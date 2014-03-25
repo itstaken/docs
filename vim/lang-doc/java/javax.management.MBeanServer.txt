@@ -1,0 +1,775 @@
+*javax.management.MBeanServer* *MBeanServer* This is the interface for MBean man
+
+public interface interface MBeanServer
+
+  implements |javax.management.MBeanServerConnection|
+
+|javax.management.MBeanServer_Description|
+|javax.management.MBeanServer_Fields|
+|javax.management.MBeanServer_Constructors|
+|javax.management.MBeanServer_Methods|
+
+================================================================================
+
+*javax.management.MBeanServer_Methods*
+|javax.management.MBeanServer.addNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)|
+|javax.management.MBeanServer.addNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)|
+|javax.management.MBeanServer.createMBean(String,ObjectName)|
+|javax.management.MBeanServer.createMBean(String,ObjectName,Object[],String[])|
+|javax.management.MBeanServer.createMBean(String,ObjectName,ObjectName)|
+|javax.management.MBeanServer.createMBean(String,ObjectName,ObjectName,Object[],String[])|
+|javax.management.MBeanServer.deserialize(ObjectName,byte[])|De-serializes a by
+|javax.management.MBeanServer.deserialize(String,byte[])|De-serializes a byte a
+|javax.management.MBeanServer.deserialize(String,ObjectName,byte[])|De-serializ
+|javax.management.MBeanServer.getAttribute(ObjectName,String)|
+|javax.management.MBeanServer.getAttributes(ObjectName,String[])|
+|javax.management.MBeanServer.getClassLoader(ObjectName)|Return the namedjava.l
+|javax.management.MBeanServer.getClassLoaderFor(ObjectName)|Return thejava.lang
+|javax.management.MBeanServer.getClassLoaderRepository()|Return the ClassLoader
+|javax.management.MBeanServer.getDefaultDomain()|
+|javax.management.MBeanServer.getDomains()|
+|javax.management.MBeanServer.getMBeanCount()|Returns the number of MBeans regi
+|javax.management.MBeanServer.getMBeanInfo(ObjectName)|
+|javax.management.MBeanServer.getObjectInstance(ObjectName)|
+|javax.management.MBeanServer.instantiate(String)|Instantiates an object using 
+|javax.management.MBeanServer.instantiate(String,Object[],String[])|Instantiate
+|javax.management.MBeanServer.instantiate(String,ObjectName)|Instantiates an ob
+|javax.management.MBeanServer.instantiate(String,ObjectName,Object[],String[])|
+|javax.management.MBeanServer.invoke(ObjectName,String,Object[],String[])|
+|javax.management.MBeanServer.isInstanceOf(ObjectName,String)|
+|javax.management.MBeanServer.isRegistered(ObjectName)|
+|javax.management.MBeanServer.queryMBeans(ObjectName,QueryExp)|
+|javax.management.MBeanServer.queryNames(ObjectName,QueryExp)|
+|javax.management.MBeanServer.registerMBean(Object,ObjectName)|Registers a pre-
+|javax.management.MBeanServer.removeNotificationListener(ObjectName,NotificationListener)|
+|javax.management.MBeanServer.removeNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)|
+|javax.management.MBeanServer.removeNotificationListener(ObjectName,ObjectName)|
+|javax.management.MBeanServer.removeNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)|
+|javax.management.MBeanServer.setAttribute(ObjectName,Attribute)|
+|javax.management.MBeanServer.setAttributes(ObjectName,AttributeList)|
+|javax.management.MBeanServer.unregisterMBean(ObjectName)|
+
+*javax.management.MBeanServer_Description*
+
+This is the interface for MBean manipulation on the agent side. It contains the 
+methods necessary for the creation, registration, and deletion of MBeans as 
+well as the access methods for registered MBeans. This is the core component of 
+the JMX infrastructure. 
+
+User code does not usually implement this interface. Instead, an object that 
+implements this interface is obtained with one of the methods in the 
+(|javax.management.MBeanServerFactory|) class. 
+
+Every MBean which is added to the MBean server becomes manageable: its 
+attributes and operations become remotely accessible through the 
+connectors/adaptors connected to that MBean server. A Java object cannot be 
+registered in the MBean server unless it is a JMX compliant MBean. 
+
+When an MBean is registered or unregistered in the MBean server a 
+MBeanServerNotification(|javax.management.MBeanServerNotification|) 
+Notification is emitted. To register an object as listener to 
+MBeanServerNotifications you should call the MBean server method 
+addNotificationListener(|javax.management.MBeanServer|) with ObjectName the 
+ObjectName of the MBeanServerDelegate(|javax.management.MBeanServerDelegate|) . 
+This ObjectName is: JMImplementation:type=MBeanServerDelegate. 
+
+An object obtained from the 
+createMBeanServer(|javax.management.MBeanServerFactory|) or 
+newMBeanServer(|javax.management.MBeanServerFactory|) methods of the 
+(|javax.management.MBeanServerFactory|) class applies security checks to its 
+methods, as follows. 
+
+First, if there is no security manager ( (|java.lang.System|) is null), then an 
+implementation of this interface is free not to make any checks. 
+
+Assuming that there is a security manager, or that the implementation chooses 
+to make checks anyway, the checks are made as detailed below. In what follows, 
+and unless otherwise specified,classNameis the string returned by 
+(|javax.management.MBeanInfo|) for the target MBean. 
+
+If a security check fails, the method throws (|java.lang.SecurityException|) . 
+
+For methods that can throw (|javax.management.InstanceNotFoundException|) , 
+this exception is thrown for a non-existent MBean, regardless of permissions. 
+This is because a non-existent MBean has no className. 
+
+
+
+For the invoke(|javax.management.MBeanServer|) method, the caller's permissions 
+must imply MBeanPermission(className, operationName, name, 
+"invoke")(|javax.management.MBeanPermission|) . 
+
+For the getAttribute(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, attribute, name, 
+"getAttribute")(|javax.management.MBeanPermission|) . 
+
+For the getAttributes(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"getAttribute")(|javax.management.MBeanPermission|) . Additionally, for each 
+attribute a in the (|javax.management.AttributeList|) , if the caller's 
+permissions do not imply MBeanPermission(className, <em>a</em>, name, 
+"getAttribute")(|javax.management.MBeanPermission|) , the MBean server will 
+behave as if that attribute had not been in the supplied list. 
+
+For the setAttribute(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, attrName, name, 
+"setAttribute")(|javax.management.MBeanPermission|) , where attrName is 
+attribute.getName()(|javax.management.Attribute|) . 
+
+For the setAttributes(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"setAttribute")(|javax.management.MBeanPermission|) . Additionally, for each 
+attribute a in the (|javax.management.AttributeList|) , if the caller's 
+permissions do not imply MBeanPermission(className, <em>a</em>, name, 
+"setAttribute")(|javax.management.MBeanPermission|) , the MBean server will 
+behave as if that attribute had not been in the supplied list. 
+
+For the addNotificationListener methods, the caller's permissions must imply 
+MBeanPermission(className, null, name, 
+"addNotificationListener")(|javax.management.MBeanPermission|) . 
+
+For the removeNotificationListener methods, the caller's permissions must imply 
+MBeanPermission(className, null, name, 
+"removeNotificationListener")(|javax.management.MBeanPermission|) . 
+
+For the getMBeanInfo(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"getMBeanInfo")(|javax.management.MBeanPermission|) . 
+
+For the getObjectInstance(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"getObjectInstance")(|javax.management.MBeanPermission|) . 
+
+For the isInstanceOf(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"isInstanceOf")(|javax.management.MBeanPermission|) . 
+
+For the queryMBeans(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(null, null, null, 
+"queryMBeans")(|javax.management.MBeanPermission|) . Additionally, for each 
+MBean n that matches name, if the caller's permissions do not imply 
+MBeanPermission(className, null, <em>n</em>, 
+"queryMBeans")(|javax.management.MBeanPermission|) , the MBean server will 
+behave as if that MBean did not exist. 
+
+Certain query elements perform operations on the MBean server. If the caller 
+does not have the required permissions for a given MBean, that MBean will not 
+be included in the result of the query. The standard query elements that are 
+affected are (|javax.management.Query|) , (|javax.management.Query|) , and 
+(|javax.management.Query|) . 
+
+For the queryNames(|javax.management.MBeanServer|) method, the checks are the 
+same as for queryMBeans except that "queryNames" is used instead of 
+"queryMBeans" in the MBeanPermission objects. Note that a "queryMBeans" 
+permission implies the corresponding "queryNames" permission. 
+
+For the getDomains(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(null, null, null, 
+"getDomains")(|javax.management.MBeanPermission|) . Additionally, for each 
+domain d in the returned array, if the caller's permissions do not imply 
+MBeanPermission(null, null, new ObjectName("<var>d</var>:x=x"), 
+"getDomains")(|javax.management.MBeanPermission|) , the domain is eliminated 
+from the array. Here, x=x is any key=value pair, needed to satisfy ObjectName's 
+constructor but not otherwise relevant. 
+
+For the getClassLoader(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, loaderName, 
+"getClassLoader")(|javax.management.MBeanPermission|) . 
+
+For the getClassLoaderFor(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, mbeanName, 
+"getClassLoaderFor")(|javax.management.MBeanPermission|) . 
+
+For the getClassLoaderRepository(|javax.management.MBeanServer|) method, the 
+caller's permissions must imply MBeanPermission(null, null, null, 
+"getClassLoaderRepository")(|javax.management.MBeanPermission|) . 
+
+For the deprecated deserialize methods, the required permissions are the same 
+as for the methods that replace them. 
+
+For the instantiate methods, the caller's permissions must imply 
+MBeanPermission(className, null, null, 
+"instantiate")(|javax.management.MBeanPermission|) , whereclassNameis the name 
+of the class which is to be instantiated. 
+
+For the registerMBean(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"registerMBean")(|javax.management.MBeanPermission|) . 
+
+If the MBeanPermission check succeeds, the MBean's class is validated by 
+checking that its ProtectionDomain(|java.security.ProtectionDomain|) implies 
+MBeanTrustPermission("register")(|javax.management.MBeanTrustPermission|) . 
+
+Finally, if the name argument is null, another MBeanPermission check is made 
+using the ObjectName returned by 
+MBeanRegistration.preRegister(|javax.management.MBeanRegistration|) . 
+
+For the createMBean methods, the caller's permissions must imply the 
+permissions needed by the equivalent instantiate followed by registerMBean. 
+
+For the unregisterMBean(|javax.management.MBeanServer|) method, the caller's 
+permissions must imply MBeanPermission(className, null, name, 
+"unregisterMBean")(|javax.management.MBeanPermission|) . 
+
+
+
+
+
+*javax.management.MBeanServer.addNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)*
+
+public void addNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.NotificationListener listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |javax.management.InstanceNotFoundException|
+         
+If the source of the notification is a reference to an MBean object, the MBean 
+server will replace it by that MBean's ObjectName. Otherwise the source is 
+unchanged. 
+
+
+
+*javax.management.MBeanServer.addNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)*
+
+public void addNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.ObjectName listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |javax.management.InstanceNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.createMBean(String,ObjectName)*
+
+public |javax.management.ObjectInstance| createMBean(
+  java.lang.String className,
+  javax.management.ObjectName name)
+  throws |javax.management.InstanceAlreadyExistsException|
+         |javax.management.MBeanException|
+         |javax.management.MBeanRegistrationException|
+         |javax.management.NotCompliantMBeanException|
+         |javax.management.ReflectionException|
+         
+If this method successfully creates an MBean, a notification is sent as 
+described above. 
+
+
+
+*javax.management.MBeanServer.createMBean(String,ObjectName,Object[],String[])*
+
+public |javax.management.ObjectInstance| createMBean(
+  java.lang.String className,
+  javax.management.ObjectName name,
+  java.lang.Object[] params,
+  java.lang.String[] signature)
+  throws |javax.management.InstanceAlreadyExistsException|
+         |javax.management.MBeanException|
+         |javax.management.MBeanRegistrationException|
+         |javax.management.NotCompliantMBeanException|
+         |javax.management.ReflectionException|
+         
+If this method successfully creates an MBean, a notification is sent as 
+described above. 
+
+
+
+*javax.management.MBeanServer.createMBean(String,ObjectName,ObjectName)*
+
+public |javax.management.ObjectInstance| createMBean(
+  java.lang.String className,
+  javax.management.ObjectName name,
+  javax.management.ObjectName loaderName)
+  throws |javax.management.InstanceAlreadyExistsException|
+         |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.MBeanRegistrationException|
+         |javax.management.NotCompliantMBeanException|
+         |javax.management.ReflectionException|
+         
+If this method successfully creates an MBean, a notification is sent as 
+described above. 
+
+
+
+*javax.management.MBeanServer.createMBean(String,ObjectName,ObjectName,Object[],String[])*
+
+public |javax.management.ObjectInstance| createMBean(
+  java.lang.String className,
+  javax.management.ObjectName name,
+  javax.management.ObjectName loaderName,
+  java.lang.Object[] params,
+  java.lang.String[] signature)
+  throws |javax.management.InstanceAlreadyExistsException|
+         |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.MBeanRegistrationException|
+         |javax.management.NotCompliantMBeanException|
+         |javax.management.ReflectionException|
+         
+If this method successfully creates an MBean, a notification is sent as 
+described above. 
+
+
+
+*javax.management.MBeanServer.deserialize(ObjectName,byte[])*
+
+public |java.io.ObjectInputStream| deserialize(
+  javax.management.ObjectName name,
+  byte[] data)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.OperationsException|
+         
+De-serializes a byte array in the context of the class loader of an MBean. 
+
+    Deprecated: Use {@link #getClassLoaderFor getClassLoaderFor} to
+ obtain the appropriate class loader for deserialization.
+
+    name - The name of the MBean whose class loader should be used for the 
+       de-serialization. 
+    data - The byte array to be de-sererialized. 
+
+    Returns: The de-serialized object stream. 
+
+*javax.management.MBeanServer.deserialize(String,byte[])*
+
+public |java.io.ObjectInputStream| deserialize(
+  java.lang.String className,
+  byte[] data)
+  throws |javax.management.OperationsException|
+         |javax.management.ReflectionException|
+         
+De-serializes a byte array in the context of a given MBean class loader. The 
+class loader is found by loading the class className through the Class Loader 
+Repository(|javax.management.loading.ClassLoaderRepository|) . The resultant 
+class's class loader is the one to use. 
+
+    Deprecated: Use {@link #getClassLoaderRepository} to obtain the
+ class loader repository and use it to deserialize.
+
+    className - The name of the class whose class loader should be used for the 
+       de-serialization. 
+    data - The byte array to be de-sererialized. 
+
+    Returns: The de-serialized object stream. 
+
+*javax.management.MBeanServer.deserialize(String,ObjectName,byte[])*
+
+public |java.io.ObjectInputStream| deserialize(
+  java.lang.String className,
+  javax.management.ObjectName loaderName,
+  byte[] data)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.OperationsException|
+         |javax.management.ReflectionException|
+         
+De-serializes a byte array in the context of a given MBean class loader. The 
+class loader is the one that loaded the class with name "className". The name 
+of the class loader to be used for loading the specified class is specified. If 
+null, the MBean Server's class loader will be used. 
+
+    Deprecated: Use {@link #getClassLoader getClassLoader} to obtain
+ the class loader for deserialization.
+
+    className - The name of the class whose class loader should be used for the 
+       de-serialization. 
+    data - The byte array to be de-sererialized. 
+    loaderName - The name of the class loader to be used for loading the specified class. If 
+       null, the MBean Server's class loader will be used. 
+
+    Returns: The de-serialized object stream. 
+
+*javax.management.MBeanServer.getAttribute(ObjectName,String)*
+
+public |java.lang.Object| getAttribute(
+  javax.management.ObjectName name,
+  java.lang.String attribute)
+  throws |javax.management.AttributeNotFoundException|
+         |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.getAttributes(ObjectName,String[])*
+
+public |javax.management.AttributeList| getAttributes(
+  javax.management.ObjectName name,
+  java.lang.String[] attributes)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.getClassLoader(ObjectName)*
+
+public |java.lang.ClassLoader| getClassLoader(javax.management.ObjectName loaderName)
+  throws |javax.management.InstanceNotFoundException|
+         
+Return the named (|java.lang.ClassLoader|) . 
+
+
+    loaderName - The ObjectName of the ClassLoader. May be null, in which case the MBean 
+       server's own ClassLoader is returned. 
+
+    Returns: The named ClassLoader. If l is the actual ClassLoader with that name, and r is 
+             the returned value, then either: 
+
+r is identical to l; or the result of r{@link ClassLoader#loadClass(String) 
+             .loadClass(s)} is the same as l{@link 
+             ClassLoader#loadClass(String) .loadClass(s)} for any string s. 
+
+What this means is that the ClassLoader may be wrapped in another ClassLoader 
+             for security or other reasons. 
+
+*javax.management.MBeanServer.getClassLoaderFor(ObjectName)*
+
+public |java.lang.ClassLoader| getClassLoaderFor(javax.management.ObjectName mbeanName)
+  throws |javax.management.InstanceNotFoundException|
+         
+Return the (|java.lang.ClassLoader|) that was used for loading the class of the 
+named MBean. 
+
+
+    mbeanName - The ObjectName of the MBean. 
+
+    Returns: The ClassLoader used for that MBean. If l is the MBean's actual ClassLoader, 
+             and r is the returned value, then either: 
+
+r is identical to l; or the result of r{@link ClassLoader#loadClass(String) 
+             .loadClass(s)} is the same as l{@link 
+             ClassLoader#loadClass(String) .loadClass(s)} for any string s. 
+
+What this means is that the ClassLoader may be wrapped in another ClassLoader 
+             for security or other reasons. 
+
+*javax.management.MBeanServer.getClassLoaderRepository()*
+
+public |javax.management.loading.ClassLoaderRepository| getClassLoaderRepository()
+
+Return the ClassLoaderRepository for this MBeanServer. 
+
+
+
+    Returns: The ClassLoaderRepository for this MBeanServer. 
+
+*javax.management.MBeanServer.getDefaultDomain()*
+
+public |java.lang.String| getDefaultDomain()
+
+
+
+
+
+*javax.management.MBeanServer.getDomains()*
+
+public |java.lang.String|[] getDomains()
+
+
+
+
+
+*javax.management.MBeanServer.getMBeanCount()*
+
+public |java.lang.Integer| getMBeanCount()
+
+Returns the number of MBeans registered in the MBean server. 
+
+
+
+    Returns: the number of registered MBeans, wrapped in an Integer. If the caller's 
+             permissions are restricted, this number may be greater than the 
+             number of MBeans the caller can access. 
+
+*javax.management.MBeanServer.getMBeanInfo(ObjectName)*
+
+public |javax.management.MBeanInfo| getMBeanInfo(javax.management.ObjectName name)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.IntrospectionException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.getObjectInstance(ObjectName)*
+
+public |javax.management.ObjectInstance| getObjectInstance(javax.management.ObjectName name)
+  throws |javax.management.InstanceNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.instantiate(String)*
+
+public |java.lang.Object| instantiate(java.lang.String className)
+  throws |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+Instantiates an object using the list of all class loaders registered in the 
+MBean server's Class Loader 
+Repository(|javax.management.loading.ClassLoaderRepository|) . The object's 
+class should have a public constructor. This method returns a reference to the 
+newly created object. The newly created object is not registered in the MBean 
+server. 
+
+This method is equivalent to instantiate(className, (Object[]) null, (String[]) 
+null)(|javax.management.MBeanServer|) . 
+
+
+    className - The class name of the object to be instantiated. 
+
+    Returns: The newly instantiated object. 
+
+*javax.management.MBeanServer.instantiate(String,Object[],String[])*
+
+public |java.lang.Object| instantiate(
+  java.lang.String className,
+  java.lang.Object[] params,
+  java.lang.String[] signature)
+  throws |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+Instantiates an object using the list of all class loaders registered in the 
+MBean server Class Loader 
+Repository(|javax.management.loading.ClassLoaderRepository|) . The object's 
+class should have a public constructor. The call returns a reference to the 
+newly created object. The newly created object is not registered in the MBean 
+server. 
+
+
+    className - The class name of the object to be instantiated. 
+    params - An array containing the parameters of the constructor to be invoked. 
+    signature - An array containing the signature of the constructor to be invoked. 
+
+    Returns: The newly instantiated object. 
+
+*javax.management.MBeanServer.instantiate(String,ObjectName)*
+
+public |java.lang.Object| instantiate(
+  java.lang.String className,
+  javax.management.ObjectName loaderName)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+Instantiates an object using the class Loader specified by its ObjectName. If 
+the loader name is null, the ClassLoader that loaded the MBean Server will be 
+used. The object's class should have a public constructor. This method returns 
+a reference to the newly created object. The newly created object is not 
+registered in the MBean server. 
+
+This method is equivalent to instantiate(className, loaderName, (Object[]) 
+null, (String[]) null)(|javax.management.MBeanServer|) . 
+
+
+    className - The class name of the MBean to be instantiated. 
+    loaderName - The object name of the class loader to be used. 
+
+    Returns: The newly instantiated object. 
+
+*javax.management.MBeanServer.instantiate(String,ObjectName,Object[],String[])*
+
+public |java.lang.Object| instantiate(
+  java.lang.String className,
+  javax.management.ObjectName loaderName,
+  java.lang.Object[] params,
+  java.lang.String[] signature)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+Instantiates an object. The class loader to be used is identified by its object 
+name. If the object name of the loader is null, the ClassLoader that loaded the 
+MBean server will be used. The object's class should have a public constructor. 
+The call returns a reference to the newly created object. The newly created 
+object is not registered in the MBean server. 
+
+
+    className - The class name of the object to be instantiated. 
+    params - An array containing the parameters of the constructor to be invoked. 
+    signature - An array containing the signature of the constructor to be invoked. 
+    loaderName - The object name of the class loader to be used. 
+
+    Returns: The newly instantiated object. 
+
+*javax.management.MBeanServer.invoke(ObjectName,String,Object[],String[])*
+
+public |java.lang.Object| invoke(
+  javax.management.ObjectName name,
+  java.lang.String operationName,
+  java.lang.Object[] params,
+  java.lang.String[] signature)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.isInstanceOf(ObjectName,String)*
+
+public boolean isInstanceOf(
+  javax.management.ObjectName name,
+  java.lang.String className)
+  throws |javax.management.InstanceNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.isRegistered(ObjectName)*
+
+public boolean isRegistered(javax.management.ObjectName name)
+
+
+
+
+
+*javax.management.MBeanServer.queryMBeans(ObjectName,QueryExp)*
+
+public |java.util.Set|<ObjectInstance> queryMBeans(
+  javax.management.ObjectName name,
+  javax.management.QueryExp query)
+
+
+
+
+
+*javax.management.MBeanServer.queryNames(ObjectName,QueryExp)*
+
+public |java.util.Set|<ObjectName> queryNames(
+  javax.management.ObjectName name,
+  javax.management.QueryExp query)
+
+
+
+
+
+*javax.management.MBeanServer.registerMBean(Object,ObjectName)*
+
+public |javax.management.ObjectInstance| registerMBean(
+  java.lang.Object object,
+  javax.management.ObjectName name)
+  throws |javax.management.InstanceAlreadyExistsException|
+         |javax.management.MBeanRegistrationException|
+         |javax.management.NotCompliantMBeanException|
+         
+Registers a pre-existing object as an MBean with the MBean server. If the 
+object name given is null, the MBean must provide its own name by implementing 
+the MBeanRegistration(|javax.management.MBeanRegistration|) interface and 
+returning the name from the preRegister(|javax.management.MBeanRegistration|) 
+method. 
+
+If this method successfully registers an MBean, a notification is sent as 
+described above. 
+
+
+    object - The MBean to be registered as an MBean. 
+    name - The object name of the MBean. May be null. 
+
+    Returns: An ObjectInstance, containing the ObjectName and the Java class name of the 
+             newly registered MBean. If the contained ObjectName is n, the 
+             contained Java class name is {@link #getMBeanInfo 
+             getMBeanInfo(n)}.getClassName(). 
+
+*javax.management.MBeanServer.removeNotificationListener(ObjectName,NotificationListener)*
+
+public void removeNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.NotificationListener listener)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.removeNotificationListener(ObjectName,NotificationListener,NotificationFilter,Object)*
+
+public void removeNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.NotificationListener listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.removeNotificationListener(ObjectName,ObjectName)*
+
+public void removeNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.ObjectName listener)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.removeNotificationListener(ObjectName,ObjectName,NotificationFilter,Object)*
+
+public void removeNotificationListener(
+  javax.management.ObjectName name,
+  javax.management.ObjectName listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.MBeanServer.setAttribute(ObjectName,Attribute)*
+
+public void setAttribute(
+  javax.management.ObjectName name,
+  javax.management.Attribute attribute)
+  throws |javax.management.AttributeNotFoundException|
+         |javax.management.InstanceNotFoundException|
+         |javax.management.InvalidAttributeValueException|
+         |javax.management.MBeanException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.setAttributes(ObjectName,AttributeList)*
+
+public |javax.management.AttributeList| setAttributes(
+  javax.management.ObjectName name,
+  javax.management.AttributeList attributes)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.ReflectionException|
+         
+
+
+
+
+*javax.management.MBeanServer.unregisterMBean(ObjectName)*
+
+public void unregisterMBean(javax.management.ObjectName name)
+  throws |javax.management.InstanceNotFoundException|
+         |javax.management.MBeanRegistrationException|
+         
+If this method successfully unregisters an MBean, a notification is sent as 
+described above. 
+
+
+
+

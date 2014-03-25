@@ -1,0 +1,95 @@
+*java.lang.management.BufferPoolMXBean* *BufferPoolMXBean* The management interf
+
+public interface interface BufferPoolMXBean
+
+  implements |java.lang.management.PlatformManagedObject|
+
+|java.lang.management.BufferPoolMXBean_Description|
+|java.lang.management.BufferPoolMXBean_Fields|
+|java.lang.management.BufferPoolMXBean_Constructors|
+|java.lang.management.BufferPoolMXBean_Methods|
+
+================================================================================
+
+*java.lang.management.BufferPoolMXBean_Methods*
+|java.lang.management.BufferPoolMXBean.getCount()|Returns an estimate of the nu
+|java.lang.management.BufferPoolMXBean.getMemoryUsed()|Returns an estimate of t
+|java.lang.management.BufferPoolMXBean.getName()|Returns the name representing 
+|java.lang.management.BufferPoolMXBean.getTotalCapacity()|Returns an estimate o
+
+*java.lang.management.BufferPoolMXBean_Description*
+
+The management interface for a buffer pool, for example a pool of 
+direct(|java.nio.ByteBuffer|) or mapped(|java.nio.MappedByteBuffer|) buffers. 
+
+A class implementing this interface is an (|javax.management.MXBean|) . A Java 
+virtual machine has one or more implementations of this interface. The 
+getPlatformMXBeans(|java.lang.management.ManagementFactory|) method can be used 
+to obtain the list ofBufferPoolMXBeanobjects representing the management 
+interfaces for pools of buffers as follows: 
+
+List<BufferPoolMXBean> pools = 
+ManagementFactory.getPlatformMXBeans(BufferPoolMXBean.class); 
+
+The management interfaces are also registered with the platform 
+MBeanServer(|javax.management.MBeanServer|) . The 
+ObjectName(|javax.management.ObjectName|) that uniquely identifies the 
+management interface within theMBeanServertakes the form: 
+
+java.nio:type=BufferPool,name=pool name 
+
+where pool name is the name(|java.lang.management.BufferPoolMXBean|) of the 
+buffer pool. 
+
+
+
+*java.lang.management.BufferPoolMXBean.getCount()*
+
+public long getCount()
+
+Returns an estimate of the number of buffers in the pool. 
+
+
+
+    Returns: An estimate of the number of buffers in this pool 
+
+*java.lang.management.BufferPoolMXBean.getMemoryUsed()*
+
+public long getMemoryUsed()
+
+Returns an estimate of the memory that the Java virtual machine is using for 
+this buffer pool. The value returned by this method may differ from the 
+estimate of the total capacity(|java.lang.management.BufferPoolMXBean|) of the 
+buffers in this pool. This difference is explained by alignment, memory 
+allocator, and other implementation specific reasons. 
+
+
+
+    Returns: An estimate of the memory that the Java virtual machine is using for this 
+             buffer pool in bytes, or {@code -1L} if an estimate of the memory 
+             usage is not available 
+
+*java.lang.management.BufferPoolMXBean.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name representing this buffer pool. 
+
+
+
+    Returns: The name of this buffer pool. 
+
+*java.lang.management.BufferPoolMXBean.getTotalCapacity()*
+
+public long getTotalCapacity()
+
+Returns an estimate of the total capacity of the buffers in this pool. A 
+buffer's capacity is the number of elements it contains and the value returned 
+by this method is an estimate of the total capacity of buffers in the pool in 
+bytes. 
+
+
+
+    Returns: An estimate of the total capacity of the buffers in this pool in bytes 
+
+

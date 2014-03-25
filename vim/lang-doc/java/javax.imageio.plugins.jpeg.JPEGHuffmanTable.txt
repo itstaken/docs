@@ -1,0 +1,107 @@
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable* *JPEGHuffmanTable* A class encapsu
+
+public class JPEGHuffmanTable
+  extends    |java.lang.Object|
+
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_Description|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_Fields|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_Constructors|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_Methods|
+
+================================================================================
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_Fields*
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdACChrominance|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdACLuminance|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdDCChrominance|
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdDCLuminance|
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_Constructors*
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable(short[],short[])|Creates a Huffman
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_Methods*
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable.getLengths()|Returns an array of s
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable.getValues()|Returns an array of sh
+|javax.imageio.plugins.jpeg.JPEGHuffmanTable.toString()|Returns aStringrepresen
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_Description*
+
+A class encapsulating a single JPEG Huffman table. Fields are provided for the 
+"standard" tables taken from Annex K of the JPEG specification. These are the 
+tables used as defaults. 
+
+For more information about the operation of the standard JPEG plug-in, see the 
+JPEG metadata format specification and usage notes 
+
+
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdACChrominance*
+
+The standard AC chrominance Huffman table. 
+
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdACLuminance*
+
+The standard AC luminance Huffman table. 
+
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdDCChrominance*
+
+The standard DC chrominance Huffman table. 
+
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable_javax.imageio.plugins.jpeg.JPEGHuffmanTable.StdDCLuminance*
+
+The standard DC luminance Huffman table. 
+
+
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable(short[],short[])*
+
+public JPEGHuffmanTable(
+  short[] lengths,
+  short[] values)
+
+Creates a Huffman table and initializes it. The input arrays are copied. The 
+arrays must describe a possible Huffman table. For example, 3 codes cannot be 
+expressed with a single bit. 
+
+    lengths - an array of {@code short}s where lengths[k] is equal to the number of values 
+       with corresponding codes of length k + 1 bits. 
+    values - an array of shorts containing the values in order of increasing code length. 
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable.getLengths()*
+
+public short[] getLengths()
+
+Returns an array of shorts containing the number of values for each length in 
+the Huffman table. The returned array is a copy. 
+
+
+
+    Returns: a short array where array[k-1] is equal to the number of values in the table of 
+             length k. 
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable.getValues()*
+
+public short[] getValues()
+
+Returns an array of shorts containing the values arranged by increasing length 
+of their corresponding codes. The interpretation of the array is dependent on 
+the values returned from getLengths. The returned array is a copy. 
+
+
+
+    Returns: a short array of values. 
+
+*javax.imageio.plugins.jpeg.JPEGHuffmanTable.toString()*
+
+public |java.lang.String| toString()
+
+Returns aStringrepresenting this Huffman table. 
+
+
+
+    Returns: a {@code String} representing this Huffman table. 
+
+

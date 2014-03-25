@@ -1,0 +1,173 @@
+*javax.net.ssl.SSLContextSpi* *SSLContextSpi* This class defines the Service Pro
+
+public abstract class SSLContextSpi
+  extends    |java.lang.Object|
+
+|javax.net.ssl.SSLContextSpi_Description|
+|javax.net.ssl.SSLContextSpi_Fields|
+|javax.net.ssl.SSLContextSpi_Constructors|
+|javax.net.ssl.SSLContextSpi_Methods|
+
+================================================================================
+
+*javax.net.ssl.SSLContextSpi_Constructors*
+|javax.net.ssl.SSLContextSpi()|
+
+*javax.net.ssl.SSLContextSpi_Methods*
+|javax.net.ssl.SSLContextSpi.engineCreateSSLEngine()|Creates a new SSLEngine us
+|javax.net.ssl.SSLContextSpi.engineCreateSSLEngine(String,int)|Creates a SSLEng
+|javax.net.ssl.SSLContextSpi.engineGetClientSessionContext()|Returns a client S
+|javax.net.ssl.SSLContextSpi.engineGetDefaultSSLParameters()|Returns a copy of 
+|javax.net.ssl.SSLContextSpi.engineGetServerSessionContext()|Returns a server S
+|javax.net.ssl.SSLContextSpi.engineGetServerSocketFactory()|Returns a ServerSoc
+|javax.net.ssl.SSLContextSpi.engineGetSocketFactory()|Returns a SocketFactory o
+|javax.net.ssl.SSLContextSpi.engineGetSupportedSSLParameters()|Returns a copy o
+|javax.net.ssl.SSLContextSpi.engineInit(KeyManager[],TrustManager[],SecureRandom)|
+
+*javax.net.ssl.SSLContextSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the SSLContext 
+class. 
+
+All the abstract methods in this class must be implemented by each 
+cryptographic service provider who wishes to supply the implementation of a 
+particular SSL context. 
+
+
+
+*javax.net.ssl.SSLContextSpi()*
+
+public SSLContextSpi()
+
+
+
+
+*javax.net.ssl.SSLContextSpi.engineCreateSSLEngine()*
+
+protected abstract |javax.net.ssl.SSLEngine| engineCreateSSLEngine()
+
+Creates a new SSLEngine using this context. 
+
+Applications using this factory method are providing no hints for an internal 
+session reuse strategy. If hints are desired, (|javax.net.ssl.SSLContextSpi|) 
+should be used instead. 
+
+Some cipher suites (such as Kerberos) require remote hostname information, in 
+which case this factory method should not be used. 
+
+
+
+    Returns: the SSLEngine Object 
+
+*javax.net.ssl.SSLContextSpi.engineCreateSSLEngine(String,int)*
+
+protected abstract |javax.net.ssl.SSLEngine| engineCreateSSLEngine(
+  java.lang.String host,
+  int port)
+
+Creates a SSLEngine using this context. 
+
+Applications using this factory method are providing hints for an internal 
+session reuse strategy. 
+
+Some cipher suites (such as Kerberos) require remote hostname information, in 
+which case peerHost needs to be specified. 
+
+
+    host - the non-authoritative name of the host 
+    port - the non-authoritative port 
+
+    Returns: the SSLEngine Object 
+
+*javax.net.ssl.SSLContextSpi.engineGetClientSessionContext()*
+
+protected abstract |javax.net.ssl.SSLSessionContext| engineGetClientSessionContext()
+
+Returns a client SSLSessionContext object for this context. 
+
+
+
+    Returns: the SSLSessionContext object 
+
+*javax.net.ssl.SSLContextSpi.engineGetDefaultSSLParameters()*
+
+protected |javax.net.ssl.SSLParameters| engineGetDefaultSSLParameters()
+
+Returns a copy of the SSLParameters indicating the default settings for this 
+SSL context. 
+
+The parameters will always have the ciphersuite and protocols arrays set to 
+non-null values. 
+
+The default implementation obtains the parameters from an SSLSocket created by 
+calling the SocketFactory.createSocket()(|javax.net.SocketFactory|) method of 
+this context's SocketFactory. 
+
+
+
+    Returns: a copy of the SSLParameters object with the default settings 
+
+*javax.net.ssl.SSLContextSpi.engineGetServerSessionContext()*
+
+protected abstract |javax.net.ssl.SSLSessionContext| engineGetServerSessionContext()
+
+Returns a server SSLSessionContext object for this context. 
+
+
+
+    Returns: the SSLSessionContext object 
+
+*javax.net.ssl.SSLContextSpi.engineGetServerSocketFactory()*
+
+protected abstract |javax.net.ssl.SSLServerSocketFactory| engineGetServerSocketFactory()
+
+Returns a ServerSocketFactory object for this context. 
+
+
+
+    Returns: the ServerSocketFactory object 
+
+*javax.net.ssl.SSLContextSpi.engineGetSocketFactory()*
+
+protected abstract |javax.net.ssl.SSLSocketFactory| engineGetSocketFactory()
+
+Returns a SocketFactory object for this context. 
+
+
+
+    Returns: the SocketFactory object 
+
+*javax.net.ssl.SSLContextSpi.engineGetSupportedSSLParameters()*
+
+protected |javax.net.ssl.SSLParameters| engineGetSupportedSSLParameters()
+
+Returns a copy of the SSLParameters indicating the maximum supported settings 
+for this SSL context. 
+
+The parameters will always have the ciphersuite and protocols arrays set to 
+non-null values. 
+
+The default implementation obtains the parameters from an SSLSocket created by 
+calling the SocketFactory.createSocket()(|javax.net.SocketFactory|) method of 
+this context's SocketFactory. 
+
+
+
+    Returns: a copy of the SSLParameters object with the maximum supported settings 
+
+*javax.net.ssl.SSLContextSpi.engineInit(KeyManager[],TrustManager[],SecureRandom)*
+
+protected abstract void engineInit(
+  javax.net.ssl.KeyManager[] km,
+  javax.net.ssl.TrustManager[] tm,
+  java.security.SecureRandom sr)
+  throws |java.security.KeyManagementException|
+         
+Initializes this context. 
+
+
+    km - the sources of authentication keys 
+    tm - the sources of peer authentication trust decisions 
+    sr - the source of randomness 
+
+

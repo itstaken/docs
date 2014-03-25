@@ -1,0 +1,129 @@
+*java.nio.file.attribute.BasicFileAttributeView* *BasicFileAttributeView* A file
+
+public interface interface BasicFileAttributeView
+
+  implements |java.nio.file.attribute.FileAttributeView|
+
+|java.nio.file.attribute.BasicFileAttributeView_Description|
+|java.nio.file.attribute.BasicFileAttributeView_Fields|
+|java.nio.file.attribute.BasicFileAttributeView_Constructors|
+|java.nio.file.attribute.BasicFileAttributeView_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.BasicFileAttributeView_Methods*
+|java.nio.file.attribute.BasicFileAttributeView.name()|Returns the name of the 
+|java.nio.file.attribute.BasicFileAttributeView.readAttributes()|Reads the basi
+|java.nio.file.attribute.BasicFileAttributeView.setTimes(FileTime,FileTime,FileTime)|
+
+*java.nio.file.attribute.BasicFileAttributeView_Description*
+
+A file attribute view that provides a view of a basic set of file attributes 
+common to many file systems. The basic set of file attributes consist of 
+mandatory and optional file attributes as defined by the 
+(|java.nio.file.attribute.BasicFileAttributes|) interface. 
+
+The file attributes are retrieved from the file system as a bulk operation by 
+invoking the readAttributes(|java.nio.file.attribute.BasicFileAttributeView|) 
+method. This class also defines the 
+setTimes(|java.nio.file.attribute.BasicFileAttributeView|) method to update the 
+file's time attributes. 
+
+Where dynamic access to file attributes is required, the attributes supported 
+by this attribute view have the following names and types: 
+
+
+
+Name Type 
+
+"lastModifiedTime" (|java.nio.file.attribute.FileTime|) 
+
+"lastAccessTime" (|java.nio.file.attribute.FileTime|) 
+
+"creationTime" (|java.nio.file.attribute.FileTime|) 
+
+"size" (|java.lang.Long|) 
+
+"isRegularFile" (|java.lang.Boolean|) 
+
+"isDirectory" (|java.lang.Boolean|) 
+
+"isSymbolicLink" (|java.lang.Boolean|) 
+
+"isOther" (|java.lang.Boolean|) 
+
+"fileKey" (|java.lang.Object|) 
+
+
+
+The getAttribute(|java.nio.file.Files|) method may be used to read any of these 
+attributes as if by invoking the 
+readAttributes()(|java.nio.file.attribute.BasicFileAttributeView|) method. 
+
+The setAttribute(|java.nio.file.Files|) method may be used to update the file's 
+last modified time, last access time or create time attributes as if by 
+invoking the setTimes(|java.nio.file.attribute.BasicFileAttributeView|) method. 
+
+
+
+*java.nio.file.attribute.BasicFileAttributeView.name()*
+
+public |java.lang.String| name()
+
+Returns the name of the attribute view. Attribute views of this type have the 
+name"basic". 
+
+
+
+*java.nio.file.attribute.BasicFileAttributeView.readAttributes()*
+
+public |java.nio.file.attribute.BasicFileAttributes| readAttributes()
+  throws |java.io.IOException|
+         
+Reads the basic file attributes as a bulk operation. 
+
+It is implementation specific if all file attributes are read as an atomic 
+operation with respect to other file system operations. 
+
+
+
+    Returns: the file attributes 
+
+*java.nio.file.attribute.BasicFileAttributeView.setTimes(FileTime,FileTime,FileTime)*
+
+public void setTimes(
+  java.nio.file.attribute.FileTime lastModifiedTime,
+  java.nio.file.attribute.FileTime lastAccessTime,
+  java.nio.file.attribute.FileTime createTime)
+  throws |java.io.IOException|
+         
+Updates any or all of the file's last modified time, last access time, and 
+create time attributes. 
+
+This method updates the file's timestamp attributes. The values are converted 
+to the epoch and precision supported by the file system. Converting from finer 
+to coarser granularities result in precision loss. The behavior of this method 
+when attempting to set a timestamp that is not supported or to a value that is 
+outside the range supported by the underlying file store is not defined. It may 
+or not fail by throwing anIOException. 
+
+If any of thelastModifiedTime,lastAccessTime, orcreateTimeparameters has the 
+valuenullthen the corresponding timestamp is not changed. An implementation may 
+require to read the existing values of the file attributes when only some, but 
+not all, of the timestamp attributes are updated. Consequently, this method may 
+not be an atomic operation with respect to other file system operations. 
+Reading and re-writing existing values may also result in precision loss. If 
+all of thelastModifiedTime,lastAccessTimeandcreateTimeparameters arenullthen 
+this method has no effect. 
+
+Usage Example: Suppose we want to change a file's creation time. 
+
+Path path = ... FileTime time = ... Files.getFileAttributeView(path, 
+BasicFileAttributeView.class).setTimes(null, null, time); 
+
+
+    lastModifiedTime - the new last modified time, or {@code null} to not change the value 
+    lastAccessTime - the last access time, or {@code null} to not change the value 
+    createTime - the file's create time, or {@code null} to not change the value 
+
+

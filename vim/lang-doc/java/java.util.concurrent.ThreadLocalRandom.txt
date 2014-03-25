@@ -1,0 +1,140 @@
+*java.util.concurrent.ThreadLocalRandom* *ThreadLocalRandom* A random number gen
+
+public class ThreadLocalRandom
+  extends    |java.util.Random|
+
+|java.util.concurrent.ThreadLocalRandom_Description|
+|java.util.concurrent.ThreadLocalRandom_Fields|
+|java.util.concurrent.ThreadLocalRandom_Constructors|
+|java.util.concurrent.ThreadLocalRandom_Methods|
+
+================================================================================
+
+*java.util.concurrent.ThreadLocalRandom_Methods*
+|java.util.concurrent.ThreadLocalRandom.current()|Returns the current thread'sT
+|java.util.concurrent.ThreadLocalRandom.next(int)|
+|java.util.concurrent.ThreadLocalRandom.nextDouble(double)|Returns a pseudorand
+|java.util.concurrent.ThreadLocalRandom.nextDouble(double,double)|Returns a pse
+|java.util.concurrent.ThreadLocalRandom.nextInt(int,int)|Returns a pseudorandom
+|java.util.concurrent.ThreadLocalRandom.nextLong(long)|Returns a pseudorandom, 
+|java.util.concurrent.ThreadLocalRandom.nextLong(long,long)|Returns a pseudoran
+|java.util.concurrent.ThreadLocalRandom.setSeed(long)|ThrowsUnsupportedOperatio
+
+*java.util.concurrent.ThreadLocalRandom_Description*
+
+A random number generator isolated to the current thread. Like the global 
+(|java.util.Random|) generator used by the (|java.lang.Math|) class, 
+aThreadLocalRandomis initialized with an internally generated seed that may not 
+otherwise be modified. When applicable, use ofThreadLocalRandomrather than 
+sharedRandomobjects in concurrent programs will typically encounter much less 
+overhead and contention. Use ofThreadLocalRandomis particularly appropriate 
+when multiple tasks (for example, each a (|java.util.concurrent.ForkJoinTask|) 
+) use random numbers in parallel in thread pools. 
+
+Usages of this class should typically be of the 
+form:ThreadLocalRandom.current().nextX(...)(whereXisInt,Long, etc). When all 
+usages are of this form, it is never possible to accidently share 
+aThreadLocalRandomacross multiple threads. 
+
+This class also provides additional commonly used bounded random generation 
+methods. 
+
+
+
+*java.util.concurrent.ThreadLocalRandom.current()*
+
+public static |java.util.concurrent.ThreadLocalRandom| current()
+
+Returns the current thread'sThreadLocalRandom. 
+
+
+
+    Returns: the current thread's {@code ThreadLocalRandom} 
+
+*java.util.concurrent.ThreadLocalRandom.next(int)*
+
+protected int next(int bits)
+
+
+
+
+
+*java.util.concurrent.ThreadLocalRandom.nextDouble(double)*
+
+public double nextDouble(double n)
+
+Returns a pseudorandom, uniformly distributeddoublevalue between 0 (inclusive) 
+and the specified value (exclusive). 
+
+
+    n - the bound on the random number to be returned. Must be positive. 
+
+    Returns: the next value 
+
+*java.util.concurrent.ThreadLocalRandom.nextDouble(double,double)*
+
+public double nextDouble(
+  double least,
+  double bound)
+
+Returns a pseudorandom, uniformly distributed value between the given least 
+value (inclusive) and bound (exclusive). 
+
+
+    least - the least value returned 
+    bound - the upper bound (exclusive) 
+
+    Returns: the next value 
+
+*java.util.concurrent.ThreadLocalRandom.nextInt(int,int)*
+
+public int nextInt(
+  int least,
+  int bound)
+
+Returns a pseudorandom, uniformly distributed value between the given least 
+value (inclusive) and bound (exclusive). 
+
+
+    least - the least value returned 
+    bound - the upper bound (exclusive) 
+
+    Returns: the next value 
+
+*java.util.concurrent.ThreadLocalRandom.nextLong(long)*
+
+public long nextLong(long n)
+
+Returns a pseudorandom, uniformly distributed value between 0 (inclusive) and 
+the specified value (exclusive). 
+
+
+    n - the bound on the random number to be returned. Must be positive. 
+
+    Returns: the next value 
+
+*java.util.concurrent.ThreadLocalRandom.nextLong(long,long)*
+
+public long nextLong(
+  long least,
+  long bound)
+
+Returns a pseudorandom, uniformly distributed value between the given least 
+value (inclusive) and bound (exclusive). 
+
+
+    least - the least value returned 
+    bound - the upper bound (exclusive) 
+
+    Returns: the next value 
+
+*java.util.concurrent.ThreadLocalRandom.setSeed(long)*
+
+public void setSeed(long seed)
+
+ThrowsUnsupportedOperationException. Setting seeds in this generator is not 
+supported. 
+
+
+
+

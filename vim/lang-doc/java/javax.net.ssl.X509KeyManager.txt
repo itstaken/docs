@@ -1,0 +1,137 @@
+*javax.net.ssl.X509KeyManager* *X509KeyManager* Instances of this interface mana
+
+public interface interface X509KeyManager
+
+  implements |javax.net.ssl.KeyManager|
+
+|javax.net.ssl.X509KeyManager_Description|
+|javax.net.ssl.X509KeyManager_Fields|
+|javax.net.ssl.X509KeyManager_Constructors|
+|javax.net.ssl.X509KeyManager_Methods|
+
+================================================================================
+
+*javax.net.ssl.X509KeyManager_Methods*
+|javax.net.ssl.X509KeyManager.chooseClientAlias(String[],Principal[],Socket)|Ch
+|javax.net.ssl.X509KeyManager.chooseServerAlias(String,Principal[],Socket)|Choo
+|javax.net.ssl.X509KeyManager.getCertificateChain(String)|Returns the certifica
+|javax.net.ssl.X509KeyManager.getClientAliases(String,Principal[])|Get the matc
+|javax.net.ssl.X509KeyManager.getPrivateKey(String)|Returns the key associated 
+|javax.net.ssl.X509KeyManager.getServerAliases(String,Principal[])|Get the matc
+
+*javax.net.ssl.X509KeyManager_Description*
+
+Instances of this interface manage which X509 certificate-based key pairs are 
+used to authenticate the local side of a secure socket. 
+
+During secure socket negotiations, implentations call methods in this interface 
+to: 
+
+determine the set of aliases that are available for negotiations based on the 
+criteria presented, select the best alias based on the criteria presented, and 
+obtain the corresponding key material for given aliases. 
+
+Note: the X509ExtendedKeyManager should be used in favor of this class. 
+
+
+
+*javax.net.ssl.X509KeyManager.chooseClientAlias(String[],Principal[],Socket)*
+
+public |java.lang.String| chooseClientAlias(
+  java.lang.String[] keyType,
+  java.security.Principal[] issuers,
+  java.net.Socket socket)
+
+Choose an alias to authenticate the client side of a secure socket given the 
+public key type and the list of certificate issuer authorities recognized by 
+the peer (if any). 
+
+
+    keyType - the key algorithm type name(s), ordered with the most-preferred key type first. 
+    issuers - the list of acceptable CA issuer subject names or null if it does not matter 
+       which issuers are used. 
+    socket - the socket to be used for this connection. This parameter can be null, which 
+       indicates that implementations are free to select an alias applicable to 
+       any socket. 
+
+    Returns: the alias name for the desired key, or null if there are no matches. 
+
+*javax.net.ssl.X509KeyManager.chooseServerAlias(String,Principal[],Socket)*
+
+public |java.lang.String| chooseServerAlias(
+  java.lang.String keyType,
+  java.security.Principal[] issuers,
+  java.net.Socket socket)
+
+Choose an alias to authenticate the server side of a secure socket given the 
+public key type and the list of certificate issuer authorities recognized by 
+the peer (if any). 
+
+
+    keyType - the key algorithm type name. 
+    issuers - the list of acceptable CA issuer subject names or null if it does not matter 
+       which issuers are used. 
+    socket - the socket to be used for this connection. This parameter can be null, which 
+       indicates that implementations are free to select an alias applicable to 
+       any socket. 
+
+    Returns: the alias name for the desired key, or null if there are no matches. 
+
+*javax.net.ssl.X509KeyManager.getCertificateChain(String)*
+
+public |java.security.cert.X509Certificate|[] getCertificateChain(java.lang.String alias)
+
+Returns the certificate chain associated with the given alias. 
+
+
+    alias - the alias name 
+
+    Returns: the certificate chain (ordered with the user's certificate first and the root 
+             certificate authority last), or null if the alias can't be found. 
+
+*javax.net.ssl.X509KeyManager.getClientAliases(String,Principal[])*
+
+public |java.lang.String|[] getClientAliases(
+  java.lang.String keyType,
+  java.security.Principal[] issuers)
+
+Get the matching aliases for authenticating the client side of a secure socket 
+given the public key type and the list of certificate issuer authorities 
+recognized by the peer (if any). 
+
+
+    keyType - the key algorithm type name 
+    issuers - the list of acceptable CA issuer subject names, or null if it does not matter 
+       which issuers are used. 
+
+    Returns: an array of the matching alias names, or null if there were no matches. 
+
+*javax.net.ssl.X509KeyManager.getPrivateKey(String)*
+
+public |java.security.PrivateKey| getPrivateKey(java.lang.String alias)
+
+Returns the key associated with the given alias. 
+
+
+    alias - the alias name 
+
+    Returns: the requested key, or null if the alias can't be found. 
+
+*javax.net.ssl.X509KeyManager.getServerAliases(String,Principal[])*
+
+public |java.lang.String|[] getServerAliases(
+  java.lang.String keyType,
+  java.security.Principal[] issuers)
+
+Get the matching aliases for authenticating the server side of a secure socket 
+given the public key type and the list of certificate issuer authorities 
+recognized by the peer (if any). 
+
+
+    keyType - the key algorithm type name 
+    issuers - the list of acceptable CA issuer subject names or null if it does not matter 
+       which issuers are used. 
+
+    Returns: an array of the matching alias names, or null if there were no matches. 
+
+

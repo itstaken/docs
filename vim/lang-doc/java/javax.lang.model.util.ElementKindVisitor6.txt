@@ -1,0 +1,359 @@
+*javax.lang.model.util.ElementKindVisitor6* *ElementKindVisitor6* A visitor of p
+
+public class ElementKindVisitor6<R,P>
+  extends    |javax.lang.model.util.SimpleElementVisitor6|
+
+|javax.lang.model.util.ElementKindVisitor6_Description|
+|javax.lang.model.util.ElementKindVisitor6_Fields|
+|javax.lang.model.util.ElementKindVisitor6_Constructors|
+|javax.lang.model.util.ElementKindVisitor6_Methods|
+
+================================================================================
+
+*javax.lang.model.util.ElementKindVisitor6_Constructors*
+|javax.lang.model.util.ElementKindVisitor6()|Constructor for concrete subclasse
+|javax.lang.model.util.ElementKindVisitor6(R)|Constructor for concrete subclass
+
+*javax.lang.model.util.ElementKindVisitor6_Methods*
+|javax.lang.model.util.ElementKindVisitor6.visitExecutable(ExecutableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitExecutableAsConstructor(ExecutableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitExecutableAsInstanceInit(ExecutableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitExecutableAsMethod(ExecutableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitExecutableAsStaticInit(ExecutableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitPackage(PackageElement,P)|The e
+|javax.lang.model.util.ElementKindVisitor6.visitType(TypeElement,P)|Visits a ty
+|javax.lang.model.util.ElementKindVisitor6.visitTypeAsAnnotationType(TypeElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitTypeAsClass(TypeElement,P)|Visi
+|javax.lang.model.util.ElementKindVisitor6.visitTypeAsEnum(TypeElement,P)|Visit
+|javax.lang.model.util.ElementKindVisitor6.visitTypeAsInterface(TypeElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitTypeParameter(TypeParameterElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariable(VariableElement,P)|Vis
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsEnumConstant(VariableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsExceptionParameter(VariableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsField(VariableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsLocalVariable(VariableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsParameter(VariableElement,P)|
+|javax.lang.model.util.ElementKindVisitor6.visitVariableAsResourceVariable(VariableElement,P)|
+
+*javax.lang.model.util.ElementKindVisitor6_Description*
+
+A visitor of program elements based on their 
+kind(|javax.lang.model.element.ElementKind|) with default behavior appropriate 
+for the RELEASE_6(|javax.lang.model.SourceVersion|) source version. For 
+elements(|javax.lang.model.element.Element|) XYZ that may have more than one 
+kind, the visitXYZ methods in this class delegate to the visitXYZKind method 
+corresponding to the first argument's kind. The visitXYZKind methods call 
+defaultAction(|javax.lang.model.util.ElementKindVisitor6|) , passing their 
+arguments todefaultAction's corresponding parameters. 
+
+Methods in this class may be overridden subject to their general contract. Note 
+that annotating methods in concrete subclasses with 
+@Override(|java.lang.Override|) will help ensure that methods are overridden as 
+intended. 
+
+WARNING: TheElementVisitorinterface implemented by this class may have methods 
+added to it or theElementKindenumused in this case may have constants added to 
+it in the future to accommodate new, currently unknown, language structures 
+added to future versions of the Java programming language. Therefore, methods 
+whose names begin with"visit"may be added to this class in the future; to avoid 
+incompatibilities, classes which extend this class should not declare any 
+instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the visitUnknown(|javax.lang.model.util.ElementKindVisitor6|) 
+method. A new abstract element kind visitor class will also be introduced to 
+correspond to the new language level; this visitor will have different default 
+behavior for the visit method in question. When the new visitor is introduced, 
+all or portions of this visitor may be deprecated. 
+
+
+
+*javax.lang.model.util.ElementKindVisitor6()*
+
+protected ElementKindVisitor6()
+
+Constructor for concrete subclasses; usesnullfor the default value. 
+
+
+*javax.lang.model.util.ElementKindVisitor6(R)*
+
+protected ElementKindVisitor6(R defaultValue)
+
+Constructor for concrete subclasses; uses the argument for the default value. 
+
+    defaultValue - the value to assign to {@link #DEFAULT_VALUE} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitExecutable(ExecutableElement,P)*
+
+public |R| visitExecutable(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits an executable element, dispatching to the visit method for the specific 
+kind(|javax.lang.model.element.ElementKind|) of 
+executable,CONSTRUCTOR,INSTANCE_INIT,METHOD, orSTATIC_INIT. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of the kind-specific visit method 
+
+*javax.lang.model.util.ElementKindVisitor6.visitExecutableAsConstructor(ExecutableElement,P)*
+
+public |R| visitExecutableAsConstructor(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits aCONSTRUCTORexecutable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitExecutableAsInstanceInit(ExecutableElement,P)*
+
+public |R| visitExecutableAsInstanceInit(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits anINSTANCE_INITexecutable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitExecutableAsMethod(ExecutableElement,P)*
+
+public |R| visitExecutableAsMethod(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits aMETHODexecutable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitExecutableAsStaticInit(ExecutableElement,P)*
+
+public |R| visitExecutableAsStaticInit(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits aSTATIC_INITexecutable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitPackage(PackageElement,P)*
+
+public |R| visitPackage(
+  javax.lang.model.element.PackageElement e,
+  P p)
+
+The element argument has kindPACKAGE. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: {@inheritDoc} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitType(TypeElement,P)*
+
+public |R| visitType(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits a type element, dispatching to the visit method for the specific 
+kind(|javax.lang.model.element.ElementKind|) of 
+type,ANNOTATION_TYPE,CLASS,ENUM, orINTERFACE. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of the kind-specific visit method 
+
+*javax.lang.model.util.ElementKindVisitor6.visitTypeAsAnnotationType(TypeElement,P)*
+
+public |R| visitTypeAsAnnotationType(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits anANNOTATION_TYPEtype element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitTypeAsClass(TypeElement,P)*
+
+public |R| visitTypeAsClass(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits aCLASStype element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitTypeAsEnum(TypeElement,P)*
+
+public |R| visitTypeAsEnum(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits anENUMtype element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitTypeAsInterface(TypeElement,P)*
+
+public |R| visitTypeAsInterface(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits anINTERFACEtype element by callingdefaultAction. . 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitTypeParameter(TypeParameterElement,P)*
+
+public |R| visitTypeParameter(
+  javax.lang.model.element.TypeParameterElement e,
+  P p)
+
+The element argument has kindTYPE_PARAMETER. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: {@inheritDoc} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariable(VariableElement,P)*
+
+public |R| visitVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits a variable element, dispatching to the visit method for the specific 
+kind(|javax.lang.model.element.ElementKind|) of 
+variable,ENUM_CONSTANT,EXCEPTION_PARAMETER,FIELD,LOCAL_VARIABLE,PARAMETER, 
+orRESOURCE_VARIABLE. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of the kind-specific visit method 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsEnumConstant(VariableElement,P)*
+
+public |R| visitVariableAsEnumConstant(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits anENUM_CONSTANTvariable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsExceptionParameter(VariableElement,P)*
+
+public |R| visitVariableAsExceptionParameter(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits anEXCEPTION_PARAMETERvariable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsField(VariableElement,P)*
+
+public |R| visitVariableAsField(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits aFIELDvariable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsLocalVariable(VariableElement,P)*
+
+public |R| visitVariableAsLocalVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits aLOCAL_VARIABLEvariable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsParameter(VariableElement,P)*
+
+public |R| visitVariableAsParameter(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits aPARAMETERvariable element by callingdefaultAction. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.ElementKindVisitor6.visitVariableAsResourceVariable(VariableElement,P)*
+
+public |R| visitVariableAsResourceVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits aRESOURCE_VARIABLEvariable element by callingvisitUnknown. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code visitUnknown} 
+
+

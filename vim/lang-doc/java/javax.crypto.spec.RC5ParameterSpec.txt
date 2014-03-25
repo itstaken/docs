@@ -1,0 +1,164 @@
+*javax.crypto.spec.RC5ParameterSpec* *RC5ParameterSpec* This class specifies the
+
+public class RC5ParameterSpec
+  extends    |java.lang.Object|
+  implements |java.security.spec.AlgorithmParameterSpec|
+
+|javax.crypto.spec.RC5ParameterSpec_Description|
+|javax.crypto.spec.RC5ParameterSpec_Fields|
+|javax.crypto.spec.RC5ParameterSpec_Constructors|
+|javax.crypto.spec.RC5ParameterSpec_Methods|
+
+================================================================================
+
+*javax.crypto.spec.RC5ParameterSpec_Constructors*
+|javax.crypto.spec.RC5ParameterSpec(int,int,int)|Constructs a parameter set for
+|javax.crypto.spec.RC5ParameterSpec(int,int,int,byte[])|Constructs a parameter 
+|javax.crypto.spec.RC5ParameterSpec(int,int,int,byte[],int)|Constructs a parame
+
+*javax.crypto.spec.RC5ParameterSpec_Methods*
+|javax.crypto.spec.RC5ParameterSpec.equals(Object)|Tests for equality between t
+|javax.crypto.spec.RC5ParameterSpec.getIV()|Returns the IV or null if this para
+|javax.crypto.spec.RC5ParameterSpec.getRounds()|Returns the number of rounds.
+|javax.crypto.spec.RC5ParameterSpec.getVersion()|Returns the version.
+|javax.crypto.spec.RC5ParameterSpec.getWordSize()|Returns the word size in bits
+|javax.crypto.spec.RC5ParameterSpec.hashCode()|Calculates a hash code value for
+
+*javax.crypto.spec.RC5ParameterSpec_Description*
+
+This class specifies the parameters used with the RC5 algorithm. 
+
+The parameters consist of a version number, a rounds count, a word size, and 
+optionally an initialization vector (IV) (only in feedback mode). 
+
+This class can be used to initialize a Cipher object that implements the RC5 
+algorithm as supplied by RSA Security Inc., or any parties authorized by RSA 
+Security. 
+
+
+
+*javax.crypto.spec.RC5ParameterSpec(int,int,int)*
+
+public RC5ParameterSpec(
+  int version,
+  int rounds,
+  int wordSize)
+
+Constructs a parameter set for RC5 from the given version, number of rounds and 
+word size (in bits). 
+
+    version - the version. 
+    rounds - the number of rounds. 
+    wordSize - the word size in bits. 
+
+*javax.crypto.spec.RC5ParameterSpec(int,int,int,byte[])*
+
+public RC5ParameterSpec(
+  int version,
+  int rounds,
+  int wordSize,
+  byte[] iv)
+
+Constructs a parameter set for RC5 from the given version, number of rounds, 
+word size (in bits), and IV. 
+
+Note that the size of the IV (block size) must be twice the word size. The 
+bytes that constitute the IV are those between iv[0] and iv[2*(wordSize/8)-1] 
+inclusive. 
+
+    version - the version. 
+    rounds - the number of rounds. 
+    wordSize - the word size in bits. 
+    iv - the buffer with the IV. The first 2*(wordSize/8) bytes of the buffer are copied 
+       to protect against subsequent modification. 
+
+*javax.crypto.spec.RC5ParameterSpec(int,int,int,byte[],int)*
+
+public RC5ParameterSpec(
+  int version,
+  int rounds,
+  int wordSize,
+  byte[] iv,
+  int offset)
+
+Constructs a parameter set for RC5 from the given version, number of rounds, 
+word size (in bits), and IV. 
+
+The IV is taken from iv, starting at offset inclusive. Note that the size of 
+the IV (block size), starting at offset inclusive, must be twice the word size. 
+The bytes that constitute the IV are those between iv[offset] and 
+iv[offset+2*(wordSize/8)-1] inclusive. 
+
+    version - the version. 
+    rounds - the number of rounds. 
+    wordSize - the word size in bits. 
+    iv - the buffer with the IV. The first 2*(wordSize/8) bytes of the buffer beginning 
+       at offset inclusive are copied to protect against subsequent 
+       modification. 
+    offset - the offset in iv where the IV starts. 
+
+*javax.crypto.spec.RC5ParameterSpec.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Tests for equality between the specified object and this object. Two 
+RC5ParameterSpec objects are considered equal if their version numbers, number 
+of rounds, word sizes, and IVs are equal. (Two IV references are considered 
+equal if both are null.) 
+
+
+    obj - the object to test for equality with this object. 
+
+    Returns: true if the objects are considered equal, false if obj is null or otherwise. 
+
+*javax.crypto.spec.RC5ParameterSpec.getIV()*
+
+public byte[] getIV()
+
+Returns the IV or null if this parameter set does not contain an IV. 
+
+
+
+    Returns: the IV or null if this parameter set does not contain an IV. Returns a new 
+             array each time this method is called. 
+
+*javax.crypto.spec.RC5ParameterSpec.getRounds()*
+
+public int getRounds()
+
+Returns the number of rounds. 
+
+
+
+    Returns: the number of rounds. 
+
+*javax.crypto.spec.RC5ParameterSpec.getVersion()*
+
+public int getVersion()
+
+Returns the version. 
+
+
+
+    Returns: 
+
+*javax.crypto.spec.RC5ParameterSpec.getWordSize()*
+
+public int getWordSize()
+
+Returns the word size in bits. 
+
+
+
+    Returns: the word size in bits. 
+
+*javax.crypto.spec.RC5ParameterSpec.hashCode()*
+
+public int hashCode()
+
+Calculates a hash code value for the object. Objects that are equal will also 
+have the same hashcode. 
+
+
+
+

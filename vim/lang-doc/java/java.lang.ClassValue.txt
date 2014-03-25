@@ -1,0 +1,138 @@
+*java.lang.ClassValue* *ClassValue* Lazily associate a computed value with (pote
+
+public abstract class ClassValue<T>
+  extends    |java.lang.Object|
+
+|java.lang.ClassValue_Description|
+|java.lang.ClassValue_Fields|
+|java.lang.ClassValue_Constructors|
+|java.lang.ClassValue_Methods|
+
+================================================================================
+
+*java.lang.ClassValue_Constructors*
+|java.lang.ClassValue()|Sole constructor.
+
+*java.lang.ClassValue_Methods*
+|java.lang.ClassValue.computeValue(Class<?>)|Computes the given class's derived
+|java.lang.ClassValue.get(Class<?>)|Returns the value for the given class.
+|java.lang.ClassValue.remove(Class<?>)|Removes the associated value for the giv
+
+*java.lang.ClassValue_Description*
+
+Lazily associate a computed value with (potentially) every type. For example, 
+if a dynamic language needs to construct a message dispatch table for each 
+class encountered at a message send call site, it can use aClassValueto cache 
+information needed to perform the message send quickly, for each class 
+encountered. 
+
+
+
+*java.lang.ClassValue()*
+
+protected ClassValue()
+
+Sole constructor. (For invocation by subclass constructors, typically 
+implicit.) 
+
+
+*java.lang.ClassValue.computeValue(Class<?>)*
+
+protected abstract |T| computeValue(java.lang.Class<?> type)
+
+Computes the given class's derived value for thisClassValue. 
+
+This method will be invoked within the first thread that accesses the value 
+with the get(|java.lang.ClassValue|) method. 
+
+Normally, this method is invoked at most once per class, but it may be invoked 
+again if there has been a call to remove(|java.lang.ClassValue|) . 
+
+If this method throws an exception, the corresponding call togetwill terminate 
+abnormally with that exception, and no class value will be recorded. 
+
+
+    type - the type whose class value must be computed 
+
+    Returns: the newly computed value associated with this {@code ClassValue}, for the given 
+             class or interface 
+
+*java.lang.ClassValue.get(Class<?>)*
+
+public |T| get(java.lang.Class<?> type)
+
+Returns the value for the given class. If no value has yet been computed, it is 
+obtained by an invocation of the computeValue(|java.lang.ClassValue|) method. 
+
+The actual installation of the value on the class is performed atomically. At 
+that point, if several racing threads have computed values, one is chosen, and 
+returned to all the racing threads. 
+
+Thetypeparameter is typically a class, but it may be any type, such as an 
+interface, a primitive type (likeint.class), orvoid.class. 
+
+In the absence ofremovecalls, a class value has a simple state diagram: 
+uninitialized and initialized. Whenremovecalls are made, the rules for value 
+observation are more complex. See the documentation for 
+remove(|java.lang.ClassValue|) for more information. 
+
+
+    type - the type whose class value must be computed or retrieved 
+
+    Returns: the current value associated with this {@code ClassValue}, for the given class 
+             or interface 
+
+*java.lang.ClassValue.remove(Class<?>)*
+
+public void remove(java.lang.Class<?> type)
+
+Removes the associated value for the given class. If this value is subsequently 
+read(|java.lang.ClassValue|) for the same class, its value will be 
+reinitialized by invoking its computeValue(|java.lang.ClassValue|) method. This 
+may result in an additional invocation of thecomputeValuemethod for the given 
+class. 
+
+In order to explain the interaction betweengetandremovecalls, we must model the 
+state transitions of a class value to take into account the alternation between 
+uninitialized and initialized states. To do this, number these states 
+sequentially from zero, and note that uninitialized (or removed) states are 
+numbered with even numbers, while initialized (or re-initialized) states have 
+odd numbers. 
+
+When a threadTremoves a class value in state2N, nothing happens, since the 
+class value is already uninitialized. Otherwise, the state is advanced 
+atomically to2N+1. 
+
+When a threadTqueries a class value in state2N, the thread first attempts to 
+initialize the class value to state2N+1by invokingcomputeValueand installing 
+the resulting value. 
+
+WhenTattempts to install the newly computed value, if the state is still at2N, 
+the class value will be initialized with the computed value, advancing it to 
+state2N+1. 
+
+Otherwise, whether the new state is even or odd,Twill discard the newly 
+computed value and retry thegetoperation. 
+
+Discarding and retrying is an important proviso, since otherwiseTcould 
+potentially install a disastrously stale value. For example: 
+
+TcallsCV.get(C)and sees state2NTquickly computes a time-dependent valueV0and 
+gets ready to install it Tis hit by an unlucky paging or scheduling event, and 
+goes to sleep for a long time ...meanwhile,T2also callsCV.get(C)and sees 
+state2NT2quickly computes a similar time-dependent valueV1and installs it 
+onCV.get(C)T2(or a third thread) then callsCV.remove(C), undoingT2's work the 
+previous actions ofT2are repeated several times also, the relevant computed 
+values change over time:V1,V2, ... ...meanwhile,Twakes up and attempts to 
+installV0; this must fail 
+
+We can assume in the above scenario thatCV.computeValueuses locks to properly 
+observe the time-dependent states as it computesV1, etc. This does not remove 
+the threat of a stale value, since there is a window of time between the return 
+ofcomputeValueinTand the installation of the the new value. No user 
+synchronization is possible during this time. 
+
+
+    type - the type whose class value must be removed 
+
+

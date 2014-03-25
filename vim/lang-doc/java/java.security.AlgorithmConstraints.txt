@@ -1,0 +1,89 @@
+*java.security.AlgorithmConstraints* *AlgorithmConstraints* This interface speci
+
+public interface interface AlgorithmConstraints
+
+
+|java.security.AlgorithmConstraints_Description|
+|java.security.AlgorithmConstraints_Fields|
+|java.security.AlgorithmConstraints_Constructors|
+|java.security.AlgorithmConstraints_Methods|
+
+================================================================================
+
+*java.security.AlgorithmConstraints_Methods*
+|java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,Key)|Determine
+|java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,String,AlgorithmParameters)|
+|java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,String,Key,AlgorithmParameters)|
+
+*java.security.AlgorithmConstraints_Description*
+
+This interface specifies constraints for cryptographic algorithms, keys (key 
+sizes), and other algorithm parameters. AlgorithmConstraintsobjects are 
+immutable. An implementation of this interface should not provide methods that 
+can change the state of an instance once it has been created. 
+
+Note thatAlgorithmConstraintscan be used to represent the restrictions 
+described by the security 
+propertiesjdk.certpath.disabledAlgorithmsandjdk.tls.disabledAlgorithms, or 
+could be used by a concretePKIXCertPathCheckerto check whether a specified 
+certificate in the certification path contains the required algorithm 
+constraints. 
+
+
+
+*java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,Key)*
+
+public boolean permits(
+  java.util.Set<java.security.CryptoPrimitive> primitives,
+  java.security.Key key)
+
+Determines whether a key is granted permission for the specified cryptographic 
+primitives. 
+
+This method is usually used to check key size and key usage. 
+
+
+    primitives - a set of cryptographic primitives 
+    key - the key 
+
+    Returns: true if the key can be used for all of the specified cryptographic primitives 
+
+*java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,String,AlgorithmParameters)*
+
+public boolean permits(
+  java.util.Set<java.security.CryptoPrimitive> primitives,
+  java.lang.String algorithm,
+  java.security.AlgorithmParameters parameters)
+
+Determines whether an algorithm is granted permission for the specified 
+cryptographic primitives. 
+
+
+    primitives - a set of cryptographic primitives 
+    algorithm - the algorithm name 
+    parameters - the algorithm parameters, or null if no additional parameters 
+
+    Returns: true if the algorithm is permitted and can be used for all of the specified 
+             cryptographic primitives 
+
+*java.security.AlgorithmConstraints.permits(Set<CryptoPrimitive>,String,Key,AlgorithmParameters)*
+
+public boolean permits(
+  java.util.Set<java.security.CryptoPrimitive> primitives,
+  java.lang.String algorithm,
+  java.security.Key key,
+  java.security.AlgorithmParameters parameters)
+
+Determines whether an algorithm and the corresponding key are granted 
+permission for the specified cryptographic primitives. 
+
+
+    primitives - a set of cryptographic primitives 
+    algorithm - the algorithm name 
+    key - the key 
+    parameters - the algorithm parameters, or null if no additional parameters 
+
+    Returns: true if the key and the algorithm can be used for all of the specified 
+             cryptographic primitives 
+
+

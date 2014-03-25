@@ -1,0 +1,84 @@
+*javax.crypto.KeyGeneratorSpi* *KeyGeneratorSpi* This class defines the Service 
+
+public abstract class KeyGeneratorSpi
+  extends    |java.lang.Object|
+
+|javax.crypto.KeyGeneratorSpi_Description|
+|javax.crypto.KeyGeneratorSpi_Fields|
+|javax.crypto.KeyGeneratorSpi_Constructors|
+|javax.crypto.KeyGeneratorSpi_Methods|
+
+================================================================================
+
+*javax.crypto.KeyGeneratorSpi_Constructors*
+|javax.crypto.KeyGeneratorSpi()|
+
+*javax.crypto.KeyGeneratorSpi_Methods*
+|javax.crypto.KeyGeneratorSpi.engineGenerateKey()|Generates a secret key.
+|javax.crypto.KeyGeneratorSpi.engineInit(AlgorithmParameterSpec,SecureRandom)|I
+|javax.crypto.KeyGeneratorSpi.engineInit(int,SecureRandom)|Initializes this key
+|javax.crypto.KeyGeneratorSpi.engineInit(SecureRandom)|Initializes the key gene
+
+*javax.crypto.KeyGeneratorSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the KeyGenerator 
+class. All the abstract methods in this class must be implemented by each 
+cryptographic service provider who wishes to supply the implementation of a key 
+generator for a particular algorithm. 
+
+
+
+*javax.crypto.KeyGeneratorSpi()*
+
+public KeyGeneratorSpi()
+
+
+
+
+*javax.crypto.KeyGeneratorSpi.engineGenerateKey()*
+
+protected abstract |javax.crypto.SecretKey| engineGenerateKey()
+
+Generates a secret key. 
+
+
+
+    Returns: 
+
+*javax.crypto.KeyGeneratorSpi.engineInit(AlgorithmParameterSpec,SecureRandom)*
+
+protected abstract void engineInit(
+  java.security.spec.AlgorithmParameterSpec params,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidAlgorithmParameterException|
+         
+Initializes the key generator with the specified parameter set and a 
+user-provided source of randomness. 
+
+
+    params - the key generation parameters 
+    random - the source of randomness for this key generator 
+
+*javax.crypto.KeyGeneratorSpi.engineInit(int,SecureRandom)*
+
+protected abstract void engineInit(
+  int keysize,
+  java.security.SecureRandom random)
+
+Initializes this key generator for a certain keysize, using the given source of 
+randomness. 
+
+
+    keysize - the keysize. This is an algorithm-specific metric, specified in number of bits. 
+    random - the source of randomness for this key generator 
+
+*javax.crypto.KeyGeneratorSpi.engineInit(SecureRandom)*
+
+protected abstract void engineInit(java.security.SecureRandom random)
+
+Initializes the key generator. 
+
+
+    random - the source of randomness for this generator 
+
+

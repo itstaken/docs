@@ -1,0 +1,157 @@
+*javax.lang.model.element.ElementVisitor* *ElementVisitor* A visitor of program 
+
+public interface interface ElementVisitor<R,P>
+
+
+|javax.lang.model.element.ElementVisitor_Description|
+|javax.lang.model.element.ElementVisitor_Fields|
+|javax.lang.model.element.ElementVisitor_Constructors|
+|javax.lang.model.element.ElementVisitor_Methods|
+
+================================================================================
+
+*javax.lang.model.element.ElementVisitor_Methods*
+|javax.lang.model.element.ElementVisitor.visit(Element)|A convenience method eq
+|javax.lang.model.element.ElementVisitor.visit(Element,P)|Visits an element.
+|javax.lang.model.element.ElementVisitor.visitExecutable(ExecutableElement,P)|V
+|javax.lang.model.element.ElementVisitor.visitPackage(PackageElement,P)|Visits 
+|javax.lang.model.element.ElementVisitor.visitType(TypeElement,P)|Visits a type
+|javax.lang.model.element.ElementVisitor.visitTypeParameter(TypeParameterElement,P)|
+|javax.lang.model.element.ElementVisitor.visitUnknown(Element,P)|Visits an unkn
+|javax.lang.model.element.ElementVisitor.visitVariable(VariableElement,P)|Visit
+
+*javax.lang.model.element.ElementVisitor_Description*
+
+A visitor of program elements, in the style of the visitor design pattern. 
+Classes implementing this interface are used to operate on an element when the 
+kind of element is unknown at compile time. When a visitor is passed to an 
+element's accept(|javax.lang.model.element.Element|) method, the visitXYZ 
+method most applicable to that element is invoked. 
+
+Classes implementing this interface may or may not throw 
+aNullPointerExceptionif the additional parameterpisnull; see documentation of 
+the implementing class for details. 
+
+WARNING: It is possible that methods will be added to this interface to 
+accommodate new, currently unknown, language structures added to future 
+versions of the Java programming language. Therefore, visitor classes directly 
+implementing this interface may be source incompatible with future versions of 
+the platform. To avoid this source incompatibility, visitor implementations are 
+encouraged to instead extend the appropriate abstract visitor class that 
+implements this interface. However, an API should generally use this visitor 
+interface as the type for parameters, return type, etc. rather than one of the 
+abstract classes. 
+
+
+
+*javax.lang.model.element.ElementVisitor.visit(Element)*
+
+public |R| visit(javax.lang.model.element.Element e)
+
+A convenience method equivalent tov.visit(e, null). 
+
+
+    e - the element to visit 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visit(Element,P)*
+
+public |R| visit(
+  javax.lang.model.element.Element e,
+  P p)
+
+Visits an element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitExecutable(ExecutableElement,P)*
+
+public |R| visitExecutable(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+Visits an executable element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitPackage(PackageElement,P)*
+
+public |R| visitPackage(
+  javax.lang.model.element.PackageElement e,
+  P p)
+
+Visits a package element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitType(TypeElement,P)*
+
+public |R| visitType(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+Visits a type element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitTypeParameter(TypeParameterElement,P)*
+
+public |R| visitTypeParameter(
+  javax.lang.model.element.TypeParameterElement e,
+  P p)
+
+Visits a type parameter element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitUnknown(Element,P)*
+
+public |R| visitUnknown(
+  javax.lang.model.element.Element e,
+  P p)
+
+Visits an unknown kind of element. This can occur if the language evolves and 
+new kinds of elements are added to theElementhierarchy. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.ElementVisitor.visitVariable(VariableElement,P)*
+
+public |R| visitVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+Visits a variable element. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+

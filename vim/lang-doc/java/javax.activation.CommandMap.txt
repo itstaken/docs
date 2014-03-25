@@ -1,0 +1,217 @@
+*javax.activation.CommandMap* *CommandMap* The CommandMap class provides an inte
+
+public abstract class CommandMap
+  extends    |java.lang.Object|
+
+|javax.activation.CommandMap_Description|
+|javax.activation.CommandMap_Fields|
+|javax.activation.CommandMap_Constructors|
+|javax.activation.CommandMap_Methods|
+
+================================================================================
+
+*javax.activation.CommandMap_Constructors*
+|javax.activation.CommandMap()|
+
+*javax.activation.CommandMap_Methods*
+|javax.activation.CommandMap.createDataContentHandler(String)|Locate a DataCont
+|javax.activation.CommandMap.createDataContentHandler(String,DataSource)|Locate
+|javax.activation.CommandMap.getAllCommands(String)|Get all the available comma
+|javax.activation.CommandMap.getAllCommands(String,DataSource)|Get all the avai
+|javax.activation.CommandMap.getCommand(String,String)|Get the default command 
+|javax.activation.CommandMap.getCommand(String,String,DataSource)|Get the defau
+|javax.activation.CommandMap.getDefaultCommandMap()|Get the default CommandMap.
+|javax.activation.CommandMap.getMimeTypes()|Get all the MIME types known to thi
+|javax.activation.CommandMap.getPreferredCommands(String)|Get the preferred com
+|javax.activation.CommandMap.getPreferredCommands(String,DataSource)|Get the pr
+|javax.activation.CommandMap.setDefaultCommandMap(CommandMap)|Set the default C
+
+*javax.activation.CommandMap_Description*
+
+The CommandMap class provides an interface to a registry of command objects 
+available in the system. Developers are expected to either use the CommandMap 
+implementation included with this package (MailcapCommandMap) or develop their 
+own. Note that some of the methods in this class are abstract. 
+
+
+
+*javax.activation.CommandMap()*
+
+public CommandMap()
+
+
+
+
+*javax.activation.CommandMap.createDataContentHandler(String)*
+
+public abstract |javax.activation.DataContentHandler| createDataContentHandler(java.lang.String mimeType)
+
+Locate a DataContentHandler that corresponds to the MIME type. The mechanism 
+and semantics for determining this are determined by the implementation of the 
+particular CommandMap. 
+
+
+    mimeType - the MIME type 
+
+    Returns: the DataContentHandler for the MIME type 
+
+*javax.activation.CommandMap.createDataContentHandler(String,DataSource)*
+
+public |javax.activation.DataContentHandler| createDataContentHandler(
+  java.lang.String mimeType,
+  javax.activation.DataSource ds)
+
+Locate a DataContentHandler that corresponds to the MIME type. The mechanism 
+and semantics for determining this are determined by the implementation of the 
+particular CommandMap. 
+
+The DataSource provides extra information, such as the file name, that a 
+CommandMap implementation may use to further refine the choice of 
+DataContentHandler. The implementation in this class simply calls the 
+createDataContentHandler method that ignores this argument. 
+
+
+    mimeType - the MIME type 
+    ds - a DataSource for the data 
+
+    Returns: the DataContentHandler for the MIME type 
+
+*javax.activation.CommandMap.getAllCommands(String)*
+
+public abstract |javax.activation.CommandInfo|[] getAllCommands(java.lang.String mimeType)
+
+Get all the available commands for this type. This method should return all the 
+possible commands for this MIME type. 
+
+
+    mimeType - the MIME type 
+
+    Returns: the CommandInfo objects representing all the commands. 
+
+*javax.activation.CommandMap.getAllCommands(String,DataSource)*
+
+public |javax.activation.CommandInfo|[] getAllCommands(
+  java.lang.String mimeType,
+  javax.activation.DataSource ds)
+
+Get all the available commands for this type. This method should return all the 
+possible commands for this MIME type. 
+
+The DataSource provides extra information, such as the file name, that a 
+CommandMap implementation may use to further refine the list of commands that 
+are returned. The implementation in this class simply calls the getAllCommands 
+method that ignores this argument. 
+
+
+    mimeType - the MIME type 
+    ds - a DataSource for the data 
+
+    Returns: the CommandInfo objects representing all the commands. 
+
+*javax.activation.CommandMap.getCommand(String,String)*
+
+public abstract |javax.activation.CommandInfo| getCommand(
+  java.lang.String mimeType,
+  java.lang.String cmdName)
+
+Get the default command corresponding to the MIME type. 
+
+
+    mimeType - the MIME type 
+    cmdName - the command name 
+
+    Returns: the CommandInfo corresponding to the command. 
+
+*javax.activation.CommandMap.getCommand(String,String,DataSource)*
+
+public |javax.activation.CommandInfo| getCommand(
+  java.lang.String mimeType,
+  java.lang.String cmdName,
+  javax.activation.DataSource ds)
+
+Get the default command corresponding to the MIME type. 
+
+The DataSource provides extra information, such as the file name, that a 
+CommandMap implementation may use to further refine the command that is chosen. 
+The implementation in this class simply calls the getCommand method that 
+ignores this argument. 
+
+
+    mimeType - the MIME type 
+    cmdName - the command name 
+    ds - a DataSource for the data 
+
+    Returns: the CommandInfo corresponding to the command. 
+
+*javax.activation.CommandMap.getDefaultCommandMap()*
+
+public static |javax.activation.CommandMap| getDefaultCommandMap()
+
+Get the default CommandMap. 
+
+In cases where a CommandMap instance has been previously set to some value (via 
+setDefaultCommandMap) return the CommandMap. 
+
+In cases where no CommandMap has been set, the CommandMap creates an instance 
+of MailcapCommandMap and set that to the default, returning its value. 
+
+
+
+
+
+    Returns: the CommandMap 
+
+*javax.activation.CommandMap.getMimeTypes()*
+
+public |java.lang.String|[] getMimeTypes()
+
+Get all the MIME types known to this command map. If the command map doesn't 
+support this operation, null is returned. 
+
+
+
+    Returns: array of MIME types as strings, or null if not supported 
+
+*javax.activation.CommandMap.getPreferredCommands(String)*
+
+public abstract |javax.activation.CommandInfo|[] getPreferredCommands(java.lang.String mimeType)
+
+Get the preferred command list from a MIME Type. The actual semantics are 
+determined by the implementation of the CommandMap. 
+
+
+    mimeType - the MIME type 
+
+    Returns: the CommandInfo classes that represent the command Beans. 
+
+*javax.activation.CommandMap.getPreferredCommands(String,DataSource)*
+
+public |javax.activation.CommandInfo|[] getPreferredCommands(
+  java.lang.String mimeType,
+  javax.activation.DataSource ds)
+
+Get the preferred command list from a MIME Type. The actual semantics are 
+determined by the implementation of the CommandMap. 
+
+The DataSource provides extra information, such as the file name, that a 
+CommandMap implementation may use to further refine the list of commands that 
+are returned. The implementation in this class simply calls the 
+getPreferredCommands method that ignores this argument. 
+
+
+    mimeType - the MIME type 
+    ds - a DataSource for the data 
+
+    Returns: the CommandInfo classes that represent the command Beans. 
+
+*javax.activation.CommandMap.setDefaultCommandMap(CommandMap)*
+
+public static void setDefaultCommandMap(javax.activation.CommandMap commandMap)
+
+Set the default CommandMap. Reset the CommandMap to the default by calling this 
+method with null. 
+
+
+    commandMap - The new default CommandMap. 
+
+

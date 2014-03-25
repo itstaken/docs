@@ -1,0 +1,76 @@
+*java.nio.file.attribute.FileOwnerAttributeView* *FileOwnerAttributeView* A file
+
+public interface interface FileOwnerAttributeView
+
+  implements |java.nio.file.attribute.FileAttributeView|
+
+|java.nio.file.attribute.FileOwnerAttributeView_Description|
+|java.nio.file.attribute.FileOwnerAttributeView_Fields|
+|java.nio.file.attribute.FileOwnerAttributeView_Constructors|
+|java.nio.file.attribute.FileOwnerAttributeView_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.FileOwnerAttributeView_Methods*
+|java.nio.file.attribute.FileOwnerAttributeView.getOwner()|Read the file owner.
+|java.nio.file.attribute.FileOwnerAttributeView.name()|Returns the name of the 
+|java.nio.file.attribute.FileOwnerAttributeView.setOwner(UserPrincipal)|Updates
+
+*java.nio.file.attribute.FileOwnerAttributeView_Description*
+
+A file attribute view that supports reading or updating the owner of a file. 
+This file attribute view is intended for file system implementations that 
+support a file attribute that represents an identity that is the owner of the 
+file. Often the owner of a file is the identity of the entity that created the 
+file. 
+
+The getOwner(|java.nio.file.attribute.FileOwnerAttributeView|) or 
+setOwner(|java.nio.file.attribute.FileOwnerAttributeView|) methods may be used 
+to read or update the owner of the file. 
+
+The getAttribute(|java.nio.file.Files|) and setAttribute(|java.nio.file.Files|) 
+methods may also be used to read or update the owner. In that case, the owner 
+attribute is identified by the name"owner", and the value of the attribute is a 
+(|java.nio.file.attribute.UserPrincipal|) . 
+
+
+
+*java.nio.file.attribute.FileOwnerAttributeView.getOwner()*
+
+public |java.nio.file.attribute.UserPrincipal| getOwner()
+  throws |java.io.IOException|
+         
+Read the file owner. 
+
+It it implementation specific if the file owner can be a 
+group(|java.nio.file.attribute.GroupPrincipal|) . 
+
+
+
+    Returns: the file owner 
+
+*java.nio.file.attribute.FileOwnerAttributeView.name()*
+
+public |java.lang.String| name()
+
+Returns the name of the attribute view. Attribute views of this type have the 
+name"owner". 
+
+
+
+*java.nio.file.attribute.FileOwnerAttributeView.setOwner(UserPrincipal)*
+
+public void setOwner(java.nio.file.attribute.UserPrincipal owner)
+  throws |java.io.IOException|
+         
+Updates the file owner. 
+
+It it implementation specific if the file owner can be a 
+group(|java.nio.file.attribute.GroupPrincipal|) . To ensure consistent and 
+correct behavior across platforms it is recommended that this method should 
+only be used to set the file owner to a user principal that is not a group. 
+
+
+    owner - the new file owner 
+
+

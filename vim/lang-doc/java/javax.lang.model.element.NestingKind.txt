@@ -1,0 +1,76 @@
+*javax.lang.model.element.NestingKind* *NestingKind* The nesting kind of a type 
+
+public final enumNestingKind
+  extends    |java.lang.Enum|
+
+|javax.lang.model.element.NestingKind_Description|
+|javax.lang.model.element.NestingKind_Fields|
+|javax.lang.model.element.NestingKind_Constructors|
+|javax.lang.model.element.NestingKind_Methods|
+
+================================================================================
+
+*javax.lang.model.element.NestingKind_Methods*
+|javax.lang.model.element.NestingKind.isNested()|Does this constant correspond 
+|javax.lang.model.element.NestingKind.valueOf(String)|
+|javax.lang.model.element.NestingKind.values()|
+
+*javax.lang.model.element.NestingKind_Description*
+
+The nesting kind of a type element. Type elements come in four varieties: 
+top-level, member, local, and anonymous. Nesting kind is a non-standard term 
+used here to denote this classification. 
+
+Note that it is possible additional nesting kinds will be added in future 
+versions of the platform. 
+
+Example: The classes below are annotated with their nesting kind. 
+
+import java.lang.annotation.*; import static 
+java.lang.annotation.RetentionPolicy.*; import javax.lang.model.element.*; 
+import static javax.lang.model.element.NestingKind.*; 
+
+Nesting(TOP_LEVEL) public class NestingExamples { Nesting(MEMBER) static class 
+MemberClass1{} 
+
+Nesting(MEMBER) class MemberClass2{} 
+
+public static void main(String... argv) { Nesting(LOCAL) class LocalClass{}; 
+
+Class<?>[] classes = { NestingExamples.class, MemberClass1.class, 
+MemberClass2.class, LocalClass.class }; 
+
+for(Class<?> clazz : classes) { System.out.format("%s is %s%n", 
+clazz.getName(), clazz.getAnnotation(Nesting.class).value()); } } } 
+
+Retention(RUNTIME) interface Nesting { NestingKind value(); } 
+
+
+
+*javax.lang.model.element.NestingKind.isNested()*
+
+public boolean isNested()
+
+Does this constant correspond to a nested type element? A nested type element 
+is any that is not top-level. An inner type element is any nested type element 
+that is not static(|javax.lang.model.element.Modifier|) . 
+
+
+
+*javax.lang.model.element.NestingKind.valueOf(String)*
+
+public static |javax.lang.model.element.NestingKind| valueOf(java.lang.String name)
+
+
+
+
+
+*javax.lang.model.element.NestingKind.values()*
+
+public static |javax.lang.model.element.NestingKind|[] values()
+
+
+
+
+
+

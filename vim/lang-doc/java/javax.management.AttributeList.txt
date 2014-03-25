@@ -1,0 +1,223 @@
+*javax.management.AttributeList* *AttributeList* Represents a list of values for
+
+public class AttributeList
+  extends    |java.util.ArrayList|
+
+|javax.management.AttributeList_Description|
+|javax.management.AttributeList_Fields|
+|javax.management.AttributeList_Constructors|
+|javax.management.AttributeList_Methods|
+
+================================================================================
+
+*javax.management.AttributeList_Constructors*
+|javax.management.AttributeList()|Constructs an empty AttributeList.
+|javax.management.AttributeList(AttributeList)|Constructs an AttributeList cont
+|javax.management.AttributeList(int)|Constructs an empty AttributeList with  th
+|javax.management.AttributeList(List<Attribute>)|Constructs anAttributeListcont
+
+*javax.management.AttributeList_Methods*
+|javax.management.AttributeList.add(Attribute)|Adds theAttributespecified as th
+|javax.management.AttributeList.add(int,Attribute)|Inserts the attribute specif
+|javax.management.AttributeList.add(int,Object)|
+|javax.management.AttributeList.add(Object)|
+|javax.management.AttributeList.addAll(AttributeList)|Appends all the elements 
+|javax.management.AttributeList.addAll(Collection<?>)|
+|javax.management.AttributeList.addAll(int,AttributeList)|Inserts all of the el
+|javax.management.AttributeList.addAll(int,Collection<?>)|
+|javax.management.AttributeList.asList()|Return a view of this list as aList.
+|javax.management.AttributeList.set(int,Attribute)|Sets the element at the posi
+|javax.management.AttributeList.set(int,Object)|
+
+*javax.management.AttributeList_Description*
+
+Represents a list of values for attributes of an MBean. See the 
+getAttributes(|javax.management.MBeanServerConnection|) and 
+setAttributes(|javax.management.MBeanServerConnection|) methods of 
+(|javax.management.MBeanServer|) and (|javax.management.MBeanServerConnection|) 
+. 
+
+For compatibility reasons, it is possible, though highly discouraged, to add 
+objects to anAttributeListthat are not instances ofAttribute. However, 
+anAttributeListcan be made type-safe, which means that an attempt to add an 
+object that is not anAttributewill produce anIllegalArgumentException. 
+AnAttributeListbecomes type-safe when the method 
+(|javax.management.AttributeList|) is called on it. 
+
+
+
+*javax.management.AttributeList()*
+
+public AttributeList()
+
+Constructs an empty AttributeList. 
+
+
+*javax.management.AttributeList(AttributeList)*
+
+public AttributeList(javax.management.AttributeList list)
+
+Constructs an AttributeList containing the elements of the AttributeList 
+specified, in the order in which they are returned by the AttributeList's 
+iterator. The AttributeList instance has an initial capacity of 110% of the 
+size of the AttributeList specified. 
+
+    list - the AttributeList that defines the initial contents of the new AttributeList. 
+
+*javax.management.AttributeList(int)*
+
+public AttributeList(int initialCapacity)
+
+Constructs an empty AttributeList with the initial capacity specified. 
+
+    initialCapacity - the initial capacity of the AttributeList, as specified by {@link 
+       ArrayList#ArrayList(int)}. 
+
+*javax.management.AttributeList(List<Attribute>)*
+
+public AttributeList(java.util.List<javax.management.Attribute> list)
+
+Constructs anAttributeListcontaining the elements of theListspecified, in the 
+order in which they are returned by theList's iterator. 
+
+    list - the {@code List} that defines the initial contents of the new {@code 
+       AttributeList}. 
+
+*javax.management.AttributeList.add(Attribute)*
+
+public void add(javax.management.Attribute object)
+
+Adds theAttributespecified as the last element of the list. 
+
+
+    object - The attribute to be added. 
+
+*javax.management.AttributeList.add(int,Attribute)*
+
+public void add(
+  int index,
+  javax.management.Attribute object)
+
+Inserts the attribute specified as an element at the position specified. 
+Elements with an index greater than or equal to the current position are 
+shifted up. If the index is out of range (index size()) a 
+RuntimeOperationsException should be raised, wrapping the 
+java.lang.IndexOutOfBoundsException thrown. 
+
+
+    object - The Attribute object to be inserted. 
+    index - The position in the list where the new {@code Attribute} object is to be 
+       inserted. 
+
+*javax.management.AttributeList.add(int,Object)*
+
+public void add(
+  int index,
+  java.lang.Object element)
+
+
+
+
+
+*javax.management.AttributeList.add(Object)*
+
+public boolean add(java.lang.Object element)
+
+
+
+
+
+*javax.management.AttributeList.addAll(AttributeList)*
+
+public boolean addAll(javax.management.AttributeList list)
+
+Appends all the elements in the AttributeList specified to the end of the list, 
+in the order in which they are returned by the Iterator of the AttributeList 
+specified. 
+
+
+    list - Elements to be inserted into the list. 
+
+    Returns: true if this list changed as a result of the call. 
+
+*javax.management.AttributeList.addAll(Collection<?>)*
+
+public boolean addAll(java.util.Collection<?> c)
+
+
+
+
+
+*javax.management.AttributeList.addAll(int,AttributeList)*
+
+public boolean addAll(
+  int index,
+  javax.management.AttributeList list)
+
+Inserts all of the elements in the AttributeList specified into this list, 
+starting at the specified position, in the order in which they are returned by 
+the Iterator of theAttributeListspecified. If the index is out of range (index 
+size() a RuntimeOperationsException should be raised, wrapping the 
+java.lang.IndexOutOfBoundsException thrown. 
+
+
+    list - Elements to be inserted into the list. 
+    index - Position at which to insert the first element from the AttributeList specified. 
+
+    Returns: true if this list changed as a result of the call. 
+
+*javax.management.AttributeList.addAll(int,Collection<?>)*
+
+public boolean addAll(
+  int index,
+  java.util.Collection<?> c)
+
+
+
+
+
+*javax.management.AttributeList.asList()*
+
+public |java.util.List|<Attribute> asList()
+
+Return a view of this list as aList. Changes to the returned value are 
+reflected by changes to the originalAttributeListand vice versa. 
+
+
+
+    Returns: a {@code List} whose contents reflect the contents of this {@code 
+             AttributeList}. 
+
+If this method has ever been called on a given {@code AttributeList} instance, 
+             a subsequent attempt to add an object to that instance which is 
+             not an {@code Attribute} will fail with a {@code 
+             IllegalArgumentException}. For compatibility reasons, an {@code 
+             AttributeList} on which this method has never been called does 
+             allow objects other than {@code Attribute}s to be added. 
+
+*javax.management.AttributeList.set(int,Attribute)*
+
+public void set(
+  int index,
+  javax.management.Attribute object)
+
+Sets the element at the position specified to be the attribute specified. The 
+previous element at that position is discarded. If the index is out of range 
+(index size() a RuntimeOperationsException should be raised, wrapping the 
+java.lang.IndexOutOfBoundsException thrown. 
+
+
+    object - The value to which the attribute element should be set. 
+    index - The position specified. 
+
+*javax.management.AttributeList.set(int,Object)*
+
+public |java.lang.Object| set(
+  int index,
+  java.lang.Object element)
+
+
+
+
+
+

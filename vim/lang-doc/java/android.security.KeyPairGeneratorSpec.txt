@@ -1,0 +1,179 @@
+*android.security.KeyPairGeneratorSpec* *KeyPairGeneratorSpec* This provides the
+
+public final class KeyPairGeneratorSpec
+  extends    |java.lang.Object|
+  implements |java.security.spec.AlgorithmParameterSpec|
+
+|android.security.KeyPairGeneratorSpec_Description|
+|android.security.KeyPairGeneratorSpec_Fields|
+|android.security.KeyPairGeneratorSpec_Constructors|
+|android.security.KeyPairGeneratorSpec_Methods|
+
+================================================================================
+
+*android.security.KeyPairGeneratorSpec_Constructors*
+|android.security.KeyPairGeneratorSpec(Context,String,String,int,AlgorithmParameterSpec,X500Principal,BigInteger,Date,Date,int)|
+
+*android.security.KeyPairGeneratorSpec_Methods*
+|android.security.KeyPairGeneratorSpec.getAlgorithmParameterSpec()|Returns theA
+|android.security.KeyPairGeneratorSpec.getContext()|Gets the Android context us
+|android.security.KeyPairGeneratorSpec.getEndDate()|Gets the end date to be use
+|android.security.KeyPairGeneratorSpec.getKeySize()|Returns the key size specif
+|android.security.KeyPairGeneratorSpec.getKeystoreAlias()|Returns the alias tha
+|android.security.KeyPairGeneratorSpec.getKeyType()|Returns the key type (e.g.,
+|android.security.KeyPairGeneratorSpec.getSerialNumber()|Gets the serial number
+|android.security.KeyPairGeneratorSpec.getStartDate()|Gets the start date to be
+|android.security.KeyPairGeneratorSpec.getSubjectDN()|Gets the subject distingu
+|android.security.KeyPairGeneratorSpec.isEncryptionRequired()|Returnstrueif thi
+
+*android.security.KeyPairGeneratorSpec_Description*
+
+This provides the required parameters needed for initializing 
+theKeyPairGeneratorthat works with <a 
+href="guide/topics/security/keystore.html">Android KeyStore facility. The 
+Android KeyStore facility is accessed through a 
+(|java.security.KeyPairGenerator|) API using theAndroidKeyStoreprovider. 
+Thecontextpassed in may be used to pop up some UI to ask the user to unlock or 
+initialize the Android KeyStore facility. 
+
+After generation, thekeyStoreAliasis used with the (|java.security.KeyStore|) 
+interface to retrieve the (|java.security.PrivateKey|) and its associated 
+(|java.security.cert.Certificate|) chain. 
+
+The KeyPair generator will create a self-signed certificate with the subject as 
+its X.509v3 Subject Distinguished Name and as its X.509v3 Issuer Distinguished 
+Name along with the other parameters specified with the 
+(|android.security.KeyPairGeneratorSpec.Builder|) . 
+
+The self-signed X.509 certificate may be replaced at a later time by a 
+certificate signed by a real Certificate Authority. 
+
+
+
+*android.security.KeyPairGeneratorSpec(Context,String,String,int,AlgorithmParameterSpec,X500Principal,BigInteger,Date,Date,int)*
+
+public KeyPairGeneratorSpec(
+  Context context,
+  java.lang.String keyStoreAlias,
+  java.lang.String keyType,
+  int keySize,
+  java.security.spec.AlgorithmParameterSpec spec,
+  javax.security.auth.x500.X500Principal subjectDN,
+  java.math.BigInteger serialNumber,
+  java.util.Date startDate,
+  java.util.Date endDate,
+  int flags)
+
+Parameter specification for the "AndroidKeyPairGenerator" instance of the 
+(|java.security.KeyPairGenerator|) API. Thecontextpassed in may be used to pop 
+up some UI to ask the user to unlock or initialize the Android keystore 
+facility. 
+
+After generation, thekeyStoreAliasis used with the (|java.security.KeyStore|) 
+interface to retrieve the (|java.security.PrivateKey|) and its associated 
+(|java.security.cert.Certificate|) chain. 
+
+The KeyPair generator will create a self-signed certificate with the properties 
+ofsubjectDNas its X.509v3 Subject Distinguished Name and as its X.509v3 Issuer 
+Distinguished Name, using the specifiedserialNumber, and the validity date 
+starting atstartDateand ending atendDate. 
+
+    context - Android context for the activity 
+    keyStoreAlias - name to use for the generated key in the Android keystore 
+    keyType - key algorithm to use (RSA, DSA, EC) 
+    keySize - size of key to generate 
+    spec - the underlying key type parameters 
+    subjectDN - X.509 v3 Subject Distinguished Name 
+    serialNumber - X509 v3 certificate serial number 
+    startDate - the start of the self-signed certificate validity period 
+    endDate - the end date of the self-signed certificate validity period 
+
+*android.security.KeyPairGeneratorSpec.getAlgorithmParameterSpec()*
+
+public |java.security.spec.AlgorithmParameterSpec| getAlgorithmParameterSpec()
+
+Returns the (|java.security.spec.AlgorithmParameterSpec|) that will be used for 
+creation of the key pair. 
+
+
+
+*android.security.KeyPairGeneratorSpec.getContext()*
+
+public Context getContext()
+
+Gets the Android context used for operations with this instance. 
+
+
+
+*android.security.KeyPairGeneratorSpec.getEndDate()*
+
+public |java.util.Date| getEndDate()
+
+Gets the end date to be used on the X.509 certificate that will be put in the 
+(|java.security.KeyStore|) . 
+
+
+
+*android.security.KeyPairGeneratorSpec.getKeySize()*
+
+public int getKeySize()
+
+Returns the key size specified by this parameter. For instance, for RSA this 
+will return the modulus size and for EC it will return the field size. 
+
+
+
+*android.security.KeyPairGeneratorSpec.getKeystoreAlias()*
+
+public |java.lang.String| getKeystoreAlias()
+
+Returns the alias that will be used in thejava.security.KeyStorein conjunction 
+with theAndroidKeyStore. 
+
+
+
+*android.security.KeyPairGeneratorSpec.getKeyType()*
+
+public |java.lang.String| getKeyType()
+
+Returns the key type (e.g., "RSA", "DSA", "EC") specified by this parameter. 
+
+
+
+*android.security.KeyPairGeneratorSpec.getSerialNumber()*
+
+public |java.math.BigInteger| getSerialNumber()
+
+Gets the serial number to be used on the X.509 certificate that will be put in 
+the (|java.security.KeyStore|) . 
+
+
+
+*android.security.KeyPairGeneratorSpec.getStartDate()*
+
+public |java.util.Date| getStartDate()
+
+Gets the start date to be used on the X.509 certificate that will be put in the 
+(|java.security.KeyStore|) . 
+
+
+
+*android.security.KeyPairGeneratorSpec.getSubjectDN()*
+
+public |javax.security.auth.x500.X500Principal| getSubjectDN()
+
+Gets the subject distinguished name to be used on the X.509 certificate that 
+will be put in the (|java.security.KeyStore|) . 
+
+
+
+*android.security.KeyPairGeneratorSpec.isEncryptionRequired()*
+
+public boolean isEncryptionRequired()
+
+Returnstrueif this parameter will require generated keys to be encrypted in the 
+(|java.security.KeyStore|) . 
+
+
+
+

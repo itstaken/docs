@@ -1,0 +1,596 @@
+*java.awt.peer.ComponentPeer* *ComponentPeer* The peer interface forComponent.
+
+public interface interface ComponentPeer
+
+
+|java.awt.peer.ComponentPeer_Description|
+|java.awt.peer.ComponentPeer_Fields|
+|java.awt.peer.ComponentPeer_Constructors|
+|java.awt.peer.ComponentPeer_Methods|
+
+================================================================================
+
+*java.awt.peer.ComponentPeer_Fields*
+|int_java.awt.peer.ComponentPeer.DEFAULT_OPERATION|
+|int_java.awt.peer.ComponentPeer.NO_EMBEDDED_CHECK|
+|int_java.awt.peer.ComponentPeer.RESET_OPERATION|
+|int_java.awt.peer.ComponentPeer.SET_BOUNDS|
+|int_java.awt.peer.ComponentPeer.SET_CLIENT_SIZE|
+|int_java.awt.peer.ComponentPeer.SET_LOCATION|
+|int_java.awt.peer.ComponentPeer.SET_SIZE|
+
+*java.awt.peer.ComponentPeer_Methods*
+|java.awt.peer.ComponentPeer.applyShape(Region)|Applies the shape to the native
+|java.awt.peer.ComponentPeer.canDetermineObscurity()|Returnstruewhen the peer c
+|java.awt.peer.ComponentPeer.checkImage(Image,int,int,ImageObserver)|Determines
+|java.awt.peer.ComponentPeer.coalescePaintEvent(PaintEvent)|Called to coalesce 
+|java.awt.peer.ComponentPeer.createBuffers(int,BufferCapabilities)|CreatenumBuf
+|java.awt.peer.ComponentPeer.createImage(ImageProducer)|Creates an image using 
+|java.awt.peer.ComponentPeer.createImage(int,int)|Creates an empty image with t
+|java.awt.peer.ComponentPeer.createVolatileImage(int,int)|Creates an empty vola
+|java.awt.peer.ComponentPeer.destroyBuffers()|Destroys all created buffers.
+|java.awt.peer.ComponentPeer.dispose()|Disposes all resources held by the compo
+|java.awt.peer.ComponentPeer.flip(int,int,int,int,BufferCapabilities.FlipContents)|
+|java.awt.peer.ComponentPeer.getBackBuffer()|Returns the back buffer as image.
+|java.awt.peer.ComponentPeer.getColorModel()|Returns the color model used by th
+|java.awt.peer.ComponentPeer.getFontMetrics(Font)|Returns a font metrics object
+|java.awt.peer.ComponentPeer.getGraphics()|Returns a graphics object to paint o
+|java.awt.peer.ComponentPeer.getGraphicsConfiguration()|Returns the graphics co
+|java.awt.peer.ComponentPeer.getLocationOnScreen()|Determines the location of t
+|java.awt.peer.ComponentPeer.getMinimumSize()|Determines the minimum size of th
+|java.awt.peer.ComponentPeer.getPreferredSize()|Determines the preferred size o
+|java.awt.peer.ComponentPeer.getToolkit()|Returns the toolkit that is responsib
+|java.awt.peer.ComponentPeer.handleEvent(AWTEvent)|Called to let the component 
+|java.awt.peer.ComponentPeer.handlesWheelScrolling()|Determines if the componen
+|java.awt.peer.ComponentPeer.isFocusable()|Returnstruewhen the component takes 
+|java.awt.peer.ComponentPeer.isObscured()|Determines if a component has been ob
+|java.awt.peer.ComponentPeer.isReparentSupported()|Returns whether this peer su
+|java.awt.peer.ComponentPeer.layout()|Used by lightweight implementations to te
+|java.awt.peer.ComponentPeer.paint(Graphics)|Paints the component to the specif
+|java.awt.peer.ComponentPeer.prepareImage(Image,int,int,ImageObserver)|Prepare 
+|java.awt.peer.ComponentPeer.print(Graphics)|Prints the component to the specif
+|java.awt.peer.ComponentPeer.reparent(ContainerPeer)|Reparents this peer to the
+|java.awt.peer.ComponentPeer.requestFocus(Component,boolean,boolean,long,CausedFocusEvent.Cause)|
+|java.awt.peer.ComponentPeer.setBackground(Color)|Sets the background color of 
+|java.awt.peer.ComponentPeer.setBounds(int,int,int,int,int)|Sets the location o
+|java.awt.peer.ComponentPeer.setEnabled(boolean)|Enables or disables a componen
+|java.awt.peer.ComponentPeer.setFont(Font)|Sets the font of this component.
+|java.awt.peer.ComponentPeer.setForeground(Color)|Sets the foreground color of 
+|java.awt.peer.ComponentPeer.setVisible(boolean)|Makes a component visible or i
+|java.awt.peer.ComponentPeer.setZOrder(ComponentPeer)|Lowers this component at 
+|java.awt.peer.ComponentPeer.updateCursorImmediately()|Updates the cursor of th
+|java.awt.peer.ComponentPeer.updateGraphicsData(GraphicsConfiguration)|Updates 
+
+*java.awt.peer.ComponentPeer_Description*
+
+The peer interface for (|java.awt.Component|) . This is the top level peer 
+interface for widgets and defines the bulk of methods for AWT component peers. 
+Most component peers have to implement this interface (via one of the 
+subinterfaces), except menu components, which implement 
+(|java.awt.peer.MenuComponentPeer|) . 
+
+The peer interfaces are intended only for use in porting the AWT. They are not 
+intended for use by application developers, and developers should not implement 
+peers nor invoke any of the peer methods directly on the peer instances. 
+
+
+
+*int_java.awt.peer.ComponentPeer.DEFAULT_OPERATION*
+
+The default operation, which is to set size and location. 
+
+TODO: This is only used internally and should probably be moved outside the 
+peer interface. 
+
+
+*int_java.awt.peer.ComponentPeer.NO_EMBEDDED_CHECK*
+
+A flag that is used to suppress checks for embedded frames. 
+
+TODO: This is only used internally and should probably be moved outside the 
+peer interface. 
+
+
+*int_java.awt.peer.ComponentPeer.RESET_OPERATION*
+
+Resets the setBounds() operation to DEFAULT_OPERATION. This is not passed into 
+(|java.awt.peer.ComponentPeer|) . 
+
+TODO: This is only used internally and should probably be moved outside the 
+peer interface. 
+
+
+*int_java.awt.peer.ComponentPeer.SET_BOUNDS*
+
+Operation for (|java.awt.peer.ComponentPeer|) , indicating a change in the 
+component size and location. 
+
+
+*int_java.awt.peer.ComponentPeer.SET_CLIENT_SIZE*
+
+Operation for (|java.awt.peer.ComponentPeer|) , indicating a change in the 
+component client size. This is used for setting the 'inside' size of windows, 
+without the border insets. 
+
+
+*int_java.awt.peer.ComponentPeer.SET_LOCATION*
+
+Operation for (|java.awt.peer.ComponentPeer|) , indicating a change in the 
+component location only. 
+
+
+*int_java.awt.peer.ComponentPeer.SET_SIZE*
+
+Operation for (|java.awt.peer.ComponentPeer|) , indicating a change in the 
+component size only. 
+
+
+
+*java.awt.peer.ComponentPeer.applyShape(Region)*
+
+public void applyShape(sun.java2d.pipe.Region shape)
+
+Applies the shape to the native component window. 
+
+
+
+*java.awt.peer.ComponentPeer.canDetermineObscurity()*
+
+public boolean canDetermineObscurity()
+
+Returnstruewhen the peer can determine if a component has been 
+obscured,falsefalse otherwise. 
+
+
+
+    Returns: {@code true} when the peer can determine if a component has been obscured, 
+             {@code false} false otherwise 
+
+*java.awt.peer.ComponentPeer.checkImage(Image,int,int,ImageObserver)*
+
+public int checkImage(
+  java.awt.Image img,
+  int w,
+  int h,
+  java.awt.image.ImageObserver o)
+
+Determines the status of the construction of the screen representaion of the 
+specified image. 
+
+
+    img - the image to check 
+    w - the target width 
+    h - the target height 
+    o - the image observer to notify 
+
+    Returns: the status as bitwise ORed ImageObserver flags 
+
+*java.awt.peer.ComponentPeer.coalescePaintEvent(PaintEvent)*
+
+public void coalescePaintEvent(java.awt.event.PaintEvent e)
+
+Called to coalesce paint events. 
+
+
+    e - the paint event to consider to coalesce 
+
+*java.awt.peer.ComponentPeer.createBuffers(int,BufferCapabilities)*
+
+public void createBuffers(
+  int numBuffers,
+  java.awt.BufferCapabilities caps)
+  throws |java.awt.AWTException|
+         
+CreatenumBuffersflipping buffers with the specified buffer capabilities. 
+
+
+    numBuffers - the number of buffers to create 
+    caps - the buffer capabilities 
+
+*java.awt.peer.ComponentPeer.createImage(ImageProducer)*
+
+public |java.awt.Image| createImage(java.awt.image.ImageProducer producer)
+
+Creates an image using the specified image producer. 
+
+
+    producer - the image producer from which the image pixels will be produced 
+
+    Returns: the created image 
+
+*java.awt.peer.ComponentPeer.createImage(int,int)*
+
+public |java.awt.Image| createImage(
+  int width,
+  int height)
+
+Creates an empty image with the specified width and height. This is generally 
+used as a non-accelerated backbuffer for drawing onto the component (e.g. by 
+Swing). 
+
+
+    width - the width of the image 
+    height - the height of the image 
+
+    Returns: the created image 
+
+*java.awt.peer.ComponentPeer.createVolatileImage(int,int)*
+
+public |java.awt.image.VolatileImage| createVolatileImage(
+  int width,
+  int height)
+
+Creates an empty volatile image with the specified width and height. This is 
+generally used as an accelerated backbuffer for drawing onto the component 
+(e.g. by Swing). 
+
+
+    width - the width of the image 
+    height - the height of the image 
+
+    Returns: the created volatile image 
+
+*java.awt.peer.ComponentPeer.destroyBuffers()*
+
+public void destroyBuffers()
+
+Destroys all created buffers. 
+
+
+
+*java.awt.peer.ComponentPeer.dispose()*
+
+public void dispose()
+
+Disposes all resources held by the component peer. This is called when the 
+component has been disconnected from the component hierarchy and is about to be 
+garbage collected. 
+
+
+
+*java.awt.peer.ComponentPeer.flip(int,int,int,int,BufferCapabilities.FlipContents)*
+
+public void flip(
+  int x1,
+  int y1,
+  int x2,
+  int y2,
+  java.awt.BufferCapabilities.FlipContents flipAction)
+
+Move the back buffer to the front buffer. 
+
+
+    x1 - the area to be flipped, upper left X coordinate 
+    y1 - the area to be flipped, upper left Y coordinate 
+    x2 - the area to be flipped, lower right X coordinate 
+    y2 - the area to be flipped, lower right Y coordinate 
+    flipAction - the flip action to perform 
+
+*java.awt.peer.ComponentPeer.getBackBuffer()*
+
+public |java.awt.Image| getBackBuffer()
+
+Returns the back buffer as image. 
+
+
+
+    Returns: the back buffer as image 
+
+*java.awt.peer.ComponentPeer.getColorModel()*
+
+public |java.awt.image.ColorModel| getColorModel()
+
+Returns the color model used by the component. 
+
+
+
+    Returns: the color model used by the component 
+
+*java.awt.peer.ComponentPeer.getFontMetrics(Font)*
+
+public |java.awt.FontMetrics| getFontMetrics(java.awt.Font font)
+
+Returns a font metrics object to determine the metrics properties of the 
+specified font. 
+
+
+    font - the font to determine the metrics for 
+
+    Returns: a font metrics object to determine the metrics properties of the specified font 
+
+*java.awt.peer.ComponentPeer.getGraphics()*
+
+public |java.awt.Graphics| getGraphics()
+
+Returns a graphics object to paint on the component. 
+
+
+
+    Returns: a graphics object to paint on the component 
+
+*java.awt.peer.ComponentPeer.getGraphicsConfiguration()*
+
+public |java.awt.GraphicsConfiguration| getGraphicsConfiguration()
+
+Returns the graphics configuration that corresponds to this component. 
+
+
+
+    Returns: the graphics configuration that corresponds to this component 
+
+*java.awt.peer.ComponentPeer.getLocationOnScreen()*
+
+public |java.awt.Point| getLocationOnScreen()
+
+Determines the location of the component on the screen. 
+
+
+
+    Returns: the location of the component on the screen 
+
+*java.awt.peer.ComponentPeer.getMinimumSize()*
+
+public |java.awt.Dimension| getMinimumSize()
+
+Determines the minimum size of the component. 
+
+
+
+    Returns: the minimum size of the component 
+
+*java.awt.peer.ComponentPeer.getPreferredSize()*
+
+public |java.awt.Dimension| getPreferredSize()
+
+Determines the preferred size of the component. 
+
+
+
+    Returns: the preferred size of the component 
+
+*java.awt.peer.ComponentPeer.getToolkit()*
+
+public |java.awt.Toolkit| getToolkit()
+
+Returns the toolkit that is responsible for the component. 
+
+
+
+    Returns: the toolkit that is responsible for the component 
+
+*java.awt.peer.ComponentPeer.handleEvent(AWTEvent)*
+
+public void handleEvent(java.awt.AWTEvent e)
+
+Called to let the component peer handle events. 
+
+
+    e - the AWT event to handle 
+
+*java.awt.peer.ComponentPeer.handlesWheelScrolling()*
+
+public boolean handlesWheelScrolling()
+
+Determines if the component handles wheel scrolling itself. Otherwise it is 
+delegated to the component's parent. 
+
+
+
+    Returns: {@code true} if the component handles wheel scrolling, {@code false} otherwise 
+
+*java.awt.peer.ComponentPeer.isFocusable()*
+
+public boolean isFocusable()
+
+Returnstruewhen the component takes part in the focus traversal,falseotherwise. 
+
+
+
+    Returns: {@code true} when the component takes part in the focus traversal, {@code 
+             false} otherwise 
+
+*java.awt.peer.ComponentPeer.isObscured()*
+
+public boolean isObscured()
+
+Determines if a component has been obscured, i.e. by an overlapping window or 
+similar. This is used by JViewport for optimizing performance. This doesn't 
+have to be implemented, when (|java.awt.peer.ComponentPeer|) returnsfalse. 
+
+
+
+    Returns: {@code true} when the component has been obscured, {@code false} otherwise 
+
+*java.awt.peer.ComponentPeer.isReparentSupported()*
+
+public boolean isReparentSupported()
+
+Returns whether this peer supports reparenting to another parent without 
+destroying the peer. 
+
+
+
+    Returns: true if appropriate reparent is supported, false otherwise 
+
+*java.awt.peer.ComponentPeer.layout()*
+
+public void layout()
+
+Used by lightweight implementations to tell a ComponentPeer to layout its 
+sub-elements. For instance, a lightweight Checkbox needs to layout the box, as 
+well as the text label. 
+
+
+
+*java.awt.peer.ComponentPeer.paint(Graphics)*
+
+public void paint(java.awt.Graphics g)
+
+Paints the component to the specified graphics context. This is called by 
+(|java.awt.Component|) to paint the component. 
+
+
+    g - the graphics context to paint to 
+
+*java.awt.peer.ComponentPeer.prepareImage(Image,int,int,ImageObserver)*
+
+public boolean prepareImage(
+  java.awt.Image img,
+  int w,
+  int h,
+  java.awt.image.ImageObserver o)
+
+Prepare the specified image for rendering on this component. This should start 
+loading the image (if not already loaded) and create an appropriate screen 
+representation. 
+
+
+    img - the image to prepare 
+    w - the width of the screen representation 
+    h - the height of the screen representation 
+    o - an image observer to observe the progress 
+
+    Returns: {@code true} if the image is already fully prepared, {@code false} otherwise 
+
+*java.awt.peer.ComponentPeer.print(Graphics)*
+
+public void print(java.awt.Graphics g)
+
+Prints the component to the specified graphics context. This is called by 
+(|java.awt.Component|) to print the component. 
+
+
+    g - the graphics context to print to 
+
+*java.awt.peer.ComponentPeer.reparent(ContainerPeer)*
+
+public void reparent(java.awt.peer.ContainerPeer newContainer)
+
+Reparents this peer to the new parent referenced bynewContainerpeer. 
+Implementation depends on toolkit and container. 
+
+
+    newContainer - peer of the new parent container 
+
+*java.awt.peer.ComponentPeer.requestFocus(Component,boolean,boolean,long,CausedFocusEvent.Cause)*
+
+public boolean requestFocus(
+  java.awt.Component lightweightChild,
+  boolean temporary,
+  boolean focusedWindowChangeAllowed,
+  long time,
+  sun.awt.CausedFocusEvent.Cause cause)
+
+Requests focus on this component. 
+
+
+    lightweightChild - the actual lightweight child that requests the focus 
+    temporary - {@code true} if the focus change is temporary, {@code false} otherwise 
+    focusedWindowChangeAllowed - {@code true} if changing the focus of the containing window is allowed or not 
+    time - the time of the focus change request 
+    cause - the cause of the focus change request 
+
+    Returns: {@code true} if the focus change is guaranteed to be granted, {@code false} 
+             otherwise 
+
+*java.awt.peer.ComponentPeer.setBackground(Color)*
+
+public void setBackground(java.awt.Color c)
+
+Sets the background color of this component. 
+
+
+    c - the background color to set 
+
+*java.awt.peer.ComponentPeer.setBounds(int,int,int,int,int)*
+
+public void setBounds(
+  int x,
+  int y,
+  int width,
+  int height,
+  int op)
+
+Sets the location or size or both of the component. The location is specified 
+relative to the component's parent. Theopparameter specifies which properties 
+change. If it is (|java.awt.peer.ComponentPeer|) , then only the location 
+changes (and the size parameters can be ignored). Ifopis 
+(|java.awt.peer.ComponentPeer|) , then only the size changes (and the location 
+can be ignored). Ifopis (|java.awt.peer.ComponentPeer|) , then both change. 
+There is a special value (|java.awt.peer.ComponentPeer|) , which is used only 
+for window-like components to set the size of the client (i.e. the 'inner' 
+size, without the insets of the window borders). 
+
+
+    x - the X location of the component 
+    y - the Y location of the component 
+    width - the width of the component 
+    height - the height of the component 
+    op - the operation flag 
+
+*java.awt.peer.ComponentPeer.setEnabled(boolean)*
+
+public void setEnabled(boolean e)
+
+Enables or disables a component. Disabled components are usually grayed out and 
+cannot be activated. 
+
+
+    e - {@code true} to enable the component, {@code false} to disable it 
+
+*java.awt.peer.ComponentPeer.setFont(Font)*
+
+public void setFont(java.awt.Font f)
+
+Sets the font of this component. 
+
+
+    f - the font of this component 
+
+*java.awt.peer.ComponentPeer.setForeground(Color)*
+
+public void setForeground(java.awt.Color c)
+
+Sets the foreground color of this component. 
+
+
+    c - the foreground color to set 
+
+*java.awt.peer.ComponentPeer.setVisible(boolean)*
+
+public void setVisible(boolean v)
+
+Makes a component visible or invisible. 
+
+
+    v - {@code true} to make a component visible, {@code false} to make it invisible 
+
+*java.awt.peer.ComponentPeer.setZOrder(ComponentPeer)*
+
+public void setZOrder(java.awt.peer.ComponentPeer above)
+
+Lowers this component at the bottom of the above HW peer. If the above 
+parameter is null then the method places this component at the top of the 
+Z-order. 
+
+
+
+*java.awt.peer.ComponentPeer.updateCursorImmediately()*
+
+public void updateCursorImmediately()
+
+Updates the cursor of the component. 
+
+
+
+*java.awt.peer.ComponentPeer.updateGraphicsData(GraphicsConfiguration)*
+
+public boolean updateGraphicsData(java.awt.GraphicsConfiguration gc)
+
+Updates internal data structures related to the component's GC. 
+
+
+
+    Returns: if the peer needs to be recreated for the changes to take effect 
+
+

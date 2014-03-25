@@ -1,0 +1,281 @@
+*javax.lang.model.element.AnnotationValueVisitor* *AnnotationValueVisitor* A vis
+
+public interface interface AnnotationValueVisitor<R,P>
+
+
+|javax.lang.model.element.AnnotationValueVisitor_Description|
+|javax.lang.model.element.AnnotationValueVisitor_Fields|
+|javax.lang.model.element.AnnotationValueVisitor_Constructors|
+|javax.lang.model.element.AnnotationValueVisitor_Methods|
+
+================================================================================
+
+*javax.lang.model.element.AnnotationValueVisitor_Methods*
+|javax.lang.model.element.AnnotationValueVisitor.visit(AnnotationValue)|A conve
+|javax.lang.model.element.AnnotationValueVisitor.visit(AnnotationValue,P)|Visit
+|javax.lang.model.element.AnnotationValueVisitor.visitAnnotation(AnnotationMirror,P)|
+|javax.lang.model.element.AnnotationValueVisitor.visitArray(List<?extendsAnnotationValue>,P)|
+|javax.lang.model.element.AnnotationValueVisitor.visitBoolean(boolean,P)|Visits
+|javax.lang.model.element.AnnotationValueVisitor.visitByte(byte,P)|Visits abyte
+|javax.lang.model.element.AnnotationValueVisitor.visitChar(char,P)|Visits achar
+|javax.lang.model.element.AnnotationValueVisitor.visitDouble(double,P)|Visits a
+|javax.lang.model.element.AnnotationValueVisitor.visitEnumConstant(VariableElement,P)|
+|javax.lang.model.element.AnnotationValueVisitor.visitFloat(float,P)|Visits afl
+|javax.lang.model.element.AnnotationValueVisitor.visitInt(int,P)|Visits anintva
+|javax.lang.model.element.AnnotationValueVisitor.visitLong(long,P)|Visits along
+|javax.lang.model.element.AnnotationValueVisitor.visitShort(short,P)|Visits ash
+|javax.lang.model.element.AnnotationValueVisitor.visitString(String,P)|Visits a
+|javax.lang.model.element.AnnotationValueVisitor.visitType(TypeMirror,P)|Visits
+|javax.lang.model.element.AnnotationValueVisitor.visitUnknown(AnnotationValue,P)|
+
+*javax.lang.model.element.AnnotationValueVisitor_Description*
+
+A visitor of the values of annotation type elements, using a variant of the 
+visitor design pattern. Unlike a standard visitor which dispatches based on the 
+concrete type of a member of a type hierarchy, this visitor dispatches based on 
+the type of data stored; there are no distinct subclasses for storing, for 
+example,booleanvalues versusintvalues. Classes implementing this interface are 
+used to operate on a value when the type of that value is unknown at compile 
+time. When a visitor is passed to a value's 
+accept(|javax.lang.model.element.AnnotationValue|) method, the visitXYZ method 
+applicable to that value is invoked. 
+
+Classes implementing this interface may or may not throw 
+aNullPointerExceptionif the additional parameterpisnull; see documentation of 
+the implementing class for details. 
+
+WARNING: It is possible that methods will be added to this interface to 
+accommodate new, currently unknown, language structures added to future 
+versions of the Java programming language. Therefore, visitor classes directly 
+implementing this interface may be source incompatible with future versions of 
+the platform. To avoid this source incompatibility, visitor implementations are 
+encouraged to instead extend the appropriate abstract visitor class that 
+implements this interface. However, an API should generally use this visitor 
+interface as the type for parameters, return type, etc. rather than one of the 
+abstract classes. 
+
+
+
+*javax.lang.model.element.AnnotationValueVisitor.visit(AnnotationValue)*
+
+public |R| visit(javax.lang.model.element.AnnotationValue av)
+
+A convenience method equivalent tov.visit(av, null). 
+
+
+    av - the value to visit 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.AnnotationValueVisitor.visit(AnnotationValue,P)*
+
+public |R| visit(
+  javax.lang.model.element.AnnotationValue av,
+  P p)
+
+Visits an annotation value. 
+
+
+    av - the value to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitAnnotation(AnnotationMirror,P)*
+
+public |R| visitAnnotation(
+  javax.lang.model.element.AnnotationMirror a,
+  P p)
+
+Visits an annotation value in an annotation. 
+
+
+    a - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitArray(List<?extendsAnnotationValue>,P)*
+
+public |R| visitArray(
+  java.util.List<? extends javax.lang.model.element.AnnotationValue> vals,
+  P p)
+
+Visits an array value in an annotation. 
+
+
+    vals - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitBoolean(boolean,P)*
+
+public |R| visitBoolean(
+  boolean b,
+  P p)
+
+Visits abooleanvalue in an annotation. 
+
+
+    b - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitByte(byte,P)*
+
+public |R| visitByte(
+  byte b,
+  P p)
+
+Visits abytevalue in an annotation. 
+
+
+    b - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitChar(char,P)*
+
+public |R| visitChar(
+  char c,
+  P p)
+
+Visits acharvalue in an annotation. 
+
+
+    c - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitDouble(double,P)*
+
+public |R| visitDouble(
+  double d,
+  P p)
+
+Visits adoublevalue in an annotation. 
+
+
+    d - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitEnumConstant(VariableElement,P)*
+
+public |R| visitEnumConstant(
+  javax.lang.model.element.VariableElement c,
+  P p)
+
+Visits anenumvalue in an annotation. 
+
+
+    c - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitFloat(float,P)*
+
+public |R| visitFloat(
+  float f,
+  P p)
+
+Visits afloatvalue in an annotation. 
+
+
+    f - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitInt(int,P)*
+
+public |R| visitInt(
+  int i,
+  P p)
+
+Visits anintvalue in an annotation. 
+
+
+    i - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitLong(long,P)*
+
+public |R| visitLong(
+  long i,
+  P p)
+
+Visits alongvalue in an annotation. 
+
+
+    i - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitShort(short,P)*
+
+public |R| visitShort(
+  short s,
+  P p)
+
+Visits ashortvalue in an annotation. 
+
+
+    s - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitString(String,P)*
+
+public |R| visitString(
+  java.lang.String s,
+  P p)
+
+Visits a string value in an annotation. 
+
+
+    s - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitType(TypeMirror,P)*
+
+public |R| visitType(
+  javax.lang.model.type.TypeMirror t,
+  P p)
+
+Visits a type value in an annotation. 
+
+
+    t - the value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+*javax.lang.model.element.AnnotationValueVisitor.visitUnknown(AnnotationValue,P)*
+
+public |R| visitUnknown(
+  javax.lang.model.element.AnnotationValue av,
+  P p)
+
+Visits an unknown kind of annotation value. This can occur if the language 
+evolves and new kinds of value can be stored in an annotation. 
+
+
+    av - the unknown value being visited 
+    p - a visitor-specified parameter 
+
+    Returns: the result of the visit 
+
+

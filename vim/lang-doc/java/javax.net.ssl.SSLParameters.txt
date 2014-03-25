@@ -1,0 +1,219 @@
+*javax.net.ssl.SSLParameters* *SSLParameters* Encapsulates parameters for an SSL
+
+public class SSLParameters
+  extends    |java.lang.Object|
+
+|javax.net.ssl.SSLParameters_Description|
+|javax.net.ssl.SSLParameters_Fields|
+|javax.net.ssl.SSLParameters_Constructors|
+|javax.net.ssl.SSLParameters_Methods|
+
+================================================================================
+
+*javax.net.ssl.SSLParameters_Constructors*
+|javax.net.ssl.SSLParameters()|Constructs SSLParameters.
+|javax.net.ssl.SSLParameters(String[])|Constructs SSLParameters from the specif
+|javax.net.ssl.SSLParameters(String[],String[])|Constructs SSLParameters from t
+
+*javax.net.ssl.SSLParameters_Methods*
+|javax.net.ssl.SSLParameters.getAlgorithmConstraints()|Returns the cryptographi
+|javax.net.ssl.SSLParameters.getCipherSuites()|Returns a copy of the array of c
+|javax.net.ssl.SSLParameters.getEndpointIdentificationAlgorithm()|Gets the endp
+|javax.net.ssl.SSLParameters.getNeedClientAuth()|Returns whether client authent
+|javax.net.ssl.SSLParameters.getProtocols()|Returns a copy of the array of prot
+|javax.net.ssl.SSLParameters.getWantClientAuth()|Returns whether client authent
+|javax.net.ssl.SSLParameters.setAlgorithmConstraints(AlgorithmConstraints)|Sets
+|javax.net.ssl.SSLParameters.setCipherSuites(String[])|Sets the array of cipher
+|javax.net.ssl.SSLParameters.setEndpointIdentificationAlgorithm(String)|Sets th
+|javax.net.ssl.SSLParameters.setNeedClientAuth(boolean)|Sets whether client aut
+|javax.net.ssl.SSLParameters.setProtocols(String[])|Sets the array of protocols
+|javax.net.ssl.SSLParameters.setWantClientAuth(boolean)|Sets whether client aut
+
+*javax.net.ssl.SSLParameters_Description*
+
+Encapsulates parameters for an SSL/TLS connection. The parameters are the list 
+of ciphersuites to be accepted in an SSL/TLS handshake, the list of protocols 
+to be allowed, the endpoint identification algorithm during SSL/TLS 
+handshaking, the algorithm constraints and whether SSL/TLS servers should 
+request or require client authentication. 
+
+SSLParameters can be created via the constructors in this class. Objects can 
+also be obtained using the getSSLParameters() methods in 
+SSLSocket(|javax.net.ssl.SSLSocket|) and 
+SSLServerSocket(|javax.net.ssl.SSLServerSocket|) and 
+SSLEngine(|javax.net.ssl.SSLEngine|) or the 
+getDefaultSSLParameters()(|javax.net.ssl.SSLContext|) and 
+getSupportedSSLParameters()(|javax.net.ssl.SSLContext|) methods in SSLContext. 
+
+SSLParameters can be applied to a connection via the methods 
+SSLSocket.setSSLParameters()(|javax.net.ssl.SSLSocket|) and 
+SSLServerSocket.setSSLParameters()(|javax.net.ssl.SSLServerSocket|) and 
+SSLEngine.getSSLParameters()(|javax.net.ssl.SSLEngine|) . 
+
+
+
+*javax.net.ssl.SSLParameters()*
+
+public SSLParameters()
+
+Constructs SSLParameters. 
+
+The cipherSuites and protocols values are set to null, wantClientAuth and 
+needClientAuth are set to false. 
+
+
+*javax.net.ssl.SSLParameters(String[])*
+
+public SSLParameters(java.lang.String[] cipherSuites)
+
+Constructs SSLParameters from the specified array of ciphersuites. 
+
+Calling this constructor is equivalent to calling the no-args constructor 
+followed by setCipherSuites(cipherSuites);. 
+
+    cipherSuites - the array of ciphersuites (or null) 
+
+*javax.net.ssl.SSLParameters(String[],String[])*
+
+public SSLParameters(
+  java.lang.String[] cipherSuites,
+  java.lang.String[] protocols)
+
+Constructs SSLParameters from the specified array of ciphersuites and 
+protocols. 
+
+Calling this constructor is equivalent to calling the no-args constructor 
+followed by setCipherSuites(cipherSuites); setProtocols(protocols);. 
+
+    cipherSuites - the array of ciphersuites (or null) 
+    protocols - the array of protocols (or null) 
+
+*javax.net.ssl.SSLParameters.getAlgorithmConstraints()*
+
+public |java.security.AlgorithmConstraints| getAlgorithmConstraints()
+
+Returns the cryptographic algorithm constraints. 
+
+
+
+    Returns: the cryptographic algorithm constraints, or null if the constraints have not 
+             been set 
+
+*javax.net.ssl.SSLParameters.getCipherSuites()*
+
+public |java.lang.String|[] getCipherSuites()
+
+Returns a copy of the array of ciphersuites or null if none have been set. 
+
+
+
+    Returns: a copy of the array of ciphersuites or null if none have been set. 
+
+*javax.net.ssl.SSLParameters.getEndpointIdentificationAlgorithm()*
+
+public |java.lang.String| getEndpointIdentificationAlgorithm()
+
+Gets the endpoint identification algorithm. 
+
+
+
+    Returns: the endpoint identification algorithm, or null if none has been set. 
+
+*javax.net.ssl.SSLParameters.getNeedClientAuth()*
+
+public boolean getNeedClientAuth()
+
+Returns whether client authentication should be required. 
+
+
+
+    Returns: whether client authentication should be required. 
+
+*javax.net.ssl.SSLParameters.getProtocols()*
+
+public |java.lang.String|[] getProtocols()
+
+Returns a copy of the array of protocols or null if none have been set. 
+
+
+
+    Returns: a copy of the array of protocols or null if none have been set. 
+
+*javax.net.ssl.SSLParameters.getWantClientAuth()*
+
+public boolean getWantClientAuth()
+
+Returns whether client authentication should be requested. 
+
+
+
+    Returns: whether client authentication should be requested. 
+
+*javax.net.ssl.SSLParameters.setAlgorithmConstraints(AlgorithmConstraints)*
+
+public void setAlgorithmConstraints(java.security.AlgorithmConstraints constraints)
+
+Sets the cryptographic algorithm constraints, which will be used in addition to 
+any configured by the runtime environment. 
+
+If the constraints parameter is non-null, every cryptographic algorithm, key 
+and algorithm parameters used in the SSL/TLS handshake must be permitted by the 
+constraints. 
+
+
+    constraints - the algorithm constraints (or null) 
+
+*javax.net.ssl.SSLParameters.setCipherSuites(String[])*
+
+public void setCipherSuites(java.lang.String[] cipherSuites)
+
+Sets the array of ciphersuites. 
+
+
+    cipherSuites - the array of ciphersuites (or null) 
+
+*javax.net.ssl.SSLParameters.setEndpointIdentificationAlgorithm(String)*
+
+public void setEndpointIdentificationAlgorithm(java.lang.String algorithm)
+
+Sets the endpoint identification algorithm. 
+
+If the algorithm parameter is non-null or non-empty, the endpoint 
+identification/verification procedures must be handled during SSL/TLS 
+handshaking. This is to prevent man-in-the-middle attacks. 
+
+
+    algorithm - The standard string name of the endpoint identification algorithm (or null). 
+       See Appendix A in the Java Cryptography Architecture API Specification 
+       and Reference for information about standard algorithm names. 
+
+*javax.net.ssl.SSLParameters.setNeedClientAuth(boolean)*
+
+public void setNeedClientAuth(boolean needClientAuth)
+
+Sets whether client authentication should be required. Calling this method 
+clears the wantClientAuth flag. 
+
+
+    needClientAuth - whether client authentication should be required 
+
+*javax.net.ssl.SSLParameters.setProtocols(String[])*
+
+public void setProtocols(java.lang.String[] protocols)
+
+Sets the array of protocols. 
+
+
+    protocols - the array of protocols (or null) 
+
+*javax.net.ssl.SSLParameters.setWantClientAuth(boolean)*
+
+public void setWantClientAuth(boolean wantClientAuth)
+
+Sets whether client authentication should be requested. Calling this method 
+clears the needClientAuth flag. 
+
+
+    wantClientAuth - whether client authentication should be requested 
+
+

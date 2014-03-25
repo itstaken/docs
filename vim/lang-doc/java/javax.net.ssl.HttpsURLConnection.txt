@@ -1,0 +1,245 @@
+*javax.net.ssl.HttpsURLConnection* *HttpsURLConnection* HttpsURLConnection exten
+
+public abstract class HttpsURLConnection
+  extends    |java.net.HttpURLConnection|
+
+|javax.net.ssl.HttpsURLConnection_Description|
+|javax.net.ssl.HttpsURLConnection_Fields|
+|javax.net.ssl.HttpsURLConnection_Constructors|
+|javax.net.ssl.HttpsURLConnection_Methods|
+
+================================================================================
+
+*javax.net.ssl.HttpsURLConnection_Fields*
+|javax.net.ssl.HostnameVerifier_javax.net.ssl.HttpsURLConnection.hostnameVerifier|
+
+*javax.net.ssl.HttpsURLConnection_Constructors*
+|javax.net.ssl.HttpsURLConnection(URL)|Creates an HttpsURLConnection using the 
+
+*javax.net.ssl.HttpsURLConnection_Methods*
+|javax.net.ssl.HttpsURLConnection.getCipherSuite()|Returns the cipher suite in 
+|javax.net.ssl.HttpsURLConnection.getDefaultHostnameVerifier()|Gets the default
+|javax.net.ssl.HttpsURLConnection.getDefaultSSLSocketFactory()|Gets the default
+|javax.net.ssl.HttpsURLConnection.getHostnameVerifier()|Gets the HostnameVerifi
+|javax.net.ssl.HttpsURLConnection.getLocalCertificates()|Returns the certificat
+|javax.net.ssl.HttpsURLConnection.getLocalPrincipal()|Returns the principal tha
+|javax.net.ssl.HttpsURLConnection.getPeerPrincipal()|Returns the server's princ
+|javax.net.ssl.HttpsURLConnection.getServerCertificates()|Returns the server's 
+|javax.net.ssl.HttpsURLConnection.getSSLSocketFactory()|Gets the SSL socket fac
+|javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(HostnameVerifier)|
+|javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory(SSLSocketFactory)|
+|javax.net.ssl.HttpsURLConnection.setHostnameVerifier(HostnameVerifier)|Sets th
+|javax.net.ssl.HttpsURLConnection.setSSLSocketFactory(SSLSocketFactory)|Sets th
+
+*javax.net.ssl.HttpsURLConnection_Description*
+
+HttpsURLConnection extends HttpURLConnection with support for https-specific 
+features. 
+
+See http://www.w3.org/pub/WWW/Protocols/ and RFC 2818 for more details on the 
+https specification. 
+
+This class uses HostnameVerifier and SSLSocketFactory. There are default 
+implementations defined for both classes. However, the implementations can be 
+replaced on a per-class (static) or per-instance basis. All new 
+HttpsURLConnections instances will be assigned the "default" static values at 
+instance creation, but they can be overriden by calling the appropriate 
+per-instance set method(s) before connecting. 
+
+
+
+*javax.net.ssl.HostnameVerifier_javax.net.ssl.HttpsURLConnection.hostnameVerifier*
+
+The hostnameVerifier for this object. 
+
+
+
+*javax.net.ssl.HttpsURLConnection(URL)*
+
+protected HttpsURLConnection(java.net.URL url)
+
+Creates an HttpsURLConnection using the URL specified. 
+
+    url - the URL 
+
+*javax.net.ssl.HttpsURLConnection.getCipherSuite()*
+
+public abstract |java.lang.String| getCipherSuite()
+
+Returns the cipher suite in use on this connection. 
+
+
+
+    Returns: the cipher suite 
+
+*javax.net.ssl.HttpsURLConnection.getDefaultHostnameVerifier()*
+
+public static |javax.net.ssl.HostnameVerifier| getDefaultHostnameVerifier()
+
+Gets the default HostnameVerifier that is inherited by new instances of this 
+class. 
+
+
+
+    Returns: the default host name verifier 
+
+*javax.net.ssl.HttpsURLConnection.getDefaultSSLSocketFactory()*
+
+public static |javax.net.ssl.SSLSocketFactory| getDefaultSSLSocketFactory()
+
+Gets the default static SSLSocketFactory that is inherited by new instances of 
+this class. 
+
+The socket factories are used when creating sockets for secure https URL 
+connections. 
+
+
+
+    Returns: the default SSLSocketFactory 
+
+*javax.net.ssl.HttpsURLConnection.getHostnameVerifier()*
+
+public |javax.net.ssl.HostnameVerifier| getHostnameVerifier()
+
+Gets the HostnameVerifier in place on this instance. 
+
+
+
+    Returns: the host name verifier 
+
+*javax.net.ssl.HttpsURLConnection.getLocalCertificates()*
+
+public abstract |java.security.cert.Certificate|[] getLocalCertificates()
+
+Returns the certificate(s) that were sent to the server during handshaking. 
+
+Note: This method is useful only when using certificate-based cipher suites. 
+
+When multiple certificates are available for use in a handshake, the 
+implementation chooses what it considers the "best" certificate chain 
+available, and transmits that to the other side. This method allows the caller 
+to know which certificate chain was actually sent. 
+
+
+
+    Returns: an ordered array of certificates, with the client's own certificate first 
+             followed by any certificate authorities. If no certificates were 
+             sent, then null is returned. 
+
+*javax.net.ssl.HttpsURLConnection.getLocalPrincipal()*
+
+public |java.security.Principal| getLocalPrincipal()
+
+Returns the principal that was sent to the server during handshaking. 
+
+Note: Subclasses should override this method. If not overridden, it will 
+default to returning the X500Principal of the end-entity certificate that was 
+sent to the server for certificate-based ciphersuites or, return null for 
+non-certificate based ciphersuites, such as Kerberos. 
+
+
+
+    Returns: the principal sent to the server. Returns an X500Principal of the end-entity 
+             certificate for X509-based cipher suites, and KerberosPrincipal 
+             for Kerberos cipher suites. If no principal was sent, then null is 
+             returned. 
+
+*javax.net.ssl.HttpsURLConnection.getPeerPrincipal()*
+
+public |java.security.Principal| getPeerPrincipal()
+  throws |javax.net.ssl.SSLPeerUnverifiedException|
+         
+Returns the server's principal which was established as part of defining the 
+session. 
+
+Note: Subclasses should override this method. If not overridden, it will 
+default to returning the X500Principal of the server's end-entity certificate 
+for certificate-based ciphersuites, or throw an SSLPeerUnverifiedException for 
+non-certificate based ciphersuites, such as Kerberos. 
+
+
+
+    Returns: the server's principal. Returns an X500Principal of the end-entity certiticate 
+             for X509-based cipher suites, and KerberosPrincipal for Kerberos 
+             cipher suites. 
+
+*javax.net.ssl.HttpsURLConnection.getServerCertificates()*
+
+public abstract |java.security.cert.Certificate|[] getServerCertificates()
+  throws |javax.net.ssl.SSLPeerUnverifiedException|
+         
+Returns the server's certificate chain which was established as part of 
+defining the session. 
+
+Note: This method can be used only when using certificate-based cipher suites; 
+using it with non-certificate-based cipher suites, such as Kerberos, will throw 
+an SSLPeerUnverifiedException. 
+
+
+
+    Returns: an ordered array of server certificates, with the peer's own certificate first 
+             followed by any certificate authorities. 
+
+*javax.net.ssl.HttpsURLConnection.getSSLSocketFactory()*
+
+public |javax.net.ssl.SSLSocketFactory| getSSLSocketFactory()
+
+Gets the SSL socket factory to be used when creating sockets for secure https 
+URL connections. 
+
+
+
+    Returns: the SSLSocketFactory 
+
+*javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(HostnameVerifier)*
+
+public static void setDefaultHostnameVerifier(javax.net.ssl.HostnameVerifier v)
+
+Sets the default HostnameVerifier inherited by a new instance of this class. 
+
+If this method is not called, the default HostnameVerifier assumes the 
+connection should not be permitted. 
+
+
+    v - the default host name verifier 
+
+*javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory(SSLSocketFactory)*
+
+public static void setDefaultSSLSocketFactory(javax.net.ssl.SSLSocketFactory sf)
+
+Sets the default SSLSocketFactory inherited by new instances of this class. 
+
+The socket factories are used when creating sockets for secure https URL 
+connections. 
+
+
+    sf - the default SSL socket factory 
+
+*javax.net.ssl.HttpsURLConnection.setHostnameVerifier(HostnameVerifier)*
+
+public void setHostnameVerifier(javax.net.ssl.HostnameVerifier v)
+
+Sets the HostnameVerifier for this instance. 
+
+New instances of this class inherit the default static hostname verifier set by 
+setDefaultHostnameVerifier(|javax.net.ssl.HttpsURLConnection|) . Calls to this 
+method replace this object's HostnameVerifier. 
+
+
+    v - the host name verifier 
+
+*javax.net.ssl.HttpsURLConnection.setSSLSocketFactory(SSLSocketFactory)*
+
+public void setSSLSocketFactory(javax.net.ssl.SSLSocketFactory sf)
+
+Sets the SSLSocketFactory to be used when this instance creates sockets for 
+secure https URL connections. 
+
+New instances of this class inherit the default static SSLSocketFactory set by 
+setDefaultSSLSocketFactory(|javax.net.ssl.HttpsURLConnection|) . Calls to this 
+method replace this object's SSLSocketFactory. 
+
+
+    sf - the SSL socket factory 
+
+

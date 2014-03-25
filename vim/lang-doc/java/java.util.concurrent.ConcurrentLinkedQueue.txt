@@ -1,0 +1,271 @@
+*java.util.concurrent.ConcurrentLinkedQueue* *ConcurrentLinkedQueue* An unbounde
+
+public class ConcurrentLinkedQueue<E>
+  extends    |java.util.AbstractQueue|
+  implements |java.util.Queue|
+             |java.io.Serializable|
+
+|java.util.concurrent.ConcurrentLinkedQueue_Description|
+|java.util.concurrent.ConcurrentLinkedQueue_Fields|
+|java.util.concurrent.ConcurrentLinkedQueue_Constructors|
+|java.util.concurrent.ConcurrentLinkedQueue_Methods|
+
+================================================================================
+
+*java.util.concurrent.ConcurrentLinkedQueue_Constructors*
+|java.util.concurrent.ConcurrentLinkedQueue()|Creates aConcurrentLinkedQueuetha
+|java.util.concurrent.ConcurrentLinkedQueue(Collection<?extendsE>)|Creates aCon
+
+*java.util.concurrent.ConcurrentLinkedQueue_Methods*
+|java.util.concurrent.ConcurrentLinkedQueue.add(E)|Inserts the specified elemen
+|java.util.concurrent.ConcurrentLinkedQueue.addAll(Collection<?extendsE>)|Appen
+|java.util.concurrent.ConcurrentLinkedQueue.contains(Object)|Returnstrueif this
+|java.util.concurrent.ConcurrentLinkedQueue.isEmpty()|Returnstrueif this queue 
+|java.util.concurrent.ConcurrentLinkedQueue.iterator()|Returns an iterator over
+|java.util.concurrent.ConcurrentLinkedQueue.offer(E)|Inserts the specified elem
+|java.util.concurrent.ConcurrentLinkedQueue.peek()|
+|java.util.concurrent.ConcurrentLinkedQueue.poll()|
+|java.util.concurrent.ConcurrentLinkedQueue.remove(Object)|Removes a single ins
+|java.util.concurrent.ConcurrentLinkedQueue.size()|Returns the number of elemen
+|java.util.concurrent.ConcurrentLinkedQueue.toArray()|Returns an array containi
+|java.util.concurrent.ConcurrentLinkedQueue.toArray(T[])|Returns an array conta
+
+*java.util.concurrent.ConcurrentLinkedQueue_Description*
+
+An unbounded thread-safe queue(|java.util.Queue|) based on linked nodes. This 
+queue orders elements FIFO (first-in-first-out). The head of the queue is that 
+element that has been on the queue the longest time. The tail of the queue is 
+that element that has been on the queue the shortest time. New elements are 
+inserted at the tail of the queue, and the queue retrieval operations obtain 
+elements at the head of the queue. AConcurrentLinkedQueueis an appropriate 
+choice when many threads will share access to a common collection. Like most 
+other concurrent collection implementations, this class does not permit the use 
+ofnullelements. 
+
+This implementation employs an efficient wait-free algorithm based on one 
+described in Simple, Fast, and Practical Non-Blocking and Blocking Concurrent 
+Queue Algorithms by Maged M. Michael and Michael L. Scott. 
+
+Iterators are weakly consistent, returning elements reflecting the state of the 
+queue at some point at or since the creation of the iterator. They do not throw 
+(|java.util.ConcurrentModificationException|) , and may proceed concurrently 
+with other operations. Elements contained in the queue since the creation of 
+the iterator will be returned exactly once. 
+
+Beware that, unlike in most collections, thesizemethod is NOT a constant-time 
+operation. Because of the asynchronous nature of these queues, determining the 
+current number of elements requires a traversal of the elements, and so may 
+report inaccurate results if this collection is modified during traversal. 
+Additionally, the bulk operationsaddAll,removeAll,retainAll,containsAll,equals, 
+andtoArrayare not guaranteed to be performed atomically. For example, an 
+iterator operating concurrently with anaddAlloperation might view only some of 
+the added elements. 
+
+This class and its iterator implement all of the optional methods of the 
+(|java.util.Queue|) and (|java.util.Iterator|) interfaces. 
+
+Memory consistency effects: As with other concurrent collections, actions in a 
+thread prior to placing an object into aConcurrentLinkedQueuehappen-before 
+actions subsequent to the access or removal of that element from 
+theConcurrentLinkedQueuein another thread. 
+
+This class is a member of the <a 
+href="/../technotes/guides/collections/index.html"> Java Collections Framework. 
+
+
+
+*java.util.concurrent.ConcurrentLinkedQueue()*
+
+public ConcurrentLinkedQueue()
+
+Creates aConcurrentLinkedQueuethat is initially empty. 
+
+
+*java.util.concurrent.ConcurrentLinkedQueue(Collection<?extendsE>)*
+
+public ConcurrentLinkedQueue(java.util.Collection<? extends E> c)
+
+Creates aConcurrentLinkedQueueinitially containing the elements of the given 
+collection, added in traversal order of the collection's iterator. 
+
+    c - the collection of elements to initially contain 
+
+*java.util.concurrent.ConcurrentLinkedQueue.add(E)*
+
+public boolean add(E e)
+
+Inserts the specified element at the tail of this queue. As the queue is 
+unbounded, this method will never throw (|java.lang.IllegalStateException|) or 
+returnfalse. 
+
+
+
+    Returns: {@code true} (as specified by {@link Collection#add}) 
+
+*java.util.concurrent.ConcurrentLinkedQueue.addAll(Collection<?extendsE>)*
+
+public boolean addAll(java.util.Collection<? extends E> c)
+
+Appends all of the elements in the specified collection to the end of this 
+queue, in the order that they are returned by the specified collection's 
+iterator. Attempts toaddAllof a queue to itself result 
+inIllegalArgumentException. 
+
+
+    c - the elements to be inserted into this queue 
+
+    Returns: {@code true} if this queue changed as a result of the call 
+
+*java.util.concurrent.ConcurrentLinkedQueue.contains(Object)*
+
+public boolean contains(java.lang.Object o)
+
+Returnstrueif this queue contains the specified element. More formally, 
+returnstrueif and only if this queue contains at least one elementesuch 
+thato.equals(e). 
+
+
+    o - object to be checked for containment in this queue 
+
+    Returns: {@code true} if this queue contains the specified element 
+
+*java.util.concurrent.ConcurrentLinkedQueue.isEmpty()*
+
+public boolean isEmpty()
+
+Returnstrueif this queue contains no elements. 
+
+
+
+    Returns: {@code true} if this queue contains no elements 
+
+*java.util.concurrent.ConcurrentLinkedQueue.iterator()*
+
+public |java.util.Iterator|<E> iterator()
+
+Returns an iterator over the elements in this queue in proper sequence. The 
+elements will be returned in order from first (head) to last (tail). 
+
+The returned iterator is a "weakly consistent" iterator that will never throw 
+ConcurrentModificationException(|java.util.ConcurrentModificationException|) , 
+and guarantees to traverse elements as they existed upon construction of the 
+iterator, and may (but is not guaranteed to) reflect any modifications 
+subsequent to construction. 
+
+
+
+    Returns: an iterator over the elements in this queue in proper sequence 
+
+*java.util.concurrent.ConcurrentLinkedQueue.offer(E)*
+
+public boolean offer(E e)
+
+Inserts the specified element at the tail of this queue. As the queue is 
+unbounded, this method will never returnfalse. 
+
+
+
+    Returns: {@code true} (as specified by {@link Queue#offer}) 
+
+*java.util.concurrent.ConcurrentLinkedQueue.peek()*
+
+public |E| peek()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedQueue.poll()*
+
+public |E| poll()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedQueue.remove(Object)*
+
+public boolean remove(java.lang.Object o)
+
+Removes a single instance of the specified element from this queue, if it is 
+present. More formally, removes an elementesuch thato.equals(e), if this queue 
+contains one or more such elements. Returnstrueif this queue contained the 
+specified element (or equivalently, if this queue changed as a result of the 
+call). 
+
+
+    o - element to be removed from this queue, if present 
+
+    Returns: {@code true} if this queue changed as a result of the call 
+
+*java.util.concurrent.ConcurrentLinkedQueue.size()*
+
+public int size()
+
+Returns the number of elements in this queue. If this queue contains more 
+thanInteger.MAX_VALUEelements, returnsInteger.MAX_VALUE. 
+
+Beware that, unlike in most collections, this method is NOT a constant-time 
+operation. Because of the asynchronous nature of these queues, determining the 
+current number of elements requires an O(n) traversal. Additionally, if 
+elements are added or removed during execution of this method, the returned 
+result may be inaccurate. Thus, this method is typically not very useful in 
+concurrent applications. 
+
+
+
+    Returns: the number of elements in this queue 
+
+*java.util.concurrent.ConcurrentLinkedQueue.toArray()*
+
+public |java.lang.Object|[] toArray()
+
+Returns an array containing all of the elements in this queue, in proper 
+sequence. 
+
+The returned array will be "safe" in that no references to it are maintained by 
+this queue. (In other words, this method must allocate a new array). The caller 
+is thus free to modify the returned array. 
+
+This method acts as bridge between array-based and collection-based APIs. 
+
+
+
+    Returns: an array containing all of the elements in this queue 
+
+*java.util.concurrent.ConcurrentLinkedQueue.toArray(T[])*
+
+public |T|[] toArray(T[] a)
+
+Returns an array containing all of the elements in this queue, in proper 
+sequence; the runtime type of the returned array is that of the specified 
+array. If the queue fits in the specified array, it is returned therein. 
+Otherwise, a new array is allocated with the runtime type of the specified 
+array and the size of this queue. 
+
+If this queue fits in the specified array with room to spare (i.e., the array 
+has more elements than this queue), the element in the array immediately 
+following the end of the queue is set tonull. 
+
+Like the (|java.util.concurrent.ConcurrentLinkedQueue|) method, this method 
+acts as bridge between array-based and collection-based APIs. Further, this 
+method allows precise control over the runtime type of the output array, and 
+may, under certain circumstances, be used to save allocation costs. 
+
+Supposexis a queue known to contain only strings. The following code can be 
+used to dump the queue into a newly allocated array ofString: 
+
+
+
+String[] y = x.toArray(new String[0]); 
+
+Note thattoArray(new Object[0])is identical in function totoArray(). 
+
+
+    a - the array into which the elements of the queue are to be stored, if it is big 
+       enough; otherwise, a new array of the same runtime type is allocated for 
+       this purpose 
+
+    Returns: an array containing all of the elements in this queue 
+
+

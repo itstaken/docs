@@ -1,0 +1,536 @@
+*java.lang.reflect.Field* *Field* AFieldprovides information about, and dynamic 
+
+public final class Field
+  extends    |java.lang.reflect.AccessibleObject|
+  implements |java.lang.reflect.Member|
+
+|java.lang.reflect.Field_Description|
+|java.lang.reflect.Field_Fields|
+|java.lang.reflect.Field_Constructors|
+|java.lang.reflect.Field_Methods|
+
+================================================================================
+
+*java.lang.reflect.Field_Methods*
+|java.lang.reflect.Field.equals(Object)|Compares thisFieldagainst the specified
+|java.lang.reflect.Field.get(Object)|Returns the value of the field represented
+|java.lang.reflect.Field.getAnnotation(Class<T>)|
+|java.lang.reflect.Field.getBoolean(Object)|Gets the value of a static or insta
+|java.lang.reflect.Field.getByte(Object)|Gets the value of a static or instance
+|java.lang.reflect.Field.getChar(Object)|Gets the value of a static or instance
+|java.lang.reflect.Field.getDeclaredAnnotations()|
+|java.lang.reflect.Field.getDeclaringClass()|Returns theClassobject representin
+|java.lang.reflect.Field.getDouble(Object)|Gets the value of a static or instan
+|java.lang.reflect.Field.getFloat(Object)|Gets the value of a static or instanc
+|java.lang.reflect.Field.getGenericType()|Returns aTypeobject that represents t
+|java.lang.reflect.Field.getInt(Object)|Gets the value of a static or instance 
+|java.lang.reflect.Field.getLong(Object)|Gets the value of a static or instance
+|java.lang.reflect.Field.getModifiers()|Returns the Java language modifiers for
+|java.lang.reflect.Field.getName()|Returns the name of the field represented by
+|java.lang.reflect.Field.getShort(Object)|Gets the value of a static or instanc
+|java.lang.reflect.Field.getType()|Returns aClassobject that identifies the  de
+|java.lang.reflect.Field.hashCode()|Returns a hashcode for thisField.
+|java.lang.reflect.Field.isEnumConstant()|Returnstrueif this field represents a
+|java.lang.reflect.Field.isSynthetic()|Returnstrueif this field is a synthetic 
+|java.lang.reflect.Field.set(Object,Object)|Sets the field represented by thisF
+|java.lang.reflect.Field.setBoolean(Object,boolean)|Sets the value of a field a
+|java.lang.reflect.Field.setByte(Object,byte)|Sets the value of a field as abyt
+|java.lang.reflect.Field.setChar(Object,char)|Sets the value of a field as acha
+|java.lang.reflect.Field.setDouble(Object,double)|Sets the value of a field as 
+|java.lang.reflect.Field.setFloat(Object,float)|Sets the value of a field as af
+|java.lang.reflect.Field.setInt(Object,int)|Sets the value of a field as aninto
+|java.lang.reflect.Field.setLong(Object,long)|Sets the value of a field as alon
+|java.lang.reflect.Field.setShort(Object,short)|Sets the value of a field as as
+|java.lang.reflect.Field.toGenericString()|Returns a string describing thisFiel
+|java.lang.reflect.Field.toString()|Returns a string describing thisField.
+
+*java.lang.reflect.Field_Description*
+
+AFieldprovides information about, and dynamic access to, a single field of a 
+class or an interface. The reflected field may be a class (static) field or an 
+instance field. 
+
+AFieldpermits widening conversions to occur during a get or set access 
+operation, but throws anIllegalArgumentExceptionif a narrowing conversion would 
+occur. 
+
+
+
+*java.lang.reflect.Field.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares thisFieldagainst the specified object. Returns true if the objects are 
+the same. TwoFieldobjects are the same if they were declared by the same class 
+and have the same name and type. 
+
+
+
+*java.lang.reflect.Field.get(Object)*
+
+public |java.lang.Object| get(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Returns the value of the field represented by thisField, on the specified 
+object. The value is automatically wrapped in an object if it has a primitive 
+type. 
+
+The underlying field's value is obtained as follows: 
+
+If the underlying field is a static field, theobjargument is ignored; it may be 
+null. 
+
+Otherwise, the underlying field is an instance field. If the 
+specifiedobjargument is null, the method throws aNullPointerException. If the 
+specified object is not an instance of the class or interface declaring the 
+underlying field, the method throws anIllegalArgumentException. 
+
+If thisFieldobject is enforcing Java language access control, and the 
+underlying field is inaccessible, the method throws anIllegalAccessException. 
+If the underlying field is static, the class that declared the field is 
+initialized if it has not already been initialized. 
+
+Otherwise, the value is retrieved from the underlying instance or static field. 
+If the field has a primitive type, the value is wrapped in an object before 
+being returned, otherwise it is returned as is. 
+
+If the field is hidden in the type ofobj, the field's value is obtained 
+according to the preceding rules. 
+
+
+    obj - object from which the represented field's value is to be extracted 
+
+    Returns: the value of the represented field in object {@code obj}; primitive values are 
+             wrapped in an appropriate object before being returned 
+
+*java.lang.reflect.Field.getAnnotation(Class<T>)*
+
+public |T| getAnnotation(java.lang.Class<T> annotationClass)
+
+
+
+
+
+*java.lang.reflect.Field.getBoolean(Object)*
+
+public boolean getBoolean(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instancebooleanfield. 
+
+
+    obj - the object to extract the {@code boolean} value from 
+
+    Returns: the value of the {@code boolean} field 
+
+*java.lang.reflect.Field.getByte(Object)*
+
+public byte getByte(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instancebytefield. 
+
+
+    obj - the object to extract the {@code byte} value from 
+
+    Returns: the value of the {@code byte} field 
+
+*java.lang.reflect.Field.getChar(Object)*
+
+public char getChar(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typecharor of another primitive 
+type convertible to typecharvia a widening conversion. 
+
+
+    obj - the object to extract the {@code char} value from 
+
+    Returns: the value of the field converted to type {@code char} 
+
+*java.lang.reflect.Field.getDeclaredAnnotations()*
+
+public |java.lang.annotation.Annotation|[] getDeclaredAnnotations()
+
+
+
+
+
+*java.lang.reflect.Field.getDeclaringClass()*
+
+public |java.lang.Class|<?> getDeclaringClass()
+
+Returns theClassobject representing the class or interface that declares the 
+field represented by thisFieldobject. 
+
+
+
+*java.lang.reflect.Field.getDouble(Object)*
+
+public double getDouble(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typedoubleor of another 
+primitive type convertible to typedoublevia a widening conversion. 
+
+
+    obj - the object to extract the {@code double} value from 
+
+    Returns: the value of the field converted to type {@code double} 
+
+*java.lang.reflect.Field.getFloat(Object)*
+
+public float getFloat(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typefloator of another 
+primitive type convertible to typefloatvia a widening conversion. 
+
+
+    obj - the object to extract the {@code float} value from 
+
+    Returns: the value of the field converted to type {@code float} 
+
+*java.lang.reflect.Field.getGenericType()*
+
+public |java.lang.reflect.Type| getGenericType()
+
+Returns aTypeobject that represents the declared type for the field represented 
+by thisFieldobject. 
+
+If theTypeis a parameterized type, theTypeobject returned must accurately 
+reflect the actual type parameters used in the source code. 
+
+If the type of the underlying field is a type variable or a parameterized type, 
+it is created. Otherwise, it is resolved. 
+
+
+
+    Returns: a {@code Type} object that represents the declared type for the field 
+             represented by this {@code Field} object 
+
+*java.lang.reflect.Field.getInt(Object)*
+
+public int getInt(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typeintor of another primitive 
+type convertible to typeintvia a widening conversion. 
+
+
+    obj - the object to extract the {@code int} value from 
+
+    Returns: the value of the field converted to type {@code int} 
+
+*java.lang.reflect.Field.getLong(Object)*
+
+public long getLong(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typelongor of another primitive 
+type convertible to typelongvia a widening conversion. 
+
+
+    obj - the object to extract the {@code long} value from 
+
+    Returns: the value of the field converted to type {@code long} 
+
+*java.lang.reflect.Field.getModifiers()*
+
+public int getModifiers()
+
+Returns the Java language modifiers for the field represented by 
+thisFieldobject, as an integer. TheModifierclass should be used to decode the 
+modifiers. 
+
+
+
+*java.lang.reflect.Field.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name of the field represented by thisFieldobject. 
+
+
+
+*java.lang.reflect.Field.getShort(Object)*
+
+public short getShort(java.lang.Object obj)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Gets the value of a static or instance field of typeshortor of another 
+primitive type convertible to typeshortvia a widening conversion. 
+
+
+    obj - the object to extract the {@code short} value from 
+
+    Returns: the value of the field converted to type {@code short} 
+
+*java.lang.reflect.Field.getType()*
+
+public |java.lang.Class|<?> getType()
+
+Returns aClassobject that identifies the declared type for the field 
+represented by thisFieldobject. 
+
+
+
+    Returns: a {@code Class} object identifying the declared type of the field represented 
+             by this object 
+
+*java.lang.reflect.Field.hashCode()*
+
+public int hashCode()
+
+Returns a hashcode for thisField. This is computed as the exclusive-or of the 
+hashcodes for the underlying field's declaring class name and its name. 
+
+
+
+*java.lang.reflect.Field.isEnumConstant()*
+
+public boolean isEnumConstant()
+
+Returnstrueif this field represents an element of an enumerated type; 
+returnsfalseotherwise. 
+
+
+
+    Returns: {@code true} if and only if this field represents an element of an enumerated 
+             type. 
+
+*java.lang.reflect.Field.isSynthetic()*
+
+public boolean isSynthetic()
+
+Returnstrueif this field is a synthetic field; returnsfalseotherwise. 
+
+
+
+    Returns: true if and only if this field is a synthetic field as defined by the Java 
+             Language Specification. 
+
+*java.lang.reflect.Field.set(Object,Object)*
+
+public void set(
+  java.lang.Object obj,
+  java.lang.Object value)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the field represented by thisFieldobject on the specified object argument 
+to the specified new value. The new value is automatically unwrapped if the 
+underlying field has a primitive type. 
+
+The operation proceeds as follows: 
+
+If the underlying field is static, theobjargument is ignored; it may be null. 
+
+Otherwise the underlying field is an instance field. If the specified object 
+argument is null, the method throws aNullPointerException. If the specified 
+object argument is not an instance of the class or interface declaring the 
+underlying field, the method throws anIllegalArgumentException. 
+
+If thisFieldobject is enforcing Java language access control, and the 
+underlying field is inaccessible, the method throws anIllegalAccessException. 
+
+If the underlying field is final, the method throws 
+anIllegalAccessExceptionunlesssetAccessible(true)has succeeded for 
+thisFieldobject and the field is non-static. Setting a final field in this way 
+is meaningful only during deserialization or reconstruction of instances of 
+classes with blank final fields, before they are made available for access by 
+other parts of a program. Use in any other context may have unpredictable 
+effects, including cases in which other parts of a program continue to use the 
+original value of this field. 
+
+If the underlying field is of a primitive type, an unwrapping conversion is 
+attempted to convert the new value to a value of a primitive type. If this 
+attempt fails, the method throws anIllegalArgumentException. 
+
+If, after possible unwrapping, the new value cannot be converted to the type of 
+the underlying field by an identity or widening conversion, the method throws 
+anIllegalArgumentException. 
+
+If the underlying field is static, the class that declared the field is 
+initialized if it has not already been initialized. 
+
+The field is set to the possibly unwrapped and widened new value. 
+
+If the field is hidden in the type ofobj, the field's value is set according to 
+the preceding rules. 
+
+
+    obj - the object whose field should be modified 
+    value - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setBoolean(Object,boolean)*
+
+public void setBoolean(
+  java.lang.Object obj,
+  boolean z)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as abooleanon the specified object. This method is 
+equivalent toset(obj, zObj), wherezObjis aBooleanobject andzObj.booleanValue() 
+== z. 
+
+
+    obj - the object whose field should be modified 
+    z - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setByte(Object,byte)*
+
+public void setByte(
+  java.lang.Object obj,
+  byte b)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as abyteon the specified object. This method is 
+equivalent toset(obj, bObj), wherebObjis aByteobject andbObj.byteValue() == b. 
+
+
+    obj - the object whose field should be modified 
+    b - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setChar(Object,char)*
+
+public void setChar(
+  java.lang.Object obj,
+  char c)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as acharon the specified object. This method is 
+equivalent toset(obj, cObj), wherecObjis aCharacterobject andcObj.charValue() 
+== c. 
+
+
+    obj - the object whose field should be modified 
+    c - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setDouble(Object,double)*
+
+public void setDouble(
+  java.lang.Object obj,
+  double d)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as adoubleon the specified object. This method is 
+equivalent toset(obj, dObj), wheredObjis aDoubleobject anddObj.doubleValue() == 
+d. 
+
+
+    obj - the object whose field should be modified 
+    d - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setFloat(Object,float)*
+
+public void setFloat(
+  java.lang.Object obj,
+  float f)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as afloaton the specified object. This method is 
+equivalent toset(obj, fObj), wherefObjis aFloatobject andfObj.floatValue() == 
+f. 
+
+
+    obj - the object whose field should be modified 
+    f - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setInt(Object,int)*
+
+public void setInt(
+  java.lang.Object obj,
+  int i)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as aninton the specified object. This method is 
+equivalent toset(obj, iObj), whereiObjis aIntegerobject andiObj.intValue() == 
+i. 
+
+
+    obj - the object whose field should be modified 
+    i - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setLong(Object,long)*
+
+public void setLong(
+  java.lang.Object obj,
+  long l)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as alongon the specified object. This method is 
+equivalent toset(obj, lObj), wherelObjis aLongobject andlObj.longValue() == l. 
+
+
+    obj - the object whose field should be modified 
+    l - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.setShort(Object,short)*
+
+public void setShort(
+  java.lang.Object obj,
+  short s)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.IllegalArgumentException|
+         
+Sets the value of a field as ashorton the specified object. This method is 
+equivalent toset(obj, sObj), wheresObjis aShortobject andsObj.shortValue() == 
+s. 
+
+
+    obj - the object whose field should be modified 
+    s - the new value for the field of {@code obj} being modified 
+
+*java.lang.reflect.Field.toGenericString()*
+
+public |java.lang.String| toGenericString()
+
+Returns a string describing thisField, including its generic type. The format 
+is the access modifiers for the field, if any, followed by the generic field 
+type, followed by a space, followed by the fully-qualified name of the class 
+declaring the field, followed by a period, followed by the name of the field. 
+
+The modifiers are placed in canonical order as specified by "The Java Language 
+Specification". This ispublic,protectedorprivatefirst, and then other modifiers 
+in the following order:static,final,transient,volatile. 
+
+
+
+    Returns: a string describing this {@code Field}, including its generic type 
+
+*java.lang.reflect.Field.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string describing thisField. The format is the access modifiers for 
+the field, if any, followed by the field type, followed by a space, followed by 
+the fully-qualified name of the class declaring the field, followed by a 
+period, followed by the name of the field. For example: 
+
+public static final int java.lang.Thread.MIN_PRIORITY private int 
+java.io.FileDescriptor.fd 
+
+The modifiers are placed in canonical order as specified by "The Java Language 
+Specification". This ispublic,protectedorprivatefirst, and then other modifiers 
+in the following order:static,final,transient,volatile. 
+
+
+
+

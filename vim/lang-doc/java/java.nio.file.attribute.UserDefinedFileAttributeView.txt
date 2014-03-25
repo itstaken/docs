@@ -1,0 +1,173 @@
+*java.nio.file.attribute.UserDefinedFileAttributeView* *UserDefinedFileAttributeView* 
+
+public interface interface UserDefinedFileAttributeView
+
+  implements |java.nio.file.attribute.FileAttributeView|
+
+|java.nio.file.attribute.UserDefinedFileAttributeView_Description|
+|java.nio.file.attribute.UserDefinedFileAttributeView_Fields|
+|java.nio.file.attribute.UserDefinedFileAttributeView_Constructors|
+|java.nio.file.attribute.UserDefinedFileAttributeView_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.UserDefinedFileAttributeView_Methods*
+|java.nio.file.attribute.UserDefinedFileAttributeView.delete(String)|Deletes a 
+|java.nio.file.attribute.UserDefinedFileAttributeView.list()|Returns a list con
+|java.nio.file.attribute.UserDefinedFileAttributeView.name()|Returns the name o
+|java.nio.file.attribute.UserDefinedFileAttributeView.read(String,ByteBuffer)|R
+|java.nio.file.attribute.UserDefinedFileAttributeView.size(String)|Returns the 
+|java.nio.file.attribute.UserDefinedFileAttributeView.write(String,ByteBuffer)|
+
+*java.nio.file.attribute.UserDefinedFileAttributeView_Description*
+
+A file attribute view that provides a view of a file's user-defined attributes, 
+sometimes known as extended attributes. User-defined file attributes are used 
+to store metadata with a file that is not meaningful to the file system. It is 
+primarily intended for file system implementations that support such a 
+capability directly but may be emulated. The details of such emulation are 
+highly implementation specific and therefore not specified. 
+
+ThisFileAttributeViewprovides a view of a file's user-defined attributes as a 
+set of name/value pairs, where the attribute name is represented by aString. An 
+implementation may require to encode and decode from the platform or file 
+system representation when accessing the attribute. The value has opaque 
+content. This attribute view defines the 
+read(|java.nio.file.attribute.UserDefinedFileAttributeView|) and 
+write(|java.nio.file.attribute.UserDefinedFileAttributeView|) methods to read 
+the value into or write from a (|java.nio.ByteBuffer|) . 
+ThisFileAttributeViewis not intended for use where the size of an attribute 
+value is larger than (|java.lang.Integer|) . 
+
+User-defined attributes may be used in some implementations to store security 
+related attributes so consequently, in the case of the default provider at 
+least, all methods that access user-defined attributes require 
+theRuntimePermission("accessUserDefinedAttributes")permission when a security 
+manager is installed. 
+
+The supportsFileAttributeView(|java.nio.file.FileStore|) method may be used to 
+test if a specific FileStore(|java.nio.file.FileStore|) supports the storage of 
+user-defined attributes. 
+
+Where dynamic access to file attributes is required, the 
+getAttribute(|java.nio.file.Files|) method may be used to read the attribute 
+value. The attribute value is returned as a byte array (byte[]). The 
+setAttribute(|java.nio.file.Files|) method may be used to write the value of a 
+user-defined attribute from a buffer (as if by invoking the 
+write(|java.nio.file.attribute.UserDefinedFileAttributeView|) method), or byte 
+array (byte[]). 
+
+
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.delete(String)*
+
+public void delete(java.lang.String name)
+  throws |java.io.IOException|
+         
+Deletes a user-defined attribute. 
+
+
+    name - The attribute name 
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.list()*
+
+public |java.util.List|<String> list()
+  throws |java.io.IOException|
+         
+Returns a list containing the names of the user-defined attributes. 
+
+
+
+    Returns: An unmodifiable list continaing the names of the file's user-defined 
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.name()*
+
+public |java.lang.String| name()
+
+Returns the name of this attribute view. Attribute views of this type have the 
+name"user". 
+
+
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.read(String,ByteBuffer)*
+
+public int read(
+  java.lang.String name,
+  java.nio.ByteBuffer dst)
+  throws |java.io.IOException|
+         
+Read the value of a user-defined attribute into a buffer. 
+
+This method reads the value of the attribute into the given buffer as a 
+sequence of bytes, failing if the number of bytes remaining in the buffer is 
+insufficient to read the complete attribute value. The number of bytes 
+transferred into the buffer isn, wherenis the size of the attribute value. The 
+first byte in the sequence is at indexpand the last byte is at indexp + n - 1, 
+wherepis the buffer's position. Upon return the buffer's position will be equal 
+top + n; its limit will not have changed. 
+
+Usage Example: Suppose we want to read a file's MIME type that is stored as a 
+user-defined attribute with the name "user.mimetype". 
+
+UserDefinedFileAttributeView view = Files.getFileAttributeView(path, 
+UserDefinedFileAttributeView.class); String name = "user.mimetype"; ByteBuffer 
+buf = ByteBuffer.allocate(view.size(name)); view.read(name, buf); buf.flip(); 
+String value = Charset.defaultCharset().decode(buf).toString(); 
+
+
+    name - The attribute name 
+    dst - The destination buffer 
+
+    Returns: The number of bytes read, possibly zero 
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.size(String)*
+
+public int size(java.lang.String name)
+  throws |java.io.IOException|
+         
+Returns the size of the value of a user-defined attribute. 
+
+
+    name - The attribute name 
+
+    Returns: The size of the attribute value, in bytes. 
+
+*java.nio.file.attribute.UserDefinedFileAttributeView.write(String,ByteBuffer)*
+
+public int write(
+  java.lang.String name,
+  java.nio.ByteBuffer src)
+  throws |java.io.IOException|
+         
+Writes the value of a user-defined attribute from a buffer. 
+
+This method writes the value of the attribute from a given buffer as a sequence 
+of bytes. The size of the value to transfer isr, whereris the number of bytes 
+remaining in the buffer, that issrc.remaining(). The sequence of bytes is 
+transferred from the buffer starting at indexp, wherepis the buffer's position. 
+Upon return, the buffer's position will be equal top + n, wherenis the number 
+of bytes transferred; its limit will not have changed. 
+
+If an attribute of the given name already exists then its value is replaced. If 
+the attribute does not exist then it is created. If it implementation specific 
+if a test to check for the existence of the attribute and the creation of 
+attribute are atomic with repect to other file system activities. 
+
+Where there is insufficient space to store the attribute, or the attribute name 
+or value exceed an implementation specific maximum size then anIOExceptionis 
+thrown. 
+
+Usage Example: Suppose we want to write a file's MIME type as a user-defined 
+attribute: 
+
+UserDefinedFileAttributeView view = FIles.getFileAttributeView(path, 
+UserDefinedFileAttributeView.class); view.write("user.mimetype", 
+Charset.defaultCharset().encode("text/html")); 
+
+
+    name - The attribute name 
+    src - The buffer containing the attribute value 
+
+    Returns: The number of bytes written, possibly zero 
+
+

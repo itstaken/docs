@@ -1,0 +1,226 @@
+*java.nio.file.FileSystems* *FileSystems* Factory methods for file systems.
+
+public final class FileSystems
+  extends    |java.lang.Object|
+
+|java.nio.file.FileSystems_Description|
+|java.nio.file.FileSystems_Fields|
+|java.nio.file.FileSystems_Constructors|
+|java.nio.file.FileSystems_Methods|
+
+================================================================================
+
+*java.nio.file.FileSystems_Methods*
+|java.nio.file.FileSystems.getDefault()|Returns the defaultFileSystem.
+|java.nio.file.FileSystems.getFileSystem(URI)|Returns a reference to an existin
+|java.nio.file.FileSystems.newFileSystem(Path,ClassLoader)|Constructs a newFile
+|java.nio.file.FileSystems.newFileSystem(URI,Map<String,?>)|Constructs a new fi
+|java.nio.file.FileSystems.newFileSystem(URI,Map<String,?>,ClassLoader)|Constru
+
+*java.nio.file.FileSystems_Description*
+
+Factory methods for file systems. This class defines the 
+getDefault(|java.nio.file.FileSystems|) method to get the default file system 
+and factory methods to construct other types of file systems. 
+
+The first invocation of any of the methods defined by this class causes the 
+default provider(|java.nio.file.spi.FileSystemProvider|) to be loaded. The 
+default provider, identified by the URI scheme "file", creates the 
+(|java.nio.file.FileSystem|) that provides access to the file systems 
+accessible to the Java virtual machine. If the process of loading or 
+initializing the default provider fails then an unspecified error is thrown. 
+
+The first invocation of the 
+installedProviders(|java.nio.file.spi.FileSystemProvider|) method, by way of 
+invoking any of thenewFileSystemmethods defined by this class, locates and 
+loads all installed file system providers. Installed providers are loaded using 
+the service-provider loading facility defined by the 
+(|java.util.ServiceLoader|) class. Installed providers are loaded using the 
+system class loader. If the system class loader cannot be found then the 
+extension class loader is used; if there is no extension class loader then the 
+bootstrap class loader is used. Providers are typically installed by placing 
+them in a JAR file on the application class path or in the extension directory, 
+the JAR file contains a provider-configuration file 
+namedjava.nio.file.spi.FileSystemProviderin the resource 
+directoryMETA-INF/services, and the file lists one or more fully-qualified 
+names of concrete subclass of (|java.nio.file.spi.FileSystemProvider|) that 
+have a zero argument constructor. The ordering that installed providers are 
+located is implementation specific. If a provider is instantiated and its 
+getScheme(|java.nio.file.spi.FileSystemProvider|) returns the same URI scheme 
+of a provider that was previously instantiated then the most recently 
+instantiated duplicate is discarded. URI schemes are compared without regard to 
+case. During construction a provider may safely access files associated with 
+the default provider but care needs to be taken to avoid circular loading of 
+other installed providers. If circular loading of installed providers is 
+detected then an unspecified error is thrown. 
+
+This class also defines factory methods that allow a (|java.lang.ClassLoader|) 
+to be specified when locating a provider. As with installed providers, the 
+provider classes are identified by placing the provider configuration file in 
+the resource directoryMETA-INF/services. 
+
+If a thread initiates the loading of the installed file system providers and 
+another thread invokes a method that also attempts to load the providers then 
+the method will block until the loading completes. 
+
+
+
+*java.nio.file.FileSystems.getDefault()*
+
+public static |java.nio.file.FileSystem| getDefault()
+
+Returns the defaultFileSystem. The default file system creates objects that 
+provide access to the file systems accessible to the Java virtual machine. The 
+working directory of the file system is the current user directory, named by 
+the system propertyuser.dir. This allows for interoperability with the 
+java.io.File(|java.io.File|) class. 
+
+The first invocation of any of the methods defined by this class locates the 
+default provider(|java.nio.file.spi.FileSystemProvider|) object. Where the 
+system propertyjava.nio.file.spi.DefaultFileSystemProvideris not defined then 
+the default provider is a system-default provider that is invoked to create the 
+default file system. 
+
+If the system propertyjava.nio.file.spi.DefaultFileSystemProvideris defined 
+then it is taken to be a list of one or more fully-qualified names of concrete 
+provider classes identified by the URI scheme"file". Where the property is a 
+list of more than one name then the names are separated by a comma. Each class 
+is loaded, using the system class loader, and instantiated by invoking a one 
+argument constructor whose formal parameter type isFileSystemProvider. The 
+providers are loaded and instantiated in the order they are listed in the 
+property. If this process fails or a provider's scheme is not equal 
+to"file"then an unspecified error is thrown. URI schemes are normally compared 
+without regard to case but for the default provider, the scheme is required to 
+be"file". The first provider class is instantiated by invoking it with a 
+reference to the system-default provider. The second provider class is 
+instantiated by invoking it with a reference to the first provider instance. 
+The third provider class is instantiated by invoking it with a reference to the 
+second instance, and so on. The last provider to be instantiated becomes the 
+default provider; itsgetFileSystemmethod is invoked with the URI"file:///"to 
+get a reference to the default file system. 
+
+Subsequent invocations of this method return the file system that was returned 
+by the first invocation. 
+
+
+
+    Returns: the default file system 
+
+*java.nio.file.FileSystems.getFileSystem(URI)*
+
+public static |java.nio.file.FileSystem| getFileSystem(java.net.URI uri)
+
+Returns a reference to an existingFileSystem. 
+
+This method iterates over the installed(|java.nio.file.spi.FileSystemProvider|) 
+providers to locate the provider that is identified by the URI 
+scheme(|java.net.URI|) of the given URI. URI schemes are compared without 
+regard to case. The exact form of the URI is highly provider dependent. If 
+found, the provider's getFileSystem(|java.nio.file.spi.FileSystemProvider|) 
+method is invoked to obtain a reference to theFileSystem. 
+
+Once a file system created by this provider is 
+closed(|java.nio.file.FileSystem|) it is provider-dependent if this method 
+returns a reference to the closed file system or throws 
+(|java.nio.file.FileSystemNotFoundException|) . If the provider allows a new 
+file system to be created with the same URI as a file system it previously 
+created then this method throws the exception if invoked after the file system 
+is closed (and before a new instance is created by the 
+newFileSystem(|java.nio.file.FileSystems|) method). 
+
+If a security manager is installed then a provider implementation may require 
+to check a permission before returning a reference to an existing file system. 
+In the case of the default(|java.nio.file.FileSystems|) file system, no 
+permission check is required. 
+
+
+
+*java.nio.file.FileSystems.newFileSystem(Path,ClassLoader)*
+
+public static |java.nio.file.FileSystem| newFileSystem(
+  java.nio.file.Path path,
+  java.lang.ClassLoader loader)
+  throws |java.io.IOException|
+         
+Constructs a newFileSystemto access the contents of a file as a file system. 
+
+This method makes use of specialized providers that create pseudo file systems 
+where the contents of one or more files is treated as a file system. 
+
+This method iterates over the installed(|java.nio.file.spi.FileSystemProvider|) 
+providers. It invokes, in turn, each provider's 
+newFileSystem(Path,Map)(|java.nio.file.spi.FileSystemProvider|) method with an 
+empty map. If a provider returns a file system then the iteration terminates 
+and the file system is returned. If none of the installed providers return 
+aFileSystemthen an attempt is made to locate the provider using the given class 
+loader. If a provider returns a file system then the lookup terminates and the 
+file system is returned. 
+
+
+    path - the path to the file 
+    loader - the class loader to locate the provider or {@code null} to only attempt to 
+       locate an installed provider 
+
+    Returns: a new file system 
+
+*java.nio.file.FileSystems.newFileSystem(URI,Map<String,?>)*
+
+public static |java.nio.file.FileSystem| newFileSystem(
+  java.net.URI uri,
+  java.util.Map<java.lang.String, ?> env)
+  throws |java.io.IOException|
+         
+Constructs a new file system that is identified by a (|java.net.URI|) This 
+method iterates over the installed(|java.nio.file.spi.FileSystemProvider|) 
+providers to locate the provider that is identified by the URI 
+scheme(|java.net.URI|) of the given URI. URI schemes are compared without 
+regard to case. The exact form of the URI is highly provider dependent. If 
+found, the provider's 
+newFileSystem(URI,Map)(|java.nio.file.spi.FileSystemProvider|) method is 
+invoked to construct the new file system. 
+
+Once a file system is closed(|java.nio.file.FileSystem|) it is 
+provider-dependent if the provider allows a new file system to be created with 
+the same URI as a file system it previously created. 
+
+Usage Example: Suppose there is a provider identified by the 
+scheme"memory"installed: 
+
+Map<String,String> env = new HashMap<>(); env.put("capacity", "16G"); 
+env.put("blockSize", "4k"); FileSystem fs = 
+FileSystems.newFileSystem(URI.create("memory:///?name=logfs"), env); 
+
+
+    uri - the URI identifying the file system 
+    env - a map of provider specific properties to configure the file system; may be 
+       empty 
+
+    Returns: a new file system 
+
+*java.nio.file.FileSystems.newFileSystem(URI,Map<String,?>,ClassLoader)*
+
+public static |java.nio.file.FileSystem| newFileSystem(
+  java.net.URI uri,
+  java.util.Map<java.lang.String, ?> env,
+  java.lang.ClassLoader loader)
+  throws |java.io.IOException|
+         
+Constructs a new file system that is identified by a (|java.net.URI|) This 
+method first attempts to locate an installed provider in exactly the same 
+manner as the newFileSystem(URI,Map)(|java.nio.file.FileSystems|) method. If 
+none of the installed providers support the URI scheme then an attempt is made 
+to locate the provider using the given class loader. If a provider supporting 
+the URI scheme is located then its 
+newFileSystem(URI,Map)(|java.nio.file.spi.FileSystemProvider|) is invoked to 
+construct the new file system. 
+
+
+    uri - the URI identifying the file system 
+    env - a map of provider specific properties to configure the file system; may be 
+       empty 
+    loader - the class loader to locate the provider or {@code null} to only attempt to 
+       locate an installed provider 
+
+    Returns: a new file system 
+
+

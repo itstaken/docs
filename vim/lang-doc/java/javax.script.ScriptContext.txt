@@ -1,0 +1,217 @@
+*javax.script.ScriptContext* *ScriptContext* The interface whose implementing cl
+
+public interface interface ScriptContext
+
+
+|javax.script.ScriptContext_Description|
+|javax.script.ScriptContext_Fields|
+|javax.script.ScriptContext_Constructors|
+|javax.script.ScriptContext_Methods|
+
+================================================================================
+
+*javax.script.ScriptContext_Fields*
+|int_javax.script.ScriptContext.ENGINE_SCOPE|
+|int_javax.script.ScriptContext.GLOBAL_SCOPE|
+
+*javax.script.ScriptContext_Methods*
+|javax.script.ScriptContext.getAttribute(String)|Retrieves the value of the att
+|javax.script.ScriptContext.getAttribute(String,int)|Gets the value of an attri
+|javax.script.ScriptContext.getAttributesScope(String)|Get the lowest scope in 
+|javax.script.ScriptContext.getBindings(int)|Gets the Bindings  associated with
+|javax.script.ScriptContext.getErrorWriter()|Returns the Writer used to display
+|javax.script.ScriptContext.getReader()|Returns a Reader to be used by the scri
+|javax.script.ScriptContext.getScopes()|Returns immutable List of all the valid
+|javax.script.ScriptContext.getWriter()|Returns the Writer for scripts to use w
+|javax.script.ScriptContext.removeAttribute(String,int)|Remove an attribute in 
+|javax.script.ScriptContext.setAttribute(String,Object,int)|Sets the value of a
+|javax.script.ScriptContext.setBindings(Bindings,int)|Associates a Bindings ins
+|javax.script.ScriptContext.setErrorWriter(Writer)|Sets the Writer used to disp
+|javax.script.ScriptContext.setReader(Reader)|Sets the Reader for scripts to re
+|javax.script.ScriptContext.setWriter(Writer)|Sets the Writer for scripts to us
+
+*javax.script.ScriptContext_Description*
+
+The interface whose implementing classes are used to connect Script Engines 
+with objects, such as scoped Bindings, in hosting applications. Each scope is a 
+set of named attributes whose values can be set and retrieved using the 
+ScriptContext methods. ScriptContexts also expose Readers and Writers that can 
+be used by the ScriptEngines for input and output. 
+
+
+
+*int_javax.script.ScriptContext.ENGINE_SCOPE*
+
+EngineScope attributes are visible during the lifetime of a single ScriptEngine 
+and a set of attributes is maintained for each engine. 
+
+
+*int_javax.script.ScriptContext.GLOBAL_SCOPE*
+
+GlobalScope attributes are visible to all engines created by same 
+ScriptEngineFactory. 
+
+
+
+*javax.script.ScriptContext.getAttribute(String)*
+
+public |java.lang.Object| getAttribute(java.lang.String name)
+
+Retrieves the value of the attribute with the given name in the scope occurring 
+earliest in the search order. The order is determined by the numeric value of 
+the scope parameter (lowest scope values first.) 
+
+
+    name - The name of the the attribute to retrieve. 
+
+    Returns: The value of the attribute in the lowest scope for which an attribute with the 
+             given name is defined. Returns null if no attribute with the name 
+             exists in any scope. 
+
+*javax.script.ScriptContext.getAttribute(String,int)*
+
+public |java.lang.Object| getAttribute(
+  java.lang.String name,
+  int scope)
+
+Gets the value of an attribute in a given scope. 
+
+
+    name - The name of the attribute to retrieve. 
+    scope - The scope in which to retrieve the attribute. 
+
+    Returns: The value of the attribute. Returns null is the name does not exist in the 
+             given scope. 
+
+*javax.script.ScriptContext.getAttributesScope(String)*
+
+public int getAttributesScope(java.lang.String name)
+
+Get the lowest scope in which an attribute is defined. 
+
+
+    name - Name of the attribute . 
+
+    Returns: The lowest scope. Returns -1 if no attribute with the given name is defined in 
+             any scope. 
+
+*javax.script.ScriptContext.getBindings(int)*
+
+public |javax.script.Bindings| getBindings(int scope)
+
+Gets the Bindings associated with the given scope in this ScriptContext. 
+
+
+
+    Returns: The associated Bindings. Returns null if it has not been set. 
+
+*javax.script.ScriptContext.getErrorWriter()*
+
+public |java.io.Writer| getErrorWriter()
+
+Returns the Writer used to display error output. 
+
+
+
+    Returns: 
+
+*javax.script.ScriptContext.getReader()*
+
+public |java.io.Reader| getReader()
+
+Returns a Reader to be used by the script to read input. 
+
+
+
+    Returns: 
+
+*javax.script.ScriptContext.getScopes()*
+
+public |java.util.List|<Integer> getScopes()
+
+Returns immutable List of all the valid values for scope in the ScriptContext. 
+
+
+
+    Returns: list of scope values 
+
+*javax.script.ScriptContext.getWriter()*
+
+public |java.io.Writer| getWriter()
+
+Returns the Writer for scripts to use when displaying output. 
+
+
+
+    Returns: 
+
+*javax.script.ScriptContext.removeAttribute(String,int)*
+
+public |java.lang.Object| removeAttribute(
+  java.lang.String name,
+  int scope)
+
+Remove an attribute in a given scope. 
+
+
+    name - The name of the attribute to remove 
+    scope - The scope in which to remove the attribute 
+
+    Returns: The removed value. 
+
+*javax.script.ScriptContext.setAttribute(String,Object,int)*
+
+public void setAttribute(
+  java.lang.String name,
+  java.lang.Object value,
+  int scope)
+
+Sets the value of an attribute in a given scope. 
+
+
+    name - The name of the attribute to set 
+    value - The value of the attribute 
+    scope - The scope in which to set the attribute 
+
+*javax.script.ScriptContext.setBindings(Bindings,int)*
+
+public void setBindings(
+  javax.script.Bindings bindings,
+  int scope)
+
+Associates a Bindings instance with a particular scope in this ScriptContext. 
+Calls to the getAttribute and setAttribute methods must map to the get and put 
+methods of the Bindings for the specified scope. 
+
+
+    bindings - The Bindings to associate with the given scope 
+    scope - The scope 
+
+*javax.script.ScriptContext.setErrorWriter(Writer)*
+
+public void setErrorWriter(java.io.Writer writer)
+
+Sets the Writer used to display error output. 
+
+
+    writer - The Writer. 
+
+*javax.script.ScriptContext.setReader(Reader)*
+
+public void setReader(java.io.Reader reader)
+
+Sets the Reader for scripts to read input . 
+
+
+    reader - The new Reader. 
+
+*javax.script.ScriptContext.setWriter(Writer)*
+
+public void setWriter(java.io.Writer writer)
+
+Sets the Writer for scripts to use when displaying output. 
+
+
+    writer - The new Writer. 
+
+

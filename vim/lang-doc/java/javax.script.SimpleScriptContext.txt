@@ -1,0 +1,242 @@
+*javax.script.SimpleScriptContext* *SimpleScriptContext* Simple implementation o
+
+public class SimpleScriptContext
+  extends    |java.lang.Object|
+  implements |javax.script.ScriptContext|
+
+|javax.script.SimpleScriptContext_Description|
+|javax.script.SimpleScriptContext_Fields|
+|javax.script.SimpleScriptContext_Constructors|
+|javax.script.SimpleScriptContext_Methods|
+
+================================================================================
+
+*javax.script.SimpleScriptContext_Fields*
+|javax.script.Bindings_javax.script.SimpleScriptContext.engineScope|
+|java.io.Writer_javax.script.SimpleScriptContext.errorWriter|
+|javax.script.Bindings_javax.script.SimpleScriptContext.globalScope|
+|java.io.Reader_javax.script.SimpleScriptContext.reader|
+|java.io.Writer_javax.script.SimpleScriptContext.writer|
+
+*javax.script.SimpleScriptContext_Constructors*
+|javax.script.SimpleScriptContext()|
+
+*javax.script.SimpleScriptContext_Methods*
+|javax.script.SimpleScriptContext.getAttribute(String)|Retrieves the value of t
+|javax.script.SimpleScriptContext.getAttribute(String,int)|Gets the value of an
+|javax.script.SimpleScriptContext.getAttributesScope(String)|Get the lowest sco
+|javax.script.SimpleScriptContext.getBindings(int)|Returns the value of the eng
+|javax.script.SimpleScriptContext.getErrorWriter()|
+|javax.script.SimpleScriptContext.getReader()|
+|javax.script.SimpleScriptContext.getScopes()|
+|javax.script.SimpleScriptContext.getWriter()|
+|javax.script.SimpleScriptContext.removeAttribute(String,int)|Remove an attribu
+|javax.script.SimpleScriptContext.setAttribute(String,Object,int)|Sets the valu
+|javax.script.SimpleScriptContext.setBindings(Bindings,int)|Sets a Bindings of 
+|javax.script.SimpleScriptContext.setErrorWriter(Writer)|
+|javax.script.SimpleScriptContext.setReader(Reader)|
+|javax.script.SimpleScriptContext.setWriter(Writer)|
+
+*javax.script.SimpleScriptContext_Description*
+
+Simple implementation of ScriptContext. 
+
+
+
+*javax.script.Bindings_javax.script.SimpleScriptContext.engineScope*
+
+This is the engine scope bindings. By default, a SimpleBindings is used. 
+Accessor methods setBindings, getBindings are used to manage this field. 
+
+
+*java.io.Writer_javax.script.SimpleScriptContext.errorWriter*
+
+This is the writer to be used to output errors from scripts. By default, a 
+PrintWriter based on System.err is used. Accessor methods getErrorWriter, 
+setErrorWriter are used to manage this field. 
+
+
+*javax.script.Bindings_javax.script.SimpleScriptContext.globalScope*
+
+This is the global scope bindings. By default, a null value (which means no 
+global scope) is used. Accessor methods setBindings, getBindings are used to 
+manage this field. 
+
+
+*java.io.Reader_javax.script.SimpleScriptContext.reader*
+
+This is the reader to be used for input from scripts. By default, a 
+InputStreamReader based on System.in is used and default charset is used by 
+this reader. Accessor methods getReader, setReader are used to manage this 
+field. 
+
+
+*java.io.Writer_javax.script.SimpleScriptContext.writer*
+
+This is the writer to be used to output from scripts. By default, a PrintWriter 
+based on System.out is used. Accessor methods getWriter, setWriter are used to 
+manage this field. 
+
+
+
+*javax.script.SimpleScriptContext()*
+
+public SimpleScriptContext()
+
+
+
+
+*javax.script.SimpleScriptContext.getAttribute(String)*
+
+public |java.lang.Object| getAttribute(java.lang.String name)
+
+Retrieves the value of the attribute with the given name in the scope occurring 
+earliest in the search order. The order is determined by the numeric value of 
+the scope parameter (lowest scope values first.) 
+
+
+    name - The name of the the attribute to retrieve. 
+
+    Returns: The value of the attribute in the lowest scope for which an attribute with the 
+             given name is defined. Returns null if no attribute with the name 
+             exists in any scope. 
+
+*javax.script.SimpleScriptContext.getAttribute(String,int)*
+
+public |java.lang.Object| getAttribute(
+  java.lang.String name,
+  int scope)
+
+Gets the value of an attribute in a given scope. 
+
+
+    name - The name of the attribute to retrieve. 
+    scope - The scope in which to retrieve the attribute. 
+
+    Returns: The value of the attribute. Returns null is the name does not exist in the 
+             given scope. 
+
+*javax.script.SimpleScriptContext.getAttributesScope(String)*
+
+public int getAttributesScope(java.lang.String name)
+
+Get the lowest scope in which an attribute is defined. 
+
+
+    name - Name of the attribute . 
+
+    Returns: The lowest scope. Returns -1 if no attribute with the given name is defined in 
+             any scope. 
+
+*javax.script.SimpleScriptContext.getBindings(int)*
+
+public |javax.script.Bindings| getBindings(int scope)
+
+Returns the value of the engineScope field if specified scope is ENGINE_SCOPE. 
+Returns the value of the globalScope field if the specified scope is 
+GLOBAL_SCOPE. 
+
+
+    scope - The specified scope 
+
+    Returns: The value of either the engineScope or globalScope field. 
+
+*javax.script.SimpleScriptContext.getErrorWriter()*
+
+public |java.io.Writer| getErrorWriter()
+
+
+
+
+
+*javax.script.SimpleScriptContext.getReader()*
+
+public |java.io.Reader| getReader()
+
+
+
+
+
+*javax.script.SimpleScriptContext.getScopes()*
+
+public |java.util.List|<Integer> getScopes()
+
+
+
+
+
+*javax.script.SimpleScriptContext.getWriter()*
+
+public |java.io.Writer| getWriter()
+
+
+
+
+
+*javax.script.SimpleScriptContext.removeAttribute(String,int)*
+
+public |java.lang.Object| removeAttribute(
+  java.lang.String name,
+  int scope)
+
+Remove an attribute in a given scope. 
+
+
+    name - The name of the attribute to remove 
+    scope - The scope in which to remove the attribute 
+
+    Returns: The removed value. 
+
+*javax.script.SimpleScriptContext.setAttribute(String,Object,int)*
+
+public void setAttribute(
+  java.lang.String name,
+  java.lang.Object value,
+  int scope)
+
+Sets the value of an attribute in a given scope. 
+
+
+    name - The name of the attribute to set 
+    value - The value of the attribute 
+    scope - The scope in which to set the attribute 
+
+*javax.script.SimpleScriptContext.setBindings(Bindings,int)*
+
+public void setBindings(
+  javax.script.Bindings bindings,
+  int scope)
+
+Sets a Bindings of attributes for the given scope. If the value of scope is 
+ENGINE_SCOPE the given Bindings replaces the engineScope field. If the value of 
+scope is GLOBAL_SCOPE the given Bindings replaces the globalScope field. 
+
+
+    bindings - The Bindings of attributes to set. 
+    scope - The value of the scope in which the attributes are set. 
+
+*javax.script.SimpleScriptContext.setErrorWriter(Writer)*
+
+public void setErrorWriter(java.io.Writer writer)
+
+
+
+
+
+*javax.script.SimpleScriptContext.setReader(Reader)*
+
+public void setReader(java.io.Reader reader)
+
+
+
+
+
+*javax.script.SimpleScriptContext.setWriter(Writer)*
+
+public void setWriter(java.io.Writer writer)
+
+
+
+
+
+

@@ -1,0 +1,136 @@
+*javax.crypto.MacSpi* *MacSpi* This class defines the Service Provider Interface
+
+public abstract class MacSpi
+  extends    |java.lang.Object|
+
+|javax.crypto.MacSpi_Description|
+|javax.crypto.MacSpi_Fields|
+|javax.crypto.MacSpi_Constructors|
+|javax.crypto.MacSpi_Methods|
+
+================================================================================
+
+*javax.crypto.MacSpi_Constructors*
+|javax.crypto.MacSpi()|
+
+*javax.crypto.MacSpi_Methods*
+|javax.crypto.MacSpi.clone()|Returns a clone if the implementation is cloneable
+|javax.crypto.MacSpi.engineDoFinal()|Completes the MAC computation and resets t
+|javax.crypto.MacSpi.engineGetMacLength()|Returns the length of the MAC in byte
+|javax.crypto.MacSpi.engineInit(Key,AlgorithmParameterSpec)|Initializes the MAC
+|javax.crypto.MacSpi.engineReset()|Resets the MAC for further use, maintaining 
+|javax.crypto.MacSpi.engineUpdate(byte)|Processes the given byte.
+|javax.crypto.MacSpi.engineUpdate(byte[],int,int)|Processes the first len bytes
+|javax.crypto.MacSpi.engineUpdate(ByteBuffer)|Processes input.remaining() bytes
+
+*javax.crypto.MacSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the Mac class. All 
+the abstract methods in this class must be implemented by each cryptographic 
+service provider who wishes to supply the implementation of a particular MAC 
+algorithm. 
+
+Implementations are free to implement the Cloneable interface. 
+
+
+
+*javax.crypto.MacSpi()*
+
+public MacSpi()
+
+
+
+
+*javax.crypto.MacSpi.clone()*
+
+public |java.lang.Object| clone()
+  throws |java.lang.CloneNotSupportedException|
+         
+Returns a clone if the implementation is cloneable. 
+
+
+
+    Returns: a clone if the implementation is cloneable. 
+
+*javax.crypto.MacSpi.engineDoFinal()*
+
+protected abstract byte[] engineDoFinal()
+
+Completes the MAC computation and resets the MAC for further use, maintaining 
+the secret key that the MAC was initialized with. 
+
+
+
+    Returns: the MAC result. 
+
+*javax.crypto.MacSpi.engineGetMacLength()*
+
+protected abstract int engineGetMacLength()
+
+Returns the length of the MAC in bytes. 
+
+
+
+    Returns: the MAC length in bytes. 
+
+*javax.crypto.MacSpi.engineInit(Key,AlgorithmParameterSpec)*
+
+protected abstract void engineInit(
+  java.security.Key key,
+  java.security.spec.AlgorithmParameterSpec params)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes the MAC with the given (secret) key and algorithm parameters. 
+
+
+    key - the (secret) key. 
+    params - the algorithm parameters. 
+
+*javax.crypto.MacSpi.engineReset()*
+
+protected abstract void engineReset()
+
+Resets the MAC for further use, maintaining the secret key that the MAC was 
+initialized with. 
+
+
+
+*javax.crypto.MacSpi.engineUpdate(byte)*
+
+protected abstract void engineUpdate(byte input)
+
+Processes the given byte. 
+
+
+    input - the input byte to be processed. 
+
+*javax.crypto.MacSpi.engineUpdate(byte[],int,int)*
+
+protected abstract void engineUpdate(
+  byte[] input,
+  int offset,
+  int len)
+
+Processes the first len bytes in input, starting at offset inclusive. 
+
+
+    input - the input buffer. 
+    offset - the offset in input where the input starts. 
+    len - the number of bytes to process. 
+
+*javax.crypto.MacSpi.engineUpdate(ByteBuffer)*
+
+protected void engineUpdate(java.nio.ByteBuffer input)
+
+Processes input.remaining() bytes in the ByteBuffer input, starting at 
+input.position(). Upon return, the buffer's position will be equal to its 
+limit; its limit will not have changed. 
+
+Subclasses should consider overriding this method if they can process 
+ByteBuffers more efficiently than byte arrays. 
+
+
+    input - the ByteBuffer 
+
+

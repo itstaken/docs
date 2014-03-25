@@ -1,0 +1,170 @@
+*javax.lang.model.util.SimpleElementVisitor6* *SimpleElementVisitor6* A simple v
+
+public class SimpleElementVisitor6<R,P>
+  extends    |javax.lang.model.util.AbstractElementVisitor6|
+
+|javax.lang.model.util.SimpleElementVisitor6_Description|
+|javax.lang.model.util.SimpleElementVisitor6_Fields|
+|javax.lang.model.util.SimpleElementVisitor6_Constructors|
+|javax.lang.model.util.SimpleElementVisitor6_Methods|
+
+================================================================================
+
+*javax.lang.model.util.SimpleElementVisitor6_Fields*
+|R_javax.lang.model.util.SimpleElementVisitor6.DEFAULT_VALUE|
+
+*javax.lang.model.util.SimpleElementVisitor6_Constructors*
+|javax.lang.model.util.SimpleElementVisitor6()|Constructor for concrete subclas
+|javax.lang.model.util.SimpleElementVisitor6(R)|Constructor for concrete subcla
+
+*javax.lang.model.util.SimpleElementVisitor6_Methods*
+|javax.lang.model.util.SimpleElementVisitor6.defaultAction(Element,P)|The defau
+|javax.lang.model.util.SimpleElementVisitor6.visitExecutable(ExecutableElement,P)|
+|javax.lang.model.util.SimpleElementVisitor6.visitPackage(PackageElement,P)|Thi
+|javax.lang.model.util.SimpleElementVisitor6.visitType(TypeElement,P)|This impl
+|javax.lang.model.util.SimpleElementVisitor6.visitTypeParameter(TypeParameterElement,P)|
+|javax.lang.model.util.SimpleElementVisitor6.visitVariable(VariableElement,P)|T
+
+*javax.lang.model.util.SimpleElementVisitor6_Description*
+
+A simple visitor of program elements with default behavior appropriate for the 
+RELEASE_6(|javax.lang.model.SourceVersion|) source version. 
+
+Visit methods corresponding toRELEASE_6language constructs call 
+defaultAction(|javax.lang.model.util.SimpleElementVisitor6|) , passing their 
+arguments todefaultAction's corresponding parameters. 
+
+For constructs introduced inRELEASE_7and later,visitUnknownis called instead. 
+
+Methods in this class may be overridden subject to their general contract. Note 
+that annotating methods in concrete subclasses with 
+@Override(|java.lang.Override|) will help ensure that methods are overridden as 
+intended. 
+
+WARNING: TheElementVisitorinterface implemented by this class may have methods 
+added to it in the future to accommodate new, currently unknown, language 
+structures added to future versions of the Java programming language. 
+Therefore, methods whose names begin with"visit"may be added to this class in 
+the future; to avoid incompatibilities, classes which extend this class should 
+not declare any instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the visitUnknown(|javax.lang.model.util.SimpleElementVisitor6|) 
+method. A new simple element visitor class will also be introduced to 
+correspond to the new language level; this visitor will have different default 
+behavior for the visit method in question. When the new visitor is introduced, 
+all or portions of this visitor may be deprecated. 
+
+
+
+*R_javax.lang.model.util.SimpleElementVisitor6.DEFAULT_VALUE*
+
+Default value to be returned; 
+defaultAction(|javax.lang.model.util.SimpleElementVisitor6|) returns this value 
+unless the method is overridden. 
+
+
+
+*javax.lang.model.util.SimpleElementVisitor6()*
+
+protected SimpleElementVisitor6()
+
+Constructor for concrete subclasses; usesnullfor the default value. 
+
+
+*javax.lang.model.util.SimpleElementVisitor6(R)*
+
+protected SimpleElementVisitor6(R defaultValue)
+
+Constructor for concrete subclasses; uses the argument for the default value. 
+
+    defaultValue - the value to assign to {@link #DEFAULT_VALUE} 
+
+*javax.lang.model.util.SimpleElementVisitor6.defaultAction(Element,P)*
+
+protected |R| defaultAction(
+  javax.lang.model.element.Element e,
+  P p)
+
+The default action for visit methods. The implementation in this class just 
+returns (|javax.lang.model.util.SimpleElementVisitor6|) ; subclasses will 
+commonly override this method. 
+
+
+    e - the element to process 
+    p - a visitor-specified parameter 
+
+    Returns: {@code DEFAULT_VALUE} unless overridden 
+
+*javax.lang.model.util.SimpleElementVisitor6.visitExecutable(ExecutableElement,P)*
+
+public |R| visitExecutable(
+  javax.lang.model.element.ExecutableElement e,
+  P p)
+
+This implementation callsdefaultAction. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.SimpleElementVisitor6.visitPackage(PackageElement,P)*
+
+public |R| visitPackage(
+  javax.lang.model.element.PackageElement e,
+  P p)
+
+This implementation callsdefaultAction. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.SimpleElementVisitor6.visitType(TypeElement,P)*
+
+public |R| visitType(
+  javax.lang.model.element.TypeElement e,
+  P p)
+
+This implementation callsdefaultAction. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.SimpleElementVisitor6.visitTypeParameter(TypeParameterElement,P)*
+
+public |R| visitTypeParameter(
+  javax.lang.model.element.TypeParameterElement e,
+  P p)
+
+This implementation callsdefaultAction. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.SimpleElementVisitor6.visitVariable(VariableElement,P)*
+
+public |R| visitVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+This implementation callsdefaultAction, unless the element is 
+aRESOURCE_VARIABLEin which casevisitUnknownis called. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code defaultAction} or {@code visitUnknown} 
+
+

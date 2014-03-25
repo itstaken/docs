@@ -1,0 +1,175 @@
+*javax.net.SocketFactory* *SocketFactory* This class creates sockets.
+
+public abstract class SocketFactory
+  extends    |java.lang.Object|
+
+|javax.net.SocketFactory_Description|
+|javax.net.SocketFactory_Fields|
+|javax.net.SocketFactory_Constructors|
+|javax.net.SocketFactory_Methods|
+
+================================================================================
+
+*javax.net.SocketFactory_Constructors*
+|javax.net.SocketFactory()|Creates a SocketFactory.
+
+*javax.net.SocketFactory_Methods*
+|javax.net.SocketFactory.createSocket()|Creates an unconnected socket.
+|javax.net.SocketFactory.createSocket(InetAddress,int)|Creates a socket and con
+|javax.net.SocketFactory.createSocket(InetAddress,int,InetAddress,int)|Creates 
+|javax.net.SocketFactory.createSocket(String,int)|Creates a socket and connects
+|javax.net.SocketFactory.createSocket(String,int,InetAddress,int)|Creates a soc
+|javax.net.SocketFactory.getDefault()|Returns a copy of the environment's defau
+
+*javax.net.SocketFactory_Description*
+
+This class creates sockets. It may be subclassed by other factories, which 
+create particular subclasses of sockets and thus provide a general framework 
+for the addition of public socket-level functionality. 
+
+Socket factories are a simple way to capture a variety of policies related to 
+the sockets being constructed, producing such sockets in a way which does not 
+require special configuration of the code which asks for the sockets: 
+
+Due to polymorphism of both factories and sockets, different kinds of sockets 
+can be used by the same application code just by passing it different kinds of 
+factories. 
+
+Factories can themselves be customized with parameters used in socket 
+construction. So for example, factories could be customized to return sockets 
+with different networking timeouts or security parameters already configured. 
+
+The sockets returned to the application can be subclasses of java.net.Socket, 
+so that they can directly expose new APIs for features such as compression, 
+security, record marking, statistics collection, or firewall tunneling. 
+
+
+
+Factory classes are specified by environment-specific configuration mechanisms. 
+For example, the getDefault method could return a factory that was appropriate 
+for a particular user or applet, and a framework could use a factory customized 
+to its own purposes. 
+
+
+
+*javax.net.SocketFactory()*
+
+protected SocketFactory()
+
+Creates a SocketFactory. 
+
+
+*javax.net.SocketFactory.createSocket()*
+
+public |java.net.Socket| createSocket()
+  throws |java.io.IOException|
+         
+Creates an unconnected socket. 
+
+
+
+    Returns: the unconnected socket 
+
+*javax.net.SocketFactory.createSocket(InetAddress,int)*
+
+public abstract |java.net.Socket| createSocket(
+  java.net.InetAddress host,
+  int port)
+  throws |java.io.IOException|
+         
+Creates a socket and connects it to the specified port number at the specified 
+address. This socket is configured using the socket options established for 
+this factory. 
+
+If there is a security manager, its checkConnect method is called with the host 
+address and port as its arguments. This could result in a SecurityException. 
+
+
+    host - the server host 
+    port - the server port 
+
+    Returns: 
+
+*javax.net.SocketFactory.createSocket(InetAddress,int,InetAddress,int)*
+
+public abstract |java.net.Socket| createSocket(
+  java.net.InetAddress address,
+  int port,
+  java.net.InetAddress localAddress,
+  int localPort)
+  throws |java.io.IOException|
+         
+Creates a socket and connect it to the specified remote address on the 
+specified remote port. The socket will also be bound to the local address and 
+port suplied. The socket is configured using the socket options established for 
+this factory. 
+
+If there is a security manager, its checkConnect method is called with the host 
+address and port as its arguments. This could result in a SecurityException. 
+
+
+    address - the server network address 
+    port - the server port 
+    localAddress - the client network address 
+    localPort - the client port 
+
+    Returns: 
+
+*javax.net.SocketFactory.createSocket(String,int)*
+
+public abstract |java.net.Socket| createSocket(
+  java.lang.String host,
+  int port)
+  throws |java.io.IOException|
+         |java.net.UnknownHostException|
+         
+Creates a socket and connects it to the specified remote host at the specified 
+remote port. This socket is configured using the socket options established for 
+this factory. 
+
+If there is a security manager, its checkConnect method is called with the host 
+address and port as its arguments. This could result in a SecurityException. 
+
+
+    host - the server host name with which to connect, or null for the loopback address. 
+    port - the server port 
+
+    Returns: 
+
+*javax.net.SocketFactory.createSocket(String,int,InetAddress,int)*
+
+public abstract |java.net.Socket| createSocket(
+  java.lang.String host,
+  int port,
+  java.net.InetAddress localHost,
+  int localPort)
+  throws |java.io.IOException|
+         |java.net.UnknownHostException|
+         
+Creates a socket and connects it to the specified remote host on the specified 
+remote port. The socket will also be bound to the local address and port 
+supplied. This socket is configured using the socket options established for 
+this factory. 
+
+If there is a security manager, its checkConnect method is called with the host 
+address and port as its arguments. This could result in a SecurityException. 
+
+
+    host - the server host name with which to connect, or null for the loopback address. 
+    port - the server port 
+    localHost - the local address the socket is bound to 
+    localPort - the local port the socket is bound to 
+
+    Returns: 
+
+*javax.net.SocketFactory.getDefault()*
+
+public static |javax.net.SocketFactory| getDefault()
+
+Returns a copy of the environment's default socket factory. 
+
+
+
+    Returns: the default SocketFactory 
+
+

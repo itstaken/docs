@@ -1,0 +1,131 @@
+*javax.management.MBeanServerNotification* *MBeanServerNotification* Represents 
+
+public class MBeanServerNotification
+  extends    |javax.management.Notification|
+
+|javax.management.MBeanServerNotification_Description|
+|javax.management.MBeanServerNotification_Fields|
+|javax.management.MBeanServerNotification_Constructors|
+|javax.management.MBeanServerNotification_Methods|
+
+================================================================================
+
+*javax.management.MBeanServerNotification_Fields*
+|java.lang.String_javax.management.MBeanServerNotification.REGISTRATION_NOTIFICATION|
+|java.lang.String_javax.management.MBeanServerNotification.UNREGISTRATION_NOTIFICATION|
+
+*javax.management.MBeanServerNotification_Constructors*
+|javax.management.MBeanServerNotification(String,Object,long,ObjectName)|Create
+
+*javax.management.MBeanServerNotification_Methods*
+|javax.management.MBeanServerNotification.getMBeanName()|Returns the  object na
+|javax.management.MBeanServerNotification.toString()|
+
+*javax.management.MBeanServerNotification_Description*
+
+Represents a notification emitted by the MBean Server through the 
+MBeanServerDelegate MBean. The MBean Server emits the following types of 
+notifications: MBean registration, MBean unregistration. 
+
+To receive MBeanServerNotifications, you need to register a listener with the 
+MBeanServerDelegate(|javax.management.MBeanServerDelegate|) MBean that 
+represents the MBeanServer. The ObjectName of the MBeanServerDelegate is 
+(|javax.management.MBeanServerDelegate|) , which is 
+JMImplementation:type=MBeanServerDelegate. 
+
+The following code prints a message every time an MBean is registered or 
+unregistered in the MBean ServermbeanServer: 
+
+
+
+private static final NotificationListener printListener = new 
+NotificationListener() { public void handleNotification(Notification n, Object 
+handback) { if (!(n instanceof MBeanServerNotification)) { 
+System.out.println("Ignored notification of class " + n.getClass().getName()); 
+return; } MBeanServerNotification mbsn = (MBeanServerNotification) n; String 
+what; if 
+(n.getType().equals(MBeanServerNotification.REGISTRATION_NOTIFICATION)) what = 
+"MBean registered"; else if 
+(n.getType().equals(MBeanServerNotification.UNREGISTRATION_NOTIFICATION)) what 
+= "MBean unregistered"; else what = "Unknown type " + n.getType(); 
+System.out.println("Received MBean Server notification: " + what + ": " + 
+mbsn.getMBeanName()); } }; 
+
+... mbeanServer.addNotificationListener( MBeanServerDelegate.DELEGATE_NAME, 
+printListener, null, null); 
+
+An MBean which is not an (|javax.management.MBeanServerDelegate|) may also emit 
+MBeanServerNotifications. In particular, there is a convention for MBeans to 
+emit an MBeanServerNotification for a group of MBeans. 
+
+An MBeanServerNotification emitted to denote the registration or unregistration 
+of a group of MBeans has the following characteristics: Its notification 
+type(|javax.management.Notification|) 
+is"JMX.mbean.registered.group"or"JMX.mbean.unregistered.group", which can also 
+be written (|javax.management.MBeanServerNotification|) + ".group"or 
+(|javax.management.MBeanServerNotification|) + ".group". 
+
+Its MBean name(|javax.management.MBeanServerNotification|) is an ObjectName 
+pattern that selects the set (or a superset) of the MBeans being registered or 
+unregistered Its user data(|javax.management.Notification|) can optionally be 
+set to an array of ObjectNames containing the names of all MBeans being 
+registered or unregistered. 
+
+
+
+MBeans which emit these group registration/unregistration notifications will 
+declare them in their MBeanNotificationInfo(|javax.management.MBeanInfo|) . 
+
+
+
+*java.lang.String_javax.management.MBeanServerNotification.REGISTRATION_NOTIFICATION*
+
+Notification type denoting that an MBean has been registered. Value is 
+"JMX.mbean.registered". 
+
+
+*java.lang.String_javax.management.MBeanServerNotification.UNREGISTRATION_NOTIFICATION*
+
+Notification type denoting that an MBean has been unregistered. Value is 
+"JMX.mbean.unregistered". 
+
+
+
+*javax.management.MBeanServerNotification(String,Object,long,ObjectName)*
+
+public MBeanServerNotification(
+  java.lang.String type,
+  java.lang.Object source,
+  long sequenceNumber,
+  javax.management.ObjectName objectName)
+
+Creates an MBeanServerNotification object specifying object names of the MBeans 
+that caused the notification and the specified notification type. 
+
+    type - A string denoting the type of the notification. Set it to one these values: 
+       {@link #REGISTRATION_NOTIFICATION}, {@link 
+       #UNREGISTRATION_NOTIFICATION}. 
+    source - The MBeanServerNotification object responsible for forwarding MBean server 
+       notification. 
+    sequenceNumber - A sequence number that can be used to order received notifications. 
+    objectName - The object name of the MBean that caused the notification. 
+
+*javax.management.MBeanServerNotification.getMBeanName()*
+
+public |javax.management.ObjectName| getMBeanName()
+
+Returns the object name of the MBean that caused the notification. 
+
+
+
+    Returns: the object name of the MBean that caused the notification. 
+
+*javax.management.MBeanServerNotification.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

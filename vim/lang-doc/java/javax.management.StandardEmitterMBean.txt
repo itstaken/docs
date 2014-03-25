@@ -1,0 +1,228 @@
+*javax.management.StandardEmitterMBean* *StandardEmitterMBean* An MBean whose ma
+
+public class StandardEmitterMBean
+  extends    |javax.management.StandardMBean|
+  implements |javax.management.NotificationEmitter|
+
+|javax.management.StandardEmitterMBean_Description|
+|javax.management.StandardEmitterMBean_Fields|
+|javax.management.StandardEmitterMBean_Constructors|
+|javax.management.StandardEmitterMBean_Methods|
+
+================================================================================
+
+*javax.management.StandardEmitterMBean_Constructors*
+|javax.management.StandardEmitterMBean(Class<?>,boolean,NotificationEmitter)|Ma
+|javax.management.StandardEmitterMBean(Class<?>,NotificationEmitter)|Make an MB
+|javax.management.StandardEmitterMBean(T,Class<T>,boolean,NotificationEmitter)|
+|javax.management.StandardEmitterMBean(T,Class<T>,NotificationEmitter)|Make an 
+
+*javax.management.StandardEmitterMBean_Methods*
+|javax.management.StandardEmitterMBean.addNotificationListener(NotificationListener,NotificationFilter,Object)|
+|javax.management.StandardEmitterMBean.getNotificationInfo()|
+|javax.management.StandardEmitterMBean.removeNotificationListener(NotificationListener)|
+|javax.management.StandardEmitterMBean.removeNotificationListener(NotificationListener,NotificationFilter,Object)|
+|javax.management.StandardEmitterMBean.sendNotification(Notification)|Sends a n
+
+*javax.management.StandardEmitterMBean_Description*
+
+An MBean whose management interface is determined by reflection on a Java 
+interface, and that emits notifications. 
+
+The following example shows how to use the public constructor 
+StandardEmitterMBean(implementation, mbeanInterface, 
+emitter)(|javax.management.StandardEmitterMBean|) to create an MBean emitting 
+notifications with any implementation class name Impl, with a management 
+interface defined (as for current Standard MBeans) by any interface Intf, and 
+with any implementation of the interface 
+(|javax.management.NotificationEmitter|) . The example uses the class 
+(|javax.management.NotificationBroadcasterSupport|) as an implementation of the 
+interface (|javax.management.NotificationEmitter|) . 
+
+
+
+MBeanServer mbs; ... final String[] types = new String[] 
+{"sun.disc.space","sun.disc.alarm"}; final MBeanNotificationInfo info = new 
+MBeanNotificationInfo( types, Notification.class.getName(), "Notification about 
+disc info."); final NotificationEmitter emitter = new 
+NotificationBroadcasterSupport(info); 
+
+final Intf impl = new Impl(...); final Object mbean = new StandardEmitterMBean( 
+impl, Intf.class, emitter); mbs.registerMBean(mbean, objectName); 
+
+
+
+*javax.management.StandardEmitterMBean(Class<?>,boolean,NotificationEmitter)*
+
+protected StandardEmitterMBean(
+  java.lang.Class<?> mbeanInterface,
+  boolean isMXBean,
+  javax.management.NotificationEmitter emitter)
+
+Make an MBean whose management interface is specified bymbeanInterface, and 
+where notifications are handled by the givenNotificationEmitter. This 
+constructor can be used to make either Standard MBeans or MXBeans. The 
+resultant MBean implements theNotificationEmitterinterface by forwarding its 
+methods toemitter. 
+
+Ifemitteris an instance ofNotificationBroadcasterSupportthen the MBean's 
+sendNotification(|javax.management.StandardEmitterMBean|) method will 
+callemitter. 
+sendNotification(|javax.management.NotificationBroadcasterSupport|) . 
+
+The array returned by (|javax.management.StandardEmitterMBean|) on the new 
+MBean is a copy of the array returned byemitter. 
+getNotificationInfo()(|javax.management.NotificationBroadcaster|) at the time 
+of construction. If the array returned byemitter.getNotificationInfo()later 
+changes, that will have no effect on this object'sgetNotificationInfo(). 
+
+This constructor must be called from a subclass that implements the 
+givenmbeanInterface. 
+
+    mbeanInterface - a StandardMBean interface. 
+    isMXBean - If true, the {@code mbeanInterface} parameter names an MXBean interface and the 
+       resultant MBean is an MXBean. 
+    emitter - the object that will handle notifications. 
+
+*javax.management.StandardEmitterMBean(Class<?>,NotificationEmitter)*
+
+protected StandardEmitterMBean(
+  java.lang.Class<?> mbeanInterface,
+  javax.management.NotificationEmitter emitter)
+
+Make an MBean whose management interface is specified bymbeanInterface, and 
+where notifications are handled by the givenNotificationEmitter. The resultant 
+MBean implements theNotificationEmitterinterface by forwarding its methods 
+toemitter. 
+
+Ifemitteris an instance ofNotificationBroadcasterSupportthen the MBean's 
+sendNotification(|javax.management.StandardEmitterMBean|) method will 
+callemitter. 
+sendNotification(|javax.management.NotificationBroadcasterSupport|) . 
+
+The array returned by (|javax.management.StandardEmitterMBean|) on the new 
+MBean is a copy of the array returned byemitter. 
+getNotificationInfo()(|javax.management.NotificationBroadcaster|) at the time 
+of construction. If the array returned byemitter.getNotificationInfo()later 
+changes, that will have no effect on this object'sgetNotificationInfo(). 
+
+This constructor must be called from a subclass that implements the 
+givenmbeanInterface. 
+
+    mbeanInterface - a StandardMBean interface. 
+    emitter - the object that will handle notifications. 
+
+*javax.management.StandardEmitterMBean(T,Class<T>,boolean,NotificationEmitter)*
+
+public StandardEmitterMBean(
+  T implementation,
+  java.lang.Class<T> mbeanInterface,
+  boolean isMXBean,
+  javax.management.NotificationEmitter emitter)
+
+Make an MBean whose management interface is specified bymbeanInterface, with 
+the given implementation and where notifications are handled by the 
+givenNotificationEmitter. This constructor can be used to make either Standard 
+MBeans or MXBeans. The resultant MBean implements 
+theNotificationEmitterinterface by forwarding its methods toemitter. It is 
+legal and useful forimplementationandemitterto be the same object. 
+
+Ifemitteris an instance ofNotificationBroadcasterSupportthen the MBean's 
+sendNotification(|javax.management.StandardEmitterMBean|) method will 
+callemitter. 
+sendNotification(|javax.management.NotificationBroadcasterSupport|) . 
+
+The array returned by (|javax.management.StandardEmitterMBean|) on the new 
+MBean is a copy of the array returned byemitter. 
+getNotificationInfo()(|javax.management.NotificationBroadcaster|) at the time 
+of construction. If the array returned byemitter.getNotificationInfo()later 
+changes, that will have no effect on this object'sgetNotificationInfo(). 
+
+    implementation - the implementation of the MBean interface. 
+    mbeanInterface - a Standard MBean interface. 
+    isMXBean - If true, the {@code mbeanInterface} parameter names an MXBean interface and the 
+       resultant MBean is an MXBean. 
+    emitter - the object that will handle notifications. 
+
+*javax.management.StandardEmitterMBean(T,Class<T>,NotificationEmitter)*
+
+public StandardEmitterMBean(
+  T implementation,
+  java.lang.Class<T> mbeanInterface,
+  javax.management.NotificationEmitter emitter)
+
+Make an MBean whose management interface is specified bymbeanInterface, with 
+the given implementation and where notifications are handled by the 
+givenNotificationEmitter. The resultant MBean implements 
+theNotificationEmitterinterface by forwarding its methods toemitter. It is 
+legal and useful forimplementationandemitterto be the same object. 
+
+Ifemitteris an instance ofNotificationBroadcasterSupportthen the MBean's 
+sendNotification(|javax.management.StandardEmitterMBean|) method will 
+callemitter. 
+sendNotification(|javax.management.NotificationBroadcasterSupport|) . 
+
+The array returned by (|javax.management.StandardEmitterMBean|) on the new 
+MBean is a copy of the array returned byemitter. 
+getNotificationInfo()(|javax.management.NotificationBroadcaster|) at the time 
+of construction. If the array returned byemitter.getNotificationInfo()later 
+changes, that will have no effect on this object'sgetNotificationInfo(). 
+
+    implementation - the implementation of the MBean interface. 
+    mbeanInterface - a Standard MBean interface. 
+    emitter - the object that will handle notifications. 
+
+*javax.management.StandardEmitterMBean.addNotificationListener(NotificationListener,NotificationFilter,Object)*
+
+public void addNotificationListener(
+  javax.management.NotificationListener listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+
+
+
+
+
+*javax.management.StandardEmitterMBean.getNotificationInfo()*
+
+public |javax.management.MBeanNotificationInfo|[] getNotificationInfo()
+
+
+
+
+
+*javax.management.StandardEmitterMBean.removeNotificationListener(NotificationListener)*
+
+public void removeNotificationListener(javax.management.NotificationListener listener)
+  throws |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.StandardEmitterMBean.removeNotificationListener(NotificationListener,NotificationFilter,Object)*
+
+public void removeNotificationListener(
+  javax.management.NotificationListener listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |javax.management.ListenerNotFoundException|
+         
+
+
+
+
+*javax.management.StandardEmitterMBean.sendNotification(Notification)*
+
+public void sendNotification(javax.management.Notification n)
+
+Sends a notification. 
+
+If theemitterparameter to the constructor was an instance 
+ofNotificationBroadcasterSupportthen this method will callemitter. 
+sendNotification(|javax.management.NotificationBroadcasterSupport|) . 
+
+
+    n - the notification to send. 
+
+

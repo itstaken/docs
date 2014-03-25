@@ -1,0 +1,167 @@
+*java.lang.Process* *Process* TheProcessBuilder#start()andRuntime#exec(String[],
+
+public abstract class Process
+  extends    |java.lang.Object|
+
+|java.lang.Process_Description|
+|java.lang.Process_Fields|
+|java.lang.Process_Constructors|
+|java.lang.Process_Methods|
+
+================================================================================
+
+*java.lang.Process_Constructors*
+|java.lang.Process()|
+
+*java.lang.Process_Methods*
+|java.lang.Process.destroy()|Kills the subprocess.
+|java.lang.Process.exitValue()|Returns the exit value for the subprocess.
+|java.lang.Process.getErrorStream()|Returns the input stream connected to the e
+|java.lang.Process.getInputStream()|Returns the input stream connected to the n
+|java.lang.Process.getOutputStream()|Returns the output stream connected to the
+|java.lang.Process.waitFor()|Causes the current thread to wait, if necessary, u
+
+*java.lang.Process_Description*
+
+The (|java.lang.ProcessBuilder|) and Runtime.exec(|java.lang.Runtime|) methods 
+create a native process and return an instance of a subclass ofProcessthat can 
+be used to control the process and obtain information about it. The 
+classProcessprovides methods for performing input from the process, performing 
+output to the process, waiting for the process to complete, checking the exit 
+status of the process, and destroying (killing) the process. 
+
+The methods that create processes may not work well for special processes on 
+certain native platforms, such as native windowing processes, daemon processes, 
+Win16/DOS processes on Microsoft Windows, or shell scripts. 
+
+By default, the created subprocess does not have its own terminal or console. 
+All its standard I/O (i.e. stdin, stdout, stderr) operations will be redirected 
+to the parent process, where they can be accessed via the streams obtained 
+using the methods (|java.lang.Process|) , (|java.lang.Process|) , and 
+(|java.lang.Process|) . The parent process uses these streams to feed input to 
+and get output from the subprocess. Because some native platforms only provide 
+limited buffer size for standard input and output streams, failure to promptly 
+write the input stream or read the output stream of the subprocess may cause 
+the subprocess to block, or even deadlock. 
+
+Where desired, subprocess I/O can also be redirected using methods of the 
+(|java.lang.ProcessBuilder|) class. 
+
+The subprocess is not killed when there are no more references to 
+theProcessobject, but rather the subprocess continues executing asynchronously. 
+
+There is no requirement that a process represented by aProcessobject execute 
+asynchronously or concurrently with respect to the Java process that owns 
+theProcessobject. 
+
+As of 1.5, (|java.lang.ProcessBuilder|) is the preferred way to create 
+aProcess. 
+
+
+
+*java.lang.Process()*
+
+public Process()
+
+
+
+
+*java.lang.Process.destroy()*
+
+public abstract void destroy()
+
+Kills the subprocess. The subprocess represented by thisProcessobject is 
+forcibly terminated. 
+
+
+
+*java.lang.Process.exitValue()*
+
+public abstract int exitValue()
+
+Returns the exit value for the subprocess. 
+
+
+
+    Returns: the exit value of the subprocess represented by this {@code Process} object. By 
+             convention, the value {@code 0} indicates normal termination. 
+
+*java.lang.Process.getErrorStream()*
+
+public abstract |java.io.InputStream| getErrorStream()
+
+Returns the input stream connected to the error output of the subprocess. The 
+stream obtains data piped from the error output of the process represented by 
+thisProcessobject. 
+
+If the standard error of the subprocess has been redirected using 
+ProcessBuilder.redirectError(|java.lang.ProcessBuilder|) or 
+ProcessBuilder.redirectErrorStream(|java.lang.ProcessBuilder|) then this method 
+will return a null input stream. 
+
+Implementation note: It is a good idea for the returned input stream to be 
+buffered. 
+
+
+
+    Returns: the input stream connected to the error output of the subprocess 
+
+*java.lang.Process.getInputStream()*
+
+public abstract |java.io.InputStream| getInputStream()
+
+Returns the input stream connected to the normal output of the subprocess. The 
+stream obtains data piped from the standard output of the process represented 
+by thisProcessobject. 
+
+If the standard output of the subprocess has been redirected using 
+ProcessBuilder.redirectOutput(|java.lang.ProcessBuilder|) then this method will 
+return a null input stream. 
+
+Otherwise, if the standard error of the subprocess has been redirected using 
+ProcessBuilder.redirectErrorStream(|java.lang.ProcessBuilder|) then the input 
+stream returned by this method will receive the merged standard output and the 
+standard error of the subprocess. 
+
+Implementation note: It is a good idea for the returned input stream to be 
+buffered. 
+
+
+
+    Returns: the input stream connected to the normal output of the subprocess 
+
+*java.lang.Process.getOutputStream()*
+
+public abstract |java.io.OutputStream| getOutputStream()
+
+Returns the output stream connected to the normal input of the subprocess. 
+Output to the stream is piped into the standard input of the process 
+represented by thisProcessobject. 
+
+If the standard input of the subprocess has been redirected using 
+ProcessBuilder.redirectInput(|java.lang.ProcessBuilder|) then this method will 
+return a null output stream. 
+
+Implementation note: It is a good idea for the returned output stream to be 
+buffered. 
+
+
+
+    Returns: the output stream connected to the normal input of the subprocess 
+
+*java.lang.Process.waitFor()*
+
+public abstract int waitFor()
+  throws |java.lang.InterruptedException|
+         
+Causes the current thread to wait, if necessary, until the process represented 
+by thisProcessobject has terminated. This method returns immediately if the 
+subprocess has already terminated. If the subprocess has not yet terminated, 
+the calling thread will be blocked until the subprocess exits. 
+
+
+
+    Returns: the exit value of the subprocess represented by this {@code Process} object. By 
+             convention, the value {@code 0} indicates normal termination. 
+
+

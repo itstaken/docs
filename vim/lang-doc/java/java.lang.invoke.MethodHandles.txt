@@ -1,0 +1,698 @@
+*java.lang.invoke.MethodHandles* *MethodHandles* This class consists exclusively
+
+public class MethodHandles
+  extends    |java.lang.Object|
+
+|java.lang.invoke.MethodHandles_Description|
+|java.lang.invoke.MethodHandles_Fields|
+|java.lang.invoke.MethodHandles_Constructors|
+|java.lang.invoke.MethodHandles_Methods|
+
+================================================================================
+
+*java.lang.invoke.MethodHandles_Methods*
+|java.lang.invoke.MethodHandles.arrayElementGetter(Class<?>)|Produces a method 
+|java.lang.invoke.MethodHandles.arrayElementSetter(Class<?>)|Produces a method 
+|java.lang.invoke.MethodHandles.catchException(MethodHandle,Class<?extendsThrowable>,MethodHandle)|
+|java.lang.invoke.MethodHandles.constant(Class<?>,Object)|Produces a method han
+|java.lang.invoke.MethodHandles.dropArguments(MethodHandle,int,Class<?>...)|Pro
+|java.lang.invoke.MethodHandles.dropArguments(MethodHandle,int,List<Class<?>>)|
+|java.lang.invoke.MethodHandles.exactInvoker(MethodType)|Produces a special inv
+|java.lang.invoke.MethodHandles.explicitCastArguments(MethodHandle,MethodType)|
+|java.lang.invoke.MethodHandles.filterArguments(MethodHandle,int,MethodHandle...)|
+|java.lang.invoke.MethodHandles.filterReturnValue(MethodHandle,MethodHandle)|Ad
+|java.lang.invoke.MethodHandles.foldArguments(MethodHandle,MethodHandle)|Adapts
+|java.lang.invoke.MethodHandles.guardWithTest(MethodHandle,MethodHandle,MethodHandle)|
+|java.lang.invoke.MethodHandles.identity(Class<?>)|Produces a method handle whi
+|java.lang.invoke.MethodHandles.insertArguments(MethodHandle,int,Object...)|Pro
+|java.lang.invoke.MethodHandles.invoker(MethodType)|Produces a special invoker 
+|java.lang.invoke.MethodHandles.lookup()|Returns aLookup lookup objecton the ca
+|java.lang.invoke.MethodHandles.permuteArguments(MethodHandle,MethodType,int...)|
+|java.lang.invoke.MethodHandles.publicLookup()|Returns aLookup lookup objectwhi
+|java.lang.invoke.MethodHandles.spreadInvoker(MethodType,int)|Produces a method
+|java.lang.invoke.MethodHandles.throwException(Class<?>,Class<?extendsThrowable>)|
+
+*java.lang.invoke.MethodHandles_Description*
+
+This class consists exclusively of static methods that operate on or return 
+method handles. They fall into several categories: 
+
+Lookup methods which help create method handles for methods and fields. 
+Combinator methods, which combine or transform pre-existing method handles into 
+new ones. Other factory methods to create method handles that emulate other 
+common JVM operations or control flow patterns. Wrapper methods which can 
+convert between method handles and interface types. 
+
+
+
+
+
+*java.lang.invoke.MethodHandles.arrayElementGetter(Class<?>)*
+
+public static |java.lang.invoke.MethodHandle| arrayElementGetter(java.lang.Class<?> arrayClass)
+  throws |java.lang.IllegalArgumentException|
+         
+Produces a method handle giving read access to elements of an array. The type 
+of the method handle will have a return type of the array's element type. Its 
+first argument will be the array type, and the second will beint. 
+
+
+    arrayClass - an array type 
+
+    Returns: a method handle which can load values from the given array type 
+
+*java.lang.invoke.MethodHandles.arrayElementSetter(Class<?>)*
+
+public static |java.lang.invoke.MethodHandle| arrayElementSetter(java.lang.Class<?> arrayClass)
+  throws |java.lang.IllegalArgumentException|
+         
+Produces a method handle giving write access to elements of an array. The type 
+of the method handle will have a void return type. Its last argument will be 
+the array's element type. The first and second arguments will be the array type 
+and int. 
+
+
+
+    Returns: a method handle which can store values into the array type 
+
+*java.lang.invoke.MethodHandles.catchException(MethodHandle,Class<?extendsThrowable>,MethodHandle)*
+
+public static |java.lang.invoke.MethodHandle| catchException(
+  java.lang.invoke.MethodHandle target,
+  java.lang.Class<? extends java.lang.Throwable> exType,
+  java.lang.invoke.MethodHandle handler)
+
+Makes a method handle which adapts a target method handle, by running it inside 
+an exception handler. If the target returns normally, the adapter returns that 
+value. If an exception matching the specified type is thrown, the fallback 
+handle is called instead on the exception, plus the original arguments. 
+
+The target and handler must have the same corresponding argument and return 
+types, except that handler may omit trailing arguments (similarly to the 
+predicate in guardWithTest(|java.lang.invoke.MethodHandles|) ). Also, the 
+handler must have an extra leading parameter ofexTypeor a supertype. Here is 
+pseudocode for the resulting adapter: 
+
+T target(A..., B...); T handler(ExType, A...); T adapter(A... a, B... b) { try 
+{ return target(a..., b...); } catch (ExType ex) { return handler(ex, a...); } 
+} 
+
+Note that the saved arguments (a...in the pseudocode) cannot be modified by 
+execution of the target, and so are passed unchanged from the caller to the 
+handler, if the handler is invoked. 
+
+The target and handler must return the same type, even if the handler always 
+throws. (This might happen, for instance, because the handler is simulating 
+afinallyclause). To create such a throwing handler, compose the handler 
+creation logic with throwException(|java.lang.invoke.MethodHandles|) , in order 
+to create a method handle of the correct return type. 
+
+
+    target - method handle to call 
+    exType - the type of exception which the handler will catch 
+    handler - method handle to call if a matching exception is thrown 
+
+    Returns: method handle which incorporates the specified try/catch logic 
+
+*java.lang.invoke.MethodHandles.constant(Class<?>,Object)*
+
+public static |java.lang.invoke.MethodHandle| constant(
+  java.lang.Class<?> type,
+  java.lang.Object value)
+
+Produces a method handle of the requested return type which returns the given 
+constant value every time it is invoked. 
+
+Before the method handle is returned, the passed-in value is converted to the 
+requested type. If the requested type is primitive, widening primitive 
+conversions are attempted, else reference conversions are attempted. The 
+returned method handle is equivalent toidentity(type).bindTo(value). 
+
+
+    type - the return type of the desired method handle 
+    value - the value to return 
+
+    Returns: a method handle of the given return type and no arguments, which always returns 
+             the given value 
+
+*java.lang.invoke.MethodHandles.dropArguments(MethodHandle,int,Class<?>...)*
+
+public static |java.lang.invoke.MethodHandle| dropArguments(
+  java.lang.invoke.MethodHandle target,
+  int pos,
+  java.lang.Class[] valueTypes)
+
+Produces a method handle which will discard some dummy arguments before calling 
+some other specified target method handle. The type of the new method handle 
+will be the same as the target's type, except it will also include the dummy 
+argument types, at some given position. 
+
+Theposargument may range between zero and N, where N is the arity of the 
+target. Ifposis zero, the dummy arguments will precede the target's real 
+arguments; ifposis N they will come after. 
+
+Example: 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodHandle cat = 
+lookup().findVirtual(String.class, "concat", methodType(String.class, 
+String.class)); assertEquals("xy", (String) cat.invokeExact("x", "y")); 
+MethodHandle d0 = dropArguments(cat, 0, String.class); assertEquals("yz", 
+(String) d0.invokeExact("x", "y", "z")); MethodHandle d1 = dropArguments(cat, 
+1, String.class); assertEquals("xz", (String) d1.invokeExact("x", "y", "z")); 
+MethodHandle d2 = dropArguments(cat, 2, String.class); assertEquals("xy", 
+(String) d2.invokeExact("x", "y", "z")); MethodHandle d12 = dropArguments(cat, 
+1, int.class, boolean.class); assertEquals("xz", (String) d12.invokeExact("x", 
+12, true, "z")); 
+
+This method is also equivalent to the following code: 
+
+dropArguments(|java.lang.invoke.MethodHandles|) (target, pos, 
+Arrays.asList(valueTypes)) 
+
+
+    target - the method handle to invoke after the arguments are dropped 
+    valueTypes - the type(s) of the argument(s) to drop 
+    pos - position of first argument to drop (zero for the leftmost) 
+
+    Returns: a method handle which drops arguments of the given types, before calling the 
+             original method handle 
+
+*java.lang.invoke.MethodHandles.dropArguments(MethodHandle,int,List<Class<?>>)*
+
+public static |java.lang.invoke.MethodHandle| dropArguments(
+  java.lang.invoke.MethodHandle target,
+  int pos,
+  java.util.List<java.lang.Class<?>> valueTypes)
+
+Produces a method handle which will discard some dummy arguments before calling 
+some other specified target method handle. The type of the new method handle 
+will be the same as the target's type, except it will also include the dummy 
+argument types, at some given position. 
+
+Theposargument may range between zero and N, where N is the arity of the 
+target. Ifposis zero, the dummy arguments will precede the target's real 
+arguments; ifposis N they will come after. 
+
+Example: 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodHandle cat = 
+lookup().findVirtual(String.class, "concat", methodType(String.class, 
+String.class)); assertEquals("xy", (String) cat.invokeExact("x", "y")); 
+MethodType bigType = cat.type().insertParameterTypes(0, int.class, 
+String.class); MethodHandle d0 = dropArguments(cat, 0, 
+bigType.parameterList().subList(0,2)); assertEquals(bigType, d0.type()); 
+assertEquals("yz", (String) d0.invokeExact(123, "x", "y", "z")); 
+
+This method is also equivalent to the following code: 
+
+dropArguments(|java.lang.invoke.MethodHandles|) (target, pos, 
+valueTypes.toArray(new Class[0])) 
+
+
+    target - the method handle to invoke after the arguments are dropped 
+    valueTypes - the type(s) of the argument(s) to drop 
+    pos - position of first argument to drop (zero for the leftmost) 
+
+    Returns: a method handle which drops arguments of the given types, before calling the 
+             original method handle 
+
+*java.lang.invoke.MethodHandles.exactInvoker(MethodType)*
+
+public static |java.lang.invoke.MethodHandle| exactInvoker(java.lang.invoke.MethodType type)
+
+Produces a special invoker method handle which can be used to invoke any method 
+handle of the given type, as if by invokeExact(|java.lang.invoke.MethodHandle|) 
+. The resulting invoker will have a type which is exactly equal to the desired 
+type, except that it will accept an additional leading argument of 
+typeMethodHandle. 
+
+This method is equivalent to the following code (though it may be more 
+efficient): 
+
+publicLookup().findVirtual(MethodHandle.class, "invokeExact", type) 
+
+Discussion: Invoker method handles can be useful when working with variable 
+method handles of unknown types. For example, to emulate aninvokeExactcall to a 
+variable method handleM, extract its typeT, look up the invoker methodXforT, 
+and call the invoker method, asX.invoke(T, A...). (It would not work to 
+callX.invokeExact, since the typeTis unknown.) If spreading, collecting, or 
+other argument transformations are required, they can be applied once to the 
+invokerXand reused on manyMmethod handle values, as long as they are compatible 
+with the type ofX. 
+
+(Note: The invoker method is not available via the Core Reflection API. An 
+attempt to call java.lang.reflect.Method.invoke(|java.lang.reflect.Method|) on 
+the declaredinvokeExactorinvokemethod will raise an 
+UnsupportedOperationException(|java.lang.UnsupportedOperationException|) .) 
+
+This method throws no reflective or security exceptions. 
+
+
+    type - the desired target type 
+
+    Returns: a method handle suitable for invoking any method handle of the given type 
+
+*java.lang.invoke.MethodHandles.explicitCastArguments(MethodHandle,MethodType)*
+
+public static |java.lang.invoke.MethodHandle| explicitCastArguments(
+  java.lang.invoke.MethodHandle target,
+  java.lang.invoke.MethodType newType)
+
+Produces a method handle which adapts the type of the given method handle to a 
+new type by pairwise argument and return type conversion. The original type and 
+new type must have the same number of arguments. The resulting method handle is 
+guaranteed to report a type which is equal to the desired new type. 
+
+If the original type and new type are equal, returns target. 
+
+The same conversions are allowed as for 
+MethodHandle.asType(|java.lang.invoke.MethodHandle|) , and some additional 
+conversions are also applied if those conversions fail. Given types T0, T1, one 
+of the following conversions is applied if possible, before or instead of any 
+conversions done byasType: 
+
+If T0 and T1 are references, and T1 is an interface type, then the value of 
+type T0 is passed as a T1 without a cast. (This treatment of interfaces follows 
+the usage of the bytecode verifier.) If T0 is boolean and T1 is another 
+primitive, the boolean is converted to a byte value, 1 for true, 0 for false. 
+(This treatment follows the usage of the bytecode verifier.) If T1 is boolean 
+and T0 is another primitive, T0 is converted to byte via Java casting 
+conversion (JLS 5.5), and the low order bit of the result is tested, as if by(x 
+& 1) != 0. If T0 and T1 are primitives other than boolean, then a Java casting 
+conversion (JLS 5.5) is applied. (Specifically, T0 will convert to T1 by 
+widening and/or narrowing.) If T0 is a reference and T1 a primitive, an 
+unboxing conversion will be applied at runtime, possibly followed by a Java 
+casting conversion (JLS 5.5) on the primitive value, possibly followed by a 
+conversion from byte to boolean by testing the low-order bit. If T0 is a 
+reference and T1 a primitive, and if the reference is null at runtime, a zero 
+value is introduced. 
+
+
+    target - the method handle to invoke after arguments are retyped 
+    newType - the expected type of the new method handle 
+
+    Returns: a method handle which delegates to the target after performing any necessary 
+             argument conversions, and arranges for any necessary return value 
+             conversions 
+
+*java.lang.invoke.MethodHandles.filterArguments(MethodHandle,int,MethodHandle...)*
+
+public static |java.lang.invoke.MethodHandle| filterArguments(
+  java.lang.invoke.MethodHandle target,
+  int pos,
+  java.lang.invoke.MethodHandle[] filters)
+
+Adapts a target method handle by pre-processing one or more of its arguments, 
+each with its own unary filter function, and then calling the target with each 
+pre-processed argument replaced by the result of its corresponding filter 
+function. 
+
+The pre-processing is performed by one or more method handles, specified in the 
+elements of thefiltersarray. The first element of the filter array corresponds 
+to theposargument of the target, and so on in sequence. 
+
+Null arguments in the array are treated as identity functions, and the 
+corresponding arguments left unchanged. (If there are no non-null elements in 
+the array, the original target is returned.) Each filter is applied to the 
+corresponding argument of the adapter. 
+
+If a filterFapplies to theNth argument of the target, thenFmust be a method 
+handle which takes exactly one argument. The type ofF's sole argument replaces 
+the corresponding argument type of the target in the resulting adapted method 
+handle. The return type ofFmust be identical to the corresponding parameter 
+type of the target. 
+
+It is an error if there are elements offilters(null or not) which do not 
+correspond to argument positions in the target. Example: 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodHandle cat = 
+lookup().findVirtual(String.class, "concat", methodType(String.class, 
+String.class)); MethodHandle upcase = lookup().findVirtual(String.class, 
+"toUpperCase", methodType(String.class)); assertEquals("xy", (String) 
+cat.invokeExact("x", "y")); MethodHandle f0 = filterArguments(cat, 0, upcase); 
+assertEquals("Xy", (String) f0.invokeExact("x", "y")); // Xy MethodHandle f1 = 
+filterArguments(cat, 1, upcase); assertEquals("xY", (String) 
+f1.invokeExact("x", "y")); // xY MethodHandle f2 = filterArguments(cat, 0, 
+upcase, upcase); assertEquals("XY", (String) f2.invokeExact("x", "y")); // XY 
+
+Here is pseudocode for the resulting adapter: 
+
+V target(P... p, A[i]... a[i], B... b); A[i] filter[i](V[i]); T adapter(P... p, 
+V[i]... v[i], B... b) { return target(p..., f[i](v[i])..., b...); } 
+
+
+    target - the method handle to invoke after arguments are filtered 
+    pos - the position of the first argument to filter 
+    filters - method handles to call initially on filtered arguments 
+
+    Returns: method handle which incorporates the specified argument filtering logic 
+
+*java.lang.invoke.MethodHandles.filterReturnValue(MethodHandle,MethodHandle)*
+
+public static |java.lang.invoke.MethodHandle| filterReturnValue(
+  java.lang.invoke.MethodHandle target,
+  java.lang.invoke.MethodHandle filter)
+
+Adapts a target method handle by post-processing its return value (if any) with 
+a filter (another method handle). The result of the filter is returned from the 
+adapter. 
+
+If the target returns a value, the filter must accept that value as its only 
+argument. If the target returns void, the filter must accept no arguments. 
+
+The return type of the filter replaces the return type of the target in the 
+resulting adapted method handle. The argument type of the filter (if any) must 
+be identical to the return type of the target. Example: 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodHandle cat = 
+lookup().findVirtual(String.class, "concat", methodType(String.class, 
+String.class)); MethodHandle length = lookup().findVirtual(String.class, 
+"length", methodType(int.class)); System.out.println((String) 
+cat.invokeExact("x", "y")); // xy MethodHandle f0 = filterReturnValue(cat, 
+length); System.out.println((int) f0.invokeExact("x", "y")); // 2 
+
+Here is pseudocode for the resulting adapter: 
+
+V target(A...); T filter(V); T adapter(A... a) { V v = target(a...); return 
+filter(v); } // and if the target has a void return: void target2(A...); T 
+filter2(); T adapter2(A... a) { target2(a...); return filter2(); } // and if 
+the filter has a void return: V target3(A...); void filter3(V); void 
+adapter3(A... a) { V v = target3(a...); filter3(v); } 
+
+
+    target - the method handle to invoke before filtering the return value 
+    filter - method handle to call on the return value 
+
+    Returns: method handle which incorporates the specified return value filtering logic 
+
+*java.lang.invoke.MethodHandles.foldArguments(MethodHandle,MethodHandle)*
+
+public static |java.lang.invoke.MethodHandle| foldArguments(
+  java.lang.invoke.MethodHandle target,
+  java.lang.invoke.MethodHandle combiner)
+
+Adapts a target method handle by pre-processing some of its arguments, and then 
+calling the target with the result of the pre-processing, inserted into the 
+original sequence of arguments. 
+
+The pre-processing is performed bycombiner, a second method handle. Of the 
+arguments passed to the adapter, the firstNarguments are copied to the 
+combiner, which is then called. (Here,Nis defined as the parameter count of the 
+combiner.) After this, control passes to the target, with any result from the 
+combiner inserted before the originalNincoming arguments. 
+
+If the combiner returns a value, the first parameter type of the target must be 
+identical with the return type of the combiner, and the nextNparameter types of 
+the target must exactly match the parameters of the combiner. 
+
+If the combiner has a void return, no result will be inserted, and the 
+firstNparameter types of the target must exactly match the parameters of the 
+combiner. 
+
+The resulting adapter is the same type as the target, except that the first 
+parameter type is dropped, if it corresponds to the result of the combiner. 
+
+(Note that dropArguments(|java.lang.invoke.MethodHandles|) can be used to 
+remove any arguments that either the combiner or the target does not wish to 
+receive. If some of the incoming arguments are destined only for the combiner, 
+consider using asCollector(|java.lang.invoke.MethodHandle|) instead, since 
+those arguments will not need to be live on the stack on entry to the target.) 
+Example: 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodHandle trace = 
+publicLookup().findVirtual(java.io.PrintStream.class, "println", 
+methodType(void.class, String.class)) .bindTo(System.out); MethodHandle cat = 
+lookup().findVirtual(String.class, "concat", methodType(String.class, 
+String.class)); assertEquals("boojum", (String) cat.invokeExact("boo", "jum")); 
+MethodHandle catTrace = foldArguments(cat, trace); // also prints "boo": 
+assertEquals("boojum", (String) catTrace.invokeExact("boo", "jum")); 
+
+Here is pseudocode for the resulting adapter: 
+
+// there are N arguments in A... T target(V, A[N]..., B...); V combiner(A...); 
+T adapter(A... a, B... b) { V v = combiner(a...); return target(v, a..., b...); 
+} // and if the combiner has a void return: T target2(A[N]..., B...); void 
+combiner2(A...); T adapter2(A... a, B... b) { combiner2(a...); return 
+target2(a..., b...); } 
+
+
+    target - the method handle to invoke after arguments are combined 
+    combiner - method handle to call initially on the incoming arguments 
+
+    Returns: method handle which incorporates the specified argument folding logic 
+
+*java.lang.invoke.MethodHandles.guardWithTest(MethodHandle,MethodHandle,MethodHandle)*
+
+public static |java.lang.invoke.MethodHandle| guardWithTest(
+  java.lang.invoke.MethodHandle test,
+  java.lang.invoke.MethodHandle target,
+  java.lang.invoke.MethodHandle fallback)
+
+Makes a method handle which adapts a target method handle, by guarding it with 
+a test, a boolean-valued method handle. If the guard fails, a fallback handle 
+is called instead. All three method handles must have the same corresponding 
+argument and return types, except that the return type of the test must be 
+boolean, and the test is allowed to have fewer arguments than the other two 
+method handles. Here is pseudocode for the resulting adapter: 
+
+boolean test(A...); T target(A...,B...); T fallback(A...,B...); T adapter(A... 
+a,B... b) { if (test(a...)) return target(a..., b...); else return 
+fallback(a..., b...); } 
+
+Note that the test arguments (a...in the pseudocode) cannot be modified by 
+execution of the test, and so are passed unchanged from the caller to the 
+target or fallback as appropriate. 
+
+
+    test - method handle used for test, must return boolean 
+    target - method handle to call if test passes 
+    fallback - method handle to call if test fails 
+
+    Returns: method handle which incorporates the specified if/then/else logic 
+
+*java.lang.invoke.MethodHandles.identity(Class<?>)*
+
+public static |java.lang.invoke.MethodHandle| identity(java.lang.Class<?> type)
+
+Produces a method handle which returns its sole argument when invoked. 
+
+
+    type - the type of the sole parameter and return value of the desired method handle 
+
+    Returns: a unary method handle which accepts and returns the given type 
+
+*java.lang.invoke.MethodHandles.insertArguments(MethodHandle,int,Object...)*
+
+public static |java.lang.invoke.MethodHandle| insertArguments(
+  java.lang.invoke.MethodHandle target,
+  int pos,
+  java.lang.Object[] values)
+
+Provides a target method handle with one or more bound arguments in advance of 
+the method handle's invocation. The formal parameters to the target 
+corresponding to the bound arguments are called bound parameters. Returns a new 
+method handle which saves away the bound arguments. When it is invoked, it 
+receives arguments for any non-bound parameters, binds the saved arguments to 
+their corresponding parameters, and calls the original target. 
+
+The type of the new method handle will drop the types for the bound parameters 
+from the original target type, since the new method handle will no longer 
+require those arguments to be supplied by its callers. 
+
+Each given argument object must match the corresponding bound parameter type. 
+If a bound parameter type is a primitive, the argument object must be a 
+wrapper, and will be unboxed to produce the primitive value. 
+
+Theposargument selects which parameters are to be bound. It may range between 
+zero and N-L (inclusively), where N is the arity of the target method handle 
+and L is the length of the values array. 
+
+
+    target - the method handle to invoke after the argument is inserted 
+    pos - where to insert the argument (zero for the first) 
+    values - the series of arguments to insert 
+
+    Returns: a method handle which inserts an additional argument, before calling the 
+             original method handle 
+
+*java.lang.invoke.MethodHandles.invoker(MethodType)*
+
+public static |java.lang.invoke.MethodHandle| invoker(java.lang.invoke.MethodType type)
+
+Produces a special invoker method handle which can be used to invoke any method 
+handle compatible with the given type, as if by 
+invoke(|java.lang.invoke.MethodHandle|) . The resulting invoker will have a 
+type which is exactly equal to the desired type, except that it will accept an 
+additional leading argument of typeMethodHandle. 
+
+Before invoking its target, if the target differs from the expected type, the 
+invoker will apply reference casts as necessary and box, unbox, or widen 
+primitive values, as if by asType(|java.lang.invoke.MethodHandle|) . Similarly, 
+the return value will be converted as necessary. If the target is a variable 
+arity method handle(|java.lang.invoke.MethodHandle|) , the required arity 
+conversion will be made, again as if by asType(|java.lang.invoke.MethodHandle|) 
+. 
+
+A general method type(|java.lang.invoke.MethodType|) , mentions 
+onlyObjectarguments and return values. An invoker for such a type is capable of 
+calling any method handle of the same arity as the general type. 
+
+This method is equivalent to the following code (though it may be more 
+efficient): 
+
+publicLookup().findVirtual(MethodHandle.class, "invoke", type) 
+
+This method throws no reflective or security exceptions. 
+
+
+    type - the desired target type 
+
+    Returns: a method handle suitable for invoking any method handle convertible to the 
+             given type 
+
+*java.lang.invoke.MethodHandles.lookup()*
+
+public static |java.lang.invoke.MethodHandles.Lookup| lookup()
+
+Returns a lookup object(|java.lang.invoke.MethodHandles.Lookup|) on the caller, 
+which has the capability to access any method handle that the caller has access 
+to, including direct method handles to private fields and methods. This lookup 
+object is a capability which may be delegated to trusted agents. Do not store 
+it in place where untrusted code can access it. 
+
+
+
+*java.lang.invoke.MethodHandles.permuteArguments(MethodHandle,MethodType,int...)*
+
+public static |java.lang.invoke.MethodHandle| permuteArguments(
+  java.lang.invoke.MethodHandle target,
+  java.lang.invoke.MethodType newType,
+  int[] reorder)
+
+Produces a method handle which adapts the calling sequence of the given method 
+handle to a new type, by reordering the arguments. The resulting method handle 
+is guaranteed to report a type which is equal to the desired new type. 
+
+The given array controls the reordering. Call#Ithe number of incoming 
+parameters (the valuenewType.parameterCount(), and call#Othe number of outgoing 
+parameters (the valuetarget.type().parameterCount()). Then the length of the 
+reordering array must be#O, and each element must be a non-negative number less 
+than#I. For everyNless than#O, theN-th outgoing argument will be taken from 
+theI-th incoming argument, whereIisreorder[N]. 
+
+No argument or return value conversions are applied. The type of each incoming 
+argument, as determined bynewType, must be identical to the type of the 
+corresponding outgoing parameter or parameters in the target method handle. The 
+return type ofnewTypemust be identical to the return type of the original 
+target. 
+
+The reordering array need not specify an actual permutation. An incoming 
+argument will be duplicated if its index appears more than once in the array, 
+and an incoming argument will be dropped if its index does not appear in the 
+array. As in the case of dropArguments(|java.lang.invoke.MethodHandles|) , 
+incoming arguments which are not mentioned in the reordering array are may be 
+any type, as determined only bynewType. 
+
+import static java.lang.invoke.MethodHandles.*; import static 
+java.lang.invoke.MethodType.*; ... MethodType intfn1 = methodType(int.class, 
+int.class); MethodType intfn2 = methodType(int.class, int.class, int.class); 
+MethodHandle sub = ... {int x, int y => x-y} ...; 
+assert(sub.type().equals(intfn2)); MethodHandle sub1 = permuteArguments(sub, 
+intfn2, 0, 1); MethodHandle rsub = permuteArguments(sub, intfn2, 1, 0); 
+assert((int)rsub.invokeExact(1, 100) == 99); MethodHandle add = ... {int x, int 
+y => x+y} ...; assert(add.type().equals(intfn2)); MethodHandle twice = 
+permuteArguments(add, intfn1, 0, 0); assert(twice.type().equals(intfn1)); 
+assert((int)twice.invokeExact(21) == 42); 
+
+
+    target - the method handle to invoke after arguments are reordered 
+    newType - the expected type of the new method handle 
+    reorder - an index array which controls the reordering 
+
+    Returns: a method handle which delegates to the target after it drops unused arguments 
+             and moves and/or duplicates the other arguments 
+
+*java.lang.invoke.MethodHandles.publicLookup()*
+
+public static |java.lang.invoke.MethodHandles.Lookup| publicLookup()
+
+Returns a lookup object(|java.lang.invoke.MethodHandles.Lookup|) which is 
+trusted minimally. It can only be used to create method handles to publicly 
+accessible fields and methods. 
+
+As a matter of pure convention, the lookup 
+class(|java.lang.invoke.MethodHandles.Lookup|) of this lookup object will be 
+(|java.lang.Object|) . 
+
+The lookup class can be changed to any other classCusing an expression of the 
+form 
+<code>publicLookup().in(C.class)</code>(|java.lang.invoke.MethodHandles.Lookup|)
+. Since all classes have equal access to public names, such a change would 
+confer no new access rights. 
+
+
+
+*java.lang.invoke.MethodHandles.spreadInvoker(MethodType,int)*
+
+public static |java.lang.invoke.MethodHandle| spreadInvoker(
+  java.lang.invoke.MethodType type,
+  int leadingArgCount)
+
+Produces a method handle which will invoke any method handle of the giventype, 
+with a given number of trailing arguments replaced by a single 
+trailingObject[]array. The resulting invoker will be a method handle with the 
+following arguments: 
+
+a singleMethodHandletarget zero or more leading values (counted 
+byleadingArgCount) anObject[]array containing trailing arguments 
+
+The invoker will invoke its target like a call to 
+invoke(|java.lang.invoke.MethodHandle|) with the indicatedtype. That is, if the 
+target is exactly of the giventype, it will behave likeinvokeExact; otherwise 
+it behave as if asType(|java.lang.invoke.MethodHandle|) is used to convert the 
+target to the requiredtype. 
+
+The type of the returned invoker will not be the giventype, but rather will 
+have all parameters except the firstleadingArgCountreplaced by a single array 
+of typeObject[], which will be the final parameter. 
+
+Before invoking its target, the invoker will spread the final array, apply 
+reference casts as necessary, and unbox and widen primitive arguments. 
+
+This method is equivalent to the following code (though it may be more 
+efficient): 
+
+MethodHandle invoker = MethodHandles.invoker(type); int spreadArgCount = 
+type.parameterCount() - leadingArgCount; invoker = 
+invoker.asSpreader(Object[].class, spreadArgCount); return invoker; 
+
+This method throws no reflective or security exceptions. 
+
+
+    type - the desired target type 
+    leadingArgCount - number of fixed arguments, to be passed unchanged to the target 
+
+    Returns: a method handle suitable for invoking any method handle of the given type 
+
+*java.lang.invoke.MethodHandles.throwException(Class<?>,Class<?extendsThrowable>)*
+
+public static |java.lang.invoke.MethodHandle| throwException(
+  java.lang.Class<?> returnType,
+  java.lang.Class<? extends java.lang.Throwable> exType)
+
+Produces a method handle which will throw exceptions of the givenexType. The 
+method handle will accept a single argument ofexType, and immediately throw it 
+as an exception. The method type will nominally specify a return ofreturnType. 
+The return type may be anything convenient: It doesn't matter to the method 
+handle's behavior, since it will never return normally. 
+
+
+
+    Returns: method handle which can throw the given exceptions 
+
+

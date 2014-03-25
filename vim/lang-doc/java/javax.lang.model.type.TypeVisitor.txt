@@ -1,0 +1,232 @@
+*javax.lang.model.type.TypeVisitor* *TypeVisitor* A visitor of types, in the sty
+
+public interface interface TypeVisitor<R,P>
+
+
+|javax.lang.model.type.TypeVisitor_Description|
+|javax.lang.model.type.TypeVisitor_Fields|
+|javax.lang.model.type.TypeVisitor_Constructors|
+|javax.lang.model.type.TypeVisitor_Methods|
+
+================================================================================
+
+*javax.lang.model.type.TypeVisitor_Methods*
+|javax.lang.model.type.TypeVisitor.visit(TypeMirror)|A convenience method equiv
+|javax.lang.model.type.TypeVisitor.visit(TypeMirror,P)|Visits a type.
+|javax.lang.model.type.TypeVisitor.visitArray(ArrayType,P)|Visits an array type
+|javax.lang.model.type.TypeVisitor.visitDeclared(DeclaredType,P)|Visits a decla
+|javax.lang.model.type.TypeVisitor.visitError(ErrorType,P)|Visits an error type
+|javax.lang.model.type.TypeVisitor.visitExecutable(ExecutableType,P)|Visits an 
+|javax.lang.model.type.TypeVisitor.visitNoType(NoType,P)|Visits aNoTypeinstance
+|javax.lang.model.type.TypeVisitor.visitNull(NullType,P)|Visits the null type.
+|javax.lang.model.type.TypeVisitor.visitPrimitive(PrimitiveType,P)|Visits a pri
+|javax.lang.model.type.TypeVisitor.visitTypeVariable(TypeVariable,P)|Visits a t
+|javax.lang.model.type.TypeVisitor.visitUnion(UnionType,P)|Visits a union type.
+|javax.lang.model.type.TypeVisitor.visitUnknown(TypeMirror,P)|Visits an unknown
+|javax.lang.model.type.TypeVisitor.visitWildcard(WildcardType,P)|Visits a wildc
+
+*javax.lang.model.type.TypeVisitor_Description*
+
+A visitor of types, in the style of the visitor design pattern. Classes 
+implementing this interface are used to operate on a type when the kind of type 
+is unknown at compile time. When a visitor is passed to a type's 
+accept(|javax.lang.model.type.TypeMirror|) method, the visitXYZ method most 
+applicable to that type is invoked. 
+
+Classes implementing this interface may or may not throw 
+aNullPointerExceptionif the additional parameterpisnull; see documentation of 
+the implementing class for details. 
+
+WARNING: It is possible that methods will be added to this interface to 
+accommodate new, currently unknown, language structures added to future 
+versions of the Java programming language. Therefore, visitor classes directly 
+implementing this interface may be source incompatible with future versions of 
+the platform. To avoid this source incompatibility, visitor implementations are 
+encouraged to instead extend the appropriate abstract visitor class that 
+implements this interface. However, an API should generally use this visitor 
+interface as the type for parameters, return type, etc. rather than one of the 
+abstract classes. 
+
+
+
+*javax.lang.model.type.TypeVisitor.visit(TypeMirror)*
+
+public |R| visit(javax.lang.model.type.TypeMirror t)
+
+A convenience method equivalent tov.visit(t, null). 
+
+
+    t - the element to visit 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visit(TypeMirror,P)*
+
+public |R| visit(
+  javax.lang.model.type.TypeMirror t,
+  P p)
+
+Visits a type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitArray(ArrayType,P)*
+
+public |R| visitArray(
+  javax.lang.model.type.ArrayType t,
+  P p)
+
+Visits an array type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitDeclared(DeclaredType,P)*
+
+public |R| visitDeclared(
+  javax.lang.model.type.DeclaredType t,
+  P p)
+
+Visits a declared type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitError(ErrorType,P)*
+
+public |R| visitError(
+  javax.lang.model.type.ErrorType t,
+  P p)
+
+Visits an error type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitExecutable(ExecutableType,P)*
+
+public |R| visitExecutable(
+  javax.lang.model.type.ExecutableType t,
+  P p)
+
+Visits an executable type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitNoType(NoType,P)*
+
+public |R| visitNoType(
+  javax.lang.model.type.NoType t,
+  P p)
+
+Visits a (|javax.lang.model.type.NoType|) instance. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitNull(NullType,P)*
+
+public |R| visitNull(
+  javax.lang.model.type.NullType t,
+  P p)
+
+Visits the null type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitPrimitive(PrimitiveType,P)*
+
+public |R| visitPrimitive(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits a primitive type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitTypeVariable(TypeVariable,P)*
+
+public |R| visitTypeVariable(
+  javax.lang.model.type.TypeVariable t,
+  P p)
+
+Visits a type variable. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitUnion(UnionType,P)*
+
+public |R| visitUnion(
+  javax.lang.model.type.UnionType t,
+  P p)
+
+Visits a union type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitUnknown(TypeMirror,P)*
+
+public |R| visitUnknown(
+  javax.lang.model.type.TypeMirror t,
+  P p)
+
+Visits an unknown kind of type. This can occur if the language evolves and new 
+kinds of types are added to theTypeMirrorhierarchy. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeVisitor.visitWildcard(WildcardType,P)*
+
+public |R| visitWildcard(
+  javax.lang.model.type.WildcardType t,
+  P p)
+
+Visits a wildcard type. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+

@@ -1,0 +1,121 @@
+*java.nio.channels.NetworkChannel* *NetworkChannel* A channel to a network socke
+
+public interface interface NetworkChannel
+
+  implements |java.nio.channels.Channel|
+
+|java.nio.channels.NetworkChannel_Description|
+|java.nio.channels.NetworkChannel_Fields|
+|java.nio.channels.NetworkChannel_Constructors|
+|java.nio.channels.NetworkChannel_Methods|
+
+================================================================================
+
+*java.nio.channels.NetworkChannel_Methods*
+|java.nio.channels.NetworkChannel.bind(SocketAddress)|Binds the channel's socke
+|java.nio.channels.NetworkChannel.getLocalAddress()|Returns the socket address 
+|java.nio.channels.NetworkChannel.getOption(SocketOption<T>)|Returns the value 
+|java.nio.channels.NetworkChannel.setOption(SocketOption<T>,T)|Sets the value o
+|java.nio.channels.NetworkChannel.supportedOptions()|Returns a set of the socke
+
+*java.nio.channels.NetworkChannel_Description*
+
+A channel to a network socket. 
+
+A channel that implements this interface is a channel to a network socket. The 
+bind(|java.nio.channels.NetworkChannel|) method is used to bind the socket to a 
+local address(|java.net.SocketAddress|) , the 
+getLocalAddress(|java.nio.channels.NetworkChannel|) method returns the address 
+that the socket is bound to, and the 
+setOption(|java.nio.channels.NetworkChannel|) and 
+getOption(|java.nio.channels.NetworkChannel|) methods are used to set and query 
+socket options. An implementation of this interface should specify the socket 
+options that it supports. 
+
+The bind(|java.nio.channels.NetworkChannel|) and 
+setOption(|java.nio.channels.NetworkChannel|) methods that do not otherwise 
+have a value to return are specified to return the network channel upon which 
+they are invoked. This allows method invocations to be chained. Implementations 
+of this interface should specialize the return type so that method invocations 
+on the implementation class can be chained. 
+
+
+
+*java.nio.channels.NetworkChannel.bind(SocketAddress)*
+
+public |java.nio.channels.NetworkChannel| bind(java.net.SocketAddress local)
+  throws |java.io.IOException|
+         
+Binds the channel's socket to a local address. 
+
+This method is used to establish an association between the socket and a local 
+address. Once an association is established then the socket remains bound until 
+the channel is closed. If thelocalparameter has the valuenullthen the socket 
+will be bound to an address that is assigned automatically. 
+
+
+    local - The address to bind the socket, or {@code null} to bind the socket to an 
+       automatically assigned socket address 
+
+    Returns: 
+
+*java.nio.channels.NetworkChannel.getLocalAddress()*
+
+public |java.net.SocketAddress| getLocalAddress()
+  throws |java.io.IOException|
+         
+Returns the socket address that this channel's socket is bound to, ornullif the 
+socket is not bound. 
+
+Where the channel is bound(|java.nio.channels.NetworkChannel|) to an Internet 
+Protocol socket address then the return value from this method is of type 
+(|java.net.InetSocketAddress|) . 
+
+
+
+    Returns: The socket address that the socket is bound to, or {@code null} if the 
+             channel's socket is not bound 
+
+*java.nio.channels.NetworkChannel.getOption(SocketOption<T>)*
+
+public |T| getOption(java.net.SocketOption<T> name)
+  throws |java.io.IOException|
+         
+Returns the value of a socket option. 
+
+
+    name - The socket option 
+
+    Returns: The value of the socket option. A value of {@code null} may be a valid value 
+             for some socket options. 
+
+*java.nio.channels.NetworkChannel.setOption(SocketOption<T>,T)*
+
+public |java.nio.channels.NetworkChannel| setOption(
+  java.net.SocketOption<T> name,
+  T value)
+  throws |java.io.IOException|
+         
+Sets the value of a socket option. 
+
+
+    name - The socket option 
+    value - The value of the socket option. A value of {@code null} may be a valid value 
+       for some socket options. 
+
+    Returns: 
+
+*java.nio.channels.NetworkChannel.supportedOptions()*
+
+public |java.util.Set|<SocketOption<?>> supportedOptions()
+
+Returns a set of the socket options supported by this channel. 
+
+This method will continue to return the set of options even after the channel 
+has been closed. 
+
+
+
+    Returns: A set of the socket options supported by this channel 
+
+

@@ -1,0 +1,90 @@
+*javax.lang.model.util.ElementScanner7* *ElementScanner7* A scanning visitor of 
+
+public class ElementScanner7<R,P>
+  extends    |javax.lang.model.util.ElementScanner6|
+
+|javax.lang.model.util.ElementScanner7_Description|
+|javax.lang.model.util.ElementScanner7_Fields|
+|javax.lang.model.util.ElementScanner7_Constructors|
+|javax.lang.model.util.ElementScanner7_Methods|
+
+================================================================================
+
+*javax.lang.model.util.ElementScanner7_Constructors*
+|javax.lang.model.util.ElementScanner7()|Constructor for concrete subclasses; u
+|javax.lang.model.util.ElementScanner7(R)|Constructor for concrete subclasses; 
+
+*javax.lang.model.util.ElementScanner7_Methods*
+|javax.lang.model.util.ElementScanner7.visitVariable(VariableElement,P)|This im
+
+*javax.lang.model.util.ElementScanner7_Description*
+
+A scanning visitor of program elements with default behavior appropriate for 
+the RELEASE_7(|javax.lang.model.SourceVersion|) source version. The visitXYZ 
+methods in this class scan their component elements by callingscanon their 
+enclosed elements(|javax.lang.model.element.Element|) , 
+parameters(|javax.lang.model.element.ExecutableElement|) , etc., as indicated 
+in the individual method specifications. A subclass can control the order 
+elements are visited by overriding the visitXYZ methods. Note that clients of a 
+scanner may get the desired behavior be invokingv.scan(e, p)rather 
+thanv.visit(e, p)on the root objects of interest. 
+
+When a subclass overrides a visitXYZ method, the new method can cause the 
+enclosed elements to be scanned in the default way by calling super.visitXYZ. 
+In this fashion, the concrete visitor can control the ordering of traversal 
+over the component elements with respect to the additional processing; for 
+example, consistently calling super.visitXYZ at the start of the overridden 
+methods will yield a preorder traversal, etc. If the component elements should 
+be traversed in some other order, instead of calling super.visitXYZ, an 
+overriding visit method should callscanwith the elements in the desired order. 
+
+Methods in this class may be overridden subject to their general contract. Note 
+that annotating methods in concrete subclasses with 
+@Override(|java.lang.Override|) will help ensure that methods are overridden as 
+intended. 
+
+WARNING: TheElementVisitorinterface implemented by this class may have methods 
+added to it in the future to accommodate new, currently unknown, language 
+structures added to future versions of the Java programming language. 
+Therefore, methods whose names begin with"visit"may be added to this class in 
+the future; to avoid incompatibilities, classes which extend this class should 
+not declare any instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the visitUnknown(|javax.lang.model.util.ElementScanner7|) 
+method. A new element scanner visitor class will also be introduced to 
+correspond to the new language level; this visitor will have different default 
+behavior for the visit method in question. When the new visitor is introduced, 
+all or portions of this visitor may be deprecated. 
+
+
+
+*javax.lang.model.util.ElementScanner7()*
+
+protected ElementScanner7()
+
+Constructor for concrete subclasses; usesnullfor the default value. 
+
+
+*javax.lang.model.util.ElementScanner7(R)*
+
+protected ElementScanner7(R defaultValue)
+
+Constructor for concrete subclasses; uses the argument for the default value. 
+
+
+*javax.lang.model.util.ElementScanner7.visitVariable(VariableElement,P)*
+
+public |R| visitVariable(
+  javax.lang.model.element.VariableElement e,
+  P p)
+
+This implementation scans the enclosed elements. 
+
+
+    e - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of scanning 
+
+

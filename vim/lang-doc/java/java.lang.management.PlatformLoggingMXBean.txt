@@ -1,0 +1,111 @@
+*java.lang.management.PlatformLoggingMXBean* *PlatformLoggingMXBean* The managem
+
+public interface interface PlatformLoggingMXBean
+
+  implements |java.lang.management.PlatformManagedObject|
+
+|java.lang.management.PlatformLoggingMXBean_Description|
+|java.lang.management.PlatformLoggingMXBean_Fields|
+|java.lang.management.PlatformLoggingMXBean_Constructors|
+|java.lang.management.PlatformLoggingMXBean_Methods|
+
+================================================================================
+
+*java.lang.management.PlatformLoggingMXBean_Methods*
+|java.lang.management.PlatformLoggingMXBean.getLoggerLevel(String)|Gets the nam
+|java.lang.management.PlatformLoggingMXBean.getLoggerNames()|Returns the list o
+|java.lang.management.PlatformLoggingMXBean.getParentLoggerName(String)|Returns
+|java.lang.management.PlatformLoggingMXBean.setLoggerLevel(String,String)|Sets 
+
+*java.lang.management.PlatformLoggingMXBean_Description*
+
+The management interface for the logging(|java.util.logging|) facility. 
+
+There is a single global instance of the PlatformLoggingMXBean. The 
+ManagementFactory.getPlatformMXBean(|java.lang.management.ManagementFactory|) 
+method can be used to obtain thePlatformLoggingMXBeanobject as follows: 
+
+PlatformLoggingMXBean logging = 
+ManagementFactory.getPlatformMXBean(PlatformLoggingMXBean.class); 
+
+ThePlatformLoggingMXBeanobject is also registered with the platform 
+MBeanServer(|java.lang.management.ManagementFactory|) . The 
+ObjectName(|javax.management.ObjectName|) for uniquely identifying 
+thePlatformLoggingMXBeanwithin an MBeanServer is: 
+
+java.util.logging:type=Logging(|java.util.logging.LogManager|) 
+
+The instance registered in the platform MBeanServer with 
+thisObjectNameimplements all attributes defined by 
+(|java.util.logging.LoggingMXBean|) . 
+
+
+
+*java.lang.management.PlatformLoggingMXBean.getLoggerLevel(String)*
+
+public |java.lang.String| getLoggerLevel(java.lang.String loggerName)
+
+Gets the name of the log level(|java.util.logging.Logger|) associated with the 
+specified logger. If the specified logger does not exist,nullis returned. This 
+method first finds the logger of the given name and then returns the name of 
+the log level by calling: Logger.getLevel()(|java.util.logging.Logger|) . 
+getName()(|java.util.logging.Level|) ; 
+
+If theLevelof the specified logger isnull, which means that this logger's 
+effective level is inherited from its parent, an empty string will be returned. 
+
+
+    loggerName - The name of the {@code Logger} to be retrieved. 
+
+    Returns: The name of the log level of the specified logger; or an empty string if the 
+             log level of the specified logger is {@code null}. If the 
+             specified logger does not exist, {@code null} is returned. 
+
+*java.lang.management.PlatformLoggingMXBean.getLoggerNames()*
+
+public |java.util.List|<String> getLoggerNames()
+
+Returns the list of the currently registered logger(|java.util.logging.Logger|) 
+names. This method calls (|java.util.logging.LogManager|) and returns a list of 
+the logger names. 
+
+
+
+    Returns: A list of {@code String} each of which is a currently registered {@code Logger} 
+             name. 
+
+*java.lang.management.PlatformLoggingMXBean.getParentLoggerName(String)*
+
+public |java.lang.String| getParentLoggerName(java.lang.String loggerName)
+
+Returns the name of the parent(|java.util.logging.Logger|) for the specified 
+logger. If the specified logger does not exist,nullis returned. If the 
+specified logger is the rootLoggerin the namespace, the result will be an empty 
+string. 
+
+
+    loggerName - The name of a {@code Logger}. 
+
+    Returns: the name of the nearest existing parent logger; an empty string if the 
+             specified logger is the root logger. If the specified logger does 
+             not exist, {@code null} is returned. 
+
+*java.lang.management.PlatformLoggingMXBean.setLoggerLevel(String,String)*
+
+public void setLoggerLevel(
+  java.lang.String loggerName,
+  java.lang.String levelName)
+
+Sets the specified logger to the specified new 
+level(|java.util.logging.Logger|) . If thelevelNameis notnull, the level of the 
+specified logger is set to the parsed Level(|java.util.logging.Level|) matching 
+thelevelName. If thelevelNameisnull, the level of the specified logger is set 
+tonulland the effective level of the logger is inherited from its nearest 
+ancestor with a specific (non-null) level value. 
+
+
+    loggerName - The name of the {@code Logger} to be set. Must be non-null. 
+    levelName - The name of the level to set on the specified logger, or {@code null} if 
+       setting the level to inherit from its nearest ancestor. 
+
+

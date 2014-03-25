@@ -1,0 +1,110 @@
+*javax.management.openmbean.CompositeDataInvocationHandler* *CompositeDataInvocationHandler* 
+
+public class CompositeDataInvocationHandler
+  extends    |java.lang.Object|
+  implements |java.lang.reflect.InvocationHandler|
+
+|javax.management.openmbean.CompositeDataInvocationHandler_Description|
+|javax.management.openmbean.CompositeDataInvocationHandler_Fields|
+|javax.management.openmbean.CompositeDataInvocationHandler_Constructors|
+|javax.management.openmbean.CompositeDataInvocationHandler_Methods|
+
+================================================================================
+
+*javax.management.openmbean.CompositeDataInvocationHandler_Constructors*
+|javax.management.openmbean.CompositeDataInvocationHandler(CompositeData)|Const
+
+*javax.management.openmbean.CompositeDataInvocationHandler_Methods*
+|javax.management.openmbean.CompositeDataInvocationHandler.getCompositeData()|R
+|javax.management.openmbean.CompositeDataInvocationHandler.invoke(Object,Method,Object[])|
+
+*javax.management.openmbean.CompositeDataInvocationHandler_Description*
+
+An (|java.lang.reflect.InvocationHandler|) that forwards getter methods to a 
+(|javax.management.openmbean.CompositeData|) . If you have an interface that 
+contains only getter methods (such asString getName()orboolean isActive()) then 
+you can use this class in conjunction with the (|java.lang.reflect.Proxy|) 
+class to produce an implementation of the interface where each getter returns 
+the value of the corresponding item in aCompositeData. 
+
+For example, suppose you have an interface like this: 
+
+
+
+public interface NamedNumber { public int getNumber(); public String getName(); 
+} 
+
+
+
+and aCompositeDataconstructed like this: 
+
+
+
+CompositeData cd = new (|javax.management.openmbean.CompositeDataSupport|) ( 
+someCompositeType, new String[] {"number", "name"}, new Object[] {5, "five"} ); 
+
+
+
+then you can construct an object implementingNamedNumberand backed by the 
+objectcdlike this: 
+
+
+
+InvocationHandler handler = new CompositeDataInvocationHandler(cd); NamedNumber 
+nn = (NamedNumber) Proxy.newProxyInstance(NamedNumber.class.getClassLoader(), 
+new Class[] {NamedNumber.class}, handler); 
+
+
+
+A call tonn.getNumber()will then return 5. 
+
+If the first letter of the property defined by a getter is a capital, then this 
+handler will look first for an item in theCompositeDatabeginning with a 
+capital, then, if that is not found, for an item beginning with the 
+corresponding lowercase letter or code point. For a getter calledgetNumber(), 
+the handler will first look for an item calledNumber, then fornumber. If the 
+getter is calledgetnumber(), then the item must be callednumber. 
+
+If the method given to 
+invoke(|javax.management.openmbean.CompositeDataInvocationHandler|) is the 
+methodboolean equals(Object)inherited fromObject, then it will return true if 
+and only if the argument is aProxywhoseInvocationHandleris also 
+aCompositeDataInvocationHandlerand whose backingCompositeDatais equal (not 
+necessarily identical) to this object's. If the method given toinvokeis the 
+methodint hashCode()inherited fromObject, then it will return a value that is 
+consistent with this definition ofequals: if two objects are equal according 
+toequals, then they will have the samehashCode. 
+
+
+
+*javax.management.openmbean.CompositeDataInvocationHandler(CompositeData)*
+
+public CompositeDataInvocationHandler(javax.management.openmbean.CompositeData compositeData)
+
+Construct a handler backed by the givenCompositeData. 
+
+    compositeData - the {@code CompositeData} that will supply information to getters. 
+
+*javax.management.openmbean.CompositeDataInvocationHandler.getCompositeData()*
+
+public |javax.management.openmbean.CompositeData| getCompositeData()
+
+Return theCompositeDatathat was supplied to the constructor. 
+
+
+
+    Returns: the {@code CompositeData} that this handler is backed by. This is never null. 
+
+*javax.management.openmbean.CompositeDataInvocationHandler.invoke(Object,Method,Object[])*
+
+public |java.lang.Object| invoke(
+  java.lang.Object proxy,
+  java.lang.reflect.Method method,
+  java.lang.Object[] args)
+  throws |java.lang.Throwable|
+         
+
+
+
+
+

@@ -1,0 +1,99 @@
+*javax.script.Invocable* *Invocable* The optional interface implemented by Scrip
+
+public interface interface Invocable
+
+
+|javax.script.Invocable_Description|
+|javax.script.Invocable_Fields|
+|javax.script.Invocable_Constructors|
+|javax.script.Invocable_Methods|
+
+================================================================================
+
+*javax.script.Invocable_Methods*
+|javax.script.Invocable.getInterface(Class<T>)|Returns an implementation of an 
+|javax.script.Invocable.getInterface(Object,Class<T>)|Returns an implementation
+|javax.script.Invocable.invokeFunction(String,Object...)|Used to call top-level
+|javax.script.Invocable.invokeMethod(Object,String,Object...)|Calls a method on
+
+*javax.script.Invocable_Description*
+
+The optional interface implemented by ScriptEngines whose methods allow the 
+invocation of procedures in scripts that have previously been executed. 
+
+
+
+*javax.script.Invocable.getInterface(Class<T>)*
+
+public |T| getInterface(java.lang.Class<T> clasz)
+
+Returns an implementation of an interface using functions compiled in the 
+interpreter. The methods of the interface may be implemented using the 
+invokeFunction method. 
+
+
+    clasz - The Class object of the interface to return. 
+
+    Returns: An instance of requested interface - null if the requested interface is 
+             unavailable, i. e. if compiled functions in the ScriptEngine 
+             cannot be found matching the ones in the requested interface. 
+
+*javax.script.Invocable.getInterface(Object,Class<T>)*
+
+public |T| getInterface(
+  java.lang.Object thiz,
+  java.lang.Class<T> clasz)
+
+Returns an implementation of an interface using member functions of a scripting 
+object compiled in the interpreter. The methods of the interface may be 
+implemented using the invokeMethod method. 
+
+
+    thiz - The scripting object whose member functions are used to implement the methods 
+       of the interface. 
+    clasz - The Class object of the interface to return. 
+
+    Returns: An instance of requested interface - null if the requested interface is 
+             unavailable, i. e. if compiled methods in the ScriptEngine cannot 
+             be found matching the ones in the requested interface. 
+
+*javax.script.Invocable.invokeFunction(String,Object...)*
+
+public |java.lang.Object| invokeFunction(
+  java.lang.String name,
+  java.lang.Object[] args)
+  throws |java.lang.NoSuchMethodException|
+         |javax.script.ScriptException|
+         
+Used to call top-level procedures and functions defined in scripts. 
+
+
+    args - Arguments to pass to the procedure or function 
+
+    Returns: The value returned by the procedure or function 
+
+*javax.script.Invocable.invokeMethod(Object,String,Object...)*
+
+public |java.lang.Object| invokeMethod(
+  java.lang.Object thiz,
+  java.lang.String name,
+  java.lang.Object[] args)
+  throws |java.lang.NoSuchMethodException|
+         |javax.script.ScriptException|
+         
+Calls a method on a script object compiled during a previous script execution, 
+which is retained in the state of the ScriptEngine. 
+
+
+    name - The name of the procedure to be called. 
+    thiz - If the procedure is a member of a class defined in the script and thiz is an 
+       instance of that class returned by a previous execution or invocation, 
+       the named method is called through that instance. 
+    args - Arguments to pass to the procedure. The rules for converting the arguments to 
+       scripting variables are implementation-specific. 
+
+    Returns: The value returned by the procedure. The rules for converting the scripting 
+             variable returned by the script method to a Java Object are 
+             implementation-specific. 
+
+

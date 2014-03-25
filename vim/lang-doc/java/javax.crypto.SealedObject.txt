@@ -1,0 +1,192 @@
+*javax.crypto.SealedObject* *SealedObject* This class enables a programmer to cr
+
+public class SealedObject
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|javax.crypto.SealedObject_Description|
+|javax.crypto.SealedObject_Fields|
+|javax.crypto.SealedObject_Constructors|
+|javax.crypto.SealedObject_Methods|
+
+================================================================================
+
+*javax.crypto.SealedObject_Fields*
+|byte[]_javax.crypto.SealedObject.encodedParams|
+
+*javax.crypto.SealedObject_Constructors*
+|javax.crypto.SealedObject(SealedObject)|Constructs a SealedObject object from 
+|javax.crypto.SealedObject(Serializable,Cipher)|Constructs a SealedObject from 
+
+*javax.crypto.SealedObject_Methods*
+|javax.crypto.SealedObject.getAlgorithm()|Returns the algorithm that was used t
+|javax.crypto.SealedObject.getObject(Cipher)|Retrieves the original (encapsulat
+|javax.crypto.SealedObject.getObject(Key)|Retrieves the original (encapsulated)
+|javax.crypto.SealedObject.getObject(Key,String)|Retrieves the original (encaps
+
+*javax.crypto.SealedObject_Description*
+
+This class enables a programmer to create an object and protect its 
+confidentiality with a cryptographic algorithm. 
+
+Given any Serializable object, one can create a SealedObject that encapsulates 
+the original object, in serialized format (i.e., a "deep copy"), and seals 
+(encrypts) its serialized contents, using a cryptographic algorithm such as 
+DES, to protect its confidentiality. The encrypted content can later be 
+decrypted (with the corresponding algorithm using the correct decryption key) 
+and de-serialized, yielding the original object. 
+
+Note that the Cipher object must be fully initialized with the correct 
+algorithm, key, padding scheme, etc., before being applied to a SealedObject. 
+
+The original object that was sealed can be recovered in two different ways: 
+
+
+
+by using the getObject(|javax.crypto.SealedObject|) method that takes a Cipher 
+object. 
+
+This method requires a fully initialized Cipher object, initialized with the 
+exact same algorithm, key, padding scheme, etc., that were used to seal the 
+object. 
+
+This approach has the advantage that the party who unseals the sealed object 
+does not require knowledge of the decryption key. For example, after one party 
+has initialized the cipher object with the required decryption key, it could 
+hand over the cipher object to another party who then unseals the sealed 
+object. 
+
+
+
+by using one of the getObject(|javax.crypto.SealedObject|) methods that take a 
+Key object. 
+
+In this approach, the getObject method creates a cipher object for the 
+appropriate decryption algorithm and initializes it with the given decryption 
+key and the algorithm parameters (if any) that were stored in the sealed 
+object. 
+
+This approach has the advantage that the party who unseals the object does not 
+need to keep track of the parameters (e.g., an IV) that were used to seal the 
+object. 
+
+
+
+
+
+*byte[]_javax.crypto.SealedObject.encodedParams*
+
+The cryptographic parameters used by the sealing Cipher, encoded in the default 
+format. 
+
+That is, cipher.getParameters().getEncoded(). 
+
+
+
+*javax.crypto.SealedObject(SealedObject)*
+
+protected SealedObject(javax.crypto.SealedObject so)
+
+Constructs a SealedObject object from the passed-in SealedObject. 
+
+    so - a SealedObject object 
+
+*javax.crypto.SealedObject(Serializable,Cipher)*
+
+public SealedObject(
+  java.io.Serializable object,
+  javax.crypto.Cipher c)
+  throws |javax.crypto.IllegalBlockSizeException|
+         |java.io.IOException|
+         
+Constructs a SealedObject from any Serializable object. 
+
+The given object is serialized, and its serialized contents are encrypted using 
+the given Cipher, which must be fully initialized. 
+
+Any algorithm parameters that may be used in the encryption operation are 
+stored inside of the new SealedObject. 
+
+    object - the object to be sealed; can be null. 
+    c - the cipher used to seal the object. 
+
+*javax.crypto.SealedObject.getAlgorithm()*
+
+public final |java.lang.String| getAlgorithm()
+
+Returns the algorithm that was used to seal this object. 
+
+
+
+    Returns: the algorithm that was used to seal this object. 
+
+*javax.crypto.SealedObject.getObject(Cipher)*
+
+public final |java.lang.Object| getObject(javax.crypto.Cipher c)
+  throws |javax.crypto.BadPaddingException|
+         |java.lang.ClassNotFoundException|
+         |javax.crypto.IllegalBlockSizeException|
+         |java.io.IOException|
+         
+Retrieves the original (encapsulated) object. 
+
+The encapsulated object is unsealed (using the given Cipher, assuming that the 
+Cipher is already properly initialized) and de-serialized, before it is 
+returned. 
+
+
+    c - the cipher used to unseal the object 
+
+    Returns: the original object. 
+
+*javax.crypto.SealedObject.getObject(Key)*
+
+public final |java.lang.Object| getObject(java.security.Key key)
+  throws |java.lang.ClassNotFoundException|
+         |java.security.InvalidKeyException|
+         |java.io.IOException|
+         |java.security.NoSuchAlgorithmException|
+         
+Retrieves the original (encapsulated) object. 
+
+This method creates a cipher for the algorithm that had been used in the 
+sealing operation. If the default provider package provides an implementation 
+of that algorithm, an instance of Cipher containing that implementation is 
+used. If the algorithm is not available in the default package, other packages 
+are searched. The Cipher object is initialized for decryption, using the given 
+key and the parameters (if any) that had been used in the sealing operation. 
+
+The encapsulated object is unsealed and de-serialized, before it is returned. 
+
+
+    key - the key used to unseal the object. 
+
+    Returns: the original object. 
+
+*javax.crypto.SealedObject.getObject(Key,String)*
+
+public final |java.lang.Object| getObject(
+  java.security.Key key,
+  java.lang.String provider)
+  throws |java.lang.ClassNotFoundException|
+         |java.security.InvalidKeyException|
+         |java.io.IOException|
+         |java.security.NoSuchAlgorithmException|
+         |java.security.NoSuchProviderException|
+         
+Retrieves the original (encapsulated) object. 
+
+This method creates a cipher for the algorithm that had been used in the 
+sealing operation, using an implementation of that algorithm from the given 
+provider. The Cipher object is initialized for decryption, using the given key 
+and the parameters (if any) that had been used in the sealing operation. 
+
+The encapsulated object is unsealed and de-serialized, before it is returned. 
+
+
+    key - the key used to unseal the object. 
+    provider - the name of the provider of the algorithm to unseal the object. 
+
+    Returns: the original object. 
+
+

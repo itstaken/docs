@@ -1,0 +1,111 @@
+*java.awt.SecondaryLoop* *SecondaryLoop* A helper interface to run the nested ev
+
+public interface interface SecondaryLoop
+
+
+|java.awt.SecondaryLoop_Description|
+|java.awt.SecondaryLoop_Fields|
+|java.awt.SecondaryLoop_Constructors|
+|java.awt.SecondaryLoop_Methods|
+
+================================================================================
+
+*java.awt.SecondaryLoop_Methods*
+|java.awt.SecondaryLoop.enter()|Blocks the execution of the current thread and 
+|java.awt.SecondaryLoop.exit()|Unblocks the execution of the thread blocked by 
+
+*java.awt.SecondaryLoop_Description*
+
+A helper interface to run the nested event loop. 
+
+Objects that implement this interface are created with the 
+(|java.awt.EventQueue|) method. The interface provides two methods, 
+(|java.awt.SecondaryLoop|) and (|java.awt.SecondaryLoop|) , which can be used 
+to start and stop the event loop. 
+
+When the (|java.awt.SecondaryLoop|) method is called, the current thread is 
+blocked until the loop is terminated by the (|java.awt.SecondaryLoop|) method. 
+Also, a new event loop is started on the event dispatch thread, which may or 
+may not be the current thread. The loop can be terminated on any thread by 
+calling its (|java.awt.SecondaryLoop|) method. After the loop is terminated, 
+theSecondaryLoopobject can be reused to run a new nested event loop. 
+
+A typical use case of applying this interface is AWT and Swing modal dialogs. 
+When a modal dialog is shown on the event dispatch thread, it enters a new 
+secondary loop. Later, when the dialog is hidden or disposed, it exits the 
+loop, and the thread continues its execution. 
+
+The following example illustrates a simple use case of secondary loops: 
+
+
+
+SecondaryLoop loop; 
+
+JButton jButton = new JButton("Button"); jButton.addActionListener(new 
+ActionListener() {@Overridepublic void actionPerformed(ActionEvent e) { Toolkit 
+tk = Toolkit.getDefaultToolkit(); EventQueue eq = tk.getSystemEventQueue(); 
+loop = eq.createSecondaryLoop(); 
+
+// Spawn a new thread to do the work Thread worker = new WorkerThread(); 
+worker.start(); 
+
+// Enter the loop to block the current event // handler, but leave UI 
+responsive if (!loop.enter()) { // Report an error } } }); 
+
+class WorkerThread extends Thread {@Overridepublic void run() { // Perform 
+calculations doSomethingUseful(); 
+
+// Exit the loop loop.exit(); } } 
+
+
+
+*java.awt.SecondaryLoop.enter()*
+
+public boolean enter()
+
+Blocks the execution of the current thread and enters a new secondary event 
+loop on the event dispatch thread. 
+
+This method can be called by any thread including the event dispatch thread. 
+This thread will be blocked until the (|java.awt.SecondaryLoop|) method is 
+called or the loop is terminated. A new secondary loop will be created on the 
+event dispatch thread for dispatching events in either case. 
+
+This method can only start one new event loop at a time per object. If a 
+secondary event loop has already been started by this object and is currently 
+still running, this method returnsfalseto indicate that it was not successful 
+in starting a new event loop. Otherwise, this method blocks the calling thread 
+and later returnstruewhen the new event loop is terminated. At such time, this 
+object can again be used to start another new event loop. 
+
+
+
+    Returns: {@code true} after termination of the secondary loop, if the secondary loop was 
+             started by this call, {@code false} otherwise 
+
+*java.awt.SecondaryLoop.exit()*
+
+public boolean exit()
+
+Unblocks the execution of the thread blocked by the (|java.awt.SecondaryLoop|) 
+method and exits the secondary loop. 
+
+This method resumes the thread that called the (|java.awt.SecondaryLoop|) 
+method and exits the secondary loop that was created when the 
+(|java.awt.SecondaryLoop|) method was invoked. 
+
+Note that if any other secondary loop is started while this loop is running, 
+the blocked thread will not resume execution until the nested loop is 
+terminated. 
+
+If this secondary loop has not been started with the (|java.awt.SecondaryLoop|) 
+method, or this secondary loop has already finished with the 
+(|java.awt.SecondaryLoop|) method, this method returnsfalse, otherwisetrueis 
+returned. 
+
+
+
+    Returns: {@code true} if this loop was previously started and has not yet been finished 
+             with the {@link #exit} method, {@code false} otherwise 
+
+

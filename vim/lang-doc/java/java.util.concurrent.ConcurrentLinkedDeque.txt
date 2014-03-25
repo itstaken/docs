@@ -1,0 +1,466 @@
+*java.util.concurrent.ConcurrentLinkedDeque* *ConcurrentLinkedDeque* An unbounde
+
+public class ConcurrentLinkedDeque<E>
+  extends    |java.util.AbstractCollection|
+  implements |java.util.Deque|
+             |java.io.Serializable|
+
+|java.util.concurrent.ConcurrentLinkedDeque_Description|
+|java.util.concurrent.ConcurrentLinkedDeque_Fields|
+|java.util.concurrent.ConcurrentLinkedDeque_Constructors|
+|java.util.concurrent.ConcurrentLinkedDeque_Methods|
+
+================================================================================
+
+*java.util.concurrent.ConcurrentLinkedDeque_Constructors*
+|java.util.concurrent.ConcurrentLinkedDeque()|Constructs an empty deque.
+|java.util.concurrent.ConcurrentLinkedDeque(Collection<?extendsE>)|Constructs a
+
+*java.util.concurrent.ConcurrentLinkedDeque_Methods*
+|java.util.concurrent.ConcurrentLinkedDeque.add(E)|Inserts the specified elemen
+|java.util.concurrent.ConcurrentLinkedDeque.addAll(Collection<?extendsE>)|Appen
+|java.util.concurrent.ConcurrentLinkedDeque.addFirst(E)|Inserts the specified e
+|java.util.concurrent.ConcurrentLinkedDeque.addLast(E)|Inserts the specified el
+|java.util.concurrent.ConcurrentLinkedDeque.clear()|Removes all of the elements
+|java.util.concurrent.ConcurrentLinkedDeque.contains(Object)|Returnstrueif this
+|java.util.concurrent.ConcurrentLinkedDeque.descendingIterator()|Returns an ite
+|java.util.concurrent.ConcurrentLinkedDeque.element()|
+|java.util.concurrent.ConcurrentLinkedDeque.getFirst()|
+|java.util.concurrent.ConcurrentLinkedDeque.getLast()|
+|java.util.concurrent.ConcurrentLinkedDeque.isEmpty()|Returnstrueif this collec
+|java.util.concurrent.ConcurrentLinkedDeque.iterator()|Returns an iterator over
+|java.util.concurrent.ConcurrentLinkedDeque.offer(E)|Inserts the specified elem
+|java.util.concurrent.ConcurrentLinkedDeque.offerFirst(E)|Inserts the specified
+|java.util.concurrent.ConcurrentLinkedDeque.offerLast(E)|Inserts the specified 
+|java.util.concurrent.ConcurrentLinkedDeque.peek()|
+|java.util.concurrent.ConcurrentLinkedDeque.peekFirst()|
+|java.util.concurrent.ConcurrentLinkedDeque.peekLast()|
+|java.util.concurrent.ConcurrentLinkedDeque.poll()|
+|java.util.concurrent.ConcurrentLinkedDeque.pollFirst()|
+|java.util.concurrent.ConcurrentLinkedDeque.pollLast()|
+|java.util.concurrent.ConcurrentLinkedDeque.pop()|
+|java.util.concurrent.ConcurrentLinkedDeque.push(E)|
+|java.util.concurrent.ConcurrentLinkedDeque.remove()|
+|java.util.concurrent.ConcurrentLinkedDeque.remove(Object)|Removes the first el
+|java.util.concurrent.ConcurrentLinkedDeque.removeFirst()|
+|java.util.concurrent.ConcurrentLinkedDeque.removeFirstOccurrence(Object)|Remov
+|java.util.concurrent.ConcurrentLinkedDeque.removeLast()|
+|java.util.concurrent.ConcurrentLinkedDeque.removeLastOccurrence(Object)|Remove
+|java.util.concurrent.ConcurrentLinkedDeque.size()|Returns the number of elemen
+|java.util.concurrent.ConcurrentLinkedDeque.toArray()|Returns an array containi
+|java.util.concurrent.ConcurrentLinkedDeque.toArray(T[])|Returns an array conta
+
+*java.util.concurrent.ConcurrentLinkedDeque_Description*
+
+An unbounded concurrent deque(|java.util.Deque|) based on linked nodes. 
+Concurrent insertion, removal, and access operations execute safely across 
+multiple threads. AConcurrentLinkedDequeis an appropriate choice when many 
+threads will share access to a common collection. Like most other concurrent 
+collection implementations, this class does not permit the use ofnullelements. 
+
+Iterators are weakly consistent, returning elements reflecting the state of the 
+deque at some point at or since the creation of the iterator. They do not throw 
+ConcurrentModificationException(|java.util.ConcurrentModificationException|) , 
+and may proceed concurrently with other operations. 
+
+Beware that, unlike in most collections, thesizemethod is NOT a constant-time 
+operation. Because of the asynchronous nature of these deques, determining the 
+current number of elements requires a traversal of the elements, and so may 
+report inaccurate results if this collection is modified during traversal. 
+Additionally, the bulk operationsaddAll,removeAll,retainAll,containsAll,equals, 
+andtoArrayare not guaranteed to be performed atomically. For example, an 
+iterator operating concurrently with anaddAlloperation might view only some of 
+the added elements. 
+
+This class and its iterator implement all of the optional methods of the 
+(|java.util.Deque|) and (|java.util.Iterator|) interfaces. 
+
+Memory consistency effects: As with other concurrent collections, actions in a 
+thread prior to placing an object into aConcurrentLinkedDequehappen-before 
+actions subsequent to the access or removal of that element from 
+theConcurrentLinkedDequein another thread. 
+
+This class is a member of the <a 
+href="/../technotes/guides/collections/index.html"> Java Collections Framework. 
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque()*
+
+public ConcurrentLinkedDeque()
+
+Constructs an empty deque. 
+
+
+*java.util.concurrent.ConcurrentLinkedDeque(Collection<?extendsE>)*
+
+public ConcurrentLinkedDeque(java.util.Collection<? extends E> c)
+
+Constructs a deque initially containing the elements of the given collection, 
+added in traversal order of the collection's iterator. 
+
+    c - the collection of elements to initially contain 
+
+*java.util.concurrent.ConcurrentLinkedDeque.add(E)*
+
+public boolean add(E e)
+
+Inserts the specified element at the tail of this deque. As the deque is 
+unbounded, this method will never throw (|java.lang.IllegalStateException|) or 
+returnfalse. 
+
+
+
+    Returns: {@code true} (as specified by {@link Collection#add}) 
+
+*java.util.concurrent.ConcurrentLinkedDeque.addAll(Collection<?extendsE>)*
+
+public boolean addAll(java.util.Collection<? extends E> c)
+
+Appends all of the elements in the specified collection to the end of this 
+deque, in the order that they are returned by the specified collection's 
+iterator. Attempts toaddAllof a deque to itself result 
+inIllegalArgumentException. 
+
+
+    c - the elements to be inserted into this deque 
+
+    Returns: {@code true} if this deque changed as a result of the call 
+
+*java.util.concurrent.ConcurrentLinkedDeque.addFirst(E)*
+
+public void addFirst(E e)
+
+Inserts the specified element at the front of this deque. As the deque is 
+unbounded, this method will never throw (|java.lang.IllegalStateException|) . 
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.addLast(E)*
+
+public void addLast(E e)
+
+Inserts the specified element at the end of this deque. As the deque is 
+unbounded, this method will never throw (|java.lang.IllegalStateException|) . 
+
+This method is equivalent to (|java.util.concurrent.ConcurrentLinkedDeque|) . 
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.clear()*
+
+public void clear()
+
+Removes all of the elements from this deque. 
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.contains(Object)*
+
+public boolean contains(java.lang.Object o)
+
+Returnstrueif this deque contains at least one elementesuch thato.equals(e). 
+
+
+    o - element whose presence in this deque is to be tested 
+
+    Returns: {@code true} if this deque contains the specified element 
+
+*java.util.concurrent.ConcurrentLinkedDeque.descendingIterator()*
+
+public |java.util.Iterator|<E> descendingIterator()
+
+Returns an iterator over the elements in this deque in reverse sequential 
+order. The elements will be returned in order from last (tail) to first (head). 
+
+The returned iterator is a "weakly consistent" iterator that will never throw 
+ConcurrentModificationException(|java.util.ConcurrentModificationException|) , 
+and guarantees to traverse elements as they existed upon construction of the 
+iterator, and may (but is not guaranteed to) reflect any modifications 
+subsequent to construction. 
+
+
+
+    Returns: an iterator over the elements in this deque in reverse order 
+
+*java.util.concurrent.ConcurrentLinkedDeque.element()*
+
+public |E| element()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.getFirst()*
+
+public |E| getFirst()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.getLast()*
+
+public |E| getLast()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.isEmpty()*
+
+public boolean isEmpty()
+
+Returnstrueif this collection contains no elements. 
+
+
+
+    Returns: {@code true} if this collection contains no elements 
+
+*java.util.concurrent.ConcurrentLinkedDeque.iterator()*
+
+public |java.util.Iterator|<E> iterator()
+
+Returns an iterator over the elements in this deque in proper sequence. The 
+elements will be returned in order from first (head) to last (tail). 
+
+The returned iterator is a "weakly consistent" iterator that will never throw 
+ConcurrentModificationException(|java.util.ConcurrentModificationException|) , 
+and guarantees to traverse elements as they existed upon construction of the 
+iterator, and may (but is not guaranteed to) reflect any modifications 
+subsequent to construction. 
+
+
+
+    Returns: an iterator over the elements in this deque in proper sequence 
+
+*java.util.concurrent.ConcurrentLinkedDeque.offer(E)*
+
+public boolean offer(E e)
+
+Inserts the specified element at the tail of this deque. As the deque is 
+unbounded, this method will never returnfalse. 
+
+
+
+    Returns: {@code true} (as specified by {@link Queue#offer}) 
+
+*java.util.concurrent.ConcurrentLinkedDeque.offerFirst(E)*
+
+public boolean offerFirst(E e)
+
+Inserts the specified element at the front of this deque. As the deque is 
+unbounded, this method will never returnfalse. 
+
+
+
+    Returns: {@code true} (as specified by {@link Deque#offerFirst}) 
+
+*java.util.concurrent.ConcurrentLinkedDeque.offerLast(E)*
+
+public boolean offerLast(E e)
+
+Inserts the specified element at the end of this deque. As the deque is 
+unbounded, this method will never returnfalse. 
+
+This method is equivalent to (|java.util.concurrent.ConcurrentLinkedDeque|) . 
+
+
+
+    Returns: {@code true} (as specified by {@link Deque#offerLast}) 
+
+*java.util.concurrent.ConcurrentLinkedDeque.peek()*
+
+public |E| peek()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.peekFirst()*
+
+public |E| peekFirst()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.peekLast()*
+
+public |E| peekLast()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.poll()*
+
+public |E| poll()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.pollFirst()*
+
+public |E| pollFirst()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.pollLast()*
+
+public |E| pollLast()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.pop()*
+
+public |E| pop()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.push(E)*
+
+public void push(E e)
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.remove()*
+
+public |E| remove()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.remove(Object)*
+
+public boolean remove(java.lang.Object o)
+
+Removes the first elementesuch thato.equals(e), if such an element exists in 
+this deque. If the deque does not contain the element, it is unchanged. 
+
+
+    o - element to be removed from this deque, if present 
+
+    Returns: {@code true} if the deque contained the specified element 
+
+*java.util.concurrent.ConcurrentLinkedDeque.removeFirst()*
+
+public |E| removeFirst()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.removeFirstOccurrence(Object)*
+
+public boolean removeFirstOccurrence(java.lang.Object o)
+
+Removes the first elementesuch thato.equals(e), if such an element exists in 
+this deque. If the deque does not contain the element, it is unchanged. 
+
+
+    o - element to be removed from this deque, if present 
+
+    Returns: {@code true} if the deque contained the specified element 
+
+*java.util.concurrent.ConcurrentLinkedDeque.removeLast()*
+
+public |E| removeLast()
+
+
+
+
+
+*java.util.concurrent.ConcurrentLinkedDeque.removeLastOccurrence(Object)*
+
+public boolean removeLastOccurrence(java.lang.Object o)
+
+Removes the last elementesuch thato.equals(e), if such an element exists in 
+this deque. If the deque does not contain the element, it is unchanged. 
+
+
+    o - element to be removed from this deque, if present 
+
+    Returns: {@code true} if the deque contained the specified element 
+
+*java.util.concurrent.ConcurrentLinkedDeque.size()*
+
+public int size()
+
+Returns the number of elements in this deque. If this deque contains more 
+thanInteger.MAX_VALUEelements, it returnsInteger.MAX_VALUE. 
+
+Beware that, unlike in most collections, this method is NOT a constant-time 
+operation. Because of the asynchronous nature of these deques, determining the 
+current number of elements requires traversing them all to count them. 
+Additionally, it is possible for the size to change during execution of this 
+method, in which case the returned result will be inaccurate. Thus, this method 
+is typically not very useful in concurrent applications. 
+
+
+
+    Returns: the number of elements in this deque 
+
+*java.util.concurrent.ConcurrentLinkedDeque.toArray()*
+
+public |java.lang.Object|[] toArray()
+
+Returns an array containing all of the elements in this deque, in proper 
+sequence (from first to last element). 
+
+The returned array will be "safe" in that no references to it are maintained by 
+this deque. (In other words, this method must allocate a new array). The caller 
+is thus free to modify the returned array. 
+
+This method acts as bridge between array-based and collection-based APIs. 
+
+
+
+    Returns: an array containing all of the elements in this deque 
+
+*java.util.concurrent.ConcurrentLinkedDeque.toArray(T[])*
+
+public |T|[] toArray(T[] a)
+
+Returns an array containing all of the elements in this deque, in proper 
+sequence (from first to last element); the runtime type of the returned array 
+is that of the specified array. If the deque fits in the specified array, it is 
+returned therein. Otherwise, a new array is allocated with the runtime type of 
+the specified array and the size of this deque. 
+
+If this deque fits in the specified array with room to spare (i.e., the array 
+has more elements than this deque), the element in the array immediately 
+following the end of the deque is set tonull. 
+
+Like the (|java.util.concurrent.ConcurrentLinkedDeque|) method, this method 
+acts as bridge between array-based and collection-based APIs. Further, this 
+method allows precise control over the runtime type of the output array, and 
+may, under certain circumstances, be used to save allocation costs. 
+
+Supposexis a deque known to contain only strings. The following code can be 
+used to dump the deque into a newly allocated array ofString: 
+
+
+
+String[] y = x.toArray(new String[0]); 
+
+Note thattoArray(new Object[0])is identical in function totoArray(). 
+
+
+    a - the array into which the elements of the deque are to be stored, if it is big 
+       enough; otherwise, a new array of the same runtime type is allocated for 
+       this purpose 
+
+    Returns: an array containing all of the elements in this deque 
+
+

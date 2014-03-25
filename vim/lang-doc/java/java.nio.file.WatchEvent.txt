@@ -1,0 +1,72 @@
+*java.nio.file.WatchEvent* *WatchEvent* An event or a repeated event for an obje
+
+public interface interface WatchEvent<T>
+
+
+|java.nio.file.WatchEvent_Description|
+|java.nio.file.WatchEvent_Fields|
+|java.nio.file.WatchEvent_Constructors|
+|java.nio.file.WatchEvent_Methods|
+
+================================================================================
+
+*java.nio.file.WatchEvent_Methods*
+|java.nio.file.WatchEvent.context()|Returns the context for the event.
+|java.nio.file.WatchEvent.count()|Returns the event count.
+|java.nio.file.WatchEvent.kind()|Returns the event kind.
+
+*java.nio.file.WatchEvent_Description*
+
+An event or a repeated event for an object that is registered with a 
+(|java.nio.file.WatchService|) . 
+
+An event is classified by its kind(|java.nio.file.WatchEvent|) and has a 
+count(|java.nio.file.WatchEvent|) to indicate the number of times that the 
+event has been observed. This allows for efficient representation of repeated 
+events. The context(|java.nio.file.WatchEvent|) method returns any context 
+associated with the event. In the case of a repeated event then the context is 
+the same for all events. 
+
+Watch events are immutable and safe for use by multiple concurrent threads. 
+
+
+
+*java.nio.file.WatchEvent.context()*
+
+public |T| context()
+
+Returns the context for the event. 
+
+In the case of ENTRY_CREATE(|java.nio.file.StandardWatchEventKinds|) , 
+ENTRY_DELETE(|java.nio.file.StandardWatchEventKinds|) , and 
+ENTRY_MODIFY(|java.nio.file.StandardWatchEventKinds|) events the context is 
+aPaththat is the relative(|java.nio.file.Path|) path between the directory 
+registered with the watch service, and the entry that is created, deleted, or 
+modified. 
+
+
+
+    Returns: the event context; may be {@code null} 
+
+*java.nio.file.WatchEvent.count()*
+
+public int count()
+
+Returns the event count. If the event count is greater than1then this is a 
+repeated event. 
+
+
+
+    Returns: the event count 
+
+*java.nio.file.WatchEvent.kind()*
+
+public |java.nio.file.WatchEvent.Kind|<T> kind()
+
+Returns the event kind. 
+
+
+
+    Returns: the event kind 
+
+

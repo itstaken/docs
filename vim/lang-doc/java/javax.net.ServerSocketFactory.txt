@@ -1,0 +1,138 @@
+*javax.net.ServerSocketFactory* *ServerSocketFactory* This class creates server 
+
+public abstract class ServerSocketFactory
+  extends    |java.lang.Object|
+
+|javax.net.ServerSocketFactory_Description|
+|javax.net.ServerSocketFactory_Fields|
+|javax.net.ServerSocketFactory_Constructors|
+|javax.net.ServerSocketFactory_Methods|
+
+================================================================================
+
+*javax.net.ServerSocketFactory_Constructors*
+|javax.net.ServerSocketFactory()|Creates a server socket factory.
+
+*javax.net.ServerSocketFactory_Methods*
+|javax.net.ServerSocketFactory.createServerSocket()|Returns an unbound server s
+|javax.net.ServerSocketFactory.createServerSocket(int)|Returns a server socket 
+|javax.net.ServerSocketFactory.createServerSocket(int,int)|Returns a server soc
+|javax.net.ServerSocketFactory.createServerSocket(int,int,InetAddress)|Returns 
+|javax.net.ServerSocketFactory.getDefault()|Returns a copy of the environment's
+
+*javax.net.ServerSocketFactory_Description*
+
+This class creates server sockets. It may be subclassed by other factories, 
+which create particular types of server sockets. This provides a general 
+framework for the addition of public socket-level functionality. It is the 
+server side analogue of a socket factory, and similarly provides a way to 
+capture a variety of policies related to the sockets being constructed. 
+
+Like socket factories, server Socket factory instances have methods used to 
+create sockets. There is also an environment specific default server socket 
+factory; frameworks will often use their own customized factory. 
+
+
+
+*javax.net.ServerSocketFactory()*
+
+protected ServerSocketFactory()
+
+Creates a server socket factory. 
+
+
+*javax.net.ServerSocketFactory.createServerSocket()*
+
+public |java.net.ServerSocket| createServerSocket()
+  throws |java.io.IOException|
+         
+Returns an unbound server socket. The socket is configured with the socket 
+options (such as accept timeout) given to this factory. 
+
+
+
+    Returns: the unbound socket 
+
+*javax.net.ServerSocketFactory.createServerSocket(int)*
+
+public abstract |java.net.ServerSocket| createServerSocket(int port)
+  throws |java.io.IOException|
+         
+Returns a server socket bound to the specified port. The socket is configured 
+with the socket options (such as accept timeout) given to this factory. 
+
+If there is a security manager, its checkListen method is called with the port 
+argument as its argument to ensure the operation is allowed. This could result 
+in a SecurityException. 
+
+
+    port - the port to listen to 
+
+    Returns: the ServerSocket 
+
+*javax.net.ServerSocketFactory.createServerSocket(int,int)*
+
+public abstract |java.net.ServerSocket| createServerSocket(
+  int port,
+  int backlog)
+  throws |java.io.IOException|
+         
+Returns a server socket bound to the specified port, and uses the specified 
+connection backlog. The socket is configured with the socket options (such as 
+accept timeout) given to this factory. 
+
+The backlog argument must be a positive value greater than 0. If the value 
+passed if equal or less than 0, then the default value will be assumed. 
+
+If there is a security manager, its checkListen method is called with the port 
+argument as its argument to ensure the operation is allowed. This could result 
+in a SecurityException. 
+
+
+    port - the port to listen to 
+    backlog - how many connections are queued 
+
+    Returns: the ServerSocket 
+
+*javax.net.ServerSocketFactory.createServerSocket(int,int,InetAddress)*
+
+public abstract |java.net.ServerSocket| createServerSocket(
+  int port,
+  int backlog,
+  java.net.InetAddress ifAddress)
+  throws |java.io.IOException|
+         
+Returns a server socket bound to the specified port, with a specified listen 
+backlog and local IP. 
+
+The ifAddress argument can be used on a multi-homed host for a ServerSocket 
+that will only accept connect requests to one of its addresses. If ifAddress is 
+null, it will accept connections on all local addresses. The socket is 
+configured with the socket options (such as accept timeout) given to this 
+factory. 
+
+The backlog argument must be a positive value greater than 0. If the value 
+passed if equal or less than 0, then the default value will be assumed. 
+
+If there is a security manager, its checkListen method is called with the port 
+argument as its argument to ensure the operation is allowed. This could result 
+in a SecurityException. 
+
+
+    port - the port to listen to 
+    backlog - how many connections are queued 
+    ifAddress - the network interface address to use 
+
+    Returns: the ServerSocket 
+
+*javax.net.ServerSocketFactory.getDefault()*
+
+public static |javax.net.ServerSocketFactory| getDefault()
+
+Returns a copy of the environment's default socket factory. 
+
+
+
+    Returns: the ServerSocketFactory 
+
+

@@ -1,0 +1,116 @@
+*java.util.concurrent.RecursiveAction* *RecursiveAction* A recursive resultlessF
+
+public abstract class RecursiveAction
+  extends    |java.util.concurrent.ForkJoinTask|
+
+|java.util.concurrent.RecursiveAction_Description|
+|java.util.concurrent.RecursiveAction_Fields|
+|java.util.concurrent.RecursiveAction_Constructors|
+|java.util.concurrent.RecursiveAction_Methods|
+
+================================================================================
+
+*java.util.concurrent.RecursiveAction_Constructors*
+|java.util.concurrent.RecursiveAction()|
+
+*java.util.concurrent.RecursiveAction_Methods*
+|java.util.concurrent.RecursiveAction.compute()|The main computation performed 
+|java.util.concurrent.RecursiveAction.exec()|Implements execution conventions f
+|java.util.concurrent.RecursiveAction.getRawResult()|Always returnsnull.
+|java.util.concurrent.RecursiveAction.setRawResult(Void)|Requires null completi
+
+*java.util.concurrent.RecursiveAction_Description*
+
+A recursive resultless (|java.util.concurrent.ForkJoinTask|) . This class 
+establishes conventions to parameterize resultless actions asVoidForkJoinTasks. 
+Becausenullis the only valid value of typeVoid, methods such as join always 
+returnnullupon completion. 
+
+Sample Usages. Here is a sketch of a ForkJoin sort that sorts a 
+givenlong[]array: 
+
+class SortTask extends RecursiveAction { final long[] array; final int lo; 
+final int hi; SortTask(long[] array, int lo, int hi) { this.array = array; 
+this.lo = lo; this.hi = hi; } protected void compute() { if (hi - lo >> 1; 
+invokeAll(new SortTask(array, lo, mid), new SortTask(array, mid, hi)); 
+merge(array, lo, hi); } } } 
+
+You could then sortanArrayby creatingnew SortTask(anArray, 0, 
+anArray.length-1)and invoking it in a ForkJoinPool. As a more concrete simple 
+example, the following task increments each element of an array: 
+
+class IncrementTask extends RecursiveAction { final long[] array; final int lo; 
+final int hi; IncrementTask(long[] array, int lo, int hi) { this.array = array; 
+this.lo = lo; this.hi = hi; } protected void compute() { if (hi - lo >> 1; 
+invokeAll(new IncrementTask(array, lo, mid), new IncrementTask(array, mid, 
+hi)); } } } 
+
+The following example illustrates some refinements and idioms that may lead to 
+better performance: RecursiveActions need not be fully recursive, so long as 
+they maintain the basic divide-and-conquer approach. Here is a class that sums 
+the squares of each element of a double array, by subdividing out only the 
+right-hand-sides of repeated divisions by two, and keeping track of them with a 
+chain ofnextreferences. It uses a dynamic threshold based on 
+methodgetSurplusQueuedTaskCount, but counterbalances potential excess 
+partitioning by directly performing leaf actions on unstolen tasks rather than 
+further subdividing. 
+
+double sumOfSquares(ForkJoinPool pool, double[] array) { int n = array.length; 
+Applyer a = new Applyer(array, 0, n, null); pool.invoke(a); return a.result; } 
+
+class Applyer extends RecursiveAction { final double[] array; final int lo, hi; 
+double result; Applyer next; // keeps track of right-hand-side tasks 
+Applyer(double[] array, int lo, int hi, Applyer next) { this.array = array; 
+this.lo = lo; this.hi = hi; this.next = next; } 
+
+double atLeaf(int l, int h) { double sum = 0; for (int i = l; i 1 
+getSurplusQueuedTaskCount() >> 1; right = new Applyer(array, mid, h, right); 
+right.fork(); h = mid; } double sum = atLeaf(l, h); while (right != null) { if 
+(right.tryUnfork()) // directly calculate if not stolen sum += 
+right.atLeaf(right.lo, right.hi); else { right.join(); sum += right.result; } 
+right = right.next; } result = sum; } } 
+
+
+
+*java.util.concurrent.RecursiveAction()*
+
+public RecursiveAction()
+
+
+
+
+*java.util.concurrent.RecursiveAction.compute()*
+
+protected abstract void compute()
+
+The main computation performed by this task. 
+
+
+
+*java.util.concurrent.RecursiveAction.exec()*
+
+protected final boolean exec()
+
+Implements execution conventions for RecursiveActions. 
+
+
+
+*java.util.concurrent.RecursiveAction.getRawResult()*
+
+public final |java.lang.Void| getRawResult()
+
+Always returnsnull. 
+
+
+
+    Returns: {@code null} always 
+
+*java.util.concurrent.RecursiveAction.setRawResult(Void)*
+
+protected final void setRawResult(java.lang.Void mustBeNull)
+
+Requires null completion value. 
+
+
+
+

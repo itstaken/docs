@@ -1,0 +1,1890 @@
+*java.nio.file.Files* *Files* This class consists exclusively of static methods 
+
+public final class Files
+  extends    |java.lang.Object|
+
+|java.nio.file.Files_Description|
+|java.nio.file.Files_Fields|
+|java.nio.file.Files_Constructors|
+|java.nio.file.Files_Methods|
+
+================================================================================
+
+*java.nio.file.Files_Methods*
+|java.nio.file.Files.copy(InputStream,Path,CopyOption...)|Copies all bytes from
+|java.nio.file.Files.copy(Path,OutputStream)|Copies all bytes from a file to an
+|java.nio.file.Files.copy(Path,Path,CopyOption...)|Copy a file to a target file
+|java.nio.file.Files.createDirectories(Path,FileAttribute<?>...)|Creates a dire
+|java.nio.file.Files.createDirectory(Path,FileAttribute<?>...)|Creates a new di
+|java.nio.file.Files.createFile(Path,FileAttribute<?>...)|Creates a new and emp
+|java.nio.file.Files.createLink(Path,Path)|Creates a new link (directory entry)
+|java.nio.file.Files.createSymbolicLink(Path,Path,FileAttribute<?>...)|Creates 
+|java.nio.file.Files.createTempDirectory(Path,String,FileAttribute<?>...)|Creat
+|java.nio.file.Files.createTempDirectory(String,FileAttribute<?>...)|Creates a 
+|java.nio.file.Files.createTempFile(Path,String,String,FileAttribute<?>...)|Cre
+|java.nio.file.Files.createTempFile(String,String,FileAttribute<?>...)|Creates 
+|java.nio.file.Files.delete(Path)|Deletes a file.
+|java.nio.file.Files.deleteIfExists(Path)|Deletes a file if it exists.
+|java.nio.file.Files.exists(Path,LinkOption...)|Tests whether a file exists.
+|java.nio.file.Files.getAttribute(Path,String,LinkOption...)|Reads the value of
+|java.nio.file.Files.getFileAttributeView(Path,Class<V>,LinkOption...)|Returns 
+|java.nio.file.Files.getFileStore(Path)|Returns theFileStorerepresenting the fi
+|java.nio.file.Files.getLastModifiedTime(Path,LinkOption...)|Returns a file's l
+|java.nio.file.Files.getOwner(Path,LinkOption...)|Returns the owner of a file.
+|java.nio.file.Files.getPosixFilePermissions(Path,LinkOption...)|Returns a file
+|java.nio.file.Files.isDirectory(Path,LinkOption...)|Tests whether a file is a 
+|java.nio.file.Files.isExecutable(Path)|Tests whether a file is executable.
+|java.nio.file.Files.isHidden(Path)|Tells whether or not a file is considered h
+|java.nio.file.Files.isReadable(Path)|Tests whether a file is readable.
+|java.nio.file.Files.isRegularFile(Path,LinkOption...)|Tests whether a file is 
+|java.nio.file.Files.isSameFile(Path,Path)|Tests if two paths locate the same f
+|java.nio.file.Files.isSymbolicLink(Path)|Tests whether a file is a symbolic li
+|java.nio.file.Files.isWritable(Path)|Tests whether a file is writable.
+|java.nio.file.Files.move(Path,Path,CopyOption...)|Move or rename a file to a t
+|java.nio.file.Files.newBufferedReader(Path,Charset)|Opens a file for reading, 
+|java.nio.file.Files.newBufferedWriter(Path,Charset,OpenOption...)|Opens or cre
+|java.nio.file.Files.newByteChannel(Path,OpenOption...)|Opens or creates a file
+|java.nio.file.Files.newByteChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)|
+|java.nio.file.Files.newDirectoryStream(Path)|Opens a directory, returning aDir
+|java.nio.file.Files.newDirectoryStream(Path,DirectoryStream.Filter<?superPath>)|
+|java.nio.file.Files.newDirectoryStream(Path,String)|Opens a directory, returni
+|java.nio.file.Files.newInputStream(Path,OpenOption...)|Opens a file, returning
+|java.nio.file.Files.newOutputStream(Path,OpenOption...)|Opens or creates a fil
+|java.nio.file.Files.notExists(Path,LinkOption...)|Tests whether the file locat
+|java.nio.file.Files.probeContentType(Path)|Probes the content type of a file.
+|java.nio.file.Files.readAllBytes(Path)|Read all the bytes from a file.
+|java.nio.file.Files.readAllLines(Path,Charset)|Read all lines from a file.
+|java.nio.file.Files.readAttributes(Path,Class<A>,LinkOption...)|Reads a file's
+|java.nio.file.Files.readAttributes(Path,String,LinkOption...)|Reads a set of f
+|java.nio.file.Files.readSymbolicLink(Path)|Reads the target of a symbolic link
+|java.nio.file.Files.setAttribute(Path,String,Object,LinkOption...)|Sets the va
+|java.nio.file.Files.setLastModifiedTime(Path,FileTime)|Updates a file's last m
+|java.nio.file.Files.setOwner(Path,UserPrincipal)|Updates the file owner.
+|java.nio.file.Files.setPosixFilePermissions(Path,Set<PosixFilePermission>)|Set
+|java.nio.file.Files.size(Path)|Returns the size of a file (in bytes).
+|java.nio.file.Files.walkFileTree(Path,FileVisitor<?superPath>)|Walks a file tr
+|java.nio.file.Files.walkFileTree(Path,Set<FileVisitOption>,int,FileVisitor<?superPath>)|
+|java.nio.file.Files.write(Path,byte[],OpenOption...)|Writes bytes to a file.
+|java.nio.file.Files.write(Path,Iterable<?extendsCharSequence>,Charset,OpenOption...)|
+
+*java.nio.file.Files_Description*
+
+This class consists exclusively of static methods that operate on files, 
+directories, or other types of files. 
+
+In most cases, the methods defined here will delegate to the associated file 
+system provider to perform the file operations. 
+
+
+
+*java.nio.file.Files.copy(InputStream,Path,CopyOption...)*
+
+public static long copy(
+  java.io.InputStream in,
+  java.nio.file.Path target,
+  java.nio.file.CopyOption[] options)
+  throws |java.io.IOException|
+         
+Copies all bytes from an input stream to a file. On return, the input stream 
+will be at end of stream. 
+
+By default, the copy fails if the target file already exists or is a symbolic 
+link. If the REPLACE_EXISTING(|java.nio.file.StandardCopyOption|) option is 
+specified, and the target file already exists, then it is replaced if it is not 
+a non-empty directory. If the target file exists and is a symbolic link, then 
+the symbolic link is replaced. In this release, theREPLACE_EXISTINGoption is 
+the only option required to be supported by this method. Additional options may 
+be supported in future releases. 
+
+If an I/O error occurs reading from the input stream or writing to the file, 
+then it may do so after the target file has been created and after some bytes 
+have been read or written. Consequently the input stream may not be at end of 
+stream and may be in an inconsistent state. It is strongly recommended that the 
+input stream be promptly closed if an I/O error occurs. 
+
+This method may block indefinitely reading from the input stream (or writing to 
+the file). The behavior for the case that the input stream is asynchronously 
+closed or the thread interrupted during the copy is highly input stream and 
+file system provider specific and therefore not specified. 
+
+Usage example: Suppose we want to capture a web page and save it to a file: 
+
+Path path = ... URI u = URI.create("http://java.sun.com/"); try (InputStream in 
+= u.toURL().openStream()) { Files.copy(in, path); } 
+
+
+    in - the input stream to read from 
+    target - the path to the file 
+    options - options specifying how the copy should be done 
+
+    Returns: the number of bytes read or written 
+
+*java.nio.file.Files.copy(Path,OutputStream)*
+
+public static long copy(
+  java.nio.file.Path source,
+  java.io.OutputStream out)
+  throws |java.io.IOException|
+         
+Copies all bytes from a file to an output stream. 
+
+If an I/O error occurs reading from the file or writing to the output stream, 
+then it may do so after some bytes have been read or written. Consequently the 
+output stream may be in an inconsistent state. It is strongly recommended that 
+the output stream be promptly closed if an I/O error occurs. 
+
+This method may block indefinitely writing to the output stream (or reading 
+from the file). The behavior for the case that the output stream is 
+asynchronously closed or the thread interrupted during the copy is highly 
+output stream and file system provider specific and therefore not specified. 
+
+Note that if the given output stream is (|java.io.Flushable|) then its 
+flush(|java.io.Flushable|) method may need to invoked after this method 
+completes so as to flush any buffered output. 
+
+
+    source - the path to the file 
+    out - the output stream to write to 
+
+    Returns: the number of bytes read or written 
+
+*java.nio.file.Files.copy(Path,Path,CopyOption...)*
+
+public static |java.nio.file.Path| copy(
+  java.nio.file.Path source,
+  java.nio.file.Path target,
+  java.nio.file.CopyOption[] options)
+  throws |java.io.IOException|
+         
+Copy a file to a target file. 
+
+This method copies a file to the target file with theoptionsparameter 
+specifying how the copy is performed. By default, the copy fails if the target 
+file already exists or is a symbolic link, except if the source and target are 
+the same(|java.nio.file.Files|) file, in which case the method completes 
+without copying the file. File attributes are not required to be copied to the 
+target file. If symbolic links are supported, and the file is a symbolic link, 
+then the final target of the link is copied. If the file is a directory then it 
+creates an empty directory in the target location (entries in the directory are 
+not copied). This method can be used with the 
+walkFileTree(|java.nio.file.Files|) method to copy a directory and all entries 
+in the directory, or an entire file-tree where required. 
+
+Theoptionsparameter may include any of the following: 
+
+Option Description 
+
+REPLACE_EXISTING(|java.nio.file.StandardCopyOption|) If the target file exists, 
+then the target file is replaced if it is not a non-empty directory. If the 
+target file exists and is a symbolic link, then the symbolic link itself, not 
+the target of the link, is replaced. 
+
+COPY_ATTRIBUTES(|java.nio.file.StandardCopyOption|) Attempts to copy the file 
+attributes associated with this file to the target file. The exact file 
+attributes that are copied is platform and file system dependent and therefore 
+unspecified. Minimally, the 
+last-modified-time(|java.nio.file.attribute.BasicFileAttributes|) is copied to 
+the target file if supported by both the source and target file store. Copying 
+of file timestamps may result in precision loss. 
+
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) Symbolic links are not followed. If 
+the file is a symbolic link, then the symbolic link itself, not the target of 
+the link, is copied. It is implementation specific if file attributes can be 
+copied to the new link. In other words, theCOPY_ATTRIBUTESoption may be ignored 
+when copying a symbolic link. 
+
+
+
+An implementation of this interface may support additional implementation 
+specific options. 
+
+Copying a file is not an atomic operation. If an (|java.io.IOException|) is 
+thrown then it possible that the target file is incomplete or some of its file 
+attributes have not been copied from the source file. When 
+theREPLACE_EXISTINGoption is specified and the target file exists, then the 
+target file is replaced. The check for the existence of the file and the 
+creation of the new file may not be atomic with respect to other file system 
+activities. 
+
+Usage Example: Suppose we want to copy a file into a directory, giving it the 
+same file name as the source file: 
+
+Path source = ... Path newdir = ... Files.copy(source, 
+newdir.resolve(source.getFileName()); 
+
+
+    source - the path to the file to copy 
+    target - the path to the target file (may be associated with a different provider to the 
+       source path) 
+    options - options specifying how the copy should be done 
+
+    Returns: the path to the target file 
+
+*java.nio.file.Files.createDirectories(Path,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createDirectories(
+  java.nio.file.Path dir,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a directory by creating all nonexistent parent directories first. 
+Unlike the createDirectory(|java.nio.file.Files|) method, an exception is not 
+thrown if the directory could not be created because it already exists. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the nonexistent directories. Each file attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. 
+
+If this method fails, then it may do so after creating some, but not all, of 
+the parent directories. 
+
+
+    dir - the directory to create 
+    attrs - an optional list of file attributes to set atomically when creating the 
+       directory 
+
+    Returns: the directory 
+
+*java.nio.file.Files.createDirectory(Path,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createDirectory(
+  java.nio.file.Path dir,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new directory. The check for the existence of the file and the 
+creation of the directory if it does not exist are a single operation that is 
+atomic with respect to all other filesystem activities that might affect the 
+directory. The createDirectories(|java.nio.file.Files|) method should be used 
+where it is required to create all nonexistent parent directories first. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the directory. Each attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. 
+
+
+    dir - the directory to create 
+    attrs - an optional list of file attributes to set atomically when creating the 
+       directory 
+
+    Returns: the directory 
+
+*java.nio.file.Files.createFile(Path,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createFile(
+  java.nio.file.Path path,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new and empty file, failing if the file already exists. The check for 
+the existence of the file and the creation of the new file if it does not exist 
+are a single operation that is atomic with respect to all other filesystem 
+activities that might affect the directory. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the file. Each attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. 
+
+
+    path - the path to the file to create 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: 
+
+*java.nio.file.Files.createLink(Path,Path)*
+
+public static |java.nio.file.Path| createLink(
+  java.nio.file.Path link,
+  java.nio.file.Path existing)
+  throws |java.io.IOException|
+         
+Creates a new link (directory entry) for an existing file (optional operation). 
+
+Thelinkparameter locates the directory entry to create. Theexistingparameter is 
+the path to an existing file. This method creates a new directory entry for the 
+file so that it can be accessed usinglinkas the path. On some file systems this 
+is known as creating a "hard link". Whether the file attributes are maintained 
+for the file or for each directory entry is file system specific and therefore 
+not specified. Typically, a file system requires that all links (directory 
+entries) for a file be on the same file system. Furthermore, on some platforms, 
+the Java virtual machine may require to be started with implementation specific 
+privileges to create hard links or to create links to directories. 
+
+
+    link - the link (directory entry) to create 
+    existing - a path to an existing file 
+
+    Returns: the path to the link (directory entry) 
+
+*java.nio.file.Files.createSymbolicLink(Path,Path,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createSymbolicLink(
+  java.nio.file.Path link,
+  java.nio.file.Path target,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a symbolic link to a target (optional operation). 
+
+Thetargetparameter is the target of the link. It may be an 
+absolute(|java.nio.file.Path|) or relative path and may not exist. When the 
+target is a relative path then file system operations on the resulting link are 
+relative to the path of the link. 
+
+Theattrsparameter is optional 
+attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the link. Each attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. 
+
+Where symbolic links are supported, but the underlying 
+(|java.nio.file.FileStore|) does not support symbolic links, then this may fail 
+with an (|java.io.IOException|) . Additionally, some operating systems may 
+require that the Java virtual machine be started with implementation specific 
+privileges to create symbolic links, in which case this method may 
+throwIOException. 
+
+
+    link - the path of the symbolic link to create 
+    target - the target of the symbolic link 
+    attrs - the array of attributes to set atomically when creating the symbolic link 
+
+    Returns: the path to the symbolic link 
+
+*java.nio.file.Files.createTempDirectory(Path,String,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createTempDirectory(
+  java.nio.file.Path dir,
+  java.lang.String prefix,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new directory in the specified directory, using the given prefix to 
+generate its name. The resultingPathis associated with the sameFileSystemas the 
+given directory. 
+
+The details as to how the name of the directory is constructed is 
+implementation dependent and therefore not specified. Where possible 
+theprefixis used to construct candidate names. 
+
+As with thecreateTempFilemethods, this method is only part of a temporary-file 
+facility. A shutdown-hook(|java.lang.Runtime|) , or the (|java.io.File|) 
+mechanism may be used to delete the directory automatically. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the directory. Each attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. 
+
+
+    dir - the path to directory in which to create the directory 
+    prefix - the prefix string to be used in generating the directory's name; may be {@code 
+       null} 
+    attrs - an optional list of file attributes to set atomically when creating the 
+       directory 
+
+    Returns: the path to the newly created directory that did not exist before this method 
+             was invoked 
+
+*java.nio.file.Files.createTempDirectory(String,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createTempDirectory(
+  java.lang.String prefix,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new directory in the default temporary-file directory, using the 
+given prefix to generate its name. The resultingPathis associated with the 
+defaultFileSystem. 
+
+This method works in exactly the manner specified by (|java.nio.file.Files|) 
+method for the case that thedirparameter is the temporary-file directory. 
+
+
+    prefix - the prefix string to be used in generating the directory's name; may be {@code 
+       null} 
+    attrs - an optional list of file attributes to set atomically when creating the 
+       directory 
+
+    Returns: the path to the newly created directory that did not exist before this method 
+             was invoked 
+
+*java.nio.file.Files.createTempFile(Path,String,String,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createTempFile(
+  java.nio.file.Path dir,
+  java.lang.String prefix,
+  java.lang.String suffix,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new empty file in the specified directory, using the given prefix and 
+suffix strings to generate its name. The resultingPathis associated with the 
+sameFileSystemas the given directory. 
+
+The details as to how the name of the file is constructed is implementation 
+dependent and therefore not specified. Where possible theprefixandsuffixare 
+used to construct candidate names in the same manner as the (|java.io.File|) 
+method. 
+
+As with theFile.createTempFilemethods, this method is only part of a 
+temporary-file facility. Where used as a work files, the resulting file may be 
+opened using the DELETE_ON_CLOSE(|java.nio.file.StandardOpenOption|) option so 
+that the file is deleted when the appropriateclosemethod is invoked. 
+Alternatively, a shutdown-hook(|java.lang.Runtime|) , or the (|java.io.File|) 
+mechanism may be used to delete the file automatically. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+creating the file. Each attribute is identified by its 
+name(|java.nio.file.attribute.FileAttribute|) . If more than one attribute of 
+the same name is included in the array then all but the last occurrence is 
+ignored. When no file attributes are specified, then the resulting file may 
+have more restrictive access permissions to files created by the 
+(|java.io.File|) method. 
+
+
+    dir - the path to directory in which to create the file 
+    prefix - the prefix string to be used in generating the file's name; may be {@code null} 
+    suffix - the suffix string to be used in generating the file's name; may be {@code 
+       null}, in which case "{@code .tmp}" is used 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: the path to the newly created file that did not exist before this method was 
+             invoked 
+
+*java.nio.file.Files.createTempFile(String,String,FileAttribute<?>...)*
+
+public static |java.nio.file.Path| createTempFile(
+  java.lang.String prefix,
+  java.lang.String suffix,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates an empty file in the default temporary-file directory, using the given 
+prefix and suffix to generate its name. The resultingPathis associated with the 
+defaultFileSystem. 
+
+This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method for the case that thedirparameter is the 
+temporary-file directory. 
+
+
+    prefix - the prefix string to be used in generating the file's name; may be {@code null} 
+    suffix - the suffix string to be used in generating the file's name; may be {@code 
+       null}, in which case "{@code .tmp}" is used 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: the path to the newly created file that did not exist before this method was 
+             invoked 
+
+*java.nio.file.Files.delete(Path)*
+
+public static void delete(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Deletes a file. 
+
+An implementation may require to examine the file to determine if the file is a 
+directory. Consequently this method may not be atomic with respect to other 
+file system operations. If the file is a symbolic link then the symbolic link 
+itself, not the final target of the link, is deleted. 
+
+If the file is a directory then the directory must be empty. In some 
+implementations a directory has entries for special files or links that are 
+created when the directory is created. In such implementations a directory is 
+considered empty when only the special entries exist. This method can be used 
+with the walkFileTree(|java.nio.file.Files|) method to delete a directory and 
+all entries in the directory, or an entire file-tree where required. 
+
+On some operating systems it may not be possible to remove a file when it is 
+open and in use by this Java virtual machine or other programs. 
+
+
+    path - the path to the file to delete 
+
+*java.nio.file.Files.deleteIfExists(Path)*
+
+public static boolean deleteIfExists(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Deletes a file if it exists. 
+
+As with the delete(Path)(|java.nio.file.Files|) method, an implementation may 
+need to examine the file to determine if the file is a directory. Consequently 
+this method may not be atomic with respect to other file system operations. If 
+the file is a symbolic link, then the symbolic link itself, not the final 
+target of the link, is deleted. 
+
+If the file is a directory then the directory must be empty. In some 
+implementations a directory has entries for special files or links that are 
+created when the directory is created. In such implementations a directory is 
+considered empty when only the special entries exist. 
+
+On some operating systems it may not be possible to remove a file when it is 
+open and in use by this Java virtual machine or other programs. 
+
+
+    path - the path to the file to delete 
+
+    Returns: {@code true} if the file was deleted by this method; {@code false} if the file 
+             could not be deleted because it did not exist 
+
+*java.nio.file.Files.exists(Path,LinkOption...)*
+
+public static boolean exists(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+
+Tests whether a file exists. 
+
+Theoptionsparameter may be used to indicate how symbolic links are handled for 
+the case that the file is a symbolic link. By default, symbolic links are 
+followed. If the option NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present 
+then symbolic links are not followed. 
+
+Note that the result of this method is immediately outdated. If this method 
+indicates the file exists then there is no guarantee that a subsequence access 
+will succeed. Care should be taken when using this method in security sensitive 
+applications. 
+
+
+    path - the path to the file to test 
+    options - options indicating how symbolic links are handled . 
+
+    Returns: {@code true} if the file exists; {@code false} if the file does not exist or 
+             its existence cannot be determined. 
+
+*java.nio.file.Files.getAttribute(Path,String,LinkOption...)*
+
+public static |java.lang.Object| getAttribute(
+  java.nio.file.Path path,
+  java.lang.String attribute,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Reads the value of a file attribute. 
+
+Theattributeparameter identifies the attribute to be read and takes the form: 
+
+[view-name:]attribute-name 
+
+where square brackets [...] delineate an optional component and the 
+character':'stands for itself. 
+
+view-name is the name(|java.nio.file.attribute.FileAttributeView|) of a 
+(|java.nio.file.attribute.FileAttributeView|) that identifies a set of file 
+attributes. If not specified then it defaults to"basic", the name of the file 
+attribute view that identifies the basic set of file attributes common to many 
+file systems. attribute-name is the name of the attribute. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+Usage Example: Suppose we require the user ID of the file owner on a system 
+that supports a "unix" view: 
+
+Path path = ... int uid = (Integer)Files.getAttribute(path, "unix:uid"); 
+
+
+    path - the path to the file 
+    attribute - the attribute to read 
+    options - options indicating how symbolic links are handled 
+
+    Returns: the attribute value 
+
+*java.nio.file.Files.getFileAttributeView(Path,Class<V>,LinkOption...)*
+
+public static |V| getFileAttributeView(
+  java.nio.file.Path path,
+  java.lang.Class<V> type,
+  java.nio.file.LinkOption[] options)
+
+Returns a file attribute view of a given type. 
+
+A file attribute view provides a read-only or updatable view of a set of file 
+attributes. This method is intended to be used where the file attribute view 
+defines type-safe methods to read or update the file attributes. 
+Thetypeparameter is the type of the attribute view required and the method 
+returns an instance of that type if supported. The 
+(|java.nio.file.attribute.BasicFileAttributeView|) type supports access to the 
+basic attributes of a file. Invoking this method to select a file attribute 
+view of that type will always return an instance of that class. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled by the 
+resulting file attribute view for the case that the file is a symbolic link. By 
+default, symbolic links are followed. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. This option is ignored by implementations that do not support 
+symbolic links. 
+
+Usage Example: Suppose we want read or set a file's ACL, if supported: 
+
+Path path = ... AclFileAttributeView view = Files.getFileAttributeView(path, 
+AclFileAttributeView.class); if (view != null) { List<AclEntryacl = 
+view.getAcl(); : } 
+
+
+    path - the path to the file 
+    type - the {@code Class} object corresponding to the file attribute view 
+    options - options indicating how symbolic links are handled 
+
+    Returns: a file attribute view of the specified type, or {@code null} if the attribute 
+             view type is not available 
+
+*java.nio.file.Files.getFileStore(Path)*
+
+public static |java.nio.file.FileStore| getFileStore(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Returns the (|java.nio.file.FileStore|) representing the file store where a 
+file is located. 
+
+Once a reference to theFileStoreis obtained it is implementation specific if 
+operations on the returnedFileStore, or 
+(|java.nio.file.attribute.FileStoreAttributeView|) objects obtained from it, 
+continue to depend on the existence of the file. In particular the behavior is 
+not defined for the case that the file is deleted or moved to a different file 
+store. 
+
+
+    path - the path to the file 
+
+    Returns: the file store where the file is stored 
+
+*java.nio.file.Files.getLastModifiedTime(Path,LinkOption...)*
+
+public static |java.nio.file.attribute.FileTime| getLastModifiedTime(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Returns a file's last modified time. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+
+    path - the path to the file 
+    options - options indicating how symbolic links are handled 
+
+    Returns: a {@code FileTime} representing the time the file was last modified, or an 
+             implementation specific default when a time stamp to indicate the 
+             time of last modification is not supported by the file system 
+
+*java.nio.file.Files.getOwner(Path,LinkOption...)*
+
+public static |java.nio.file.attribute.UserPrincipal| getOwner(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Returns the owner of a file. 
+
+Thepathparameter is associated with a file system that supports 
+(|java.nio.file.attribute.FileOwnerAttributeView|) . This file attribute view 
+provides access to a file attribute that is the owner of the file. 
+
+
+    path - A file reference that locates the file 
+    options - options indicating how symbolic links are handled 
+
+    Returns: A user principal representing the owner of the file 
+
+*java.nio.file.Files.getPosixFilePermissions(Path,LinkOption...)*
+
+public static |java.util.Set|<PosixFilePermission> getPosixFilePermissions(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Returns a file's POSIX file permissions. 
+
+Thepathparameter is associated with aFileSystemthat supports the 
+(|java.nio.file.attribute.PosixFileAttributeView|) . This attribute view 
+provides access to file attributes commonly associated with files on file 
+systems used by operating systems that implement the Portable Operating System 
+Interface (POSIX) family of standards. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+
+    path - the path to the file 
+    options - options indicating how symbolic links are handled 
+
+    Returns: the file permissions 
+
+*java.nio.file.Files.isDirectory(Path,LinkOption...)*
+
+public static boolean isDirectory(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+
+Tests whether a file is a directory. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+Where is it required to distinguish an I/O exception from the case that the 
+file is not a directory then the file attributes can be read with the 
+readAttributes(|java.nio.file.Files|) method and the file type tested with the 
+(|java.nio.file.attribute.BasicFileAttributes|) method. 
+
+
+    path - the path to the file to test 
+    options - options indicating how symbolic links are handled 
+
+    Returns: {@code true} if the file is a directory; {@code false} if the file does not 
+             exist, is not a directory, or it cannot be determined if the file 
+             is a directory or not. 
+
+*java.nio.file.Files.isExecutable(Path)*
+
+public static boolean isExecutable(java.nio.file.Path path)
+
+Tests whether a file is executable. This method checks that a file exists and 
+that this Java virtual machine has appropriate privileges to 
+execute(|java.lang.Runtime|) the file. The semantics may differ when checking 
+access to a directory. For example, on UNIX systems, checking for execute 
+access checks that the Java virtual machine has permission to search the 
+directory in order to access file or subdirectories. 
+
+Depending on the implementation, this method may require to read file 
+permissions, access control lists, or other file attributes in order to check 
+the effective access to the file. Consequently, this method may not be atomic 
+with respect to other file system operations. 
+
+Note that the result of this method is immediately outdated, there is no 
+guarantee that a subsequent attempt to execute the file will succeed (or even 
+that it will access the same file). Care should be taken when using this method 
+in security sensitive applications. 
+
+
+    path - the path to the file to check 
+
+    Returns: {@code true} if the file exists and is executable; {@code false} if the file 
+             does not exist, execute access would be denied because the Java 
+             virtual machine has insufficient privileges, or access cannot be 
+             determined 
+
+*java.nio.file.Files.isHidden(Path)*
+
+public static boolean isHidden(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Tells whether or not a file is considered hidden. The exact definition of 
+hidden is platform or provider dependent. On UNIX for example a file is 
+considered to be hidden if its name begins with a period character ('.'). On 
+Windows a file is considered hidden if it isn't a directory and the DOS 
+hidden(|java.nio.file.attribute.DosFileAttributes|) attribute is set. 
+
+Depending on the implementation this method may require to access the file 
+system to determine if the file is considered hidden. 
+
+
+    path - the path to the file to test 
+
+    Returns: {@code true} if the file is considered hidden 
+
+*java.nio.file.Files.isReadable(Path)*
+
+public static boolean isReadable(java.nio.file.Path path)
+
+Tests whether a file is readable. This method checks that a file exists and 
+that this Java virtual machine has appropriate privileges that would allow it 
+open the file for reading. Depending on the implementation, this method may 
+require to read file permissions, access control lists, or other file 
+attributes in order to check the effective access to the file. Consequently, 
+this method may not be atomic with respect to other file system operations. 
+
+Note that the result of this method is immediately outdated, there is no 
+guarantee that a subsequent attempt to open the file for reading will succeed 
+(or even that it will access the same file). Care should be taken when using 
+this method in security sensitive applications. 
+
+
+    path - the path to the file to check 
+
+    Returns: {@code true} if the file exists and is readable; {@code false} if the file does 
+             not exist, read access would be denied because the Java virtual 
+             machine has insufficient privileges, or access cannot be 
+             determined 
+
+*java.nio.file.Files.isRegularFile(Path,LinkOption...)*
+
+public static boolean isRegularFile(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+
+Tests whether a file is a regular file with opaque content. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+Where is it required to distinguish an I/O exception from the case that the 
+file is not a regular file then the file attributes can be read with the 
+readAttributes(|java.nio.file.Files|) method and the file type tested with the 
+(|java.nio.file.attribute.BasicFileAttributes|) method. 
+
+
+    path - the path to the file 
+    options - options indicating how symbolic links are handled 
+
+    Returns: {@code true} if the file is a regular file; {@code false} if the file does not 
+             exist, is not a regular file, or it cannot be determined if the 
+             file is a regular file or not. 
+
+*java.nio.file.Files.isSameFile(Path,Path)*
+
+public static boolean isSameFile(
+  java.nio.file.Path path,
+  java.nio.file.Path path2)
+  throws |java.io.IOException|
+         
+Tests if two paths locate the same file. 
+
+If bothPathobjects are equal(|java.nio.file.Path|) then this method 
+returnstruewithout checking if the file exists. If the twoPathobjects are 
+associated with different providers then this method returnsfalse. Otherwise, 
+this method checks if bothPathobjects locate the same file, and depending on 
+the implementation, may require to open or access both files. 
+
+If the file system and files remain static, then this method implements an 
+equivalence relation for non-nullPaths. 
+
+It is reflexive: forPathf,isSameFile(f,f)should returntrue. It is symmetric: 
+for twoPathsfandg,isSameFile(f,g)will equalisSameFile(g,f). It is transitive: 
+for threePathsf,g, andh, 
+ifisSameFile(f,g)returnstrueandisSameFile(g,h)returnstrue, 
+thenisSameFile(g,h)will return returntrue. 
+
+
+    path - one path to the file 
+    path2 - the other path 
+
+    Returns: {@code true} if, and only if, the two paths locate the same file 
+
+*java.nio.file.Files.isSymbolicLink(Path)*
+
+public static boolean isSymbolicLink(java.nio.file.Path path)
+
+Tests whether a file is a symbolic link. 
+
+Where is it required to distinguish an I/O exception from the case that the 
+file is not a symbolic link then the file attributes can be read with the 
+readAttributes(|java.nio.file.Files|) method and the file type tested with the 
+(|java.nio.file.attribute.BasicFileAttributes|) method. 
+
+
+
+    Returns: {@code true} if the file is a symbolic link; {@code false} if the file does not 
+             exist, is not a symbolic link, or it cannot be determined if the 
+             file is a symbolic link or not. 
+
+*java.nio.file.Files.isWritable(Path)*
+
+public static boolean isWritable(java.nio.file.Path path)
+
+Tests whether a file is writable. This method checks that a file exists and 
+that this Java virtual machine has appropriate privileges that would allow it 
+open the file for writing. Depending on the implementation, this method may 
+require to read file permissions, access control lists, or other file 
+attributes in order to check the effective access to the file. Consequently, 
+this method may not be atomic with respect to other file system operations. 
+
+Note that result of this method is immediately outdated, there is no guarantee 
+that a subsequent attempt to open the file for writing will succeed (or even 
+that it will access the same file). Care should be taken when using this method 
+in security sensitive applications. 
+
+
+    path - the path to the file to check 
+
+    Returns: {@code true} if the file exists and is writable; {@code false} if the file does 
+             not exist, write access would be denied because the Java virtual 
+             machine has insufficient privileges, or access cannot be 
+             determined 
+
+*java.nio.file.Files.move(Path,Path,CopyOption...)*
+
+public static |java.nio.file.Path| move(
+  java.nio.file.Path source,
+  java.nio.file.Path target,
+  java.nio.file.CopyOption[] options)
+  throws |java.io.IOException|
+         
+Move or rename a file to a target file. 
+
+By default, this method attempts to move the file to the target file, failing 
+if the target file exists except if the source and target are the 
+same(|java.nio.file.Files|) file, in which case this method has no effect. If 
+the file is a symbolic link then the symbolic link itself, not the target of 
+the link, is moved. This method may be invoked to move an empty directory. In 
+some implementations a directory has entries for special files or links that 
+are created when the directory is created. In such implementations a directory 
+is considered empty when only the special entries exist. When invoked to move a 
+directory that is not empty then the directory is moved if it does not require 
+moving the entries in the directory. For example, renaming a directory on the 
+same (|java.nio.file.FileStore|) will usually not require moving the entries in 
+the directory. When moving a directory requires that its entries be moved then 
+this method fails (by throwing anIOException). To move a file tree may involve 
+copying rather than moving directories and this can be done using the 
+copy(|java.nio.file.Files|) method in conjunction with the 
+Files.walkFileTree(|java.nio.file.Files|) utility method. 
+
+Theoptionsparameter may include any of the following: 
+
+Option Description 
+
+REPLACE_EXISTING(|java.nio.file.StandardCopyOption|) If the target file exists, 
+then the target file is replaced if it is not a non-empty directory. If the 
+target file exists and is a symbolic link, then the symbolic link itself, not 
+the target of the link, is replaced. 
+
+ATOMIC_MOVE(|java.nio.file.StandardCopyOption|) The move is performed as an 
+atomic file system operation and all other options are ignored. If the target 
+file exists then it is implementation specific if the existing file is replaced 
+or this method fails by throwing an (|java.io.IOException|) . If the move 
+cannot be performed as an atomic file system operation then 
+(|java.nio.file.AtomicMoveNotSupportedException|) is thrown. This can arise, 
+for example, when the target location is on a differentFileStoreand would 
+require that the file be copied, or target location is associated with a 
+different provider to this object. 
+
+An implementation of this interface may support additional implementation 
+specific options. 
+
+Where the move requires that the file be copied then the 
+last-modified-time(|java.nio.file.attribute.BasicFileAttributes|) is copied to 
+the new file. An implementation may also attempt to copy other file attributes 
+but is not required to fail if the file attributes cannot be copied. When the 
+move is performed as a non-atomic operation, and aIOExceptionis thrown, then 
+the state of the files is not defined. The original file and the target file 
+may both exist, the target file may be incomplete or some of its file 
+attributes may not been copied from the original file. 
+
+Usage Examples: Suppose we want to rename a file to "newname", keeping the file 
+in the same directory: 
+
+Path source = ... Files.move(source, source.resolveSibling("newname")); 
+
+Alternatively, suppose we want to move a file to new directory, keeping the 
+same file name, and replacing any existing file of that name in the directory: 
+
+Path source = ... Path newdir = ... Files.move(source, 
+newdir.resolve(source.getFileName()), REPLACE_EXISTING); 
+
+
+    source - the path to the file to move 
+    target - the path to the target file (may be associated with a different provider to the 
+       source path) 
+    options - options specifying how the move should be done 
+
+    Returns: the path to the target file 
+
+*java.nio.file.Files.newBufferedReader(Path,Charset)*
+
+public static |java.io.BufferedReader| newBufferedReader(
+  java.nio.file.Path path,
+  java.nio.charset.Charset cs)
+  throws |java.io.IOException|
+         
+Opens a file for reading, returning aBufferedReaderthat may be used to read 
+text from the file in an efficient manner. Bytes from the file are decoded into 
+characters using the specified charset. Reading commences at the beginning of 
+the file. 
+
+TheReadermethods that read from the file throwIOExceptionif a malformed or 
+unmappable byte sequence is read. 
+
+
+    path - the path to the file 
+    cs - the charset to use for decoding 
+
+    Returns: a new buffered reader, with default buffer size, to read text from the file 
+
+*java.nio.file.Files.newBufferedWriter(Path,Charset,OpenOption...)*
+
+public static |java.io.BufferedWriter| newBufferedWriter(
+  java.nio.file.Path path,
+  java.nio.charset.Charset cs,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens or creates a file for writing, returning aBufferedWriterthat may be used 
+to write text to the file in an efficient manner. Theoptionsparameter specifies 
+how the the file is created or opened. If no options are present then this 
+method works as if the CREATE(|java.nio.file.StandardOpenOption|) , 
+TRUNCATE_EXISTING(|java.nio.file.StandardOpenOption|) , and 
+WRITE(|java.nio.file.StandardOpenOption|) options are present. In other words, 
+it opens the file for writing, creating the file if it doesn't exist, or 
+initially truncating an existing regular-file(|java.nio.file.Files|) to a size 
+of0if it exists. 
+
+TheWritermethods to write text throwIOExceptionif the text cannot be encoded 
+using the specified charset. 
+
+
+    path - the path to the file 
+    cs - the charset to use for encoding 
+    options - options specifying how the file is opened 
+
+    Returns: a new buffered writer, with default buffer size, to write text to the file 
+
+*java.nio.file.Files.newByteChannel(Path,OpenOption...)*
+
+public static |java.nio.channels.SeekableByteChannel| newByteChannel(
+  java.nio.file.Path path,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens or creates a file, returning a seekable byte channel to access the file. 
+
+This method opens or creates a file in exactly the manner specified by the 
+newByteChannel(|java.nio.file.Files|) method. 
+
+
+    path - the path to the file to open or create 
+    options - options specifying how the file is opened 
+
+    Returns: a new seekable byte channel 
+
+*java.nio.file.Files.newByteChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)*
+
+public static |java.nio.channels.SeekableByteChannel| newByteChannel(
+  java.nio.file.Path path,
+  java.util.Set<? extends java.nio.file.OpenOption> options,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Opens or creates a file, returning a seekable byte channel to access the file. 
+
+Theoptionsparameter determines how the file is opened. The 
+READ(|java.nio.file.StandardOpenOption|) and 
+WRITE(|java.nio.file.StandardOpenOption|) options determine if the file should 
+be opened for reading and/or writing. If neither option (or the 
+APPEND(|java.nio.file.StandardOpenOption|) option) is present then the file is 
+opened for reading. By default reading or writing commence at the beginning of 
+the file. 
+
+In the addition toREADandWRITE, the following options may be present: 
+
+Option Description 
+
+APPEND(|java.nio.file.StandardOpenOption|) If this option is present then the 
+file is opened for writing and each invocation of the channel'swritemethod 
+first advances the position to the end of the file and then writes the 
+requested data. Whether the advancement of the position and the writing of the 
+data are done in a single atomic operation is system-dependent and therefore 
+unspecified. This option may not be used in conjunction with 
+theREADorTRUNCATE_EXISTINGoptions. 
+
+TRUNCATE_EXISTING(|java.nio.file.StandardOpenOption|) If this option is present 
+then the existing file is truncated to a size of 0 bytes. This option is 
+ignored when the file is opened only for reading. 
+
+CREATE_NEW(|java.nio.file.StandardOpenOption|) If this option is present then a 
+new file is created, failing if the file already exists or is a symbolic link. 
+When creating a file the check for the existence of the file and the creation 
+of the file if it does not exist is atomic with respect to other file system 
+operations. This option is ignored when the file is opened only for reading. 
+
+CREATE(|java.nio.file.StandardOpenOption|) If this option is present then an 
+existing file is opened if it exists, otherwise a new file is created. This 
+option is ignored if theCREATE_NEWoption is also present or the file is opened 
+only for reading. 
+
+DELETE_ON_CLOSE(|java.nio.file.StandardOpenOption|) When this option is present 
+then the implementation makes a best effort attempt to delete the file when 
+closed by the close(|java.nio.channels.SeekableByteChannel|) method. If 
+theclosemethod is not invoked then a best effort attempt is made to delete the 
+file when the Java virtual machine terminates. 
+
+SPARSE(|java.nio.file.StandardOpenOption|) When creating a new file this option 
+is a hint that the new file will be sparse. This option is ignored when not 
+creating a new file. 
+
+SYNC(|java.nio.file.StandardOpenOption|) Requires that every update to the 
+file's content or metadata be written synchronously to the underlying storage 
+device. (see Synchronized I/O file integrity). 
+
+DSYNC(|java.nio.file.StandardOpenOption|) Requires that every update to the 
+file's content be written synchronously to the underlying storage device. (see 
+Synchronized I/O file integrity). 
+
+
+
+An implementation may also support additional implementation specific options. 
+
+Theattrsparameter is optional 
+file-attributes(|java.nio.file.attribute.FileAttribute|) to set atomically when 
+a new file is created. 
+
+In the case of the default provider, the returned seekable byte channel is a 
+(|java.nio.channels.FileChannel|) . 
+
+Usage Examples: 
+
+Path path = ... 
+
+// open file for reading ReadableByteChannel rbc = Files.newByteChannel(path, 
+EnumSet.of(READ))); 
+
+// open file for writing to the end of an existing file, creating // the file 
+if it doesn't already exist WritableByteChannel wbc = 
+Files.newByteChannel(path, EnumSet.of(CREATE,APPEND)); 
+
+// create file with initial permissions, opening it for both reading and 
+writingFileAttribute> perms = ...SeekableByteChannel sbc = 
+Files.newByteChannel(path, EnumSet.of(CREATE_NEW,READ,WRITE), perms); 
+
+
+    path - the path to the file to open or create 
+    options - options specifying how the file is opened 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: a new seekable byte channel 
+
+*java.nio.file.Files.newDirectoryStream(Path)*
+
+public static |java.nio.file.DirectoryStream|<Path> newDirectoryStream(java.nio.file.Path dir)
+  throws |java.io.IOException|
+         
+Opens a directory, returning a (|java.nio.file.DirectoryStream|) to iterate 
+over all entries in the directory. The elements returned by the directory 
+stream's iterator(|java.nio.file.DirectoryStream|) are of typePath, each one 
+representing an entry in the directory. ThePathobjects are obtained as if by 
+resolving(|java.nio.file.Path|) the name of the directory entry againstdir. 
+
+When not using the try-with-resources construct, then directory 
+stream'sclosemethod should be invoked after iteration is completed so as to 
+free any resources held for the open directory. 
+
+When an implementation supports operations on entries in the directory that 
+execute in a race-free manner then the returned directory stream is a 
+(|java.nio.file.SecureDirectoryStream|) . 
+
+
+    dir - the path to the directory 
+
+    Returns: a new and open {@code DirectoryStream} object 
+
+*java.nio.file.Files.newDirectoryStream(Path,DirectoryStream.Filter<?superPath>)*
+
+public static |java.nio.file.DirectoryStream|<Path> newDirectoryStream(
+  java.nio.file.Path dir,
+  java.nio.file.DirectoryStream.Filter<? super java.nio.file.Path> filter)
+  throws |java.io.IOException|
+         
+Opens a directory, returning a (|java.nio.file.DirectoryStream|) to iterate 
+over the entries in the directory. The elements returned by the directory 
+stream's iterator(|java.nio.file.DirectoryStream|) are of typePath, each one 
+representing an entry in the directory. ThePathobjects are obtained as if by 
+resolving(|java.nio.file.Path|) the name of the directory entry againstdir. The 
+entries returned by the iterator are filtered by the given 
+filter(|java.nio.file.DirectoryStream.Filter|) . 
+
+When not using the try-with-resources construct, then directory 
+stream'sclosemethod should be invoked after iteration is completed so as to 
+free any resources held for the open directory. 
+
+Where the filter terminates due to an uncaught error or runtime exception then 
+it is propagated to the hasNext(|java.util.Iterator|) or 
+next(|java.util.Iterator|) method. Where anIOExceptionis thrown, it results in 
+thehasNextornextmethod throwing a (|java.nio.file.DirectoryIteratorException|) 
+with theIOExceptionas the cause. 
+
+When an implementation supports operations on entries in the directory that 
+execute in a race-free manner then the returned directory stream is a 
+(|java.nio.file.SecureDirectoryStream|) . 
+
+Usage Example: Suppose we want to iterate over the files in a directory that 
+are larger than 8K. 
+
+DirectoryStream.Filter<Path> filter = new DirectoryStream.Filter<Path>() { 
+public boolean accept(Path file) throws IOException { return (Files.size(file) 
+> 8192L); } }; Path dir = ... try (DirectoryStream<Path> stream = 
+Files.newDirectoryStream(dir, filter)) { : } 
+
+
+    dir - the path to the directory 
+    filter - the directory stream filter 
+
+    Returns: a new and open {@code DirectoryStream} object 
+
+*java.nio.file.Files.newDirectoryStream(Path,String)*
+
+public static |java.nio.file.DirectoryStream|<Path> newDirectoryStream(
+  java.nio.file.Path dir,
+  java.lang.String glob)
+  throws |java.io.IOException|
+         
+Opens a directory, returning a (|java.nio.file.DirectoryStream|) to iterate 
+over the entries in the directory. The elements returned by the directory 
+stream's iterator(|java.nio.file.DirectoryStream|) are of typePath, each one 
+representing an entry in the directory. ThePathobjects are obtained as if by 
+resolving(|java.nio.file.Path|) the name of the directory entry againstdir. The 
+entries returned by the iterator are filtered by matching 
+theStringrepresentation of their file names against the given globbing pattern. 
+
+For example, suppose we want to iterate over the files ending with ".java" in a 
+directory: 
+
+Path dir = ... try (DirectoryStream<Path> stream = 
+Files.newDirectoryStream(dir, "*.java")) { : } 
+
+The globbing pattern is specified by the 
+getPathMatcher(|java.nio.file.FileSystem|) method. 
+
+When not using the try-with-resources construct, then directory 
+stream'sclosemethod should be invoked after iteration is completed so as to 
+free any resources held for the open directory. 
+
+When an implementation supports operations on entries in the directory that 
+execute in a race-free manner then the returned directory stream is a 
+(|java.nio.file.SecureDirectoryStream|) . 
+
+
+    dir - the path to the directory 
+    glob - the glob pattern 
+
+    Returns: a new and open {@code DirectoryStream} object 
+
+*java.nio.file.Files.newInputStream(Path,OpenOption...)*
+
+public static |java.io.InputStream| newInputStream(
+  java.nio.file.Path path,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens a file, returning an input stream to read from the file. The stream will 
+not be buffered, and is not required to support the mark(|java.io.InputStream|) 
+or reset(|java.io.InputStream|) methods. The stream will be safe for access by 
+multiple concurrent threads. Reading commences at the beginning of the file. 
+Whether the returned stream is asynchronously closeable and/or interruptible is 
+highly file system provider specific and therefore not specified. 
+
+Theoptionsparameter determines how the file is opened. If no options are 
+present then it is equivalent to opening the file with the 
+READ(|java.nio.file.StandardOpenOption|) option. In addition to theREADoption, 
+an implementation may also support additional implementation specific options. 
+
+
+    path - the path to the file to open 
+    options - options specifying how the file is opened 
+
+    Returns: a new input stream 
+
+*java.nio.file.Files.newOutputStream(Path,OpenOption...)*
+
+public static |java.io.OutputStream| newOutputStream(
+  java.nio.file.Path path,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens or creates a file, returning an output stream that may be used to write 
+bytes to the file. The resulting stream will not be buffered. The stream will 
+be safe for access by multiple concurrent threads. Whether the returned stream 
+is asynchronously closeable and/or interruptible is highly file system provider 
+specific and therefore not specified. 
+
+This method opens or creates a file in exactly the manner specified by the 
+newByteChannel(|java.nio.file.Files|) method with the exception that the 
+READ(|java.nio.file.StandardOpenOption|) option may not be present in the array 
+of options. If no options are present then this method works as if the 
+CREATE(|java.nio.file.StandardOpenOption|) , 
+TRUNCATE_EXISTING(|java.nio.file.StandardOpenOption|) , and 
+WRITE(|java.nio.file.StandardOpenOption|) options are present. In other words, 
+it opens the file for writing, creating the file if it doesn't exist, or 
+initially truncating an existing regular-file(|java.nio.file.Files|) to a size 
+of0if it exists. 
+
+Usage Examples: 
+
+Path path = ... 
+
+// truncate and overwrite an existing file, or create the file if // it doesn't 
+initially exist OutputStream out = Files.newOutputStream(path); 
+
+// append to an existing file, fail if the file does not exist out = 
+Files.newOutputStream(path, APPEND); 
+
+// append to an existing file, create file if it doesn't initially exist out = 
+Files.newOutputStream(path, CREATE, APPEND); 
+
+// always create new file, failing if it already exists out = 
+Files.newOutputStream(path, CREATE_NEW); 
+
+
+    path - the path to the file to open or create 
+    options - options specifying how the file is opened 
+
+    Returns: a new output stream 
+
+*java.nio.file.Files.notExists(Path,LinkOption...)*
+
+public static boolean notExists(
+  java.nio.file.Path path,
+  java.nio.file.LinkOption[] options)
+
+Tests whether the file located by this path does not exist. This method is 
+intended for cases where it is required to take action when it can be confirmed 
+that a file does not exist. 
+
+Theoptionsparameter may be used to indicate how symbolic links are handled for 
+the case that the file is a symbolic link. By default, symbolic links are 
+followed. If the option NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present 
+then symbolic links are not followed. 
+
+Note that this method is not the complement of the 
+exists(|java.nio.file.Files|) method. Where it is not possible to determine if 
+a file exists or not then both methods returnfalse. As with theexistsmethod, 
+the result of this method is immediately outdated. If this method indicates the 
+file does exist then there is no guarantee that a subsequence attempt to create 
+the file will succeed. Care should be taken when using this method in security 
+sensitive applications. 
+
+
+    path - the path to the file to test 
+    options - options indicating how symbolic links are handled 
+
+    Returns: {@code true} if the file does not exist; {@code false} if the file exists or 
+             its existence cannot be determined 
+
+*java.nio.file.Files.probeContentType(Path)*
+
+public static |java.lang.String| probeContentType(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Probes the content type of a file. 
+
+This method uses the installed (|java.nio.file.spi.FileTypeDetector|) 
+implementations to probe the given file to determine its content type. Each 
+file type detector's probeContentType(|java.nio.file.spi.FileTypeDetector|) is 
+invoked, in turn, to probe the file type. If the file is recognized then the 
+content type is returned. If the file is not recognized by any of the installed 
+file type detectors then a system-default file type detector is invoked to 
+guess the content type. 
+
+A given invocation of the Java virtual machine maintains a system-wide list of 
+file type detectors. Installed file type detectors are loaded using the 
+service-provider loading facility defined by the (|java.util.ServiceLoader|) 
+class. Installed file type detectors are loaded using the system class loader. 
+If the system class loader cannot be found then the extension class loader is 
+used; If the extension class loader cannot be found then the bootstrap class 
+loader is used. File type detectors are typically installed by placing them in 
+a JAR file on the application class path or in the extension directory, the JAR 
+file contains a provider-configuration file 
+namedjava.nio.file.spi.FileTypeDetectorin the resource 
+directoryMETA-INF/services, and the file lists one or more fully-qualified 
+names of concrete subclass ofFileTypeDetectorthat have a zero argument 
+constructor. If the process of locating or instantiating the installed file 
+type detectors fails then an unspecified error is thrown. The ordering that 
+installed providers are located is implementation specific. 
+
+The return value of this method is the string form of the value of a 
+Multipurpose Internet Mail Extension (MIME) content type as defined by RFC2045: 
+Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet 
+Message Bodies. The string is guaranteed to be parsable according to the 
+grammar in the RFC. 
+
+
+    path - the path to the file to probe 
+
+    Returns: The content type of the file, or {@code null} if the content type cannot be 
+             determined 
+
+*java.nio.file.Files.readAllBytes(Path)*
+
+public static byte[] readAllBytes(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Read all the bytes from a file. The method ensures that the file is closed when 
+all bytes have been read or an I/O error, or other runtime exception, is 
+thrown. 
+
+Note that this method is intended for simple cases where it is convenient to 
+read all bytes into a byte array. It is not intended for reading in large 
+files. 
+
+
+    path - the path to the file 
+
+    Returns: a byte array containing the bytes read from the file 
+
+*java.nio.file.Files.readAllLines(Path,Charset)*
+
+public static |java.util.List|<String> readAllLines(
+  java.nio.file.Path path,
+  java.nio.charset.Charset cs)
+  throws |java.io.IOException|
+         
+Read all lines from a file. This method ensures that the file is closed when 
+all bytes have been read or an I/O error, or other runtime exception, is 
+thrown. Bytes from the file are decoded into characters using the specified 
+charset. 
+
+This method recognizes the following as line terminators: 
+
+u000D followed by u000A, CARRIAGE RETURN followed by LINE FEED u000A, LINE FEED 
+u000D, CARRIAGE RETURN 
+
+Additional Unicode line terminators may be recognized in future releases. 
+
+Note that this method is intended for simple cases where it is convenient to 
+read all lines in a single operation. It is not intended for reading in large 
+files. 
+
+
+    path - the path to the file 
+    cs - the charset to use for decoding 
+
+    Returns: the lines from the file as a {@code List}; whether the {@code List} is 
+             modifiable or not is implementation dependent and therefore not 
+             specified 
+
+*java.nio.file.Files.readAttributes(Path,Class<A>,LinkOption...)*
+
+public static |A| readAttributes(
+  java.nio.file.Path path,
+  java.lang.Class<A> type,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Reads a file's attributes as a bulk operation. 
+
+Thetypeparameter is the type of the attributes required and this method returns 
+an instance of that type if supported. All implementations support a basic set 
+of file attributes and so invoking this method with atypeparameter 
+ofBasicFileAttributes.classwill not throwUnsupportedOperationException. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+It is implementation specific if all file attributes are read as an atomic 
+operation with respect to other file system operations. 
+
+Usage Example: Suppose we want to read a file's attributes in bulk: 
+
+Path path = ... BasicFileAttributes attrs = Files.readAttributes(path, 
+BasicFileAttributes.class); 
+
+Alternatively, suppose we want to read file's POSIX attributes without 
+following symbolic links: 
+
+PosixFileAttributes attrs = Files.readAttributes(path, 
+PosixFileAttributes.class, NOFOLLOW_LINKS); 
+
+
+    path - the path to the file 
+    type - the {@code Class} of the file attributes required to read 
+    options - options indicating how symbolic links are handled 
+
+    Returns: the file attributes 
+
+*java.nio.file.Files.readAttributes(Path,String,LinkOption...)*
+
+public static |java.util.Map|<String,Object> readAttributes(
+  java.nio.file.Path path,
+  java.lang.String attributes,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Reads a set of file attributes as a bulk operation. 
+
+Theattributesparameter identifies the attributes to be read and takes the form: 
+
+[view-name:]attribute-list 
+
+where square brackets [...] delineate an optional component and the 
+character':'stands for itself. 
+
+view-name is the name(|java.nio.file.attribute.FileAttributeView|) of a 
+(|java.nio.file.attribute.FileAttributeView|) that identifies a set of file 
+attributes. If not specified then it defaults to"basic", the name of the file 
+attribute view that identifies the basic set of file attributes common to many 
+file systems. 
+
+The attribute-list component is a comma separated list of zero or more names of 
+attributes to read. If the list contains the value"*"then all attributes are 
+read. Attributes that are not supported are ignored and will not be present in 
+the returned map. It is implementation specific if all attributes are read as 
+an atomic operation with respect to other file system operations. 
+
+The following examples demonstrate possible values for theattributesparameter: 
+
+
+
+"*" Read all 
+basic-file-attributes(|java.nio.file.attribute.BasicFileAttributes|) . 
+
+"size,lastModifiedTime,lastAccessTime" Reads the file size, last modified time, 
+and last access time attributes. 
+
+"posix:*" Read all 
+POSIX-file-attributes(|java.nio.file.attribute.PosixFileAttributes|) . 
+
+"posix:permissions,owner,size" Reads the POSX file permissions, owner, and file 
+size. 
+
+
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is read. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+
+    path - the path to the file 
+    attributes - the attributes to read 
+    options - options indicating how symbolic links are handled 
+
+    Returns: a map of the attributes returned; The map's keys are the attribute names, its 
+             values are the attribute values 
+
+*java.nio.file.Files.readSymbolicLink(Path)*
+
+public static |java.nio.file.Path| readSymbolicLink(java.nio.file.Path link)
+  throws |java.io.IOException|
+         
+Reads the target of a symbolic link (optional operation). 
+
+If the file system supports symbolic links then this method is used to read the 
+target of the link, failing if the file is not a symbolic link. The target of 
+the link need not exist. The returnedPathobject will be associated with the 
+same file system aslink. 
+
+
+    link - the path to the symbolic link 
+
+    Returns: a {@code Path} object representing the target of the link 
+
+*java.nio.file.Files.setAttribute(Path,String,Object,LinkOption...)*
+
+public static |java.nio.file.Path| setAttribute(
+  java.nio.file.Path path,
+  java.lang.String attribute,
+  java.lang.Object value,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Sets the value of a file attribute. 
+
+Theattributeparameter identifies the attribute to be set and takes the form: 
+
+[view-name:]attribute-name 
+
+where square brackets [...] delineate an optional component and the 
+character':'stands for itself. 
+
+view-name is the name(|java.nio.file.attribute.FileAttributeView|) of a 
+(|java.nio.file.attribute.FileAttributeView|) that identifies a set of file 
+attributes. If not specified then it defaults to"basic", the name of the file 
+attribute view that identifies the basic set of file attributes common to many 
+file systems. attribute-name is the name of the attribute within the set. 
+
+Theoptionsarray may be used to indicate how symbolic links are handled for the 
+case that the file is a symbolic link. By default, symbolic links are followed 
+and the file attribute of the final target of the link is set. If the option 
+NOFOLLOW_LINKS(|java.nio.file.LinkOption|) is present then symbolic links are 
+not followed. 
+
+Usage Example: Suppose we want to set the DOS "hidden" attribute: 
+
+Path path = ... Files.setAttribute(path, "dos:hidden", true); 
+
+
+    path - the path to the file 
+    attribute - the attribute to set 
+    value - the attribute value 
+    options - options indicating how symbolic links are handled 
+
+    Returns: the {@code path} parameter 
+
+*java.nio.file.Files.setLastModifiedTime(Path,FileTime)*
+
+public static |java.nio.file.Path| setLastModifiedTime(
+  java.nio.file.Path path,
+  java.nio.file.attribute.FileTime time)
+  throws |java.io.IOException|
+         
+Updates a file's last modified time attribute. The file time is converted to 
+the epoch and precision supported by the file system. Converting from finer to 
+coarser granularities result in precision loss. The behavior of this method 
+when attempting to set the last modified time when it is not supported by the 
+file system or is outside the range supported by the underlying file store is 
+not defined. It may or not fail by throwing anIOException. 
+
+Usage Example: Suppose we want to set the last modified time to the current 
+time: 
+
+Path path = ... FileTime now = FileTime.fromMillis(System.currentTimeMillis()); 
+Files.setLastModifiedTime(path, now); 
+
+
+    path - the path to the file 
+    time - the new last modified time 
+
+    Returns: 
+
+*java.nio.file.Files.setOwner(Path,UserPrincipal)*
+
+public static |java.nio.file.Path| setOwner(
+  java.nio.file.Path path,
+  java.nio.file.attribute.UserPrincipal owner)
+  throws |java.io.IOException|
+         
+Updates the file owner. 
+
+Thepathparameter is associated with a file system that supports 
+(|java.nio.file.attribute.FileOwnerAttributeView|) . This file attribute view 
+provides access to a file attribute that is the owner of the file. 
+
+Usage Example: Suppose we want to make "joe" the owner of a file: 
+
+Path path = ... UserPrincipalLookupService lookupService = 
+provider(path).getUserPrincipalLookupService(); UserPrincipal joe = 
+lookupService.lookupPrincipalByName("joe"); Files.setOwner(path, joe); 
+
+
+    path - A file reference that locates the file 
+    owner - The new file owner 
+
+*java.nio.file.Files.setPosixFilePermissions(Path,Set<PosixFilePermission>)*
+
+public static |java.nio.file.Path| setPosixFilePermissions(
+  java.nio.file.Path path,
+  java.util.Set<java.nio.file.attribute.PosixFilePermission> perms)
+  throws |java.io.IOException|
+         
+Sets a file's POSIX permissions. 
+
+Thepathparameter is associated with aFileSystemthat supports the 
+(|java.nio.file.attribute.PosixFileAttributeView|) . This attribute view 
+provides access to file attributes commonly associated with files on file 
+systems used by operating systems that implement the Portable Operating System 
+Interface (POSIX) family of standards. 
+
+
+    path - A file reference that locates the file 
+    perms - The new set of permissions 
+
+*java.nio.file.Files.size(Path)*
+
+public static long size(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Returns the size of a file (in bytes). The size may differ from the actual size 
+on the file system due to compression, support for sparse files, or other 
+reasons. The size of files that are not regular(|java.nio.file.Files|) files is 
+implementation specific and therefore unspecified. 
+
+
+    path - the path to the file 
+
+    Returns: the file size, in bytes 
+
+*java.nio.file.Files.walkFileTree(Path,FileVisitor<?superPath>)*
+
+public static |java.nio.file.Path| walkFileTree(
+  java.nio.file.Path start,
+  java.nio.file.FileVisitor<? super java.nio.file.Path> visitor)
+  throws |java.io.IOException|
+         
+Walks a file tree. 
+
+This method works as if invoking it were equivalent to evaluating the 
+expression: 
+
+walkFileTree(start, EnumSet.noneOf(FileVisitOption.class), Integer.MAX_VALUE, 
+visitor) 
+
+In other words, it does not follow symbolic links, and visits all levels of the 
+file tree. 
+
+
+    start - the starting file 
+    visitor - the file visitor to invoke for each file 
+
+    Returns: the starting file 
+
+*java.nio.file.Files.walkFileTree(Path,Set<FileVisitOption>,int,FileVisitor<?superPath>)*
+
+public static |java.nio.file.Path| walkFileTree(
+  java.nio.file.Path start,
+  java.util.Set<java.nio.file.FileVisitOption> options,
+  int maxDepth,
+  java.nio.file.FileVisitor<? super java.nio.file.Path> visitor)
+  throws |java.io.IOException|
+         
+Walks a file tree. 
+
+This method walks a file tree rooted at a given starting file. The file tree 
+traversal is depth-first with the given (|java.nio.file.FileVisitor|) invoked 
+for each file encountered. File tree traversal completes when all accessible 
+files in the tree have been visited, or a visit method returns a result of 
+TERMINATE(|java.nio.file.FileVisitResult|) . Where a visit method terminates 
+due anIOException, an uncaught error, or runtime exception, then the traversal 
+is terminated and the error or exception is propagated to the caller of this 
+method. 
+
+For each file encountered this method attempts to read its 
+(|java.nio.file.attribute.BasicFileAttributes|) . If the file is not a 
+directory then the visitFile(|java.nio.file.FileVisitor|) method is invoked 
+with the file attributes. If the file attributes cannot be read, due to an I/O 
+exception, then the visitFileFailed(|java.nio.file.FileVisitor|) method is 
+invoked with the I/O exception. 
+
+Where the file is a directory, and the directory could not be opened, then 
+thevisitFileFailedmethod is invoked with the I/O exception, after which, the 
+file tree walk continues, by default, at the next sibling of the directory. 
+
+Where the directory is opened successfully, then the entries in the directory, 
+and their descendants are visited. When all entries have been visited, or an 
+I/O error occurs during iteration of the directory, then the directory is 
+closed and the visitor's postVisitDirectory(|java.nio.file.FileVisitor|) method 
+is invoked. The file tree walk then continues, by default, at the next sibling 
+of the directory. 
+
+By default, symbolic links are not automatically followed by this method. If 
+theoptionsparameter contains the FOLLOW_LINKS(|java.nio.file.FileVisitOption|) 
+option then symbolic links are followed. When following links, and the 
+attributes of the target cannot be read, then this method attempts to get 
+theBasicFileAttributesof the link. If they can be read then thevisitFilemethod 
+is invoked with the attributes of the link (otherwise thevisitFileFailedmethod 
+is invoked as specified above). 
+
+If theoptionsparameter contains the 
+FOLLOW_LINKS(|java.nio.file.FileVisitOption|) option then this method keeps 
+track of directories visited so that cycles can be detected. A cycle arises 
+when there is an entry in a directory that is an ancestor of the directory. 
+Cycle detection is done by recording the 
+file-key(|java.nio.file.attribute.BasicFileAttributes|) of directories, or if 
+file keys are not available, by invoking the isSameFile(|java.nio.file.Files|) 
+method to test if a directory is the same file as an ancestor. When a cycle is 
+detected it is treated as an I/O error, and the 
+visitFileFailed(|java.nio.file.FileVisitor|) method is invoked with an instance 
+of (|java.nio.file.FileSystemLoopException|) . 
+
+ThemaxDepthparameter is the maximum number of levels of directories to visit. A 
+value of0means that only the starting file is visited, unless denied by the 
+security manager. A value of MAX_VALUE(|java.lang.Integer|) may be used to 
+indicate that all levels should be visited. ThevisitFilemethod is invoked for 
+all files, including directories, encountered atmaxDepth, unless the basic file 
+attributes cannot be read, in which case thevisitFileFailedmethod is invoked. 
+
+If a visitor returns a result ofnullthenNullPointerExceptionis thrown. 
+
+When a security manager is installed and it denies access to a file (or 
+directory), then it is ignored and the visitor is not invoked for that file (or 
+directory). 
+
+
+    start - the starting file 
+    options - options to configure the traversal 
+    maxDepth - the maximum number of directory levels to visit 
+    visitor - the file visitor to invoke for each file 
+
+    Returns: the starting file 
+
+*java.nio.file.Files.write(Path,byte[],OpenOption...)*
+
+public static |java.nio.file.Path| write(
+  java.nio.file.Path path,
+  byte[] bytes,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Writes bytes to a file. Theoptionsparameter specifies how the the file is 
+created or opened. If no options are present then this method works as if the 
+CREATE(|java.nio.file.StandardOpenOption|) , 
+TRUNCATE_EXISTING(|java.nio.file.StandardOpenOption|) , and 
+WRITE(|java.nio.file.StandardOpenOption|) options are present. In other words, 
+it opens the file for writing, creating the file if it doesn't exist, or 
+initially truncating an existing regular-file(|java.nio.file.Files|) to a size 
+of0. All bytes in the byte array are written to the file. The method ensures 
+that the file is closed when all bytes have been written (or an I/O error or 
+other runtime exception is thrown). If an I/O error occurs then it may do so 
+after the file has created or truncated, or after some bytes have been written 
+to the file. 
+
+Usage example: By default the method creates a new file or overwrites an 
+existing file. Suppose you instead want to append bytes to an existing file: 
+
+Path path = ... byte[] bytes = ... Files.write(path, bytes, 
+StandardOpenOption.APPEND); 
+
+
+    path - the path to the file 
+    bytes - the byte array with the bytes to write 
+    options - options specifying how the file is opened 
+
+    Returns: 
+
+*java.nio.file.Files.write(Path,Iterable<?extendsCharSequence>,Charset,OpenOption...)*
+
+public static |java.nio.file.Path| write(
+  java.nio.file.Path path,
+  java.lang.Iterable<? extends java.lang.CharSequence> lines,
+  java.nio.charset.Charset cs,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Write lines of text to a file. Each line is a char sequence and is written to 
+the file in sequence with each line terminated by the platform's line 
+separator, as defined by the system propertyline.separator. Characters are 
+encoded into bytes using the specified charset. 
+
+Theoptionsparameter specifies how the the file is created or opened. If no 
+options are present then this method works as if the 
+CREATE(|java.nio.file.StandardOpenOption|) , 
+TRUNCATE_EXISTING(|java.nio.file.StandardOpenOption|) , and 
+WRITE(|java.nio.file.StandardOpenOption|) options are present. In other words, 
+it opens the file for writing, creating the file if it doesn't exist, or 
+initially truncating an existing regular-file(|java.nio.file.Files|) to a size 
+of0. The method ensures that the file is closed when all lines have been 
+written (or an I/O error or other runtime exception is thrown). If an I/O error 
+occurs then it may do so after the file has created or truncated, or after some 
+bytes have been written to the file. 
+
+
+    path - the path to the file 
+    lines - an object to iterate over the char sequences 
+    cs - the charset to use for encoding 
+    options - options specifying how the file is opened 
+
+    Returns: 
+
+

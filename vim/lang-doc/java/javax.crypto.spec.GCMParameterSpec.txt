@@ -1,0 +1,97 @@
+*javax.crypto.spec.GCMParameterSpec* *GCMParameterSpec* Specifies the set of par
+
+public class GCMParameterSpec
+  extends    |java.lang.Object|
+  implements |java.security.spec.AlgorithmParameterSpec|
+
+|javax.crypto.spec.GCMParameterSpec_Description|
+|javax.crypto.spec.GCMParameterSpec_Fields|
+|javax.crypto.spec.GCMParameterSpec_Constructors|
+|javax.crypto.spec.GCMParameterSpec_Methods|
+
+================================================================================
+
+*javax.crypto.spec.GCMParameterSpec_Constructors*
+|javax.crypto.spec.GCMParameterSpec(int,byte[])|Constructs a GCMParameterSpec u
+|javax.crypto.spec.GCMParameterSpec(int,byte[],int,int)|Constructs a GCMParamet
+
+*javax.crypto.spec.GCMParameterSpec_Methods*
+|javax.crypto.spec.GCMParameterSpec.getIV()|Returns the Initialization Vector (
+|javax.crypto.spec.GCMParameterSpec.getTLen()|Returns the authentication tag le
+
+*javax.crypto.spec.GCMParameterSpec_Description*
+
+Specifies the set of parameters required by a (|javax.crypto.Cipher|) using the 
+Galois/Counter Mode (GCM) mode. 
+
+Simple block cipher modes (such as CBC) generally require only an 
+initialization vector (such asIvParameterSpec), but GCM needs these parameters: 
+
+IV: Initialization Vector (IV) tLen: length (in bits) of authentication tag T 
+
+In addition to the parameters described here, other GCM inputs/output 
+(Additional Authenticated Data (AAD), Keys, block ciphers, plain/ciphertext and 
+authentication tags) are handled in theCipherclass. 
+
+Please see RFC 5116 for more information on the Authenticated Encryption with 
+Associated Data (AEAD) algorithm, and NIST Special Publication 800-38D, "NIST 
+Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) 
+and GMAC." 
+
+The GCM specification states thattLenmay only have the values {128, 120, 112, 
+104, 96}, or {64, 32} for certain applications. Other values can be specified 
+for this class, but not all CSP implementations will support them. 
+
+
+
+*javax.crypto.spec.GCMParameterSpec(int,byte[])*
+
+public GCMParameterSpec(
+  int tLen,
+  byte[] src)
+
+Constructs a GCMParameterSpec using the specified authentication tag bit-length 
+and IV buffer. 
+
+    tLen - the authentication tag length (in bits) 
+    src - the IV source buffer. The contents of the buffer are copied to protect against 
+       subsequent modification. 
+
+*javax.crypto.spec.GCMParameterSpec(int,byte[],int,int)*
+
+public GCMParameterSpec(
+  int tLen,
+  byte[] src,
+  int offset,
+  int len)
+
+Constructs a GCMParameterSpec object using the specified authentication tag 
+bit-length and a subset of the specified buffer as the IV. 
+
+    tLen - the authentication tag length (in bits) 
+    src - the IV source buffer. The contents of the buffer are copied to protect against 
+       subsequent modification. 
+    offset - the offset in {@code src} where the IV starts 
+    len - the number of IV bytes 
+
+*javax.crypto.spec.GCMParameterSpec.getIV()*
+
+public byte[] getIV()
+
+Returns the Initialization Vector (IV). 
+
+
+
+    Returns: the IV. Creates a new array each time this method is called. 
+
+*javax.crypto.spec.GCMParameterSpec.getTLen()*
+
+public int getTLen()
+
+Returns the authentication tag length. 
+
+
+
+    Returns: the authentication tag length (in bits) 
+
+

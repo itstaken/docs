@@ -1,0 +1,151 @@
+*javax.annotation.processing.AbstractProcessor* *AbstractProcessor* An abstract 
+
+public abstract class AbstractProcessor
+  extends    |java.lang.Object|
+  implements |javax.annotation.processing.Processor|
+
+|javax.annotation.processing.AbstractProcessor_Description|
+|javax.annotation.processing.AbstractProcessor_Fields|
+|javax.annotation.processing.AbstractProcessor_Constructors|
+|javax.annotation.processing.AbstractProcessor_Methods|
+
+================================================================================
+
+*javax.annotation.processing.AbstractProcessor_Fields*
+|javax.annotation.processing.ProcessingEnvironment_javax.annotation.processing.AbstractProcessor.processingEnv|
+
+*javax.annotation.processing.AbstractProcessor_Constructors*
+|javax.annotation.processing.AbstractProcessor()|Constructor for subclasses to 
+
+*javax.annotation.processing.AbstractProcessor_Methods*
+|javax.annotation.processing.AbstractProcessor.getCompletions(Element,AnnotationMirror,ExecutableElement,String)|
+|javax.annotation.processing.AbstractProcessor.getSupportedAnnotationTypes()|If
+|javax.annotation.processing.AbstractProcessor.getSupportedOptions()|If the pro
+|javax.annotation.processing.AbstractProcessor.getSupportedSourceVersion()|If t
+|javax.annotation.processing.AbstractProcessor.init(ProcessingEnvironment)|Init
+|javax.annotation.processing.AbstractProcessor.isInitialized()|Returnstrueif th
+|javax.annotation.processing.AbstractProcessor.process(Set<?extendsTypeElement>,RoundEnvironment)|
+
+*javax.annotation.processing.AbstractProcessor_Description*
+
+An abstract annotation processor designed to be a convenient superclass for 
+most concrete annotation processors. This class examines annotation values to 
+compute the options(|javax.annotation.processing.AbstractProcessor|) , 
+annotations(|javax.annotation.processing.AbstractProcessor|) , and source 
+version(|javax.annotation.processing.AbstractProcessor|) supported by its 
+subtypes. 
+
+The getter methods may issue warnings(|javax.annotation.processing.Messager|) 
+about noteworthy conditions using the facilities available after the processor 
+has been initialized(|javax.annotation.processing.AbstractProcessor|) . 
+
+Subclasses are free to override the implementation and specification of any of 
+the methods in this class as long as the general 
+Processor(|javax.annotation.processing.Processor|) contract for that method is 
+obeyed. 
+
+
+
+*javax.annotation.processing.ProcessingEnvironment_javax.annotation.processing.AbstractProcessor.processingEnv*
+
+Processing environment providing by the tool framework. 
+
+
+
+*javax.annotation.processing.AbstractProcessor()*
+
+protected AbstractProcessor()
+
+Constructor for subclasses to call. 
+
+
+*javax.annotation.processing.AbstractProcessor.getCompletions(Element,AnnotationMirror,ExecutableElement,String)*
+
+public |java.lang.Iterable|<? extends javax.annotation.processing.Completion> getCompletions(
+  javax.lang.model.element.Element element,
+  javax.lang.model.element.AnnotationMirror annotation,
+  javax.lang.model.element.ExecutableElement member,
+  java.lang.String userText)
+
+Returns an empty iterable of completions. 
+
+
+    element - {@inheritDoc} 
+    annotation - {@inheritDoc} 
+    member - {@inheritDoc} 
+    userText - {@inheritDoc} 
+
+*javax.annotation.processing.AbstractProcessor.getSupportedAnnotationTypes()*
+
+public |java.util.Set|<String> getSupportedAnnotationTypes()
+
+If the processor class is annotated with 
+(|javax.annotation.processing.SupportedAnnotationTypes|) , return an 
+unmodifiable set with the same set of strings as the annotation. If the class 
+is not so annotated, an empty set is returned. 
+
+
+
+    Returns: the names of the annotation types supported by this processor, or an empty set 
+             if none 
+
+*javax.annotation.processing.AbstractProcessor.getSupportedOptions()*
+
+public |java.util.Set|<String> getSupportedOptions()
+
+If the processor class is annotated with 
+(|javax.annotation.processing.SupportedOptions|) , return an unmodifiable set 
+with the same set of strings as the annotation. If the class is not so 
+annotated, an empty set is returned. 
+
+
+
+    Returns: the options recognized by this processor, or an empty set if none 
+
+*javax.annotation.processing.AbstractProcessor.getSupportedSourceVersion()*
+
+public |javax.lang.model.SourceVersion| getSupportedSourceVersion()
+
+If the processor class is annotated with 
+(|javax.annotation.processing.SupportedSourceVersion|) , return the source 
+version in the annotation. If the class is not so annotated, 
+(|javax.lang.model.SourceVersion|) is returned. 
+
+
+
+    Returns: the latest source version supported by this processor 
+
+*javax.annotation.processing.AbstractProcessor.init(ProcessingEnvironment)*
+
+public synchronized void init(javax.annotation.processing.ProcessingEnvironment processingEnv)
+
+Initializes the processor with the processing environment by setting 
+theprocessingEnvfield to the value of theprocessingEnvargument. 
+AnIllegalStateExceptionwill be thrown if this method is called more than once 
+on the same object. 
+
+
+    processingEnv - environment to access facilities the tool framework provides to the processor 
+
+*javax.annotation.processing.AbstractProcessor.isInitialized()*
+
+protected synchronized boolean isInitialized()
+
+Returnstrueif this object has been 
+initialized(|javax.annotation.processing.AbstractProcessor|) ,falseotherwise. 
+
+
+
+    Returns: {@code true} if this object has been initialized, {@code false} otherwise. 
+
+*javax.annotation.processing.AbstractProcessor.process(Set<?extendsTypeElement>,RoundEnvironment)*
+
+public abstract boolean process(
+  java.util.Set<? extends javax.lang.model.element.TypeElement> annotations,
+  javax.annotation.processing.RoundEnvironment roundEnv)
+
+
+
+
+
+

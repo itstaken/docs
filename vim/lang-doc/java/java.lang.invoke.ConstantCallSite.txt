@@ -1,0 +1,106 @@
+*java.lang.invoke.ConstantCallSite* *ConstantCallSite* AConstantCallSiteis aCall
+
+public class ConstantCallSite
+  extends    |java.lang.invoke.CallSite|
+
+|java.lang.invoke.ConstantCallSite_Description|
+|java.lang.invoke.ConstantCallSite_Fields|
+|java.lang.invoke.ConstantCallSite_Constructors|
+|java.lang.invoke.ConstantCallSite_Methods|
+
+================================================================================
+
+*java.lang.invoke.ConstantCallSite_Constructors*
+|java.lang.invoke.ConstantCallSite(MethodHandle)|Creates a call site with a per
+|java.lang.invoke.ConstantCallSite(MethodType,MethodHandle)|Creates a call site
+
+*java.lang.invoke.ConstantCallSite_Methods*
+|java.lang.invoke.ConstantCallSite.dynamicInvoker()|Returns this call site's pe
+|java.lang.invoke.ConstantCallSite.getTarget()|Returns the target method of the
+|java.lang.invoke.ConstantCallSite.setTarget(MethodHandle)|Always throws anUnsu
+
+*java.lang.invoke.ConstantCallSite_Description*
+
+AConstantCallSiteis a (|java.lang.invoke.CallSite|) whose target is permanent, 
+and can never be changed. Aninvokedynamicinstruction linked to 
+aConstantCallSiteis permanently bound to the call site's target. 
+
+
+
+*java.lang.invoke.ConstantCallSite(MethodHandle)*
+
+public ConstantCallSite(java.lang.invoke.MethodHandle target)
+
+Creates a call site with a permanent target. 
+
+    target - the target to be permanently associated with this call site 
+
+*java.lang.invoke.ConstantCallSite(MethodType,MethodHandle)*
+
+protected ConstantCallSite(
+  java.lang.invoke.MethodType targetType,
+  java.lang.invoke.MethodHandle createTargetHook)
+  throws |java.lang.Throwable|
+         
+Creates a call site with a permanent target, possibly bound to the call site 
+itself. 
+
+During construction of the call site, thecreateTargetHookis invoked to produce 
+the actual target, as if by a call of the form(MethodHandle) 
+createTargetHook.invoke(this). 
+
+Note that user code cannot perform such an action directly in a subclass 
+constructor, since the target must be fixed before 
+theConstantCallSiteconstructor returns. 
+
+The hook is said to bind the call site to a target method handle, and a typical 
+action would besomeTarget.bindTo(this). However, the hook is free to take any 
+action whatever, including ignoring the call site and returning a constant 
+target. 
+
+The result returned by the hook must be a method handle of exactly the same 
+type as the call site. 
+
+While the hook is being called, the newConstantCallSiteobject is in a partially 
+constructed state. In this state, a call togetTarget, or any other attempt to 
+use the target, will result in anIllegalStateException. It is legal at all 
+times to obtain the call site's type using thetypemethod. 
+
+    targetType - the type of the method handle to be permanently associated with this call site 
+    createTargetHook - a method handle to invoke (on the call site) to produce the call site's target 
+
+*java.lang.invoke.ConstantCallSite.dynamicInvoker()*
+
+public final |java.lang.invoke.MethodHandle| dynamicInvoker()
+
+Returns this call site's permanent target. Since that target will never change, 
+this is a correct implementation of 
+CallSite.dynamicInvoker(|java.lang.invoke.CallSite|) . 
+
+
+
+    Returns: the immutable linkage state of this call site, a constant method handle 
+
+*java.lang.invoke.ConstantCallSite.getTarget()*
+
+public final |java.lang.invoke.MethodHandle| getTarget()
+
+Returns the target method of the call site, which behaves like afinalfield of 
+theConstantCallSite. That is, the the target is always the original value 
+passed to the constructor call which created this instance. 
+
+
+
+    Returns: the immutable linkage state of this call site, a constant method handle 
+
+*java.lang.invoke.ConstantCallSite.setTarget(MethodHandle)*
+
+public final void setTarget(java.lang.invoke.MethodHandle ignore)
+
+Always throws an (|java.lang.UnsupportedOperationException|) . This kind of 
+call site cannot change its target. 
+
+
+    ignore - a new target proposed for the call site, which is ignored 
+
+

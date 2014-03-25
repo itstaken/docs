@@ -1,0 +1,268 @@
+*javax.lang.model.util.TypeKindVisitor6* *TypeKindVisitor6* A visitor of types b
+
+public class TypeKindVisitor6<R,P>
+  extends    |javax.lang.model.util.SimpleTypeVisitor6|
+
+|javax.lang.model.util.TypeKindVisitor6_Description|
+|javax.lang.model.util.TypeKindVisitor6_Fields|
+|javax.lang.model.util.TypeKindVisitor6_Constructors|
+|javax.lang.model.util.TypeKindVisitor6_Methods|
+
+================================================================================
+
+*javax.lang.model.util.TypeKindVisitor6_Constructors*
+|javax.lang.model.util.TypeKindVisitor6()|Constructor for concrete subclasses t
+|javax.lang.model.util.TypeKindVisitor6(R)|Constructor for concrete subclasses 
+
+*javax.lang.model.util.TypeKindVisitor6_Methods*
+|javax.lang.model.util.TypeKindVisitor6.visitNoType(NoType,P)|Visits aNoTypeins
+|javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsNone(NoType,P)|Visits aTyp
+|javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsPackage(NoType,P)|Visits a
+|javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsVoid(NoType,P)|Visits aTyp
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitive(PrimitiveType,P)|Visits 
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsBoolean(PrimitiveType,P)|
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsByte(PrimitiveType,P)|V
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsChar(PrimitiveType,P)|V
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsDouble(PrimitiveType,P)|
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsFloat(PrimitiveType,P)|
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsInt(PrimitiveType,P)|Vi
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsLong(PrimitiveType,P)|V
+|javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsShort(PrimitiveType,P)|
+
+*javax.lang.model.util.TypeKindVisitor6_Description*
+
+A visitor of types based on their kind(|javax.lang.model.type.TypeKind|) with 
+default behavior appropriate for the 
+RELEASE_6(|javax.lang.model.SourceVersion|) source version. For 
+types(|javax.lang.model.type.TypeMirror|) XYZ that may have more than one kind, 
+the visitXYZ methods in this class delegate to the visitXYZKind method 
+corresponding to the first argument's kind. The visitXYZKind methods call 
+defaultAction(|javax.lang.model.util.TypeKindVisitor6|) , passing their 
+arguments todefaultAction's corresponding parameters. 
+
+Methods in this class may be overridden subject to their general contract. Note 
+that annotating methods in concrete subclasses with 
+@Override(|java.lang.Override|) will help ensure that methods are overridden as 
+intended. 
+
+WARNING: TheTypeVisitorinterface implemented by this class may have methods 
+added to it in the future to accommodate new, currently unknown, language 
+structures added to future versions of the Java programming language. 
+Therefore, methods whose names begin with"visit"may be added to this class in 
+the future; to avoid incompatibilities, classes which extend this class should 
+not declare any instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the visitUnknown(|javax.lang.model.util.TypeKindVisitor6|) 
+method. A new type kind visitor class will also be introduced to correspond to 
+the new language level; this visitor will have different default behavior for 
+the visit method in question. When the new visitor is introduced, all or 
+portions of this visitor may be deprecated. 
+
+
+
+*javax.lang.model.util.TypeKindVisitor6()*
+
+protected TypeKindVisitor6()
+
+Constructor for concrete subclasses to call; usesnullfor the default value. 
+
+
+*javax.lang.model.util.TypeKindVisitor6(R)*
+
+protected TypeKindVisitor6(R defaultValue)
+
+Constructor for concrete subclasses to call; uses the argument for the default 
+value. 
+
+    defaultValue - the value to assign to {@link #DEFAULT_VALUE} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitNoType(NoType,P)*
+
+public |R| visitNoType(
+  javax.lang.model.type.NoType t,
+  P p)
+
+Visits a (|javax.lang.model.type.NoType|) instance, dispatching to the visit 
+method for the specific kind(|javax.lang.model.type.TypeKind|) of 
+pseudo-type:VOID,PACKAGE, orNONE. 
+
+
+    t - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of the kind-specific visit method 
+
+*javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsNone(NoType,P)*
+
+public |R| visitNoTypeAsNone(
+  javax.lang.model.type.NoType t,
+  P p)
+
+Visits a NONE(|javax.lang.model.type.TypeKind|) pseudo-type by 
+callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsPackage(NoType,P)*
+
+public |R| visitNoTypeAsPackage(
+  javax.lang.model.type.NoType t,
+  P p)
+
+Visits a PACKAGE(|javax.lang.model.type.TypeKind|) pseudo-type by 
+callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitNoTypeAsVoid(NoType,P)*
+
+public |R| visitNoTypeAsVoid(
+  javax.lang.model.type.NoType t,
+  P p)
+
+Visits a VOID(|javax.lang.model.type.TypeKind|) pseudo-type by 
+callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitive(PrimitiveType,P)*
+
+public |R| visitPrimitive(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits a primitive type, dispatching to the visit method for the specific 
+kind(|javax.lang.model.type.TypeKind|) of primitive type:BOOLEAN,BYTE, etc. 
+
+
+    t - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of the kind-specific visit method 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsBoolean(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsBoolean(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aBOOLEANprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsByte(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsByte(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aBYTEprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsChar(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsChar(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aCHARprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsDouble(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsDouble(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aDOUBLEprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsFloat(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsFloat(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aFLOATprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsInt(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsInt(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits anINTprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsLong(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsLong(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aLONGprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+*javax.lang.model.util.TypeKindVisitor6.visitPrimitiveAsShort(PrimitiveType,P)*
+
+public |R| visitPrimitiveAsShort(
+  javax.lang.model.type.PrimitiveType t,
+  P p)
+
+Visits aSHORTprimitive type by callingdefaultAction. 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: the result of {@code defaultAction} 
+
+

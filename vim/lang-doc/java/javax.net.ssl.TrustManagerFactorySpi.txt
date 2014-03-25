@@ -1,0 +1,76 @@
+*javax.net.ssl.TrustManagerFactorySpi* *TrustManagerFactorySpi* This class defin
+
+public abstract class TrustManagerFactorySpi
+  extends    |java.lang.Object|
+
+|javax.net.ssl.TrustManagerFactorySpi_Description|
+|javax.net.ssl.TrustManagerFactorySpi_Fields|
+|javax.net.ssl.TrustManagerFactorySpi_Constructors|
+|javax.net.ssl.TrustManagerFactorySpi_Methods|
+
+================================================================================
+
+*javax.net.ssl.TrustManagerFactorySpi_Constructors*
+|javax.net.ssl.TrustManagerFactorySpi()|
+
+*javax.net.ssl.TrustManagerFactorySpi_Methods*
+|javax.net.ssl.TrustManagerFactorySpi.engineGetTrustManagers()|Returns one trus
+|javax.net.ssl.TrustManagerFactorySpi.engineInit(KeyStore)|Initializes this fac
+|javax.net.ssl.TrustManagerFactorySpi.engineInit(ManagerFactoryParameters)|Init
+
+*javax.net.ssl.TrustManagerFactorySpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the 
+TrustManagerFactory class. 
+
+All the abstract methods in this class must be implemented by each 
+cryptographic service provider who wishes to supply the implementation of a 
+particular trust manager factory. 
+
+
+
+*javax.net.ssl.TrustManagerFactorySpi()*
+
+public TrustManagerFactorySpi()
+
+
+
+
+*javax.net.ssl.TrustManagerFactorySpi.engineGetTrustManagers()*
+
+protected abstract |javax.net.ssl.TrustManager|[] engineGetTrustManagers()
+
+Returns one trust manager for each type of trust material. 
+
+
+
+    Returns: the trust managers 
+
+*javax.net.ssl.TrustManagerFactorySpi.engineInit(KeyStore)*
+
+protected abstract void engineInit(java.security.KeyStore ks)
+  throws |java.security.KeyStoreException|
+         
+Initializes this factory with a source of certificate authorities and related 
+trust material. 
+
+
+    ks - the key store or null 
+
+*javax.net.ssl.TrustManagerFactorySpi.engineInit(ManagerFactoryParameters)*
+
+protected abstract void engineInit(javax.net.ssl.ManagerFactoryParameters spec)
+  throws |java.security.InvalidAlgorithmParameterException|
+         
+Initializes this factory with a source of provider-specific key material. 
+
+In some cases, initialization parameters other than a keystore may be needed by 
+a provider. Users of that particular provider are expected to pass an 
+implementation of the appropriate ManagerFactoryParameters as defined by the 
+provider. The provider can then call the specified methods in the 
+ManagerFactoryParameters implementation to obtain the needed information. 
+
+
+    spec - an implementation of a provider-specific parameter specification 
+
+

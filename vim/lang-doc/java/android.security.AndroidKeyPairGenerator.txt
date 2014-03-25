@@ -1,0 +1,76 @@
+*android.security.AndroidKeyPairGenerator* *AndroidKeyPairGenerator* Provides a 
+
+public class AndroidKeyPairGenerator
+  extends    |java.security.KeyPairGeneratorSpi|
+
+|android.security.AndroidKeyPairGenerator_Description|
+|android.security.AndroidKeyPairGenerator_Fields|
+|android.security.AndroidKeyPairGenerator_Constructors|
+|android.security.AndroidKeyPairGenerator_Methods|
+
+================================================================================
+
+*android.security.AndroidKeyPairGenerator_Constructors*
+|android.security.AndroidKeyPairGenerator()|
+
+*android.security.AndroidKeyPairGenerator_Methods*
+|android.security.AndroidKeyPairGenerator.generateKeyPair()|Generate a KeyPair 
+|android.security.AndroidKeyPairGenerator.initialize(AlgorithmParameterSpec,SecureRandom)|
+|android.security.AndroidKeyPairGenerator.initialize(int,SecureRandom)|
+
+*android.security.AndroidKeyPairGenerator_Description*
+
+Provides a way to create instances of a KeyPair which will be placed in the 
+Android keystore service usable only by the application that called it. This 
+can be used in conjunction with (|java.security.KeyStore|) using 
+the"AndroidKeyStore"type. 
+
+This class can not be directly instantiated and must instead be used via the 
+KeyPairGenerator.getInstance("AndroidKeyPairGenerator")(|java.security.KeyPairGenerator|)
+API. 
+
+
+
+*android.security.AndroidKeyPairGenerator()*
+
+public AndroidKeyPairGenerator()
+
+
+
+
+*android.security.AndroidKeyPairGenerator.generateKeyPair()*
+
+public |java.security.KeyPair| generateKeyPair()
+
+Generate a KeyPair which is backed by the Android keystore service. You must 
+call (|java.security.KeyPairGenerator|) with an 
+(|android.security.KeyPairGeneratorSpec|) as theparamsargument before calling 
+this otherwise anIllegalStateExceptionwill be thrown. 
+
+This will create an entry in the Android keystore service with a self-signed 
+certificate using theparamsspecified in theinitialize(params)call. 
+
+
+
+*android.security.AndroidKeyPairGenerator.initialize(AlgorithmParameterSpec,SecureRandom)*
+
+public void initialize(
+  java.security.spec.AlgorithmParameterSpec params,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidAlgorithmParameterException|
+         
+
+
+
+
+*android.security.AndroidKeyPairGenerator.initialize(int,SecureRandom)*
+
+public void initialize(
+  int keysize,
+  java.security.SecureRandom random)
+
+
+
+
+
+

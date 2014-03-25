@@ -1,0 +1,224 @@
+*javax.activation.MimeType* *MimeType* A Multipurpose Internet Mail Extension (M
+
+public class MimeType
+  extends    |java.lang.Object|
+  implements |java.io.Externalizable|
+
+|javax.activation.MimeType_Description|
+|javax.activation.MimeType_Fields|
+|javax.activation.MimeType_Constructors|
+|javax.activation.MimeType_Methods|
+
+================================================================================
+
+*javax.activation.MimeType_Constructors*
+|javax.activation.MimeType()|Default constructor.
+|javax.activation.MimeType(String)|Constructor that builds a MimeType from a St
+|javax.activation.MimeType(String,String)|Constructor that builds a MimeType wi
+
+*javax.activation.MimeType_Methods*
+|javax.activation.MimeType.getBaseType()|Return a String representation of this
+|javax.activation.MimeType.getParameter(String)|Retrieve the value associated w
+|javax.activation.MimeType.getParameters()|Retrieve this object's parameter lis
+|javax.activation.MimeType.getPrimaryType()|Retrieve the primary type of this o
+|javax.activation.MimeType.getSubType()|Retrieve the subtype of this object.
+|javax.activation.MimeType.match(MimeType)|Determine if the primary and sub typ
+|javax.activation.MimeType.match(String)|Determine if the primary and sub type 
+|javax.activation.MimeType.readExternal(ObjectInput)|The object implements the 
+|javax.activation.MimeType.removeParameter(String)|Remove any value associated 
+|javax.activation.MimeType.setParameter(String,String)|Set the value to be asso
+|javax.activation.MimeType.setPrimaryType(String)|Set the primary type for this
+|javax.activation.MimeType.setSubType(String)|Set the subtype for this object t
+|javax.activation.MimeType.toString()|Return the String representation of this 
+|javax.activation.MimeType.writeExternal(ObjectOutput)|The object implements th
+
+*javax.activation.MimeType_Description*
+
+A Multipurpose Internet Mail Extension (MIME) type, as defined in RFC 2045 and 
+2046. 
+
+
+
+*javax.activation.MimeType()*
+
+public MimeType()
+
+Default constructor. 
+
+
+*javax.activation.MimeType(String)*
+
+public MimeType(java.lang.String rawdata)
+  throws |javax.activation.MimeTypeParseException|
+         
+Constructor that builds a MimeType from a String. 
+
+    rawdata - the MIME type string 
+
+*javax.activation.MimeType(String,String)*
+
+public MimeType(
+  java.lang.String primary,
+  java.lang.String sub)
+  throws |javax.activation.MimeTypeParseException|
+         
+Constructor that builds a MimeType with the given primary and sub type but has 
+an empty parameter list. 
+
+    primary - the primary MIME type 
+    sub - the MIME sub-type 
+
+*javax.activation.MimeType.getBaseType()*
+
+public |java.lang.String| getBaseType()
+
+Return a String representation of this object without the parameter list. 
+
+
+
+    Returns: the MIME type and sub-type 
+
+*javax.activation.MimeType.getParameter(String)*
+
+public |java.lang.String| getParameter(java.lang.String name)
+
+Retrieve the value associated with the given name, or null if there is no 
+current association. 
+
+
+    name - the parameter name 
+
+    Returns: the paramter's value 
+
+*javax.activation.MimeType.getParameters()*
+
+public |javax.activation.MimeTypeParameterList| getParameters()
+
+Retrieve this object's parameter list. 
+
+
+
+    Returns: a MimeTypeParameterList object representing the parameters 
+
+*javax.activation.MimeType.getPrimaryType()*
+
+public |java.lang.String| getPrimaryType()
+
+Retrieve the primary type of this object. 
+
+
+
+    Returns: the primary MIME type 
+
+*javax.activation.MimeType.getSubType()*
+
+public |java.lang.String| getSubType()
+
+Retrieve the subtype of this object. 
+
+
+
+    Returns: the MIME subtype 
+
+*javax.activation.MimeType.match(MimeType)*
+
+public boolean match(javax.activation.MimeType type)
+
+Determine if the primary and sub type of this object is the same as what is in 
+the given type. 
+
+
+    type - the MimeType object to compare with 
+
+    Returns: true if they match 
+
+*javax.activation.MimeType.match(String)*
+
+public boolean match(java.lang.String rawdata)
+  throws |javax.activation.MimeTypeParseException|
+         
+Determine if the primary and sub type of this object is the same as the content 
+type described in rawdata. 
+
+
+    rawdata - the MIME type string to compare with 
+
+    Returns: true if they match 
+
+*javax.activation.MimeType.readExternal(ObjectInput)*
+
+public void readExternal(java.io.ObjectInput in)
+  throws |java.lang.ClassNotFoundException|
+         |java.io.IOException|
+         
+The object implements the readExternal method to restore its contents by 
+calling the methods of DataInput for primitive types and readObject for 
+objects, strings and arrays. The readExternal method must read the values in 
+the same sequence and with the same types as were written by writeExternal. 
+
+
+    in - the ObjectInput object to read from 
+
+*javax.activation.MimeType.removeParameter(String)*
+
+public void removeParameter(java.lang.String name)
+
+Remove any value associated with the given name. 
+
+
+    name - the parameter name 
+
+*javax.activation.MimeType.setParameter(String,String)*
+
+public void setParameter(
+  java.lang.String name,
+  java.lang.String value)
+
+Set the value to be associated with the given name, replacing any previous 
+association. 
+
+
+    name - the parameter name 
+    value - the paramter's value 
+
+*javax.activation.MimeType.setPrimaryType(String)*
+
+public void setPrimaryType(java.lang.String primary)
+  throws |javax.activation.MimeTypeParseException|
+         
+Set the primary type for this object to the given String. 
+
+
+    primary - the primary MIME type 
+
+*javax.activation.MimeType.setSubType(String)*
+
+public void setSubType(java.lang.String sub)
+  throws |javax.activation.MimeTypeParseException|
+         
+Set the subtype for this object to the given String. 
+
+
+    sub - the MIME subtype 
+
+*javax.activation.MimeType.toString()*
+
+public |java.lang.String| toString()
+
+Return the String representation of this object. 
+
+
+
+*javax.activation.MimeType.writeExternal(ObjectOutput)*
+
+public void writeExternal(java.io.ObjectOutput out)
+  throws |java.io.IOException|
+         
+The object implements the writeExternal method to save its contents by calling 
+the methods of DataOutput for its primitive values or calling the writeObject 
+method of ObjectOutput for objects, strings and arrays. 
+
+
+    out - the ObjectOutput object to write to 
+
+

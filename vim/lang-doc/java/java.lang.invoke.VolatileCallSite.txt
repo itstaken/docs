@@ -1,0 +1,98 @@
+*java.lang.invoke.VolatileCallSite* *VolatileCallSite* AVolatileCallSiteis aCall
+
+public class VolatileCallSite
+  extends    |java.lang.invoke.CallSite|
+
+|java.lang.invoke.VolatileCallSite_Description|
+|java.lang.invoke.VolatileCallSite_Fields|
+|java.lang.invoke.VolatileCallSite_Constructors|
+|java.lang.invoke.VolatileCallSite_Methods|
+
+================================================================================
+
+*java.lang.invoke.VolatileCallSite_Constructors*
+|java.lang.invoke.VolatileCallSite(MethodHandle)|Creates a call site with a vol
+|java.lang.invoke.VolatileCallSite(MethodType)|Creates a call site with a volat
+
+*java.lang.invoke.VolatileCallSite_Methods*
+|java.lang.invoke.VolatileCallSite.dynamicInvoker()|
+|java.lang.invoke.VolatileCallSite.getTarget()|Returns the target method of the
+|java.lang.invoke.VolatileCallSite.setTarget(MethodHandle)|Updates the target m
+
+*java.lang.invoke.VolatileCallSite_Description*
+
+AVolatileCallSiteis a (|java.lang.invoke.CallSite|) whose target acts like a 
+volatile variable. Aninvokedynamicinstruction linked to aVolatileCallSitesees 
+updates to its call site target immediately, even if the update occurs in 
+another thread. There may be a performance penalty for such tight coupling 
+between threads. 
+
+UnlikeMutableCallSite, there is no syncAll 
+operation(|java.lang.invoke.MutableCallSite|) on volatile call sites, since 
+every write to a volatile variable is implicitly synchronized with reader 
+threads. 
+
+In other respects, aVolatileCallSiteis interchangeable withMutableCallSite. 
+
+
+
+*java.lang.invoke.VolatileCallSite(MethodHandle)*
+
+public VolatileCallSite(java.lang.invoke.MethodHandle target)
+
+Creates a call site with a volatile binding to its target. The target is set to 
+the given value. 
+
+    target - the method handle that will be the initial target of the call site 
+
+*java.lang.invoke.VolatileCallSite(MethodType)*
+
+public VolatileCallSite(java.lang.invoke.MethodType type)
+
+Creates a call site with a volatile binding to its target. The initial target 
+is set to a method handle of the given type which will throw 
+anIllegalStateExceptionif called. 
+
+    type - the method type that this call site will have 
+
+*java.lang.invoke.VolatileCallSite.dynamicInvoker()*
+
+public final |java.lang.invoke.MethodHandle| dynamicInvoker()
+
+
+
+
+
+*java.lang.invoke.VolatileCallSite.getTarget()*
+
+public final |java.lang.invoke.MethodHandle| getTarget()
+
+Returns the target method of the call site, which behaves like avolatilefield 
+of theVolatileCallSite. 
+
+The interactions ofgetTargetwith memory are the same as of a read from 
+avolatilefield. 
+
+In particular, the current thread is required to issue a fresh read of the 
+target from memory, and must not fail to see a recent update to the target by 
+another thread. 
+
+
+
+    Returns: the linkage state of this call site, a method handle which can change over time 
+
+*java.lang.invoke.VolatileCallSite.setTarget(MethodHandle)*
+
+public void setTarget(java.lang.invoke.MethodHandle newTarget)
+
+Updates the target method of this call site, as a volatile variable. The type 
+of the new target must agree with the type of the old target. 
+
+The interactions with memory are the same as of a write to a volatile field. In 
+particular, any threads is guaranteed to see the updated target the next time 
+it callsgetTarget. 
+
+
+    newTarget - the new target 
+
+

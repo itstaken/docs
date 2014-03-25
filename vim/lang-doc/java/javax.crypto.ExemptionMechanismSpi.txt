@@ -1,0 +1,152 @@
+*javax.crypto.ExemptionMechanismSpi* *ExemptionMechanismSpi* This class defines 
+
+public abstract class ExemptionMechanismSpi
+  extends    |java.lang.Object|
+
+|javax.crypto.ExemptionMechanismSpi_Description|
+|javax.crypto.ExemptionMechanismSpi_Fields|
+|javax.crypto.ExemptionMechanismSpi_Constructors|
+|javax.crypto.ExemptionMechanismSpi_Methods|
+
+================================================================================
+
+*javax.crypto.ExemptionMechanismSpi_Constructors*
+|javax.crypto.ExemptionMechanismSpi()|
+
+*javax.crypto.ExemptionMechanismSpi_Methods*
+|javax.crypto.ExemptionMechanismSpi.engineGenExemptionBlob()|Generates the exem
+|javax.crypto.ExemptionMechanismSpi.engineGenExemptionBlob(byte[],int)|Generate
+|javax.crypto.ExemptionMechanismSpi.engineGetOutputSize(int)|Returns the length
+|javax.crypto.ExemptionMechanismSpi.engineInit(Key)|Initializes this exemption 
+|javax.crypto.ExemptionMechanismSpi.engineInit(Key,AlgorithmParameters)|Initial
+|javax.crypto.ExemptionMechanismSpi.engineInit(Key,AlgorithmParameterSpec)|Init
+
+*javax.crypto.ExemptionMechanismSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the 
+ExemptionMechanism class. All the abstract methods in this class must be 
+implemented by each cryptographic service provider who wishes to supply the 
+implementation of a particular exemption mechanism. 
+
+
+
+*javax.crypto.ExemptionMechanismSpi()*
+
+public ExemptionMechanismSpi()
+
+
+
+
+*javax.crypto.ExemptionMechanismSpi.engineGenExemptionBlob()*
+
+protected abstract byte[] engineGenExemptionBlob()
+  throws |javax.crypto.ExemptionMechanismException|
+         
+Generates the exemption mechanism key blob. 
+
+
+
+    Returns: the new buffer with the result key blob. 
+
+*javax.crypto.ExemptionMechanismSpi.engineGenExemptionBlob(byte[],int)*
+
+protected abstract int engineGenExemptionBlob(
+  byte[] output,
+  int outputOffset)
+  throws |javax.crypto.ExemptionMechanismException|
+         |javax.crypto.ShortBufferException|
+         
+Generates the exemption mechanism key blob, and stores the result in the output 
+buffer, starting at outputOffset inclusive. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+engineGetOutputSize(|javax.crypto.ExemptionMechanismSpi|) to determine how big 
+the output buffer should be. 
+
+
+    output - the buffer for the result 
+    outputOffset - the offset in output where the result is stored 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.ExemptionMechanismSpi.engineGetOutputSize(int)*
+
+protected abstract int engineGetOutputSize(int inputLen)
+
+Returns the length in bytes that an output buffer would need to be in order to 
+hold the result of the next 
+engineGenExemptionBlob(|javax.crypto.ExemptionMechanismSpi|) operation, given 
+the input length inputLen (in bytes). 
+
+The actual output length of the next 
+engineGenExemptionBlob(|javax.crypto.ExemptionMechanismSpi|) call may be 
+smaller than the length returned by this method. 
+
+
+    inputLen - the input length (in bytes) 
+
+    Returns: the required output buffer size (in bytes) 
+
+*javax.crypto.ExemptionMechanismSpi.engineInit(Key)*
+
+protected abstract void engineInit(java.security.Key key)
+  throws |javax.crypto.ExemptionMechanismException|
+         |java.security.InvalidKeyException|
+         
+Initializes this exemption mechanism with a key. 
+
+If this exemption mechanism requires any algorithm parameters that cannot be 
+derived from the given key, the underlying exemption mechanism implementation 
+is supposed to generate the required parameters itself (using provider-specific 
+default values); in the case that algorithm parameters must be specified by the 
+caller, an InvalidKeyException is raised. 
+
+
+    key - the key for this exemption mechanism 
+
+*javax.crypto.ExemptionMechanismSpi.engineInit(Key,AlgorithmParameters)*
+
+protected abstract void engineInit(
+  java.security.Key key,
+  java.security.AlgorithmParameters params)
+  throws |javax.crypto.ExemptionMechanismException|
+         |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this exemption mechanism with a key and a set of algorithm 
+parameters. 
+
+If this exemption mechanism requires any algorithm parameters and params is 
+null, the underlying exemption mechanism implementation is supposed to generate 
+the required parameters itself (using provider-specific default values); in the 
+case that algorithm parameters must be specified by the caller, an 
+InvalidAlgorithmParameterException is raised. 
+
+
+    key - the key for this exemption mechanism 
+    params - the algorithm parameters 
+
+*javax.crypto.ExemptionMechanismSpi.engineInit(Key,AlgorithmParameterSpec)*
+
+protected abstract void engineInit(
+  java.security.Key key,
+  java.security.spec.AlgorithmParameterSpec params)
+  throws |javax.crypto.ExemptionMechanismException|
+         |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this exemption mechanism with a key and a set of algorithm 
+parameters. 
+
+If this exemption mechanism requires any algorithm parameters and params is 
+null, the underlying exemption mechanism implementation is supposed to generate 
+the required parameters itself (using provider-specific default values); in the 
+case that algorithm parameters must be specified by the caller, an 
+InvalidAlgorithmParameterException is raised. 
+
+
+    key - the key for this exemption mechanism 
+    params - the algorithm parameters 
+
+

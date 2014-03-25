@@ -1,0 +1,109 @@
+*javax.management.NotificationBroadcaster* *NotificationBroadcaster* Interface i
+
+public interface interface NotificationBroadcaster
+
+
+|javax.management.NotificationBroadcaster_Description|
+|javax.management.NotificationBroadcaster_Fields|
+|javax.management.NotificationBroadcaster_Constructors|
+|javax.management.NotificationBroadcaster_Methods|
+
+================================================================================
+
+*javax.management.NotificationBroadcaster_Methods*
+|javax.management.NotificationBroadcaster.addNotificationListener(NotificationListener,NotificationFilter,Object)|
+|javax.management.NotificationBroadcaster.getNotificationInfo()|Returns an arra
+|javax.management.NotificationBroadcaster.removeNotificationListener(NotificationListener)|
+
+*javax.management.NotificationBroadcaster_Description*
+
+Interface implemented by an MBean that emits Notifications. It allows a 
+listener to be registered with the MBean as a notification listener. 
+
+Notification dispatch 
+
+When an MBean emits a notification, it considers each listener that has been 
+added with addNotificationListener(|javax.management.NotificationBroadcaster|) 
+and not subsequently removed with 
+removeNotificationListener(|javax.management.NotificationBroadcaster|) . If a 
+filter was provided with that listener, and if the filter's 
+isNotificationEnabled(|javax.management.NotificationFilter|) method returns 
+false, the listener is ignored. Otherwise, the listener's 
+handleNotification(|javax.management.NotificationListener|) method is called 
+with the notification, as well as the handback object that was provided 
+toaddNotificationListener. 
+
+If the same listener is added more than once, it is considered as many times as 
+it was added. It is often useful to add the same listener with different 
+filters or handback objects. 
+
+Implementations of this interface can differ regarding the thread in which the 
+methods of filters and listeners are called. 
+
+If the method call of a filter or listener throws an (|java.lang.Exception|) , 
+then that exception should not prevent other listeners from being invoked. 
+However, if the method call throws an (|java.lang.Error|) , then it is 
+recommended that processing of the notification stop at that point, and if it 
+is possible to propagate theErrorto the sender of the notification, this should 
+be done. 
+
+New code should use the (|javax.management.NotificationEmitter|) interface 
+instead. 
+
+Implementations of this interface and ofNotificationEmittershould be careful 
+about synchronization. In particular, it is not a good idea for an 
+implementation to hold any locks while it is calling a listener. To deal with 
+the possibility that the list of listeners might change while a notification is 
+being dispatched, a good strategy is to use a 
+(|java.util.concurrent.CopyOnWriteArrayList|) for this list. 
+
+
+
+*javax.management.NotificationBroadcaster.addNotificationListener(NotificationListener,NotificationFilter,Object)*
+
+public void addNotificationListener(
+  javax.management.NotificationListener listener,
+  javax.management.NotificationFilter filter,
+  java.lang.Object handback)
+  throws |java.lang.IllegalArgumentException|
+         
+Adds a listener to this MBean. 
+
+
+    listener - The listener object which will handle the notifications emitted by the 
+       broadcaster. 
+    filter - The filter object. If filter is null, no filtering will be performed before 
+       handling notifications. 
+    handback - An opaque object to be sent back to the listener when a notification is 
+       emitted. This object cannot be used by the Notification broadcaster 
+       object. It should be resent unchanged with the notification to the 
+       listener. 
+
+*javax.management.NotificationBroadcaster.getNotificationInfo()*
+
+public |javax.management.MBeanNotificationInfo|[] getNotificationInfo()
+
+Returns an array indicating, for each notification this MBean may send, the 
+name of the Java class of the notification and the notification type. 
+
+It is not illegal for the MBean to send notifications not described in this 
+array. However, some clients of the MBean server may depend on the array being 
+complete for their correct functioning. 
+
+
+
+    Returns: the array of possible notifications. 
+
+*javax.management.NotificationBroadcaster.removeNotificationListener(NotificationListener)*
+
+public void removeNotificationListener(javax.management.NotificationListener listener)
+  throws |javax.management.ListenerNotFoundException|
+         
+Removes a listener from this MBean. If the listener has been registered with 
+different handback objects or notification filters, all entries corresponding 
+to the listener will be removed. 
+
+
+    listener - A listener that was previously added to this MBean. 
+
+

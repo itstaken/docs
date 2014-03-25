@@ -1,0 +1,184 @@
+*javax.management.modelmbean.ModelMBeanOperationInfo* *ModelMBeanOperationInfo* 
+
+public class ModelMBeanOperationInfo
+  extends    |javax.management.MBeanOperationInfo|
+  implements |javax.management.DescriptorAccess|
+
+|javax.management.modelmbean.ModelMBeanOperationInfo_Description|
+|javax.management.modelmbean.ModelMBeanOperationInfo_Fields|
+|javax.management.modelmbean.ModelMBeanOperationInfo_Constructors|
+|javax.management.modelmbean.ModelMBeanOperationInfo_Methods|
+
+================================================================================
+
+*javax.management.modelmbean.ModelMBeanOperationInfo_Constructors*
+|javax.management.modelmbean.ModelMBeanOperationInfo(ModelMBeanOperationInfo)|C
+|javax.management.modelmbean.ModelMBeanOperationInfo(String,Method)|Constructs 
+|javax.management.modelmbean.ModelMBeanOperationInfo(String,Method,Descriptor)|
+|javax.management.modelmbean.ModelMBeanOperationInfo(String,String,MBeanParameterInfo[],String,int)|
+|javax.management.modelmbean.ModelMBeanOperationInfo(String,String,MBeanParameterInfo[],String,int,Descriptor)|
+
+*javax.management.modelmbean.ModelMBeanOperationInfo_Methods*
+|javax.management.modelmbean.ModelMBeanOperationInfo.clone()|Creates and return
+|javax.management.modelmbean.ModelMBeanOperationInfo.getDescriptor()|Returns a 
+|javax.management.modelmbean.ModelMBeanOperationInfo.setDescriptor(Descriptor)|
+|javax.management.modelmbean.ModelMBeanOperationInfo.toString()|Returns a strin
+
+*javax.management.modelmbean.ModelMBeanOperationInfo_Description*
+
+The ModelMBeanOperationInfo object describes a management operation of the 
+ModelMBean. It is a subclass of MBeanOperationInfo with the addition of an 
+associated Descriptor and an implementation of the DescriptorAccess interface. 
+
+The fields in the descriptor are defined, but not limited to, the following. 
+Note that when the Type in this table is Number, a String that is the decimal 
+representation of a Long can also be used. 
+
+NameTypeMeaning nameString Operation name. descriptorTypeString Must be 
+"operation". classString Class where method is defined (fully qualified). 
+roleString Must be "operation", "getter", or "setter". targetObjectObject 
+Object on which to execute this method. targetTypeString type of object 
+reference for targetObject. Can be: ObjectReference | Handle | EJBHandle | IOR 
+| RMIReference. valueObject Cached value for operation. displayNameString Human 
+readable display name of the operation. currencyTimeLimitNumber How long cached 
+value is valid. lastUpdatedTimeStampNumber When cached value was set. 
+visibilityNumber 1-4 where 1: always visible 4: rarely visible. 
+presentationStringString XML formatted string to describe how to present 
+operation 
+
+The default descriptor will have name, descriptorType, displayName and role 
+fields set. The default value of the name and displayName fields is the 
+operation name. 
+
+Note: because of inconsistencies in previous versions of this specification, it 
+is recommended not to use negative or zero values for currencyTimeLimit. To 
+indicate that a cached value is never valid, omit the currencyTimeLimit field. 
+To indicate that it is always valid, use a very large number for this field. 
+
+The serialVersionUID of this class is 6532732096650090465L. 
+
+
+
+*javax.management.modelmbean.ModelMBeanOperationInfo(ModelMBeanOperationInfo)*
+
+public ModelMBeanOperationInfo(javax.management.modelmbean.ModelMBeanOperationInfo inInfo)
+
+Constructs a new ModelMBeanOperationInfo object from this ModelMBeanOperation 
+Object. 
+
+    inInfo - the ModelMBeanOperationInfo to be duplicated 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo(String,Method)*
+
+public ModelMBeanOperationInfo(
+  java.lang.String description,
+  java.lang.reflect.Method operationMethod)
+
+Constructs a ModelMBeanOperationInfo object with a default descriptor. The 
+(|javax.management.Descriptor|) of the constructed object will include fields 
+contributed by any annotations on theMethodobject that contain the 
+(|javax.management.DescriptorKey|) meta-annotation. 
+
+    operationMethod - The java.lang.reflect.Method object describing the MBean operation. 
+    description - A human readable description of the operation. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo(String,Method,Descriptor)*
+
+public ModelMBeanOperationInfo(
+  java.lang.String description,
+  java.lang.reflect.Method operationMethod,
+  javax.management.Descriptor descriptor)
+
+Constructs a ModelMBeanOperationInfo object. The 
+(|javax.management.Descriptor|) of the constructed object will include fields 
+contributed by any annotations on theMethodobject that contain the 
+(|javax.management.DescriptorKey|) meta-annotation. 
+
+    operationMethod - The java.lang.reflect.Method object describing the MBean operation. 
+    description - A human readable description of the operation. 
+    descriptor - An instance of Descriptor containing the appropriate metadata for this instance 
+       of the ModelMBeanOperationInfo. If it is null a default descriptor will 
+       be created. If the descriptor does not contain the fields "displayName" 
+       or "role", the missing ones are added with their default values. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo(String,String,MBeanParameterInfo[],String,int)*
+
+public ModelMBeanOperationInfo(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.MBeanParameterInfo[] signature,
+  java.lang.String type,
+  int impact)
+
+Constructs a ModelMBeanOperationInfo object with a default descriptor. 
+
+    name - The name of the method. 
+    description - A human readable description of the operation. 
+    signature - MBeanParameterInfo objects describing the parameters(arguments) of the method. 
+    type - The type of the method's return value. 
+    impact - The impact of the method, one of INFO, ACTION, ACTION_INFO, UNKNOWN. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo(String,String,MBeanParameterInfo[],String,int,Descriptor)*
+
+public ModelMBeanOperationInfo(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.MBeanParameterInfo[] signature,
+  java.lang.String type,
+  int impact,
+  javax.management.Descriptor descriptor)
+
+Constructs a ModelMBeanOperationInfo object. 
+
+    name - The name of the method. 
+    description - A human readable description of the operation. 
+    signature - MBeanParameterInfo objects describing the parameters(arguments) of the method. 
+    type - The type of the method's return value. 
+    impact - The impact of the method, one of INFO, ACTION, ACTION_INFO, UNKNOWN. 
+    descriptor - An instance of Descriptor containing the appropriate metadata for this instance 
+       of the MBeanOperationInfo. If it is null then a default descriptor will 
+       be created. If the descriptor does not contain fields "displayName" or 
+       "role", the missing ones are added with their default values. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo.clone()*
+
+public |java.lang.Object| clone()
+
+Creates and returns a new ModelMBeanOperationInfo which is a duplicate of this 
+ModelMBeanOperationInfo. 
+
+
+
+*javax.management.modelmbean.ModelMBeanOperationInfo.getDescriptor()*
+
+public |javax.management.Descriptor| getDescriptor()
+
+Returns a copy of the associated Descriptor of the ModelMBeanOperationInfo. 
+
+
+
+    Returns: Descriptor associated with the ModelMBeanOperationInfo object. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo.setDescriptor(Descriptor)*
+
+public void setDescriptor(javax.management.Descriptor inDescriptor)
+
+Sets associated Descriptor (full replace) for the ModelMBeanOperationInfo If 
+the new Descriptor is null, then the associated Descriptor reverts to a default 
+descriptor. The Descriptor is validated before it is assigned. If the new 
+Descriptor is invalid, then a RuntimeOperationsException wrapping an 
+IllegalArgumentException is thrown. 
+
+
+    inDescriptor - replaces the Descriptor associated with the ModelMBeanOperation. 
+
+*javax.management.modelmbean.ModelMBeanOperationInfo.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string containing the entire contents of the ModelMBeanOperationInfo 
+in human readable form. 
+
+
+
+

@@ -1,0 +1,271 @@
+*android.security.KeyChain* *KeyChain* TheKeyChainclass provides access to priva
+
+public final class KeyChain
+  extends    |java.lang.Object|
+
+|android.security.KeyChain_Description|
+|android.security.KeyChain_Fields|
+|android.security.KeyChain_Constructors|
+|android.security.KeyChain_Methods|
+
+================================================================================
+
+*android.security.KeyChain_Fields*
+|java.lang.String_android.security.KeyChain.ACCOUNT_TYPE|
+|java.lang.String_android.security.KeyChain.ACTION_STORAGE_CHANGED|
+|java.lang.String_android.security.KeyChain.EXTRA_ALIAS|
+|java.lang.String_android.security.KeyChain.EXTRA_CERTIFICATE|
+|java.lang.String_android.security.KeyChain.EXTRA_HOST|
+|java.lang.String_android.security.KeyChain.EXTRA_NAME|
+|java.lang.String_android.security.KeyChain.EXTRA_PKCS12|
+|java.lang.String_android.security.KeyChain.EXTRA_PORT|
+|java.lang.String_android.security.KeyChain.EXTRA_RESPONSE|
+|java.lang.String_android.security.KeyChain.EXTRA_SENDER|
+
+*android.security.KeyChain_Constructors*
+|android.security.KeyChain()|
+
+*android.security.KeyChain_Methods*
+|android.security.KeyChain.bind(Context)|
+|android.security.KeyChain.choosePrivateKeyAlias(Activity,KeyChainAliasCallback,String[],Principal[],String,int,String)|
+|android.security.KeyChain.createInstallIntent()|Returns anIntentthat can be us
+|android.security.KeyChain.getCertificateChain(Context,String)|Returns theX509C
+|android.security.KeyChain.getPrivateKey(Context,String)|Returns thePrivateKeyf
+|android.security.KeyChain.isBoundKeyAlgorithm(String)|Returnstrueif the curren
+|android.security.KeyChain.isKeyAlgorithmSupported(String)|Returnstrueif the cu
+
+*android.security.KeyChain_Description*
+
+TheKeyChainclass provides access to private keys and their corresponding 
+certificate chains in credential storage. 
+
+Applications accessing theKeyChainnormally go through these steps: 
+
+
+
+Receive a callback from an X509KeyManager(|javax.net.ssl.X509KeyManager|) that 
+a private key is requested. 
+
+Call choosePrivateKeyAlias(|android.security.KeyChain|) to allow the user to 
+select from a list of currently available private keys and corresponding 
+certificate chains. The chosen alias will be returned by the callback 
+(|android.security.KeyChainAliasCallback|) , or null if no private key is 
+available or the user cancels the request. 
+
+Call (|android.security.KeyChain|) and (|android.security.KeyChain|) to 
+retrieve the credentials to return to the corresponding 
+(|javax.net.ssl.X509KeyManager|) callbacks. 
+
+
+
+An application may remember the value of a selected alias to avoid prompting 
+the user with choosePrivateKeyAlias(|android.security.KeyChain|) on subsequent 
+connections. If the alias is no longer valid, null will be returned on lookups 
+using that value 
+
+An application can request the installation of private keys and certificates 
+via theIntentprovided by (|android.security.KeyChain|) . Private keys installed 
+via thisIntentwill be accessible via (|android.security.KeyChain|) while 
+Certificate Authority (CA) certificates will be trusted by all applications 
+through the defaultX509TrustManager. 
+
+
+
+*java.lang.String_android.security.KeyChain.ACCOUNT_TYPE*
+
+
+
+
+*java.lang.String_android.security.KeyChain.ACTION_STORAGE_CHANGED*
+
+Broadcast Action: Indicates the trusted storage has changed. Sent when one of 
+this happens: 
+
+a new CA is added, an existing CA is removed or disabled, a disabled CA is 
+enabled, trusted storage is reset (all user certs are cleared), when permission 
+to access a private key is changed. 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_ALIAS*
+
+Extra for use with (|android.security.KeyChain|) 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_CERTIFICATE*
+
+Optional extra to specify an X.509 certificate to install on theIntentreturned 
+by (|android.security.KeyChain|) . The extra value should be a PEM or ASN.1 DER 
+encodedbyte[]. An (|java.security.cert.X509Certificate|) can be converted to 
+DER encoded bytes with (|java.security.cert.X509Certificate|) . 
+
+(|android.security.KeyChain|) may be used to provide a default alias name for 
+the installed certificate. 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_HOST*
+
+Extra for use with (|android.security.KeyChain|) 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_NAME*
+
+Optional extra to specify aStringcredential name on theIntentreturned by 
+(|android.security.KeyChain|) . 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_PKCS12*
+
+Optional extra for use with theIntentreturned by (|android.security.KeyChain|) 
+to specify a PKCS#12 key store to install. The extra value should be abyte[]. 
+The bytes may come from an external source or be generated with 
+(|java.security.KeyStore|) on a "PKCS12" instance. 
+
+The user will be prompted for the password to load the key store. 
+
+The key store will be scanned for (|java.security.KeyStore.PrivateKeyEntry|) 
+entries and both the private key and associated certificate chain will be 
+installed. 
+
+(|android.security.KeyChain|) may be used to provide a default alias name for 
+the installed credentials. 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_PORT*
+
+Extra for use with (|android.security.KeyChain|) 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_RESPONSE*
+
+Extra for use with (|android.security.KeyChain|) 
+
+
+*java.lang.String_android.security.KeyChain.EXTRA_SENDER*
+
+Extra for use with (|android.security.KeyChain|) 
+
+
+
+*android.security.KeyChain()*
+
+public KeyChain()
+
+
+
+
+*android.security.KeyChain.bind(Context)*
+
+public static |android.security.KeyChain.KeyChainConnection| bind(Context context)
+  throws |java.lang.InterruptedException|
+         
+
+
+
+
+*android.security.KeyChain.choosePrivateKeyAlias(Activity,KeyChainAliasCallback,String[],Principal[],String,int,String)*
+
+public static void choosePrivateKeyAlias(
+  Activity activity,
+  android.security.KeyChainAliasCallback response,
+  java.lang.String[] keyTypes,
+  java.security.Principal[] issuers,
+  java.lang.String host,
+  int port,
+  java.lang.String alias)
+
+Launches anActivityfor the user to select the alias for a private key and 
+certificate pair for authentication. The selected alias or null will be 
+returned via the KeyChainAliasCallback callback. 
+
+keyTypesandissuersmay be used to highlight suggested choices to the user, 
+although to cope with sometimes erroneous values provided by servers, the user 
+may be able to override these suggestions. 
+
+hostandportmay be used to give the user more context about the server 
+requesting the credentials. 
+
+aliasallows the chooser to preselect an existing alias which will still be 
+subject to user confirmation. 
+
+
+    activity - The {@link Activity} context to use for launching the new sub-Activity to 
+       prompt the user to select a private key; used only to call 
+       startActivity(); must not be null. 
+    response - Callback to invoke when the request completes; must not be null 
+    keyTypes - The acceptable types of asymmetric keys such as "RSA" or "DSA", or a null 
+       array. 
+    issuers - The acceptable certificate issuers for the certificate matching the private 
+       key, or null. 
+    host - The host name of the server requesting the certificate, or null if unavailable. 
+    port - The port number of the server requesting the certificate, or -1 if unavailable. 
+    alias - The alias to preselect if available, or null if unavailable. 
+
+*android.security.KeyChain.createInstallIntent()*
+
+public static Intent createInstallIntent()
+
+Returns anIntentthat can be used for credential installation. The intent may be 
+used without any extras, in which case the user will be able to install 
+credentials from their own source. 
+
+Alternatively, (|android.security.KeyChain|) or (|android.security.KeyChain|) 
+maybe used to specify the bytes of an X.509 certificate or a PKCS#12 key store 
+for installation. These extras may be combined with 
+(|android.security.KeyChain|) to provide a default alias name for credentials 
+being installed. 
+
+When used with (|Activity|) , (|Activity|) will be returned if a credential was 
+successfully installed, otherwise (|Activity|) will be returned. 
+
+
+
+*android.security.KeyChain.getCertificateChain(Context,String)*
+
+public static |java.security.cert.X509Certificate|[] getCertificateChain(
+  Context context,
+  java.lang.String alias)
+  throws |java.lang.InterruptedException|
+         |android.security.KeyChainException|
+         
+Returns theX509Certificatechain for the requested alias, or null if no there is 
+no result. 
+
+
+    alias - The alias of the desired certificate chain, typically returned via {@link 
+       KeyChainAliasCallback#alias}. 
+
+*android.security.KeyChain.getPrivateKey(Context,String)*
+
+public static |java.security.PrivateKey| getPrivateKey(
+  Context context,
+  java.lang.String alias)
+  throws |java.lang.InterruptedException|
+         |android.security.KeyChainException|
+         
+Returns thePrivateKeyfor the requested alias, or null if no there is no result. 
+
+
+    alias - The alias of the desired private key, typically returned via {@link 
+       KeyChainAliasCallback#alias}. 
+
+*android.security.KeyChain.isBoundKeyAlgorithm(String)*
+
+public static boolean isBoundKeyAlgorithm(java.lang.String algorithm)
+
+Returnstrueif the current device'sKeyChainbinds anyPrivateKeyof the 
+givenalgorithmto the device once imported or generated. This can be used to 
+tell if there is special hardware support that can be used to bind keys to the 
+device in a way that makes it non-exportable. 
+
+
+
+*android.security.KeyChain.isKeyAlgorithmSupported(String)*
+
+public static boolean isKeyAlgorithmSupported(java.lang.String algorithm)
+
+Returnstrueif the current device'sKeyChainsupports a specificPrivateKeytype 
+indicated byalgorithm(e.g., "RSA"). 
+
+
+
+

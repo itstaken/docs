@@ -1,0 +1,98 @@
+*java.nio.file.SimpleFileVisitor* *SimpleFileVisitor* A simple visitor of files 
+
+public class SimpleFileVisitor<T>
+  extends    |java.lang.Object|
+  implements |java.nio.file.FileVisitor|
+
+|java.nio.file.SimpleFileVisitor_Description|
+|java.nio.file.SimpleFileVisitor_Fields|
+|java.nio.file.SimpleFileVisitor_Constructors|
+|java.nio.file.SimpleFileVisitor_Methods|
+
+================================================================================
+
+*java.nio.file.SimpleFileVisitor_Constructors*
+|java.nio.file.SimpleFileVisitor()|Initializes a new instance of this class.
+
+*java.nio.file.SimpleFileVisitor_Methods*
+|java.nio.file.SimpleFileVisitor.postVisitDirectory(T,IOException)|Invoked for 
+|java.nio.file.SimpleFileVisitor.preVisitDirectory(T,BasicFileAttributes)|Invok
+|java.nio.file.SimpleFileVisitor.visitFile(T,BasicFileAttributes)|Invoked for a
+|java.nio.file.SimpleFileVisitor.visitFileFailed(T,IOException)|Invoked for a f
+
+*java.nio.file.SimpleFileVisitor_Description*
+
+A simple visitor of files with default behavior to visit all files and to 
+re-throw I/O errors. 
+
+Methods in this class may be overridden subject to their general contract. 
+
+
+
+*java.nio.file.SimpleFileVisitor()*
+
+protected SimpleFileVisitor()
+
+Initializes a new instance of this class. 
+
+
+*java.nio.file.SimpleFileVisitor.postVisitDirectory(T,IOException)*
+
+public |java.nio.file.FileVisitResult| postVisitDirectory(
+  T dir,
+  java.io.IOException exc)
+  throws |java.io.IOException|
+         
+Invoked for a directory after entries in the directory, and all of their 
+descendants, have been visited. 
+
+Unless overridden, this method returns 
+CONTINUE(|java.nio.file.FileVisitResult|) if the directory iteration completes 
+without an I/O exception; otherwise this method re-throws the I/O exception 
+that caused the iteration of the directory to terminate prematurely. 
+
+
+
+*java.nio.file.SimpleFileVisitor.preVisitDirectory(T,BasicFileAttributes)*
+
+public |java.nio.file.FileVisitResult| preVisitDirectory(
+  T dir,
+  java.nio.file.attribute.BasicFileAttributes attrs)
+  throws |java.io.IOException|
+         
+Invoked for a directory before entries in the directory are visited. 
+
+Unless overridden, this method returns 
+CONTINUE(|java.nio.file.FileVisitResult|) . 
+
+
+
+*java.nio.file.SimpleFileVisitor.visitFile(T,BasicFileAttributes)*
+
+public |java.nio.file.FileVisitResult| visitFile(
+  T file,
+  java.nio.file.attribute.BasicFileAttributes attrs)
+  throws |java.io.IOException|
+         
+Invoked for a file in a directory. 
+
+Unless overridden, this method returns 
+CONTINUE(|java.nio.file.FileVisitResult|) . 
+
+
+
+*java.nio.file.SimpleFileVisitor.visitFileFailed(T,IOException)*
+
+public |java.nio.file.FileVisitResult| visitFileFailed(
+  T file,
+  java.io.IOException exc)
+  throws |java.io.IOException|
+         
+Invoked for a file that could not be visited. 
+
+Unless overridden, this method re-throws the I/O exception that prevented the 
+file from being visited. 
+
+
+
+

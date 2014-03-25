@@ -1,0 +1,96 @@
+*java.nio.file.DirectoryStream* *DirectoryStream* An object to iterate over the 
+
+public interface interface DirectoryStream<T>
+
+  implements |java.io.Closeable|
+             |java.lang.Iterable|
+
+|java.nio.file.DirectoryStream_Description|
+|java.nio.file.DirectoryStream_Fields|
+|java.nio.file.DirectoryStream_Constructors|
+|java.nio.file.DirectoryStream_Methods|
+
+================================================================================
+
+*java.nio.file.DirectoryStream_Methods*
+|java.nio.file.DirectoryStream.iterator()|Returns the iterator associated with 
+
+*java.nio.file.DirectoryStream_Description*
+
+An object to iterate over the entries in a directory. A directory stream allows 
+for the convenient use of the for-each construct to iterate over a directory. 
+
+WhileDirectoryStreamextendsIterable, it is not a general-purposeIterableas it 
+supports only a singleIterator; invoking the 
+iterator(|java.nio.file.DirectoryStream|) method to obtain a second or 
+subsequent iterator throwsIllegalStateException. 
+
+An important property of the directory stream'sIteratoris that its 
+hasNext(|java.util.Iterator|) method is guaranteed to read-ahead by at least 
+one element. IfhasNextmethod returnstrue, and is followed by a call to 
+thenextmethod, it is guaranteed that thenextmethod will not throw an exception 
+due to an I/O error, or because the stream has been 
+closed(|java.nio.file.DirectoryStream|) . TheIteratordoes not support the 
+remove(|java.util.Iterator|) operation. 
+
+ADirectoryStreamis opened upon creation and is closed by invoking 
+theclosemethod. Closing a directory stream releases any resources associated 
+with the stream. Failure to close the stream may result in a resource leak. The 
+try-with-resources statement provides a useful construct to ensure that the 
+stream is closed: 
+
+Path dir = ... try (DirectoryStream<Path> stream = 
+Files.newDirectoryStream(dir)) { for (Path entry: stream) { ... } } 
+
+Once a directory stream is closed, then further access to the directory, using 
+theIterator, behaves as if the end of stream has been reached. Due to 
+read-ahead, theIteratormay return one or more elements after the directory 
+stream has been closed. Once these buffered elements have been read, then 
+subsequent calls to thehasNextmethod returnsfalse, and subsequent calls to 
+thenextmethod will throwNoSuchElementException. 
+
+A directory stream is not required to be asynchronously closeable. If a thread 
+is blocked on the directory stream's iterator reading from the directory, and 
+another thread invokes theclosemethod, then the second thread may block until 
+the read operation is complete. 
+
+If an I/O error is encountered when accessing the directory then it causes 
+theIterator'shasNextornextmethods to throw 
+(|java.nio.file.DirectoryIteratorException|) with the (|java.io.IOException|) 
+as the cause. As stated above, thehasNextmethod is guaranteed to read-ahead by 
+at least one element. This means that ifhasNextmethod returnstrue, and is 
+followed by a call to thenextmethod, then it is guaranteed that thenextmethod 
+will not fail with aDirectoryIteratorException. 
+
+The elements returned by the iterator are in no specific order. Some file 
+systems maintain special links to the directory itself and the directory's 
+parent directory. Entries representing these links are not returned by the 
+iterator. 
+
+The iterator is weakly consistent. It is thread safe but does not freeze the 
+directory while iterating, so it may (or may not) reflect updates to the 
+directory that occur after theDirectoryStreamis created. 
+
+Usage Examples: Suppose we want a list of the source files in a directory. This 
+example uses both the for-each and try-with-resources constructs. 
+
+List<Path> listSourceFiles(Path dir) throws IOException { List<Path> result = 
+new ArrayList<>(); try (DirectoryStream<Path> stream = 
+Files.newDirectoryStream(dir, "*.{c,h,cpp,hpp,java}")) { for (Path entry: 
+stream) { result.add(entry); } } catch (DirectoryIteratorException ex) { // I/O 
+error encounted during the iteration, the cause is an IOException throw 
+ex.getCause(); } return result; } 
+
+
+
+*java.nio.file.DirectoryStream.iterator()*
+
+public |java.util.Iterator|<T> iterator()
+
+Returns the iterator associated with thisDirectoryStream. 
+
+
+
+    Returns: the iterator associated with this {@code DirectoryStream} 
+
+

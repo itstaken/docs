@@ -1,0 +1,134 @@
+*java.nio.channels.spi.AsynchronousChannelProvider* *AsynchronousChannelProvider* 
+
+public abstract class AsynchronousChannelProvider
+  extends    |java.lang.Object|
+
+|java.nio.channels.spi.AsynchronousChannelProvider_Description|
+|java.nio.channels.spi.AsynchronousChannelProvider_Fields|
+|java.nio.channels.spi.AsynchronousChannelProvider_Constructors|
+|java.nio.channels.spi.AsynchronousChannelProvider_Methods|
+
+================================================================================
+
+*java.nio.channels.spi.AsynchronousChannelProvider_Constructors*
+|java.nio.channels.spi.AsynchronousChannelProvider()|Initializes a new instance
+
+*java.nio.channels.spi.AsynchronousChannelProvider_Methods*
+|java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousChannelGroup(ExecutorService,int)|
+|java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousChannelGroup(int,ThreadFactory)|
+|java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousServerSocketChannel(AsynchronousChannelGroup)|
+|java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousSocketChannel(AsynchronousChannelGroup)|
+|java.nio.channels.spi.AsynchronousChannelProvider.provider()|Returns the syste
+
+*java.nio.channels.spi.AsynchronousChannelProvider_Description*
+
+Service-provider class for asynchronous channels. 
+
+An asynchronous channel provider is a concrete subclass of this class that has 
+a zero-argument constructor and implements the abstract methods specified 
+below. A given invocation of the Java virtual machine maintains a single 
+system-wide default provider instance, which is returned by the 
+provider(|java.nio.channels.spi.AsynchronousChannelProvider|) method. The first 
+invocation of that method will locate the default provider as specified below. 
+
+All of the methods in this class are safe for use by multiple concurrent 
+threads. 
+
+
+
+*java.nio.channels.spi.AsynchronousChannelProvider()*
+
+protected AsynchronousChannelProvider()
+
+Initializes a new instance of this class. 
+
+
+*java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousChannelGroup(ExecutorService,int)*
+
+public abstract |java.nio.channels.AsynchronousChannelGroup| openAsynchronousChannelGroup(
+  java.util.concurrent.ExecutorService executor,
+  int initialSize)
+  throws |java.io.IOException|
+         
+Constructs a new asynchronous channel group with the given thread pool. 
+
+
+    executor - The thread pool 
+    initialSize - A value {@code >=0} or a negative value for implementation specific default 
+
+*java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousChannelGroup(int,ThreadFactory)*
+
+public abstract |java.nio.channels.AsynchronousChannelGroup| openAsynchronousChannelGroup(
+  int nThreads,
+  java.util.concurrent.ThreadFactory threadFactory)
+  throws |java.io.IOException|
+         
+Constructs a new asynchronous channel group with a fixed thread pool. 
+
+
+    nThreads - The number of threads in the pool 
+    threadFactory - The factory to use when creating new threads 
+
+*java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousServerSocketChannel(AsynchronousChannelGroup)*
+
+public abstract |java.nio.channels.AsynchronousServerSocketChannel| openAsynchronousServerSocketChannel(java.nio.channels.AsynchronousChannelGroup group)
+  throws |java.io.IOException|
+         
+Opens an asynchronous server-socket channel. 
+
+
+    group - The group to which the channel is bound, or {@code null} to bind to the default 
+       group 
+
+    Returns: The new channel 
+
+*java.nio.channels.spi.AsynchronousChannelProvider.openAsynchronousSocketChannel(AsynchronousChannelGroup)*
+
+public abstract |java.nio.channels.AsynchronousSocketChannel| openAsynchronousSocketChannel(java.nio.channels.AsynchronousChannelGroup group)
+  throws |java.io.IOException|
+         
+Opens an asynchronous socket channel. 
+
+
+    group - The group to which the channel is bound, or {@code null} to bind to the default 
+       group 
+
+    Returns: The new channel 
+
+*java.nio.channels.spi.AsynchronousChannelProvider.provider()*
+
+public static |java.nio.channels.spi.AsynchronousChannelProvider| provider()
+
+Returns the system-wide default asynchronous channel provider for this 
+invocation of the Java virtual machine. 
+
+The first invocation of this method locates the default provider object as 
+follows: 
+
+
+
+If the system property java.nio.channels.spi.AsynchronousChannelProvider is 
+defined then it is taken to be the fully-qualified name of a concrete provider 
+class. The class is loaded and instantiated; if this process fails then an 
+unspecified error is thrown. 
+
+If a provider class has been installed in a jar file that is visible to the 
+system class loader, and that jar file contains a provider-configuration file 
+named java.nio.channels.spi.AsynchronousChannelProvider in the resource 
+directory META-INF/services, then the first class name specified in that file 
+is taken. The class is loaded and instantiated; if this process fails then an 
+unspecified error is thrown. 
+
+Finally, if no provider has been specified by any of the above means then the 
+system-default provider class is instantiated and the result is returned. 
+
+
+
+Subsequent invocations of this method return the provider that was returned by 
+the first invocation. 
+
+
+
+    Returns: The system-wide default AsynchronousChannel provider 
+
+

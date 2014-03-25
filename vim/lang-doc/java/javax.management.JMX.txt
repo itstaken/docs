@@ -1,0 +1,290 @@
+*javax.management.JMX* *JMX* Static methods from the JMX API.
+
+public class JMX
+  extends    |java.lang.Object|
+
+|javax.management.JMX_Description|
+|javax.management.JMX_Fields|
+|javax.management.JMX_Constructors|
+|javax.management.JMX_Methods|
+
+================================================================================
+
+*javax.management.JMX_Fields*
+|java.lang.String_javax.management.JMX.DEFAULT_VALUE_FIELD|
+|java.lang.String_javax.management.JMX.IMMUTABLE_INFO_FIELD|
+|java.lang.String_javax.management.JMX.INTERFACE_CLASS_NAME_FIELD|
+|java.lang.String_javax.management.JMX.LEGAL_VALUES_FIELD|
+|java.lang.String_javax.management.JMX.MAX_VALUE_FIELD|
+|java.lang.String_javax.management.JMX.MIN_VALUE_FIELD|
+|java.lang.String_javax.management.JMX.MXBEAN_FIELD|
+|java.lang.String_javax.management.JMX.OPEN_TYPE_FIELD|
+|java.lang.String_javax.management.JMX.ORIGINAL_TYPE_FIELD|
+
+*javax.management.JMX_Methods*
+|javax.management.JMX.isMXBeanInterface(Class<?>)|Test whether an interface is 
+|javax.management.JMX.newMBeanProxy(MBeanServerConnection,ObjectName,Class<T>)|
+|javax.management.JMX.newMBeanProxy(MBeanServerConnection,ObjectName,Class<T>,boolean)|
+|javax.management.JMX.newMXBeanProxy(MBeanServerConnection,ObjectName,Class<T>)|
+|javax.management.JMX.newMXBeanProxy(MBeanServerConnection,ObjectName,Class<T>,boolean)|
+
+*javax.management.JMX_Description*
+
+Static methods from the JMX API. There are no instances of this class. 
+
+
+
+*java.lang.String_javax.management.JMX.DEFAULT_VALUE_FIELD*
+
+The name of the defaultValue field. 
+
+
+*java.lang.String_javax.management.JMX.IMMUTABLE_INFO_FIELD*
+
+The name of the immutableInfo field. 
+
+
+*java.lang.String_javax.management.JMX.INTERFACE_CLASS_NAME_FIELD*
+
+The name of the interfaceClassName field. 
+
+
+*java.lang.String_javax.management.JMX.LEGAL_VALUES_FIELD*
+
+The name of the legalValues field. 
+
+
+*java.lang.String_javax.management.JMX.MAX_VALUE_FIELD*
+
+The name of the maxValue field. 
+
+
+*java.lang.String_javax.management.JMX.MIN_VALUE_FIELD*
+
+The name of the minValue field. 
+
+
+*java.lang.String_javax.management.JMX.MXBEAN_FIELD*
+
+The name of the mxbean field. 
+
+
+*java.lang.String_javax.management.JMX.OPEN_TYPE_FIELD*
+
+The name of the openType field. 
+
+
+*java.lang.String_javax.management.JMX.ORIGINAL_TYPE_FIELD*
+
+The name of the originalType field. 
+
+
+
+*javax.management.JMX.isMXBeanInterface(Class<?>)*
+
+public static boolean isMXBeanInterface(java.lang.Class<?> interfaceClass)
+
+Test whether an interface is an MXBean interface. An interface is an MXBean 
+interface if it is annotated &#64;MXBean(|javax.management.MXBean|) 
+or@MXBean(true)or if it does not have an@MXBeanannotation and its name ends 
+with "MXBean". 
+
+
+    interfaceClass - The candidate interface. 
+
+    Returns: true if {@code interfaceClass} is an interface and meets the conditions 
+             described. 
+
+*javax.management.JMX.newMBeanProxy(MBeanServerConnection,ObjectName,Class<T>)*
+
+public static |T| newMBeanProxy(
+  javax.management.MBeanServerConnection connection,
+  javax.management.ObjectName objectName,
+  java.lang.Class<T> interfaceClass)
+
+Make a proxy for a Standard MBean in a local or remote MBean Server. 
+
+If you have an MBean Servermbscontaining an MBean with 
+(|javax.management.ObjectName|) name, and if the MBean's management interface 
+is described by the Java interfaceMyMBean, you can construct a proxy for the 
+MBean like this: 
+
+
+
+MyMBean proxy = JMX.newMBeanProxy(mbs, name, MyMBean.class); 
+
+Suppose, for example,MyMBeanlooks like this: 
+
+
+
+public interface MyMBean { public String getSomeAttribute(); public void 
+setSomeAttribute(String value); public void someOperation(String param1, int 
+param2); } 
+
+Then you can execute: 
+
+
+
+proxy.getSomeAttribute()which will result in a call tombs. 
+getAttribute(|javax.management.MBeanServerConnection|) (name, "SomeAttribute"). 
+
+proxy.setSomeAttribute("whatever")which will result in a call tombs. 
+setAttribute(|javax.management.MBeanServerConnection|) (name, new 
+Attribute("SomeAttribute", "whatever")). 
+
+proxy.someOperation("param1", 2)which will be translated into a call tombs. 
+invoke(|javax.management.MBeanServerConnection|) (name, "someOperation", ). 
+
+
+
+The object returned by this method is a (|java.lang.reflect.Proxy|) 
+whoseInvocationHandleris an (|javax.management.MBeanServerInvocationHandler|) . 
+
+This method is equivalent to newMBeanProxy(connection, objectName, 
+interfaceClass, false)(|javax.management.JMX|) . 
+
+
+    connection - the MBean server to forward to. 
+    objectName - the name of the MBean within {@code connection} to forward to. 
+    interfaceClass - the management interface that the MBean exports, which will also be implemented 
+       by the returned proxy. 
+
+    Returns: the new proxy instance. 
+
+*javax.management.JMX.newMBeanProxy(MBeanServerConnection,ObjectName,Class<T>,boolean)*
+
+public static |T| newMBeanProxy(
+  javax.management.MBeanServerConnection connection,
+  javax.management.ObjectName objectName,
+  java.lang.Class<T> interfaceClass,
+  boolean notificationEmitter)
+
+Make a proxy for a Standard MBean in a local or remote MBean Server that may 
+also support the methods of (|javax.management.NotificationEmitter|) . 
+
+This method behaves the same as (|javax.management.JMX|) , but additionally, 
+ifnotificationEmitteristrue, then the MBean is assumed to be a 
+(|javax.management.NotificationBroadcaster|) or 
+(|javax.management.NotificationEmitter|) and the returned proxy will implement 
+(|javax.management.NotificationEmitter|) as well asinterfaceClass. A call to 
+(|javax.management.NotificationBroadcaster|) on the proxy will result in a call 
+to (|javax.management.MBeanServerConnection|) , and likewise for the other 
+methods of (|javax.management.NotificationBroadcaster|) and 
+(|javax.management.NotificationEmitter|) . 
+
+
+    connection - the MBean server to forward to. 
+    objectName - the name of the MBean within {@code connection} to forward to. 
+    interfaceClass - the management interface that the MBean exports, which will also be implemented 
+       by the returned proxy. 
+    notificationEmitter - make the returned proxy implement {@link NotificationEmitter} by forwarding its 
+       methods via {@code connection}. 
+
+    Returns: the new proxy instance. 
+
+*javax.management.JMX.newMXBeanProxy(MBeanServerConnection,ObjectName,Class<T>)*
+
+public static |T| newMXBeanProxy(
+  javax.management.MBeanServerConnection connection,
+  javax.management.ObjectName objectName,
+  java.lang.Class<T> interfaceClass)
+
+Make a proxy for an MXBean in a local or remote MBean Server. 
+
+If you have an MBean Servermbscontaining an MXBean with 
+(|javax.management.ObjectName|) name, and if the MXBean's management interface 
+is described by the Java interfaceMyMXBean, you can construct a proxy for the 
+MXBean like this: 
+
+
+
+MyMXBean proxy = JMX.newMXBeanProxy(mbs, name, MyMXBean.class); 
+
+Suppose, for example,MyMXBeanlooks like this: 
+
+
+
+public interface MyMXBean { public String getSimpleAttribute(); public void 
+setSimpleAttribute(String value); public (|java.lang.management.MemoryUsage|) 
+getMappedAttribute(); public void setMappedAttribute(MemoryUsage memoryUsage); 
+public MemoryUsage someOperation(String param1, MemoryUsage param2); } 
+
+Then: 
+
+
+
+proxy.getSimpleAttribute()will result in a call tombs. 
+getAttribute(|javax.management.MBeanServerConnection|) (name, 
+"SimpleAttribute"). 
+
+proxy.setSimpleAttribute("whatever")will result in a call tombs. 
+setAttribute(|javax.management.MBeanServerConnection|) (name, new 
+Attribute("SimpleAttribute", "whatever")). 
+
+BecauseStringis a simple type, in the sense of 
+(|javax.management.openmbean.SimpleType|) , it is not changed in the context of 
+an MXBean. The MXBean proxy behaves the same as a Standard MBean proxy (see 
+newMBeanProxy(|javax.management.JMX|) ) for the attributeSimpleAttribute. 
+
+proxy.getMappedAttribute()will result in a call 
+tombs.getAttribute("MappedAttribute"). The MXBean mapping rules mean that the 
+actual type of the attributeMappedAttributewill be 
+CompositeData(|javax.management.openmbean.CompositeData|) and that is what 
+thembs.getAttributecall will return. The proxy will then convert 
+theCompositeDataback into the expected typeMemoryUsageusing the MXBean mapping 
+rules. 
+
+Similarly,proxy.setMappedAttribute(memoryUsage)will convert 
+theMemoryUsageargument into aCompositeDatabefore callingmbs.setAttribute. 
+
+proxy.someOperation("whatever", memoryUsage)will convert theMemoryUsageargument 
+into aCompositeDataand callmbs.invoke. The value returned bymbs.invokewill be 
+also be aCompositeData, and the proxy will convert this into the expected 
+typeMemoryUsageusing the MXBean mapping rules. 
+
+
+
+The object returned by this method is a (|java.lang.reflect.Proxy|) 
+whoseInvocationHandleris an (|javax.management.MBeanServerInvocationHandler|) . 
+
+This method is equivalent to newMXBeanProxy(connection, objectName, 
+interfaceClass, false)(|javax.management.JMX|) . 
+
+
+    connection - the MBean server to forward to. 
+    objectName - the name of the MBean within {@code connection} to forward to. 
+    interfaceClass - the MXBean interface, which will also be implemented by the returned proxy. 
+
+    Returns: the new proxy instance. 
+
+*javax.management.JMX.newMXBeanProxy(MBeanServerConnection,ObjectName,Class<T>,boolean)*
+
+public static |T| newMXBeanProxy(
+  javax.management.MBeanServerConnection connection,
+  javax.management.ObjectName objectName,
+  java.lang.Class<T> interfaceClass,
+  boolean notificationEmitter)
+
+Make a proxy for an MXBean in a local or remote MBean Server that may also 
+support the methods of (|javax.management.NotificationEmitter|) . 
+
+This method behaves the same as (|javax.management.JMX|) , but additionally, 
+ifnotificationEmitteristrue, then the MXBean is assumed to be a 
+(|javax.management.NotificationBroadcaster|) or 
+(|javax.management.NotificationEmitter|) and the returned proxy will implement 
+(|javax.management.NotificationEmitter|) as well asinterfaceClass. A call to 
+(|javax.management.NotificationBroadcaster|) on the proxy will result in a call 
+to (|javax.management.MBeanServerConnection|) , and likewise for the other 
+methods of (|javax.management.NotificationBroadcaster|) and 
+(|javax.management.NotificationEmitter|) . 
+
+
+    connection - the MBean server to forward to. 
+    objectName - the name of the MBean within {@code connection} to forward to. 
+    interfaceClass - the MXBean interface, which will also be implemented by the returned proxy. 
+    notificationEmitter - make the returned proxy implement {@link NotificationEmitter} by forwarding its 
+       methods via {@code connection}. 
+
+    Returns: the new proxy instance. 
+
+

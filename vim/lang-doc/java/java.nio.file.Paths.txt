@@ -1,0 +1,94 @@
+*java.nio.file.Paths* *Paths* This class consists exclusively of static methods 
+
+public final class Paths
+  extends    |java.lang.Object|
+
+|java.nio.file.Paths_Description|
+|java.nio.file.Paths_Fields|
+|java.nio.file.Paths_Constructors|
+|java.nio.file.Paths_Methods|
+
+================================================================================
+
+*java.nio.file.Paths_Methods*
+|java.nio.file.Paths.get(String,String...)|Converts a path string, or a sequenc
+|java.nio.file.Paths.get(URI)|Converts the given URI to aPathobject.
+
+*java.nio.file.Paths_Description*
+
+This class consists exclusively of static methods that return a 
+(|java.nio.file.Path|) by converting a path string or (|java.net.URI|) . 
+
+
+
+*java.nio.file.Paths.get(String,String...)*
+
+public static |java.nio.file.Path| get(
+  java.lang.String first,
+  java.lang.String[] more)
+
+Converts a path string, or a sequence of strings that when joined form a path 
+string, to aPath. Ifmoredoes not specify any elements then the value of 
+thefirstparameter is the path string to convert. Ifmorespecifies one or more 
+elements then each non-empty string, includingfirst, is considered to be a 
+sequence of name elements (see (|java.nio.file.Path|) ) and is joined to form a 
+path string. The details as to how the Strings are joined is provider specific 
+but typically they will be joined using the 
+name-separator(|java.nio.file.FileSystem|) as the separator. For example, if 
+the name separator is "/" andgetPath("/foo","bar","gus")is invoked, then the 
+path string"/foo/bar/gus"is converted to aPath. APathrepresenting an empty path 
+is returned iffirstis the empty string andmoredoes not contain any non-empty 
+strings. 
+
+ThePathis obtained by invoking the getPath(|java.nio.file.FileSystem|) method 
+of the default(|java.nio.file.FileSystems|) (|java.nio.file.FileSystem|) . 
+
+Note that while this method is very convenient, using it will imply an assumed 
+reference to the defaultFileSystemand limit the utility of the calling code. 
+Hence it should not be used in library code intended for flexible reuse. A more 
+flexible alternative is to use an existingPathinstance as an anchor, such as: 
+
+Path dir = ... Path path = dir.resolve("file"); 
+
+
+    first - the path string or initial part of the path string 
+    more - additional strings to be joined to form the path string 
+
+    Returns: the resulting {@code Path} 
+
+*java.nio.file.Paths.get(URI)*
+
+public static |java.nio.file.Path| get(java.net.URI uri)
+
+Converts the given URI to a (|java.nio.file.Path|) object. 
+
+This method iterates over the installed(|java.nio.file.spi.FileSystemProvider|) 
+providers to locate the provider that is identified by the URI 
+scheme(|java.net.URI|) of the given URI. URI schemes are compared without 
+regard to case. If the provider is found then its 
+getPath(|java.nio.file.spi.FileSystemProvider|) method is invoked to convert 
+the URI. 
+
+In the case of the default provider, identified by the URI scheme "file", the 
+given URI has a non-empty path component, and undefined query and fragment 
+components. Whether the authority component may be present is platform 
+specific. The returnedPathis associated with the 
+default(|java.nio.file.FileSystems|) file system. 
+
+The default provider provides a similar round-trip guarantee to the 
+(|java.io.File|) class. For a givenPathp it is guaranteed that 
+
+Paths.get(p. toUri(|java.nio.file.Path|) ()).equals( p. 
+toAbsolutePath(|java.nio.file.Path|) ()) 
+
+so long as the originalPath, theURI, and the newPathare all created in 
+(possibly different invocations of) the same Java virtual machine. Whether 
+other providers make any guarantees is provider specific and therefore 
+unspecified. 
+
+
+    uri - the URI to convert 
+
+    Returns: the resulting {@code Path} 
+
+

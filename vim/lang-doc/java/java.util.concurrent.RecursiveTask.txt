@@ -1,0 +1,81 @@
+*java.util.concurrent.RecursiveTask* *RecursiveTask* A recursive result-bearingF
+
+public abstract class RecursiveTask<V>
+  extends    |java.util.concurrent.ForkJoinTask|
+
+|java.util.concurrent.RecursiveTask_Description|
+|java.util.concurrent.RecursiveTask_Fields|
+|java.util.concurrent.RecursiveTask_Constructors|
+|java.util.concurrent.RecursiveTask_Methods|
+
+================================================================================
+
+*java.util.concurrent.RecursiveTask_Constructors*
+|java.util.concurrent.RecursiveTask()|
+
+*java.util.concurrent.RecursiveTask_Methods*
+|java.util.concurrent.RecursiveTask.compute()|The main computation performed by
+|java.util.concurrent.RecursiveTask.exec()|Implements execution conventions for
+|java.util.concurrent.RecursiveTask.getRawResult()|
+|java.util.concurrent.RecursiveTask.setRawResult(V)|
+
+*java.util.concurrent.RecursiveTask_Description*
+
+A recursive result-bearing (|java.util.concurrent.ForkJoinTask|) . 
+
+For a classic example, here is a task computing Fibonacci numbers: 
+
+class Fibonacci extends RecursiveTask { final int n; Fibonacci(int n) { this.n 
+= n; } Integer compute() { if (n <= 1) return n; Fibonacci f1 = new Fibonacci(n 
+- 1); f1.fork(); Fibonacci f2 = new Fibonacci(n - 2); return f2.compute() + 
+f1.join(); } } 
+
+However, besides being a dumb way to compute Fibonacci functions (there is a 
+simple fast linear algorithm that you'd use in practice), this is likely to 
+perform poorly because the smallest subtasks are too small to be worthwhile 
+splitting up. Instead, as is the case for nearly all fork/join applications, 
+you'd pick some minimum granularity size (for example 10 here) for which you 
+always sequentially solve rather than subdividing. 
+
+
+
+*java.util.concurrent.RecursiveTask()*
+
+public RecursiveTask()
+
+
+
+
+*java.util.concurrent.RecursiveTask.compute()*
+
+protected abstract |V| compute()
+
+The main computation performed by this task. 
+
+
+
+*java.util.concurrent.RecursiveTask.exec()*
+
+protected final boolean exec()
+
+Implements execution conventions for RecursiveTask. 
+
+
+
+*java.util.concurrent.RecursiveTask.getRawResult()*
+
+public final |V| getRawResult()
+
+
+
+
+
+*java.util.concurrent.RecursiveTask.setRawResult(V)*
+
+protected final void setRawResult(V value)
+
+
+
+
+
+

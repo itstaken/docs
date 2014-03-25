@@ -1,0 +1,154 @@
+*java.nio.file.attribute.AclEntry* *AclEntry* An entry in an access control list
+
+public final class AclEntry
+  extends    |java.lang.Object|
+
+|java.nio.file.attribute.AclEntry_Description|
+|java.nio.file.attribute.AclEntry_Fields|
+|java.nio.file.attribute.AclEntry_Constructors|
+|java.nio.file.attribute.AclEntry_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.AclEntry_Methods*
+|java.nio.file.attribute.AclEntry.equals(Object)|Compares the specified object 
+|java.nio.file.attribute.AclEntry.flags()|Returns a copy of the flags component
+|java.nio.file.attribute.AclEntry.hashCode()|Returns the hash-code value for th
+|java.nio.file.attribute.AclEntry.newBuilder()|Constructs a new builder.
+|java.nio.file.attribute.AclEntry.newBuilder(AclEntry)|Constructs a new builder
+|java.nio.file.attribute.AclEntry.permissions()|Returns a copy of the permissio
+|java.nio.file.attribute.AclEntry.principal()|Returns the principal component.
+|java.nio.file.attribute.AclEntry.toString()|Returns the string representation 
+|java.nio.file.attribute.AclEntry.type()|Returns the ACL entry type.
+
+*java.nio.file.attribute.AclEntry_Description*
+
+An entry in an access control list (ACL). 
+
+The ACL entry represented by this class is based on the ACL model specified in 
+RFC3530: Network File System (NFS) version 4 Protocol. Each entry has four 
+components as follows: 
+
+The type(|java.nio.file.attribute.AclEntry|) component determines if the entry 
+grants or denies access. 
+
+The principal(|java.nio.file.attribute.AclEntry|) component, sometimes called 
+the "who" component, is a (|java.nio.file.attribute.UserPrincipal|) 
+corresponding to the identity that the entry grants or denies access 
+
+The permissions(|java.nio.file.attribute.AclEntry|) component is a set of 
+permissions(|java.nio.file.attribute.AclEntryPermission|) 
+
+The flags(|java.nio.file.attribute.AclEntry|) component is a set of 
+flags(|java.nio.file.attribute.AclEntryFlag|) to indicate how entries are 
+inherited and propagated 
+
+ACL entries are created using an associated 
+(|java.nio.file.attribute.AclEntry.Builder|) object by invoking its 
+build(|java.nio.file.attribute.AclEntry.Builder|) method. 
+
+ACL entries are immutable and are safe for use by multiple concurrent threads. 
+
+
+
+*java.nio.file.attribute.AclEntry.equals(Object)*
+
+public boolean equals(java.lang.Object ob)
+
+Compares the specified object with this ACL entry for equality. 
+
+If the given object is not anAclEntrythen this method immediately returnsfalse. 
+
+For two ACL entries to be considered equals requires that they are both the 
+same type, their who components are equal, their permissions components are 
+equal, and their flags components are equal. 
+
+This method satisfies the general contract of the 
+Object.equals(|java.lang.Object|) method. 
+
+
+    ob - the object to which this object is to be compared 
+
+    Returns: {@code true} if, and only if, the given object is an AclEntry that is identical 
+             to this AclEntry 
+
+*java.nio.file.attribute.AclEntry.flags()*
+
+public |java.util.Set|<AclEntryFlag> flags()
+
+Returns a copy of the flags component. 
+
+The returned set is a modifiable copy of the flags. 
+
+
+
+*java.nio.file.attribute.AclEntry.hashCode()*
+
+public int hashCode()
+
+Returns the hash-code value for this ACL entry. 
+
+This method satisfies the general contract of the (|java.lang.Object|) method. 
+
+
+
+*java.nio.file.attribute.AclEntry.newBuilder()*
+
+public static |java.nio.file.attribute.AclEntry.Builder| newBuilder()
+
+Constructs a new builder. The initial value of the type and who components 
+isnull. The initial value of the permissions and flags components is the empty 
+set. 
+
+
+
+    Returns: a new builder 
+
+*java.nio.file.attribute.AclEntry.newBuilder(AclEntry)*
+
+public static |java.nio.file.attribute.AclEntry.Builder| newBuilder(java.nio.file.attribute.AclEntry entry)
+
+Constructs a new builder with the components of an existing ACL entry. 
+
+
+    entry - an ACL entry 
+
+    Returns: a new builder 
+
+*java.nio.file.attribute.AclEntry.permissions()*
+
+public |java.util.Set|<AclEntryPermission> permissions()
+
+Returns a copy of the permissions component. 
+
+The returned set is a modifiable copy of the permissions. 
+
+
+
+*java.nio.file.attribute.AclEntry.principal()*
+
+public |java.nio.file.attribute.UserPrincipal| principal()
+
+Returns the principal component. 
+
+
+
+*java.nio.file.attribute.AclEntry.toString()*
+
+public |java.lang.String| toString()
+
+Returns the string representation of this ACL entry. 
+
+
+
+    Returns: the string representation of this entry 
+
+*java.nio.file.attribute.AclEntry.type()*
+
+public |java.nio.file.attribute.AclEntryType| type()
+
+Returns the ACL entry type. 
+
+
+
+

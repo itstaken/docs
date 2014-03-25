@@ -1,0 +1,710 @@
+*java.util.concurrent.ForkJoinTask* *ForkJoinTask* Abstract base class for tasks
+
+public abstract class ForkJoinTask<V>
+  extends    |java.lang.Object|
+  implements |java.util.concurrent.Future|
+             |java.io.Serializable|
+
+|java.util.concurrent.ForkJoinTask_Description|
+|java.util.concurrent.ForkJoinTask_Fields|
+|java.util.concurrent.ForkJoinTask_Constructors|
+|java.util.concurrent.ForkJoinTask_Methods|
+
+================================================================================
+
+*java.util.concurrent.ForkJoinTask_Constructors*
+|java.util.concurrent.ForkJoinTask()|
+
+*java.util.concurrent.ForkJoinTask_Methods*
+|java.util.concurrent.ForkJoinTask.adapt(Callable<?extendsT>)|Returns a newFork
+|java.util.concurrent.ForkJoinTask.adapt(Runnable)|Returns a newForkJoinTasktha
+|java.util.concurrent.ForkJoinTask.adapt(Runnable,T)|Returns a newForkJoinTaskt
+|java.util.concurrent.ForkJoinTask.cancel(boolean)|Attempts to cancel execution
+|java.util.concurrent.ForkJoinTask.complete(V)|Completes this task, and if not 
+|java.util.concurrent.ForkJoinTask.completeExceptionally(Throwable)|Completes t
+|java.util.concurrent.ForkJoinTask.exec()|Immediately performs the base action 
+|java.util.concurrent.ForkJoinTask.fork()|Arranges to asynchronously execute th
+|java.util.concurrent.ForkJoinTask.get()|Waits if necessary for the computation
+|java.util.concurrent.ForkJoinTask.get(long,TimeUnit)|Waits if necessary for at
+|java.util.concurrent.ForkJoinTask.getException()|Returns the exception thrown 
+|java.util.concurrent.ForkJoinTask.getPool()|Returns the pool hosting the curre
+|java.util.concurrent.ForkJoinTask.getQueuedTaskCount()|Returns an estimate of 
+|java.util.concurrent.ForkJoinTask.getRawResult()|Returns the result that would
+|java.util.concurrent.ForkJoinTask.getSurplusQueuedTaskCount()|Returns an estim
+|java.util.concurrent.ForkJoinTask.helpQuiesce()|Possibly executes tasks until 
+|java.util.concurrent.ForkJoinTask.inForkJoinPool()|Returnstrueif the current t
+|java.util.concurrent.ForkJoinTask.invoke()|Commences performing this task, awa
+|java.util.concurrent.ForkJoinTask.invokeAll(Collection<T>)|Forks all tasks in 
+|java.util.concurrent.ForkJoinTask.invokeAll(ForkJoinTask<?>...)|Forks the give
+|java.util.concurrent.ForkJoinTask.invokeAll(ForkJoinTask<?>,ForkJoinTask<?>)|F
+|java.util.concurrent.ForkJoinTask.isCancelled()|
+|java.util.concurrent.ForkJoinTask.isCompletedAbnormally()|Returnstrueif this t
+|java.util.concurrent.ForkJoinTask.isCompletedNormally()|Returnstrueif this tas
+|java.util.concurrent.ForkJoinTask.isDone()|
+|java.util.concurrent.ForkJoinTask.join()|Returns the result of the computation
+|java.util.concurrent.ForkJoinTask.peekNextLocalTask()|Returns, but does not un
+|java.util.concurrent.ForkJoinTask.pollNextLocalTask()|Unschedules and returns,
+|java.util.concurrent.ForkJoinTask.pollTask()|Unschedules and returns, without 
+|java.util.concurrent.ForkJoinTask.quietlyInvoke()|Commences performing this ta
+|java.util.concurrent.ForkJoinTask.quietlyJoin()|Joins this task, without retur
+|java.util.concurrent.ForkJoinTask.reinitialize()|Resets the internal bookkeepi
+|java.util.concurrent.ForkJoinTask.setRawResult(V)|Forces the given value to be
+|java.util.concurrent.ForkJoinTask.tryUnfork()|Tries to unschedule this task fo
+
+*java.util.concurrent.ForkJoinTask_Description*
+
+Abstract base class for tasks that run within a 
+(|java.util.concurrent.ForkJoinPool|) . AForkJoinTaskis a thread-like entity 
+that is much lighter weight than a normal thread. Huge numbers of tasks and 
+subtasks may be hosted by a small number of actual threads in a ForkJoinPool, 
+at the price of some usage limitations. 
+
+A "main"ForkJoinTaskbegins execution when submitted to a 
+(|java.util.concurrent.ForkJoinPool|) . Once started, it will usually in turn 
+start other subtasks. As indicated by the name of this class, many programs 
+usingForkJoinTaskemploy only methods (|java.util.concurrent.ForkJoinTask|) and 
+(|java.util.concurrent.ForkJoinTask|) , or derivatives such as 
+invokeAll(|java.util.concurrent.ForkJoinTask|) . However, this class also 
+provides a number of other methods that can come into play in advanced usages, 
+as well as extension mechanics that allow support of new forms of fork/join 
+processing. 
+
+AForkJoinTaskis a lightweight form of (|java.util.concurrent.Future|) . The 
+efficiency ofForkJoinTasks stems from a set of restrictions (that are only 
+partially statically enforceable) reflecting their intended use as 
+computational tasks calculating pure functions or operating on purely isolated 
+objects. The primary coordination mechanisms are 
+(|java.util.concurrent.ForkJoinTask|) , that arranges asynchronous execution, 
+and (|java.util.concurrent.ForkJoinTask|) , that doesn't proceed until the 
+task's result has been computed. Computations should avoidsynchronizedmethods 
+or blocks, and should minimize other blocking synchronization apart from 
+joining other tasks or using synchronizers such as Phasers that are advertised 
+to cooperate with fork/join scheduling. Tasks should also not perform blocking 
+IO, and should ideally access variables that are completely independent of 
+those accessed by other running tasks. Minor breaches of these restrictions, 
+for example using shared output streams, may be tolerable in practice, but 
+frequent use may result in poor performance, and the potential to indefinitely 
+stall if the number of threads not waiting for IO or other external 
+synchronization becomes exhausted. This usage restriction is in part enforced 
+by not permitting checked exceptions such asIOExceptionsto be thrown. However, 
+computations may still encounter unchecked exceptions, that are rethrown to 
+callers attempting to join them. These exceptions may additionally include 
+(|java.util.concurrent.RejectedExecutionException|) stemming from internal 
+resource exhaustion, such as failure to allocate internal task queues. Rethrown 
+exceptions behave in the same way as regular exceptions, but, when possible, 
+contain stack traces (as displayed for example usingex.printStackTrace()) of 
+both the thread that initiated the computation as well as the thread actually 
+encountering the exception; minimally only the latter. 
+
+The primary method for awaiting completion and extracting results of a task is 
+(|java.util.concurrent.ForkJoinTask|) , but there are several variants: The 
+(|java.util.concurrent.Future|) methods support interruptible and/or timed 
+waits for completion and report results usingFutureconventions. Method 
+(|java.util.concurrent.ForkJoinTask|) is semantically equivalent tofork(); 
+join()but always attempts to begin execution in the current thread. The "quiet" 
+forms of these methods do not extract results or report exceptions. These may 
+be useful when a set of tasks are being executed, and you need to delay 
+processing of results or exceptions until all complete. 
+MethodinvokeAll(available in multiple versions) performs the most common form 
+of parallel invocation: forking a set of tasks and joining them all. 
+
+The execution status of tasks may be queried at several levels of detail: 
+(|java.util.concurrent.ForkJoinTask|) is true if a task completed in any way 
+(including the case where a task was cancelled without executing); 
+(|java.util.concurrent.ForkJoinTask|) is true if a task completed without 
+cancellation or encountering an exception; 
+(|java.util.concurrent.ForkJoinTask|) is true if the task was cancelled (in 
+which case (|java.util.concurrent.ForkJoinTask|) returns a 
+(|java.util.concurrent.CancellationException|) ); and 
+(|java.util.concurrent.ForkJoinTask|) is true if a task was either cancelled or 
+encountered an exception, in which case (|java.util.concurrent.ForkJoinTask|) 
+will return either the encountered exception or 
+(|java.util.concurrent.CancellationException|) . 
+
+The ForkJoinTask class is not usually directly subclassed. Instead, you 
+subclass one of the abstract classes that support a particular style of 
+fork/join processing, typically (|java.util.concurrent.RecursiveAction|) for 
+computations that do not return results, or 
+(|java.util.concurrent.RecursiveTask|) for those that do. Normally, a concrete 
+ForkJoinTask subclass declares fields comprising its parameters, established in 
+a constructor, and then defines acomputemethod that somehow uses the control 
+methods supplied by this base class. While these methods havepublicaccess (to 
+allow instances of different task subclasses to call each other's methods), 
+some of them may only be called from within other ForkJoinTasks (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke them in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+Method (|java.util.concurrent.ForkJoinTask|) and its variants are appropriate 
+for use only when completion dependencies are acyclic; that is, the parallel 
+computation can be described as a directed acyclic graph (DAG). Otherwise, 
+executions may encounter a form of deadlock as tasks cyclically wait for each 
+other. However, this framework supports other methods and techniques (for 
+example the use of (|java.util.concurrent.Phaser|) , 
+(|java.util.concurrent.ForkJoinTask|) , and 
+(|java.util.concurrent.ForkJoinTask|) ) that may be of use in constructing 
+custom subclasses for problems that are not statically structured as DAGs. 
+
+Most base support methods arefinal, to prevent overriding of implementations 
+that are intrinsically tied to the underlying lightweight task scheduling 
+framework. Developers creating new basic styles of fork/join processing should 
+minimally implementprotectedmethods (|java.util.concurrent.ForkJoinTask|) , 
+(|java.util.concurrent.ForkJoinTask|) , and 
+(|java.util.concurrent.ForkJoinTask|) , while also introducing an abstract 
+computational method that can be implemented in its subclasses, possibly 
+relying on otherprotectedmethods provided by this class. 
+
+ForkJoinTasks should perform relatively small amounts of computation. Large 
+tasks should be split into smaller subtasks, usually via recursive 
+decomposition. As a very rough rule of thumb, a task should perform more than 
+100 and less than 10000 basic computational steps, and should avoid indefinite 
+looping. If tasks are too big, then parallelism cannot improve throughput. If 
+too small, then memory and internal task maintenance overhead may overwhelm 
+processing. 
+
+This class providesadaptmethods for (|java.lang.Runnable|) and 
+(|java.util.concurrent.Callable|) , that may be of use when mixing execution 
+ofForkJoinTaskswith other kinds of tasks. When all tasks are of this form, 
+consider using a pool constructed in asyncMode. 
+
+ForkJoinTasks areSerializable, which enables them to be used in extensions such 
+as remote execution frameworks. It is sensible to serialize tasks only before 
+or after, but not during, execution. Serialization is not relied on during 
+execution itself. 
+
+
+
+*java.util.concurrent.ForkJoinTask()*
+
+public ForkJoinTask()
+
+
+
+
+*java.util.concurrent.ForkJoinTask.adapt(Callable<?extendsT>)*
+
+public static |java.util.concurrent.ForkJoinTask|<T> adapt(java.util.concurrent.Callable<? extends T> callable)
+
+Returns a newForkJoinTaskthat performs thecallmethod of the givenCallableas its 
+action, and returns its result upon (|java.util.concurrent.ForkJoinTask|) , 
+translating any checked exceptions encountered intoRuntimeException. 
+
+
+    callable - the callable action 
+
+    Returns: 
+
+*java.util.concurrent.ForkJoinTask.adapt(Runnable)*
+
+public static |java.util.concurrent.ForkJoinTask|<?> adapt(java.lang.Runnable runnable)
+
+Returns a newForkJoinTaskthat performs therunmethod of the givenRunnableas its 
+action, and returns a null result upon (|java.util.concurrent.ForkJoinTask|) . 
+
+
+    runnable - the runnable action 
+
+    Returns: 
+
+*java.util.concurrent.ForkJoinTask.adapt(Runnable,T)*
+
+public static |java.util.concurrent.ForkJoinTask|<T> adapt(
+  java.lang.Runnable runnable,
+  T result)
+
+Returns a newForkJoinTaskthat performs therunmethod of the givenRunnableas its 
+action, and returns the given result upon (|java.util.concurrent.ForkJoinTask|) 
+. 
+
+
+    runnable - the runnable action 
+    result - the result upon completion 
+
+    Returns: 
+
+*java.util.concurrent.ForkJoinTask.cancel(boolean)*
+
+public boolean cancel(boolean mayInterruptIfRunning)
+
+Attempts to cancel execution of this task. This attempt will fail if the task 
+has already completed or could not be cancelled for some other reason. If 
+successful, and this task has not started whencancelis called, execution of 
+this task is suppressed. After this method returns successfully, unless there 
+is an intervening call to (|java.util.concurrent.ForkJoinTask|) , subsequent 
+calls to (|java.util.concurrent.ForkJoinTask|) , 
+(|java.util.concurrent.ForkJoinTask|) , andcancelwill returntrueand calls to 
+(|java.util.concurrent.ForkJoinTask|) and related methods will result 
+inCancellationException. 
+
+This method may be overridden in subclasses, but if so, must still ensure that 
+these properties hold. In particular, thecancelmethod itself must not throw 
+exceptions. 
+
+This method is designed to be invoked by other tasks. To terminate the current 
+task, you can just return or throw an unchecked exception from its computation 
+method, or invoke (|java.util.concurrent.ForkJoinTask|) . 
+
+
+    mayInterruptIfRunning - this value has no effect in the default implementation because interrupts are 
+       not used to control cancellation. 
+
+    Returns: {@code true} if this task is now cancelled 
+
+*java.util.concurrent.ForkJoinTask.complete(V)*
+
+public void complete(V value)
+
+Completes this task, and if not already aborted or cancelled, returning the 
+given value as the result of subsequent invocations ofjoinand related 
+operations. This method may be used to provide results for asynchronous tasks, 
+or to provide alternative handling for tasks that would not otherwise complete 
+normally. Its use in other situations is discouraged. This method is 
+overridable, but overridden versions must invokesuperimplementation to maintain 
+guarantees. 
+
+
+    value - the result value for this task 
+
+*java.util.concurrent.ForkJoinTask.completeExceptionally(Throwable)*
+
+public void completeExceptionally(java.lang.Throwable ex)
+
+Completes this task abnormally, and if not already aborted or cancelled, causes 
+it to throw the given exception uponjoinand related operations. This method may 
+be used to induce exceptions in asynchronous tasks, or to force completion of 
+tasks that would not otherwise complete. Its use in other situations is 
+discouraged. This method is overridable, but overridden versions must 
+invokesuperimplementation to maintain guarantees. 
+
+
+    ex - the exception to throw. If this exception is not a {@code RuntimeException} or 
+       {@code Error}, the actual exception thrown will be a {@code 
+       RuntimeException} with cause {@code ex}. 
+
+*java.util.concurrent.ForkJoinTask.exec()*
+
+protected abstract boolean exec()
+
+Immediately performs the base action of this task. This method is designed to 
+support extensions, and should not in general be called otherwise. The return 
+value controls whether this task is considered to be done normally. It may 
+return false in asynchronous actions that require explicit invocations of 
+(|java.util.concurrent.ForkJoinTask|) to become joinable. It may also throw an 
+(unchecked) exception to indicate abnormal exit. 
+
+
+
+    Returns: {@code true} if completed normally 
+
+*java.util.concurrent.ForkJoinTask.fork()*
+
+public final |java.util.concurrent.ForkJoinTask|<V> fork()
+
+Arranges to asynchronously execute this task. While it is not necessarily 
+enforced, it is a usage error to fork a task more than once unless it has 
+completed and been reinitialized. Subsequent modifications to the state of this 
+task or any data it operates on are not necessarily consistently observable by 
+any thread other than the one executing it unless preceded by a call to 
+(|java.util.concurrent.ForkJoinTask|) or related methods, or a call to 
+(|java.util.concurrent.ForkJoinTask|) returningtrue. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: {@code this}, to simplify usage 
+
+*java.util.concurrent.ForkJoinTask.get()*
+
+public final |V| get()
+  throws |java.util.concurrent.ExecutionException|
+         |java.lang.InterruptedException|
+         
+Waits if necessary for the computation to complete, and then retrieves its 
+result. 
+
+
+
+    Returns: the computed result 
+
+*java.util.concurrent.ForkJoinTask.get(long,TimeUnit)*
+
+public final |V| get(
+  long timeout,
+  java.util.concurrent.TimeUnit unit)
+  throws |java.util.concurrent.ExecutionException|
+         |java.lang.InterruptedException|
+         |java.util.concurrent.TimeoutException|
+         
+Waits if necessary for at most the given time for the computation to complete, 
+and then retrieves its result, if available. 
+
+
+    timeout - the maximum time to wait 
+    unit - the time unit of the timeout argument 
+
+    Returns: the computed result 
+
+*java.util.concurrent.ForkJoinTask.getException()*
+
+public final |java.lang.Throwable| getException()
+
+Returns the exception thrown by the base computation, or 
+aCancellationExceptionif cancelled, ornullif none or if the method has not yet 
+completed. 
+
+
+
+    Returns: the exception, or {@code null} if none 
+
+*java.util.concurrent.ForkJoinTask.getPool()*
+
+public static |java.util.concurrent.ForkJoinPool| getPool()
+
+Returns the pool hosting the current task execution, or null if this task is 
+executing outside of any ForkJoinPool. 
+
+
+
+    Returns: the pool, or {@code null} if none 
+
+*java.util.concurrent.ForkJoinTask.getQueuedTaskCount()*
+
+public static int getQueuedTaskCount()
+
+Returns an estimate of the number of tasks that have been forked by the current 
+worker thread but not yet executed. This value may be useful for heuristic 
+decisions about whether to fork other tasks. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: the number of tasks 
+
+*java.util.concurrent.ForkJoinTask.getRawResult()*
+
+public abstract |V| getRawResult()
+
+Returns the result that would be returned by 
+(|java.util.concurrent.ForkJoinTask|) , even if this task completed abnormally, 
+ornullif this task is not known to have been completed. This method is designed 
+to aid debugging, as well as to support extensions. Its use in any other 
+context is discouraged. 
+
+
+
+    Returns: the result, or {@code null} if not completed 
+
+*java.util.concurrent.ForkJoinTask.getSurplusQueuedTaskCount()*
+
+public static int getSurplusQueuedTaskCount()
+
+Returns an estimate of how many more locally queued tasks are held by the 
+current worker thread than there are other worker threads that might steal 
+them. This value may be useful for heuristic decisions about whether to fork 
+other tasks. In many usages of ForkJoinTasks, at steady state, each worker 
+should aim to maintain a small constant surplus (for example, 3) of tasks, and 
+to process computations locally if this threshold is exceeded. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: the surplus number of tasks, which may be negative 
+
+*java.util.concurrent.ForkJoinTask.helpQuiesce()*
+
+public static void helpQuiesce()
+
+Possibly executes tasks until the pool hosting the current task is 
+quiescent(|java.util.concurrent.ForkJoinPool|) . This method may be of use in 
+designs in which many tasks are forked, but none are explicitly joined, instead 
+executing them until all are processed. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+*java.util.concurrent.ForkJoinTask.inForkJoinPool()*
+
+public static boolean inForkJoinPool()
+
+Returnstrueif the current thread is a 
+(|java.util.concurrent.ForkJoinWorkerThread|) executing as a ForkJoinPool 
+computation. 
+
+
+
+    Returns: {@code true} if the current thread is a {@link ForkJoinWorkerThread} executing 
+             as a ForkJoinPool computation, or {@code false} otherwise 
+
+*java.util.concurrent.ForkJoinTask.invoke()*
+
+public final |V| invoke()
+
+Commences performing this task, awaits its completion if necessary, and returns 
+its result, or throws an (unchecked)RuntimeExceptionorErrorif the underlying 
+computation did so. 
+
+
+
+    Returns: the computed result 
+
+*java.util.concurrent.ForkJoinTask.invokeAll(Collection<T>)*
+
+public static |java.util.Collection|<T extends java.util.concurrent.ForkJoinTask<?>> invokeAll(java.util.Collection<T> tasks)
+
+Forks all tasks in the specified collection, returning whenisDoneholds for each 
+task or an (unchecked) exception is encountered, in which case the exception is 
+rethrown. If more than one task encounters an exception, then this method 
+throws any one of these exceptions. If any task encounters an exception, others 
+may be cancelled. However, the execution status of individual tasks is not 
+guaranteed upon exceptional return. The status of each task may be obtained 
+using (|java.util.concurrent.ForkJoinTask|) and related methods to check if 
+they have been cancelled, completed normally or exceptionally, or left 
+unprocessed. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+    tasks - the collection of tasks 
+
+    Returns: the tasks argument, to simplify usage 
+
+*java.util.concurrent.ForkJoinTask.invokeAll(ForkJoinTask<?>...)*
+
+public static void invokeAll(java.util.concurrent.ForkJoinTask[] tasks)
+
+Forks the given tasks, returning whenisDoneholds for each task or an 
+(unchecked) exception is encountered, in which case the exception is rethrown. 
+If more than one task encounters an exception, then this method throws any one 
+of these exceptions. If any task encounters an exception, others may be 
+cancelled. However, the execution status of individual tasks is not guaranteed 
+upon exceptional return. The status of each task may be obtained using 
+(|java.util.concurrent.ForkJoinTask|) and related methods to check if they have 
+been cancelled, completed normally or exceptionally, or left unprocessed. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+    tasks - the tasks 
+
+*java.util.concurrent.ForkJoinTask.invokeAll(ForkJoinTask<?>,ForkJoinTask<?>)*
+
+public static void invokeAll(
+  java.util.concurrent.ForkJoinTask<?> t1,
+  java.util.concurrent.ForkJoinTask<?> t2)
+
+Forks the given tasks, returning whenisDoneholds for each task or an 
+(unchecked) exception is encountered, in which case the exception is rethrown. 
+If more than one task encounters an exception, then this method throws any one 
+of these exceptions. If any task encounters an exception, the other may be 
+cancelled. However, the execution status of individual tasks is not guaranteed 
+upon exceptional return. The status of each task may be obtained using 
+(|java.util.concurrent.ForkJoinTask|) and related methods to check if they have 
+been cancelled, completed normally or exceptionally, or left unprocessed. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+    t1 - the first task 
+    t2 - the second task 
+
+*java.util.concurrent.ForkJoinTask.isCancelled()*
+
+public final boolean isCancelled()
+
+
+
+
+
+*java.util.concurrent.ForkJoinTask.isCompletedAbnormally()*
+
+public final boolean isCompletedAbnormally()
+
+Returnstrueif this task threw an exception or was cancelled. 
+
+
+
+    Returns: {@code true} if this task threw an exception or was cancelled 
+
+*java.util.concurrent.ForkJoinTask.isCompletedNormally()*
+
+public final boolean isCompletedNormally()
+
+Returnstrueif this task completed without throwing an exception and was not 
+cancelled. 
+
+
+
+    Returns: {@code true} if this task completed without throwing an exception and was not 
+             cancelled 
+
+*java.util.concurrent.ForkJoinTask.isDone()*
+
+public final boolean isDone()
+
+
+
+
+
+*java.util.concurrent.ForkJoinTask.join()*
+
+public final |V| join()
+
+Returns the result of the computation when it is 
+done(|java.util.concurrent.ForkJoinTask|) . This method differs from 
+(|java.util.concurrent.ForkJoinTask|) in that abnormal completion results 
+inRuntimeExceptionorError, notExecutionException, and that interrupts of the 
+calling thread do not cause the method to abruptly return by 
+throwingInterruptedException. 
+
+
+
+    Returns: the computed result 
+
+*java.util.concurrent.ForkJoinTask.peekNextLocalTask()*
+
+protected static |java.util.concurrent.ForkJoinTask|<?> peekNextLocalTask()
+
+Returns, but does not unschedule or execute, a task queued by the current 
+thread but not yet executed, if one is immediately available. There is no 
+guarantee that this task will actually be polled or executed next. Conversely, 
+this method may return null even if a task exists but cannot be accessed 
+without contention with other threads. This method is designed primarily to 
+support extensions, and is unlikely to be useful otherwise. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: the next task, or {@code null} if none are available 
+
+*java.util.concurrent.ForkJoinTask.pollNextLocalTask()*
+
+protected static |java.util.concurrent.ForkJoinTask|<?> pollNextLocalTask()
+
+Unschedules and returns, without executing, the next task queued by the current 
+thread but not yet executed. This method is designed primarily to support 
+extensions, and is unlikely to be useful otherwise. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: the next task, or {@code null} if none are available 
+
+*java.util.concurrent.ForkJoinTask.pollTask()*
+
+protected static |java.util.concurrent.ForkJoinTask|<?> pollTask()
+
+Unschedules and returns, without executing, the next task queued by the current 
+thread but not yet executed, if one is available, or if not available, a task 
+that was forked by some other thread, if available. Availability may be 
+transient, so anullresult does not necessarily imply quiescence of the pool 
+this task is operating in. This method is designed primarily to support 
+extensions, and is unlikely to be useful otherwise. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: a task, or {@code null} if none are available 
+
+*java.util.concurrent.ForkJoinTask.quietlyInvoke()*
+
+public final void quietlyInvoke()
+
+Commences performing this task and awaits its completion if necessary, without 
+returning its result or throwing its exception. 
+
+
+
+*java.util.concurrent.ForkJoinTask.quietlyJoin()*
+
+public final void quietlyJoin()
+
+Joins this task, without returning its result or throwing its exception. This 
+method may be useful when processing collections of tasks when some have been 
+cancelled or otherwise known to have aborted. 
+
+
+
+*java.util.concurrent.ForkJoinTask.reinitialize()*
+
+public void reinitialize()
+
+Resets the internal bookkeeping state of this task, allowing a subsequentfork. 
+This method allows repeated reuse of this task, but only if reuse occurs when 
+this task has either never been forked, or has been forked, then completed and 
+all outstanding joins of this task have also completed. Effects under any other 
+usage conditions are not guaranteed. This method may be useful when executing 
+pre-constructed trees of subtasks in loops. 
+
+Upon completion of this method,isDone()reportsfalse, 
+andgetException()reportsnull. However, the value returned bygetRawResultis 
+unaffected. To clear this value, you can invokesetRawResult(null). 
+
+
+
+*java.util.concurrent.ForkJoinTask.setRawResult(V)*
+
+protected abstract void setRawResult(V value)
+
+Forces the given value to be returned as a result. This method is designed to 
+support extensions, and should not in general be called otherwise. 
+
+
+    value - the value 
+
+*java.util.concurrent.ForkJoinTask.tryUnfork()*
+
+public boolean tryUnfork()
+
+Tries to unschedule this task for execution. This method will typically succeed 
+if this task is the most recently forked task by the current thread, and has 
+not commenced executing in another thread. This method may be useful when 
+arranging alternative local processing of tasks that could have been, but were 
+not, stolen. 
+
+This method may be invoked only from withinForkJoinPoolcomputations (as may be 
+determined using method (|java.util.concurrent.ForkJoinTask|) ). Attempts to 
+invoke in other contexts result in exceptions or errors, possibly 
+includingClassCastException. 
+
+
+
+    Returns: {@code true} if unforked 
+
+

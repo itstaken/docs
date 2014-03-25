@@ -1,0 +1,85 @@
+*javax.net.ssl.ExtendedSSLSession* *ExtendedSSLSession* Extends the SSLSession i
+
+public abstract class ExtendedSSLSession
+  extends    |java.lang.Object|
+  implements |javax.net.ssl.SSLSession|
+
+|javax.net.ssl.ExtendedSSLSession_Description|
+|javax.net.ssl.ExtendedSSLSession_Fields|
+|javax.net.ssl.ExtendedSSLSession_Constructors|
+|javax.net.ssl.ExtendedSSLSession_Methods|
+
+================================================================================
+
+*javax.net.ssl.ExtendedSSLSession_Constructors*
+|javax.net.ssl.ExtendedSSLSession()|
+
+*javax.net.ssl.ExtendedSSLSession_Methods*
+|javax.net.ssl.ExtendedSSLSession.getLocalSupportedSignatureAlgorithms()|Obtain
+|javax.net.ssl.ExtendedSSLSession.getPeerSupportedSignatureAlgorithms()|Obtains
+
+*javax.net.ssl.ExtendedSSLSession_Description*
+
+Extends the SSLSession interface to support additional session attributes. 
+
+
+
+*javax.net.ssl.ExtendedSSLSession()*
+
+public ExtendedSSLSession()
+
+
+
+
+*javax.net.ssl.ExtendedSSLSession.getLocalSupportedSignatureAlgorithms()*
+
+public abstract |java.lang.String|[] getLocalSupportedSignatureAlgorithms()
+
+Obtains an array of supported signature algorithms that the local side is 
+willing to use. 
+
+Note: this method is used to indicate to the peer which signature algorithms 
+may be used for digital signatures in TLS 1.2. It is not meaningful for TLS 
+versions prior to 1.2. 
+
+The signature algorithm name must be a standard Java Security name (such as 
+"SHA1withRSA", "SHA256withECDSA", and so on). See Appendix A in the <a href= 
+"/../technotes/guides/security/crypto/CryptoSpec.html#AppA"> Java Cryptography 
+Architecture API Specification and Reference for information about standard 
+algorithm names. 
+
+Note: the local supported signature algorithms should conform to the algorithm 
+constraints specified by 
+getAlgorithmConstraints()(|javax.net.ssl.SSLParameters|) method in 
+SSLParameters. 
+
+
+
+    Returns: An array of supported signature algorithms, in descending order of preference. 
+             The return value is an empty array if no signature algorithm is 
+             supported. 
+
+*javax.net.ssl.ExtendedSSLSession.getPeerSupportedSignatureAlgorithms()*
+
+public abstract |java.lang.String|[] getPeerSupportedSignatureAlgorithms()
+
+Obtains an array of supported signature algorithms that the peer is able to 
+use. 
+
+Note: this method is used to indicate to the local side which signature 
+algorithms may be used for digital signatures in TLS 1.2. It is not meaningful 
+for TLS versions prior to 1.2. 
+
+The signature algorithm name must be a standard Java Security name (such as 
+"SHA1withRSA", "SHA256withECDSA", and so on). See Appendix A in the <a href= 
+"/../technotes/guides/security/crypto/CryptoSpec.html#AppA"> Java Cryptography 
+Architecture API Specification and Reference for information about standard 
+algorithm names. 
+
+
+
+    Returns: An array of supported signature algorithms, in descending order of preference. 
+             The return value is an empty array if the peer has not sent the 
+             supported signature algorithms. 
+
+

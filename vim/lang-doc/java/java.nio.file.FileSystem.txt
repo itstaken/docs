@@ -1,0 +1,422 @@
+*java.nio.file.FileSystem* *FileSystem* Provides an interface to a file system a
+
+public abstract class FileSystem
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|java.nio.file.FileSystem_Description|
+|java.nio.file.FileSystem_Fields|
+|java.nio.file.FileSystem_Constructors|
+|java.nio.file.FileSystem_Methods|
+
+================================================================================
+
+*java.nio.file.FileSystem_Constructors*
+|java.nio.file.FileSystem()|Initializes a new instance of this class.
+
+*java.nio.file.FileSystem_Methods*
+|java.nio.file.FileSystem.close()|Closes this file system.
+|java.nio.file.FileSystem.getFileStores()|Returns an object to iterate over the
+|java.nio.file.FileSystem.getPath(String,String...)|Converts a path string, or 
+|java.nio.file.FileSystem.getPathMatcher(String)|Returns aPathMatcherthat perfo
+|java.nio.file.FileSystem.getRootDirectories()|Returns an object to iterate ove
+|java.nio.file.FileSystem.getSeparator()|Returns the name separator, represente
+|java.nio.file.FileSystem.getUserPrincipalLookupService()|Returns theUserPrinci
+|java.nio.file.FileSystem.isOpen()|Tells whether or not this file system is ope
+|java.nio.file.FileSystem.isReadOnly()|Tells whether or not this file system al
+|java.nio.file.FileSystem.newWatchService()|Constructs a newWatchService(option
+|java.nio.file.FileSystem.provider()|Returns the provider that created this fil
+|java.nio.file.FileSystem.supportedFileAttributeViews()|Returns the set of theF
+
+*java.nio.file.FileSystem_Description*
+
+Provides an interface to a file system and is the factory for objects to access 
+files and other objects in the file system. 
+
+The default file system, obtained by invoking the 
+FileSystems.getDefault(|java.nio.file.FileSystems|) method, provides access to 
+the file system that is accessible to the Java virtual machine. The 
+(|java.nio.file.FileSystems|) class defines methods to create file systems that 
+provide access to other types of (custom) file systems. 
+
+A file system is the factory for several types of objects: 
+
+The getPath(|java.nio.file.FileSystem|) method converts a system dependent path 
+string, returning a (|java.nio.file.Path|) object that may be used to locate 
+and access a file. The getPathMatcher(|java.nio.file.FileSystem|) method is 
+used to create a (|java.nio.file.PathMatcher|) that performs match operations 
+on paths. The getFileStores(|java.nio.file.FileSystem|) method returns an 
+iterator over the underlying file-stores(|java.nio.file.FileStore|) . The 
+getUserPrincipalLookupService(|java.nio.file.FileSystem|) method returns the 
+(|java.nio.file.attribute.UserPrincipalLookupService|) to lookup users or 
+groups by name. The newWatchService(|java.nio.file.FileSystem|) method creates 
+a (|java.nio.file.WatchService|) that may be used to watch objects for changes 
+and events. 
+
+File systems vary greatly. In some cases the file system is a single hierarchy 
+of files with one top-level root directory. In other cases it may have several 
+distinct file hierarchies, each with its own top-level root directory. The 
+getRootDirectories(|java.nio.file.FileSystem|) method may be used to iterate 
+over the root directories in the file system. A file system is typically 
+composed of one or more underlying file-stores(|java.nio.file.FileStore|) that 
+provide the storage for the files. Theses file stores can also vary in the 
+features they support, and the file attributes or meta-data that they associate 
+with files. 
+
+A file system is open upon creation and can be closed by invoking its 
+close(|java.nio.file.FileSystem|) method. Once closed, any further attempt to 
+access objects in the file system cause 
+(|java.nio.file.ClosedFileSystemException|) to be thrown. File systems created 
+by the default provider(|java.nio.file.spi.FileSystemProvider|) cannot be 
+closed. 
+
+AFileSystemcan provide read-only or read-write access to the file system. 
+Whether or not a file system provides read-only access is established when 
+theFileSystemis created and can be tested by invoking its 
+isReadOnly(|java.nio.file.FileSystem|) method. Attempts to write to file stores 
+by means of an object associated with a read-only file system throws 
+(|java.nio.file.ReadOnlyFileSystemException|) . 
+
+File systems are safe for use by multiple concurrent threads. The 
+close(|java.nio.file.FileSystem|) method may be invoked at any time to close a 
+file system but whether a file system is asynchronously closeable is provider 
+specific and therefore unspecified. In other words, if a thread is accessing an 
+object in a file system, and another thread invokes theclosemethod then it may 
+require to block until the first operation is complete. Closing a file system 
+causes all open channels, watch services, and other 
+closeable(|java.io.Closeable|) objects associated with the file system to be 
+closed. 
+
+
+
+*java.nio.file.FileSystem()*
+
+protected FileSystem()
+
+Initializes a new instance of this class. 
+
+
+*java.nio.file.FileSystem.close()*
+
+public abstract void close()
+  throws |java.io.IOException|
+         
+Closes this file system. 
+
+After a file system is closed then all subsequent access to the file system, 
+either by methods defined by this class or on objects associated with this file 
+system, throw (|java.nio.file.ClosedFileSystemException|) . If the file system 
+is already closed then invoking this method has no effect. 
+
+Closing a file system will close all open channels(|java.nio.channels.Channel|) 
+, directory-streams(|java.nio.file.DirectoryStream|) , 
+watch-service(|java.nio.file.WatchService|) , and other closeable objects 
+associated with this file system. The default(|java.nio.file.FileSystems|) file 
+system cannot be closed. 
+
+
+
+*java.nio.file.FileSystem.getFileStores()*
+
+public abstract |java.lang.Iterable|<FileStore> getFileStores()
+
+Returns an object to iterate over the underlying file stores. 
+
+The elements of the returned iterator are the 
+FileStores(|java.nio.file.FileStore|) for this file system. The order of the 
+elements is not defined and the file stores may change during the lifetime of 
+the Java virtual machine. When an I/O error occurs, perhaps because a file 
+store is not accessible, then it is not returned by the iterator. 
+
+In the case of the default provider, and a security manager is installed, the 
+security manager is invoked to check (|java.lang.RuntimePermission|) 
+("getFileStoreAttributes"). If denied, then no file stores are returned by the 
+iterator. In addition, the security manager's (|java.lang.SecurityManager|) 
+method is invoked to check read access to the file store's top-most directory. 
+If denied, the file store is not returned by the iterator. It is system 
+dependent if the permission checks are done when the iterator is obtained or 
+during iteration. 
+
+Usage Example: Suppose we want to print the space usage for all file stores: 
+
+for (FileStore store: FileSystems.getDefault().getFileStores()) { long total = 
+store.getTotalSpace() / 1024; long used = (store.getTotalSpace() - 
+store.getUnallocatedSpace()) / 1024; long avail = store.getUsableSpace() / 
+1024; System.out.format("%-20s %12d %12d %12d%n", store, total, used, avail); } 
+
+
+
+    Returns: An object to iterate over the backing file stores 
+
+*java.nio.file.FileSystem.getPath(String,String...)*
+
+public abstract |java.nio.file.Path| getPath(
+  java.lang.String first,
+  java.lang.String[] more)
+
+Converts a path string, or a sequence of strings that when joined form a path 
+string, to aPath. Ifmoredoes not specify any elements then the value of 
+thefirstparameter is the path string to convert. Ifmorespecifies one or more 
+elements then each non-empty string, includingfirst, is considered to be a 
+sequence of name elements (see (|java.nio.file.Path|) ) and is joined to form a 
+path string. The details as to how the Strings are joined is provider specific 
+but typically they will be joined using the 
+name-separator(|java.nio.file.FileSystem|) as the separator. For example, if 
+the name separator is "/" andgetPath("/foo","bar","gus")is invoked, then the 
+path string"/foo/bar/gus"is converted to aPath. APathrepresenting an empty path 
+is returned iffirstis the empty string andmoredoes not contain any non-empty 
+strings. 
+
+The parsing and conversion to a path object is inherently implementation 
+dependent. In the simplest case, the path string is rejected, and 
+(|java.nio.file.InvalidPathException|) thrown, if the path string contains 
+characters that cannot be converted to characters that are legal to the file 
+store. For example, on UNIX systems, the NUL (u0000) character is not allowed 
+to be present in a path. An implementation may choose to reject path strings 
+that contain names that are longer than those allowed by any file store, and 
+where an implementation supports a complex path syntax, it may choose to reject 
+path strings that are badly formed. 
+
+In the case of the default provider, path strings are parsed based on the 
+definition of paths at the platform or virtual file system level. For example, 
+an operating system may not allow specific characters to be present in a file 
+name, but a specific underlying file store may impose different or additional 
+restrictions on the set of legal characters. 
+
+This method throws (|java.nio.file.InvalidPathException|) when the path string 
+cannot be converted to a path. Where possible, and where applicable, the 
+exception is created with an index(|java.nio.file.InvalidPathException|) value 
+indicating the first position in thepathparameter that caused the path string 
+to be rejected. 
+
+
+    first - the path string or initial part of the path string 
+    more - additional strings to be joined to form the path string 
+
+    Returns: the resulting {@code Path} 
+
+*java.nio.file.FileSystem.getPathMatcher(String)*
+
+public abstract |java.nio.file.PathMatcher| getPathMatcher(java.lang.String syntaxAndPattern)
+
+Returns aPathMatcherthat performs match operations on theStringrepresentation 
+of (|java.nio.file.Path|) objects by interpreting a given pattern. 
+
+ThesyntaxAndPatternparameter identifies the syntax and the pattern and takes 
+the form: 
+
+syntax:pattern 
+
+where':'stands for itself. 
+
+AFileSystemimplementation supports the "glob" and "regex" syntaxes, and may 
+support others. The value of the syntax component is compared without regard to 
+case. 
+
+When the syntax is "glob" then theStringrepresentation of the path is matched 
+using a limited pattern language that resembles regular expressions but with a 
+simpler syntax. For example: 
+
+
+
+*.java Matches a path that represents a file name ending in.java 
+
+*.* Matches file names containing a dot 
+
+
+
+*.{java,class} Matches file names ending with.javaor.class 
+
+foo.? Matches file names starting withfoo.and a single character extension 
+
+home** Matches homegusdata on UNIX platforms 
+
+home** Matches homegus and homegusdata on UNIX platforms 
+
+C:* Matches C:foo and C:bar on the Windows platform (note that the backslash is 
+escaped; as a string literal in the Java Language the pattern would be "C: 
+
+
+
+The following rules are used to interpret glob patterns: 
+
+The*character matches zero or more characters(|java.lang.Character|) of a 
+name(|java.nio.file.Path|) component without crossing directory boundaries. 
+
+The**characters matches zero or more characters(|java.lang.Character|) crossing 
+directory boundaries. 
+
+The?character matches exactly one character of a name component. 
+
+The backslash character (\) is used to escape characters that would otherwise 
+be interpreted as special characters. The expression\\matches a single 
+backslash and "\{" matches a left brace for example. 
+
+The[ ]characters are a bracket expression that match a single character of a 
+name component out of a set of characters. For example,[abc]matches"a","b", 
+or"c". The hyphen (-) may be used to specify a range so[a-z]specifies a range 
+that matches from"a"to"z"(inclusive). These forms can be mixed so [abce-g] 
+matches"a","b","c","e","f"or"g". If the character after the[is a!then it is 
+used for negation so[!a-c]matches any character except"a","b", or"c". Within a 
+bracket expression the*,?and\characters match themselves. The (-) character 
+matches itself if it is the first character within the brackets, or the first 
+character after the!if negating. 
+
+The{ }characters are a group of subpatterns, where the group matches if any 
+subpattern in the group matches. The","character is used to separate the 
+subpatterns. Groups cannot be nested. 
+
+Leading perioddot characters in file name are treated as regular characters in 
+match operations. For example, the"*"glob pattern matches file name".login". 
+The (|java.nio.file.Files|) method may be used to test whether a file is 
+considered hidden. 
+
+All other characters match themselves in an implementation dependent manner. 
+This includes characters representing any 
+name-separators(|java.nio.file.FileSystem|) . 
+
+The matching of root(|java.nio.file.Path|) components is highly 
+implementation-dependent and is not specified. 
+
+
+
+When the syntax is "regex" then the pattern component is a regular expression 
+as defined by the (|java.util.regex.Pattern|) class. 
+
+For both the glob and regex syntaxes, the matching details, such as whether the 
+matching is case sensitive, are implementation-dependent and therefore not 
+specified. 
+
+
+    syntaxAndPattern - The syntax and pattern 
+
+    Returns: A path matcher that may be used to match paths against the pattern 
+
+*java.nio.file.FileSystem.getRootDirectories()*
+
+public abstract |java.lang.Iterable|<Path> getRootDirectories()
+
+Returns an object to iterate over the paths of the root directories. 
+
+A file system provides access to a file store that may be composed of a number 
+of distinct file hierarchies, each with its own top-level root directory. 
+Unless denied by the security manager, each element in the returned iterator 
+corresponds to the root directory of a distinct file hierarchy. The order of 
+the elements is not defined. The file hierarchies may change during the 
+lifetime of the Java virtual machine. For example, in some implementations, the 
+insertion of removable media may result in the creation of a new file hierarchy 
+with its own top-level directory. 
+
+When a security manager is installed, it is invoked to check access to the each 
+root directory. If denied, the root directory is not returned by the iterator. 
+In the case of the default provider, the (|java.lang.SecurityManager|) method 
+is invoked to check read access to each root directory. It is system dependent 
+if the permission checks are done when the iterator is obtained or during 
+iteration. 
+
+
+
+    Returns: An object to iterate over the root directories 
+
+*java.nio.file.FileSystem.getSeparator()*
+
+public abstract |java.lang.String| getSeparator()
+
+Returns the name separator, represented as a string. 
+
+The name separator is used to separate names in a path string. An 
+implementation may support multiple name separators in which case this method 
+returns an implementation specific default name separator. This separator is 
+used when creating path strings by invoking the 
+toString()(|java.nio.file.Path|) method. 
+
+In the case of the default provider, this method returns the same separator as 
+(|java.io.File|) . 
+
+
+
+    Returns: The name separator 
+
+*java.nio.file.FileSystem.getUserPrincipalLookupService()*
+
+public abstract |java.nio.file.attribute.UserPrincipalLookupService| getUserPrincipalLookupService()
+
+Returns theUserPrincipalLookupServicefor this file system (optional operation). 
+The resulting lookup service may be used to lookup user or group names. 
+
+Usage Example: Suppose we want to make "joe" the owner of a file: 
+
+UserPrincipalLookupService lookupService = 
+FileSystems.getDefault().getUserPrincipalLookupService(); Files.setOwner(path, 
+lookupService.lookupPrincipalByName("joe")); 
+
+
+
+    Returns: The {@code UserPrincipalLookupService} for this file system 
+
+*java.nio.file.FileSystem.isOpen()*
+
+public abstract boolean isOpen()
+
+Tells whether or not this file system is open. 
+
+File systems created by the default provider are always open. 
+
+
+
+    Returns: {@code true} if, and only if, this file system is open 
+
+*java.nio.file.FileSystem.isReadOnly()*
+
+public abstract boolean isReadOnly()
+
+Tells whether or not this file system allows only read-only access to its file 
+stores. 
+
+
+
+    Returns: {@code true} if, and only if, this file system provides read-only access 
+
+*java.nio.file.FileSystem.newWatchService()*
+
+public abstract |java.nio.file.WatchService| newWatchService()
+  throws |java.io.IOException|
+         
+Constructs a new (|java.nio.file.WatchService|) (optional operation). 
+
+This method constructs a new watch service that may be used to watch registered 
+objects for changes and events. 
+
+
+
+    Returns: a new watch service 
+
+*java.nio.file.FileSystem.provider()*
+
+public abstract |java.nio.file.spi.FileSystemProvider| provider()
+
+Returns the provider that created this file system. 
+
+
+
+    Returns: The provider that created this file system. 
+
+*java.nio.file.FileSystem.supportedFileAttributeViews()*
+
+public abstract |java.util.Set|<String> supportedFileAttributeViews()
+
+Returns the set of the names(|java.nio.file.attribute.FileAttributeView|) of 
+the file attribute views supported by thisFileSystem. 
+
+The (|java.nio.file.attribute.BasicFileAttributeView|) is required to be 
+supported and therefore the set contains at least one element, "basic". 
+
+The supportsFileAttributeView(String)(|java.nio.file.FileStore|) method may be 
+used to test if an underlying (|java.nio.file.FileStore|) supports the file 
+attributes identified by a file attribute view. 
+
+
+
+    Returns: An unmodifiable set of the names of the supported file attribute views 
+
+

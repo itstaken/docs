@@ -1,0 +1,331 @@
+*javax.script.ScriptEngine* *ScriptEngine* ScriptEngine is the fundamental inter
+
+public interface interface ScriptEngine
+
+
+|javax.script.ScriptEngine_Description|
+|javax.script.ScriptEngine_Fields|
+|javax.script.ScriptEngine_Constructors|
+|javax.script.ScriptEngine_Methods|
+
+================================================================================
+
+*javax.script.ScriptEngine_Fields*
+|java.lang.String_javax.script.ScriptEngine.ARGV|
+|java.lang.String_javax.script.ScriptEngine.ENGINE|
+|java.lang.String_javax.script.ScriptEngine.ENGINE_VERSION|
+|java.lang.String_javax.script.ScriptEngine.FILENAME|
+|java.lang.String_javax.script.ScriptEngine.LANGUAGE|
+|java.lang.String_javax.script.ScriptEngine.LANGUAGE_VERSION|
+|java.lang.String_javax.script.ScriptEngine.NAME|
+
+*javax.script.ScriptEngine_Methods*
+|javax.script.ScriptEngine.createBindings()|Returns an uninitialized Bindings.
+|javax.script.ScriptEngine.eval(Reader)|Same as eval(String) except that the so
+|javax.script.ScriptEngine.eval(Reader,Bindings)|Same as eval(String, Bindings)
+|javax.script.ScriptEngine.eval(Reader,ScriptContext)|Same as eval(String, Scri
+|javax.script.ScriptEngine.eval(String)|Executes the specified script.
+|javax.script.ScriptEngine.eval(String,Bindings)|Executes the script using the 
+|javax.script.ScriptEngine.eval(String,ScriptContext)|Causes the immediate exec
+|javax.script.ScriptEngine.get(String)|Retrieves a value set in the state of th
+|javax.script.ScriptEngine.getBindings(int)|Returns a scope of named values.
+|javax.script.ScriptEngine.getContext()|Returns the default ScriptContext of th
+|javax.script.ScriptEngine.getFactory()|Returns a ScriptEngineFactory for the c
+|javax.script.ScriptEngine.put(String,Object)|Sets a key/value pair in the stat
+|javax.script.ScriptEngine.setBindings(Bindings,int)|Sets a scope of named valu
+|javax.script.ScriptEngine.setContext(ScriptContext)|Sets the default ScriptCon
+
+*javax.script.ScriptEngine_Description*
+
+ScriptEngine is the fundamental interface whose methods must be fully 
+functional in every implementation of this specification. 
+
+These methods provide basic scripting functionality. Applications written to 
+this simple interface are expected to work with minimal modifications in every 
+implementation. It includes methods that execute scripts, and ones that set and 
+get values. 
+
+The values are key/value pairs of two types. The first type of pairs consists 
+of those whose keys are reserved and defined in this specification or by 
+individual implementations. The values in the pairs with reserved keys have 
+specified meanings. 
+
+The other type of pairs consists of those that create Java language Bindings, 
+the values are usually represented in scripts by the corresponding keys or by 
+decorated forms of them. 
+
+
+
+*java.lang.String_javax.script.ScriptEngine.ARGV*
+
+Reserved key for a named value that passes an array of positional arguments to 
+a script. 
+
+
+*java.lang.String_javax.script.ScriptEngine.ENGINE*
+
+Reserved key for a named value that is the name of the ScriptEngine 
+implementation. 
+
+
+*java.lang.String_javax.script.ScriptEngine.ENGINE_VERSION*
+
+Reserved key for a named value that identifies the version of the ScriptEngine 
+implementation. 
+
+
+*java.lang.String_javax.script.ScriptEngine.FILENAME*
+
+Reserved key for a named value that is the name of the file being executed. 
+
+
+*java.lang.String_javax.script.ScriptEngine.LANGUAGE*
+
+Reserved key for a named value that is the full name of Scripting Language 
+supported by the implementation. 
+
+
+*java.lang.String_javax.script.ScriptEngine.LANGUAGE_VERSION*
+
+Reserved key for the named value that identifies the version of the scripting 
+language supported by the implementation. 
+
+
+*java.lang.String_javax.script.ScriptEngine.NAME*
+
+Reserved key for a named value that identifies the short name of the scripting 
+language. The name is used by the ScriptEngineManager to locate a ScriptEngine 
+with a given name in the getEngineByName method. 
+
+
+
+*javax.script.ScriptEngine.createBindings()*
+
+public |javax.script.Bindings| createBindings()
+
+Returns an uninitialized Bindings. 
+
+
+
+    Returns: A Bindings that can be used to replace the state of this ScriptEngine. 
+
+*javax.script.ScriptEngine.eval(Reader)*
+
+public |java.lang.Object| eval(java.io.Reader reader)
+  throws |javax.script.ScriptException|
+         
+Same as eval(String) except that the source of the script is provided as a 
+Reader 
+
+
+    reader - The source of the script. 
+
+    Returns: The value returned by the script. 
+
+*javax.script.ScriptEngine.eval(Reader,Bindings)*
+
+public |java.lang.Object| eval(
+  java.io.Reader reader,
+  javax.script.Bindings n)
+  throws |javax.script.ScriptException|
+         
+Same as eval(String, Bindings) except that the source of the script is provided 
+as a Reader. 
+
+
+    reader - The source of the script. 
+    n - The Bindings of attributes. 
+
+    Returns: The value returned by the script. 
+
+*javax.script.ScriptEngine.eval(Reader,ScriptContext)*
+
+public |java.lang.Object| eval(
+  java.io.Reader reader,
+  javax.script.ScriptContext context)
+  throws |javax.script.ScriptException|
+         
+Same as eval(String, ScriptContext) where the source of the script is read from 
+a Reader. 
+
+
+    reader - The source of the script to be executed by the script engine. 
+    context - The ScriptContext passed to the script engine. 
+
+    Returns: The value returned from the execution of the script. 
+
+*javax.script.ScriptEngine.eval(String)*
+
+public |java.lang.Object| eval(java.lang.String script)
+  throws |javax.script.ScriptException|
+         
+Executes the specified script. The default ScriptContext for the ScriptEngine 
+is used. 
+
+
+    script - The script language source to be executed. 
+
+    Returns: The value returned from the execution of the script. 
+
+*javax.script.ScriptEngine.eval(String,Bindings)*
+
+public |java.lang.Object| eval(
+  java.lang.String script,
+  javax.script.Bindings n)
+  throws |javax.script.ScriptException|
+         
+Executes the script using the Bindings argument as the ENGINE_SCOPE Bindings of 
+the ScriptEngine during the script execution. The Reader, Writer and 
+non-ENGINE_SCOPE Bindings of the default ScriptContext are used. The 
+ENGINE_SCOPE Bindings of the ScriptEngine is not changed, and its mappings are 
+unaltered by the script execution. 
+
+
+    script - The source for the script. 
+    n - The Bindings of attributes to be used for script execution. 
+
+    Returns: The value returned by the script. 
+
+*javax.script.ScriptEngine.eval(String,ScriptContext)*
+
+public |java.lang.Object| eval(
+  java.lang.String script,
+  javax.script.ScriptContext context)
+  throws |javax.script.ScriptException|
+         
+Causes the immediate execution of the script whose source is the String passed 
+as the first argument. The script may be reparsed or recompiled before 
+execution. State left in the engine from previous executions, including 
+variable values and compiled procedures may be visible during this execution. 
+
+
+    script - The script to be executed by the script engine. 
+    context - A ScriptContext exposing sets of attributes in different scopes. The meanings 
+       of the scopes ScriptContext.GLOBAL_SCOPE, and ScriptContext.ENGINE_SCOPE 
+       are defined in the specification. 
+
+The ENGINE_SCOPE Bindings of the ScriptContext contains the bindings of 
+       scripting variables to application objects to be used during this script 
+       execution. 
+
+    Returns: The value returned from the execution of the script. 
+
+*javax.script.ScriptEngine.get(String)*
+
+public |java.lang.Object| get(java.lang.String key)
+
+Retrieves a value set in the state of this engine. The value might be one which 
+was set using setValue or some other value in the state of the ScriptEngine, 
+depending on the implementation. Must have the same effect as 
+getBindings(ScriptContext.ENGINE_SCOPE).get 
+
+
+    key - The key whose value is to be returned 
+
+    Returns: the value for the given key 
+
+*javax.script.ScriptEngine.getBindings(int)*
+
+public |javax.script.Bindings| getBindings(int scope)
+
+Returns a scope of named values. The possible scopes are: 
+
+ScriptContext.GLOBAL_SCOPE - The set of named values representing global scope. 
+If this ScriptEngine is created by a ScriptEngineManager, then the manager sets 
+global scope bindings. This may be null if no global scope is associated with 
+this ScriptEngine ScriptContext.ENGINE_SCOPE - The set of named values 
+representing the state of this ScriptEngine. The values are generally visible 
+in scripts using the associated keys as variable names. Any other value of 
+scope defined in the default ScriptContext of the ScriptEngine. 
+
+
+
+The Bindings instances that are returned must be identical to those returned by 
+the getBindings method of ScriptContext called with corresponding arguments on 
+the default ScriptContext of the ScriptEngine. 
+
+
+    scope - Either ScriptContext.ENGINE_SCOPE or ScriptContext.GLOBAL_SCOPE which specifies 
+       the Bindings to return. Implementations of ScriptContext may define 
+       additional scopes. If the default ScriptContext of the ScriptEngine 
+       defines additional scopes, any of them can be passed to get the 
+       corresponding Bindings. 
+
+    Returns: The Bindings with the specified scope. 
+
+*javax.script.ScriptEngine.getContext()*
+
+public |javax.script.ScriptContext| getContext()
+
+Returns the default ScriptContext of the ScriptEngine whose Bindings, Reader 
+and Writers are used for script executions when no ScriptContext is specified. 
+
+
+
+    Returns: The default ScriptContext of the ScriptEngine. 
+
+*javax.script.ScriptEngine.getFactory()*
+
+public |javax.script.ScriptEngineFactory| getFactory()
+
+Returns a ScriptEngineFactory for the class to which this ScriptEngine belongs. 
+
+
+
+    Returns: The ScriptEngineFactory 
+
+*javax.script.ScriptEngine.put(String,Object)*
+
+public void put(
+  java.lang.String key,
+  java.lang.Object value)
+
+Sets a key/value pair in the state of the ScriptEngine that may either create a 
+Java Language Binding to be used in the execution of scripts or be used in some 
+other way, depending on whether the key is reserved. Must have the same effect 
+as getBindings(ScriptContext.ENGINE_SCOPE).put. 
+
+
+    key - The name of named value to add 
+    value - The value of named value to add. 
+
+*javax.script.ScriptEngine.setBindings(Bindings,int)*
+
+public void setBindings(
+  javax.script.Bindings bindings,
+  int scope)
+
+Sets a scope of named values to be used by scripts. The possible scopes are: 
+
+ScriptContext.ENGINE_SCOPE - The specified Bindings replaces the engine scope 
+of the ScriptEngine. 
+
+ScriptContext.GLOBAL_SCOPE - The specified Bindings must be visible as the 
+GLOBAL_SCOPE. 
+
+Any other value of scope defined in the default ScriptContext of the 
+ScriptEngine. 
+
+
+
+The method must have the same effect as calling the setBindings method of 
+ScriptContext with the corresponding value of scope on the default 
+ScriptContext of the ScriptEngine. 
+
+
+    bindings - The Bindings for the specified scope. 
+    scope - The specified scope. Either ScriptContext.ENGINE_SCOPE, 
+       ScriptContext.GLOBAL_SCOPE, or any other valid value of scope. 
+
+*javax.script.ScriptEngine.setContext(ScriptContext)*
+
+public void setContext(javax.script.ScriptContext context)
+
+Sets the default ScriptContext of the ScriptEngine whose Bindings, Reader and 
+Writers are used for script executions when no ScriptContext is specified. 
+
+
+    context - A ScriptContext that will replace the default ScriptContext in the 
+       ScriptEngine. 
+
+

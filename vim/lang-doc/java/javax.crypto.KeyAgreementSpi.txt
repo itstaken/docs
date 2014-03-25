@@ -1,0 +1,172 @@
+*javax.crypto.KeyAgreementSpi* *KeyAgreementSpi* This class defines the Service 
+
+public abstract class KeyAgreementSpi
+  extends    |java.lang.Object|
+
+|javax.crypto.KeyAgreementSpi_Description|
+|javax.crypto.KeyAgreementSpi_Fields|
+|javax.crypto.KeyAgreementSpi_Constructors|
+|javax.crypto.KeyAgreementSpi_Methods|
+
+================================================================================
+
+*javax.crypto.KeyAgreementSpi_Constructors*
+|javax.crypto.KeyAgreementSpi()|
+
+*javax.crypto.KeyAgreementSpi_Methods*
+|javax.crypto.KeyAgreementSpi.engineDoPhase(Key,boolean)|Executes the next phas
+|javax.crypto.KeyAgreementSpi.engineGenerateSecret()|Generates the shared secre
+|javax.crypto.KeyAgreementSpi.engineGenerateSecret(byte[],int)|Generates the sh
+|javax.crypto.KeyAgreementSpi.engineGenerateSecret(String)|Creates the shared s
+|javax.crypto.KeyAgreementSpi.engineInit(Key,AlgorithmParameterSpec,SecureRandom)|
+|javax.crypto.KeyAgreementSpi.engineInit(Key,SecureRandom)|Initializes this key
+
+*javax.crypto.KeyAgreementSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the KeyAgreement 
+class. All the abstract methods in this class must be implemented by each 
+cryptographic service provider who wishes to supply the implementation of a 
+particular key agreement algorithm. 
+
+The keys involved in establishing a shared secret are created by one of the key 
+generators (KeyPairGenerator or KeyGenerator), a KeyFactory, or as a result 
+from an intermediate phase of the key agreement protocol ( 
+engineDoPhase(|javax.crypto.KeyAgreementSpi|) ). 
+
+For each of the correspondents in the key exchange, engineDoPhase needs to be 
+called. For example, if the key exchange is with one other party, engineDoPhase 
+needs to be called once, with the lastPhase flag set to true. If the key 
+exchange is with two other parties, engineDoPhase needs to be called twice, the 
+first time setting the lastPhase flag to false, and the second time setting it 
+to true. There may be any number of parties involved in a key exchange. 
+
+
+
+*javax.crypto.KeyAgreementSpi()*
+
+public KeyAgreementSpi()
+
+
+
+
+*javax.crypto.KeyAgreementSpi.engineDoPhase(Key,boolean)*
+
+protected abstract |java.security.Key| engineDoPhase(
+  java.security.Key key,
+  boolean lastPhase)
+  throws |java.lang.IllegalStateException|
+         |java.security.InvalidKeyException|
+         
+Executes the next phase of this key agreement with the given key that was 
+received from one of the other parties involved in this key agreement. 
+
+
+    key - the key for this phase. For example, in the case of Diffie-Hellman between 2 
+       parties, this would be the other party's Diffie-Hellman public key. 
+    lastPhase - flag which indicates whether or not this is the last phase of this key 
+       agreement. 
+
+    Returns: the (intermediate) key resulting from this phase, or null if this phase does 
+             not yield a key 
+
+*javax.crypto.KeyAgreementSpi.engineGenerateSecret()*
+
+protected abstract byte[] engineGenerateSecret()
+  throws |java.lang.IllegalStateException|
+         
+Generates the shared secret and returns it in a new buffer. 
+
+This method resets this KeyAgreementSpi object, so that it can be reused for 
+further key agreements. Unless this key agreement is reinitialized with one of 
+the engineInit methods, the same private information and algorithm parameters 
+will be used for subsequent key agreements. 
+
+
+
+    Returns: the new buffer with the shared secret 
+
+*javax.crypto.KeyAgreementSpi.engineGenerateSecret(byte[],int)*
+
+protected abstract int engineGenerateSecret(
+  byte[] sharedSecret,
+  int offset)
+  throws |java.lang.IllegalStateException|
+         |javax.crypto.ShortBufferException|
+         
+Generates the shared secret, and places it into the buffer sharedSecret, 
+beginning at offset inclusive. 
+
+If the sharedSecret buffer is too small to hold the result, a 
+ShortBufferException is thrown. In this case, this call should be repeated with 
+a larger output buffer. 
+
+This method resets this KeyAgreementSpi object, so that it can be reused for 
+further key agreements. Unless this key agreement is reinitialized with one of 
+the engineInit methods, the same private information and algorithm parameters 
+will be used for subsequent key agreements. 
+
+
+    sharedSecret - the buffer for the shared secret 
+    offset - the offset in sharedSecret where the shared secret will be stored 
+
+    Returns: the number of bytes placed into sharedSecret 
+
+*javax.crypto.KeyAgreementSpi.engineGenerateSecret(String)*
+
+protected abstract |javax.crypto.SecretKey| engineGenerateSecret(java.lang.String algorithm)
+  throws |java.lang.IllegalStateException|
+         |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         
+Creates the shared secret and returns it as a secret key object of the 
+requested algorithm type. 
+
+This method resets this KeyAgreementSpi object, so that it can be reused for 
+further key agreements. Unless this key agreement is reinitialized with one of 
+the engineInit methods, the same private information and algorithm parameters 
+will be used for subsequent key agreements. 
+
+
+    algorithm - the requested secret key algorithm 
+
+    Returns: the shared secret key 
+
+*javax.crypto.KeyAgreementSpi.engineInit(Key,AlgorithmParameterSpec,SecureRandom)*
+
+protected abstract void engineInit(
+  java.security.Key key,
+  java.security.spec.AlgorithmParameterSpec params,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this key agreement with the given key, set of algorithm parameters, 
+and source of randomness. 
+
+
+    key - the party's private information. For example, in the case of the Diffie-Hellman 
+       key agreement, this would be the party's own Diffie-Hellman private key. 
+    params - the key agreement parameters 
+    random - the source of randomness 
+
+*javax.crypto.KeyAgreementSpi.engineInit(Key,SecureRandom)*
+
+protected abstract void engineInit(
+  java.security.Key key,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidKeyException|
+         
+Initializes this key agreement with the given key and source of randomness. The 
+given key is required to contain all the algorithm parameters required for this 
+key agreement. 
+
+If the key agreement algorithm requires random bytes, it gets them from the 
+given source of randomness, random. However, if the underlying algorithm 
+implementation does not require any random bytes, random is ignored. 
+
+
+    key - the party's private information. For example, in the case of the Diffie-Hellman 
+       key agreement, this would be the party's own Diffie-Hellman private key. 
+    random - the source of randomness 
+
+

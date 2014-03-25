@@ -1,0 +1,72 @@
+*java.util.concurrent.ForkJoinPool.ManagedBlocker* *ForkJoinPool.ManagedBlocker* 
+
+public static interface interface ForkJoinPool.ManagedBlocker
+
+
+|java.util.concurrent.ForkJoinPool.ManagedBlocker_Description|
+|java.util.concurrent.ForkJoinPool.ManagedBlocker_Fields|
+|java.util.concurrent.ForkJoinPool.ManagedBlocker_Constructors|
+|java.util.concurrent.ForkJoinPool.ManagedBlocker_Methods|
+
+================================================================================
+
+*java.util.concurrent.ForkJoinPool.ManagedBlocker_Methods*
+|java.util.concurrent.ForkJoinPool.ManagedBlocker.block()|Possibly blocks the c
+|java.util.concurrent.ForkJoinPool.ManagedBlocker.isReleasable()|Returnstrueif 
+
+*java.util.concurrent.ForkJoinPool.ManagedBlocker_Description*
+
+Interface for extending managed parallelism for tasks running in 
+(|java.util.concurrent.ForkJoinPool|) s. 
+
+AManagedBlockerprovides two methods. MethodisReleasablemust returntrueif 
+blocking is not necessary. Methodblockblocks the current thread if necessary 
+(perhaps internally invokingisReleasablebefore actually blocking). These 
+actions are performed by any thread invoking 
+(|java.util.concurrent.ForkJoinPool|) . The unusual methods in this API 
+accommodate synchronizers that may, but don't usually, block for long periods. 
+Similarly, they allow more efficient internal handling of cases in which 
+additional workers may be, but usually are not, needed to ensure sufficient 
+parallelism. Toward this end, implementations of methodisReleasablemust be 
+amenable to repeated invocation. 
+
+For example, here is a ManagedBlocker based on a ReentrantLock: 
+
+class ManagedLocker implements ManagedBlocker { final ReentrantLock lock; 
+boolean hasLock = false; ManagedLocker(ReentrantLock lock) { this.lock = lock; 
+} public boolean block() { if (!hasLock) lock.lock(); return true; } public 
+boolean isReleasable() { return hasLock || (hasLock = lock.tryLock()); } } 
+
+Here is a class that possibly blocks waiting for an item on a given queue: 
+
+class QueueTaker implements ManagedBlocker { final BlockingQueue queue; 
+volatile E item = null; QueueTaker(BlockingQueue q) { this.queue = q; } public 
+boolean block() throws InterruptedException { if (item == null) item = 
+queue.take(); return true; } public boolean isReleasable() { return item != 
+null || (item = queue.poll()) != null; } public E getItem() { // call after 
+pool.managedBlock completes return item; } } 
+
+
+
+*java.util.concurrent.ForkJoinPool.ManagedBlocker.block()*
+
+public boolean block()
+  throws |java.lang.InterruptedException|
+         
+Possibly blocks the current thread, for example waiting for a lock or 
+condition. 
+
+
+
+    Returns: {@code true} if no additional blocking is necessary (i.e., if isReleasable 
+             would return true) 
+
+*java.util.concurrent.ForkJoinPool.ManagedBlocker.isReleasable()*
+
+public boolean isReleasable()
+
+Returnstrueif blocking is unnecessary. 
+
+
+
+

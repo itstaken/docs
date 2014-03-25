@@ -1,0 +1,159 @@
+*javax.management.openmbean.OpenMBeanOperationInfoSupport* *OpenMBeanOperationInfoSupport* 
+
+public class OpenMBeanOperationInfoSupport
+  extends    |javax.management.MBeanOperationInfo|
+  implements |javax.management.openmbean.OpenMBeanOperationInfo|
+
+|javax.management.openmbean.OpenMBeanOperationInfoSupport_Description|
+|javax.management.openmbean.OpenMBeanOperationInfoSupport_Fields|
+|javax.management.openmbean.OpenMBeanOperationInfoSupport_Constructors|
+|javax.management.openmbean.OpenMBeanOperationInfoSupport_Methods|
+
+================================================================================
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport_Constructors*
+|javax.management.openmbean.OpenMBeanOperationInfoSupport(String,String,OpenMBeanParameterInfo[],OpenType<?>,int)|
+|javax.management.openmbean.OpenMBeanOperationInfoSupport(String,String,OpenMBeanParameterInfo[],OpenType<?>,int,Descriptor)|
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport_Methods*
+|javax.management.openmbean.OpenMBeanOperationInfoSupport.equals(Object)|Compar
+|javax.management.openmbean.OpenMBeanOperationInfoSupport.getReturnOpenType()|R
+|javax.management.openmbean.OpenMBeanOperationInfoSupport.hashCode()|Returns th
+|javax.management.openmbean.OpenMBeanOperationInfoSupport.toString()|Returns a 
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport_Description*
+
+Describes an operation of an Open MBean. 
+
+
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport(String,String,OpenMBeanParameterInfo[],OpenType<?>,int)*
+
+public OpenMBeanOperationInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenMBeanParameterInfo[] signature,
+  javax.management.openmbean.OpenType<?> returnOpenType,
+  int impact)
+
+Constructs anOpenMBeanOperationInfoSupportinstance, which describes the 
+operation of a class of open MBeans, with the 
+specifiedname,description,signature,returnOpenTypeandimpact. 
+
+Thesignaturearray parameter is internally copied, so that subsequent changes to 
+the array referenced bysignaturehave no effect on this instance. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    signature - can be null or empty if there are no parameters to describe. 
+    returnOpenType - cannot be null: use {@code SimpleType.VOID} for operations that return nothing. 
+    impact - must be one of {@code ACTION}, {@code ACTION_INFO}, {@code INFO}, or {@code 
+       UNKNOWN}. 
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport(String,String,OpenMBeanParameterInfo[],OpenType<?>,int,Descriptor)*
+
+public OpenMBeanOperationInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenMBeanParameterInfo[] signature,
+  javax.management.openmbean.OpenType<?> returnOpenType,
+  int impact,
+  javax.management.Descriptor descriptor)
+
+Constructs anOpenMBeanOperationInfoSupportinstance, which describes the 
+operation of a class of open MBeans, with the 
+specifiedname,description,signature,returnOpenType,impact, anddescriptor. 
+
+Thesignaturearray parameter is internally copied, so that subsequent changes to 
+the array referenced bysignaturehave no effect on this instance. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    signature - can be null or empty if there are no parameters to describe. 
+    returnOpenType - cannot be null: use {@code SimpleType.VOID} for operations that return nothing. 
+    impact - must be one of {@code ACTION}, {@code ACTION_INFO}, {@code INFO}, or {@code 
+       UNKNOWN}. 
+    descriptor - The descriptor for the operation. This may be null, which is equivalent to an 
+       empty descriptor. 
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specifiedobjparameter with 
+thisOpenMBeanOperationInfoSupportinstance for equality. 
+
+Returnstrueif and only if all of the following statements are true: 
+
+objis non null, objalso implements theOpenMBeanOperationInfointerface, their 
+names are equal their signatures are equal their return open types are equal 
+their impacts are equal 
+
+This ensures that thisequalsmethod works properly forobjparameters which are 
+different implementations of theOpenMBeanOperationInfointerface. 
+
+
+    obj - the object to be compared for equality with this {@code 
+       OpenMBeanOperationInfoSupport} instance; 
+
+    Returns: {@code true} if the specified object is equal to this {@code 
+             OpenMBeanOperationInfoSupport} instance. 
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport.getReturnOpenType()*
+
+public |javax.management.openmbean.OpenType|<?> getReturnOpenType()
+
+Returns the open type of the values returned by the operation described by 
+thisOpenMBeanOperationInfoinstance. 
+
+
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for thisOpenMBeanOperationInfoSupportinstance. 
+
+The hash code of anOpenMBeanOperationInfoSupportinstance is the sum of the hash 
+codes of all elements of information used inequalscomparisons (ie: its name, 
+return open type, impact and signature, where the signature hashCode is 
+calculated by a call tojava.util.Arrays.asList(this.getSignature).hashCode()). 
+
+This ensures thatt1.equals(t2)implies thatt1.hashCode()==t2.hashCode()for any 
+twoOpenMBeanOperationInfoSupportinstancest1andt2, as required by the general 
+contract of the method Object.hashCode()(|java.lang.Object|) . 
+
+However, note that another instance of a class implementing 
+theOpenMBeanOperationInfointerface may be equal to 
+thisOpenMBeanOperationInfoSupportinstance as defined by 
+(|javax.management.openmbean.OpenMBeanOperationInfoSupport|) , but may have a 
+different hash code if it is calculated differently. 
+
+AsOpenMBeanOperationInfoSupportinstances are immutable, the hash code for this 
+instance is calculated once, on the first call tohashCode, and then the same 
+value is returned for subsequent calls. 
+
+
+
+    Returns: the hash code value for this {@code OpenMBeanOperationInfoSupport} instance 
+
+*javax.management.openmbean.OpenMBeanOperationInfoSupport.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of thisOpenMBeanOperationInfoSupportinstance. 
+
+The string representation consists of the name of this class 
+(iejavax.management.openmbean.OpenMBeanOperationInfoSupport), and the name, 
+signature, return open type and impact of the described operation and the 
+string representation of its descriptor. 
+
+AsOpenMBeanOperationInfoSupportinstances are immutable, the string 
+representation for this instance is calculated once, on the first call 
+totoString, and then the same value is returned for subsequent calls. 
+
+
+
+    Returns: a string representation of this {@code OpenMBeanOperationInfoSupport} instance 
+
+

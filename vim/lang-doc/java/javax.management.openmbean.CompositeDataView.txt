@@ -1,0 +1,86 @@
+*javax.management.openmbean.CompositeDataView* *CompositeDataView* A Java class 
+
+public interface interface CompositeDataView
+
+
+|javax.management.openmbean.CompositeDataView_Description|
+|javax.management.openmbean.CompositeDataView_Fields|
+|javax.management.openmbean.CompositeDataView_Constructors|
+|javax.management.openmbean.CompositeDataView_Methods|
+
+================================================================================
+
+*javax.management.openmbean.CompositeDataView_Methods*
+|javax.management.openmbean.CompositeDataView.toCompositeData(CompositeType)|Re
+
+*javax.management.openmbean.CompositeDataView_Description*
+
+A Java class can implement this interface to indicate how it is to be converted 
+into aCompositeDataby the MXBean framework. 
+
+A typical way to use this class is to add extra items to theCompositeDatain 
+addition to the ones that are declared in theCompositeTypesupplied by the 
+MXBean framework. To do this, you must create anotherCompositeTypethat has all 
+the same items, plus your extra items. 
+
+For example, suppose you have a classMeasurethat consists of a String 
+calledunitsand avaluethat is either alongor adouble. It might look like this: 
+
+
+
+public class Measure implements CompositeDataView { private String units; 
+private Number value; // a Long or a Double 
+
+public Measure(String units, Number value) { this.units = units; this.value = 
+value; } 
+
+public static Measure from(CompositeData cd) { return new Measure((String) 
+cd.get("units"), (Number) cd.get("value")); } 
+
+public String getUnits() { return units; } 
+
+// Can't be called getValue(), because Number is not a valid type // in an 
+MXBean, so the implied "value" property would be rejected. public Number 
+_getValue() { return value; } 
+
+public CompositeData toCompositeData(CompositeType ct) { try {List itemNames = 
+new ArrayList(ct.keySet());List itemDescriptions = new ArrayList();List> 
+itemTypes = new ArrayList>();for (String item : itemNames) { 
+itemDescriptions.add(ct.getDescription(item)); itemTypes.add(ct.getType(item)); 
+} itemNames.add("value"); itemDescriptions.add("long or double value of the 
+measure"); itemTypes.add((value instanceof Long) ? SimpleType.LONG : 
+SimpleType.DOUBLE); CompositeType xct = new CompositeType(ct.getTypeName(), 
+ct.getDescription(), itemNames.toArray(new String[0]), 
+itemDescriptions.toArray(new String[0]), itemTypes.toArray(new 
+OpenType<?>[0])); CompositeData cd = new CompositeDataSupport(xct, new String[] 
+{"units", "value"}, new Object[] {units, value}); assert ct.isValue(cd); // 
+check we've done it right return cd; } catch (Exception e) { throw new 
+RuntimeException(e); } } } 
+
+TheCompositeTypethat will appear in theopenTypefield of the 
+Descriptor(|javax.management.Descriptor|) for an attribute or operation of this 
+type will show only theunitsitem, but the actualCompositeDatathat is generated 
+will have bothunitsandvalue. 
+
+
+
+*javax.management.openmbean.CompositeDataView.toCompositeData(CompositeType)*
+
+public |javax.management.openmbean.CompositeData| toCompositeData(javax.management.openmbean.CompositeType ct)
+
+Return aCompositeDatacorresponding to the values in this object. The returned 
+value should usually be an instance of 
+(|javax.management.openmbean.CompositeDataSupport|) , or a class that 
+serializes as aCompositeDataSupportvia awriteReplacemethod. Otherwise, a remote 
+client that receives the object might not be able to reconstruct it. 
+
+
+    ct - The expected {@code CompositeType} of the returned value. If the returned value 
+       is {@code cd}, then {@code cd.getCompositeType().equals(ct)} should be 
+       true. Typically this will be because {@code cd} is a {@link 
+       CompositeDataSupport} constructed with {@code ct} as its {@code 
+       CompositeType}. 
+
+    Returns: the {@code CompositeData}. 
+
+

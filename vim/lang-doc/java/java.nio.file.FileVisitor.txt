@@ -1,0 +1,129 @@
+*java.nio.file.FileVisitor* *FileVisitor* A visitor of files.
+
+public interface interface FileVisitor<T>
+
+
+|java.nio.file.FileVisitor_Description|
+|java.nio.file.FileVisitor_Fields|
+|java.nio.file.FileVisitor_Constructors|
+|java.nio.file.FileVisitor_Methods|
+
+================================================================================
+
+*java.nio.file.FileVisitor_Methods*
+|java.nio.file.FileVisitor.postVisitDirectory(T,IOException)|Invoked for a dire
+|java.nio.file.FileVisitor.preVisitDirectory(T,BasicFileAttributes)|Invoked for
+|java.nio.file.FileVisitor.visitFile(T,BasicFileAttributes)|Invoked for a file 
+|java.nio.file.FileVisitor.visitFileFailed(T,IOException)|Invoked for a file th
+
+*java.nio.file.FileVisitor_Description*
+
+A visitor of files. An implementation of this interface is provided to the 
+Files.walkFileTree(|java.nio.file.Files|) methods to visit each file in a file 
+tree. 
+
+Usage Examples: Suppose we want to delete a file tree. In that case, each 
+directory should be deleted after the entries in the directory are deleted. 
+
+Path start = ... Files.walkFileTree(start, new SimpleFileVisitor<Path>() { 
+Override public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) 
+throws IOException { Files.delete(file); return FileVisitResult.CONTINUE; } 
+Override public FileVisitResult postVisitDirectory(Path dir, IOException e) 
+throws IOException { if (e == null) { Files.delete(dir); return 
+FileVisitResult.CONTINUE; } else { // directory iteration failed throw e; } } 
+}); 
+
+Furthermore, suppose we want to copy a file tree to a target location. In that 
+case, symbolic links should be followed and the target directory should be 
+created before the entries in the directory are copied. 
+
+final Path source = ... final Path target = ... 
+
+Files.walkFileTree(source, EnumSet.of(FileVisitOption.FOLLOW_LINKS), 
+Integer.MAX_VALUE, new SimpleFileVisitor<Path>() { Override public 
+FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws 
+IOException { Path targetdir = target.resolve(source.relativize(dir)); try { 
+Files.copy(dir, targetdir); } catch (FileAlreadyExistsException e) { if 
+(!Files.isDirectory(targetdir)) throw e; } return CONTINUE; } Override public 
+FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws 
+IOException { Files.copy(file, target.resolve(source.relativize(file))); return 
+CONTINUE; } }); 
+
+
+
+*java.nio.file.FileVisitor.postVisitDirectory(T,IOException)*
+
+public |java.nio.file.FileVisitResult| postVisitDirectory(
+  T dir,
+  java.io.IOException exc)
+  throws |java.io.IOException|
+         
+Invoked for a directory after entries in the directory, and all of their 
+descendants, have been visited. This method is also invoked when iteration of 
+the directory completes prematurely (by a 
+visitFile(|java.nio.file.FileVisitor|) method returning 
+SKIP_SIBLINGS(|java.nio.file.FileVisitResult|) , or an I/O error when iterating 
+over the directory). 
+
+
+    dir - a reference to the directory 
+    exc - {@code null} if the iteration of the directory completes without an error; 
+       otherwise the I/O exception that caused the iteration of the directory 
+       to complete prematurely 
+
+    Returns: the visit result 
+
+*java.nio.file.FileVisitor.preVisitDirectory(T,BasicFileAttributes)*
+
+public |java.nio.file.FileVisitResult| preVisitDirectory(
+  T dir,
+  java.nio.file.attribute.BasicFileAttributes attrs)
+  throws |java.io.IOException|
+         
+Invoked for a directory before entries in the directory are visited. 
+
+If this method returns CONTINUE(|java.nio.file.FileVisitResult|) , then entries 
+in the directory are visited. If this method returns 
+SKIP_SUBTREE(|java.nio.file.FileVisitResult|) or 
+SKIP_SIBLINGS(|java.nio.file.FileVisitResult|) then entries in the directory 
+(and any descendants) will not be visited. 
+
+
+    dir - a reference to the directory 
+    attrs - the directory's basic attributes 
+
+    Returns: the visit result 
+
+*java.nio.file.FileVisitor.visitFile(T,BasicFileAttributes)*
+
+public |java.nio.file.FileVisitResult| visitFile(
+  T file,
+  java.nio.file.attribute.BasicFileAttributes attrs)
+  throws |java.io.IOException|
+         
+Invoked for a file in a directory. 
+
+
+    file - a reference to the file 
+    attrs - the file's basic attributes 
+
+    Returns: the visit result 
+
+*java.nio.file.FileVisitor.visitFileFailed(T,IOException)*
+
+public |java.nio.file.FileVisitResult| visitFileFailed(
+  T file,
+  java.io.IOException exc)
+  throws |java.io.IOException|
+         
+Invoked for a file that could not be visited. This method is invoked if the 
+file's attributes could not be read, the file is a directory that could not be 
+opened, and other reasons. 
+
+
+    file - a reference to the file 
+    exc - the I/O exception that prevented the file from being visited 
+
+    Returns: the visit result 
+
+

@@ -1,0 +1,240 @@
+*javax.lang.model.util.Elements* *Elements* Utility methods for operating on pro
+
+public interface interface Elements
+
+
+|javax.lang.model.util.Elements_Description|
+|javax.lang.model.util.Elements_Fields|
+|javax.lang.model.util.Elements_Constructors|
+|javax.lang.model.util.Elements_Methods|
+
+================================================================================
+
+*javax.lang.model.util.Elements_Methods*
+|javax.lang.model.util.Elements.getAllAnnotationMirrors(Element)|Returns all an
+|javax.lang.model.util.Elements.getAllMembers(TypeElement)|Returns all members 
+|javax.lang.model.util.Elements.getBinaryName(TypeElement)|Returns the binary n
+|javax.lang.model.util.Elements.getConstantExpression(Object)|Returns the text 
+|javax.lang.model.util.Elements.getDocComment(Element)|Returns the text of the 
+|javax.lang.model.util.Elements.getElementValuesWithDefaults(AnnotationMirror)|
+|javax.lang.model.util.Elements.getName(CharSequence)|Return a name with the sa
+|javax.lang.model.util.Elements.getPackageElement(CharSequence)|Returns a packa
+|javax.lang.model.util.Elements.getPackageOf(Element)|Returns the package of an
+|javax.lang.model.util.Elements.getTypeElement(CharSequence)|Returns a type ele
+|javax.lang.model.util.Elements.hides(Element,Element)|Tests whether one type, 
+|javax.lang.model.util.Elements.isDeprecated(Element)|Returnstrueif the element
+|javax.lang.model.util.Elements.overrides(ExecutableElement,ExecutableElement,TypeElement)|
+|javax.lang.model.util.Elements.printElements(Writer,Element...)|Prints a repre
+
+*javax.lang.model.util.Elements_Description*
+
+Utility methods for operating on program elements. 
+
+Compatibility Note: Methods may be added to this interface in future releases 
+of the platform. 
+
+
+
+*javax.lang.model.util.Elements.getAllAnnotationMirrors(Element)*
+
+public |java.util.List|<? extends javax.lang.model.element.AnnotationMirror> getAllAnnotationMirrors(javax.lang.model.element.Element e)
+
+Returns all annotations of an element, whether inherited or directly present. 
+
+
+    e - the element being examined 
+
+    Returns: all annotations of the element 
+
+*javax.lang.model.util.Elements.getAllMembers(TypeElement)*
+
+public |java.util.List|<? extends javax.lang.model.element.Element> getAllMembers(javax.lang.model.element.TypeElement type)
+
+Returns all members of a type element, whether inherited or declared directly. 
+For a class the result also includes its constructors, but not local or 
+anonymous classes. 
+
+Note that elements of certain kinds can be isolated using methods in 
+(|javax.lang.model.util.ElementFilter|) . 
+
+
+    type - the type being examined 
+
+    Returns: all members of the type 
+
+*javax.lang.model.util.Elements.getBinaryName(TypeElement)*
+
+public |javax.lang.model.element.Name| getBinaryName(javax.lang.model.element.TypeElement type)
+
+Returns the binary name of a type element. 
+
+
+    type - the type element being examined 
+
+    Returns: the binary name 
+
+*javax.lang.model.util.Elements.getConstantExpression(Object)*
+
+public |java.lang.String| getConstantExpression(java.lang.Object value)
+
+Returns the text of a constant expression representing a primitive value or a 
+string. The text returned is in a form suitable for representing the value in 
+source code. 
+
+
+    value - a primitive value or string 
+
+    Returns: the text of a constant expression 
+
+*javax.lang.model.util.Elements.getDocComment(Element)*
+
+public |java.lang.String| getDocComment(javax.lang.model.element.Element e)
+
+Returns the text of the documentation (Javadoc) comment of an element. 
+
+A documentation comment of an element is a comment that begins with "/**" , 
+ends with a separate "*and immediately precedes the element, ignoring white 
+space. Therefore, a documentation comment contains at least three"*" 
+characters. The text returned for the documentation comment is a processed form 
+of the comment as it appears in source code. The leading "/**" and trailing 
+"*are removed. For lines of the comment starting after the initial "/**", 
+leading white space characters are discarded as are any consecutive "*" 
+characters appearing after the white space or starting the line. The processed 
+lines are then concatenated together (including line terminators) and returned. 
+
+
+    e - the element being examined 
+
+    Returns: the documentation comment of the element, or {@code null} if there is none 
+
+*javax.lang.model.util.Elements.getElementValuesWithDefaults(AnnotationMirror)*
+
+public |java.util.Map|<? extends javax.lang.model.element.ExecutableElement,? extends javax.lang.model.element.AnnotationValue> getElementValuesWithDefaults(javax.lang.model.element.AnnotationMirror a)
+
+Returns the values of an annotation's elements, including defaults. 
+
+
+    a - annotation to examine 
+
+    Returns: the values of the annotation's elements, including defaults 
+
+*javax.lang.model.util.Elements.getName(CharSequence)*
+
+public |javax.lang.model.element.Name| getName(java.lang.CharSequence cs)
+
+Return a name with the same sequence of characters as the argument. 
+
+
+    cs - the character sequence to return as a name 
+
+*javax.lang.model.util.Elements.getPackageElement(CharSequence)*
+
+public |javax.lang.model.element.PackageElement| getPackageElement(java.lang.CharSequence name)
+
+Returns a package given its fully qualified name. 
+
+
+    name - fully qualified package name, or "" for an unnamed package 
+
+    Returns: the named package, or {@code null} if it cannot be found 
+
+*javax.lang.model.util.Elements.getPackageOf(Element)*
+
+public |javax.lang.model.element.PackageElement| getPackageOf(javax.lang.model.element.Element type)
+
+Returns the package of an element. The package of a package is itself. 
+
+
+    type - the element being examined 
+
+    Returns: the package of an element 
+
+*javax.lang.model.util.Elements.getTypeElement(CharSequence)*
+
+public |javax.lang.model.element.TypeElement| getTypeElement(java.lang.CharSequence name)
+
+Returns a type element given its canonical name. 
+
+
+    name - the canonical name 
+
+    Returns: the named type element, or {@code null} if it cannot be found 
+
+*javax.lang.model.util.Elements.hides(Element,Element)*
+
+public boolean hides(
+  javax.lang.model.element.Element hider,
+  javax.lang.model.element.Element hidden)
+
+Tests whether one type, method, or field hides another. 
+
+
+    hider - the first element 
+    hidden - the second element 
+
+    Returns: {@code true} if and only if the first element hides the second 
+
+*javax.lang.model.util.Elements.isDeprecated(Element)*
+
+public boolean isDeprecated(javax.lang.model.element.Element e)
+
+Returnstrueif the element is deprecated,falseotherwise. 
+
+
+    e - the element being examined 
+
+    Returns: {@code true} if the element is deprecated, {@code false} otherwise 
+
+*javax.lang.model.util.Elements.overrides(ExecutableElement,ExecutableElement,TypeElement)*
+
+public boolean overrides(
+  javax.lang.model.element.ExecutableElement overrider,
+  javax.lang.model.element.ExecutableElement overridden,
+  javax.lang.model.element.TypeElement type)
+
+Tests whether one method, as a member of a given type, overrides another 
+method. When a non-abstract method overrides an abstract one, the former is 
+also said to implement the latter. 
+
+In the simplest and most typical usage, the value of thetypeparameter will 
+simply be the class or interface directly enclosingoverrider(the 
+possibly-overriding method). For example, supposem1represents the 
+methodString.hashCodeandm2representsObject.hashCode. We can then ask 
+whetherm1overridesm2within the classString(it does): 
+
+assert elements.overrides(m1, m2, elements.getTypeElement("java.lang.String")); 
+
+A more interesting case can be illustrated by the following example in which a 
+method in typeAdoes not override a like-named method in typeB: 
+
+class A { public void m() {} }interface B { void m(); } ...m1 = ...; // A.mm2 = 
+...; // B.massert ! elements.overrides(m1, m2, elements.getTypeElement("A")); 
+
+When viewed as a member of a third typeC, however, the method inAdoes override 
+the one inB: 
+
+class C extends A implements B {} ...assert elements.overrides(m1, m2, 
+elements.getTypeElement("C")); 
+
+
+    overrider - the first method, possible overrider 
+    overridden - the second method, possibly being overridden 
+    type - the type of which the first method is a member 
+
+    Returns: {@code true} if and only if the first method overrides the second 
+
+*javax.lang.model.util.Elements.printElements(Writer,Element...)*
+
+public void printElements(
+  java.io.Writer w,
+  javax.lang.model.element.Element[] elements)
+
+Prints a representation of the elements to the given writer in the specified 
+order. The main purpose of this method is for diagnostics. The exact format of 
+the output is not specified and is subject to change. 
+
+
+    w - the writer to print the output to 
+    elements - the elements to print 
+
+

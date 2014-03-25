@@ -1,0 +1,235 @@
+*javax.management.relation.RoleInfo* *RoleInfo* A RoleInfo object summarises a r
+
+public class RoleInfo
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|javax.management.relation.RoleInfo_Description|
+|javax.management.relation.RoleInfo_Fields|
+|javax.management.relation.RoleInfo_Constructors|
+|javax.management.relation.RoleInfo_Methods|
+
+================================================================================
+
+*javax.management.relation.RoleInfo_Fields*
+|int_javax.management.relation.RoleInfo.ROLE_CARDINALITY_INFINITY|
+
+*javax.management.relation.RoleInfo_Constructors*
+|javax.management.relation.RoleInfo(RoleInfo)|Copy constructor.
+|javax.management.relation.RoleInfo(String,String)|Constructor.
+|javax.management.relation.RoleInfo(String,String,boolean,boolean)|Constructor.
+|javax.management.relation.RoleInfo(String,String,boolean,boolean,int,int,String)|
+
+*javax.management.relation.RoleInfo_Methods*
+|javax.management.relation.RoleInfo.checkMaxDegree(int)|Returns true if the val
+|javax.management.relation.RoleInfo.checkMinDegree(int)|Returns true if the val
+|javax.management.relation.RoleInfo.getDescription()|Returns description text f
+|javax.management.relation.RoleInfo.getMaxDegree()|Returns maximum degree for c
+|javax.management.relation.RoleInfo.getMinDegree()|Returns minimum degree for c
+|javax.management.relation.RoleInfo.getName()|Returns the name of the role.
+|javax.management.relation.RoleInfo.getRefMBeanClassName()|Returns name of type
+|javax.management.relation.RoleInfo.isReadable()|Returns read access mode for t
+|javax.management.relation.RoleInfo.isWritable()|Returns write access mode for 
+|javax.management.relation.RoleInfo.toString()|Returns a string describing the 
+
+*javax.management.relation.RoleInfo_Description*
+
+A RoleInfo object summarises a role in a relation type. 
+
+The serialVersionUID of this class is 2504952983494636987L. 
+
+
+
+*int_javax.management.relation.RoleInfo.ROLE_CARDINALITY_INFINITY*
+
+To specify an unlimited cardinality. 
+
+
+
+*javax.management.relation.RoleInfo(RoleInfo)*
+
+public RoleInfo(javax.management.relation.RoleInfo roleInfo)
+  throws |java.lang.IllegalArgumentException|
+         
+Copy constructor. 
+
+    roleInfo - the RoleInfo instance to be copied. 
+
+*javax.management.relation.RoleInfo(String,String)*
+
+public RoleInfo(
+  java.lang.String roleName,
+  java.lang.String mbeanClassName)
+  throws |java.lang.ClassNotFoundException|
+         |java.lang.IllegalArgumentException|
+         |javax.management.NotCompliantMBeanException|
+         
+Constructor. 
+
+    roleName - name of the role 
+    mbeanClassName - name of the class of MBean(s) expected to be referenced in corresponding role. 
+       If an MBean M is in this role, then the MBean server must return true 
+       for {@link MBeanServer#isInstanceOf isInstanceOf(M, mbeanClassName)}. 
+
+IsReadable and IsWritable defaulted to true. Minimum and maximum degrees 
+       defaulted to 1. Description of role defaulted to null. 
+
+*javax.management.relation.RoleInfo(String,String,boolean,boolean)*
+
+public RoleInfo(
+  java.lang.String roleName,
+  java.lang.String mbeanClassName,
+  boolean read,
+  boolean write)
+  throws |java.lang.ClassNotFoundException|
+         |java.lang.IllegalArgumentException|
+         |javax.management.NotCompliantMBeanException|
+         
+Constructor. 
+
+    roleName - name of the role 
+    mbeanClassName - name of the class of MBean(s) expected to be referenced in corresponding role. 
+       If an MBean M is in this role, then the MBean server must return true 
+       for {@link MBeanServer#isInstanceOf isInstanceOf(M, mbeanClassName)}. 
+    read - flag to indicate if the corresponding role can be read 
+    write - flag to indicate if the corresponding role can be set 
+
+Minimum and maximum degrees defaulted to 1. Description of role defaulted to 
+       null. 
+
+*javax.management.relation.RoleInfo(String,String,boolean,boolean,int,int,String)*
+
+public RoleInfo(
+  java.lang.String roleName,
+  java.lang.String mbeanClassName,
+  boolean read,
+  boolean write,
+  int min,
+  int max,
+  java.lang.String descr)
+  throws |java.lang.ClassNotFoundException|
+         |java.lang.IllegalArgumentException|
+         |javax.management.relation.InvalidRoleInfoException|
+         |javax.management.NotCompliantMBeanException|
+         
+Constructor. 
+
+    roleName - name of the role. 
+    mbeanClassName - name of the class of MBean(s) expected to be referenced in corresponding role. 
+       If an MBean M is in this role, then the MBean server must return true 
+       for {@link MBeanServer#isInstanceOf isInstanceOf(M, mbeanClassName)}. 
+    read - flag to indicate if the corresponding role can be read 
+    write - flag to indicate if the corresponding role can be set 
+    min - minimum degree for role, i.e. minimum number of MBeans to provide in 
+       corresponding role Must be less than or equal to max. 
+       (ROLE_CARDINALITY_INFINITY for unlimited) 
+    max - maximum degree for role, i.e. maximum number of MBeans to provide in 
+       corresponding role Must be greater than or equal to min 
+       (ROLE_CARDINALITY_INFINITY for unlimited) 
+    descr - description of the role (can be null) 
+
+*javax.management.relation.RoleInfo.checkMaxDegree(int)*
+
+public boolean checkMaxDegree(int value)
+
+Returns true if the value parameter is lower than or equal to the expected 
+maximum degree, false otherwise. 
+
+
+    value - the value to be checked 
+
+    Returns: true if lower than or equal to maximum degree, false otherwise. 
+
+*javax.management.relation.RoleInfo.checkMinDegree(int)*
+
+public boolean checkMinDegree(int value)
+
+Returns true if the value parameter is greater than or equal to the expected 
+minimum degree, false otherwise. 
+
+
+    value - the value to be checked 
+
+    Returns: true if greater than or equal to minimum degree, false otherwise. 
+
+*javax.management.relation.RoleInfo.getDescription()*
+
+public |java.lang.String| getDescription()
+
+Returns description text for the role. 
+
+
+
+    Returns: the description of the role. 
+
+*javax.management.relation.RoleInfo.getMaxDegree()*
+
+public int getMaxDegree()
+
+Returns maximum degree for corresponding role reference. 
+
+
+
+    Returns: the maximum degree. 
+
+*javax.management.relation.RoleInfo.getMinDegree()*
+
+public int getMinDegree()
+
+Returns minimum degree for corresponding role reference. 
+
+
+
+    Returns: the minimum degree. 
+
+*javax.management.relation.RoleInfo.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name of the role. 
+
+
+
+    Returns: the name of the role. 
+
+*javax.management.relation.RoleInfo.getRefMBeanClassName()*
+
+public |java.lang.String| getRefMBeanClassName()
+
+Returns name of type of MBean expected to be referenced in corresponding role. 
+
+
+
+    Returns: the name of the referenced type. 
+
+*javax.management.relation.RoleInfo.isReadable()*
+
+public boolean isReadable()
+
+Returns read access mode for the role (true if it is readable). 
+
+
+
+    Returns: true if the role is readable. 
+
+*javax.management.relation.RoleInfo.isWritable()*
+
+public boolean isWritable()
+
+Returns write access mode for the role (true if it is writable). 
+
+
+
+    Returns: true if the role is writable. 
+
+*javax.management.relation.RoleInfo.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string describing the role info. 
+
+
+
+    Returns: a description of the role info. 
+
+

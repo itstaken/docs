@@ -1,0 +1,145 @@
+*java.nio.file.attribute.DosFileAttributeView* *DosFileAttributeView* A file att
+
+public interface interface DosFileAttributeView
+
+  implements |java.nio.file.attribute.BasicFileAttributeView|
+
+|java.nio.file.attribute.DosFileAttributeView_Description|
+|java.nio.file.attribute.DosFileAttributeView_Fields|
+|java.nio.file.attribute.DosFileAttributeView_Constructors|
+|java.nio.file.attribute.DosFileAttributeView_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.DosFileAttributeView_Methods*
+|java.nio.file.attribute.DosFileAttributeView.name()|Returns the name of the at
+|java.nio.file.attribute.DosFileAttributeView.readAttributes()|
+|java.nio.file.attribute.DosFileAttributeView.setArchive(boolean)|Updates the v
+|java.nio.file.attribute.DosFileAttributeView.setHidden(boolean)|Updates the va
+|java.nio.file.attribute.DosFileAttributeView.setReadOnly(boolean)|Updates the 
+|java.nio.file.attribute.DosFileAttributeView.setSystem(boolean)|Updates the va
+
+*java.nio.file.attribute.DosFileAttributeView_Description*
+
+A file attribute view that provides a view of the legacy "DOS" file attributes. 
+These attributes are supported by file systems such as the File Allocation 
+Table (FAT) format commonly used in consumer devices. 
+
+ADosFileAttributeViewis a (|java.nio.file.attribute.BasicFileAttributeView|) 
+that additionally supports access to the set of DOS attribute flags that are 
+used to indicate if the file is read-only, hidden, a system file, or archived. 
+
+Where dynamic access to file attributes is required, the attributes supported 
+by this attribute view are as defined byBasicFileAttributeView, and in 
+addition, the following attributes are supported: 
+
+
+
+Name Type 
+
+readonly (|java.lang.Boolean|) 
+
+hidden (|java.lang.Boolean|) 
+
+system (|java.lang.Boolean|) 
+
+archive (|java.lang.Boolean|) 
+
+
+
+The getAttribute(|java.nio.file.Files|) method may be used to read any of these 
+attributes, or any of the attributes defined by 
+(|java.nio.file.attribute.BasicFileAttributeView|) as if by invoking the 
+readAttributes()(|java.nio.file.attribute.DosFileAttributeView|) method. 
+
+The setAttribute(|java.nio.file.Files|) method may be used to update the file's 
+last modified time, last access time or create time attributes as defined by 
+(|java.nio.file.attribute.BasicFileAttributeView|) . It may also be used to 
+update the DOS attributes as if by invoking the 
+setReadOnly(|java.nio.file.attribute.DosFileAttributeView|) , 
+setHidden(|java.nio.file.attribute.DosFileAttributeView|) , 
+setSystem(|java.nio.file.attribute.DosFileAttributeView|) , and 
+setArchive(|java.nio.file.attribute.DosFileAttributeView|) methods 
+respectively. 
+
+
+
+*java.nio.file.attribute.DosFileAttributeView.name()*
+
+public |java.lang.String| name()
+
+Returns the name of the attribute view. Attribute views of this type have the 
+name"dos". 
+
+
+
+*java.nio.file.attribute.DosFileAttributeView.readAttributes()*
+
+public |java.nio.file.attribute.DosFileAttributes| readAttributes()
+  throws |java.io.IOException|
+         
+
+
+
+
+*java.nio.file.attribute.DosFileAttributeView.setArchive(boolean)*
+
+public void setArchive(boolean value)
+  throws |java.io.IOException|
+         
+Updates the value of the archive attribute. 
+
+It is implementation specific if the attribute can be updated as an atomic 
+operation with respect to other file system operations. An implementation may, 
+for example, require to read the existing value of the DOS attribute in order 
+to update this attribute. 
+
+
+    value - the new value of the attribute 
+
+*java.nio.file.attribute.DosFileAttributeView.setHidden(boolean)*
+
+public void setHidden(boolean value)
+  throws |java.io.IOException|
+         
+Updates the value of the hidden attribute. 
+
+It is implementation specific if the attribute can be updated as an atomic 
+operation with respect to other file system operations. An implementation may, 
+for example, require to read the existing value of the DOS attribute in order 
+to update this attribute. 
+
+
+    value - the new value of the attribute 
+
+*java.nio.file.attribute.DosFileAttributeView.setReadOnly(boolean)*
+
+public void setReadOnly(boolean value)
+  throws |java.io.IOException|
+         
+Updates the value of the read-only attribute. 
+
+It is implementation specific if the attribute can be updated as an atomic 
+operation with respect to other file system operations. An implementation may, 
+for example, require to read the existing value of the DOS attribute in order 
+to update this attribute. 
+
+
+    value - the new value of the attribute 
+
+*java.nio.file.attribute.DosFileAttributeView.setSystem(boolean)*
+
+public void setSystem(boolean value)
+  throws |java.io.IOException|
+         
+Updates the value of the system attribute. 
+
+It is implementation specific if the attribute can be updated as an atomic 
+operation with respect to other file system operations. An implementation may, 
+for example, require to read the existing value of the DOS attribute in order 
+to update this attribute. 
+
+
+    value - the new value of the attribute 
+
+

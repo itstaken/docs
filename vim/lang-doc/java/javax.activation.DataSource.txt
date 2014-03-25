@@ -1,0 +1,82 @@
+*javax.activation.DataSource* *DataSource* The DataSource interface provides the
+
+public interface interface DataSource
+
+
+|javax.activation.DataSource_Description|
+|javax.activation.DataSource_Fields|
+|javax.activation.DataSource_Constructors|
+|javax.activation.DataSource_Methods|
+
+================================================================================
+
+*javax.activation.DataSource_Methods*
+|javax.activation.DataSource.getContentType()|This method returns the MIME type
+|javax.activation.DataSource.getInputStream()|This method returns an InputStrea
+|javax.activation.DataSource.getName()|Return the name of this object where the
+|javax.activation.DataSource.getOutputStream()|This method returns an OutputStr
+
+*javax.activation.DataSource_Description*
+
+The DataSource interface provides the JavaBeans Activation Framework with an 
+abstraction of an arbitrary collection of data. It provides a type for that 
+data as well as access to it in the form of InputStreams and OutputStreams 
+where appropriate. 
+
+
+
+*javax.activation.DataSource.getContentType()*
+
+public |java.lang.String| getContentType()
+
+This method returns the MIME type of the data in the form of a string. It 
+should always return a valid type. It is suggested that getContentType return 
+"application/octet-stream" if the DataSource implementation can not determine 
+the data type. 
+
+
+
+    Returns: the MIME Type 
+
+*javax.activation.DataSource.getInputStream()*
+
+public |java.io.InputStream| getInputStream()
+  throws |java.io.IOException|
+         
+This method returns an InputStream representing the data and throws the 
+appropriate exception if it can not do so. Note that a new InputStream object 
+must be returned each time this method is called, and the stream must be 
+positioned at the beginning of the data. 
+
+
+
+    Returns: an InputStream 
+
+*javax.activation.DataSource.getName()*
+
+public |java.lang.String| getName()
+
+Return the name of this object where the name of the object is dependant on the 
+nature of the underlying objects. DataSources encapsulating files may choose to 
+return the filename of the object. (Typically this would be the last component 
+of the filename, not an entire pathname.) 
+
+
+
+    Returns: the name of the object. 
+
+*javax.activation.DataSource.getOutputStream()*
+
+public |java.io.OutputStream| getOutputStream()
+  throws |java.io.IOException|
+         
+This method returns an OutputStream where the data can be written and throws 
+the appropriate exception if it can not do so. Note that a new OutputStream 
+object must be returned each time this method is called, and the stream must be 
+positioned at the location the data is to be written. 
+
+
+
+    Returns: an OutputStream 
+
+

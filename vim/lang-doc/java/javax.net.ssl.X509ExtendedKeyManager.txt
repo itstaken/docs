@@ -1,0 +1,82 @@
+*javax.net.ssl.X509ExtendedKeyManager* *X509ExtendedKeyManager* Abstract class t
+
+public abstract class X509ExtendedKeyManager
+  extends    |java.lang.Object|
+  implements |javax.net.ssl.X509KeyManager|
+
+|javax.net.ssl.X509ExtendedKeyManager_Description|
+|javax.net.ssl.X509ExtendedKeyManager_Fields|
+|javax.net.ssl.X509ExtendedKeyManager_Constructors|
+|javax.net.ssl.X509ExtendedKeyManager_Methods|
+
+================================================================================
+
+*javax.net.ssl.X509ExtendedKeyManager_Constructors*
+|javax.net.ssl.X509ExtendedKeyManager()|Constructor used by subclasses only.
+
+*javax.net.ssl.X509ExtendedKeyManager_Methods*
+|javax.net.ssl.X509ExtendedKeyManager.chooseEngineClientAlias(String[],Principal[],SSLEngine)|
+|javax.net.ssl.X509ExtendedKeyManager.chooseEngineServerAlias(String,Principal[],SSLEngine)|
+
+*javax.net.ssl.X509ExtendedKeyManager_Description*
+
+Abstract class that provides for extension of the X509KeyManager interface. 
+
+Methods in this class should be overriden to provide actual implementations. 
+
+
+
+*javax.net.ssl.X509ExtendedKeyManager()*
+
+protected X509ExtendedKeyManager()
+
+Constructor used by subclasses only. 
+
+
+*javax.net.ssl.X509ExtendedKeyManager.chooseEngineClientAlias(String[],Principal[],SSLEngine)*
+
+public |java.lang.String| chooseEngineClientAlias(
+  java.lang.String[] keyType,
+  java.security.Principal[] issuers,
+  javax.net.ssl.SSLEngine engine)
+
+Choose an alias to authenticate the client side of an SSLEngine connection 
+given the public key type and the list of certificate issuer authorities 
+recognized by the peer (if any). 
+
+The default implementation returns null. 
+
+
+    keyType - the key algorithm type name(s), ordered with the most-preferred key type first. 
+    issuers - the list of acceptable CA issuer subject names or null if it does not matter 
+       which issuers are used. 
+    engine - the SSLEngine to be used for this connection. This parameter can be null, which 
+       indicates that implementations of this interface are free to select an 
+       alias applicable to any engine. 
+
+    Returns: the alias name for the desired key, or null if there are no matches. 
+
+*javax.net.ssl.X509ExtendedKeyManager.chooseEngineServerAlias(String,Principal[],SSLEngine)*
+
+public |java.lang.String| chooseEngineServerAlias(
+  java.lang.String keyType,
+  java.security.Principal[] issuers,
+  javax.net.ssl.SSLEngine engine)
+
+Choose an alias to authenticate the server side of an SSLEngine connection 
+given the public key type and the list of certificate issuer authorities 
+recognized by the peer (if any). 
+
+The default implementation returns null. 
+
+
+    keyType - the key algorithm type name. 
+    issuers - the list of acceptable CA issuer subject names or null if it does not matter 
+       which issuers are used. 
+    engine - the SSLEngine to be used for this connection. This parameter can be null, which 
+       indicates that implementations of this interface are free to select an 
+       alias applicable to any engine. 
+
+    Returns: the alias name for the desired key, or null if there are no matches. 
+
+

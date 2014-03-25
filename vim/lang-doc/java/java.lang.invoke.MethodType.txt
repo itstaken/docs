@@ -1,0 +1,512 @@
+*java.lang.invoke.MethodType* *MethodType* A method type represents the argument
+
+public final class MethodType
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|java.lang.invoke.MethodType_Description|
+|java.lang.invoke.MethodType_Fields|
+|java.lang.invoke.MethodType_Constructors|
+|java.lang.invoke.MethodType_Methods|
+
+================================================================================
+
+*java.lang.invoke.MethodType_Methods*
+|java.lang.invoke.MethodType.appendParameterTypes(Class<?>...)|Finds or creates
+|java.lang.invoke.MethodType.appendParameterTypes(List<Class<?>>)|Finds or crea
+|java.lang.invoke.MethodType.changeParameterType(int,Class<?>)|Finds or creates
+|java.lang.invoke.MethodType.changeReturnType(Class<?>)|Finds or creates a meth
+|java.lang.invoke.MethodType.dropParameterTypes(int,int)|Finds or creates a met
+|java.lang.invoke.MethodType.equals(Object)|Compares the specified object with 
+|java.lang.invoke.MethodType.erase()|Erases all reference types toObject.
+|java.lang.invoke.MethodType.fromMethodDescriptorString(String,ClassLoader)|Fin
+|java.lang.invoke.MethodType.generic()|Converts all types, both reference and p
+|java.lang.invoke.MethodType.genericMethodType(int)|Finds or creates a method t
+|java.lang.invoke.MethodType.genericMethodType(int,boolean)|Finds or creates a 
+|java.lang.invoke.MethodType.hashCode()|Returns the hash code value for this me
+|java.lang.invoke.MethodType.hasPrimitives()|Reports if this type contains a pr
+|java.lang.invoke.MethodType.hasWrappers()|Reports if this type contains a wrap
+|java.lang.invoke.MethodType.insertParameterTypes(int,Class<?>...)|Finds or cre
+|java.lang.invoke.MethodType.insertParameterTypes(int,List<Class<?>>)|Finds or 
+|java.lang.invoke.MethodType.methodType(Class<?>)|Finds or creates a method typ
+|java.lang.invoke.MethodType.methodType(Class<?>,Class<?>)|Finds or creates a m
+|java.lang.invoke.MethodType.methodType(Class<?>,Class<?>[])|Finds or creates a
+|java.lang.invoke.MethodType.methodType(Class<?>,Class<?>,Class<?>...)|Finds or
+|java.lang.invoke.MethodType.methodType(Class<?>,List<Class<?>>)|Finds or creat
+|java.lang.invoke.MethodType.methodType(Class<?>,MethodType)|Finds or creates a
+|java.lang.invoke.MethodType.parameterArray()|Presents the parameter types as a
+|java.lang.invoke.MethodType.parameterCount()|Returns the number of parameter t
+|java.lang.invoke.MethodType.parameterList()|Presents the parameter types as a 
+|java.lang.invoke.MethodType.parameterType(int)|Returns the parameter type at t
+|java.lang.invoke.MethodType.returnType()|Returns the return type of this metho
+|java.lang.invoke.MethodType.toMethodDescriptorString()|Produces a bytecode des
+|java.lang.invoke.MethodType.toString()|Returns a string representation of the 
+|java.lang.invoke.MethodType.unwrap()|Converts all wrapper types to their corre
+|java.lang.invoke.MethodType.wrap()|Converts all primitive types to their corre
+
+*java.lang.invoke.MethodType_Description*
+
+A method type represents the arguments and return type accepted and returned by 
+a method handle, or the arguments and return type passed and expected by a 
+method handle caller. Method types must be properly matched between a method 
+handle and all its callers, and the JVM's operations enforce this matching at, 
+specifically during calls to 
+MethodHandle.invokeExact(|java.lang.invoke.MethodHandle|) and 
+MethodHandle.invoke(|java.lang.invoke.MethodHandle|) , and during execution 
+ofinvokedynamicinstructions. 
+
+The structure is a return type accompanied by any number of parameter types. 
+The types (primitive,void, and reference) are represented by 
+(|java.lang.Class|) objects. (For ease of exposition, we treatvoidas if it were 
+a type. In fact, it denotes the absence of a return type.) 
+
+All instances ofMethodTypeare immutable. Two instances are completely 
+interchangeable if they compare equal. Equality depends on pairwise 
+correspondence of the return and parameter types and on nothing else. 
+
+This type can be created only by factory methods. All factory methods may cache 
+values, though caching is not guaranteed. Some factory methods are static, 
+while others are virtual methods which modify precursor method types, e.g., by 
+changing a selected parameter. 
+
+Factory methods which operate on groups of parameter types are systematically 
+presented in two versions, so that both Java arrays and Java lists can be used 
+to work with groups of parameter types. The query 
+methodsparameterArrayandparameterListalso provide a choice between arrays and 
+lists. MethodTypeobjects are sometimes derived from bytecode instructions such 
+asinvokedynamic, specifically from the type descriptor strings associated with 
+the instructions in a class file's constant pool. 
+
+Like classes and strings, method types can also be represented directly in a 
+class file's constant pool as constants. A method type may be loaded by 
+anldcinstruction which refers to a suitableCONSTANT_MethodTypeconstant pool 
+entry. The entry refers to aCONSTANT_Utf8spelling for the descriptor string. 
+For more details, see the package summary. 
+
+When the JVM materializes aMethodTypefrom a descriptor string, all classes 
+named in the descriptor must be accessible, and will be loaded. (But the 
+classes need not be initialized, as is the case with aCONSTANT_Class.) This 
+loading may occur at any time before theMethodTypeobject is first derived. 
+
+
+
+*java.lang.invoke.MethodType.appendParameterTypes(Class<?>...)*
+
+public |java.lang.invoke.MethodType| appendParameterTypes(java.lang.Class[] ptypesToInsert)
+
+Finds or creates a method type with additional parameter types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    ptypesToInsert - zero or more new parameter types to insert after the end of the parameter list 
+
+    Returns: the same type, except with the selected parameter(s) appended 
+
+*java.lang.invoke.MethodType.appendParameterTypes(List<Class<?>>)*
+
+public |java.lang.invoke.MethodType| appendParameterTypes(java.util.List<java.lang.Class<?>> ptypesToInsert)
+
+Finds or creates a method type with additional parameter types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    ptypesToInsert - zero or more new parameter types to insert after the end of the parameter list 
+
+    Returns: the same type, except with the selected parameter(s) appended 
+
+*java.lang.invoke.MethodType.changeParameterType(int,Class<?>)*
+
+public |java.lang.invoke.MethodType| changeParameterType(
+  int num,
+  java.lang.Class<?> nptype)
+
+Finds or creates a method type with a single different parameter type. 
+Convenience method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    num - the index (zero-based) of the parameter type to change 
+    nptype - a new parameter type to replace the old one with 
+
+    Returns: the same type, except with the selected parameter changed 
+
+*java.lang.invoke.MethodType.changeReturnType(Class<?>)*
+
+public |java.lang.invoke.MethodType| changeReturnType(java.lang.Class<?> nrtype)
+
+Finds or creates a method type with a different return type. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    nrtype - a return parameter type to replace the old one with 
+
+    Returns: the same type, except with the return type change 
+
+*java.lang.invoke.MethodType.dropParameterTypes(int,int)*
+
+public |java.lang.invoke.MethodType| dropParameterTypes(
+  int start,
+  int end)
+
+Finds or creates a method type with some parameter types omitted. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    start - the index (zero-based) of the first parameter type to remove 
+    end - the index (greater than {@code start}) of the first parameter type after not to 
+       remove 
+
+    Returns: the same type, except with the selected parameter(s) removed 
+
+*java.lang.invoke.MethodType.equals(Object)*
+
+public boolean equals(java.lang.Object x)
+
+Compares the specified object with this type for equality. That is, it returns 
+true if and only if the specified object is also a method type with exactly the 
+same parameters and return type. 
+
+
+    x - object to compare 
+
+*java.lang.invoke.MethodType.erase()*
+
+public |java.lang.invoke.MethodType| erase()
+
+Erases all reference types toObject. Convenience method for 
+methodType(|java.lang.invoke.MethodType|) . All primitive types (includingvoid) 
+will remain unchanged. 
+
+
+
+    Returns: a version of the original type with all reference types replaced 
+
+*java.lang.invoke.MethodType.fromMethodDescriptorString(String,ClassLoader)*
+
+public static |java.lang.invoke.MethodType| fromMethodDescriptorString(
+  java.lang.String descriptor,
+  java.lang.ClassLoader loader)
+  throws |java.lang.IllegalArgumentException|
+         |java.lang.TypeNotPresentException|
+         
+Finds or creates an instance of a method type, given the spelling of its 
+bytecode descriptor. Convenience method for 
+methodType(|java.lang.invoke.MethodType|) . Any class or interface name 
+embedded in the descriptor string will be resolved by calling 
+(|java.lang.ClassLoader|) on the given loader (or if it is null, on the system 
+class loader). 
+
+Note that it is possible to encounter method types which cannot be constructed 
+by this method, because their component types are not all reachable from a 
+common class loader. 
+
+This method is included for the benfit of applications that must generate 
+bytecodes that process method handles andinvokedynamic. 
+
+
+    descriptor - a bytecode-level type descriptor string "(T...)T" 
+    loader - the class loader in which to look up the types 
+
+    Returns: a method type matching the bytecode-level type descriptor 
+
+*java.lang.invoke.MethodType.generic()*
+
+public |java.lang.invoke.MethodType| generic()
+
+Converts all types, both reference and primitive, toObject. Convenience method 
+for genericMethodType(|java.lang.invoke.MethodType|) . The 
+expressiontype.wrap().erase()produces the same value astype.generic(). 
+
+
+
+    Returns: a version of the original type with all types replaced 
+
+*java.lang.invoke.MethodType.genericMethodType(int)*
+
+public static |java.lang.invoke.MethodType| genericMethodType(int objectArgCount)
+
+Finds or creates a method type whose components are allObject. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . All parameters and the 
+return type will be Object. 
+
+
+    objectArgCount - number of parameters 
+
+    Returns: a generally applicable method type, for all calls of the given argument count 
+
+*java.lang.invoke.MethodType.genericMethodType(int,boolean)*
+
+public static |java.lang.invoke.MethodType| genericMethodType(
+  int objectArgCount,
+  boolean finalArray)
+
+Finds or creates a method type whose components areObjectwith an optional 
+trailingObject[]array. Convenience method for 
+methodType(|java.lang.invoke.MethodType|) . All parameters and the return type 
+will beObject, except the final array parameter if any, which will beObject[]. 
+
+
+    objectArgCount - number of parameters (excluding the final array parameter if any) 
+    finalArray - whether there will be a trailing array parameter, of type {@code Object[]} 
+
+    Returns: a generally applicable method type, for all calls of the given fixed argument 
+             count and a collected array of further arguments 
+
+*java.lang.invoke.MethodType.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this method type. It is defined to be the same 
+as the hashcode of a List whose elements are the return type followed by the 
+parameter types. 
+
+
+
+    Returns: the hash code value for this method type 
+
+*java.lang.invoke.MethodType.hasPrimitives()*
+
+public boolean hasPrimitives()
+
+Reports if this type contains a primitive argument or return value. The return 
+typevoidcounts as a primitive. 
+
+
+
+    Returns: true if any of the types are primitives 
+
+*java.lang.invoke.MethodType.hasWrappers()*
+
+public boolean hasWrappers()
+
+Reports if this type contains a wrapper argument or return value. Wrappers are 
+types which box primitive values, such as (|java.lang.Integer|) . The reference 
+typejava.lang.Voidcounts as a wrapper, if it occurs as a return type. 
+
+
+
+    Returns: true if any of the types are wrappers 
+
+*java.lang.invoke.MethodType.insertParameterTypes(int,Class<?>...)*
+
+public |java.lang.invoke.MethodType| insertParameterTypes(
+  int num,
+  java.lang.Class[] ptypesToInsert)
+
+Finds or creates a method type with additional parameter types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    num - the position (zero-based) of the inserted parameter type(s) 
+    ptypesToInsert - zero or more new parameter types to insert into the parameter list 
+
+    Returns: the same type, except with the selected parameter(s) inserted 
+
+*java.lang.invoke.MethodType.insertParameterTypes(int,List<Class<?>>)*
+
+public |java.lang.invoke.MethodType| insertParameterTypes(
+  int num,
+  java.util.List<java.lang.Class<?>> ptypesToInsert)
+
+Finds or creates a method type with additional parameter types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . 
+
+
+    num - the position (zero-based) of the inserted parameter type(s) 
+    ptypesToInsert - zero or more new parameter types to insert into the parameter list 
+
+    Returns: the same type, except with the selected parameter(s) inserted 
+
+*java.lang.invoke.MethodType.methodType(Class<?>)*
+
+public static |java.lang.invoke.MethodType| methodType(java.lang.Class<?> rtype)
+
+Finds or creates a method type with the given components. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . The resulting method has no 
+parameter types. 
+
+
+
+    Returns: a method type with the given return value 
+
+*java.lang.invoke.MethodType.methodType(Class<?>,Class<?>)*
+
+public static |java.lang.invoke.MethodType| methodType(
+  java.lang.Class<?> rtype,
+  java.lang.Class<?> ptype0)
+
+Finds or creates a method type with the given components. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . The resulting method has the 
+single given parameter type. 
+
+
+
+    Returns: a method type with the given return value and parameter type 
+
+*java.lang.invoke.MethodType.methodType(Class<?>,Class<?>[])*
+
+public static |java.lang.invoke.MethodType| methodType(
+  java.lang.Class<?> rtype,
+  java.lang.Class[] ptypes)
+
+Finds or creates an instance of the given method type. 
+
+
+    rtype - the return type 
+    ptypes - the parameter types 
+
+    Returns: a method type with the given components 
+
+*java.lang.invoke.MethodType.methodType(Class<?>,Class<?>,Class<?>...)*
+
+public static |java.lang.invoke.MethodType| methodType(
+  java.lang.Class<?> rtype,
+  java.lang.Class<?> ptype0,
+  java.lang.Class[] ptypes)
+
+Finds or creates a method type with the given components. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . The leading parameter type is 
+prepended to the remaining array. 
+
+
+
+    Returns: a method type with the given components 
+
+*java.lang.invoke.MethodType.methodType(Class<?>,List<Class<?>>)*
+
+public static |java.lang.invoke.MethodType| methodType(
+  java.lang.Class<?> rtype,
+  java.util.List<java.lang.Class<?>> ptypes)
+
+Finds or creates a method type with the given components. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . 
+
+
+
+    Returns: a method type with the given components 
+
+*java.lang.invoke.MethodType.methodType(Class<?>,MethodType)*
+
+public static |java.lang.invoke.MethodType| methodType(
+  java.lang.Class<?> rtype,
+  java.lang.invoke.MethodType ptypes)
+
+Finds or creates a method type with the given components. Convenience method 
+for methodType(|java.lang.invoke.MethodType|) . The resulting method has the 
+same parameter types asptypes, and the specified return type. 
+
+
+
+*java.lang.invoke.MethodType.parameterArray()*
+
+public |java.lang.Class|[] parameterArray()
+
+Presents the parameter types as an array (a convenience method). Changes to the 
+array will not result in changes to the type. 
+
+
+
+    Returns: the parameter types (as a fresh copy if necessary) 
+
+*java.lang.invoke.MethodType.parameterCount()*
+
+public int parameterCount()
+
+Returns the number of parameter types in this method type. 
+
+
+
+    Returns: the number of parameter types 
+
+*java.lang.invoke.MethodType.parameterList()*
+
+public |java.util.List|<Class<?>> parameterList()
+
+Presents the parameter types as a list (a convenience method). The list will be 
+immutable. 
+
+
+
+    Returns: the parameter types (as an immutable list) 
+
+*java.lang.invoke.MethodType.parameterType(int)*
+
+public |java.lang.Class|<?> parameterType(int num)
+
+Returns the parameter type at the specified index, within this method type. 
+
+
+    num - the index (zero-based) of the desired parameter type 
+
+    Returns: the selected parameter type 
+
+*java.lang.invoke.MethodType.returnType()*
+
+public |java.lang.Class|<?> returnType()
+
+Returns the return type of this method type. 
+
+
+
+    Returns: the return type 
+
+*java.lang.invoke.MethodType.toMethodDescriptorString()*
+
+public |java.lang.String| toMethodDescriptorString()
+
+Produces a bytecode descriptor representation of the method type. 
+
+Note that this is not a strict inverse of 
+fromMethodDescriptorString(|java.lang.invoke.MethodType|) . Two distinct 
+classes which share a common name but have different class loaders will appear 
+identical when viewed within descriptor strings. 
+
+This method is included for the benfit of applications that must generate 
+bytecodes that process method handles andinvokedynamic. 
+fromMethodDescriptorString(|java.lang.invoke.MethodType|) , because the latter 
+requires a suitable class loader argument. 
+
+
+
+    Returns: the bytecode type descriptor representation 
+
+*java.lang.invoke.MethodType.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of the method type, of the 
+form"(PT0,PT1...)RT". The string representation of a method type is a 
+parenthesis enclosed, comma separated list of type names, followed immediately 
+by the return type. 
+
+Each type is represented by its simple name(|java.lang.Class|) . 
+
+
+
+*java.lang.invoke.MethodType.unwrap()*
+
+public |java.lang.invoke.MethodType| unwrap()
+
+Converts all wrapper types to their corresponding primitive types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . All primitive types 
+(includingvoid) will remain unchanged. A return type ofjava.lang.Voidis changed 
+tovoid. 
+
+
+
+    Returns: a version of the original type with all wrapper types replaced 
+
+*java.lang.invoke.MethodType.wrap()*
+
+public |java.lang.invoke.MethodType| wrap()
+
+Converts all primitive types to their corresponding wrapper types. Convenience 
+method for methodType(|java.lang.invoke.MethodType|) . All reference types 
+(including wrapper types) will remain unchanged. Avoidreturn type is changed to 
+the typejava.lang.Void. The expressiontype.wrap().erase()produces the same 
+value astype.generic(). 
+
+
+
+    Returns: a version of the original type with all primitive types replaced 
+
+

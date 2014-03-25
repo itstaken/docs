@@ -1,0 +1,109 @@
+*javax.lang.model.util.AbstractTypeVisitor6* *AbstractTypeVisitor6* A skeletal v
+
+public abstract class AbstractTypeVisitor6<R,P>
+  extends    |java.lang.Object|
+  implements |javax.lang.model.type.TypeVisitor|
+
+|javax.lang.model.util.AbstractTypeVisitor6_Description|
+|javax.lang.model.util.AbstractTypeVisitor6_Fields|
+|javax.lang.model.util.AbstractTypeVisitor6_Constructors|
+|javax.lang.model.util.AbstractTypeVisitor6_Methods|
+
+================================================================================
+
+*javax.lang.model.util.AbstractTypeVisitor6_Constructors*
+|javax.lang.model.util.AbstractTypeVisitor6()|Constructor for concrete subclass
+
+*javax.lang.model.util.AbstractTypeVisitor6_Methods*
+|javax.lang.model.util.AbstractTypeVisitor6.visit(TypeMirror)|Visits any type m
+|javax.lang.model.util.AbstractTypeVisitor6.visit(TypeMirror,P)|Visits any type
+|javax.lang.model.util.AbstractTypeVisitor6.visitUnion(UnionType,P)|Visits aUni
+|javax.lang.model.util.AbstractTypeVisitor6.visitUnknown(TypeMirror,P)|
+
+*javax.lang.model.util.AbstractTypeVisitor6_Description*
+
+A skeletal visitor of types with default behavior appropriate for the 
+RELEASE_6(|javax.lang.model.SourceVersion|) source version. 
+
+WARNING: TheTypeVisitorinterface implemented by this class may have methods 
+added to it in the future to accommodate new, currently unknown, language 
+structures added to future versions of the Java programming language. 
+Therefore, methods whose names begin with"visit"may be added to this class in 
+the future; to avoid incompatibilities, classes which extend this class should 
+not declare any instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the visitUnknown(|javax.lang.model.util.AbstractTypeVisitor6|) 
+method. A new abstract type visitor class will also be introduced to correspond 
+to the new language level; this visitor will have different default behavior 
+for the visit method in question. When the new visitor is introduced, all or 
+portions of this visitor may be deprecated. 
+
+
+
+*javax.lang.model.util.AbstractTypeVisitor6()*
+
+protected AbstractTypeVisitor6()
+
+Constructor for concrete subclasses to call. 
+
+
+*javax.lang.model.util.AbstractTypeVisitor6.visit(TypeMirror)*
+
+public final |R| visit(javax.lang.model.type.TypeMirror t)
+
+Visits any type mirror as if by passing itself to that type mirror's 
+accept(|javax.lang.model.type.TypeMirror|) method and passingnullfor the 
+additional parameter. The invocationv.visit(t)is equivalent tot.accept(v, 
+null). 
+
+
+    t - the type to visit 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.util.AbstractTypeVisitor6.visit(TypeMirror,P)*
+
+public final |R| visit(
+  javax.lang.model.type.TypeMirror t,
+  P p)
+
+Visits any type mirror as if by passing itself to that type mirror's 
+accept(|javax.lang.model.type.TypeMirror|) method. The invocationv.visit(t, 
+p)is equivalent tot.accept(v, p). 
+
+
+    t - the type to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.util.AbstractTypeVisitor6.visitUnion(UnionType,P)*
+
+public |R| visitUnion(
+  javax.lang.model.type.UnionType t,
+  P p)
+
+Visits aUnionTypeelement by callingvisitUnknown. 
+
+
+    t - {@inheritDoc} 
+    p - {@inheritDoc} 
+
+    Returns: the result of {@code visitUnknown} 
+
+*javax.lang.model.util.AbstractTypeVisitor6.visitUnknown(TypeMirror,P)*
+
+public |R| visitUnknown(
+  javax.lang.model.type.TypeMirror t,
+  P p)
+
+The default implementation of this method inAbstractTypeVisitor6will always 
+throwUnknownTypeException. This behavior is not required of a subclass. 
+
+
+    t - the type to visit 
+
+    Returns: a visitor-specified result 
+
+

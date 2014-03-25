@@ -1,0 +1,56 @@
+*java.lang.AutoCloseable* *AutoCloseable* A resource that must be closed when it
+
+public interface interface AutoCloseable
+
+
+|java.lang.AutoCloseable_Description|
+|java.lang.AutoCloseable_Fields|
+|java.lang.AutoCloseable_Constructors|
+|java.lang.AutoCloseable_Methods|
+
+================================================================================
+
+*java.lang.AutoCloseable_Methods*
+|java.lang.AutoCloseable.close()|Closes this resource, relinquishing any underl
+
+*java.lang.AutoCloseable_Description*
+
+A resource that must be closed when it is no longer needed. 
+
+
+
+*java.lang.AutoCloseable.close()*
+
+public void close()
+  throws |java.lang.Exception|
+         
+Closes this resource, relinquishing any underlying resources. This method is 
+invoked automatically on objects managed by thetry-with-resources statement. 
+
+While this interface method is declared to throwException, implementers are 
+strongly encouraged to declare concrete implementations of theclosemethod to 
+throw more specific exceptions, or to throw no exception at all if the close 
+operation cannot fail. 
+
+Implementers of this interface are also strongly advised to not have 
+theclosemethod throw (|java.lang.InterruptedException|) . 
+
+This exception interacts with a thread's interrupted status, and runtime 
+misbehavior is likely to occur if anInterruptedExceptionis 
+suppressed(|java.lang.Throwable|) . 
+
+More generally, if it would cause problems for an exception to be suppressed, 
+theAutoCloseable.closemethod should not throw it. 
+
+Note that unlike the close(|java.io.Closeable|) method of (|java.io.Closeable|) 
+, thisclosemethod is not required to be idempotent. In other words, calling 
+thisclosemethod more than once may have some visible side effect, 
+unlikeCloseable.closewhich is required to have no effect if called more than 
+once. 
+
+However, implementers of this interface are strongly encouraged to make 
+theirclosemethods idempotent. 
+
+
+
+

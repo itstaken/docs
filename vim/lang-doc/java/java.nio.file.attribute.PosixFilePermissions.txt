@@ -1,0 +1,81 @@
+*java.nio.file.attribute.PosixFilePermissions* *PosixFilePermissions* This class
+
+public final class PosixFilePermissions
+  extends    |java.lang.Object|
+
+|java.nio.file.attribute.PosixFilePermissions_Description|
+|java.nio.file.attribute.PosixFilePermissions_Fields|
+|java.nio.file.attribute.PosixFilePermissions_Constructors|
+|java.nio.file.attribute.PosixFilePermissions_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.PosixFilePermissions_Methods*
+|java.nio.file.attribute.PosixFilePermissions.asFileAttribute(Set<PosixFilePermission>)|
+|java.nio.file.attribute.PosixFilePermissions.fromString(String)|Returns the se
+|java.nio.file.attribute.PosixFilePermissions.toString(Set<PosixFilePermission>)|
+
+*java.nio.file.attribute.PosixFilePermissions_Description*
+
+This class consists exclusively of static methods that operate on sets of 
+(|java.nio.file.attribute.PosixFilePermission|) objects. 
+
+
+
+*java.nio.file.attribute.PosixFilePermissions.asFileAttribute(Set<PosixFilePermission>)*
+
+public static |java.nio.file.attribute.FileAttribute|<Set<PosixFilePermission>> asFileAttribute(java.util.Set<java.nio.file.attribute.PosixFilePermission> perms)
+
+Creates a (|java.nio.file.attribute.FileAttribute|) , encapsulating a copy of 
+the given file permissions, suitable for passing to the 
+createFile(|java.nio.file.Files|) or createDirectory(|java.nio.file.Files|) 
+methods. 
+
+
+    perms - the set of permissions 
+
+    Returns: an attribute encapsulating the given file permissions with {@link 
+             FileAttribute#name name} {@code "posix:permissions"} 
+
+*java.nio.file.attribute.PosixFilePermissions.fromString(String)*
+
+public static |java.util.Set|<PosixFilePermission> fromString(java.lang.String perms)
+
+Returns the set of permissions corresponding to a givenStringrepresentation. 
+
+Thepermsparameter is aStringrepresenting the permissions. It has 9 characters 
+that are interpreted as three sets of three. The first set refers to the 
+owner's permissions; the next to the group permissions and the last to others. 
+Within each set, the first character is'r'to indicate permission to read, the 
+second character is'w'to indicate permission to write, and the third character 
+is'x'for execute permission. Where a permission is not set then the 
+corresponding character is set to'-'. 
+
+Usage Example: Suppose we require the set of permissions that indicate the 
+owner has read, write, and execute permissions, the group has read and execute 
+permissions and others have none. 
+
+Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---"); 
+
+
+    perms - string representing a set of permissions 
+
+    Returns: the resulting set of permissions 
+
+*java.nio.file.attribute.PosixFilePermissions.toString(Set<PosixFilePermission>)*
+
+public static |java.lang.String| toString(java.util.Set<java.nio.file.attribute.PosixFilePermission> perms)
+
+Returns theStringrepresentation of a set of permissions. It is guaranteed that 
+the returnedStringcan be parsed by the 
+(|java.nio.file.attribute.PosixFilePermissions|) method. 
+
+If the set containsnullor elements that are not of typePosixFilePermissionthen 
+these elements are ignored. 
+
+
+    perms - the set of permissions 
+
+    Returns: the string representation of the permission set 
+
+

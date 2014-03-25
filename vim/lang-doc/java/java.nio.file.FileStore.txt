@@ -1,0 +1,218 @@
+*java.nio.file.FileStore* *FileStore* Storage for files.
+
+public abstract class FileStore
+  extends    |java.lang.Object|
+
+|java.nio.file.FileStore_Description|
+|java.nio.file.FileStore_Fields|
+|java.nio.file.FileStore_Constructors|
+|java.nio.file.FileStore_Methods|
+
+================================================================================
+
+*java.nio.file.FileStore_Constructors*
+|java.nio.file.FileStore()|Initializes a new instance of this class.
+
+*java.nio.file.FileStore_Methods*
+|java.nio.file.FileStore.getAttribute(String)|Reads the value of a file store a
+|java.nio.file.FileStore.getFileStoreAttributeView(Class<V>)|Returns aFileStore
+|java.nio.file.FileStore.getTotalSpace()|Returns the size, in bytes, of the fil
+|java.nio.file.FileStore.getUnallocatedSpace()|Returns the number of unallocate
+|java.nio.file.FileStore.getUsableSpace()|Returns the number of bytes available
+|java.nio.file.FileStore.isReadOnly()|Tells whether this file store is read-onl
+|java.nio.file.FileStore.name()|Returns the name of this file store.
+|java.nio.file.FileStore.supportsFileAttributeView(Class<?extendsFileAttributeView>)|
+|java.nio.file.FileStore.supportsFileAttributeView(String)|Tells whether or not
+|java.nio.file.FileStore.type()|Returns the type of this file store.
+
+*java.nio.file.FileStore_Description*
+
+Storage for files. AFileStorerepresents a storage pool, device, partition, 
+volume, concrete file system or other implementation specific means of file 
+storage. TheFileStorefor where a file is stored is obtained by invoking the 
+getFileStore(|java.nio.file.Files|) method, or all file stores can be 
+enumerated by invoking the getFileStores(|java.nio.file.FileSystem|) method. 
+
+In addition to the methods defined by this class, a file store may support one 
+or more 
+FileStoreAttributeView(|java.nio.file.attribute.FileStoreAttributeView|) 
+classes that provide a read-only or updatable view of a set of file store 
+attributes. 
+
+
+
+*java.nio.file.FileStore()*
+
+protected FileStore()
+
+Initializes a new instance of this class. 
+
+
+*java.nio.file.FileStore.getAttribute(String)*
+
+public abstract |java.lang.Object| getAttribute(java.lang.String attribute)
+  throws |java.io.IOException|
+         
+Reads the value of a file store attribute. 
+
+Theattributeparameter identifies the attribute to be read and takes the form: 
+
+view-name:attribute-name 
+
+where the character':'stands for itself. 
+
+view-name is the name(|java.nio.file.attribute.FileStoreAttributeView|) of a 
+AttributeView(|java.nio.file.FileStore|) that identifies a set of file 
+attributes. attribute-name is the name of the attribute. 
+
+Usage Example: Suppose we want to know if ZFS compression is enabled (assuming 
+the "zfs" view is supported): 
+
+boolean compression = (Boolean)fs.getAttribute("zfs:compression"); 
+
+
+    attribute - the attribute to read 
+
+    Returns: the attribute value; {@code null} may be a valid valid for some attributes 
+
+*java.nio.file.FileStore.getFileStoreAttributeView(Class<V>)*
+
+public abstract |V| getFileStoreAttributeView(java.lang.Class<V> type)
+
+Returns aFileStoreAttributeViewof the given type. 
+
+This method is intended to be used where the file store attribute view defines 
+type-safe methods to read or update the file store attributes. Thetypeparameter 
+is the type of the attribute view required and the method returns an instance 
+of that type if supported. 
+
+
+    type - the {@code Class} object corresponding to the attribute view 
+
+    Returns: a file store attribute view of the specified type or {@code null} if the 
+             attribute view is not available 
+
+*java.nio.file.FileStore.getTotalSpace()*
+
+public abstract long getTotalSpace()
+  throws |java.io.IOException|
+         
+Returns the size, in bytes, of the file store. 
+
+
+
+    Returns: the size of the file store, in bytes 
+
+*java.nio.file.FileStore.getUnallocatedSpace()*
+
+public abstract long getUnallocatedSpace()
+  throws |java.io.IOException|
+         
+Returns the number of unallocated bytes in the file store. 
+
+The returned number of unallocated bytes is a hint, but not a guarantee, that 
+it is possible to use most or any of these bytes. The number of unallocated 
+bytes is most likely to be accurate immediately after the space attributes are 
+obtained. It is likely to be made inaccurate by any external I/O operations 
+including those made on the system outside of this virtual machine. 
+
+
+
+    Returns: the number of unallocated bytes 
+
+*java.nio.file.FileStore.getUsableSpace()*
+
+public abstract long getUsableSpace()
+  throws |java.io.IOException|
+         
+Returns the number of bytes available to this Java virtual machine on the file 
+store. 
+
+The returned number of available bytes is a hint, but not a guarantee, that it 
+is possible to use most or any of these bytes. The number of usable bytes is 
+most likely to be accurate immediately after the space attributes are obtained. 
+It is likely to be made inaccurate by any external I/O operations including 
+those made on the system outside of this Java virtual machine. 
+
+
+
+    Returns: the number of bytes available 
+
+*java.nio.file.FileStore.isReadOnly()*
+
+public abstract boolean isReadOnly()
+
+Tells whether this file store is read-only. A file store is read-only if it 
+does not support write operations or other changes to files. Any attempt to 
+create a file, open an existing file for writing etc. causes anIOExceptionto be 
+thrown. 
+
+
+
+    Returns: {@code true} if, and only if, this file store is read-only 
+
+*java.nio.file.FileStore.name()*
+
+public abstract |java.lang.String| name()
+
+Returns the name of this file store. The format of the name is highly 
+implementation specific. It will typically be the name of the storage pool or 
+volume. 
+
+The string returned by this method may differ from the string returned by the 
+toString(|java.lang.Object|) method. 
+
+
+
+    Returns: the name of this file store 
+
+*java.nio.file.FileStore.supportsFileAttributeView(Class<?extendsFileAttributeView>)*
+
+public abstract boolean supportsFileAttributeView(java.lang.Class<? extends java.nio.file.attribute.FileAttributeView> type)
+
+Tells whether or not this file store supports the file attributes identified by 
+the given file attribute view. 
+
+Invoking this method to test if the file store supports 
+(|java.nio.file.attribute.BasicFileAttributeView|) will always returntrue. In 
+the case of the default provider, this method cannot guarantee to give the 
+correct result when the file store is not a local storage device. The reasons 
+for this are implementation specific and therefore unspecified. 
+
+
+    type - the file attribute view type 
+
+    Returns: {@code true} if, and only if, the file attribute view is supported 
+
+*java.nio.file.FileStore.supportsFileAttributeView(String)*
+
+public abstract boolean supportsFileAttributeView(java.lang.String name)
+
+Tells whether or not this file store supports the file attributes identified by 
+the given file attribute view. 
+
+Invoking this method to test if the file store supports 
+(|java.nio.file.attribute.BasicFileAttributeView|) , identified by the name 
+"basic" will always returntrue. In the case of the default provider, this 
+method cannot guarantee to give the correct result when the file store is not a 
+local storage device. The reasons for this are implementation specific and 
+therefore unspecified. 
+
+
+    name - the {@link FileAttributeView#name name} of file attribute view 
+
+    Returns: {@code true} if, and only if, the file attribute view is supported 
+
+*java.nio.file.FileStore.type()*
+
+public abstract |java.lang.String| type()
+
+Returns the type of this file store. The format of the string returned by this 
+method is highly implementation specific. It may indicate, for example, the 
+format used or if the file store is local or remote. 
+
+
+
+    Returns: a string representing the type of this file store 
+
+

@@ -1,0 +1,96 @@
+*javax.lang.model.util.AbstractElementVisitor6* *AbstractElementVisitor6* A skel
+
+public abstract class AbstractElementVisitor6<R,P>
+  extends    |java.lang.Object|
+  implements |javax.lang.model.element.ElementVisitor|
+
+|javax.lang.model.util.AbstractElementVisitor6_Description|
+|javax.lang.model.util.AbstractElementVisitor6_Fields|
+|javax.lang.model.util.AbstractElementVisitor6_Constructors|
+|javax.lang.model.util.AbstractElementVisitor6_Methods|
+
+================================================================================
+
+*javax.lang.model.util.AbstractElementVisitor6_Constructors*
+|javax.lang.model.util.AbstractElementVisitor6()|Constructor for concrete subcl
+
+*javax.lang.model.util.AbstractElementVisitor6_Methods*
+|javax.lang.model.util.AbstractElementVisitor6.visit(Element)|Visits any progra
+|javax.lang.model.util.AbstractElementVisitor6.visit(Element,P)|Visits any prog
+|javax.lang.model.util.AbstractElementVisitor6.visitUnknown(Element,P)|
+
+*javax.lang.model.util.AbstractElementVisitor6_Description*
+
+A skeletal visitor of program elements with default behavior appropriate for 
+the RELEASE_6(|javax.lang.model.SourceVersion|) source version. 
+
+WARNING: TheElementVisitorinterface implemented by this class may have methods 
+added to it in the future to accommodate new, currently unknown, language 
+structures added to future versions of the Java programming language. 
+Therefore, methods whose names begin with"visit"may be added to this class in 
+the future; to avoid incompatibilities, classes which extend this class should 
+not declare any instance methods with names beginning with"visit". 
+
+When such a new visit method is added, the default implementation in this class 
+will be to call the 
+visitUnknown(|javax.lang.model.util.AbstractElementVisitor6|) method. A new 
+abstract element visitor class will also be introduced to correspond to the new 
+language level; this visitor will have different default behavior for the visit 
+method in question. When the new visitor is introduced, all or portions of this 
+visitor may be deprecated. 
+
+
+
+*javax.lang.model.util.AbstractElementVisitor6()*
+
+protected AbstractElementVisitor6()
+
+Constructor for concrete subclasses to call. 
+
+
+*javax.lang.model.util.AbstractElementVisitor6.visit(Element)*
+
+public final |R| visit(javax.lang.model.element.Element e)
+
+Visits any program element as if by passing itself to that element's 
+accept(|javax.lang.model.element.Element|) method and passingnullfor the 
+additional parameter. The invocationv.visit(elem)is equivalent toelem.accept(v, 
+null). 
+
+
+    e - the element to visit 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.util.AbstractElementVisitor6.visit(Element,P)*
+
+public final |R| visit(
+  javax.lang.model.element.Element e,
+  P p)
+
+Visits any program element as if by passing itself to that element's 
+accept(|javax.lang.model.element.Element|) method. The 
+invocationv.visit(elem)is equivalent toelem.accept(v, p). 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.util.AbstractElementVisitor6.visitUnknown(Element,P)*
+
+public |R| visitUnknown(
+  javax.lang.model.element.Element e,
+  P p)
+
+The default implementation of this method inAbstractElementVisitor6will always 
+throwUnknownElementException. This behavior is not required of a subclass. 
+
+
+    e - the element to visit 
+    p - a visitor-specified parameter 
+
+    Returns: a visitor-specified result 
+
+

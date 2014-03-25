@@ -1,0 +1,240 @@
+*java.nio.channels.AsynchronousServerSocketChannel* *AsynchronousServerSocketChannel* 
+
+public abstract class AsynchronousServerSocketChannel
+  extends    |java.lang.Object|
+  implements |java.nio.channels.AsynchronousChannel|
+             |java.nio.channels.NetworkChannel|
+
+|java.nio.channels.AsynchronousServerSocketChannel_Description|
+|java.nio.channels.AsynchronousServerSocketChannel_Fields|
+|java.nio.channels.AsynchronousServerSocketChannel_Constructors|
+|java.nio.channels.AsynchronousServerSocketChannel_Methods|
+
+================================================================================
+
+*java.nio.channels.AsynchronousServerSocketChannel_Constructors*
+|java.nio.channels.AsynchronousServerSocketChannel(AsynchronousChannelProvider)|
+
+*java.nio.channels.AsynchronousServerSocketChannel_Methods*
+|java.nio.channels.AsynchronousServerSocketChannel.accept()|Accepts a connectio
+|java.nio.channels.AsynchronousServerSocketChannel.accept(A,CompletionHandler<AsynchronousSocketChannel,?superA>)|
+|java.nio.channels.AsynchronousServerSocketChannel.bind(SocketAddress)|Binds th
+|java.nio.channels.AsynchronousServerSocketChannel.bind(SocketAddress,int)|Bind
+|java.nio.channels.AsynchronousServerSocketChannel.open()|Opens an asynchronous
+|java.nio.channels.AsynchronousServerSocketChannel.open(AsynchronousChannelGroup)|
+|java.nio.channels.AsynchronousServerSocketChannel.provider()|Returns the provi
+|java.nio.channels.AsynchronousServerSocketChannel.setOption(SocketOption<T>,T)|
+
+*java.nio.channels.AsynchronousServerSocketChannel_Description*
+
+An asynchronous channel for stream-oriented listening sockets. 
+
+An asynchronous server-socket channel is created by invoking the 
+open(|java.nio.channels.AsynchronousServerSocketChannel|) method of this class. 
+A newly-created asynchronous server-socket channel is open but not yet bound. 
+It can be bound to a local address and configured to listen for connections by 
+invoking the bind(|java.nio.channels.AsynchronousServerSocketChannel|) method. 
+Once bound, the accept(|java.nio.channels.AsynchronousServerSocketChannel|) 
+method is used to initiate the accepting of connections to the channel's 
+socket. An attempt to invoke the accept method on an unbound channel will cause 
+a (|java.nio.channels.NotYetBoundException|) to be thrown. 
+
+Channels of this type are safe for use by multiple concurrent threads though at 
+most one accept operation can be outstanding at any time. If a thread initiates 
+an accept operation before a previous accept operation has completed then an 
+(|java.nio.channels.AcceptPendingException|) will be thrown. 
+
+Socket options are configured using the 
+setOption(|java.nio.channels.AsynchronousServerSocketChannel|) method. Channels 
+of this type support the following options: 
+
+
+
+Option Name Description 
+
+SO_RCVBUF(|java.net.StandardSocketOptions|) The size of the socket receive 
+buffer 
+
+SO_REUSEADDR(|java.net.StandardSocketOptions|) Re-use address 
+
+
+
+Additional (implementation specific) options may also be supported. 
+
+Usage Example: 
+
+final AsynchronousServerSocketChannel listener = 
+AsynchronousServerSocketChannel.open().bind(new InetSocketAddress(5000)); 
+
+listener.accept(null, new CompletionHandler<AsynchronousSocketChannel,Void>() { 
+public void completed(AsynchronousSocketChannel ch, Void att) { // accept the 
+next connection listener.accept(null, this); 
+
+// handle this connection handle(ch); } public void failed(Throwable exc, Void 
+att) { ... } }); 
+
+
+
+*java.nio.channels.AsynchronousServerSocketChannel(AsynchronousChannelProvider)*
+
+protected AsynchronousServerSocketChannel(java.nio.channels.spi.AsynchronousChannelProvider provider)
+
+Initializes a new instance of this class. 
+
+
+*java.nio.channels.AsynchronousServerSocketChannel.accept()*
+
+public abstract |java.util.concurrent.Future|<AsynchronousSocketChannel> accept()
+
+Accepts a connection. 
+
+This method initiates an asynchronous operation to accept a connection made to 
+this channel's socket. The method behaves in exactly the same manner as the 
+(|java.nio.channels.AsynchronousServerSocketChannel|) method except that 
+instead of specifying a completion handler, this method returns 
+aFuturerepresenting the pending result. TheFuture's 
+get(|java.util.concurrent.Future|) method returns the 
+(|java.nio.channels.AsynchronousSocketChannel|) to the new connection on 
+successful completion. 
+
+
+
+    Returns: a {@code Future} object representing the pending result 
+
+*java.nio.channels.AsynchronousServerSocketChannel.accept(A,CompletionHandler<AsynchronousSocketChannel,?superA>)*
+
+public abstract void accept(
+  A attachment,
+  java.nio.channels.CompletionHandler<java.nio.channels.AsynchronousSocketChannel, ? super A> handler)
+
+Accepts a connection. 
+
+This method initiates an asynchronous operation to accept a connection made to 
+this channel's socket. Thehandlerparameter is a completion handler that is 
+invoked when a connection is accepted (or the operation fails). The result 
+passed to the completion handler is the 
+(|java.nio.channels.AsynchronousSocketChannel|) to the new connection. 
+
+When a new connection is accepted then the 
+resultingAsynchronousSocketChannelwill be bound to the same 
+(|java.nio.channels.AsynchronousChannelGroup|) as this channel. If the group is 
+shutdown(|java.nio.channels.AsynchronousChannelGroup|) and a connection is 
+accepted, then the connection is closed, and the operation completes with 
+anIOExceptionand cause (|java.nio.channels.ShutdownChannelGroupException|) . 
+
+To allow for concurrent handling of new connections, the completion handler is 
+not invoked directly by the initiating thread when a new connection is accepted 
+immediately (see Threading). 
+
+If a security manager has been installed then it verifies that the address and 
+port number of the connection's remote endpoint are permitted by the security 
+manager's checkAccept(|java.lang.SecurityManager|) method. The permission check 
+is performed with privileges that are restricted by the calling context of this 
+method. If the permission check fails then the connection is closed and the 
+operation completes with a (|java.lang.SecurityException|) . 
+
+
+    attachment - The object to attach to the I/O operation; can be {@code null} 
+    handler - The handler for consuming the result 
+
+*java.nio.channels.AsynchronousServerSocketChannel.bind(SocketAddress)*
+
+public final |java.nio.channels.AsynchronousServerSocketChannel| bind(java.net.SocketAddress local)
+  throws |java.io.IOException|
+         
+Binds the channel's socket to a local address and configures the socket to 
+listen for connections. 
+
+An invocation of this method is equivalent to the following: 
+
+bind(local, 0); 
+
+
+    local - The local address to bind the socket, or null to bind to an automatically 
+       assigned socket address 
+
+    Returns: 
+
+*java.nio.channels.AsynchronousServerSocketChannel.bind(SocketAddress,int)*
+
+public abstract |java.nio.channels.AsynchronousServerSocketChannel| bind(
+  java.net.SocketAddress local,
+  int backlog)
+  throws |java.io.IOException|
+         
+Binds the channel's socket to a local address and configures the socket to 
+listen for connections. 
+
+This method is used to establish an association between the socket and a local 
+address. Once an association is established then the socket remains bound until 
+the associated channel is closed. 
+
+Thebacklogparameter is the maximum number of pending connections on the socket. 
+Its exact semantics are implementation specific. In particular, an 
+implementation may impose a maximum length or may choose to ignore the 
+parameter altogther. If thebacklogparameter has the value0, or a negative 
+value, then an implementation specific default is used. 
+
+
+    local - The local address to bind the socket, or {@code null} to bind to an 
+       automatically assigned socket address 
+    backlog - The maximum number of pending connections 
+
+    Returns: 
+
+*java.nio.channels.AsynchronousServerSocketChannel.open()*
+
+public static |java.nio.channels.AsynchronousServerSocketChannel| open()
+  throws |java.io.IOException|
+         
+Opens an asynchronous server-socket channel. 
+
+This method returns an asynchronous server socket channel that is bound to the 
+default group. This method is equivalent to evaluating the expression: 
+
+open((AsynchronousChannelGroup)null); 
+
+
+
+    Returns: A new asynchronous server socket channel 
+
+*java.nio.channels.AsynchronousServerSocketChannel.open(AsynchronousChannelGroup)*
+
+public static |java.nio.channels.AsynchronousServerSocketChannel| open(java.nio.channels.AsynchronousChannelGroup group)
+  throws |java.io.IOException|
+         
+Opens an asynchronous server-socket channel. 
+
+The new channel is created by invoking the 
+openAsynchronousServerSocketChannel(|java.nio.channels.spi.AsynchronousChannelProvider|)
+method on the (|java.nio.channels.spi.AsynchronousChannelProvider|) object that 
+created the given group. If the group parameter is null then the resulting 
+channel is created by the system-wide default provider, and bound to the 
+default group. 
+
+
+    group - The group to which the newly constructed channel should be bound, or null for 
+       the default group 
+
+    Returns: A new asynchronous server socket channel 
+
+*java.nio.channels.AsynchronousServerSocketChannel.provider()*
+
+public final |java.nio.channels.spi.AsynchronousChannelProvider| provider()
+
+Returns the provider that created this channel. 
+
+
+
+*java.nio.channels.AsynchronousServerSocketChannel.setOption(SocketOption<T>,T)*
+
+public abstract |java.nio.channels.AsynchronousServerSocketChannel| setOption(
+  java.net.SocketOption<T> name,
+  T value)
+  throws |java.io.IOException|
+         
+
+
+
+
+

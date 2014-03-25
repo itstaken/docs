@@ -1,0 +1,151 @@
+*android.security.KeyPairGeneratorSpec.Builder* *KeyPairGeneratorSpec.Builder* B
+
+public static final class KeyPairGeneratorSpec.Builder
+  extends    |java.lang.Object|
+
+|android.security.KeyPairGeneratorSpec.Builder_Description|
+|android.security.KeyPairGeneratorSpec.Builder_Fields|
+|android.security.KeyPairGeneratorSpec.Builder_Constructors|
+|android.security.KeyPairGeneratorSpec.Builder_Methods|
+
+================================================================================
+
+*android.security.KeyPairGeneratorSpec.Builder_Constructors*
+|android.security.KeyPairGeneratorSpec.Builder(Context)|Creates a new instance 
+
+*android.security.KeyPairGeneratorSpec.Builder_Methods*
+|android.security.KeyPairGeneratorSpec.Builder.build()|Builds the instance of t
+|android.security.KeyPairGeneratorSpec.Builder.setAlgorithmParameterSpec(AlgorithmParameterSpec)|
+|android.security.KeyPairGeneratorSpec.Builder.setAlias(String)|Sets the alias 
+|android.security.KeyPairGeneratorSpec.Builder.setEncryptionRequired()|Indicate
+|android.security.KeyPairGeneratorSpec.Builder.setEndDate(Date)|Sets the end of
+|android.security.KeyPairGeneratorSpec.Builder.setKeySize(int)|Sets the key siz
+|android.security.KeyPairGeneratorSpec.Builder.setKeyType(String)|Sets the key 
+|android.security.KeyPairGeneratorSpec.Builder.setSerialNumber(BigInteger)|Sets
+|android.security.KeyPairGeneratorSpec.Builder.setStartDate(Date)|Sets the star
+|android.security.KeyPairGeneratorSpec.Builder.setSubject(X500Principal)|Sets t
+
+*android.security.KeyPairGeneratorSpec.Builder_Description*
+
+Builder class for (|android.security.KeyPairGeneratorSpec|) objects. 
+
+This will build a parameter spec for use with the <a 
+href="guide/topics/security/keystore.html">Android KeyStore facility. 
+
+The required fields must be filled in with the builder. 
+
+Example: 
+
+Calendar start = new Calendar(); Calendar end = new Calendar(); end.add(1, 
+Calendar.YEAR); 
+
+KeyPairGeneratorSpec spec = new 
+KeyPairGeneratorSpec.Builder(mContext).setAlias(myKey) .setSubject(new 
+X500Principal(CN=myKey)).setSerial(BigInteger.valueOf(1337)) 
+.setStartDate(start.getTime()).setEndDate(end.getTime()).build(); 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder(Context)*
+
+public KeyPairGeneratorSpec.Builder(Context context)
+
+Creates a new instance of theBuilderwith the givencontext. Thecontextpassed in 
+may be used to pop up some UI to ask the user to unlock or initialize the 
+Android KeyStore facility. 
+
+
+*android.security.KeyPairGeneratorSpec.Builder.build()*
+
+public |android.security.KeyPairGeneratorSpec| build()
+
+Builds the instance of theKeyPairGeneratorSpec. 
+
+
+
+    Returns: built instance of {@code KeyPairGeneratorSpec} 
+
+*android.security.KeyPairGeneratorSpec.Builder.setAlgorithmParameterSpec(AlgorithmParameterSpec)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setAlgorithmParameterSpec(java.security.spec.AlgorithmParameterSpec spec)
+
+Sets the underlying key type's parameters. This is required for DSA where you 
+must set this to an instance of (|java.security.spec.DSAParameterSpec|) . 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setAlias(String)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setAlias(java.lang.String alias)
+
+Sets the alias to be used to retrieve the key later from a 
+(|java.security.KeyStore|) instance using theAndroidKeyStoreprovider. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setEncryptionRequired()*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setEncryptionRequired()
+
+Indicates that this key must be encrypted at rest on storage. Note that 
+enabling this will require that the user enable a strong lock screen (e.g., 
+PIN, password) before creating or using the generated key is successful. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setEndDate(Date)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setEndDate(java.util.Date endDate)
+
+Sets the end of the validity period for the self-signed certificate of the 
+generated key pair. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setKeySize(int)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setKeySize(int keySize)
+
+Sets the key size for the keypair to be created. For instance, for a key type 
+of RSA this will set the modulus size and for a key type of EC it will select a 
+curve with a matching field size. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setKeyType(String)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setKeyType(java.lang.String keyType)
+  throws |java.security.NoSuchAlgorithmException|
+         
+Sets the key type (e.g., RSA, DSA, EC) of the keypair to be created. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setSerialNumber(BigInteger)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setSerialNumber(java.math.BigInteger serialNumber)
+
+Sets the serial number used for the self-signed certificate of the generated 
+key pair. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setStartDate(Date)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setStartDate(java.util.Date startDate)
+
+Sets the start of the validity period for the self-signed certificate of the 
+generated key pair. 
+
+
+
+*android.security.KeyPairGeneratorSpec.Builder.setSubject(X500Principal)*
+
+public |android.security.KeyPairGeneratorSpec.Builder| setSubject(javax.security.auth.x500.X500Principal subject)
+
+Sets the subject used for the self-signed certificate of the generated key 
+pair. 
+
+
+
+

@@ -1,0 +1,101 @@
+*javax.activation.CommandInfo* *CommandInfo* The CommandInfo class is used by Co
+
+public class CommandInfo
+  extends    |java.lang.Object|
+
+|javax.activation.CommandInfo_Description|
+|javax.activation.CommandInfo_Fields|
+|javax.activation.CommandInfo_Constructors|
+|javax.activation.CommandInfo_Methods|
+
+================================================================================
+
+*javax.activation.CommandInfo_Constructors*
+|javax.activation.CommandInfo(String,String)|The Constructor for CommandInfo.
+
+*javax.activation.CommandInfo_Methods*
+|javax.activation.CommandInfo.getCommandClass()|Return the command's class name
+|javax.activation.CommandInfo.getCommandName()|Return the command verb.
+|javax.activation.CommandInfo.getCommandObject(DataHandler,ClassLoader)|Return 
+
+*javax.activation.CommandInfo_Description*
+
+The CommandInfo class is used by CommandMap implementations to describe the 
+results of command requests. It provides the requestor with both the verb 
+requested, as well as an instance of the bean. There is also a method that will 
+return the name of the class that implements the command but it is not 
+guaranteed to return a valid value. The reason for this is to allow CommandMap 
+implmentations that subclass CommandInfo to provide special behavior. For 
+example a CommandMap could dynamically generate JavaBeans. In this case, it 
+might not be possible to create an object with all the correct state 
+information solely from the class name. 
+
+
+
+*javax.activation.CommandInfo(String,String)*
+
+public CommandInfo(
+  java.lang.String verb,
+  java.lang.String className)
+
+The Constructor for CommandInfo. 
+
+    verb - The command verb this CommandInfo decribes. 
+    className - The command's fully qualified class name. 
+
+*javax.activation.CommandInfo.getCommandClass()*
+
+public |java.lang.String| getCommandClass()
+
+Return the command's class name. This method MAY return null in cases where a 
+CommandMap subclassed CommandInfo for its own purposes. In other words, it 
+might not be possible to create the correct state in the command by merely 
+knowing its class name. DO NOT DEPEND ON THIS METHOD RETURNING A VALID VALUE! 
+
+
+
+    Returns: The class name of the command, or null 
+
+*javax.activation.CommandInfo.getCommandName()*
+
+public |java.lang.String| getCommandName()
+
+Return the command verb. 
+
+
+
+    Returns: the command verb. 
+
+*javax.activation.CommandInfo.getCommandObject(DataHandler,ClassLoader)*
+
+public |java.lang.Object| getCommandObject(
+  javax.activation.DataHandler dh,
+  java.lang.ClassLoader loader)
+  throws |java.lang.ClassNotFoundException|
+         |java.io.IOException|
+         
+Return the instantiated JavaBean component. 
+
+Begin by instantiating the component with Beans.instantiate(). 
+
+If the bean implements the javax.activation.CommandObject interface, call its 
+setCommandContext method. 
+
+If the DataHandler parameter is null, then the bean is instantiated with no 
+data. NOTE: this may be useful if for some reason the DataHandler that is 
+passed in throws IOExceptions when this method attempts to access its 
+InputStream. It will allow the caller to retrieve a reference to the bean if it 
+can be instantiated. 
+
+If the bean does NOT implement the CommandObject interface, this method will 
+check if it implements the java.io.Externalizable interface. If it does, the 
+bean's readExternal method will be called if an InputStream can be acquired 
+from the DataHandler. 
+
+
+    dh - The DataHandler that describes the data to be passed to the command. 
+    loader - The ClassLoader to be used to instantiate the bean. 
+
+    Returns: 
+
+

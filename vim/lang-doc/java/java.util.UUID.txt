@@ -1,0 +1,281 @@
+*java.util.UUID* *UUID* A class that represents an immutable universally unique 
+
+public final class UUID
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+             |java.lang.Comparable|
+
+|java.util.UUID_Description|
+|java.util.UUID_Fields|
+|java.util.UUID_Constructors|
+|java.util.UUID_Methods|
+
+================================================================================
+
+*java.util.UUID_Constructors*
+|java.util.UUID(long,long)|Constructs a newUUIDusing the specified data.
+
+*java.util.UUID_Methods*
+|java.util.UUID.clockSequence()|The clock sequence value associated with this U
+|java.util.UUID.compareTo(UUID)|Compares this UUID with the specified UUID.
+|java.util.UUID.equals(Object)|Compares this object to the specified object.
+|java.util.UUID.fromString(String)|Creates aUUIDfrom the string standard repres
+|java.util.UUID.getLeastSignificantBits()|Returns the least significant 64 bits
+|java.util.UUID.getMostSignificantBits()|Returns the most significant 64 bits o
+|java.util.UUID.hashCode()|Returns a hash code for thisUUID.
+|java.util.UUID.nameUUIDFromBytes(byte[])|Static factory to retrieve a type 3 (
+|java.util.UUID.node()|The node value associated with this UUID.
+|java.util.UUID.randomUUID()|Static factory to retrieve a type 4 (pseudo random
+|java.util.UUID.timestamp()|The timestamp value associated with this UUID.
+|java.util.UUID.toString()|Returns aStringobject representing thisUUID.
+|java.util.UUID.variant()|The variant number associated with thisUUID.
+|java.util.UUID.version()|The version number associated with thisUUID.
+
+*java.util.UUID_Description*
+
+A class that represents an immutable universally unique identifier (UUID). A 
+UUID represents a 128-bit value. 
+
+There exist different variants of these global identifiers. The methods of this 
+class are for manipulating the Leach-Salz variant, although the constructors 
+allow the creation of any variant of UUID (described below). 
+
+The layout of a variant 2 (Leach-Salz) UUID is as follows: 
+
+The most significant long consists of the following unsigned fields: 
+
+0xFFFFFFFF00000000 time_low 0x00000000FFFF0000 time_mid 0x000000000000F000 
+version 0x0000000000000FFF time_hi 
+
+The least significant long consists of the following unsigned fields: 
+
+0xC000000000000000 variant 0x3FFF000000000000 clock_seq 0x0000FFFFFFFFFFFF node 
+
+The variant field contains a value which identifies the layout of theUUID. The 
+bit layout described above is valid only for aUUIDwith a variant value of 2, 
+which indicates the Leach-Salz variant. 
+
+The version field holds a value that describes the type of thisUUID. There are 
+four different basic types of UUIDs: time-based, DCE security, name-based, and 
+randomly generated UUIDs. These types have a version value of 1, 2, 3 and 4, 
+respectively. 
+
+For more information including algorithms used to createUUIDs, see RFC4122: A 
+Universally Unique IDentifier (UUID) URN Namespace, section 4.2 Algorithms for 
+Creating a Time-Based UUID. 
+
+
+
+*java.util.UUID(long,long)*
+
+public UUID(
+  long mostSigBits,
+  long leastSigBits)
+
+Constructs a newUUIDusing the specified data.mostSigBitsis used for the most 
+significant 64 bits of theUUIDandleastSigBitsbecomes the least significant 64 
+bits of theUUID. 
+
+    mostSigBits - The most significant bits of the {@code UUID} 
+    leastSigBits - The least significant bits of the {@code UUID} 
+
+*java.util.UUID.clockSequence()*
+
+public int clockSequence()
+
+The clock sequence value associated with this UUID. 
+
+The 14 bit clock sequence value is constructed from the clock sequence field of 
+this UUID. The clock sequence field is used to guarantee temporal uniqueness in 
+a time-based UUID. 
+
+TheclockSequencevalue is only meaningful in a time-based UUID, which has 
+version type 1. If this UUID is not a time-based UUID then this method throws 
+UnsupportedOperationException. 
+
+
+
+    Returns: The clock sequence of this {@code UUID} 
+
+*java.util.UUID.compareTo(UUID)*
+
+public int compareTo(java.util.UUID val)
+
+Compares this UUID with the specified UUID. 
+
+The first of two UUIDs is greater than the second if the most significant field 
+in which the UUIDs differ is greater for the first UUID. 
+
+
+    val - {@code UUID} to which this {@code UUID} is to be compared 
+
+    Returns: -1, 0 or 1 as this {@code UUID} is less than, equal to, or greater than {@code 
+             val} 
+
+*java.util.UUID.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares this object to the specified object. The result istrueif and only if 
+the argument is notnull, is aUUIDobject, has the same variant, and contains the 
+same value, bit for bit, as thisUUID. 
+
+
+    obj - The object to be compared 
+
+    Returns: {@code true} if the objects are the same; {@code false} otherwise 
+
+*java.util.UUID.fromString(String)*
+
+public static |java.util.UUID| fromString(java.lang.String name)
+
+Creates aUUIDfrom the string standard representation as described in the 
+(|java.util.UUID|) method. 
+
+
+    name - A string that specifies a {@code UUID} 
+
+    Returns: A {@code UUID} with the specified value 
+
+*java.util.UUID.getLeastSignificantBits()*
+
+public long getLeastSignificantBits()
+
+Returns the least significant 64 bits of this UUID's 128 bit value. 
+
+
+
+    Returns: The least significant 64 bits of this UUID's 128 bit value 
+
+*java.util.UUID.getMostSignificantBits()*
+
+public long getMostSignificantBits()
+
+Returns the most significant 64 bits of this UUID's 128 bit value. 
+
+
+
+    Returns: The most significant 64 bits of this UUID's 128 bit value 
+
+*java.util.UUID.hashCode()*
+
+public int hashCode()
+
+Returns a hash code for thisUUID. 
+
+
+
+    Returns: A hash code value for this {@code UUID} 
+
+*java.util.UUID.nameUUIDFromBytes(byte[])*
+
+public static |java.util.UUID| nameUUIDFromBytes(byte[] name)
+
+Static factory to retrieve a type 3 (name based)UUIDbased on the specified byte 
+array. 
+
+
+    name - A byte array to be used to construct a {@code UUID} 
+
+    Returns: A {@code UUID} generated from the specified array 
+
+*java.util.UUID.node()*
+
+public long node()
+
+The node value associated with this UUID. 
+
+The 48 bit node value is constructed from the node field of this UUID. This 
+field is intended to hold the IEEE 802 address of the machine that generated 
+this UUID to guarantee spatial uniqueness. 
+
+The node value is only meaningful in a time-based UUID, which has version type 
+1. If this UUID is not a time-based UUID then this method throws 
+UnsupportedOperationException. 
+
+
+
+    Returns: The node value of this {@code UUID} 
+
+*java.util.UUID.randomUUID()*
+
+public static |java.util.UUID| randomUUID()
+
+Static factory to retrieve a type 4 (pseudo randomly generated) UUID. 
+
+TheUUIDis generated using a cryptographically strong pseudo random number 
+generator. 
+
+
+
+    Returns: A randomly generated {@code UUID} 
+
+*java.util.UUID.timestamp()*
+
+public long timestamp()
+
+The timestamp value associated with this UUID. 
+
+The 60 bit timestamp value is constructed from the time_low, time_mid, and 
+time_hi fields of thisUUID. The resulting timestamp is measured in 
+100-nanosecond units since midnight, October 15, 1582 UTC. 
+
+The timestamp value is only meaningful in a time-based UUID, which has version 
+type 1. If thisUUIDis not a time-based UUID then this method throws 
+UnsupportedOperationException. 
+
+
+
+*java.util.UUID.toString()*
+
+public |java.lang.String| toString()
+
+Returns aStringobject representing thisUUID. 
+
+The UUID string representation is as described by this BNF: 
+
+UUID = "-" "-" "-" "-" 
+
+time_low = 4* time_mid = 2* time_high_and_version = 2* variant_and_sequence = 
+2* node = 6* hexOctet = hexDigit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | 
+"7" | "8" | "9" | "a" | "b" | "c" | "d" | "e" | "f" | "A" | "B" | "C" | "D" | 
+"E" | "F" 
+
+
+
+    Returns: A string representation of this {@code UUID} 
+
+*java.util.UUID.variant()*
+
+public int variant()
+
+The variant number associated with thisUUID. The variant number describes the 
+layout of theUUID. 
+
+The variant number has the following meaning: 
+
+0 Reserved for NCS backward compatibility 2 IETFRFC4122 (Leach-Salz), used by 
+this class 6 Reserved, Microsoft Corporation backward compatibility 7 Reserved 
+for future definition 
+
+
+
+    Returns: The variant number of this {@code UUID} 
+
+*java.util.UUID.version()*
+
+public int version()
+
+The version number associated with thisUUID. The version number describes how 
+thisUUIDwas generated. 
+
+The version number has the following meaning: 
+
+1 Time-based UUID 2 DCE security UUID 3 Name-based UUID 4 Randomly generated 
+UUID 
+
+
+
+    Returns: The version number of this {@code UUID} 
+
+

@@ -1,0 +1,320 @@
+*javax.lang.model.util.Types* *Types* Utility methods for operating on types.
+
+public interface interface Types
+
+
+|javax.lang.model.util.Types_Description|
+|javax.lang.model.util.Types_Fields|
+|javax.lang.model.util.Types_Constructors|
+|javax.lang.model.util.Types_Methods|
+
+================================================================================
+
+*javax.lang.model.util.Types_Methods*
+|javax.lang.model.util.Types.asElement(TypeMirror)|Returns the element correspo
+|javax.lang.model.util.Types.asMemberOf(DeclaredType,Element)|Returns the type 
+|javax.lang.model.util.Types.boxedClass(PrimitiveType)|Returns the class of a b
+|javax.lang.model.util.Types.capture(TypeMirror)|Applies capture conversion to 
+|javax.lang.model.util.Types.contains(TypeMirror,TypeMirror)|Tests whether one 
+|javax.lang.model.util.Types.directSupertypes(TypeMirror)|Returns the direct su
+|javax.lang.model.util.Types.erasure(TypeMirror)|Returns the erasure of a type.
+|javax.lang.model.util.Types.getArrayType(TypeMirror)|Returns an array type wit
+|javax.lang.model.util.Types.getDeclaredType(DeclaredType,TypeElement,TypeMirror...)|
+|javax.lang.model.util.Types.getDeclaredType(TypeElement,TypeMirror...)|Returns
+|javax.lang.model.util.Types.getNoType(TypeKind)|Returns a pseudo-type used whe
+|javax.lang.model.util.Types.getNullType()|Returns the null type.
+|javax.lang.model.util.Types.getPrimitiveType(TypeKind)|Returns a primitive typ
+|javax.lang.model.util.Types.getWildcardType(TypeMirror,TypeMirror)|Returns a n
+|javax.lang.model.util.Types.isAssignable(TypeMirror,TypeMirror)|Tests whether 
+|javax.lang.model.util.Types.isSameType(TypeMirror,TypeMirror)|Tests whether tw
+|javax.lang.model.util.Types.isSubsignature(ExecutableType,ExecutableType)|Test
+|javax.lang.model.util.Types.isSubtype(TypeMirror,TypeMirror)|Tests whether one
+|javax.lang.model.util.Types.unboxedType(TypeMirror)|Returns the type (a primit
+
+*javax.lang.model.util.Types_Description*
+
+Utility methods for operating on types. 
+
+Compatibility Note: Methods may be added to this interface in future releases 
+of the platform. 
+
+
+
+*javax.lang.model.util.Types.asElement(TypeMirror)*
+
+public |javax.lang.model.element.Element| asElement(javax.lang.model.type.TypeMirror t)
+
+Returns the element corresponding to a type. The type may be 
+aDeclaredTypeorTypeVariable. Returnsnullif the type is not one with a 
+corresponding element. 
+
+
+
+    Returns: the element corresponding to the given type 
+
+*javax.lang.model.util.Types.asMemberOf(DeclaredType,Element)*
+
+public |javax.lang.model.type.TypeMirror| asMemberOf(
+  javax.lang.model.type.DeclaredType containing,
+  javax.lang.model.element.Element element)
+
+Returns the type of an element when that element is viewed as a member of, or 
+otherwise directly contained by, a given type. For example, when viewed as a 
+member of the parameterized typeSet, theSet.addmethod is anExecutableTypewhose 
+parameter is of typeString. 
+
+
+    containing - the containing type 
+    element - the element 
+
+    Returns: the type of the element as viewed from the containing type 
+
+*javax.lang.model.util.Types.boxedClass(PrimitiveType)*
+
+public |javax.lang.model.element.TypeElement| boxedClass(javax.lang.model.type.PrimitiveType p)
+
+Returns the class of a boxed value of a given primitive type. That is, boxing 
+conversion is applied. 
+
+
+    p - the primitive type to be converted 
+
+    Returns: the class of a boxed value of type {@code p} 
+
+*javax.lang.model.util.Types.capture(TypeMirror)*
+
+public |javax.lang.model.type.TypeMirror| capture(javax.lang.model.type.TypeMirror t)
+
+Applies capture conversion to a type. 
+
+
+    t - the type to be converted 
+
+    Returns: the result of applying capture conversion 
+
+*javax.lang.model.util.Types.contains(TypeMirror,TypeMirror)*
+
+public boolean contains(
+  javax.lang.model.type.TypeMirror t1,
+  javax.lang.model.type.TypeMirror t2)
+
+Tests whether one type argument contains another. 
+
+
+    t1 - the first type 
+    t2 - the second type 
+
+    Returns: {@code true} if and only if the first type contains the second 
+
+*javax.lang.model.util.Types.directSupertypes(TypeMirror)*
+
+public |java.util.List|<? extends javax.lang.model.type.TypeMirror> directSupertypes(javax.lang.model.type.TypeMirror t)
+
+Returns the direct supertypes of a type. The interface types, if any, will 
+appear last in the list. 
+
+
+    t - the type being examined 
+
+    Returns: the direct supertypes, or an empty list if none 
+
+*javax.lang.model.util.Types.erasure(TypeMirror)*
+
+public |javax.lang.model.type.TypeMirror| erasure(javax.lang.model.type.TypeMirror t)
+
+Returns the erasure of a type. 
+
+
+    t - the type to be erased 
+
+    Returns: the erasure of the given type 
+
+*javax.lang.model.util.Types.getArrayType(TypeMirror)*
+
+public |javax.lang.model.type.ArrayType| getArrayType(javax.lang.model.type.TypeMirror componentType)
+
+Returns an array type with the specified component type. 
+
+
+    componentType - the component type 
+
+    Returns: an array type with the specified component type. 
+
+*javax.lang.model.util.Types.getDeclaredType(DeclaredType,TypeElement,TypeMirror...)*
+
+public |javax.lang.model.type.DeclaredType| getDeclaredType(
+  javax.lang.model.type.DeclaredType containing,
+  javax.lang.model.element.TypeElement typeElem,
+  javax.lang.model.type.TypeMirror[] typeArgs)
+
+Returns the type corresponding to a type element and actual type arguments, 
+given a containing type(|javax.lang.model.type.DeclaredType|) of which it is a 
+member. The parameterized typeOuter.Inner, for example, may be constructed by 
+first using (|javax.lang.model.util.Types|) to get the typeOuter, and then 
+invoking this method. 
+
+If the containing type is a parameterized type, the number of type arguments 
+must equal the number oftypeElem's formal type parameters. If it is not 
+parameterized or if it isnull, this method is equivalent 
+togetDeclaredType(typeElem, typeArgs). 
+
+
+    containing - the containing type, or {@code null} if none 
+    typeElem - the type element 
+    typeArgs - the actual type arguments 
+
+    Returns: the type corresponding to the type element and actual type arguments, contained 
+             within the given type 
+
+*javax.lang.model.util.Types.getDeclaredType(TypeElement,TypeMirror...)*
+
+public |javax.lang.model.type.DeclaredType| getDeclaredType(
+  javax.lang.model.element.TypeElement typeElem,
+  javax.lang.model.type.TypeMirror[] typeArgs)
+
+Returns the type corresponding to a type element and actual type arguments. 
+Given the type element forSetand the type mirror forString, for example, this 
+method may be used to get the parameterized typeSet. 
+
+The number of type arguments must either equal the number of the type element's 
+formal type parameters, or must be zero. If zero, and if the type element is 
+generic, then the type element's raw type is returned. 
+
+If a parameterized type is being returned, its type element must not be 
+contained within a generic outer class. The parameterized typeOuter.Inner, for 
+example, may be constructed by first using this method to get the typeOuter, 
+and then invoking (|javax.lang.model.util.Types|) . 
+
+
+    typeElem - the type element 
+    typeArgs - the actual type arguments 
+
+    Returns: the type corresponding to the type element and actual type arguments 
+
+*javax.lang.model.util.Types.getNoType(TypeKind)*
+
+public |javax.lang.model.type.NoType| getNoType(javax.lang.model.type.TypeKind kind)
+
+Returns a pseudo-type used where no actual type is appropriate. The kind of 
+type to return may be either VOID(|javax.lang.model.type.TypeKind|) or 
+NONE(|javax.lang.model.type.TypeKind|) . For packages, use 
+(|javax.lang.model.util.Elements|) .asType()instead. 
+
+
+    kind - the kind of type to return 
+
+    Returns: a pseudo-type of kind {@code VOID} or {@code NONE} 
+
+*javax.lang.model.util.Types.getNullType()*
+
+public |javax.lang.model.type.NullType| getNullType()
+
+Returns the null type. This is the type ofnull. 
+
+
+
+    Returns: the null type 
+
+*javax.lang.model.util.Types.getPrimitiveType(TypeKind)*
+
+public |javax.lang.model.type.PrimitiveType| getPrimitiveType(javax.lang.model.type.TypeKind kind)
+
+Returns a primitive type. 
+
+
+    kind - the kind of primitive type to return 
+
+    Returns: a primitive type 
+
+*javax.lang.model.util.Types.getWildcardType(TypeMirror,TypeMirror)*
+
+public |javax.lang.model.type.WildcardType| getWildcardType(
+  javax.lang.model.type.TypeMirror extendsBound,
+  javax.lang.model.type.TypeMirror superBound)
+
+Returns a new wildcard type argument. Either of the wildcard's bounds may be 
+specified, or neither, but not both. 
+
+
+    extendsBound - the extends (upper) bound, or {@code null} if none 
+    superBound - the super (lower) bound, or {@code null} if none 
+
+    Returns: a new wildcard 
+
+*javax.lang.model.util.Types.isAssignable(TypeMirror,TypeMirror)*
+
+public boolean isAssignable(
+  javax.lang.model.type.TypeMirror t1,
+  javax.lang.model.type.TypeMirror t2)
+
+Tests whether one type is assignable to another. 
+
+
+    t1 - the first type 
+    t2 - the second type 
+
+    Returns: {@code true} if and only if the first type is assignable to the second 
+
+*javax.lang.model.util.Types.isSameType(TypeMirror,TypeMirror)*
+
+public boolean isSameType(
+  javax.lang.model.type.TypeMirror t1,
+  javax.lang.model.type.TypeMirror t2)
+
+Tests whether twoTypeMirrorobjects represent the same type. 
+
+Caveat: if either of the arguments to this method represents a wildcard, this 
+method will return false. As a consequence, a wildcard is not the same type as 
+itself. This might be surprising at first, but makes sense once you consider 
+that an example like this must be rejected by the compiler: 
+
+List list = new ArrayList();list.add(list.get(0)); 
+
+
+    t1 - the first type 
+    t2 - the second type 
+
+    Returns: {@code true} if and only if the two types are the same 
+
+*javax.lang.model.util.Types.isSubsignature(ExecutableType,ExecutableType)*
+
+public boolean isSubsignature(
+  javax.lang.model.type.ExecutableType m1,
+  javax.lang.model.type.ExecutableType m2)
+
+Tests whether the signature of one method is a subsignature of another. 
+
+
+    m1 - the first method 
+    m2 - the second method 
+
+    Returns: {@code true} if and only if the first signature is a subsignature of the second 
+
+*javax.lang.model.util.Types.isSubtype(TypeMirror,TypeMirror)*
+
+public boolean isSubtype(
+  javax.lang.model.type.TypeMirror t1,
+  javax.lang.model.type.TypeMirror t2)
+
+Tests whether one type is a subtype of another. Any type is considered to be a 
+subtype of itself. 
+
+
+    t1 - the first type 
+    t2 - the second type 
+
+    Returns: {@code true} if and only if the first type is a subtype of the second 
+
+*javax.lang.model.util.Types.unboxedType(TypeMirror)*
+
+public |javax.lang.model.type.PrimitiveType| unboxedType(javax.lang.model.type.TypeMirror t)
+
+Returns the type (a primitive type) of unboxed values of a given type. That is, 
+unboxing conversion is applied. 
+
+
+    t - the type to be unboxed 
+
+    Returns: the type of an unboxed value of type {@code t} 
+
+

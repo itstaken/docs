@@ -1,0 +1,71 @@
+*java.awt.Paint* *Paint* This Paint interface defines how color patterns
+ can be
+
+public interface interface Paint
+
+  implements |java.awt.Transparency|
+
+|java.awt.Paint_Description|
+|java.awt.Paint_Fields|
+|java.awt.Paint_Constructors|
+|java.awt.Paint_Methods|
+
+================================================================================
+
+*java.awt.Paint_Methods*
+|java.awt.Paint.createContext(ColorModel,Rectangle,Rectangle2D,AffineTransform,RenderingHints)|
+
+*java.awt.Paint_Description*
+
+This Paint interface defines how color patterns can be generated for 
+(|java.awt.Graphics2D|) operations. A class implementing the Paint interface is 
+added to the Graphics2D context in order to define the color pattern used by 
+the draw and fill methods. 
+
+Instances of classes implementing Paint must be read-only because the 
+Graphics2D does not clone these objects when they are set as an attribute with 
+the setPaint method or when the Graphics2D object is itself cloned. 
+
+
+
+*java.awt.Paint.createContext(ColorModel,Rectangle,Rectangle2D,AffineTransform,RenderingHints)*
+
+public |java.awt.PaintContext| createContext(
+  java.awt.image.ColorModel cm,
+  java.awt.Rectangle deviceBounds,
+  java.awt.geom.Rectangle2D userBounds,
+  java.awt.geom.AffineTransform xform,
+  java.awt.RenderingHints hints)
+
+Creates and returns a (|java.awt.PaintContext|) used to generate the color 
+pattern. The arguments to this method convey additional information about the 
+rendering operation that may be used or ignored on various implementations of 
+thePaintinterface. A caller must pass non-nullvalues for all of the arguments 
+except for theColorModelargument which may benullto indicate that no 
+specificColorModeltype is preferred. Implementations of thePaintinterface are 
+allowed to use or ignore any of the arguments as makes sense for their 
+function, and are not constrained to use the specifiedColorModelfor the 
+returnedPaintContext, even if it is notnull. Implementations are allowed to 
+throwNullPointerExceptionfor anynullargument other than theColorModelargument, 
+but are not required to do so. 
+
+
+    cm - the preferred {@link ColorModel} which represents the most convenient format 
+       for the caller to receive the pixel data, or {@code null} if there is no 
+       preference. 
+    deviceBounds - the device space bounding box of the graphics primitive being rendered. 
+       Implementations of the {@code Paint} interface are allowed to throw 
+       {@code NullPointerException} for a {@code null} {@code deviceBounds}. 
+    userBounds - the user space bounding box of the graphics primitive being rendered. 
+       Implementations of the {@code Paint} interface are allowed to throw 
+       {@code NullPointerException} for a {@code null} {@code userBounds}. 
+    xform - the {@link AffineTransform} from user space into device space. Implementations 
+       of the {@code Paint} interface are allowed to throw {@code 
+       NullPointerException} for a {@code null} {@code xform}. 
+    hints - the set of hints that the context object can use to choose between rendering 
+       alternatives. Implementations of the {@code Paint} interface are allowed 
+       to throw {@code NullPointerException} for a {@code null} {@code hints}. 
+
+    Returns: the {@code PaintContext} for generating color patterns. 
+
+

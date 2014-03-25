@@ -1,0 +1,650 @@
+*java.nio.file.spi.FileSystemProvider* *FileSystemProvider* Service-provider cla
+
+public abstract class FileSystemProvider
+  extends    |java.lang.Object|
+
+|java.nio.file.spi.FileSystemProvider_Description|
+|java.nio.file.spi.FileSystemProvider_Fields|
+|java.nio.file.spi.FileSystemProvider_Constructors|
+|java.nio.file.spi.FileSystemProvider_Methods|
+
+================================================================================
+
+*java.nio.file.spi.FileSystemProvider_Constructors*
+|java.nio.file.spi.FileSystemProvider()|Initializes a new instance of this clas
+
+*java.nio.file.spi.FileSystemProvider_Methods*
+|java.nio.file.spi.FileSystemProvider.checkAccess(Path,AccessMode...)|Checks th
+|java.nio.file.spi.FileSystemProvider.copy(Path,Path,CopyOption...)|Copy a file
+|java.nio.file.spi.FileSystemProvider.createDirectory(Path,FileAttribute<?>...)|
+|java.nio.file.spi.FileSystemProvider.createLink(Path,Path)|Creates a new link 
+|java.nio.file.spi.FileSystemProvider.createSymbolicLink(Path,Path,FileAttribute<?>...)|
+|java.nio.file.spi.FileSystemProvider.delete(Path)|Deletes a file.
+|java.nio.file.spi.FileSystemProvider.deleteIfExists(Path)|Deletes a file if it
+|java.nio.file.spi.FileSystemProvider.getFileAttributeView(Path,Class<V>,LinkOption...)|
+|java.nio.file.spi.FileSystemProvider.getFileStore(Path)|Returns theFileStorere
+|java.nio.file.spi.FileSystemProvider.getFileSystem(URI)|Returns an existingFil
+|java.nio.file.spi.FileSystemProvider.getPath(URI)|Return aPathobject by conver
+|java.nio.file.spi.FileSystemProvider.getScheme()|Returns the URI scheme that i
+|java.nio.file.spi.FileSystemProvider.installedProviders()|Returns a list of th
+|java.nio.file.spi.FileSystemProvider.isHidden(Path)|Tells whether or not a fil
+|java.nio.file.spi.FileSystemProvider.isSameFile(Path,Path)|Tests if two paths 
+|java.nio.file.spi.FileSystemProvider.move(Path,Path,CopyOption...)|Move or ren
+|java.nio.file.spi.FileSystemProvider.newAsynchronousFileChannel(Path,Set<?extendsOpenOption>,ExecutorService,FileAttribute<?>...)|
+|java.nio.file.spi.FileSystemProvider.newByteChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)|
+|java.nio.file.spi.FileSystemProvider.newDirectoryStream(Path,DirectoryStream.Filter<?superPath>)|
+|java.nio.file.spi.FileSystemProvider.newFileChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)|
+|java.nio.file.spi.FileSystemProvider.newFileSystem(Path,Map<String,?>)|Constru
+|java.nio.file.spi.FileSystemProvider.newFileSystem(URI,Map<String,?>)|Construc
+|java.nio.file.spi.FileSystemProvider.newInputStream(Path,OpenOption...)|Opens 
+|java.nio.file.spi.FileSystemProvider.newOutputStream(Path,OpenOption...)|Opens
+|java.nio.file.spi.FileSystemProvider.readAttributes(Path,Class<A>,LinkOption...)|
+|java.nio.file.spi.FileSystemProvider.readAttributes(Path,String,LinkOption...)|
+|java.nio.file.spi.FileSystemProvider.readSymbolicLink(Path)|Reads the target o
+|java.nio.file.spi.FileSystemProvider.setAttribute(Path,String,Object,LinkOption...)|
+
+*java.nio.file.spi.FileSystemProvider_Description*
+
+Service-provider class for file systems. The methods defined by the 
+(|java.nio.file.Files|) class will typically delegate to an instance of this 
+class. 
+
+A file system provider is a concrete implementation of this class that 
+implements the abstract methods defined by this class. A provider is identified 
+by aURI scheme(|java.nio.file.spi.FileSystemProvider|) . The default provider 
+is identified by the URI scheme "file". It creates the 
+(|java.nio.file.FileSystem|) that provides access to the file systems 
+accessible to the Java virtual machine. The (|java.nio.file.FileSystems|) class 
+defines how file system providers are located and loaded. The default provider 
+is typically a system-default provider but may be overridden if the system 
+propertyjava.nio.file.spi.DefaultFileSystemProvideris set. In that case, the 
+provider has a one argument constructor whose formal parameter type 
+isFileSystemProvider. All other providers have a zero argument constructor that 
+initializes the provider. 
+
+A provider is a factory for one or more (|java.nio.file.FileSystem|) instances. 
+Each file system is identified by aURIwhere the URI's scheme matches the 
+provider's scheme(|java.nio.file.spi.FileSystemProvider|) . The default file 
+system, for example, is identified by the URI"file:///". A memory-based file 
+system, for example, may be identified by a URI such as"memory:///?name=logfs". 
+The newFileSystem(|java.nio.file.spi.FileSystemProvider|) method may be used to 
+create a file system, and the 
+getFileSystem(|java.nio.file.spi.FileSystemProvider|) method may be used to 
+obtain a reference to an existing file system created by the provider. Where a 
+provider is the factory for a single file system then it is provider dependent 
+if the file system is created when the provider is initialized, or later when 
+thenewFileSystemmethod is invoked. In the case of the default provider, 
+theFileSystemis created when the provider is initialized. 
+
+All of the methods in this class are safe for use by multiple concurrent 
+threads. 
+
+
+
+*java.nio.file.spi.FileSystemProvider()*
+
+protected FileSystemProvider()
+
+Initializes a new instance of this class. 
+
+During construction a provider may safely access files associated with the 
+default provider but care needs to be taken to avoid circular loading of other 
+installed providers. If circular loading of installed providers is detected 
+then an unspecified error is thrown. 
+
+
+*java.nio.file.spi.FileSystemProvider.checkAccess(Path,AccessMode...)*
+
+public abstract void checkAccess(
+  java.nio.file.Path path,
+  java.nio.file.AccessMode[] modes)
+  throws |java.io.IOException|
+         
+Checks the existence, and optionally the accessibility, of a file. 
+
+This method may be used by the isReadable(|java.nio.file.Files|) , 
+isWritable(|java.nio.file.Files|) and isExecutable(|java.nio.file.Files|) 
+methods to check the accessibility of a file. 
+
+This method checks the existence of a file and that this Java virtual machine 
+has appropriate privileges that would allow it access the file according to all 
+of access modes specified in themodesparameter as follows: 
+
+Value Description 
+
+READ(|java.nio.file.AccessMode|) Checks that the file exists and that the Java 
+virtual machine has permission to read the file. 
+
+WRITE(|java.nio.file.AccessMode|) Checks that the file exists and that the Java 
+virtual machine has permission to write to the file, 
+
+EXECUTE(|java.nio.file.AccessMode|) Checks that the file exists and that the 
+Java virtual machine has permission to execute(|java.lang.Runtime|) the file. 
+The semantics may differ when checking access to a directory. For example, on 
+UNIX systems, checking forEXECUTEaccess checks that the Java virtual machine 
+has permission to search the directory in order to access file or 
+subdirectories. 
+
+
+
+If themodesparameter is of length zero, then the existence of the file is 
+checked. 
+
+This method follows symbolic links if the file referenced by this object is a 
+symbolic link. Depending on the implementation, this method may require to read 
+file permissions, access control lists, or other file attributes in order to 
+check the effective access to the file. To determine the effective access to a 
+file may require access to several attributes and so in some implementations 
+this method may not be atomic with respect to other file system operations. 
+
+
+    path - the path to the file to check 
+    modes - The access modes to check; may have zero elements 
+
+*java.nio.file.spi.FileSystemProvider.copy(Path,Path,CopyOption...)*
+
+public abstract void copy(
+  java.nio.file.Path source,
+  java.nio.file.Path target,
+  java.nio.file.CopyOption[] options)
+  throws |java.io.IOException|
+         
+Copy a file to a target file. This method works in exactly the manner specified 
+by the (|java.nio.file.Files|) method except that both the source and target 
+paths must be associated with this provider. 
+
+
+    source - the path to the file to copy 
+    target - the path to the target file 
+    options - options specifying how the copy should be done 
+
+*java.nio.file.spi.FileSystemProvider.createDirectory(Path,FileAttribute<?>...)*
+
+public abstract void createDirectory(
+  java.nio.file.Path dir,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a new directory. This method works in exactly the manner specified by 
+the (|java.nio.file.Files|) method. 
+
+
+    dir - the directory to create 
+    attrs - an optional list of file attributes to set atomically when creating the 
+       directory 
+
+*java.nio.file.spi.FileSystemProvider.createLink(Path,Path)*
+
+public void createLink(
+  java.nio.file.Path link,
+  java.nio.file.Path existing)
+  throws |java.io.IOException|
+         
+Creates a new link (directory entry) for an existing file. This method works in 
+exactly the manner specified by the (|java.nio.file.Files|) method. 
+
+The default implementation of this method throwsUnsupportedOperationException. 
+
+
+    link - the link (directory entry) to create 
+    existing - a path to an existing file 
+
+*java.nio.file.spi.FileSystemProvider.createSymbolicLink(Path,Path,FileAttribute<?>...)*
+
+public void createSymbolicLink(
+  java.nio.file.Path link,
+  java.nio.file.Path target,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Creates a symbolic link to a target. This method works in exactly the manner 
+specified by the (|java.nio.file.Files|) method. 
+
+The default implementation of this method throwsUnsupportedOperationException. 
+
+
+    link - the path of the symbolic link to create 
+    target - the target of the symbolic link 
+    attrs - the array of attributes to set atomically when creating the symbolic link 
+
+*java.nio.file.spi.FileSystemProvider.delete(Path)*
+
+public abstract void delete(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Deletes a file. This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method. 
+
+
+    path - the path to the file to delete 
+
+*java.nio.file.spi.FileSystemProvider.deleteIfExists(Path)*
+
+public boolean deleteIfExists(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Deletes a file if it exists. This method works in exactly the manner specified 
+by the (|java.nio.file.Files|) method. 
+
+The default implementation of this method simply invokes 
+(|java.nio.file.spi.FileSystemProvider|) ignoring theNoSuchFileExceptionwhen 
+the file does not exist. It may be overridden where appropriate. 
+
+
+    path - the path to the file to delete 
+
+    Returns: {@code true} if the file was deleted by this method; {@code false} if the file 
+             could not be deleted because it did not exist 
+
+*java.nio.file.spi.FileSystemProvider.getFileAttributeView(Path,Class<V>,LinkOption...)*
+
+public abstract |V| getFileAttributeView(
+  java.nio.file.Path path,
+  java.lang.Class<V> type,
+  java.nio.file.LinkOption[] options)
+
+Returns a file attribute view of a given type. This method works in exactly the 
+manner specified by the (|java.nio.file.Files|) method. 
+
+
+    path - the path to the file 
+    type - the {@code Class} object corresponding to the file attribute view 
+    options - options indicating how symbolic links are handled 
+
+    Returns: a file attribute view of the specified type, or {@code null} if the attribute 
+             view type is not available 
+
+*java.nio.file.spi.FileSystemProvider.getFileStore(Path)*
+
+public abstract |java.nio.file.FileStore| getFileStore(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Returns the (|java.nio.file.FileStore|) representing the file store where a 
+file is located. This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method. 
+
+
+    path - the path to the file 
+
+    Returns: the file store where the file is stored 
+
+*java.nio.file.spi.FileSystemProvider.getFileSystem(URI)*
+
+public abstract |java.nio.file.FileSystem| getFileSystem(java.net.URI uri)
+
+Returns an existingFileSystemcreated by this provider. 
+
+This method returns a reference to aFileSystemthat was created by invoking the 
+newFileSystem(URI,Map)(|java.nio.file.spi.FileSystemProvider|) method. File 
+systems created the 
+newFileSystem(Path,Map)(|java.nio.file.spi.FileSystemProvider|) method are not 
+returned by this method. The file system is identified by itsURI. Its exact 
+form is highly provider dependent. In the case of the default provider the 
+URI's path component is"/"and the authority, query and fragment components are 
+undefined (Undefined components are represented bynull). 
+
+Once a file system created by this provider is 
+closed(|java.nio.file.FileSystem|) it is provider-dependent if this method 
+returns a reference to the closed file system or throws 
+(|java.nio.file.FileSystemNotFoundException|) . If the provider allows a new 
+file system to be created with the same URI as a file system it previously 
+created then this method throws the exception if invoked after the file system 
+is closed (and before a new instance is created by the 
+newFileSystem(|java.nio.file.spi.FileSystemProvider|) method). 
+
+If a security manager is installed then a provider implementation may require 
+to check a permission before returning a reference to an existing file system. 
+In the case of the default(|java.nio.file.FileSystems|) file system, no 
+permission check is required. 
+
+
+    uri - URI reference 
+
+    Returns: The file system 
+
+*java.nio.file.spi.FileSystemProvider.getPath(URI)*
+
+public abstract |java.nio.file.Path| getPath(java.net.URI uri)
+
+Return aPathobject by converting the given (|java.net.URI|) . The 
+resultingPathis associated with a (|java.nio.file.FileSystem|) that already 
+exists or is constructed automatically. 
+
+The exact form of the URI is file system provider dependent. In the case of the 
+default provider, the URI scheme is"file"and the given URI has a non-empty path 
+component, and undefined query, and fragment components. The resultingPathis 
+associated with the default default(|java.nio.file.FileSystems|) FileSystem. 
+
+If a security manager is installed then a provider implementation may require 
+to check a permission. In the case of the default(|java.nio.file.FileSystems|) 
+file system, no permission check is required. 
+
+
+    uri - The URI to convert 
+
+*java.nio.file.spi.FileSystemProvider.getScheme()*
+
+public abstract |java.lang.String| getScheme()
+
+Returns the URI scheme that identifies this provider. 
+
+
+
+    Returns: The URI scheme 
+
+*java.nio.file.spi.FileSystemProvider.installedProviders()*
+
+public static |java.util.List|<FileSystemProvider> installedProviders()
+
+Returns a list of the installed file system providers. 
+
+The first invocation of this method causes the default provider to be 
+initialized (if not already initialized) and loads any other installed 
+providers as described by the (|java.nio.file.FileSystems|) class. 
+
+
+
+    Returns: An unmodifiable list of the installed file system providers. The list contains 
+             at least one element, that is the default file system provider 
+
+*java.nio.file.spi.FileSystemProvider.isHidden(Path)*
+
+public abstract boolean isHidden(java.nio.file.Path path)
+  throws |java.io.IOException|
+         
+Tells whether or not a file is considered hidden. This method works in exactly 
+the manner specified by the (|java.nio.file.Files|) method. 
+
+This method is invoked by the isHidden(|java.nio.file.Files|) method. 
+
+
+    path - the path to the file to test 
+
+    Returns: {@code true} if the file is considered hidden 
+
+*java.nio.file.spi.FileSystemProvider.isSameFile(Path,Path)*
+
+public abstract boolean isSameFile(
+  java.nio.file.Path path,
+  java.nio.file.Path path2)
+  throws |java.io.IOException|
+         
+Tests if two paths locate the same file. This method works in exactly the 
+manner specified by the (|java.nio.file.Files|) method. 
+
+
+    path - one path to the file 
+    path2 - the other path 
+
+    Returns: {@code true} if, and only if, the two paths locate the same file 
+
+*java.nio.file.spi.FileSystemProvider.move(Path,Path,CopyOption...)*
+
+public abstract void move(
+  java.nio.file.Path source,
+  java.nio.file.Path target,
+  java.nio.file.CopyOption[] options)
+  throws |java.io.IOException|
+         
+Move or rename a file to a target file. This method works in exactly the manner 
+specified by the (|java.nio.file.Files|) method except that both the source and 
+target paths must be associated with this provider. 
+
+
+    source - the path to the file to move 
+    target - the path to the target file 
+    options - options specifying how the move should be done 
+
+*java.nio.file.spi.FileSystemProvider.newAsynchronousFileChannel(Path,Set<?extendsOpenOption>,ExecutorService,FileAttribute<?>...)*
+
+public |java.nio.channels.AsynchronousFileChannel| newAsynchronousFileChannel(
+  java.nio.file.Path path,
+  java.util.Set<? extends java.nio.file.OpenOption> options,
+  java.util.concurrent.ExecutorService executor,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Opens or creates a file for reading and/or writing, returning an asynchronous 
+file channel to access the file. This method works in exactly the manner 
+specified by the 
+AsynchronousFileChannel.open(|java.nio.channels.AsynchronousFileChannel|) 
+method. A provider that does not support all the features required to construct 
+an asynchronous file channel throwsUnsupportedOperationException. The default 
+provider is required to support the creation of asynchronous file channels. 
+When not overridden, the default implementation of this method 
+throwsUnsupportedOperationException. 
+
+
+    path - the path of the file to open or create 
+    options - options specifying how the file is opened 
+    executor - the thread pool or {@code null} to associate the channel with the default 
+       thread pool 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: a new asynchronous file channel 
+
+*java.nio.file.spi.FileSystemProvider.newByteChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)*
+
+public abstract |java.nio.channels.SeekableByteChannel| newByteChannel(
+  java.nio.file.Path path,
+  java.util.Set<? extends java.nio.file.OpenOption> options,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Opens or creates a file, returning a seekable byte channel to access the file. 
+This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method. 
+
+
+    path - the path to the file to open or create 
+    options - options specifying how the file is opened 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: a new seekable byte channel 
+
+*java.nio.file.spi.FileSystemProvider.newDirectoryStream(Path,DirectoryStream.Filter<?superPath>)*
+
+public abstract |java.nio.file.DirectoryStream|<Path> newDirectoryStream(
+  java.nio.file.Path dir,
+  java.nio.file.DirectoryStream.Filter<? super java.nio.file.Path> filter)
+  throws |java.io.IOException|
+         
+Opens a directory, returning aDirectoryStreamto iterate over the entries in the 
+directory. This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method. 
+
+
+    dir - the path to the directory 
+    filter - the directory stream filter 
+
+    Returns: a new and open {@code DirectoryStream} object 
+
+*java.nio.file.spi.FileSystemProvider.newFileChannel(Path,Set<?extendsOpenOption>,FileAttribute<?>...)*
+
+public |java.nio.channels.FileChannel| newFileChannel(
+  java.nio.file.Path path,
+  java.util.Set<? extends java.nio.file.OpenOption> options,
+  java.nio.file.attribute.FileAttribute[] attrs)
+  throws |java.io.IOException|
+         
+Opens or creates a file for reading and/or writing, returning a file channel to 
+access the file. This method works in exactly the manner specified by the 
+FileChannel.open(|java.nio.channels.FileChannel|) method. A provider that does 
+not support all the features required to construct a file channel 
+throwsUnsupportedOperationException. The default provider is required to 
+support the creation of file channels. When not overridden, the default 
+implementation throwsUnsupportedOperationException. 
+
+
+    path - the path of the file to open or create 
+    options - options specifying how the file is opened 
+    attrs - an optional list of file attributes to set atomically when creating the file 
+
+    Returns: a new file channel 
+
+*java.nio.file.spi.FileSystemProvider.newFileSystem(Path,Map<String,?>)*
+
+public |java.nio.file.FileSystem| newFileSystem(
+  java.nio.file.Path path,
+  java.util.Map<java.lang.String, ?> env)
+  throws |java.io.IOException|
+         
+Constructs a newFileSystemto access the contents of a file as a file system. 
+
+This method is intended for specialized providers of pseudo file systems where 
+the contents of one or more files is treated as a file system. Theenvparameter 
+is a map of provider specific properties to configure the file system. 
+
+If this provider does not support the creation of such file systems or if the 
+provider does not recognize the file type of the given file then it 
+throwsUnsupportedOperationException. The default implementation of this method 
+throwsUnsupportedOperationException. 
+
+
+    path - The path to the file 
+    env - A map of provider specific properties to configure the file system; may be 
+       empty 
+
+    Returns: A new file system 
+
+*java.nio.file.spi.FileSystemProvider.newFileSystem(URI,Map<String,?>)*
+
+public abstract |java.nio.file.FileSystem| newFileSystem(
+  java.net.URI uri,
+  java.util.Map<java.lang.String, ?> env)
+  throws |java.io.IOException|
+         
+Constructs a newFileSystemobject identified by a URI. This method is invoked by 
+the (|java.nio.file.FileSystems|) method to open a new file system identified 
+by a URI. 
+
+Theuriparameter is an absolute, hierarchical URI, with a scheme equal (without 
+regard to case) to the scheme supported by this provider. The exact form of the 
+URI is highly provider dependent. Theenvparameter is a map of provider specific 
+properties to configure the file system. 
+
+This method throws (|java.nio.file.FileSystemAlreadyExistsException|) if the 
+file system already exists because it was previously created by an invocation 
+of this method. Once a file system is closed(|java.nio.file.FileSystem|) it is 
+provider-dependent if the provider allows a new file system to be created with 
+the same URI as a file system it previously created. 
+
+
+    uri - URI reference 
+    env - A map of provider specific properties to configure the file system; may be 
+       empty 
+
+    Returns: A new file system 
+
+*java.nio.file.spi.FileSystemProvider.newInputStream(Path,OpenOption...)*
+
+public |java.io.InputStream| newInputStream(
+  java.nio.file.Path path,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens a file, returning an input stream to read from the file. This method 
+works in exactly the manner specified by the (|java.nio.file.Files|) method. 
+
+The default implementation of this method opens a channel to the file as if by 
+invoking the (|java.nio.file.spi.FileSystemProvider|) method and constructs a 
+stream that reads bytes from the channel. This method should be overridden 
+where appropriate. 
+
+
+    path - the path to the file to open 
+    options - options specifying how the file is opened 
+
+    Returns: a new input stream 
+
+*java.nio.file.spi.FileSystemProvider.newOutputStream(Path,OpenOption...)*
+
+public |java.io.OutputStream| newOutputStream(
+  java.nio.file.Path path,
+  java.nio.file.OpenOption[] options)
+  throws |java.io.IOException|
+         
+Opens or creates a file, returning an output stream that may be used to write 
+bytes to the file. This method works in exactly the manner specified by the 
+(|java.nio.file.Files|) method. 
+
+The default implementation of this method opens a channel to the file as if by 
+invoking the (|java.nio.file.spi.FileSystemProvider|) method and constructs a 
+stream that writes bytes to the channel. This method should be overridden where 
+appropriate. 
+
+
+    path - the path to the file to open or create 
+    options - options specifying how the file is opened 
+
+    Returns: a new output stream 
+
+*java.nio.file.spi.FileSystemProvider.readAttributes(Path,Class<A>,LinkOption...)*
+
+public abstract |A| readAttributes(
+  java.nio.file.Path path,
+  java.lang.Class<A> type,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Reads a file's attributes as a bulk operation. This method works in exactly the 
+manner specified by the (|java.nio.file.Files|) method. 
+
+
+    path - the path to the file 
+    type - the {@code Class} of the file attributes required to read 
+    options - options indicating how symbolic links are handled 
+
+    Returns: the file attributes 
+
+*java.nio.file.spi.FileSystemProvider.readAttributes(Path,String,LinkOption...)*
+
+public abstract |java.util.Map|<String,Object> readAttributes(
+  java.nio.file.Path path,
+  java.lang.String attributes,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Reads a set of file attributes as a bulk operation. This method works in 
+exactly the manner specified by the (|java.nio.file.Files|) method. 
+
+
+    path - the path to the file 
+    attributes - the attributes to read 
+    options - options indicating how symbolic links are handled 
+
+    Returns: a map of the attributes returned; may be empty. The map's keys are the 
+             attribute names, its values are the attribute values 
+
+*java.nio.file.spi.FileSystemProvider.readSymbolicLink(Path)*
+
+public |java.nio.file.Path| readSymbolicLink(java.nio.file.Path link)
+  throws |java.io.IOException|
+         
+Reads the target of a symbolic link. This method works in exactly the manner 
+specified by the (|java.nio.file.Files|) method. 
+
+The default implementation of this method throwsUnsupportedOperationException. 
+
+
+    link - the path to the symbolic link 
+
+*java.nio.file.spi.FileSystemProvider.setAttribute(Path,String,Object,LinkOption...)*
+
+public abstract void setAttribute(
+  java.nio.file.Path path,
+  java.lang.String attribute,
+  java.lang.Object value,
+  java.nio.file.LinkOption[] options)
+  throws |java.io.IOException|
+         
+Sets the value of a file attribute. This method works in exactly the manner 
+specified by the (|java.nio.file.Files|) method. 
+
+
+    path - the path to the file 
+    attribute - the attribute to set 
+    value - the attribute value 
+    options - options indicating how symbolic links are handled 
+
+

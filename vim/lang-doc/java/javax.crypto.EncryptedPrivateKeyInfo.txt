@@ -1,0 +1,203 @@
+*javax.crypto.EncryptedPrivateKeyInfo* *EncryptedPrivateKeyInfo* This class impl
+
+public class EncryptedPrivateKeyInfo
+  extends    |java.lang.Object|
+
+|javax.crypto.EncryptedPrivateKeyInfo_Description|
+|javax.crypto.EncryptedPrivateKeyInfo_Fields|
+|javax.crypto.EncryptedPrivateKeyInfo_Constructors|
+|javax.crypto.EncryptedPrivateKeyInfo_Methods|
+
+================================================================================
+
+*javax.crypto.EncryptedPrivateKeyInfo_Constructors*
+|javax.crypto.EncryptedPrivateKeyInfo(AlgorithmParameters,byte[])|Constructs an
+|javax.crypto.EncryptedPrivateKeyInfo(byte[])|Constructs (i.e., parses) an Encr
+|javax.crypto.EncryptedPrivateKeyInfo(String,byte[])|Constructs an EncryptedPri
+
+*javax.crypto.EncryptedPrivateKeyInfo_Methods*
+|javax.crypto.EncryptedPrivateKeyInfo.getAlgName()|Returns the encryption algor
+|javax.crypto.EncryptedPrivateKeyInfo.getAlgParameters()|Returns the algorithm 
+|javax.crypto.EncryptedPrivateKeyInfo.getEncoded()|Returns the ASN.1 encoding o
+|javax.crypto.EncryptedPrivateKeyInfo.getEncryptedData()|Returns the encrypted 
+|javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Cipher)|Extract the enclosed P
+|javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key)|Extract the enclosed PKCS
+|javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key,Provider)|Extract the encl
+|javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key,String)|Extract the enclos
+
+*javax.crypto.EncryptedPrivateKeyInfo_Description*
+
+This class implements the EncryptedPrivateKeyInfo type as defined in PKCS #8. 
+Its ASN.1 definition is as follows: 
+
+
+
+EncryptedPrivateKeyInfo ::= SEQUENCE { encryptionAlgorithm AlgorithmIdentifier, 
+encryptedData OCTET STRING } 
+
+AlgorithmIdentifier ::= SEQUENCE { algorithm OBJECT IDENTIFIER, parameters ANY 
+DEFINED BY algorithm OPTIONAL } 
+
+
+
+*javax.crypto.EncryptedPrivateKeyInfo(AlgorithmParameters,byte[])*
+
+public EncryptedPrivateKeyInfo(
+  java.security.AlgorithmParameters algParams,
+  byte[] encryptedData)
+  throws |java.security.NoSuchAlgorithmException|
+         
+Constructs an EncryptedPrivateKeyInfo from the encryption algorithm parameters 
+and the encrypted data. 
+
+    algParams - the algorithm parameters for the encryption algorithm. algParams.getEncoded() 
+       should return the ASN.1 encoded bytes of the parameters field of the 
+       AlgorithmIdentifer component of the EncryptedPrivateKeyInfo type. 
+    encryptedData - encrypted data. The contents of encrypedData are copied to protect against 
+       subsequent modification when constructing this object. 
+
+*javax.crypto.EncryptedPrivateKeyInfo(byte[])*
+
+public EncryptedPrivateKeyInfo(byte[] encoded)
+  throws |java.io.IOException|
+         
+Constructs (i.e., parses) an EncryptedPrivateKeyInfo from its ASN.1 encoding. 
+
+    encoded - the ASN.1 encoding of this object. The contents of the array are copied to 
+       protect against subsequent modification. 
+
+*javax.crypto.EncryptedPrivateKeyInfo(String,byte[])*
+
+public EncryptedPrivateKeyInfo(
+  java.lang.String algName,
+  byte[] encryptedData)
+  throws |java.security.NoSuchAlgorithmException|
+         
+Constructs an EncryptedPrivateKeyInfo from the encryption algorithm name and 
+the encrypted data. 
+
+Note: This constructor will use null as the value of the algorithm parameters. 
+If the encryption algorithm has parameters whose value is not null, a different 
+constructor, e.g. EncryptedPrivateKeyInfo(AlgorithmParameters, byte[]), should 
+be used. 
+
+    algName - encryption algorithm name. See Appendix A in the 
+
+Java Cryptography Architecture Reference Guide for information about standard 
+       Cipher algorithm names. 
+    encryptedData - encrypted data. The contents of encrypedData are copied to protect against 
+       subsequent modification when constructing this object. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getAlgName()*
+
+public |java.lang.String| getAlgName()
+
+Returns the encryption algorithm. Note: Standard name is returned instead of 
+the specified one in the constructor when such mapping is available. See 
+Appendix A in the <a href= 
+"/../technotes/guides/security/crypto/CryptoSpec.html#AppA"> Java Cryptography 
+Architecture Reference Guide for information about standard Cipher algorithm 
+names. 
+
+
+
+    Returns: the encryption algorithm name. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getAlgParameters()*
+
+public |java.security.AlgorithmParameters| getAlgParameters()
+
+Returns the algorithm parameters used by the encryption algorithm. 
+
+
+
+    Returns: the algorithm parameters. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getEncoded()*
+
+public byte[] getEncoded()
+  throws |java.io.IOException|
+         
+Returns the ASN.1 encoding of this object. 
+
+
+
+    Returns: the ASN.1 encoding. Returns a new array each time this method is called. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getEncryptedData()*
+
+public byte[] getEncryptedData()
+
+Returns the encrypted data. 
+
+
+
+    Returns: the encrypted data. Returns a new array each time this method is called. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Cipher)*
+
+public |java.security.spec.PKCS8EncodedKeySpec| getKeySpec(javax.crypto.Cipher cipher)
+  throws |java.security.spec.InvalidKeySpecException|
+         
+Extract the enclosed PKCS8EncodedKeySpec object from the encrypted data and 
+return it. Note: In order to successfully retrieve the enclosed 
+PKCS8EncodedKeySpec object, cipher needs to be initialized to either 
+Cipher.DECRYPT_MODE or Cipher.UNWRAP_MODE, with the same key and parameters 
+used for generating the encrypted data. 
+
+
+    cipher - the initialized cipher object which will be used for decrypting the encrypted 
+       data. 
+
+    Returns: the PKCS8EncodedKeySpec object. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key)*
+
+public |java.security.spec.PKCS8EncodedKeySpec| getKeySpec(java.security.Key decryptKey)
+  throws |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         
+Extract the enclosed PKCS8EncodedKeySpec object from the encrypted data and 
+return it. 
+
+
+    decryptKey - key used for decrypting the encrypted data. 
+
+    Returns: the PKCS8EncodedKeySpec object. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key,Provider)*
+
+public |java.security.spec.PKCS8EncodedKeySpec| getKeySpec(
+  java.security.Key decryptKey,
+  java.security.Provider provider)
+  throws |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         
+Extract the enclosed PKCS8EncodedKeySpec object from the encrypted data and 
+return it. 
+
+
+    decryptKey - key used for decrypting the encrypted data. 
+    provider - the name of provider whose Cipher implementation will be used. 
+
+    Returns: the PKCS8EncodedKeySpec object. 
+
+*javax.crypto.EncryptedPrivateKeyInfo.getKeySpec(Key,String)*
+
+public |java.security.spec.PKCS8EncodedKeySpec| getKeySpec(
+  java.security.Key decryptKey,
+  java.lang.String providerName)
+  throws |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         |java.security.NoSuchProviderException|
+         
+Extract the enclosed PKCS8EncodedKeySpec object from the encrypted data and 
+return it. 
+
+
+    decryptKey - key used for decrypting the encrypted data. 
+    providerName - the name of provider whose Cipher implementation will be used. 
+
+    Returns: the PKCS8EncodedKeySpec object. 
+
+

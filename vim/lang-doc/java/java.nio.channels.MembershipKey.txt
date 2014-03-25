@@ -1,0 +1,174 @@
+*java.nio.channels.MembershipKey* *MembershipKey* A token representing the membe
+
+public abstract class MembershipKey
+  extends    |java.lang.Object|
+
+|java.nio.channels.MembershipKey_Description|
+|java.nio.channels.MembershipKey_Fields|
+|java.nio.channels.MembershipKey_Constructors|
+|java.nio.channels.MembershipKey_Methods|
+
+================================================================================
+
+*java.nio.channels.MembershipKey_Constructors*
+|java.nio.channels.MembershipKey()|Initializes a new instance of this class.
+
+*java.nio.channels.MembershipKey_Methods*
+|java.nio.channels.MembershipKey.block(InetAddress)|Block multicast datagrams f
+|java.nio.channels.MembershipKey.channel()|Returns the channel for which this m
+|java.nio.channels.MembershipKey.drop()|Drop membership.
+|java.nio.channels.MembershipKey.group()|Returns the multicast group for which 
+|java.nio.channels.MembershipKey.isValid()|Tells whether or not this membership
+|java.nio.channels.MembershipKey.networkInterface()|Returns the network interfa
+|java.nio.channels.MembershipKey.sourceAddress()|Returns the source address if 
+|java.nio.channels.MembershipKey.unblock(InetAddress)|Unblock multicast datagra
+
+*java.nio.channels.MembershipKey_Description*
+
+A token representing the membership of an Internet Protocol (IP) multicast 
+group. 
+
+A membership key may represent a membership to receive all datagrams sent to 
+the group, or it may be source-specific, meaning that it represents a 
+membership that receives only datagrams from a specific source address. Whether 
+or not a membership key is source-specific may be determined by invoking its 
+sourceAddress(|java.nio.channels.MembershipKey|) method. 
+
+A membership key is valid upon creation and remains valid until the membership 
+is dropped by invoking the drop(|java.nio.channels.MembershipKey|) method, or 
+the channel is closed. The validity of the membership key may be tested by 
+invoking its isValid(|java.nio.channels.MembershipKey|) method. 
+
+Where a membership key is not source-specific and the underlying operation 
+system supports source filtering, then the 
+block(|java.nio.channels.MembershipKey|) and 
+unblock(|java.nio.channels.MembershipKey|) methods can be used to block or 
+unblock multicast datagrams from particular source addresses. 
+
+
+
+*java.nio.channels.MembershipKey()*
+
+protected MembershipKey()
+
+Initializes a new instance of this class. 
+
+
+*java.nio.channels.MembershipKey.block(InetAddress)*
+
+public abstract |java.nio.channels.MembershipKey| block(java.net.InetAddress source)
+  throws |java.io.IOException|
+         
+Block multicast datagrams from the given source address. 
+
+If this membership key is not source-specific, and the underlying operating 
+system supports source filtering, then this method blocks multicast datagrams 
+from the given source address. If the given source address is already blocked 
+then this method has no effect. After a source address is blocked it may still 
+be possible to receive datagams from that source. This can arise when datagrams 
+are waiting to be received in the socket's receive buffer. 
+
+
+    source - The source address to block 
+
+    Returns: This membership key 
+
+*java.nio.channels.MembershipKey.channel()*
+
+public abstract |java.nio.channels.MulticastChannel| channel()
+
+Returns the channel for which this membership key was created. This method will 
+continue to return the channel even after the membership becomes 
+invalid(|java.nio.channels.MembershipKey|) . 
+
+
+
+    Returns: 
+
+*java.nio.channels.MembershipKey.drop()*
+
+public abstract void drop()
+
+Drop membership. 
+
+If the membership key represents a membership to receive all datagrams then the 
+membership is dropped and the channel will no longer receive any datagrams sent 
+to the group. If the membership key is source-specific then the channel will no 
+longer receive datagrams sent to the group from that source address. 
+
+After membership is dropped it may still be possible to receive datagrams sent 
+to the group. This can arise when datagrams are waiting to be received in the 
+socket's receive buffer. After membership is dropped then the channel may 
+join(|java.nio.channels.MulticastChannel|) the group again in which case a new 
+membership key is returned. 
+
+Upon return, this membership object will be 
+invalid(|java.nio.channels.MembershipKey|) . If the multicast group membership 
+is already invalid then invoking this method has no effect. Once a multicast 
+group membership is invalid, it remains invalid forever. 
+
+
+
+*java.nio.channels.MembershipKey.group()*
+
+public abstract |java.net.InetAddress| group()
+
+Returns the multicast group for which this membership key was created. This 
+method will continue to return the group even after the membership becomes 
+invalid(|java.nio.channels.MembershipKey|) . 
+
+
+
+    Returns: the multicast group 
+
+*java.nio.channels.MembershipKey.isValid()*
+
+public abstract boolean isValid()
+
+Tells whether or not this membership is valid. 
+
+A multicast group membership is valid upon creation and remains valid until the 
+membership is dropped by invoking the drop(|java.nio.channels.MembershipKey|) 
+method, or the channel is closed. 
+
+
+
+    Returns: {@code true} if this membership key is valid, {@code false} otherwise 
+
+*java.nio.channels.MembershipKey.networkInterface()*
+
+public abstract |java.net.NetworkInterface| networkInterface()
+
+Returns the network interface for which this membership key was created. This 
+method will continue to return the network interface even after the membership 
+becomes invalid(|java.nio.channels.MembershipKey|) . 
+
+
+
+    Returns: the network interface 
+
+*java.nio.channels.MembershipKey.sourceAddress()*
+
+public abstract |java.net.InetAddress| sourceAddress()
+
+Returns the source address if this membership key is source-specific, ornullif 
+this membership is not source-specific. 
+
+
+
+    Returns: The source address if this membership key is source-specific, otherwise {@code 
+             null} 
+
+*java.nio.channels.MembershipKey.unblock(InetAddress)*
+
+public abstract |java.nio.channels.MembershipKey| unblock(java.net.InetAddress source)
+
+Unblock multicast datagrams from the given source address that was previously 
+blocked using the block(|java.nio.channels.MembershipKey|) method. 
+
+
+    source - The source address to unblock 
+
+    Returns: This membership key 
+
+

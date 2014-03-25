@@ -1,0 +1,88 @@
+*javax.activation.FileTypeMap* *FileTypeMap* The FileTypeMap is an abstract clas
+
+public abstract class FileTypeMap
+  extends    |java.lang.Object|
+
+|javax.activation.FileTypeMap_Description|
+|javax.activation.FileTypeMap_Fields|
+|javax.activation.FileTypeMap_Constructors|
+|javax.activation.FileTypeMap_Methods|
+
+================================================================================
+
+*javax.activation.FileTypeMap_Constructors*
+|javax.activation.FileTypeMap()|The default constructor.
+
+*javax.activation.FileTypeMap_Methods*
+|javax.activation.FileTypeMap.getContentType(File)|Return the type of the file 
+|javax.activation.FileTypeMap.getContentType(String)|Return the type of the fil
+|javax.activation.FileTypeMap.getDefaultFileTypeMap()|Return the default FileTy
+|javax.activation.FileTypeMap.setDefaultFileTypeMap(FileTypeMap)|Sets the defau
+
+*javax.activation.FileTypeMap_Description*
+
+The FileTypeMap is an abstract class that provides a data typing interface for 
+files. Implementations of this class will implement the getContentType methods 
+which will derive a content type from a file name or a File object. 
+FileTypeMaps could use any scheme to determine the data type, from examining 
+the file extension of a file (like the MimetypesFileTypeMap) to opening the 
+file and trying to derive its type from the contents of the file. The 
+FileDataSource class uses the default FileTypeMap (a MimetypesFileTypeMap 
+unless changed) to determine the content type of files. 
+
+
+
+*javax.activation.FileTypeMap()*
+
+public FileTypeMap()
+
+The default constructor. 
+
+
+*javax.activation.FileTypeMap.getContentType(File)*
+
+public abstract |java.lang.String| getContentType(java.io.File file)
+
+Return the type of the file object. This method should always return a valid 
+MIME type. 
+
+
+    file - A file to be typed. 
+
+    Returns: The content type. 
+
+*javax.activation.FileTypeMap.getContentType(String)*
+
+public abstract |java.lang.String| getContentType(java.lang.String filename)
+
+Return the type of the file passed in. This method should always return a valid 
+MIME type. 
+
+
+    filename - the pathname of the file. 
+
+    Returns: The content type. 
+
+*javax.activation.FileTypeMap.getDefaultFileTypeMap()*
+
+public static |javax.activation.FileTypeMap| getDefaultFileTypeMap()
+
+Return the default FileTypeMap for the system. If setDefaultFileTypeMap was 
+called, return that instance, otherwise return an instance of 
+MimetypesFileTypeMap. 
+
+
+
+    Returns: The default FileTypeMap 
+
+*javax.activation.FileTypeMap.setDefaultFileTypeMap(FileTypeMap)*
+
+public static void setDefaultFileTypeMap(javax.activation.FileTypeMap map)
+
+Sets the default FileTypeMap for the system. This instance will be returned to 
+callers of getDefaultFileTypeMap. 
+
+
+    map - The FileTypeMap. 
+
+

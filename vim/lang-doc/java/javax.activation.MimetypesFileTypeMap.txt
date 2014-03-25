@@ -1,0 +1,106 @@
+*javax.activation.MimetypesFileTypeMap* *MimetypesFileTypeMap* This class extend
+
+public class MimetypesFileTypeMap
+  extends    |javax.activation.FileTypeMap|
+
+|javax.activation.MimetypesFileTypeMap_Description|
+|javax.activation.MimetypesFileTypeMap_Fields|
+|javax.activation.MimetypesFileTypeMap_Constructors|
+|javax.activation.MimetypesFileTypeMap_Methods|
+
+================================================================================
+
+*javax.activation.MimetypesFileTypeMap_Constructors*
+|javax.activation.MimetypesFileTypeMap()|The default constructor.
+|javax.activation.MimetypesFileTypeMap(InputStream)|Construct a MimetypesFileTy
+|javax.activation.MimetypesFileTypeMap(String)|Construct a MimetypesFileTypeMap
+
+*javax.activation.MimetypesFileTypeMap_Methods*
+|javax.activation.MimetypesFileTypeMap.addMimeTypes(String)|Prepend the MIME ty
+|javax.activation.MimetypesFileTypeMap.getContentType(File)|Return the MIME typ
+|javax.activation.MimetypesFileTypeMap.getContentType(String)|Return the MIME t
+
+*javax.activation.MimetypesFileTypeMap_Description*
+
+This class extends FileTypeMap and provides data typing of files via their file 
+extension. It uses the .mime.types format. 
+
+MIME types file search order: The MimetypesFileTypeMap looks in various places 
+in the user's system for MIME types file entries. When requests are made to 
+search for MIME types in the MimetypesFileTypeMap, it searches MIME types files 
+in the following order: 
+
+Programmatically added entries to the MimetypesFileTypeMap instance. The file 
+.mime.types in the user's home directory. The file <java.home>/lib/mime.types. 
+The file or resources named META-INF/mime.types. The file or resource named 
+META-INF/mimetypes.default (usually found only in the activation.jar file). 
+
+MIME types file format: 
+
+# comments begin with a '#' # the format is <mime type> <space separated file 
+extensions> # for example: text/plain txt text TXT # this would map file.txt, 
+file.text, and file.TXT to # the mime type "text/plain" 
+
+
+
+*javax.activation.MimetypesFileTypeMap()*
+
+public MimetypesFileTypeMap()
+
+The default constructor. 
+
+
+*javax.activation.MimetypesFileTypeMap(InputStream)*
+
+public MimetypesFileTypeMap(java.io.InputStream is)
+
+Construct a MimetypesFileTypeMap with programmatic entries added from the 
+InputStream. 
+
+    is - the input stream to read from 
+
+*javax.activation.MimetypesFileTypeMap(String)*
+
+public MimetypesFileTypeMap(java.lang.String mimeTypeFileName)
+  throws |java.io.IOException|
+         
+Construct a MimetypesFileTypeMap with programmatic entries added from the named 
+file. 
+
+    mimeTypeFileName - the file name 
+
+*javax.activation.MimetypesFileTypeMap.addMimeTypes(String)*
+
+public synchronized void addMimeTypes(java.lang.String mime_types)
+
+Prepend the MIME type values to the registry. 
+
+
+    mime_types - A .mime.types formatted string of entries. 
+
+*javax.activation.MimetypesFileTypeMap.getContentType(File)*
+
+public |java.lang.String| getContentType(java.io.File f)
+
+Return the MIME type of the file object. The implementation in this class calls 
+getContentType(f.getName()). 
+
+
+    f - the file 
+
+    Returns: the file's MIME type 
+
+*javax.activation.MimetypesFileTypeMap.getContentType(String)*
+
+public synchronized |java.lang.String| getContentType(java.lang.String filename)
+
+Return the MIME type based on the specified file name. The MIME type entries 
+are searched as described above under MIME types file search order. If no entry 
+is found, the type "application/octet-stream" is returned. 
+
+
+    filename - the file name 
+
+    Returns: the file's MIME type 
+
+

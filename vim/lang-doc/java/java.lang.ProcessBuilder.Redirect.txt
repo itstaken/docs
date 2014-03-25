@@ -1,0 +1,163 @@
+*java.lang.ProcessBuilder.Redirect* *ProcessBuilder.Redirect* Represents a sourc
+
+public abstract static class ProcessBuilder.Redirect
+  extends    |java.lang.Object|
+
+|java.lang.ProcessBuilder.Redirect_Description|
+|java.lang.ProcessBuilder.Redirect_Fields|
+|java.lang.ProcessBuilder.Redirect_Constructors|
+|java.lang.ProcessBuilder.Redirect_Methods|
+
+================================================================================
+
+*java.lang.ProcessBuilder.Redirect_Fields*
+|java.lang.ProcessBuilder.Redirect_java.lang.ProcessBuilder.Redirect.INHERIT|
+|java.lang.ProcessBuilder.Redirect_java.lang.ProcessBuilder.Redirect.PIPE|
+
+*java.lang.ProcessBuilder.Redirect_Methods*
+|java.lang.ProcessBuilder.Redirect.appendTo(File)|Returns a redirect to append 
+|java.lang.ProcessBuilder.Redirect.equals(Object)|Compares the specified object
+|java.lang.ProcessBuilder.Redirect.file()|Returns theFilesource or destination 
+|java.lang.ProcessBuilder.Redirect.from(File)|Returns a redirect to read from t
+|java.lang.ProcessBuilder.Redirect.hashCode()|Returns a hash code value for thi
+|java.lang.ProcessBuilder.Redirect.to(File)|Returns a redirect to write to the 
+|java.lang.ProcessBuilder.Redirect.type()|Returns the type of thisRedirect.
+
+*java.lang.ProcessBuilder.Redirect_Description*
+
+Represents a source of subprocess input or a destination of subprocess output. 
+
+EachRedirectinstance is one of the following: 
+
+the special value Redirect.PIPE(|java.lang.ProcessBuilder.Redirect|) the 
+special value Redirect.INHERIT(|java.lang.ProcessBuilder.Redirect|) a 
+redirection to read from a file, created by an invocation of 
+Redirect.from(File)(|java.lang.ProcessBuilder.Redirect|) a redirection to write 
+to a file, created by an invocation of 
+Redirect.to(File)(|java.lang.ProcessBuilder.Redirect|) a redirection to append 
+to a file, created by an invocation of 
+Redirect.appendTo(File)(|java.lang.ProcessBuilder.Redirect|) 
+
+Each of the above categories has an associated unique 
+Type(|java.lang.ProcessBuilder.Redirect.Type|) . 
+
+
+
+*java.lang.ProcessBuilder.Redirect_java.lang.ProcessBuilder.Redirect.INHERIT*
+
+Indicates that subprocess I/O source or destination will be the same as those 
+of the current process. This is the normal behavior of most operating system 
+command interpreters (shells). 
+
+It will always be true that 
+
+Redirect.INHERIT.file() == null Redirect.INHERIT.type() == 
+Redirect.Type.INHERIT 
+
+
+*java.lang.ProcessBuilder.Redirect_java.lang.ProcessBuilder.Redirect.PIPE*
+
+Indicates that subprocess I/O will be connected to the current Java process 
+over a pipe. 
+
+This is the default handling of subprocess standard I/O. 
+
+It will always be true that 
+
+Redirect.PIPE.file() == null Redirect.PIPE.type() == Redirect.Type.PIPE 
+
+
+
+*java.lang.ProcessBuilder.Redirect.appendTo(File)*
+
+public static |java.lang.ProcessBuilder.Redirect| appendTo(java.io.File file)
+
+Returns a redirect to append to the specified file. Each write operation first 
+advances the position to the end of the file and then writes the requested 
+data. Whether the advancement of the position and the writing of the data are 
+done in a single atomic operation is system-dependent and therefore 
+unspecified. 
+
+It will always be true that 
+
+Redirect.appendTo(file).file() == file Redirect.appendTo(file).type() == 
+Redirect.Type.APPEND 
+
+
+
+    Returns: a redirect to append to the specified file 
+
+*java.lang.ProcessBuilder.Redirect.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specified object with thisRedirectfor equality. Returnstrueif and 
+only if the two objects are identical or both objects areRedirectinstances of 
+the same type associated with non-null equalFileinstances. 
+
+
+
+*java.lang.ProcessBuilder.Redirect.file()*
+
+public |java.io.File| file()
+
+Returns the (|java.io.File|) source or destination associated with this 
+redirect, ornullif there is no such file. 
+
+
+
+    Returns: the file associated with this redirect, or {@code null} if there is no such 
+             file 
+
+*java.lang.ProcessBuilder.Redirect.from(File)*
+
+public static |java.lang.ProcessBuilder.Redirect| from(java.io.File file)
+
+Returns a redirect to read from the specified file. 
+
+It will always be true that 
+
+Redirect.from(file).file() == file Redirect.from(file).type() == 
+Redirect.Type.READ 
+
+
+
+    Returns: a redirect to read from the specified file 
+
+*java.lang.ProcessBuilder.Redirect.hashCode()*
+
+public int hashCode()
+
+Returns a hash code value for thisRedirect. 
+
+
+
+    Returns: a hash code value for this {@code Redirect} 
+
+*java.lang.ProcessBuilder.Redirect.to(File)*
+
+public static |java.lang.ProcessBuilder.Redirect| to(java.io.File file)
+
+Returns a redirect to write to the specified file. If the specified file exists 
+when the subprocess is started, its previous contents will be discarded. 
+
+It will always be true that 
+
+Redirect.to(file).file() == file Redirect.to(file).type() == 
+Redirect.Type.WRITE 
+
+
+
+    Returns: a redirect to write to the specified file 
+
+*java.lang.ProcessBuilder.Redirect.type()*
+
+public abstract |java.lang.ProcessBuilder.Redirect.Type| type()
+
+Returns the type of thisRedirect. 
+
+
+
+    Returns: the type of this {@code Redirect} 
+
+

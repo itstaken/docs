@@ -1,0 +1,100 @@
+*java.util.concurrent.ForkJoinWorkerThread* *ForkJoinWorkerThread* A thread mana
+
+public class ForkJoinWorkerThread
+  extends    |java.lang.Thread|
+
+|java.util.concurrent.ForkJoinWorkerThread_Description|
+|java.util.concurrent.ForkJoinWorkerThread_Fields|
+|java.util.concurrent.ForkJoinWorkerThread_Constructors|
+|java.util.concurrent.ForkJoinWorkerThread_Methods|
+
+================================================================================
+
+*java.util.concurrent.ForkJoinWorkerThread_Constructors*
+|java.util.concurrent.ForkJoinWorkerThread(ForkJoinPool)|Creates a ForkJoinWork
+
+*java.util.concurrent.ForkJoinWorkerThread_Methods*
+|java.util.concurrent.ForkJoinWorkerThread.getPool()|Returns the pool hosting t
+|java.util.concurrent.ForkJoinWorkerThread.getPoolIndex()|Returns the index num
+|java.util.concurrent.ForkJoinWorkerThread.onStart()|Initializes internal state
+|java.util.concurrent.ForkJoinWorkerThread.onTermination(Throwable)|Performs cl
+|java.util.concurrent.ForkJoinWorkerThread.run()|This method is required to be 
+
+*java.util.concurrent.ForkJoinWorkerThread_Description*
+
+A thread managed by a (|java.util.concurrent.ForkJoinPool|) , which executes 
+(|java.util.concurrent.ForkJoinTask|) s. This class is subclassable solely for 
+the sake of adding functionality -- there are no overridable methods dealing 
+with scheduling or execution. However, you can override initialization and 
+termination methods surrounding the main task processing loop. If you do create 
+such a subclass, you will also need to supply a custom 
+(|java.util.concurrent.ForkJoinPool.ForkJoinWorkerThreadFactory|) to use it in 
+aForkJoinPool. 
+
+
+
+*java.util.concurrent.ForkJoinWorkerThread(ForkJoinPool)*
+
+protected ForkJoinWorkerThread(java.util.concurrent.ForkJoinPool pool)
+
+Creates a ForkJoinWorkerThread operating in the given pool. 
+
+    pool - the pool this thread works in 
+
+*java.util.concurrent.ForkJoinWorkerThread.getPool()*
+
+public |java.util.concurrent.ForkJoinPool| getPool()
+
+Returns the pool hosting this thread. 
+
+
+
+    Returns: 
+
+*java.util.concurrent.ForkJoinWorkerThread.getPoolIndex()*
+
+public int getPoolIndex()
+
+Returns the index number of this thread in its pool. The returned value ranges 
+from zero to the maximum number of threads (minus one) that have ever been 
+created in the pool. This method may be useful for applications that track 
+status or collect results per-worker rather than per-task. 
+
+
+
+    Returns: the index number 
+
+*java.util.concurrent.ForkJoinWorkerThread.onStart()*
+
+protected void onStart()
+
+Initializes internal state after construction but before processing any tasks. 
+If you override this method, you must invokesuper.onStart()at the beginning of 
+the method. Initialization requires care: Most fields must have legal default 
+values, to ensure that attempted accesses from other threads work correctly 
+even before this thread starts processing tasks. 
+
+
+
+*java.util.concurrent.ForkJoinWorkerThread.onTermination(Throwable)*
+
+protected void onTermination(java.lang.Throwable exception)
+
+Performs cleanup associated with termination of this worker thread. If you 
+override this method, you must invokesuper.onTerminationat the end of the 
+overridden method. 
+
+
+    exception - the exception causing this thread to abort due to an unrecoverable error, or 
+       {@code null} if completed normally 
+
+*java.util.concurrent.ForkJoinWorkerThread.run()*
+
+public void run()
+
+This method is required to be public, but should never be called explicitly. It 
+performs the main run loop to execute (|java.util.concurrent.ForkJoinTask|) s. 
+
+
+
+

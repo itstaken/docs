@@ -1,0 +1,1238 @@
+*javax.crypto.Cipher* *Cipher* This class provides the functionality of a crypto
+
+public class Cipher
+  extends    |java.lang.Object|
+
+|javax.crypto.Cipher_Description|
+|javax.crypto.Cipher_Fields|
+|javax.crypto.Cipher_Constructors|
+|javax.crypto.Cipher_Methods|
+
+================================================================================
+
+*javax.crypto.Cipher_Fields*
+|int_javax.crypto.Cipher.DECRYPT_MODE|
+|int_javax.crypto.Cipher.ENCRYPT_MODE|
+|int_javax.crypto.Cipher.PRIVATE_KEY|
+|int_javax.crypto.Cipher.PUBLIC_KEY|
+|int_javax.crypto.Cipher.SECRET_KEY|
+|int_javax.crypto.Cipher.UNWRAP_MODE|
+|int_javax.crypto.Cipher.WRAP_MODE|
+
+*javax.crypto.Cipher_Constructors*
+|javax.crypto.Cipher(CipherSpi,Provider,String)|Creates a Cipher object.
+
+*javax.crypto.Cipher_Methods*
+|javax.crypto.Cipher.doFinal()|Finishes a multiple-part encryption or decryptio
+|javax.crypto.Cipher.doFinal(byte[])|Encrypts or decrypts data in a single-part
+|javax.crypto.Cipher.doFinal(byte[],int)|Finishes a multiple-part encryption or
+|javax.crypto.Cipher.doFinal(byte[],int,int)|Encrypts or decrypts data in a sin
+|javax.crypto.Cipher.doFinal(byte[],int,int,byte[])|Encrypts or decrypts data i
+|javax.crypto.Cipher.doFinal(byte[],int,int,byte[],int)|Encrypts or decrypts da
+|javax.crypto.Cipher.doFinal(ByteBuffer,ByteBuffer)|Encrypts or decrypts data i
+|javax.crypto.Cipher.getAlgorithm()|Returns the algorithm name of this Cipher o
+|javax.crypto.Cipher.getBlockSize()|Returns the block size (in bytes).
+|javax.crypto.Cipher.getExemptionMechanism()|Returns the exemption mechanism ob
+|javax.crypto.Cipher.getInstance(String)|Returns a Cipher object that implement
+|javax.crypto.Cipher.getInstance(String,Provider)|Returns a Cipher object that 
+|javax.crypto.Cipher.getInstance(String,String)|Returns a Cipher object that im
+|javax.crypto.Cipher.getIV()|Returns the initialization vector (IV) in a new bu
+|javax.crypto.Cipher.getMaxAllowedKeyLength(String)|Returns the maximum key len
+|javax.crypto.Cipher.getMaxAllowedParameterSpec(String)|Returns an AlgorithmPar
+|javax.crypto.Cipher.getOutputSize(int)|Returns the length in bytes that an out
+|javax.crypto.Cipher.getParameters()|Returns the parameters used with this ciph
+|javax.crypto.Cipher.getProvider()|Returns the provider of this Cipher object.
+|javax.crypto.Cipher.init(int,Certificate)|Initializes this cipher with the pub
+|javax.crypto.Cipher.init(int,Certificate,SecureRandom)|Initializes this cipher
+|javax.crypto.Cipher.init(int,Key)|Initializes this cipher with a key.
+|javax.crypto.Cipher.init(int,Key,AlgorithmParameters)|Initializes this cipher 
+|javax.crypto.Cipher.init(int,Key,AlgorithmParameterSpec)|Initializes this ciph
+|javax.crypto.Cipher.init(int,Key,AlgorithmParameterSpec,SecureRandom)|Initiali
+|javax.crypto.Cipher.init(int,Key,AlgorithmParameters,SecureRandom)|Initializes
+|javax.crypto.Cipher.init(int,Key,SecureRandom)|Initializes this cipher with a 
+|javax.crypto.Cipher.unwrap(byte[],String,int)|Unwrap a previously wrapped key.
+|javax.crypto.Cipher.update(byte[])|Continues a multiple-part encryption or dec
+|javax.crypto.Cipher.update(byte[],int,int)|Continues a multiple-part encryptio
+|javax.crypto.Cipher.update(byte[],int,int,byte[])|Continues a multiple-part en
+|javax.crypto.Cipher.update(byte[],int,int,byte[],int)|Continues a multiple-par
+|javax.crypto.Cipher.update(ByteBuffer,ByteBuffer)|Continues a multiple-part en
+|javax.crypto.Cipher.updateAAD(byte[])|Continues a multi-part update of the Add
+|javax.crypto.Cipher.updateAAD(byte[],int,int)|Continues a multi-part update of
+|javax.crypto.Cipher.updateAAD(ByteBuffer)|Continues a multi-part update of the
+|javax.crypto.Cipher.wrap(Key)|Wrap a key.
+
+*javax.crypto.Cipher_Description*
+
+This class provides the functionality of a cryptographic cipher for encryption 
+and decryption. It forms the core of the Java Cryptographic Extension (JCE) 
+framework. 
+
+In order to create a Cipher object, the application calls the Cipher's 
+getInstance method, and passes the name of the requested transformation to it. 
+Optionally, the name of a provider may be specified. 
+
+A transformation is a string that describes the operation (or set of 
+operations) to be performed on the given input, to produce some output. A 
+transformation always includes the name of a cryptographic algorithm (e.g., 
+DES), and may be followed by a feedback mode and padding scheme. 
+
+A transformation is of the form: 
+
+"algorithm/mode/padding" or 
+
+"algorithm" 
+
+(in the latter case, provider-specific default values for the mode and padding 
+scheme are used). For example, the following is a valid transformation: 
+
+
+
+Cipher c = Cipher.getInstance("DES/CBC/PKCS5Padding"); 
+
+Using modes such as CFB and OFB, block ciphers can encrypt data in units 
+smaller than the cipher's actual block size. When requesting such a mode, you 
+may optionally specify the number of bits to be processed at a time by 
+appending this number to the mode name as shown in the "DES/CFB8/NoPadding" and 
+"DES/OFB32/PKCS5Padding" transformations. If no such number is specified, a 
+provider-specific default is used. (For example, the SunJCE provider uses a 
+default of 64 bits for DES.) Thus, block ciphers can be turned into 
+byte-oriented stream ciphers by using an 8 bit mode such as CFB8 or OFB8. 
+
+Modes such as Authenticated Encryption with Associated Data (AEAD) provide 
+authenticity assurances for both confidential data and Additional Associated 
+Data (AAD) that is not encrypted. (Please see RFC 5116 for more information on 
+AEAD and AEAD algorithms such as GCM/CCM.) Both confidential and AAD data can 
+be used when calculating the authentication tag (similar to a 
+(|javax.crypto.Mac|) ). This tag is appended to the ciphertext during 
+encryption, and is verified on decryption. 
+
+AEAD modes such as GCM/CCM perform all AAD authenticity calculations before 
+starting the ciphertext authenticity calculations. To avoid implementations 
+having to internally buffer ciphertext, all AAD data must be supplied to 
+GCM/CCM implementations (via theupdateAADmethods) before the ciphertext is 
+processed (via theupdateanddoFinalmethods). 
+
+
+
+GCMParameterSpec s = new GCMParameterSpec(...); cipher.init(..., s); 
+
+// If the GCMParameterSpec is needed again 
+cipher.getParameters().getParameterSpec(GCMParameterSpec.class)); 
+
+cipher.updateAAD(...); // AAD cipher.update(...); // Multi-part update 
+cipher.doFinal(...); // conclusion of operation 
+
+Every implementation of the Java platform is required to support the following 
+standard Cipher transformations with the keysizes in parentheses: 
+
+AES/CBC/NoPadding (128) AES/CBC/PKCS5Padding (128) AES/ECB/NoPadding (128) 
+AES/ECB/PKCS5Padding (128) DES/CBC/NoPadding (56) DES/CBC/PKCS5Padding (56) 
+DES/ECB/NoPadding (56) DES/ECB/PKCS5Padding (56) DESede/CBC/NoPadding (168) 
+DESede/CBC/PKCS5Padding (168) DESede/ECB/NoPadding (168) 
+DESede/ECB/PKCS5Padding (168) RSA/ECB/PKCS1Padding (1024, 2048) 
+RSA/ECB/OAEPWithSHA-1AndMGF1Padding (1024, 2048) 
+RSA/ECB/OAEPWithSHA-256AndMGF1Padding (1024, 2048) 
+
+These transformations are described in the <a 
+href="/../technotes/guides/security/StandardNames.html#Cipher"> Cipher section 
+of the Java Cryptography Architecture Standard Algorithm Name Documentation. 
+Consult the release documentation for your implementation to see if any other 
+transformations are supported. 
+
+
+
+*int_javax.crypto.Cipher.DECRYPT_MODE*
+
+Constant used to initialize cipher to decryption mode. 
+
+
+*int_javax.crypto.Cipher.ENCRYPT_MODE*
+
+Constant used to initialize cipher to encryption mode. 
+
+
+*int_javax.crypto.Cipher.PRIVATE_KEY*
+
+Constant used to indicate the to-be-unwrapped key is a "private key". 
+
+
+*int_javax.crypto.Cipher.PUBLIC_KEY*
+
+Constant used to indicate the to-be-unwrapped key is a "public key". 
+
+
+*int_javax.crypto.Cipher.SECRET_KEY*
+
+Constant used to indicate the to-be-unwrapped key is a "secret key". 
+
+
+*int_javax.crypto.Cipher.UNWRAP_MODE*
+
+Constant used to initialize cipher to key-unwrapping mode. 
+
+
+*int_javax.crypto.Cipher.WRAP_MODE*
+
+Constant used to initialize cipher to key-wrapping mode. 
+
+
+
+*javax.crypto.Cipher(CipherSpi,Provider,String)*
+
+protected Cipher(
+  javax.crypto.CipherSpi cipherSpi,
+  java.security.Provider provider,
+  java.lang.String transformation)
+
+Creates a Cipher object. 
+
+    cipherSpi - the delegate 
+    provider - the provider 
+    transformation - the transformation 
+
+*javax.crypto.Cipher.doFinal()*
+
+public final byte[] doFinal()
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         
+Finishes a multiple-part encryption or decryption operation, depending on how 
+this cipher was initialized. 
+
+Input data that may have been buffered during a previous update operation is 
+processed, with padding (if requested) being applied. If an AEAD mode such as 
+GCM/CCM is being used, the authentication tag is appended in the case of 
+encryption, or verified in the case of decryption. The result is stored in a 
+new buffer. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+
+
+    Returns: the new buffer with the result 
+
+*javax.crypto.Cipher.doFinal(byte[])*
+
+public final byte[] doFinal(byte[] input)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         
+Encrypts or decrypts data in a single-part operation, or finishes a 
+multiple-part operation. The data is encrypted or decrypted, depending on how 
+this cipher was initialized. 
+
+The bytes in the input buffer, and any input bytes that may have been buffered 
+during a previous update operation, are processed, with padding (if requested) 
+being applied. If an AEAD mode such as GCM/CCM is being used, the 
+authentication tag is appended in the case of encryption, or verified in the 
+case of decryption. The result is stored in a new buffer. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+
+    input - the input buffer 
+
+    Returns: the new buffer with the result 
+
+*javax.crypto.Cipher.doFinal(byte[],int)*
+
+public final int doFinal(
+  byte[] output,
+  int outputOffset)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         |javax.crypto.ShortBufferException|
+         
+Finishes a multiple-part encryption or decryption operation, depending on how 
+this cipher was initialized. 
+
+Input data that may have been buffered during a previous update operation is 
+processed, with padding (if requested) being applied. If an AEAD mode such as 
+GCM/CCM is being used, the authentication tag is appended in the case of 
+encryption, or verified in the case of decryption. The result is stored in the 
+output buffer, starting at outputOffset inclusive. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+getOutputSize(|javax.crypto.Cipher|) to determine how big the output buffer 
+should be. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+
+    output - the buffer for the result 
+    outputOffset - the offset in output where the result is stored 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.doFinal(byte[],int,int)*
+
+public final byte[] doFinal(
+  byte[] input,
+  int inputOffset,
+  int inputLen)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         
+Encrypts or decrypts data in a single-part operation, or finishes a 
+multiple-part operation. The data is encrypted or decrypted, depending on how 
+this cipher was initialized. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, and any input bytes that may have been buffered during a previous 
+update operation, are processed, with padding (if requested) being applied. If 
+an AEAD mode such as GCM/CCM is being used, the authentication tag is appended 
+in the case of encryption, or verified in the case of decryption. The result is 
+stored in a new buffer. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+
+    Returns: the new buffer with the result 
+
+*javax.crypto.Cipher.doFinal(byte[],int,int,byte[])*
+
+public final int doFinal(
+  byte[] input,
+  int inputOffset,
+  int inputLen,
+  byte[] output)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         |javax.crypto.ShortBufferException|
+         
+Encrypts or decrypts data in a single-part operation, or finishes a 
+multiple-part operation. The data is encrypted or decrypted, depending on how 
+this cipher was initialized. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, and any input bytes that may have been buffered during a previous 
+update operation, are processed, with padding (if requested) being applied. If 
+an AEAD mode such as GCM/CCM is being used, the authentication tag is appended 
+in the case of encryption, or verified in the case of decryption. The result is 
+stored in the output buffer. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+getOutputSize(|javax.crypto.Cipher|) to determine how big the output buffer 
+should be. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same byte array and no unprocessed input data is overwritten 
+when the result is copied into the output buffer. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+    output - the buffer for the result 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.doFinal(byte[],int,int,byte[],int)*
+
+public final int doFinal(
+  byte[] input,
+  int inputOffset,
+  int inputLen,
+  byte[] output,
+  int outputOffset)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         |javax.crypto.ShortBufferException|
+         
+Encrypts or decrypts data in a single-part operation, or finishes a 
+multiple-part operation. The data is encrypted or decrypted, depending on how 
+this cipher was initialized. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, and any input bytes that may have been buffered during a previous 
+update operation, are processed, with padding (if requested) being applied. If 
+an AEAD mode such as GCM/CCM is being used, the authentication tag is appended 
+in the case of encryption, or verified in the case of decryption. The result is 
+stored in the output buffer, starting at outputOffset inclusive. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+getOutputSize(|javax.crypto.Cipher|) to determine how big the output buffer 
+should be. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same byte array and no unprocessed input data is overwritten 
+when the result is copied into the output buffer. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+    output - the buffer for the result 
+    outputOffset - the offset in output where the result is stored 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.doFinal(ByteBuffer,ByteBuffer)*
+
+public final int doFinal(
+  java.nio.ByteBuffer input,
+  java.nio.ByteBuffer output)
+  throws |javax.crypto.BadPaddingException|
+         |javax.crypto.IllegalBlockSizeException|
+         |javax.crypto.ShortBufferException|
+         
+Encrypts or decrypts data in a single-part operation, or finishes a 
+multiple-part operation. The data is encrypted or decrypted, depending on how 
+this cipher was initialized. 
+
+All input.remaining() bytes starting at input.position() are processed. If an 
+AEAD mode such as GCM/CCM is being used, the authentication tag is appended in 
+the case of encryption, or verified in the case of decryption. The result is 
+stored in the output buffer. Upon return, the input buffer's position will be 
+equal to its limit; its limit will not have changed. The output buffer's 
+position will have advanced by n, where n is the value returned by this method; 
+the output buffer's limit will not have changed. 
+
+If output.remaining() bytes are insufficient to hold the result, a 
+ShortBufferException is thrown. In this case, repeat this call with a larger 
+output buffer. Use getOutputSize(|javax.crypto.Cipher|) to determine how big 
+the output buffer should be. 
+
+Upon finishing, this method resets this cipher object to the state it was in 
+when previously initialized via a call to init. That is, the object is reset 
+and available to encrypt or decrypt (depending on the operation mode that was 
+specified in the call to init) more data. 
+
+Note: if any exception is thrown, this cipher object may need to be reset 
+before it can be used again. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same byte array and no unprocessed input data is overwritten 
+when the result is copied into the output buffer. 
+
+
+    input - the input ByteBuffer 
+    output - the output ByteBuffer 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.getAlgorithm()*
+
+public final |java.lang.String| getAlgorithm()
+
+Returns the algorithm name of this Cipher object. 
+
+This is the same name that was specified in one of the getInstance calls that 
+created this Cipher object.. 
+
+
+
+    Returns: the algorithm name of this Cipher object. 
+
+*javax.crypto.Cipher.getBlockSize()*
+
+public final int getBlockSize()
+
+Returns the block size (in bytes). 
+
+
+
+    Returns: the block size (in bytes), or 0 if the underlying algorithm is not a block 
+             cipher 
+
+*javax.crypto.Cipher.getExemptionMechanism()*
+
+public final |javax.crypto.ExemptionMechanism| getExemptionMechanism()
+
+Returns the exemption mechanism object used with this cipher. 
+
+
+
+    Returns: the exemption mechanism object used with this cipher, or null if this cipher 
+             does not use any exemption mechanism. 
+
+*javax.crypto.Cipher.getInstance(String)*
+
+public static final |javax.crypto.Cipher| getInstance(java.lang.String transformation)
+  throws |java.security.NoSuchAlgorithmException|
+         |javax.crypto.NoSuchPaddingException|
+         
+Returns a Cipher object that implements the specified transformation. 
+
+This method traverses the list of registered security Providers, starting with 
+the most preferred Provider. A new Cipher object encapsulating the CipherSpi 
+implementation from the first Provider that supports the specified algorithm is 
+returned. 
+
+Note that the list of registered providers may be retrieved via the 
+Security.getProviders()(|java.security.Security|) method. 
+
+
+    transformation - the name of the transformation, e.g., DES/CBC/PKCS5Padding. See the Cipher 
+       section in the Java Cryptography Architecture Standard Algorithm Name 
+       Documentation for information about standard transformation names. 
+
+    Returns: a cipher that implements the requested transformation. 
+
+*javax.crypto.Cipher.getInstance(String,Provider)*
+
+public static final |javax.crypto.Cipher| getInstance(
+  java.lang.String transformation,
+  java.security.Provider provider)
+  throws |java.security.NoSuchAlgorithmException|
+         |javax.crypto.NoSuchPaddingException|
+         
+Returns a Cipher object that implements the specified transformation. 
+
+A new Cipher object encapsulating the CipherSpi implementation from the 
+specified Provider object is returned. Note that the specified Provider object 
+does not have to be registered in the provider list. 
+
+
+    transformation - the name of the transformation, e.g., DES/CBC/PKCS5Padding. See the Cipher 
+       section in the Java Cryptography Architecture Standard Algorithm Name 
+       Documentation for information about standard transformation names. 
+    provider - the provider. 
+
+    Returns: a cipher that implements the requested transformation. 
+
+*javax.crypto.Cipher.getInstance(String,String)*
+
+public static final |javax.crypto.Cipher| getInstance(
+  java.lang.String transformation,
+  java.lang.String provider)
+  throws |java.security.NoSuchAlgorithmException|
+         |javax.crypto.NoSuchPaddingException|
+         |java.security.NoSuchProviderException|
+         
+Returns a Cipher object that implements the specified transformation. 
+
+A new Cipher object encapsulating the CipherSpi implementation from the 
+specified provider is returned. The specified provider must be registered in 
+the security provider list. 
+
+Note that the list of registered providers may be retrieved via the 
+Security.getProviders()(|java.security.Security|) method. 
+
+
+    transformation - the name of the transformation, e.g., DES/CBC/PKCS5Padding. See the Cipher 
+       section in the Java Cryptography Architecture Standard Algorithm Name 
+       Documentation for information about standard transformation names. 
+    provider - the name of the provider. 
+
+    Returns: a cipher that implements the requested transformation. 
+
+*javax.crypto.Cipher.getIV()*
+
+public final byte[] getIV()
+
+Returns the initialization vector (IV) in a new buffer. 
+
+This is useful in the case where a random IV was created, or in the context of 
+password-based encryption or decryption, where the IV is derived from a 
+user-supplied password. 
+
+
+
+    Returns: the initialization vector in a new buffer, or null if the underlying algorithm 
+             does not use an IV, or if the IV has not yet been set. 
+
+*javax.crypto.Cipher.getMaxAllowedKeyLength(String)*
+
+public static final int getMaxAllowedKeyLength(java.lang.String transformation)
+  throws |java.security.NoSuchAlgorithmException|
+         
+Returns the maximum key length for the specified transformation according to 
+the installed JCE jurisdiction policy files. If JCE unlimited strength 
+jurisdiction policy files are installed, Integer.MAX_VALUE will be returned. 
+For more information on default key size in JCE jurisdiction policy files, 
+please see Appendix E in the <a href= 
+"/../technotes/guides/security/crypto/CryptoSpec.html#AppC"> Java Cryptography 
+Architecture Reference Guide. 
+
+
+    transformation - the cipher transformation. 
+
+    Returns: the maximum key length in bits or Integer.MAX_VALUE. 
+
+*javax.crypto.Cipher.getMaxAllowedParameterSpec(String)*
+
+public static final |java.security.spec.AlgorithmParameterSpec| getMaxAllowedParameterSpec(java.lang.String transformation)
+  throws |java.security.NoSuchAlgorithmException|
+         
+Returns an AlgorithmParameterSpec object which contains the maximum cipher 
+parameter value according to the jurisdiction policy file. If JCE unlimited 
+strength jurisdiction policy files are installed or there is no maximum limit 
+on the parameters for the specified transformation in the policy file, null 
+will be returned. 
+
+
+    transformation - the cipher transformation. 
+
+    Returns: an AlgorithmParameterSpec which holds the maximum value or null. 
+
+*javax.crypto.Cipher.getOutputSize(int)*
+
+public final int getOutputSize(int inputLen)
+
+Returns the length in bytes that an output buffer would need to be in order to 
+hold the result of the next update or doFinal operation, given the input length 
+inputLen (in bytes). 
+
+This call takes into account any unprocessed (buffered) data from a previous 
+update call, padding, and AEAD tagging. 
+
+The actual output length of the next update or doFinal call may be smaller than 
+the length returned by this method. 
+
+
+    inputLen - the input length (in bytes) 
+
+    Returns: the required output buffer size (in bytes) 
+
+*javax.crypto.Cipher.getParameters()*
+
+public final |java.security.AlgorithmParameters| getParameters()
+
+Returns the parameters used with this cipher. 
+
+The returned parameters may be the same that were used to initialize this 
+cipher, or may contain a combination of default and random parameter values 
+used by the underlying cipher implementation if this cipher requires algorithm 
+parameters but was not initialized with any. 
+
+
+
+    Returns: the parameters used with this cipher, or null if this cipher does not use any 
+             parameters. 
+
+*javax.crypto.Cipher.getProvider()*
+
+public final |java.security.Provider| getProvider()
+
+Returns the provider of this Cipher object. 
+
+
+
+    Returns: the provider of this Cipher object 
+
+*javax.crypto.Cipher.init(int,Certificate)*
+
+public final void init(
+  int opmode,
+  java.security.cert.Certificate certificate)
+  throws |java.security.InvalidKeyException|
+         
+Initializes this cipher with the public key from the given certificate. The 
+cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If the certificate is of type X.509 and has a key usage extension field marked 
+as critical, and the value of the key usage extension field implies that the 
+public key in the certificate and its corresponding private key are not 
+supposed to be used for the operation represented by the value of opmode, an 
+InvalidKeyException is thrown. 
+
+If this cipher requires any algorithm parameters that cannot be derived from 
+the public key in the given certificate, the underlying cipher implementation 
+is supposed to generate the required parameters itself (using provider-specific 
+default or random values) if it is being initialized for encryption or key 
+wrapping, and raise an InvalidKeyException if it is being initialized for 
+decryption or key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them using the 
+SecureRandom implementation of the highest-priority installed provider as the 
+source of randomness. (If none of the installed providers supply an 
+implementation of SecureRandom, a system-provided source of randomness will be 
+used.) 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    certificate - the certificate 
+
+*javax.crypto.Cipher.init(int,Certificate,SecureRandom)*
+
+public final void init(
+  int opmode,
+  java.security.cert.Certificate certificate,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidKeyException|
+         
+Initializes this cipher with the public key from the given certificate and a 
+source of randomness. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If the certificate is of type X.509 and has a key usage extension field marked 
+as critical, and the value of the key usage extension field implies that the 
+public key in the certificate and its corresponding private key are not 
+supposed to be used for the operation represented by the value of opmode, an 
+InvalidKeyException is thrown. 
+
+If this cipher requires any algorithm parameters that cannot be derived from 
+the public key in the given certificate, the underlying cipher implementation 
+is supposed to generate the required parameters itself (using provider-specific 
+default or random values) if it is being initialized for encryption or key 
+wrapping, and raise an InvalidKeyException if it is being initialized for 
+decryption or key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them from 
+random. 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    certificate - the certificate 
+    random - the source of randomness 
+
+*javax.crypto.Cipher.init(int,Key)*
+
+public final void init(
+  int opmode,
+  java.security.Key key)
+  throws |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters that cannot be derived from 
+the given key, the underlying cipher implementation is supposed to generate the 
+required parameters itself (using provider-specific default or random values) 
+if it is being initialized for encryption or key wrapping, and raise an 
+InvalidKeyException if it is being initialized for decryption or key 
+unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them using the 
+<code>SecureRandom</code>(|java.security.SecureRandom|) implementation of the 
+highest-priority installed provider as the source of randomness. (If none of 
+the installed providers supply an implementation of SecureRandom, a 
+system-provided source of randomness will be used.) 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the key 
+
+*javax.crypto.Cipher.init(int,Key,AlgorithmParameters)*
+
+public final void init(
+  int opmode,
+  java.security.Key key,
+  java.security.AlgorithmParameters params)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key and a set of algorithm parameters. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters and params is null, the 
+underlying cipher implementation is supposed to generate the required 
+parameters itself (using provider-specific default or random values) if it is 
+being initialized for encryption or key wrapping, and raise an 
+InvalidAlgorithmParameterException if it is being initialized for decryption or 
+key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them using the 
+<code>SecureRandom</code>(|java.security.SecureRandom|) implementation of the 
+highest-priority installed provider as the source of randomness. (If none of 
+the installed providers supply an implementation of SecureRandom, a 
+system-provided source of randomness will be used.) 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the encryption key 
+    params - the algorithm parameters 
+
+*javax.crypto.Cipher.init(int,Key,AlgorithmParameterSpec)*
+
+public final void init(
+  int opmode,
+  java.security.Key key,
+  java.security.spec.AlgorithmParameterSpec params)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key and a set of algorithm parameters. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters and params is null, the 
+underlying cipher implementation is supposed to generate the required 
+parameters itself (using provider-specific default or random values) if it is 
+being initialized for encryption or key wrapping, and raise an 
+InvalidAlgorithmParameterException if it is being initialized for decryption or 
+key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them using the 
+<code>SecureRandom</code>(|java.security.SecureRandom|) implementation of the 
+highest-priority installed provider as the source of randomness. (If none of 
+the installed providers supply an implementation of SecureRandom, a 
+system-provided source of randomness will be used.) 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the encryption key 
+    params - the algorithm parameters 
+
+*javax.crypto.Cipher.init(int,Key,AlgorithmParameterSpec,SecureRandom)*
+
+public final void init(
+  int opmode,
+  java.security.Key key,
+  java.security.spec.AlgorithmParameterSpec params,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key, a set of algorithm parameters, and a source 
+of randomness. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters and params is null, the 
+underlying cipher implementation is supposed to generate the required 
+parameters itself (using provider-specific default or random values) if it is 
+being initialized for encryption or key wrapping, and raise an 
+InvalidAlgorithmParameterException if it is being initialized for decryption or 
+key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them from 
+random. 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the encryption key 
+    params - the algorithm parameters 
+    random - the source of randomness 
+
+*javax.crypto.Cipher.init(int,Key,AlgorithmParameters,SecureRandom)*
+
+public final void init(
+  int opmode,
+  java.security.Key key,
+  java.security.AlgorithmParameters params,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidAlgorithmParameterException|
+         |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key, a set of algorithm parameters, and a source 
+of randomness. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters and params is null, the 
+underlying cipher implementation is supposed to generate the required 
+parameters itself (using provider-specific default or random values) if it is 
+being initialized for encryption or key wrapping, and raise an 
+InvalidAlgorithmParameterException if it is being initialized for decryption or 
+key unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them from 
+random. 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the encryption key 
+    params - the algorithm parameters 
+    random - the source of randomness 
+
+*javax.crypto.Cipher.init(int,Key,SecureRandom)*
+
+public final void init(
+  int opmode,
+  java.security.Key key,
+  java.security.SecureRandom random)
+  throws |java.security.InvalidKeyException|
+         
+Initializes this cipher with a key and a source of randomness. 
+
+The cipher is initialized for one of the following four operations: encryption, 
+decryption, key wrapping or key unwrapping, depending on the value of opmode. 
+
+If this cipher requires any algorithm parameters that cannot be derived from 
+the given key, the underlying cipher implementation is supposed to generate the 
+required parameters itself (using provider-specific default or random values) 
+if it is being initialized for encryption or key wrapping, and raise an 
+InvalidKeyException if it is being initialized for decryption or key 
+unwrapping. The generated parameters can be retrieved using 
+getParameters(|javax.crypto.Cipher|) or getIV(|javax.crypto.Cipher|) (if the 
+parameter is an IV). 
+
+If this cipher requires algorithm parameters that cannot be derived from the 
+input parameters, and there are no reasonable provider-specific default values, 
+initialization will necessarily fail. 
+
+If this cipher (including its underlying feedback or padding scheme) requires 
+any random bytes (e.g., for parameter generation), it will get them from 
+random. 
+
+Note that when a Cipher object is initialized, it loses all previously-acquired 
+state. In other words, initializing a Cipher is equivalent to creating a new 
+instance of that Cipher and initializing it. 
+
+
+    opmode - the operation mode of this cipher (this is one of the following: ENCRYPT_MODE, 
+       DECRYPT_MODE, WRAP_MODE or UNWRAP_MODE) 
+    key - the encryption key 
+    random - the source of randomness 
+
+*javax.crypto.Cipher.unwrap(byte[],String,int)*
+
+public final |java.security.Key| unwrap(
+  byte[] wrappedKey,
+  java.lang.String wrappedKeyAlgorithm,
+  int wrappedKeyType)
+  throws |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         
+Unwrap a previously wrapped key. 
+
+
+    wrappedKey - the key to be unwrapped. 
+    wrappedKeyAlgorithm - the algorithm associated with the wrapped key. 
+    wrappedKeyType - the type of the wrapped key. This must be one of SECRET_KEY, PRIVATE_KEY, or 
+       PUBLIC_KEY. 
+
+    Returns: the unwrapped key. 
+
+*javax.crypto.Cipher.update(byte[])*
+
+public final byte[] update(byte[] input)
+
+Continues a multiple-part encryption or decryption operation (depending on how 
+this cipher was initialized), processing another data part. 
+
+The bytes in the input buffer are processed, and the result is stored in a new 
+buffer. 
+
+If input has a length of zero, this method returns null. 
+
+
+    input - the input buffer 
+
+    Returns: the new buffer with the result, or null if the underlying cipher is a block 
+             cipher and the input data is too short to result in a new block. 
+
+*javax.crypto.Cipher.update(byte[],int,int)*
+
+public final byte[] update(
+  byte[] input,
+  int inputOffset,
+  int inputLen)
+
+Continues a multiple-part encryption or decryption operation (depending on how 
+this cipher was initialized), processing another data part. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, are processed, and the result is stored in a new buffer. 
+
+If inputLen is zero, this method returns null. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+
+    Returns: the new buffer with the result, or null if the underlying cipher is a block 
+             cipher and the input data is too short to result in a new block. 
+
+*javax.crypto.Cipher.update(byte[],int,int,byte[])*
+
+public final int update(
+  byte[] input,
+  int inputOffset,
+  int inputLen,
+  byte[] output)
+  throws |javax.crypto.ShortBufferException|
+         
+Continues a multiple-part encryption or decryption operation (depending on how 
+this cipher was initialized), processing another data part. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, are processed, and the result is stored in the output buffer. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+getOutputSize(|javax.crypto.Cipher|) to determine how big the output buffer 
+should be. 
+
+If inputLen is zero, this method returns a length of zero. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same byte array and no unprocessed input data is overwritten 
+when the result is copied into the output buffer. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+    output - the buffer for the result 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.update(byte[],int,int,byte[],int)*
+
+public final int update(
+  byte[] input,
+  int inputOffset,
+  int inputLen,
+  byte[] output,
+  int outputOffset)
+  throws |javax.crypto.ShortBufferException|
+         
+Continues a multiple-part encryption or decryption operation (depending on how 
+this cipher was initialized), processing another data part. 
+
+The first inputLen bytes in the input buffer, starting at inputOffset 
+inclusive, are processed, and the result is stored in the output buffer, 
+starting at outputOffset inclusive. 
+
+If the output buffer is too small to hold the result, a ShortBufferException is 
+thrown. In this case, repeat this call with a larger output buffer. Use 
+getOutputSize(|javax.crypto.Cipher|) to determine how big the output buffer 
+should be. 
+
+If inputLen is zero, this method returns a length of zero. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same byte array and no unprocessed input data is overwritten 
+when the result is copied into the output buffer. 
+
+
+    input - the input buffer 
+    inputOffset - the offset in input where the input starts 
+    inputLen - the input length 
+    output - the buffer for the result 
+    outputOffset - the offset in output where the result is stored 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.update(ByteBuffer,ByteBuffer)*
+
+public final int update(
+  java.nio.ByteBuffer input,
+  java.nio.ByteBuffer output)
+  throws |javax.crypto.ShortBufferException|
+         
+Continues a multiple-part encryption or decryption operation (depending on how 
+this cipher was initialized), processing another data part. 
+
+All input.remaining() bytes starting at input.position() are processed. The 
+result is stored in the output buffer. Upon return, the input buffer's position 
+will be equal to its limit; its limit will not have changed. The output 
+buffer's position will have advanced by n, where n is the value returned by 
+this method; the output buffer's limit will not have changed. 
+
+If output.remaining() bytes are insufficient to hold the result, a 
+ShortBufferException is thrown. In this case, repeat this call with a larger 
+output buffer. Use getOutputSize(|javax.crypto.Cipher|) to determine how big 
+the output buffer should be. 
+
+Note: this method should be copy-safe, which means the input and output buffers 
+can reference the same block of memory and no unprocessed input data is 
+overwritten when the result is copied into the output buffer. 
+
+
+    input - the input ByteBuffer 
+    output - the output ByteByffer 
+
+    Returns: the number of bytes stored in output 
+
+*javax.crypto.Cipher.updateAAD(byte[])*
+
+public final void updateAAD(byte[] src)
+
+Continues a multi-part update of the Additional Authentication Data (AAD). 
+
+Calls to this method provide AAD to the cipher when operating in modes such as 
+AEAD (GCM/CCM). If this cipher is operating in either GCM or CCM mode, all AAD 
+must be supplied before beginning operations on the ciphertext (via 
+theupdateanddoFinalmethods). 
+
+
+    src - the buffer containing the Additional Authentication Data 
+
+*javax.crypto.Cipher.updateAAD(byte[],int,int)*
+
+public final void updateAAD(
+  byte[] src,
+  int offset,
+  int len)
+
+Continues a multi-part update of the Additional Authentication Data (AAD), 
+using a subset of the provided buffer. 
+
+Calls to this method provide AAD to the cipher when operating in modes such as 
+AEAD (GCM/CCM). If this cipher is operating in either GCM or CCM mode, all AAD 
+must be supplied before beginning operations on the ciphertext (via 
+theupdateanddoFinalmethods). 
+
+
+    src - the buffer containing the AAD 
+    offset - the offset in {@code src} where the AAD input starts 
+    len - the number of AAD bytes 
+
+*javax.crypto.Cipher.updateAAD(ByteBuffer)*
+
+public final void updateAAD(java.nio.ByteBuffer src)
+
+Continues a multi-part update of the Additional Authentication Data (AAD). 
+
+Calls to this method provide AAD to the cipher when operating in modes such as 
+AEAD (GCM/CCM). If this cipher is operating in either GCM or CCM mode, all AAD 
+must be supplied before beginning operations on the ciphertext (via 
+theupdateanddoFinalmethods). 
+
+Allsrc.remaining()bytes starting atsrc.position()are processed. Upon return, 
+the input buffer's position will be equal to its limit; its limit will not have 
+changed. 
+
+
+    src - the buffer containing the AAD 
+
+*javax.crypto.Cipher.wrap(Key)*
+
+public final byte[] wrap(java.security.Key key)
+  throws |javax.crypto.IllegalBlockSizeException|
+         |java.security.InvalidKeyException|
+         
+Wrap a key. 
+
+
+    key - the key to be wrapped. 
+
+    Returns: the wrapped key. 
+
+

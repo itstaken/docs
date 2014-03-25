@@ -1,0 +1,68 @@
+*javax.lang.model.type.TypeVariable* *TypeVariable* Represents a type variable.
+
+public interface interface TypeVariable
+
+  implements |javax.lang.model.type.ReferenceType|
+
+|javax.lang.model.type.TypeVariable_Description|
+|javax.lang.model.type.TypeVariable_Fields|
+|javax.lang.model.type.TypeVariable_Constructors|
+|javax.lang.model.type.TypeVariable_Methods|
+
+================================================================================
+
+*javax.lang.model.type.TypeVariable_Methods*
+|javax.lang.model.type.TypeVariable.asElement()|Returns the element correspondi
+|javax.lang.model.type.TypeVariable.getLowerBound()|Returns the lower bound of 
+|javax.lang.model.type.TypeVariable.getUpperBound()|Returns the upper bound of 
+
+*javax.lang.model.type.TypeVariable_Description*
+
+Represents a type variable. A type variable may be explicitly declared by a 
+type parameter(|javax.lang.model.element.TypeParameterElement|) of a type, 
+method, or constructor. A type variable may also be declared implicitly, as by 
+the capture conversion of a wildcard type argument (see chapter 5 of The Java 
+Language Specification). 
+
+
+
+*javax.lang.model.type.TypeVariable.asElement()*
+
+public |javax.lang.model.element.Element| asElement()
+
+Returns the element corresponding to this type variable. 
+
+
+
+    Returns: the element corresponding to this type variable 
+
+*javax.lang.model.type.TypeVariable.getLowerBound()*
+
+public |javax.lang.model.type.TypeMirror| getLowerBound()
+
+Returns the lower bound of this type variable. While a type parameter cannot 
+include an explicit lower bound declaration, capture conversion can produce a 
+type variable with a non-trivial lower bound. Type variables otherwise have a 
+lower bound of (|javax.lang.model.type.NullType|) . 
+
+
+
+    Returns: the lower bound of this type variable 
+
+*javax.lang.model.type.TypeVariable.getUpperBound()*
+
+public |javax.lang.model.type.TypeMirror| getUpperBound()
+
+Returns the upper bound of this type variable. 
+
+If this type variable was declared with no explicit upper bounds, the result 
+isjava.lang.Object. If it was declared with multiple upper bounds, the result 
+is an intersection type (modeled as a (|javax.lang.model.type.DeclaredType|) ). 
+Individual bounds can be found by examining the result's 
+supertypes(|javax.lang.model.util.Types|) . 
+
+
+
+    Returns: the upper bound of this type variable 
+
+

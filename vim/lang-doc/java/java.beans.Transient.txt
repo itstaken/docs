@@ -1,0 +1,37 @@
+*java.beans.Transient* *Transient* Indicates that an attribute called "transient
+
+public interface class Transient
+
+  implements |java.lang.annotation.Annotation|
+
+|java.beans.Transient_Description|
+|java.beans.Transient_Fields|
+|java.beans.Transient_Constructors|
+|java.beans.Transient_Methods|
+
+================================================================================
+
+*java.beans.Transient_Description*
+
+Indicates that an attribute called "transient" should be declared with the 
+givenvaluewhen the (|java.beans.Introspector|) constructs a 
+(|java.beans.PropertyDescriptor|) or (|java.beans.EventSetDescriptor|) classes 
+associated with the annotated code element. Atruevalue for the "transient" 
+attribute indicates to encoders derived from (|java.beans.Encoder|) that this 
+feature should be ignored. 
+
+TheTransientannotation may be be used in any of the methods that are involved 
+in a (|java.beans.FeatureDescriptor|) subclass to identify the transient 
+feature in the annotated class and its subclasses. Normally, the method that 
+starts with "get" is the best place to put the annotation and it is this 
+declaration that takes precedence in the case of multiple annotations being 
+defined for the same feature. 
+
+To declare a feature non-transient in a class whose superclass declares it 
+transient, use@Transient(false). In all cases, the (|java.beans.Introspector|) 
+decides if a feature is transient by referring to the annotation on the most 
+specific superclass. If noTransientannotation is present in any superclass the 
+feature is not transient. 
+
+
+

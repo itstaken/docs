@@ -1,0 +1,160 @@
+*java.nio.file.attribute.FileTime* *FileTime* Represents the value of a file's t
+
+public final class FileTime
+  extends    |java.lang.Object|
+  implements |java.lang.Comparable|
+
+|java.nio.file.attribute.FileTime_Description|
+|java.nio.file.attribute.FileTime_Fields|
+|java.nio.file.attribute.FileTime_Constructors|
+|java.nio.file.attribute.FileTime_Methods|
+
+================================================================================
+
+*java.nio.file.attribute.FileTime_Methods*
+|java.nio.file.attribute.FileTime.compareTo(FileTime)|Compares the value of two
+|java.nio.file.attribute.FileTime.equals(Object)|Tests thisFileTimefor equality
+|java.nio.file.attribute.FileTime.from(long,TimeUnit)|Returns aFileTimerepresen
+|java.nio.file.attribute.FileTime.fromMillis(long)|Returns aFileTimerepresentin
+|java.nio.file.attribute.FileTime.hashCode()|Computes a hash code for this file
+|java.nio.file.attribute.FileTime.to(TimeUnit)|Returns the value at the given u
+|java.nio.file.attribute.FileTime.toMillis()|Returns the value in milliseconds.
+|java.nio.file.attribute.FileTime.toString()|Returns the string representation 
+
+*java.nio.file.attribute.FileTime_Description*
+
+Represents the value of a file's time stamp attribute. For example, it may 
+represent the time that the file was last 
+modified(|java.nio.file.attribute.BasicFileAttributes|) , 
+accessed(|java.nio.file.attribute.BasicFileAttributes|) , or 
+created(|java.nio.file.attribute.BasicFileAttributes|) . 
+
+Instances of this class are immutable. 
+
+
+
+*java.nio.file.attribute.FileTime.compareTo(FileTime)*
+
+public int compareTo(java.nio.file.attribute.FileTime other)
+
+Compares the value of twoFileTimeobjects for order. 
+
+
+    other - the other {@code FileTime} to be compared 
+
+    Returns: {@code 0} if this {@code FileTime} is equal to {@code other}, a value less than 
+             0 if this {@code FileTime} represents a time that is before {@code 
+             other}, and a value greater than 0 if this {@code FileTime} 
+             represents a time that is after {@code other} 
+
+*java.nio.file.attribute.FileTime.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Tests thisFileTimefor equality with the given object. 
+
+The result istrueif and only if the argument is notnulland is aFileTimethat 
+represents the same time. This method satisfies the general contract of 
+theObject.equalsmethod. 
+
+
+    obj - the object to compare with 
+
+    Returns: {@code true} if, and only if, the given object is a {@code FileTime} that 
+             represents the same time 
+
+*java.nio.file.attribute.FileTime.from(long,TimeUnit)*
+
+public static |java.nio.file.attribute.FileTime| from(
+  long value,
+  java.util.concurrent.TimeUnit unit)
+
+Returns aFileTimerepresenting a value at the given unit of granularity. 
+
+
+    value - the value since the epoch (1970-01-01T00:00:00Z); can be negative 
+    unit - the unit of granularity to interpret the value 
+
+    Returns: a {@code FileTime} representing the given value 
+
+*java.nio.file.attribute.FileTime.fromMillis(long)*
+
+public static |java.nio.file.attribute.FileTime| fromMillis(long value)
+
+Returns aFileTimerepresenting the given value in milliseconds. 
+
+
+    value - the value, in milliseconds, since the epoch (1970-01-01T00:00:00Z); can be 
+       negative 
+
+    Returns: a {@code FileTime} representing the given value 
+
+*java.nio.file.attribute.FileTime.hashCode()*
+
+public int hashCode()
+
+Computes a hash code for this file time. 
+
+The hash code is based upon the value represented, and satisfies the general 
+contract of the (|java.lang.Object|) method. 
+
+
+
+    Returns: the hash-code value 
+
+*java.nio.file.attribute.FileTime.to(TimeUnit)*
+
+public long to(java.util.concurrent.TimeUnit unit)
+
+Returns the value at the given unit of granularity. 
+
+Conversion from a coarser granularity that would numerically overflow saturate 
+toLong.MIN_VALUEif negative orLong.MAX_VALUEif positive. 
+
+
+    unit - the unit of granularity for the return value 
+
+    Returns: value in the given unit of granularity, since the epoch since the epoch 
+             (1970-01-01T00:00:00Z); can be negative 
+
+*java.nio.file.attribute.FileTime.toMillis()*
+
+public long toMillis()
+
+Returns the value in milliseconds. 
+
+Conversion from a coarser granularity that would numerically overflow saturate 
+toLong.MIN_VALUEif negative orLong.MAX_VALUEif positive. 
+
+
+
+    Returns: the value in milliseconds, since the epoch (1970-01-01T00:00:00Z) 
+
+*java.nio.file.attribute.FileTime.toString()*
+
+public |java.lang.String| toString()
+
+Returns the string representation of thisFileTime. The string is returned in 
+the ISO8601 format: 
+
+YYYY-MM-DDThh:mm:ss[.s+]Z 
+
+where "[.s+]" represents a dot followed by one of more digits for the decimal 
+fraction of a second. It is only present when the decimal fraction of a second 
+is not zero. For 
+example,FileTime.fromMillis(1234567890000L).toString()yields"2009-02-13T23:31:30Z",
+andFileTime.fromMillis(1234567890123L).toString()yields"2009-02-13T23:31:30.123Z".
+
+
+AFileTimeis primarily intended to represent the value of a file's time stamp. 
+Where used to represent extreme values, where the year is less than "0001" or 
+greater than "9999" then this method deviates from ISO 8601 in the same manner 
+as the XML Schema language. That is, the year may be expanded to more than four 
+digits and may be negative-signed. If more than four digits then leading zeros 
+are not present. The year before "0001" is "-0001". 
+
+
+
+    Returns: the string representation of this file time 
+
+

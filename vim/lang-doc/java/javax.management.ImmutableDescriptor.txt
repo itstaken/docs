@@ -1,0 +1,247 @@
+*javax.management.ImmutableDescriptor* *ImmutableDescriptor* An immutable descri
+
+public class ImmutableDescriptor
+  extends    |java.lang.Object|
+  implements |javax.management.Descriptor|
+
+|javax.management.ImmutableDescriptor_Description|
+|javax.management.ImmutableDescriptor_Fields|
+|javax.management.ImmutableDescriptor_Constructors|
+|javax.management.ImmutableDescriptor_Methods|
+
+================================================================================
+
+*javax.management.ImmutableDescriptor_Fields*
+|javax.management.ImmutableDescriptor_javax.management.ImmutableDescriptor.EMPTY_DESCRIPTOR|
+
+*javax.management.ImmutableDescriptor_Constructors*
+|javax.management.ImmutableDescriptor(Map<String,?>)|Construct a descriptor whe
+|javax.management.ImmutableDescriptor(String...)|Construct a descriptor contain
+|javax.management.ImmutableDescriptor(String[],Object[])|Construct a descriptor
+
+*javax.management.ImmutableDescriptor_Methods*
+|javax.management.ImmutableDescriptor.clone()|Returns a descriptor which is equ
+|javax.management.ImmutableDescriptor.equals(Object)|Compares this descriptor t
+|javax.management.ImmutableDescriptor.getFieldNames()|
+|javax.management.ImmutableDescriptor.getFields()|
+|javax.management.ImmutableDescriptor.getFieldValue(String)|
+|javax.management.ImmutableDescriptor.getFieldValues(String...)|
+|javax.management.ImmutableDescriptor.hashCode()|Returns the hash code value fo
+|javax.management.ImmutableDescriptor.isValid()|Returns true if all of the fiel
+|javax.management.ImmutableDescriptor.removeField(String)|Removes a field from 
+|javax.management.ImmutableDescriptor.setField(String,Object)|This operation is
+|javax.management.ImmutableDescriptor.setFields(String[],Object[])|This operati
+|javax.management.ImmutableDescriptor.toString()|
+|javax.management.ImmutableDescriptor.union(Descriptor...)|Return anImmutableDe
+
+*javax.management.ImmutableDescriptor_Description*
+
+An immutable descriptor. 
+
+
+
+*javax.management.ImmutableDescriptor_javax.management.ImmutableDescriptor.EMPTY_DESCRIPTOR*
+
+An empty descriptor. 
+
+
+
+*javax.management.ImmutableDescriptor(Map<String,?>)*
+
+public ImmutableDescriptor(java.util.Map<java.lang.String, ?> fields)
+
+Construct a descriptor where the names and values of the fields are the keys 
+and values of the given Map. 
+
+
+*javax.management.ImmutableDescriptor(String...)*
+
+public ImmutableDescriptor(java.lang.String[] fields)
+
+Construct a descriptor containing the given fields. Each String must be of the 
+formfieldName=fieldValue. The field name ends at the first=character; for 
+example if the String isa=b=cthen the field name isaand its value isb=c. 
+
+
+*javax.management.ImmutableDescriptor(String[],Object[])*
+
+public ImmutableDescriptor(
+  java.lang.String[] fieldNames,
+  java.lang.Object[] fieldValues)
+
+Construct a descriptor containing the given fields and values. 
+
+
+*javax.management.ImmutableDescriptor.clone()*
+
+public |javax.management.Descriptor| clone()
+
+Returns a descriptor which is equal to this descriptor. Changes to the returned 
+descriptor will have no effect on this descriptor, and vice versa. 
+
+This method returns the object on which it is called. A subclass can override 
+it to return another object provided the contract is respected. 
+
+
+
+*javax.management.ImmutableDescriptor.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+Compares this descriptor to the given object. The objects are equal if the 
+given object is also a Descriptor, and if the two Descriptors have the same 
+field names (possibly differing in case) and the same associated values. The 
+respective values for a field in the two Descriptors are equal if the following 
+conditions hold: 
+
+If one value is null then the other must be too. If one value is a primitive 
+array then the other must be a primitive array of the same type with the same 
+elements. If one value is an object array then the other must be too and 
+(|java.util.Arrays|) must return true. Otherwise (|java.lang.Object|) must 
+return true. 
+
+
+    o - the object to compare with. 
+
+    Returns: {@code true} if the objects are the same; {@code false} otherwise. 
+
+*javax.management.ImmutableDescriptor.getFieldNames()*
+
+public final |java.lang.String|[] getFieldNames()
+
+
+
+
+
+*javax.management.ImmutableDescriptor.getFields()*
+
+public final |java.lang.String|[] getFields()
+
+
+
+
+
+*javax.management.ImmutableDescriptor.getFieldValue(String)*
+
+public final |java.lang.Object| getFieldValue(java.lang.String fieldName)
+
+
+
+
+
+*javax.management.ImmutableDescriptor.getFieldValues(String...)*
+
+public final |java.lang.Object|[] getFieldValues(java.lang.String[] fieldNames)
+
+
+
+
+
+*javax.management.ImmutableDescriptor.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this descriptor. The hash code is computed as 
+the sum of the hash codes for each field in the descriptor. The hash code of a 
+field with namenand valuevisn.toLowerCase().hashCode() ^ h. Herehis the hash 
+code ofv, computed as follows: 
+
+Ifvis null thenhis 0. Ifvis a primitive array thenhis computed using the 
+appropriate overloading ofjava.util.Arrays.hashCode. Ifvis an object array 
+thenhis computed using (|java.util.Arrays|) . Otherwisehisv.hashCode(). 
+
+
+
+    Returns: A hash code value for this object. 
+
+*javax.management.ImmutableDescriptor.isValid()*
+
+public boolean isValid()
+
+Returns true if all of the fields have legal values given their names. This 
+method always returns true, but a subclass can override it to return false when 
+appropriate. 
+
+
+
+    Returns: true if the values are legal. 
+
+*javax.management.ImmutableDescriptor.removeField(String)*
+
+public final void removeField(java.lang.String fieldName)
+
+Removes a field from the descriptor. 
+
+
+    fieldName - String name of the field to be removed. If the field name is illegal or the 
+       field is not found, no exception is thrown. 
+
+*javax.management.ImmutableDescriptor.setField(String,Object)*
+
+public final void setField(
+  java.lang.String fieldName,
+  java.lang.Object fieldValue)
+  throws |javax.management.RuntimeOperationsException|
+         
+This operation is unsupported since this class is immutable. If this call would 
+change a mutable descriptor with the same contents, then a 
+(|javax.management.RuntimeOperationsException|) wrapping an 
+(|java.lang.UnsupportedOperationException|) is thrown. Otherwise, the behavior 
+is the same as it would be for a mutable descriptor: either an exception is 
+thrown because of illegal parameters, or there is no effect. 
+
+
+
+*javax.management.ImmutableDescriptor.setFields(String[],Object[])*
+
+public final void setFields(
+  java.lang.String[] fieldNames,
+  java.lang.Object[] fieldValues)
+  throws |javax.management.RuntimeOperationsException|
+         
+This operation is unsupported since this class is immutable. If this call would 
+change a mutable descriptor with the same contents, then a 
+(|javax.management.RuntimeOperationsException|) wrapping an 
+(|java.lang.UnsupportedOperationException|) is thrown. Otherwise, the behavior 
+is the same as it would be for a mutable descriptor: either an exception is 
+thrown because of illegal parameters, or there is no effect. 
+
+
+
+*javax.management.ImmutableDescriptor.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*javax.management.ImmutableDescriptor.union(Descriptor...)*
+
+public static |javax.management.ImmutableDescriptor| union(javax.management.Descriptor[] descriptors)
+
+Return anImmutableDescriptorwhose contents are the union of the given 
+descriptors. Every field name that appears in any of the descriptors will 
+appear in the result with the value that it has when the method is called. 
+Subsequent changes to any of the descriptors do not affect the 
+ImmutableDescriptor returned here. 
+
+In the simplest case, there is only one descriptor and the 
+returnedImmutableDescriptoris a copy of its fields at the time this method is 
+called: 
+
+
+
+Descriptor d = something(); ImmutableDescriptor copy = 
+ImmutableDescriptor.union(d); 
+
+
+    descriptors - the descriptors to be combined. Any of the descriptors can be null, in which 
+       case it is skipped. 
+
+    Returns: an {@code ImmutableDescriptor} that is the union of the given descriptors. The 
+             returned object may be identical to one of the input descriptors 
+             if it is an ImmutableDescriptor that contains all of the required 
+             fields. 
+
+

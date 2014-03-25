@@ -1,0 +1,75 @@
+*javax.lang.model.type.DeclaredType* *DeclaredType* Represents a declared type, 
+
+public interface interface DeclaredType
+
+  implements |javax.lang.model.type.ReferenceType|
+
+|javax.lang.model.type.DeclaredType_Description|
+|javax.lang.model.type.DeclaredType_Fields|
+|javax.lang.model.type.DeclaredType_Constructors|
+|javax.lang.model.type.DeclaredType_Methods|
+
+================================================================================
+
+*javax.lang.model.type.DeclaredType_Methods*
+|javax.lang.model.type.DeclaredType.asElement()|Returns the element correspondi
+|javax.lang.model.type.DeclaredType.getEnclosingType()|Returns the type of the 
+|javax.lang.model.type.DeclaredType.getTypeArguments()|Returns the actual type 
+
+*javax.lang.model.type.DeclaredType_Description*
+
+Represents a declared type, either a class type or an interface type. This 
+includes parameterized types such asjava.util.Setas well as raw types. 
+
+While aTypeElementrepresents a class or interface element, 
+aDeclaredTyperepresents a class or interface type, the latter being a use (or 
+invocation) of the former. See (|javax.lang.model.element.TypeElement|) for 
+more on this distinction. 
+
+The supertypes (both class and interface types) of a declared type may be found 
+using the (|javax.lang.model.util.Types|) method. This returns the supertypes 
+with any type arguments substituted in. 
+
+This interface is also used to represent intersection types. An intersection 
+type is implicit in a program rather than being explictly declared. For 
+example, the bound of the type parameteris an intersection type. It is 
+represented by aDeclaredTypewithNumberas its superclass andRunnableas its lone 
+superinterface. 
+
+
+
+*javax.lang.model.type.DeclaredType.asElement()*
+
+public |javax.lang.model.element.Element| asElement()
+
+Returns the element corresponding to this type. 
+
+
+
+    Returns: the element corresponding to this type 
+
+*javax.lang.model.type.DeclaredType.getEnclosingType()*
+
+public |javax.lang.model.type.TypeMirror| getEnclosingType()
+
+Returns the type of the innermost enclosing instance or aNoTypeof kindNONEif 
+there is no enclosing instance. Only types corresponding to inner classes have 
+an enclosing instance. 
+
+
+
+    Returns: a type mirror for the enclosing type 
+
+*javax.lang.model.type.DeclaredType.getTypeArguments()*
+
+public |java.util.List|<? extends javax.lang.model.type.TypeMirror> getTypeArguments()
+
+Returns the actual type arguments of this type. For a type nested within a 
+parameterized type (such asOuter.Inner), only the type arguments of the 
+innermost type are included. 
+
+
+
+    Returns: the actual type arguments of this type, or an empty list if none 
+
+

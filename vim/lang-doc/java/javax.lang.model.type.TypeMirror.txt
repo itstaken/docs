@@ -1,0 +1,99 @@
+*javax.lang.model.type.TypeMirror* *TypeMirror* Represents a type in the Java pr
+
+public interface interface TypeMirror
+
+
+|javax.lang.model.type.TypeMirror_Description|
+|javax.lang.model.type.TypeMirror_Fields|
+|javax.lang.model.type.TypeMirror_Constructors|
+|javax.lang.model.type.TypeMirror_Methods|
+
+================================================================================
+
+*javax.lang.model.type.TypeMirror_Methods*
+|javax.lang.model.type.TypeMirror.accept(TypeVisitor<R,P>,P)|Applies a visitor 
+|javax.lang.model.type.TypeMirror.equals(Object)|Obeys the general contract ofO
+|javax.lang.model.type.TypeMirror.getKind()|Returns thekindof this type.
+|javax.lang.model.type.TypeMirror.hashCode()|Obeys the general contract ofObjec
+|javax.lang.model.type.TypeMirror.toString()|Returns an informative string repr
+
+*javax.lang.model.type.TypeMirror_Description*
+
+Represents a type in the Java programming language. Types include primitive 
+types, declared types (class and interface types), array types, type variables, 
+and the null type. Also represented are wildcard type arguments, the signature 
+and return types of executables, and pseudo-types corresponding to packages and 
+to the keywordvoid. 
+
+Types should be compared using the utility methods in 
+(|javax.lang.model.util.Types|) . There is no guarantee that any particular 
+type will always be represented by the same object. 
+
+To implement operations based on the class of anTypeMirrorobject, either use a 
+visitor(|javax.lang.model.type.TypeVisitor|) or use the result of the 
+(|javax.lang.model.type.TypeMirror|) method. Usinginstanceofis not necessarily 
+a reliable idiom for determining the effective class of an object in this 
+modeling hierarchy since an implementation may choose to have a single object 
+implement multipleTypeMirrorsubinterfaces. 
+
+
+
+*javax.lang.model.type.TypeMirror.accept(TypeVisitor<R,P>,P)*
+
+public |R| accept(
+  javax.lang.model.type.TypeVisitor<R, P> v,
+  P p)
+
+Applies a visitor to this type. 
+
+
+    v - the visitor operating on this type 
+    p - additional parameter to the visitor 
+
+    Returns: a visitor-specified result 
+
+*javax.lang.model.type.TypeMirror.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Obeys the general contract of Object.equals(|java.lang.Object|) . This method 
+does not, however, indicate whether two types represent the same type. Semantic 
+comparisons of type equality should instead use (|javax.lang.model.util.Types|) 
+. The results oft1.equals(t2)andTypes.isSameType(t1, t2)may differ. 
+
+
+    obj - the object to be compared with this type 
+
+    Returns: {@code true} if the specified object is equal to this one 
+
+*javax.lang.model.type.TypeMirror.getKind()*
+
+public |javax.lang.model.type.TypeKind| getKind()
+
+Returns thekindof this type. 
+
+
+
+    Returns: the kind of this type 
+
+*javax.lang.model.type.TypeMirror.hashCode()*
+
+public int hashCode()
+
+Obeys the general contract of Object.hashCode(|java.lang.Object|) . 
+
+
+
+*javax.lang.model.type.TypeMirror.toString()*
+
+public |java.lang.String| toString()
+
+Returns an informative string representation of this type. If possible, the 
+string should be of a form suitable for representing this type in source code. 
+Any names embedded in the result are qualified if possible. 
+
+
+
+    Returns: a string representation of this type 
+
+

@@ -1,0 +1,509 @@
+*javax.management.Descriptor* *Descriptor* Additional metadata for a JMX element
+
+public interface interface Descriptor
+
+  implements |java.io.Serializable|
+             |java.lang.Cloneable|
+
+|javax.management.Descriptor_Description|
+|javax.management.Descriptor_Fields|
+|javax.management.Descriptor_Constructors|
+|javax.management.Descriptor_Methods|
+
+================================================================================
+
+*javax.management.Descriptor_Methods*
+|javax.management.Descriptor.clone()|Returns a descriptor which is equal to thi
+|javax.management.Descriptor.equals(Object)|Compares this descriptor to the giv
+|javax.management.Descriptor.getFieldNames()|Returns all the field names in the
+|javax.management.Descriptor.getFields()|Returns all of the fields contained in
+|javax.management.Descriptor.getFieldValue(String)|Returns the value for a spec
+|javax.management.Descriptor.getFieldValues(String...)|Returns all the field va
+|javax.management.Descriptor.hashCode()|Returns the hash code value for this de
+|javax.management.Descriptor.isValid()|Returns true if all of the fields have l
+|javax.management.Descriptor.removeField(String)|Removes a field from the descr
+|javax.management.Descriptor.setField(String,Object)|Sets the value for a speci
+|javax.management.Descriptor.setFields(String[],Object[])|Sets all fields in th
+
+*javax.management.Descriptor_Description*
+
+Additional metadata for a JMX element. ADescriptoris associated with a 
+(|javax.management.MBeanInfo|) , (|javax.management.MBeanAttributeInfo|) , etc. 
+It consists of a collection of fields. A field is a name and an associated 
+value. 
+
+Field names are not case-sensitive. The namesdescriptorType,descriptortype, 
+andDESCRIPTORTYPEare all equivalent. However, the case that was used when the 
+field was first set is preserved in the result of the 
+(|javax.management.Descriptor|) and (|javax.management.Descriptor|) methods. 
+
+Not all field names and values are predefined. New fields can be defined and 
+added by any program. 
+
+A descriptor can be mutable or immutable. An immutable descriptor, once 
+created, never changes. The Descriptor methods that could modify the contents 
+of the descriptor will throw an exception for an immutable descriptor. 
+Immutable descriptors are usually instances of 
+(|javax.management.ImmutableDescriptor|) or a subclass. Mutable descriptors are 
+usually instances of (|javax.management.modelmbean.DescriptorSupport|) or a 
+subclass. 
+
+Certain fields are used by the JMX implementation. This means either that the 
+presence of the field may change the behavior of the JMX API or that the field 
+may be set in descriptors returned by the JMX API. These fields appear in 
+italics in the table below, and each one has a corresponding constant in the 
+(|javax.management.JMX|) class. For example, the fielddefaultValueis 
+represented by the constant (|javax.management.JMX|) . 
+
+Certain other fields have conventional meanings described in the table below 
+but they are not required to be understood or set by the JMX implementation. 
+
+Field names defined by the JMX specification in this and all future versions 
+will never contain a period (.). Users can safely create their own fields by 
+including a period in the name and be sure that these names will not collide 
+with any future version of the JMX API. It is recommended to follow the Java 
+package naming convention to avoid collisions between field names from 
+different origins. For example, a field created byexample.commight have the 
+namecom.example.interestLevel. 
+
+Note that the values in thedefaultValue,legalValues,maxValue, andminValuefields 
+should be consistent with the type returned by thegetType()method for the 
+associatedMBeanAttributeInfoorMBeanParameterInfo. For MXBeans, this means that 
+they should be of the mapped Java type, called opendata(J) in the MXBean type 
+mapping rules. 
+
+
+
+NameTypeUsed inMeaning 
+
+defaultValueObject MBeanAttributeInfoMBeanParameterInfo 
+
+Default value for an attribute or parameter. See (|javax.management.openmbean|) 
+. 
+
+deprecatedStringAny 
+
+An indication that this element of the information model is no longer 
+recommended for use. A set of MBeans defined by an application is collectively 
+called an information model. The convention is for the value of this field to 
+contain a string that is the version of the model in which the element was 
+first deprecated, followed by a space, followed by an explanation of the 
+deprecation, for example"1.3 Replaced by the Capacity attribute". 
+
+descriptionResource BundleBaseNameStringAny 
+
+The base name for the (|java.util.ResourceBundle|) in which the key given in 
+thedescriptionResourceKeyfield can be found, for 
+example"com.example.myapp.MBeanResources". The meaning of this field is defined 
+by this specification but the field is not set or used by the JMX API itself. 
+
+descriptionResourceKey StringAny 
+
+A resource key for the description of this element. In conjunction with 
+thedescriptionResourceBundleBaseName, this can be used to find a localized 
+version of the description. The meaning of this field is defined by this 
+specification but the field is not set or used by the JMX API itself. 
+
+enabledString MBeanAttributeInfoMBeanNotificationInfoMBeanOperationInfo 
+
+The string"true"or"false"according as this item is enabled. When an attribute 
+or operation is not enabled, it exists but cannot currently be accessed. A user 
+interface might present it as a greyed-out item. For example, an attribute 
+might only be meaningful after thestart()method of an MBean has been called, 
+and is otherwise disabled. Likewise, a notification might be disabled if it 
+cannot currently be emitted but could be in other circumstances. 
+
+exceptionsString[] MBeanAttributeInfo, MBeanConstructorInfo, MBeanOperationInfo 
+
+The class names of the exceptions that can be thrown when invoking a 
+constructor or operation, or getting an attribute. The meaning of this field is 
+defined by this specification but the field is not set or used by the JMX API 
+itself. Exceptions thrown when setting an attribute are specified by the field 
+setExceptions. 
+
+immutableInfoString MBeanInfo 
+
+The string"true"or"false"according as this MBean's MBeanInfo is immutable. When 
+this field is true, the MBeanInfo for the given MBean is guaranteed not to 
+change over the lifetime of the MBean. Hence, a client can read it once and 
+cache the read value. When this field is false or absent, there is no such 
+guarantee, although that does not mean that the MBeanInfo will necessarily 
+change. See also the "jmx.mbean.info.changed" notification. 
+
+infoTimeoutStringLongMBeanInfo 
+
+The time in milli-seconds that the MBeanInfo can reasonably be expected to be 
+unchanged. The value can be aLongor a decimal string. This provides a hint from 
+a DynamicMBean or any MBean that does not defineimmutableInfoastruethat the 
+MBeanInfo is not likely to change within this period and therefore can be 
+cached. When this field is missing or has the value zero, it is not recommended 
+to cache the MBeanInfo unless it has theimmutableInfoset totrueor it has 
+"jmx.mbean.info.changed" in its (|javax.management.MBeanNotificationInfo|) 
+array. 
+
+interfaceClassName StringMBeanInfo 
+
+The Java interface name for a Standard MBean or MXBean, as returned by 
+(|java.lang.Class|) . A Standard MBean or MXBean registered directly in the 
+MBean Server or created using the (|javax.management.StandardMBean|) class will 
+have this field in its MBeanInfo Descriptor. 
+
+legalValues SetMBeanAttributeInfoMBeanParameterInfo 
+
+Legal values for an attribute or parameter. See (|javax.management.openmbean|) 
+. 
+
+locale StringAny 
+
+The locale(|java.util.Locale|) of the description in 
+thisMBeanInfo,MBeanAttributeInfo, etc, as returned by (|java.util.Locale|) . 
+
+maxValueObject MBeanAttributeInfoMBeanParameterInfo 
+
+Maximum legal value for an attribute or parameter. See 
+(|javax.management.openmbean|) . 
+
+metricTypeString MBeanAttributeInfoMBeanOperationInfo 
+
+The type of a metric, one of the strings "counter" or "gauge". A metric is a 
+measurement exported by an MBean, usually an attribute but sometimes the result 
+of an operation. A metric that is a counter has a value that never decreases 
+except by being reset to a starting value. Counter metrics are almost always 
+non-negative integers. An example might be the number of requests received. A 
+metric that is a gauge has a numeric value that can increase or decrease. 
+Examples might be the number of open connections or a cache hit rate or a 
+temperature reading. 
+
+minValueObject MBeanAttributeInfoMBeanParameterInfo 
+
+Minimum legal value for an attribute or parameter. See 
+(|javax.management.openmbean|) . 
+
+mxbeanString MBeanInfo 
+
+The string"true"or"false"according as this MBean is an 
+(|javax.management.MXBean|) . A Standard MBean or MXBean registered directly 
+with the MBean Server or created using the (|javax.management.StandardMBean|) 
+class will have this field in its MBeanInfo Descriptor. 
+
+openType (|javax.management.openmbean.OpenType|) 
+MBeanAttributeInfoMBeanOperationInfoMBeanParameterInfo 
+
+The Open Type of this element. In the case 
+ofMBeanAttributeInfoandMBeanParameterInfo, this is the Open Type of the 
+attribute or parameter. In the case ofMBeanOperationInfo, it is the Open Type 
+of the return value. This field is set in the Descriptor for all instances of 
+(|javax.management.openmbean.OpenMBeanAttributeInfoSupport|) , 
+(|javax.management.openmbean.OpenMBeanOperationInfoSupport|) , and 
+(|javax.management.openmbean.OpenMBeanParameterInfoSupport|) . It is also set 
+for attributes, operations, and parameters of MXBeans. 
+
+This field can be set for anMBeanNotificationInfo, in which case it indicates 
+the Open Type that the user data(|javax.management.Notification|) will have. 
+
+originalTypeString MBeanAttributeInfoMBeanOperationInfoMBeanParameterInfo 
+
+The original Java type of this element as it appeared in the 
+(|javax.management.MXBean|) interface method that produced 
+thisMBeanAttributeInfo(etc). For example, a method public 
+(|java.lang.management.MemoryUsage|) getHeapMemoryUsage(); in an MXBean 
+interface defines an attribute calledHeapMemoryUsageof type 
+(|javax.management.openmbean.CompositeData|) . TheoriginalTypefield in the 
+Descriptor for this attribute will have the 
+value"java.lang.management.MemoryUsage". 
+
+The format of this string is described in the section Type Names of the MXBean 
+specification. 
+
+setExceptionsString[] MBeanAttributeInfo 
+
+The class names of the exceptions that can be thrown when setting an attribute. 
+The meaning of this field is defined by this specification but the field is not 
+set or used by the JMX API itself. Exceptions thrown when getting an attribute 
+are specified by the field exceptions. 
+
+severityStringInteger MBeanNotificationInfo 
+
+The severity of this notification. It can be 0 to mean unknown severity or a 
+value from 1 to 6 representing decreasing levels of severity. It can be 
+represented as a decimal string or anInteger. 
+
+sinceStringAny 
+
+The version of the information model in which this element was introduced. A 
+set of MBeans defined by an application is collectively called an information 
+model. The application may also define versions of this model, and use 
+the"since"field to record the version in which an element first appeared. 
+
+unitsString MBeanAttributeInfoMBeanParameterInfoMBeanOperationInfo 
+
+The units in which an attribute, parameter, or operation return value is 
+measured, for example"bytes"or"seconds". 
+
+
+
+Some additional fields are defined by Model MBeans. See the information for 
+ModelMBeanInfo, ModelMBeanAttributeInfo, ModelMBeanConstructorInfo, 
+ModelMBeanNotificationInfo, and ModelMBeanOperationInfo, as well as the chapter 
+"Model MBeans" of the JMX Specification. The following table summarizes these 
+fields. Note that when the Type in this table is Number, a String that is the 
+decimal representation of a Long can also be used. 
+
+Nothing prevents the use of these fields in MBeans that are not Model MBeans. 
+The displayName, severity, and visibility fields are of interest outside Model 
+MBeans, for example. But only Model MBeans have a predefined behavior for these 
+fields. 
+
+
+
+NameTypeUsed inMeaning 
+
+classStringModelMBeanOperationInfo Class where method is defined (fully 
+qualified). 
+
+currencyTimeLimitNumber 
+ModelMBeanInfoModelMBeanAttributeInfoModelMBeanOperationInfo How long cached 
+value is valid: <0 never, =0 always, >0 seconds. 
+
+defaultObjectModelMBeanAttributeInfo Default value for attribute. 
+
+descriptorTypeStringAny Type of descriptor, "mbean", "attribute", 
+"constructor", "operation", or "notification". 
+
+displayNameStringAny Human readable name of this item. 
+
+exportStringModelMBeanInfo Name to be used to export/expose this MBean so that 
+it is findable by other JMX Agents. 
+
+getMethodStringModelMBeanAttributeInfo Name of operation descriptor for get 
+method. 
+
+lastUpdatedTimeStampNumber ModelMBeanAttributeInfoModelMBeanOperationInfo When 
+value was set. 
+
+logStringModelMBeanInfoModelMBeanNotificationInfo t or T: log all 
+notifications, f or F: log no notifications. 
+
+logFileStringModelMBeanInfoModelMBeanNotificationInfo Fully qualified filename 
+to log events to. 
+
+messageIDStringModelMBeanNotificationInfo Unique key for message text (to allow 
+translation, analysis). 
+
+messageTextStringModelMBeanNotificationInfo Text of notification. 
+
+nameStringAny Name of this item. 
+
+persistFileStringModelMBeanInfo File name into which the MBean should be 
+persisted. 
+
+persistLocationStringModelMBeanInfo The fully qualified directory name where 
+the MBean should be persisted (if appropriate). 
+
+persistPeriodNumber ModelMBeanInfoModelMBeanAttributeInfo Frequency of persist 
+cycle in seconds. Used when persistPolicy is "OnTimer" or "NoMoreOftenThan". 
+
+persistPolicyString ModelMBeanInfoModelMBeanAttributeInfo One of: 
+OnUpdate|OnTimer|NoMoreOftenThan|OnUnregister|Always|Never. See the section 
+"MBean Descriptor Fields" in the JMX specification document. 
+
+presentationStringStringAny XML formatted string to allow presentation of data. 
+
+protocolMapDescriptorModelMBeanAttributeInfo See the section "Protocol Map 
+Support" in the JMX specification document. Mappings must be appropriate for 
+the attribute and entries can be updated or augmented at runtime. 
+
+roleString ModelMBeanConstructorInfoModelMBeanOperationInfo One of 
+"constructor", "operation", "getter", or "setter". 
+
+setMethodStringModelMBeanAttributeInfo Name of operation descriptor for set 
+method. 
+
+severityNumber ModelMBeanNotificationInfo 0-6 where 0: unknown; 1: 
+non-recoverable; 2: critical, failure; 3: major, severe; 4: minor, marginal, 
+error; 5: warning; 6: normal, cleared, informative 
+
+targetObjectObjectModelMBeanOperationInfo Object on which to execute this 
+method. 
+
+targetTypeStringModelMBeanOperationInfo type of object reference for 
+targetObject. Can be: ObjectReference | Handle | EJBHandle | IOR | 
+RMIReference. 
+
+valueObject ModelMBeanAttributeInfoModelMBeanOperationInfo Current (cached) 
+value for attribute or operation. 
+
+visibilityNumberAny 1-4 where 1: always visible, 4: rarely visible. 
+
+
+
+
+
+*javax.management.Descriptor.clone()*
+
+public |java.lang.Object| clone()
+  throws |javax.management.RuntimeOperationsException|
+         
+Returns a descriptor which is equal to this descriptor. Changes to the returned 
+descriptor will have no effect on this descriptor, and vice versa. If this 
+descriptor is immutable, it may fulfill this condition by returning itself. 
+
+
+
+    Returns: A descriptor which is equal to this descriptor. 
+
+*javax.management.Descriptor.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares this descriptor to the given object. The objects are equal if the 
+given object is also a Descriptor, and if the two Descriptors have the same 
+field names (possibly differing in case) and the same associated values. The 
+respective values for a field in the two Descriptors are equal if the following 
+conditions hold: 
+
+If one value is null then the other must be too. If one value is a primitive 
+array then the other must be a primitive array of the same type with the same 
+elements. If one value is an object array then the other must be too and 
+(|java.util.Arrays|) must return true. Otherwise (|java.lang.Object|) must 
+return true. 
+
+
+    obj - the object to compare with. 
+
+    Returns: {@code true} if the objects are the same; {@code false} otherwise. 
+
+*javax.management.Descriptor.getFieldNames()*
+
+public |java.lang.String|[] getFieldNames()
+
+Returns all the field names in the descriptor. 
+
+
+
+    Returns: String array of field names. If the descriptor is empty, you will get an empty 
+             array. 
+
+*javax.management.Descriptor.getFields()*
+
+public |java.lang.String|[] getFields()
+
+Returns all of the fields contained in this descriptor as a string array. 
+
+
+
+    Returns: String array of fields in the format fieldName=fieldValue If the value of a 
+             field is not a String, then the toString() method will be called 
+             on it and the returned value, enclosed in parentheses, used as the 
+             value for the field in the returned array. If the value of a field 
+             is null, then the value of the field in the returned array will be 
+             empty. If the descriptor is empty, you will get an empty array. 
+
+*javax.management.Descriptor.getFieldValue(String)*
+
+public |java.lang.Object| getFieldValue(java.lang.String fieldName)
+  throws |javax.management.RuntimeOperationsException|
+         
+Returns the value for a specific field name, or null if no value is present for 
+that name. 
+
+
+    fieldName - the field name. 
+
+    Returns: the corresponding value, or null if the field is not present. 
+
+*javax.management.Descriptor.getFieldValues(String...)*
+
+public |java.lang.Object|[] getFieldValues(java.lang.String[] fieldNames)
+
+Returns all the field values in the descriptor as an array of Objects. The 
+returned values are in the same order as thefieldNamesString array parameter. 
+
+
+    fieldNames - String array of the names of the fields that the values should be returned for. 
+       If the array is empty then an empty array will be returned. If the array 
+       is null then all values will be returned, as if the parameter were the 
+       array returned by {@link #getFieldNames()}. If a field name in the array 
+       does not exist, including the case where it is null or the empty string, 
+       then null is returned for the matching array element being returned. 
+
+    Returns: Object array of field values. If the list of {@code fieldNames} is empty, you 
+             will get an empty array. 
+
+*javax.management.Descriptor.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this descriptor. The hash code is computed as 
+the sum of the hash codes for each field in the descriptor. The hash code of a 
+field with namenand valuevisn.toLowerCase().hashCode() ^ h. Herehis the hash 
+code ofv, computed as follows: 
+
+Ifvis null thenhis 0. Ifvis a primitive array thenhis computed using the 
+appropriate overloading ofjava.util.Arrays.hashCode. Ifvis an object array 
+thenhis computed using (|java.util.Arrays|) . Otherwisehisv.hashCode(). 
+
+
+
+    Returns: A hash code value for this object. 
+
+*javax.management.Descriptor.isValid()*
+
+public boolean isValid()
+  throws |javax.management.RuntimeOperationsException|
+         
+Returns true if all of the fields have legal values given their names. 
+
+
+
+    Returns: true if the values are legal. 
+
+*javax.management.Descriptor.removeField(String)*
+
+public void removeField(java.lang.String fieldName)
+
+Removes a field from the descriptor. 
+
+
+    fieldName - String name of the field to be removed. If the field name is illegal or the 
+       field is not found, no exception is thrown. 
+
+*javax.management.Descriptor.setField(String,Object)*
+
+public void setField(
+  java.lang.String fieldName,
+  java.lang.Object fieldValue)
+  throws |javax.management.RuntimeOperationsException|
+         
+Sets the value for a specific field name. This will modify an existing field or 
+add a new field. 
+
+The field value will be validated before it is set. If it is not valid, then an 
+exception will be thrown. The meaning of validity is dependent on the 
+descriptor implementation. 
+
+
+    fieldName - The field name to be set. Cannot be null or empty. 
+    fieldValue - The field value to be set for the field name. Can be null if that is a valid 
+       value for the field. 
+
+*javax.management.Descriptor.setFields(String[],Object[])*
+
+public void setFields(
+  java.lang.String[] fieldNames,
+  java.lang.Object[] fieldValues)
+  throws |javax.management.RuntimeOperationsException|
+         
+Sets all fields in the field names array to the new value with the same index 
+in the field values array. Array sizes must match. 
+
+The field value will be validated before it is set. If it is not valid, then an 
+exception will be thrown. If the arrays are empty, then no change will take 
+effect. 
+
+
+    fieldNames - String array of field names. The array and array elements cannot be null. 
+    fieldValues - Object array of the corresponding field values. The array cannot be null. 
+       Elements of the array can be null. 
+
+

@@ -1,0 +1,211 @@
+*javax.script.ScriptEngineManager* *ScriptEngineManager* The ScriptEngineManager
+
+public class ScriptEngineManager
+  extends    |java.lang.Object|
+
+|javax.script.ScriptEngineManager_Description|
+|javax.script.ScriptEngineManager_Fields|
+|javax.script.ScriptEngineManager_Constructors|
+|javax.script.ScriptEngineManager_Methods|
+
+================================================================================
+
+*javax.script.ScriptEngineManager_Constructors*
+|javax.script.ScriptEngineManager()|If the thread context ClassLoader can be ac
+|javax.script.ScriptEngineManager(ClassLoader)|This constructor loads the imple
+
+*javax.script.ScriptEngineManager_Methods*
+|javax.script.ScriptEngineManager.get(String)|Gets the value for the specified 
+|javax.script.ScriptEngineManager.getBindings()|getBindings returns the value o
+|javax.script.ScriptEngineManager.getEngineByExtension(String)|Look up and crea
+|javax.script.ScriptEngineManager.getEngineByMimeType(String)|Look up and creat
+|javax.script.ScriptEngineManager.getEngineByName(String)|Looks up and creates 
+|javax.script.ScriptEngineManager.getEngineFactories()|Returns a list whose ele
+|javax.script.ScriptEngineManager.put(String,Object)|Sets the specified key/val
+|javax.script.ScriptEngineManager.registerEngineExtension(String,ScriptEngineFactory)|
+|javax.script.ScriptEngineManager.registerEngineMimeType(String,ScriptEngineFactory)|
+|javax.script.ScriptEngineManager.registerEngineName(String,ScriptEngineFactory)|
+|javax.script.ScriptEngineManager.setBindings(Bindings)|setBindings stores the 
+
+*javax.script.ScriptEngineManager_Description*
+
+The ScriptEngineManager implements a discovery and instantiation mechanism for 
+ScriptEngine classes and also maintains a collection of key/value pairs storing 
+state shared by all engines created by the Manager. This class uses the service 
+provider mechanism to enumerate all the implementations of ScriptEngineFactory. 
+The ScriptEngineManager provides a method to return a list of all these 
+factories as well as utility methods which look up factories on the basis of 
+language name, file extension and mime type. 
+
+The Bindings of key/value pairs, referred to as the "Global Scope" maintained 
+by the manager is available to all instances of ScriptEngine created by the 
+ScriptEngineManager. The values in the Bindings are generally exposed in all 
+scripts. 
+
+
+
+*javax.script.ScriptEngineManager()*
+
+public ScriptEngineManager()
+
+If the thread context ClassLoader can be accessed by the caller, then the 
+effect of calling this constructor is the same as calling 
+ScriptEngineManager(Thread.currentThread().getContextClassLoader()). Otherwise, 
+the effect is the same as calling ScriptEngineManager(null). 
+
+
+*javax.script.ScriptEngineManager(ClassLoader)*
+
+public ScriptEngineManager(java.lang.ClassLoader loader)
+
+This constructor loads the implementations of ScriptEngineFactory visible to 
+the given ClassLoader using the service provider mechanism. If loader is null, 
+the script engine factories that are bundled with the platform and that are in 
+the usual extension directories (installed extensions) are loaded. 
+
+    loader - ClassLoader used to discover script engine factories. 
+
+*javax.script.ScriptEngineManager.get(String)*
+
+public |java.lang.Object| get(java.lang.String key)
+
+Gets the value for the specified key in the Global Scope 
+
+
+    key - The key whose value is to be returned. 
+
+    Returns: The value for the specified key. 
+
+*javax.script.ScriptEngineManager.getBindings()*
+
+public |javax.script.Bindings| getBindings()
+
+getBindings returns the value of the globalScope field. ScriptEngineManager 
+sets this Bindings as global bindings for ScriptEngine objects created by it. 
+
+
+
+    Returns: The globalScope field. 
+
+*javax.script.ScriptEngineManager.getEngineByExtension(String)*
+
+public |javax.script.ScriptEngine| getEngineByExtension(java.lang.String extension)
+
+Look up and create a ScriptEngine for a given extension. The algorithm used by 
+getEngineByName is used except that the search starts by looking for a 
+ScriptEngineFactory registered to handle the given extension using 
+registerEngineExtension. 
+
+
+    extension - The given extension 
+
+    Returns: The engine to handle scripts with this extension. Returns null if not found. 
+
+*javax.script.ScriptEngineManager.getEngineByMimeType(String)*
+
+public |javax.script.ScriptEngine| getEngineByMimeType(java.lang.String mimeType)
+
+Look up and create a ScriptEngine for a given mime type. The algorithm used by 
+getEngineByName is used except that the search starts by looking for a 
+ScriptEngineFactory registered to handle the given mime type using 
+registerEngineMimeType. 
+
+
+    mimeType - The given mime type 
+
+    Returns: The engine to handle scripts with this mime type. Returns null if not found. 
+
+*javax.script.ScriptEngineManager.getEngineByName(String)*
+
+public |javax.script.ScriptEngine| getEngineByName(java.lang.String shortName)
+
+Looks up and creates a ScriptEngine for a given name. The algorithm first 
+searches for a ScriptEngineFactory that has been registered as a handler for 
+the specified name using the registerEngineName method. If one is not found, it 
+searches the set of ScriptEngineFactory instances stored by the constructor for 
+one with the specified name. If a ScriptEngineFactory is found by either 
+method, it is used to create instance of ScriptEngine. 
+
+
+    shortName - The short name of the ScriptEngine implementation. returned by the getNames 
+       method of its ScriptEngineFactory. 
+
+    Returns: A ScriptEngine created by the factory located in the search. Returns null if no 
+             such factory was found. The ScriptEngineManager sets its own 
+             globalScope Bindings as the GLOBAL_SCOPE Bindings of the newly 
+             created ScriptEngine. 
+
+*javax.script.ScriptEngineManager.getEngineFactories()*
+
+public |java.util.List|<ScriptEngineFactory> getEngineFactories()
+
+Returns a list whose elements are instances of all the ScriptEngineFactory 
+classes found by the discovery mechanism. 
+
+
+
+    Returns: List of all discovered ScriptEngineFactorys. 
+
+*javax.script.ScriptEngineManager.put(String,Object)*
+
+public void put(
+  java.lang.String key,
+  java.lang.Object value)
+
+Sets the specified key/value pair in the Global Scope. 
+
+
+    key - Key to set 
+    value - Value to set. 
+
+*javax.script.ScriptEngineManager.registerEngineExtension(String,ScriptEngineFactory)*
+
+public void registerEngineExtension(
+  java.lang.String extension,
+  javax.script.ScriptEngineFactory factory)
+
+Registers a ScriptEngineFactory to handle an extension. Overrides any such 
+association found using the Discovery mechanism. 
+
+
+    extension - The extension type to be associated with the ScriptEngineFactory. 
+    factory - The class to associate with the given extension. 
+
+*javax.script.ScriptEngineManager.registerEngineMimeType(String,ScriptEngineFactory)*
+
+public void registerEngineMimeType(
+  java.lang.String type,
+  javax.script.ScriptEngineFactory factory)
+
+Registers a ScriptEngineFactory to handle a mime type. Overrides any such 
+association found using the Discovery mechanism. 
+
+
+    type - The mime type to be associated with the ScriptEngineFactory. 
+    factory - The class to associate with the given mime type. 
+
+*javax.script.ScriptEngineManager.registerEngineName(String,ScriptEngineFactory)*
+
+public void registerEngineName(
+  java.lang.String name,
+  javax.script.ScriptEngineFactory factory)
+
+Registers a ScriptEngineFactory to handle a language name. Overrides any such 
+association found using the Discovery mechanism. 
+
+
+    name - The name to be associated with the ScriptEngineFactory. 
+    factory - The class to associate with the given name. 
+
+*javax.script.ScriptEngineManager.setBindings(Bindings)*
+
+public void setBindings(javax.script.Bindings bindings)
+
+setBindings stores the specified Bindings in the globalScope field. 
+ScriptEngineManager sets this Bindings as global bindings for ScriptEngine 
+objects created by it. 
+
+
+    bindings - The specified Bindings 
+
+

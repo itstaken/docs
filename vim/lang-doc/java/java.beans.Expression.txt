@@ -1,0 +1,135 @@
+*java.beans.Expression* *Expression* An Expression object represents a primitive
+
+public class Expression
+  extends    |java.beans.Statement|
+
+|java.beans.Expression_Description|
+|java.beans.Expression_Fields|
+|java.beans.Expression_Constructors|
+|java.beans.Expression_Methods|
+
+================================================================================
+
+*java.beans.Expression_Constructors*
+|java.beans.Expression(Object,Object,String,Object[])|Creates a newExpressionob
+|java.beans.Expression(Object,String,Object[])|Creates a newExpressionobject  f
+
+*java.beans.Expression_Methods*
+|java.beans.Expression.execute()|
+|java.beans.Expression.getValue()|If the value property of this instance is not
+|java.beans.Expression.setValue(Object)|Sets the value of this expression to va
+|java.beans.Expression.toString()|Prints the value of this expression using a J
+
+*java.beans.Expression_Description*
+
+An Expression object represents a primitive expression in which a single method 
+is applied to a target and a set of arguments to return a result - as in 
+"a.getFoo()". 
+
+In addition to the properties of the super class, the Expression object 
+provides a value which is the object returned when this expression is 
+evaluated. The return value is typically not provided by the caller and is 
+instead computed by dynamically finding the method and invoking it when the 
+first call to getValue is made. 
+
+
+
+*java.beans.Expression(Object,Object,String,Object[])*
+
+public Expression(
+  java.lang.Object value,
+  java.lang.Object target,
+  java.lang.String methodName,
+  java.lang.Object[] arguments)
+
+Creates a new (|java.beans.Expression|) object with the specified value for the 
+specified target object to invoke the method specified by the name and by the 
+array of arguments. Thevaluevalue is used as the value of thevalueproperty, so 
+the (|java.beans.Expression|) method will return it without executing 
+thisExpression. 
+
+Thetargetand themethodNamevalues should not benull. Otherwise an attempt to 
+execute thisExpressionwill result in aNullPointerException. If 
+theargumentsvalue isnull, an empty array is used as the value of 
+theargumentsproperty. 
+
+    value - the value of this expression 
+    target - the target object of this expression 
+    methodName - the name of the method to invoke on the specified target 
+    arguments - the array of arguments to invoke the specified method 
+
+*java.beans.Expression(Object,String,Object[])*
+
+public Expression(
+  java.lang.Object target,
+  java.lang.String methodName,
+  java.lang.Object[] arguments)
+
+Creates a new (|java.beans.Expression|) object for the specified target object 
+to invoke the method specified by the name and by the array of arguments. 
+
+Thetargetand themethodNamevalues should not benull. Otherwise an attempt to 
+execute thisExpressionwill result in aNullPointerException. If 
+theargumentsvalue isnull, an empty array is used as the value of 
+theargumentsproperty. 
+
+    target - the target object of this expression 
+    methodName - the name of the method to invoke on the specified target 
+    arguments - the array of arguments to invoke the specified method 
+
+*java.beans.Expression.execute()*
+
+public void execute()
+  throws |java.lang.Exception|
+         
+If the invoked method completes normally, the value it returns is copied in 
+thevalueproperty. Note that thevalueproperty is set tonull, if the return type 
+of the underlying method isvoid. 
+
+
+
+*java.beans.Expression.getValue()*
+
+public |java.lang.Object| getValue()
+  throws |java.lang.Exception|
+         
+If the value property of this instance is not already set, this method 
+dynamically finds the method with the specified methodName on this target with 
+these arguments and calls it. The result of the method invocation is first 
+copied into the value property of this expression and then returned as the 
+result of getValue. If the value property was already set, either by a call to 
+setValue or a previous call to getValue then the value property is returned 
+without either looking up or calling the method. 
+
+The value property of an Expression is set to a unique private (non-null) value 
+by default and this value is used as an internal indication that the method has 
+not yet been called. A return value of null replaces this default value in the 
+same way that any other value would, ensuring that expressions are never 
+evaluated more than once. 
+
+See the excecute method for details on how methods are chosen using the dynamic 
+types of the target and arguments. 
+
+
+
+    Returns: The result of applying this method to these arguments. 
+
+*java.beans.Expression.setValue(Object)*
+
+public void setValue(java.lang.Object value)
+
+Sets the value of this expression to value. This value will be returned by the 
+getValue method without calling the method associated with this expression. 
+
+
+    value - The value of this expression. 
+
+*java.beans.Expression.toString()*
+
+public |java.lang.String| toString()
+
+Prints the value of this expression using a Java-style syntax. 
+
+
+
+

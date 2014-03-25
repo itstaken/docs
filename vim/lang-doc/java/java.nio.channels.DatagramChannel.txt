@@ -1,0 +1,457 @@
+*java.nio.channels.DatagramChannel* *DatagramChannel* A selectable channel for d
+
+public abstract class DatagramChannel
+  extends    |java.nio.channels.spi.AbstractSelectableChannel|
+  implements |java.nio.channels.ByteChannel|
+             |java.nio.channels.ScatteringByteChannel|
+             |java.nio.channels.GatheringByteChannel|
+             |java.nio.channels.MulticastChannel|
+
+|java.nio.channels.DatagramChannel_Description|
+|java.nio.channels.DatagramChannel_Fields|
+|java.nio.channels.DatagramChannel_Constructors|
+|java.nio.channels.DatagramChannel_Methods|
+
+================================================================================
+
+*java.nio.channels.DatagramChannel_Constructors*
+|java.nio.channels.DatagramChannel(SelectorProvider)|Initializes a new instance
+
+*java.nio.channels.DatagramChannel_Methods*
+|java.nio.channels.DatagramChannel.bind(SocketAddress)|
+|java.nio.channels.DatagramChannel.connect(SocketAddress)|Connects this channel
+|java.nio.channels.DatagramChannel.disconnect()|Disconnects this channel's sock
+|java.nio.channels.DatagramChannel.getRemoteAddress()|Returns the remote addres
+|java.nio.channels.DatagramChannel.isConnected()|Tells whether or not this chan
+|java.nio.channels.DatagramChannel.open()|Opens a datagram channel.
+|java.nio.channels.DatagramChannel.open(ProtocolFamily)|Opens a datagram channe
+|java.nio.channels.DatagramChannel.read(ByteBuffer)|Reads a datagram from this 
+|java.nio.channels.DatagramChannel.read(ByteBuffer[])|Reads a datagram from thi
+|java.nio.channels.DatagramChannel.read(ByteBuffer[],int,int)|Reads a datagram 
+|java.nio.channels.DatagramChannel.receive(ByteBuffer)|Receives a datagram via 
+|java.nio.channels.DatagramChannel.send(ByteBuffer,SocketAddress)|Sends a datag
+|java.nio.channels.DatagramChannel.setOption(SocketOption<T>,T)|
+|java.nio.channels.DatagramChannel.socket()|Retrieves a datagram socket associa
+|java.nio.channels.DatagramChannel.validOps()|Returns an operation set identify
+|java.nio.channels.DatagramChannel.write(ByteBuffer)|Writes a datagram to this 
+|java.nio.channels.DatagramChannel.write(ByteBuffer[])|Writes a datagram to thi
+|java.nio.channels.DatagramChannel.write(ByteBuffer[],int,int)|Writes a datagra
+
+*java.nio.channels.DatagramChannel_Description*
+
+A selectable channel for datagram-oriented sockets. 
+
+A datagram channel is created by invoking one of the 
+open(|java.nio.channels.DatagramChannel|) methods of this class. It is not 
+possible to create a channel for an arbitrary, pre-existing datagram socket. A 
+newly-created datagram channel is open but not connected. A datagram channel 
+need not be connected in order for the 
+send(|java.nio.channels.DatagramChannel|) and 
+receive(|java.nio.channels.DatagramChannel|) methods to be used. A datagram 
+channel may be connected, by invoking its 
+connect(|java.nio.channels.DatagramChannel|) method, in order to avoid the 
+overhead of the security checks are otherwise performed as part of every send 
+and receive operation. A datagram channel must be connected in order to use the 
+read(|java.nio.channels.DatagramChannel|) and 
+write(|java.nio.channels.DatagramChannel|) methods, since those methods do not 
+accept or return socket addresses. 
+
+Once connected, a datagram channel remains connected until it is disconnected 
+or closed. Whether or not a datagram channel is connected may be determined by 
+invoking its isConnected(|java.nio.channels.DatagramChannel|) method. 
+
+Socket options are configured using the 
+setOption(|java.nio.channels.DatagramChannel|) method. A datagram channel to an 
+Internet Protocol socket supports the following options: 
+
+
+
+Option Name Description 
+
+SO_SNDBUF(|java.net.StandardSocketOptions|) The size of the socket send buffer 
+
+SO_RCVBUF(|java.net.StandardSocketOptions|) The size of the socket receive 
+buffer 
+
+SO_REUSEADDR(|java.net.StandardSocketOptions|) Re-use address 
+
+SO_BROADCAST(|java.net.StandardSocketOptions|) Allow transmission of broadcast 
+datagrams 
+
+IP_TOS(|java.net.StandardSocketOptions|) The Type of Service (ToS) octet in the 
+Internet Protocol (IP) header 
+
+IP_MULTICAST_IF(|java.net.StandardSocketOptions|) The network interface for 
+Internet Protocol (IP) multicast datagrams 
+
+IP_MULTICAST_TTL(|java.net.StandardSocketOptions|) The time-to-live for 
+Internet Protocol (IP) multicast datagrams 
+
+IP_MULTICAST_LOOP(|java.net.StandardSocketOptions|) Loopback for Internet 
+Protocol (IP) multicast datagrams 
+
+
+
+Additional (implementation specific) options may also be supported. 
+
+Datagram channels are safe for use by multiple concurrent threads. They support 
+concurrent reading and writing, though at most one thread may be reading and at 
+most one thread may be writing at any given time. 
+
+
+
+*java.nio.channels.DatagramChannel(SelectorProvider)*
+
+protected DatagramChannel(java.nio.channels.spi.SelectorProvider provider)
+
+Initializes a new instance of this class. 
+
+
+*java.nio.channels.DatagramChannel.bind(SocketAddress)*
+
+public abstract |java.nio.channels.DatagramChannel| bind(java.net.SocketAddress local)
+  throws |java.io.IOException|
+         
+
+
+
+
+*java.nio.channels.DatagramChannel.connect(SocketAddress)*
+
+public abstract |java.nio.channels.DatagramChannel| connect(java.net.SocketAddress remote)
+  throws |java.io.IOException|
+         
+Connects this channel's socket. 
+
+The channel's socket is configured so that it only receives datagrams from, and 
+sends datagrams to, the given remote peer address. Once connected, datagrams 
+may not be received from or sent to any other address. A datagram socket 
+remains connected until it is explicitly disconnected or until it is closed. 
+
+This method performs exactly the same security checks as the 
+connect(|java.net.DatagramSocket|) method of the (|java.net.DatagramSocket|) 
+class. That is, if a security manager has been installed then this method 
+verifies that its checkAccept(|java.lang.SecurityManager|) and 
+checkConnect(|java.lang.SecurityManager|) methods permit datagrams to be 
+received from and sent to, respectively, the given remote address. 
+
+This method may be invoked at any time. It will not have any effect on read or 
+write operations that are already in progress at the moment that it is invoked. 
+If this channel's socket is not bound then this method will first cause the 
+socket to be bound to an address that is assigned automatically, as if invoking 
+the bind(|java.nio.channels.DatagramChannel|) method with a parameter ofnull. 
+
+
+    remote - The remote address to which this channel is to be connected 
+
+    Returns: This datagram channel 
+
+*java.nio.channels.DatagramChannel.disconnect()*
+
+public abstract |java.nio.channels.DatagramChannel| disconnect()
+  throws |java.io.IOException|
+         
+Disconnects this channel's socket. 
+
+The channel's socket is configured so that it can receive datagrams from, and 
+sends datagrams to, any remote address so long as the security manager, if 
+installed, permits it. 
+
+This method may be invoked at any time. It will not have any effect on read or 
+write operations that are already in progress at the moment that it is invoked. 
+
+If this channel's socket is not connected, or if the channel is closed, then 
+invoking this method has no effect. 
+
+
+
+    Returns: This datagram channel 
+
+*java.nio.channels.DatagramChannel.getRemoteAddress()*
+
+public abstract |java.net.SocketAddress| getRemoteAddress()
+  throws |java.io.IOException|
+         
+Returns the remote address to which this channel's socket is connected. 
+
+
+
+    Returns: The remote address; {@code null} if the channel's socket is not connected 
+
+*java.nio.channels.DatagramChannel.isConnected()*
+
+public abstract boolean isConnected()
+
+Tells whether or not this channel's socket is connected. 
+
+
+
+    Returns: {@code true} if, and only if, this channel's socket is {@link #isOpen open} and 
+             connected 
+
+*java.nio.channels.DatagramChannel.open()*
+
+public static |java.nio.channels.DatagramChannel| open()
+  throws |java.io.IOException|
+         
+Opens a datagram channel. 
+
+The new channel is created by invoking the 
+openDatagramChannel(|java.nio.channels.spi.SelectorProvider|) method of the 
+system-wide default (|java.nio.channels.spi.SelectorProvider|) object. The 
+channel will not be connected. 
+
+The ProtocolFamily(|java.net.ProtocolFamily|) of the channel's socket is 
+platform (and possibly configuration) dependent and therefore unspecified. The 
+open(|java.nio.channels.DatagramChannel|) allows the protocol family to be 
+selected when opening a datagram channel, and should be used to open datagram 
+channels that are intended for Internet Protocol multicasting. 
+
+
+
+    Returns: A new datagram channel 
+
+*java.nio.channels.DatagramChannel.open(ProtocolFamily)*
+
+public static |java.nio.channels.DatagramChannel| open(java.net.ProtocolFamily family)
+  throws |java.io.IOException|
+         
+Opens a datagram channel. 
+
+Thefamilyparameter is used to specify the (|java.net.ProtocolFamily|) . If the 
+datagram channel is to be used for IP multicasing then this should correspond 
+to the address type of the multicast groups that this channel will join. 
+
+The new channel is created by invoking the 
+openDatagramChannel(|java.nio.channels.spi.SelectorProvider|) method of the 
+system-wide default (|java.nio.channels.spi.SelectorProvider|) object. The 
+channel will not be connected. 
+
+
+    family - The protocol family 
+
+    Returns: A new datagram channel 
+
+*java.nio.channels.DatagramChannel.read(ByteBuffer)*
+
+public abstract int read(java.nio.ByteBuffer dst)
+  throws |java.io.IOException|
+         
+Reads a datagram from this channel. 
+
+This method may only be invoked if this channel's socket is connected, and it 
+only accepts datagrams from the socket's peer. If there are more bytes in the 
+datagram than remain in the given buffer then the remainder of the datagram is 
+silently discarded. Otherwise this method behaves exactly as specified in the 
+(|java.nio.channels.ReadableByteChannel|) interface. 
+
+
+
+*java.nio.channels.DatagramChannel.read(ByteBuffer[])*
+
+public final long read(java.nio.ByteBuffer[] dsts)
+  throws |java.io.IOException|
+         
+Reads a datagram from this channel. 
+
+This method may only be invoked if this channel's socket is connected, and it 
+only accepts datagrams from the socket's peer. If there are more bytes in the 
+datagram than remain in the given buffers then the remainder of the datagram is 
+silently discarded. Otherwise this method behaves exactly as specified in the 
+(|java.nio.channels.ScatteringByteChannel|) interface. 
+
+
+
+*java.nio.channels.DatagramChannel.read(ByteBuffer[],int,int)*
+
+public abstract long read(
+  java.nio.ByteBuffer[] dsts,
+  int offset,
+  int length)
+  throws |java.io.IOException|
+         
+Reads a datagram from this channel. 
+
+This method may only be invoked if this channel's socket is connected, and it 
+only accepts datagrams from the socket's peer. If there are more bytes in the 
+datagram than remain in the given buffers then the remainder of the datagram is 
+silently discarded. Otherwise this method behaves exactly as specified in the 
+(|java.nio.channels.ScatteringByteChannel|) interface. 
+
+
+
+*java.nio.channels.DatagramChannel.receive(ByteBuffer)*
+
+public abstract |java.net.SocketAddress| receive(java.nio.ByteBuffer dst)
+  throws |java.io.IOException|
+         
+Receives a datagram via this channel. 
+
+If a datagram is immediately available, or if this channel is in blocking mode 
+and one eventually becomes available, then the datagram is copied into the 
+given byte buffer and its source address is returned. If this channel is in 
+non-blocking mode and a datagram is not immediately available then this method 
+immediately returns null. 
+
+The datagram is transferred into the given byte buffer starting at its current 
+position, as if by a regular read(|java.nio.channels.ReadableByteChannel|) 
+operation. If there are fewer bytes remaining in the buffer than are required 
+to hold the datagram then the remainder of the datagram is silently discarded. 
+
+This method performs exactly the same security checks as the 
+receive(|java.net.DatagramSocket|) method of the (|java.net.DatagramSocket|) 
+class. That is, if the socket is not connected to a specific remote address and 
+a security manager has been installed then for each datagram received this 
+method verifies that the source's address and port number are permitted by the 
+security manager's checkAccept(|java.lang.SecurityManager|) method. The 
+overhead of this security check can be avoided by first connecting the socket 
+via the connect(|java.nio.channels.DatagramChannel|) method. 
+
+This method may be invoked at any time. If another thread has already initiated 
+a read operation upon this channel, however, then an invocation of this method 
+will block until the first operation is complete. If this channel's socket is 
+not bound then this method will first cause the socket to be bound to an 
+address that is assigned automatically, as if invoking the 
+bind(|java.nio.channels.DatagramChannel|) method with a parameter ofnull. 
+
+
+    dst - The buffer into which the datagram is to be transferred 
+
+    Returns: The datagram's source address, or null if this channel is in non-blocking mode 
+             and no datagram was immediately available 
+
+*java.nio.channels.DatagramChannel.send(ByteBuffer,SocketAddress)*
+
+public abstract int send(
+  java.nio.ByteBuffer src,
+  java.net.SocketAddress target)
+  throws |java.io.IOException|
+         
+Sends a datagram via this channel. 
+
+If this channel is in non-blocking mode and there is sufficient room in the 
+underlying output buffer, or if this channel is in blocking mode and sufficient 
+room becomes available, then the remaining bytes in the given buffer are 
+transmitted as a single datagram to the given target address. 
+
+The datagram is transferred from the byte buffer as if by a regular 
+write(|java.nio.channels.WritableByteChannel|) operation. 
+
+This method performs exactly the same security checks as the 
+send(|java.net.DatagramSocket|) method of the (|java.net.DatagramSocket|) 
+class. That is, if the socket is not connected to a specific remote address and 
+a security manager has been installed then for each datagram sent this method 
+verifies that the target address and port number are permitted by the security 
+manager's checkConnect(|java.lang.SecurityManager|) method. The overhead of 
+this security check can be avoided by first connecting the socket via the 
+connect(|java.nio.channels.DatagramChannel|) method. 
+
+This method may be invoked at any time. If another thread has already initiated 
+a write operation upon this channel, however, then an invocation of this method 
+will block until the first operation is complete. If this channel's socket is 
+not bound then this method will first cause the socket to be bound to an 
+address that is assigned automatically, as if by invoking the 
+bind(|java.nio.channels.DatagramChannel|) method with a parameter ofnull. 
+
+
+    src - The buffer containing the datagram to be sent 
+    target - The address to which the datagram is to be sent 
+
+    Returns: The number of bytes sent, which will be either the number of bytes that were 
+             remaining in the source buffer when this method was invoked or, if 
+             this channel is non-blocking, may be zero if there was 
+             insufficient room for the datagram in the underlying output buffer 
+
+*java.nio.channels.DatagramChannel.setOption(SocketOption<T>,T)*
+
+public abstract |java.nio.channels.DatagramChannel| setOption(
+  java.net.SocketOption<T> name,
+  T value)
+  throws |java.io.IOException|
+         
+
+
+
+
+*java.nio.channels.DatagramChannel.socket()*
+
+public abstract |java.net.DatagramSocket| socket()
+
+Retrieves a datagram socket associated with this channel. 
+
+The returned object will not declare any public methods that are not declared 
+in the (|java.net.DatagramSocket|) class. 
+
+
+
+    Returns: A datagram socket associated with this channel 
+
+*java.nio.channels.DatagramChannel.validOps()*
+
+public final int validOps()
+
+Returns an operation set identifying this channel's supported operations. 
+
+Datagram channels support reading and writing, so this method returns ( 
+(|java.nio.channels.SelectionKey|) | (|java.nio.channels.SelectionKey|) ). 
+
+
+
+    Returns: The valid-operation set 
+
+*java.nio.channels.DatagramChannel.write(ByteBuffer)*
+
+public abstract int write(java.nio.ByteBuffer src)
+  throws |java.io.IOException|
+         
+Writes a datagram to this channel. 
+
+This method may only be invoked if this channel's socket is connected, in which 
+case it sends datagrams directly to the socket's peer. Otherwise it behaves 
+exactly as specified in the (|java.nio.channels.WritableByteChannel|) 
+interface. 
+
+
+
+*java.nio.channels.DatagramChannel.write(ByteBuffer[])*
+
+public final long write(java.nio.ByteBuffer[] srcs)
+  throws |java.io.IOException|
+         
+Writes a datagram to this channel. 
+
+This method may only be invoked if this channel's socket is connected, in which 
+case it sends datagrams directly to the socket's peer. Otherwise it behaves 
+exactly as specified in the (|java.nio.channels.GatheringByteChannel|) 
+interface. 
+
+
+
+    Returns: The number of bytes sent, which will be either the number of bytes that were 
+             remaining in the source buffer when this method was invoked or, if 
+             this channel is non-blocking, may be zero if there was 
+             insufficient room for the datagram in the underlying output buffer 
+
+*java.nio.channels.DatagramChannel.write(ByteBuffer[],int,int)*
+
+public abstract long write(
+  java.nio.ByteBuffer[] srcs,
+  int offset,
+  int length)
+  throws |java.io.IOException|
+         
+Writes a datagram to this channel. 
+
+This method may only be invoked if this channel's socket is connected, in which 
+case it sends datagrams directly to the socket's peer. Otherwise it behaves 
+exactly as specified in the (|java.nio.channels.GatheringByteChannel|) 
+interface. 
+
+
+
+    Returns: The number of bytes sent, which will be either the number of bytes that were 
+             remaining in the source buffer when this method was invoked or, if 
+             this channel is non-blocking, may be zero if there was 
+             insufficient room for the datagram in the underlying output buffer 
+
+

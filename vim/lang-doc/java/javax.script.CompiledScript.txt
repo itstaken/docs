@@ -1,0 +1,98 @@
+*javax.script.CompiledScript* *CompiledScript* Extended by classes that store re
+
+public abstract class CompiledScript
+  extends    |java.lang.Object|
+
+|javax.script.CompiledScript_Description|
+|javax.script.CompiledScript_Fields|
+|javax.script.CompiledScript_Constructors|
+|javax.script.CompiledScript_Methods|
+
+================================================================================
+
+*javax.script.CompiledScript_Constructors*
+|javax.script.CompiledScript()|
+
+*javax.script.CompiledScript_Methods*
+|javax.script.CompiledScript.eval()|Executes the program stored in the Compiled
+|javax.script.CompiledScript.eval(Bindings)|Executes the program stored in the 
+|javax.script.CompiledScript.eval(ScriptContext)|Executes the program stored in
+|javax.script.CompiledScript.getEngine()|Returns the ScriptEngine whose compile
+
+*javax.script.CompiledScript_Description*
+
+Extended by classes that store results of compilations. State might be stored 
+in the form of Java classes, Java class files or scripting language opcodes. 
+The script may be executed repeatedly without reparsing. 
+
+Each CompiledScript is associated with a ScriptEngine -- A call to an eval 
+method of the CompiledScript causes the execution of the script by the 
+ScriptEngine. Changes in the state of the ScriptEngine caused by execution of 
+tne CompiledScript may visible during subsequent executions of scripts by the 
+engine. 
+
+
+
+*javax.script.CompiledScript()*
+
+public CompiledScript()
+
+
+
+
+*javax.script.CompiledScript.eval()*
+
+public |java.lang.Object| eval()
+  throws |javax.script.ScriptException|
+         
+Executes the program stored in the CompiledScript object. The default 
+ScriptContext of the associated ScriptEngine is used. The effect of calling 
+this method is same as that of eval(getEngine().getContext()). 
+
+
+
+    Returns: The return value from the script execution 
+
+*javax.script.CompiledScript.eval(Bindings)*
+
+public |java.lang.Object| eval(javax.script.Bindings bindings)
+  throws |javax.script.ScriptException|
+         
+Executes the program stored in the CompiledScript object using the supplied 
+Bindings of attributes as the ENGINE_SCOPE of the associated ScriptEngine 
+during script execution. If bindings is null, then the effect of calling this 
+method is same as that of eval(getEngine().getContext()). . The GLOBAL_SCOPE 
+Bindings, Reader and Writer associated with the default ScriptContext of the 
+associated ScriptEngine are used. 
+
+
+    bindings - The bindings of attributes used for the ENGINE_SCOPE. 
+
+    Returns: The return value from the script execution 
+
+*javax.script.CompiledScript.eval(ScriptContext)*
+
+public abstract |java.lang.Object| eval(javax.script.ScriptContext context)
+  throws |javax.script.ScriptException|
+         
+Executes the program stored in this CompiledScript object. 
+
+
+    context - A ScriptContext that is used in the same way as the ScriptContext passed to the 
+       eval methods of ScriptEngine. 
+
+    Returns: The value returned by the script execution, if any. Should return null if no 
+             value is returned by the script execution. 
+
+*javax.script.CompiledScript.getEngine()*
+
+public abstract |javax.script.ScriptEngine| getEngine()
+
+Returns the ScriptEngine whose compile method created this CompiledScript. The 
+CompiledScript will execute in this engine. 
+
+
+
+    Returns: The ScriptEngine that created this CompiledScript 
+
+

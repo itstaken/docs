@@ -1,0 +1,161 @@
+*javax.net.ssl.HandshakeCompletedEvent* *HandshakeCompletedEvent* This event ind
+
+public class HandshakeCompletedEvent
+  extends    |java.util.EventObject|
+
+|javax.net.ssl.HandshakeCompletedEvent_Description|
+|javax.net.ssl.HandshakeCompletedEvent_Fields|
+|javax.net.ssl.HandshakeCompletedEvent_Constructors|
+|javax.net.ssl.HandshakeCompletedEvent_Methods|
+
+================================================================================
+
+*javax.net.ssl.HandshakeCompletedEvent_Constructors*
+|javax.net.ssl.HandshakeCompletedEvent(SSLSocket,SSLSession)|Constructs a new H
+
+*javax.net.ssl.HandshakeCompletedEvent_Methods*
+|javax.net.ssl.HandshakeCompletedEvent.getCipherSuite()|Returns the cipher suit
+|javax.net.ssl.HandshakeCompletedEvent.getLocalCertificates()|Returns the certi
+|javax.net.ssl.HandshakeCompletedEvent.getLocalPrincipal()|Returns the principa
+|javax.net.ssl.HandshakeCompletedEvent.getPeerCertificateChain()|Returns the id
+|javax.net.ssl.HandshakeCompletedEvent.getPeerCertificates()|Returns the identi
+|javax.net.ssl.HandshakeCompletedEvent.getPeerPrincipal()|Returns the identity 
+|javax.net.ssl.HandshakeCompletedEvent.getSession()|Returns the session that tr
+|javax.net.ssl.HandshakeCompletedEvent.getSocket()|Returns the socket which is 
+
+*javax.net.ssl.HandshakeCompletedEvent_Description*
+
+This event indicates that an SSL handshake completed on a given SSL connection. 
+All of the core information about that handshake's result is captured through 
+an "SSLSession" object. As a convenience, this event class provides direct 
+access to some important session attributes. 
+
+The source of this event is the SSLSocket on which handshaking just completed. 
+
+
+
+*javax.net.ssl.HandshakeCompletedEvent(SSLSocket,SSLSession)*
+
+public HandshakeCompletedEvent(
+  javax.net.ssl.SSLSocket sock,
+  javax.net.ssl.SSLSession s)
+
+Constructs a new HandshakeCompletedEvent. 
+
+    sock - the SSLSocket acting as the source of the event 
+    s - the SSLSession this event is associated with 
+
+*javax.net.ssl.HandshakeCompletedEvent.getCipherSuite()*
+
+public |java.lang.String| getCipherSuite()
+
+Returns the cipher suite in use by the session which was produced by the 
+handshake. (This is a convenience method for getting the ciphersuite from the 
+SSLsession.) 
+
+
+
+    Returns: the name of the cipher suite negotiated during this session. 
+
+*javax.net.ssl.HandshakeCompletedEvent.getLocalCertificates()*
+
+public |java.security.cert.Certificate|[] getLocalCertificates()
+
+Returns the certificate(s) that were sent to the peer during handshaking. Note: 
+This method is useful only when using certificate-based cipher suites. 
+
+When multiple certificates are available for use in a handshake, the 
+implementation chooses what it considers the "best" certificate chain 
+available, and transmits that to the other side. This method allows the caller 
+to know which certificate chain was actually used. 
+
+
+
+    Returns: an ordered array of certificates, with the local certificate first followed by 
+             any certificate authorities. If no certificates were sent, then 
+             null is returned. 
+
+*javax.net.ssl.HandshakeCompletedEvent.getLocalPrincipal()*
+
+public |java.security.Principal| getLocalPrincipal()
+
+Returns the principal that was sent to the peer during handshaking. 
+
+
+
+    Returns: the principal sent to the peer. Returns an X500Principal of the end-entity 
+             certificate for X509-based cipher suites, and KerberosPrincipal 
+             for Kerberos cipher suites. If no principal was sent, then null is 
+             returned. 
+
+*javax.net.ssl.HandshakeCompletedEvent.getPeerCertificateChain()*
+
+public |javax.security.cert.X509Certificate|[] getPeerCertificateChain()
+  throws |javax.net.ssl.SSLPeerUnverifiedException|
+         
+Returns the identity of the peer which was identified as part of defining the 
+session. Note: This method can be used only when using certificate-based cipher 
+suites; using it with non-certificate-based cipher suites, such as Kerberos, 
+will throw an SSLPeerUnverifiedException. 
+
+Note: this method exists for compatibility with previous releases. New 
+applications should use (|javax.net.ssl.HandshakeCompletedEvent|) instead. 
+
+
+
+    Returns: an ordered array of peer X.509 certificates, with the peer's own certificate 
+             first followed by any certificate authorities. (The certificates 
+             are in the original JSSE {@link 
+             javax.security.cert.X509Certificate} format). 
+
+*javax.net.ssl.HandshakeCompletedEvent.getPeerCertificates()*
+
+public |java.security.cert.Certificate|[] getPeerCertificates()
+  throws |javax.net.ssl.SSLPeerUnverifiedException|
+         
+Returns the identity of the peer which was established as part of defining the 
+session. Note: This method can be used only when using certificate-based cipher 
+suites; using it with non-certificate-based cipher suites, such as Kerberos, 
+will throw an SSLPeerUnverifiedException. 
+
+
+
+    Returns: an ordered array of the peer certificates, with the peer's own certificate 
+             first followed by any certificate authorities. 
+
+*javax.net.ssl.HandshakeCompletedEvent.getPeerPrincipal()*
+
+public |java.security.Principal| getPeerPrincipal()
+  throws |javax.net.ssl.SSLPeerUnverifiedException|
+         
+Returns the identity of the peer which was established as part of defining the 
+session. 
+
+
+
+    Returns: the peer's principal. Returns an X500Principal of the end-entity certiticate 
+             for X509-based cipher suites, and KerberosPrincipal for Kerberos 
+             cipher suites. 
+
+*javax.net.ssl.HandshakeCompletedEvent.getSession()*
+
+public |javax.net.ssl.SSLSession| getSession()
+
+Returns the session that triggered this event. 
+
+
+
+    Returns: the SSLSession for this handshake 
+
+*javax.net.ssl.HandshakeCompletedEvent.getSocket()*
+
+public |javax.net.ssl.SSLSocket| getSocket()
+
+Returns the socket which is the source of this event. (This is a convenience 
+function, to let applications write code without type casts.) 
+
+
+
+    Returns: the socket on which the connection was made. 
+
+

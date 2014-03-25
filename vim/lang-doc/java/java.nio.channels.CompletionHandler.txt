@@ -1,0 +1,56 @@
+*java.nio.channels.CompletionHandler* *CompletionHandler* A handler for consumin
+
+public interface interface CompletionHandler<V,A>
+
+
+|java.nio.channels.CompletionHandler_Description|
+|java.nio.channels.CompletionHandler_Fields|
+|java.nio.channels.CompletionHandler_Constructors|
+|java.nio.channels.CompletionHandler_Methods|
+
+================================================================================
+
+*java.nio.channels.CompletionHandler_Methods*
+|java.nio.channels.CompletionHandler.completed(V,A)|Invoked when an operation h
+|java.nio.channels.CompletionHandler.failed(Throwable,A)|Invoked when an operat
+
+*java.nio.channels.CompletionHandler_Description*
+
+A handler for consuming the result of an asynchronous I/O operation. 
+
+The asynchronous channels defined in this package allow a completion handler to 
+be specified to consume the result of an asynchronous operation. The 
+completed(|java.nio.channels.CompletionHandler|) method is invoked when the I/O 
+operation completes successfully. The 
+failed(|java.nio.channels.CompletionHandler|) method is invoked if the I/O 
+operations fails. The implementations of these methods should complete in a 
+timely manner so as to avoid keeping the invoking thread from dispatching to 
+other completion handlers. 
+
+
+
+*java.nio.channels.CompletionHandler.completed(V,A)*
+
+public void completed(
+  V result,
+  A attachment)
+
+Invoked when an operation has completed. 
+
+
+    result - The result of the I/O operation. 
+    attachment - The object attached to the I/O operation when it was initiated. 
+
+*java.nio.channels.CompletionHandler.failed(Throwable,A)*
+
+public void failed(
+  java.lang.Throwable exc,
+  A attachment)
+
+Invoked when an operation fails. 
+
+
+    exc - The exception to indicate why the I/O operation failed 
+    attachment - The object attached to the I/O operation when it was initiated. 
+
+

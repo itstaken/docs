@@ -1,0 +1,329 @@
+*javax.management.modelmbean.DescriptorSupport* *DescriptorSupport* This class r
+
+public class DescriptorSupport
+  extends    |java.lang.Object|
+  implements |javax.management.Descriptor|
+
+|javax.management.modelmbean.DescriptorSupport_Description|
+|javax.management.modelmbean.DescriptorSupport_Fields|
+|javax.management.modelmbean.DescriptorSupport_Constructors|
+|javax.management.modelmbean.DescriptorSupport_Methods|
+
+================================================================================
+
+*javax.management.modelmbean.DescriptorSupport_Constructors*
+|javax.management.modelmbean.DescriptorSupport()|Descriptor default constructor
+|javax.management.modelmbean.DescriptorSupport(DescriptorSupport)|Descriptor co
+|javax.management.modelmbean.DescriptorSupport(int)|Descriptor constructor.
+|javax.management.modelmbean.DescriptorSupport(String...)|Constructor taking fi
+|javax.management.modelmbean.DescriptorSupport(String)|Descriptor constructor t
+|javax.management.modelmbean.DescriptorSupport(String[],Object[])|Constructor t
+
+*javax.management.modelmbean.DescriptorSupport_Methods*
+|javax.management.modelmbean.DescriptorSupport.clone()|Returns a new Descriptor
+|javax.management.modelmbean.DescriptorSupport.equals(Object)|Compares this des
+|javax.management.modelmbean.DescriptorSupport.getFieldNames()|
+|javax.management.modelmbean.DescriptorSupport.getFields()|
+|javax.management.modelmbean.DescriptorSupport.getFieldValue(String)|
+|javax.management.modelmbean.DescriptorSupport.getFieldValues(String...)|
+|javax.management.modelmbean.DescriptorSupport.hashCode()|Returns the hash code
+|javax.management.modelmbean.DescriptorSupport.isValid()|Returns true if all of
+|javax.management.modelmbean.DescriptorSupport.removeField(String)|
+|javax.management.modelmbean.DescriptorSupport.setField(String,Object)|
+|javax.management.modelmbean.DescriptorSupport.setFields(String[],Object[])|
+|javax.management.modelmbean.DescriptorSupport.toString()|Returns a human reada
+|javax.management.modelmbean.DescriptorSupport.toXMLString()|Returns an XML Str
+
+*javax.management.modelmbean.DescriptorSupport_Description*
+
+This class represents the metadata set for a ModelMBean element. A descriptor 
+is part of the ModelMBeanInfo, ModelMBeanNotificationInfo, 
+ModelMBeanAttributeInfo, ModelMBeanConstructorInfo, and 
+ModelMBeanParameterInfo. 
+
+A descriptor consists of a collection of fields. Each field is in 
+fieldname=fieldvalue format. Field names are not case sensitive, case will be 
+preserved on field values. 
+
+All field names and values are not predefined. New fields can be defined and 
+added by any program. Some fields have been predefined for consistency of 
+implementation and support by the ModelMBeanInfo, ModelMBeanAttributeInfo, 
+ModelMBeanConstructorInfo, ModelMBeanNotificationInfo, ModelMBeanOperationInfo 
+and ModelMBean classes. 
+
+The serialVersionUID of this class is -6292969195866300415L. 
+
+
+
+*javax.management.modelmbean.DescriptorSupport()*
+
+public DescriptorSupport()
+
+Descriptor default constructor. Default initial descriptor size is 20. It will 
+grow as needed. Note that the created empty descriptor is not a valid 
+descriptor (the method isValid(|javax.management.modelmbean.DescriptorSupport|) 
+returns false) 
+
+
+*javax.management.modelmbean.DescriptorSupport(DescriptorSupport)*
+
+public DescriptorSupport(javax.management.modelmbean.DescriptorSupport inDescr)
+
+Descriptor constructor taking a Descriptor as parameter. Creates a new 
+descriptor initialized to the values of the descriptor passed in parameter. 
+
+    inDescr - the descriptor to be used to initialize the constructed descriptor. If it is 
+       null or contains no descriptor fields, an empty Descriptor will be 
+       created. 
+
+*javax.management.modelmbean.DescriptorSupport(int)*
+
+public DescriptorSupport(int initNumFields)
+  throws |javax.management.MBeanException|
+         |javax.management.RuntimeOperationsException|
+         
+Descriptor constructor. Takes as parameter the initial capacity of the Map that 
+stores the descriptor fields. Capacity will grow as needed. Note that the 
+created empty descriptor is not a valid descriptor (the method 
+isValid(|javax.management.modelmbean.DescriptorSupport|) returns false). 
+
+    initNumFields - The initial capacity of the Map that stores the descriptor fields. 
+
+*javax.management.modelmbean.DescriptorSupport(String...)*
+
+public DescriptorSupport(java.lang.String[] fields)
+
+Constructor taking fields in the fieldName=fieldValue format. 
+
+    fields - String array with each element containing a field name and value. If this array 
+       is null or empty, then the default constructor will be executed. Null 
+       strings or empty strings will be ignored. 
+
+All field values should be Strings. If the field values are not Strings, the 
+       programmer will have to reset or convert these fields correctly. 
+
+Note: Each string should be of the form fieldName=fieldValue. The field name 
+       ends at the first {@code =} character; for example if the String is 
+       {@code a=b=c} then the field name is {@code a} and its value is {@code 
+       b=c}. 
+
+*javax.management.modelmbean.DescriptorSupport(String)*
+
+public DescriptorSupport(java.lang.String inStr)
+  throws |javax.management.MBeanException|
+         |javax.management.RuntimeOperationsException|
+         |javax.management.modelmbean.XMLParseException|
+         
+Descriptor constructor taking an XML String. 
+
+The format of the XML string is not defined, but an implementation must ensure 
+that the string returned by 
+toXMLString()(|javax.management.modelmbean.DescriptorSupport|) on an existing 
+descriptor can be used to instantiate an equivalent descriptor using this 
+constructor. 
+
+In this implementation, all field values will be created as Strings. If the 
+field values are not Strings, the programmer will have to reset or convert 
+these fields correctly. 
+
+    inStr - An XML-formatted string used to populate this Descriptor. The format is not 
+       defined, but any implementation must ensure that the string returned by 
+       method {@link #toXMLString toXMLString} on an existing descriptor can be 
+       used to instantiate an equivalent descriptor when instantiated using 
+       this constructor. 
+
+*javax.management.modelmbean.DescriptorSupport(String[],Object[])*
+
+public DescriptorSupport(
+  java.lang.String[] fieldNames,
+  java.lang.Object[] fieldValues)
+  throws |javax.management.RuntimeOperationsException|
+         
+Constructor taking field names and field values. Neither array can be null. 
+
+    fieldNames - String array of field names. No elements of this array can be null. 
+    fieldValues - Object array of the corresponding field values. Elements of the array can be 
+       null. The fieldValue must be valid for the fieldName (as defined in 
+       method {@link #isValid isValid}) 
+
+Note: array sizes of parameters should match. If both arrays are empty, then an 
+       empty descriptor is created. 
+
+*javax.management.modelmbean.DescriptorSupport.clone()*
+
+public synchronized |java.lang.Object| clone()
+  throws |javax.management.RuntimeOperationsException|
+         
+Returns a new Descriptor which is a duplicate of the Descriptor. 
+
+
+
+*javax.management.modelmbean.DescriptorSupport.equals(Object)*
+
+public synchronized boolean equals(java.lang.Object o)
+
+Compares this descriptor to the given object. The objects are equal if the 
+given object is also a Descriptor, and if the two Descriptors have the same 
+field names (possibly differing in case) and the same associated values. The 
+respective values for a field in the two Descriptors are equal if the following 
+conditions hold: 
+
+If one value is null then the other must be too. If one value is a primitive 
+array then the other must be a primitive array of the same type with the same 
+elements. If one value is an object array then the other must be too and 
+Arrays.deepEquals(|java.util.Arrays|) must return true. Otherwise 
+(|java.lang.Object|) must return true. 
+
+
+    o - the object to compare with. 
+
+    Returns: {@code true} if the objects are the same; {@code false} otherwise. 
+
+*javax.management.modelmbean.DescriptorSupport.getFieldNames()*
+
+public synchronized |java.lang.String|[] getFieldNames()
+
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.getFields()*
+
+public synchronized |java.lang.String|[] getFields()
+
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.getFieldValue(String)*
+
+public synchronized |java.lang.Object| getFieldValue(java.lang.String fieldName)
+  throws |javax.management.RuntimeOperationsException|
+         
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.getFieldValues(String...)*
+
+public synchronized |java.lang.Object|[] getFieldValues(java.lang.String[] fieldNames)
+
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.hashCode()*
+
+public synchronized int hashCode()
+
+Returns the hash code value for this descriptor. The hash code is computed as 
+the sum of the hash codes for each field in the descriptor. The hash code of a 
+field with namenand valuevisn.toLowerCase().hashCode() ^ h. Herehis the hash 
+code ofv, computed as follows: 
+
+Ifvis null thenhis 0. Ifvis a primitive array thenhis computed using the 
+appropriate overloading ofjava.util.Arrays.hashCode. Ifvis an object array 
+thenhis computed using Arrays.deepHashCode(|java.util.Arrays|) . 
+Otherwisehisv.hashCode(). 
+
+
+
+    Returns: A hash code value for this object. 
+
+*javax.management.modelmbean.DescriptorSupport.isValid()*
+
+public synchronized boolean isValid()
+  throws |javax.management.RuntimeOperationsException|
+         
+Returns true if all of the fields have legal values given their names. 
+
+This implementation does not support interoperating with a directory or lookup 
+service. Thus, conforming to the specification, no checking is done on the 
+"export" field. 
+
+Otherwise this implementation returns false if: 
+
+name and descriptorType fieldNames are not defined, or null, or empty, or not 
+String class, role, getMethod, setMethod fieldNames, if defined, are null or 
+not String persistPeriod, currencyTimeLimit, lastUpdatedTimeStamp, 
+lastReturnedTimeStamp if defined, are null, or not a Numeric String or not a 
+Numeric Value >= -1 log fieldName, if defined, is null, or not a Boolean or not 
+a String with value "t", "f", "true", "false". These String values must not be 
+case sensitive. visibility fieldName, if defined, is null, or not a Numeric 
+String or a not Numeric Value >= 1 and <= 4 severity fieldName, if defined, is 
+null, or not a Numeric String or not a Numeric Value >= 0 and <= 6 
+persistPolicy fieldName, if defined, is null, or not one of the following 
+strings: "OnUpdate", "OnTimer", "NoMoreOftenThan", "OnUnregister", "Always", 
+"Never". These String values must not be case sensitive. 
+
+
+
+*javax.management.modelmbean.DescriptorSupport.removeField(String)*
+
+public synchronized void removeField(java.lang.String fieldName)
+
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.setField(String,Object)*
+
+public synchronized void setField(
+  java.lang.String fieldName,
+  java.lang.Object fieldValue)
+  throws |javax.management.RuntimeOperationsException|
+         
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.setFields(String[],Object[])*
+
+public synchronized void setFields(
+  java.lang.String[] fieldNames,
+  java.lang.Object[] fieldValues)
+  throws |javax.management.RuntimeOperationsException|
+         
+
+
+
+
+*javax.management.modelmbean.DescriptorSupport.toString()*
+
+public synchronized |java.lang.String| toString()
+
+Returns a human readable string representing the descriptor. The string will be 
+in the format of "fieldName=fieldValue,fieldName2=fieldValue2,..." 
+
+If there are no fields in the descriptor, then an empty String is returned. 
+
+If a fieldValue is an object then the toString() method is called on it and its 
+returned value is used as the value for the field enclosed in parenthesis. 
+
+
+
+*javax.management.modelmbean.DescriptorSupport.toXMLString()*
+
+public synchronized |java.lang.String| toXMLString()
+
+Returns an XML String representing the descriptor. 
+
+The format is not defined, but an implementation must ensure that the string 
+returned by this method can be used to build an equivalent descriptor when 
+instantiated using the constructor DescriptorSupport(String 
+inStr)(|javax.management.modelmbean.DescriptorSupport|) . 
+
+Fields which are not String objects will have toString() called on them to 
+create the value. The value will be enclosed in parentheses. It is not 
+guaranteed that you can reconstruct these objects unless they have been 
+specifically set up to support toString() in a meaningful format and have a 
+matching constructor that accepts a String in the same format. 
+
+If the descriptor is empty the following String is returned: 
+<Descriptor></Descriptor> 
+
+
+
+    Returns: the XML string. 
+
+

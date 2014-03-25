@@ -1,0 +1,330 @@
+*javax.management.openmbean.OpenMBeanParameterInfoSupport* *OpenMBeanParameterInfoSupport* 
+
+public class OpenMBeanParameterInfoSupport
+  extends    |javax.management.MBeanParameterInfo|
+  implements |javax.management.openmbean.OpenMBeanParameterInfo|
+
+|javax.management.openmbean.OpenMBeanParameterInfoSupport_Description|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport_Fields|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport_Constructors|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport_Methods|
+
+================================================================================
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport_Constructors*
+|javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<?>)|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<?>,Descriptor)|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T)|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T,Comparable<T>,Comparable<T>)|
+|javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T,T[])|
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport_Methods*
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.equals(Object)|Compar
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.getDefaultValue()|Ret
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.getLegalValues()|Retu
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.getMaxValue()|Returns
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.getMinValue()|Returns
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.getOpenType()|Returns
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.hasDefaultValue()|Ret
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.hashCode()|Returns th
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.hasLegalValues()|Retu
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.hasMaxValue()|Returns
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.hasMinValue()|Returns
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.isValue(Object)|Tests
+|javax.management.openmbean.OpenMBeanParameterInfoSupport.toString()|Returns a 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport_Description*
+
+Describes a parameter used in one or more operations or constructors of an open 
+MBean. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<?>)*
+
+public OpenMBeanParameterInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenType<?> openType)
+
+Constructs anOpenMBeanParameterInfoSupportinstance, which describes the 
+parameter used in one or more operations or constructors of a class of open 
+MBeans, with the specifiedname,openTypeanddescription. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    openType - cannot be null. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<?>,Descriptor)*
+
+public OpenMBeanParameterInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenType<?> openType,
+  javax.management.Descriptor descriptor)
+
+Constructs anOpenMBeanParameterInfoSupportinstance, which describes the 
+parameter used in one or more operations or constructors of a class of open 
+MBeans, with the specifiedname,openType,description, anddescriptor. 
+
+Thedescriptorcan contain entries that will define the values returned by 
+certain methods of this class, as explained in the (|null|) . 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    openType - cannot be null. 
+    descriptor - The descriptor for the parameter. This may be null which is equivalent to an 
+       empty descriptor. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T)*
+
+public OpenMBeanParameterInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenType<T> openType,
+  T defaultValue)
+  throws |javax.management.openmbean.OpenDataException|
+         
+Constructs anOpenMBeanParameterInfoSupportinstance, which describes the 
+parameter used in one or more operations or constructors of a class of open 
+MBeans, with the specifiedname,openType,descriptionanddefaultValue. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    openType - cannot be null. 
+    defaultValue - must be a valid value for the {@code openType} specified for this parameter; 
+       default value not supported for {@code ArrayType} and {@code 
+       TabularType}; can be null, in which case it means that no default value 
+       is set. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T,Comparable<T>,Comparable<T>)*
+
+public OpenMBeanParameterInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenType<T> openType,
+  T defaultValue,
+  java.lang.Comparable<T> minValue,
+  java.lang.Comparable<T> maxValue)
+  throws |javax.management.openmbean.OpenDataException|
+         
+Constructs anOpenMBeanParameterInfoSupportinstance, which describes the 
+parameter used in one or more operations or constructors of a class of open 
+MBeans, with the 
+specifiedname,openType,description,defaultValue,minValueandmaxValue. 
+
+It is possible to specify minimal and maximal values only for an open type 
+whose values areComparable. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    openType - cannot be null. 
+    defaultValue - must be a valid value for the {@code openType} specified for this parameter; 
+       default value not supported for {@code ArrayType} and {@code 
+       TabularType}; can be null, in which case it means that no default value 
+       is set. 
+    minValue - must be valid for the {@code openType} specified for this parameter; can be 
+       null, in which case it means that no minimal value is set. 
+    maxValue - must be valid for the {@code openType} specified for this parameter; can be 
+       null, in which case it means that no maximal value is set. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport(String,String,OpenType<T>,T,T[])*
+
+public OpenMBeanParameterInfoSupport(
+  java.lang.String name,
+  java.lang.String description,
+  javax.management.openmbean.OpenType<T> openType,
+  T defaultValue,
+  T[] legalValues)
+  throws |javax.management.openmbean.OpenDataException|
+         
+Constructs anOpenMBeanParameterInfoSupportinstance, which describes the 
+parameter used in one or more operations or constructors of a class of open 
+MBeans, with the specifiedname,openType,description,defaultValueandlegalValues. 
+
+The contents oflegalValuesare copied, so subsequent modifications of the array 
+referenced bylegalValueshave no impact on 
+thisOpenMBeanParameterInfoSupportinstance. 
+
+    name - cannot be a null or empty string. 
+    description - cannot be a null or empty string. 
+    openType - cannot be null. 
+    defaultValue - must be a valid value for the {@code openType} specified for this parameter; 
+       default value not supported for {@code ArrayType} and {@code 
+       TabularType}; can be null, in which case it means that no default value 
+       is set. 
+    legalValues - each contained value must be valid for the {@code openType} specified for this 
+       parameter; legal values not supported for {@code ArrayType} and {@code 
+       TabularType}; can be null or empty. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specifiedobjparameter with 
+thisOpenMBeanParameterInfoSupportinstance for equality. 
+
+Returnstrueif and only if all of the following statements are true: 
+
+objis non null, objalso implements theOpenMBeanParameterInfointerface, their 
+names are equal their open types are equal their default, min, max and legal 
+values are equal. 
+
+This ensures that thisequalsmethod works properly forobjparameters which are 
+different implementations of theOpenMBeanParameterInfointerface. 
+
+Ifobjalso implements (|javax.management.DescriptorRead|) , then its 
+getDescriptor()(|javax.management.DescriptorRead|) method must also return the 
+same value as for this object. 
+
+
+    obj - the object to be compared for equality with this {@code 
+       OpenMBeanParameterInfoSupport} instance. 
+
+    Returns: {@code true} if the specified object is equal to this {@code 
+             OpenMBeanParameterInfoSupport} instance. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.getDefaultValue()*
+
+public |java.lang.Object| getDefaultValue()
+
+Returns the default value for the parameter described by 
+thisOpenMBeanParameterInfoSupportinstance, if specified, ornullotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.getLegalValues()*
+
+public |java.util.Set|<?> getLegalValues()
+
+Returns an unmodifiable Set of legal values for the parameter described by 
+thisOpenMBeanParameterInfoSupportinstance, if specified, ornullotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.getMaxValue()*
+
+public |java.lang.Comparable|<?> getMaxValue()
+
+Returns the maximal value for the parameter described by 
+thisOpenMBeanParameterInfoSupportinstance, if specified, ornullotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.getMinValue()*
+
+public |java.lang.Comparable|<?> getMinValue()
+
+Returns the minimal value for the parameter described by 
+thisOpenMBeanParameterInfoSupportinstance, if specified, ornullotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.getOpenType()*
+
+public |javax.management.openmbean.OpenType|<?> getOpenType()
+
+Returns the open type for the values of the parameter described by 
+thisOpenMBeanParameterInfoSupportinstance. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.hasDefaultValue()*
+
+public boolean hasDefaultValue()
+
+Returnstrueif thisOpenMBeanParameterInfoSupportinstance specifies a non-null 
+default value for the described parameter,falseotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for thisOpenMBeanParameterInfoSupportinstance. 
+
+The hash code of anOpenMBeanParameterInfoSupportinstance is the sum of the hash 
+codes of all elements of information used inequalscomparisons (ie: its name, 
+its open type, its default, min, max and legal values, and its Descriptor). 
+
+This ensures thatt1.equals(t2)implies thatt1.hashCode()==t2.hashCode()for any 
+twoOpenMBeanParameterInfoSupportinstancest1andt2, as required by the general 
+contract of the method Object.hashCode()(|java.lang.Object|) . 
+
+However, note that another instance of a class implementing 
+theOpenMBeanParameterInfointerface may be equal to 
+thisOpenMBeanParameterInfoSupportinstance as defined by 
+(|javax.management.openmbean.OpenMBeanParameterInfoSupport|) , but may have a 
+different hash code if it is calculated differently. 
+
+AsOpenMBeanParameterInfoSupportinstances are immutable, the hash code for this 
+instance is calculated once, on the first call tohashCode, and then the same 
+value is returned for subsequent calls. 
+
+
+
+    Returns: the hash code value for this {@code OpenMBeanParameterInfoSupport} instance 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.hasLegalValues()*
+
+public boolean hasLegalValues()
+
+Returnstrueif thisOpenMBeanParameterInfoSupportinstance specifies a non-null 
+set of legal values for the described parameter,falseotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.hasMaxValue()*
+
+public boolean hasMaxValue()
+
+Returnstrueif thisOpenMBeanParameterInfoSupportinstance specifies a non-null 
+maximal value for the described parameter,falseotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.hasMinValue()*
+
+public boolean hasMinValue()
+
+Returnstrueif thisOpenMBeanParameterInfoSupportinstance specifies a non-null 
+minimal value for the described parameter,falseotherwise. 
+
+
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.isValue(Object)*
+
+public boolean isValue(java.lang.Object obj)
+
+Tests whetherobjis a valid value for the parameter described by 
+thisOpenMBeanParameterInfoinstance. 
+
+
+    obj - the object to be tested. 
+
+    Returns: {@code true} if {@code obj} is a valid value for the parameter described by 
+             this {@code OpenMBeanParameterInfo} instance, {@code false} 
+             otherwise. 
+
+*javax.management.openmbean.OpenMBeanParameterInfoSupport.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of thisOpenMBeanParameterInfoSupportinstance. 
+
+The string representation consists of the name of this class 
+(i.e.javax.management.openmbean.OpenMBeanParameterInfoSupport), the string 
+representation of the name and open type of the described parameter, the string 
+representation of its default, min, max and legal values and the string 
+representation of its descriptor. 
+
+AsOpenMBeanParameterInfoSupportinstances are immutable, the string 
+representation for this instance is calculated once, on the first call 
+totoString, and then the same value is returned for subsequent calls. 
+
+
+
+    Returns: a string representation of this {@code OpenMBeanParameterInfoSupport} instance. 
+
+

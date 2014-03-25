@@ -1,0 +1,806 @@
+*javax.management.MXBean* *MXBean* Annotation to mark an interface explicitly as
+
+public interface class MXBean
+
+  implements |java.lang.annotation.Annotation|
+
+|javax.management.MXBean_Description|
+|javax.management.MXBean_Fields|
+|javax.management.MXBean_Constructors|
+|javax.management.MXBean_Methods|
+
+================================================================================
+
+*javax.management.MXBean_Description*
+
+Annotation to mark an interface explicitly as being an MXBean interface, or as 
+not being an MXBean interface. By default, an interface is an MXBean interface 
+if its name ends withMXBean, as inSomethingMXBean. The following interfaces are 
+MXBean interfaces: 
+
+
+
+public interface WhatsitMXBean {} 
+
+MXBean public interface Whatsit1Interface {} 
+
+MXBean(true) public interface Whatsit2Interface {} 
+
+The following interfaces are not MXBean interfaces: 
+
+
+
+public interface Whatsit3Interface{} 
+
+MXBean(false) public interface MisleadingMXBean {} 
+
+MXBean specification 
+
+The MXBean concept provides a simple way to code an MBean that only references 
+a predefined set of types, the ones defined by (|javax.management.openmbean|) . 
+In this way, you can be sure that your MBean will be usable by any client, 
+including remote clients, without any requirement that the client have access 
+to model-specific classes representing the types of your MBeans. 
+
+The concepts are easier to understand by comparison with the Standard MBean 
+concept. Here is how a managed object might be represented as a Standard MBean, 
+and as an MXBean: 
+
+
+
+Standard MBeanMXBean 
+
+
+
+public interface MemoryPoolMBean { String getName(); MemoryUsage getUsage(); // 
+... } 
+
+
+
+public interface MemoryPoolMXBean { String getName(); MemoryUsage getUsage(); 
+// ... } 
+
+
+
+As you can see, the definitions are very similar. The only difference is that 
+the convention for naming the interface is to use SomethingMXBean for MXBeans, 
+rather than SomethingMBean for Standard MBeans. 
+
+In this managed object, there is an attribute called Usage of type 
+(|java.lang.management.MemoryUsage|) . The point of an attribute like this is 
+that it gives a coherent snapshot of a set of data items. For example, it might 
+include the current amount of used memory in the memory pool, and the current 
+maximum of the memory pool. If these were separate items, obtained with 
+separate getAttribute(|javax.management.MBeanServer|) calls, then we could get 
+values seen at different times that were not consistent. We might get a used 
+value that was greater than the max value. 
+
+So, we might define MemoryUsage like this: 
+
+
+
+Standard MBeanMXBean 
+
+
+
+public class MemoryUsage implements Serializable { // standard JavaBean 
+conventions with getters 
+
+public MemoryUsage(long init, long used, long committed, long max) {...} long 
+getInit() {...} long getUsed() {...} long getCommitted() {...} long getMax() 
+{...} } 
+
+
+
+public class MemoryUsage { // standard JavaBean conventions with getters 
+ConstructorProperties({"init", "used", "committed", "max"}) public 
+MemoryUsage(long init, long used, long committed, long max) {...} long 
+getInit() {...} long getUsed() {...} long getCommitted() {...} long getMax() 
+{...} } 
+
+
+
+The definitions are the same in the two cases, except that with the MXBean, 
+MemoryUsage no longer needs to be marked Serializable (though it can be). On 
+the other hand, we have added a@ConstructorPropertiesannotation to link the 
+constructor parameters to the corresponding getters. We will see more about 
+this below. 
+
+MemoryUsage is a model-specific class. With Standard MBeans, a client of the 
+MBean Server cannot access the Usage attribute if it does not know the class 
+MemoryUsage. Suppose the client is a generic console based on JMX technology. 
+Then the console would have to be configured with the model-specific classes of 
+every application it might connect to. The problem is even worse for clients 
+that are not written in the Java language. Then there may not be any way to 
+tell the client what a MemoryUsage looks like. 
+
+This is where MXBeans differ from Standard MBeans. Although we define the 
+management interface in almost exactly the same way, the MXBean framework 
+converts model-specific classes into standard classes from the Java platform. 
+Using arrays and the CompositeData(|javax.management.openmbean.CompositeData|) 
+and TabularData(|javax.management.openmbean.TabularData|) classes from the 
+standard (|javax.management.openmbean|) package, it is possible to build data 
+structures of arbitrary complexity using only standard classes. 
+
+This becomes clearer if we compare what the clients of the two models might 
+look like: 
+
+
+
+Standard MBeanMXBean 
+
+
+
+String name = (String) mbeanServer. 
+getAttribute(|javax.management.MBeanServer|) (objectName, "Name"); MemoryUsage 
+usage = (MemoryUsage) mbeanServer.getAttribute(objectName, "Usage"); long used 
+= usage.getUsed(); 
+
+
+
+String name = (String) mbeanServer. 
+getAttribute(|javax.management.MBeanServer|) (objectName, "Name"); 
+(|javax.management.openmbean.CompositeData|) usage = (CompositeData) 
+mbeanServer.getAttribute(objectName, "Usage"); long used = (Long) usage. 
+get(|javax.management.openmbean.CompositeData|) ("used"); 
+
+
+
+For attributes with simple types like String, the code is the same. But for 
+attributes with complex types, the Standard MBean code requires the client to 
+know the model-specific class MemoryUsage, while the MXBean code requires no 
+non-standard classes. 
+
+The client code shown here is slightly more complicated for the MXBean client. 
+But, if the client does in fact know the model, here the interface 
+MemoryPoolMXBean and the class MemoryUsage, then it can construct a proxy. This 
+is the recommended way to interact with managed objects when you know the model 
+beforehand, regardless of whether you are using Standard MBeans or MXBeans: 
+
+
+
+Standard MBeanMXBean 
+
+
+
+MemoryPoolMBean proxy = JMX. newMBeanProxy(|javax.management.JMX|) ( 
+mbeanServer, objectName, MemoryPoolMBean.class); String name = proxy.getName(); 
+MemoryUsage usage = proxy.getUsage(); long used = usage.getUsed(); 
+
+
+
+MemoryPoolMXBean proxy = JMX. newMXBeanProxy(|javax.management.JMX|) ( 
+mbeanServer, objectName, MemoryPoolMXBean.class); String name = 
+proxy.getName(); MemoryUsage usage = proxy.getUsage(); long used = 
+usage.getUsed(); 
+
+
+
+Implementing the MemoryPool object works similarly for both Standard MBeans and 
+MXBeans. 
+
+
+
+Standard MBeanMXBean 
+
+
+
+public class MemoryPool implements MemoryPoolMBean { public String getName() 
+{...} public MemoryUsage getUsage() {...} // ... } 
+
+
+
+public class MemoryPool implements MemoryPoolMXBean { public String getName() 
+{...} public MemoryUsage getUsage() {...} // ... } 
+
+
+
+Registering the MBean in the MBean Server works in the same way in both cases: 
+
+
+
+Standard MBeanMXBean 
+
+
+
+{ MemoryPoolMBean pool = new MemoryPool(); mbeanServer. 
+registerMBean(|javax.management.MBeanServer|) (pool, objectName); } 
+
+
+
+{ MemoryPoolMXBean pool = new MemoryPool(); mbeanServer. 
+registerMBean(|javax.management.MBeanServer|) (pool, objectName); } 
+
+
+
+Definition of an MXBean 
+
+An MXBean is a kind of MBean. An MXBean object can be registered directly in 
+the MBean Server, or it can be used as an argument to 
+(|javax.management.StandardMBean|) and the resultant MBean registered in the 
+MBean Server. 
+
+When an object is registered in the MBean Server using 
+theregisterMBeanorcreateMBeanmethods of the (|javax.management.MBeanServer|) 
+interface, the object's class is examined to determine what type of MBean it 
+is: 
+
+If the class implements the interface (|javax.management.DynamicMBean|) then 
+the MBean is a Dynamic MBean. Note that the classStandardMBeanimplements this 
+interface, so this case applies to a Standard MBean or MXBean created using the 
+classStandardMBean. 
+
+Otherwise, if the class matches the Standard MBean naming conventions, then the 
+MBean is a Standard MBean. 
+
+Otherwise, it may be an MXBean. The set of interfaces implemented by the object 
+is examined for interfaces that: 
+
+have a class name SMXBean where S is any non-empty string, and do not have an 
+annotation@MXBean(false); and/or have an annotation@MXBean(true)or just@MXBean. 
+
+If there is exactly one such interface, or if there is one such interface that 
+is a subinterface of all the others, then the object is an MXBean. The 
+interface in question is the MXBean interface. In the example above, the MXBean 
+interface isMemoryPoolMXBean. 
+
+If none of these conditions is met, the MBean is invalid and the attempt to 
+register it will generate (|javax.management.NotCompliantMBeanException|) . 
+
+Every Java type that appears as the parameter or return type of a method in an 
+MXBean interface must be convertible using the rules below. Additionally, 
+parameters must be reconstructible as defined below. 
+
+An attempt to construct an MXBean that does not conform to the above rules will 
+produce an exception. 
+
+Naming conventions 
+
+The same naming conventions are applied to the methods in an MXBean as in a 
+Standard MBean: 
+
+A method T getN(), where T is a Java type (not void) and N is a non-empty 
+string, specifies that there is a readable attribute called N. The Java type 
+and Open type of the attribute are determined by the mapping rules below. The 
+methodfinal Class getClass()inherited fromObjectis ignored when looking for 
+getters. 
+
+A method boolean isN() specifies that there is a readable attribute called N 
+with Java type boolean and Open type SimpleType.Boolean. 
+
+A method void setN(T x) specifies that there is a writeable attribute called N. 
+The Java type and Open type of the attribute are determined by the mapping 
+rules below. (Of course, the name x of the parameter is irrelevant.) 
+
+Every other method specifies that there is an operation with the same name as 
+the method. The Java type and Open type of the return value and of each 
+parameter are determined by the mapping rules below. 
+
+The rules for getN and isN collectively define the notion of a getter. The rule 
+for setN defines the notion of a setter. 
+
+It is an error for there to be two getters with the same name, or two setters 
+with the same name. If there is a getter and a setter for the same name, then 
+the type T in both must be the same. In this case the attribute is read/write. 
+If there is only a getter or only a setter, the attribute is read-only or 
+write-only respectively. 
+
+Type mapping rules 
+
+An MXBean is a kind of Open MBean, as defined by the 
+(|javax.management.openmbean|) package. This means that the types of 
+attributes, operation parameters, and operation return values must all be 
+describable using Open Types, that is the four standard subclasses of 
+(|javax.management.openmbean.OpenType|) . MXBeans achieve this by mapping Java 
+types into Open Types. 
+
+For every Java type J, the MXBean mapping is described by the following 
+information: 
+
+The corresponding Open Type, opentype(J). This is an instance of a subclass of 
+(|javax.management.openmbean.OpenType|) . The mapped Java type, opendata(J), 
+which is always the same for any given opentype(J). This is a Java class. How a 
+value is converted from type J to type opendata(J). How a value is converted 
+from type opendata(J) to type J, if it can be. 
+
+For example, for the Java typeList: 
+
+The Open Type, opentype(List), is (|javax.management.openmbean.ArrayType|) (1, 
+(|javax.management.openmbean.SimpleType|) ), representing a 1-dimensional array 
+of Strings. The mapped Java type, opendata(List), isString[]. AListcan be 
+converted to aString[]using List.toArray(new String[0])(|java.util.List|) . 
+AString[]can be converted to aListusing Arrays.asList(|java.util.Arrays|) . 
+
+If no mapping rules exist to derive opentype(J) from J, then J cannot be the 
+type of a method parameter or return value in an MXBean interface. 
+
+If there is a way to convert opendata(J) back to J then we say that J is 
+reconstructible. All method parameters in an MXBean interface must be 
+reconstructible, because when the MXBean framework is invoking a method it will 
+need to convert those parameters from opendata(J) to J. In a proxy generated by 
+JMX.newMXBeanProxy(|javax.management.JMX|) , it is the return values of the 
+methods in the MXBean interface that must be reconstructible. 
+
+Null values are allowed for all Java types and Open Types, except primitive 
+Java types where they are not possible. When converting from type J to type 
+opendata(J) or from type opendata(J) to type J, a null value is mapped to a 
+null value. 
+
+The following table summarizes the type mapping rules. 
+
+
+
+Java type J opentype(J) opendata(J) 
+
+
+
+int,boolean, etc (the 8 primitive Java types) 
+SimpleType.INTEGER,SimpleType.BOOLEAN, etc Integer,Boolean, etc (the 
+corresponding boxed types) 
+
+Integer,ObjectName, etc (the types covered by 
+(|javax.management.openmbean.SimpleType|) ) the correspondingSimpleType J, the 
+same type 
+
+int[]etc (a one-dimensional array with primitive element type) 
+ArrayType.getPrimitiveArrayType(int[].class)etc J, the same type 
+
+E[] (an array with non-primitive element type E; this includesint[][], where E 
+isint[]) ArrayType.getArrayType(opentype(E)) opendata(E)[] 
+
+List<E>Set<E>SortedSet<E>(see below) same as for E[] same as for E[] 
+
+An enumeration E (declared in Java asenumE{...}) SimpleType.STRING String 
+
+Map<K,V>SortedMap<K,V> (|javax.management.openmbean.TabularType|) (see below) 
+(|javax.management.openmbean.TabularData|) (see below) 
+
+An MXBean interface SimpleType.OBJECTNAME (see below) 
+(|javax.management.ObjectName|) (see below) 
+
+Any other type (|javax.management.openmbean.CompositeType|) , if possible (see 
+below) (|javax.management.openmbean.CompositeData|) 
+
+
+
+The following sections give further details of these rules. 
+
+Mappings for primitive types 
+
+The 8 primitive Java types (boolean,byte,short,int,long,float,double,char) are 
+mapped to the corresponding boxed types fromjava.lang, namelyBoolean,Byte, etc. 
+The Open Type is the correspondingSimpleType. Thus, opentype(long) 
+isSimpleType.LONG, and opendata(long) isjava.lang.Long. 
+
+An array of primitive type such aslong[]can be represented directly as an Open 
+Type. Thus, openType(long[]) isArrayType.getPrimitiveArrayType(long[].class), 
+and opendata(long[]) islong[]. 
+
+In practice, the difference between a plainintandInteger, etc, does not show up 
+because operations in the JMX API are always on Java objects, not primitives. 
+However, the difference does show up with arrays. 
+
+Mappings for collections (List<E>etc) 
+
+AList<E>orSet<E>, such asListorSet, is mapped in the same way as an array of 
+the same element type, such asString[]orObjectName[]. 
+
+ASortedSet<E>is also mapped in the same way as an E[], but it is only 
+convertible if E is a class or interface that implements 
+(|java.lang.Comparable|) . Thus, aSortedSetorSortedSetis convertible, but 
+aSortedSetorSortedSet>is not. The conversion of aSortedSetinstance will fail 
+with anIllegalArgumentExceptionif it has a non-null 
+comparator()(|java.util.SortedSet|) . 
+
+AList<E>is reconstructed as ajava.util.ArrayList<E>; aSet<E>as 
+ajava.util.HashSet<E>; aSortedSet<E>as ajava.util.TreeSet<E>. 
+
+Mappings for maps (Map<K,V>etc) 
+
+AMap<K,V>orSortedMap<K,V>, for exampleMap, has Open Type 
+(|javax.management.openmbean.TabularType|) and is mapped to a 
+(|javax.management.openmbean.TabularData|) . TheTabularTypehas two items 
+calledkeyandvalue. The Open Type ofkeyis opentype(K), and the Open Type 
+ofvalueis opentype(V). The index of theTabularTypeis the single itemkey. 
+
+For example, theTabularTypefor aMapmight be constructed with code like this: 
+
+
+
+String typeName = "java.util.Map<java.lang.String, 
+javax.management.ObjectName>"; String[] keyValue = new String[] {"key", 
+"value"}; OpenType[] openTypes = new OpenType[] {SimpleType.STRING, 
+SimpleType.OBJECTNAME}; CompositeType rowType = new CompositeType(typeName, 
+typeName, keyValue, keyValue, openTypes); TabularType tabularType = new 
+TabularType(typeName, typeName, rowType, new String[] {"key"}); 
+
+ThetypeNamehere is determined by the type name rules detailed below. 
+
+ASortedMap<K,V>is mapped in the same way, but it is only convertible if K is a 
+class or interface that implements (|java.lang.Comparable|) . Thus, 
+aSortedMapis convertible, but aSortedMapis not. The conversion of 
+aSortedMapinstance will fail with anIllegalArgumentExceptionif it has a 
+non-null comparator()(|java.util.SortedMap|) . 
+
+AMap<K,V>is reconstructed as ajava.util.HashMap<K,V>; aSortedMap<K,V>as 
+ajava.util.TreeMap<K,V>. 
+
+TabularDatais an interface. The concrete class that is used to represent 
+aMap<K,V>as Open Data is (|javax.management.openmbean.TabularDataSupport|) , or 
+another class implementingTabularDatathat serializes asTabularDataSupport. 
+
+Mappings for MXBean interfaces 
+
+An MXBean interface, or a type referenced within an MXBean interface, can 
+reference another MXBean interface, J. Then opentype(J) 
+isSimpleType.OBJECTNAMEand opendata(J) isObjectName. 
+
+For example, suppose you have two MXBean interfaces like this: 
+
+
+
+public interface ProductMXBean { public ModuleMXBean[] getModules(); } 
+
+public interface ModuleMXBean { public ProductMXBean getProduct(); } 
+
+The object implementing theModuleMXBeaninterface returns from 
+itsgetProductmethod an object implementing theProductMXBeaninterface. 
+TheModuleMXBeanobject and the returnedProductMXBeanobjects must both be 
+registered as MXBeans in the same MBean Server. 
+
+The methodModuleMXBean.getProduct()defines an attribute calledProduct. The Open 
+Type for this attribute isSimpleType.OBJECTNAME, and the 
+correspondingObjectNamevalue will be the name under which the 
+referencedProductMXBeanis registered in the MBean Server. 
+
+If you make an MXBean proxy for aModuleMXBeanand call itsgetProduct()method, 
+the proxy will map theObjectNameback into aProductMXBeanby making another 
+MXBean proxy. More formally, when a proxy made with 
+JMX.newMXBeanProxy(mbeanServerConnection, objectNameX, 
+interfaceX)(|javax.management.JMX|) needs to mapobjectNameYback intointerfaceY, 
+another MXBean interface, it does so 
+withJMX.newMXBeanProxy(mbeanServerConnection, objectNameY, interfaceY). The 
+implementation may return a proxy that was previously created by a call 
+toJMX.newMXBeanProxywith the same parameters, or it may create a new proxy. 
+
+The reverse mapping is illustrated by the following change to 
+theModuleMXBeaninterface: 
+
+
+
+public interface ModuleMXBean { public ProductMXBean getProduct(); public void 
+setProduct(ProductMXBean c); } 
+
+The presence of thesetProductmethod now means that theProductattribute is 
+read/write. As before, the value of this attribute is anObjectName. When the 
+attribute is set, theObjectNamemust be converted into theProductMXBeanobject 
+that thesetProductmethod expects. This object will be an MXBean proxy for the 
+givenObjectNamein the same MBean Server. 
+
+If you make an MXBean proxy for aModuleMXBeanand call itssetProductmethod, the 
+proxy will map itsProductMXBeanargument back into anObjectName. This will only 
+work if the argument is in fact another proxy, for aProductMXBeanin the 
+sameMBeanServerConnection. The proxy can have been returned from another proxy 
+(likeModuleMXBean.getProduct()which returns a proxy for aProductMXBean); or it 
+can have been created by JMX.newMXBeanProxy(|javax.management.JMX|) ; or it can 
+have been created using Proxy(|java.lang.reflect.Proxy|) with an invocation 
+handler that is (|javax.management.MBeanServerInvocationHandler|) or a 
+subclass. 
+
+If the same MXBean were registered under two differentObjectNames, a reference 
+to that MXBean from another MXBean would be ambiguous. Therefore, if an MXBean 
+object is already registered in an MBean Server and an attempt is made to 
+register it in the same MBean Server under another name, the result is an 
+(|javax.management.InstanceAlreadyExistsException|) . Registering the same 
+MBean object under more than one name is discouraged in general, notably 
+because it does not work well for MBeans that are 
+(|javax.management.NotificationBroadcaster|) s. 
+
+Mappings for other types 
+
+Given a Java class or interface J that does not match the other rules in the 
+table above, the MXBean framework will attempt to map it to a 
+(|javax.management.openmbean.CompositeType|) as follows. The type name of 
+thisCompositeTypeis determined by the type name rules below. 
+
+The class is examined for getters using the conventions above. (Getters must be 
+public instance methods.) If there are no getters, or if any getter has a type 
+that is not convertible, then J is not convertible. 
+
+If there is at least one getter and every getter has a convertible type, then 
+opentype(J) is aCompositeTypewith one item for every getter. If the getter is 
+
+T getName() 
+
+then the item in theCompositeTypeis callednameand has type opentype(T). For 
+example, if the item is 
+
+String getOwner() 
+
+then the item is calledownerand has Open TypeSimpleType.STRING. If the getter 
+is 
+
+boolean isName() 
+
+then the item in theCompositeTypeis callednameand has typeSimpleType.BOOLEAN. 
+
+Notice that the first character (or code point) is converted to lower case. 
+This follows the Java Beans convention, which for historical reasons is 
+different from the Standard MBean convention. In a Standard MBean or MXBean 
+interface, a methodgetOwnerdefines an attribute calledOwner, while in a Java 
+Bean or mappedCompositeType, a methodgetOwnerdefines a property or item 
+calledowner. 
+
+If two methods produce the same item name (for example,getOwnerandisOwner, 
+orgetOwnerandgetowner) then the type is not convertible. 
+
+When the Open Type isCompositeType, the corresponding mapped Java type 
+(opendata(J)) is (|javax.management.openmbean.CompositeData|) . The mapping 
+from an instance of J to aCompositeDatacorresponding to theCompositeTypejust 
+described is done as follows. First, if J implements the interface 
+(|javax.management.openmbean.CompositeDataView|) , then that interface's 
+toCompositeData(|javax.management.openmbean.CompositeDataView|) method is 
+called to do the conversion. Otherwise, theCompositeDatais constructed by 
+calling the getter for each item and converting it to the corresponding Open 
+Data type. Thus, a getter such as 
+
+List getNames() 
+
+will have been mapped to an item with name "names" and Open TypeArrayType(1, 
+SimpleType.STRING). The conversion toCompositeDatawill callgetNames()and 
+convert the resultantListinto aString[]for the item "names". 
+
+CompositeDatais an interface. The concrete class that is used to represent a 
+type as Open Data is (|javax.management.openmbean.CompositeDataSupport|) , or 
+another class implementingCompositeDatathat serializes asCompositeDataSupport. 
+
+Reconstructing an instance of Java type J from aCompositeData 
+
+If opendata(J) isCompositeDatafor a Java type J, then either an instance of J 
+can be reconstructed from aCompositeData, or J is not reconstructible. If any 
+item in theCompositeDatais not reconstructible, then J is not reconstructible 
+either. 
+
+For any given J, the following rules are consulted to determine how to 
+reconstruct instances of J fromCompositeData. The first applicable rule in the 
+list is the one that will be used. 
+
+
+
+If J has a methodpublic staticJ from(CompositeData cd) then that method is 
+called to reconstruct an instance of J. 
+
+Otherwise, if J has at least one public constructor with a 
+ConstructorProperties(|java.beans.ConstructorProperties|) annotation, then one 
+of those constructors (not necessarily always the same one) will be called to 
+reconstruct an instance of J. Every such annotation must list as many strings 
+as the constructor has parameters; each string must name a property 
+corresponding to a getter of J; and the type of this getter must be the same as 
+the corresponding constructor parameter. It is not an error for there to be 
+getters that are not mentioned in theConstructorPropertiesannotation (these may 
+correspond to information that is not needed to reconstruct the object). 
+
+An instance of J is reconstructed by calling a constructor with the appropriate 
+reconstructed items from theCompositeData. The constructor to be called will be 
+determined at runtime based on the items actually present in theCompositeData, 
+given that thisCompositeDatamight come from an earlier version of J where not 
+all the items were present. A constructor is applicable if all the properties 
+named in itsConstructorPropertiesannotation are present as items in 
+theCompositeData. If no constructor is applicable, then the attempt to 
+reconstruct J fails. 
+
+For any possible combination of properties, it must be the case that either (a) 
+there are no applicable constructors, or (b) there is exactly one applicable 
+constructor, or (c) one of the applicable constructors names a proper superset 
+of the properties named by each other applicable constructor. (In other words, 
+there should never be ambiguity over which constructor to choose.) If this 
+condition is not true, then J is not reconstructible. 
+
+Otherwise, if J has a public no-arg constructor, and for every getter in J with 
+type T and name N there is a corresponding setter with the same name and type, 
+then an instance of J is constructed with the no-arg constructor and the 
+setters are called with the reconstructed items from theCompositeDatato restore 
+the values. For example, if there is a methodpublic List getNames() then there 
+must also be a methodpublic void setNames(List names) for this rule to apply. 
+
+If theCompositeDatacame from an earlier version of J, some items might not be 
+present. In this case, the corresponding setters will not be called. 
+
+Otherwise, if J is an interface that has no methods other than getters, an 
+instance of J is constructed using a (|java.lang.reflect.Proxy|) with a 
+(|javax.management.openmbean.CompositeDataInvocationHandler|) backed by 
+theCompositeDatabeing converted. 
+
+Otherwise, J is not reconstructible. 
+
+Here are examples showing different ways to code a typeNamedNumberthat consists 
+of anintand aString. In each case, theCompositeTypelooks like this: 
+
+
+
+(|javax.management.openmbean.CompositeType|) ( "NamedNumber", // typeName 
+"NamedNumber", // description new String[] {"number", "name"}, // itemNames new 
+String[] {"number", "name"}, // itemDescriptions new OpenType[] 
+{SimpleType.INTEGER, SimpleType.STRING} // itemTypes ); 
+
+
+
+Staticfrommethod: 
+
+
+
+public class NamedNumber { public int getNumber() {return number;} public 
+String getName() {return name;} private NamedNumber(int number, String name) { 
+this.number = number; this.name = name; } public static NamedNumber 
+from(CompositeData cd) { return new NamedNumber((Integer) cd.get("number"), 
+(String) cd.get("name")); } private final int number; private final String 
+name; } 
+
+
+
+Public constructor with ConstructorProperties annotation: 
+
+
+
+public class NamedNumber { public int getNumber() {return number;} public 
+String getName() {return name;} ConstructorProperties({"number", "name"}) 
+public NamedNumber(int number, String name) { this.number = number; this.name = 
+name; } private final int number; private final String name; } 
+
+
+
+Setter for every getter: 
+
+
+
+public class NamedNumber { public int getNumber() {return number;} public void 
+setNumber(int number) {this.number = number;} public String getName() {return 
+name;} public void setName(String name) {this.name = name;} public 
+NamedNumber() {} private int number; private String name; } 
+
+
+
+Interface with only getters: 
+
+
+
+public interface NamedNumber { public int getNumber(); public String getName(); 
+} 
+
+
+
+
+
+It is usually better for classes that simply represent a collection of data to 
+be immutable. An instance of an immutable class cannot be changed after it has 
+been constructed. Notice thatCompositeDataitself is immutable. Immutability has 
+many advantages, notably with regard to thread-safety and security. So the 
+approach using setters should generally be avoided if possible. 
+
+Recursive types 
+
+Recursive (self-referential) types cannot be used in MXBean interfaces. This is 
+a consequence of the immutability of 
+(|javax.management.openmbean.CompositeType|) . For example, the following type 
+could not be the type of an attribute, because it refers to itself: 
+
+
+
+public interface Node { public String getName(); public int getPriority(); 
+public Node getNext(); } 
+
+It is always possible to rewrite recursive types like this so they are no 
+longer recursive. Doing so may require introducing new types. For example: 
+
+
+
+public interface NodeList { public List<Node> getNodes(); } 
+
+public interface Node { public String getName(); public int getPriority(); } 
+
+MBeanInfo contents for an MXBean 
+
+An MXBean is a type of Open MBean. However, for compatibility reasons, its 
+(|javax.management.MBeanInfo|) is not an 
+(|javax.management.openmbean.OpenMBeanInfo|) . In particular, when the type of 
+an attribute, parameter, or operation return value is a primitive type such 
+asint, or isvoid(for a return type), then the attribute, parameter, or 
+operation will be represented respectively by an 
+(|javax.management.MBeanAttributeInfo|) , 
+(|javax.management.MBeanParameterInfo|) , or 
+(|javax.management.MBeanOperationInfo|) whosegetType()orgetReturnType()returns 
+the primitive name ("int" etc). This is so even though the mapping rules above 
+specify that the opendata mapping is the wrapped type (Integeretc). 
+
+The array of public constructors returned by (|javax.management.MBeanInfo|) for 
+an MXBean that is directly registered in the MBean Server will contain all of 
+the public constructors of that MXBean. If the class of the MXBean is not 
+public then its constructors are not considered public either. The list 
+returned for an MXBean that is constructed using the 
+(|javax.management.StandardMBean|) class is derived in the same way as for 
+Standard MBeans. Regardless of how the MXBean was constructed, its constructor 
+parameters are not subject to MXBean mapping rules and do not have a 
+correspondingOpenType. 
+
+The array of notification types returned by (|javax.management.MBeanInfo|) for 
+an MXBean that is directly registered in the MBean Server will be empty if the 
+MXBean does not implement the (|javax.management.NotificationBroadcaster|) 
+interface. Otherwise, it will be the result of calling 
+(|javax.management.NotificationBroadcaster|) at the time the MXBean was 
+registered. Even if the result of this method changes subsequently, the result 
+ofMBeanInfo.getNotifications()will not. The list returned for an MXBean that is 
+constructed using the (|javax.management.StandardMBean|) or 
+(|javax.management.StandardEmitterMBean|) class is derived in the same way as 
+for Standard MBeans. 
+
+The (|javax.management.Descriptor|) for all of 
+theMBeanAttributeInfo,MBeanParameterInfo, andMBeanOperationInfoobjects 
+contained in theMBeanInfowill have a fieldopenTypewhose value is the 
+(|javax.management.openmbean.OpenType|) specified by the mapping rules above. 
+So even whengetType()is "int",getDescriptor().getField("openType")will be 
+(|javax.management.openmbean.SimpleType|) . 
+
+TheDescriptorfor each of these objects will also have a fieldoriginalTypethat 
+is a string representing the Java type that appeared in the MXBean interface. 
+The format of this string is described in the section Type Names below. 
+
+TheDescriptorfor theMBeanInfowill have a fieldmxbeanwhose value is the string 
+"true". 
+
+Type Names 
+
+Sometimes the unmapped type T of a method parameter or return value in an 
+MXBean must be represented as a string. If T is a non-generic type, this string 
+is the value returned by (|java.lang.Class|) . Otherwise it is the value of 
+genericstring(T), defined as follows: 
+
+
+
+If T is a non-generic non-array type, genericstring(T) is the value returned by 
+(|java.lang.Class|) , for example"int"or"java.lang.String". 
+
+If T is an array E[], genericstring(T) is genericstring(E) followed by"[]". For 
+example, genericstring(int[]) is"int[]", and genericstring(List[][]) 
+is"java.util.List[][]". 
+
+Otherwise, T is a parameterized type such asListand genericstring(T) consists 
+of the following: the fully-qualified name of the parameterized type as 
+returned byClass.getName(); a left angle bracket ("<"); genericstring(A) where 
+A is the first type parameter; if there is a second type parameter B then", "(a 
+comma and a single space) followed by genericstring(B); a right angle bracket 
+(">"). 
+
+
+
+Note that if a method returnsint[], this will be represented by the 
+string"[I"returned byClass.getName(), but if a method returnsList, this will be 
+represented by the string"java.util.List". 
+
+Exceptions 
+
+A problem with mapping from Java types to Open types is signaled with an 
+(|javax.management.openmbean.OpenDataException|) . This can happen when an 
+MXBean interface is being analyzed, for example if it references a type like 
+java.util.Random(|java.util.Random|) that has no getters. Or it can happen when 
+an instance is being converted (a return value from a method in an MXBean or a 
+parameter to a method in an MXBean proxy), for example when converting 
+fromSortedSettoString[]if theSortedSethas a non-nullComparator. 
+
+A problem with mapping to Java types from Open types is signaled with an 
+(|java.io.InvalidObjectException|) . This can happen when an MXBean interface 
+is being analyzed, for example if it references a type that is not 
+reconstructible according to the rules above, in a context where a 
+reconstructible type is required. Or it can happen when an instance is being 
+converted (a parameter to a method in an MXBean or a return value from a method 
+in an MXBean proxy), for example from a String to an Enum if there is no Enum 
+constant with that name. 
+
+Depending on the context, theOpenDataExceptionorInvalidObjectExceptionmay be 
+wrapped in another exception such as (|javax.management.RuntimeMBeanException|) 
+or (|java.lang.reflect.UndeclaredThrowableException|) . For every thrown 
+exception, the condition C will be true: "e 
+isOpenDataExceptionorInvalidObjectException(as appropriate), or C is true of e. 
+getCause()(|java.lang.Throwable|) ". 
+
+
+
