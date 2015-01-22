@@ -1,0 +1,138 @@
+*javax.smartcardio.Card* *Card* A Smart Card with which a connection has been es
+
+public abstract class Card
+  extends    |java.lang.Object|
+
+|javax.smartcardio.Card_Description|
+|javax.smartcardio.Card_Fields|
+|javax.smartcardio.Card_Constructors|
+|javax.smartcardio.Card_Methods|
+
+================================================================================
+
+*javax.smartcardio.Card_Constructors*
+|javax.smartcardio.Card()|Constructs a new Card object.
+
+*javax.smartcardio.Card_Methods*
+|javax.smartcardio.Card.beginExclusive()|Requests exclusive access to this card
+|javax.smartcardio.Card.disconnect(boolean)|Disconnects the connection with thi
+|javax.smartcardio.Card.endExclusive()|Releases the exclusive access previously
+|javax.smartcardio.Card.getATR()|Returns the ATR of this card.
+|javax.smartcardio.Card.getBasicChannel()|Returns the CardChannel for the basic
+|javax.smartcardio.Card.getProtocol()|Returns the protocol in use for this card
+|javax.smartcardio.Card.openLogicalChannel()|Opens a new logical channel to the
+|javax.smartcardio.Card.transmitControlCommand(int,byte[])|Transmits a control 
+
+*javax.smartcardio.Card_Description*
+
+A Smart Card with which a connection has been established. Card objects are 
+obtained by calling CardTerminal.connect()(|javax.smartcardio.CardTerminal|) . 
+
+
+
+*javax.smartcardio.Card()*
+
+protected Card()
+
+Constructs a new Card object. 
+
+This constructor is called by subclasses only. Application should call the 
+CardTerminal.connect()(|javax.smartcardio.CardTerminal|) method to obtain a 
+Card object. 
+
+
+*javax.smartcardio.Card.beginExclusive()*
+
+public abstract void beginExclusive()
+  throws |javax.smartcardio.CardException|
+         
+Requests exclusive access to this card. 
+
+Once a thread has invoked beginExclusive, only this thread is allowed to 
+communicate with this card until it calls endExclusive. Other threads 
+attempting communication will receive a CardException. 
+
+Applications have to ensure that exclusive access is correctly released. This 
+can be achieved by executing the beginExclusive() and endExclusive calls in a 
+try ... finally block. 
+
+
+
+*javax.smartcardio.Card.disconnect(boolean)*
+
+public abstract void disconnect(boolean reset)
+  throws |javax.smartcardio.CardException|
+         
+Disconnects the connection with this card. After this method returns, calling 
+methods on this object or in CardChannels associated with this object that 
+require interaction with the card will raise an IllegalStateException. 
+
+
+    reset - whether to reset the card after disconnecting. 
+
+*javax.smartcardio.Card.endExclusive()*
+
+public abstract void endExclusive()
+  throws |javax.smartcardio.CardException|
+         
+Releases the exclusive access previously established using beginExclusive. 
+
+
+
+*javax.smartcardio.Card.getATR()*
+
+public abstract |javax.smartcardio.ATR| getATR()
+
+Returns the ATR of this card. 
+
+
+
+    Returns: the ATR of this card. 
+
+*javax.smartcardio.Card.getBasicChannel()*
+
+public abstract |javax.smartcardio.CardChannel| getBasicChannel()
+
+Returns the CardChannel for the basic logical channel. The basic logical 
+channel has a channel number of 0. 
+
+
+
+*javax.smartcardio.Card.getProtocol()*
+
+public abstract |java.lang.String| getProtocol()
+
+Returns the protocol in use for this card. 
+
+
+
+    Returns: the protocol in use for this card, for example "T=0" or "T=1" 
+
+*javax.smartcardio.Card.openLogicalChannel()*
+
+public abstract |javax.smartcardio.CardChannel| openLogicalChannel()
+  throws |javax.smartcardio.CardException|
+         
+Opens a new logical channel to the card and returns it. The channel is opened 
+by issuing a MANAGE CHANNEL command that should use the format [00 70 00 00 
+01]. 
+
+
+
+*javax.smartcardio.Card.transmitControlCommand(int,byte[])*
+
+public abstract byte[] transmitControlCommand(
+  int controlCode,
+  byte[] command)
+  throws |javax.smartcardio.CardException|
+         
+Transmits a control command to the terminal device. 
+
+This can be used to, for example, control terminal functions like a built-in 
+PIN pad or biometrics. 
+
+
+    controlCode - the control code of the command 
+    command - the command data 
+
+

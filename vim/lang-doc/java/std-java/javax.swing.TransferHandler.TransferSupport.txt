@@ -1,0 +1,232 @@
+*javax.swing.TransferHandler.TransferSupport* *TransferHandler.TransferSupport* 
+
+public static final class TransferHandler.TransferSupport
+  extends    |java.lang.Object|
+
+|javax.swing.TransferHandler.TransferSupport_Description|
+|javax.swing.TransferHandler.TransferSupport_Fields|
+|javax.swing.TransferHandler.TransferSupport_Constructors|
+|javax.swing.TransferHandler.TransferSupport_Methods|
+
+================================================================================
+
+*javax.swing.TransferHandler.TransferSupport_Constructors*
+|javax.swing.TransferHandler.TransferSupport(Component,Transferable)|Create a T
+
+*javax.swing.TransferHandler.TransferSupport_Methods*
+|javax.swing.TransferHandler.TransferSupport.getComponent()|Returns the target 
+|javax.swing.TransferHandler.TransferSupport.getDataFlavors()|Returns the data 
+|javax.swing.TransferHandler.TransferSupport.getDropAction()|Returns the action
+|javax.swing.TransferHandler.TransferSupport.getDropLocation()|Returns the curr
+|javax.swing.TransferHandler.TransferSupport.getSourceDropActions()|Returns the
+|javax.swing.TransferHandler.TransferSupport.getTransferable()|Returns the Tran
+|javax.swing.TransferHandler.TransferSupport.getUserDropAction()|Returns the us
+|javax.swing.TransferHandler.TransferSupport.isDataFlavorSupported(DataFlavor)|
+|javax.swing.TransferHandler.TransferSupport.isDrop()|Returns whether or not th
+|javax.swing.TransferHandler.TransferSupport.setDropAction(int)|Sets the drop a
+|javax.swing.TransferHandler.TransferSupport.setShowDropLocation(boolean)|Sets 
+
+*javax.swing.TransferHandler.TransferSupport_Description*
+
+This class encapsulates all relevant details of a clipboard or drag and drop 
+transfer, and also allows for customizing aspects of the drag and drop 
+experience. 
+
+The main purpose of this class is to provide the information needed by a 
+developer to determine the suitability of a transfer or to import the data 
+contained within. But it also doubles as a controller for customizing 
+properties during drag and drop, such as whether or not to show the drop 
+location, and which drop action to use. 
+
+Developers typically need not create instances of this class. Instead, they are 
+something provided by the DnD implementation to certain methods in 
+TransferHandler. 
+
+
+
+*javax.swing.TransferHandler.TransferSupport(Component,Transferable)*
+
+public TransferHandler.TransferSupport(
+  java.awt.Component component,
+  java.awt.datatransfer.Transferable transferable)
+
+Create a TransferSupport with isDrop() false for the given component and 
+Transferable. 
+
+    component - the target component 
+    transferable - the transferable 
+
+*javax.swing.TransferHandler.TransferSupport.getComponent()*
+
+public |java.awt.Component| getComponent()
+
+Returns the target component of this transfer. 
+
+
+
+    Returns: the target component 
+
+*javax.swing.TransferHandler.TransferSupport.getDataFlavors()*
+
+public |java.awt.datatransfer.DataFlavor|[] getDataFlavors()
+
+Returns the data flavors for this transfer. 
+
+
+
+    Returns: the data flavors for this transfer 
+
+*javax.swing.TransferHandler.TransferSupport.getDropAction()*
+
+public int getDropAction()
+
+Returns the action chosen for the drop, when thisTransferSupportrepresents a 
+drop. 
+
+Unless explicitly chosen by way ofsetDropAction, this returns the user drop 
+action provided bygetUserDropAction. 
+
+You may wish to query this inTransferHandler'simportDatamethod to customize 
+processing based on the action. 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+
+    Returns: the action chosen for the drop 
+
+*javax.swing.TransferHandler.TransferSupport.getDropLocation()*
+
+public |javax.swing.TransferHandler.DropLocation| getDropLocation()
+
+Returns the current (non-null) drop location for the component, when 
+thisTransferSupportrepresents a drop. 
+
+Note: For components with built-in drop support, this location will be a 
+subclass ofDropLocationof the same type returned by that 
+component'sgetDropLocationmethod. 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+
+    Returns: the drop location 
+
+*javax.swing.TransferHandler.TransferSupport.getSourceDropActions()*
+
+public int getSourceDropActions()
+
+Returns the drag source's supported drop actions, when 
+thisTransferSupportrepresents a drop. 
+
+The source actions represent the set of actions supported by the source of this 
+transfer, and are represented as some bitwise-OR combination 
+ofCOPY,MOVEandLINK. You may wish to query this 
+inTransferHandler'scanImportmethod when determining the suitability of a drop 
+or when deciding on a drop action to explicitly choose. To determine if a 
+particular action is supported by the source, bitwise-AND the action with the 
+source drop actions, and then compare the result against the original action. 
+For example: 
+
+boolean copySupported = (COPY & getSourceDropActions()) == COPY; 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+
+    Returns: the drag source's supported drop actions 
+
+*javax.swing.TransferHandler.TransferSupport.getTransferable()*
+
+public |java.awt.datatransfer.Transferable| getTransferable()
+
+Returns the Transferable associated with this transfer. 
+
+Note: Unless it is necessary to fetch the Transferable directly, use one of the 
+other methods on this class to inquire about the transfer. This may perform 
+better than fetching the Transferable and asking it directly. 
+
+
+
+    Returns: the Transferable associated with this transfer 
+
+*javax.swing.TransferHandler.TransferSupport.getUserDropAction()*
+
+public int getUserDropAction()
+
+Returns the user drop action for the drop, when thisTransferSupportrepresents a 
+drop. 
+
+The user drop action is chosen for a drop as described in the documentation for 
+(|java.awt.dnd.DropTargetDragEvent|) and (|java.awt.dnd.DropTargetDropEvent|) . 
+A different action may be chosen as the drop action by way of 
+thesetDropActionmethod. 
+
+You may wish to query this inTransferHandler'scanImportmethod when determining 
+the suitability of a drop or when deciding on a drop action to explicitly 
+choose. 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+
+    Returns: the user drop action 
+
+*javax.swing.TransferHandler.TransferSupport.isDataFlavorSupported(DataFlavor)*
+
+public boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor df)
+
+Returns whether or not the given data flavor is supported. 
+
+
+    df - the DataFlavor to test 
+
+    Returns: whether or not the given flavor is supported. 
+
+*javax.swing.TransferHandler.TransferSupport.isDrop()*
+
+public boolean isDrop()
+
+Returns whether or not this TransferSupport represents a drop operation. 
+
+
+
+    Returns: true if this is a drop operation, false otherwise. 
+
+*javax.swing.TransferHandler.TransferSupport.setDropAction(int)*
+
+public void setDropAction(int dropAction)
+
+Sets the drop action for the transfer - which must represent a drop - to the 
+given action, instead of the default user drop action. The action must be 
+supported by the source's drop actions, and must be one ofCOPY,MOVEorLINK. 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+    dropAction - the drop action 
+
+*javax.swing.TransferHandler.TransferSupport.setShowDropLocation(boolean)*
+
+public void setShowDropLocation(boolean showDropLocation)
+
+Sets whether or not the drop location should be visually indicated for the 
+transfer - which must represent a drop. This is applicable to those components 
+that automatically show the drop location when appropriate during a drag and 
+drop operation). By default, the drop location is shown only when 
+theTransferHandlerhas said it can accept the import represented by 
+thisTransferSupport. With this method you can force the drop location to always 
+be shown, or always not be shown. 
+
+This method is only for use with drag and drop transfers. Calling it 
+whenisDrop()isfalseresults in anIllegalStateException. 
+
+
+    showDropLocation - whether or not to indicate the drop location 
+
+

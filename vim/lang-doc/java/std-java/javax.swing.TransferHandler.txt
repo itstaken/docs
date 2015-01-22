@@ -1,0 +1,439 @@
+*javax.swing.TransferHandler* *TransferHandler* This class is used to handle the
+
+public class TransferHandler
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|javax.swing.TransferHandler_Description|
+|javax.swing.TransferHandler_Fields|
+|javax.swing.TransferHandler_Constructors|
+|javax.swing.TransferHandler_Methods|
+
+================================================================================
+
+*javax.swing.TransferHandler_Fields*
+|int_javax.swing.TransferHandler.COPY|
+|int_javax.swing.TransferHandler.COPY_OR_MOVE|
+|int_javax.swing.TransferHandler.LINK|
+|int_javax.swing.TransferHandler.MOVE|
+|int_javax.swing.TransferHandler.NONE|
+
+*javax.swing.TransferHandler_Constructors*
+|javax.swing.TransferHandler()|Convenience constructor for subclasses.
+|javax.swing.TransferHandler(String)|Constructs a transfer handler that can tra
+
+*javax.swing.TransferHandler_Methods*
+|javax.swing.TransferHandler.canImport(JComponent,DataFlavor[])|Indicates wheth
+|javax.swing.TransferHandler.canImport(TransferHandler.TransferSupport)|This me
+|javax.swing.TransferHandler.createTransferable(JComponent)|Creates a Transfera
+|javax.swing.TransferHandler.exportAsDrag(JComponent,InputEvent,int)|Causes the
+|javax.swing.TransferHandler.exportDone(JComponent,Transferable,int)|Invoked af
+|javax.swing.TransferHandler.exportToClipboard(JComponent,Clipboard,int)|Causes
+|javax.swing.TransferHandler.getCopyAction()|Returns anActionthat performs copy
+|javax.swing.TransferHandler.getCutAction()|Returns anActionthat performs cut o
+|javax.swing.TransferHandler.getDragImage()|Returns the drag image.
+|javax.swing.TransferHandler.getDragImageOffset()|Returns an anchor offset for 
+|javax.swing.TransferHandler.getPasteAction()|Returns anActionthat performs pas
+|javax.swing.TransferHandler.getSourceActions(JComponent)|Returns the type of t
+|javax.swing.TransferHandler.getVisualRepresentation(Transferable)|Returns an o
+|javax.swing.TransferHandler.importData(JComponent,Transferable)|Causes a trans
+|javax.swing.TransferHandler.importData(TransferHandler.TransferSupport)|Causes
+|javax.swing.TransferHandler.setDragImage(Image)|Sets the drag image parameter.
+|javax.swing.TransferHandler.setDragImageOffset(Point)|Sets an anchor offset fo
+
+*javax.swing.TransferHandler_Description*
+
+This class is used to handle the transfer of a Transferable to and from Swing 
+components. The Transferable is used to represent data that is exchanged via a 
+cut, copy, or paste to/from a clipboard. It is also used in drag-and-drop 
+operations to represent a drag from a component, and a drop to a component. 
+Swing provides functionality that automatically supports cut, copy, and paste 
+keyboard bindings that use the functionality provided by an implementation of 
+this class. Swing also provides functionality that automatically supports drag 
+and drop that uses the functionality provided by an implementation of this 
+class. The Swing developer can concentrate on specifying the semantics of a 
+transfer primarily by setting the transferHandler property on a Swing 
+component. 
+
+This class is implemented to provide a default behavior of transferring a 
+component property simply by specifying the name of the property in the 
+constructor. For example, to transfer the foreground color from one component 
+to another either via the clipboard or a drag and drop operation a 
+TransferHandler can be constructed with the string "foreground". The built in 
+support will use the color returned by getForeground as the source of the 
+transfer, and setForeground for the target of a transfer. 
+
+Please see 
+
+How to Use Drag and Drop and Data Transfer, a section in The Java Tutorial, for 
+more information. 
+
+
+
+*int_javax.swing.TransferHandler.COPY*
+
+An int representing a copy transfer action. This value is used when data is 
+copied to a clipboard or copied elsewhere in a drag and drop operation. 
+
+
+*int_javax.swing.TransferHandler.COPY_OR_MOVE*
+
+An int representing a source action capability of either copy or move. 
+
+
+*int_javax.swing.TransferHandler.LINK*
+
+An int representing a link transfer action. This value is used to specify that 
+data should be linked in a drag and drop operation. 
+
+
+*int_javax.swing.TransferHandler.MOVE*
+
+An int representing a move transfer action. This value is used when data is 
+moved to a clipboard (i.e. a cut) or moved elsewhere in a drag and drop 
+operation. 
+
+
+*int_javax.swing.TransferHandler.NONE*
+
+An int representing no transfer action. 
+
+
+
+*javax.swing.TransferHandler()*
+
+protected TransferHandler()
+
+Convenience constructor for subclasses. 
+
+
+*javax.swing.TransferHandler(String)*
+
+public TransferHandler(java.lang.String property)
+
+Constructs a transfer handler that can transfer a Java Bean property from one 
+component to another via the clipboard or a drag and drop operation. 
+
+    property - the name of the property to transfer; this can be null if there is no property 
+       associated with the transfer handler (a subclass that performs some 
+       other kind of transfer, for example) 
+
+*javax.swing.TransferHandler.canImport(JComponent,DataFlavor[])*
+
+public boolean canImport(
+  javax.swing.JComponent comp,
+  java.awt.datatransfer.DataFlavor[] transferFlavors)
+
+Indicates whether a component will accept an import of the given set of data 
+flavors prior to actually attempting to import it. 
+
+Note: Swing now calls the newer version of canImport that takes a 
+TransferSupport, which in turn calls this method (only if the component in 
+theTransferSupportis aJComponent). Developers are encouraged to call and 
+override the newer version as it provides more information (and is the only 
+version that supports use with aTransferHandlerset directly on aJFrameor other 
+non-JComponent). 
+
+
+    comp - the component to receive the transfer; provided to enable sharing of 
+       TransferHandlers 
+    transferFlavors - the data formats available 
+
+    Returns: true if the data can be inserted into the component, false otherwise 
+
+*javax.swing.TransferHandler.canImport(TransferHandler.TransferSupport)*
+
+public boolean canImport(javax.swing.TransferHandler.TransferSupport support)
+
+This method is called repeatedly during a drag and drop operation to allow the 
+developer to configure properties of, and to return the acceptability of 
+transfers; with a return value oftrueindicating that the transfer represented 
+by the givenTransferSupport(which contains all of the details of the transfer) 
+is acceptable at the current time, and a value offalserejecting the transfer. 
+
+For those components that automatically display a drop location during drag and 
+drop, accepting the transfer, by default, tells them to show the drop location. 
+This can be changed by callingsetShowDropLocationon theTransferSupport. 
+
+By default, when the transfer is accepted, the chosen drop action is that 
+picked by the user via their drag gesture. The developer can override this and 
+choose a different action, from the supported source actions, by 
+callingsetDropActionon theTransferSupport. 
+
+On every call tocanImport, theTransferSupportcontains fresh state. As such, any 
+properties set on it must be set on every call. Upon a drop,canImportis called 
+one final time before calling intoimportData. Any state set on 
+theTransferSupportduring that last call will be available inimportData. 
+
+This method is not called internally in response to paste operations. As such, 
+it is recommended that implementations ofimportDataexplicitly call this method 
+for such cases and that this method be prepared to return the suitability of 
+paste operations as well. 
+
+Note: The TransferSupport object passed to this method is only valid for the 
+duration of the method call. It is undefined what values it may contain after 
+this method returns. 
+
+
+    support - the object containing the details of the transfer, not null. 
+
+    Returns: true if the import can happen, false otherwise 
+
+*javax.swing.TransferHandler.createTransferable(JComponent)*
+
+protected |java.awt.datatransfer.Transferable| createTransferable(javax.swing.JComponent c)
+
+Creates a Transferable to use as the source for a data transfer. Returns the 
+representation of the data to be transferred, or null if the component's 
+property is null 
+
+
+    c - the component holding the data to be transferred; provided to enable sharing of 
+       TransferHandlers 
+
+    Returns: the representation of the data to be transferred, or null if the property 
+             associated with c is null 
+
+*javax.swing.TransferHandler.exportAsDrag(JComponent,InputEvent,int)*
+
+public void exportAsDrag(
+  javax.swing.JComponent comp,
+  java.awt.event.InputEvent e,
+  int action)
+
+Causes the Swing drag support to be initiated. This is called by the various UI 
+implementations in the javax.swing.plaf.basic package if the dragEnabled 
+property is set on the component. This can be called by custom UI 
+implementations to use the Swing drag support. This method can also be called 
+by a Swing extension written as a subclass of JComponent to take advantage of 
+the Swing drag support. 
+
+The transfer will not necessarily have been completed at the return of this 
+call (i.e. the call does not block waiting for the drop). The transfer will 
+take place through the Swing implementation of the java.awt.dnd mechanism, 
+requiring no further effort from the developer. The exportDone method will be 
+called when the transfer has completed. 
+
+
+    comp - the component holding the data to be transferred; provided to enable sharing of 
+       TransferHandlers 
+    e - the event that triggered the transfer 
+    action - the transfer action initially requested; either {@code COPY}, {@code MOVE} or 
+       {@code LINK}; the DnD system may change the action used during the 
+       course of the drag operation 
+
+*javax.swing.TransferHandler.exportDone(JComponent,Transferable,int)*
+
+protected void exportDone(
+  javax.swing.JComponent source,
+  java.awt.datatransfer.Transferable data,
+  int action)
+
+Invoked after data has been exported. This method should remove the data that 
+was transferred if the action was MOVE. 
+
+This method is implemented to do nothing since MOVE is not a supported action 
+of this implementation (getSourceActions does not include MOVE). 
+
+
+    source - the component that was the source of the data 
+    data - The data that was transferred or possibly null if the action is NONE. 
+    action - the actual action that was performed 
+
+*javax.swing.TransferHandler.exportToClipboard(JComponent,Clipboard,int)*
+
+public void exportToClipboard(
+  javax.swing.JComponent comp,
+  java.awt.datatransfer.Clipboard clip,
+  int action)
+  throws |java.lang.IllegalStateException|
+         
+Causes a transfer from the given component to the given clipboard. This method 
+is called by the default cut and copy actions registered in a component's 
+action map. 
+
+The transfer will take place using the java.awt.datatransfer mechanism, 
+requiring no further effort from the developer. Any data transfer will be 
+complete and the exportDone method will be called with the action that 
+occurred, before this method returns. Should the clipboard be unavailable when 
+attempting to place data on it, the IllegalStateException thrown by 
+(|java.awt.datatransfer.Clipboard|) will be propogated through this method. 
+However, exportDone will first be called with an action of NONE for 
+consistency. 
+
+
+    comp - the component holding the data to be transferred; provided to enable sharing of 
+       TransferHandlers 
+    clip - the clipboard to transfer the data into 
+    action - the transfer action requested; this should be a value of either COPY or MOVE; 
+       the operation performed is the intersection of the transfer capabilities 
+       given by getSourceActions and the requested action; the intersection may 
+       result in an action of NONE if the requested action isn't supported 
+
+*javax.swing.TransferHandler.getCopyAction()*
+
+public static |javax.swing.Action| getCopyAction()
+
+Returns anActionthat performs copy operations to the clipboard. When performed, 
+this action operates on theJComponentsource of theActionEventby 
+invokingexportToClipboard, with aCOPYaction, on the component'sTransferHandler. 
+
+
+
+    Returns: an {@code Action} for performing copies to the clipboard 
+
+*javax.swing.TransferHandler.getCutAction()*
+
+public static |javax.swing.Action| getCutAction()
+
+Returns anActionthat performs cut operations to the clipboard. When performed, 
+this action operates on theJComponentsource of theActionEventby 
+invokingexportToClipboard, with aMOVEaction, on the component'sTransferHandler. 
+
+
+
+    Returns: an {@code Action} for performing cuts to the clipboard 
+
+*javax.swing.TransferHandler.getDragImage()*
+
+public |java.awt.Image| getDragImage()
+
+Returns the drag image. If there is no image to drag, the returned value 
+isnull. 
+
+
+
+    Returns: the reference to the drag image 
+
+*javax.swing.TransferHandler.getDragImageOffset()*
+
+public |java.awt.Point| getDragImageOffset()
+
+Returns an anchor offset for the image to drag. 
+
+
+
+    Returns: a {@code Point} object that corresponds to coordinates of an anchor offset of 
+             the image relative to the upper left corner of the image. The 
+             point {@code (0,0)} returns by default. 
+
+*javax.swing.TransferHandler.getPasteAction()*
+
+public static |javax.swing.Action| getPasteAction()
+
+Returns anActionthat performs paste operations from the clipboard. When 
+performed, this action operates on theJComponentsource of theActionEventby 
+invokingimportData, with the clipboard contents, on the 
+component'sTransferHandler. 
+
+
+
+    Returns: an {@code Action} for performing pastes from the clipboard 
+
+*javax.swing.TransferHandler.getSourceActions(JComponent)*
+
+public int getSourceActions(javax.swing.JComponent c)
+
+Returns the type of transfer actions supported by the source; any bitwise-OR 
+combination ofCOPY,MOVEandLINK. 
+
+Some models are not mutable, so a transfer operation ofMOVEshould not be 
+advertised in that case. ReturningNONEdisables transfers from the component. 
+
+
+    c - the component holding the data to be transferred; provided to enable sharing of 
+       TransferHandlers 
+
+    Returns: {@code COPY} if the transfer property can be found, otherwise returns NONE 
+
+*javax.swing.TransferHandler.getVisualRepresentation(Transferable)*
+
+public |javax.swing.Icon| getVisualRepresentation(java.awt.datatransfer.Transferable t)
+
+Returns an object that establishes the look of a transfer. This is useful for 
+both providing feedback while performing a drag operation and for representing 
+the transfer in a clipboard implementation that has a visual appearance. The 
+implementation of the Icon interface should not alter the graphics clip or 
+alpha level. The icon implementation need not be rectangular or paint all of 
+the bounding rectangle and logic that calls the icons paint method should not 
+assume the all bits are painted. null is a valid return value for this method 
+and indicates there is no visual representation provided. In that case, the 
+calling logic is free to represent the transferable however it wants. 
+
+The default Swing logic will not do an alpha blended drag animation if the 
+return is null. 
+
+
+    t - the data to be transferred; this value is expected to have been created by the 
+       createTransferable method 
+
+    Returns: null, indicating there is no default visual representation 
+
+*javax.swing.TransferHandler.importData(JComponent,Transferable)*
+
+public boolean importData(
+  javax.swing.JComponent comp,
+  java.awt.datatransfer.Transferable t)
+
+Causes a transfer to a component from a clipboard or a DND drop operation. The 
+Transferable represents the data to be imported into the component. 
+
+Note: Swing now calls the newer version of importData that takes a 
+TransferSupport, which in turn calls this method (if the component in 
+theTransferSupportis aJComponent). Developers are encouraged to call and 
+override the newer version as it provides more information (and is the only 
+version that supports use with aTransferHandlerset directly on aJFrameor other 
+non-JComponent). 
+
+
+    comp - the component to receive the transfer; provided to enable sharing of 
+       TransferHandlers 
+    t - the data to import 
+
+    Returns: true if the data was inserted into the component, false otherwise 
+
+*javax.swing.TransferHandler.importData(TransferHandler.TransferSupport)*
+
+public boolean importData(javax.swing.TransferHandler.TransferSupport support)
+
+Causes a transfer to occur from a clipboard or a drag and drop operation. The 
+Transferable to be imported and the component to transfer to are contained 
+within the TransferSupport. 
+
+While the drag and drop implementation callscanImportto determine the 
+suitability of a transfer before calling this method, the implementation of 
+paste does not. As such, it cannot be assumed that the transfer is acceptable 
+upon a call to this method for paste. It is recommended thatcanImportbe 
+explicitly called to cover this case. 
+
+Note: The TransferSupport object passed to this method is only valid for the 
+duration of the method call. It is undefined what values it may contain after 
+this method returns. 
+
+
+    support - the object containing the details of the transfer, not null. 
+
+    Returns: true if the data was inserted into the component, false otherwise 
+
+*javax.swing.TransferHandler.setDragImage(Image)*
+
+public void setDragImage(java.awt.Image img)
+
+Sets the drag image parameter. The image has to be prepared for rendering by 
+the moment of the call. The image is stored by reference because of some 
+performance reasons. 
+
+
+    img - an image to drag 
+
+*javax.swing.TransferHandler.setDragImageOffset(Point)*
+
+public void setDragImageOffset(java.awt.Point p)
+
+Sets an anchor offset for the image to drag. It can not benull. 
+
+
+    p - a {@code Point} object that corresponds to coordinates of an anchor offset of 
+       the image relative to the upper left corner of the image 
+
+

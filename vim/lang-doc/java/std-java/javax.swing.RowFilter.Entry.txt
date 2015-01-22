@@ -1,0 +1,101 @@
+*javax.swing.RowFilter.Entry* *RowFilter.Entry* An Entry object is passed to ins
+
+public abstract static class RowFilter.Entry<M,I>
+  extends    |java.lang.Object|
+
+|javax.swing.RowFilter.Entry_Description|
+|javax.swing.RowFilter.Entry_Fields|
+|javax.swing.RowFilter.Entry_Constructors|
+|javax.swing.RowFilter.Entry_Methods|
+
+================================================================================
+
+*javax.swing.RowFilter.Entry_Constructors*
+|javax.swing.RowFilter.Entry()|Creates an Entry.
+
+*javax.swing.RowFilter.Entry_Methods*
+|javax.swing.RowFilter.Entry.getIdentifier()|Returns the identifer (in the mode
+|javax.swing.RowFilter.Entry.getModel()|Returns the underlying model.
+|javax.swing.RowFilter.Entry.getStringValue(int)|Returns the string value at th
+|javax.swing.RowFilter.Entry.getValue(int)|Returns the value at the specified i
+|javax.swing.RowFilter.Entry.getValueCount()|Returns the number of values in th
+
+*javax.swing.RowFilter.Entry_Description*
+
+An Entry object is passed to instances of RowFilter, allowing the filter to get 
+the value of the entry's data, and thus to determine whether the entry should 
+be shown. An Entry object contains information about the model as well as 
+methods for getting the underlying values from the model. 
+
+
+
+*javax.swing.RowFilter.Entry()*
+
+public RowFilter.Entry()
+
+Creates an Entry. 
+
+
+*javax.swing.RowFilter.Entry.getIdentifier()*
+
+public abstract |I| getIdentifier()
+
+Returns the identifer (in the model) of the entry. For a table this corresponds 
+to the index of the row in the model, expressed as an Integer. 
+
+
+
+    Returns: a model-based (not view-based) identifier for this entry 
+
+*javax.swing.RowFilter.Entry.getModel()*
+
+public abstract |M| getModel()
+
+Returns the underlying model. 
+
+
+
+    Returns: the model containing the data that this entry represents 
+
+*javax.swing.RowFilter.Entry.getStringValue(int)*
+
+public |java.lang.String| getStringValue(int index)
+
+Returns the string value at the specified index. If filtering is being done 
+based on String values this method is preferred to that of getValue as 
+getValue(index).toString() may return a different result than 
+getStringValue(index). 
+
+This implementation calls getValue(index).toString() after checking for null. 
+Subclasses that provide different string conversion should override this method 
+if necessary. 
+
+
+    index - the index of the value to get 
+
+    Returns: {@code non-null} string at the specified index 
+
+*javax.swing.RowFilter.Entry.getValue(int)*
+
+public abstract |java.lang.Object| getValue(int index)
+
+Returns the value at the specified index. This may return null. When used with 
+a table, index corresponds to the column number in the model. 
+
+
+    index - the index of the value to get 
+
+    Returns: value at the specified index 
+
+*javax.swing.RowFilter.Entry.getValueCount()*
+
+public abstract int getValueCount()
+
+Returns the number of values in the entry. For example, when used with a table 
+this corresponds to the number of columns. 
+
+
+
+    Returns: number of values in the object being filtered 
+
+

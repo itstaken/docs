@@ -1,0 +1,147 @@
+*javax.smartcardio.CardChannel* *CardChannel* A logical channel connection to a 
+
+public abstract class CardChannel
+  extends    |java.lang.Object|
+
+|javax.smartcardio.CardChannel_Description|
+|javax.smartcardio.CardChannel_Fields|
+|javax.smartcardio.CardChannel_Constructors|
+|javax.smartcardio.CardChannel_Methods|
+
+================================================================================
+
+*javax.smartcardio.CardChannel_Constructors*
+|javax.smartcardio.CardChannel()|Constructs a new CardChannel object.
+
+*javax.smartcardio.CardChannel_Methods*
+|javax.smartcardio.CardChannel.close()|Closes this CardChannel.
+|javax.smartcardio.CardChannel.getCard()|Returns the Card this channel is assoc
+|javax.smartcardio.CardChannel.getChannelNumber()|Returns the channel number of
+|javax.smartcardio.CardChannel.transmit(ByteBuffer,ByteBuffer)|Transmits the co
+|javax.smartcardio.CardChannel.transmit(CommandAPDU)|Transmits the specified co
+
+*javax.smartcardio.CardChannel_Description*
+
+A logical channel connection to a Smart Card. It is used to exchange APDUs with 
+a Smart Card. A CardChannel object can be obtained by calling the method 
+(|javax.smartcardio.Card|) or (|javax.smartcardio.Card|) . 
+
+
+
+*javax.smartcardio.CardChannel()*
+
+protected CardChannel()
+
+Constructs a new CardChannel object. 
+
+This constructor is called by subclasses only. Application should call the 
+(|javax.smartcardio.Card|) and (|javax.smartcardio.Card|) methods to obtain a 
+CardChannel object. 
+
+
+*javax.smartcardio.CardChannel.close()*
+
+public abstract void close()
+  throws |javax.smartcardio.CardException|
+         
+Closes this CardChannel. The logical channel is closed by issuing a MANAGE 
+CHANNEL command that should use the format [xx 70 80 0n] where n is the channel 
+number of this channel and xx is the CLA byte that encodes this logical channel 
+and has all other bits set to 0. After this method returns, calling other 
+methods in this class will raise an IllegalStateException. 
+
+Note that the basic logical channel cannot be closed using this method. It can 
+be closed by calling (|javax.smartcardio.Card|) . 
+
+
+
+*javax.smartcardio.CardChannel.getCard()*
+
+public abstract |javax.smartcardio.Card| getCard()
+
+Returns the Card this channel is associated with. 
+
+
+
+    Returns: the Card this channel is associated with 
+
+*javax.smartcardio.CardChannel.getChannelNumber()*
+
+public abstract int getChannelNumber()
+
+Returns the channel number of this CardChannel. A channel number of 0 indicates 
+the basic logical channel. 
+
+
+
+    Returns: the channel number of this CardChannel. 
+
+*javax.smartcardio.CardChannel.transmit(ByteBuffer,ByteBuffer)*
+
+public abstract int transmit(
+  java.nio.ByteBuffer command,
+  java.nio.ByteBuffer response)
+  throws |javax.smartcardio.CardException|
+         
+Transmits the command APDU stored in the command ByteBuffer and receives the 
+reponse APDU in the response ByteBuffer. 
+
+The command buffer must contain valid command APDU data starting at 
+command.position() and the APDU must be command.remaining() bytes long. Upon 
+return, the command buffer's position will be equal to its limit; its limit 
+will not have changed. The output buffer will have received the response APDU 
+bytes. Its position will have advanced by the number of bytes received, which 
+is also the return value of this method. 
+
+The CLA byte of the command APDU is automatically adjusted to match the channel 
+number of this CardChannel. 
+
+Note that this method cannot be used to transmit MANAGE CHANNEL APDUs. Logical 
+channels should be managed using the (|javax.smartcardio.Card|) and 
+CardChannel.close()(|javax.smartcardio.CardChannel|) methods. 
+
+See transmit()(|javax.smartcardio.CardChannel|) for a discussion of the 
+handling of response APDUs with the SW1 values 61 or 6C. 
+
+
+    command - the buffer containing the command APDU 
+    response - the buffer that shall receive the response APDU from the card 
+
+    Returns: the length of the received response APDU 
+
+*javax.smartcardio.CardChannel.transmit(CommandAPDU)*
+
+public abstract |javax.smartcardio.ResponseAPDU| transmit(javax.smartcardio.CommandAPDU command)
+  throws |javax.smartcardio.CardException|
+         
+Transmits the specified command APDU to the Smart Card and returns the response 
+APDU. 
+
+The CLA byte of the command APDU is automatically adjusted to match the channel 
+number of this CardChannel. 
+
+Note that this method cannot be used to transmit MANAGE CHANNEL APDUs. Logical 
+channels should be managed using the (|javax.smartcardio.Card|) and 
+CardChannel.close()(|javax.smartcardio.CardChannel|) methods. 
+
+Implementations should transparently handle artifacts of the transmission 
+protocol. For example, when using the T=0 protocol, the following processing 
+should occur as described in ISO/IEC 7816-4: 
+
+if the response APDU has an SW1 of 61, the implementation should issue a GET 
+RESPONSE command using SW2 as the Lefield. This process is repeated as long as 
+an SW1 of 61 is received. The response body of these exchanges is concatenated 
+to form the final response body. 
+
+if the response APDU is 6C XX, the implementation should reissue the command 
+using XX as the Le field. 
+
+The ResponseAPDU returned by this method is the result after this processing 
+has been performed. 
+
+
+    command - the command APDU 
+
+    Returns: the response APDU received from the card 
+
+

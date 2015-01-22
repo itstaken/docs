@@ -1,0 +1,443 @@
+*javax.swing.SwingWorker* *SwingWorker* An abstract class to perform lengthy GUI
+
+public abstract class SwingWorker<T,V>
+  extends    |java.lang.Object|
+  implements |java.util.concurrent.RunnableFuture|
+
+|javax.swing.SwingWorker_Description|
+|javax.swing.SwingWorker_Fields|
+|javax.swing.SwingWorker_Constructors|
+|javax.swing.SwingWorker_Methods|
+
+================================================================================
+
+*javax.swing.SwingWorker_Constructors*
+|javax.swing.SwingWorker()|Constructs thisSwingWorker.
+
+*javax.swing.SwingWorker_Methods*
+|javax.swing.SwingWorker.addPropertyChangeListener(PropertyChangeListener)|Adds
+|javax.swing.SwingWorker.cancel(boolean)|
+|javax.swing.SwingWorker.doInBackground()|Computes a result, or throws an excep
+|javax.swing.SwingWorker.done()|Executed on the Event Dispatch Thread after the
+|javax.swing.SwingWorker.execute()|Schedules thisSwingWorkerfor execution on a 
+|javax.swing.SwingWorker.firePropertyChange(String,Object,Object)|Reports a bou
+|javax.swing.SwingWorker.get()|
+|javax.swing.SwingWorker.get(long,TimeUnit)|
+|javax.swing.SwingWorker.getProgress()|Returns theprogressbound property.
+|javax.swing.SwingWorker.getPropertyChangeSupport()|Returns thePropertyChangeSu
+|javax.swing.SwingWorker.getState()|Returns theSwingWorkerstate bound property.
+|javax.swing.SwingWorker.isCancelled()|
+|javax.swing.SwingWorker.isDone()|
+|javax.swing.SwingWorker.process(List<V>)|Receives data chunks from thepublishm
+|javax.swing.SwingWorker.publish(V...)|Sends data chunks to the#processmethod.
+|javax.swing.SwingWorker.removePropertyChangeListener(PropertyChangeListener)|R
+|javax.swing.SwingWorker.run()|Sets thisFutureto the result of computation unle
+|javax.swing.SwingWorker.setProgress(int)|Sets theprogressbound property.
+
+*javax.swing.SwingWorker_Description*
+
+An abstract class to perform lengthy GUI-interaction tasks in a background 
+thread. Several background threads can be used to execute such tasks. However, 
+the exact strategy of choosing a thread for any particularSwingWorkeris 
+unspecified and should not be relied on. 
+
+When writing a multi-threaded application using Swing, there are two 
+constraints to keep in mind: (refer to 
+
+How to Use Threads for more details): 
+
+Time-consuming tasks should not be run on the Event Dispatch Thread. Otherwise 
+the application becomes unresponsive. 
+
+Swing components should be accessed on the Event Dispatch Thread only. 
+
+
+
+
+
+These constraints mean that a GUI application with time intensive computing 
+needs at least two threads: 1) a thread to perform the lengthy task and 2) the 
+Event Dispatch Thread (EDT) for all GUI-related activities. This involves 
+inter-thread communication which can be tricky to implement. 
+
+SwingWorkeris designed for situations where you need to have a long running 
+task run in a background thread and provide updates to the UI either when done, 
+or while processing. Subclasses ofSwingWorkermust implement the 
+(|javax.swing.SwingWorker|) method to perform the background computation. 
+
+Workflow 
+
+There are three threads involved in the life cycle of aSwingWorker: 
+
+
+
+Current thread: The (|javax.swing.SwingWorker|) method is called on this 
+thread. It schedulesSwingWorkerfor the execution on a worker thread and returns 
+immediately. One can wait for theSwingWorkerto complete using the 
+get(|javax.swing.SwingWorker|) methods. 
+
+Worker thread: The (|javax.swing.SwingWorker|) method is called on this thread. 
+This is where all background activities should happen. To 
+notifyPropertyChangeListenersabout bound properties changes use the 
+firePropertyChange(|javax.swing.SwingWorker|) and (|javax.swing.SwingWorker|) 
+methods. By default there are two bound properties available:stateandprogress. 
+
+Event Dispatch Thread: All Swing related activities occur on this 
+thread.SwingWorkerinvokes the process(|javax.swing.SwingWorker|) and 
+(|javax.swing.SwingWorker|) methods and notifies anyPropertyChangeListenerson 
+this thread. 
+
+Often, the Current thread is the Event Dispatch Thread. 
+
+Before thedoInBackgroundmethod is invoked on a worker 
+thread,SwingWorkernotifies anyPropertyChangeListenersabout thestateproperty 
+change toStateValue.STARTED. After thedoInBackgroundmethod is finished 
+thedonemethod is executed. ThenSwingWorkernotifies 
+anyPropertyChangeListenersabout thestateproperty change toStateValue.DONE. 
+
+SwingWorkeris only designed to be executed once. Executing aSwingWorkermore 
+than once will not result in invoking thedoInBackgroundmethod twice. 
+
+Sample Usage 
+
+The following example illustrates the simplest use case. Some processing is 
+done in the background and when done you update a Swing component. 
+
+Say we want to find the "Meaning of Life" and display the result in aJLabel. 
+
+
+
+final JLabel label; class MeaningOfLifeFinder extends SwingWorker<String, 
+Object> {@Overridepublic String doInBackground() { return 
+findTheMeaningOfLife(); }@Overrideprotected void done() { try { 
+label.setText(get()); } catch (Exception ignore) { } } } 
+
+(new MeaningOfLifeFinder()).execute(); 
+
+The next example is useful in situations where you wish to process data as it 
+is ready on the Event Dispatch Thread. 
+
+Now we want to find the first N prime numbers and display the results in 
+aJTextArea. While this is computing, we want to update our progress in 
+aJProgressBar. Finally, we also want to print the prime numbers toSystem.out. 
+
+class PrimeNumbersTask extends SwingWorker<List<Integer>, Integer> { 
+PrimeNumbersTask(JTextArea textArea, int numbersToFind) { //initialize 
+}@Overridepublic List<Integer> doInBackground() { while (! enough and and ! 
+isCancelled()) { number = nextPrimeNumber(); publish(number); setProgress(100 * 
+numbers.size() / numbersToFind); } } return numbers; }@Overrideprotected void 
+process(List<Integer> chunks) { for (int number : chunks) { 
+textArea.append(number + \n); } } } 
+
+JTextArea textArea = new JTextArea(); final JProgressBar progressBar = new 
+JProgressBar(0, 100); PrimeNumbersTask task = new PrimeNumbersTask(textArea, 
+N); task.addPropertyChangeListener( new PropertyChangeListener() { public void 
+propertyChange(PropertyChangeEvent evt) { if 
+(progress.equals(evt.getPropertyName())) { 
+progressBar.setValue((Integer)evt.getNewValue()); } } }); 
+
+task.execute(); System.out.println(task.get()); //prints all prime numbers we 
+have got 
+
+BecauseSwingWorkerimplementsRunnable, aSwingWorkercan be submitted to an 
+(|java.util.concurrent.Executor|) for execution. 
+
+
+
+*javax.swing.SwingWorker()*
+
+public SwingWorker()
+
+Constructs thisSwingWorker. 
+
+
+*javax.swing.SwingWorker.addPropertyChangeListener(PropertyChangeListener)*
+
+public final void addPropertyChangeListener(java.beans.PropertyChangeListener listener)
+
+Adds aPropertyChangeListenerto the listener list. The listener is registered 
+for all properties. The same listener object may be added more than once, and 
+will be called as many times as it is added. Iflistenerisnull, no exception is 
+thrown and no action is taken. 
+
+Note: This is merely a convenience wrapper. All work is delegated 
+toPropertyChangeSupportfrom (|javax.swing.SwingWorker|) . 
+
+
+    listener - the {@code PropertyChangeListener} to be added 
+
+*javax.swing.SwingWorker.cancel(boolean)*
+
+public final boolean cancel(boolean mayInterruptIfRunning)
+
+
+
+
+
+*javax.swing.SwingWorker.doInBackground()*
+
+protected abstract |T| doInBackground()
+  throws |java.lang.Exception|
+         
+Computes a result, or throws an exception if unable to do so. 
+
+Note that this method is executed only once. 
+
+Note: this method is executed in a background thread. 
+
+
+
+    Returns: the computed result 
+
+*javax.swing.SwingWorker.done()*
+
+protected void done()
+
+Executed on the Event Dispatch Thread after thedoInBackgroundmethod is 
+finished. The default implementation does nothing. Subclasses may override this 
+method to perform completion actions on the Event Dispatch Thread. Note that 
+you can query status inside the implementation of this method to determine the 
+result of this task or whether this task has been cancelled. 
+
+
+
+*javax.swing.SwingWorker.execute()*
+
+public final void execute()
+
+Schedules thisSwingWorkerfor execution on a worker thread. There are a number 
+of worker threads available. In the event all worker threads are busy handling 
+otherSwingWorkersthisSwingWorkeris placed in a waiting queue. 
+
+Note:SwingWorkeris only designed to be executed once. Executing 
+aSwingWorkermore than once will not result in invoking thedoInBackgroundmethod 
+twice. 
+
+
+
+*javax.swing.SwingWorker.firePropertyChange(String,Object,Object)*
+
+public final void firePropertyChange(
+  java.lang.String propertyName,
+  java.lang.Object oldValue,
+  java.lang.Object newValue)
+
+Reports a bound property update to any registered listeners. No event is fired 
+ifoldandneware equal and non-null. 
+
+ThisSwingWorkerwill be the source for any generated events. 
+
+When called off the Event Dispatch ThreadPropertyChangeListenersare notified 
+asynchronously on the Event Dispatch Thread. 
+
+Note: This is merely a convenience wrapper. All work is delegated 
+toPropertyChangeSupportfrom (|javax.swing.SwingWorker|) . 
+
+
+    propertyName - the programmatic name of the property that was changed 
+    oldValue - the old value of the property 
+    newValue - the new value of the property 
+
+*javax.swing.SwingWorker.get()*
+
+public final |T| get()
+  throws |java.util.concurrent.ExecutionException|
+         |java.lang.InterruptedException|
+         
+Note: callinggeton the Event Dispatch Thread blocks all events, including 
+repaints, from being processed until thisSwingWorkeris complete. 
+
+When you want theSwingWorkerto block on the Event Dispatch Thread we recommend 
+that you use a modal dialog. 
+
+For example: 
+
+
+
+class SwingWorkerCompletionWaiter extends PropertyChangeListener { private 
+JDialog dialog; 
+
+public SwingWorkerCompletionWaiter(JDialog dialog) { this.dialog = dialog; } 
+
+public void propertyChange(PropertyChangeEvent event) { if 
+(state.equals(event.getPropertyName()) and and SwingWorker.StateValue.DONE == 
+event.getNewValue()) { dialog.setVisible(false); dialog.dispose(); } } } 
+JDialog dialog = new JDialog(owner, true); 
+swingWorker.addPropertyChangeListener( new 
+SwingWorkerCompletionWaiter(dialog)); swingWorker.execute(); //the dialog will 
+be visible until the SwingWorker is done dialog.setVisible(true); 
+
+
+
+*javax.swing.SwingWorker.get(long,TimeUnit)*
+
+public final |T| get(
+  long timeout,
+  java.util.concurrent.TimeUnit unit)
+  throws |java.util.concurrent.ExecutionException|
+         |java.lang.InterruptedException|
+         |java.util.concurrent.TimeoutException|
+         
+Please refer to (|javax.swing.SwingWorker|) for more details. 
+
+
+
+*javax.swing.SwingWorker.getProgress()*
+
+public final int getProgress()
+
+Returns theprogressbound property. 
+
+
+
+    Returns: the progress bound property. 
+
+*javax.swing.SwingWorker.getPropertyChangeSupport()*
+
+public final |java.beans.PropertyChangeSupport| getPropertyChangeSupport()
+
+Returns thePropertyChangeSupportfor thisSwingWorker. This method is used when 
+flexible access to bound properties support is needed. 
+
+ThisSwingWorkerwill be the source for any generated events. 
+
+Note: The returnedPropertyChangeSupportnotifies anyPropertyChangeListeners 
+asynchronously on the Event Dispatch Thread in the event 
+thatfirePropertyChangeorfireIndexedPropertyChangeare called off the Event 
+Dispatch Thread. 
+
+
+
+    Returns: {@code PropertyChangeSupport} for this {@code SwingWorker} 
+
+*javax.swing.SwingWorker.getState()*
+
+public final |javax.swing.SwingWorker.StateValue| getState()
+
+Returns theSwingWorkerstate bound property. 
+
+
+
+    Returns: the current state 
+
+*javax.swing.SwingWorker.isCancelled()*
+
+public final boolean isCancelled()
+
+
+
+
+
+*javax.swing.SwingWorker.isDone()*
+
+public final boolean isDone()
+
+
+
+
+
+*javax.swing.SwingWorker.process(List<V>)*
+
+protected void process(java.util.List<V> chunks)
+
+Receives data chunks from thepublishmethod asynchronously on the Event Dispatch 
+Thread. 
+
+Please refer to the (|javax.swing.SwingWorker|) method for more details. 
+
+
+    chunks - intermediate results to process 
+
+*javax.swing.SwingWorker.publish(V...)*
+
+protected final void publish(V[] chunks)
+
+Sends data chunks to the (|javax.swing.SwingWorker|) method. This method is to 
+be used from inside thedoInBackgroundmethod to deliver intermediate results for 
+processing on the Event Dispatch Thread inside theprocessmethod. 
+
+Because theprocessmethod is invoked asynchronously on the Event Dispatch Thread 
+multiple invocations to thepublishmethod might occur before theprocessmethod is 
+executed. For performance purposes all these invocations are coalesced into one 
+invocation with concatenated arguments. 
+
+For example: 
+
+
+
+publish(1); publish(2, 3); publish(4, 5, 6); 
+
+might result in: 
+
+
+
+process(1, 2, 3, 4, 5, 6) 
+
+Sample Usage. This code snippet loads some tabular data and 
+updatesDefaultTableModelwith it. Note that it safe to mutate the tableModel 
+from inside theprocessmethod because it is invoked on the Event Dispatch 
+Thread. 
+
+
+
+class TableSwingWorker extends SwingWorker<DefaultTableModel, Object[]> { 
+private final DefaultTableModel tableModel; 
+
+public TableSwingWorker(DefaultTableModel tableModel) { this.tableModel = 
+tableModel; }@Overrideprotected DefaultTableModel doInBackground() throws 
+Exception { for (Object[] row = loadData(); ! isCancelled() and and row != 
+null; row = loadData()) { publish((Object[]) row); } return tableModel; 
+}@Overrideprotected void process(List<Object[]> chunks) { for (Object[] row : 
+chunks) { tableModel.addRow(row); } } } 
+
+
+    chunks - intermediate results to process 
+
+*javax.swing.SwingWorker.removePropertyChangeListener(PropertyChangeListener)*
+
+public final void removePropertyChangeListener(java.beans.PropertyChangeListener listener)
+
+Removes aPropertyChangeListenerfrom the listener list. This removes 
+aPropertyChangeListenerthat was registered for all properties. Iflistenerwas 
+added more than once to the same event source, it will be notified one less 
+time after being removed. Iflistenerisnull, or was never added, no exception is 
+thrown and no action is taken. 
+
+Note: This is merely a convenience wrapper. All work is delegated 
+toPropertyChangeSupportfrom (|javax.swing.SwingWorker|) . 
+
+
+    listener - the {@code PropertyChangeListener} to be removed 
+
+*javax.swing.SwingWorker.run()*
+
+public final void run()
+
+Sets thisFutureto the result of computation unless it has been cancelled. 
+
+
+
+*javax.swing.SwingWorker.setProgress(int)*
+
+protected final void setProgress(int progress)
+
+Sets theprogressbound property. The value should be from 0 to 100. 
+
+BecausePropertyChangeListeners are notified asynchronously on the Event 
+Dispatch Thread multiple invocations to thesetProgressmethod might occur before 
+anyPropertyChangeListenersare invoked. For performance purposes all these 
+invocations are coalesced into one invocation with the last invocation argument 
+only. 
+
+For example, the following invokations: 
+
+
+
+setProgress(1); setProgress(2); setProgress(3); 
+
+might result in a singlePropertyChangeListenernotification with the value3. 
+
+
+    progress - the progress value to set 
+
+

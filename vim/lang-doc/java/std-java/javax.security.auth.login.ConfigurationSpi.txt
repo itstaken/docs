@@ -1,0 +1,69 @@
+*javax.security.auth.login.ConfigurationSpi* *ConfigurationSpi* This class defin
+
+public abstract class ConfigurationSpi
+  extends    |java.lang.Object|
+
+|javax.security.auth.login.ConfigurationSpi_Description|
+|javax.security.auth.login.ConfigurationSpi_Fields|
+|javax.security.auth.login.ConfigurationSpi_Constructors|
+|javax.security.auth.login.ConfigurationSpi_Methods|
+
+================================================================================
+
+*javax.security.auth.login.ConfigurationSpi_Constructors*
+|javax.security.auth.login.ConfigurationSpi()|
+
+*javax.security.auth.login.ConfigurationSpi_Methods*
+|javax.security.auth.login.ConfigurationSpi.engineGetAppConfigurationEntry(String)|
+|javax.security.auth.login.ConfigurationSpi.engineRefresh()|Refresh and reload 
+
+*javax.security.auth.login.ConfigurationSpi_Description*
+
+This class defines the Service Provider Interface (SPI) for the Configuration 
+class. All the abstract methods in this class must be implemented by each 
+service provider who wishes to supply a Configuration implementation. 
+
+Subclass implementations of this abstract class must provide a public 
+constructor that takes a Configuration.Parameters object as an input parameter. 
+This constructor also must throw an IllegalArgumentException if it does not 
+understand the Configuration.Parameters input. 
+
+
+
+*javax.security.auth.login.ConfigurationSpi()*
+
+public ConfigurationSpi()
+
+
+
+
+*javax.security.auth.login.ConfigurationSpi.engineGetAppConfigurationEntry(String)*
+
+protected abstract |javax.security.auth.login.AppConfigurationEntry|[] engineGetAppConfigurationEntry(java.lang.String name)
+
+Retrieve the AppConfigurationEntries for the specified name. 
+
+
+
+
+    name - the name used to index the Configuration. 
+
+    Returns: an array of AppConfigurationEntries for the specified name, or null if there 
+             are no entries. 
+
+*javax.security.auth.login.ConfigurationSpi.engineRefresh()*
+
+protected void engineRefresh()
+
+Refresh and reload the Configuration. 
+
+This method causes this Configuration object to refresh/reload its contents in 
+an implementation-dependent manner. For example, if this Configuration object 
+stores its entries in a file, calling refresh may cause the file to be re-read. 
+
+The default implementation of this method does nothing. This method should be 
+overridden if a refresh operation is supported by the implementation. 
+
+
+
+

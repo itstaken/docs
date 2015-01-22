@@ -1,0 +1,142 @@
+*javax.smartcardio.CardTerminals* *CardTerminals* The set of terminals supported
+
+public abstract class CardTerminals
+  extends    |java.lang.Object|
+
+|javax.smartcardio.CardTerminals_Description|
+|javax.smartcardio.CardTerminals_Fields|
+|javax.smartcardio.CardTerminals_Constructors|
+|javax.smartcardio.CardTerminals_Methods|
+
+================================================================================
+
+*javax.smartcardio.CardTerminals_Constructors*
+|javax.smartcardio.CardTerminals()|Constructs a new CardTerminals object.
+
+*javax.smartcardio.CardTerminals_Methods*
+|javax.smartcardio.CardTerminals.getTerminal(String)|Returns the terminal with 
+|javax.smartcardio.CardTerminals.list()|Returns an unmodifiable list of all ava
+|javax.smartcardio.CardTerminals.list(CardTerminals.State)|Returns an unmodifia
+|javax.smartcardio.CardTerminals.waitForChange()|Waits for card insertion or re
+|javax.smartcardio.CardTerminals.waitForChange(long)|Waits for card insertion o
+
+*javax.smartcardio.CardTerminals_Description*
+
+The set of terminals supported by a TerminalFactory. This class allows 
+applications to enumerate the available CardTerminals, obtain a specific 
+CardTerminal, or wait for the insertion or removal of cards. 
+
+This class is multi-threading safe and can be used by multiple threads 
+concurrently. However, this object keeps track of the card presence state of 
+each of its terminals. Multiple objects should be used if independent calls to 
+(|javax.smartcardio.CardTerminals|) are required. 
+
+Applications can obtain instances of this class by calling 
+(|javax.smartcardio.TerminalFactory|) . 
+
+
+
+*javax.smartcardio.CardTerminals()*
+
+protected CardTerminals()
+
+Constructs a new CardTerminals object. 
+
+This constructor is called by subclasses only. Application should call 
+(|javax.smartcardio.TerminalFactory|) to obtain a CardTerminals object. 
+
+
+*javax.smartcardio.CardTerminals.getTerminal(String)*
+
+public |javax.smartcardio.CardTerminal| getTerminal(java.lang.String name)
+
+Returns the terminal with the specified name or null if no such terminal 
+exists. 
+
+
+
+    Returns: the terminal with the specified name or null if no such terminal exists. 
+
+*javax.smartcardio.CardTerminals.list()*
+
+public |java.util.List|<CardTerminal> list()
+  throws |javax.smartcardio.CardException|
+         
+Returns an unmodifiable list of all available terminals. 
+
+
+
+    Returns: an unmodifiable list of all available terminals. 
+
+*javax.smartcardio.CardTerminals.list(CardTerminals.State)*
+
+public abstract |java.util.List|<CardTerminal> list(javax.smartcardio.CardTerminals.State state)
+  throws |javax.smartcardio.CardException|
+         
+Returns an unmodifiable list of all terminals matching the specified state. 
+
+If state is State.ALL(|javax.smartcardio.CardTerminals.State|) , this method 
+returns all CardTerminals encapsulated by this object. If state is 
+State.CARD_PRESENT(|javax.smartcardio.CardTerminals.State|) or 
+State.CARD_ABSENT(|javax.smartcardio.CardTerminals.State|) , it returns all 
+CardTerminals where a card is currently present or absent, respectively. 
+
+If state is State.CARD_INSERTION(|javax.smartcardio.CardTerminals.State|) or 
+State.CARD_REMOVAL(|javax.smartcardio.CardTerminals.State|) , it returns all 
+CardTerminals for which an insertion (or removal, respectively) was detected 
+during the last call to (|javax.smartcardio.CardTerminals|) . If 
+waitForChange() has not been called on this object, CARD_INSERTION is 
+equivalent to CARD_PRESENT and CARD_REMOVAL is equivalent to CARD_ABSENT. For 
+an example of the use of CARD_INSERTION, see 
+(|javax.smartcardio.CardTerminals|) . 
+
+
+    state - the State 
+
+    Returns: an unmodifiable list of all terminals matching the specified attribute. 
+
+*javax.smartcardio.CardTerminals.waitForChange()*
+
+public void waitForChange()
+  throws |javax.smartcardio.CardException|
+         
+Waits for card insertion or removal in any of the terminals of this object. 
+
+This call is equivalent to calling 
+waitForChange(0)(|javax.smartcardio.CardTerminals|) . 
+
+
+
+*javax.smartcardio.CardTerminals.waitForChange(long)*
+
+public abstract boolean waitForChange(long timeout)
+  throws |javax.smartcardio.CardException|
+         
+Waits for card insertion or removal in any of the terminals of this object or 
+until the timeout expires. 
+
+This method examines each CardTerminal of this object. If a card was inserted 
+into or removed from a CardTerminal since the previous call to waitForChange(), 
+it returns immediately. Otherwise, or if this is the first call to 
+waitForChange() on this object, it blocks until a card is inserted into or 
+removed from a CardTerminal. 
+
+If timeout is greater than 0, the method returns after timeout milliseconds 
+even if there is no change in state. In that case, this method returns false; 
+otherwise it returns true. 
+
+This method is often used in a loop in combination with 
+list(State.CARD_INSERTION)(|javax.smartcardio.CardTerminals|) , for example: 
+
+TerminalFactory factory = ...; CardTerminals terminals = factory.terminals(); 
+while (true) { for (CardTerminal terminal : terminals.list(CARD_INSERTION)) { 
+// examine Card in terminal, return if it matches } terminals.waitForChange(); 
+} 
+
+
+    timeout - if positive, block for up to timeout milliseconds; if zero, block indefinitely; 
+       must not be negative 
+
+    Returns: false if the method returns due to an expired timeout, true otherwise. 
+
+

@@ -1,0 +1,81 @@
+*javax.sql.DataSource* *DataSource* A factory for connections to the physical da
+
+public interface interface DataSource
+
+  implements |javax.sql.CommonDataSource|
+             |java.sql.Wrapper|
+
+|javax.sql.DataSource_Description|
+|javax.sql.DataSource_Fields|
+|javax.sql.DataSource_Constructors|
+|javax.sql.DataSource_Methods|
+
+================================================================================
+
+*javax.sql.DataSource_Methods*
+|javax.sql.DataSource.getConnection()|Attempts to establish a connection with t
+|javax.sql.DataSource.getConnection(String,String)|Attempts to establish a conn
+
+*javax.sql.DataSource_Description*
+
+A factory for connections to the physical data source that this DataSource 
+object represents. An alternative to the DriverManager facility, a DataSource 
+object is the preferred means of getting a connection. An object that 
+implements the DataSource interface will typically be registered with a naming 
+service based on the JavaTM Naming and Directory (JNDI) API. 
+
+The DataSource interface is implemented by a driver vendor. There are three 
+types of implementations: 
+
+Basic implementation -- produces a standard Connection object Connection 
+pooling implementation -- produces a Connection object that will automatically 
+participate in connection pooling. This implementation works with a middle-tier 
+connection pooling manager. Distributed transaction implementation -- produces 
+a Connection object that may be used for distributed transactions and almost 
+always participates in connection pooling. This implementation works with a 
+middle-tier transaction manager and almost always with a connection pooling 
+manager. 
+
+A DataSource object has properties that can be modified when necessary. For 
+example, if the data source is moved to a different server, the property for 
+the server can be changed. The benefit is that because the data source's 
+properties can be changed, any code accessing that data source does not need to 
+be changed. 
+
+A driver that is accessed via a DataSource object does not register itself with 
+the DriverManager. Rather, a DataSource object is retrieved though a lookup 
+operation and then used to create a Connection object. With a basic 
+implementation, the connection obtained through a DataSource object is 
+identical to a connection obtained through the DriverManager facility. 
+
+
+
+*javax.sql.DataSource.getConnection()*
+
+public |java.sql.Connection| getConnection()
+  throws |java.sql.SQLException|
+         
+Attempts to establish a connection with the data source that this DataSource 
+object represents. 
+
+
+
+    Returns: a connection to the data source 
+
+*javax.sql.DataSource.getConnection(String,String)*
+
+public |java.sql.Connection| getConnection(
+  java.lang.String username,
+  java.lang.String password)
+  throws |java.sql.SQLException|
+         
+Attempts to establish a connection with the data source that this DataSource 
+object represents. 
+
+
+    username - the database user on whose behalf the connection is being made 
+    password - the user's password 
+
+    Returns: a connection to the data source 
+
+

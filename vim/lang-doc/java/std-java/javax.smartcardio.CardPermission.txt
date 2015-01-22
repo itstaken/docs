@@ -1,0 +1,118 @@
+*javax.smartcardio.CardPermission* *CardPermission* A permission for Smart Card 
+
+public class CardPermission
+  extends    |java.security.Permission|
+
+|javax.smartcardio.CardPermission_Description|
+|javax.smartcardio.CardPermission_Fields|
+|javax.smartcardio.CardPermission_Constructors|
+|javax.smartcardio.CardPermission_Methods|
+
+================================================================================
+
+*javax.smartcardio.CardPermission_Constructors*
+|javax.smartcardio.CardPermission(String,String)|Constructs a new CardPermissio
+
+*javax.smartcardio.CardPermission_Methods*
+|javax.smartcardio.CardPermission.equals(Object)|Compares the specified object 
+|javax.smartcardio.CardPermission.getActions()|Returns the canonical string rep
+|javax.smartcardio.CardPermission.hashCode()|Returns the hash code value for th
+|javax.smartcardio.CardPermission.implies(Permission)|Checks if this CardPermis
+
+*javax.smartcardio.CardPermission_Description*
+
+A permission for Smart Card operations. A CardPermission consists of the name 
+of the card terminal the permission applies to and a set of actions that are 
+valid for that terminal. 
+
+A CardPermission with a name of * applies to all card terminals. The actions 
+string is a comma separated list of the actions listed below, or * to signify 
+"all actions." 
+
+Individual actions are: 
+
+connect connect to a card using 
+CardTerminal.connect()(|javax.smartcardio.CardTerminal|) reset reset the card 
+using Card.disconnect(true)(|javax.smartcardio.Card|) exclusive establish 
+exclusive access to a card using (|javax.smartcardio.Card|) and 
+endExclusive()(|javax.smartcardio.Card|) transmitControl transmit a control 
+command using Card.transmitControlCommand()(|javax.smartcardio.Card|) 
+getBasicChannel obtain the basic logical channel using 
+(|javax.smartcardio.Card|) openLogicalChannel open a new logical channel using 
+(|javax.smartcardio.Card|) 
+
+
+
+*javax.smartcardio.CardPermission(String,String)*
+
+public CardPermission(
+  java.lang.String terminalName,
+  java.lang.String actions)
+
+Constructs a new CardPermission with the specified actions. terminalName is the 
+name of a CardTerminal or * if this permission applies to all terminals. 
+actions contains a comma-separated list of the individual actions or * to 
+signify all actions. For more information, see the documentation at the top of 
+this class(|javax.smartcardio.CardPermission|) . 
+
+    terminalName - the name of the card terminal, or * 
+    actions - the action string (or null if the set of permitted actions is empty) 
+
+*javax.smartcardio.CardPermission.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specified object with this CardPermission for equality. This 
+CardPermission is equal to another Object object, if and only if 
+
+object is an instance of CardPermission, this.getName() is equal to 
+((CardPermission)object).getName(), and this.getActions() is equal to 
+((CardPermission)object).getActions(). 
+
+
+    obj - the object to be compared for equality with this CardPermission 
+
+    Returns: true if and only if the specified object is equal to this CardPermission 
+
+*javax.smartcardio.CardPermission.getActions()*
+
+public |java.lang.String| getActions()
+
+Returns the canonical string representation of the actions. It is * to signify 
+all actions defined by this class or the string concatenation of the 
+comma-separated, lexicographically sorted list of individual actions. 
+
+
+
+    Returns: the canonical string representation of the actions. 
+
+*javax.smartcardio.CardPermission.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this CardPermission object. 
+
+
+
+    Returns: the hash code value for this CardPermission object. 
+
+*javax.smartcardio.CardPermission.implies(Permission)*
+
+public boolean implies(java.security.Permission permission)
+
+Checks if this CardPermission object implies the specified permission. That is 
+the case, if and only if 
+
+permission is an instance of CardPermission, permission's actions are a proper 
+subset of this object's actions, and this object's getName() method is either * 
+or equal to permission's name. 
+
+
+
+
+    permission - the permission to check against 
+
+    Returns: true if and only if this CardPermission object implies the specified 
+             permission. 
+
+

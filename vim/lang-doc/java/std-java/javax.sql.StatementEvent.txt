@@ -1,0 +1,78 @@
+*javax.sql.StatementEvent* *StatementEvent* A StatementEvent is sent to all Stat
+
+public class StatementEvent
+  extends    |java.util.EventObject|
+
+|javax.sql.StatementEvent_Description|
+|javax.sql.StatementEvent_Fields|
+|javax.sql.StatementEvent_Constructors|
+|javax.sql.StatementEvent_Methods|
+
+================================================================================
+
+*javax.sql.StatementEvent_Constructors*
+|javax.sql.StatementEvent(PooledConnection,PreparedStatement)|Constructs a Stat
+|javax.sql.StatementEvent(PooledConnection,PreparedStatement,SQLException)|Cons
+
+*javax.sql.StatementEvent_Methods*
+|javax.sql.StatementEvent.getSQLException()|Returns the SQLException the driver
+|javax.sql.StatementEvent.getStatement()|Returns the PreparedStatement that is 
+
+*javax.sql.StatementEvent_Description*
+
+A StatementEvent is sent to all StatementEventListeners which were registered 
+with a PooledConnection. This occurs when the driver determines that a 
+PreparedStatement that is associated with the PooledConnection has been closed 
+or the driver determines is invalid. 
+
+
+
+*javax.sql.StatementEvent(PooledConnection,PreparedStatement)*
+
+public StatementEvent(
+  javax.sql.PooledConnection con,
+  java.sql.PreparedStatement statement)
+
+Constructs a StatementEvent with the specified PooledConnection and 
+PreparedStatement. The SQLException contained in the event defaults to null. 
+
+    con - The PooledConnection that the closed or invalid PreparedStatementis associated 
+       with. 
+    statement - The PreparedStatement that is bieng closed or is invalid 
+
+*javax.sql.StatementEvent(PooledConnection,PreparedStatement,SQLException)*
+
+public StatementEvent(
+  javax.sql.PooledConnection con,
+  java.sql.PreparedStatement statement,
+  java.sql.SQLException exception)
+
+Constructs a StatementEvent with the specified PooledConnection, 
+PreparedStatement and SQLException 
+
+    con - The PooledConnection that the closed or invalid PreparedStatement is associated 
+       with. 
+    statement - The PreparedStatement that is being closed or is invalid 
+    exception - The SQLException the driver is about to throw to the application 
+
+*javax.sql.StatementEvent.getSQLException()*
+
+public |java.sql.SQLException| getSQLException()
+
+Returns the SQLException the driver is about to throw 
+
+
+
+    Returns: The SQLException the driver is about to throw 
+
+*javax.sql.StatementEvent.getStatement()*
+
+public |java.sql.PreparedStatement| getStatement()
+
+Returns the PreparedStatement that is being closed or is invalid 
+
+
+
+    Returns: The PreparedStatement that is being closed or is invalid 
+
+

@@ -1,0 +1,356 @@
+*javax.smartcardio.CommandAPDU* *CommandAPDU* A command APDU following the struc
+
+public final class CommandAPDU
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|javax.smartcardio.CommandAPDU_Description|
+|javax.smartcardio.CommandAPDU_Fields|
+|javax.smartcardio.CommandAPDU_Constructors|
+|javax.smartcardio.CommandAPDU_Methods|
+
+================================================================================
+
+*javax.smartcardio.CommandAPDU_Constructors*
+|javax.smartcardio.CommandAPDU(byte[])|Constructs a CommandAPDU from a byte arr
+|javax.smartcardio.CommandAPDU(byte[],int,int)|Constructs a CommandAPDU from a 
+|javax.smartcardio.CommandAPDU(ByteBuffer)|Creates a CommandAPDU from the ByteB
+|javax.smartcardio.CommandAPDU(int,int,int,int)|Constructs a CommandAPDU from t
+|javax.smartcardio.CommandAPDU(int,int,int,int,byte[])|Constructs a CommandAPDU
+|javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int)|Constructs a Command
+|javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int,int)|Constructs a Com
+|javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int,int,int)|Constructs a
+|javax.smartcardio.CommandAPDU(int,int,int,int,int)|Constructs a CommandAPDU fr
+
+*javax.smartcardio.CommandAPDU_Methods*
+|javax.smartcardio.CommandAPDU.equals(Object)|Compares the specified object wit
+|javax.smartcardio.CommandAPDU.getBytes()|Returns a copy of the bytes in this A
+|javax.smartcardio.CommandAPDU.getCLA()|Returns the value of the class byte CLA
+|javax.smartcardio.CommandAPDU.getData()|Returns a copy of the data bytes in th
+|javax.smartcardio.CommandAPDU.getINS()|Returns the value of the instruction by
+|javax.smartcardio.CommandAPDU.getNc()|Returns the number of data bytes in the 
+|javax.smartcardio.CommandAPDU.getNe()|Returns the maximum number of expected d
+|javax.smartcardio.CommandAPDU.getP1()|Returns the value of the parameter byte 
+|javax.smartcardio.CommandAPDU.getP2()|Returns the value of the parameter byte 
+|javax.smartcardio.CommandAPDU.hashCode()|Returns the hash code value for this 
+|javax.smartcardio.CommandAPDU.toString()|Returns a string representation of th
+
+*javax.smartcardio.CommandAPDU_Description*
+
+A command APDU following the structure defined in ISO/IEC 7816-4. It consists 
+of a four byte header and a conditional body of variable length. This class 
+does not attempt to verify that the APDU encodes a semantically valid command. 
+
+Note that when the expected length of the response APDU is specified in the 
+constructors(|javax.smartcardio.CommandAPDU|) , the actual length (Ne) must be 
+specified, not its encoded form (Le). Similarly, 
+(|javax.smartcardio.CommandAPDU|) returns the actual value Ne. In other words, 
+a value of 0 means "no data in the response APDU" rather than "maximum length." 
+
+This class supports both the short and extended forms of length encoding for Ne 
+and Nc. However, note that not all terminals and Smart Cards are capable of 
+accepting APDUs that use the extended form. 
+
+For the header bytes CLA, INS, P1, and P2 the Java type int is used to 
+represent the 8 bit unsigned values. In the constructors, only the 8 lowest 
+bits of the int value specified by the application are significant. The 
+accessor methods always return the byte as an unsigned value between 0 and 255. 
+
+Instances of this class are immutable. Where data is passed in or out via byte 
+arrays, defensive cloning is performed. 
+
+
+
+*javax.smartcardio.CommandAPDU(byte[])*
+
+public CommandAPDU(byte[] apdu)
+
+Constructs a CommandAPDU from a byte array containing the complete APDU 
+contents (header and body). 
+
+Note that the apdu bytes are copied to protect against subsequent modification. 
+
+    apdu - the complete command APDU 
+
+*javax.smartcardio.CommandAPDU(byte[],int,int)*
+
+public CommandAPDU(
+  byte[] apdu,
+  int apduOffset,
+  int apduLength)
+
+Constructs a CommandAPDU from a byte array containing the complete APDU 
+contents (header and body). The APDU starts at the index apduOffset in the byte 
+array and is apduLength bytes long. 
+
+Note that the apdu bytes are copied to protect against subsequent modification. 
+
+    apdu - the complete command APDU 
+    apduOffset - the offset in the byte array at which the apdu data begins 
+    apduLength - the length of the APDU 
+
+*javax.smartcardio.CommandAPDU(ByteBuffer)*
+
+public CommandAPDU(java.nio.ByteBuffer apdu)
+
+Creates a CommandAPDU from the ByteBuffer containing the complete APDU contents 
+(header and body). The buffer's position must be set to the start of the APDU, 
+its limit to the end of the APDU. Upon return, the buffer's position is equal 
+to its limit; its limit remains unchanged. 
+
+Note that the data in the ByteBuffer is copied to protect against subsequent 
+modification. 
+
+    apdu - the ByteBuffer containing the complete APDU 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int)*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2)
+
+Constructs a CommandAPDU from the four header bytes. This is case 1 in ISO 
+7816, no command body. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int,byte[])*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2,
+  byte[] data)
+
+Constructs a CommandAPDU from the four header bytes and command data. This is 
+case 3 in ISO 7816, command data present and Ne absent. The value Nc is taken 
+as data.length. If data is null or its length is 0, the APDU is encoded as ISO 
+7816 case 1. 
+
+Note that the data bytes are copied to protect against subsequent modification. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+    data - the byte array containing the data bytes of the command body 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int)*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2,
+  byte[] data,
+  int ne)
+
+Constructs a CommandAPDU from the four header bytes, command data, and expected 
+response data length. This is case 4 in ISO 7816, command data and Ne present. 
+The value Nc is taken as data.length if data is non-null and as 0 otherwise. If 
+Ne or Nc are zero, the APDU is encoded as case 1, 2, or 3 per ISO 7816. 
+
+Note that the data bytes are copied to protect against subsequent modification. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+    data - the byte array containing the data bytes of the command body 
+    ne - the maximum number of expected data bytes in a response APDU 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int,int)*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2,
+  byte[] data,
+  int dataOffset,
+  int dataLength)
+
+Constructs a CommandAPDU from the four header bytes and command data. This is 
+case 3 in ISO 7816, command data present and Ne absent. The value Nc is taken 
+as dataLength. If dataLength is 0, the APDU is encoded as ISO 7816 case 1. 
+
+Note that the data bytes are copied to protect against subsequent modification. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+    data - the byte array containing the data bytes of the command body 
+    dataOffset - the offset in the byte array at which the data bytes of the command body begin 
+    dataLength - the number of the data bytes in the command body 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int,byte[],int,int,int)*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2,
+  byte[] data,
+  int dataOffset,
+  int dataLength,
+  int ne)
+
+Constructs a CommandAPDU from the four header bytes, command data, and expected 
+response data length. This is case 4 in ISO 7816, command data and Le present. 
+The value Nc is taken as dataLength. If Ne or Nc are zero, the APDU is encoded 
+as case 1, 2, or 3 per ISO 7816. 
+
+Note that the data bytes are copied to protect against subsequent modification. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+    data - the byte array containing the data bytes of the command body 
+    dataOffset - the offset in the byte array at which the data bytes of the command body begin 
+    dataLength - the number of the data bytes in the command body 
+    ne - the maximum number of expected data bytes in a response APDU 
+
+*javax.smartcardio.CommandAPDU(int,int,int,int,int)*
+
+public CommandAPDU(
+  int cla,
+  int ins,
+  int p1,
+  int p2,
+  int ne)
+
+Constructs a CommandAPDU from the four header bytes and the expected response 
+data length. This is case 2 in ISO 7816, empty command data field with Ne 
+specified. If Ne is 0, the APDU is encoded as ISO 7816 case 1. 
+
+    cla - the class byte CLA 
+    ins - the instruction byte INS 
+    p1 - the parameter byte P1 
+    p2 - the parameter byte P2 
+    ne - the maximum number of expected data bytes in a response APDU 
+
+*javax.smartcardio.CommandAPDU.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specified object with this command APDU for equality. Returns true 
+if the given object is also a CommandAPDU and its bytes are identical to the 
+bytes in this CommandAPDU. 
+
+
+    obj - the object to be compared for equality with this command APDU 
+
+    Returns: true if the specified object is equal to this command APDU 
+
+*javax.smartcardio.CommandAPDU.getBytes()*
+
+public byte[] getBytes()
+
+Returns a copy of the bytes in this APDU. 
+
+
+
+    Returns: a copy of the bytes in this APDU. 
+
+*javax.smartcardio.CommandAPDU.getCLA()*
+
+public int getCLA()
+
+Returns the value of the class byte CLA. 
+
+
+
+    Returns: the value of the class byte CLA. 
+
+*javax.smartcardio.CommandAPDU.getData()*
+
+public byte[] getData()
+
+Returns a copy of the data bytes in the command body. If this APDU as no body, 
+this method returns a byte array with length zero. 
+
+
+
+    Returns: a copy of the data bytes in the command body or the empty byte array if this 
+             APDU has no body. 
+
+*javax.smartcardio.CommandAPDU.getINS()*
+
+public int getINS()
+
+Returns the value of the instruction byte INS. 
+
+
+
+    Returns: the value of the instruction byte INS. 
+
+*javax.smartcardio.CommandAPDU.getNc()*
+
+public int getNc()
+
+Returns the number of data bytes in the command body (Nc) or 0 if this APDU has 
+no body. This call is equivalent to getData().length. 
+
+
+
+    Returns: the number of data bytes in the command body or 0 if this APDU has no body. 
+
+*javax.smartcardio.CommandAPDU.getNe()*
+
+public int getNe()
+
+Returns the maximum number of expected data bytes in a response APDU (Ne). 
+
+
+
+    Returns: the maximum number of expected data bytes in a response APDU. 
+
+*javax.smartcardio.CommandAPDU.getP1()*
+
+public int getP1()
+
+Returns the value of the parameter byte P1. 
+
+
+
+    Returns: the value of the parameter byte P1. 
+
+*javax.smartcardio.CommandAPDU.getP2()*
+
+public int getP2()
+
+Returns the value of the parameter byte P2. 
+
+
+
+    Returns: the value of the parameter byte P2. 
+
+*javax.smartcardio.CommandAPDU.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this command APDU. 
+
+
+
+    Returns: the hash code value for this command APDU. 
+
+*javax.smartcardio.CommandAPDU.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of this command APDU. 
+
+
+
+    Returns: a String representation of this command APDU. 
+
+

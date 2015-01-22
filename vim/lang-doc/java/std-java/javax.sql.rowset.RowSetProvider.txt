@@ -1,0 +1,105 @@
+*javax.sql.rowset.RowSetProvider* *RowSetProvider* A factory API that enables ap
+
+public class RowSetProvider
+  extends    |java.lang.Object|
+
+|javax.sql.rowset.RowSetProvider_Description|
+|javax.sql.rowset.RowSetProvider_Fields|
+|javax.sql.rowset.RowSetProvider_Constructors|
+|javax.sql.rowset.RowSetProvider_Methods|
+
+================================================================================
+
+*javax.sql.rowset.RowSetProvider_Constructors*
+|javax.sql.rowset.RowSetProvider()|
+
+*javax.sql.rowset.RowSetProvider_Methods*
+|javax.sql.rowset.RowSetProvider.newFactory()|Creates a new instance of a RowSe
+|javax.sql.rowset.RowSetProvider.newFactory(String,ClassLoader)|Creates  a new 
+
+*javax.sql.rowset.RowSetProvider_Description*
+
+A factory API that enables applications to obtain aRowSetFactoryimplementation 
+that can be used to create different types ofRowSetimplementations. 
+
+Example: 
+
+
+
+RowSetFactory aFactory = RowSetProvider.newFactory(); CachedRowSet crs = 
+aFactory.createCachedRowSet(); ... RowSetFactory rsf = 
+RowSetProvider.newFactory("com.sun.rowset.RowSetFactoryImpl", null); WebRowSet 
+wrs = rsf.createWebRowSet(); 
+
+Tracing of this class may be enabled by setting the System 
+propertyjavax.sql.rowset.RowSetFactory.debugto any value butfalse. 
+
+
+
+*javax.sql.rowset.RowSetProvider()*
+
+protected RowSetProvider()
+
+
+
+
+*javax.sql.rowset.RowSetProvider.newFactory()*
+
+public static |javax.sql.rowset.RowSetFactory| newFactory()
+  throws |java.sql.SQLException|
+         
+Creates a new instance of a RowSetFactory implementation. This method uses the 
+following look up order to determine the RowSetFactory implementation class to 
+load: 
+
+The System propertyjavax.sql.rowset.RowSetFactory. For example: 
+
+-Djavax.sql.rowset.RowSetFactory=com.sun.rowset.RowSetFactoryImpl 
+
+
+
+The (|java.util.ServiceLoader|) API. TheServiceLoaderAPI will look for a class 
+name in the fileMETA-INF/services/javax.sql.rowset.RowSetFactoryin jars 
+available to the runtime. For example, to have the the RowSetFactory 
+implementationcom.sun.rowset.RowSetFactoryImplloaded, the entry 
+inMETA-INF/services/javax.sql.rowset.RowSetFactorywould be: 
+
+com.sun.rowset.RowSetFactoryImpl 
+
+
+
+Platform default RowSetFactory instance. 
+
+
+
+Once an application has obtained a reference to aRowSetFactory, it can use the 
+factory to obtain RowSet instances. 
+
+
+
+    Returns: New instance of a RowSetFactory 
+
+*javax.sql.rowset.RowSetProvider.newFactory(String,ClassLoader)*
+
+public static |javax.sql.rowset.RowSetFactory| newFactory(
+  java.lang.String factoryClassName,
+  java.lang.ClassLoader cl)
+  throws |java.sql.SQLException|
+         
+Creates a new instance of a RowSetFactory from the specified factory class 
+name. This function is useful when there are multiple providers in the 
+classpath. It gives more control to the application as it can specify which 
+provider should be loaded. 
+
+Once an application has obtained a reference to a RowSetFactory it can use the 
+factory to obtain RowSet instances. 
+
+
+    factoryClassName - fully qualified factory class name that provides an implementation of 
+       javax.sql.rowset.RowSetFactory. 
+    cl - ClassLoader used to load the factory class. If null current Thread's context 
+       classLoader is used to load the factory class. 
+
+    Returns: New instance of a RowSetFactory 
+
+

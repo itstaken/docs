@@ -1,0 +1,84 @@
+*javax.smartcardio.TerminalFactorySpi* *TerminalFactorySpi* The TerminalFactoryS
+
+public abstract class TerminalFactorySpi
+  extends    |java.lang.Object|
+
+|javax.smartcardio.TerminalFactorySpi_Description|
+|javax.smartcardio.TerminalFactorySpi_Fields|
+|javax.smartcardio.TerminalFactorySpi_Constructors|
+|javax.smartcardio.TerminalFactorySpi_Methods|
+
+================================================================================
+
+*javax.smartcardio.TerminalFactorySpi_Constructors*
+|javax.smartcardio.TerminalFactorySpi()|Constructs a new TerminalFactorySpi obj
+
+*javax.smartcardio.TerminalFactorySpi_Methods*
+|javax.smartcardio.TerminalFactorySpi.engineTerminals()|Returns the CardTermina
+
+*javax.smartcardio.TerminalFactorySpi_Description*
+
+The TerminalFactorySpi class defines the service provider interface. 
+Applications do not access this class directly, instead see 
+(|javax.smartcardio.TerminalFactory|) . 
+
+Service providers that want to write a new implementation should define a 
+concrete subclass of TerminalFactorySpi with a constructor that takes an Object 
+as parameter. That class needs to be registered in a (|java.security.Provider|) 
+. The engine type(|java.security.Provider.Service|) is TerminalFactory. Service 
+providers also need to implement subclasses of the abstract classes 
+(|javax.smartcardio.CardTerminals|) , (|javax.smartcardio.CardTerminal|) , 
+(|javax.smartcardio.Card|) , and (|javax.smartcardio.CardChannel|) . 
+
+For example: 
+
+file MyProvider.java: 
+
+package com.somedomain.card; 
+
+import java.security.Provider; 
+
+public class MyProvider extends Provider { public MyProvider() { 
+super("MyProvider", 1.0d, "Smart Card Example"); put("TerminalFactory.MyType", 
+"com.somedomain.card.MySpi"); } } 
+
+file MySpi.java 
+
+package com.somedomain.card; 
+
+import javax.smartcardio.*; 
+
+public class MySpi extends TerminalFactoySpi { public MySpi(Object parameter) { 
+// initialize as appropriate } protected CardTerminals engineTerminals() { // 
+add implementation code here } } 
+
+
+
+*javax.smartcardio.TerminalFactorySpi()*
+
+protected TerminalFactorySpi()
+
+Constructs a new TerminalFactorySpi object. 
+
+This class is part of the service provider interface and not accessed directly 
+by applications. Applications should use TerminalFactory objects, which can be 
+obtained by calling one of the 
+TerminalFactory.getInstance()(|javax.smartcardio.TerminalFactory|) methods. 
+
+Concrete subclasses should define a constructor that takes an Object as 
+parameter. It will be invoked when an application calls one of the 
+TerminalFactory.getInstance()(|javax.smartcardio.TerminalFactory|) methods and 
+receives the params object specified by the application. 
+
+
+*javax.smartcardio.TerminalFactorySpi.engineTerminals()*
+
+protected abstract |javax.smartcardio.CardTerminals| engineTerminals()
+
+Returns the CardTerminals created by this factory. 
+
+
+
+    Returns: the CardTerminals created by this factory. 
+
+

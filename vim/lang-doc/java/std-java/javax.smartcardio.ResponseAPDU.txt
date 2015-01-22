@@ -1,0 +1,147 @@
+*javax.smartcardio.ResponseAPDU* *ResponseAPDU* A response APDU as defined in IS
+
+public final class ResponseAPDU
+  extends    |java.lang.Object|
+  implements |java.io.Serializable|
+
+|javax.smartcardio.ResponseAPDU_Description|
+|javax.smartcardio.ResponseAPDU_Fields|
+|javax.smartcardio.ResponseAPDU_Constructors|
+|javax.smartcardio.ResponseAPDU_Methods|
+
+================================================================================
+
+*javax.smartcardio.ResponseAPDU_Constructors*
+|javax.smartcardio.ResponseAPDU(byte[])|Constructs a ResponseAPDU from a byte a
+
+*javax.smartcardio.ResponseAPDU_Methods*
+|javax.smartcardio.ResponseAPDU.equals(Object)|Compares the specified object wi
+|javax.smartcardio.ResponseAPDU.getBytes()|Returns a copy of the bytes in this 
+|javax.smartcardio.ResponseAPDU.getData()|Returns a copy of the data bytes in t
+|javax.smartcardio.ResponseAPDU.getNr()|Returns the number of data bytes in the
+|javax.smartcardio.ResponseAPDU.getSW()|Returns the value of the status bytes S
+|javax.smartcardio.ResponseAPDU.getSW1()|Returns the value of the status byte S
+|javax.smartcardio.ResponseAPDU.getSW2()|Returns the value of the status byte S
+|javax.smartcardio.ResponseAPDU.hashCode()|Returns the hash code value for this
+|javax.smartcardio.ResponseAPDU.toString()|Returns a string representation of t
+
+*javax.smartcardio.ResponseAPDU_Description*
+
+A response APDU as defined in ISO/IEC 7816-4. It consists of a conditional body 
+and a two byte trailer. This class does not attempt to verify that the APDU 
+encodes a semantically valid response. 
+
+Instances of this class are immutable. Where data is passed in or out via byte 
+arrays, defensive cloning is performed. 
+
+
+
+*javax.smartcardio.ResponseAPDU(byte[])*
+
+public ResponseAPDU(byte[] apdu)
+
+Constructs a ResponseAPDU from a byte array containing the complete APDU 
+contents (conditional body and trailed). 
+
+Note that the byte array is cloned to protect against subsequent modification. 
+
+    apdu - the complete response APDU 
+
+*javax.smartcardio.ResponseAPDU.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compares the specified object with this response APDU for equality. Returns 
+true if the given object is also a ResponseAPDU and its bytes are identical to 
+the bytes in this ResponseAPDU. 
+
+
+    obj - the object to be compared for equality with this response APDU 
+
+    Returns: true if the specified object is equal to this response APDU 
+
+*javax.smartcardio.ResponseAPDU.getBytes()*
+
+public byte[] getBytes()
+
+Returns a copy of the bytes in this APDU. 
+
+
+
+    Returns: a copy of the bytes in this APDU. 
+
+*javax.smartcardio.ResponseAPDU.getData()*
+
+public byte[] getData()
+
+Returns a copy of the data bytes in the response body. If this APDU as no body, 
+this method returns a byte array with a length of zero. 
+
+
+
+    Returns: a copy of the data bytes in the response body or the empty byte array if this 
+             APDU has no body. 
+
+*javax.smartcardio.ResponseAPDU.getNr()*
+
+public int getNr()
+
+Returns the number of data bytes in the response body (Nr) or 0 if this APDU 
+has no body. This call is equivalent to getData().length. 
+
+
+
+    Returns: the number of data bytes in the response body or 0 if this APDU has no body. 
+
+*javax.smartcardio.ResponseAPDU.getSW()*
+
+public int getSW()
+
+Returns the value of the status bytes SW1 and SW2 as a single status word SW. 
+It is defined as (getSW1() . 
+
+
+
+    Returns: the value of the status word SW. 
+
+*javax.smartcardio.ResponseAPDU.getSW1()*
+
+public int getSW1()
+
+Returns the value of the status byte SW1 as a value between 0 and 255. 
+
+
+
+    Returns: the value of the status byte SW1 as a value between 0 and 255. 
+
+*javax.smartcardio.ResponseAPDU.getSW2()*
+
+public int getSW2()
+
+Returns the value of the status byte SW2 as a value between 0 and 255. 
+
+
+
+    Returns: the value of the status byte SW2 as a value between 0 and 255. 
+
+*javax.smartcardio.ResponseAPDU.hashCode()*
+
+public int hashCode()
+
+Returns the hash code value for this response APDU. 
+
+
+
+    Returns: the hash code value for this response APDU. 
+
+*javax.smartcardio.ResponseAPDU.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of this response APDU. 
+
+
+
+    Returns: a String representation of this response APDU. 
+
+

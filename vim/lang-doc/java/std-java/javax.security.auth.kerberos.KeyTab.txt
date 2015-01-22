@@ -1,0 +1,153 @@
+*javax.security.auth.kerberos.KeyTab* *KeyTab* This class encapsulates a keytab 
+
+public final class KeyTab
+  extends    |java.lang.Object|
+
+|javax.security.auth.kerberos.KeyTab_Description|
+|javax.security.auth.kerberos.KeyTab_Fields|
+|javax.security.auth.kerberos.KeyTab_Constructors|
+|javax.security.auth.kerberos.KeyTab_Methods|
+
+================================================================================
+
+*javax.security.auth.kerberos.KeyTab_Methods*
+|javax.security.auth.kerberos.KeyTab.equals(Object)|Compares the specified Obje
+|javax.security.auth.kerberos.KeyTab.exists()|Checks if the keytab file exists.
+|javax.security.auth.kerberos.KeyTab.getInstance()|Returns the defaultKeyTabins
+|javax.security.auth.kerberos.KeyTab.getInstance(File)|Returns aKeyTabinstance 
+|javax.security.auth.kerberos.KeyTab.getKeys(KerberosPrincipal)|Returns fresh k
+|javax.security.auth.kerberos.KeyTab.hashCode()|Returns a hashcode for this Key
+|javax.security.auth.kerberos.KeyTab.toString()|
+
+*javax.security.auth.kerberos.KeyTab_Description*
+
+This class encapsulates a keytab file. 
+
+A Kerberos JAAS login module that obtains long term secret keys from a keytab 
+file should use this class. The login module will store an instance of this 
+class in the private credential set of a Subject(|javax.security.auth.Subject|) 
+during the commit phase of the authentication process. 
+
+It might be necessary for the application to be granted a 
+PrivateCredentialPermission(|javax.security.auth.PrivateCredentialPermission|) 
+if it needs to access the KeyTab instance from a Subject. This permission is 
+not needed when the application depends on the default JGSS Kerberos mechanism 
+to access the KeyTab. In that case, however, the application will need an 
+appropriate ServicePermission(|javax.security.auth.kerberos.ServicePermission|) 
+. 
+
+The keytab file format is described at 
+
+http://www.ioplex.com/utilities/keytab.txt. 
+
+
+
+*javax.security.auth.kerberos.KeyTab.equals(Object)*
+
+public boolean equals(java.lang.Object other)
+
+Compares the specified Object with this KeyTab for equality. Returns true if 
+the given object is also a KeyTab and the two KeyTab instances are equivalent. 
+
+
+    other - the Object to compare to 
+
+    Returns: true if the specified object is equal to this KeyTab 
+
+*javax.security.auth.kerberos.KeyTab.exists()*
+
+public boolean exists()
+
+Checks if the keytab file exists. Implementation of this method should make 
+sure that the result matches the latest status of the keytab file. 
+
+The caller can use the result to determine if it should fallback to another 
+mechanism to read the keys. 
+
+
+
+    Returns: true if the keytab file exists; false otherwise. 
+
+*javax.security.auth.kerberos.KeyTab.getInstance()*
+
+public static |javax.security.auth.kerberos.KeyTab| getInstance()
+
+Returns the defaultKeyTabinstance. 
+
+The result of this method is never null. This method only associates the 
+returnedKeyTabobject with the default keytab file and does not read it. 
+
+
+
+    Returns: the default keytab instance. 
+
+*javax.security.auth.kerberos.KeyTab.getInstance(File)*
+
+public static |javax.security.auth.kerberos.KeyTab| getInstance(java.io.File file)
+
+Returns aKeyTabinstance from aFileobject. 
+
+The result of this method is never null. This method only associates the 
+returnedKeyTabobject with the file and does not read it. 
+
+
+    file - the keytab {@code File} object, must not be null 
+
+    Returns: the keytab instance 
+
+*javax.security.auth.kerberos.KeyTab.getKeys(KerberosPrincipal)*
+
+public |javax.security.auth.kerberos.KerberosKey|[] getKeys(javax.security.auth.kerberos.KerberosPrincipal principal)
+
+Returns fresh keys for the given Kerberos principal. 
+
+Implementation of this method should make sure the returned keys match the 
+latest content of the keytab file. The result is a newly created copy that can 
+be modified by the caller without modifying the keytab object. The caller 
+should destroy(|javax.security.auth.kerberos.KerberosKey|) the result keys 
+after they are used. 
+
+Please note that the keytab file can be created after theKeyTabobject is 
+instantiated and its content may change over time. Therefore, an application 
+should call this method only when it needs to use the keys. Any previous result 
+from an earlier invocation could potentially be expired. 
+
+If there is any error (say, I/O error or format error) during the reading 
+process of the KeyTab file, a saved result should be returned. If there is no 
+saved result (say, this is the first time this method is called, or, all 
+previous read attempts failed), an empty array should be returned. This can 
+make sure the result is not drastically changed during the (probably slow) 
+update of the keytab file. 
+
+Each time this method is called and the reading of the file succeeds with no 
+exception (say, I/O error or file format error), the result should be saved 
+forprincipal. The implementation can also save keys for other principals having 
+keys in the same keytab object if convenient. 
+
+Any unsupported key read from the keytab is ignored and not included in the 
+result. 
+
+
+    principal - the Kerberos principal, must not be null. 
+
+    Returns: the keys (never null, may be empty) 
+
+*javax.security.auth.kerberos.KeyTab.hashCode()*
+
+public int hashCode()
+
+Returns a hashcode for this KeyTab. 
+
+
+
+    Returns: a hashCode() for the KeyTab 
+
+*javax.security.auth.kerberos.KeyTab.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

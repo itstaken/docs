@@ -1,0 +1,145 @@
+*javax.security.cert.Certificate* *Certificate* Abstract class for managing a va
+
+public abstract class Certificate
+  extends    |java.lang.Object|
+
+|javax.security.cert.Certificate_Description|
+|javax.security.cert.Certificate_Fields|
+|javax.security.cert.Certificate_Constructors|
+|javax.security.cert.Certificate_Methods|
+
+================================================================================
+
+*javax.security.cert.Certificate_Constructors*
+|javax.security.cert.Certificate()|
+
+*javax.security.cert.Certificate_Methods*
+|javax.security.cert.Certificate.equals(Object)|Compares this certificate for e
+|javax.security.cert.Certificate.getEncoded()|Returns the encoded form of this 
+|javax.security.cert.Certificate.getPublicKey()|Gets the public key from this c
+|javax.security.cert.Certificate.hashCode()|Returns a hashcode value for this c
+|javax.security.cert.Certificate.toString()|Returns a string representation of 
+|javax.security.cert.Certificate.verify(PublicKey)|Verifies that this certifica
+|javax.security.cert.Certificate.verify(PublicKey,String)|Verifies that this ce
+
+*javax.security.cert.Certificate_Description*
+
+Abstract class for managing a variety of identity certificates. An identity 
+certificate is a guarantee by a principal that a public key is that of another 
+principal. (A principal represents an entity such as an individual user, a 
+group, or a corporation.) 
+
+This class is an abstraction for certificates that have different formats but 
+important common uses. For example, different types of certificates, such as 
+X.509 and PGP, share general certificate functionality (like encoding and 
+verifying) and some types of information (like a public key). 
+
+X.509, PGP, and SDSI certificates can all be implemented by subclassing the 
+Certificate class, even though they contain different sets of information, and 
+they store and retrieve the information in different ways. 
+
+Note: The classes in the package javax.security.cert exist for compatibility 
+with earlier versions of the Java Secure Sockets Extension (JSSE). New 
+applications should instead use the standard Java SE certificate classes 
+located in java.security.cert. 
+
+
+
+*javax.security.cert.Certificate()*
+
+public Certificate()
+
+
+
+
+*javax.security.cert.Certificate.equals(Object)*
+
+public boolean equals(java.lang.Object other)
+
+Compares this certificate for equality with the specified object. If the other 
+object is an instanceof Certificate, then its encoded form is retrieved and 
+compared with the encoded form of this certificate. 
+
+
+    other - the object to test for equality with this certificate. 
+
+    Returns: true if the encoded forms of the two certificates match, false otherwise. 
+
+*javax.security.cert.Certificate.getEncoded()*
+
+public abstract byte[] getEncoded()
+  throws |javax.security.cert.CertificateEncodingException|
+         
+Returns the encoded form of this certificate. It is assumed that each 
+certificate type would have only a single form of encoding; for example, X.509 
+certificates would be encoded as ASN.1 DER. 
+
+
+
+    Returns: encoded form of this certificate 
+
+*javax.security.cert.Certificate.getPublicKey()*
+
+public abstract |java.security.PublicKey| getPublicKey()
+
+Gets the public key from this certificate. 
+
+
+
+    Returns: the public key. 
+
+*javax.security.cert.Certificate.hashCode()*
+
+public int hashCode()
+
+Returns a hashcode value for this certificate from its encoded form. 
+
+
+
+    Returns: the hashcode value. 
+
+*javax.security.cert.Certificate.toString()*
+
+public abstract |java.lang.String| toString()
+
+Returns a string representation of this certificate. 
+
+
+
+    Returns: a string representation of this certificate. 
+
+*javax.security.cert.Certificate.verify(PublicKey)*
+
+public abstract void verify(java.security.PublicKey key)
+  throws |javax.security.cert.CertificateException|
+         |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         |java.security.NoSuchProviderException|
+         |java.security.SignatureException|
+         
+Verifies that this certificate was signed using the private key that 
+corresponds to the specified public key. 
+
+
+    key - the PublicKey used to carry out the verification. 
+
+*javax.security.cert.Certificate.verify(PublicKey,String)*
+
+public abstract void verify(
+  java.security.PublicKey key,
+  java.lang.String sigProvider)
+  throws |javax.security.cert.CertificateException|
+         |java.security.InvalidKeyException|
+         |java.security.NoSuchAlgorithmException|
+         |java.security.NoSuchProviderException|
+         |java.security.SignatureException|
+         
+Verifies that this certificate was signed using the private key that 
+corresponds to the specified public key. This method uses the signature 
+verification engine supplied by the specified provider. 
+
+
+    key - the PublicKey used to carry out the verification. 
+    sigProvider - the name of the signature provider. 
+
+

@@ -1,0 +1,117 @@
+*javax.smartcardio.CardTerminal* *CardTerminal* A Smart Card terminal, sometimes
+
+public abstract class CardTerminal
+  extends    |java.lang.Object|
+
+|javax.smartcardio.CardTerminal_Description|
+|javax.smartcardio.CardTerminal_Fields|
+|javax.smartcardio.CardTerminal_Constructors|
+|javax.smartcardio.CardTerminal_Methods|
+
+================================================================================
+
+*javax.smartcardio.CardTerminal_Constructors*
+|javax.smartcardio.CardTerminal()|Constructs a new CardTerminal object.
+
+*javax.smartcardio.CardTerminal_Methods*
+|javax.smartcardio.CardTerminal.connect(String)|Establishes a connection to the
+|javax.smartcardio.CardTerminal.getName()|Returns the unique name of this termi
+|javax.smartcardio.CardTerminal.isCardPresent()|Returns whether a card is prese
+|javax.smartcardio.CardTerminal.waitForCardAbsent(long)|Waits until a card is a
+|javax.smartcardio.CardTerminal.waitForCardPresent(long)|Waits until a card is 
+
+*javax.smartcardio.CardTerminal_Description*
+
+A Smart Card terminal, sometimes refered to as a Smart Card Reader. A 
+CardTerminal object can be obtained by calling 
+(|javax.smartcardio.CardTerminals|) or 
+CardTerminals.getTerminal()(|javax.smartcardio.CardTerminals|) . 
+
+Note that physical card readers with slots for multiple cards are represented 
+by one CardTerminal object per such slot. 
+
+
+
+*javax.smartcardio.CardTerminal()*
+
+protected CardTerminal()
+
+Constructs a new CardTerminal object. 
+
+This constructor is called by subclasses only. Application should call 
+list()(|javax.smartcardio.CardTerminals|) or 
+getTerminal()(|javax.smartcardio.CardTerminals|) to obtain a CardTerminal 
+object. 
+
+
+*javax.smartcardio.CardTerminal.connect(String)*
+
+public abstract |javax.smartcardio.Card| connect(java.lang.String protocol)
+  throws |javax.smartcardio.CardException|
+         
+Establishes a connection to the card. If a connection has previously 
+established using the specified protocol, this method returns the same Card 
+object as the previous call. 
+
+
+    protocol - the protocol to use ("T=0", "T=1", or "T=CL"), or "*" to connect using any 
+       available protocol. 
+
+*javax.smartcardio.CardTerminal.getName()*
+
+public abstract |java.lang.String| getName()
+
+Returns the unique name of this terminal. 
+
+
+
+    Returns: the unique name of this terminal. 
+
+*javax.smartcardio.CardTerminal.isCardPresent()*
+
+public abstract boolean isCardPresent()
+  throws |javax.smartcardio.CardException|
+         
+Returns whether a card is present in this terminal. 
+
+
+
+    Returns: whether a card is present in this terminal. 
+
+*javax.smartcardio.CardTerminal.waitForCardAbsent(long)*
+
+public abstract boolean waitForCardAbsent(long timeout)
+  throws |javax.smartcardio.CardException|
+         
+Waits until a card is absent in this terminal or the timeout expires. If the 
+method returns due to an expired timeout, it returns false. Otherwise it return 
+true. 
+
+If no card is present in this terminal when this method is called, it returns 
+immediately. 
+
+
+    timeout - if positive, block for up to timeout milliseconds; if zero, block indefinitely; 
+       must not be negative 
+
+    Returns: false if the method returns due to an expired timeout, true otherwise. 
+
+*javax.smartcardio.CardTerminal.waitForCardPresent(long)*
+
+public abstract boolean waitForCardPresent(long timeout)
+  throws |javax.smartcardio.CardException|
+         
+Waits until a card is present in this terminal or the timeout expires. If the 
+method returns due to an expired timeout, it returns false. Otherwise it return 
+true. 
+
+If a card is present in this terminal when this method is called, it returns 
+immediately. 
+
+
+    timeout - if positive, block for up to timeout milliseconds; if zero, block indefinitely; 
+       must not be negative 
+
+    Returns: false if the method returns due to an expired timeout, true otherwise. 
+
+
