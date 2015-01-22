@@ -1,0 +1,53 @@
+*android.content.ServiceConnection* *ServiceConnection* Interface for monitoring
+
+public interface interface ServiceConnection
+
+
+|android.content.ServiceConnection_Description|
+|android.content.ServiceConnection_Fields|
+|android.content.ServiceConnection_Constructors|
+|android.content.ServiceConnection_Methods|
+
+================================================================================
+
+*android.content.ServiceConnection_Methods*
+|android.content.ServiceConnection.onServiceConnected(ComponentName,IBinder)|Ca
+|android.content.ServiceConnection.onServiceDisconnected(ComponentName)|Called 
+
+*android.content.ServiceConnection_Description*
+
+Interface for monitoring the state of an application service. See 
+(|android.app.Service|) and Context.bindService()(|android.content.Context|) 
+for more information. Like many callbacks from the system, the methods on this 
+class are called from the main thread of your process. 
+
+
+
+*android.content.ServiceConnection.onServiceConnected(ComponentName,IBinder)*
+
+public void onServiceConnected(
+  android.content.ComponentName name,
+  android.os.IBinder service)
+
+Called when a connection to the Service has been established, with the 
+(|android.os.IBinder|) of the communication channel to the Service. 
+
+
+    name - The concrete component name of the service that has been connected. 
+    service - The IBinder of the Service's communication channel, which you can now make 
+       calls on. 
+
+*android.content.ServiceConnection.onServiceDisconnected(ComponentName)*
+
+public void onServiceDisconnected(android.content.ComponentName name)
+
+Called when a connection to the Service has been lost. This typically happens 
+when the process hosting the service has crashed or been killed. This does not 
+remove the ServiceConnection itself -- this binding to the service will remain 
+active, and you will receive a call to (|android.content.ServiceConnection|) 
+when the Service is next running. 
+
+
+    name - The concrete component name of the service whose connection has been lost. 
+
+

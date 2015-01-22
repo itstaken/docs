@@ -1,0 +1,521 @@
+*android.nfc.tech.MifareClassic* *MifareClassic* Provides access to MIFARE Class
+
+public final class MifareClassic
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.MifareClassic_Description|
+|android.nfc.tech.MifareClassic_Fields|
+|android.nfc.tech.MifareClassic_Constructors|
+|android.nfc.tech.MifareClassic_Methods|
+
+================================================================================
+
+*android.nfc.tech.MifareClassic_Fields*
+|int_android.nfc.tech.MifareClassic.BLOCK_SIZE|
+|byte[]_android.nfc.tech.MifareClassic.KEY_DEFAULT|
+|byte[]_android.nfc.tech.MifareClassic.KEY_MIFARE_APPLICATION_DIRECTORY|
+|byte[]_android.nfc.tech.MifareClassic.KEY_NFC_FORUM|
+|int_android.nfc.tech.MifareClassic.SIZE_1K|
+|int_android.nfc.tech.MifareClassic.SIZE_2K|
+|int_android.nfc.tech.MifareClassic.SIZE_4K|
+|int_android.nfc.tech.MifareClassic.SIZE_MINI|
+|int_android.nfc.tech.MifareClassic.TYPE_CLASSIC|
+|int_android.nfc.tech.MifareClassic.TYPE_PLUS|
+|int_android.nfc.tech.MifareClassic.TYPE_PRO|
+|int_android.nfc.tech.MifareClassic.TYPE_UNKNOWN|
+
+*android.nfc.tech.MifareClassic_Constructors*
+|android.nfc.tech.MifareClassic(Tag)|
+
+*android.nfc.tech.MifareClassic_Methods*
+|android.nfc.tech.MifareClassic.authenticateSectorWithKeyA(int,byte[])|Authenti
+|android.nfc.tech.MifareClassic.authenticateSectorWithKeyB(int,byte[])|Authenti
+|android.nfc.tech.MifareClassic.blockToSector(int)|Return the sector that conta
+|android.nfc.tech.MifareClassic.decrement(int,int)|Decrement a value block, sto
+|android.nfc.tech.MifareClassic.get(Tag)|Get an instance ofMifareClassicfor the
+|android.nfc.tech.MifareClassic.getBlockCount()|Return the total number of MIFA
+|android.nfc.tech.MifareClassic.getBlockCountInSector(int)|Return the number of
+|android.nfc.tech.MifareClassic.getMaxTransceiveLength()|Return the maximum num
+|android.nfc.tech.MifareClassic.getSectorCount()|Return the number of MIFARE Cl
+|android.nfc.tech.MifareClassic.getSize()|Return the size of the tag in bytes
+|android.nfc.tech.MifareClassic.getTimeout()|Get the current#transceivetimeout 
+|android.nfc.tech.MifareClassic.getType()|Return the type of this MIFARE Classi
+|android.nfc.tech.MifareClassic.increment(int,int)|Increment a value block, sto
+|android.nfc.tech.MifareClassic.isEmulated()|Return true if the tag is emulated
+|android.nfc.tech.MifareClassic.readBlock(int)|Read 16-byte block.
+|android.nfc.tech.MifareClassic.restore(int)|Copy from a value block to the tem
+|android.nfc.tech.MifareClassic.sectorToBlock(int)|Return the first block of a 
+|android.nfc.tech.MifareClassic.setTimeout(int)|Set the#transceivetimeout in mi
+|android.nfc.tech.MifareClassic.transceive(byte[])|Send raw NfcA data to a tag 
+|android.nfc.tech.MifareClassic.transfer(int)|Copy from the temporary block to 
+|android.nfc.tech.MifareClassic.writeBlock(int,byte[])|Write 16-byte block.
+
+*android.nfc.tech.MifareClassic_Description*
+
+Provides access to MIFARE Classic properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.MifareClassic|) object using 
+(|android.nfc.tech.MifareClassic|) . 
+
+MIFARE Classic is also known as MIFARE Standard. MIFARE Classic tags are 
+divided into sectors, and each sector is sub-divided into blocks. Block size is 
+always 16 bytes ( (|android.nfc.tech.MifareClassic|) . Sector size varies. 
+
+MIFARE Classic Mini are 320 bytes ( (|android.nfc.tech.MifareClassic|) ), with 
+5 sectors each of 4 blocks. MIFARE Classic 1k are 1024 bytes ( 
+(|android.nfc.tech.MifareClassic|) ), with 16 sectors each of 4 blocks. MIFARE 
+Classic 2k are 2048 bytes ( (|android.nfc.tech.MifareClassic|) ), with 32 
+sectors each of 4 blocks. MIFARE Classic 4k} are 4096 bytes ( 
+(|android.nfc.tech.MifareClassic|) ). The first 32 sectors contain 4 blocks and 
+the last 8 sectors contain 16 blocks. 
+
+MIFARE Classic tags require authentication on a per-sector basis before any 
+other I/O operations on that sector can be performed. There are two keys per 
+sector, and ACL bits determine what I/O operations are allowed on that sector 
+after authenticating with a key. (|android.nfc.tech.MifareClassic|) and 
+(|android.nfc.tech.MifareClassic|) . 
+
+Three well-known authentication keys are defined in this class: 
+(|android.nfc.tech.MifareClassic|) , (|android.nfc.tech.MifareClassic|) , 
+(|android.nfc.tech.MifareClassic|) . 
+
+(|android.nfc.tech.MifareClassic|) is the default factory key for MIFARE 
+Classic. (|android.nfc.tech.MifareClassic|) is the well-known key for MIFARE 
+Classic cards that have been formatted according to the MIFARE Application 
+Directory (MAD) specification. (|android.nfc.tech.MifareClassic|) is the 
+well-known key for MIFARE Classic cards that have been formatted according to 
+the NXP specification for NDEF on MIFARE Classic. 
+
+Implementation of this class on a Android NFC device is optional. If it is not 
+implemented, then (|android.nfc.tech.MifareClassic|) will never be enumerated 
+in (|android.nfc.Tag|) . If it is enumerated, then all 
+(|android.nfc.tech.MifareClassic|) I/O operations will be supported, and 
+(|android.nfc.tech.Ndef|) NDEF tags will also be supported. In either case, 
+(|android.nfc.tech.NfcA|) will also be enumerated on the tag, because all 
+MIFARE Classic tags are also (|android.nfc.tech.NfcA|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*int_android.nfc.tech.MifareClassic.BLOCK_SIZE*
+
+Size of a MIFARE Classic block (in bytes) 
+
+
+*byte[]_android.nfc.tech.MifareClassic.KEY_DEFAULT*
+
+The default factory key. 
+
+
+*byte[]_android.nfc.tech.MifareClassic.KEY_MIFARE_APPLICATION_DIRECTORY*
+
+The well-known key for tags formatted according to the MIFARE Application 
+Directory (MAD) specification. 
+
+
+*byte[]_android.nfc.tech.MifareClassic.KEY_NFC_FORUM*
+
+The well-known key for tags formatted according to the NDEF on MIFARE Classic 
+specification. 
+
+
+*int_android.nfc.tech.MifareClassic.SIZE_1K*
+
+Tag contains 16 sectors, each with 4 blocks. 
+
+
+*int_android.nfc.tech.MifareClassic.SIZE_2K*
+
+Tag contains 32 sectors, each with 4 blocks. 
+
+
+*int_android.nfc.tech.MifareClassic.SIZE_4K*
+
+Tag contains 40 sectors. The first 32 sectors contain 4 blocks and the last 8 
+sectors contain 16 blocks. 
+
+
+*int_android.nfc.tech.MifareClassic.SIZE_MINI*
+
+Tag contains 5 sectors, each with 4 blocks. 
+
+
+*int_android.nfc.tech.MifareClassic.TYPE_CLASSIC*
+
+A MIFARE Classic tag 
+
+
+*int_android.nfc.tech.MifareClassic.TYPE_PLUS*
+
+A MIFARE Plus tag 
+
+
+*int_android.nfc.tech.MifareClassic.TYPE_PRO*
+
+A MIFARE Pro tag 
+
+
+*int_android.nfc.tech.MifareClassic.TYPE_UNKNOWN*
+
+A MIFARE Classic compatible card of unknown type 
+
+
+
+*android.nfc.tech.MifareClassic(Tag)*
+
+public MifareClassic(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.MifareClassic.authenticateSectorWithKeyA(int,byte[])*
+
+public boolean authenticateSectorWithKeyA(
+  int sectorIndex,
+  byte[] key)
+  throws |java.io.IOException|
+         
+Authenticate a sector with key A. 
+
+Successful authentication of a sector with key A enables other I/O operations 
+on that sector. The set of operations granted by key A key depends on the ACL 
+bits set in that sector. For more information see the MIFARE Classic 
+specification on (|http://www.nxp.com|) . 
+
+A failed authentication attempt causes an implicit reconnection to the tag, so 
+authentication to other sectors will be lost. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    sectorIndex - index of sector to authenticate, starting from 0 
+    key - 6-byte authentication key 
+
+    Returns: true on success, false on authentication failure 
+
+*android.nfc.tech.MifareClassic.authenticateSectorWithKeyB(int,byte[])*
+
+public boolean authenticateSectorWithKeyB(
+  int sectorIndex,
+  byte[] key)
+  throws |java.io.IOException|
+         
+Authenticate a sector with key B. 
+
+Successful authentication of a sector with key B enables other I/O operations 
+on that sector. The set of operations granted by key B depends on the ACL bits 
+set in that sector. For more information see the MIFARE Classic specification 
+on (|http://www.nxp.com|) . 
+
+A failed authentication attempt causes an implicit reconnection to the tag, so 
+authentication to other sectors will be lost. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    sectorIndex - index of sector to authenticate, starting from 0 
+    key - 6-byte authentication key 
+
+    Returns: true on success, false on authentication failure 
+
+*android.nfc.tech.MifareClassic.blockToSector(int)*
+
+public int blockToSector(int blockIndex)
+
+Return the sector that contains a given block. Does not cause any RF activity 
+and does not block. 
+
+
+    blockIndex - index of block to lookup, starting from 0 
+
+    Returns: sector index that contains the block 
+
+*android.nfc.tech.MifareClassic.decrement(int,int)*
+
+public void decrement(
+  int blockIndex,
+  int value)
+  throws |java.io.IOException|
+         
+Decrement a value block, storing the result in the temporary block on the tag. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to decrement, starting from 0 
+    value - non-negative to decrement by 
+
+*android.nfc.tech.MifareClassic.get(Tag)*
+
+public static |android.nfc.tech.MifareClassic| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.MifareClassic|) for the given tag. Does 
+not cause any RF activity and does not block. Returns null if 
+(|android.nfc.tech.MifareClassic|) was not enumerated in (|android.nfc.Tag|) . 
+This indicates the tag is not MIFARE Classic compatible, or this Android device 
+does not support MIFARE Classic. 
+
+
+    tag - an MIFARE Classic compatible tag 
+
+    Returns: MIFARE Classic object 
+
+*android.nfc.tech.MifareClassic.getBlockCount()*
+
+public int getBlockCount()
+
+Return the total number of MIFARE Classic blocks. Does not cause any RF 
+activity and does not block. 
+
+
+
+    Returns: total number of blocks 
+
+*android.nfc.tech.MifareClassic.getBlockCountInSector(int)*
+
+public int getBlockCountInSector(int sectorIndex)
+
+Return the number of blocks in the given sector. Does not cause any RF activity 
+and does not block. 
+
+
+    sectorIndex - index of sector, starting from 0 
+
+    Returns: number of blocks in the sector 
+
+*android.nfc.tech.MifareClassic.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.MifareClassic|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.MifareClassic.getSectorCount()*
+
+public int getSectorCount()
+
+Return the number of MIFARE Classic sectors. Does not cause any RF activity and 
+does not block. 
+
+
+
+    Returns: number of sectors 
+
+*android.nfc.tech.MifareClassic.getSize()*
+
+public int getSize()
+
+Return the size of the tag in bytes One of (|android.nfc.tech.MifareClassic|) , 
+(|android.nfc.tech.MifareClassic|) , (|android.nfc.tech.MifareClassic|) , 
+(|android.nfc.tech.MifareClassic|) . These constants are equal to their 
+respective size in bytes. Does not cause any RF activity and does not block. 
+
+
+
+    Returns: size in bytes 
+
+*android.nfc.tech.MifareClassic.getTimeout()*
+
+public int getTimeout()
+
+Get the current (|android.nfc.tech.MifareClassic|) timeout in milliseconds. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: timeout value in milliseconds 
+
+*android.nfc.tech.MifareClassic.getType()*
+
+public int getType()
+
+Return the type of this MIFARE Classic compatible tag. One of 
+(|android.nfc.tech.MifareClassic|) , (|android.nfc.tech.MifareClassic|) , 
+(|android.nfc.tech.MifareClassic|) or (|android.nfc.tech.MifareClassic|) . Does 
+not cause any RF activity and does not block. 
+
+
+
+    Returns: 
+
+*android.nfc.tech.MifareClassic.increment(int,int)*
+
+public void increment(
+  int blockIndex,
+  int value)
+  throws |java.io.IOException|
+         
+Increment a value block, storing the result in the temporary block on the tag. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to increment, starting from 0 
+    value - non-negative to increment by 
+
+*android.nfc.tech.MifareClassic.isEmulated()*
+
+public boolean isEmulated()
+
+Return true if the tag is emulated, determined at discovery time. These are 
+actually smart-cards that emulate a MIFARE Classic interface. They can be 
+treated identically to a MIFARE Classic tag. 
+
+
+
+*android.nfc.tech.MifareClassic.readBlock(int)*
+
+public byte[] readBlock(int blockIndex)
+  throws |java.io.IOException|
+         
+Read 16-byte block. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to read, starting from 0 
+
+    Returns: 16 byte block 
+
+*android.nfc.tech.MifareClassic.restore(int)*
+
+public void restore(int blockIndex)
+  throws |java.io.IOException|
+         
+Copy from a value block to the temporary block. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to copy from 
+
+*android.nfc.tech.MifareClassic.sectorToBlock(int)*
+
+public int sectorToBlock(int sectorIndex)
+
+Return the first block of a given sector. Does not cause any RF activity and 
+does not block. 
+
+
+    sectorIndex - index of sector to lookup, starting from 0 
+
+    Returns: block index of first block in sector 
+
+*android.nfc.tech.MifareClassic.setTimeout(int)*
+
+public void setTimeout(int timeout)
+
+Set the (|android.nfc.tech.MifareClassic|) timeout in milliseconds. 
+
+The timeout only applies to (|android.nfc.tech.MifareClassic|) on this object, 
+and is reset to a default value when (|android.nfc.tech.MifareClassic|) is 
+called. 
+
+Setting a longer timeout may be useful when performing transactions that 
+require a long processing time on the tag such as key generation. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    timeout - timeout value in milliseconds 
+
+*android.nfc.tech.MifareClassic.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NfcA data to a tag and receive the response. 
+
+This is equivalent to connecting to this tag via (|android.nfc.tech.NfcA|) and 
+calling (|android.nfc.tech.NfcA|) . Note that all MIFARE Classic tags are based 
+on (|android.nfc.tech.NfcA|) technology. 
+
+Use (|android.nfc.tech.MifareClassic|) to retrieve the maximum number of bytes 
+that can be sent with (|android.nfc.tech.MifareClassic|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+*android.nfc.tech.MifareClassic.transfer(int)*
+
+public void transfer(int blockIndex)
+  throws |java.io.IOException|
+         
+Copy from the temporary block to a value block. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to copy to 
+
+*android.nfc.tech.MifareClassic.writeBlock(int,byte[])*
+
+public void writeBlock(
+  int blockIndex,
+  byte[] data)
+  throws |java.io.IOException|
+         
+Write 16-byte block. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareClassic|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    blockIndex - index of block to write, starting from 0 
+    data - 16 bytes of data to write 
+
+

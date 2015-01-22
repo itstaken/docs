@@ -1,0 +1,483 @@
+*android.webkit.WebChromeClient* *WebChromeClient* 
+
+public class WebChromeClient
+  extends    |java.lang.Object|
+
+|android.webkit.WebChromeClient_Description|
+|android.webkit.WebChromeClient_Fields|
+|android.webkit.WebChromeClient_Constructors|
+|android.webkit.WebChromeClient_Methods|
+
+================================================================================
+
+*android.webkit.WebChromeClient_Constructors*
+|android.webkit.WebChromeClient()|
+
+*android.webkit.WebChromeClient_Methods*
+|android.webkit.WebChromeClient.getDefaultVideoPoster()|When not playing, video
+|android.webkit.WebChromeClient.getVideoLoadingProgressView()|When the user sta
+|android.webkit.WebChromeClient.getVisitedHistory(ValueCallback<String[]>)|Obta
+|android.webkit.WebChromeClient.onCloseWindow(WebView)|Notify the host applicat
+|android.webkit.WebChromeClient.onConsoleMessage(ConsoleMessage)|Report a JavaS
+|android.webkit.WebChromeClient.onConsoleMessage(String,int,String)|Report a Ja
+|android.webkit.WebChromeClient.onCreateWindow(WebView,boolean,boolean,Message)|
+|android.webkit.WebChromeClient.onExceededDatabaseQuota(String,String,long,long,long,WebStorage.QuotaUpdater)|
+|android.webkit.WebChromeClient.onGeolocationPermissionsHidePrompt()|Notify the
+|android.webkit.WebChromeClient.onGeolocationPermissionsShowPrompt(String,GeolocationPermissions.Callback)|
+|android.webkit.WebChromeClient.onHideCustomView()|Notify the host application 
+|android.webkit.WebChromeClient.onJsAlert(WebView,String,String,JsResult)|Tell 
+|android.webkit.WebChromeClient.onJsBeforeUnload(WebView,String,String,JsResult)|
+|android.webkit.WebChromeClient.onJsConfirm(WebView,String,String,JsResult)|Tel
+|android.webkit.WebChromeClient.onJsPrompt(WebView,String,String,String,JsPromptResult)|
+|android.webkit.WebChromeClient.onJsTimeout()|Tell the client that a JavaScript
+|android.webkit.WebChromeClient.onProgressChanged(WebView,int)|Tell the host ap
+|android.webkit.WebChromeClient.onReachedMaxAppCacheSize(long,long,WebStorage.QuotaUpdater)|
+|android.webkit.WebChromeClient.onReceivedIcon(WebView,Bitmap)|Notify the host 
+|android.webkit.WebChromeClient.onReceivedTitle(WebView,String)|Notify the host
+|android.webkit.WebChromeClient.onReceivedTouchIconUrl(WebView,String,boolean)|
+|android.webkit.WebChromeClient.onRequestFocus(WebView)|Request display and foc
+|android.webkit.WebChromeClient.onShowCustomView(View,int,WebChromeClient.CustomViewCallback)|
+|android.webkit.WebChromeClient.onShowCustomView(View,WebChromeClient.CustomViewCallback)|
+|android.webkit.WebChromeClient.openFileChooser(ValueCallback<Uri>,String,String)|
+|android.webkit.WebChromeClient.setupAutoFill(Message)|Tell the client that the
+
+*android.webkit.WebChromeClient_Description*
+
+
+
+
+
+*android.webkit.WebChromeClient()*
+
+public WebChromeClient()
+
+
+
+
+*android.webkit.WebChromeClient.getDefaultVideoPoster()*
+
+public Bitmap getDefaultVideoPoster()
+
+When not playing, video elements are represented by a 'poster' image. The image 
+to use can be specified by the poster attribute of the video tag in HTML. If 
+the attribute is absent, then a default poster will be used. This method allows 
+the ChromeClient to provide that default image. 
+
+
+
+    Returns: Bitmap The image to use as a default poster, or null if no such image is 
+             available. 
+
+*android.webkit.WebChromeClient.getVideoLoadingProgressView()*
+
+public |android.view.View| getVideoLoadingProgressView()
+
+When the user starts to playback a video element, it may take time for enough 
+data to be buffered before the first frames can be rendered. While this 
+buffering is taking place, the ChromeClient can use this function to provide a 
+View to be displayed. For example, the ChromeClient could show a spinner 
+animation. 
+
+
+
+    Returns: View The View to be displayed whilst the video is loading. 
+
+*android.webkit.WebChromeClient.getVisitedHistory(ValueCallback<String[]>)*
+
+public void getVisitedHistory(android.webkit.ValueCallback<java.lang.String[]> callback)
+
+Obtains a list of all visited history items, used for link coloring 
+
+
+
+*android.webkit.WebChromeClient.onCloseWindow(WebView)*
+
+public void onCloseWindow(android.webkit.WebView window)
+
+Notify the host application to close the given WebView and remove it from the 
+view system if necessary. At this point, WebCore has stopped any loading in 
+this window and has removed any cross-scripting ability in javascript. 
+
+
+    window - The WebView that needs to be closed. 
+
+*android.webkit.WebChromeClient.onConsoleMessage(ConsoleMessage)*
+
+public boolean onConsoleMessage(android.webkit.ConsoleMessage consoleMessage)
+
+Report a JavaScript console message to the host application. The ChromeClient 
+should override this to process the log message as they see fit. 
+
+
+    consoleMessage - Object containing details of the console message. 
+
+    Returns: true if the message is handled by the client. 
+
+*android.webkit.WebChromeClient.onConsoleMessage(String,int,String)*
+
+public void onConsoleMessage(
+  java.lang.String message,
+  int lineNumber,
+  java.lang.String sourceID)
+
+Report a JavaScript error message to the host application. The ChromeClient 
+should override this to process the log message as they see fit. 
+
+    Deprecated: Use {@link #onConsoleMessage(ConsoleMessage) onConsoleMessage(ConsoleMessage)}
+      instead.
+
+    message - The error message to report. 
+    lineNumber - The line number of the error. 
+    sourceID - The name of the source file that caused the error. 
+
+*android.webkit.WebChromeClient.onCreateWindow(WebView,boolean,boolean,Message)*
+
+public boolean onCreateWindow(
+  android.webkit.WebView view,
+  boolean isDialog,
+  boolean isUserGesture,
+  android.os.Message resultMsg)
+
+Request the host application to create a new window. If the host application 
+chooses to honor this request, it should return true from this method, create a 
+new WebView to host the window, insert it into the View system and send the 
+supplied resultMsg message to its target with the new WebView as an argument. 
+If the host application chooses not to honor the request, it should return 
+false from this method. The default implementation of this method does nothing 
+and hence returns false. 
+
+
+    view - The WebView from which the request for a new window originated. 
+    isDialog - True if the new window should be a dialog, rather than a full-size window. 
+    isUserGesture - True if the request was initiated by a user gesture, such as the user clicking 
+       a link. 
+    resultMsg - The message to send when once a new WebView has been created. resultMsg.obj is 
+       a {@link WebView.WebViewTransport} object. This should be used to 
+       transport the new WebView, by calling {@link 
+       WebView.WebViewTransport#setWebView(WebView) 
+       WebView.WebViewTransport.setWebView(WebView)}. 
+
+    Returns: This method should return true if the host application will create a new 
+             window, in which case resultMsg should be sent to its target. 
+             Otherwise, this method should return false. Returning false from 
+             this method but also sending resultMsg will result in undefined 
+             behavior. 
+
+*android.webkit.WebChromeClient.onExceededDatabaseQuota(String,String,long,long,long,WebStorage.QuotaUpdater)*
+
+public void onExceededDatabaseQuota(
+  java.lang.String url,
+  java.lang.String databaseIdentifier,
+  long quota,
+  long estimatedDatabaseSize,
+  long totalQuota,
+  android.webkit.WebStorage.QuotaUpdater quotaUpdater)
+
+Tell the client that the quota has been exceeded for the Web SQL Database API 
+for a particular origin and request a new quota. The client must respond by 
+invoking the updateQuota(long)(|android.webkit.WebStorage.QuotaUpdater|) method 
+of the supplied (|android.webkit.WebStorage.QuotaUpdater|) instance. The 
+minimum value that can be set for the new quota is the current quota. The 
+default implementation responds with the current quota, so the quota will not 
+be increased. 
+
+    Deprecated: This method is no longer called; WebView now uses the HTML5 / JavaScript Quota
+             Management API.
+
+    url - The URL of the page that triggered the notification 
+    databaseIdentifier - The identifier of the database where the quota was exceeded. 
+    quota - The quota for the origin, in bytes 
+    estimatedDatabaseSize - The estimated size of the offending database, in bytes 
+    totalQuota - The total quota for all origins, in bytes 
+    quotaUpdater - An instance of {@link WebStorage.QuotaUpdater} which must be used to inform the 
+       WebView of the new quota. 
+
+*android.webkit.WebChromeClient.onGeolocationPermissionsHidePrompt()*
+
+public void onGeolocationPermissionsHidePrompt()
+
+Notify the host application that a request for Geolocation permissions, made 
+with a previous call to 
+onGeolocationPermissionsShowPrompt()(|android.webkit.WebChromeClient|) has been 
+canceled. Any related UI should therefore be hidden. 
+
+
+
+*android.webkit.WebChromeClient.onGeolocationPermissionsShowPrompt(String,GeolocationPermissions.Callback)*
+
+public void onGeolocationPermissionsShowPrompt(
+  java.lang.String origin,
+  android.webkit.GeolocationPermissions.Callback callback)
+
+Notify the host application that web content from the specified origin is 
+attempting to use the Geolocation API, but no permission state is currently set 
+for that origin. The host application should invoke the specified callback with 
+the desired permission state. See (|android.webkit.GeolocationPermissions|) for 
+details. 
+
+
+    origin - The origin of the web content attempting to use the Geolocation API. 
+    callback - The callback to use to set the permission state for the origin. 
+
+*android.webkit.WebChromeClient.onHideCustomView()*
+
+public void onHideCustomView()
+
+Notify the host application that the current page would like to hide its custom 
+view. 
+
+
+
+*android.webkit.WebChromeClient.onJsAlert(WebView,String,String,JsResult)*
+
+public boolean onJsAlert(
+  android.webkit.WebView view,
+  java.lang.String url,
+  java.lang.String message,
+  android.webkit.JsResult result)
+
+Tell the client to display a javascript alert dialog. If the client returns 
+true, WebView will assume that the client will handle the dialog. If the client 
+returns false, it will continue execution. 
+
+
+    view - The WebView that initiated the callback. 
+    url - The url of the page requesting the dialog. 
+    message - Message to be displayed in the window. 
+    result - A JsResult to confirm that the user hit enter. 
+
+    Returns: boolean Whether the client will handle the alert dialog. 
+
+*android.webkit.WebChromeClient.onJsBeforeUnload(WebView,String,String,JsResult)*
+
+public boolean onJsBeforeUnload(
+  android.webkit.WebView view,
+  java.lang.String url,
+  java.lang.String message,
+  android.webkit.JsResult result)
+
+Tell the client to display a dialog to confirm navigation away from the current 
+page. This is the result of the onbeforeunload javascript event. If the client 
+returns true, WebView will assume that the client will handle the confirm 
+dialog and call the appropriate JsResult method. If the client returns false, a 
+default value of true will be returned to javascript to accept navigation away 
+from the current page. The default behavior is to return false. Setting the 
+JsResult to true will navigate away from the current page, false will cancel 
+the navigation. 
+
+
+    view - The WebView that initiated the callback. 
+    url - The url of the page requesting the dialog. 
+    message - Message to be displayed in the window. 
+    result - A JsResult used to send the user's response to javascript. 
+
+    Returns: boolean Whether the client will handle the confirm dialog. 
+
+*android.webkit.WebChromeClient.onJsConfirm(WebView,String,String,JsResult)*
+
+public boolean onJsConfirm(
+  android.webkit.WebView view,
+  java.lang.String url,
+  java.lang.String message,
+  android.webkit.JsResult result)
+
+Tell the client to display a confirm dialog to the user. If the client returns 
+true, WebView will assume that the client will handle the confirm dialog and 
+call the appropriate JsResult method. If the client returns false, a default 
+value of false will be returned to javascript. The default behavior is to 
+return false. 
+
+
+    view - The WebView that initiated the callback. 
+    url - The url of the page requesting the dialog. 
+    message - Message to be displayed in the window. 
+    result - A JsResult used to send the user's response to javascript. 
+
+    Returns: boolean Whether the client will handle the confirm dialog. 
+
+*android.webkit.WebChromeClient.onJsPrompt(WebView,String,String,String,JsPromptResult)*
+
+public boolean onJsPrompt(
+  android.webkit.WebView view,
+  java.lang.String url,
+  java.lang.String message,
+  java.lang.String defaultValue,
+  android.webkit.JsPromptResult result)
+
+Tell the client to display a prompt dialog to the user. If the client returns 
+true, WebView will assume that the client will handle the prompt dialog and 
+call the appropriate JsPromptResult method. If the client returns false, a 
+default value of false will be returned to to javascript. The default behavior 
+is to return false. 
+
+
+    view - The WebView that initiated the callback. 
+    url - The url of the page requesting the dialog. 
+    message - Message to be displayed in the window. 
+    defaultValue - The default value displayed in the prompt dialog. 
+    result - A JsPromptResult used to send the user's reponse to javascript. 
+
+    Returns: boolean Whether the client will handle the prompt dialog. 
+
+*android.webkit.WebChromeClient.onJsTimeout()*
+
+public boolean onJsTimeout()
+
+Tell the client that a JavaScript execution timeout has occured. And the client 
+may decide whether or not to interrupt the execution. If the client returns 
+true, the JavaScript will be interrupted. If the client returns false, the 
+execution will continue. Note that in the case of continuing execution, the 
+timeout counter will be reset, and the callback will continue to occur if the 
+script does not finish at the next check point. 
+
+    Deprecated: This method is no longer supported and will not be invoked.
+
+
+    Returns: boolean Whether the JavaScript execution should be interrupted. 
+
+*android.webkit.WebChromeClient.onProgressChanged(WebView,int)*
+
+public void onProgressChanged(
+  android.webkit.WebView view,
+  int newProgress)
+
+Tell the host application the current progress of loading a page. 
+
+
+    view - The WebView that initiated the callback. 
+    newProgress - Current page loading progress, represented by an integer between 0 and 100. 
+
+*android.webkit.WebChromeClient.onReachedMaxAppCacheSize(long,long,WebStorage.QuotaUpdater)*
+
+public void onReachedMaxAppCacheSize(
+  long requiredStorage,
+  long quota,
+  android.webkit.WebStorage.QuotaUpdater quotaUpdater)
+
+Notify the host application that the Application Cache has reached the maximum 
+size. The client must respond by invoking the 
+updateQuota(long)(|android.webkit.WebStorage.QuotaUpdater|) method of the 
+supplied (|android.webkit.WebStorage.QuotaUpdater|) instance. The minimum value 
+that can be set for the new quota is the current quota. The default 
+implementation responds with the current quota, so the quota will not be 
+increased. 
+
+    Deprecated: This method is no longer called; WebView now uses the HTML5 / JavaScript Quota
+             Management API.
+
+    requiredStorage - The amount of storage required by the Application Cache operation that 
+       triggered this notification, in bytes. 
+    quota - the current maximum Application Cache size, in bytes 
+    quotaUpdater - An instance of {@link WebStorage.QuotaUpdater} which must be used to inform the 
+       WebView of the new quota. 
+
+*android.webkit.WebChromeClient.onReceivedIcon(WebView,Bitmap)*
+
+public void onReceivedIcon(
+  android.webkit.WebView view,
+  Bitmap icon)
+
+Notify the host application of a new favicon for the current page. 
+
+
+    view - The WebView that initiated the callback. 
+    icon - A Bitmap containing the favicon for the current page. 
+
+*android.webkit.WebChromeClient.onReceivedTitle(WebView,String)*
+
+public void onReceivedTitle(
+  android.webkit.WebView view,
+  java.lang.String title)
+
+Notify the host application of a change in the document title. 
+
+
+    view - The WebView that initiated the callback. 
+    title - A String containing the new title of the document. 
+
+*android.webkit.WebChromeClient.onReceivedTouchIconUrl(WebView,String,boolean)*
+
+public void onReceivedTouchIconUrl(
+  android.webkit.WebView view,
+  java.lang.String url,
+  boolean precomposed)
+
+Notify the host application of the url for an apple-touch-icon. 
+
+
+    view - The WebView that initiated the callback. 
+    url - The icon url. 
+    precomposed - True if the url is for a precomposed touch icon. 
+
+*android.webkit.WebChromeClient.onRequestFocus(WebView)*
+
+public void onRequestFocus(android.webkit.WebView view)
+
+Request display and focus for this WebView. This may happen due to another 
+WebView opening a link in this WebView and requesting that this WebView be 
+displayed. 
+
+
+    view - The WebView that needs to be focused. 
+
+*android.webkit.WebChromeClient.onShowCustomView(View,int,WebChromeClient.CustomViewCallback)*
+
+public void onShowCustomView(
+  android.view.View view,
+  int requestedOrientation,
+  android.webkit.WebChromeClient.CustomViewCallback callback)
+
+Notify the host application that the current page would like to show a custom 
+View in a particular orientation. 
+
+    Deprecated: This method supports the obsolete plugin mechanism,
+ and will not be invoked in future
+
+    view - is the View object to be shown. 
+    requestedOrientation - An orientation constant as used in {@link ActivityInfo#screenOrientation 
+       ActivityInfo.screenOrientation}. 
+    callback - is the callback to be invoked if and when the view is dismissed. 
+
+*android.webkit.WebChromeClient.onShowCustomView(View,WebChromeClient.CustomViewCallback)*
+
+public void onShowCustomView(
+  android.view.View view,
+  android.webkit.WebChromeClient.CustomViewCallback callback)
+
+Notify the host application that the current page would like to show a custom 
+View. This is used for Fullscreen video playback; see "HTML5 Video support" 
+documentation on (|android.webkit.WebView|) . 
+
+
+    view - is the View object to be shown. 
+    callback - is the callback to be invoked if and when the view is dismissed. 
+
+*android.webkit.WebChromeClient.openFileChooser(ValueCallback<Uri>,String,String)*
+
+public void openFileChooser(
+  android.webkit.ValueCallback<android.net.Uri> uploadFile,
+  java.lang.String acceptType,
+  java.lang.String capture)
+
+Tell the client to open a file chooser. 
+
+
+    uploadFile - A ValueCallback to set the URI of the file to upload. onReceiveValue must be 
+       called to wake up the thread.a 
+    acceptType - The value of the 'accept' attribute of the input tag associated with this file 
+       picker. 
+    capture - The value of the 'capture' attribute of the input tag associated with this file 
+       picker. 
+
+*android.webkit.WebChromeClient.setupAutoFill(Message)*
+
+public void setupAutoFill(android.os.Message msg)
+
+Tell the client that the page being viewed has an autofillable form and the 
+user would like to set a profile up. 
+
+
+    msg - A Message to send once the user has successfully set up a profile and to inform 
+       the WebTextView it should now autofill using that new profile. 
+
+

@@ -1,0 +1,903 @@
+*android.widget.RemoteViews* *RemoteViews* A class that describes a view hierarc
+
+public class RemoteViews
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+             |android.view.LayoutInflater.Filter|
+
+|android.widget.RemoteViews_Description|
+|android.widget.RemoteViews_Fields|
+|android.widget.RemoteViews_Constructors|
+|android.widget.RemoteViews_Methods|
+
+================================================================================
+
+*android.widget.RemoteViews_Fields*
+|android.os.Parcelable.Creator<android.widget.RemoteViews>_android.widget.RemoteViews.CREATOR|
+
+*android.widget.RemoteViews_Constructors*
+|android.widget.RemoteViews(Parcel)|Reads a RemoteViews object from a parcel.
+|android.widget.RemoteViews(RemoteViews,RemoteViews)|Create a new RemoteViews o
+|android.widget.RemoteViews(String,int)|Create a new RemoteViews object that wi
+
+*android.widget.RemoteViews_Methods*
+|android.widget.RemoteViews.addView(int,RemoteViews)|Equivalent to callingViewG
+|android.widget.RemoteViews.apply(Context,ViewGroup)|Inflates the view hierarch
+|android.widget.RemoteViews.apply(Context,ViewGroup,RemoteViews.OnClickHandler)|
+|android.widget.RemoteViews.clone()|
+|android.widget.RemoteViews.describeContents()|
+|android.widget.RemoteViews.estimateMemoryUsage()|
+|android.widget.RemoteViews.getLayoutId()|Reutrns the layout id of the root lay
+|android.widget.RemoteViews.getPackage()|
+|android.widget.RemoteViews.mergeRemoteViews(RemoteViews)|Merges the passed Rem
+|android.widget.RemoteViews.onLoadClass(Class)|
+|android.widget.RemoteViews.reapply(Context,View)|Applies all of the actions to
+|android.widget.RemoteViews.reapply(Context,View,RemoteViews.OnClickHandler)|
+|android.widget.RemoteViews.removeAllViews(int)|Equivalent to callingViewGroup#
+|android.widget.RemoteViews.setBitmap(int,String,Bitmap)|Call a method taking o
+|android.widget.RemoteViews.setBoolean(int,String,boolean)|Call a method taking
+|android.widget.RemoteViews.setBundle(int,String,Bundle)|Call a method taking o
+|android.widget.RemoteViews.setByte(int,String,byte)|Call a method taking one b
+|android.widget.RemoteViews.setChar(int,String,char)|Call a method taking one c
+|android.widget.RemoteViews.setCharSequence(int,String,CharSequence)|Call a met
+|android.widget.RemoteViews.setChronometer(int,long,String,boolean)|Equivalent 
+|android.widget.RemoteViews.setContentDescription(int,CharSequence)|Equivalent 
+|android.widget.RemoteViews.setDisplayedChild(int,int)|Equivalent to callingAda
+|android.widget.RemoteViews.setDouble(int,String,double)|Call a method taking o
+|android.widget.RemoteViews.setDrawableParameters(int,boolean,int,int,PorterDuff.Mode,int)|
+|android.widget.RemoteViews.setEmptyView(int,int)|Equivalent to calling Adapter
+|android.widget.RemoteViews.setFloat(int,String,float)|Call a method taking one
+|android.widget.RemoteViews.setImageViewBitmap(int,Bitmap)|Equivalent to callin
+|android.widget.RemoteViews.setImageViewResource(int,int)|Equivalent to calling
+|android.widget.RemoteViews.setImageViewUri(int,Uri)|Equivalent to calling Imag
+|android.widget.RemoteViews.setInt(int,String,int)|Call a method taking one int
+|android.widget.RemoteViews.setIntent(int,String,Intent)|Call a method taking o
+|android.widget.RemoteViews.setLabelFor(int,int)|Equivalent to calling View.set
+|android.widget.RemoteViews.setLong(int,String,long)|Call a method taking one l
+|android.widget.RemoteViews.setOnClickFillInIntent(int,Intent)|When using colle
+|android.widget.RemoteViews.setOnClickPendingIntent(int,PendingIntent)|Equivale
+|android.widget.RemoteViews.setPendingIntentTemplate(int,PendingIntent)|When us
+|android.widget.RemoteViews.setProgressBar(int,int,int,boolean)|Equivalent to c
+|android.widget.RemoteViews.setRelativeScrollPosition(int,int)|Equivalent to ca
+|android.widget.RemoteViews.setRemoteAdapter(int,ArrayList<RemoteViews>,int)|Cr
+|android.widget.RemoteViews.setRemoteAdapter(int,Intent)|Equivalent to callinga
+|android.widget.RemoteViews.setRemoteAdapter(int,int,Intent)|Equivalent to call
+|android.widget.RemoteViews.setScrollPosition(int,int)|Equivalent to callingand
+|android.widget.RemoteViews.setShort(int,String,short)|Call a method taking one
+|android.widget.RemoteViews.setString(int,String,String)|Call a method taking o
+|android.widget.RemoteViews.setTextColor(int,int)|Equivalent to callingandroid.
+|android.widget.RemoteViews.setTextViewCompoundDrawables(int,int,int,int,int)|E
+|android.widget.RemoteViews.setTextViewCompoundDrawablesRelative(int,int,int,int,int)|
+|android.widget.RemoteViews.setTextViewText(int,CharSequence)|Equivalent to cal
+|android.widget.RemoteViews.setTextViewTextSize(int,int,float)|Equivalent to ca
+|android.widget.RemoteViews.setUri(int,String,Uri)|Call a method taking one Uri
+|android.widget.RemoteViews.setUser(UserHandle)|
+|android.widget.RemoteViews.setViewPadding(int,int,int,int,int)|Equivalent to c
+|android.widget.RemoteViews.setViewVisibility(int,int)|Equivalent to calling Vi
+|android.widget.RemoteViews.showNext(int)|Equivalent to callingAdapterViewAnima
+|android.widget.RemoteViews.showPrevious(int)|Equivalent to callingAdapterViewA
+|android.widget.RemoteViews.writeToParcel(Parcel,int)|
+
+*android.widget.RemoteViews_Description*
+
+A class that describes a view hierarchy that can be displayed in another 
+process. The hierarchy is inflated from a layout resource file, and this class 
+provides some basic operations for modifying the content of the inflated 
+hierarchy. 
+
+
+
+*android.os.Parcelable.Creator<android.widget.RemoteViews>_android.widget.RemoteViews.CREATOR*
+
+Parcelable.Creator that instantiates RemoteViews objects 
+
+
+
+*android.widget.RemoteViews(Parcel)*
+
+public RemoteViews(android.os.Parcel parcel)
+
+Reads a RemoteViews object from a parcel. 
+
+    parcel - 
+
+*android.widget.RemoteViews(RemoteViews,RemoteViews)*
+
+public RemoteViews(
+  android.widget.RemoteViews landscape,
+  android.widget.RemoteViews portrait)
+
+Create a new RemoteViews object that will inflate as the specified landspace or 
+portrait RemoteViews, depending on the current configuration. 
+
+    landscape - The RemoteViews to inflate in landscape configuration 
+    portrait - The RemoteViews to inflate in portrait configuration 
+
+*android.widget.RemoteViews(String,int)*
+
+public RemoteViews(
+  java.lang.String packageName,
+  int layoutId)
+
+Create a new RemoteViews object that will display the views contained in the 
+specified layout file. 
+
+    packageName - Name of the package that contains the layout resource 
+    layoutId - The id of the layout resource 
+
+*android.widget.RemoteViews.addView(int,RemoteViews)*
+
+public void addView(
+  int viewId,
+  android.widget.RemoteViews nestedView)
+
+Equivalent to calling (|android.view.ViewGroup|) after inflating the given 
+(|android.widget.RemoteViews|) . This allows users to build "nested" 
+(|android.widget.RemoteViews|) . In cases where consumers of 
+(|android.widget.RemoteViews|) may recycle layouts, use 
+(|android.widget.RemoteViews|) to clear any existing children. 
+
+
+    viewId - The id of the parent {@link ViewGroup} to add child into. 
+    nestedView - {@link RemoteViews} that describes the child. 
+
+*android.widget.RemoteViews.apply(Context,ViewGroup)*
+
+public |android.view.View| apply(
+  android.content.Context context,
+  android.view.ViewGroup parent)
+
+Inflates the view hierarchy represented by this object and applies all of the 
+actions. 
+
+Caller beware: this may throw 
+
+
+    context - Default context to use 
+    parent - Parent that the resulting view hierarchy will be attached to. This method does 
+       not attach the hierarchy. The caller should do so when appropriate. 
+
+    Returns: The inflated view hierarchy 
+
+*android.widget.RemoteViews.apply(Context,ViewGroup,RemoteViews.OnClickHandler)*
+
+public |android.view.View| apply(
+  android.content.Context context,
+  android.view.ViewGroup parent,
+  android.widget.RemoteViews.OnClickHandler handler)
+
+
+
+
+
+*android.widget.RemoteViews.clone()*
+
+public |android.widget.RemoteViews| clone()
+
+
+
+
+
+*android.widget.RemoteViews.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.widget.RemoteViews.estimateMemoryUsage()*
+
+public int estimateMemoryUsage()
+
+
+
+
+
+*android.widget.RemoteViews.getLayoutId()*
+
+public int getLayoutId()
+
+Reutrns the layout id of the root layout associated with this RemoteViews. In 
+the case that the RemoteViews has both a landscape and portrait root, this will 
+return the layout id associated with the portrait layout. 
+
+
+
+    Returns: the layout id. 
+
+*android.widget.RemoteViews.getPackage()*
+
+public |java.lang.String| getPackage()
+
+
+
+
+
+*android.widget.RemoteViews.mergeRemoteViews(RemoteViews)*
+
+public void mergeRemoteViews(android.widget.RemoteViews newRv)
+
+Merges the passed RemoteViews actions with this RemoteViews actions according 
+to action-specific merge rules. 
+
+
+    newRv - 
+
+*android.widget.RemoteViews.onLoadClass(Class)*
+
+public boolean onLoadClass(java.lang.Class clazz)
+
+
+
+
+
+*android.widget.RemoteViews.reapply(Context,View)*
+
+public void reapply(
+  android.content.Context context,
+  android.view.View v)
+
+Applies all of the actions to the provided view. 
+
+Caller beware: this may throw 
+
+
+    v - The view to apply the actions to. This should be the result of the {@link 
+       #apply(Context,ViewGroup)} call. 
+
+*android.widget.RemoteViews.reapply(Context,View,RemoteViews.OnClickHandler)*
+
+public void reapply(
+  android.content.Context context,
+  android.view.View v,
+  android.widget.RemoteViews.OnClickHandler handler)
+
+
+
+
+
+*android.widget.RemoteViews.removeAllViews(int)*
+
+public void removeAllViews(int viewId)
+
+Equivalent to calling (|android.view.ViewGroup|) . 
+
+
+    viewId - The id of the parent {@link ViewGroup} to remove all children from. 
+
+*android.widget.RemoteViews.setBitmap(int,String,Bitmap)*
+
+public void setBitmap(
+  int viewId,
+  java.lang.String methodName,
+  Bitmap value)
+
+Call a method taking one Bitmap on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setBoolean(int,String,boolean)*
+
+public void setBoolean(
+  int viewId,
+  java.lang.String methodName,
+  boolean value)
+
+Call a method taking one boolean on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setBundle(int,String,Bundle)*
+
+public void setBundle(
+  int viewId,
+  java.lang.String methodName,
+  android.os.Bundle value)
+
+Call a method taking one Bundle on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setByte(int,String,byte)*
+
+public void setByte(
+  int viewId,
+  java.lang.String methodName,
+  byte value)
+
+Call a method taking one byte on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setChar(int,String,char)*
+
+public void setChar(
+  int viewId,
+  java.lang.String methodName,
+  char value)
+
+Call a method taking one char on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setCharSequence(int,String,CharSequence)*
+
+public void setCharSequence(
+  int viewId,
+  java.lang.String methodName,
+  java.lang.CharSequence value)
+
+Call a method taking one CharSequence on a view in the layout for this 
+RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setChronometer(int,long,String,boolean)*
+
+public void setChronometer(
+  int viewId,
+  long base,
+  java.lang.String format,
+  boolean started)
+
+Equivalent to calling Chronometer.setBase(|android.widget.Chronometer|) , 
+Chronometer.setFormat(|android.widget.Chronometer|) , and 
+Chronometer.start()(|android.widget.Chronometer|) or 
+Chronometer.stop()(|android.widget.Chronometer|) . 
+
+
+    viewId - The id of the {@link Chronometer} to change 
+    base - The time at which the timer would have read 0:00. This time should be based off 
+       of {@link android.os.SystemClock#elapsedRealtime 
+       SystemClock.elapsedRealtime()}. 
+    format - The Chronometer format string, or null to simply display the timer value. 
+    started - True if you want the clock to be started, false if not. 
+
+*android.widget.RemoteViews.setContentDescription(int,CharSequence)*
+
+public void setContentDescription(
+  int viewId,
+  java.lang.CharSequence contentDescription)
+
+Equivalent to calling View.setContentDescription(CharSequence). 
+
+
+    viewId - The id of the view whose content description should change. 
+    contentDescription - The new content description for the view. 
+
+*android.widget.RemoteViews.setDisplayedChild(int,int)*
+
+public void setDisplayedChild(
+  int viewId,
+  int childIndex)
+
+Equivalent to calling (|android.widget.AdapterViewAnimator|) 
+
+
+    viewId - The id of the view on which to call {@link 
+       AdapterViewAnimator#setDisplayedChild(int)} 
+
+*android.widget.RemoteViews.setDouble(int,String,double)*
+
+public void setDouble(
+  int viewId,
+  java.lang.String methodName,
+  double value)
+
+Call a method taking one double on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setDrawableParameters(int,boolean,int,int,PorterDuff.Mode,int)*
+
+public void setDrawableParameters(
+  int viewId,
+  boolean targetBackground,
+  int alpha,
+  int colorFilter,
+  PorterDuff.Mode mode,
+  int level)
+
+
+
+
+    viewId - The id of the view that contains the target {@link Drawable} 
+    targetBackground - If true, apply these parameters to the {@link Drawable} returned by {@link 
+       android.view.View#getBackground()}. Otherwise, assume the target view is 
+       an {@link ImageView} and apply them to {@link ImageView#getDrawable()}. 
+    alpha - Specify an alpha value for the drawable, or -1 to leave unchanged. 
+    colorFilter - Specify a color for a {@link android.graphics.ColorFilter} for this drawable, 
+       or -1 to leave unchanged. 
+    mode - Specify a PorterDuff mode for this drawable, or null to leave unchanged. 
+    level - Specify the level for the drawable, or -1 to leave unchanged. 
+
+*android.widget.RemoteViews.setEmptyView(int,int)*
+
+public void setEmptyView(
+  int viewId,
+  int emptyViewId)
+
+Equivalent to calling AdapterView.setEmptyView 
+
+
+    viewId - The id of the view on which to set the empty view 
+    emptyViewId - The view id of the empty view 
+
+*android.widget.RemoteViews.setFloat(int,String,float)*
+
+public void setFloat(
+  int viewId,
+  java.lang.String methodName,
+  float value)
+
+Call a method taking one float on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setImageViewBitmap(int,Bitmap)*
+
+public void setImageViewBitmap(
+  int viewId,
+  Bitmap bitmap)
+
+Equivalent to calling ImageView.setImageBitmap 
+
+
+    viewId - The id of the view whose bitmap should change 
+    bitmap - The new Bitmap for the drawable 
+
+*android.widget.RemoteViews.setImageViewResource(int,int)*
+
+public void setImageViewResource(
+  int viewId,
+  int srcId)
+
+Equivalent to calling ImageView.setImageResource 
+
+
+    viewId - The id of the view whose drawable should change 
+    srcId - The new resource id for the drawable 
+
+*android.widget.RemoteViews.setImageViewUri(int,Uri)*
+
+public void setImageViewUri(
+  int viewId,
+  android.net.Uri uri)
+
+Equivalent to calling ImageView.setImageURI 
+
+
+    viewId - The id of the view whose drawable should change 
+    uri - The Uri for the image 
+
+*android.widget.RemoteViews.setInt(int,String,int)*
+
+public void setInt(
+  int viewId,
+  java.lang.String methodName,
+  int value)
+
+Call a method taking one int on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setIntent(int,String,Intent)*
+
+public void setIntent(
+  int viewId,
+  java.lang.String methodName,
+  android.content.Intent value)
+
+Call a method taking one Intent on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The {@link android.content.Intent} to pass the method. 
+
+*android.widget.RemoteViews.setLabelFor(int,int)*
+
+public void setLabelFor(
+  int viewId,
+  int labeledId)
+
+Equivalent to calling View.setLabelFor(int). 
+
+
+    viewId - The id of the view whose property to set. 
+    labeledId - The id of a view for which this view serves as a label. 
+
+*android.widget.RemoteViews.setLong(int,String,long)*
+
+public void setLong(
+  int viewId,
+  java.lang.String methodName,
+  long value)
+
+Call a method taking one long on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setOnClickFillInIntent(int,Intent)*
+
+public void setOnClickFillInIntent(
+  int viewId,
+  android.content.Intent fillInIntent)
+
+When using collections (eg. (|android.widget.ListView|) , 
+(|android.widget.StackView|) etc.) in widgets, it is very costly to set 
+PendingIntents on the individual items, and is hence not permitted. Instead a 
+single PendingIntent template can be set on the collection, see 
+(|android.widget.RemoteViews|) , and the individual on-click action of a given 
+item can be distinguished by setting a fillInIntent on that item. The 
+fillInIntent is then combined with the PendingIntent template in order to 
+determine the final intent which will be executed when the item is clicked. 
+This works as follows: any fields which are left blank in the PendingIntent 
+template, but are provided by the fillInIntent will be overwritten, and the 
+resulting PendingIntent will be used. 
+
+of the PendingIntent template will then be filled in with the associated fields 
+that are set in fillInIntent. See (|android.content.Intent|) for more details. 
+
+
+    viewId - The id of the view on which to set the fillInIntent 
+    fillInIntent - The intent which will be combined with the parent's PendingIntent in order to 
+       determine the on-click behavior of the view specified by viewId 
+
+*android.widget.RemoteViews.setOnClickPendingIntent(int,PendingIntent)*
+
+public void setOnClickPendingIntent(
+  int viewId,
+  android.app.PendingIntent pendingIntent)
+
+Equivalent to calling (|android.view.View|) to launch the provided 
+(|android.app.PendingIntent|) . 
+
+When setting the on-click action of items within collections (eg. 
+(|android.widget.ListView|) , (|android.widget.StackView|) etc.), this method 
+will not work. Instead, use {@link RemoteViews#setPendingIntentTemplate(int, 
+PendingIntent) in conjunction with RemoteViews#setOnClickFillInIntent(int, 
+Intent). 
+
+
+    viewId - The id of the view that will trigger the {@link PendingIntent} when clicked 
+    pendingIntent - The {@link PendingIntent} to send when user clicks 
+
+*android.widget.RemoteViews.setPendingIntentTemplate(int,PendingIntent)*
+
+public void setPendingIntentTemplate(
+  int viewId,
+  android.app.PendingIntent pendingIntentTemplate)
+
+When using collections (eg. (|android.widget.ListView|) , 
+(|android.widget.StackView|) etc.) in widgets, it is very costly to set 
+PendingIntents on the individual items, and is hence not permitted. Instead 
+this method should be used to set a single PendingIntent template on the 
+collection, and individual items can differentiate their on-click behavior 
+using (|android.widget.RemoteViews|) . 
+
+
+    viewId - The id of the collection who's children will use this PendingIntent template 
+       when clicked 
+    pendingIntentTemplate - The {@link PendingIntent} to be combined with extras specified by a child of 
+       viewId and executed when that child is clicked 
+
+*android.widget.RemoteViews.setProgressBar(int,int,int,boolean)*
+
+public void setProgressBar(
+  int viewId,
+  int max,
+  int progress,
+  boolean indeterminate)
+
+Equivalent to calling ProgressBar.setMax(|android.widget.ProgressBar|) , 
+ProgressBar.setProgress(|android.widget.ProgressBar|) , and 
+ProgressBar.setIndeterminate(|android.widget.ProgressBar|) If indeterminate is 
+true, then the values for max and progress are ignored. 
+
+
+    viewId - The id of the {@link ProgressBar} to change 
+    max - The 100% value for the progress bar 
+    progress - The current value of the progress bar. 
+    indeterminate - True if the progress bar is indeterminate, false if not. 
+
+*android.widget.RemoteViews.setRelativeScrollPosition(int,int)*
+
+public void setRelativeScrollPosition(
+  int viewId,
+  int offset)
+
+Equivalent to calling (|android.widget.AbsListView|) . 
+
+
+    viewId - The id of the view to change 
+    offset - Scroll by this adapter position offset 
+
+*android.widget.RemoteViews.setRemoteAdapter(int,ArrayList<RemoteViews>,int)*
+
+public void setRemoteAdapter(
+  int viewId,
+  java.util.ArrayList<android.widget.RemoteViews> list,
+  int viewTypeCount)
+
+Creates a simple Adapter for the viewId specified. The viewId must point to an 
+AdapterView, ie. (|android.widget.ListView|) , (|android.widget.GridView|) , 
+(|android.widget.StackView|) or (|android.widget.AdapterViewAnimator|) . This 
+is a simpler but less flexible approach to populating collection widgets. Its 
+use is encouraged for most scenarios, as long as the total memory within the 
+list of RemoteViews is relatively small (ie. doesn't contain large or numerous 
+Bitmaps, see (|android.widget.RemoteViews|) ). In the case of numerous images, 
+the use of API is still possible by setting image URIs instead of Bitmaps, see 
+(|android.widget.RemoteViews|) . 
+
+This API is supported in the compatibility library for previous API levels, see 
+RemoteViewsCompat. 
+
+
+    viewId - The id of the {@link AdapterView} 
+    list - The list of RemoteViews which will populate the view specified by viewId. 
+    viewTypeCount - The maximum number of unique layout id's used to construct the list of 
+       RemoteViews. This count cannot change during the life-cycle of a given 
+       widget, so this parameter should account for the maximum possible number 
+       of types that may appear in the See {@link Adapter#getViewTypeCount()}. 
+
+*android.widget.RemoteViews.setRemoteAdapter(int,Intent)*
+
+public void setRemoteAdapter(
+  int viewId,
+  android.content.Intent intent)
+
+Equivalent to calling (|android.widget.AbsListView|) . Can only be used for App 
+Widgets. 
+
+
+    viewId - The id of the {@link AdapterView} 
+    intent - The intent of the service which will be providing data to the 
+       RemoteViewsAdapter 
+
+*android.widget.RemoteViews.setRemoteAdapter(int,int,Intent)*
+
+public void setRemoteAdapter(
+  int appWidgetId,
+  int viewId,
+  android.content.Intent intent)
+
+Equivalent to calling (|android.widget.AbsListView|) . 
+
+    Deprecated: This method has been deprecated. See
+      {@link android.widget.RemoteViews#setRemoteAdapter(int, Intent)}
+
+    appWidgetId - The id of the app widget which contains the specified view. (This parameter is 
+       ignored in this deprecated method) 
+    viewId - The id of the {@link AdapterView} 
+    intent - The intent of the service which will be providing data to the 
+       RemoteViewsAdapter 
+
+*android.widget.RemoteViews.setScrollPosition(int,int)*
+
+public void setScrollPosition(
+  int viewId,
+  int position)
+
+Equivalent to calling (|android.widget.AbsListView|) . 
+
+
+    viewId - The id of the view to change 
+    position - Scroll to this adapter position 
+
+*android.widget.RemoteViews.setShort(int,String,short)*
+
+public void setShort(
+  int viewId,
+  java.lang.String methodName,
+  short value)
+
+Call a method taking one short on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setString(int,String,String)*
+
+public void setString(
+  int viewId,
+  java.lang.String methodName,
+  java.lang.String value)
+
+Call a method taking one String on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setTextColor(int,int)*
+
+public void setTextColor(
+  int viewId,
+  int color)
+
+Equivalent to calling (|android.widget.TextView|) . 
+
+
+    viewId - The id of the view whose text color should change 
+    color - Sets the text color for all the states (normal, selected, focused) to be this 
+       color. 
+
+*android.widget.RemoteViews.setTextViewCompoundDrawables(int,int,int,int,int)*
+
+public void setTextViewCompoundDrawables(
+  int viewId,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+Equivalent to calling (|android.widget.TextView|) . 
+
+
+    viewId - The id of the view whose text should change 
+    left - The id of a drawable to place to the left of the text, or 0 
+    top - The id of a drawable to place above the text, or 0 
+    right - The id of a drawable to place to the right of the text, or 0 
+    bottom - The id of a drawable to place below the text, or 0 
+
+*android.widget.RemoteViews.setTextViewCompoundDrawablesRelative(int,int,int,int,int)*
+
+public void setTextViewCompoundDrawablesRelative(
+  int viewId,
+  int start,
+  int top,
+  int end,
+  int bottom)
+
+Equivalent to calling (|android.widget.TextView|) . 
+
+
+    viewId - The id of the view whose text should change 
+    start - The id of a drawable to place before the text (relative to the layout 
+       direction), or 0 
+    top - The id of a drawable to place above the text, or 0 
+    end - The id of a drawable to place after the text, or 0 
+    bottom - The id of a drawable to place below the text, or 0 
+
+*android.widget.RemoteViews.setTextViewText(int,CharSequence)*
+
+public void setTextViewText(
+  int viewId,
+  java.lang.CharSequence text)
+
+Equivalent to calling TextView.setText 
+
+
+    viewId - The id of the view whose text should change 
+    text - The new text for the view 
+
+*android.widget.RemoteViews.setTextViewTextSize(int,int,float)*
+
+public void setTextViewTextSize(
+  int viewId,
+  int units,
+  float size)
+
+Equivalent to calling (|android.widget.TextView|) 
+
+
+    viewId - The id of the view whose text size should change 
+    units - The units of size (e.g. COMPLEX_UNIT_SP) 
+    size - The size of the text 
+
+*android.widget.RemoteViews.setUri(int,String,Uri)*
+
+public void setUri(
+  int viewId,
+  java.lang.String methodName,
+  android.net.Uri value)
+
+Call a method taking one Uri on a view in the layout for this RemoteViews. 
+
+
+    viewId - The id of the view on which to call the method. 
+    methodName - The name of the method to call. 
+    value - The value to pass to the method. 
+
+*android.widget.RemoteViews.setUser(UserHandle)*
+
+public void setUser(android.os.UserHandle user)
+
+
+
+
+
+*android.widget.RemoteViews.setViewPadding(int,int,int,int,int)*
+
+public void setViewPadding(
+  int viewId,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+Equivalent to calling (|android.view.View|) . 
+
+
+    viewId - The id of the view to change 
+    left - the left padding in pixels 
+    top - the top padding in pixels 
+    right - the right padding in pixels 
+    bottom - the bottom padding in pixels 
+
+*android.widget.RemoteViews.setViewVisibility(int,int)*
+
+public void setViewVisibility(
+  int viewId,
+  int visibility)
+
+Equivalent to calling View.setVisibility 
+
+
+    viewId - The id of the view whose visibility should change 
+    visibility - The new visibility for the view 
+
+*android.widget.RemoteViews.showNext(int)*
+
+public void showNext(int viewId)
+
+Equivalent to calling (|android.widget.AdapterViewAnimator|) 
+
+
+    viewId - The id of the view on which to call {@link AdapterViewAnimator#showNext()} 
+
+*android.widget.RemoteViews.showPrevious(int)*
+
+public void showPrevious(int viewId)
+
+Equivalent to calling (|android.widget.AdapterViewAnimator|) 
+
+
+    viewId - The id of the view on which to call {@link AdapterViewAnimator#showPrevious()} 
+
+*android.widget.RemoteViews.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

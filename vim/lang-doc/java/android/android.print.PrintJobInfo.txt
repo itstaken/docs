@@ -1,0 +1,530 @@
+*android.print.PrintJobInfo* *PrintJobInfo* This class represents the descriptio
+
+public final class PrintJobInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.print.PrintJobInfo_Description|
+|android.print.PrintJobInfo_Fields|
+|android.print.PrintJobInfo_Constructors|
+|android.print.PrintJobInfo_Methods|
+
+================================================================================
+
+*android.print.PrintJobInfo_Fields*
+|android.os.Parcelable.Creator<android.print.PrintJobInfo>_android.print.PrintJobInfo.CREATOR|
+|int_android.print.PrintJobInfo.STATE_ANY|
+|int_android.print.PrintJobInfo.STATE_ANY_ACTIVE|
+|int_android.print.PrintJobInfo.STATE_ANY_SCHEDULED|
+|int_android.print.PrintJobInfo.STATE_ANY_VISIBLE_TO_CLIENTS|
+|int_android.print.PrintJobInfo.STATE_BLOCKED|
+|int_android.print.PrintJobInfo.STATE_CANCELED|
+|int_android.print.PrintJobInfo.STATE_COMPLETED|
+|int_android.print.PrintJobInfo.STATE_CREATED|
+|int_android.print.PrintJobInfo.STATE_FAILED|
+|int_android.print.PrintJobInfo.STATE_QUEUED|
+|int_android.print.PrintJobInfo.STATE_STARTED|
+
+*android.print.PrintJobInfo_Constructors*
+|android.print.PrintJobInfo()|
+|android.print.PrintJobInfo(PrintJobInfo)|
+
+*android.print.PrintJobInfo_Methods*
+|android.print.PrintJobInfo.describeContents()|
+|android.print.PrintJobInfo.getAdvancedIntOption(String)|Gets the value of an a
+|android.print.PrintJobInfo.getAdvancedOptions()|Gets the advanced options.
+|android.print.PrintJobInfo.getAdvancedStringOption(String)|Gets the value of a
+|android.print.PrintJobInfo.getAppId()|Sets the owning application id.
+|android.print.PrintJobInfo.getAttributes()|Gets the print job attributes.
+|android.print.PrintJobInfo.getCopies()|Gets the number of copies.
+|android.print.PrintJobInfo.getCreationTime()|Gets the wall time in millisecond
+|android.print.PrintJobInfo.getDocumentInfo()|Gets the info describing the prin
+|android.print.PrintJobInfo.getId()|Gets the unique print job id.
+|android.print.PrintJobInfo.getLabel()|Gets the human readable job label.
+|android.print.PrintJobInfo.getPages()|Gets the included pages.
+|android.print.PrintJobInfo.getPrinterId()|Gets the unique target printer id.
+|android.print.PrintJobInfo.getPrinterName()|Gets the name of the target printe
+|android.print.PrintJobInfo.getState()|Gets the current job state.
+|android.print.PrintJobInfo.getStateReason()|Gets the reason for the print job 
+|android.print.PrintJobInfo.getTag()|Gets the optional tag assigned by a print 
+|android.print.PrintJobInfo.hasAdvancedOption(String)|Gets whether this job has
+|android.print.PrintJobInfo.isCancelling()|Gets whether this print is being can
+|android.print.PrintJobInfo.setAdvancedOptions(Bundle)|Sets the advanced option
+|android.print.PrintJobInfo.setAppId(int)|Sets the owning application id.
+|android.print.PrintJobInfo.setAttributes(PrintAttributes)|Sets the print job a
+|android.print.PrintJobInfo.setCancelling(boolean)|Sets whether this print is b
+|android.print.PrintJobInfo.setCopies(int)|Sets the number of copies.
+|android.print.PrintJobInfo.setCreationTime(long)|Sets the wall time in millise
+|android.print.PrintJobInfo.setDocumentInfo(PrintDocumentInfo)|Sets the info de
+|android.print.PrintJobInfo.setId(PrintJobId)|Sets the unique print job id.
+|android.print.PrintJobInfo.setLabel(String)|Sets the human readable job label.
+|android.print.PrintJobInfo.setPages(PageRange[])|Sets the included pages.
+|android.print.PrintJobInfo.setPrinterId(PrinterId)|Sets the unique target prit
+|android.print.PrintJobInfo.setPrinterName(String)|Sets the name of the target 
+|android.print.PrintJobInfo.setState(int)|Sets the current job state.
+|android.print.PrintJobInfo.setStateReason(String)|Sets the reason for the prin
+|android.print.PrintJobInfo.setTag(String)|Sets the optional tag assigned by a 
+|android.print.PrintJobInfo.stateToString(int)|
+|android.print.PrintJobInfo.toString()|
+|android.print.PrintJobInfo.writeToParcel(Parcel,int)|
+
+*android.print.PrintJobInfo_Description*
+
+This class represents the description of a print job. The print job state 
+includes properties such as its id, print attributes used for generating the 
+content, and so on. Note that the print jobs state may change over time and 
+this class represents a snapshot of this state. 
+
+
+
+*android.os.Parcelable.Creator<android.print.PrintJobInfo>_android.print.PrintJobInfo.CREATOR*
+
+
+
+
+*int_android.print.PrintJobInfo.STATE_ANY*
+
+Constant for matching any print job state. 
+
+
+*int_android.print.PrintJobInfo.STATE_ANY_ACTIVE*
+
+Constant for matching any active print job state. 
+
+
+*int_android.print.PrintJobInfo.STATE_ANY_SCHEDULED*
+
+Constant for matching any scheduled, i.e. delivered to a print service, print 
+job state. 
+
+
+*int_android.print.PrintJobInfo.STATE_ANY_VISIBLE_TO_CLIENTS*
+
+Constant for matching any print job state. 
+
+
+*int_android.print.PrintJobInfo.STATE_BLOCKED*
+
+Print job state: The print job is blocked. 
+
+Next valid states: (|android.print.PrintJobInfo|) , 
+(|android.print.PrintJobInfo|) , (|android.print.PrintJobInfo|) 
+
+
+*int_android.print.PrintJobInfo.STATE_CANCELED*
+
+Print job state: The print job is canceled. This is a terminal state. 
+
+Next valid states: None 
+
+
+*int_android.print.PrintJobInfo.STATE_COMPLETED*
+
+Print job state: The print job is successfully printed. This is a terminal 
+state. 
+
+Next valid states: None 
+
+
+*int_android.print.PrintJobInfo.STATE_CREATED*
+
+Print job state: The print job is being created but not yet ready to be 
+printed. 
+
+Next valid states: (|android.print.PrintJobInfo|) 
+
+
+*int_android.print.PrintJobInfo.STATE_FAILED*
+
+Print job state: The print job was printing but printing failed. 
+
+Next valid states: (|android.print.PrintJobInfo|) , 
+(|android.print.PrintJobInfo|) 
+
+
+*int_android.print.PrintJobInfo.STATE_QUEUED*
+
+Print job state: The print jobs is created, it is ready to be printed and 
+should be processed. 
+
+Next valid states: (|android.print.PrintJobInfo|) , 
+(|android.print.PrintJobInfo|) , (|android.print.PrintJobInfo|) 
+
+
+*int_android.print.PrintJobInfo.STATE_STARTED*
+
+Print job state: The print job is being printed. 
+
+Next valid states: (|android.print.PrintJobInfo|) , 
+(|android.print.PrintJobInfo|) , (|android.print.PrintJobInfo|) , 
+(|android.print.PrintJobInfo|) 
+
+
+
+*android.print.PrintJobInfo()*
+
+public PrintJobInfo()
+
+
+
+
+*android.print.PrintJobInfo(PrintJobInfo)*
+
+public PrintJobInfo(android.print.PrintJobInfo other)
+
+
+
+
+*android.print.PrintJobInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.print.PrintJobInfo.getAdvancedIntOption(String)*
+
+public int getAdvancedIntOption(java.lang.String key)
+
+Gets the value of an advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: The option value. 
+
+*android.print.PrintJobInfo.getAdvancedOptions()*
+
+public |android.os.Bundle| getAdvancedOptions()
+
+Gets the advanced options. 
+
+
+
+    Returns: The advanced options. 
+
+*android.print.PrintJobInfo.getAdvancedStringOption(String)*
+
+public |java.lang.String| getAdvancedStringOption(java.lang.String key)
+
+Gets the value of an advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: The option value. 
+
+*android.print.PrintJobInfo.getAppId()*
+
+public int getAppId()
+
+Sets the owning application id. 
+
+
+
+    Returns: The owning app id. 
+
+*android.print.PrintJobInfo.getAttributes()*
+
+public |android.print.PrintAttributes| getAttributes()
+
+Gets the print job attributes. 
+
+
+
+    Returns: The attributes. 
+
+*android.print.PrintJobInfo.getCopies()*
+
+public int getCopies()
+
+Gets the number of copies. 
+
+
+
+    Returns: The number of copies or zero if not set. 
+
+*android.print.PrintJobInfo.getCreationTime()*
+
+public long getCreationTime()
+
+Gets the wall time in millisecond when this print job was created. 
+
+
+
+    Returns: The creation time in milliseconds. 
+
+*android.print.PrintJobInfo.getDocumentInfo()*
+
+public |android.print.PrintDocumentInfo| getDocumentInfo()
+
+Gets the info describing the printed document. 
+
+
+
+    Returns: The document info. 
+
+*android.print.PrintJobInfo.getId()*
+
+public |android.print.PrintJobId| getId()
+
+Gets the unique print job id. 
+
+
+
+    Returns: 
+
+*android.print.PrintJobInfo.getLabel()*
+
+public |java.lang.String| getLabel()
+
+Gets the human readable job label. 
+
+
+
+    Returns: 
+
+*android.print.PrintJobInfo.getPages()*
+
+public |android.print.PageRange|[] getPages()
+
+Gets the included pages. 
+
+
+
+    Returns: The included pages or null if not set. 
+
+*android.print.PrintJobInfo.getPrinterId()*
+
+public |android.print.PrinterId| getPrinterId()
+
+Gets the unique target printer id. 
+
+
+
+    Returns: The target printer id. 
+
+*android.print.PrintJobInfo.getPrinterName()*
+
+public |java.lang.String| getPrinterName()
+
+Gets the name of the target printer. 
+
+
+
+    Returns: The printer name. 
+
+*android.print.PrintJobInfo.getState()*
+
+public int getState()
+
+Gets the current job state. 
+
+
+
+    Returns: The job state. 
+
+*android.print.PrintJobInfo.getStateReason()*
+
+public |java.lang.String| getStateReason()
+
+Gets the reason for the print job being in the current state. 
+
+
+
+    Returns: The reason, or null if there is no reason or the reason is unknown. 
+
+*android.print.PrintJobInfo.getTag()*
+
+public |java.lang.String| getTag()
+
+Gets the optional tag assigned by a print service. 
+
+
+
+    Returns: 
+
+*android.print.PrintJobInfo.hasAdvancedOption(String)*
+
+public boolean hasAdvancedOption(java.lang.String key)
+
+Gets whether this job has a given advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: Whether the option is present. 
+
+*android.print.PrintJobInfo.isCancelling()*
+
+public boolean isCancelling()
+
+Gets whether this print is being cancelled. 
+
+
+
+    Returns: True if the print job is being cancelled. 
+
+*android.print.PrintJobInfo.setAdvancedOptions(Bundle)*
+
+public void setAdvancedOptions(android.os.Bundle options)
+
+Sets the advanced options. 
+
+
+    options - The advanced options. 
+
+*android.print.PrintJobInfo.setAppId(int)*
+
+public void setAppId(int appId)
+
+Sets the owning application id. 
+
+
+    appId - The owning app id. 
+
+*android.print.PrintJobInfo.setAttributes(PrintAttributes)*
+
+public void setAttributes(android.print.PrintAttributes attributes)
+
+Sets the print job attributes. 
+
+
+    attributes - The attributes. 
+
+*android.print.PrintJobInfo.setCancelling(boolean)*
+
+public void setCancelling(boolean cancelling)
+
+Sets whether this print is being cancelled. 
+
+
+    cancelling - True if the print job is being cancelled. 
+
+*android.print.PrintJobInfo.setCopies(int)*
+
+public void setCopies(int copyCount)
+
+Sets the number of copies. 
+
+
+    copyCount - The number of copies. 
+
+*android.print.PrintJobInfo.setCreationTime(long)*
+
+public void setCreationTime(long creationTime)
+
+Sets the wall time in milliseconds when this print job was created. 
+
+
+    creationTime - The creation time in milliseconds. 
+
+*android.print.PrintJobInfo.setDocumentInfo(PrintDocumentInfo)*
+
+public void setDocumentInfo(android.print.PrintDocumentInfo info)
+
+Sets the info describing the printed document. 
+
+
+    info - The document info. 
+
+*android.print.PrintJobInfo.setId(PrintJobId)*
+
+public void setId(android.print.PrintJobId id)
+
+Sets the unique print job id. 
+
+
+    The - job id. 
+
+*android.print.PrintJobInfo.setLabel(String)*
+
+public void setLabel(java.lang.String label)
+
+Sets the human readable job label. 
+
+
+    label - The label. 
+
+*android.print.PrintJobInfo.setPages(PageRange[])*
+
+public void setPages(android.print.PageRange[] pageRanges)
+
+Sets the included pages. 
+
+
+    pageRanges - The included pages. 
+
+*android.print.PrintJobInfo.setPrinterId(PrinterId)*
+
+public void setPrinterId(android.print.PrinterId printerId)
+
+Sets the unique target pritner id. 
+
+
+    printerId - The target printer id. 
+
+*android.print.PrintJobInfo.setPrinterName(String)*
+
+public void setPrinterName(java.lang.String printerName)
+
+Sets the name of the target printer. 
+
+
+    printerName - The printer name. 
+
+*android.print.PrintJobInfo.setState(int)*
+
+public void setState(int state)
+
+Sets the current job state. 
+
+
+    state - The job state. 
+
+*android.print.PrintJobInfo.setStateReason(String)*
+
+public void setStateReason(java.lang.String stateReason)
+
+Sets the reason for the print job being in the current state. 
+
+
+    stateReason - The reason, or null if there is no reason or the reason is unknown. 
+
+*android.print.PrintJobInfo.setTag(String)*
+
+public void setTag(java.lang.String tag)
+
+Sets the optional tag assigned by a print service. 
+
+
+    tag - The tag. 
+
+*android.print.PrintJobInfo.stateToString(int)*
+
+public static |java.lang.String| stateToString(int state)
+
+
+
+
+
+*android.print.PrintJobInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.print.PrintJobInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+
+
+
+
+

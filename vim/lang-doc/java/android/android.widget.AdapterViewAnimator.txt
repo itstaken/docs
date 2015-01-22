@@ -1,0 +1,373 @@
+*android.widget.AdapterViewAnimator* *AdapterViewAnimator* Base class for aAdapt
+
+public abstract class AdapterViewAnimator
+  extends    |android.widget.AdapterView|
+  implements |android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback|
+             |android.widget.Advanceable|
+
+|android.widget.AdapterViewAnimator_Description|
+|android.widget.AdapterViewAnimator_Fields|
+|android.widget.AdapterViewAnimator_Constructors|
+|android.widget.AdapterViewAnimator_Methods|
+
+================================================================================
+
+*android.widget.AdapterViewAnimator_Constructors*
+|android.widget.AdapterViewAnimator(Context)|
+|android.widget.AdapterViewAnimator(Context,AttributeSet)|
+|android.widget.AdapterViewAnimator(Context,AttributeSet,int)|
+
+*android.widget.AdapterViewAnimator_Methods*
+|android.widget.AdapterViewAnimator.advance()|Called by anandroid.appwidget.App
+|android.widget.AdapterViewAnimator.deferNotifyDataSetChanged()|This defers a n
+|android.widget.AdapterViewAnimator.fyiWillBeAdvancedByHostKThx()|Called by ana
+|android.widget.AdapterViewAnimator.getAdapter()|
+|android.widget.AdapterViewAnimator.getBaseline()|
+|android.widget.AdapterViewAnimator.getCurrentView()|Returns the View correspon
+|android.widget.AdapterViewAnimator.getDisplayedChild()|Returns the index of th
+|android.widget.AdapterViewAnimator.getInAnimation()|Returns the current animat
+|android.widget.AdapterViewAnimator.getOutAnimation()|Returns the current anima
+|android.widget.AdapterViewAnimator.getSelectedView()|
+|android.widget.AdapterViewAnimator.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.AdapterViewAnimator.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.AdapterViewAnimator.onLayout(boolean,int,int,int,int)|
+|android.widget.AdapterViewAnimator.onMeasure(int,int)|
+|android.widget.AdapterViewAnimator.onRemoteAdapterConnected()|Called back when
+|android.widget.AdapterViewAnimator.onRemoteAdapterDisconnected()|Called back w
+|android.widget.AdapterViewAnimator.onRestoreInstanceState(Parcelable)|
+|android.widget.AdapterViewAnimator.onSaveInstanceState()|
+|android.widget.AdapterViewAnimator.onTouchEvent(MotionEvent)|
+|android.widget.AdapterViewAnimator.setAdapter(Adapter)|
+|android.widget.AdapterViewAnimator.setAnimateFirstView(boolean)|Indicates whet
+|android.widget.AdapterViewAnimator.setDisplayedChild(int)|Sets which child vie
+|android.widget.AdapterViewAnimator.setInAnimation(Context,int)|Specifies the a
+|android.widget.AdapterViewAnimator.setInAnimation(ObjectAnimator)|Specifies th
+|android.widget.AdapterViewAnimator.setOutAnimation(Context,int)|Specifies the 
+|android.widget.AdapterViewAnimator.setOutAnimation(ObjectAnimator)|Specifies t
+|android.widget.AdapterViewAnimator.setRemoteViewsAdapter(Intent)|Sets up this 
+|android.widget.AdapterViewAnimator.setRemoteViewsOnClickHandler(RemoteViews.OnClickHandler)|
+|android.widget.AdapterViewAnimator.setSelection(int)|
+|android.widget.AdapterViewAnimator.showNext()|Manually shows the next child.
+|android.widget.AdapterViewAnimator.showPrevious()|Manually shows the previous 
+
+*android.widget.AdapterViewAnimator_Description*
+
+Base class for a (|android.widget.AdapterView|) that will perform animations 
+when switching between its views. 
+
+
+
+*android.widget.AdapterViewAnimator(Context)*
+
+public AdapterViewAnimator(android.content.Context context)
+
+
+
+
+*android.widget.AdapterViewAnimator(Context,AttributeSet)*
+
+public AdapterViewAnimator(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.AdapterViewAnimator(Context,AttributeSet,int)*
+
+public AdapterViewAnimator(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyleAttr)
+
+
+
+
+*android.widget.AdapterViewAnimator.advance()*
+
+public void advance()
+
+Called by an (|android.appwidget.AppWidgetHost|) in order to advance the 
+current view when it is being used within an app widget. 
+
+
+
+*android.widget.AdapterViewAnimator.deferNotifyDataSetChanged()*
+
+public void deferNotifyDataSetChanged()
+
+This defers a notifyDataSetChanged on the pending RemoteViewsAdapter if it has 
+not connected yet. 
+
+
+
+*android.widget.AdapterViewAnimator.fyiWillBeAdvancedByHostKThx()*
+
+public void fyiWillBeAdvancedByHostKThx()
+
+Called by an (|android.appwidget.AppWidgetHost|) to indicate that it will be 
+automatically advancing the views of this 
+(|android.widget.AdapterViewAnimator|) by calling 
+(|android.widget.AdapterViewAnimator|) at some point in the future. This allows 
+subclasses to perform any required setup, for example, to stop automatically 
+advancing their children. 
+
+
+
+*android.widget.AdapterViewAnimator.getAdapter()*
+
+public |android.widget.Adapter| getAdapter()
+
+
+
+
+
+*android.widget.AdapterViewAnimator.getBaseline()*
+
+public int getBaseline()
+
+
+
+
+
+*android.widget.AdapterViewAnimator.getCurrentView()*
+
+public |android.view.View| getCurrentView()
+
+Returns the View corresponding to the currently displayed child. 
+
+
+
+    Returns: The View currently displayed. 
+
+*android.widget.AdapterViewAnimator.getDisplayedChild()*
+
+public int getDisplayedChild()
+
+Returns the index of the currently displayed child view. 
+
+
+
+*android.widget.AdapterViewAnimator.getInAnimation()*
+
+public |android.animation.ObjectAnimator| getInAnimation()
+
+Returns the current animation used to animate a View that enters the screen. 
+
+
+
+    Returns: An Animation or null if none is set. 
+
+*android.widget.AdapterViewAnimator.getOutAnimation()*
+
+public |android.animation.ObjectAnimator| getOutAnimation()
+
+Returns the current animation used to animate a View that exits the screen. 
+
+
+
+    Returns: An Animation or null if none is set. 
+
+*android.widget.AdapterViewAnimator.getSelectedView()*
+
+public |android.view.View| getSelectedView()
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onRemoteAdapterConnected()*
+
+public boolean onRemoteAdapterConnected()
+
+Called back when the adapter connects to the RemoteViewsService. 
+
+
+
+*android.widget.AdapterViewAnimator.onRemoteAdapterDisconnected()*
+
+public void onRemoteAdapterDisconnected()
+
+Called back when the adapter disconnects from the RemoteViewsService. 
+
+
+
+*android.widget.AdapterViewAnimator.onRestoreInstanceState(Parcelable)*
+
+public void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onSaveInstanceState()*
+
+public |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+*android.widget.AdapterViewAnimator.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.setAdapter(Adapter)*
+
+public void setAdapter(android.widget.Adapter adapter)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.setAnimateFirstView(boolean)*
+
+public void setAnimateFirstView(boolean animate)
+
+Indicates whether the current View should be animated the first time the 
+ViewAnimation is displayed. 
+
+
+    animate - True to animate the current View the first time it is displayed, false 
+       otherwise. 
+
+*android.widget.AdapterViewAnimator.setDisplayedChild(int)*
+
+public void setDisplayedChild(int whichChild)
+
+Sets which child view will be displayed. 
+
+
+    whichChild - the index of the child view to display 
+
+*android.widget.AdapterViewAnimator.setInAnimation(Context,int)*
+
+public void setInAnimation(
+  android.content.Context context,
+  int resourceID)
+
+Specifies the animation used to animate a View that enters the screen. 
+
+
+    context - The application's environment. 
+    resourceID - The resource id of the animation. 
+
+*android.widget.AdapterViewAnimator.setInAnimation(ObjectAnimator)*
+
+public void setInAnimation(android.animation.ObjectAnimator inAnimation)
+
+Specifies the animation used to animate a View that enters the screen. 
+
+
+    inAnimation - The animation started when a View enters the screen. 
+
+*android.widget.AdapterViewAnimator.setOutAnimation(Context,int)*
+
+public void setOutAnimation(
+  android.content.Context context,
+  int resourceID)
+
+Specifies the animation used to animate a View that exit the screen. 
+
+
+    context - The application's environment. 
+    resourceID - The resource id of the animation. 
+
+*android.widget.AdapterViewAnimator.setOutAnimation(ObjectAnimator)*
+
+public void setOutAnimation(android.animation.ObjectAnimator outAnimation)
+
+Specifies the animation used to animate a View that exit the screen. 
+
+
+    outAnimation - The animation started when a View exit the screen. 
+
+*android.widget.AdapterViewAnimator.setRemoteViewsAdapter(Intent)*
+
+public void setRemoteViewsAdapter(android.content.Intent intent)
+
+Sets up this AdapterViewAnimator to use a remote views adapter which connects 
+to a RemoteViewsService through the specified intent. 
+
+
+    intent - the intent used to identify the RemoteViewsService for the adapter to connect 
+       to. 
+
+*android.widget.AdapterViewAnimator.setRemoteViewsOnClickHandler(RemoteViews.OnClickHandler)*
+
+public void setRemoteViewsOnClickHandler(android.widget.RemoteViews.OnClickHandler handler)
+
+Sets up the onClickHandler to be used by the RemoteViewsAdapter when inflating 
+RemoteViews 
+
+
+    handler - The OnClickHandler to use when inflating RemoteViews. 
+
+*android.widget.AdapterViewAnimator.setSelection(int)*
+
+public void setSelection(int position)
+
+
+
+
+
+*android.widget.AdapterViewAnimator.showNext()*
+
+public void showNext()
+
+Manually shows the next child. 
+
+
+
+*android.widget.AdapterViewAnimator.showPrevious()*
+
+public void showPrevious()
+
+Manually shows the previous child. 
+
+
+
+

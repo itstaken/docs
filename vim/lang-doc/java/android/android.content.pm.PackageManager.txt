@@ -1,0 +1,3244 @@
+*android.content.pm.PackageManager* *PackageManager* Class for retrieving variou
+
+public abstract class PackageManager
+  extends    |java.lang.Object|
+
+|android.content.pm.PackageManager_Description|
+|android.content.pm.PackageManager_Fields|
+|android.content.pm.PackageManager_Constructors|
+|android.content.pm.PackageManager_Methods|
+
+================================================================================
+
+*android.content.pm.PackageManager_Fields*
+|java.lang.String_android.content.pm.PackageManager.ACTION_CLEAN_EXTERNAL_STORAGE|
+|java.lang.String_android.content.pm.PackageManager.ACTION_REQUEST_PERMISSION|
+|int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DEFAULT|
+|int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED|
+|int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED|
+|int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER|
+|int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED|
+|int_android.content.pm.PackageManager.DELETE_ALL_USERS|
+|int_android.content.pm.PackageManager.DELETE_FAILED_DEVICE_POLICY_MANAGER|
+|int_android.content.pm.PackageManager.DELETE_FAILED_INTERNAL_ERROR|
+|int_android.content.pm.PackageManager.DELETE_FAILED_USER_RESTRICTED|
+|int_android.content.pm.PackageManager.DELETE_KEEP_DATA|
+|int_android.content.pm.PackageManager.DELETE_SUCCEEDED|
+|int_android.content.pm.PackageManager.DELETE_SYSTEM_APP|
+|int_android.content.pm.PackageManager.DONT_KILL_APP|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_REQUEST_PERMISSION_PERMISSION_LIST|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_ID|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALL_FLAGS|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALLER_PACKAGE|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALLER_UID|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_PACKAGE_NAME|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_RESULT|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_URI|
+|java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_VERSION_CODE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_APP_WIDGETS|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_AUDIO_LOW_LATENCY|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_BLUETOOTH|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_BLUETOOTH_LE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_ANY|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_AUTOFOCUS|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_FLASH|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_FRONT|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_CONSUMER_IR|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_DEVICE_ADMIN|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH_MULTITOUCH_DISTINCT|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH_MULTITOUCH_JAZZHAND|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_HOME_SCREEN|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_INPUT_METHODS|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_LIVE_WALLPAPER|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION_GPS|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION_NETWORK|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_MICROPHONE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_NFC|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_NFC_HCE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_NFC_HOST_CARD_EMULATION|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SCREEN_LANDSCAPE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SCREEN_PORTRAIT|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_ACCELEROMETER|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_BAROMETER|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_COMPASS|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_GYROSCOPE|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_LIGHT|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_PROXIMITY|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_STEP_COUNTER|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_STEP_DETECTOR|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SIP|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_SIP_VOIP|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY_CDMA|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY_GSM|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TELEVISION|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_JAZZHAND|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_USB_ACCESSORY|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_USB_HOST|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_WIFI|
+|java.lang.String_android.content.pm.PackageManager.FEATURE_WIFI_DIRECT|
+|int_android.content.pm.PackageManager.GET_ACTIVITIES|
+|int_android.content.pm.PackageManager.GET_CONFIGURATIONS|
+|int_android.content.pm.PackageManager.GET_DISABLED_COMPONENTS|
+|int_android.content.pm.PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS|
+|int_android.content.pm.PackageManager.GET_GIDS|
+|int_android.content.pm.PackageManager.GET_INSTRUMENTATION|
+|int_android.content.pm.PackageManager.GET_INTENT_FILTERS|
+|int_android.content.pm.PackageManager.GET_META_DATA|
+|int_android.content.pm.PackageManager.GET_PERMISSIONS|
+|int_android.content.pm.PackageManager.GET_PROVIDERS|
+|int_android.content.pm.PackageManager.GET_RECEIVERS|
+|int_android.content.pm.PackageManager.GET_RESOLVED_FILTER|
+|int_android.content.pm.PackageManager.GET_SERVICES|
+|int_android.content.pm.PackageManager.GET_SHARED_LIBRARY_FILES|
+|int_android.content.pm.PackageManager.GET_SIGNATURES|
+|int_android.content.pm.PackageManager.GET_UNINSTALLED_PACKAGES|
+|int_android.content.pm.PackageManager.GET_URI_PERMISSION_PATTERNS|
+|int_android.content.pm.PackageManager.INSTALL_ALL_USERS|
+|int_android.content.pm.PackageManager.INSTALL_ALLOW_DOWNGRADE|
+|int_android.content.pm.PackageManager.INSTALL_ALLOW_TEST|
+|int_android.content.pm.PackageManager.INSTALL_EXTERNAL|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_ALREADY_EXISTS|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_CONFLICTING_PROVIDER|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_CONTAINER_ERROR|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_CPU_ABI_INCOMPATIBLE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_DEXOPT|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_DUPLICATE_PACKAGE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_INTERNAL_ERROR|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_APK|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_INSTALL_LOCATION|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_URI|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_MEDIA_UNAVAILABLE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_MISSING_FEATURE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_MISSING_SHARED_LIBRARY|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_NEWER_SDK|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_NO_SHARED_USER|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_OLDER_SDK|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_PACKAGE_CHANGED|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_REPLACE_COULDNT_DELETE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_SHARED_USER_INCOMPATIBLE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_TEST_ONLY|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_UID_CHANGED|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_UPDATE_INCOMPATIBLE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_USER_RESTRICTED|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_VERIFICATION_FAILURE|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_VERIFICATION_TIMEOUT|
+|int_android.content.pm.PackageManager.INSTALL_FAILED_VERSION_DOWNGRADE|
+|int_android.content.pm.PackageManager.INSTALL_FORWARD_LOCK|
+|int_android.content.pm.PackageManager.INSTALL_FROM_ADB|
+|int_android.content.pm.PackageManager.INSTALL_INTERNAL|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_MANIFEST|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_MANIFEST_EMPTY|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_NO_CERTIFICATES|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_NOT_APK|
+|int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION|
+|int_android.content.pm.PackageManager.INSTALL_REPLACE_EXISTING|
+|int_android.content.pm.PackageManager.INSTALL_SUCCEEDED|
+|int_android.content.pm.PackageManager.MATCH_DEFAULT_ONLY|
+|long_android.content.pm.PackageManager.MAXIMUM_VERIFICATION_TIMEOUT|
+|int_android.content.pm.PackageManager.MOVE_EXTERNAL_MEDIA|
+|int_android.content.pm.PackageManager.MOVE_FAILED_DOESNT_EXIST|
+|int_android.content.pm.PackageManager.MOVE_FAILED_FORWARD_LOCKED|
+|int_android.content.pm.PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE|
+|int_android.content.pm.PackageManager.MOVE_FAILED_INTERNAL_ERROR|
+|int_android.content.pm.PackageManager.MOVE_FAILED_INVALID_LOCATION|
+|int_android.content.pm.PackageManager.MOVE_FAILED_OPERATION_PENDING|
+|int_android.content.pm.PackageManager.MOVE_FAILED_SYSTEM_PACKAGE|
+|int_android.content.pm.PackageManager.MOVE_INTERNAL|
+|int_android.content.pm.PackageManager.MOVE_SUCCEEDED|
+|int_android.content.pm.PackageManager.PERMISSION_DENIED|
+|int_android.content.pm.PackageManager.PERMISSION_GRANTED|
+|int_android.content.pm.PackageManager.SIGNATURE_FIRST_NOT_SIGNED|
+|int_android.content.pm.PackageManager.SIGNATURE_MATCH|
+|int_android.content.pm.PackageManager.SIGNATURE_NEITHER_SIGNED|
+|int_android.content.pm.PackageManager.SIGNATURE_NO_MATCH|
+|int_android.content.pm.PackageManager.SIGNATURE_SECOND_NOT_SIGNED|
+|int_android.content.pm.PackageManager.SIGNATURE_UNKNOWN_PACKAGE|
+|int_android.content.pm.PackageManager.VERIFICATION_ALLOW|
+|int_android.content.pm.PackageManager.VERIFICATION_ALLOW_WITHOUT_SUFFICIENT|
+|int_android.content.pm.PackageManager.VERIFICATION_REJECT|
+
+*android.content.pm.PackageManager_Constructors*
+|android.content.pm.PackageManager()|
+
+*android.content.pm.PackageManager_Methods*
+|android.content.pm.PackageManager.addPackageToPreferred(String)|
+|android.content.pm.PackageManager.addPermission(PermissionInfo)|Add a new dyna
+|android.content.pm.PackageManager.addPermissionAsync(PermissionInfo)|Like#addP
+|android.content.pm.PackageManager.addPreferredActivity(IntentFilter,int,ComponentName[],ComponentName)|
+|android.content.pm.PackageManager.addPreferredActivity(IntentFilter,int,ComponentName[],ComponentName,int)|
+|android.content.pm.PackageManager.buildPermissionRequestIntent(String...)|Retu
+|android.content.pm.PackageManager.canonicalToCurrentPackageNames(String[])|Map
+|android.content.pm.PackageManager.checkPermission(String,String)|Check whether
+|android.content.pm.PackageManager.checkSignatures(int,int)|Like#checkSignature
+|android.content.pm.PackageManager.checkSignatures(String,String)|Compare the s
+|android.content.pm.PackageManager.clearApplicationUserData(String,IPackageDataObserver)|
+|android.content.pm.PackageManager.clearPackagePreferredActivities(String)|Remo
+|android.content.pm.PackageManager.currentToCanonicalPackageNames(String[])|Map
+|android.content.pm.PackageManager.deleteApplicationCacheFiles(String,IPackageDataObserver)|
+|android.content.pm.PackageManager.deletePackage(String,IPackageDeleteObserver,int)|
+|android.content.pm.PackageManager.extendVerificationTimeout(int,int,long)|Allo
+|android.content.pm.PackageManager.freeStorage(long,IntentSender)|Free storage 
+|android.content.pm.PackageManager.freeStorageAndNotify(long,IPackageDataObserver)|
+|android.content.pm.PackageManager.getActivityIcon(ComponentName)|Retrieve the 
+|android.content.pm.PackageManager.getActivityIcon(Intent)|Retrieve the icon as
+|android.content.pm.PackageManager.getActivityInfo(ComponentName,int)|Retrieve 
+|android.content.pm.PackageManager.getActivityLogo(ComponentName)|Retrieve the 
+|android.content.pm.PackageManager.getActivityLogo(Intent)|Retrieve the logo as
+|android.content.pm.PackageManager.getAllPermissionGroups(int)|Retrieve all of 
+|android.content.pm.PackageManager.getApplicationBlockedSettingAsUser(String,UserHandle)|
+|android.content.pm.PackageManager.getApplicationEnabledSetting(String)|Return 
+|android.content.pm.PackageManager.getApplicationIcon(ApplicationInfo)|Retrieve
+|android.content.pm.PackageManager.getApplicationIcon(String)|Retrieve the icon
+|android.content.pm.PackageManager.getApplicationInfo(String,int)|Retrieve all 
+|android.content.pm.PackageManager.getApplicationLabel(ApplicationInfo)|Return 
+|android.content.pm.PackageManager.getApplicationLogo(ApplicationInfo)|Retrieve
+|android.content.pm.PackageManager.getApplicationLogo(String)|Retrieve the logo
+|android.content.pm.PackageManager.getComponentEnabledSetting(ComponentName)|Re
+|android.content.pm.PackageManager.getDataDirForUser(int,String)|Returns the da
+|android.content.pm.PackageManager.getDefaultActivityIcon()|Return the generic 
+|android.content.pm.PackageManager.getDrawable(String,int,ApplicationInfo)|Retr
+|android.content.pm.PackageManager.getHomeActivities(List<ResolveInfo>)|Ask for
+|android.content.pm.PackageManager.getInstalledApplications(int)|Return a List 
+|android.content.pm.PackageManager.getInstalledPackages(int)|Return a List of a
+|android.content.pm.PackageManager.getInstalledPackages(int,int)|Return a List 
+|android.content.pm.PackageManager.getInstallerPackageName(String)|Retrieve the
+|android.content.pm.PackageManager.getInstrumentationInfo(ComponentName,int)|Re
+|android.content.pm.PackageManager.getLaunchIntentForPackage(String)|Return a "
+|android.content.pm.PackageManager.getNameForUid(int)|Retrieve the official nam
+|android.content.pm.PackageManager.getPackageArchiveInfo(String,int)|Retrieve o
+|android.content.pm.PackageManager.getPackageGids(String)|Return an array of al
+|android.content.pm.PackageManager.getPackageInfo(String,int)|Retrieve overall 
+|android.content.pm.PackageManager.getPackagesForUid(int)|Retrieve the names of
+|android.content.pm.PackageManager.getPackagesHoldingPermissions(String[],int)|
+|android.content.pm.PackageManager.getPackageSizeInfo(String,int,IPackageStatsObserver)|
+|android.content.pm.PackageManager.getPackageSizeInfo(String,IPackageStatsObserver)|
+|android.content.pm.PackageManager.getPackageUid(String,int)|
+|android.content.pm.PackageManager.getPermissionGroupInfo(String,int)|Retrieve 
+|android.content.pm.PackageManager.getPermissionInfo(String,int)|Retrieve all o
+|android.content.pm.PackageManager.getPreferredActivities(List<IntentFilter>,List<ComponentName>,String)|
+|android.content.pm.PackageManager.getPreferredPackages(int)|Retrieve the list 
+|android.content.pm.PackageManager.getProviderInfo(ComponentName,int)|Retrieve 
+|android.content.pm.PackageManager.getReceiverInfo(ComponentName,int)|Retrieve 
+|android.content.pm.PackageManager.getResourcesForActivity(ComponentName)|Retri
+|android.content.pm.PackageManager.getResourcesForApplication(ApplicationInfo)|
+|android.content.pm.PackageManager.getResourcesForApplication(String)|Retrieve 
+|android.content.pm.PackageManager.getResourcesForApplicationAsUser(String,int)|
+|android.content.pm.PackageManager.getServiceInfo(ComponentName,int)|Retrieve a
+|android.content.pm.PackageManager.getSystemAvailableFeatures()|Get a list of f
+|android.content.pm.PackageManager.getSystemSharedLibraryNames()|Get a list of 
+|android.content.pm.PackageManager.getText(String,int,ApplicationInfo)|Retrieve
+|android.content.pm.PackageManager.getUidForSharedUser(String)|Return the user 
+|android.content.pm.PackageManager.getVerifierDeviceIdentity()|Returns the devi
+|android.content.pm.PackageManager.getXml(String,int,ApplicationInfo)|Retrieve 
+|android.content.pm.PackageManager.grantPermission(String,String)|Grant a permi
+|android.content.pm.PackageManager.hasSystemFeature(String)|Check whether the g
+|android.content.pm.PackageManager.installExistingPackage(String)|If there is a
+|android.content.pm.PackageManager.installPackage(Uri,IPackageInstallObserver,int,String)|
+|android.content.pm.PackageManager.installPackageWithVerification(Uri,IPackageInstallObserver,int,String,Uri,ManifestDigest,ContainerEncryptionParams)|
+|android.content.pm.PackageManager.installPackageWithVerificationAndEncryption(Uri,IPackageInstallObserver,int,String,VerificationParams,ContainerEncryptionParams)|
+|android.content.pm.PackageManager.isSafeMode()|Return whether the device has b
+|android.content.pm.PackageManager.movePackage(String,IPackageMoveObserver,int)|
+|android.content.pm.PackageManager.queryBroadcastReceivers(Intent,int)|Retrieve
+|android.content.pm.PackageManager.queryBroadcastReceivers(Intent,int,int)|Retr
+|android.content.pm.PackageManager.queryContentProviders(String,int,int)|Retrie
+|android.content.pm.PackageManager.queryInstrumentation(String,int)|Retrieve in
+|android.content.pm.PackageManager.queryIntentActivities(Intent,int)|Retrieve a
+|android.content.pm.PackageManager.queryIntentActivitiesAsUser(Intent,int,int)|
+|android.content.pm.PackageManager.queryIntentActivityOptions(ComponentName,Intent[],Intent,int)|
+|android.content.pm.PackageManager.queryIntentContentProviders(Intent,int)|Retr
+|android.content.pm.PackageManager.queryIntentContentProvidersAsUser(Intent,int,int)|
+|android.content.pm.PackageManager.queryIntentServices(Intent,int)|Retrieve all
+|android.content.pm.PackageManager.queryIntentServicesAsUser(Intent,int,int)|Re
+|android.content.pm.PackageManager.queryPermissionsByGroup(String,int)|Query fo
+|android.content.pm.PackageManager.removePackageFromPreferred(String)|
+|android.content.pm.PackageManager.removePermission(String)|Removes a permissio
+|android.content.pm.PackageManager.replacePreferredActivity(IntentFilter,int,ComponentName[],ComponentName)|
+|android.content.pm.PackageManager.resolveActivity(Intent,int)|Determine the be
+|android.content.pm.PackageManager.resolveActivityAsUser(Intent,int,int)|Determ
+|android.content.pm.PackageManager.resolveContentProvider(String,int)|Find a si
+|android.content.pm.PackageManager.resolveService(Intent,int)|Determine the bes
+|android.content.pm.PackageManager.revokePermission(String,String)|Revoke a per
+|android.content.pm.PackageManager.setApplicationBlockedSettingAsUser(String,boolean,UserHandle)|
+|android.content.pm.PackageManager.setApplicationEnabledSetting(String,int,int)|
+|android.content.pm.PackageManager.setComponentEnabledSetting(ComponentName,int,int)|
+|android.content.pm.PackageManager.setInstallerPackageName(String,String)|Chang
+|android.content.pm.PackageManager.verifyPendingInstall(int,int)|Allows a packa
+
+*android.content.pm.PackageManager_Description*
+
+Class for retrieving various kinds of information related to the application 
+packages that are currently installed on the device. 
+
+You can find this class through (|android.content.Context|) . 
+
+
+
+*java.lang.String_android.content.pm.PackageManager.ACTION_CLEAN_EXTERNAL_STORAGE*
+
+Action to external storage service to clean out removed apps. 
+
+
+*java.lang.String_android.content.pm.PackageManager.ACTION_REQUEST_PERMISSION*
+
+The action used to request that the user approve a permission request from the 
+application. 
+
+
+*int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DEFAULT*
+
+Flag for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : This component or application is in its 
+default enabled state (as specified in its manifest). 
+
+
+*int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED*
+
+Flag for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : This component or application has been 
+explicitly disabled, regardless of what it has specified in its manifest. 
+
+
+*int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED*
+
+Flag for (|android.content.pm.PackageManager|) only: This application should be 
+considered, until the point where the user actually wants to use it. This means 
+that it will not normally show up to the user (such as in the launcher), but 
+various parts of the user interface can use 
+(|android.content.pm.PackageManager|) to still see it and allow the user to 
+select it (as for example an IME, device admin, etc). Such code, once the user 
+has selected the app, should at that point also make it enabled. This option 
+currently can not be used with (|android.content.pm.PackageManager|) . 
+
+
+*int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER*
+
+Flag for (|android.content.pm.PackageManager|) only: The user has explicitly 
+disabled the application, regardless of what it has specified in its manifest. 
+Because this is due to the user's request, they may re-enable it if desired 
+through the appropriate system UI. This option currently cannot be used with 
+(|android.content.pm.PackageManager|) . 
+
+
+*int_android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED*
+
+Flag for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : This component or application has been 
+explictily enabled, regardless of what it has specified in its manifest. 
+
+
+*int_android.content.pm.PackageManager.DELETE_ALL_USERS*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that you 
+want the package deleted for all users. 
+
+
+*int_android.content.pm.PackageManager.DELETE_FAILED_DEVICE_POLICY_MANAGER*
+
+Deletion failed return code: this is passed to the (|IPackageDeleteObserver|) 
+by (|android.content.pm.PackageManager|) if the system failed to delete the 
+package because it is the active DevicePolicy manager. 
+
+
+*int_android.content.pm.PackageManager.DELETE_FAILED_INTERNAL_ERROR*
+
+Deletion failed return code: this is passed to the (|IPackageDeleteObserver|) 
+by (|android.content.pm.PackageManager|) if the system failed to delete the 
+package for an unspecified reason. 
+
+
+*int_android.content.pm.PackageManager.DELETE_FAILED_USER_RESTRICTED*
+
+Deletion failed return code: this is passed to the (|IPackageDeleteObserver|) 
+by (|android.content.pm.PackageManager|) if the system failed to delete the 
+package since the user is restricted. 
+
+
+*int_android.content.pm.PackageManager.DELETE_KEEP_DATA*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that you 
+don't want to delete the package's data directory. 
+
+
+*int_android.content.pm.PackageManager.DELETE_SUCCEEDED*
+
+Return code for when package deletion succeeds. This is passed to the 
+(|IPackageDeleteObserver|) by (|android.content.pm.PackageManager|) if the 
+system succeeded in deleting the package. 
+
+
+*int_android.content.pm.PackageManager.DELETE_SYSTEM_APP*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that, if 
+you are calling uninstall on a system that has been updated, then don't do the 
+normal process of uninstalling the update and rolling back to the older system 
+version (which needs to happen for all users); instead, just mark the app as 
+uninstalled for the current user. 
+
+
+*int_android.content.pm.PackageManager.DONT_KILL_APP*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that you 
+don't want to kill the app containing the component. Be careful when you set 
+this since changing component states can make the containing application's 
+behavior unpredictable. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_REQUEST_PERMISSION_PERMISSION_LIST*
+
+Extra field name for the list of permissions, which the user must approve. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_ID*
+
+Extra field name for the ID of a package pending verification. Passed to a 
+package verifier and is used to call back to 
+(|android.content.pm.PackageManager|) 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALL_FLAGS*
+
+Extra field name for the requested install flags for a package pending 
+verification. Passed to a package verifier. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALLER_PACKAGE*
+
+Extra field name for the package identifier which is trying to install the 
+package. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_INSTALLER_UID*
+
+Extra field name for the uid of who is requesting to install the package. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_PACKAGE_NAME*
+
+Extra field name for the package name of a package pending verification. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_RESULT*
+
+Extra field name for the result of a verification, either 
+(|android.content.pm.PackageManager|) , or 
+(|android.content.pm.PackageManager|) . Passed to package verifiers after a 
+package is verified. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_URI*
+
+Extra field name for the URI to a verification file. Passed to a package 
+verifier. 
+
+
+*java.lang.String_android.content.pm.PackageManager.EXTRA_VERIFICATION_VERSION_CODE*
+
+Extra field name for the version code of a package pending verification. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_APP_WIDGETS*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports app widgets. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_AUDIO_LOW_LATENCY*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's audio pipeline is 
+low-latency, more suitable for audio applications sensitive to delays or lag in 
+sound input or output. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_BLUETOOTH*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device is capable of communicating 
+with other devices via Bluetooth. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_BLUETOOTH_LE*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device is capable of communicating 
+with other devices via Bluetooth Low Energy radio. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a camera facing away 
+from the screen. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_ANY*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has at least one camera 
+pointing in some direction. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_AUTOFOCUS*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's camera supports 
+auto-focus. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_FLASH*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's camera supports flash. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CAMERA_FRONT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a front facing camera. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_CONSUMER_IR*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device is capable of communicating 
+with consumer IR devices. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_DEVICE_ADMIN*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports device policy 
+enforcement via device admins. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device does not have a touch 
+screen, but does support touch emulation for basic events. For instance, the 
+device might use a mouse or remote control to drive a cursor, and emulate basic 
+touch pointer events like down, up, drag, etc. All devices that support 
+android.hardware.touchscreen or a sub-feature are presumed to also support 
+faketouch. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH_MULTITOUCH_DISTINCT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device does not have a touch 
+screen, but does support touch emulation for basic events that supports 
+distinct tracking of two or more fingers. This is an extension of 
+(|android.content.pm.PackageManager|) for input devices with this capability. 
+Note that unlike a distinct multitouch screen as defined by 
+(|android.content.pm.PackageManager|) , these kinds of input devices will not 
+actually provide full two-finger gestures since the input is being transformed 
+to cursor movement on the screen. That is, single finger gestures will move a 
+cursor; two-finger swipes will result in single-finger touch events; other 
+two-finger gestures will result in the corresponding two-finger touch event. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_FAKETOUCH_MULTITOUCH_JAZZHAND*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device does not have a touch 
+screen, but does support touch emulation for basic events that supports 
+tracking a hand of fingers (5 or more fingers) fully independently. This is an 
+extension of (|android.content.pm.PackageManager|) for input devices with this 
+capability. Note that unlike a multitouch screen as defined by 
+(|android.content.pm.PackageManager|) , not all two finger gestures can be 
+detected due to the limitations described for 
+(|android.content.pm.PackageManager|) . 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_HOME_SCREEN*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports a home screen that 
+is replaceable by third party applications. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_INPUT_METHODS*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports adding new input 
+methods implemented with the (|android.inputmethodservice.InputMethodService|) 
+API. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_LIVE_WALLPAPER*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports live wallpapers. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports one or more methods 
+of reporting current location. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION_GPS*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a Global Positioning 
+System receiver and can report precise location. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_LOCATION_NETWORK*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device can report location with 
+coarse accuracy using a network-based geolocation system. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_MICROPHONE*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device can record audio via a 
+microphone. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_NFC*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device can communicate using 
+Near-Field Communications (NFC). 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_NFC_HCE*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports host- based NFC 
+card emulation. 
+
+TODO remove when depending apps have moved to new constant. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_NFC_HOST_CARD_EMULATION*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports host- based NFC 
+card emulation. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SCREEN_LANDSCAPE*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports landscape 
+orientation screens. For backwards compatibility, you can assume that if 
+neither this nor (|android.content.pm.PackageManager|) is set then the device 
+supports both portrait and landscape. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SCREEN_PORTRAIT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports portrait 
+orientation screens. For backwards compatibility, you can assume that if 
+neither this nor (|android.content.pm.PackageManager|) is set then the device 
+supports both portrait and landscape. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_ACCELEROMETER*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes an accelerometer. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_BAROMETER*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a barometer (air 
+pressure sensor.) 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_COMPASS*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a magnetometer 
+(compass). 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_GYROSCOPE*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a gyroscope. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_LIGHT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a light sensor. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_PROXIMITY*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a proximity sensor. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_STEP_COUNTER*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a hardware step 
+counter. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SENSOR_STEP_DETECTOR*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device includes a hardware step 
+detector. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SIP*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The SIP API is enabled on the device. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_SIP_VOIP*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports SIP-based VOIP. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a telephony radio with 
+data communication support. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY_CDMA*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a CDMA telephony stack. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TELEPHONY_GSM*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device has a GSM telephony stack. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TELEVISION*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : This is a device dedicated to showing 
+UI on a television. Television here is defined to be a typical living room 
+television experience: displayed on a big screen, where the user is sitting far 
+away from it, and the dominant form of input will be something like a DPAD, not 
+through touch or mouse. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's display has a touch 
+screen. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's touch screen supports 
+multitouch sufficient for basic two-finger gesture detection. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's touch screen is capable of 
+tracking two or more fingers fully independently. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_JAZZHAND*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device's touch screen is capable of 
+tracking a full hand of fingers fully independently -- that is, 5 or more 
+simultaneous independent pointers. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_USB_ACCESSORY*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports connecting to USB 
+accessories. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_USB_HOST*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports connecting to USB 
+devices as the USB host. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_WIFI*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports WiFi (802.11) 
+networking. 
+
+
+*java.lang.String_android.content.pm.PackageManager.FEATURE_WIFI_DIRECT*
+
+Feature for (|android.content.pm.PackageManager|) and 
+(|android.content.pm.PackageManager|) : The device supports Wi-Fi Direct 
+networking. 
+
+
+*int_android.content.pm.PackageManager.GET_ACTIVITIES*
+
+(|android.content.pm.PackageInfo|) flag: return information about activities in 
+the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_CONFIGURATIONS*
+
+(|android.content.pm.PackageInfo|) flag: return information about hardware 
+preferences in PackageInfo.configPreferences(|android.content.pm.PackageInfo|) 
+and requested features in 
+PackageInfo.reqFeatures(|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_DISABLED_COMPONENTS*
+
+(|android.content.pm.PackageInfo|) flag: include disabled components in the 
+returned info. 
+
+
+*int_android.content.pm.PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS*
+
+(|android.content.pm.PackageInfo|) flag: include disabled components which are 
+in that state only because of (|android.content.pm.PackageManager|) in the 
+returned info. Note that if you set this flag, applications that are in this 
+disabled state will be reported as enabled. 
+
+
+*int_android.content.pm.PackageManager.GET_GIDS*
+
+(|android.content.pm.PackageInfo|) flag: return the group 
+ids(|android.content.pm.PackageInfo|) that are associated with an application. 
+This applies for any API returning a PackageInfo class, either directly or 
+nested inside of another. 
+
+
+*int_android.content.pm.PackageManager.GET_INSTRUMENTATION*
+
+(|android.content.pm.PackageInfo|) flag: return information about 
+instrumentation in the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_INTENT_FILTERS*
+
+(|android.content.pm.PackageInfo|) flag: return information about the intent 
+filters supported by the activity. 
+
+
+*int_android.content.pm.PackageManager.GET_META_DATA*
+
+(|android.content.pm.ComponentInfo|) flag: return the 
+(|android.content.pm.ComponentInfo|) data (|android.os.Bundle|) s that are 
+associated with a component. This applies for any API returning a ComponentInfo 
+subclass. 
+
+
+*int_android.content.pm.PackageManager.GET_PERMISSIONS*
+
+(|android.content.pm.PackageInfo|) flag: return information about permissions 
+in the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_PROVIDERS*
+
+(|android.content.pm.PackageInfo|) flag: return information about content 
+providers in the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_RECEIVERS*
+
+(|android.content.pm.PackageInfo|) flag: return information about intent 
+receivers in the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_RESOLVED_FILTER*
+
+(|android.content.pm.ResolveInfo|) flag: return the IntentFilter that was 
+matched for a particular ResolveInfo in (|android.content.pm.ResolveInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_SERVICES*
+
+(|android.content.pm.PackageInfo|) flag: return information about services in 
+the package in (|android.content.pm.PackageInfo|) . 
+
+
+*int_android.content.pm.PackageManager.GET_SHARED_LIBRARY_FILES*
+
+(|android.content.pm.ApplicationInfo|) flag: return the paths to the shared 
+libraries(|android.content.pm.ApplicationInfo|) that are associated with an 
+application. This applies for any API returning an ApplicationInfo class, 
+either directly or nested inside of another. 
+
+
+*int_android.content.pm.PackageManager.GET_SIGNATURES*
+
+(|android.content.pm.PackageInfo|) flag: return information about the 
+signatures included in the package. 
+
+
+*int_android.content.pm.PackageManager.GET_UNINSTALLED_PACKAGES*
+
+Flag parameter to retrieve some information about all applications (even 
+uninstalled ones) which have data directories. This state could have resulted 
+if applications have been deleted with flagDONT_DELETE_DATAwith a possibility 
+of being replaced or reinstalled in future. 
+
+Note: this flag may cause less information about currently installed 
+applications to be returned. 
+
+
+*int_android.content.pm.PackageManager.GET_URI_PERMISSION_PATTERNS*
+
+(|android.content.pm.ProviderInfo|) flag: return the URI permission 
+patterns(|android.content.pm.ProviderInfo|) that are associated with a content 
+provider. This applies for any API returning a ProviderInfo class, either 
+directly or nested inside of another. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_ALL_USERS*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that this 
+install should immediately be visible to all users. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_ALLOW_DOWNGRADE*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that it is 
+okay to install an update to an app where the newly installed app has a lower 
+version code than the currently installed app. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_ALLOW_TEST*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that you 
+want to allow test packages (those that have set android:testOnly in their 
+manifest) to be installed. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_EXTERNAL*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that this 
+package has to be installed on the sdcard. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_ALREADY_EXISTS*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the package is already installed. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_CONFLICTING_PROVIDER*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package failed because it 
+contains a content provider with the same authority as a provider already 
+installed in the system. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_CONTAINER_ERROR*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if a secure container mount point 
+couldn't be accessed on external media. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_CPU_ABI_INCOMPATIBLE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the package being installed contains 
+native code, but none that is compatible with the the device's CPU_ABI. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_DEXOPT*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package failed while 
+optimizing and validating its dex files, either because there was not enough 
+storage or the validation failed. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_DUPLICATE_PACKAGE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if a package is already installed with 
+the same name. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the package manager service found that 
+the device didn't have enough storage space to install the app. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_INTERNAL_ERROR*
+
+Installation failed return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+system failed to install the package because of system issues. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_APK*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the package archive file is invalid. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_INSTALL_LOCATION*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package couldn't be installed 
+in the specified install location. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_INVALID_URI*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the URI passed in is invalid. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_MEDIA_UNAVAILABLE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package couldn't be installed 
+in the specified install location because the media is not available. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_MISSING_FEATURE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package uses a feature that is 
+not available. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_MISSING_SHARED_LIBRARY*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package uses a shared library 
+that is not available. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_NEWER_SDK*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package failed because the 
+current SDK version is newer than that required by the package. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_NO_SHARED_USER*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the requested shared user does not 
+exist. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_OLDER_SDK*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package failed because the 
+current SDK version is older than that required by the package. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_PACKAGE_CHANGED*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the package changed from what the 
+calling program expected. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_REPLACE_COULDNT_DELETE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package uses a shared library 
+that is not available. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_SHARED_USER_INCOMPATIBLE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package is requested a shared 
+user which is already installed on the device and does not have matching 
+signature. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_TEST_ONLY*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package failed because it has 
+specified that it is a test-only package and the caller has not supplied the 
+(|android.content.pm.PackageManager|) flag. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_UID_CHANGED*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package is assigned a 
+different UID than it previously held. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_UPDATE_INCOMPATIBLE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if a previously installed package of the 
+same name has a different signature than the new package (and the old package's 
+data was not removed). 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_USER_RESTRICTED*
+
+Installation failed return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+system failed to install the package because the user is restricted from 
+installing apps. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_VERIFICATION_FAILURE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package couldn't be installed 
+because the verification did not succeed. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_VERIFICATION_TIMEOUT*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package couldn't be installed 
+because the verification timed out. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FAILED_VERSION_DOWNGRADE*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) if the new package has an older version 
+code than the currently installed package. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FORWARD_LOCK*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that this 
+package should be installed as forward locked, i.e. only the app itself should 
+have access to its code and non-resource assets. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_FROM_ADB*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that this 
+install was initiated via ADB. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_INTERNAL*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that this 
+package has to be installed on the sdcard. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_MANIFEST*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser was unable to retrieve the AndroidManifest.xml file. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser encountered a bad or missing package name in the manifest. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser encountered a bad shared user id name in the manifest. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser encountered a CertificateEncodingException in one of the files in the 
+.apk. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser found inconsistent certificates on the files in the .apk. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_MANIFEST_EMPTY*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser did not find any actionable tags (instrumentation or application) in the 
+manifest. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser encountered some structural problem in the manifest. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_NO_CERTIFICATES*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser did not find any certificates in the .apk. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_NOT_APK*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser was given a path that is not a file, or does not end with the expected 
+'.apk' extension. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION*
+
+Installation parse return code: this is passed to the 
+(|IPackageInstallObserver|) by (|android.content.pm.PackageManager|) if the 
+parser encountered an unexpected exception. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_REPLACE_EXISTING*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that you 
+want to replace an already installed package, if one exists. 
+
+
+*int_android.content.pm.PackageManager.INSTALL_SUCCEEDED*
+
+Installation return code: this is passed to the (|IPackageInstallObserver|) by 
+(|android.content.pm.PackageManager|) on success. 
+
+
+*int_android.content.pm.PackageManager.MATCH_DEFAULT_ONLY*
+
+Resolution and querying flag: if set, only filters that support the 
+(|android.content.Intent|) will be considered for matching. This is a synonym 
+for including the CATEGORY_DEFAULT in your supplied Intent. 
+
+
+*long_android.content.pm.PackageManager.MAXIMUM_VERIFICATION_TIMEOUT*
+
+Can be used as themillisecondsToDelayargument for 
+(|android.content.pm.PackageManager|) . This is the maximum 
+timePackageManagerwaits for the verification agent to return (in milliseconds). 
+
+
+*int_android.content.pm.PackageManager.MOVE_EXTERNAL_MEDIA*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that the 
+package should be moved to external media. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_DOESNT_EXIST*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package doesn't exist. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_FORWARD_LOCKED*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package cannot be moved 
+since its forward locked. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) when the package hasn't been successfully 
+moved by the system because of insufficient memory on specified media. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_INTERNAL_ERROR*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package cannot be moved 
+to the specified location. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_INVALID_LOCATION*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package cannot be moved 
+to the specified location. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_OPERATION_PENDING*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package already has an 
+operation pending in the (|PackageHandler|) queue. 
+
+
+*int_android.content.pm.PackageManager.MOVE_FAILED_SYSTEM_PACKAGE*
+
+Error code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) if the specified package cannot be moved 
+since its a system package. 
+
+
+*int_android.content.pm.PackageManager.MOVE_INTERNAL*
+
+Flag parameter for (|android.content.pm.PackageManager|) to indicate that the 
+package should be moved to internal storage if its been installed on external 
+media. 
+
+
+*int_android.content.pm.PackageManager.MOVE_SUCCEEDED*
+
+Return code that is passed to the (|IPackageMoveObserver|) by 
+(|android.content.pm.PackageManager|) when the package has been successfully 
+moved by the system. 
+
+
+*int_android.content.pm.PackageManager.PERMISSION_DENIED*
+
+Permission check result: this is returned by 
+(|android.content.pm.PackageManager|) if the permission has not been granted to 
+the given package. 
+
+
+*int_android.content.pm.PackageManager.PERMISSION_GRANTED*
+
+Permission check result: this is returned by 
+(|android.content.pm.PackageManager|) if the permission has been granted to the 
+given package. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_FIRST_NOT_SIGNED*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if the first package is not signed but 
+the second is. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_MATCH*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if all signatures on the two packages 
+match. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_NEITHER_SIGNED*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if neither of the two packages is signed. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_NO_MATCH*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if not all signatures on both packages 
+match. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_SECOND_NOT_SIGNED*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if the second package is not signed but 
+the first is. 
+
+
+*int_android.content.pm.PackageManager.SIGNATURE_UNKNOWN_PACKAGE*
+
+Signature check result: this is returned by 
+(|android.content.pm.PackageManager|) if either of the packages are not valid. 
+
+
+*int_android.content.pm.PackageManager.VERIFICATION_ALLOW*
+
+Used as theverificationCodeargument for (|android.content.pm.PackageManager|) 
+to indicate that the calling package verifier allows the installation to 
+proceed. 
+
+
+*int_android.content.pm.PackageManager.VERIFICATION_ALLOW_WITHOUT_SUFFICIENT*
+
+Usable by the required verifier as theverificationCodeargument for 
+(|android.content.pm.PackageManager|) to indicate that it will allow the 
+installation to proceed without any of the optional verifiers needing to vote. 
+
+
+*int_android.content.pm.PackageManager.VERIFICATION_REJECT*
+
+Used as theverificationCodeargument for (|android.content.pm.PackageManager|) 
+to indicate the calling package verifier does not vote to allow the 
+installation to proceed. 
+
+
+
+*android.content.pm.PackageManager()*
+
+public PackageManager()
+
+
+
+
+*android.content.pm.PackageManager.addPackageToPreferred(String)*
+
+public abstract void addPackageToPreferred(java.lang.String packageName)
+
+
+
+    Deprecated: This function no longer does anything; it was an old
+ approach to managing preferred activities, which has been superseded
+ by (and conflicts with) the modern activity-based preferences.
+
+
+*android.content.pm.PackageManager.addPermission(PermissionInfo)*
+
+public abstract boolean addPermission(android.content.pm.PermissionInfo info)
+
+Add a new dynamic permission to the system. For this to work, your package must 
+have defined a permission tree through the 
+&lt;permission-tree&gt;(|android.R.styleable|) tag in its manifest. A package 
+can only add permissions to trees that were defined by either its own package 
+or another with the same user id; a permission is in a tree if it matches the 
+name of the permission tree + ".": for example, "com.foo.bar" is a member of 
+the permission tree "com.foo". 
+
+It is good to make your permission tree name descriptive, because you are 
+taking possession of that entire set of permission names. Thus, it must be 
+under a domain you control, with a suffix that will not match any normal 
+permissions that may be declared in any applications that are part of that 
+domain. 
+
+New permissions must be added before any .apks are installed that use those 
+permissions. Permissions you add through this method are remembered across 
+reboots of the device. If the given permission already exists, the info you 
+supply here will be used to update it. 
+
+
+    info - Description of the permission to be added. 
+
+    Returns: Returns true if a new permission was created, false if an existing one was 
+             updated. 
+
+*android.content.pm.PackageManager.addPermissionAsync(PermissionInfo)*
+
+public abstract boolean addPermissionAsync(android.content.pm.PermissionInfo info)
+
+Like (|android.content.pm.PackageManager|) but asynchronously persists the 
+package manager state after returning from the call, allowing it to return 
+quicker and batch a series of adds at the expense of no guarantee the added 
+permission will be retained if the device is rebooted before it is written. 
+
+
+
+*android.content.pm.PackageManager.addPreferredActivity(IntentFilter,int,ComponentName[],ComponentName)*
+
+public abstract void addPreferredActivity(
+  android.content.IntentFilter filter,
+  int match,
+  android.content.ComponentName[] set,
+  android.content.ComponentName activity)
+
+
+
+    Deprecated: This is a protected API that should not have been available
+ to third party applications.  It is the platform's responsibility for
+ assigning preferred activities and this cannot be directly modified.
+
+ Add a new preferred activity mapping to the system.  This will be used
+ to automatically select the given activity component when
+ {@link Context#startActivity(Intent) Context.startActivity()} finds
+ multiple matching activities and also matches the given filter.
+
+    filter - The set of intents under which this activity will be made preferred. 
+    match - The IntentFilter match category that this preference applies to. 
+    set - The set of activities that the user was picking from when this preference was 
+       made. 
+    activity - The component name of the activity that is to be preferred. 
+
+*android.content.pm.PackageManager.addPreferredActivity(IntentFilter,int,ComponentName[],ComponentName,int)*
+
+public void addPreferredActivity(
+  android.content.IntentFilter filter,
+  int match,
+  android.content.ComponentName[] set,
+  android.content.ComponentName activity,
+  int userId)
+
+Same as (|android.content.pm.PackageManager|) , but with a specific userId to 
+apply the preference to. 
+
+
+
+*android.content.pm.PackageManager.buildPermissionRequestIntent(String...)*
+
+public |android.content.Intent| buildPermissionRequestIntent(java.lang.String[] permissions)
+
+Returns an (|android.content.Intent|) suitable for passing 
+tostartActivityForResultwhich prompts the user to grantpermissionsto this 
+application. 
+
+
+
+*android.content.pm.PackageManager.canonicalToCurrentPackageNames(String[])*
+
+public abstract |java.lang.String|[] canonicalToCurrentPackageNames(java.lang.String[] names)
+
+Map from a packages canonical name to the current name in use on the device. 
+
+
+    names - Array of new names to be mapped. 
+
+    Returns: Returns an array of the same size as the original, containing the current name 
+             for each package. 
+
+*android.content.pm.PackageManager.checkPermission(String,String)*
+
+public abstract int checkPermission(
+  java.lang.String permName,
+  java.lang.String pkgName)
+
+Check whether a particular package has been granted a particular permission. 
+
+
+    permName - The name of the permission you are checking for, 
+    pkgName - The name of the package you are checking against. 
+
+    Returns: If the package has the permission, PERMISSION_GRANTED is returned. If it does 
+             not have the permission, PERMISSION_DENIED is returned. 
+
+*android.content.pm.PackageManager.checkSignatures(int,int)*
+
+public abstract int checkSignatures(
+  int uid1,
+  int uid2)
+
+Like (|android.content.pm.PackageManager|) , but takes UIDs of the two packages 
+to be checked. This can be useful, for example, when doing the check in an IPC, 
+where the UID is the only identity available. It is functionally identical to 
+determining the package associated with the UIDs and checking their signatures. 
+
+
+    uid1 - First UID whose signature will be compared. 
+    uid2 - Second UID whose signature will be compared. 
+
+    Returns: Returns an integer indicating whether all signatures on the two packages match. 
+             The value is >= 0 ({@link #SIGNATURE_MATCH}) if all signatures 
+             match or < 0 if there is not a match ({@link #SIGNATURE_NO_MATCH} 
+             or {@link #SIGNATURE_UNKNOWN_PACKAGE}). 
+
+*android.content.pm.PackageManager.checkSignatures(String,String)*
+
+public abstract int checkSignatures(
+  java.lang.String pkg1,
+  java.lang.String pkg2)
+
+Compare the signatures of two packages to determine if the same signature 
+appears in both of them. If they do contain the same signature, then they are 
+allowed special privileges when working with each other: they can share the 
+same user-id, run instrumentation against each other, etc. 
+
+
+    pkg1 - First package name whose signature will be compared. 
+    pkg2 - Second package name whose signature will be compared. 
+
+    Returns: Returns an integer indicating whether all signatures on the two packages match. 
+             The value is >= 0 ({@link #SIGNATURE_MATCH}) if all signatures 
+             match or < 0 if there is not a match ({@link #SIGNATURE_NO_MATCH} 
+             or {@link #SIGNATURE_UNKNOWN_PACKAGE}). 
+
+*android.content.pm.PackageManager.clearApplicationUserData(String,IPackageDataObserver)*
+
+public abstract void clearApplicationUserData(
+  java.lang.String packageName,
+  IPackageDataObserver observer)
+
+Attempts to clear the user data directory of an application. Since this may 
+take a little while, the result will be posted back to the given observer. A 
+deletion will fail if the named package cannot be found, or if the named 
+package is a "system package". 
+
+
+    packageName - The name of the package 
+    observer - An observer callback to get notified when the operation is finished {@link 
+       android.content.pm.IPackageDataObserver#onRemoveCompleted(String, 
+       boolean)} will be called when that happens. observer may be null to 
+       indicate that no callback is desired. 
+
+*android.content.pm.PackageManager.clearPackagePreferredActivities(String)*
+
+public abstract void clearPackagePreferredActivities(java.lang.String packageName)
+
+Remove all preferred activity mappings, previously added with 
+(|android.content.pm.PackageManager|) , from the system whose activities are 
+implemented in the given package name. An application can only clear its own 
+package(s). 
+
+
+    packageName - The name of the package whose preferred activity mappings are to be removed. 
+
+*android.content.pm.PackageManager.currentToCanonicalPackageNames(String[])*
+
+public abstract |java.lang.String|[] currentToCanonicalPackageNames(java.lang.String[] names)
+
+Map from the current package names in use on the device to whatever the current 
+canonical name of that package is. 
+
+
+    names - Array of current names to be mapped. 
+
+    Returns: Returns an array of the same size as the original, containing the canonical 
+             name for each package. 
+
+*android.content.pm.PackageManager.deleteApplicationCacheFiles(String,IPackageDataObserver)*
+
+public abstract void deleteApplicationCacheFiles(
+  java.lang.String packageName,
+  IPackageDataObserver observer)
+
+Attempts to delete the cache files associated with an application. Since this 
+may take a little while, the result will be posted back to the given observer. 
+A deletion will fail if the calling context lacks the 
+(|android.Manifest.permission|) permission, if the named package cannot be 
+found, or if the named package is a "system package". 
+
+
+    packageName - The name of the package to delete 
+    observer - An observer callback to get notified when the cache file deletion is complete. 
+       {@link android.content.pm.IPackageDataObserver#onRemoveCompleted(String, 
+       boolean)} will be called when that happens. observer may be null to 
+       indicate that no callback is desired. 
+
+*android.content.pm.PackageManager.deletePackage(String,IPackageDeleteObserver,int)*
+
+public abstract void deletePackage(
+  java.lang.String packageName,
+  IPackageDeleteObserver observer,
+  int flags)
+
+Attempts to delete a package. Since this may take a little while, the result 
+will be posted back to the given observer. A deletion will fail if the calling 
+context lacks the (|android.Manifest.permission|) permission, if the named 
+package cannot be found, or if the named package is a "system package". (TODO: 
+include pointer to documentation on "system packages") 
+
+
+    packageName - The name of the package to delete 
+    observer - An observer callback to get notified when the package deletion is complete. 
+       {@link 
+       android.content.pm.IPackageDeleteObserver#packageDeleted(boolean)} will 
+       be called when that happens. observer may be null to indicate that no 
+       callback is desired. 
+    flags - - possible values: {@link #DELETE_KEEP_DATA}, {@link #DELETE_ALL_USERS}. 
+
+*android.content.pm.PackageManager.extendVerificationTimeout(int,int,long)*
+
+public abstract void extendVerificationTimeout(
+  int id,
+  int verificationCodeAtTimeout,
+  long millisecondsToDelay)
+
+Allows a package listening to the package verification 
+broadcast(|android.content.Intent|) to extend the default timeout for a 
+response and declare what action to perform after the timeout occurs. The 
+response must include theverificationCodeAtTimeoutwhich is one of 
+(|android.content.pm.PackageManager|) or (|android.content.pm.PackageManager|) 
+. 
+
+This method may only be called once per package id. Additional calls will have 
+no effect. 
+
+
+    id - pending package identifier as passed via the {@link 
+       PackageManager#EXTRA_VERIFICATION_ID} Intent extra. 
+    verificationCodeAtTimeout - either {@link PackageManager#VERIFICATION_ALLOW} or {@link 
+       PackageManager#VERIFICATION_REJECT}. If {@code 
+       verificationCodeAtTimeout} is neither {@link 
+       PackageManager#VERIFICATION_ALLOW} or {@link 
+       PackageManager#VERIFICATION_REJECT}, then {@code 
+       verificationCodeAtTimeout} will default to {@link 
+       PackageManager#VERIFICATION_REJECT}. 
+    millisecondsToDelay - the amount of time requested for the timeout. Must be positive and less than 
+       {@link PackageManager#MAXIMUM_VERIFICATION_TIMEOUT}. If {@code 
+       millisecondsToDelay} is out of bounds, {@code millisecondsToDelay} will 
+       be set to the closest in bounds value; namely, 0 or {@link 
+       PackageManager#MAXIMUM_VERIFICATION_TIMEOUT}. 
+
+*android.content.pm.PackageManager.freeStorage(long,IntentSender)*
+
+public abstract void freeStorage(
+  long freeStorageSize,
+  android.content.IntentSender pi)
+
+Free storage by deleting LRU sorted list of cache files across all 
+applications. If the currently available free storage on the device is greater 
+than or equal to the requested free storage, no cache files are cleared. If the 
+currently available storage on the device is less than the requested free 
+storage, some or all of the cache files across all applications are deleted 
+(based on last accessed time) to increase the free storage space on the device 
+to the requested value. There is no guarantee that clearing all the cache files 
+from all applications will clear up enough storage to achieve the desired 
+value. 
+
+
+    freeStorageSize - The number of bytes of storage to be freed by the system. Say if 
+       freeStorageSize is XX, and the current free storage is YY, if XX is less 
+       than YY, just return. if not free XX-YY number of bytes if possible. 
+    pi - IntentSender call back used to notify when the operation is completed.May be 
+       null to indicate that no call back is desired. 
+
+*android.content.pm.PackageManager.freeStorageAndNotify(long,IPackageDataObserver)*
+
+public abstract void freeStorageAndNotify(
+  long freeStorageSize,
+  IPackageDataObserver observer)
+
+Free storage by deleting LRU sorted list of cache files across all 
+applications. If the currently available free storage on the device is greater 
+than or equal to the requested free storage, no cache files are cleared. If the 
+currently available storage on the device is less than the requested free 
+storage, some or all of the cache files across all applications are deleted 
+(based on last accessed time) to increase the free storage space on the device 
+to the requested value. There is no guarantee that clearing all the cache files 
+from all applications will clear up enough storage to achieve the desired 
+value. 
+
+
+    freeStorageSize - The number of bytes of storage to be freed by the system. Say if 
+       freeStorageSize is XX, and the current free storage is YY, if XX is less 
+       than YY, just return. if not free XX-YY number of bytes if possible. 
+    observer - call back used to notify when the operation is completed 
+
+*android.content.pm.PackageManager.getActivityIcon(ComponentName)*
+
+public abstract Drawable getActivityIcon(android.content.ComponentName activityName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the icon associated with an activity. Given the full name of an 
+activity, retrieves the information about it and calls 
+ComponentInfo.loadIcon()(|android.content.pm.ComponentInfo|) to return its 
+icon. If the activity cannot be found, NameNotFoundException is thrown. 
+
+
+    activityName - Name of the activity whose icon is to be retrieved. 
+
+    Returns: Returns the image of the icon, or the default activity icon if it could not be 
+             found. Does not return null. 
+
+*android.content.pm.PackageManager.getActivityIcon(Intent)*
+
+public abstract Drawable getActivityIcon(android.content.Intent intent)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the icon associated with an Intent. If intent.getClassName() is set, 
+this simply returns the result of getActivityIcon(intent.getClassName()). 
+Otherwise it resolves the intent's component and returns the icon associated 
+with the resolved component. If intent.getClassName() cannot be found or the 
+Intent cannot be resolved to a component, NameNotFoundException is thrown. 
+
+
+    intent - The intent for which you would like to retrieve an icon. 
+
+    Returns: Returns the image of the icon, or the default activity icon if it could not be 
+             found. Does not return null. 
+
+*android.content.pm.PackageManager.getActivityInfo(ComponentName,int)*
+
+public abstract |android.content.pm.ActivityInfo| getActivityInfo(
+  android.content.ComponentName component,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular activity class. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if an 
+activity with the given class name cannot be found on the system. 
+
+
+    component - The full component name (i.e. 
+       com.google.apps.contacts/com.google.apps.contacts.ContactsList) of an 
+       Activity class. 
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, to modify the data (in ApplicationInfo) 
+       returned. 
+
+    Returns: {@link ActivityInfo} containing information about the activity. 
+
+*android.content.pm.PackageManager.getActivityLogo(ComponentName)*
+
+public abstract Drawable getActivityLogo(android.content.ComponentName activityName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the logo associated with an activity. Given the full name of an 
+activity, retrieves the information about it and calls 
+ComponentInfo.loadLogo()(|android.content.pm.ComponentInfo|) to return its 
+logo. If the activity cannot be found, NameNotFoundException is thrown. 
+
+
+    activityName - Name of the activity whose logo is to be retrieved. 
+
+    Returns: Returns the image of the logo or null if the activity has no logo specified. 
+
+*android.content.pm.PackageManager.getActivityLogo(Intent)*
+
+public abstract Drawable getActivityLogo(android.content.Intent intent)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the logo associated with an Intent. If intent.getClassName() is set, 
+this simply returns the result of getActivityLogo(intent.getClassName()). 
+Otherwise it resolves the intent's component and returns the logo associated 
+with the resolved component. If intent.getClassName() cannot be found or the 
+Intent cannot be resolved to a component, NameNotFoundException is thrown. 
+
+
+    intent - The intent for which you would like to retrieve a logo. 
+
+    Returns: Returns the image of the logo, or null if the activity has no logo specified. 
+
+*android.content.pm.PackageManager.getAllPermissionGroups(int)*
+
+public abstract |java.util.List|<PermissionGroupInfo> getAllPermissionGroups(int flags)
+
+Retrieve all of the known permission groups in the system. 
+
+
+    flags - Additional option flags. Use {@link #GET_META_DATA} to retrieve any meta-data 
+       associated with the permission group. 
+
+    Returns: Returns a list of {@link PermissionGroupInfo} containing information about all 
+             of the known permission groups. 
+
+*android.content.pm.PackageManager.getApplicationBlockedSettingAsUser(String,UserHandle)*
+
+public abstract boolean getApplicationBlockedSettingAsUser(
+  java.lang.String packageName,
+  android.os.UserHandle userHandle)
+
+Returns the blocked state of a package. 
+
+
+
+*android.content.pm.PackageManager.getApplicationEnabledSetting(String)*
+
+public abstract int getApplicationEnabledSetting(java.lang.String packageName)
+
+Return the the enabled setting for an application. This returns the last value 
+set by (|android.content.pm.PackageManager|) ; in most cases this value will be 
+(|android.content.pm.PackageManager|) since the value originally specified in 
+the manifest has not been modified. 
+
+
+    packageName - The component to retrieve. 
+
+    Returns: Returns the current enabled state for the component. May be one of {@link 
+             #COMPONENT_ENABLED_STATE_ENABLED}, {@link 
+             #COMPONENT_ENABLED_STATE_DISABLED}, or {@link 
+             #COMPONENT_ENABLED_STATE_DEFAULT}. The last one means the 
+             application's enabled state is based on the original information 
+             in the manifest as found in {@link ComponentInfo}. 
+
+*android.content.pm.PackageManager.getApplicationIcon(ApplicationInfo)*
+
+public abstract Drawable getApplicationIcon(android.content.pm.ApplicationInfo info)
+
+Retrieve the icon associated with an application. If it has not defined an 
+icon, the default app icon is returned. Does not return null. 
+
+
+    info - Information about application being queried. 
+
+    Returns: Returns the image of the icon, or the default application icon if it could not 
+             be found. 
+
+*android.content.pm.PackageManager.getApplicationIcon(String)*
+
+public abstract Drawable getApplicationIcon(java.lang.String packageName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the icon associated with an application. Given the name of the 
+application's package, retrieves the information about it and calls 
+getApplicationIcon() to return its icon. If the application cannot be found, 
+NameNotFoundException is thrown. 
+
+
+    packageName - Name of the package whose application icon is to be retrieved. 
+
+    Returns: Returns the image of the icon, or the default application icon if it could not 
+             be found. Does not return null. 
+
+*android.content.pm.PackageManager.getApplicationInfo(String,int)*
+
+public abstract |android.content.pm.ApplicationInfo| getApplicationInfo(
+  java.lang.String packageName,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular package/application. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if an 
+application with the given package name cannot be found on the system. 
+
+
+    packageName - The full name (i.e. com.google.apps.contacts) of an application. 
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, {@link #GET_UNINSTALLED_PACKAGES} to modify 
+       the data returned. 
+
+    Returns: {@link ApplicationInfo} Returns ApplicationInfo object containing information 
+             about the package. If flag GET_UNINSTALLED_PACKAGES is set and if 
+             the package is not found in the list of installed applications, 
+             the application information is retrieved from the list of 
+             uninstalled applications(which includes installed applications as 
+             well as applications with data directory ie applications which had 
+             been deleted with {@code DONT_DELETE_DATA} flag set). 
+
+*android.content.pm.PackageManager.getApplicationLabel(ApplicationInfo)*
+
+public abstract |java.lang.CharSequence| getApplicationLabel(android.content.pm.ApplicationInfo info)
+
+Return the label to use for this application. 
+
+
+    info - The application to get the label of. 
+
+    Returns: Returns the label associated with this application, or null if it could not be 
+             found for any reason. 
+
+*android.content.pm.PackageManager.getApplicationLogo(ApplicationInfo)*
+
+public abstract Drawable getApplicationLogo(android.content.pm.ApplicationInfo info)
+
+Retrieve the logo associated with an application. If it has not specified a 
+logo, this method returns null. 
+
+
+    info - Information about application being queried. 
+
+    Returns: Returns the image of the logo, or null if no logo is specified by the 
+             application. 
+
+*android.content.pm.PackageManager.getApplicationLogo(String)*
+
+public abstract Drawable getApplicationLogo(java.lang.String packageName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the logo associated with an application. Given the name of the 
+application's package, retrieves the information about it and calls 
+getApplicationLogo() to return its logo. If the application cannot be found, 
+NameNotFoundException is thrown. 
+
+
+    packageName - Name of the package whose application logo is to be retrieved. 
+
+    Returns: Returns the image of the logo, or null if no application logo has been 
+             specified. 
+
+*android.content.pm.PackageManager.getComponentEnabledSetting(ComponentName)*
+
+public abstract int getComponentEnabledSetting(android.content.ComponentName componentName)
+
+Return the the enabled setting for a package component (activity, receiver, 
+service, provider). This returns the last value set by 
+(|android.content.pm.PackageManager|) ; in most cases this value will be 
+(|android.content.pm.PackageManager|) since the value originally specified in 
+the manifest has not been modified. 
+
+
+    componentName - The component to retrieve. 
+
+    Returns: Returns the current enabled state for the component. May be one of {@link 
+             #COMPONENT_ENABLED_STATE_ENABLED}, {@link 
+             #COMPONENT_ENABLED_STATE_DISABLED}, or {@link 
+             #COMPONENT_ENABLED_STATE_DEFAULT}. The last one means the 
+             component's enabled state is based on the original information in 
+             the manifest as found in {@link ComponentInfo}. 
+
+*android.content.pm.PackageManager.getDataDirForUser(int,String)*
+
+public static |java.lang.String| getDataDirForUser(
+  int userId,
+  java.lang.String packageName)
+
+Returns the data directory for a particular user and package, given the uid of 
+the package. 
+
+
+    uid - uid of the package, including the userId and appId 
+    packageName - name of the package 
+
+    Returns: the user-specific data directory for the package 
+
+*android.content.pm.PackageManager.getDefaultActivityIcon()*
+
+public abstract Drawable getDefaultActivityIcon()
+
+Return the generic icon for an activity that is used when no specific icon is 
+defined. 
+
+
+
+    Returns: Drawable Image of the icon. 
+
+*android.content.pm.PackageManager.getDrawable(String,int,ApplicationInfo)*
+
+public abstract Drawable getDrawable(
+  java.lang.String packageName,
+  int resid,
+  android.content.pm.ApplicationInfo appInfo)
+
+Retrieve an image from a package. This is a low-level API used by the various 
+package manager info structures (such as (|android.content.pm.ComponentInfo|) 
+to implement retrieval of their associated icon. 
+
+
+    packageName - The name of the package that this icon is coming from. Cannot be null. 
+    resid - The resource identifier of the desired image. Cannot be 0. 
+    appInfo - Overall information about packageName. This may be null, in which case the 
+       application information will be retrieved for you if needed; if you 
+       already have this information around, it can be much more efficient to 
+       supply it here. 
+
+    Returns: Returns a Drawable holding the requested image. Returns null if an image could 
+             not be found for any reason. 
+
+*android.content.pm.PackageManager.getHomeActivities(List<ResolveInfo>)*
+
+public abstract |android.content.ComponentName| getHomeActivities(java.util.List<android.content.pm.ResolveInfo> outActivities)
+
+Ask for the set of available 'home' activities and the current explicit 
+default, if any. 
+
+
+
+*android.content.pm.PackageManager.getInstalledApplications(int)*
+
+public abstract |java.util.List|<ApplicationInfo> getInstalledApplications(int flags)
+
+Return a List of all application packages that are installed on the device. If 
+flag GET_UNINSTALLED_PACKAGES has been set, a list of all applications 
+including those deleted withDONT_DELETE_DATA(partially installed apps with data 
+directory) will be returned. 
+
+
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, {@link #GET_UNINSTALLED_PACKAGES} to modify 
+       the data returned. 
+
+    Returns: Returns a List of ApplicationInfo objects, one for each application that is 
+             installed on the device. In the unlikely case of there being no 
+             installed applications, an empty list is returned. If flag 
+             GET_UNINSTALLED_PACKAGES is set, a list of all applications 
+             including those deleted with {@code DONT_DELETE_DATA} (partially 
+             installed apps with data directory) will be returned. 
+
+*android.content.pm.PackageManager.getInstalledPackages(int)*
+
+public abstract |java.util.List|<PackageInfo> getInstalledPackages(int flags)
+
+Return a List of all packages that are installed on the device. 
+
+
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, {@link 
+       #GET_UNINSTALLED_PACKAGES} to modify the data returned. 
+
+    Returns: A List of PackageInfo objects, one for each package that is installed on the 
+             device. In the unlikely case of there being no installed packages, 
+             an empty list is returned. If flag GET_UNINSTALLED_PACKAGES is 
+             set, a list of all applications including those deleted with 
+             {@code DONT_DELETE_DATA} (partially installed apps with data 
+             directory) will be returned. 
+
+*android.content.pm.PackageManager.getInstalledPackages(int,int)*
+
+public abstract |java.util.List|<PackageInfo> getInstalledPackages(
+  int flags,
+  int userId)
+
+Return a List of all packages that are installed on the device, for a specific 
+user. Requesting a list of installed packages for another user will require the 
+permission INTERACT_ACROSS_USERS_FULL. 
+
+
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, {@link 
+       #GET_UNINSTALLED_PACKAGES} to modify the data returned. 
+    userId - The user for whom the installed packages are to be listed 
+
+    Returns: A List of PackageInfo objects, one for each package that is installed on the 
+             device. In the unlikely case of there being no installed packages, 
+             an empty list is returned. If flag GET_UNINSTALLED_PACKAGES is 
+             set, a list of all applications including those deleted with 
+             {@code DONT_DELETE_DATA} (partially installed apps with data 
+             directory) will be returned. 
+
+*android.content.pm.PackageManager.getInstallerPackageName(String)*
+
+public abstract |java.lang.String| getInstallerPackageName(java.lang.String packageName)
+
+Retrieve the package name of the application that installed a package. This 
+identifies which market the package came from. 
+
+
+    packageName - The name of the package to query 
+
+*android.content.pm.PackageManager.getInstrumentationInfo(ComponentName,int)*
+
+public abstract |android.content.pm.InstrumentationInfo| getInstrumentationInfo(
+  android.content.ComponentName className,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular instrumentation 
+class. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if 
+instrumentation with the given class name cannot be found on the system. 
+
+
+    className - The full name (i.e. com.google.apps.contacts.InstrumentList) of an 
+       Instrumentation class. 
+    flags - Additional option flags. Currently should always be 0. 
+
+    Returns: InstrumentationInfo containing information about the instrumentation. 
+
+*android.content.pm.PackageManager.getLaunchIntentForPackage(String)*
+
+public abstract |android.content.Intent| getLaunchIntentForPackage(java.lang.String packageName)
+
+Return a "good" intent to launch a front-door activity in a package, for use 
+for example to implement an "open" button when browsing through packages. The 
+current implementation will look first for a main activity in the category 
+(|android.content.Intent|) , next for a main activity in the category 
+(|android.content.Intent|) , or return null if neither are found. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a package 
+with the given name cannot be found on the system. 
+
+
+    packageName - The name of the package to inspect. 
+
+    Returns: Returns either a fully-qualified Intent that can be used to launch the main 
+             activity in the package, or null if the package does not contain 
+             such an activity. 
+
+*android.content.pm.PackageManager.getNameForUid(int)*
+
+public abstract |java.lang.String| getNameForUid(int uid)
+
+Retrieve the official name associated with a user id. This name is guaranteed 
+to never change, though it is possibly for the underlying user id to be 
+changed. That is, if you are storing information about user ids in persistent 
+storage, you should use the string returned by this function instead of the raw 
+user-id. 
+
+
+    uid - The user id for which you would like to retrieve a name. 
+
+    Returns: Returns a unique name for the given user id, or null if the user id is not 
+             currently assigned. 
+
+*android.content.pm.PackageManager.getPackageArchiveInfo(String,int)*
+
+public |android.content.pm.PackageInfo| getPackageArchiveInfo(
+  java.lang.String archiveFilePath,
+  int flags)
+
+Retrieve overall information about an application package defined in a package 
+archive file 
+
+
+    archiveFilePath - The path to the archive file 
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, to 
+       modify the data returned. 
+
+    Returns: Returns the information about the package. Returns null if the package could 
+             not be successfully parsed. 
+
+*android.content.pm.PackageManager.getPackageGids(String)*
+
+public abstract int[] getPackageGids(java.lang.String packageName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Return an array of all of the secondary group-ids that have been assigned to a 
+package. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a package 
+with the given name cannot be found on the system. 
+
+
+    packageName - The full name (i.e. com.google.apps.contacts) of the desired package. 
+
+    Returns: Returns an int array of the assigned gids, or null if there are none. 
+
+*android.content.pm.PackageManager.getPackageInfo(String,int)*
+
+public abstract |android.content.pm.PackageInfo| getPackageInfo(
+  java.lang.String packageName,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve overall information about an application package that is installed on 
+the system. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a package 
+with the given name can not be found on the system. 
+
+
+    packageName - The full name (i.e. com.google.apps.contacts) of the desired package. 
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, {@link 
+       #GET_UNINSTALLED_PACKAGES} to modify the data returned. 
+
+    Returns: Returns a PackageInfo object containing information about the package. If flag 
+             GET_UNINSTALLED_PACKAGES is set and if the package is not found in 
+             the list of installed applications, the package information is 
+             retrieved from the list of uninstalled applications (which 
+             includes installed applications as well as applications with data 
+             directory i.e. applications which had been deleted with {@code 
+             DONT_DELETE_DATA} flag set). 
+
+*android.content.pm.PackageManager.getPackagesForUid(int)*
+
+public abstract |java.lang.String|[] getPackagesForUid(int uid)
+
+Retrieve the names of all packages that are associated with a particular user 
+id. In most cases, this will be a single package name, the package that has 
+been assigned that user id. Where there are multiple packages sharing the same 
+user id through the "sharedUserId" mechanism, all packages with that id will be 
+returned. 
+
+
+    uid - The user id for which you would like to retrieve the associated packages. 
+
+    Returns: Returns an array of one or more packages assigned to the user id, or null if 
+             there are no known packages with the given id. 
+
+*android.content.pm.PackageManager.getPackagesHoldingPermissions(String[],int)*
+
+public abstract |java.util.List|<PackageInfo> getPackagesHoldingPermissions(
+  java.lang.String[] permissions,
+  int flags)
+
+Return a List of all installed packages that are currently holding any of the 
+given permissions. 
+
+
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, {@link 
+       #GET_UNINSTALLED_PACKAGES} to modify the data returned. 
+
+    Returns: Returns a List of PackageInfo objects, one for each installed application that 
+             is holding any of the permissions that were provided. 
+
+*android.content.pm.PackageManager.getPackageSizeInfo(String,int,IPackageStatsObserver)*
+
+public abstract void getPackageSizeInfo(
+  java.lang.String packageName,
+  int userHandle,
+  IPackageStatsObserver observer)
+
+Retrieve the size information for a package. Since this may take a little 
+while, the result will be posted back to the given observer. The calling 
+context should have the (|android.Manifest.permission|) permission. 
+
+
+    packageName - The name of the package whose size information is to be retrieved 
+    userHandle - The user whose size information should be retrieved. 
+    observer - An observer callback to get notified when the operation is complete. {@link 
+       android.content.pm.IPackageStatsObserver#onGetStatsCompleted(PackageStats, 
+       boolean)} The observer's callback is invoked with a PackageStats 
+       object(containing the code, data and cache sizes of the package) and a 
+       boolean value representing the status of the operation. observer may be 
+       null to indicate that no callback is desired. 
+
+*android.content.pm.PackageManager.getPackageSizeInfo(String,IPackageStatsObserver)*
+
+public void getPackageSizeInfo(
+  java.lang.String packageName,
+  IPackageStatsObserver observer)
+
+Like (|android.content.pm.PackageManager|) , but returns the size for the 
+calling user. 
+
+
+
+*android.content.pm.PackageManager.getPackageUid(String,int)*
+
+public abstract int getPackageUid(
+  java.lang.String packageName,
+  int userHandle)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+
+
+
+    packageName - The full name (i.e. com.google.apps.contacts) of the desired package. 
+    userHandle - The user handle identifier to look up the package under. 
+
+    Returns: Returns an integer uid who owns the given package name. 
+
+*android.content.pm.PackageManager.getPermissionGroupInfo(String,int)*
+
+public abstract |android.content.pm.PermissionGroupInfo| getPermissionGroupInfo(
+  java.lang.String name,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular group of 
+permissions. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a 
+permission group with the given name cannot be found on the system. 
+
+
+    name - The fully qualified name (i.e. com.google.permission_group.APPS) of the 
+       permission you are interested in. 
+    flags - Additional option flags. Use {@link #GET_META_DATA} to retrieve any meta-data 
+       associated with the permission group. 
+
+    Returns: Returns a {@link PermissionGroupInfo} containing information about the 
+             permission. 
+
+*android.content.pm.PackageManager.getPermissionInfo(String,int)*
+
+public abstract |android.content.pm.PermissionInfo| getPermissionInfo(
+  java.lang.String name,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular permission. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a 
+permission with the given name cannot be found on the system. 
+
+
+    name - The fully qualified name (i.e. com.google.permission.LOGIN) of the permission 
+       you are interested in. 
+    flags - Additional option flags. Use {@link #GET_META_DATA} to retrieve any meta-data 
+       associated with the permission. 
+
+    Returns: Returns a {@link PermissionInfo} containing information about the permission. 
+
+*android.content.pm.PackageManager.getPreferredActivities(List<IntentFilter>,List<ComponentName>,String)*
+
+public abstract int getPreferredActivities(
+  java.util.List<android.content.IntentFilter> outFilters,
+  java.util.List<android.content.ComponentName> outActivities,
+  java.lang.String packageName)
+
+Retrieve all preferred activities, previously added with 
+(|android.content.pm.PackageManager|) , that are currently registered with the 
+system. 
+
+
+    outFilters - A list in which to place the filters of all of the preferred activities, or 
+       null for none. 
+    outActivities - A list in which to place the component names of all of the preferred 
+       activities, or null for none. 
+    packageName - An option package in which you would like to limit the list. If null, all 
+       activities will be returned; if non-null, only those activities in the 
+       given package are returned. 
+
+    Returns: Returns the total number of registered preferred activities (the number of 
+             distinct IntentFilter records, not the number of unique activity 
+             components) that were found. 
+
+*android.content.pm.PackageManager.getPreferredPackages(int)*
+
+public abstract |java.util.List|<PackageInfo> getPreferredPackages(int flags)
+
+Retrieve the list of all currently configured preferred packages. The first 
+package on the list is the most preferred, the last is the least preferred. 
+
+
+    flags - Additional option flags. Use any combination of {@link #GET_ACTIVITIES}, {@link 
+       #GET_GIDS}, {@link #GET_CONFIGURATIONS}, {@link #GET_INSTRUMENTATION}, 
+       {@link #GET_PERMISSIONS}, {@link #GET_PROVIDERS}, {@link 
+       #GET_RECEIVERS}, {@link #GET_SERVICES}, {@link #GET_SIGNATURES}, to 
+       modify the data returned. 
+
+    Returns: Returns a list of PackageInfo objects describing each preferred application, in 
+             order of preference. 
+
+*android.content.pm.PackageManager.getProviderInfo(ComponentName,int)*
+
+public abstract |android.content.pm.ProviderInfo| getProviderInfo(
+  android.content.ComponentName component,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular content provider 
+class. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a 
+provider with the given class name cannot be found on the system. 
+
+
+    component - The full component name (i.e. 
+       com.google.providers.media/com.google.providers.media.MediaProvider) of 
+       a ContentProvider class. 
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, to modify the data returned. 
+
+    Returns: ProviderInfo containing information about the service. 
+
+*android.content.pm.PackageManager.getReceiverInfo(ComponentName,int)*
+
+public abstract |android.content.pm.ActivityInfo| getReceiverInfo(
+  android.content.ComponentName component,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular receiver class. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a 
+receiver with the given class name cannot be found on the system. 
+
+
+    component - The full component name (i.e. 
+       com.google.apps.calendar/com.google.apps.calendar.CalendarAlarm) of a 
+       Receiver class. 
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, to modify the data returned. 
+
+    Returns: {@link ActivityInfo} containing information about the receiver. 
+
+*android.content.pm.PackageManager.getResourcesForActivity(ComponentName)*
+
+public abstract |android.content.res.Resources| getResourcesForActivity(android.content.ComponentName activityName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the resources associated with an activity. Given the full name of an 
+activity, retrieves the information about it and calls getResources() to return 
+its application's resources. If the activity cannot be found, 
+NameNotFoundException is thrown. 
+
+
+    activityName - Name of the activity whose resources are to be retrieved. 
+
+    Returns: Returns the application's Resources. 
+
+*android.content.pm.PackageManager.getResourcesForApplication(ApplicationInfo)*
+
+public abstract |android.content.res.Resources| getResourcesForApplication(android.content.pm.ApplicationInfo app)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the resources for an application. Throws NameNotFoundException if the 
+package is no longer installed. 
+
+
+    app - Information about the desired application. 
+
+    Returns: Returns the application's Resources. 
+
+*android.content.pm.PackageManager.getResourcesForApplication(String)*
+
+public abstract |android.content.res.Resources| getResourcesForApplication(java.lang.String appPackageName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve the resources associated with an application. Given the full package 
+name of an application, retrieves the information about it and calls 
+getResources() to return its application's resources. If the appPackageName 
+cannot be found, NameNotFoundException is thrown. 
+
+
+    appPackageName - Package name of the application whose resources are to be retrieved. 
+
+    Returns: Returns the application's Resources. 
+
+*android.content.pm.PackageManager.getResourcesForApplicationAsUser(String,int)*
+
+public abstract |android.content.res.Resources| getResourcesForApplicationAsUser(
+  java.lang.String appPackageName,
+  int userId)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+
+
+
+
+*android.content.pm.PackageManager.getServiceInfo(ComponentName,int)*
+
+public abstract |android.content.pm.ServiceInfo| getServiceInfo(
+  android.content.ComponentName component,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Retrieve all of the information we know about a particular service class. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if a service 
+with the given class name cannot be found on the system. 
+
+
+    component - The full component name (i.e. 
+       com.google.apps.media/com.google.apps.media.BackgroundPlayback) of a 
+       Service class. 
+    flags - Additional option flags. Use any combination of {@link #GET_META_DATA}, {@link 
+       #GET_SHARED_LIBRARY_FILES}, to modify the data returned. 
+
+    Returns: ServiceInfo containing information about the service. 
+
+*android.content.pm.PackageManager.getSystemAvailableFeatures()*
+
+public abstract |android.content.pm.FeatureInfo|[] getSystemAvailableFeatures()
+
+Get a list of features that are available on the system. 
+
+
+
+    Returns: An array of FeatureInfo classes describing the features that are available on 
+             the system, or null if there are none(!!). 
+
+*android.content.pm.PackageManager.getSystemSharedLibraryNames()*
+
+public abstract |java.lang.String|[] getSystemSharedLibraryNames()
+
+Get a list of shared libraries that are available on the system. 
+
+
+
+    Returns: An array of shared library names that are available on the system, or null if 
+             none are installed. 
+
+*android.content.pm.PackageManager.getText(String,int,ApplicationInfo)*
+
+public abstract |java.lang.CharSequence| getText(
+  java.lang.String packageName,
+  int resid,
+  android.content.pm.ApplicationInfo appInfo)
+
+Retrieve text from a package. This is a low-level API used by the various 
+package manager info structures (such as (|android.content.pm.ComponentInfo|) 
+to implement retrieval of their associated labels and other text. 
+
+
+    packageName - The name of the package that this text is coming from. Cannot be null. 
+    resid - The resource identifier of the desired text. Cannot be 0. 
+    appInfo - Overall information about packageName. This may be null, in which case the 
+       application information will be retrieved for you if needed; if you 
+       already have this information around, it can be much more efficient to 
+       supply it here. 
+
+    Returns: Returns a CharSequence holding the requested text. Returns null if the text 
+             could not be found for any reason. 
+
+*android.content.pm.PackageManager.getUidForSharedUser(String)*
+
+public abstract int getUidForSharedUser(java.lang.String sharedUserName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Return the user id associated with a shared user name. Multiple applications 
+can specify a shared user name in their manifest and thus end up using a common 
+uid. This might be used for new applications that use an existing shared user 
+name and need to know the uid of the shared user. 
+
+
+    sharedUserName - The shared user name whose uid is to be retrieved. 
+
+    Returns: Returns the uid associated with the shared user, or NameNotFoundException if 
+             the shared user name is not being used by any installed packages 
+
+*android.content.pm.PackageManager.getVerifierDeviceIdentity()*
+
+public abstract |android.content.pm.VerifierDeviceIdentity| getVerifierDeviceIdentity()
+
+Returns the device identity that verifiers can use to associate their scheme to 
+a particular device. This should not be used by anything other than a package 
+verifier. 
+
+
+
+    Returns: identity that uniquely identifies current device 
+
+*android.content.pm.PackageManager.getXml(String,int,ApplicationInfo)*
+
+public abstract |android.content.res.XmlResourceParser| getXml(
+  java.lang.String packageName,
+  int resid,
+  android.content.pm.ApplicationInfo appInfo)
+
+Retrieve an XML file from a package. This is a low-level API used to retrieve 
+XML meta data. 
+
+
+    packageName - The name of the package that this xml is coming from. Cannot be null. 
+    resid - The resource identifier of the desired xml. Cannot be 0. 
+    appInfo - Overall information about packageName. This may be null, in which case the 
+       application information will be retrieved for you if needed; if you 
+       already have this information around, it can be much more efficient to 
+       supply it here. 
+
+    Returns: Returns an XmlPullParser allowing you to parse out the XML data. Returns null 
+             if the xml resource could not be found for any reason. 
+
+*android.content.pm.PackageManager.grantPermission(String,String)*
+
+public abstract void grantPermission(
+  java.lang.String packageName,
+  java.lang.String permissionName)
+
+Grant a permission to an application which the application does not already 
+have. The permission must have been requested by the application, but as an 
+optional permission. If the application is not allowed to hold the permission, 
+a SecurityException is thrown. 
+
+
+    packageName - The name of the package that the permission will be granted to. 
+    permissionName - The name of the permission. 
+
+*android.content.pm.PackageManager.hasSystemFeature(String)*
+
+public abstract boolean hasSystemFeature(java.lang.String name)
+
+Check whether the given feature name is one of the available features as 
+returned by (|android.content.pm.PackageManager|) . 
+
+
+
+    Returns: Returns true if the devices supports the feature, else false. 
+
+*android.content.pm.PackageManager.installExistingPackage(String)*
+
+public abstract int installExistingPackage(java.lang.String packageName)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+If there is already an application with the given package name installed on the 
+system for other users, also install it for the calling user. 
+
+
+
+*android.content.pm.PackageManager.installPackage(Uri,IPackageInstallObserver,int,String)*
+
+public abstract void installPackage(
+  android.net.Uri packageURI,
+  IPackageInstallObserver observer,
+  int flags,
+  java.lang.String installerPackageName)
+
+
+
+
+    packageURI - The location of the package file to install. This can be a 'file:' or a 
+       'content:' URI. 
+    observer - An observer callback to get notified when the package installation is complete. 
+       {@link IPackageInstallObserver#packageInstalled(String, int)} will be 
+       called when that happens. observer may be null to indicate that no 
+       callback is desired. 
+    flags - - possible values: {@link #INSTALL_FORWARD_LOCK}, {@link 
+       #INSTALL_REPLACE_EXISTING}, {@link #INSTALL_ALLOW_TEST}. 
+    installerPackageName - Optional package name of the application that is performing the installation. 
+       This identifies which market the package came from. 
+
+*android.content.pm.PackageManager.installPackageWithVerification(Uri,IPackageInstallObserver,int,String,Uri,ManifestDigest,ContainerEncryptionParams)*
+
+public abstract void installPackageWithVerification(
+  android.net.Uri packageURI,
+  IPackageInstallObserver observer,
+  int flags,
+  java.lang.String installerPackageName,
+  android.net.Uri verificationURI,
+  android.content.pm.ManifestDigest manifestDigest,
+  android.content.pm.ContainerEncryptionParams encryptionParams)
+
+Similar to (|android.content.pm.PackageManager|) but with an extra verification 
+file provided. 
+
+
+    packageURI - The location of the package file to install. This can be a 'file:' or a 
+       'content:' URI. 
+    observer - An observer callback to get notified when the package installation is complete. 
+       {@link IPackageInstallObserver#packageInstalled(String, int)} will be 
+       called when that happens. observer may be null to indicate that no 
+       callback is desired. 
+    flags - - possible values: {@link #INSTALL_FORWARD_LOCK}, {@link 
+       #INSTALL_REPLACE_EXISTING}, {@link #INSTALL_ALLOW_TEST} . 
+    installerPackageName - Optional package name of the application that is performing the installation. 
+       This identifies which market the package came from. 
+    verificationURI - The location of the supplementary verification file. This can be a 'file:' or a 
+       'content:' URI. May be {@code null}. 
+    manifestDigest - an object that holds the digest of the package which can be used to verify 
+       ownership. May be {@code null}. 
+    encryptionParams - if the package to be installed is encrypted, these parameters describing the 
+       encryption and authentication used. May be {@code null}. 
+
+*android.content.pm.PackageManager.installPackageWithVerificationAndEncryption(Uri,IPackageInstallObserver,int,String,VerificationParams,ContainerEncryptionParams)*
+
+public abstract void installPackageWithVerificationAndEncryption(
+  android.net.Uri packageURI,
+  IPackageInstallObserver observer,
+  int flags,
+  java.lang.String installerPackageName,
+  android.content.pm.VerificationParams verificationParams,
+  android.content.pm.ContainerEncryptionParams encryptionParams)
+
+Similar to (|android.content.pm.PackageManager|) but with an extra verification 
+information provided. 
+
+
+    packageURI - The location of the package file to install. This can be a 'file:' or a 
+       'content:' URI. 
+    observer - An observer callback to get notified when the package installation is complete. 
+       {@link IPackageInstallObserver#packageInstalled(String, int)} will be 
+       called when that happens. observer may be null to indicate that no 
+       callback is desired. 
+    flags - - possible values: {@link #INSTALL_FORWARD_LOCK}, {@link 
+       #INSTALL_REPLACE_EXISTING}, {@link #INSTALL_ALLOW_TEST} . 
+    installerPackageName - Optional package name of the application that is performing the installation. 
+       This identifies which market the package came from. 
+    verificationParams - an object that holds signal information to assist verification. May be {@code 
+       null}. 
+    encryptionParams - if the package to be installed is encrypted, these parameters describing the 
+       encryption and authentication used. May be {@code null}. 
+
+*android.content.pm.PackageManager.isSafeMode()*
+
+public abstract boolean isSafeMode()
+
+Return whether the device has been booted into safe mode. 
+
+
+
+*android.content.pm.PackageManager.movePackage(String,IPackageMoveObserver,int)*
+
+public abstract void movePackage(
+  java.lang.String packageName,
+  IPackageMoveObserver observer,
+  int flags)
+
+Attempts to move package resources from internal to external media or vice 
+versa. Since this may take a little while, the result will be posted back to 
+the given observer. This call may fail if the calling context lacks the 
+(|android.Manifest.permission|) permission, if the named package cannot be 
+found, or if the named package is a "system package". 
+
+
+    packageName - The name of the package to delete 
+    observer - An observer callback to get notified when the package move is complete. {@link 
+       android.content.pm.IPackageMoveObserver#packageMoved(boolean)} will be 
+       called when that happens. observer may be null to indicate that no 
+       callback is desired. 
+    flags - To indicate install location {@link #MOVE_INTERNAL} or {@link 
+       #MOVE_EXTERNAL_MEDIA} 
+
+*android.content.pm.PackageManager.queryBroadcastReceivers(Intent,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryBroadcastReceivers(
+  android.content.Intent intent,
+  int flags)
+
+Retrieve all receivers that can handle a broadcast of the given intent. 
+
+
+    intent - The desired intent as per resolveActivity(). 
+    flags - Additional option flags. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching Receiver. These are 
+             ordered from first to last in priority. If there are no matching 
+             receivers, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryBroadcastReceivers(Intent,int,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryBroadcastReceivers(
+  android.content.Intent intent,
+  int flags,
+  int userId)
+
+Retrieve all receivers that can handle a broadcast of the given intent, for a 
+specific user. 
+
+
+    intent - The desired intent as per resolveActivity(). 
+    flags - Additional option flags. 
+    userId - The userId of the user being queried. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching Receiver. These are 
+             ordered from first to last in priority. If there are no matching 
+             receivers, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryContentProviders(String,int,int)*
+
+public abstract |java.util.List|<ProviderInfo> queryContentProviders(
+  java.lang.String processName,
+  int uid,
+  int flags)
+
+Retrieve content provider information. 
+
+Note: unlike most other methods, an empty result set is indicated by a null 
+return instead of an empty list. 
+
+
+    processName - If non-null, limits the returned providers to only those that are hosted by the 
+       given process. If null, all content providers are returned. 
+    uid - If processName is non-null, this is the required uid owning the requested 
+       content providers. 
+    flags - Additional option flags. Currently should always be 0. 
+
+    Returns: A List<ContentProviderInfo> containing one entry for each content provider 
+             either patching processName or, if processName is null, all known 
+             content providers. If there are no matching providers, null is 
+             returned. 
+
+*android.content.pm.PackageManager.queryInstrumentation(String,int)*
+
+public abstract |java.util.List|<InstrumentationInfo> queryInstrumentation(
+  java.lang.String targetPackage,
+  int flags)
+
+Retrieve information about available instrumentation code. May be used to 
+retrieve either all instrumentation code, or only the code targeting a 
+particular package. 
+
+
+    targetPackage - If null, all instrumentation is returned; only the instrumentation targeting 
+       this package name is returned. 
+    flags - Additional option flags. Currently should always be 0. 
+
+    Returns: A List<InstrumentationInfo> containing one entry for each matching available 
+             Instrumentation. Returns an empty list if there is no 
+             instrumentation available for the given package. 
+
+*android.content.pm.PackageManager.queryIntentActivities(Intent,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentActivities(
+  android.content.Intent intent,
+  int flags)
+
+Retrieve all activities that can be performed for the given intent. 
+
+
+    intent - The desired intent as per resolveActivity(). 
+    flags - Additional option flags. The most important is {@link #MATCH_DEFAULT_ONLY}, to 
+       limit the resolution to only those activities that support the {@link 
+       android.content.Intent#CATEGORY_DEFAULT}. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching Activity. These are 
+             ordered from best to worst match -- that is, the first item in the 
+             list is what is returned by {@link #resolveActivity}. If there are 
+             no matching activities, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryIntentActivitiesAsUser(Intent,int,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentActivitiesAsUser(
+  android.content.Intent intent,
+  int flags,
+  int userId)
+
+Retrieve all activities that can be performed for the given intent, for a 
+specific user. 
+
+
+    intent - The desired intent as per resolveActivity(). 
+    flags - Additional option flags. The most important is {@link #MATCH_DEFAULT_ONLY}, to 
+       limit the resolution to only those activities that support the {@link 
+       android.content.Intent#CATEGORY_DEFAULT}. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching Activity. These are 
+             ordered from best to worst match -- that is, the first item in the 
+             list is what is returned by {@link #resolveActivity}. If there are 
+             no matching activities, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryIntentActivityOptions(ComponentName,Intent[],Intent,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentActivityOptions(
+  android.content.ComponentName caller,
+  android.content.Intent[] specifics,
+  android.content.Intent intent,
+  int flags)
+
+Retrieve a set of activities that should be presented to the user as similar 
+options. This is like (|android.content.pm.PackageManager|) , except it also 
+allows you to supply a list of more explicit Intents that you would like to 
+resolve to particular options, and takes care of returning the final 
+ResolveInfo list in a reasonable order, with no duplicates, based on those 
+inputs. 
+
+
+    caller - The class name of the activity that is making the request. This activity will 
+       never appear in the output list. Can be null. 
+    specifics - An array of Intents that should be resolved to the first specific results. Can 
+       be null. 
+    intent - The desired intent as per resolveActivity(). 
+    flags - Additional option flags. The most important is {@link #MATCH_DEFAULT_ONLY}, to 
+       limit the resolution to only those activities that support the {@link 
+       android.content.Intent#CATEGORY_DEFAULT}. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching Activity. These are 
+             ordered first by all of the intents resolved in specifics and then 
+             any additional activities that can handle intent but did not get 
+             included by one of the specifics intents. If there are no matching 
+             activities, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryIntentContentProviders(Intent,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentContentProviders(
+  android.content.Intent intent,
+  int flags)
+
+Retrieve all providers that can match the given intent. 
+
+
+    intent - An intent containing all of the desired specification (action, data, type, 
+       category, and/or component). 
+    flags - Additional option flags. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching ProviderInfo. These 
+             are ordered from best to worst match. If there are no matching 
+             providers, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryIntentContentProvidersAsUser(Intent,int,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentContentProvidersAsUser(
+  android.content.Intent intent,
+  int flags,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageManager.queryIntentServices(Intent,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentServices(
+  android.content.Intent intent,
+  int flags)
+
+Retrieve all services that can match the given intent. 
+
+
+    intent - The desired intent as per resolveService(). 
+    flags - Additional option flags. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching ServiceInfo. These 
+             are ordered from best to worst match -- that is, the first item in 
+             the list is what is returned by resolveService(). If there are no 
+             matching services, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryIntentServicesAsUser(Intent,int,int)*
+
+public abstract |java.util.List|<ResolveInfo> queryIntentServicesAsUser(
+  android.content.Intent intent,
+  int flags,
+  int userId)
+
+Retrieve all services that can match the given intent for a given user. 
+
+
+    intent - The desired intent as per resolveService(). 
+    flags - Additional option flags. 
+    userId - The user id. 
+
+    Returns: A List<ResolveInfo> containing one entry for each matching ServiceInfo. These 
+             are ordered from best to worst match -- that is, the first item in 
+             the list is what is returned by resolveService(). If there are no 
+             matching services, an empty list is returned. 
+
+*android.content.pm.PackageManager.queryPermissionsByGroup(String,int)*
+
+public abstract |java.util.List|<PermissionInfo> queryPermissionsByGroup(
+  java.lang.String group,
+  int flags)
+  throws |android.content.pm.PackageManager.NameNotFoundException|
+         
+Query for all of the permissions associated with a particular group. 
+
+Throws (|android.content.pm.PackageManager.NameNotFoundException|) if the given 
+group does not exist. 
+
+
+    group - The fully qualified name (i.e. com.google.permission.LOGIN) of the permission 
+       group you are interested in. Use null to find all of the permissions not 
+       associated with a group. 
+    flags - Additional option flags. Use {@link #GET_META_DATA} to retrieve any meta-data 
+       associated with the permissions. 
+
+    Returns: Returns a list of {@link PermissionInfo} containing information about all of 
+             the permissions in the given group. 
+
+*android.content.pm.PackageManager.removePackageFromPreferred(String)*
+
+public abstract void removePackageFromPreferred(java.lang.String packageName)
+
+
+
+    Deprecated: This function no longer does anything; it was an old
+ approach to managing preferred activities, which has been superseded
+ by (and conflicts with) the modern activity-based preferences.
+
+
+*android.content.pm.PackageManager.removePermission(String)*
+
+public abstract void removePermission(java.lang.String name)
+
+Removes a permission that was previously added with 
+(|android.content.pm.PackageManager|) . The same ownership rules apply -- you 
+are only allowed to remove permissions that you are allowed to add. 
+
+
+    name - The name of the permission to remove. 
+
+*android.content.pm.PackageManager.replacePreferredActivity(IntentFilter,int,ComponentName[],ComponentName)*
+
+public abstract void replacePreferredActivity(
+  android.content.IntentFilter filter,
+  int match,
+  android.content.ComponentName[] set,
+  android.content.ComponentName activity)
+
+
+
+    Deprecated: This is a protected API that should not have been available
+ to third party applications.  It is the platform's responsibility for
+ assigning preferred activities and this cannot be directly modified.
+
+ Replaces an existing preferred activity mapping to the system, and if that were not present
+ adds a new preferred activity.  This will be used
+ to automatically select the given activity component when
+ {@link Context#startActivity(Intent) Context.startActivity()} finds
+ multiple matching activities and also matches the given filter.
+
+    filter - The set of intents under which this activity will be made preferred. 
+    match - The IntentFilter match category that this preference applies to. 
+    set - The set of activities that the user was picking from when this preference was 
+       made. 
+    activity - The component name of the activity that is to be preferred. 
+
+*android.content.pm.PackageManager.resolveActivity(Intent,int)*
+
+public abstract |android.content.pm.ResolveInfo| resolveActivity(
+  android.content.Intent intent,
+  int flags)
+
+Determine the best action to perform for a given Intent. This is how 
+(|android.content.Intent|) finds an activity if a class has not been explicitly 
+specified. 
+
+Note: if using an implicit Intent (without an explicit ComponentName 
+specified), be sure to consider whether to set the 
+(|android.content.pm.PackageManager|) only flag. You need to do so to resolve 
+the activity in the same way that (|android.content.Context|) and 
+Intent.resolveActivity(PackageManager)(|android.content.Intent|) do. 
+
+
+    intent - An intent containing all of the desired specification (action, data, type, 
+       category, and/or component). 
+    flags - Additional option flags. The most important is {@link #MATCH_DEFAULT_ONLY}, to 
+       limit the resolution to only those activities that support the {@link 
+       android.content.Intent#CATEGORY_DEFAULT}. 
+
+    Returns: Returns a ResolveInfo containing the final activity intent that was determined 
+             to be the best action. Returns null if no matching activity was 
+             found. If multiple matching activities are found and there is no 
+             default set, returns a ResolveInfo containing something else, such 
+             as the activity resolver. 
+
+*android.content.pm.PackageManager.resolveActivityAsUser(Intent,int,int)*
+
+public abstract |android.content.pm.ResolveInfo| resolveActivityAsUser(
+  android.content.Intent intent,
+  int flags,
+  int userId)
+
+Determine the best action to perform for a given Intent for a given user. This 
+is how (|android.content.Intent|) finds an activity if a class has not been 
+explicitly specified. 
+
+Note: if using an implicit Intent (without an explicit ComponentName 
+specified), be sure to consider whether to set the 
+(|android.content.pm.PackageManager|) only flag. You need to do so to resolve 
+the activity in the same way that (|android.content.Context|) and 
+Intent.resolveActivity(PackageManager)(|android.content.Intent|) do. 
+
+
+    intent - An intent containing all of the desired specification (action, data, type, 
+       category, and/or component). 
+    flags - Additional option flags. The most important is {@link #MATCH_DEFAULT_ONLY}, to 
+       limit the resolution to only those activities that support the {@link 
+       android.content.Intent#CATEGORY_DEFAULT}. 
+    userId - The user id. 
+
+    Returns: Returns a ResolveInfo containing the final activity intent that was determined 
+             to be the best action. Returns null if no matching activity was 
+             found. If multiple matching activities are found and there is no 
+             default set, returns a ResolveInfo containing something else, such 
+             as the activity resolver. 
+
+*android.content.pm.PackageManager.resolveContentProvider(String,int)*
+
+public abstract |android.content.pm.ProviderInfo| resolveContentProvider(
+  java.lang.String name,
+  int flags)
+
+Find a single content provider by its base path name. 
+
+
+    name - The name of the provider to find. 
+    flags - Additional option flags. Currently should always be 0. 
+
+    Returns: ContentProviderInfo Information about the provider, if found, else null. 
+
+*android.content.pm.PackageManager.resolveService(Intent,int)*
+
+public abstract |android.content.pm.ResolveInfo| resolveService(
+  android.content.Intent intent,
+  int flags)
+
+Determine the best service to handle for a given Intent. 
+
+
+    intent - An intent containing all of the desired specification (action, data, type, 
+       category, and/or component). 
+    flags - Additional option flags. 
+
+    Returns: Returns a ResolveInfo containing the final service intent that was determined 
+             to be the best action. Returns null if no matching service was 
+             found. 
+
+*android.content.pm.PackageManager.revokePermission(String,String)*
+
+public abstract void revokePermission(
+  java.lang.String packageName,
+  java.lang.String permissionName)
+
+Revoke a permission that was previously granted by 
+(|android.content.pm.PackageManager|) . 
+
+
+    packageName - The name of the package that the permission will be granted to. 
+    permissionName - The name of the permission. 
+
+*android.content.pm.PackageManager.setApplicationBlockedSettingAsUser(String,boolean,UserHandle)*
+
+public abstract boolean setApplicationBlockedSettingAsUser(
+  java.lang.String packageName,
+  boolean blocked,
+  android.os.UserHandle userHandle)
+
+Puts the package in a blocked state, which is almost like an uninstalled state, 
+making the package unavailable, but it doesn't remove the data or the actual 
+package file. 
+
+
+
+*android.content.pm.PackageManager.setApplicationEnabledSetting(String,int,int)*
+
+public abstract void setApplicationEnabledSetting(
+  java.lang.String packageName,
+  int newState,
+  int flags)
+
+Set the enabled setting for an application This setting will override any 
+enabled state which may have been set by the application in its manifest. It 
+also overrides the enabled state set in the manifest for any of the 
+application's components. It does not override any enabled state set by 
+(|android.content.pm.PackageManager|) for any of the application's components. 
+
+
+    packageName - The package name of the application to enable 
+    newState - The new enabled state for the component. The legal values for this state are: 
+       {@link #COMPONENT_ENABLED_STATE_ENABLED}, {@link 
+       #COMPONENT_ENABLED_STATE_DISABLED} and {@link 
+       #COMPONENT_ENABLED_STATE_DEFAULT} The last one removes the setting, 
+       thereby restoring the applications's state to whatever was set in its 
+       manifest (or enabled, by default). 
+    flags - Optional behavior flags: {@link #DONT_KILL_APP} or 0. 
+
+*android.content.pm.PackageManager.setComponentEnabledSetting(ComponentName,int,int)*
+
+public abstract void setComponentEnabledSetting(
+  android.content.ComponentName componentName,
+  int newState,
+  int flags)
+
+Set the enabled setting for a package component (activity, receiver, service, 
+provider). This setting will override any enabled state which may have been set 
+by the component in its manifest. 
+
+
+    componentName - The component to enable 
+    newState - The new enabled state for the component. The legal values for this state are: 
+       {@link #COMPONENT_ENABLED_STATE_ENABLED}, {@link 
+       #COMPONENT_ENABLED_STATE_DISABLED} and {@link 
+       #COMPONENT_ENABLED_STATE_DEFAULT} The last one removes the setting, 
+       thereby restoring the component's state to whatever was set in it's 
+       manifest (or enabled, by default). 
+    flags - Optional behavior flags: {@link #DONT_KILL_APP} or 0. 
+
+*android.content.pm.PackageManager.setInstallerPackageName(String,String)*
+
+public abstract void setInstallerPackageName(
+  java.lang.String targetPackage,
+  java.lang.String installerPackageName)
+
+Change the installer associated with a given package. There are limitations on 
+how the installer package can be changed; in particular: 
+
+A SecurityException will be thrown if installerPackageName is not signed with 
+the same certificate as the calling application. A SecurityException will be 
+thrown if targetPackage already has an installer package, and that installer 
+package is not signed with the same certificate as the calling application. 
+
+
+    targetPackage - The installed package whose installer will be changed. 
+    installerPackageName - The package name of the new installer. May be null to clear the association. 
+
+*android.content.pm.PackageManager.verifyPendingInstall(int,int)*
+
+public abstract void verifyPendingInstall(
+  int id,
+  int verificationCode)
+
+Allows a package listening to the package verification 
+broadcast(|android.content.Intent|) to respond to the package manager. The 
+response must include theverificationCodewhich is one of 
+(|android.content.pm.PackageManager|) or (|android.content.pm.PackageManager|) 
+. 
+
+
+    id - pending package identifier as passed via the {@link 
+       PackageManager#EXTRA_VERIFICATION_ID} Intent extra. 
+    verificationCode - either {@link PackageManager#VERIFICATION_ALLOW} or {@link 
+       PackageManager#VERIFICATION_REJECT}. 
+
+

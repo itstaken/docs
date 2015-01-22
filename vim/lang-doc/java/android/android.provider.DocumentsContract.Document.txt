@@ -1,0 +1,184 @@
+*android.provider.DocumentsContract.Document* *DocumentsContract.Document* Const
+
+public static final class DocumentsContract.Document
+  extends    |java.lang.Object|
+
+|android.provider.DocumentsContract.Document_Description|
+|android.provider.DocumentsContract.Document_Fields|
+|android.provider.DocumentsContract.Document_Constructors|
+|android.provider.DocumentsContract.Document_Methods|
+
+================================================================================
+
+*android.provider.DocumentsContract.Document_Fields*
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_DISPLAY_NAME|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_DOCUMENT_ID|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_FLAGS|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_ICON|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_LAST_MODIFIED|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_MIME_TYPE|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_SIZE|
+|java.lang.String_android.provider.DocumentsContract.Document.COLUMN_SUMMARY|
+|int_android.provider.DocumentsContract.Document.FLAG_DIR_HIDE_GRID_TITLES|
+|int_android.provider.DocumentsContract.Document.FLAG_DIR_PREFERS_GRID|
+|int_android.provider.DocumentsContract.Document.FLAG_DIR_PREFERS_LAST_MODIFIED|
+|int_android.provider.DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE|
+|int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_DELETE|
+|int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_THUMBNAIL|
+|int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_WRITE|
+|java.lang.String_android.provider.DocumentsContract.Document.MIME_TYPE_DIR|
+
+*android.provider.DocumentsContract.Document_Description*
+
+Constants related to a document, including (|android.database.Cursor|) column 
+names and flags. 
+
+A document can be either an openable stream (with a specific MIME type), or a 
+directory containing additional documents (with the 
+(|android.provider.DocumentsContract.Document|) MIME type). A directory 
+represents the top of a subtree containing zero or more documents, which can 
+recursively contain even more documents and directories. 
+
+All columns are read-only to client applications. 
+
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_DISPLAY_NAME*
+
+Display name of a document, used as the primary title displayed to a user. This 
+column is required. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_DOCUMENT_ID*
+
+Unique ID of a document. This ID is both provided by and interpreted by a 
+(|android.provider.DocumentsProvider|) , and should be treated as an opaque 
+value by client applications. This column is required. 
+
+Each document must have a unique ID within a provider, but that single document 
+may be included as a child of multiple directories. 
+
+A provider must always return durable IDs, since they will be used to issue 
+long-term URI permission grants when an application interacts with 
+(|android.content.Intent|) and (|android.content.Intent|) . 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_FLAGS*
+
+Flags that apply to a document. This column is required. 
+
+Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_ICON*
+
+Specific icon resource ID for a document. This column is optional, and may 
+benullto use a platform-provided default icon based on 
+(|android.provider.DocumentsContract.Document|) . 
+
+Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_LAST_MODIFIED*
+
+Timestamp when a document was last modified, in milliseconds since January 1, 
+1970 00:00:00.0 UTC. This column is required, and may benullif unknown. A 
+(|android.provider.DocumentsProvider|) can update this field using events from 
+(|android.os.ParcelFileDescriptor.OnCloseListener|) or other reliable 
+(|android.os.ParcelFileDescriptor|) transports. 
+
+Type: INTEGER (long) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_MIME_TYPE*
+
+Concrete MIME type of a document. For example, "image/png" or "application/pdf" 
+for openable files. A document can also be a directory containing additional 
+documents, which is represented with the 
+(|android.provider.DocumentsContract.Document|) MIME type. This column is 
+required. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_SIZE*
+
+Size of a document, in bytes, ornullif unknown. This column is required. 
+
+Type: INTEGER (long) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.COLUMN_SUMMARY*
+
+Summary of a document, which may be shown to a user. This column is optional, 
+and may benull. 
+
+Type: STRING 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_DIR_HIDE_GRID_TITLES*
+
+Flag indicating that document titles should be hidden when viewing this 
+directory in a larger format grid. For example, a directory containing only 
+images may want the image thumbnails to speak for themselves. Only valid when 
+(|android.provider.DocumentsContract.Document|) is 
+(|android.provider.DocumentsContract.Document|) . 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_DIR_PREFERS_GRID*
+
+Flag indicating that a directory prefers its contents be shown in a larger 
+format grid. Usually suitable when a directory contains mostly pictures. Only 
+valid when (|android.provider.DocumentsContract.Document|) is 
+(|android.provider.DocumentsContract.Document|) . 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_DIR_PREFERS_LAST_MODIFIED*
+
+Flag indicating that a directory prefers its contents be sorted by 
+(|android.provider.DocumentsContract.Document|) . Only valid when 
+(|android.provider.DocumentsContract.Document|) is 
+(|android.provider.DocumentsContract.Document|) . 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE*
+
+Flag indicating that a document is a directory that supports creation of new 
+files within it. Only valid when 
+(|android.provider.DocumentsContract.Document|) is 
+(|android.provider.DocumentsContract.Document|) . 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_DELETE*
+
+Flag indicating that a document is deletable. 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_THUMBNAIL*
+
+Flag indicating that a document can be represented as a thumbnail. 
+
+
+*int_android.provider.DocumentsContract.Document.FLAG_SUPPORTS_WRITE*
+
+Flag indicating that a document supports writing. 
+
+When a document is opened with (|android.content.Intent|) , the calling 
+application is granted both (|android.content.Intent|) and 
+(|android.content.Intent|) . However, the actual writability of a document may 
+change over time, for example due to remote access changes. This flag indicates 
+that a document client can expect (|android.content.ContentResolver|) to 
+succeed. 
+
+
+*java.lang.String_android.provider.DocumentsContract.Document.MIME_TYPE_DIR*
+
+MIME type of a document which is a directory that may contain additional 
+documents. 
+
+
+

@@ -1,0 +1,389 @@
+*android.util.ArrayMap* *ArrayMap* ArrayMap is a generic key->value mapping data
+
+public final class ArrayMap<K,V>
+  extends    |java.lang.Object|
+  implements |java.util.Map|
+
+|android.util.ArrayMap_Description|
+|android.util.ArrayMap_Fields|
+|android.util.ArrayMap_Constructors|
+|android.util.ArrayMap_Methods|
+
+================================================================================
+
+*android.util.ArrayMap_Fields*
+|android.util.ArrayMap_android.util.ArrayMap.EMPTY|
+
+*android.util.ArrayMap_Constructors*
+|android.util.ArrayMap()|Create a new empty ArrayMap.
+|android.util.ArrayMap(ArrayMap)|Create a new ArrayMap with the mappings from t
+|android.util.ArrayMap(int)|Create a new ArrayMap with a given initial capacity
+
+*android.util.ArrayMap_Methods*
+|android.util.ArrayMap.append(K,V)|Special fast path for appending items to the
+|android.util.ArrayMap.clear()|Make the array map empty.
+|android.util.ArrayMap.containsAll(Collection<?>)|Determine if the array map co
+|android.util.ArrayMap.containsKey(Object)|Check whether a key exists in the ar
+|android.util.ArrayMap.containsValue(Object)|Check whether a value exists in th
+|android.util.ArrayMap.ensureCapacity(int)|Ensure the array map can hold at lea
+|android.util.ArrayMap.entrySet()|Return ajava.util.Setfor iterating over and i
+|android.util.ArrayMap.equals(Object)|
+|android.util.ArrayMap.erase()|
+|android.util.ArrayMap.get(Object)|Retrieve a value from the array.
+|android.util.ArrayMap.hashCode()|
+|android.util.ArrayMap.isEmpty()|Return true if the array map contains no items
+|android.util.ArrayMap.keyAt(int)|Return the key at the given index in the arra
+|android.util.ArrayMap.keySet()|Return ajava.util.Setfor iterating over and int
+|android.util.ArrayMap.put(K,V)|Add a new value to the array map.
+|android.util.ArrayMap.putAll(ArrayMap<?extendsK,?extendsV>)|Perform a#put(Obje
+|android.util.ArrayMap.putAll(Map<?extendsK,?extendsV>)|Perform a#put(Object, O
+|android.util.ArrayMap.remove(Object)|Remove an existing key from the array map
+|android.util.ArrayMap.removeAll(Collection<?>)|Remove all keys in the array ma
+|android.util.ArrayMap.removeAt(int)|Remove the key/value mapping at the given 
+|android.util.ArrayMap.retainAll(Collection<?>)|Remove all keys in the array ma
+|android.util.ArrayMap.setValueAt(int,V)|Set the value at a given index in the 
+|android.util.ArrayMap.size()|Return the number of items in this array map.
+|android.util.ArrayMap.toString()|
+|android.util.ArrayMap.valueAt(int)|Return the value at the given index in the 
+|android.util.ArrayMap.values()|Return ajava.util.Collectionfor iterating over 
+
+*android.util.ArrayMap_Description*
+
+ArrayMap is a generic key->value mapping data structure that is designed to be 
+more memory efficient than a traditional (|java.util.HashMap|) . It keeps its 
+mappings in an array data structure -- an integer array of hash codes for each 
+item, and an Object array of the key/value pairs. This allows it to avoid 
+having to create an extra object for every entry put in to the map, and it also 
+tries to control the growth of the size of these arrays more aggressively 
+(since growing them only requires copying the entries in the array, not 
+rebuilding a hash map). 
+
+Note that this implementation is not intended to be appropriate for data 
+structures that may contain large numbers of items. It is generally slower than 
+a traditional HashMap, since lookups require a binary search and adds and 
+removes require inserting and deleting entries in the array. For containers 
+holding up to hundreds of items, the performance difference is not significant, 
+less than 50%. 
+
+Because this container is intended to better balance memory use, unlike most 
+other standard Java containers it will shrink its array as items are removed 
+from it. Currently you have no control over this shrinking -- if you set a 
+capacity and then remove an item, it may reduce the capacity to better match 
+the current size. In the future an explicit call to set the capacity should 
+turn off this aggressive shrinking behavior. 
+
+
+
+*android.util.ArrayMap_android.util.ArrayMap.EMPTY*
+
+
+
+
+
+*android.util.ArrayMap()*
+
+public ArrayMap()
+
+Create a new empty ArrayMap. The default capacity of an array map is 0, and 
+will grow once items are added to it. 
+
+
+*android.util.ArrayMap(ArrayMap)*
+
+public ArrayMap(android.util.ArrayMap map)
+
+Create a new ArrayMap with the mappings from the given ArrayMap. 
+
+
+*android.util.ArrayMap(int)*
+
+public ArrayMap(int capacity)
+
+Create a new ArrayMap with a given initial capacity. 
+
+
+*android.util.ArrayMap.append(K,V)*
+
+public void append(
+  K key,
+  V value)
+
+Special fast path for appending items to the end of the array without 
+validation. The array must already be large enough to contain the item. 
+
+
+
+*android.util.ArrayMap.clear()*
+
+public void clear()
+
+Make the array map empty. All storage is released. 
+
+
+
+*android.util.ArrayMap.containsAll(Collection<?>)*
+
+public boolean containsAll(java.util.Collection<?> collection)
+
+Determine if the array map contains all of the keys in the given collection. 
+
+
+    collection - The collection whose contents are to be checked against. 
+
+    Returns: Returns true if this array map contains a key for every entry in collection, 
+             else returns false. 
+
+*android.util.ArrayMap.containsKey(Object)*
+
+public boolean containsKey(java.lang.Object key)
+
+Check whether a key exists in the array. 
+
+
+    key - The key to search for. 
+
+    Returns: Returns true if the key exists, else false. 
+
+*android.util.ArrayMap.containsValue(Object)*
+
+public boolean containsValue(java.lang.Object value)
+
+Check whether a value exists in the array. This requires a linear search 
+through the entire array. 
+
+
+    value - The value to search for. 
+
+    Returns: Returns true if the value exists, else false. 
+
+*android.util.ArrayMap.ensureCapacity(int)*
+
+public void ensureCapacity(int minimumCapacity)
+
+Ensure the array map can hold at least minimumCapacity items. 
+
+
+
+*android.util.ArrayMap.entrySet()*
+
+public |java.util.Set|<Entry<K,V>> entrySet()
+
+Return a (|java.util.Set|) for iterating over and interacting with all mappings 
+in the array map. 
+
+Note: this is a very inefficient way to access the array contents, it requires 
+generating a number of temporary objects. 
+
+Note: the semantics of this Set are subtly different than that of a 
+(|java.util.HashMap|) : most important, the Map.Entry(|java.util.Map.Entry|) 
+object returned by its iterator is a single object that exists for the entire 
+iterator, so you can not hold on to it after calling 
+Iterator.next(|java.util.Iterator|) . 
+
+
+
+*android.util.ArrayMap.equals(Object)*
+
+public boolean equals(java.lang.Object object)
+
+This implementation returns false if the object is not a map, or if the maps 
+have different sizes. Otherwise, for each key in this map, values of both maps 
+are compared. If the values for any key are not equal, the method returns 
+false, otherwise it returns true. 
+
+
+
+*android.util.ArrayMap.erase()*
+
+public void erase()
+
+
+
+
+
+*android.util.ArrayMap.get(Object)*
+
+public |V| get(java.lang.Object key)
+
+Retrieve a value from the array. 
+
+
+    key - The key of the value to retrieve. 
+
+    Returns: Returns the value associated with the given key, or null if there is no such 
+             key. 
+
+*android.util.ArrayMap.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.util.ArrayMap.isEmpty()*
+
+public boolean isEmpty()
+
+Return true if the array map contains no items. 
+
+
+
+*android.util.ArrayMap.keyAt(int)*
+
+public |K| keyAt(int index)
+
+Return the key at the given index in the array. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+
+    Returns: Returns the key stored at the given index. 
+
+*android.util.ArrayMap.keySet()*
+
+public |java.util.Set|<K> keySet()
+
+Return a (|java.util.Set|) for iterating over and interacting with all keys in 
+the array map. 
+
+Note: this is a fairly inefficient way to access the array contents, it 
+requires generating a number of temporary objects. 
+
+
+
+*android.util.ArrayMap.put(K,V)*
+
+public |V| put(
+  K key,
+  V value)
+
+Add a new value to the array map. 
+
+
+    key - The key under which to store the value. Must not be null. If this key already 
+       exists in the array, its value will be replaced. 
+    value - The value to store for the given key. 
+
+    Returns: Returns the old value that was stored for the given key, or null if there was 
+             no such key. 
+
+*android.util.ArrayMap.putAll(ArrayMap<?extendsK,?extendsV>)*
+
+public void putAll(android.util.ArrayMap<? extends K, ? extends V> array)
+
+Perform a (|android.util.ArrayMap|) of all key/value pairs in array 
+
+
+    array - The array whose contents are to be retrieved. 
+
+*android.util.ArrayMap.putAll(Map<?extendsK,?extendsV>)*
+
+public void putAll(java.util.Map<? extends K, ? extends V> map)
+
+Perform a (|android.util.ArrayMap|) of all key/value pairs in map 
+
+
+    map - The map whose contents are to be retrieved. 
+
+*android.util.ArrayMap.remove(Object)*
+
+public |V| remove(java.lang.Object key)
+
+Remove an existing key from the array map. 
+
+
+    key - The key of the mapping to remove. 
+
+    Returns: Returns the value that was stored under the key, or null if there was no such 
+             key. 
+
+*android.util.ArrayMap.removeAll(Collection<?>)*
+
+public boolean removeAll(java.util.Collection<?> collection)
+
+Remove all keys in the array map that exist in the given collection. 
+
+
+    collection - The collection whose contents are to be used to remove keys. 
+
+    Returns: Returns true if any keys were removed from the array map, else false. 
+
+*android.util.ArrayMap.removeAt(int)*
+
+public |V| removeAt(int index)
+
+Remove the key/value mapping at the given index. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+
+    Returns: Returns the value that was stored at this index. 
+
+*android.util.ArrayMap.retainAll(Collection<?>)*
+
+public boolean retainAll(java.util.Collection<?> collection)
+
+Remove all keys in the array map that do not exist in the given collection. 
+
+
+    collection - The collection whose contents are to be used to determine which keys to keep. 
+
+    Returns: Returns true if any keys were removed from the array map, else false. 
+
+*android.util.ArrayMap.setValueAt(int,V)*
+
+public |V| setValueAt(
+  int index,
+  V value)
+
+Set the value at a given index in the array. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+    value - The new value to store at this index. 
+
+    Returns: Returns the previous value at the given index. 
+
+*android.util.ArrayMap.size()*
+
+public int size()
+
+Return the number of items in this array map. 
+
+
+
+*android.util.ArrayMap.toString()*
+
+public |java.lang.String| toString()
+
+This implementation composes a string by iterating over its mappings. If this 
+map contains itself as a key or a value, the string "(this Map)" will appear in 
+its place. 
+
+
+
+*android.util.ArrayMap.valueAt(int)*
+
+public |V| valueAt(int index)
+
+Return the value at the given index in the array. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+
+    Returns: Returns the value stored at the given index. 
+
+*android.util.ArrayMap.values()*
+
+public |java.util.Collection|<V> values()
+
+Return a (|java.util.Collection|) for iterating over and interacting with all 
+values in the array map. 
+
+Note: this is a fairly inefficient way to access the array contents, it 
+requires generating a number of temporary objects. 
+
+
+
+

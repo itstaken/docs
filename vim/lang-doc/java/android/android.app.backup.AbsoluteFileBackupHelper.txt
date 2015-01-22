@@ -1,0 +1,61 @@
+*android.app.backup.AbsoluteFileBackupHelper* *AbsoluteFileBackupHelper* Like Fi
+
+public class AbsoluteFileBackupHelper
+  extends    |android.app.backup.FileBackupHelperBase|
+  implements |android.app.backup.BackupHelper|
+
+|android.app.backup.AbsoluteFileBackupHelper_Description|
+|android.app.backup.AbsoluteFileBackupHelper_Fields|
+|android.app.backup.AbsoluteFileBackupHelper_Constructors|
+|android.app.backup.AbsoluteFileBackupHelper_Methods|
+
+================================================================================
+
+*android.app.backup.AbsoluteFileBackupHelper_Constructors*
+|android.app.backup.AbsoluteFileBackupHelper(Context,String...)|Construct a hel
+
+*android.app.backup.AbsoluteFileBackupHelper_Methods*
+|android.app.backup.AbsoluteFileBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.AbsoluteFileBackupHelper.restoreEntity(BackupDataInputStream)|
+
+*android.app.backup.AbsoluteFileBackupHelper_Description*
+
+Like FileBackupHelper, but takes absolute paths for the files instead of 
+subpaths of getFilesDir() 
+
+
+
+*android.app.backup.AbsoluteFileBackupHelper(Context,String...)*
+
+public AbsoluteFileBackupHelper(
+  android.content.Context context,
+  java.lang.String[] files)
+
+Construct a helper for backing up / restoring the files at the given absolute 
+locations within the file system. 
+
+    context - 
+    files - 
+
+*android.app.backup.AbsoluteFileBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public void performBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+
+Based on oldState, determine which of the files from the application's data 
+directory need to be backed up, write them to the data stream, and fill in 
+newState with the state as it exists now. 
+
+
+
+*android.app.backup.AbsoluteFileBackupHelper.restoreEntity(BackupDataInputStream)*
+
+public void restoreEntity(android.app.backup.BackupDataInputStream data)
+
+Restore one absolute file entity from the restore stream 
+
+
+
+

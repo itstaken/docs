@@ -1,0 +1,340 @@
+*android.view.inputmethod.BaseInputConnection* *BaseInputConnection* Base class 
+
+public class BaseInputConnection
+  extends    |java.lang.Object|
+  implements |android.view.inputmethod.InputConnection|
+
+|android.view.inputmethod.BaseInputConnection_Description|
+|android.view.inputmethod.BaseInputConnection_Fields|
+|android.view.inputmethod.BaseInputConnection_Constructors|
+|android.view.inputmethod.BaseInputConnection_Methods|
+
+================================================================================
+
+*android.view.inputmethod.BaseInputConnection_Fields*
+|android.view.inputmethod.InputMethodManager_android.view.inputmethod.BaseInputConnection.mIMM|
+
+*android.view.inputmethod.BaseInputConnection_Constructors*
+|android.view.inputmethod.BaseInputConnection(View,boolean)|
+
+*android.view.inputmethod.BaseInputConnection_Methods*
+|android.view.inputmethod.BaseInputConnection.beginBatchEdit()|Default implemen
+|android.view.inputmethod.BaseInputConnection.clearMetaKeyStates(int)|Default i
+|android.view.inputmethod.BaseInputConnection.commitCompletion(CompletionInfo)|
+|android.view.inputmethod.BaseInputConnection.commitCorrection(CorrectionInfo)|
+|android.view.inputmethod.BaseInputConnection.commitText(CharSequence,int)|Defa
+|android.view.inputmethod.BaseInputConnection.deleteSurroundingText(int,int)|Th
+|android.view.inputmethod.BaseInputConnection.endBatchEdit()|Default implementa
+|android.view.inputmethod.BaseInputConnection.finishComposingText()|The default
+|android.view.inputmethod.BaseInputConnection.getComposingSpanEnd(Spannable)|
+|android.view.inputmethod.BaseInputConnection.getComposingSpanStart(Spannable)|
+|android.view.inputmethod.BaseInputConnection.getCursorCapsMode(int)|The defaul
+|android.view.inputmethod.BaseInputConnection.getEditable()|Return the target o
+|android.view.inputmethod.BaseInputConnection.getExtractedText(ExtractedTextRequest,int)|
+|android.view.inputmethod.BaseInputConnection.getSelectedText(int)|The default 
+|android.view.inputmethod.BaseInputConnection.getTextAfterCursor(int,int)|The d
+|android.view.inputmethod.BaseInputConnection.getTextBeforeCursor(int,int)|The 
+|android.view.inputmethod.BaseInputConnection.performContextMenuAction(int)|The
+|android.view.inputmethod.BaseInputConnection.performEditorAction(int)|The defa
+|android.view.inputmethod.BaseInputConnection.performPrivateCommand(String,Bundle)|
+|android.view.inputmethod.BaseInputConnection.removeComposingSpans(Spannable)|
+|android.view.inputmethod.BaseInputConnection.reportFinish()|Called when this I
+|android.view.inputmethod.BaseInputConnection.reportFullscreenMode(boolean)|Upd
+|android.view.inputmethod.BaseInputConnection.sendKeyEvent(KeyEvent)|Provides s
+|android.view.inputmethod.BaseInputConnection.setComposingRegion(int,int)|
+|android.view.inputmethod.BaseInputConnection.setComposingSpans(Spannable)|
+|android.view.inputmethod.BaseInputConnection.setComposingSpans(Spannable,int,int)|
+|android.view.inputmethod.BaseInputConnection.setComposingText(CharSequence,int)|
+|android.view.inputmethod.BaseInputConnection.setSelection(int,int)|The default
+
+*android.view.inputmethod.BaseInputConnection_Description*
+
+Base class for implementors of the InputConnection interface, taking care of 
+most of the common behavior for providing a connection to an Editable. 
+Implementors of this class will want to be sure to implement 
+(|android.view.inputmethod.BaseInputConnection|) to provide access to their own 
+editable object, and to refer to the documentation in 
+(|android.view.inputmethod.InputConnection|) . 
+
+
+
+*android.view.inputmethod.InputMethodManager_android.view.inputmethod.BaseInputConnection.mIMM*
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection(View,boolean)*
+
+public BaseInputConnection(
+  android.view.View targetView,
+  boolean fullEditor)
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.beginBatchEdit()*
+
+public boolean beginBatchEdit()
+
+Default implementation does nothing. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.clearMetaKeyStates(int)*
+
+public boolean clearMetaKeyStates(int states)
+
+Default implementation uses MetaKeyKeyListener.clearMetaKeyState(long, 
+int)(|android.text.method.MetaKeyKeyListener|) to clear the state. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.commitCompletion(CompletionInfo)*
+
+public boolean commitCompletion(android.view.inputmethod.CompletionInfo text)
+
+Default implementation does nothing and returns false. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.commitCorrection(CorrectionInfo)*
+
+public boolean commitCorrection(android.view.inputmethod.CorrectionInfo correctionInfo)
+
+Default implementation does nothing and returns false. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.commitText(CharSequence,int)*
+
+public boolean commitText(
+  java.lang.CharSequence text,
+  int newCursorPosition)
+
+Default implementation replaces any existing composing text with the given 
+text. In addition, only if dummy mode, a key event is sent for the new text and 
+the current editable buffer cleared. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.deleteSurroundingText(int,int)*
+
+public boolean deleteSurroundingText(
+  int beforeLength,
+  int afterLength)
+
+The default implementation performs the deletion around the current selection 
+position of the editable text. 
+
+
+    beforeLength - 
+    afterLength - 
+
+*android.view.inputmethod.BaseInputConnection.endBatchEdit()*
+
+public boolean endBatchEdit()
+
+Default implementation does nothing. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.finishComposingText()*
+
+public boolean finishComposingText()
+
+The default implementation removes the composing state from the current 
+editable text. In addition, only if dummy mode, a key event is sent for the new 
+text and the current editable buffer cleared. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getComposingSpanEnd(Spannable)*
+
+public static int getComposingSpanEnd(android.text.Spannable text)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.getComposingSpanStart(Spannable)*
+
+public static int getComposingSpanStart(android.text.Spannable text)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.getCursorCapsMode(int)*
+
+public int getCursorCapsMode(int reqModes)
+
+The default implementation uses TextUtils.getCapsMode to get the cursor caps 
+mode for the current selection position in the editable text, unless in dummy 
+mode in which case 0 is always returned. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getEditable()*
+
+public |android.text.Editable| getEditable()
+
+Return the target of edit operations. The default implementation returns its 
+own fake editable that is just used for composing text; subclasses that are 
+real text editors should override this and supply their own. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getExtractedText(ExtractedTextRequest,int)*
+
+public |android.view.inputmethod.ExtractedText| getExtractedText(
+  android.view.inputmethod.ExtractedTextRequest request,
+  int flags)
+
+The default implementation always returns null. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getSelectedText(int)*
+
+public |java.lang.CharSequence| getSelectedText(int flags)
+
+The default implementation returns the text currently selected, or null if none 
+is selected. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getTextAfterCursor(int,int)*
+
+public |java.lang.CharSequence| getTextAfterCursor(
+  int length,
+  int flags)
+
+The default implementation returns the given amount of text from the current 
+cursor position in the buffer. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.getTextBeforeCursor(int,int)*
+
+public |java.lang.CharSequence| getTextBeforeCursor(
+  int length,
+  int flags)
+
+The default implementation returns the given amount of text from the current 
+cursor position in the buffer. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.performContextMenuAction(int)*
+
+public boolean performContextMenuAction(int id)
+
+The default implementation does nothing. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.performEditorAction(int)*
+
+public boolean performEditorAction(int actionCode)
+
+The default implementation turns this into the enter key. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.performPrivateCommand(String,Bundle)*
+
+public boolean performPrivateCommand(
+  java.lang.String action,
+  android.os.Bundle data)
+
+The default implementation does nothing. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.removeComposingSpans(Spannable)*
+
+public static final void removeComposingSpans(android.text.Spannable text)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.reportFinish()*
+
+protected void reportFinish()
+
+Called when this InputConnection is no longer used by the InputMethodManager. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.reportFullscreenMode(boolean)*
+
+public boolean reportFullscreenMode(boolean enabled)
+
+Updates InputMethodManager with the current fullscreen mode. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.sendKeyEvent(KeyEvent)*
+
+public boolean sendKeyEvent(android.view.KeyEvent event)
+
+Provides standard implementation for sending a key event to the window attached 
+to the input connection's view. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.setComposingRegion(int,int)*
+
+public boolean setComposingRegion(
+  int start,
+  int end)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.setComposingSpans(Spannable)*
+
+public static void setComposingSpans(android.text.Spannable text)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.setComposingSpans(Spannable,int,int)*
+
+public static void setComposingSpans(
+  android.text.Spannable text,
+  int start,
+  int end)
+
+
+
+
+
+*android.view.inputmethod.BaseInputConnection.setComposingText(CharSequence,int)*
+
+public boolean setComposingText(
+  java.lang.CharSequence text,
+  int newCursorPosition)
+
+The default implementation places the given text into the editable, replacing 
+any existing composing text. The new text is marked as in a composing state 
+with the composing style. 
+
+
+
+*android.view.inputmethod.BaseInputConnection.setSelection(int,int)*
+
+public boolean setSelection(
+  int start,
+  int end)
+
+The default implementation changes the selection position in the current 
+editable text. 
+
+
+
+

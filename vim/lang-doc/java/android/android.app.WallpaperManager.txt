@@ -1,0 +1,453 @@
+*android.app.WallpaperManager* *WallpaperManager* Provides access to the system 
+
+public class WallpaperManager
+  extends    |java.lang.Object|
+
+|android.app.WallpaperManager_Description|
+|android.app.WallpaperManager_Fields|
+|android.app.WallpaperManager_Constructors|
+|android.app.WallpaperManager_Methods|
+
+================================================================================
+
+*android.app.WallpaperManager_Fields*
+|java.lang.String_android.app.WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER|
+|java.lang.String_android.app.WallpaperManager.ACTION_CROP_AND_SET_WALLPAPER|
+|java.lang.String_android.app.WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER|
+|java.lang.String_android.app.WallpaperManager.COMMAND_DROP|
+|java.lang.String_android.app.WallpaperManager.COMMAND_SECONDARY_TAP|
+|java.lang.String_android.app.WallpaperManager.COMMAND_TAP|
+|java.lang.String_android.app.WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT|
+|java.lang.String_android.app.WallpaperManager.WALLPAPER_PREVIEW_META_DATA|
+
+*android.app.WallpaperManager_Methods*
+|android.app.WallpaperManager.clear()|Remove any currently set wallpaper, rever
+|android.app.WallpaperManager.clearWallpaperOffsets(IBinder)|Clear the offsets 
+|android.app.WallpaperManager.forgetLoadedWallpaper()|Remove all internal refer
+|android.app.WallpaperManager.getBitmap()|Like#getDrawable()but returns a Bitma
+|android.app.WallpaperManager.getBuiltInDrawable()|Returns a drawable for the s
+|android.app.WallpaperManager.getBuiltInDrawable(int,int,boolean,float,float)|R
+|android.app.WallpaperManager.getCropAndSetWallpaperIntent(Uri)|Gets an Intent 
+|android.app.WallpaperManager.getDesiredMinimumHeight()|Returns the desired min
+|android.app.WallpaperManager.getDesiredMinimumWidth()|Returns the desired mini
+|android.app.WallpaperManager.getDrawable()|Retrieve the current system wallpap
+|android.app.WallpaperManager.getFastDrawable()|Like#getDrawable(), but the ret
+|android.app.WallpaperManager.getInstance(Context)|Retrieve a WallpaperManager 
+|android.app.WallpaperManager.getIWallpaperManager()|
+|android.app.WallpaperManager.getWallpaperInfo()|If the current wallpaper is a 
+|android.app.WallpaperManager.hasResourceWallpaper(int)|Return whether any user
+|android.app.WallpaperManager.peekDrawable()|Retrieve the current system wallpa
+|android.app.WallpaperManager.peekFastDrawable()|Like#getFastDrawable(), but if
+|android.app.WallpaperManager.sendWallpaperCommand(IBinder,String,int,int,int,Bundle)|
+|android.app.WallpaperManager.setBitmap(Bitmap)|Change the current system wallp
+|android.app.WallpaperManager.setResource(int)|Change the current system wallpa
+|android.app.WallpaperManager.setStream(InputStream)|Change the current system 
+|android.app.WallpaperManager.setWallpaperOffsets(IBinder,float,float)|Set the 
+|android.app.WallpaperManager.setWallpaperOffsetSteps(float,float)|For applicat
+|android.app.WallpaperManager.suggestDesiredDimensions(int,int)|For use only by
+
+*android.app.WallpaperManager_Description*
+
+Provides access to the system wallpaper. With WallpaperManager, you can get the 
+current wallpaper, get the desired dimensions for the wallpaper, set the 
+wallpaper, and more. Get an instance of WallpaperManager with 
+getInstance()(|android.app.WallpaperManager|) . 
+
+
+
+*java.lang.String_android.app.WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER*
+
+Directly launch live wallpaper preview, allowing the user to immediately 
+confirm to switch to a specific live wallpaper. You must specify 
+(|android.app.WallpaperManager|) with the ComponentName of a live wallpaper 
+component that is to be shown. 
+
+
+*java.lang.String_android.app.WallpaperManager.ACTION_CROP_AND_SET_WALLPAPER*
+
+Activity Action: Show settings for choosing wallpaper. Do not use directly to 
+construct an intent; instead, use (|android.app.WallpaperManager|) . Input: 
+(|android.content.Intent|) is the URI of the image to crop and set as 
+wallpaper. Output: RESULT_OK if user decided to crop/set the wallpaper, 
+RESULT_CANCEL otherwise Activities that support this intent should specify a 
+MIME filter of "image/*" 
+
+
+*java.lang.String_android.app.WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER*
+
+Launch an activity for the user to pick the current global live wallpaper. 
+
+
+*java.lang.String_android.app.WallpaperManager.COMMAND_DROP*
+
+Command for (|android.app.WallpaperManager|) : reported by the wallpaper host 
+when the user drops an object into an area of the host. The x and y arguments 
+are the location of the drop. 
+
+
+*java.lang.String_android.app.WallpaperManager.COMMAND_SECONDARY_TAP*
+
+Command for (|android.app.WallpaperManager|) : reported by the wallpaper host 
+when the user releases a secondary pointer on an empty area (not performing an 
+action in the host). The x and y arguments are the location of the secondary 
+tap in screen coordinates. 
+
+
+*java.lang.String_android.app.WallpaperManager.COMMAND_TAP*
+
+Command for (|android.app.WallpaperManager|) : reported by the wallpaper host 
+when the user taps on an empty area (not performing an action in the host). The 
+x and y arguments are the location of the tap in screen coordinates. 
+
+
+*java.lang.String_android.app.WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT*
+
+Extra in (|android.app.WallpaperManager|) that specifies the ComponentName of a 
+live wallpaper that should be shown as a preview, for the user to confirm. 
+
+
+*java.lang.String_android.app.WallpaperManager.WALLPAPER_PREVIEW_META_DATA*
+
+Manifest entry for activities that respond to (|android.content.Intent|) which 
+allows them to provide a custom large icon associated with this action. 
+
+
+
+*android.app.WallpaperManager.clear()*
+
+public void clear()
+  throws |java.io.IOException|
+         
+Remove any currently set wallpaper, reverting to the system's built-in 
+wallpaper. On success, the intent (|android.content.Intent|) is broadcast. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+
+*android.app.WallpaperManager.clearWallpaperOffsets(IBinder)*
+
+public void clearWallpaperOffsets(android.os.IBinder windowToken)
+
+Clear the offsets previously associated with this window through 
+(|android.app.WallpaperManager|) . This reverts the window to its default 
+state, where it does not cause the wallpaper to scroll from whatever its last 
+offsets were. 
+
+
+    windowToken - The window who these offsets should be associated with, as returned by {@link 
+       android.view.View#getWindowToken() View.getWindowToken()}. 
+
+*android.app.WallpaperManager.forgetLoadedWallpaper()*
+
+public void forgetLoadedWallpaper()
+
+Remove all internal references to the last loaded wallpaper. Useful for apps 
+that want to reduce memory usage when they only temporarily need to have the 
+wallpaper. After calling, the next request for the wallpaper will require 
+reloading it again from disk. 
+
+
+
+*android.app.WallpaperManager.getBitmap()*
+
+public Bitmap getBitmap()
+
+Like (|android.app.WallpaperManager|) but returns a Bitmap. 
+
+
+
+*android.app.WallpaperManager.getBuiltInDrawable()*
+
+public Drawable getBuiltInDrawable()
+
+Returns a drawable for the system built-in static wallpaper . 
+
+
+
+*android.app.WallpaperManager.getBuiltInDrawable(int,int,boolean,float,float)*
+
+public Drawable getBuiltInDrawable(
+  int outWidth,
+  int outHeight,
+  boolean scaleToFit,
+  float horizontalAlignment,
+  float verticalAlignment)
+
+Returns a drawable for the system built-in static wallpaper. Based on the 
+parameters, the drawable can be cropped and scaled 
+
+
+    outWidth - The width of the returned drawable 
+    outWidth - The height of the returned drawable 
+    scaleToFit - If true, scale the wallpaper down rather than just cropping it 
+    horizontalAlignment - A float value between 0 and 1 specifying where to crop the image; 0 for 
+       left-aligned, 0.5 for horizontal center-aligned, and 1 for right-aligned 
+    verticalAlignment - A float value between 0 and 1 specifying where to crop the image; 0 for 
+       top-aligned, 0.5 for vertical center-aligned, and 1 for bottom-aligned 
+
+*android.app.WallpaperManager.getCropAndSetWallpaperIntent(Uri)*
+
+public |android.content.Intent| getCropAndSetWallpaperIntent(android.net.Uri imageUri)
+
+Gets an Intent that will launch an activity that crops the given image and sets 
+the device's wallpaper. If there is a default HOME activity that supports 
+cropping wallpapers, it will be preferred as the default. Use this method 
+instead of directly creating a (|android.app.WallpaperManager|) intent. 
+
+
+    imageUri - The image URI that will be set in the intent. The must be a content URI and its 
+       provider must resolve its type to "image/*" 
+
+*android.app.WallpaperManager.getDesiredMinimumHeight()*
+
+public int getDesiredMinimumHeight()
+
+Returns the desired minimum height for the wallpaper. Callers of 
+(|android.app.WallpaperManager|) or (|android.app.WallpaperManager|) should 
+check this value beforehand to make sure the supplied wallpaper respects the 
+desired minimum height. 
+
+If the returned value is <= 0, the caller should use the height of the default 
+display instead. 
+
+
+
+    Returns: The desired minimum height for the wallpaper. This value should be honored by 
+             applications that set the wallpaper but it is not mandatory. 
+
+*android.app.WallpaperManager.getDesiredMinimumWidth()*
+
+public int getDesiredMinimumWidth()
+
+Returns the desired minimum width for the wallpaper. Callers of 
+(|android.app.WallpaperManager|) or (|android.app.WallpaperManager|) should 
+check this value beforehand to make sure the supplied wallpaper respects the 
+desired minimum width. 
+
+If the returned value is <= 0, the caller should use the width of the default 
+display instead. 
+
+
+
+    Returns: The desired minimum width for the wallpaper. This value should be honored by 
+             applications that set the wallpaper but it is not mandatory. 
+
+*android.app.WallpaperManager.getDrawable()*
+
+public Drawable getDrawable()
+
+Retrieve the current system wallpaper; if no wallpaper is set, the system 
+built-in static wallpaper is returned. This is returned as an abstract Drawable 
+that you can install in a View to display whatever wallpaper the user has 
+currently set. 
+
+
+
+    Returns: Returns a Drawable object that will draw the wallpaper. 
+
+*android.app.WallpaperManager.getFastDrawable()*
+
+public Drawable getFastDrawable()
+
+Like (|android.app.WallpaperManager|) , but the returned Drawable has a number 
+of limitations to reduce its overhead as much as possible. It will never scale 
+the wallpaper (only centering it if the requested bounds do match the bitmap 
+bounds, which should not be typical), doesn't allow setting an alpha, color 
+filter, or other attributes, etc. The bounds of the returned drawable will be 
+initialized to the same bounds as the wallpaper, so normally you will not need 
+to touch it. The drawable also assumes that it will be used in a context 
+running in the same density as the screen (not in density compatibility mode). 
+
+
+
+    Returns: Returns a Drawable object that will draw the wallpaper. 
+
+*android.app.WallpaperManager.getInstance(Context)*
+
+public static |android.app.WallpaperManager| getInstance(android.content.Context context)
+
+Retrieve a WallpaperManager associated with the given Context. 
+
+
+
+*android.app.WallpaperManager.getIWallpaperManager()*
+
+public IWallpaperManager getIWallpaperManager()
+
+
+
+
+
+*android.app.WallpaperManager.getWallpaperInfo()*
+
+public |android.app.WallpaperInfo| getWallpaperInfo()
+
+If the current wallpaper is a live wallpaper component, return the information 
+about that wallpaper. Otherwise, if it is a static image, simply return null. 
+
+
+
+*android.app.WallpaperManager.hasResourceWallpaper(int)*
+
+public boolean hasResourceWallpaper(int resid)
+
+Return whether any users are currently set to use the wallpaper with the given 
+resource ID. That is, their wallpaper has been set through 
+(|android.app.WallpaperManager|) with the same resource id. 
+
+
+
+*android.app.WallpaperManager.peekDrawable()*
+
+public Drawable peekDrawable()
+
+Retrieve the current system wallpaper; if there is no wallpaper set, a null 
+pointer is returned. This is returned as an abstract Drawable that you can 
+install in a View to display whatever wallpaper the user has currently set. 
+
+
+
+    Returns: Returns a Drawable object that will draw the wallpaper or a null pointer if 
+             these is none. 
+
+*android.app.WallpaperManager.peekFastDrawable()*
+
+public Drawable peekFastDrawable()
+
+Like (|android.app.WallpaperManager|) , but if there is no wallpaper set, a 
+null pointer is returned. 
+
+
+
+    Returns: Returns an optimized Drawable object that will draw the wallpaper or a null 
+             pointer if these is none. 
+
+*android.app.WallpaperManager.sendWallpaperCommand(IBinder,String,int,int,int,Bundle)*
+
+public void sendWallpaperCommand(
+  android.os.IBinder windowToken,
+  java.lang.String action,
+  int x,
+  int y,
+  int z,
+  android.os.Bundle extras)
+
+Send an arbitrary command to the current active wallpaper. 
+
+
+    windowToken - The window who these offsets should be associated with, as returned by {@link 
+       android.view.View#getWindowToken() View.getWindowToken()}. 
+    action - Name of the command to perform. This must be a scoped name to avoid collisions, 
+       such as "com.mycompany.wallpaper.DOIT". 
+    x - Arbitrary integer argument based on command. 
+    y - Arbitrary integer argument based on command. 
+    z - Arbitrary integer argument based on command. 
+    extras - Optional additional information for the command, or null. 
+
+*android.app.WallpaperManager.setBitmap(Bitmap)*
+
+public void setBitmap(Bitmap bitmap)
+  throws |java.io.IOException|
+         
+Change the current system wallpaper to a bitmap. The given bitmap is converted 
+to a PNG and stored as the wallpaper. On success, the intent 
+(|android.content.Intent|) is broadcast. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+    bitmap - The bitmap to save. 
+
+*android.app.WallpaperManager.setResource(int)*
+
+public void setResource(int resid)
+  throws |java.io.IOException|
+         
+Change the current system wallpaper to the bitmap in the given resource. The 
+resource is opened as a raw data stream and copied into the wallpaper; it must 
+be a valid PNG or JPEG image. On success, the intent (|android.content.Intent|) 
+is broadcast. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+    resid - The bitmap to save. 
+
+*android.app.WallpaperManager.setStream(InputStream)*
+
+public void setStream(java.io.InputStream data)
+  throws |java.io.IOException|
+         
+Change the current system wallpaper to a specific byte stream. The give 
+InputStream is copied into persistent storage and will now be used as the 
+wallpaper. Currently it must be either a JPEG or PNG image. On success, the 
+intent (|android.content.Intent|) is broadcast. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+    data - A stream containing the raw data to install as a wallpaper. 
+
+*android.app.WallpaperManager.setWallpaperOffsets(IBinder,float,float)*
+
+public void setWallpaperOffsets(
+  android.os.IBinder windowToken,
+  float xOffset,
+  float yOffset)
+
+Set the position of the current wallpaper within any larger space, when that 
+wallpaper is visible behind the given window. The X and Y offsets are floating 
+point numbers ranging from 0 to 1, representing where the wallpaper should be 
+positioned within the screen space. These only make sense when the wallpaper is 
+larger than the screen. 
+
+
+    windowToken - The window who these offsets should be associated with, as returned by {@link 
+       android.view.View#getWindowToken() View.getWindowToken()}. 
+    xOffset - The offset along the X dimension, from 0 to 1. 
+    yOffset - The offset along the Y dimension, from 0 to 1. 
+
+*android.app.WallpaperManager.setWallpaperOffsetSteps(float,float)*
+
+public void setWallpaperOffsetSteps(
+  float xStep,
+  float yStep)
+
+For applications that use multiple virtual screens showing a wallpaper, specify 
+the step size between virtual screens. For example, if the launcher has 3 
+virtual screens, it would specify an xStep of 0.5, since the X offset for those 
+screens are 0.0, 0.5 and 1.0 
+
+
+    xStep - The X offset delta from one screen to the next one 
+    yStep - The Y offset delta from one screen to the next one 
+
+*android.app.WallpaperManager.suggestDesiredDimensions(int,int)*
+
+public void suggestDesiredDimensions(
+  int minimumWidth,
+  int minimumHeight)
+
+For use only by the current home application, to specify the size of wallpaper 
+it would like to use. This allows such applications to have a virtual wallpaper 
+that is larger than the physical screen, matching the size of their workspace. 
+
+Note developers, who don't seem to be reading this. This is for home screens to 
+tell what size wallpaper they would like. Nobody else should be calling this! 
+Certainly not other non-home-screen apps that change the wallpaper. Those apps 
+are supposed to retrieve the suggested size so they can construct a wallpaper 
+that matches it. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+    minimumWidth - Desired minimum width 
+    minimumHeight - Desired minimum height 
+
+

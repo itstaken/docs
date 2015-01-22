@@ -1,0 +1,235 @@
+*android.app.LocalActivityManager* *LocalActivityManager* Helper class for manag
+
+public class LocalActivityManager
+  extends    |java.lang.Object|
+
+|android.app.LocalActivityManager_Description|
+|android.app.LocalActivityManager_Fields|
+|android.app.LocalActivityManager_Constructors|
+|android.app.LocalActivityManager_Methods|
+
+================================================================================
+
+*android.app.LocalActivityManager_Constructors*
+|android.app.LocalActivityManager(Activity,boolean)|Create a new LocalActivityM
+
+*android.app.LocalActivityManager_Methods*
+|android.app.LocalActivityManager.destroyActivity(String,boolean)|Destroy the a
+|android.app.LocalActivityManager.dispatchCreate(Bundle)|Restore a state that w
+|android.app.LocalActivityManager.dispatchDestroy(boolean)|Called by the contai
+|android.app.LocalActivityManager.dispatchPause(boolean)|Called by the containe
+|android.app.LocalActivityManager.dispatchResume()|Called by the container acti
+|android.app.LocalActivityManager.dispatchRetainNonConfigurationInstance()|Call
+|android.app.LocalActivityManager.dispatchStop()|Called by the container activi
+|android.app.LocalActivityManager.getActivity(String)|Return the Activity objec
+|android.app.LocalActivityManager.getCurrentActivity()|Retrieve the Activity th
+|android.app.LocalActivityManager.getCurrentId()|Retrieve the ID of the activit
+|android.app.LocalActivityManager.removeAllActivities()|Remove all activities f
+|android.app.LocalActivityManager.saveInstanceState()|Retrieve the state of all
+|android.app.LocalActivityManager.startActivity(String,Intent)|Start a new acti
+
+*android.app.LocalActivityManager_Description*
+
+Helper class for managing multiple running embedded activities in the same 
+process. This class is not normally used directly, but rather created for you 
+as part of the (|android.app.ActivityGroup|) implementation. 
+
+
+  Deprecated: Use the new {@link Fragment} and {@link FragmentManager} APIs
+ instead; these are also
+ available on older platforms through the Android compatibility package.
+
+*android.app.LocalActivityManager(Activity,boolean)*
+
+public LocalActivityManager(
+  android.app.Activity parent,
+  boolean singleMode)
+
+Create a new LocalActivityManager for holding activities running within the 
+given parent. 
+
+    parent - the host of the embedded activities 
+    singleMode - True if the LocalActivityManger should keep a maximum of one activity resumed 
+
+*android.app.LocalActivityManager.destroyActivity(String,boolean)*
+
+public |android.view.Window| destroyActivity(
+  java.lang.String id,
+  boolean finish)
+
+Destroy the activity associated with a particular id. This activity will go 
+through the normal lifecycle events and fine onDestroy(), and then the id 
+removed from the group. 
+
+
+    id - Unique identifier of the activity to be destroyed 
+    finish - If true, this activity will be finished, so its id and all state are removed 
+       from the group. 
+
+    Returns: Returns the window that was used to display the activity, or null if there was 
+             none. 
+
+*android.app.LocalActivityManager.dispatchCreate(Bundle)*
+
+public void dispatchCreate(android.os.Bundle state)
+
+Restore a state that was previously returned by 
+(|android.app.LocalActivityManager|) . This adds to the activity group 
+information about all activity IDs that had previously been saved, even if they 
+have not been started yet, so if the user later navigates to them the correct 
+state will be restored. 
+
+Note: This does not change the current running activity, or start whatever 
+activity was previously running when the state was saved. That is up to the 
+client to do, in whatever way it thinks is best. 
+
+
+    state - a previously saved state; does nothing if this is null 
+
+*android.app.LocalActivityManager.dispatchDestroy(boolean)*
+
+public void dispatchDestroy(boolean finishing)
+
+Called by the container activity in its (|android.app.Activity|) so that 
+LocalActivityManager can perform the corresponding action on the activities it 
+holds. 
+
+
+
+*android.app.LocalActivityManager.dispatchPause(boolean)*
+
+public void dispatchPause(boolean finishing)
+
+Called by the container activity in its (|android.app.Activity|) so that 
+LocalActivityManager can perform the corresponding action on the activities it 
+holds. 
+
+
+    finishing - set to true if the parent activity has been finished; this can be determined by 
+       calling Activity.isFinishing() 
+
+*android.app.LocalActivityManager.dispatchResume()*
+
+public void dispatchResume()
+
+Called by the container activity in its (|android.app.Activity|) so that 
+LocalActivityManager can perform the corresponding action on the activities it 
+holds. 
+
+
+
+*android.app.LocalActivityManager.dispatchRetainNonConfigurationInstance()*
+
+public |java.util.HashMap|<String,Object> dispatchRetainNonConfigurationInstance()
+
+Call onRetainNonConfigurationInstance on each child activity and store the 
+results in a HashMap by id. Only construct the HashMap if there is a non-null 
+object to store. Note that this does not support nested ActivityGroups. 
+
+
+
+*android.app.LocalActivityManager.dispatchStop()*
+
+public void dispatchStop()
+
+Called by the container activity in its (|android.app.Activity|) so that 
+LocalActivityManager can perform the corresponding action on the activities it 
+holds. 
+
+
+
+*android.app.LocalActivityManager.getActivity(String)*
+
+public |android.app.Activity| getActivity(java.lang.String id)
+
+Return the Activity object associated with a string ID. 
+
+
+
+    Returns: the associated Activity object, or null if the id is unknown or its activity is 
+             not currently instantiated 
+
+*android.app.LocalActivityManager.getCurrentActivity()*
+
+public |android.app.Activity| getCurrentActivity()
+
+Retrieve the Activity that is currently running. 
+
+
+
+    Returns: the currently running (resumed) Activity, or null if there is not one 
+
+*android.app.LocalActivityManager.getCurrentId()*
+
+public |java.lang.String| getCurrentId()
+
+Retrieve the ID of the activity that is currently running. 
+
+
+
+    Returns: the ID of the currently running (resumed) Activity, or null if there is not one 
+
+*android.app.LocalActivityManager.removeAllActivities()*
+
+public void removeAllActivities()
+
+Remove all activities from this LocalActivityManager, performing an 
+(|android.app.Activity|) on any that are currently instantiated. 
+
+
+
+*android.app.LocalActivityManager.saveInstanceState()*
+
+public |android.os.Bundle| saveInstanceState()
+
+Retrieve the state of all activities known by the group. For activities that 
+have previously run and are now stopped or finished, the last saved state is 
+used. For the current running activity, its (|android.app.Activity|) is called 
+to retrieve its current state. 
+
+
+
+    Returns: a Bundle holding the newly created state of all known activities 
+
+*android.app.LocalActivityManager.startActivity(String,Intent)*
+
+public |android.view.Window| startActivity(
+  java.lang.String id,
+  android.content.Intent intent)
+
+Start a new activity running in the group. Every activity you start must have a 
+unique string ID associated with it -- this is used to keep track of the 
+activity, so that if you later call startActivity() again on it the same 
+activity object will be retained. 
+
+When there had previously been an activity started under this id, it may either 
+be destroyed and a new one started, or the current one re-used, based on these 
+conditions, in order: 
+
+If the Intent maps to a different activity component than is currently running, 
+the current activity is finished and a new one started. If the current activity 
+uses a non-multiple launch mode (such as singleTop), or the Intent has the 
+(|android.content.Intent|) flag set, then the current activity will remain 
+running and its Activity.onNewIntent()(|android.app.Activity|) method called. 
+If the new Intent is the same (excluding extras) as the previous one, and the 
+new Intent does not have the (|android.content.Intent|) set, then the current 
+activity will remain running as-is. Otherwise, the current activity will be 
+finished and a new one started. 
+
+If the given Intent can not be resolved to an available Activity, this method 
+throws (|android.content.ActivityNotFoundException|) . 
+
+Warning: There is an issue where, if the Intent does not include an explicit 
+component, we can restore the state for a different activity class than was 
+previously running when the state was saved (if the set of available activities 
+changes between those points). 
+
+
+    id - Unique identifier of the activity to be started 
+    intent - The Intent describing the activity to be started 
+
+    Returns: Returns the window of the activity. The caller needs to take care of adding 
+             this window to a view hierarchy, and likewise dealing with 
+             removing the old window if the activity has changed. 
+
+

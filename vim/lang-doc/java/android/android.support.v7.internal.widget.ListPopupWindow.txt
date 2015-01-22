@@ -1,0 +1,685 @@
+*android.support.v7.internal.widget.ListPopupWindow* *ListPopupWindow* A ListPop
+
+public class ListPopupWindow
+  extends    |java.lang.Object|
+
+|android.support.v7.internal.widget.ListPopupWindow_Description|
+|android.support.v7.internal.widget.ListPopupWindow_Fields|
+|android.support.v7.internal.widget.ListPopupWindow_Constructors|
+|android.support.v7.internal.widget.ListPopupWindow_Methods|
+
+================================================================================
+
+*android.support.v7.internal.widget.ListPopupWindow_Fields*
+|int_android.support.v7.internal.widget.ListPopupWindow.FILL_PARENT|
+|int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_FROM_FOCUSABLE|
+|int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_NEEDED|
+|int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_NOT_NEEDED|
+|int_android.support.v7.internal.widget.ListPopupWindow.POSITION_PROMPT_ABOVE|
+|int_android.support.v7.internal.widget.ListPopupWindow.POSITION_PROMPT_BELOW|
+|int_android.support.v7.internal.widget.ListPopupWindow.WRAP_CONTENT|
+
+*android.support.v7.internal.widget.ListPopupWindow_Constructors*
+|android.support.v7.internal.widget.ListPopupWindow(Context)|Create a new, empt
+|android.support.v7.internal.widget.ListPopupWindow(Context,AttributeSet)|Creat
+|android.support.v7.internal.widget.ListPopupWindow(Context,AttributeSet,int)|C
+
+*android.support.v7.internal.widget.ListPopupWindow_Methods*
+|android.support.v7.internal.widget.ListPopupWindow.clearListSelection()|Clear 
+|android.support.v7.internal.widget.ListPopupWindow.dismiss()|Dismiss the popup
+|android.support.v7.internal.widget.ListPopupWindow.getAnchorView()|Returns the
+|android.support.v7.internal.widget.ListPopupWindow.getAnimationStyle()|Returns
+|android.support.v7.internal.widget.ListPopupWindow.getBackground()|
+|android.support.v7.internal.widget.ListPopupWindow.getHeight()|
+|android.support.v7.internal.widget.ListPopupWindow.getHorizontalOffset()|
+|android.support.v7.internal.widget.ListPopupWindow.getInputMethodMode()|Return
+|android.support.v7.internal.widget.ListPopupWindow.getListView()|
+|android.support.v7.internal.widget.ListPopupWindow.getMaxAvailableHeight(View,int,boolean)|
+|android.support.v7.internal.widget.ListPopupWindow.getPromptPosition()|
+|android.support.v7.internal.widget.ListPopupWindow.getSelectedItem()|
+|android.support.v7.internal.widget.ListPopupWindow.getSelectedItemId()|
+|android.support.v7.internal.widget.ListPopupWindow.getSelectedItemPosition()|
+|android.support.v7.internal.widget.ListPopupWindow.getSelectedView()|
+|android.support.v7.internal.widget.ListPopupWindow.getSoftInputMode()|Returns 
+|android.support.v7.internal.widget.ListPopupWindow.getVerticalOffset()|
+|android.support.v7.internal.widget.ListPopupWindow.getWidth()|
+|android.support.v7.internal.widget.ListPopupWindow.isDropDownAlwaysVisible()|
+|android.support.v7.internal.widget.ListPopupWindow.isInputMethodNotNeeded()|
+|android.support.v7.internal.widget.ListPopupWindow.isModal()|Returns whether t
+|android.support.v7.internal.widget.ListPopupWindow.isShowing()|
+|android.support.v7.internal.widget.ListPopupWindow.onKeyDown(int,KeyEvent)|Fil
+|android.support.v7.internal.widget.ListPopupWindow.onKeyUp(int,KeyEvent)|Filte
+|android.support.v7.internal.widget.ListPopupWindow.performItemClick(int)|Perfo
+|android.support.v7.internal.widget.ListPopupWindow.postShow()|Post a#show()cal
+|android.support.v7.internal.widget.ListPopupWindow.setAdapter(ListAdapter)|Set
+|android.support.v7.internal.widget.ListPopupWindow.setAnchorView(View)|Sets th
+|android.support.v7.internal.widget.ListPopupWindow.setAnimationStyle(int)|Set 
+|android.support.v7.internal.widget.ListPopupWindow.setBackgroundDrawable(Drawable)|
+|android.support.v7.internal.widget.ListPopupWindow.setContentWidth(int)|Sets t
+|android.support.v7.internal.widget.ListPopupWindow.setDropDownAlwaysVisible(boolean)|
+|android.support.v7.internal.widget.ListPopupWindow.setForceIgnoreOutsideTouch(boolean)|
+|android.support.v7.internal.widget.ListPopupWindow.setHeight(int)|Sets the hei
+|android.support.v7.internal.widget.ListPopupWindow.setHorizontalOffset(int)|Se
+|android.support.v7.internal.widget.ListPopupWindow.setInputMethodMode(int)|Con
+|android.support.v7.internal.widget.ListPopupWindow.setListSelector(Drawable)|S
+|android.support.v7.internal.widget.ListPopupWindow.setModal(boolean)|Set wheth
+|android.support.v7.internal.widget.ListPopupWindow.setOnDismissListener(PopupWindow.OnDismissListener)|
+|android.support.v7.internal.widget.ListPopupWindow.setOnItemClickListener(AdapterView.OnItemClickListener)|
+|android.support.v7.internal.widget.ListPopupWindow.setOnItemSelectedListener(AdapterView.OnItemSelectedListener)|
+|android.support.v7.internal.widget.ListPopupWindow.setPromptPosition(int)|Set 
+|android.support.v7.internal.widget.ListPopupWindow.setPromptView(View)|Set a v
+|android.support.v7.internal.widget.ListPopupWindow.setSelection(int)|Set the s
+|android.support.v7.internal.widget.ListPopupWindow.setSoftInputMode(int)|Sets 
+|android.support.v7.internal.widget.ListPopupWindow.setVerticalOffset(int)|Set 
+|android.support.v7.internal.widget.ListPopupWindow.setWidth(int)|Sets the widt
+|android.support.v7.internal.widget.ListPopupWindow.show()|Show the popup list.
+
+*android.support.v7.internal.widget.ListPopupWindow_Description*
+
+A ListPopupWindow anchors itself to a host view and displays a list of choices. 
+
+ListPopupWindow contains a number of tricky behaviors surrounding positioning, 
+scrolling parents to fit the dropdown, interacting sanely with the IME if 
+present, and others. 
+
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.FILL_PARENT*
+
+Alias for (|ViewGroup.LayoutParams|) . If used to specify a popup width, the 
+popup will match the width of the anchor view. If used to specify a popup 
+height, the popup will fill available space. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_FROM_FOCUSABLE*
+
+Mode for (|android.support.v7.internal.widget.ListPopupWindow|) : the 
+requirements for the input method should be based on the focusability of the 
+popup. That is if it is focusable than it needs to work with the input method, 
+else it doesn't. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_NEEDED*
+
+Mode for (|android.support.v7.internal.widget.ListPopupWindow|) : this popup 
+always needs to work with an input method, regardless of whether it is 
+focusable. This means that it will always be displayed so that the user can 
+also operate the input method while it is shown. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.INPUT_METHOD_NOT_NEEDED*
+
+Mode for (|android.support.v7.internal.widget.ListPopupWindow|) : this popup 
+never needs to work with an input method, regardless of whether it is 
+focusable. This means that it will always be displayed to use as much space on 
+the screen as needed, regardless of whether this covers the input method. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.POSITION_PROMPT_ABOVE*
+
+The provided prompt view should appear above list content. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.POSITION_PROMPT_BELOW*
+
+The provided prompt view should appear below list content. 
+
+
+*int_android.support.v7.internal.widget.ListPopupWindow.WRAP_CONTENT*
+
+Alias for (|ViewGroup.LayoutParams|) . If used to specify a popup width, the 
+popup will use the width of its content. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow(Context)*
+
+public ListPopupWindow(Context context)
+
+Create a new, empty popup window capable of displaying items from a 
+ListAdapter. Backgrounds should be set using 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+    context - Context used for contained views. 
+
+*android.support.v7.internal.widget.ListPopupWindow(Context,AttributeSet)*
+
+public ListPopupWindow(
+  Context context,
+  AttributeSet attrs)
+
+Create a new, empty popup window capable of displaying items from a 
+ListAdapter. Backgrounds should be set using 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+    context - Context used for contained views. 
+    attrs - Attributes from inflating parent views used to style the popup. 
+
+*android.support.v7.internal.widget.ListPopupWindow(Context,AttributeSet,int)*
+
+public ListPopupWindow(
+  Context context,
+  AttributeSet attrs,
+  int defStyleAttr)
+
+Create a new, empty popup window capable of displaying items from a 
+ListAdapter. Backgrounds should be set using 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+    context - Context used for contained views. 
+    attrs - Attributes from inflating parent views used to style the popup. 
+    defStyleAttr - Default style attribute to use for popup content. 
+
+*android.support.v7.internal.widget.ListPopupWindow.clearListSelection()*
+
+public void clearListSelection()
+
+Clear any current list selection. Only valid when 
+(|android.support.v7.internal.widget.ListPopupWindow|) ==true. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.dismiss()*
+
+public void dismiss()
+
+Dismiss the popup window. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.getAnchorView()*
+
+public View getAnchorView()
+
+Returns the view that will be used to anchor this popup. 
+
+
+
+    Returns: The popup's anchor view 
+
+*android.support.v7.internal.widget.ListPopupWindow.getAnimationStyle()*
+
+public int getAnimationStyle()
+
+Returns the animation style that will be used when the popup window is shown or 
+dismissed. 
+
+
+
+    Returns: Animation style that will be used. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getBackground()*
+
+public Drawable getBackground()
+
+
+
+
+
+    Returns: The background drawable for the popup window. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getHeight()*
+
+public int getHeight()
+
+
+
+
+
+    Returns: The height of the popup window in pixels. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getHorizontalOffset()*
+
+public int getHorizontalOffset()
+
+
+
+
+
+    Returns: The horizontal offset of the popup from its anchor in pixels. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getInputMethodMode()*
+
+public int getInputMethodMode()
+
+Return the current value in 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.getListView()*
+
+public ListView getListView()
+
+
+
+
+
+    Returns: The {@link ListView} displayed within the popup window. Only valid when {@link 
+             #isShowing()} == {@code true}. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getMaxAvailableHeight(View,int,boolean)*
+
+public int getMaxAvailableHeight(
+  View anchor,
+  int yOffset,
+  boolean ignoreBottomDecorations)
+
+Copied from PopupWindow.java of JB 
+
+Returns the maximum height that is available for the popup to be completely 
+shown, optionally ignoring any bottom decorations such as the input method. It 
+is recommended that this height be the maximum for the popup's height, 
+otherwise it is possible that the popup will be clipped. 
+
+
+    anchor - The view on which the popup window must be anchored. 
+    yOffset - y offset from the view's bottom edge 
+    ignoreBottomDecorations - if true, the height returned will be all the way to the bottom of the display, 
+       ignoring any bottom decorations 
+
+    Returns: The maximum available height for the popup to be completely shown. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getPromptPosition()*
+
+public int getPromptPosition()
+
+
+
+
+
+    Returns: Where the optional prompt view should appear. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getSelectedItem()*
+
+public |java.lang.Object| getSelectedItem()
+
+
+
+
+
+    Returns: The currently selected item or null if the popup is not showing. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getSelectedItemId()*
+
+public long getSelectedItemId()
+
+
+
+
+
+    Returns: The ID of the currently selected item or {@link ListView#INVALID_ROW_ID} if 
+             {@link #isShowing()} == {@code false}. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getSelectedItemPosition()*
+
+public int getSelectedItemPosition()
+
+
+
+
+
+    Returns: The position of the currently selected item or {@link 
+             ListView#INVALID_POSITION} if {@link #isShowing()} == {@code 
+             false}. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getSelectedView()*
+
+public View getSelectedView()
+
+
+
+
+
+    Returns: The View for the currently selected item or null if {@link #isShowing()} == 
+             {@code false}. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getSoftInputMode()*
+
+public int getSoftInputMode()
+
+Returns the current value in 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.getVerticalOffset()*
+
+public int getVerticalOffset()
+
+
+
+
+
+    Returns: The vertical offset of the popup from its anchor in pixels. 
+
+*android.support.v7.internal.widget.ListPopupWindow.getWidth()*
+
+public int getWidth()
+
+
+
+
+
+    Returns: The width of the popup window in pixels. 
+
+*android.support.v7.internal.widget.ListPopupWindow.isDropDownAlwaysVisible()*
+
+public boolean isDropDownAlwaysVisible()
+
+
+
+
+
+    Returns: Whether the drop-down is visible under special conditions. 
+
+*android.support.v7.internal.widget.ListPopupWindow.isInputMethodNotNeeded()*
+
+public boolean isInputMethodNotNeeded()
+
+
+
+
+
+    Returns: {@code true} if this popup is configured to assume the user does not need to 
+             interact with the IME while it is showing, {@code false} 
+             otherwise. 
+
+*android.support.v7.internal.widget.ListPopupWindow.isModal()*
+
+public boolean isModal()
+
+Returns whether the popup window will be modal when shown. 
+
+
+
+    Returns: {@code true} if the popup window will be modal, {@code false} otherwise. 
+
+*android.support.v7.internal.widget.ListPopupWindow.isShowing()*
+
+public boolean isShowing()
+
+
+
+
+
+    Returns: {@code true} if the popup is currently showing, {@code false} otherwise. 
+
+*android.support.v7.internal.widget.ListPopupWindow.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  KeyEvent event)
+
+Filter key down events. By forwarding key down events to this function, views 
+using non-modal ListPopupWindow can have it handle key selection of items. 
+
+
+    keyCode - keyCode param passed to the host view's onKeyDown 
+    event - event param passed to the host view's onKeyDown 
+
+    Returns: true if the event was handled, false if it was ignored. 
+
+*android.support.v7.internal.widget.ListPopupWindow.onKeyUp(int,KeyEvent)*
+
+public boolean onKeyUp(
+  int keyCode,
+  KeyEvent event)
+
+Filter key down events. By forwarding key up events to this function, views 
+using non-modal ListPopupWindow can have it handle key selection of items. 
+
+
+    keyCode - keyCode param passed to the host view's onKeyUp 
+    event - event param passed to the host view's onKeyUp 
+
+    Returns: true if the event was handled, false if it was ignored. 
+
+*android.support.v7.internal.widget.ListPopupWindow.performItemClick(int)*
+
+public boolean performItemClick(int position)
+
+Perform an item click operation on the specified list adapter position. 
+
+
+    position - Adapter position for performing the click 
+
+    Returns: true if the click action could be performed, false if not. (e.g. if the popup 
+             was not showing, this method would return false.) 
+
+*android.support.v7.internal.widget.ListPopupWindow.postShow()*
+
+public void postShow()
+
+Post a (|android.support.v7.internal.widget.ListPopupWindow|) call to the UI 
+thread. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.setAdapter(ListAdapter)*
+
+public void setAdapter(ListAdapter adapter)
+
+Sets the adapter that provides the data and the views to represent the data in 
+this popup window. 
+
+
+    adapter - The adapter to use to create this window's content. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setAnchorView(View)*
+
+public void setAnchorView(View anchor)
+
+Sets the popup's anchor view. This popup will always be positioned relative to 
+the anchor view when shown. 
+
+
+    anchor - The view to use as an anchor. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setAnimationStyle(int)*
+
+public void setAnimationStyle(int animationStyle)
+
+Set an animation style to use when the popup window is shown or dismissed. 
+
+
+    animationStyle - Animation style to use. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setBackgroundDrawable(Drawable)*
+
+public void setBackgroundDrawable(Drawable d)
+
+Sets a drawable to be the background for the popup window. 
+
+
+    d - A drawable to set as the background. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setContentWidth(int)*
+
+public void setContentWidth(int width)
+
+Sets the width of the popup window by the size of its content. The final width 
+may be larger to accommodate styled window dressing. 
+
+
+    width - Desired width of content in pixels. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setDropDownAlwaysVisible(boolean)*
+
+public void setDropDownAlwaysVisible(boolean dropDownAlwaysVisible)
+
+Sets whether the drop-down should remain visible under certain conditions. 
+
+The drop-down will occupy the entire screen below 
+(|android.support.v7.internal.widget.ListPopupWindow|) regardless of the size 
+or content of the list. (|android.support.v7.internal.widget.ListPopupWindow|) 
+will fill any space that is not used by the list. 
+
+
+    dropDownAlwaysVisible - Whether to keep the drop-down visible. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setForceIgnoreOutsideTouch(boolean)*
+
+public void setForceIgnoreOutsideTouch(boolean forceIgnoreOutsideTouch)
+
+Forces outside touches to be ignored. Normally if 
+(|android.support.v7.internal.widget.ListPopupWindow|) is false, we allow 
+outside touch to dismiss the dropdown. If this is set to true, then we ignore 
+outside touch even when the drop down is not set to always visible. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.setHeight(int)*
+
+public void setHeight(int height)
+
+Sets the height of the popup window in pixels. Can also be 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+    height - Height of the popup window. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setHorizontalOffset(int)*
+
+public void setHorizontalOffset(int offset)
+
+Set the horizontal offset of this popup from its anchor view in pixels. 
+
+
+    offset - The horizontal offset of the popup from its anchor. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setInputMethodMode(int)*
+
+public void setInputMethodMode(int mode)
+
+Control how the popup operates with an input method: one of 
+(|android.support.v7.internal.widget.ListPopupWindow|) , 
+(|android.support.v7.internal.widget.ListPopupWindow|) , or 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to the 
+(|android.support.v7.internal.widget.ListPopupWindow|) method. 
+
+
+
+*android.support.v7.internal.widget.ListPopupWindow.setListSelector(Drawable)*
+
+public void setListSelector(Drawable selector)
+
+Sets a drawable to use as the list item selector. 
+
+
+    selector - List selector drawable to use in the popup. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setModal(boolean)*
+
+public void setModal(boolean modal)
+
+Set whether this window should be modal when shown. 
+
+If a popup window is modal, it will receive all touch and key input. If the 
+user touches outside the popup window's content area the popup window will be 
+dismissed. 
+
+
+    modal - {@code true} if the popup window should be modal, {@code false} otherwise. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setOnDismissListener(PopupWindow.OnDismissListener)*
+
+public void setOnDismissListener(PopupWindow.OnDismissListener listener)
+
+Set a listener to receive a callback when the popup is dismissed. 
+
+
+    listener - Listener that will be notified when the popup is dismissed. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setOnItemClickListener(AdapterView.OnItemClickListener)*
+
+public void setOnItemClickListener(AdapterView.OnItemClickListener clickListener)
+
+Sets a listener to receive events when a list item is clicked. 
+
+
+    clickListener - Listener to register 
+
+*android.support.v7.internal.widget.ListPopupWindow.setOnItemSelectedListener(AdapterView.OnItemSelectedListener)*
+
+public void setOnItemSelectedListener(AdapterView.OnItemSelectedListener selectedListener)
+
+Sets a listener to receive events when a list item is selected. 
+
+
+    selectedListener - Listener to register. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setPromptPosition(int)*
+
+public void setPromptPosition(int position)
+
+Set where the optional prompt view should appear. The default is 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+    position - A position constant declaring where the prompt should be displayed. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setPromptView(View)*
+
+public void setPromptView(View prompt)
+
+Set a view to act as a user prompt for this popup window. Where the prompt view 
+will appear is controlled by 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+    prompt - View to use as an informational prompt. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setSelection(int)*
+
+public void setSelection(int position)
+
+Set the selected position of the list. Only valid when 
+(|android.support.v7.internal.widget.ListPopupWindow|) ==true. 
+
+
+    position - List position to set as selected. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setSoftInputMode(int)*
+
+public void setSoftInputMode(int mode)
+
+Sets the operating mode for the soft input area. 
+
+
+    mode - The desired mode, see {@link 
+       android.view.WindowManager.LayoutParams#softInputMode} for the full list 
+
+*android.support.v7.internal.widget.ListPopupWindow.setVerticalOffset(int)*
+
+public void setVerticalOffset(int offset)
+
+Set the vertical offset of this popup from its anchor view in pixels. 
+
+
+    offset - The vertical offset of the popup from its anchor. 
+
+*android.support.v7.internal.widget.ListPopupWindow.setWidth(int)*
+
+public void setWidth(int width)
+
+Sets the width of the popup window in pixels. Can also be 
+(|android.support.v7.internal.widget.ListPopupWindow|) or 
+(|android.support.v7.internal.widget.ListPopupWindow|) . 
+
+
+    width - Width of the popup window. 
+
+*android.support.v7.internal.widget.ListPopupWindow.show()*
+
+public void show()
+
+Show the popup list. If the list is already showing, this method will 
+recalculate the popup's size and position. 
+
+
+
+

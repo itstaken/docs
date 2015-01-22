@@ -1,0 +1,120 @@
+*android.transition.Fade* *Fade* This transition tracks changes to the visibilit
+
+public class Fade
+  extends    |android.transition.Visibility|
+
+|android.transition.Fade_Description|
+|android.transition.Fade_Fields|
+|android.transition.Fade_Constructors|
+|android.transition.Fade_Methods|
+
+================================================================================
+
+*android.transition.Fade_Fields*
+|int_android.transition.Fade.IN|
+|int_android.transition.Fade.OUT|
+
+*android.transition.Fade_Constructors*
+|android.transition.Fade()|Constructs a Fade transition that will fade targets 
+|android.transition.Fade(int)|Constructs a Fade transition that will fade targe
+
+*android.transition.Fade_Methods*
+|android.transition.Fade.captureStartValues(TransitionValues)|
+|android.transition.Fade.onAppear(ViewGroup,TransitionValues,int,TransitionValues,int)|
+|android.transition.Fade.onDisappear(ViewGroup,TransitionValues,int,TransitionValues,int)|
+
+*android.transition.Fade_Description*
+
+This transition tracks changes to the visibility of target views in the start 
+and end scenes and fades views in or out when they become visible or 
+non-visible. Visibility is determined by both the (|android.view.View|) state 
+of the view as well as whether it is parented in the current view hierarchy. 
+
+The ability of this transition to fade out a particular view, and the way that 
+that fading operation takes place, is based on the situation of the view in the 
+view hierarchy. For example, if a view was simply removed from its parent, then 
+the view will be added into a (|android.view.ViewGroupOverlay|) while fading. 
+If a visible view is changed to be (|android.view.View|) or 
+(|android.view.View|) , then the visibility will be changed to 
+(|android.view.View|) for the duration of the animation. However, if a view is 
+in a hierarchy which is also altering its visibility, the situation can be more 
+complicated. In general, if a view that is no longer in the hierarchy in the 
+end scene still has a parent (so its parent hierarchy was removed, but it was 
+not removed from its parent), then it will be left alone to avoid side-effects 
+from improperly removing it from its parent. The only exception to this is if 
+the previous (|android.transition.Scene|) was created from a layout resource 
+file(|android.transition.Scene|) , then it is considered safe to un-parent the 
+starting scene view in order to fade it out. 
+
+A Fade transition can be described in a resource file by using the tag fade, 
+along with the standard attributes of (|android.R.styleable|) and 
+(|android.R.styleable|) . 
+
+
+
+*int_android.transition.Fade.IN*
+
+Fading mode used in (|android.transition.Fade|) to make the transition operate 
+on targets that are appearing. Maybe be combined with 
+(|android.transition.Fade|) to fade both in and out. 
+
+
+*int_android.transition.Fade.OUT*
+
+Fading mode used in (|android.transition.Fade|) to make the transition operate 
+on targets that are disappearing. Maybe be combined with 
+(|android.transition.Fade|) to fade both in and out. 
+
+
+
+*android.transition.Fade()*
+
+public Fade()
+
+Constructs a Fade transition that will fade targets in and out. 
+
+
+*android.transition.Fade(int)*
+
+public Fade(int fadingMode)
+
+Constructs a Fade transition that will fade targets in and/or out, according to 
+the value of fadingMode. 
+
+    fadingMode - The behavior of this transition, a combination of {@link #IN} and {@link #OUT}. 
+
+*android.transition.Fade.captureStartValues(TransitionValues)*
+
+public void captureStartValues(android.transition.TransitionValues transitionValues)
+
+
+
+
+
+*android.transition.Fade.onAppear(ViewGroup,TransitionValues,int,TransitionValues,int)*
+
+public |android.animation.Animator| onAppear(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  int startVisibility,
+  android.transition.TransitionValues endValues,
+  int endVisibility)
+
+
+
+
+
+*android.transition.Fade.onDisappear(ViewGroup,TransitionValues,int,TransitionValues,int)*
+
+public |android.animation.Animator| onDisappear(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  int startVisibility,
+  android.transition.TransitionValues endValues,
+  int endVisibility)
+
+
+
+
+
+

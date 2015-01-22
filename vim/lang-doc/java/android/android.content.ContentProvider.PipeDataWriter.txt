@@ -1,0 +1,44 @@
+*android.content.ContentProvider.PipeDataWriter* *ContentProvider.PipeDataWriter* 
+
+public static interface interface ContentProvider.PipeDataWriter<T>
+
+
+|android.content.ContentProvider.PipeDataWriter_Description|
+|android.content.ContentProvider.PipeDataWriter_Fields|
+|android.content.ContentProvider.PipeDataWriter_Constructors|
+|android.content.ContentProvider.PipeDataWriter_Methods|
+
+================================================================================
+
+*android.content.ContentProvider.PipeDataWriter_Methods*
+|android.content.ContentProvider.PipeDataWriter.writeDataToPipe(ParcelFileDescriptor,Uri,String,Bundle,T)|
+
+*android.content.ContentProvider.PipeDataWriter_Description*
+
+Interface to write a stream of data to a pipe. Use with 
+(|android.content.ContentProvider|) . 
+
+
+
+*android.content.ContentProvider.PipeDataWriter.writeDataToPipe(ParcelFileDescriptor,Uri,String,Bundle,T)*
+
+public void writeDataToPipe(
+  android.os.ParcelFileDescriptor output,
+  android.net.Uri uri,
+  java.lang.String mimeType,
+  android.os.Bundle opts,
+  T args)
+
+Called from a background thread to stream data out to a pipe. Note that the 
+pipe is blocking, so this thread can block on writes for an arbitrary amount of 
+time if the client is slow at reading. 
+
+
+    output - The pipe where data should be written. This will be closed for you upon 
+       returning from this function. 
+    uri - The URI whose data is to be written. 
+    mimeType - The desired type of data to be written. 
+    opts - Options supplied by caller. 
+    args - Your own custom arguments. 
+
+

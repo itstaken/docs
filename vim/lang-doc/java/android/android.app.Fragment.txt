@@ -1,0 +1,1149 @@
+*android.app.Fragment* *Fragment* A Fragment is a piece of an application's user
+
+public class Fragment
+  extends    |java.lang.Object|
+  implements |android.content.ComponentCallbacks2|
+             |android.view.View.OnCreateContextMenuListener|
+
+|android.app.Fragment_Description|
+|android.app.Fragment_Fields|
+|android.app.Fragment_Constructors|
+|android.app.Fragment_Methods|
+
+================================================================================
+
+*android.app.Fragment_Constructors*
+|android.app.Fragment()|Default constructor.
+
+*android.app.Fragment_Methods*
+|android.app.Fragment.dump(String,FileDescriptor,PrintWriter,String[])|Print th
+|android.app.Fragment.equals(Object)|Subclasses can not override equals().
+|android.app.Fragment.getActivity()|Return the Activity this fragment is curren
+|android.app.Fragment.getArguments()|Return the arguments supplied when the fra
+|android.app.Fragment.getChildFragmentManager()|Return a private FragmentManage
+|android.app.Fragment.getFragmentManager()|Return the FragmentManager for inter
+|android.app.Fragment.getId()|Return the identifier this fragment is known by.
+|android.app.Fragment.getLayoutInflater(Bundle)|
+|android.app.Fragment.getLoaderManager()|Return the LoaderManager for this frag
+|android.app.Fragment.getParentFragment()|Returns the parent Fragment containin
+|android.app.Fragment.getResources()|Return getActivity().getResources().
+|android.app.Fragment.getRetainInstance()|
+|android.app.Fragment.getString(int)|Return a localized string from the applica
+|android.app.Fragment.getString(int,Object...)|Return a localized formatted str
+|android.app.Fragment.getTag()|Get the tag name of the fragment, if specified.
+|android.app.Fragment.getTargetFragment()|Return the target fragment set by#set
+|android.app.Fragment.getTargetRequestCode()|Return the target request code set
+|android.app.Fragment.getText(int)|Return a localized, styled CharSequence from
+|android.app.Fragment.getUserVisibleHint()|
+|android.app.Fragment.getView()|Get the root view for the fragment's layout (th
+|android.app.Fragment.hashCode()|Subclasses can not override hashCode().
+|android.app.Fragment.instantiate(Context,String)|Like#instantiate(Context, Str
+|android.app.Fragment.instantiate(Context,String,Bundle)|Create a new instance 
+|android.app.Fragment.isAdded()|Return true if the fragment is currently added 
+|android.app.Fragment.isDetached()|Return true if the fragment has been explici
+|android.app.Fragment.isHidden()|Return true if the fragment has been hidden.
+|android.app.Fragment.isInLayout()|Return true if the layout is included as par
+|android.app.Fragment.isRemoving()|Return true if this fragment is currently be
+|android.app.Fragment.isResumed()|Return true if the fragment is in the resumed
+|android.app.Fragment.isVisible()|Return true if the fragment is currently visi
+|android.app.Fragment.onActivityCreated(Bundle)|Called when the fragment's acti
+|android.app.Fragment.onActivityResult(int,int,Intent)|Receive the result from 
+|android.app.Fragment.onAttach(Activity)|Called when a fragment is first attach
+|android.app.Fragment.onConfigurationChanged(Configuration)|
+|android.app.Fragment.onContextItemSelected(MenuItem)|This hook is called whene
+|android.app.Fragment.onCreate(Bundle)|Called to do initial creation of a fragm
+|android.app.Fragment.onCreateAnimator(int,boolean,int)|Called when a fragment 
+|android.app.Fragment.onCreateContextMenu(ContextMenu,View,ContextMenu.ContextMenuInfo)|
+|android.app.Fragment.onCreateOptionsMenu(Menu,MenuInflater)|Initialize the con
+|android.app.Fragment.onCreateView(LayoutInflater,ViewGroup,Bundle)|Called to h
+|android.app.Fragment.onDestroy()|Called when the fragment is no longer in use.
+|android.app.Fragment.onDestroyOptionsMenu()|Called when this fragment's option
+|android.app.Fragment.onDestroyView()|Called when the view previously created b
+|android.app.Fragment.onDetach()|Called when the fragment is no longer attached
+|android.app.Fragment.onHiddenChanged(boolean)|Called when the hidden state (as
+|android.app.Fragment.onInflate(Activity,AttributeSet,Bundle)|Called when a fra
+|android.app.Fragment.onInflate(AttributeSet,Bundle)|
+|android.app.Fragment.onLowMemory()|
+|android.app.Fragment.onOptionsItemSelected(MenuItem)|This hook is called whene
+|android.app.Fragment.onOptionsMenuClosed(Menu)|This hook is called whenever th
+|android.app.Fragment.onPause()|Called when the Fragment is no longer resumed.
+|android.app.Fragment.onPrepareOptionsMenu(Menu)|Prepare the Screen's standard 
+|android.app.Fragment.onResume()|Called when the fragment is visible to the use
+|android.app.Fragment.onSaveInstanceState(Bundle)|Called to ask the fragment to
+|android.app.Fragment.onStart()|Called when the Fragment is visible to the user
+|android.app.Fragment.onStop()|Called when the Fragment is no longer started.
+|android.app.Fragment.onTrimMemory(int)|
+|android.app.Fragment.onViewCreated(View,Bundle)|Called immediately after#onCre
+|android.app.Fragment.onViewStateRestored(Bundle)|Called when all saved state h
+|android.app.Fragment.registerForContextMenu(View)|Registers a context menu to 
+|android.app.Fragment.setArguments(Bundle)|Supply the construction arguments fo
+|android.app.Fragment.setHasOptionsMenu(boolean)|Report that this fragment woul
+|android.app.Fragment.setInitialSavedState(Fragment.SavedState)|Set the initial
+|android.app.Fragment.setMenuVisibility(boolean)|Set a hint for whether this fr
+|android.app.Fragment.setRetainInstance(boolean)|Control whether a fragment ins
+|android.app.Fragment.setTargetFragment(Fragment,int)|Optional target for this 
+|android.app.Fragment.setUserVisibleHint(boolean)|Set a hint to the system abou
+|android.app.Fragment.startActivity(Intent)|CallActivity#startActivity(Intent)f
+|android.app.Fragment.startActivity(Intent,Bundle)|CallActivity#startActivity(I
+|android.app.Fragment.startActivityForResult(Intent,int)|CallActivity#startActi
+|android.app.Fragment.startActivityForResult(Intent,int,Bundle)|CallActivity#st
+|android.app.Fragment.toString()|
+|android.app.Fragment.unregisterForContextMenu(View)|Prevents a context menu to
+
+*android.app.Fragment_Description*
+
+A Fragment is a piece of an application's user interface or behavior that can 
+be placed in an (|android.app.Activity|) . Interaction with fragments is done 
+through (|android.app.FragmentManager|) , which can be obtained via 
+Activity.getFragmentManager()(|android.app.Activity|) and 
+Fragment.getFragmentManager()(|android.app.Fragment|) . 
+
+The Fragment class can be used many ways to achieve a wide variety of results. 
+In its core, it represents a particular operation or interface that is running 
+within a larger (|android.app.Activity|) . A Fragment is closely tied to the 
+Activity it is in, and can not be used apart from one. Though Fragment defines 
+its own lifecycle, that lifecycle is dependent on its activity: if the activity 
+is stopped, no fragments inside of it can be started; when the activity is 
+destroyed, all fragments will be destroyed. 
+
+All subclasses of Fragment must include a public empty constructor. The 
+framework will often re-instantiate a fragment class when needed, in particular 
+during state restore, and needs to be able to find this constructor to 
+instantiate it. If the empty constructor is not available, a runtime exception 
+will occur in some cases during state restore. 
+
+Topics covered here: 
+
+Older Platforms Lifecycle Layout Back Stack 
+
+Developer Guides For more information about using fragments, read the <a 
+href="guide/topics/fundamentals/fragments.html">Fragments developer guide. 
+
+Older Platforms 
+
+While the Fragment API was introduced in (|android.os.Build.VERSION_CODES|) , a 
+version of the API at is also available for use on older platforms through 
+(|android.support.v4.app.FragmentActivity|) . See the blog post 
+
+Fragments For All for more details. 
+
+Lifecycle 
+
+Though a Fragment's lifecycle is tied to its owning activity, it has its own 
+wrinkle on the standard activity lifecycle. It includes basic activity 
+lifecycle methods such as (|android.app.Fragment|) , but also important are 
+methods related to interactions with the activity and UI generation. 
+
+The core series of lifecycle methods that are called to bring a fragment up to 
+resumed state (interacting with the user) are: 
+
+(|android.app.Fragment|) called once the fragment is associated with its 
+activity. (|android.app.Fragment|) called to do initial creation of the 
+fragment. (|android.app.Fragment|) creates and returns the view hierarchy 
+associated with the fragment. (|android.app.Fragment|) tells the fragment that 
+its activity has completed its own Activity.onCreate()(|android.app.Activity|) 
+. (|android.app.Fragment|) tells the fragment that all of the saved state of 
+its view hierarchy has been restored. (|android.app.Fragment|) makes the 
+fragment visible to the user (based on its containing activity being started). 
+(|android.app.Fragment|) makes the fragment interacting with the user (based on 
+its containing activity being resumed). 
+
+As a fragment is no longer being used, it goes through a reverse series of 
+callbacks: 
+
+(|android.app.Fragment|) fragment is no longer interacting with the user either 
+because its activity is being paused or a fragment operation is modifying it in 
+the activity. (|android.app.Fragment|) fragment is no longer visible to the 
+user either because its activity is being stopped or a fragment operation is 
+modifying it in the activity. (|android.app.Fragment|) allows the fragment to 
+clean up resources associated with its View. (|android.app.Fragment|) called to 
+do final cleanup of the fragment's state. (|android.app.Fragment|) called 
+immediately prior to the fragment no longer being associated with its activity. 
+
+Layout 
+
+Fragments can be used as part of your application's layout, allowing you to 
+better modularize your code and more easily adjust your user interface to the 
+screen it is running on. As an example, we can look at a simple program 
+consisting of a list of items, and display of the details of each item. 
+
+An activity's layout XML can include <fragment> tags to embed fragment 
+instances inside of the layout. For example, here is a simple layout that 
+embeds one fragment:development/samples/ApiDemos/res/layout/fragment_layout.xml 
+layoutThe layout is installed in the activity in the normal 
+way:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentLayout.java
+mainThe titles fragment, showing a list of titles, is fairly simple, relying on 
+(|android.app.ListFragment|) for most of its work. Note the implementation of 
+clicking an item: depending on the current activity's layout, it can either 
+create and display a new fragment to show the details in-place (more about this 
+later), or start a new activity to show the 
+details.development/samples/ApiDemos/src/com/example/android/apis/app/FragmentLayout.java
+titlesThe details fragment showing the contents of a selected item just 
+displays a string of text based on an index of a string array built in to the 
+app:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentLayout.java
+detailsIn this case when the user clicks on a title, there is no details 
+container in the current activity, so the titles fragment's click code will 
+launch a new activity to display the details 
+fragment:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentLayout.java
+details_activityHowever the screen may be large enough to show both the list of 
+titles and details about the currently selected title. To use such a layout on 
+a landscape screen, this alternative layout can be placed under 
+layout-land:development/samples/ApiDemos/res/layout-land/fragment_layout.xml 
+layoutNote how the prior code will adjust to this alternative UI flow: the 
+titles fragment will now embed the details fragment inside of this activity, 
+and the details activity will finish itself if it is running in a configuration 
+where the details can be shown in-place. 
+
+When a configuration change causes the activity hosting these fragments to 
+restart, its new instance may use a different layout that doesn't include the 
+same fragments as the previous layout. In this case all of the previous 
+fragments will still be instantiated and running in the new instance. However, 
+any that are no longer associated with a <fragment> tag in the view hierarchy 
+will not have their content view created and will return false from 
+(|android.app.Fragment|) . (The code here also shows how you can determine if a 
+fragment placed in a container is no longer running in a layout with that 
+container and avoid creating its view hierarchy in that case.) 
+
+The attributes of the <fragment> tag are used to control the LayoutParams 
+provided when attaching the fragment's view to the parent container. They can 
+also be parsed by the fragment in (|android.app.Fragment|) as parameters. 
+
+The fragment being instantiated must have some kind of unique identifier so 
+that it can be re-associated with a previous instance if the parent activity 
+needs to be destroyed and recreated. This can be provided these ways: 
+
+If nothing is explicitly supplied, the view ID of the container will be used. 
+android:tag can be used in <fragment> to provide a specific tag name for the 
+fragment. android:id can be used in <fragment> to provide a specific identifier 
+for the fragment. 
+
+
+
+Back Stack 
+
+The transaction in which fragments are modified can be placed on an internal 
+back-stack of the owning activity. When the user presses back in the activity, 
+any transactions on the back stack are popped off before the activity itself is 
+finished. 
+
+For example, consider this simple fragment that is instantiated with an integer 
+argument and displays that in a TextView in its 
+UI:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentStack.java
+fragmentA function that creates a new instance of the fragment, replacing 
+whatever current fragment instance is being shown and pushing that change on to 
+the back stack could be written 
+as:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentStack.java
+add_stackAfter each call to this function, a new entry is on the stack, and 
+pressing back will pop it to return the user to whatever previous state the 
+activity UI was in. 
+
+
+
+*android.app.Fragment()*
+
+public Fragment()
+
+Default constructor. Every fragment must have an empty constructor, so it can 
+be instantiated when restoring its activity's state. It is strongly recommended 
+that subclasses do not have other constructors with parameters, since these 
+constructors will not be called when the fragment is re-instantiated; instead, 
+arguments can be supplied by the caller with (|android.app.Fragment|) and later 
+retrieved by the Fragment with (|android.app.Fragment|) . 
+
+Applications should generally not implement a constructor. The first place 
+application code an run where the fragment is ready to be used is in 
+(|android.app.Fragment|) , the point where the fragment is actually associated 
+with its activity. Some applications may also want to implement 
+(|android.app.Fragment|) to retrieve attributes from a layout resource, though 
+should take care here because this happens for the fragment is attached to its 
+activity. 
+
+
+*android.app.Fragment.dump(String,FileDescriptor,PrintWriter,String[])*
+
+public void dump(
+  java.lang.String prefix,
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+Print the Fragments's state into the given stream. 
+
+
+    prefix - Text to print at the front of each line. 
+    fd - The raw file descriptor that the dump is being sent to. 
+    writer - The PrintWriter to which you should dump your state. This will be closed for 
+       you after you return. 
+    args - additional arguments to the dump request. 
+
+*android.app.Fragment.equals(Object)*
+
+public final boolean equals(java.lang.Object o)
+
+Subclasses can not override equals(). 
+
+
+
+*android.app.Fragment.getActivity()*
+
+public final |android.app.Activity| getActivity()
+
+Return the Activity this fragment is currently associated with. 
+
+
+
+*android.app.Fragment.getArguments()*
+
+public final |android.os.Bundle| getArguments()
+
+Return the arguments supplied when the fragment was instantiated, if any. 
+
+
+
+*android.app.Fragment.getChildFragmentManager()*
+
+public final |android.app.FragmentManager| getChildFragmentManager()
+
+Return a private FragmentManager for placing and managing Fragments inside of 
+this Fragment. 
+
+
+
+*android.app.Fragment.getFragmentManager()*
+
+public final |android.app.FragmentManager| getFragmentManager()
+
+Return the FragmentManager for interacting with fragments associated with this 
+fragment's activity. Note that this will be non-null slightly before 
+(|android.app.Fragment|) , during the time from when the fragment is placed in 
+a (|android.app.FragmentTransaction|) until it is committed and attached to its 
+activity. 
+
+If this Fragment is a child of another Fragment, the FragmentManager returned 
+here will be the parent's (|android.app.Fragment|) . 
+
+
+
+*android.app.Fragment.getId()*
+
+public final int getId()
+
+Return the identifier this fragment is known by. This is either the android:id 
+value supplied in a layout or the container view ID supplied when adding the 
+fragment. 
+
+
+
+*android.app.Fragment.getLayoutInflater(Bundle)*
+
+public |android.view.LayoutInflater| getLayoutInflater(android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.app.Fragment.getLoaderManager()*
+
+public |android.app.LoaderManager| getLoaderManager()
+
+Return the LoaderManager for this fragment, creating it if needed. 
+
+
+
+*android.app.Fragment.getParentFragment()*
+
+public final |android.app.Fragment| getParentFragment()
+
+Returns the parent Fragment containing this Fragment. If this Fragment is 
+attached directly to an Activity, returns null. 
+
+
+
+*android.app.Fragment.getResources()*
+
+public final |android.content.res.Resources| getResources()
+
+Return getActivity().getResources(). 
+
+
+
+*android.app.Fragment.getRetainInstance()*
+
+public final boolean getRetainInstance()
+
+
+
+
+
+*android.app.Fragment.getString(int)*
+
+public final |java.lang.String| getString(int resId)
+
+Return a localized string from the application's package's default string 
+table. 
+
+
+    resId - Resource id for the string 
+
+*android.app.Fragment.getString(int,Object...)*
+
+public final |java.lang.String| getString(
+  int resId,
+  java.lang.Object[] formatArgs)
+
+Return a localized formatted string from the application's package's default 
+string table, substituting the format arguments as defined in 
+(|java.util.Formatter|) and (|java.lang.String|) . 
+
+
+    resId - Resource id for the format string 
+    formatArgs - The format arguments that will be used for substitution. 
+
+*android.app.Fragment.getTag()*
+
+public final |java.lang.String| getTag()
+
+Get the tag name of the fragment, if specified. 
+
+
+
+*android.app.Fragment.getTargetFragment()*
+
+public final |android.app.Fragment| getTargetFragment()
+
+Return the target fragment set by (|android.app.Fragment|) . 
+
+
+
+*android.app.Fragment.getTargetRequestCode()*
+
+public final int getTargetRequestCode()
+
+Return the target request code set by (|android.app.Fragment|) . 
+
+
+
+*android.app.Fragment.getText(int)*
+
+public final |java.lang.CharSequence| getText(int resId)
+
+Return a localized, styled CharSequence from the application's package's 
+default string table. 
+
+
+    resId - Resource id for the CharSequence text 
+
+*android.app.Fragment.getUserVisibleHint()*
+
+public boolean getUserVisibleHint()
+
+
+
+
+
+    Returns: The current value of the user-visible hint on this fragment. 
+
+*android.app.Fragment.getView()*
+
+public |android.view.View| getView()
+
+Get the root view for the fragment's layout (the one returned by 
+(|android.app.Fragment|) ), if provided. 
+
+
+
+    Returns: The fragment's root view, or null if it has no layout. 
+
+*android.app.Fragment.hashCode()*
+
+public final int hashCode()
+
+Subclasses can not override hashCode(). 
+
+
+
+*android.app.Fragment.instantiate(Context,String)*
+
+public static |android.app.Fragment| instantiate(
+  android.content.Context context,
+  java.lang.String fname)
+
+Like (|android.app.Fragment|) but with a null argument Bundle. 
+
+
+
+*android.app.Fragment.instantiate(Context,String,Bundle)*
+
+public static |android.app.Fragment| instantiate(
+  android.content.Context context,
+  java.lang.String fname,
+  android.os.Bundle args)
+
+Create a new instance of a Fragment with the given class name. This is the same 
+as calling its empty constructor. 
+
+
+    context - The calling context being used to instantiate the fragment. This is currently 
+       just used to get its ClassLoader. 
+    fname - The class name of the fragment to instantiate. 
+    args - Bundle of arguments to supply to the fragment, which it can retrieve with 
+       {@link #getArguments()}. May be null. 
+
+    Returns: Returns a new fragment instance. 
+
+*android.app.Fragment.isAdded()*
+
+public final boolean isAdded()
+
+Return true if the fragment is currently added to its activity. 
+
+
+
+*android.app.Fragment.isDetached()*
+
+public final boolean isDetached()
+
+Return true if the fragment has been explicitly detached from the UI. That is, 
+FragmentTransaction.detach(Fragment)(|android.app.FragmentTransaction|) has 
+been used on it. 
+
+
+
+*android.app.Fragment.isHidden()*
+
+public final boolean isHidden()
+
+Return true if the fragment has been hidden. By default fragments are shown. 
+You can find out about changes to this state with (|android.app.Fragment|) . 
+Note that the hidden state is orthogonal to other states -- that is, to be 
+visible to the user, a fragment must be both started and not hidden. 
+
+
+
+*android.app.Fragment.isInLayout()*
+
+public final boolean isInLayout()
+
+Return true if the layout is included as part of an activity view hierarchy via 
+the <fragment> tag. This will always be true when fragments are created through 
+the <fragment> tag, except in the case where an old fragment is restored from a 
+previous state and it does not appear in the layout of the current state. 
+
+
+
+*android.app.Fragment.isRemoving()*
+
+public final boolean isRemoving()
+
+Return true if this fragment is currently being removed from its activity. This 
+is not whether its activity is finishing, but rather whether it is in the 
+process of being removed from its activity. 
+
+
+
+*android.app.Fragment.isResumed()*
+
+public final boolean isResumed()
+
+Return true if the fragment is in the resumed state. This is true for the 
+duration of (|android.app.Fragment|) and (|android.app.Fragment|) as well. 
+
+
+
+*android.app.Fragment.isVisible()*
+
+public final boolean isVisible()
+
+Return true if the fragment is currently visible to the user. This means it: 
+(1) has been added, (2) has its view attached to the window, and (3) is not 
+hidden. 
+
+
+
+*android.app.Fragment.onActivityCreated(Bundle)*
+
+public void onActivityCreated(android.os.Bundle savedInstanceState)
+
+Called when the fragment's activity has been created and this fragment's view 
+hierarchy instantiated. It can be used to do final initialization once these 
+pieces are in place, such as retrieving views or restoring state. It is also 
+useful for fragments that use (|android.app.Fragment|) to retain their 
+instance, as this callback tells the fragment when it is fully associated with 
+the new activity instance. This is called after (|android.app.Fragment|) and 
+before (|android.app.Fragment|) . 
+
+
+    savedInstanceState - If the fragment is being re-created from a previous saved state, this is the 
+       state. 
+
+*android.app.Fragment.onActivityResult(int,int,Intent)*
+
+public void onActivityResult(
+  int requestCode,
+  int resultCode,
+  android.content.Intent data)
+
+Receive the result from a previous call to (|android.app.Fragment|) . This 
+follows the related Activity API as described there in (|android.app.Activity|) 
+. 
+
+
+    requestCode - The integer request code originally supplied to startActivityForResult(), 
+       allowing you to identify who this result came from. 
+    resultCode - The integer result code returned by the child activity through its setResult(). 
+    data - An Intent, which can return result data to the caller (various data can be 
+       attached to Intent "extras"). 
+
+*android.app.Fragment.onAttach(Activity)*
+
+public void onAttach(android.app.Activity activity)
+
+Called when a fragment is first attached to its activity. 
+(|android.app.Fragment|) will be called after this. 
+
+
+
+*android.app.Fragment.onConfigurationChanged(Configuration)*
+
+public void onConfigurationChanged(android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.app.Fragment.onContextItemSelected(MenuItem)*
+
+public boolean onContextItemSelected(android.view.MenuItem item)
+
+This hook is called whenever an item in a context menu is selected. The default 
+implementation simply returns false to have the normal processing happen 
+(calling the item's Runnable or sending a message to its Handler as 
+appropriate). You can use this method for any items for which you would like to 
+do processing without those other facilities. 
+
+Use (|android.view.MenuItem|) to get extra information set by the View that 
+added this menu item. 
+
+Derived classes should call through to the base class for it to perform the 
+default menu handling. 
+
+
+    item - The context menu item that was selected. 
+
+    Returns: boolean Return false to allow normal context menu processing to proceed, true 
+             to consume it here. 
+
+*android.app.Fragment.onCreate(Bundle)*
+
+public void onCreate(android.os.Bundle savedInstanceState)
+
+Called to do initial creation of a fragment. This is called after 
+(|android.app.Fragment|) and before (|android.app.Fragment|) . 
+
+Note that this can be called while the fragment's activity is still in the 
+process of being created. As such, you can not rely on things like the 
+activity's content view hierarchy being initialized at this point. If you want 
+to do work once the activity itself is created, see (|android.app.Fragment|) . 
+
+
+    savedInstanceState - If the fragment is being re-created from a previous saved state, this is the 
+       state. 
+
+*android.app.Fragment.onCreateAnimator(int,boolean,int)*
+
+public |android.animation.Animator| onCreateAnimator(
+  int transit,
+  boolean enter,
+  int nextAnim)
+
+Called when a fragment loads an animation. 
+
+
+
+*android.app.Fragment.onCreateContextMenu(ContextMenu,View,ContextMenu.ContextMenuInfo)*
+
+public void onCreateContextMenu(
+  android.view.ContextMenu menu,
+  android.view.View v,
+  android.view.ContextMenu.ContextMenuInfo menuInfo)
+
+Called when a context menu for theviewis about to be shown. Unlike 
+(|android.app.Fragment|) , this will be called every time the context menu is 
+about to be shown and should be populated for the view (or item inside the view 
+for (|android.widget.AdapterView|) subclasses, this can be found in 
+themenuInfo)). 
+
+Use (|android.app.Fragment|) to know when an item has been selected. 
+
+The default implementation calls up to 
+Activity.onCreateContextMenu(|android.app.Activity|) , though you can not call 
+this implementation if you don't want that behavior. 
+
+It is not safe to hold onto the context menu after this method returns. 
+
+
+
+*android.app.Fragment.onCreateOptionsMenu(Menu,MenuInflater)*
+
+public void onCreateOptionsMenu(
+  android.view.Menu menu,
+  android.view.MenuInflater inflater)
+
+Initialize the contents of the Activity's standard options menu. You should 
+place your menu items in to menu. For this method to be called, you must have 
+first called (|android.app.Fragment|) . See 
+Activity.onCreateOptionsMenu(|android.app.Activity|) for more information. 
+
+
+    menu - The options menu in which you place your items. 
+
+*android.app.Fragment.onCreateView(LayoutInflater,ViewGroup,Bundle)*
+
+public |android.view.View| onCreateView(
+  android.view.LayoutInflater inflater,
+  android.view.ViewGroup container,
+  android.os.Bundle savedInstanceState)
+
+Called to have the fragment instantiate its user interface view. This is 
+optional, and non-graphical fragments can return null (which is the default 
+implementation). This will be called between (|android.app.Fragment|) and 
+(|android.app.Fragment|) . 
+
+If you return a View from here, you will later be called in 
+(|android.app.Fragment|) when the view is being released. 
+
+
+    inflater - The LayoutInflater object that can be used to inflate any views in the 
+       fragment, 
+    container - If non-null, this is the parent view that the fragment's UI should be attached 
+       to. The fragment should not add the view itself, but this can be used to 
+       generate the LayoutParams of the view. 
+    savedInstanceState - If non-null, this fragment is being re-constructed from a previous saved state 
+       as given here. 
+
+    Returns: Return the View for the fragment's UI, or null. 
+
+*android.app.Fragment.onDestroy()*
+
+public void onDestroy()
+
+Called when the fragment is no longer in use. This is called after 
+(|android.app.Fragment|) and before (|android.app.Fragment|) . 
+
+
+
+*android.app.Fragment.onDestroyOptionsMenu()*
+
+public void onDestroyOptionsMenu()
+
+Called when this fragment's option menu items are no longer being included in 
+the overall options menu. Receiving this call means that the menu needed to be 
+rebuilt, but this fragment's items were not included in the newly built menu 
+(its (|android.app.Fragment|) was not called). 
+
+
+
+*android.app.Fragment.onDestroyView()*
+
+public void onDestroyView()
+
+Called when the view previously created by (|android.app.Fragment|) has been 
+detached from the fragment. The next time the fragment needs to be displayed, a 
+new view will be created. This is called after (|android.app.Fragment|) and 
+before (|android.app.Fragment|) . It is called regardless of whether 
+(|android.app.Fragment|) returned a non-null view. Internally it is called 
+after the view's state has been saved but before it has been removed from its 
+parent. 
+
+
+
+*android.app.Fragment.onDetach()*
+
+public void onDetach()
+
+Called when the fragment is no longer attached to its activity. This is called 
+after (|android.app.Fragment|) . 
+
+
+
+*android.app.Fragment.onHiddenChanged(boolean)*
+
+public void onHiddenChanged(boolean hidden)
+
+Called when the hidden state (as returned by (|android.app.Fragment|) of the 
+fragment has changed. Fragments start out not hidden; this will be called 
+whenever the fragment changes state from that. 
+
+
+    hidden - True if the fragment is now hidden, false if it is not visible. 
+
+*android.app.Fragment.onInflate(Activity,AttributeSet,Bundle)*
+
+public void onInflate(
+  android.app.Activity activity,
+  android.util.AttributeSet attrs,
+  android.os.Bundle savedInstanceState)
+
+Called when a fragment is being created as part of a view layout inflation, 
+typically from setting the content view of an activity. This may be called 
+immediately after the fragment is created from a tag in a layout file. Note 
+this is before the fragment's (|android.app.Fragment|) has been called; all you 
+should do here is parse the attributes and save them away. 
+
+This is called every time the fragment is inflated, even if it is being 
+inflated into a new instance with saved state. It typically makes sense to 
+re-parse the parameters each time, to allow them to change with different 
+configurations. 
+
+Here is a typical implementation of a fragment that can take parameters both 
+through attributes supplied here as well from (|android.app.Fragment|) 
+:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentArguments.java
+fragmentNote that parsing the XML attributes uses a "styleable" resource. The 
+declaration for the styleable used here 
+is:development/samples/ApiDemos/res/values/attrs.xml fragment_argumentsThe 
+fragment can then be declared within its activity's content layout through a 
+tag like this:development/samples/ApiDemos/res/layout/fragment_arguments.xml 
+from_attributesThis fragment can also be created dynamically from arguments 
+given at runtime in the arguments Bundle; here is an example of doing so at 
+creation of the containing 
+activity:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentArguments.java
+create 
+
+
+    activity - The Activity that is inflating this fragment. 
+    attrs - The attributes at the tag where the fragment is being created. 
+    savedInstanceState - If the fragment is being re-created from a previous saved state, this is the 
+       state. 
+
+*android.app.Fragment.onInflate(AttributeSet,Bundle)*
+
+public void onInflate(
+  android.util.AttributeSet attrs,
+  android.os.Bundle savedInstanceState)
+
+
+
+    Deprecated: Use {@link #onInflate(Activity, AttributeSet, Bundle)} instead.
+
+
+*android.app.Fragment.onLowMemory()*
+
+public void onLowMemory()
+
+
+
+
+
+*android.app.Fragment.onOptionsItemSelected(MenuItem)*
+
+public boolean onOptionsItemSelected(android.view.MenuItem item)
+
+This hook is called whenever an item in your options menu is selected. The 
+default implementation simply returns false to have the normal processing 
+happen (calling the item's Runnable or sending a message to its Handler as 
+appropriate). You can use this method for any items for which you would like to 
+do processing without those other facilities. 
+
+Derived classes should call through to the base class for it to perform the 
+default menu handling. 
+
+
+    item - The menu item that was selected. 
+
+    Returns: boolean Return false to allow normal menu processing to proceed, true to 
+             consume it here. 
+
+*android.app.Fragment.onOptionsMenuClosed(Menu)*
+
+public void onOptionsMenuClosed(android.view.Menu menu)
+
+This hook is called whenever the options menu is being closed (either by the 
+user canceling the menu with the back/menu button, or when an item is 
+selected). 
+
+
+    menu - The options menu as last shown or first initialized by onCreateOptionsMenu(). 
+
+*android.app.Fragment.onPause()*
+
+public void onPause()
+
+Called when the Fragment is no longer resumed. This is generally tied to 
+Activity.onPause(|android.app.Activity|) of the containing Activity's 
+lifecycle. 
+
+
+
+*android.app.Fragment.onPrepareOptionsMenu(Menu)*
+
+public void onPrepareOptionsMenu(android.view.Menu menu)
+
+Prepare the Screen's standard options menu to be displayed. This is called 
+right before the menu is shown, every time it is shown. You can use this method 
+to efficiently enable/disable items or otherwise dynamically modify the 
+contents. See Activity.onPrepareOptionsMenu(|android.app.Activity|) for more 
+information. 
+
+
+    menu - The options menu as last shown or first initialized by onCreateOptionsMenu(). 
+
+*android.app.Fragment.onResume()*
+
+public void onResume()
+
+Called when the fragment is visible to the user and actively running. This is 
+generally tied to Activity.onResume(|android.app.Activity|) of the containing 
+Activity's lifecycle. 
+
+
+
+*android.app.Fragment.onSaveInstanceState(Bundle)*
+
+public void onSaveInstanceState(android.os.Bundle outState)
+
+Called to ask the fragment to save its current dynamic state, so it can later 
+be reconstructed in a new instance of its process is restarted. If a new 
+instance of the fragment later needs to be created, the data you place in the 
+Bundle here will be available in the Bundle given to (|android.app.Fragment|) , 
+(|android.app.Fragment|) , and (|android.app.Fragment|) . 
+
+This corresponds to 
+Activity.onSaveInstanceState(Bundle)(|android.app.Activity|) and most of the 
+discussion there applies here as well. Note however: this method may be called 
+at any time before (|android.app.Fragment|) . There are many situations where a 
+fragment may be mostly torn down (such as when placed on the back stack with no 
+UI showing), but its state will not be saved until its owning activity actually 
+needs to save its state. 
+
+
+    outState - Bundle in which to place your saved state. 
+
+*android.app.Fragment.onStart()*
+
+public void onStart()
+
+Called when the Fragment is visible to the user. This is generally tied to 
+Activity.onStart(|android.app.Activity|) of the containing Activity's 
+lifecycle. 
+
+
+
+*android.app.Fragment.onStop()*
+
+public void onStop()
+
+Called when the Fragment is no longer started. This is generally tied to 
+Activity.onStop(|android.app.Activity|) of the containing Activity's lifecycle. 
+
+
+
+*android.app.Fragment.onTrimMemory(int)*
+
+public void onTrimMemory(int level)
+
+
+
+
+
+*android.app.Fragment.onViewCreated(View,Bundle)*
+
+public void onViewCreated(
+  android.view.View view,
+  android.os.Bundle savedInstanceState)
+
+Called immediately after (|android.app.Fragment|) has returned, but before any 
+saved state has been restored in to the view. This gives subclasses a chance to 
+initialize themselves once they know their view hierarchy has been completely 
+created. The fragment's view hierarchy is not however attached to its parent at 
+this point. 
+
+
+    view - The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}. 
+    savedInstanceState - If non-null, this fragment is being re-constructed from a previous saved state 
+       as given here. 
+
+*android.app.Fragment.onViewStateRestored(Bundle)*
+
+public void onViewStateRestored(android.os.Bundle savedInstanceState)
+
+Called when all saved state has been restored into the view hierarchy of the 
+fragment. This can be used to do initialization based on saved state that you 
+are letting the view hierarchy track itself, such as whether check box widgets 
+are currently checked. This is called after (|android.app.Fragment|) and before 
+(|android.app.Fragment|) . 
+
+
+    savedInstanceState - If the fragment is being re-created from a previous saved state, this is the 
+       state. 
+
+*android.app.Fragment.registerForContextMenu(View)*
+
+public void registerForContextMenu(android.view.View view)
+
+Registers a context menu to be shown for the given view (multiple views can 
+show the context menu). This method will set the 
+(|android.view.View.OnCreateContextMenuListener|) on the view to this fragment, 
+so (|android.app.Fragment|) will be called when it is time to show the context 
+menu. 
+
+
+    view - The view that should show a context menu. 
+
+*android.app.Fragment.setArguments(Bundle)*
+
+public void setArguments(android.os.Bundle args)
+
+Supply the construction arguments for this fragment. This can only be called 
+before the fragment has been attached to its activity; that is, you should call 
+it immediately after constructing the fragment. The arguments supplied here 
+will be retained across fragment destroy and creation. 
+
+
+
+*android.app.Fragment.setHasOptionsMenu(boolean)*
+
+public void setHasOptionsMenu(boolean hasMenu)
+
+Report that this fragment would like to participate in populating the options 
+menu by receiving a call to (|android.app.Fragment|) and related methods. 
+
+
+    hasMenu - If true, the fragment has menu items to contribute. 
+
+*android.app.Fragment.setInitialSavedState(Fragment.SavedState)*
+
+public void setInitialSavedState(android.app.Fragment.SavedState state)
+
+Set the initial saved state that this Fragment should restore itself from when 
+first being constructed, as returned by 
+FragmentManager.saveFragmentInstanceState(|android.app.FragmentManager|) . 
+
+
+    state - The state the fragment should be restored from. 
+
+*android.app.Fragment.setMenuVisibility(boolean)*
+
+public void setMenuVisibility(boolean menuVisible)
+
+Set a hint for whether this fragment's menu should be visible. This is useful 
+if you know that a fragment has been placed in your view hierarchy so that the 
+user can not currently seen it, so any menu items it has should also not be 
+shown. 
+
+
+    menuVisible - The default is true, meaning the fragment's menu will be shown as usual. If 
+       false, the user will not see the menu. 
+
+*android.app.Fragment.setRetainInstance(boolean)*
+
+public void setRetainInstance(boolean retain)
+
+Control whether a fragment instance is retained across Activity re-creation 
+(such as from a configuration change). This can only be used with fragments not 
+in the back stack. If set, the fragment lifecycle will be slightly different 
+when an activity is recreated: 
+
+(|android.app.Fragment|) will not be called (but (|android.app.Fragment|) still 
+will be, because the fragment is being detached from its current activity). 
+(|android.app.Fragment|) will not be called since the fragment is not being 
+re-created. (|android.app.Fragment|) and (|android.app.Fragment|) will still be 
+called. 
+
+
+
+*android.app.Fragment.setTargetFragment(Fragment,int)*
+
+public void setTargetFragment(
+  android.app.Fragment fragment,
+  int requestCode)
+
+Optional target for this fragment. This may be used, for example, if this 
+fragment is being started by another, and when done wants to give a result back 
+to the first. The target set here is retained across instances via 
+FragmentManager.putFragment()(|android.app.FragmentManager|) . 
+
+
+    fragment - The fragment that is the target of this one. 
+    requestCode - Optional request code, for convenience if you are going to call back with 
+       {@link #onActivityResult(int, int, Intent)}. 
+
+*android.app.Fragment.setUserVisibleHint(boolean)*
+
+public void setUserVisibleHint(boolean isVisibleToUser)
+
+Set a hint to the system about whether this fragment's UI is currently visible 
+to the user. This hint defaults to true and is persistent across fragment 
+instance state save and restore. 
+
+An app may set this to false to indicate that the fragment's UI is scrolled out 
+of visibility or is otherwise not directly visible to the user. This may be 
+used by the system to prioritize operations such as fragment lifecycle updates 
+or loader ordering behavior. 
+
+
+    isVisibleToUser - true if this fragment's UI is currently visible to the user (default), false if 
+       it is not. 
+
+*android.app.Fragment.startActivity(Intent)*
+
+public void startActivity(android.content.Intent intent)
+
+Call (|android.app.Activity|) from the fragment's containing Activity. 
+
+
+    intent - The intent to start. 
+
+*android.app.Fragment.startActivity(Intent,Bundle)*
+
+public void startActivity(
+  android.content.Intent intent,
+  android.os.Bundle options)
+
+Call (|android.app.Activity|) from the fragment's containing Activity. 
+
+
+    intent - The intent to start. 
+    options - Additional options for how the Activity should be started. See {@link 
+       android.content.Context#startActivity(Intent, Bundle) 
+       Context.startActivity(Intent, Bundle)} for more details. 
+
+*android.app.Fragment.startActivityForResult(Intent,int)*
+
+public void startActivityForResult(
+  android.content.Intent intent,
+  int requestCode)
+
+Call (|android.app.Activity|) from the fragment's containing Activity. 
+
+
+
+*android.app.Fragment.startActivityForResult(Intent,int,Bundle)*
+
+public void startActivityForResult(
+  android.content.Intent intent,
+  int requestCode,
+  android.os.Bundle options)
+
+Call (|android.app.Activity|) from the fragment's containing Activity. 
+
+
+
+*android.app.Fragment.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.app.Fragment.unregisterForContextMenu(View)*
+
+public void unregisterForContextMenu(android.view.View view)
+
+Prevents a context menu to be shown for the given view. This method will remove 
+the (|android.view.View.OnCreateContextMenuListener|) on the view. 
+
+
+    view - The view that should stop showing a context menu. 
+
+

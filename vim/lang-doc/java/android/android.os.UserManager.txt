@@ -1,0 +1,648 @@
+*android.os.UserManager* *UserManager* Manages users and user details on a multi
+
+public class UserManager
+  extends    |java.lang.Object|
+
+|android.os.UserManager_Description|
+|android.os.UserManager_Fields|
+|android.os.UserManager_Constructors|
+|android.os.UserManager_Methods|
+
+================================================================================
+
+*android.os.UserManager_Fields*
+|java.lang.String_android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH|
+|java.lang.String_android.os.UserManager.DISALLOW_CONFIG_CREDENTIALS|
+|java.lang.String_android.os.UserManager.DISALLOW_CONFIG_WIFI|
+|java.lang.String_android.os.UserManager.DISALLOW_INSTALL_APPS|
+|java.lang.String_android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES|
+|java.lang.String_android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS|
+|java.lang.String_android.os.UserManager.DISALLOW_REMOVE_USER|
+|java.lang.String_android.os.UserManager.DISALLOW_SHARE_LOCATION|
+|java.lang.String_android.os.UserManager.DISALLOW_UNINSTALL_APPS|
+|java.lang.String_android.os.UserManager.DISALLOW_USB_FILE_TRANSFER|
+|int_android.os.UserManager.PIN_VERIFICATION_FAILED_INCORRECT|
+|int_android.os.UserManager.PIN_VERIFICATION_FAILED_NOT_SET|
+|int_android.os.UserManager.PIN_VERIFICATION_SUCCESS|
+
+*android.os.UserManager_Constructors*
+|android.os.UserManager(Context,IUserManager)|
+
+*android.os.UserManager_Methods*
+|android.os.UserManager.checkRestrictionsChallenge(String)|
+|android.os.UserManager.createUser(String,int)|Creates a user with the specifie
+|android.os.UserManager.get(Context)|
+|android.os.UserManager.getApplicationRestrictions(String)|Returns a Bundle con
+|android.os.UserManager.getApplicationRestrictions(String,UserHandle)|
+|android.os.UserManager.getMaxSupportedUsers()|Returns the maximum number of us
+|android.os.UserManager.getSerialNumberForUser(UserHandle)|Return the serial nu
+|android.os.UserManager.getUserCount()|Return the number of users currently cre
+|android.os.UserManager.getUserForSerialNumber(long)|Return the user associated
+|android.os.UserManager.getUserHandle()|Returns the user handle for the user th
+|android.os.UserManager.getUserHandle(int)|Returns a userHandle on this device 
+|android.os.UserManager.getUserIcon(int)|Returns a file descriptor for the user
+|android.os.UserManager.getUserInfo(int)|Returns the UserInfo object describing
+|android.os.UserManager.getUserName()|Returns the user name of the user making 
+|android.os.UserManager.getUserRestrictions()|Returns the user-wide restriction
+|android.os.UserManager.getUserRestrictions(UserHandle)|Returns the user-wide r
+|android.os.UserManager.getUsers()|Returns information for all users on this de
+|android.os.UserManager.getUsers(boolean)|Returns information for all users on 
+|android.os.UserManager.getUserSerialNumber(int)|Returns a serial number on thi
+|android.os.UserManager.hasRestrictionsChallenge()|
+|android.os.UserManager.hasUserRestriction(String)|
+|android.os.UserManager.hasUserRestriction(String,UserHandle)|
+|android.os.UserManager.isGuestEnabled()|Checks if a guest user is enabled for 
+|android.os.UserManager.isLinkedUser()|Used to check if the user making this ca
+|android.os.UserManager.isUserAGoat()|Used to determine whether the user making
+|android.os.UserManager.isUserRunning(UserHandle)|Return whether the given user
+|android.os.UserManager.isUserRunningOrStopping(UserHandle)|Return whether the 
+|android.os.UserManager.removeRestrictions()|
+|android.os.UserManager.removeUser(int)|Removes a user and all associated data.
+|android.os.UserManager.setApplicationRestrictions(String,Bundle,UserHandle)|
+|android.os.UserManager.setGuestEnabled(boolean)|Enable or disable the use of a
+|android.os.UserManager.setRestrictionsChallenge(String)|Sets a new challenge P
+|android.os.UserManager.setUserIcon(int,Bitmap)|Sets the user's photo.
+|android.os.UserManager.setUserName(int,String)|Updates the user's name.
+|android.os.UserManager.setUserRestriction(String,boolean)|Sets the value of a 
+|android.os.UserManager.setUserRestriction(String,boolean,UserHandle)|
+|android.os.UserManager.setUserRestrictions(Bundle)|Sets all the user-wide rest
+|android.os.UserManager.setUserRestrictions(Bundle,UserHandle)|Sets all the use
+|android.os.UserManager.supportsMultipleUsers()|Returns whether the system supp
+|android.os.UserManager.wipeUser(int)|Wipes all the data for a user, but doesn'
+
+*android.os.UserManager_Description*
+
+Manages users and user details on a multi-user system. 
+
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH*
+
+Key for user restrictions. Specifies if a user is disallowed from configuring 
+bluetooth. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_CONFIG_CREDENTIALS*
+
+Key for user restrictions. Specifies if a user is disallowed from configuring 
+user credentials. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_CONFIG_WIFI*
+
+Key for user restrictions. Specifies if a user is disallowed from changing 
+Wi-Fi access points. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_INSTALL_APPS*
+
+Key for user restrictions. Specifies if a user is disallowed from installing 
+applications. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES*
+
+Key for user restrictions. Specifies if a user is disallowed from enabling the 
+"Unknown Sources" setting, that allows installation of apps from unknown 
+sources. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS*
+
+Key for user restrictions. Specifies if a user is disallowed from adding and 
+removing accounts. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_REMOVE_USER*
+
+Key for user restrictions. Specifies if a user is disallowed from removing 
+users. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_SHARE_LOCATION*
+
+Key for user restrictions. Specifies if a user is disallowed from toggling 
+location sharing. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_UNINSTALL_APPS*
+
+Key for user restrictions. Specifies if a user is disallowed from uninstalling 
+applications. The default value is false. 
+
+Type: Boolean 
+
+
+*java.lang.String_android.os.UserManager.DISALLOW_USB_FILE_TRANSFER*
+
+Key for user restrictions. Specifies if a user is disallowed from transferring 
+files over USB. The default value is false. 
+
+Type: Boolean 
+
+
+*int_android.os.UserManager.PIN_VERIFICATION_FAILED_INCORRECT*
+
+
+
+
+*int_android.os.UserManager.PIN_VERIFICATION_FAILED_NOT_SET*
+
+
+
+
+*int_android.os.UserManager.PIN_VERIFICATION_SUCCESS*
+
+
+
+
+
+*android.os.UserManager(Context,IUserManager)*
+
+public UserManager(
+  android.content.Context context,
+  IUserManager service)
+
+
+
+
+*android.os.UserManager.checkRestrictionsChallenge(String)*
+
+public int checkRestrictionsChallenge(java.lang.String pin)
+
+
+
+
+    pin - The PIN to verify, or null to get the number of milliseconds to wait for before 
+       allowing the user to enter the PIN. 
+
+    Returns: Returns a positive number (including zero) for how many milliseconds before you 
+             can accept another PIN, when the input is null or the input 
+             doesn't match the saved PIN. Returns {@link 
+             #PIN_VERIFICATION_SUCCESS} if the input matches the saved PIN. 
+             Returns {@link #PIN_VERIFICATION_FAILED_NOT_SET} if there is no 
+             PIN set. 
+
+*android.os.UserManager.createUser(String,int)*
+
+public |android.content.pm.UserInfo| createUser(
+  java.lang.String name,
+  int flags)
+
+Creates a user with the specified name and options. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    name - the user's name 
+    flags - flags that identify the type of user and other properties. 
+
+    Returns: the UserInfo object for the created user, or null if the user could not be 
+             created. 
+
+*android.os.UserManager.get(Context)*
+
+public static synchronized |android.os.UserManager| get(android.content.Context context)
+
+
+
+
+
+*android.os.UserManager.getApplicationRestrictions(String)*
+
+public |android.os.Bundle| getApplicationRestrictions(java.lang.String packageName)
+
+Returns a Bundle containing any saved application restrictions for this user, 
+for the given package name. Only an application with this package name can call 
+this method. 
+
+
+    packageName - the package name of the calling application 
+
+    Returns: a Bundle with the restrictions as key/value pairs, or null if there are no 
+             saved restrictions. The values can be of type Boolean, String or 
+             String[], depending on the restriction type, as defined by the 
+             application. 
+
+*android.os.UserManager.getApplicationRestrictions(String,UserHandle)*
+
+public |android.os.Bundle| getApplicationRestrictions(
+  java.lang.String packageName,
+  android.os.UserHandle user)
+
+
+
+
+
+*android.os.UserManager.getMaxSupportedUsers()*
+
+public static int getMaxSupportedUsers()
+
+Returns the maximum number of users that can be created on this device. A 
+return value of 1 means that it is a single user device. 
+
+
+
+    Returns: a value greater than or equal to 1 
+
+*android.os.UserManager.getSerialNumberForUser(UserHandle)*
+
+public long getSerialNumberForUser(android.os.UserHandle user)
+
+Return the serial number for a user. This is a device-unique number assigned to 
+that user; if the user is deleted and then a new user created, the new users 
+will not be given the same serial number. 
+
+
+    user - The user whose serial number is to be retrieved. 
+
+    Returns: The serial number of the given user; returns -1 if the given UserHandle does 
+             not exist. 
+
+*android.os.UserManager.getUserCount()*
+
+public int getUserCount()
+
+Return the number of users currently created on the device. 
+
+
+
+*android.os.UserManager.getUserForSerialNumber(long)*
+
+public |android.os.UserHandle| getUserForSerialNumber(long serialNumber)
+
+Return the user associated with a serial number previously returned by 
+(|android.os.UserManager|) . 
+
+
+    serialNumber - The serial number of the user that is being retrieved. 
+
+    Returns: Return the user associated with the serial number, or null if there is not one. 
+
+*android.os.UserManager.getUserHandle()*
+
+public int getUserHandle()
+
+Returns the user handle for the user that this application is running for. 
+
+
+
+    Returns: the user handle of the user making this call. 
+
+*android.os.UserManager.getUserHandle(int)*
+
+public int getUserHandle(int userSerialNumber)
+
+Returns a userHandle on this device for a given user serial number. User 
+handles can be recycled when deleting and creating users, but serial numbers 
+are not reused until the device is wiped. 
+
+
+    userSerialNumber - 
+
+    Returns: the userHandle associated with that user serial number, or -1 if the serial 
+             number is not valid. 
+
+*android.os.UserManager.getUserIcon(int)*
+
+public Bitmap getUserIcon(int userHandle)
+
+Returns a file descriptor for the user's photo. PNG data can be read from this 
+file. 
+
+
+    userHandle - the user whose photo we want to read. 
+
+    Returns: a {@link Bitmap} of the user's photo, or null if there's no photo. 
+
+*android.os.UserManager.getUserInfo(int)*
+
+public |android.content.pm.UserInfo| getUserInfo(int userHandle)
+
+Returns the UserInfo object describing a specific user. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    userHandle - the user handle of the user whose information is being requested. 
+
+    Returns: the UserInfo object for a specific user. 
+
+*android.os.UserManager.getUserName()*
+
+public |java.lang.String| getUserName()
+
+Returns the user name of the user making this call. This call is only available 
+to applications on the system image; it requires the MANAGE_USERS permission. 
+
+
+
+    Returns: the user name 
+
+*android.os.UserManager.getUserRestrictions()*
+
+public |android.os.Bundle| getUserRestrictions()
+
+Returns the user-wide restrictions imposed on this user. 
+
+
+
+    Returns: a Bundle containing all the restrictions. 
+
+*android.os.UserManager.getUserRestrictions(UserHandle)*
+
+public |android.os.Bundle| getUserRestrictions(android.os.UserHandle userHandle)
+
+Returns the user-wide restrictions imposed on the user specified by userHandle. 
+
+
+    userHandle - the UserHandle of the user for whom to retrieve the restrictions. 
+
+    Returns: a Bundle containing all the restrictions. 
+
+*android.os.UserManager.getUsers()*
+
+public |java.util.List|<UserInfo> getUsers()
+
+Returns information for all users on this device. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+
+    Returns: the list of users that were created. 
+
+*android.os.UserManager.getUsers(boolean)*
+
+public |java.util.List|<UserInfo> getUsers(boolean excludeDying)
+
+Returns information for all users on this device. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    excludeDying - specify if the list should exclude users being removed. 
+
+    Returns: the list of users that were created. 
+
+*android.os.UserManager.getUserSerialNumber(int)*
+
+public int getUserSerialNumber(int userHandle)
+
+Returns a serial number on this device for a given userHandle. User handles can 
+be recycled when deleting and creating users, but serial numbers are not reused 
+until the device is wiped. 
+
+
+    userHandle - 
+
+    Returns: a serial number associated with that user, or -1 if the userHandle is not 
+             valid. 
+
+*android.os.UserManager.hasRestrictionsChallenge()*
+
+public boolean hasRestrictionsChallenge()
+
+
+
+
+
+    Returns: whether a restrictions PIN is in effect. 
+
+*android.os.UserManager.hasUserRestriction(String)*
+
+public boolean hasUserRestriction(java.lang.String restrictionKey)
+
+
+
+
+    restrictionKey - the string key representing the restriction 
+
+*android.os.UserManager.hasUserRestriction(String,UserHandle)*
+
+public boolean hasUserRestriction(
+  java.lang.String restrictionKey,
+  android.os.UserHandle userHandle)
+
+
+
+
+    restrictionKey - the string key representing the restriction 
+    userHandle - the UserHandle of the user for whom to retrieve the restrictions. 
+
+*android.os.UserManager.isGuestEnabled()*
+
+public boolean isGuestEnabled()
+
+Checks if a guest user is enabled for this device. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+
+    Returns: whether a guest user is enabled 
+
+*android.os.UserManager.isLinkedUser()*
+
+public boolean isLinkedUser()
+
+Used to check if the user making this call is linked to another user. Linked 
+users may have a reduced number of available apps, app restrictions and account 
+restrictions. 
+
+
+
+    Returns: whether the user making this call is a linked user 
+
+*android.os.UserManager.isUserAGoat()*
+
+public boolean isUserAGoat()
+
+Used to determine whether the user making this call is subject to 
+teleportations. 
+
+
+
+    Returns: whether the user making this call is a goat 
+
+*android.os.UserManager.isUserRunning(UserHandle)*
+
+public boolean isUserRunning(android.os.UserHandle user)
+
+Return whether the given user is actively running. This means that the user is 
+in the "started" state, not "stopped" -- it is currently allowed to run code 
+through scheduled alarms, receiving broadcasts, etc. A started user may be 
+either the current foreground user or a background user; the result here does 
+not distinguish between the two. 
+
+
+    user - The user to retrieve the running state for. 
+
+*android.os.UserManager.isUserRunningOrStopping(UserHandle)*
+
+public boolean isUserRunningOrStopping(android.os.UserHandle user)
+
+Return whether the given user is actively running or stopping. This is like 
+(|android.os.UserManager|) , but will also return true if the user had been 
+running but is in the process of being stopped (but is not yet fully stopped, 
+and still running some code). 
+
+
+    user - The user to retrieve the running state for. 
+
+*android.os.UserManager.removeRestrictions()*
+
+public void removeRestrictions()
+
+
+
+
+
+*android.os.UserManager.removeUser(int)*
+
+public boolean removeUser(int userHandle)
+
+Removes a user and all associated data. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    userHandle - the integer handle of the user, where 0 is the primary user. 
+
+*android.os.UserManager.setApplicationRestrictions(String,Bundle,UserHandle)*
+
+public void setApplicationRestrictions(
+  java.lang.String packageName,
+  android.os.Bundle restrictions,
+  android.os.UserHandle user)
+
+
+
+
+
+*android.os.UserManager.setGuestEnabled(boolean)*
+
+public void setGuestEnabled(boolean enable)
+
+Enable or disable the use of a guest account. If disabled, the existing guest 
+account will be wiped. Requires (|android.Manifest.permission|) permission. 
+
+
+    enable - whether to enable a guest account. 
+
+*android.os.UserManager.setRestrictionsChallenge(String)*
+
+public boolean setRestrictionsChallenge(java.lang.String newPin)
+
+Sets a new challenge PIN for restrictions. This is only for use by 
+pre-installed apps and requires the MANAGE_USERS permission. 
+
+
+    newPin - the PIN to use for challenge dialogs. 
+
+    Returns: Returns true if the challenge PIN was set successfully. 
+
+*android.os.UserManager.setUserIcon(int,Bitmap)*
+
+public void setUserIcon(
+  int userHandle,
+  Bitmap icon)
+
+Sets the user's photo. 
+
+
+    userHandle - the user for whom to change the photo. 
+    icon - the bitmap to set as the photo. 
+
+*android.os.UserManager.setUserName(int,String)*
+
+public void setUserName(
+  int userHandle,
+  java.lang.String name)
+
+Updates the user's name. Requires (|android.Manifest.permission|) permission. 
+
+
+    userHandle - the user's integer handle 
+    name - the new name for the user 
+
+*android.os.UserManager.setUserRestriction(String,boolean)*
+
+public void setUserRestriction(
+  java.lang.String key,
+  boolean value)
+
+Sets the value of a specific restriction. Requires the MANAGE_USERS permission. 
+
+
+    key - the key of the restriction 
+    value - the value for the restriction 
+
+*android.os.UserManager.setUserRestriction(String,boolean,UserHandle)*
+
+public void setUserRestriction(
+  java.lang.String key,
+  boolean value,
+  android.os.UserHandle userHandle)
+
+
+
+
+    key - the key of the restriction 
+    value - the value for the restriction 
+    userHandle - the user whose restriction is to be changed. 
+
+*android.os.UserManager.setUserRestrictions(Bundle)*
+
+public void setUserRestrictions(android.os.Bundle restrictions)
+
+Sets all the user-wide restrictions for this user. Requires the MANAGE_USERS 
+permission. 
+
+
+    restrictions - the Bundle containing all the restrictions. 
+
+*android.os.UserManager.setUserRestrictions(Bundle,UserHandle)*
+
+public void setUserRestrictions(
+  android.os.Bundle restrictions,
+  android.os.UserHandle userHandle)
+
+Sets all the user-wide restrictions for the specified user. Requires the 
+MANAGE_USERS permission. 
+
+
+    restrictions - the Bundle containing all the restrictions. 
+    userHandle - the UserHandle of the user for whom to set the restrictions. 
+
+*android.os.UserManager.supportsMultipleUsers()*
+
+public static boolean supportsMultipleUsers()
+
+Returns whether the system supports multiple users. 
+
+
+
+    Returns: true if multiple users can be created, false if it is a single user device. 
+
+*android.os.UserManager.wipeUser(int)*
+
+public void wipeUser(int userHandle)
+
+Wipes all the data for a user, but doesn't remove the user. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    userHandle - 
+
+

@@ -1,0 +1,283 @@
+*android.util.JsonWriter* *JsonWriter* Writes a JSON (RFC 4627)
+ encoded value t
+
+public final class JsonWriter
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|android.util.JsonWriter_Description|
+|android.util.JsonWriter_Fields|
+|android.util.JsonWriter_Constructors|
+|android.util.JsonWriter_Methods|
+
+================================================================================
+
+*android.util.JsonWriter_Constructors*
+|android.util.JsonWriter(Writer)|Creates a new instance that writes a JSON-enco
+
+*android.util.JsonWriter_Methods*
+|android.util.JsonWriter.beginArray()|Begins encoding a new array.
+|android.util.JsonWriter.beginObject()|Begins encoding a new object.
+|android.util.JsonWriter.close()|Flushes and closes this writer and the underly
+|android.util.JsonWriter.endArray()|Ends encoding the current array.
+|android.util.JsonWriter.endObject()|Ends encoding the current object.
+|android.util.JsonWriter.flush()|Ensures all buffered data is written to the un
+|android.util.JsonWriter.isLenient()|Returns true if this writer has relaxed sy
+|android.util.JsonWriter.name(String)|Encodes the property name.
+|android.util.JsonWriter.nullValue()|Encodesnull.
+|android.util.JsonWriter.setIndent(String)|Sets the indentation string to be re
+|android.util.JsonWriter.setLenient(boolean)|Configure this writer to relax its
+|android.util.JsonWriter.value(boolean)|Encodesvalue.
+|android.util.JsonWriter.value(double)|Encodesvalue.
+|android.util.JsonWriter.value(long)|Encodesvalue.
+|android.util.JsonWriter.value(Number)|Encodesvalue.
+|android.util.JsonWriter.value(String)|Encodesvalue.
+
+*android.util.JsonWriter_Description*
+
+Writes a JSON (RFC 4627) encoded value to a stream, one token at a time. The 
+stream includes both literal values (strings, numbers, booleans and nulls) as 
+well as the begin and end delimiters of objects and arrays. 
+
+Encoding JSON To encode your data as JSON, create a newJsonWriter. Each JSON 
+document must contain one top-level array or object. Call methods on the writer 
+as you walk the structure's contents, nesting arrays and objects as necessary: 
+
+To write arrays, first call (|android.util.JsonWriter|) . Write each of the 
+array's elements with the appropriate (|android.util.JsonWriter|) methods or by 
+nesting other arrays and objects. Finally close the array using 
+(|android.util.JsonWriter|) . To write objects, first call 
+(|android.util.JsonWriter|) . Write each of the object's properties by 
+alternating calls to (|android.util.JsonWriter|) with the property's value. 
+Write property values with the appropriate (|android.util.JsonWriter|) method 
+or by nesting other objects or arrays. Finally close the object using 
+(|android.util.JsonWriter|) . 
+
+Example Suppose we'd like to encode a stream of messages such as the following: 
+[ { "id": 912345678901, "text": "How do I write JSON on Android?", "geo": null, 
+"user": { "name": "android_newb", "followers_count": 41 } }, { "id": 
+912345678902, "text": "@android_newb just use android.util.JsonWriter!", "geo": 
+[50.454722, -104.606667], "user": { "name": "jesse", "followers_count": 2 } } ] 
+
+This code encodes the above structure: public void writeJsonStream(OutputStream 
+out, List messages) throws IOException { JsonWriter writer = new JsonWriter(new 
+OutputStreamWriter(out, "UTF-8")); writer.setIndent(" "); 
+writeMessagesArray(writer, messages); writer.close(); } 
+
+public void writeMessagesArray(JsonWriter writer, List messages) throws 
+IOException { writer.beginArray(); for (Message message : messages) { 
+writeMessage(writer, message); } writer.endArray(); } 
+
+public void writeMessage(JsonWriter writer, Message message) throws IOException 
+{ writer.beginObject(); writer.name("id").value(message.getId()); 
+writer.name("text").value(message.getText()); if (message.getGeo() != null) { 
+writer.name("geo"); writeDoublesArray(writer, message.getGeo()); } else { 
+writer.name("geo").nullValue(); } writer.name("user"); writeUser(writer, 
+message.getUser()); writer.endObject(); } 
+
+public void writeUser(JsonWriter writer, User user) throws IOException { 
+writer.beginObject(); writer.name("name").value(user.getName()); 
+writer.name("followers_count").value(user.getFollowersCount()); 
+writer.endObject(); } 
+
+public void writeDoublesArray(JsonWriter writer, List doubles) throws 
+IOException { writer.beginArray(); for (Double value : doubles) { 
+writer.value(value); } writer.endArray(); } 
+
+EachJsonWritermay be used to write a single JSON stream. Instances of this 
+class are not thread safe. Calls that would result in a malformed JSON string 
+will fail with an (|java.lang.IllegalStateException|) . 
+
+
+
+*android.util.JsonWriter(Writer)*
+
+public JsonWriter(java.io.Writer out)
+
+Creates a new instance that writes a JSON-encoded stream toout. For best 
+performance, ensure (|java.io.Writer|) is buffered; wrapping in 
+BufferedWriter(|java.io.BufferedWriter|) if necessary. 
+
+
+*android.util.JsonWriter.beginArray()*
+
+public |android.util.JsonWriter| beginArray()
+  throws |java.io.IOException|
+         
+Begins encoding a new array. Each call to this method must be paired with a 
+call to (|android.util.JsonWriter|) . 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.beginObject()*
+
+public |android.util.JsonWriter| beginObject()
+  throws |java.io.IOException|
+         
+Begins encoding a new object. Each call to this method must be paired with a 
+call to (|android.util.JsonWriter|) . 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Flushes and closes this writer and the underlying (|java.io.Writer|) . 
+
+
+
+*android.util.JsonWriter.endArray()*
+
+public |android.util.JsonWriter| endArray()
+  throws |java.io.IOException|
+         
+Ends encoding the current array. 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.endObject()*
+
+public |android.util.JsonWriter| endObject()
+  throws |java.io.IOException|
+         
+Ends encoding the current object. 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.flush()*
+
+public void flush()
+  throws |java.io.IOException|
+         
+Ensures all buffered data is written to the underlying (|java.io.Writer|) and 
+flushes that writer. 
+
+
+
+*android.util.JsonWriter.isLenient()*
+
+public boolean isLenient()
+
+Returns true if this writer has relaxed syntax rules. 
+
+
+
+*android.util.JsonWriter.name(String)*
+
+public |android.util.JsonWriter| name(java.lang.String name)
+  throws |java.io.IOException|
+         
+Encodes the property name. 
+
+
+    name - the name of the forthcoming value. May not be null. 
+
+    Returns: 
+
+*android.util.JsonWriter.nullValue()*
+
+public |android.util.JsonWriter| nullValue()
+  throws |java.io.IOException|
+         
+Encodesnull. 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.setIndent(String)*
+
+public void setIndent(java.lang.String indent)
+
+Sets the indentation string to be repeated for each level of indentation in the 
+encoded document. Ifindent.isEmpty()the encoded document will be compact. 
+Otherwise the encoded document will be more human-readable. 
+
+
+    indent - a string containing only whitespace. 
+
+*android.util.JsonWriter.setLenient(boolean)*
+
+public void setLenient(boolean lenient)
+
+Configure this writer to relax its syntax rules. By default, this writer only 
+emits well-formed JSON as specified by RFC 4627. Setting the writer to lenient 
+permits the following: 
+
+Top-level values of any type. With strict writing, the top-level value must be 
+an object or an array. Numbers may be NaNs(|java.lang.Double|) or 
+infinities(|java.lang.Double|) . 
+
+
+
+*android.util.JsonWriter.value(boolean)*
+
+public |android.util.JsonWriter| value(boolean value)
+  throws |java.io.IOException|
+         
+Encodesvalue. 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.value(double)*
+
+public |android.util.JsonWriter| value(double value)
+  throws |java.io.IOException|
+         
+Encodesvalue. 
+
+
+    value - a finite value. May not be {@link Double#isNaN() NaNs} or {@link 
+       Double#isInfinite() infinities} unless this writer is lenient. 
+
+    Returns: 
+
+*android.util.JsonWriter.value(long)*
+
+public |android.util.JsonWriter| value(long value)
+  throws |java.io.IOException|
+         
+Encodesvalue. 
+
+
+
+    Returns: 
+
+*android.util.JsonWriter.value(Number)*
+
+public |android.util.JsonWriter| value(java.lang.Number value)
+  throws |java.io.IOException|
+         
+Encodesvalue. 
+
+
+    value - a finite value. May not be {@link Double#isNaN() NaNs} or {@link 
+       Double#isInfinite() infinities} unless this writer is lenient. 
+
+    Returns: 
+
+*android.util.JsonWriter.value(String)*
+
+public |android.util.JsonWriter| value(java.lang.String value)
+  throws |java.io.IOException|
+         
+Encodesvalue. 
+
+
+    value - the literal string value, or null to encode a null literal. 
+
+    Returns: 
+
+

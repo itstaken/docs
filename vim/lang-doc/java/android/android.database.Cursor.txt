@@ -1,0 +1,629 @@
+*android.database.Cursor* *Cursor* This interface provides random read-write acc
+
+public interface interface Cursor
+
+  implements |java.io.Closeable|
+
+|android.database.Cursor_Description|
+|android.database.Cursor_Fields|
+|android.database.Cursor_Constructors|
+|android.database.Cursor_Methods|
+
+================================================================================
+
+*android.database.Cursor_Fields*
+|int_android.database.Cursor.FIELD_TYPE_BLOB|
+|int_android.database.Cursor.FIELD_TYPE_FLOAT|
+|int_android.database.Cursor.FIELD_TYPE_INTEGER|
+|int_android.database.Cursor.FIELD_TYPE_NULL|
+|int_android.database.Cursor.FIELD_TYPE_STRING|
+
+*android.database.Cursor_Methods*
+|android.database.Cursor.close()|Closes the Cursor, releasing all of its resour
+|android.database.Cursor.copyStringToBuffer(int,CharArrayBuffer)|Retrieves the 
+|android.database.Cursor.deactivate()|Deactivates the Cursor, making all calls 
+|android.database.Cursor.getBlob(int)|Returns the value of the requested column
+|android.database.Cursor.getColumnCount()|Return total number of columns
+|android.database.Cursor.getColumnIndex(String)|Returns the zero-based index fo
+|android.database.Cursor.getColumnIndexOrThrow(String)|Returns the zero-based i
+|android.database.Cursor.getColumnName(int)|Returns the column name at the give
+|android.database.Cursor.getColumnNames()|Returns a string array holding the na
+|android.database.Cursor.getCount()|Returns the numbers of rows in the cursor.
+|android.database.Cursor.getDouble(int)|Returns the value of the requested colu
+|android.database.Cursor.getExtras()|Returns a bundle of extra values.
+|android.database.Cursor.getFloat(int)|Returns the value of the requested colum
+|android.database.Cursor.getInt(int)|Returns the value of the requested column 
+|android.database.Cursor.getLong(int)|Returns the value of the requested column
+|android.database.Cursor.getNotificationUri()|Return the URI at which notificat
+|android.database.Cursor.getPosition()|Returns the current position of the curs
+|android.database.Cursor.getShort(int)|Returns the value of the requested colum
+|android.database.Cursor.getString(int)|Returns the value of the requested colu
+|android.database.Cursor.getType(int)|Returns data type of the given column's v
+|android.database.Cursor.getWantsAllOnMoveCalls()|onMove() will only be called 
+|android.database.Cursor.isAfterLast()|Returns whether the cursor is pointing t
+|android.database.Cursor.isBeforeFirst()|Returns whether the cursor is pointing
+|android.database.Cursor.isClosed()|return true if the cursor is closed
+|android.database.Cursor.isFirst()|Returns whether the cursor is pointing to th
+|android.database.Cursor.isLast()|Returns whether the cursor is pointing to the
+|android.database.Cursor.isNull(int)|Returns true if the value in the indicated
+|android.database.Cursor.move(int)|Move the cursor by a relative amount, forwar
+|android.database.Cursor.moveToFirst()|Move the cursor to the first row.
+|android.database.Cursor.moveToLast()|Move the cursor to the last row.
+|android.database.Cursor.moveToNext()|Move the cursor to the next row.
+|android.database.Cursor.moveToPosition(int)|Move the cursor to an absolute pos
+|android.database.Cursor.moveToPrevious()|Move the cursor to the previous row.
+|android.database.Cursor.registerContentObserver(ContentObserver)|Register an o
+|android.database.Cursor.registerDataSetObserver(DataSetObserver)|Register an o
+|android.database.Cursor.requery()|Performs the query that created the cursor a
+|android.database.Cursor.respond(Bundle)|This is an out-of-band way for the the
+|android.database.Cursor.setNotificationUri(ContentResolver,Uri)|Register to wa
+|android.database.Cursor.unregisterContentObserver(ContentObserver)|Unregister 
+|android.database.Cursor.unregisterDataSetObserver(DataSetObserver)|Unregister 
+
+*android.database.Cursor_Description*
+
+This interface provides random read-write access to the result set returned by 
+a database query. 
+
+Cursor implementations are not required to be synchronized so code using a 
+Cursor from multiple threads should perform its own synchronization when using 
+the Cursor. 
+
+Implementations should subclass (|android.database.AbstractCursor|) . 
+
+
+
+*int_android.database.Cursor.FIELD_TYPE_BLOB*
+
+Value returned by (|android.database.Cursor|) if the specified column type is 
+blob 
+
+
+*int_android.database.Cursor.FIELD_TYPE_FLOAT*
+
+Value returned by (|android.database.Cursor|) if the specified column type is 
+float 
+
+
+*int_android.database.Cursor.FIELD_TYPE_INTEGER*
+
+Value returned by (|android.database.Cursor|) if the specified column type is 
+integer 
+
+
+*int_android.database.Cursor.FIELD_TYPE_NULL*
+
+Value returned by (|android.database.Cursor|) if the specified column is null 
+
+
+*int_android.database.Cursor.FIELD_TYPE_STRING*
+
+Value returned by (|android.database.Cursor|) if the specified column type is 
+string 
+
+
+
+*android.database.Cursor.close()*
+
+public void close()
+
+Closes the Cursor, releasing all of its resources and making it completely 
+invalid. Unlike (|android.database.Cursor|) a call to 
+(|android.database.Cursor|) will not make the Cursor valid again. 
+
+
+
+*android.database.Cursor.copyStringToBuffer(int,CharArrayBuffer)*
+
+public void copyStringToBuffer(
+  int columnIndex,
+  android.database.CharArrayBuffer buffer)
+
+Retrieves the requested column text and stores it in the buffer provided. If 
+the buffer size is not sufficient, a new char buffer will be allocated and 
+assigned to CharArrayBuffer.data 
+
+
+    columnIndex - the zero-based index of the target column. if the target column is null, return 
+       buffer 
+    buffer - the buffer to copy the text into. 
+
+*android.database.Cursor.deactivate()*
+
+public void deactivate()
+
+Deactivates the Cursor, making all calls on it fail until 
+(|android.database.Cursor|) is called. Inactive Cursors use fewer resources 
+than active Cursors. Calling (|android.database.Cursor|) will make the cursor 
+active again. 
+
+    Deprecated: Since {@link #requery()} is deprecated, so too is this.
+
+
+*android.database.Cursor.getBlob(int)*
+
+public byte[] getBlob(int columnIndex)
+
+Returns the value of the requested column as a byte array. 
+
+The result and whether this method throws an exception when the column value is 
+null or the column type is not a blob type is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a byte array. 
+
+*android.database.Cursor.getColumnCount()*
+
+public int getColumnCount()
+
+Return total number of columns 
+
+
+
+    Returns: number of columns 
+
+*android.database.Cursor.getColumnIndex(String)*
+
+public int getColumnIndex(java.lang.String columnName)
+
+Returns the zero-based index for the given column name, or -1 if the column 
+doesn't exist. If you expect the column to exist use 
+(|android.database.Cursor|) instead, which will make the error more clear. 
+
+
+    columnName - the name of the target column. 
+
+    Returns: the zero-based column index for the given column name, or -1 if the column name 
+             does not exist. 
+
+*android.database.Cursor.getColumnIndexOrThrow(String)*
+
+public int getColumnIndexOrThrow(java.lang.String columnName)
+  throws |java.lang.IllegalArgumentException|
+         
+Returns the zero-based index for the given column name, or throws 
+(|java.lang.IllegalArgumentException|) if the column doesn't exist. If you're 
+not sure if a column will exist or not use (|android.database.Cursor|) and 
+check for -1, which is more efficient than catching the exceptions. 
+
+
+    columnName - the name of the target column. 
+
+    Returns: the zero-based column index for the given column name 
+
+*android.database.Cursor.getColumnName(int)*
+
+public |java.lang.String| getColumnName(int columnIndex)
+
+Returns the column name at the given zero-based column index. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the column name for the given column index. 
+
+*android.database.Cursor.getColumnNames()*
+
+public |java.lang.String|[] getColumnNames()
+
+Returns a string array holding the names of all of the columns in the result 
+set in the order in which they were listed in the result. 
+
+
+
+    Returns: the names of the columns returned in this query. 
+
+*android.database.Cursor.getCount()*
+
+public int getCount()
+
+Returns the numbers of rows in the cursor. 
+
+
+
+    Returns: the number of rows in the cursor. 
+
+*android.database.Cursor.getDouble(int)*
+
+public double getDouble(int columnIndex)
+
+Returns the value of the requested column as a double. 
+
+The result and whether this method throws an exception when the column value is 
+null, the column type is not a floating-point type, or the floating-point value 
+is not representable as a double value is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a double. 
+
+*android.database.Cursor.getExtras()*
+
+public |android.os.Bundle| getExtras()
+
+Returns a bundle of extra values. This is an optional way for cursors to 
+provide out-of-band metadata to their users. One use of this is for reporting 
+on the progress of network requests that are required to fetch data for the 
+cursor. 
+
+These values may only change when requery is called. 
+
+
+
+    Returns: cursor-defined values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY} if there 
+             are no values. Never null. 
+
+*android.database.Cursor.getFloat(int)*
+
+public float getFloat(int columnIndex)
+
+Returns the value of the requested column as a float. 
+
+The result and whether this method throws an exception when the column value is 
+null, the column type is not a floating-point type, or the floating-point value 
+is not representable as a float value is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a float. 
+
+*android.database.Cursor.getInt(int)*
+
+public int getInt(int columnIndex)
+
+Returns the value of the requested column as an int. 
+
+The result and whether this method throws an exception when the column value is 
+null, the column type is not an integral type, or the integer value is outside 
+the range [Integer.MIN_VALUE, Integer.MAX_VALUE] is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as an int. 
+
+*android.database.Cursor.getLong(int)*
+
+public long getLong(int columnIndex)
+
+Returns the value of the requested column as a long. 
+
+The result and whether this method throws an exception when the column value is 
+null, the column type is not an integral type, or the integer value is outside 
+the range [Long.MIN_VALUE, Long.MAX_VALUE] is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a long. 
+
+*android.database.Cursor.getNotificationUri()*
+
+public |android.net.Uri| getNotificationUri()
+
+Return the URI at which notifications of changes in this Cursor's data will be 
+delivered, as previously set by (|android.database.Cursor|) . 
+
+
+
+    Returns: Returns a URI that can be used with {@link 
+             ContentResolver#registerContentObserver(android.net.Uri, boolean, 
+             ContentObserver) ContentResolver.registerContentObserver} to find 
+             out about changes to this Cursor's data. May be null if no 
+             notification URI has been set. 
+
+*android.database.Cursor.getPosition()*
+
+public int getPosition()
+
+Returns the current position of the cursor in the row set. The value is 
+zero-based. When the row set is first returned the cursor will be at positon 
+-1, which is before the first row. After the last row is returned another call 
+to next() will leave the cursor past the last entry, at a position of count(). 
+
+
+
+    Returns: the current cursor position. 
+
+*android.database.Cursor.getShort(int)*
+
+public short getShort(int columnIndex)
+
+Returns the value of the requested column as a short. 
+
+The result and whether this method throws an exception when the column value is 
+null, the column type is not an integral type, or the integer value is outside 
+the range [Short.MIN_VALUE, Short.MAX_VALUE] is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a short. 
+
+*android.database.Cursor.getString(int)*
+
+public |java.lang.String| getString(int columnIndex)
+
+Returns the value of the requested column as a String. 
+
+The result and whether this method throws an exception when the column value is 
+null or the column type is not a string type is implementation-defined. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: the value of that column as a String. 
+
+*android.database.Cursor.getType(int)*
+
+public int getType(int columnIndex)
+
+Returns data type of the given column's value. The preferred type of the column 
+is returned but the data may be converted to other types as documented in the 
+get-type methods such as (|android.database.Cursor|) , 
+(|android.database.Cursor|) etc. 
+
+Returned column types are 
+
+(|android.database.Cursor|) (|android.database.Cursor|) 
+(|android.database.Cursor|) (|android.database.Cursor|) 
+(|android.database.Cursor|) 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: column value type 
+
+*android.database.Cursor.getWantsAllOnMoveCalls()*
+
+public boolean getWantsAllOnMoveCalls()
+
+onMove() will only be called across processes if this method returns true. 
+
+
+
+    Returns: whether all cursor movement should result in a call to onMove(). 
+
+*android.database.Cursor.isAfterLast()*
+
+public boolean isAfterLast()
+
+Returns whether the cursor is pointing to the position after the last row. 
+
+
+
+    Returns: whether the cursor is after the last result. 
+
+*android.database.Cursor.isBeforeFirst()*
+
+public boolean isBeforeFirst()
+
+Returns whether the cursor is pointing to the position before the first row. 
+
+
+
+    Returns: whether the cursor is before the first result. 
+
+*android.database.Cursor.isClosed()*
+
+public boolean isClosed()
+
+return true if the cursor is closed 
+
+
+
+    Returns: true if the cursor is closed. 
+
+*android.database.Cursor.isFirst()*
+
+public boolean isFirst()
+
+Returns whether the cursor is pointing to the first row. 
+
+
+
+    Returns: whether the cursor is pointing at the first entry. 
+
+*android.database.Cursor.isLast()*
+
+public boolean isLast()
+
+Returns whether the cursor is pointing to the last row. 
+
+
+
+    Returns: whether the cursor is pointing at the last entry. 
+
+*android.database.Cursor.isNull(int)*
+
+public boolean isNull(int columnIndex)
+
+Returns true if the value in the indicated column is null. 
+
+
+    columnIndex - the zero-based index of the target column. 
+
+    Returns: whether the column value is null. 
+
+*android.database.Cursor.move(int)*
+
+public boolean move(int offset)
+
+Move the cursor by a relative amount, forward or backward, from the current 
+position. Positive offsets move forwards, negative offsets move backwards. If 
+the final position is outside of the bounds of the result set then the 
+resultant position will be pinned to -1 or count() depending on whether the 
+value is off the front or end of the set, respectively. 
+
+This method will return true if the requested destination was reachable, 
+otherwise, it returns false. For example, if the cursor is at currently on the 
+second entry in the result set and move(-5) is called, the position will be 
+pinned at -1, and false will be returned. 
+
+
+    offset - the offset to be applied from the current position. 
+
+    Returns: whether the requested move fully succeeded. 
+
+*android.database.Cursor.moveToFirst()*
+
+public boolean moveToFirst()
+
+Move the cursor to the first row. 
+
+This method will return false if the cursor is empty. 
+
+
+
+    Returns: whether the move succeeded. 
+
+*android.database.Cursor.moveToLast()*
+
+public boolean moveToLast()
+
+Move the cursor to the last row. 
+
+This method will return false if the cursor is empty. 
+
+
+
+    Returns: whether the move succeeded. 
+
+*android.database.Cursor.moveToNext()*
+
+public boolean moveToNext()
+
+Move the cursor to the next row. 
+
+This method will return false if the cursor is already past the last entry in 
+the result set. 
+
+
+
+    Returns: whether the move succeeded. 
+
+*android.database.Cursor.moveToPosition(int)*
+
+public boolean moveToPosition(int position)
+
+Move the cursor to an absolute position. The valid range of values is -1 <= 
+position <= count. 
+
+This method will return true if the request destination was reachable, 
+otherwise, it returns false. 
+
+
+    position - the zero-based position to move to. 
+
+    Returns: whether the requested move fully succeeded. 
+
+*android.database.Cursor.moveToPrevious()*
+
+public boolean moveToPrevious()
+
+Move the cursor to the previous row. 
+
+This method will return false if the cursor is already before the first entry 
+in the result set. 
+
+
+
+    Returns: whether the move succeeded. 
+
+*android.database.Cursor.registerContentObserver(ContentObserver)*
+
+public void registerContentObserver(android.database.ContentObserver observer)
+
+Register an observer that is called when changes happen to the content backing 
+this cursor. Typically the data set won't change until 
+(|android.database.Cursor|) is called. 
+
+
+    observer - the object that gets notified when the content backing the cursor changes. 
+
+*android.database.Cursor.registerDataSetObserver(DataSetObserver)*
+
+public void registerDataSetObserver(android.database.DataSetObserver observer)
+
+Register an observer that is called when changes happen to the contents of the 
+this cursors data set, for example, when the data set is changed via 
+(|android.database.Cursor|) , (|android.database.Cursor|) , or 
+(|android.database.Cursor|) . 
+
+
+    observer - the object that gets notified when the cursors data set changes. 
+
+*android.database.Cursor.requery()*
+
+public boolean requery()
+
+Performs the query that created the cursor again, refreshing its contents. This 
+may be done at any time, including after a call to (|android.database.Cursor|) 
+. 
+
+Since this method could execute a query on the database and potentially take a 
+while, it could cause ANR if it is called on Main (UI) thread. A warning is 
+printed if this method is being executed on Main thread. 
+
+    Deprecated: Don't use this. Just request a new cursor, so you can do this
+ asynchronously and update your list view once the new cursor comes back.
+
+
+    Returns: true if the requery succeeded, false if not, in which case the cursor becomes 
+             invalid. 
+
+*android.database.Cursor.respond(Bundle)*
+
+public |android.os.Bundle| respond(android.os.Bundle extras)
+
+This is an out-of-band way for the the user of a cursor to communicate with the 
+cursor. The structure of each bundle is entirely defined by the cursor. 
+
+One use of this is to tell a cursor that it should retry its network request 
+after it reported an error. 
+
+
+    extras - extra values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY}. Never null. 
+
+    Returns: extra values, or {@link android.os.Bundle#EMPTY Bundle.EMPTY}. Never null. 
+
+*android.database.Cursor.setNotificationUri(ContentResolver,Uri)*
+
+public void setNotificationUri(
+  android.content.ContentResolver cr,
+  android.net.Uri uri)
+
+Register to watch a content URI for changes. This can be the URI of a specific 
+data row (for example, "content://my_provider_type/23"), or a a generic URI for 
+a content type. 
+
+
+    cr - The content resolver from the caller's context. The listener attached to this 
+       resolver will be notified. 
+    uri - The content URI to watch. 
+
+*android.database.Cursor.unregisterContentObserver(ContentObserver)*
+
+public void unregisterContentObserver(android.database.ContentObserver observer)
+
+Unregister an observer that has previously been registered with this cursor via 
+(|android.database.Cursor|) . 
+
+
+    observer - the object to unregister. 
+
+*android.database.Cursor.unregisterDataSetObserver(DataSetObserver)*
+
+public void unregisterDataSetObserver(android.database.DataSetObserver observer)
+
+Unregister an observer that has previously been registered with this cursor via 
+(|android.database.Cursor|) . 
+
+
+    observer - the object to unregister. 
+
+

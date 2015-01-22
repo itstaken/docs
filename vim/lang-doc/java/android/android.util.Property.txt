@@ -1,0 +1,120 @@
+*android.util.Property* *Property* A property is an abstraction that can be used
+
+public abstract class Property<T,V>
+  extends    |java.lang.Object|
+
+|android.util.Property_Description|
+|android.util.Property_Fields|
+|android.util.Property_Constructors|
+|android.util.Property_Methods|
+
+================================================================================
+
+*android.util.Property_Constructors*
+|android.util.Property(Class<V>,String)|A constructor that takes an identifying
+
+*android.util.Property_Methods*
+|android.util.Property.get(T)|Returns the current value that this property repr
+|android.util.Property.getName()|Returns the name for this property.
+|android.util.Property.getType()|Returns the type for this property.
+|android.util.Property.isReadOnly()|Returns true if the#set(Object, Object)meth
+|android.util.Property.of(Class<T>,Class<V>,String)|This factory method creates
+|android.util.Property.set(T,V)|Sets the value on object which this property re
+
+*android.util.Property_Description*
+
+A property is an abstraction that can be used to represent a mutable value that 
+is held in a host object. The Property's (|android.util.Property|) or 
+(|android.util.Property|) methods can be implemented in terms of the private 
+fields of the host object, or via "setter" and "getter" methods or by some 
+other mechanism, as appropriate. 
+
+
+
+*android.util.Property(Class<V>,String)*
+
+public Property(
+  java.lang.Class<V> type,
+  java.lang.String name)
+
+A constructor that takes an identifying name and type(|android.util.Property|) 
+for the property. 
+
+
+*android.util.Property.get(T)*
+
+public abstract |V| get(T object)
+
+Returns the current value that this property represents on the given object. 
+
+
+
+*android.util.Property.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name for this property. 
+
+
+
+*android.util.Property.getType()*
+
+public |java.lang.Class|<V> getType()
+
+Returns the type for this property. 
+
+
+
+*android.util.Property.isReadOnly()*
+
+public boolean isReadOnly()
+
+Returns true if the (|android.util.Property|) method does not set the value on 
+the target object (in which case the set()(|android.util.Property|) method 
+should throw a (|android.util.NoSuchPropertyException|) exception). This may 
+happen if the Property wraps functionality that allows querying the underlying 
+value but not setting it. For example, the (|android.util.Property|) factory 
+method may return a Property with name "foo" for an object that has only a 
+getFoo() or isFoo() method, but no matching setFoo() method. 
+
+
+
+*android.util.Property.of(Class<T>,Class<V>,String)*
+
+public static |android.util.Property|<T,V> of(
+  java.lang.Class<T> hostType,
+  java.lang.Class<V> valueType,
+  java.lang.String name)
+
+This factory method creates and returns a Property given the class and name 
+parameters, where the "name" parameter represents either: 
+
+a public getName() method on the class which takes no arguments, plus an 
+optional public setName() method which takes a value of the same type returned 
+by getName() a public isName() method on the class which takes no arguments, 
+plus an optional public setName() method which takes a value of the same type 
+returned by isName() a public name field on the class 
+
+If either of the get/is method alternatives is found on the class, but an 
+appropriate setName() method is not found, the Property will be 
+readOnly(|android.util.Property|) . Calling the (|android.util.Property|) 
+method on such a property is allowed, but will have no effect. 
+
+If neither the methods nor the field are found on the class a 
+(|android.util.NoSuchPropertyException|) exception will be thrown. 
+
+
+
+*android.util.Property.set(T,V)*
+
+public void set(
+  T object,
+  V value)
+
+Sets the value on object which this property represents. If the method is 
+unable to set the value on the target object it will throw an 
+(|java.lang.UnsupportedOperationException|) exception. 
+
+
+
+

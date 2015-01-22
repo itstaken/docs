@@ -1,0 +1,272 @@
+*android.provider.ContactsContract.Intents.Insert* *ContactsContract.Intents.Insert* 
+
+public static final class ContactsContract.Intents.Insert
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.Intents.Insert_Description|
+|android.provider.ContactsContract.Intents.Insert_Fields|
+|android.provider.ContactsContract.Intents.Insert_Constructors|
+|android.provider.ContactsContract.Intents.Insert_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Intents.Insert_Fields*
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.ACCOUNT|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.ACTION|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.COMPANY|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.DATA|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.DATA_SET|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL_ISPRIMARY|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.FULL_MODE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_HANDLE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_ISPRIMARY|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_PROTOCOL|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.JOB_TITLE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.NAME|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.NOTES|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE_ISPRIMARY|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONETIC_NAME|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL_ISPRIMARY|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_EMAIL|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_EMAIL_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_PHONE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_PHONE_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_EMAIL|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_EMAIL_TYPE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_PHONE|
+|java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_PHONE_TYPE|
+
+*android.provider.ContactsContract.Intents.Insert_Constructors*
+|android.provider.ContactsContract.Intents.Insert()|
+
+*android.provider.ContactsContract.Intents.Insert_Description*
+
+Convenience class that contains string constants used to create contact 
+Intents(|android.content.Intent|) . 
+
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.ACCOUNT*
+
+Used to specify the account in which to create the new contact. 
+
+If this value is not provided, the user is presented with a disambiguation 
+dialog to chose an account 
+
+Type: (|android.accounts.Account|) 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.ACTION*
+
+The action code to use when adding a contact 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.COMPANY*
+
+The extra field for the contact company. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.DATA*
+
+The extra field that allows the client to supply multiple rows of arbitrary 
+data for a single contact created using the (|android.content.Intent|) or 
+edited using (|android.content.Intent|) . It is an ArrayList of 
+(|android.content.ContentValues|) , one per data row. Supplying this extra is 
+similar to inserting multiple rows into the 
+(|android.provider.ContactsContract.Contacts.Data|) table, except the user gets 
+a chance to see and edit them before saving. Each ContentValues object must 
+have a value for (|android.provider.ContactsContract.Contacts.Data|) . If 
+supplied values are not visible in the editor UI, they will be dropped. 
+Duplicate data will dropped. Some fields like 
+Email.TYPE(|android.provider.ContactsContract.CommonDataKinds.Email|) may be 
+automatically adjusted to comply with the constraints of the specific account 
+type. For example, an Exchange contact can only have one phone numbers of type 
+Home, so the contact editor may choose a different type for this phone number 
+to avoid dropping the valueable part of the row, which is the phone number. 
+
+Example: 
+
+ArrayList<ContentValues> data = new ArrayList<ContentValues>(); 
+
+ContentValues row1 = new ContentValues(); row1.put(Data.MIMETYPE, 
+Organization.CONTENT_ITEM_TYPE); row1.put(Organization.COMPANY, "Android"); 
+data.add(row1); 
+
+ContentValues row2 = new ContentValues(); row2.put(Data.MIMETYPE, 
+Email.CONTENT_ITEM_TYPE); row2.put(Email.TYPE, Email.TYPE_CUSTOM); 
+row2.put(Email.LABEL, "Green Bot"); row2.put(Email.ADDRESS, 
+"android@android.com"); data.add(row2); 
+
+Intent intent = new Intent(Intent.ACTION_INSERT, Contacts.CONTENT_URI); 
+intent.putParcelableArrayListExtra(Insert.DATA, data); 
+
+startActivity(intent); 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.DATA_SET*
+
+Used to specify the data set within the account in which to create the new 
+contact. 
+
+This value is optional - if it is not specified, the contact will be created in 
+the base account, with no data set. 
+
+Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL*
+
+The extra field for the contact email address. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL_ISPRIMARY*
+
+The extra field for the email isprimary flag. Type: boolean 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.EMAIL_TYPE*
+
+The extra field for the contact email type. Type: Either an integer value from 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) or a string 
+specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.FULL_MODE*
+
+If present, forces a bypass of quick insert mode. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_HANDLE*
+
+The extra field for an IM handle. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_ISPRIMARY*
+
+The extra field for the IM isprimary flag. Type: boolean 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.IM_PROTOCOL*
+
+The extra field for the IM protocol 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.JOB_TITLE*
+
+The extra field for the contact job title. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.NAME*
+
+The extra field for the contact name. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.NOTES*
+
+The extra field for the contact notes. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE*
+
+The extra field for the contact phone number. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE_ISPRIMARY*
+
+The extra field for the phone isprimary flag. Type: boolean 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONE_TYPE*
+
+The extra field for the contact phone number type. Type: Either an integer 
+value from (|android.provider.ContactsContract.CommonDataKinds.Phone|) , or a 
+string specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.PHONETIC_NAME*
+
+The extra field for the contact phonetic name. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL*
+
+The extra field for the contact postal address. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL_ISPRIMARY*
+
+The extra field for the postal isprimary flag. Type: boolean 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.POSTAL_TYPE*
+
+The extra field for the contact postal address type. Type: Either an integer 
+value from 
+(|android.provider.ContactsContract.CommonDataKinds.StructuredPostal|) or a 
+string specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_EMAIL*
+
+The extra field for an optional second contact email address. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_EMAIL_TYPE*
+
+The extra field for an optional second contact email type. Type: Either an 
+integer value from (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+or a string specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_PHONE*
+
+The extra field for an optional second contact phone number. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.SECONDARY_PHONE_TYPE*
+
+The extra field for an optional second contact phone number type. Type: Either 
+an integer value from 
+(|android.provider.ContactsContract.CommonDataKinds.Phone|) , or a string 
+specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_EMAIL*
+
+The extra field for an optional third contact email address. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_EMAIL_TYPE*
+
+The extra field for an optional third contact email type. Type: Either an 
+integer value from (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+or a string specifying a custom label. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_PHONE*
+
+The extra field for an optional third contact phone number. Type: String 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.Insert.TERTIARY_PHONE_TYPE*
+
+The extra field for an optional third contact phone number type. Type: Either 
+an integer value from 
+(|android.provider.ContactsContract.CommonDataKinds.Phone|) , or a string 
+specifying a custom label. 
+
+
+
+*android.provider.ContactsContract.Intents.Insert()*
+
+public ContactsContract.Intents.Insert()
+
+
+
+

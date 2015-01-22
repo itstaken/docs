@@ -1,0 +1,187 @@
+*android.app.SearchDialog* *SearchDialog* Search dialog.
+
+public class SearchDialog
+  extends    |android.app.Dialog|
+
+|android.app.SearchDialog_Description|
+|android.app.SearchDialog_Fields|
+|android.app.SearchDialog_Constructors|
+|android.app.SearchDialog_Methods|
+
+================================================================================
+
+*android.app.SearchDialog_Constructors*
+|android.app.SearchDialog(Context,SearchManager)|Constructor - fires it up and 
+
+*android.app.SearchDialog_Methods*
+|android.app.SearchDialog.hide()|
+|android.app.SearchDialog.launchQuerySearch()|Launch a search for the text in t
+|android.app.SearchDialog.launchQuerySearch(int,String)|Launch a search for the
+|android.app.SearchDialog.onBackPressed()|
+|android.app.SearchDialog.onConfigurationChanged()|Called after resources have 
+|android.app.SearchDialog.onCreate(Bundle)|Create the search dialog and any res
+|android.app.SearchDialog.onRestoreInstanceState(Bundle)|Restore the state of t
+|android.app.SearchDialog.onSaveInstanceState()|Save the minimal set of data ne
+|android.app.SearchDialog.onStart()|
+|android.app.SearchDialog.onStop()|The search dialog is being dismissed, so han
+|android.app.SearchDialog.onTouchEvent(MotionEvent)|Dialog#onTouchEvent(MotionE
+|android.app.SearchDialog.setListSelection(int)|Sets the list item selection in
+|android.app.SearchDialog.setWorking(boolean)|Sets the search dialog to the 'wo
+|android.app.SearchDialog.show(String,boolean,ComponentName,Bundle)|Set up the 
+
+*android.app.SearchDialog_Description*
+
+Search dialog. This is controlled by the SearchManager and runs in the current 
+foreground process. 
+
+
+
+*android.app.SearchDialog(Context,SearchManager)*
+
+public SearchDialog(
+  android.content.Context context,
+  android.app.SearchManager searchManager)
+
+Constructor - fires it up and makes it look like the search UI. 
+
+    context - Application Context we can use for system acess 
+
+*android.app.SearchDialog.hide()*
+
+public void hide()
+
+
+
+
+
+*android.app.SearchDialog.launchQuerySearch()*
+
+public void launchQuerySearch()
+
+Launch a search for the text in the query text field. 
+
+
+
+*android.app.SearchDialog.launchQuerySearch(int,String)*
+
+protected void launchQuerySearch(
+  int actionKey,
+  java.lang.String actionMsg)
+
+Launch a search for the text in the query text field. 
+
+
+    actionKey - The key code of the action key that was pressed, or {@link 
+       KeyEvent#KEYCODE_UNKNOWN} if none. 
+    actionMsg - The message for the action key that was pressed, or null if none. 
+
+*android.app.SearchDialog.onBackPressed()*
+
+public void onBackPressed()
+
+
+
+
+
+*android.app.SearchDialog.onConfigurationChanged()*
+
+public void onConfigurationChanged()
+
+Called after resources have changed, e.g. after screen rotation or locale 
+change. 
+
+
+
+*android.app.SearchDialog.onCreate(Bundle)*
+
+protected void onCreate(android.os.Bundle savedInstanceState)
+
+Create the search dialog and any resources that are used for the entire 
+lifetime of the dialog. 
+
+
+
+*android.app.SearchDialog.onRestoreInstanceState(Bundle)*
+
+public void onRestoreInstanceState(android.os.Bundle savedInstanceState)
+
+Restore the state of the dialog from a previously saved bundle. 
+
+
+    savedInstanceState - The state of the dialog previously saved by {@link #onSaveInstanceState()}. 
+
+*android.app.SearchDialog.onSaveInstanceState()*
+
+public |android.os.Bundle| onSaveInstanceState()
+
+Save the minimal set of data necessary to recreate the search 
+
+
+
+    Returns: A bundle with the state of the dialog, or {@code null} if the search dialog is 
+             not showing. 
+
+*android.app.SearchDialog.onStart()*
+
+public void onStart()
+
+
+
+
+
+*android.app.SearchDialog.onStop()*
+
+public void onStop()
+
+The search dialog is being dismissed, so handle all of the local shutdown 
+operations. 
+
+This function is designed to be idempotent so that dismiss() can be safely 
+called at any time (even if already closed) and more likely to really dump any 
+memory. No leaks! 
+
+
+
+*android.app.SearchDialog.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent event)
+
+(|android.app.Dialog|) will cancel the dialog only when the touch is outside 
+the window. But the window includes space for the drop-down, so we also cancel 
+on taps outside the search bar when the drop-down is not showing. 
+
+
+
+*android.app.SearchDialog.setListSelection(int)*
+
+public void setListSelection(int index)
+
+Sets the list item selection in the AutoCompleteTextView's ListView. 
+
+
+
+*android.app.SearchDialog.setWorking(boolean)*
+
+public void setWorking(boolean working)
+
+Sets the search dialog to the 'working' state, which shows a working spinner in 
+the right hand size of the text field. 
+
+
+    working - true to show spinner, false to hide spinner 
+
+*android.app.SearchDialog.show(String,boolean,ComponentName,Bundle)*
+
+public boolean show(
+  java.lang.String initialQuery,
+  boolean selectInitialQuery,
+  android.content.ComponentName componentName,
+  android.os.Bundle appSearchData)
+
+Set up the search dialog 
+
+
+
+    Returns: true if search dialog launched, false if not 
+
+

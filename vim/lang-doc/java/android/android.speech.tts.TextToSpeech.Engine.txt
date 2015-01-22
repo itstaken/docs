@@ -1,0 +1,357 @@
+*android.speech.tts.TextToSpeech.Engine* *TextToSpeech.Engine* Constants and par
+
+public class TextToSpeech.Engine
+  extends    |java.lang.Object|
+
+|android.speech.tts.TextToSpeech.Engine_Description|
+|android.speech.tts.TextToSpeech.Engine_Fields|
+|android.speech.tts.TextToSpeech.Engine_Constructors|
+|android.speech.tts.TextToSpeech.Engine_Methods|
+
+================================================================================
+
+*android.speech.tts.TextToSpeech.Engine_Fields*
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_CHECK_TTS_DATA|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_GET_SAMPLE_TEXT|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_TTS_DATA_INSTALLED|
+|int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_BAD_DATA|
+|int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_FAIL|
+|int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_DATA|
+|int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_VOLUME|
+|int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_PASS|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.DEFAULT_ENGINE|
+|float_android.speech.tts.TextToSpeech.Engine.DEFAULT_PAN|
+|int_android.speech.tts.TextToSpeech.Engine.DEFAULT_PITCH|
+|int_android.speech.tts.TextToSpeech.Engine.DEFAULT_RATE|
+|int_android.speech.tts.TextToSpeech.Engine.DEFAULT_STREAM|
+|float_android.speech.tts.TextToSpeech.Engine.DEFAULT_VOLUME|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_CHECK_VOICE_DATA_FOR|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_SAMPLE_TEXT|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_TTS_DATA_INSTALLED|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_FILES|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_FILES_INFO|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_ROOT_DIRECTORY|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_COUNTRY|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_ENGINE|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_LANGUAGE|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_PAN|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_PITCH|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_RATE|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_STREAM|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VARIANT|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME|
+|java.lang.String_android.speech.tts.TextToSpeech.Engine.SERVICE_META_DATA|
+|int_android.speech.tts.TextToSpeech.Engine.USE_DEFAULTS|
+
+*android.speech.tts.TextToSpeech.Engine_Constructors*
+|android.speech.tts.TextToSpeech.Engine()|
+
+*android.speech.tts.TextToSpeech.Engine_Description*
+
+Constants and parameter names for controlling text-to-speech. These include: 
+
+
+
+Intents to ask engine to install data or check its data and extras for a TTS 
+engine's check data activity. 
+
+Keys for the parameters passed with speak commands, e.g. 
+(|android.speech.tts.TextToSpeech.Engine|) , 
+(|android.speech.tts.TextToSpeech.Engine|) . 
+
+A list of feature strings that engines might support, e.g 
+(|android.speech.tts.TextToSpeech.Engine|) ). These values may be passed in to 
+(|android.speech.tts.TextToSpeech|) and (|android.speech.tts.TextToSpeech|) to 
+modify engine behaviour. The engine can be queried for the set of features it 
+supports through (|android.speech.tts.TextToSpeech|) . 
+
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_CHECK_TTS_DATA*
+
+Activity Action: Starts the activity from the platform TextToSpeech engine to 
+verify the proper installation and availability of the resource files on the 
+system. Upon completion, the activity will return one of the following codes: 
+(|android.speech.tts.TextToSpeech.Engine|) , 
+(|android.speech.tts.TextToSpeech.Engine|) , Moreover, the data received in the 
+activity result will contain the following fields: 
+
+(|android.speech.tts.TextToSpeech.Engine|) which contains an ArrayList of all 
+the available voices. The format of each voice is: lang-COUNTRY-variant where 
+COUNTRY and variant are optional (ie, "eng" or "eng-USA" or "eng-USA-FEMALE"). 
+(|android.speech.tts.TextToSpeech.Engine|) which contains an ArrayList of all 
+the unavailable voices (ones that user can install). The format of each voice 
+is: lang-COUNTRY-variant where COUNTRY and variant are optional (ie, "eng" or 
+"eng-USA" or "eng-USA-FEMALE"). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_GET_SAMPLE_TEXT*
+
+Activity intent for getting some sample text to use for demonstrating TTS. 
+Specific locale have to be requested by passing following extra parameters: 
+
+language country variant 
+
+Upon completion, the activity result may contain the following fields: 
+
+(|android.speech.tts.TextToSpeech.Engine|) which contains an String with sample 
+text. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA*
+
+Activity Action: Triggers the platform TextToSpeech engine to start the 
+activity that installs the resource files on the device that are required for 
+TTS to be operational. Since the installation of the data can be interrupted or 
+declined by the user, the application shouldn't expect successful installation 
+upon return from that intent, and if need be, should check installation status 
+with (|android.speech.tts.TextToSpeech.Engine|) . 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.ACTION_TTS_DATA_INSTALLED*
+
+Broadcast Action: broadcast to signal the change in the list of available 
+languages or/and their features. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_BAD_DATA*
+
+Indicates erroneous data when checking the installation status of the resources 
+used by the TextToSpeech engine with the 
+(|android.speech.tts.TextToSpeech.Engine|) intent. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_FAIL*
+
+Indicates failure when checking the installation status of the resources used 
+by the TextToSpeech engine with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_DATA*
+
+Indicates missing resources when checking the installation status of the 
+resources used by the TextToSpeech engine with the 
+(|android.speech.tts.TextToSpeech.Engine|) intent. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_MISSING_VOLUME*
+
+Indicates missing storage volume when checking the installation status of the 
+resources used by the TextToSpeech engine with the 
+(|android.speech.tts.TextToSpeech.Engine|) intent. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.CHECK_VOICE_DATA_PASS*
+
+Indicates success when checking the installation status of the resources used 
+by the TextToSpeech engine with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.DEFAULT_ENGINE*
+
+Package name of the default TTS engine. 
+
+
+*float_android.speech.tts.TextToSpeech.Engine.DEFAULT_PAN*
+
+Default pan (centered). 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.DEFAULT_PITCH*
+
+Default pitch. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.DEFAULT_RATE*
+
+Default speech rate. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.DEFAULT_STREAM*
+
+Default audio stream used when playing synthesized speech. 
+
+
+*float_android.speech.tts.TextToSpeech.Engine.DEFAULT_VOLUME*
+
+Default volume. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine returns an ArrayList of all the 
+available voices. The format of each voice is: lang-COUNTRY-variant where 
+COUNTRY and variant are optional (ie, "eng" or "eng-USA" or "eng-USA-FEMALE"). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_CHECK_VOICE_DATA_FOR*
+
+Extra information sent with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent where the caller indicates to the TextToSpeech engine which specific 
+sets of voice data to check for by sending an ArrayList of the voices that are 
+of interest. The format of each voice is: lang-COUNTRY-variant where COUNTRY 
+and variant are optional (ie, "eng" or "eng-USA" or "eng-USA-FEMALE"). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_SAMPLE_TEXT*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine returns an String with sample text 
+for requested voice 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_TTS_DATA_INSTALLED*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result. It indicates whether the data files for the synthesis engine 
+were successfully installed. The installation was initiated with the 
+(|android.speech.tts.TextToSpeech.Engine|) intent. The possible values for this 
+extra are (|android.speech.tts.TextToSpeech|) and 
+(|android.speech.tts.TextToSpeech|) . 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine returns an ArrayList of all the 
+unavailable voices. The format of each voice is: lang-COUNTRY-variant where 
+COUNTRY and variant are optional (ie, "eng" or "eng-USA" or "eng-USA-FEMALE"). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_FILES*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine specifies the file names of its 
+resources under the resource path. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_FILES_INFO*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine specifies the locale associated 
+with each resource file. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.EXTRA_VOICE_DATA_ROOT_DIRECTORY*
+
+Extra information received with the (|android.speech.tts.TextToSpeech.Engine|) 
+intent result where the TextToSpeech engine specifies the path to its 
+resources. 
+
+It may be used by language packages to find out where to put their data. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.INTENT_ACTION_TTS_SERVICE*
+
+Intent for starting a TTS service. Services that handle this intent must extend 
+(|android.speech.tts.TextToSpeechService|) . Normal applications should not use 
+this intent directly, instead they should talk to the TTS service using the the 
+methods in this class. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_FEATURE_EMBEDDED_SYNTHESIS*
+
+Feature key for embedded synthesis. See (|android.speech.tts.TextToSpeech|) for 
+a description of how feature keys work. If set and supported by the engine as 
+per (|android.speech.tts.TextToSpeech|) , the engine must synthesize text 
+on-device (without making network requests). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_FEATURE_NETWORK_SYNTHESIS*
+
+Feature key for network synthesis. See (|android.speech.tts.TextToSpeech|) for 
+a description of how feature keys work. If set (and supported by the engine as 
+per (|android.speech.tts.TextToSpeech|) , the engine must use network based 
+synthesis. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_COUNTRY*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_ENGINE*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_LANGUAGE*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_PAN*
+
+Parameter key to specify how the speech is panned from left to right when 
+speaking text. Pan is specified as a float ranging from -1 to +1 where -1 maps 
+to a hard-left pan, 0 to center (the default behavior), and +1 to hard-right. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_PITCH*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_RATE*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_STREAM*
+
+Parameter key to specify the audio stream type to be used when speaking text or 
+playing back a file. The value should be one of the STREAM_ constants defined 
+in (|AudioManager|) . 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID*
+
+Parameter key to identify an utterance in the 
+(|android.speech.tts.TextToSpeech.OnUtteranceCompletedListener|) after text has 
+been spoken, a file has been played back or a silence duration has elapsed. 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VARIANT*
+
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME*
+
+Parameter key to specify the speech volume relative to the current stream type 
+volume used when speaking text. Volume is specified as a float ranging from 0 
+to 1 where 0 is silence, and 1 is the maximum volume (the default behavior). 
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.Engine.SERVICE_META_DATA*
+
+Name under which a text to speech engine publishes information about itself. 
+This meta-data should reference an XML resource containing a < 
+tts-engine(|android.R.styleable|) > tag. 
+
+
+*int_android.speech.tts.TextToSpeech.Engine.USE_DEFAULTS*
+
+Default value for (|Settings.Secure|) . 
+
+
+
+*android.speech.tts.TextToSpeech.Engine()*
+
+public TextToSpeech.Engine()
+
+
+
+

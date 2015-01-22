@@ -1,0 +1,559 @@
+*android.text.method.BaseMovementMethod* *BaseMovementMethod* Base classes for m
+
+public class BaseMovementMethod
+  extends    |java.lang.Object|
+  implements |android.text.method.MovementMethod|
+
+|android.text.method.BaseMovementMethod_Description|
+|android.text.method.BaseMovementMethod_Fields|
+|android.text.method.BaseMovementMethod_Constructors|
+|android.text.method.BaseMovementMethod_Methods|
+
+================================================================================
+
+*android.text.method.BaseMovementMethod_Constructors*
+|android.text.method.BaseMovementMethod()|
+
+*android.text.method.BaseMovementMethod_Methods*
+|android.text.method.BaseMovementMethod.bottom(TextView,Spannable)|Performs a b
+|android.text.method.BaseMovementMethod.canSelectArbitrarily()|
+|android.text.method.BaseMovementMethod.down(TextView,Spannable)|Performs a dow
+|android.text.method.BaseMovementMethod.end(TextView,Spannable)|Performs an end
+|android.text.method.BaseMovementMethod.getMovementMetaState(Spannable,KeyEvent)|
+|android.text.method.BaseMovementMethod.handleMovementKey(TextView,Spannable,int,int,KeyEvent)|
+|android.text.method.BaseMovementMethod.home(TextView,Spannable)|Performs a hom
+|android.text.method.BaseMovementMethod.initialize(TextView,Spannable)|
+|android.text.method.BaseMovementMethod.left(TextView,Spannable)|Performs a lef
+|android.text.method.BaseMovementMethod.leftWord(TextView,Spannable)|
+|android.text.method.BaseMovementMethod.lineEnd(TextView,Spannable)|Performs a 
+|android.text.method.BaseMovementMethod.lineStart(TextView,Spannable)|Performs 
+|android.text.method.BaseMovementMethod.onGenericMotionEvent(TextView,Spannable,MotionEvent)|
+|android.text.method.BaseMovementMethod.onKeyDown(TextView,Spannable,int,KeyEvent)|
+|android.text.method.BaseMovementMethod.onKeyOther(TextView,Spannable,KeyEvent)|
+|android.text.method.BaseMovementMethod.onKeyUp(TextView,Spannable,int,KeyEvent)|
+|android.text.method.BaseMovementMethod.onTakeFocus(TextView,Spannable,int)|
+|android.text.method.BaseMovementMethod.onTouchEvent(TextView,Spannable,MotionEvent)|
+|android.text.method.BaseMovementMethod.onTrackballEvent(TextView,Spannable,MotionEvent)|
+|android.text.method.BaseMovementMethod.pageDown(TextView,Spannable)|Performs a
+|android.text.method.BaseMovementMethod.pageUp(TextView,Spannable)|Performs a p
+|android.text.method.BaseMovementMethod.right(TextView,Spannable)|Performs a ri
+|android.text.method.BaseMovementMethod.rightWord(TextView,Spannable)|
+|android.text.method.BaseMovementMethod.scrollBottom(TextView,Spannable)|Perfor
+|android.text.method.BaseMovementMethod.scrollDown(TextView,Spannable,int)|Perf
+|android.text.method.BaseMovementMethod.scrollLeft(TextView,Spannable,int)|Perf
+|android.text.method.BaseMovementMethod.scrollLineEnd(TextView,Spannable)|Perfo
+|android.text.method.BaseMovementMethod.scrollLineStart(TextView,Spannable)|Per
+|android.text.method.BaseMovementMethod.scrollPageDown(TextView,Spannable)|Perf
+|android.text.method.BaseMovementMethod.scrollPageUp(TextView,Spannable)|Perfor
+|android.text.method.BaseMovementMethod.scrollRight(TextView,Spannable,int)|Per
+|android.text.method.BaseMovementMethod.scrollTop(TextView,Spannable)|Performs 
+|android.text.method.BaseMovementMethod.scrollUp(TextView,Spannable,int)|Perfor
+|android.text.method.BaseMovementMethod.top(TextView,Spannable)|Performs a top 
+|android.text.method.BaseMovementMethod.up(TextView,Spannable)|Performs an up m
+
+*android.text.method.BaseMovementMethod_Description*
+
+Base classes for movement methods. 
+
+
+
+*android.text.method.BaseMovementMethod()*
+
+public BaseMovementMethod()
+
+
+
+
+*android.text.method.BaseMovementMethod.bottom(TextView,Spannable)*
+
+protected boolean bottom(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a bottom movement action. Moves the cursor or scrolls to the bottom of 
+the buffer. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.canSelectArbitrarily()*
+
+public boolean canSelectArbitrarily()
+
+
+
+
+
+*android.text.method.BaseMovementMethod.down(TextView,Spannable)*
+
+protected boolean down(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a down movement action. Moves the cursor or scrolls down by one line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.end(TextView,Spannable)*
+
+protected boolean end(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs an end movement action. Moves the cursor or scrolls to the start of 
+the line or to the top of the document depending on whether the insertion point 
+is being moved or the document is being scrolled. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.getMovementMetaState(Spannable,KeyEvent)*
+
+protected int getMovementMetaState(
+  android.text.Spannable buffer,
+  android.view.KeyEvent event)
+
+Gets the meta state used for movement using the modifiers tracked by the text 
+buffer as well as those present in the key event. 
+
+The movement meta state excludes the state of locked modifiers or the SHIFT key 
+since they are not used by movement actions (but they may be used for 
+selection). 
+
+
+    buffer - The text buffer. 
+    event - The key event. 
+
+    Returns: The keyboard meta states used for movement. 
+
+*android.text.method.BaseMovementMethod.handleMovementKey(TextView,Spannable,int,int,KeyEvent)*
+
+protected boolean handleMovementKey(
+  android.widget.TextView widget,
+  android.text.Spannable buffer,
+  int keyCode,
+  int movementMetaState,
+  android.view.KeyEvent event)
+
+Performs a movement key action. The default implementation decodes the key down 
+and invokes movement actions such as (|android.text.method.BaseMovementMethod|) 
+and (|android.text.method.BaseMovementMethod|) . 
+(|android.text.method.BaseMovementMethod|) calls this method once to handle an 
+(|android.view.KeyEvent|) . (|android.text.method.BaseMovementMethod|) calls 
+this method repeatedly to handle each repetition of an 
+(|android.view.KeyEvent|) . 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+    event - The key event. 
+    keyCode - The key code. 
+    movementMetaState - The keyboard meta states used for movement. 
+    event - The key event. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.home(TextView,Spannable)*
+
+protected boolean home(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a home movement action. Moves the cursor or scrolls to the start of 
+the line or to the top of the document depending on whether the insertion point 
+is being moved or the document is being scrolled. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.initialize(TextView,Spannable)*
+
+public void initialize(
+  android.widget.TextView widget,
+  android.text.Spannable text)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.left(TextView,Spannable)*
+
+protected boolean left(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a left movement action. Moves the cursor or scrolls left by one 
+character. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.leftWord(TextView,Spannable)*
+
+protected boolean leftWord(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.lineEnd(TextView,Spannable)*
+
+protected boolean lineEnd(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a line-end movement action. Moves the cursor or scrolls to the end of 
+the line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.lineStart(TextView,Spannable)*
+
+protected boolean lineStart(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a line-start movement action. Moves the cursor or scrolls to the start 
+of the line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.onGenericMotionEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onGenericMotionEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onKeyDown(TextView,Spannable,int,KeyEvent)*
+
+public boolean onKeyDown(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onKeyOther(TextView,Spannable,KeyEvent)*
+
+public boolean onKeyOther(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onKeyUp(TextView,Spannable,int,KeyEvent)*
+
+public boolean onKeyUp(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onTakeFocus(TextView,Spannable,int)*
+
+public void onTakeFocus(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int direction)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onTouchEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onTouchEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.onTrackballEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onTrackballEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.pageDown(TextView,Spannable)*
+
+protected boolean pageDown(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a page-down movement action. Moves the cursor or scrolls down by one 
+page. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.pageUp(TextView,Spannable)*
+
+protected boolean pageUp(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a page-up movement action. Moves the cursor or scrolls up by one page. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.right(TextView,Spannable)*
+
+protected boolean right(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a right movement action. Moves the cursor or scrolls right by one 
+character. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.rightWord(TextView,Spannable)*
+
+protected boolean rightWord(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+
+
+
+
+*android.text.method.BaseMovementMethod.scrollBottom(TextView,Spannable)*
+
+protected boolean scrollBottom(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll to bottom action. Scrolls to the bottom of the document. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollDown(TextView,Spannable,int)*
+
+protected boolean scrollDown(
+  android.widget.TextView widget,
+  android.text.Spannable buffer,
+  int amount)
+
+Performs a scroll down action. Scrolls down by the specified number of lines. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+    amount - The number of lines to scroll by. Must be at least 1. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollLeft(TextView,Spannable,int)*
+
+protected boolean scrollLeft(
+  android.widget.TextView widget,
+  android.text.Spannable buffer,
+  int amount)
+
+Performs a scroll left action. Scrolls left by the specified number of 
+characters. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+    amount - The number of characters to scroll by. Must be at least 1. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollLineEnd(TextView,Spannable)*
+
+protected boolean scrollLineEnd(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll to line end action. Scrolls to the end of the line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollLineStart(TextView,Spannable)*
+
+protected boolean scrollLineStart(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll to line start action. Scrolls to the start of the line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollPageDown(TextView,Spannable)*
+
+protected boolean scrollPageDown(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll page up action. Scrolls down by one page. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollPageUp(TextView,Spannable)*
+
+protected boolean scrollPageUp(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll page up action. Scrolls up by one page. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollRight(TextView,Spannable,int)*
+
+protected boolean scrollRight(
+  android.widget.TextView widget,
+  android.text.Spannable buffer,
+  int amount)
+
+Performs a scroll right action. Scrolls right by the specified number of 
+characters. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+    amount - The number of characters to scroll by. Must be at least 1. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollTop(TextView,Spannable)*
+
+protected boolean scrollTop(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a scroll to top action. Scrolls to the top of the document. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.scrollUp(TextView,Spannable,int)*
+
+protected boolean scrollUp(
+  android.widget.TextView widget,
+  android.text.Spannable buffer,
+  int amount)
+
+Performs a scroll up action. Scrolls up by the specified number of lines. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+    amount - The number of lines to scroll by. Must be at least 1. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.top(TextView,Spannable)*
+
+protected boolean top(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs a top movement action. Moves the cursor or scrolls to the top of the 
+buffer. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+*android.text.method.BaseMovementMethod.up(TextView,Spannable)*
+
+protected boolean up(
+  android.widget.TextView widget,
+  android.text.Spannable buffer)
+
+Performs an up movement action. Moves the cursor or scrolls up by one line. 
+
+
+    widget - The text view. 
+    buffer - The text buffer. 
+
+    Returns: True if the event was handled. 
+
+

@@ -1,0 +1,193 @@
+*android.util.Base64* *Base64* Utilities for encoding and decoding the Base64 re
+
+public class Base64
+  extends    |java.lang.Object|
+
+|android.util.Base64_Description|
+|android.util.Base64_Fields|
+|android.util.Base64_Constructors|
+|android.util.Base64_Methods|
+
+================================================================================
+
+*android.util.Base64_Fields*
+|int_android.util.Base64.CRLF|
+|int_android.util.Base64.DEFAULT|
+|int_android.util.Base64.NO_CLOSE|
+|int_android.util.Base64.NO_PADDING|
+|int_android.util.Base64.NO_WRAP|
+|int_android.util.Base64.URL_SAFE|
+
+*android.util.Base64_Methods*
+|android.util.Base64.decode(byte[],int)|Decode the Base64-encoded data in input
+|android.util.Base64.decode(byte[],int,int,int)|Decode the Base64-encoded data 
+|android.util.Base64.decode(String,int)|Decode the Base64-encoded data in input
+|android.util.Base64.encode(byte[],int)|Base64-encode the given data and return
+|android.util.Base64.encode(byte[],int,int,int)|Base64-encode the given data an
+|android.util.Base64.encodeToString(byte[],int)|Base64-encode the given data an
+|android.util.Base64.encodeToString(byte[],int,int,int)|Base64-encode the given
+
+*android.util.Base64_Description*
+
+Utilities for encoding and decoding the Base64 representation of binary data. 
+See RFCs 2045 and 3548. 
+
+
+
+*int_android.util.Base64.CRLF*
+
+Encoder flag bit to indicate lines should be terminated with a CRLF pair 
+instead of just an LF. Has no effect ifNO_WRAPis specified as well. 
+
+
+*int_android.util.Base64.DEFAULT*
+
+Default values for encoder/decoder flags. 
+
+
+*int_android.util.Base64.NO_CLOSE*
+
+Flag to pass to (|android.util.Base64OutputStream|) to indicate that it should 
+not close the output stream it is wrapping when it itself is closed. 
+
+
+*int_android.util.Base64.NO_PADDING*
+
+Encoder flag bit to omit the padding '=' characters at the end of the output 
+(if any). 
+
+
+*int_android.util.Base64.NO_WRAP*
+
+Encoder flag bit to omit all line terminators (i.e., the output will be on one 
+long line). 
+
+
+*int_android.util.Base64.URL_SAFE*
+
+Encoder/decoder flag bit to indicate using the "URL and filename safe" variant 
+of Base64 (see RFC 3548 section 4) where-and_are used in place of+and/. 
+
+
+
+*android.util.Base64.decode(byte[],int)*
+
+public static byte[] decode(
+  byte[] input,
+  int flags)
+
+Decode the Base64-encoded data in input and return the data in a new byte 
+array. 
+
+The padding '=' characters at the end are considered optional, but if any are 
+present, there must be the correct number of them. 
+
+
+    input - the input array to decode 
+    flags - controls certain features of the decoded output. Pass {@code DEFAULT} to decode 
+       standard Base64. 
+
+*android.util.Base64.decode(byte[],int,int,int)*
+
+public static byte[] decode(
+  byte[] input,
+  int offset,
+  int len,
+  int flags)
+
+Decode the Base64-encoded data in input and return the data in a new byte 
+array. 
+
+The padding '=' characters at the end are considered optional, but if any are 
+present, there must be the correct number of them. 
+
+
+    input - the data to decode 
+    offset - the position within the input array at which to start 
+    len - the number of bytes of input to decode 
+    flags - controls certain features of the decoded output. Pass {@code DEFAULT} to decode 
+       standard Base64. 
+
+*android.util.Base64.decode(String,int)*
+
+public static byte[] decode(
+  java.lang.String str,
+  int flags)
+
+Decode the Base64-encoded data in input and return the data in a new byte 
+array. 
+
+The padding '=' characters at the end are considered optional, but if any are 
+present, there must be the correct number of them. 
+
+
+    str - the input String to decode, which is converted to bytes using the default 
+       charset 
+    flags - controls certain features of the decoded output. Pass {@code DEFAULT} to decode 
+       standard Base64. 
+
+*android.util.Base64.encode(byte[],int)*
+
+public static byte[] encode(
+  byte[] input,
+  int flags)
+
+Base64-encode the given data and return a newly allocated byte[] with the 
+result. 
+
+
+    input - the data to encode 
+    flags - controls certain features of the encoded output. Passing {@code DEFAULT} 
+       results in output that adheres to RFC 2045. 
+
+*android.util.Base64.encode(byte[],int,int,int)*
+
+public static byte[] encode(
+  byte[] input,
+  int offset,
+  int len,
+  int flags)
+
+Base64-encode the given data and return a newly allocated byte[] with the 
+result. 
+
+
+    input - the data to encode 
+    offset - the position within the input array at which to start 
+    len - the number of bytes of input to encode 
+    flags - controls certain features of the encoded output. Passing {@code DEFAULT} 
+       results in output that adheres to RFC 2045. 
+
+*android.util.Base64.encodeToString(byte[],int)*
+
+public static |java.lang.String| encodeToString(
+  byte[] input,
+  int flags)
+
+Base64-encode the given data and return a newly allocated String with the 
+result. 
+
+
+    input - the data to encode 
+    flags - controls certain features of the encoded output. Passing {@code DEFAULT} 
+       results in output that adheres to RFC 2045. 
+
+*android.util.Base64.encodeToString(byte[],int,int,int)*
+
+public static |java.lang.String| encodeToString(
+  byte[] input,
+  int offset,
+  int len,
+  int flags)
+
+Base64-encode the given data and return a newly allocated String with the 
+result. 
+
+
+    input - the data to encode 
+    offset - the position within the input array at which to start 
+    len - the number of bytes of input to encode 
+    flags - controls certain features of the encoded output. Passing {@code DEFAULT} 
+       results in output that adheres to RFC 2045. 
+
+

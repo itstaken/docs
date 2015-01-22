@@ -1,0 +1,114 @@
+*android.support.v7.media.MediaRouteProvider.RouteController* *MediaRouteProvider.RouteController* 
+
+public abstract static class MediaRouteProvider.RouteController
+  extends    |java.lang.Object|
+
+|android.support.v7.media.MediaRouteProvider.RouteController_Description|
+|android.support.v7.media.MediaRouteProvider.RouteController_Fields|
+|android.support.v7.media.MediaRouteProvider.RouteController_Constructors|
+|android.support.v7.media.MediaRouteProvider.RouteController_Methods|
+
+================================================================================
+
+*android.support.v7.media.MediaRouteProvider.RouteController_Constructors*
+|android.support.v7.media.MediaRouteProvider.RouteController()|
+
+*android.support.v7.media.MediaRouteProvider.RouteController_Methods*
+|android.support.v7.media.MediaRouteProvider.RouteController.onControlRequest(Intent,MediaRouter.ControlRequestCallback)|
+|android.support.v7.media.MediaRouteProvider.RouteController.onRelease()|Releas
+|android.support.v7.media.MediaRouteProvider.RouteController.onSelect()|Selects
+|android.support.v7.media.MediaRouteProvider.RouteController.onSetVolume(int)|R
+|android.support.v7.media.MediaRouteProvider.RouteController.onUnselect()|Unsel
+|android.support.v7.media.MediaRouteProvider.RouteController.onUpdateVolume(int)|
+
+*android.support.v7.media.MediaRouteProvider.RouteController_Description*
+
+Provides control over a particular route. 
+
+The media router obtains a route controller for a route whenever it needs to 
+control a route. When a route is selected, the media router invokes the 
+(|android.support.v7.media.MediaRouteProvider.RouteController|) method of its 
+route controller. While selected, the media router may call other methods of 
+the route controller to request that it perform certain actions to the route. 
+When a route is unselected, the media router invokes the 
+(|android.support.v7.media.MediaRouteProvider.RouteController|) method of its 
+route controller. When the media route no longer needs the route controller it 
+will invoke the (|android.support.v7.media.MediaRouteProvider.RouteController|) 
+method to allow the route controller to free its resources. 
+
+There may be multiple route controllers simultaneously active for the same 
+route. Each route controller will be released separately. 
+
+All operations on the route controller are asynchronous and results are 
+communicated via callbacks. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.RouteController()*
+
+public MediaRouteProvider.RouteController()
+
+
+
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onControlRequest(Intent,MediaRouter.ControlRequestCallback)*
+
+public boolean onControlRequest(
+  Intent intent,
+  android.support.v7.media.MediaRouter.ControlRequestCallback callback)
+
+Performs a media control(|android.support.v7.media.MediaControlIntent|) request 
+asynchronously on behalf of the route. 
+
+
+    intent - A {@link MediaControlIntent media control intent}. 
+    callback - A {@link ControlRequestCallback} to invoke with the result of the request, or 
+       null if no result is required. 
+
+    Returns: True if the controller intends to handle the request and will invoke the 
+             callback when finished. False if the controller will not handle 
+             the request and will not invoke the callback. 
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onRelease()*
+
+public void onRelease()
+
+Releases the route controller, allowing it to free its resources. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onSelect()*
+
+public void onSelect()
+
+Selects the route. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onSetVolume(int)*
+
+public void onSetVolume(int volume)
+
+Requests to set the volume of the route. 
+
+
+    volume - The new volume value between 0 and {@link MediaRouteDescriptor#getVolumeMax}. 
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onUnselect()*
+
+public void onUnselect()
+
+Unselects the route. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.RouteController.onUpdateVolume(int)*
+
+public void onUpdateVolume(int delta)
+
+Requests an incremental volume update for the route. 
+
+
+    delta - The delta to add to the current volume. 
+
+

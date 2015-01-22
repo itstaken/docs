@@ -1,0 +1,64 @@
+*android.graphics.NinePatch_Delegate* *NinePatch_Delegate* Delegate implementing
+
+public final class NinePatch_Delegate
+  extends    |java.lang.Object|
+
+|android.graphics.NinePatch_Delegate_Description|
+|android.graphics.NinePatch_Delegate_Fields|
+|android.graphics.NinePatch_Delegate_Constructors|
+|android.graphics.NinePatch_Delegate_Methods|
+
+================================================================================
+
+*android.graphics.NinePatch_Delegate_Constructors*
+|android.graphics.NinePatch_Delegate()|
+
+*android.graphics.NinePatch_Delegate_Methods*
+|android.graphics.NinePatch_Delegate.getChunk(byte[])|Returns aNinePatchChunkob
+|android.graphics.NinePatch_Delegate.serialize(NinePatchChunk)|Serializes the g
+
+*android.graphics.NinePatch_Delegate_Description*
+
+Delegate implementing the native methods of android.graphics.NinePatch 
+
+Through the layoutlib_create tool, the original native methods of NinePatch 
+have been replaced by calls to methods of the same name in this delegate class. 
+
+Because it's a stateless class to start with, there's no need to keep a 
+(|com.android.layoutlib.bridge.impl.DelegateManager|) around to map int to 
+instance of the delegate. 
+
+
+
+*android.graphics.NinePatch_Delegate()*
+
+public NinePatch_Delegate()
+
+
+
+
+*android.graphics.NinePatch_Delegate.getChunk(byte[])*
+
+public static NinePatchChunk getChunk(byte[] array)
+
+Returns a (|NinePatchChunk|) object for the given serialized representation. 
+
+If the chunk is present in the cache then the object from the cache is 
+returned, otherwise the array is deserialized into a (|NinePatchChunk|) object. 
+
+
+    array - the serialized representation of the chunk. 
+
+    Returns: the NinePatchChunk or null if deserialization failed. 
+
+*android.graphics.NinePatch_Delegate.serialize(NinePatchChunk)*
+
+public static byte[] serialize(NinePatchChunk chunk)
+
+Serializes the given chunk. 
+
+
+
+    Returns: the serialized data for the chunk. 
+
+

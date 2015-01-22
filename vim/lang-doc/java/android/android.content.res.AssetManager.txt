@@ -1,0 +1,370 @@
+*android.content.res.AssetManager* *AssetManager* Provides access to an applicat
+
+public final class AssetManager
+  extends    |java.lang.Object|
+
+|android.content.res.AssetManager_Description|
+|android.content.res.AssetManager_Fields|
+|android.content.res.AssetManager_Constructors|
+|android.content.res.AssetManager_Methods|
+
+================================================================================
+
+*android.content.res.AssetManager_Fields*
+|int_android.content.res.AssetManager.ACCESS_BUFFER|
+|int_android.content.res.AssetManager.ACCESS_RANDOM|
+|int_android.content.res.AssetManager.ACCESS_STREAMING|
+|int_android.content.res.AssetManager.ACCESS_UNKNOWN|
+
+*android.content.res.AssetManager_Constructors*
+|android.content.res.AssetManager()|Create a new AssetManager containing only t
+
+*android.content.res.AssetManager_Methods*
+|android.content.res.AssetManager.addAssetPath(String)|Add an additional set of
+|android.content.res.AssetManager.addAssetPaths(String[])|Add multiple sets of 
+|android.content.res.AssetManager.close()|Close this asset manager.
+|android.content.res.AssetManager.finalize()|
+|android.content.res.AssetManager.getAssetAllocations()|
+|android.content.res.AssetManager.getCookieName(int)|
+|android.content.res.AssetManager.getGlobalAssetCount()|
+|android.content.res.AssetManager.getGlobalAssetManagerCount()|
+|android.content.res.AssetManager.getLocales()|Get the locales that this asset 
+|android.content.res.AssetManager.getSystem()|Return a global shared asset mana
+|android.content.res.AssetManager.isUpToDate()|Determine whether the state in t
+|android.content.res.AssetManager.list(String)|Return a String array of all the
+|android.content.res.AssetManager.open(String)|Open an asset using ACCESS_STREA
+|android.content.res.AssetManager.open(String,int)|Open an asset using an expli
+|android.content.res.AssetManager.openFd(String)|
+|android.content.res.AssetManager.openNonAsset(int,String)|Open a non-asset in 
+|android.content.res.AssetManager.openNonAsset(int,String,int)|Open a non-asset
+|android.content.res.AssetManager.openNonAsset(String)|Open a non-asset file as
+|android.content.res.AssetManager.openNonAsset(String,int)|Open a non-asset fil
+|android.content.res.AssetManager.openNonAssetFd(int,String)|
+|android.content.res.AssetManager.openNonAssetFd(String)|
+|android.content.res.AssetManager.openXmlResourceParser(int,String)|Retrieve a 
+|android.content.res.AssetManager.openXmlResourceParser(String)|Retrieve a pars
+|android.content.res.AssetManager.setConfiguration(int,int,String,int,int,int,int,int,int,int,int,int,int,int,int,int,int)|
+|android.content.res.AssetManager.setLocale(String)|Change the locale being use
+
+*android.content.res.AssetManager_Description*
+
+Provides access to an application's raw asset files; see 
+(|android.content.res.Resources|) for the way most applications will want to 
+retrieve their resource data. This class presents a lower-level API that allows 
+you to open and read raw files that have been bundled with the application as a 
+simple stream of bytes. 
+
+
+
+*int_android.content.res.AssetManager.ACCESS_BUFFER*
+
+Mode for (|android.content.res.AssetManager|) : Attempt to load contents into 
+memory, for fast small reads. 
+
+
+*int_android.content.res.AssetManager.ACCESS_RANDOM*
+
+Mode for (|android.content.res.AssetManager|) : Read chunks, and seek forward 
+and backward. 
+
+
+*int_android.content.res.AssetManager.ACCESS_STREAMING*
+
+Mode for (|android.content.res.AssetManager|) : Read sequentially, with an 
+occasional forward seek. 
+
+
+*int_android.content.res.AssetManager.ACCESS_UNKNOWN*
+
+Mode for (|android.content.res.AssetManager|) : no specific information about 
+how data will be accessed. 
+
+
+
+*android.content.res.AssetManager()*
+
+public AssetManager()
+
+Create a new AssetManager containing only the basic system assets. Applications 
+will not generally use this method, instead retrieving the appropriate asset 
+manager with (|android.content.res.Resources|) . Not for use by applications. 
+
+
+*android.content.res.AssetManager.addAssetPath(String)*
+
+public final int addAssetPath(java.lang.String path)
+
+Add an additional set of assets to the asset manager. This can be either a 
+directory or ZIP file. Not for use by applications. Returns the cookie of the 
+added asset, or 0 on failure. 
+
+
+
+*android.content.res.AssetManager.addAssetPaths(String[])*
+
+public final int[] addAssetPaths(java.lang.String[] paths)
+
+Add multiple sets of assets to the asset manager at once. See 
+(|android.content.res.AssetManager|) for more information. Returns array of 
+cookies for each added asset with 0 indicating failure, or null if the input 
+array of paths is null. 
+
+
+
+*android.content.res.AssetManager.close()*
+
+public void close()
+
+Close this asset manager. 
+
+
+
+*android.content.res.AssetManager.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.content.res.AssetManager.getAssetAllocations()*
+
+public static final native |java.lang.String| getAssetAllocations()
+
+
+
+
+
+*android.content.res.AssetManager.getCookieName(int)*
+
+public final native |java.lang.String| getCookieName(int cookie)
+
+
+
+
+
+*android.content.res.AssetManager.getGlobalAssetCount()*
+
+public static final native int getGlobalAssetCount()
+
+
+
+
+
+*android.content.res.AssetManager.getGlobalAssetManagerCount()*
+
+public static final native int getGlobalAssetManagerCount()
+
+
+
+
+
+*android.content.res.AssetManager.getLocales()*
+
+public final native |java.lang.String|[] getLocales()
+
+Get the locales that this asset manager contains data for. 
+
+
+
+*android.content.res.AssetManager.getSystem()*
+
+public static |android.content.res.AssetManager| getSystem()
+
+Return a global shared asset manager that provides access to only system assets 
+(no application assets). 
+
+
+
+*android.content.res.AssetManager.isUpToDate()*
+
+public final native boolean isUpToDate()
+
+Determine whether the state in this asset manager is up-to-date with the files 
+on the filesystem. If false is returned, you need to instantiate a new 
+AssetManager class to see the new data. 
+
+
+
+*android.content.res.AssetManager.list(String)*
+
+public final native |java.lang.String|[] list(java.lang.String path)
+  throws |java.io.IOException|
+         
+Return a String array of all the assets at the given path. 
+
+
+    path - A relative path within the assets, i.e., "docs/home.html". 
+
+    Returns: String[] Array of strings, one for each asset. These file names are relative to 
+             'path'. You can open the file by concatenating 'path' and a name 
+             in the returned string (via File) and passing that to open(). 
+
+*android.content.res.AssetManager.open(String)*
+
+public final |java.io.InputStream| open(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Open an asset using ACCESS_STREAMING mode. This provides access to files that 
+have been bundled with an application as assets -- that is, files placed in to 
+the "assets" directory. 
+
+
+    fileName - The name of the asset to open. This name can be hierarchical. 
+
+*android.content.res.AssetManager.open(String,int)*
+
+public final |java.io.InputStream| open(
+  java.lang.String fileName,
+  int accessMode)
+  throws |java.io.IOException|
+         
+Open an asset using an explicit access mode, returning an InputStream to read 
+its contents. This provides access to files that have been bundled with an 
+application as assets -- that is, files placed in to the "assets" directory. 
+
+
+    fileName - The name of the asset to open. This name can be hierarchical. 
+    accessMode - Desired access mode for retrieving the data. 
+
+*android.content.res.AssetManager.openFd(String)*
+
+public final |android.content.res.AssetFileDescriptor| openFd(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.content.res.AssetManager.openNonAsset(int,String)*
+
+public final |java.io.InputStream| openNonAsset(
+  int cookie,
+  java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Open a non-asset in a specified package. Not for use by applications. 
+
+
+    cookie - Identifier of the package to be opened. 
+    fileName - Name of the asset to retrieve. 
+
+*android.content.res.AssetManager.openNonAsset(int,String,int)*
+
+public final |java.io.InputStream| openNonAsset(
+  int cookie,
+  java.lang.String fileName,
+  int accessMode)
+  throws |java.io.IOException|
+         
+Open a non-asset in a specified package. Not for use by applications. 
+
+
+    cookie - Identifier of the package to be opened. 
+    fileName - Name of the asset to retrieve. 
+    accessMode - Desired access mode for retrieving the data. 
+
+*android.content.res.AssetManager.openNonAsset(String)*
+
+public final |java.io.InputStream| openNonAsset(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Open a non-asset file as an asset using ACCESS_STREAMING mode. This provides 
+direct access to all of the files included in an application package (not only 
+its assets). Applications should not normally use this. 
+
+
+
+*android.content.res.AssetManager.openNonAsset(String,int)*
+
+public final |java.io.InputStream| openNonAsset(
+  java.lang.String fileName,
+  int accessMode)
+  throws |java.io.IOException|
+         
+Open a non-asset file as an asset using a specific access mode. This provides 
+direct access to all of the files included in an application package (not only 
+its assets). Applications should not normally use this. 
+
+
+
+*android.content.res.AssetManager.openNonAssetFd(int,String)*
+
+public final |android.content.res.AssetFileDescriptor| openNonAssetFd(
+  int cookie,
+  java.lang.String fileName)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.content.res.AssetManager.openNonAssetFd(String)*
+
+public final |android.content.res.AssetFileDescriptor| openNonAssetFd(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.content.res.AssetManager.openXmlResourceParser(int,String)*
+
+public final |android.content.res.XmlResourceParser| openXmlResourceParser(
+  int cookie,
+  java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Retrieve a parser for a compiled XML file. 
+
+
+    cookie - Identifier of the package to be opened. 
+    fileName - The name of the file to retrieve. 
+
+*android.content.res.AssetManager.openXmlResourceParser(String)*
+
+public final |android.content.res.XmlResourceParser| openXmlResourceParser(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Retrieve a parser for a compiled XML file. 
+
+
+    fileName - The name of the file to retrieve. 
+
+*android.content.res.AssetManager.setConfiguration(int,int,String,int,int,int,int,int,int,int,int,int,int,int,int,int,int)*
+
+public final native void setConfiguration(
+  int mcc,
+  int mnc,
+  java.lang.String locale,
+  int orientation,
+  int touchscreen,
+  int density,
+  int keyboard,
+  int keyboardHidden,
+  int navigation,
+  int screenWidth,
+  int screenHeight,
+  int smallestScreenWidthDp,
+  int screenWidthDp,
+  int screenHeightDp,
+  int screenLayout,
+  int uiMode,
+  int majorVersion)
+
+Change the configuation used when retrieving resources. Not for use by 
+applications. 
+
+
+
+*android.content.res.AssetManager.setLocale(String)*
+
+public final native void setLocale(java.lang.String locale)
+
+Change the locale being used by this asset manager. Not for use by 
+applications. 
+
+
+
+

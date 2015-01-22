@@ -1,0 +1,257 @@
+*android.os.CommonClock* *CommonClock* Used for accessing the android common tim
+
+public class CommonClock
+  extends    |java.lang.Object|
+
+|android.os.CommonClock_Description|
+|android.os.CommonClock_Fields|
+|android.os.CommonClock_Constructors|
+|android.os.CommonClock_Methods|
+
+================================================================================
+
+*android.os.CommonClock_Fields*
+|int_android.os.CommonClock.ERROR_ESTIMATE_UNKNOWN|
+|long_android.os.CommonClock.INVALID_TIMELINE_ID|
+|java.lang.String_android.os.CommonClock.SERVICE_NAME|
+|int_android.os.CommonClock.STATE_CLIENT|
+|int_android.os.CommonClock.STATE_INITIAL|
+|int_android.os.CommonClock.STATE_INVALID|
+|int_android.os.CommonClock.STATE_MASTER|
+|int_android.os.CommonClock.STATE_RONIN|
+|int_android.os.CommonClock.STATE_WAIT_FOR_ELECTION|
+|long_android.os.CommonClock.TIME_NOT_SYNCED|
+
+*android.os.CommonClock_Constructors*
+|android.os.CommonClock()|Class constructor.
+
+*android.os.CommonClock_Methods*
+|android.os.CommonClock.create()|Handy class factory method.
+|android.os.CommonClock.finalize()|
+|android.os.CommonClock.getEstimatedError()|Gets the current estimation of comm
+|android.os.CommonClock.getMasterAddr()|Gets the IP address and UDP port of the
+|android.os.CommonClock.getState()|Gets the current state of this clock's commo
+|android.os.CommonClock.getTime()|Gets the common clock's current time.
+|android.os.CommonClock.getTimelineId()|Gets the ID of the timeline the common 
+|android.os.CommonClock.release()|Release all native resources held by thisandr
+|android.os.CommonClock.setServerDiedListener(CommonClock.OnServerDiedListener)|
+|android.os.CommonClock.setTimelineChangedListener(CommonClock.OnTimelineChangedListener)|
+
+*android.os.CommonClock_Description*
+
+Used for accessing the android common time service's common clock and receiving 
+notifications about common time synchronization status changes. 
+
+
+
+*int_android.os.CommonClock.ERROR_ESTIMATE_UNKNOWN*
+
+Sentinel value returned by (|android.os.CommonClock|) when the common time 
+service is not currently synced to any timeline. 
+
+
+*long_android.os.CommonClock.INVALID_TIMELINE_ID*
+
+Sentinel value returned by (|android.os.CommonClock|) when the common time 
+service is not currently synced to any timeline. 
+
+
+*java.lang.String_android.os.CommonClock.SERVICE_NAME*
+
+Name of the underlying native binder service 
+
+
+*int_android.os.CommonClock.STATE_CLIENT*
+
+Value used by (|android.os.CommonClock|) to indicate that the common time 
+service is in its client state and is synchronizing its time to a different 
+timeline master on the network. 
+
+
+*int_android.os.CommonClock.STATE_INITIAL*
+
+Value used by (|android.os.CommonClock|) to indicate that the common time 
+service is in its initial state and attempting to find the current timeline 
+master, if any. The service will transition to either 
+(|android.os.CommonClock|) if it finds an active master, or to 
+(|android.os.CommonClock|) if no active master is found and this client becomes 
+the master of a new timeline. 
+
+
+*int_android.os.CommonClock.STATE_INVALID*
+
+Value used by (|android.os.CommonClock|) to indicate that there was an internal 
+error while attempting to determine the state of the common time service. 
+
+
+*int_android.os.CommonClock.STATE_MASTER*
+
+Value used by (|android.os.CommonClock|) to indicate that the common time 
+service is in its master state and is serving as the timeline master for other 
+common time service clients on the network. 
+
+
+*int_android.os.CommonClock.STATE_RONIN*
+
+Value used by (|android.os.CommonClock|) to indicate that the common time 
+service is in its Ronin state. Common time service instances in the client 
+state enter the Ronin state after their timeline master becomes unreachable on 
+the network. Common time services who enter the Ronin state will begin a new 
+master election for the timeline they were recently clients of. As clients 
+detect they are not the winner and drop out of the election, they will 
+transition to the (|android.os.CommonClock|) state. When there is only one 
+client remaining in the election, it will assume ownership of the timeline and 
+transition to the (|android.os.CommonClock|) state. During the election, all 
+clients will allow their timeline to drift without applying correction. 
+
+
+*int_android.os.CommonClock.STATE_WAIT_FOR_ELECTION*
+
+Value used by (|android.os.CommonClock|) to indicate that the common time 
+service is waiting for a master election to conclude and for the new master to 
+announce itself before transitioning to the (|android.os.CommonClock|) state. 
+If no new master announces itself within the timeout threshold, the time 
+service will transition back to the (|android.os.CommonClock|) state in order 
+to restart the election. 
+
+
+*long_android.os.CommonClock.TIME_NOT_SYNCED*
+
+Sentinel value returned by (|android.os.CommonClock|) and 
+(|android.os.CommonClock|) when the common time service is not able to 
+determine the current common time due to a lack of synchronization. 
+
+
+
+*android.os.CommonClock()*
+
+public CommonClock()
+  throws |android.os.RemoteException|
+         
+Class constructor. 
+
+
+*android.os.CommonClock.create()*
+
+public static |android.os.CommonClock| create()
+
+Handy class factory method. 
+
+
+
+*android.os.CommonClock.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.CommonClock.getEstimatedError()*
+
+public int getEstimatedError()
+  throws |android.os.RemoteException|
+         
+Gets the current estimation of common clock's synchronization accuracy from the 
+common time service. 
+
+
+
+    Returns: a signed 32-bit value representing the common time service's estimation of 
+             synchronization accuracy in microseconds, or the special value 
+             {@link #ERROR_ESTIMATE_UNKNOWN} if the common time service is 
+             currently not synchronized. Negative values indicate that the 
+             local server estimates that the nominal common time is behind the 
+             local server's time (in other words, the local clock is running 
+             fast) Positive values indicate that the local server estimates 
+             that the nominal common time is ahead of the local server's time 
+             (in other words, the local clock is running slow) 
+
+*android.os.CommonClock.getMasterAddr()*
+
+public |java.net.InetSocketAddress| getMasterAddr()
+  throws |android.os.RemoteException|
+         
+Gets the IP address and UDP port of the current timeline master. 
+
+
+
+    Returns: an InetSocketAddress containing the IP address and UDP port of the current 
+             timeline master, or null if there is no current master. 
+
+*android.os.CommonClock.getState()*
+
+public int getState()
+  throws |android.os.RemoteException|
+         
+Gets the current state of this clock's common time service in the the master 
+election algorithm. 
+
+
+
+    Returns: a integer indicating the current state of the this clock's common time service 
+             in the master election algorithm or {@link #STATE_INVALID} if 
+             there is an internal error. 
+
+*android.os.CommonClock.getTime()*
+
+public long getTime()
+  throws |android.os.RemoteException|
+         
+Gets the common clock's current time. 
+
+
+
+    Returns: a signed 64-bit value representing the current common time in microseconds, or 
+             the special value {@link #TIME_NOT_SYNCED} if the common time 
+             service is currently not synchronized. 
+
+*android.os.CommonClock.getTimelineId()*
+
+public long getTimelineId()
+  throws |android.os.RemoteException|
+         
+Gets the ID of the timeline the common time service is currently synchronizing 
+its clock to. 
+
+
+
+    Returns: a long representing the unique ID of the timeline the common time service is 
+             currently synchronizing with, or {@link #INVALID_TIMELINE_ID} if 
+             the common time service is currently not synchronized. 
+
+*android.os.CommonClock.release()*
+
+public void release()
+
+Release all native resources held by this (|android.os.CommonClock|) instance. 
+Once resources have been released, the (|android.os.CommonClock|) instance is 
+disconnected from the native service and will throw a 
+(|android.os.RemoteException|) if any of its methods are called. Clients should 
+always call release on their client instances before releasing their last Java 
+reference to the instance. Failure to do this will cause non-deterministic 
+native resource reclamation and may cause the common time service to remain 
+active on the network for longer than it should. 
+
+
+
+*android.os.CommonClock.setServerDiedListener(CommonClock.OnServerDiedListener)*
+
+public void setServerDiedListener(android.os.CommonClock.OnServerDiedListener listener)
+
+Registers an OnServerDiedListener interface. Call this method with a null 
+listener to stop receiving server death notifications. 
+
+
+
+*android.os.CommonClock.setTimelineChangedListener(CommonClock.OnTimelineChangedListener)*
+
+public void setTimelineChangedListener(android.os.CommonClock.OnTimelineChangedListener listener)
+
+Registers an OnTimelineChangedListener interface. Call this method with a null 
+listener to stop receiving server death notifications. 
+
+
+
+

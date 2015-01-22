@@ -1,0 +1,180 @@
+*android.widget.ZoomButtonsController* *ZoomButtonsController* TheZoomButtonsCon
+
+public class ZoomButtonsController
+  extends    |java.lang.Object|
+  implements |android.view.View.OnTouchListener|
+
+|android.widget.ZoomButtonsController_Description|
+|android.widget.ZoomButtonsController_Fields|
+|android.widget.ZoomButtonsController_Constructors|
+|android.widget.ZoomButtonsController_Methods|
+
+================================================================================
+
+*android.widget.ZoomButtonsController_Constructors*
+|android.widget.ZoomButtonsController(View)|Constructor for theZoomButtonsContr
+
+*android.widget.ZoomButtonsController_Methods*
+|android.widget.ZoomButtonsController.getContainer()|Gets the container that is
+|android.widget.ZoomButtonsController.getZoomControls()|Gets the view for the z
+|android.widget.ZoomButtonsController.isAutoDismissed()|Whether the zoom contro
+|android.widget.ZoomButtonsController.isVisible()|Whether the zoom controls are
+|android.widget.ZoomButtonsController.onTouch(View,MotionEvent)|
+|android.widget.ZoomButtonsController.setAutoDismissed(boolean)|Sets whether th
+|android.widget.ZoomButtonsController.setFocusable(boolean)|Sets whether the zo
+|android.widget.ZoomButtonsController.setOnZoomListener(ZoomButtonsController.OnZoomListener)|
+|android.widget.ZoomButtonsController.setVisible(boolean)|Sets whether the zoom
+|android.widget.ZoomButtonsController.setZoomInEnabled(boolean)|Whether to enab
+|android.widget.ZoomButtonsController.setZoomOutEnabled(boolean)|Whether to ena
+|android.widget.ZoomButtonsController.setZoomSpeed(long)|Sets the delay between
+
+*android.widget.ZoomButtonsController_Description*
+
+The (|android.widget.ZoomButtonsController|) handles showing and hiding the 
+zoom controls and positioning it relative to an owner view. It also gives the 
+client access to the zoom controls container, allowing for additional accessory 
+buttons to be shown in the zoom controls window. 
+
+Typically, clients should call 
+setVisible(true)(|android.widget.ZoomButtonsController|) on a touch down or 
+move (no need to call setVisible(false)(|android.widget.ZoomButtonsController|) 
+since it will time out on its own). Also, whenever the owner cannot be zoomed 
+further, the client should update (|android.widget.ZoomButtonsController|) and 
+(|android.widget.ZoomButtonsController|) . 
+
+If you are using this with a custom View, please call 
+setVisible(false)(|android.widget.ZoomButtonsController|) from 
+(|android.view.View|) and from (|android.view.View|) when visibility != 
+View.VISIBLE. 
+
+
+
+*android.widget.ZoomButtonsController(View)*
+
+public ZoomButtonsController(android.view.View ownerView)
+
+Constructor for the (|android.widget.ZoomButtonsController|) . 
+
+    ownerView - The view that is being zoomed by the zoom controls. The zoom controls will be 
+       displayed aligned with this view. 
+
+*android.widget.ZoomButtonsController.getContainer()*
+
+public |android.view.ViewGroup| getContainer()
+
+Gets the container that is the parent of the zoom controls. 
+
+The client can add other views to this container to link them with the zoom 
+controls. 
+
+
+
+    Returns: The container of the zoom controls. It will be a layout that respects the 
+             gravity of a child's layout parameters. 
+
+*android.widget.ZoomButtonsController.getZoomControls()*
+
+public |android.view.View| getZoomControls()
+
+Gets the view for the zoom controls. 
+
+
+
+    Returns: The zoom controls view. 
+
+*android.widget.ZoomButtonsController.isAutoDismissed()*
+
+public boolean isAutoDismissed()
+
+Whether the zoom controls will be automatically dismissed after showing. 
+
+
+
+    Returns: Whether the zoom controls will be auto dismissed after showing. 
+
+*android.widget.ZoomButtonsController.isVisible()*
+
+public boolean isVisible()
+
+Whether the zoom controls are visible to the user. 
+
+
+
+    Returns: Whether the zoom controls are visible to the user. 
+
+*android.widget.ZoomButtonsController.onTouch(View,MotionEvent)*
+
+public boolean onTouch(
+  android.view.View v,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.widget.ZoomButtonsController.setAutoDismissed(boolean)*
+
+public void setAutoDismissed(boolean autoDismiss)
+
+Sets whether the zoom controls will be automatically dismissed after showing. 
+
+
+
+*android.widget.ZoomButtonsController.setFocusable(boolean)*
+
+public void setFocusable(boolean focusable)
+
+Sets whether the zoom controls should be focusable. If the controls are 
+focusable, then trackball and arrow key interactions are possible. Otherwise, 
+only touch interactions are possible. 
+
+
+    focusable - Whether the zoom controls should be focusable. 
+
+*android.widget.ZoomButtonsController.setOnZoomListener(ZoomButtonsController.OnZoomListener)*
+
+public void setOnZoomListener(android.widget.ZoomButtonsController.OnZoomListener listener)
+
+Sets the (|android.widget.ZoomButtonsController.OnZoomListener|) listener that 
+receives callbacks to zoom. 
+
+
+    listener - The listener that will be told to zoom. 
+
+*android.widget.ZoomButtonsController.setVisible(boolean)*
+
+public void setVisible(boolean visible)
+
+Sets whether the zoom controls should be visible to the user. 
+
+
+    visible - Whether the zoom controls should be visible to the user. 
+
+*android.widget.ZoomButtonsController.setZoomInEnabled(boolean)*
+
+public void setZoomInEnabled(boolean enabled)
+
+Whether to enable the zoom in control. 
+
+
+    enabled - Whether to enable the zoom in control. 
+
+*android.widget.ZoomButtonsController.setZoomOutEnabled(boolean)*
+
+public void setZoomOutEnabled(boolean enabled)
+
+Whether to enable the zoom out control. 
+
+
+    enabled - Whether to enable the zoom out control. 
+
+*android.widget.ZoomButtonsController.setZoomSpeed(long)*
+
+public void setZoomSpeed(long speed)
+
+Sets the delay between zoom callbacks as the user holds a zoom button. 
+
+
+    speed - The delay in milliseconds between zoom callbacks. 
+
+

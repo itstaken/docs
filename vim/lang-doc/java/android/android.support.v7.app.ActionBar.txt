@@ -1,0 +1,794 @@
+*android.support.v7.app.ActionBar* *ActionBar* A window feature at the top of th
+
+public abstract class ActionBar
+  extends    |java.lang.Object|
+
+|android.support.v7.app.ActionBar_Description|
+|android.support.v7.app.ActionBar_Fields|
+|android.support.v7.app.ActionBar_Constructors|
+|android.support.v7.app.ActionBar_Methods|
+
+================================================================================
+
+*android.support.v7.app.ActionBar_Fields*
+|int_android.support.v7.app.ActionBar.DISPLAY_HOME_AS_UP|
+|int_android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM|
+|int_android.support.v7.app.ActionBar.DISPLAY_SHOW_HOME|
+|int_android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE|
+|int_android.support.v7.app.ActionBar.DISPLAY_USE_LOGO|
+|int_android.support.v7.app.ActionBar.NAVIGATION_MODE_LIST|
+|int_android.support.v7.app.ActionBar.NAVIGATION_MODE_STANDARD|
+|int_android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS|
+
+*android.support.v7.app.ActionBar_Constructors*
+|android.support.v7.app.ActionBar()|
+
+*android.support.v7.app.ActionBar_Methods*
+|android.support.v7.app.ActionBar.addOnMenuVisibilityListener(ActionBar.OnMenuVisibilityListener)|
+|android.support.v7.app.ActionBar.addTab(ActionBar.Tab)|Add a tab for use in ta
+|android.support.v7.app.ActionBar.addTab(ActionBar.Tab,boolean)|Add a tab for u
+|android.support.v7.app.ActionBar.addTab(ActionBar.Tab,int)|Add a tab for use i
+|android.support.v7.app.ActionBar.addTab(ActionBar.Tab,int,boolean)|Add a tab f
+|android.support.v7.app.ActionBar.getCustomView()|
+|android.support.v7.app.ActionBar.getDisplayOptions()|
+|android.support.v7.app.ActionBar.getHeight()|Retrieve the current height of th
+|android.support.v7.app.ActionBar.getNavigationItemCount()|Get the number of na
+|android.support.v7.app.ActionBar.getNavigationMode()|Returns the current navig
+|android.support.v7.app.ActionBar.getSelectedNavigationIndex()|Get the position
+|android.support.v7.app.ActionBar.getSelectedTab()|Returns the currently select
+|android.support.v7.app.ActionBar.getSubtitle()|Returns the current ActionBar s
+|android.support.v7.app.ActionBar.getTabAt(int)|Returns the tab at the specifie
+|android.support.v7.app.ActionBar.getTabCount()|Returns the number of tabs curr
+|android.support.v7.app.ActionBar.getThemedContext()|Returns aContextwith an ap
+|android.support.v7.app.ActionBar.getTitle()|Returns the current ActionBar titl
+|android.support.v7.app.ActionBar.hide()|Hide the ActionBar if it is currently 
+|android.support.v7.app.ActionBar.isShowing()|
+|android.support.v7.app.ActionBar.newTab()|Create and return a newTab.
+|android.support.v7.app.ActionBar.removeAllTabs()|Remove all tabs from the acti
+|android.support.v7.app.ActionBar.removeOnMenuVisibilityListener(ActionBar.OnMenuVisibilityListener)|
+|android.support.v7.app.ActionBar.removeTab(ActionBar.Tab)|Remove a tab from th
+|android.support.v7.app.ActionBar.removeTabAt(int)|Remove a tab from the action
+|android.support.v7.app.ActionBar.selectTab(ActionBar.Tab)|Select the specified
+|android.support.v7.app.ActionBar.setBackgroundDrawable(Drawable)|Set the Actio
+|android.support.v7.app.ActionBar.setCustomView(View)|Set the action bar into c
+|android.support.v7.app.ActionBar.setCustomView(View,ActionBar.LayoutParams)|Se
+|android.support.v7.app.ActionBar.setDisplayHomeAsUpEnabled(boolean)|Set whethe
+|android.support.v7.app.ActionBar.setDisplayOptions(int)|Set display options.
+|android.support.v7.app.ActionBar.setDisplayOptions(int,int)|Set selected displ
+|android.support.v7.app.ActionBar.setDisplayShowCustomEnabled(boolean)|Set whet
+|android.support.v7.app.ActionBar.setDisplayShowHomeEnabled(boolean)|Set whethe
+|android.support.v7.app.ActionBar.setDisplayShowTitleEnabled(boolean)|Set wheth
+|android.support.v7.app.ActionBar.setDisplayUseLogoEnabled(boolean)|Set whether
+|android.support.v7.app.ActionBar.setHomeButtonEnabled(boolean)|Enable or disab
+|android.support.v7.app.ActionBar.setIcon(Drawable)|Set the icon to display in 
+|android.support.v7.app.ActionBar.setIcon(int)|Set the icon to display in the '
+|android.support.v7.app.ActionBar.setListNavigationCallbacks(SpinnerAdapter,ActionBar.OnNavigationListener)|
+|android.support.v7.app.ActionBar.setLogo(Drawable)|Set the logo to display in 
+|android.support.v7.app.ActionBar.setLogo(int)|Set the logo to display in the '
+|android.support.v7.app.ActionBar.setNavigationMode(int)|Set the current naviga
+|android.support.v7.app.ActionBar.setSelectedNavigationItem(int)|Set the select
+|android.support.v7.app.ActionBar.setSplitBackgroundDrawable(Drawable)|Set the 
+|android.support.v7.app.ActionBar.setStackedBackgroundDrawable(Drawable)|Set th
+|android.support.v7.app.ActionBar.setSubtitle(CharSequence)|Set the action bar'
+|android.support.v7.app.ActionBar.setSubtitle(int)|Set the action bar's subtitl
+|android.support.v7.app.ActionBar.setTitle(CharSequence)|Set the action bar's t
+|android.support.v7.app.ActionBar.setTitle(int)|Set the action bar's title.
+|android.support.v7.app.ActionBar.show()|Show the ActionBar if it is not curren
+
+*android.support.v7.app.ActionBar_Description*
+
+A window feature at the top of the activity that may display the activity 
+title, navigation modes, and other interactive items. 
+
+Note: This class is included in the <a 
+href="tools/extras/support-library.html">support library for compatibility with 
+API level 7 and higher. If you're developing your app for API level 11 and 
+higher only, you should instead use the framework (|android.app.ActionBar|) 
+class. 
+
+When using the support library, you can add the action bar to the top of your 
+activity window by extending the (|android.support.v7.app.ActionBarActivity|) 
+class and setting the activity theme to 
+Theme.AppCompat(|android.support.v7.appcompat.R.style|) or a similar theme. 
+
+By default, the action bar shows the application icon on the left, followed by 
+the activity title. If your activity has an options menu, you can make select 
+items accessible directly from the action bar as "action items". You can also 
+modify various characteristics of the action bar or remove it completely. 
+
+From your activity, you can retrieve an instance of 
+(|android.support.v7.app.ActionBar|) by calling 
+(|android.support.v7.app.ActionBarActivity|) . 
+
+In some cases, the action bar may be overlayed by another bar that enables 
+contextual actions, using an (|android.support.v7.view.ActionMode|) . For 
+example, when the user selects one or more items in your activity, you can 
+enable an action mode that offers actions specific to the selected items, with 
+a UI that temporarily replaces the action bar. Although the UI may occupy the 
+same space, the (|android.support.v7.view.ActionMode|) APIs are distinct and 
+independent from those for (|android.support.v7.app.ActionBar|) . 
+
+Developer Guides 
+
+For information about how to use the action bar, including how to add action 
+items, navigation modes and more, read the <a 
+href="guide/topics/ui/actionbar.html">Action Bar API guide. 
+
+
+
+*int_android.support.v7.app.ActionBar.DISPLAY_HOME_AS_UP*
+
+Display the 'home' element such that it appears as an 'up' affordance. e.g. 
+show an arrow to the left indicating the action that will be taken. 
+
+Set this flag if selecting the 'home' button in the action bar to return up by 
+a single level in your UI rather than back to the top level or front page. 
+
+Setting this option will implicitly enable interaction with the home/up button. 
+See (|android.support.v7.app.ActionBar|) . 
+
+
+*int_android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM*
+
+Show the custom view if one has been set. 
+
+
+*int_android.support.v7.app.ActionBar.DISPLAY_SHOW_HOME*
+
+Show 'home' elements in this action bar, leaving more space for other 
+navigation elements. This includes logo and icon. 
+
+
+*int_android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE*
+
+Show the activity title and subtitle, if present. 
+
+
+*int_android.support.v7.app.ActionBar.DISPLAY_USE_LOGO*
+
+Use logo instead of icon if available. This flag will cause appropriate 
+navigation modes to use a wider logo in place of the standard icon. 
+
+
+*int_android.support.v7.app.ActionBar.NAVIGATION_MODE_LIST*
+
+List navigation mode. Instead of static title text this mode presents a list 
+menu for navigation within the activity. e.g. this might be presented to the 
+user as a dropdown list. 
+
+
+*int_android.support.v7.app.ActionBar.NAVIGATION_MODE_STANDARD*
+
+Standard navigation mode. Consists of either a logo or icon and title text with 
+an optional subtitle. Clicking any of these elements will dispatch 
+onOptionsItemSelected to the host Activity with a MenuItem with item ID 
+android.R.id.home. 
+
+
+*int_android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS*
+
+Tab navigation mode. Instead of static title text this mode presents a series 
+of tabs for navigation within the activity. 
+
+
+
+*android.support.v7.app.ActionBar()*
+
+public ActionBar()
+
+
+
+
+*android.support.v7.app.ActionBar.addOnMenuVisibilityListener(ActionBar.OnMenuVisibilityListener)*
+
+public abstract void addOnMenuVisibilityListener(android.support.v7.app.ActionBar.OnMenuVisibilityListener listener)
+
+Add a listener that will respond to menu visibility change events. 
+
+
+    listener - The new listener to add 
+
+*android.support.v7.app.ActionBar.addTab(ActionBar.Tab)*
+
+public abstract void addTab(android.support.v7.app.ActionBar.Tab tab)
+
+Add a tab for use in tabbed navigation mode. The tab will be added at the end 
+of the list. If this is the first tab to be added it will become the selected 
+tab. 
+
+
+    tab - Tab to add 
+
+*android.support.v7.app.ActionBar.addTab(ActionBar.Tab,boolean)*
+
+public abstract void addTab(
+  android.support.v7.app.ActionBar.Tab tab,
+  boolean setSelected)
+
+Add a tab for use in tabbed navigation mode. The tab will be added at the end 
+of the list. 
+
+
+    tab - Tab to add 
+    setSelected - True if the added tab should become the selected tab. 
+
+*android.support.v7.app.ActionBar.addTab(ActionBar.Tab,int)*
+
+public abstract void addTab(
+  android.support.v7.app.ActionBar.Tab tab,
+  int position)
+
+Add a tab for use in tabbed navigation mode. The tab will be inserted at 
+position. If this is the first tab to be added it will become the selected tab. 
+
+
+    tab - The tab to add 
+    position - The new position of the tab 
+
+*android.support.v7.app.ActionBar.addTab(ActionBar.Tab,int,boolean)*
+
+public abstract void addTab(
+  android.support.v7.app.ActionBar.Tab tab,
+  int position,
+  boolean setSelected)
+
+Add a tab for use in tabbed navigation mode. The tab will be insterted at 
+position. 
+
+
+    tab - The tab to add 
+    position - The new position of the tab 
+    setSelected - True if the added tab should become the selected tab. 
+
+*android.support.v7.app.ActionBar.getCustomView()*
+
+public abstract View getCustomView()
+
+
+
+
+
+    Returns: The current custom view. 
+
+*android.support.v7.app.ActionBar.getDisplayOptions()*
+
+public abstract int getDisplayOptions()
+
+
+
+
+
+    Returns: The current set of display options. 
+
+*android.support.v7.app.ActionBar.getHeight()*
+
+public abstract int getHeight()
+
+Retrieve the current height of the ActionBar. 
+
+
+
+    Returns: The ActionBar's height 
+
+*android.support.v7.app.ActionBar.getNavigationItemCount()*
+
+public abstract int getNavigationItemCount()
+
+Get the number of navigation items present in the current navigation mode. 
+
+
+
+    Returns: Number of navigation items. 
+
+*android.support.v7.app.ActionBar.getNavigationMode()*
+
+public abstract int getNavigationMode()
+
+Returns the current navigation mode. The result will be one of: 
+
+(|android.support.v7.app.ActionBar|) 
+
+(|android.support.v7.app.ActionBar|) 
+
+(|android.support.v7.app.ActionBar|) 
+
+
+
+    Returns: The current navigation mode. 
+
+*android.support.v7.app.ActionBar.getSelectedNavigationIndex()*
+
+public abstract int getSelectedNavigationIndex()
+
+Get the position of the selected navigation item in list or tabbed navigation 
+modes. 
+
+
+
+    Returns: Position of the selected item. 
+
+*android.support.v7.app.ActionBar.getSelectedTab()*
+
+public abstract |android.support.v7.app.ActionBar.Tab| getSelectedTab()
+
+Returns the currently selected tab if in tabbed navigation mode and there is at 
+least one tab present. 
+
+
+
+    Returns: The currently selected tab or null 
+
+*android.support.v7.app.ActionBar.getSubtitle()*
+
+public abstract |java.lang.CharSequence| getSubtitle()
+
+Returns the current ActionBar subtitle in standard mode. Returns null if 
+(|android.support.v7.app.ActionBar|) would not return 
+(|android.support.v7.app.ActionBar|) . 
+
+
+
+    Returns: The current ActionBar subtitle or null. 
+
+*android.support.v7.app.ActionBar.getTabAt(int)*
+
+public abstract |android.support.v7.app.ActionBar.Tab| getTabAt(int index)
+
+Returns the tab at the specified index. 
+
+
+    index - Index value in the range 0-get 
+
+*android.support.v7.app.ActionBar.getTabCount()*
+
+public abstract int getTabCount()
+
+Returns the number of tabs currently registered with the action bar. 
+
+
+
+    Returns: 
+
+*android.support.v7.app.ActionBar.getThemedContext()*
+
+public Context getThemedContext()
+
+Returns a (|Context|) with an appropriate theme for creating views that will 
+appear in the action bar. If you are inflating or instantiating custom views 
+that will appear in an action bar, you should use the Context returned by this 
+method. (This includes adapters used for list navigation mode.) This will 
+ensure that views contrast properly against the action bar. 
+
+
+
+    Returns: A themed Context for creating views 
+
+*android.support.v7.app.ActionBar.getTitle()*
+
+public abstract |java.lang.CharSequence| getTitle()
+
+Returns the current ActionBar title in standard mode. Returns null if 
+(|android.support.v7.app.ActionBar|) would not return 
+(|android.support.v7.app.ActionBar|) . 
+
+
+
+    Returns: The current ActionBar title or null. 
+
+*android.support.v7.app.ActionBar.hide()*
+
+public abstract void hide()
+
+Hide the ActionBar if it is currently showing. If the window hosting the 
+ActionBar does not have the feature (|Window|) it will resize application 
+content to fit the new space available. 
+
+Instead of calling this function directly, you can also cause an ActionBar 
+using the overlay feature to hide through 
+View.SYSTEM_UI_FLAG_FULLSCREEN(|View|) . Hiding the ActionBar through this 
+system UI flag allows you to more seamlessly hide it in conjunction with other 
+screen decorations. 
+
+
+
+*android.support.v7.app.ActionBar.isShowing()*
+
+public abstract boolean isShowing()
+
+
+
+
+
+    Returns: true if the ActionBar is showing, false otherwise. 
+
+*android.support.v7.app.ActionBar.newTab()*
+
+public abstract |android.support.v7.app.ActionBar.Tab| newTab()
+
+Create and return a new (|android.support.v7.app.ActionBar.Tab|) . This tab 
+will not be included in the action bar until it is added. 
+
+Very often tabs will be used to switch between (|Fragment|) objects. Here is a 
+typical implementation of such 
+tabs:development/samples/ApiDemos/src/com/example/android/apis/app/FragmentTabs.java
+complete 
+
+
+
+    Returns: 
+
+*android.support.v7.app.ActionBar.removeAllTabs()*
+
+public abstract void removeAllTabs()
+
+Remove all tabs from the action bar and deselect the current tab. 
+
+
+
+*android.support.v7.app.ActionBar.removeOnMenuVisibilityListener(ActionBar.OnMenuVisibilityListener)*
+
+public abstract void removeOnMenuVisibilityListener(android.support.v7.app.ActionBar.OnMenuVisibilityListener listener)
+
+Remove a menu visibility listener. This listener will no longer receive menu 
+visibility change events. 
+
+
+    listener - A listener to remove that was previously added 
+
+*android.support.v7.app.ActionBar.removeTab(ActionBar.Tab)*
+
+public abstract void removeTab(android.support.v7.app.ActionBar.Tab tab)
+
+Remove a tab from the action bar. If the removed tab was selected it will be 
+deselected and another tab will be selected if present. 
+
+
+    tab - The tab to remove 
+
+*android.support.v7.app.ActionBar.removeTabAt(int)*
+
+public abstract void removeTabAt(int position)
+
+Remove a tab from the action bar. If the removed tab was selected it will be 
+deselected and another tab will be selected if present. 
+
+
+    position - Position of the tab to remove 
+
+*android.support.v7.app.ActionBar.selectTab(ActionBar.Tab)*
+
+public abstract void selectTab(android.support.v7.app.ActionBar.Tab tab)
+
+Select the specified tab. If it is not a child of this action bar it will be 
+added. 
+
+Note: If you want to select by index, use (|android.support.v7.app.ActionBar|) 
+. 
+
+
+    tab - Tab to select 
+
+*android.support.v7.app.ActionBar.setBackgroundDrawable(Drawable)*
+
+public abstract void setBackgroundDrawable(Drawable d)
+
+Set the ActionBar's background. This will be used for the primary action bar. 
+
+
+    d - Background drawable 
+
+*android.support.v7.app.ActionBar.setCustomView(View)*
+
+public abstract void setCustomView(View view)
+
+Set the action bar into custom navigation mode, supplying a view for custom 
+navigation. 
+
+Custom navigation views appear between the application icon and any action 
+buttons and may use any space available there. Common use cases for custom 
+navigation views might include an auto-suggesting address bar for a browser or 
+other navigation mechanisms that do not translate well to provided navigation 
+modes. 
+
+
+    view - Custom navigation view to place in the ActionBar. 
+
+*android.support.v7.app.ActionBar.setCustomView(View,ActionBar.LayoutParams)*
+
+public abstract void setCustomView(
+  View view,
+  android.support.v7.app.ActionBar.LayoutParams layoutParams)
+
+Set the action bar into custom navigation mode, supplying a view for custom 
+navigation. 
+
+Custom navigation views appear between the application icon and any action 
+buttons and may use any space available there. Common use cases for custom 
+navigation views might include an auto-suggesting address bar for a browser or 
+other navigation mechanisms that do not translate well to provided navigation 
+modes. 
+
+The display option (|android.support.v7.app.ActionBar|) must be set for the 
+custom view to be displayed. 
+
+
+    view - Custom navigation view to place in the ActionBar. 
+    layoutParams - How this custom view should layout in the bar. 
+
+*android.support.v7.app.ActionBar.setDisplayHomeAsUpEnabled(boolean)*
+
+public abstract void setDisplayHomeAsUpEnabled(boolean showHomeAsUp)
+
+Set whether home should be displayed as an "up" affordance. Set this to true if 
+selecting "home" returns up by a single level in your UI rather than back to 
+the top level or front page. 
+
+To set several display options at once, see the setDisplayOptions methods. 
+
+
+    showHomeAsUp - true to show the user that selecting home will return one level up rather than 
+       to the top level of the app. 
+
+*android.support.v7.app.ActionBar.setDisplayOptions(int)*
+
+public abstract void setDisplayOptions(int options)
+
+Set display options. This changes all display option bits at once. To change a 
+limited subset of display options, see (|android.support.v7.app.ActionBar|) . 
+
+
+    options - A combination of the bits defined by the DISPLAY_ constants defined in 
+       ActionBar. 
+
+*android.support.v7.app.ActionBar.setDisplayOptions(int,int)*
+
+public abstract void setDisplayOptions(
+  int options,
+  int mask)
+
+Set selected display options. Only the options specified by mask will be 
+changed. To change all display option bits at once, see 
+(|android.support.v7.app.ActionBar|) . 
+
+Example: setDisplayOptions(0, DISPLAY_SHOW_HOME) will disable the 
+(|android.support.v7.app.ActionBar|) option. 
+setDisplayOptions(DISPLAY_SHOW_HOME, DISPLAY_SHOW_HOME | DISPLAY_USE_LOGO) will 
+enable (|android.support.v7.app.ActionBar|) and disable 
+(|android.support.v7.app.ActionBar|) . 
+
+
+    options - A combination of the bits defined by the DISPLAY_ constants defined in 
+       ActionBar. 
+    mask - A bit mask declaring which display options should be changed. 
+
+*android.support.v7.app.ActionBar.setDisplayShowCustomEnabled(boolean)*
+
+public abstract void setDisplayShowCustomEnabled(boolean showCustom)
+
+Set whether a custom view should be displayed, if set. 
+
+To set several display options at once, see the setDisplayOptions methods. 
+
+
+    showCustom - true if the currently set custom view should be displayed, false otherwise. 
+
+*android.support.v7.app.ActionBar.setDisplayShowHomeEnabled(boolean)*
+
+public abstract void setDisplayShowHomeEnabled(boolean showHome)
+
+Set whether to include the application home affordance in the action bar. Home 
+is presented as either an activity icon or logo. 
+
+To set several display options at once, see the setDisplayOptions methods. 
+
+
+    showHome - true to show home, false otherwise. 
+
+*android.support.v7.app.ActionBar.setDisplayShowTitleEnabled(boolean)*
+
+public abstract void setDisplayShowTitleEnabled(boolean showTitle)
+
+Set whether an activity title/subtitle should be displayed. 
+
+To set several display options at once, see the setDisplayOptions methods. 
+
+
+    showTitle - true to display a title/subtitle if present. 
+
+*android.support.v7.app.ActionBar.setDisplayUseLogoEnabled(boolean)*
+
+public abstract void setDisplayUseLogoEnabled(boolean useLogo)
+
+Set whether to display the activity logo rather than the activity icon. A logo 
+is often a wider, more detailed image. 
+
+To set several display options at once, see the setDisplayOptions methods. 
+
+
+    useLogo - true to use the activity logo, false to use the activity icon. 
+
+*android.support.v7.app.ActionBar.setHomeButtonEnabled(boolean)*
+
+public void setHomeButtonEnabled(boolean enabled)
+
+Enable or disable the "home" button in the corner of the action bar. (Note that 
+this is the application home/up affordance on the action bar, not the 
+systemwide home button.) 
+
+This defaults to true for packages targeting < API 14. For packages targeting 
+API 14 or greater, the application should call this method to enable 
+interaction with the home/up affordance. 
+
+Setting the (|android.support.v7.app.ActionBar|) display option will 
+automatically enable the home button. 
+
+
+    enabled - true to enable the home button, false to disable the home button. 
+
+*android.support.v7.app.ActionBar.setIcon(Drawable)*
+
+public abstract void setIcon(Drawable icon)
+
+Set the icon to display in the 'home' section of the action bar. The action bar 
+will use an icon specified by its style or the activity icon by default. 
+
+Whether the home section shows an icon or logo is controlled by the display 
+option (|android.support.v7.app.ActionBar|) . 
+
+
+    icon - Drawable to show as an icon. 
+
+*android.support.v7.app.ActionBar.setIcon(int)*
+
+public abstract void setIcon(int resId)
+
+Set the icon to display in the 'home' section of the action bar. The action bar 
+will use an icon specified by its style or the activity icon by default. 
+
+Whether the home section shows an icon or logo is controlled by the display 
+option (|android.support.v7.app.ActionBar|) . 
+
+
+    resId - Resource ID of a drawable to show as an icon. 
+
+*android.support.v7.app.ActionBar.setListNavigationCallbacks(SpinnerAdapter,ActionBar.OnNavigationListener)*
+
+public abstract void setListNavigationCallbacks(
+  SpinnerAdapter adapter,
+  android.support.v7.app.ActionBar.OnNavigationListener callback)
+
+Set the adapter and navigation callback for list navigation mode. 
+
+The supplied adapter will provide views for the expanded list as well as the 
+currently selected item. (These may be displayed differently.) 
+
+The supplied OnNavigationListener will alert the application when the user 
+changes the current list selection. 
+
+
+    adapter - An adapter that will provide views both to display the current navigation 
+       selection and populate views within the dropdown navigation menu. 
+    callback - An OnNavigationListener that will receive events when the user selects a 
+       navigation item. 
+
+*android.support.v7.app.ActionBar.setLogo(Drawable)*
+
+public abstract void setLogo(Drawable logo)
+
+Set the logo to display in the 'home' section of the action bar. The action bar 
+will use a logo specified by its style or the activity logo by default. 
+
+Whether the home section shows an icon or logo is controlled by the display 
+option (|android.support.v7.app.ActionBar|) . 
+
+
+    logo - Drawable to show as a logo. 
+
+*android.support.v7.app.ActionBar.setLogo(int)*
+
+public abstract void setLogo(int resId)
+
+Set the logo to display in the 'home' section of the action bar. The action bar 
+will use a logo specified by its style or the activity logo by default. 
+
+Whether the home section shows an icon or logo is controlled by the display 
+option (|android.support.v7.app.ActionBar|) . 
+
+
+    resId - Resource ID of a drawable to show as a logo. 
+
+*android.support.v7.app.ActionBar.setNavigationMode(int)*
+
+public abstract void setNavigationMode(int mode)
+
+Set the current navigation mode. 
+
+
+    mode - The new mode to set. 
+
+*android.support.v7.app.ActionBar.setSelectedNavigationItem(int)*
+
+public abstract void setSelectedNavigationItem(int position)
+
+Set the selected navigation item in list or tabbed navigation modes. 
+
+
+    position - Position of the item to select. 
+
+*android.support.v7.app.ActionBar.setSplitBackgroundDrawable(Drawable)*
+
+public void setSplitBackgroundDrawable(Drawable d)
+
+Set the ActionBar's split background. This will appear in the split action bar 
+containing menu-provided action buttons on some devices and configurations 
+
+You can enable split action bar with (|android.R.attr|) 
+
+
+    d - Background drawable for the split bar 
+
+*android.support.v7.app.ActionBar.setStackedBackgroundDrawable(Drawable)*
+
+public void setStackedBackgroundDrawable(Drawable d)
+
+Set the ActionBar's stacked background. This will appear in the second 
+row/stacked bar on some devices and configurations. 
+
+
+    d - Background drawable for the stacked row 
+
+*android.support.v7.app.ActionBar.setSubtitle(CharSequence)*
+
+public abstract void setSubtitle(java.lang.CharSequence subtitle)
+
+Set the action bar's subtitle. This will only be displayed if 
+(|android.support.v7.app.ActionBar|) is set. Set to null to disable the 
+subtitle entirely. 
+
+
+    subtitle - Subtitle to set 
+
+*android.support.v7.app.ActionBar.setSubtitle(int)*
+
+public abstract void setSubtitle(int resId)
+
+Set the action bar's subtitle. This will only be displayed if 
+(|android.support.v7.app.ActionBar|) is set. 
+
+
+    resId - Resource ID of subtitle string to set 
+
+*android.support.v7.app.ActionBar.setTitle(CharSequence)*
+
+public abstract void setTitle(java.lang.CharSequence title)
+
+Set the action bar's title. This will only be displayed if 
+(|android.support.v7.app.ActionBar|) is set. 
+
+
+    title - Title to set 
+
+*android.support.v7.app.ActionBar.setTitle(int)*
+
+public abstract void setTitle(int resId)
+
+Set the action bar's title. This will only be displayed if 
+(|android.support.v7.app.ActionBar|) is set. 
+
+
+    resId - Resource ID of title string to set 
+
+*android.support.v7.app.ActionBar.show()*
+
+public abstract void show()
+
+Show the ActionBar if it is not currently showing. If the window hosting the 
+ActionBar does not have the feature (|Window|) it will resize application 
+content to fit the new space available. 
+
+If you are hiding the ActionBar through View.SYSTEM_UI_FLAG_FULLSCREEN(|View|) 
+, you should not call this function directly. 
+
+
+
+

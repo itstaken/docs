@@ -1,0 +1,132 @@
+*android.content.pm.RegisteredServicesCache* *RegisteredServicesCache* Cache of 
+
+public abstract class RegisteredServicesCache<V>
+  extends    |java.lang.Object|
+
+|android.content.pm.RegisteredServicesCache_Description|
+|android.content.pm.RegisteredServicesCache_Fields|
+|android.content.pm.RegisteredServicesCache_Constructors|
+|android.content.pm.RegisteredServicesCache_Methods|
+
+================================================================================
+
+*android.content.pm.RegisteredServicesCache_Fields*
+|android.content.Context_android.content.pm.RegisteredServicesCache.mContext|
+
+*android.content.pm.RegisteredServicesCache_Constructors*
+|android.content.pm.RegisteredServicesCache(Context,String,String,String,XmlSerializerAndParser<V>)|
+
+*android.content.pm.RegisteredServicesCache_Methods*
+|android.content.pm.RegisteredServicesCache.dump(FileDescriptor,PrintWriter,String[],int)|
+|android.content.pm.RegisteredServicesCache.getAllServices(int)|
+|android.content.pm.RegisteredServicesCache.getListener()|
+|android.content.pm.RegisteredServicesCache.getServiceInfo(V,int)|Accessor for 
+|android.content.pm.RegisteredServicesCache.invalidateCache(int)|
+|android.content.pm.RegisteredServicesCache.parseServiceAttributes(Resources,String,AttributeSet)|
+|android.content.pm.RegisteredServicesCache.setListener(RegisteredServicesCacheListener<V>,Handler)|
+
+*android.content.pm.RegisteredServicesCache_Description*
+
+Cache of registered services. This cache is lazily built by interrogating 
+(|android.content.pm.PackageManager|) on a per-user basis. It's updated as 
+packages are added, removed and changed. Users are responsible for calling 
+(|android.content.pm.RegisteredServicesCache|) when a user is started, since 
+(|android.content.pm.PackageManager|) broadcasts aren't sent for stopped users. 
+
+The services are referred to by type V and are made available via the 
+(|android.content.pm.RegisteredServicesCache|) method. 
+
+
+
+*android.content.Context_android.content.pm.RegisteredServicesCache.mContext*
+
+
+
+
+
+*android.content.pm.RegisteredServicesCache(Context,String,String,String,XmlSerializerAndParser<V>)*
+
+public RegisteredServicesCache(
+  android.content.Context context,
+  java.lang.String interfaceName,
+  java.lang.String metaDataName,
+  java.lang.String attributeName,
+  android.content.pm.XmlSerializerAndParser<V> serializerAndParser)
+
+
+
+
+*android.content.pm.RegisteredServicesCache.dump(FileDescriptor,PrintWriter,String[],int)*
+
+public void dump(
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter fout,
+  java.lang.String[] args,
+  int userId)
+
+
+
+
+
+*android.content.pm.RegisteredServicesCache.getAllServices(int)*
+
+public |java.util.Collection|<ServiceInfo<V>> getAllServices(int userId)
+
+
+
+
+
+    Returns: a collection of {@link RegisteredServicesCache.ServiceInfo} objects for all 
+             registered authenticators. 
+
+*android.content.pm.RegisteredServicesCache.getListener()*
+
+public |android.content.pm.RegisteredServicesCacheListener|<V> getListener()
+
+
+
+
+
+*android.content.pm.RegisteredServicesCache.getServiceInfo(V,int)*
+
+public |android.content.pm.RegisteredServicesCache.ServiceInfo|<V> getServiceInfo(
+  V type,
+  int userId)
+
+Accessor for the registered authenticators. 
+
+
+    type - the account type of the authenticator 
+
+    Returns: the AuthenticatorInfo that matches the account type or null if none is present 
+
+*android.content.pm.RegisteredServicesCache.invalidateCache(int)*
+
+public void invalidateCache(int userId)
+
+
+
+
+
+*android.content.pm.RegisteredServicesCache.parseServiceAttributes(Resources,String,AttributeSet)*
+
+public abstract |V| parseServiceAttributes(
+  android.content.res.Resources res,
+  java.lang.String packageName,
+  android.util.AttributeSet attrs)
+
+
+
+
+
+*android.content.pm.RegisteredServicesCache.setListener(RegisteredServicesCacheListener<V>,Handler)*
+
+public void setListener(
+  android.content.pm.RegisteredServicesCacheListener<V> listener,
+  android.os.Handler handler)
+
+
+
+
+
+

@@ -1,0 +1,239 @@
+*android.os.RemoteCallbackList* *RemoteCallbackList* Takes care of the grunt wor
+
+public class RemoteCallbackList<E extends android.os.IInterface>
+  extends    |java.lang.Object|
+
+|android.os.RemoteCallbackList_Description|
+|android.os.RemoteCallbackList_Fields|
+|android.os.RemoteCallbackList_Constructors|
+|android.os.RemoteCallbackList_Methods|
+
+================================================================================
+
+*android.os.RemoteCallbackList_Constructors*
+|android.os.RemoteCallbackList()|
+
+*android.os.RemoteCallbackList_Methods*
+|android.os.RemoteCallbackList.beginBroadcast()|Prepare to start making calls t
+|android.os.RemoteCallbackList.finishBroadcast()|Clean up the state of a broadc
+|android.os.RemoteCallbackList.getBroadcastCookie(int)|Retrieve the cookie asso
+|android.os.RemoteCallbackList.getBroadcastItem(int)|Retrieve an item in the ac
+|android.os.RemoteCallbackList.getRegisteredCallbackCount()|Returns the number 
+|android.os.RemoteCallbackList.kill()|Disable this callback list.
+|android.os.RemoteCallbackList.onCallbackDied(E)|Old version of#onCallbackDied(
+|android.os.RemoteCallbackList.onCallbackDied(E,Object)|Called when the process
+|android.os.RemoteCallbackList.register(E)|Simple version ofRemoteCallbackList#
+|android.os.RemoteCallbackList.register(E,Object)|Add a new callback to the lis
+|android.os.RemoteCallbackList.unregister(E)|Remove from the list a callback th
+
+*android.os.RemoteCallbackList_Description*
+
+Takes care of the grunt work of maintaining a list of remote interfaces, 
+typically for the use of performing callbacks from a (|android.app.Service|) to 
+its clients. In particular, this: 
+
+Keeps track of a set of registered (|android.os.IInterface|) callbacks, taking 
+care to identify them through their underlying unique (|android.os.IBinder|) 
+(by calling IInterface.asBinder()(|android.os.IInterface|) . Attaches a 
+IBinder.DeathRecipient(|android.os.IBinder.DeathRecipient|) to each registered 
+interface, so that it can be cleaned out of the list if its process goes away. 
+Performs locking of the underlying list of interfaces to deal with 
+multithreaded incoming calls, and a thread-safe way to iterate over a snapshot 
+of the list without holding its lock. 
+
+To use this class, simply create a single instance along with your service, and 
+call its (|android.os.RemoteCallbackList|) and 
+(|android.os.RemoteCallbackList|) methods as client register and unregister 
+with your service. To call back on to the registered clients, use 
+(|android.os.RemoteCallbackList|) , (|android.os.RemoteCallbackList|) , and 
+(|android.os.RemoteCallbackList|) . 
+
+If a registered callback's process goes away, this class will take care of 
+automatically removing it from the list. If you want to do additional work in 
+this situation, you can create a subclass that implements the 
+(|android.os.RemoteCallbackList|) method. 
+
+
+
+*android.os.RemoteCallbackList()*
+
+public RemoteCallbackList()
+
+
+
+
+*android.os.RemoteCallbackList.beginBroadcast()*
+
+public int beginBroadcast()
+
+Prepare to start making calls to the currently registered callbacks. This 
+creates a copy of the callback list, which you can retrieve items from using 
+(|android.os.RemoteCallbackList|) . Note that only one broadcast can be active 
+at a time, so you must be sure to always call this from the same thread 
+(usually by scheduling with (|android.os.Handler|) ) or do your own 
+synchronization. You must call (|android.os.RemoteCallbackList|) when done. 
+
+A typical loop delivering a broadcast looks like this: 
+
+
+
+int i = callbacks.beginBroadcast(); while (i > 0) { i--; try { 
+callbacks.getBroadcastItem(i).somethingHappened(); } catch (RemoteException e) 
+{ // The RemoteCallbackList will take care of removing // the dead object for 
+us. } } callbacks.finishBroadcast(); 
+
+
+
+    Returns: Returns the number of callbacks in the broadcast, to be used with {@link 
+             #getBroadcastItem} to determine the range of indices you can 
+             supply. 
+
+*android.os.RemoteCallbackList.finishBroadcast()*
+
+public void finishBroadcast()
+
+Clean up the state of a broadcast previously initiated by calling 
+(|android.os.RemoteCallbackList|) . This must always be called when you are 
+done with a broadcast. 
+
+
+
+*android.os.RemoteCallbackList.getBroadcastCookie(int)*
+
+public |java.lang.Object| getBroadcastCookie(int index)
+
+Retrieve the cookie associated with the item returned by 
+(|android.os.RemoteCallbackList|) . 
+
+
+
+*android.os.RemoteCallbackList.getBroadcastItem(int)*
+
+public |E| getBroadcastItem(int index)
+
+Retrieve an item in the active broadcast that was previously started with 
+(|android.os.RemoteCallbackList|) . This can only be called after the broadcast 
+is started, and its data is no longer valid after calling 
+(|android.os.RemoteCallbackList|) . 
+
+Note that it is possible for the process of one of the returned callbacks to go 
+away before you call it, so you will need to catch 
+(|android.os.RemoteException|) when calling on to the returned object. The 
+callback list itself, however, will take care of unregistering these objects 
+once it detects that it is no longer valid, so you can handle such an exception 
+by simply ignoring it. 
+
+
+    index - Which of the registered callbacks you would like to retrieve. Ranges from 0 to 
+       1-{@link #beginBroadcast}. 
+
+    Returns: Returns the callback interface that you can call. This will always be non-null. 
+
+*android.os.RemoteCallbackList.getRegisteredCallbackCount()*
+
+public int getRegisteredCallbackCount()
+
+Returns the number of registered callbacks. Note that the number of registered 
+callbacks may differ from the value returned by 
+(|android.os.RemoteCallbackList|) since the former returns the number of 
+callbacks registered at the time of the call and the second the number of 
+callback to which the broadcast will be delivered. 
+
+This function is useful to decide whether to schedule a broadcast if this 
+requires doing some work which otherwise would not be performed. 
+
+
+
+    Returns: 
+
+*android.os.RemoteCallbackList.kill()*
+
+public void kill()
+
+Disable this callback list. All registered callbacks are unregistered, and the 
+list is disabled so that future calls to (|android.os.RemoteCallbackList|) will 
+fail. This should be used when a Service is stopping, to prevent clients from 
+registering callbacks after it is stopped. 
+
+
+
+*android.os.RemoteCallbackList.onCallbackDied(E)*
+
+public void onCallbackDied(E extends android.os.IInterface callback)
+
+Old version of (|android.os.RemoteCallbackList|) that does not provide a 
+cookie. 
+
+
+
+*android.os.RemoteCallbackList.onCallbackDied(E,Object)*
+
+public void onCallbackDied(
+  E extends android.os.IInterface callback,
+  java.lang.Object cookie)
+
+Called when the process hosting a callback in the list has gone away. The 
+default implementation calls (|android.os.RemoteCallbackList|) for backwards 
+compatibility. 
+
+
+    callback - The callback whose process has died. Note that, since its process has died, you 
+       can not make any calls on to this interface. You can, however, retrieve 
+       its IBinder and compare it with another IBinder to see if it is the same 
+       object. 
+    cookie - The cookie object original provided to {@link #register(E, Object)}. 
+
+*android.os.RemoteCallbackList.register(E)*
+
+public boolean register(E extends android.os.IInterface callback)
+
+Simple version of (|android.os.RemoteCallbackList|) that does not take a cookie 
+object. 
+
+
+
+*android.os.RemoteCallbackList.register(E,Object)*
+
+public boolean register(
+  E extends android.os.IInterface callback,
+  java.lang.Object cookie)
+
+Add a new callback to the list. This callback will remain in the list until a 
+corresponding call to (|android.os.RemoteCallbackList|) or its hosting process 
+goes away. If the callback was already registered (determined by checking to 
+see if the callback.asBinder()(|android.os.IInterface|) object is already in 
+the list), then it will be left as-is. Registrations are not counted; a single 
+call to (|android.os.RemoteCallbackList|) will remove a callback after any 
+number calls to register it. 
+
+
+    callback - The callback interface to be added to the list. Must not be null -- passing 
+       null here will cause a NullPointerException. Most services will want to 
+       check for null before calling this with an object given from a client, 
+       so that clients can't crash the service with bad data. 
+    cookie - Optional additional data to be associated with this callback. 
+
+    Returns: Returns true if the callback was successfully added to the list. Returns false 
+             if it was not added, either because {@link #kill} had previously 
+             been called or the callback's process has gone away. 
+
+*android.os.RemoteCallbackList.unregister(E)*
+
+public boolean unregister(E extends android.os.IInterface callback)
+
+Remove from the list a callback that was previously added with 
+(|android.os.RemoteCallbackList|) . This uses the 
+callback.asBinder()(|android.os.IInterface|) object to correctly find the 
+previous registration. Registrations are not counted; a single unregister call 
+will remove a callback after any number calls to 
+(|android.os.RemoteCallbackList|) for it. 
+
+
+    callback - The callback to be removed from the list. Passing null here will cause a 
+       NullPointerException, so you will generally want to check for null 
+       before calling. 
+
+    Returns: Returns true if the callback was found and unregistered. Returns false if the 
+             given callback was not found on the list. 
+
+

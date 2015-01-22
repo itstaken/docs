@@ -1,0 +1,527 @@
+*android.view.ViewParent* *ViewParent* Defines the responsibilities for a class 
+
+public interface interface ViewParent
+
+
+|android.view.ViewParent_Description|
+|android.view.ViewParent_Fields|
+|android.view.ViewParent_Constructors|
+|android.view.ViewParent_Methods|
+
+================================================================================
+
+*android.view.ViewParent_Methods*
+|android.view.ViewParent.bringChildToFront(View)|Change the z order of the chil
+|android.view.ViewParent.canResolveLayoutDirection()|Tells if this view parent 
+|android.view.ViewParent.canResolveTextAlignment()|Tells if this view parent ca
+|android.view.ViewParent.canResolveTextDirection()|Tells if this view parent ca
+|android.view.ViewParent.childDrawableStateChanged(View)|This method is called 
+|android.view.ViewParent.childHasTransientStateChanged(View,boolean)|Called whe
+|android.view.ViewParent.clearChildFocus(View)|Called when a child of this pare
+|android.view.ViewParent.createContextMenu(ContextMenu)|Have the parent populat
+|android.view.ViewParent.focusableViewAvailable(View)|Tells the parent that a n
+|android.view.ViewParent.focusSearch(View,int)|Find the nearest view in the spe
+|android.view.ViewParent.getChildVisibleRect(View,Rect,android.graphics.Point)|
+|android.view.ViewParent.getLayoutDirection()|Return this view parent layout di
+|android.view.ViewParent.getParent()|Returns the parent if it exists, or null.
+|android.view.ViewParent.getParentForAccessibility()|Gets the parent of a given
+|android.view.ViewParent.getTextAlignment()|Return this view parent text alignm
+|android.view.ViewParent.getTextDirection()|Return this view parent text direct
+|android.view.ViewParent.invalidateChild(View,Rect)|All or part of a child is d
+|android.view.ViewParent.invalidateChildInParent(int[],Rect)|All or part of a c
+|android.view.ViewParent.isLayoutDirectionResolved()|Tells if this view parent 
+|android.view.ViewParent.isLayoutRequested()|Indicates whether layout was reque
+|android.view.ViewParent.isTextAlignmentResolved()|Tells if this view parent te
+|android.view.ViewParent.isTextDirectionResolved()|Tells if this view parent te
+|android.view.ViewParent.notifySubtreeAccessibilityStateChanged(View,View,int)|
+|android.view.ViewParent.recomputeViewAttributes(View)|Tell view hierarchy that
+|android.view.ViewParent.requestChildFocus(View,View)|Called when a child of th
+|android.view.ViewParent.requestChildRectangleOnScreen(View,Rect,boolean)|Calle
+|android.view.ViewParent.requestDisallowInterceptTouchEvent(boolean)|Called whe
+|android.view.ViewParent.requestFitSystemWindows()|Ask that a new dispatch ofVi
+|android.view.ViewParent.requestLayout()|Called when something has changed whic
+|android.view.ViewParent.requestSendAccessibilityEvent(View,AccessibilityEvent)|
+|android.view.ViewParent.requestTransparentRegion(View)|Called when a child wan
+|android.view.ViewParent.showContextMenuForChild(View)|Bring up a context menu 
+|android.view.ViewParent.startActionModeForChild(View,ActionMode.Callback)|Star
+
+*android.view.ViewParent_Description*
+
+Defines the responsibilities for a class that will be a parent of a View. This 
+is the API that a view sees when it wants to interact with its parent. 
+
+
+
+*android.view.ViewParent.bringChildToFront(View)*
+
+public void bringChildToFront(android.view.View child)
+
+Change the z order of the child so it's on top of all other children. This 
+ordering change may affect layout, if this container uses an order-dependent 
+layout scheme (e.g., LinearLayout). Prior to (|android.os.Build.VERSION_CODES|) 
+this method should be followed by calls to (|android.view.ViewParent|) and 
+(|android.view.View|) on this parent to force the parent to redraw with the new 
+child ordering. 
+
+
+    child - The child to bring to the top of the z order 
+
+*android.view.ViewParent.canResolveLayoutDirection()*
+
+public boolean canResolveLayoutDirection()
+
+Tells if this view parent can resolve the layout direction. See 
+(|android.view.View|) 
+
+
+
+    Returns: True if this view parent can resolve the layout direction. 
+
+*android.view.ViewParent.canResolveTextAlignment()*
+
+public boolean canResolveTextAlignment()
+
+Tells if this view parent can resolve the text alignment. See 
+(|android.view.View|) 
+
+
+
+    Returns: True if this view parent can resolve the text alignment. 
+
+*android.view.ViewParent.canResolveTextDirection()*
+
+public boolean canResolveTextDirection()
+
+Tells if this view parent can resolve the text direction. See 
+(|android.view.View|) 
+
+
+
+    Returns: True if this view parent can resolve the text direction. 
+
+*android.view.ViewParent.childDrawableStateChanged(View)*
+
+public void childDrawableStateChanged(android.view.View child)
+
+This method is called on the parent when a child's drawable state has changed. 
+
+
+    child - The child whose drawable state has changed. 
+
+*android.view.ViewParent.childHasTransientStateChanged(View,boolean)*
+
+public void childHasTransientStateChanged(
+  android.view.View child,
+  boolean hasTransientState)
+
+Called when a child view now has or no longer is tracking transient state. 
+
+"Transient state" is any state that a View might hold that is not expected to 
+be reflected in the data model that the View currently presents. This state 
+only affects the presentation to the user within the View itself, such as the 
+current state of animations in progress or the state of a text selection 
+operation. 
+
+Transient state is useful for hinting to other components of the View system 
+that a particular view is tracking something complex but encapsulated. A 
+ListView for example may acknowledge that list item Views with transient state 
+should be preserved within their position or stable item ID instead of treating 
+that view as trivially replaceable by the backing adapter. This allows adapter 
+implementations to be simpler instead of needing to track the state of item 
+view animations in progress such that they could be restored in the event of an 
+unexpected recycling and rebinding of attached item views. 
+
+This method is called on a parent view when a child view or a view within its 
+subtree begins or ends tracking of internal transient state. 
+
+
+    child - Child view whose state has changed 
+    hasTransientState - true if this child has transient state 
+
+*android.view.ViewParent.clearChildFocus(View)*
+
+public void clearChildFocus(android.view.View child)
+
+Called when a child of this parent is giving up focus 
+
+
+    child - The view that is giving up focus 
+
+*android.view.ViewParent.createContextMenu(ContextMenu)*
+
+public void createContextMenu(android.view.ContextMenu menu)
+
+Have the parent populate the specified context menu if it has anything to add 
+(and then recurse on its parent). 
+
+
+    menu - The menu to populate 
+
+*android.view.ViewParent.focusableViewAvailable(View)*
+
+public void focusableViewAvailable(android.view.View v)
+
+Tells the parent that a new focusable view has become available. This is to 
+handle transitions from the case where there are no focusable views to the case 
+where the first focusable view appears. 
+
+
+    v - The view that has become newly focusable 
+
+*android.view.ViewParent.focusSearch(View,int)*
+
+public |android.view.View| focusSearch(
+  android.view.View v,
+  int direction)
+
+Find the nearest view in the specified direction that wants to take focus 
+
+
+    v - The view that currently has focus 
+    direction - One of FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT 
+
+*android.view.ViewParent.getChildVisibleRect(View,Rect,android.graphics.Point)*
+
+public boolean getChildVisibleRect(
+  android.view.View child,
+  Rect r,
+  android.graphics.Point offset)
+
+Compute the visible part of a rectangular region defined in terms of a child 
+view's coordinates. 
+
+Returns the clipped visible part of the rectangle r, defined in the child's 
+local coordinate system. r is modified by this method to contain the result, 
+expressed in the global (root) coordinate system. 
+
+The resulting rectangle is always axis aligned. If a rotation is applied to a 
+node in the View hierarchy, the result is the axis-aligned bounding box of the 
+visible rectangle. 
+
+
+    child - A child View, whose rectangular visible region we want to compute 
+    r - The input rectangle, defined in the child coordinate system. Will be 
+       overwritten to contain the resulting visible rectangle, expressed in 
+       global (root) coordinates 
+    offset - The input coordinates of a point, defined in the child coordinate system. As 
+       with the r parameter, this will be overwritten to contain the global 
+       (root) coordinates of that point. A null value is valid (in case you are 
+       not interested in this result) 
+
+    Returns: true if the resulting rectangle is not empty, false otherwise 
+
+*android.view.ViewParent.getLayoutDirection()*
+
+public int getLayoutDirection()
+
+Return this view parent layout direction. See (|android.view.View|) 
+
+
+
+    Returns: {@link View#LAYOUT_DIRECTION_RTL} if the layout direction is RTL or returns 
+             {@link View#LAYOUT_DIRECTION_LTR} if the layout direction is not 
+             RTL. 
+
+*android.view.ViewParent.getParent()*
+
+public |android.view.ViewParent| getParent()
+
+Returns the parent if it exists, or null. 
+
+
+
+    Returns: a ViewParent or null if this ViewParent does not have a parent 
+
+*android.view.ViewParent.getParentForAccessibility()*
+
+public |android.view.ViewParent| getParentForAccessibility()
+
+Gets the parent of a given View for accessibility. Since some Views are not 
+exposed to the accessibility layer the parent for accessibility is not 
+necessarily the direct parent of the View, rather it is a predecessor. 
+
+
+
+    Returns: The parent or null if no such is found. 
+
+*android.view.ViewParent.getTextAlignment()*
+
+public int getTextAlignment()
+
+Return this view parent text alignment. See (|android.view.View|) 
+
+
+
+    Returns: the resolved text alignment. Returns one of: 
+
+{@link View#TEXT_ALIGNMENT_GRAVITY}, {@link View#TEXT_ALIGNMENT_CENTER}, {@link 
+             View#TEXT_ALIGNMENT_TEXT_START}, {@link 
+             View#TEXT_ALIGNMENT_TEXT_END}, {@link 
+             View#TEXT_ALIGNMENT_VIEW_START}, {@link 
+             View#TEXT_ALIGNMENT_VIEW_END} 
+
+*android.view.ViewParent.getTextDirection()*
+
+public int getTextDirection()
+
+Return this view parent text direction. See (|android.view.View|) 
+
+
+
+    Returns: the resolved text direction. Returns one of: 
+
+{@link View#TEXT_DIRECTION_FIRST_STRONG} {@link View#TEXT_DIRECTION_ANY_RTL}, 
+             {@link View#TEXT_DIRECTION_LTR}, {@link View#TEXT_DIRECTION_RTL}, 
+             {@link View#TEXT_DIRECTION_LOCALE} 
+
+*android.view.ViewParent.invalidateChild(View,Rect)*
+
+public void invalidateChild(
+  android.view.View child,
+  Rect r)
+
+All or part of a child is dirty and needs to be redrawn. 
+
+
+    child - The child which is dirty 
+    r - The area within the child that is invalid 
+
+*android.view.ViewParent.invalidateChildInParent(int[],Rect)*
+
+public |android.view.ViewParent| invalidateChildInParent(
+  int[] location,
+  Rect r)
+
+All or part of a child is dirty and needs to be redrawn. 
+
+The location array is an array of two int values which respectively define the 
+left and the top position of the dirty child. 
+
+This method must return the parent of this ViewParent if the specified 
+rectangle must be invalidated in the parent. If the specified rectangle does 
+not require invalidation in the parent or if the parent does not exist, this 
+method must return null. 
+
+When this method returns a non-null value, the location array must have been 
+updated with the left and top coordinates of this ViewParent. 
+
+
+    location - An array of 2 ints containing the left and top coordinates of the child to 
+       invalidate 
+    r - The area within the child that is invalid 
+
+    Returns: the parent of this ViewParent or null 
+
+*android.view.ViewParent.isLayoutDirectionResolved()*
+
+public boolean isLayoutDirectionResolved()
+
+Tells if this view parent layout direction is resolved. See 
+(|android.view.View|) 
+
+
+
+    Returns: True if this view parent layout direction is resolved. 
+
+*android.view.ViewParent.isLayoutRequested()*
+
+public boolean isLayoutRequested()
+
+Indicates whether layout was requested on this view parent. 
+
+
+
+    Returns: true if layout was requested, false otherwise 
+
+*android.view.ViewParent.isTextAlignmentResolved()*
+
+public boolean isTextAlignmentResolved()
+
+Tells if this view parent text alignment is resolved. See (|android.view.View|) 
+
+
+
+    Returns: True if this view parent text alignment is resolved. 
+
+*android.view.ViewParent.isTextDirectionResolved()*
+
+public boolean isTextDirectionResolved()
+
+Tells if this view parent text direction is resolved. See (|android.view.View|) 
+
+
+
+    Returns: True if this view parent text direction is resolved. 
+
+*android.view.ViewParent.notifySubtreeAccessibilityStateChanged(View,View,int)*
+
+public void notifySubtreeAccessibilityStateChanged(
+  android.view.View child,
+  android.view.View source,
+  int changeType)
+
+Notifies a view parent that the accessibility state of one of its descendants 
+has changed and that the structure of the subtree is different. 
+
+
+    child - The direct child whose subtree has changed. 
+    source - The descendant view that changed. 
+    changeType - A bit mask of the types of changes that occurred. One or more of: 
+
+{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION} {@link 
+       AccessibilityEvent#CONTENT_CHANGE_TYPE_SUBTREE} {@link 
+       AccessibilityEvent#CONTENT_CHANGE_TYPE_TEXT} {@link 
+       AccessibilityEvent#CONTENT_CHANGE_TYPE_UNDEFINED} 
+
+*android.view.ViewParent.recomputeViewAttributes(View)*
+
+public void recomputeViewAttributes(android.view.View child)
+
+Tell view hierarchy that the global view attributes need to be re-evaluated. 
+
+
+    child - View whose attributes have changed. 
+
+*android.view.ViewParent.requestChildFocus(View,View)*
+
+public void requestChildFocus(
+  android.view.View child,
+  android.view.View focused)
+
+Called when a child of this parent wants focus 
+
+
+    child - The child of this ViewParent that wants focus. This view will contain the 
+       focused view. It is not necessarily the view that actually has focus. 
+    focused - The view that is a descendant of child that actually has focus 
+
+*android.view.ViewParent.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rectangle,
+  boolean immediate)
+
+Called when a child of this group wants a particular rectangle to be positioned 
+onto the screen. (|android.view.ViewGroup|) s overriding this can trust that: 
+
+child will be a direct child of this group rectangle will be in the child's 
+coordinates 
+
+(|android.view.ViewGroup|) s overriding this should uphold the contract: 
+
+nothing will change if the rectangle is already visible the view port will be 
+scrolled only just enough to make the rectangle visible 
+
+
+    child - The direct child making the request. 
+    rectangle - The rectangle in the child's coordinates the child wishes to be on the screen. 
+    immediate - True to forbid animated or delayed scrolling, false otherwise 
+
+    Returns: Whether the group scrolled to handle the operation 
+
+*android.view.ViewParent.requestDisallowInterceptTouchEvent(boolean)*
+
+public void requestDisallowInterceptTouchEvent(boolean disallowIntercept)
+
+Called when a child does not want this parent and its ancestors to intercept 
+touch events with (|android.view.ViewGroup|) . 
+
+This parent should pass this call onto its parents. This parent must obey this 
+request for the duration of the touch (that is, only clear the flag after this 
+parent has received an up or a cancel. 
+
+
+    disallowIntercept - True if the child does not want the parent to intercept touch events. 
+
+*android.view.ViewParent.requestFitSystemWindows()*
+
+public void requestFitSystemWindows()
+
+Ask that a new dispatch of View.fitSystemWindows(Rect)(|android.view.View|) be 
+performed. 
+
+
+
+*android.view.ViewParent.requestLayout()*
+
+public void requestLayout()
+
+Called when something has changed which has invalidated the layout of a child 
+of this view parent. This will schedule a layout pass of the view tree. 
+
+
+
+*android.view.ViewParent.requestSendAccessibilityEvent(View,AccessibilityEvent)*
+
+public boolean requestSendAccessibilityEvent(
+  android.view.View child,
+  android.view.accessibility.AccessibilityEvent event)
+
+Called by a child to request from its parent to send an 
+(|android.view.accessibility.AccessibilityEvent|) . The child has already 
+populated a record for itself in the event and is delegating to its parent to 
+send the event. The parent can optionally add a record for itself. 
+
+Note: An accessibility event is fired by an individual view which populates the 
+event with a record for its state and requests from its parent to perform the 
+sending. The parent can optionally add a record for itself before dispatching 
+the request to its parent. A parent can also choose not to respect the request 
+for sending the event. The accessibility event is sent by the topmost view in 
+the view tree. 
+
+
+    child - The child which requests sending the event. 
+    event - The event to be sent. 
+
+    Returns: True if the event was sent. 
+
+*android.view.ViewParent.requestTransparentRegion(View)*
+
+public void requestTransparentRegion(android.view.View child)
+
+Called when a child wants the view hierarchy to gather and report transparent 
+regions to the window compositor. Views that "punch" holes in the view 
+hierarchy, such as SurfaceView can use this API to improve performance of the 
+system. When no such a view is present in the hierarchy, this optimization in 
+unnecessary and might slightly reduce the view hierarchy performance. 
+
+
+    child - the view requesting the transparent region computation 
+
+*android.view.ViewParent.showContextMenuForChild(View)*
+
+public boolean showContextMenuForChild(android.view.View originalView)
+
+Bring up a context menu for the specified view or its ancestors. 
+
+In most cases, a subclass does not need to override this. However, if the 
+subclass is added directly to the window manager (for example, 
+(|android.view.ViewManager|) ) then it should override this and show the 
+context menu. 
+
+
+    originalView - The source view where the context menu was first invoked 
+
+    Returns: true if a context menu was displayed 
+
+*android.view.ViewParent.startActionModeForChild(View,ActionMode.Callback)*
+
+public |android.view.ActionMode| startActionModeForChild(
+  android.view.View originalView,
+  android.view.ActionMode.Callback callback)
+
+Start an action mode for the specified view. 
+
+In most cases, a subclass does not need to override this. However, if the 
+subclass is added directly to the window manager (for example, 
+(|android.view.ViewManager|) ) then it should override this and start the 
+action mode. 
+
+
+    originalView - The source view where the action mode was first invoked 
+    callback - The callback that will handle lifecycle events for the action mode 
+
+    Returns: The new action mode if it was started, null otherwise 
+
+

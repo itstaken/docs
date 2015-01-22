@@ -1,0 +1,148 @@
+*android.os.Messenger* *Messenger* Reference to a Handler, which others can use 
+
+public final class Messenger
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.os.Messenger_Description|
+|android.os.Messenger_Fields|
+|android.os.Messenger_Constructors|
+|android.os.Messenger_Methods|
+
+================================================================================
+
+*android.os.Messenger_Fields*
+|android.os.Parcelable.Creator<android.os.Messenger>_android.os.Messenger.CREATOR|
+
+*android.os.Messenger_Constructors*
+|android.os.Messenger(Handler)|Create a new Messenger pointing to the given Han
+|android.os.Messenger(IBinder)|Create a Messenger from a raw IBinder, which had
+
+*android.os.Messenger_Methods*
+|android.os.Messenger.describeContents()|
+|android.os.Messenger.equals(Object)|Comparison operator on two Messenger objec
+|android.os.Messenger.getBinder()|Retrieve the IBinder that this Messenger is u
+|android.os.Messenger.hashCode()|
+|android.os.Messenger.readMessengerOrNullFromParcel(Parcel)|Convenience functio
+|android.os.Messenger.send(Message)|Send a Message to this Messenger's Handler.
+|android.os.Messenger.writeMessengerOrNullToParcel(Messenger,Parcel)|Convenienc
+|android.os.Messenger.writeToParcel(Parcel,int)|
+
+*android.os.Messenger_Description*
+
+Reference to a Handler, which others can use to send messages to it. This 
+allows for the implementation of message-based communication across processes, 
+by creating a Messenger pointing to a Handler in one process, and handing that 
+Messenger to another process. 
+
+
+
+*android.os.Parcelable.Creator<android.os.Messenger>_android.os.Messenger.CREATOR*
+
+
+
+
+
+*android.os.Messenger(Handler)*
+
+public Messenger(android.os.Handler target)
+
+Create a new Messenger pointing to the given Handler. Any Message objects sent 
+through this Messenger will appear in the Handler as if 
+Handler.sendMessage(Message)(|android.os.Handler|) had been called directly. 
+
+    target - The Handler that will receive sent messages. 
+
+*android.os.Messenger(IBinder)*
+
+public Messenger(android.os.IBinder target)
+
+Create a Messenger from a raw IBinder, which had previously been retrieved with 
+(|android.os.Messenger|) . 
+
+    target - The IBinder this Messenger should communicate with. 
+
+*android.os.Messenger.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.Messenger.equals(Object)*
+
+public boolean equals(java.lang.Object otherObj)
+
+Comparison operator on two Messenger objects, such that true is returned then 
+they both point to the same Handler. 
+
+
+
+*android.os.Messenger.getBinder()*
+
+public |android.os.IBinder| getBinder()
+
+Retrieve the IBinder that this Messenger is using to communicate with its 
+associated Handler. 
+
+
+
+    Returns: Returns the IBinder backing this Messenger. 
+
+*android.os.Messenger.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.os.Messenger.readMessengerOrNullFromParcel(Parcel)*
+
+public static |android.os.Messenger| readMessengerOrNullFromParcel(android.os.Parcel in)
+
+Convenience function for reading either a Messenger or null pointer from a 
+Parcel. You must have previously written the Messenger with 
+(|android.os.Messenger|) . 
+
+
+    in - The Parcel containing the written Messenger. 
+
+    Returns: Returns the Messenger read from the Parcel, or null if null had been written. 
+
+*android.os.Messenger.send(Message)*
+
+public void send(android.os.Message message)
+  throws |android.os.RemoteException|
+         
+Send a Message to this Messenger's Handler. 
+
+
+    message - The Message to send. Usually retrieved through {@link Message#obtain() 
+       Message.obtain()}. 
+
+*android.os.Messenger.writeMessengerOrNullToParcel(Messenger,Parcel)*
+
+public static void writeMessengerOrNullToParcel(
+  android.os.Messenger messenger,
+  android.os.Parcel out)
+
+Convenience function for writing either a Messenger or null pointer to a 
+Parcel. You must use this with (|android.os.Messenger|) for later reading it. 
+
+
+    messenger - The Messenger to write, or null. 
+    out - Where to write the Messenger. 
+
+*android.os.Messenger.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

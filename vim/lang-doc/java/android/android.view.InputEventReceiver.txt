@@ -1,0 +1,112 @@
+*android.view.InputEventReceiver* *InputEventReceiver* Provides a low-level mech
+
+public abstract class InputEventReceiver
+  extends    |java.lang.Object|
+
+|android.view.InputEventReceiver_Description|
+|android.view.InputEventReceiver_Fields|
+|android.view.InputEventReceiver_Constructors|
+|android.view.InputEventReceiver_Methods|
+
+================================================================================
+
+*android.view.InputEventReceiver_Constructors*
+|android.view.InputEventReceiver(InputChannel,Looper)|Creates an input event re
+
+*android.view.InputEventReceiver_Methods*
+|android.view.InputEventReceiver.consumeBatchedInputEvents(long)|Consumes all p
+|android.view.InputEventReceiver.dispose()|Disposes the receiver.
+|android.view.InputEventReceiver.finalize()|
+|android.view.InputEventReceiver.finishInputEvent(InputEvent,boolean)|Finishes 
+|android.view.InputEventReceiver.onBatchedInputEventPending()|Called when a bat
+|android.view.InputEventReceiver.onInputEvent(InputEvent)|Called when an input 
+
+*android.view.InputEventReceiver_Description*
+
+Provides a low-level mechanism for an application to receive input events. 
+
+
+
+*android.view.InputEventReceiver(InputChannel,Looper)*
+
+public InputEventReceiver(
+  android.view.InputChannel inputChannel,
+  android.os.Looper looper)
+
+Creates an input event receiver bound to the specified input channel. 
+
+    inputChannel - The input channel. 
+    looper - The looper to use when invoking callbacks. 
+
+*android.view.InputEventReceiver.consumeBatchedInputEvents(long)*
+
+public final boolean consumeBatchedInputEvents(long frameTimeNanos)
+
+Consumes all pending batched input events. Must be called on the same Looper 
+thread to which the receiver is attached. 
+
+This method forces all batched input events to be delivered immediately. Should 
+be called just before animating or drawing a new frame in the UI. 
+
+
+    frameTimeNanos - The time in the {@link System#nanoTime()} time base when the current display 
+       frame started rendering, or -1 if unknown. 
+
+    Returns: Whether a batch was consumed 
+
+*android.view.InputEventReceiver.dispose()*
+
+public void dispose()
+
+Disposes the receiver. 
+
+
+
+*android.view.InputEventReceiver.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.InputEventReceiver.finishInputEvent(InputEvent,boolean)*
+
+public final void finishInputEvent(
+  android.view.InputEvent event,
+  boolean handled)
+
+Finishes an input event and indicates whether it was handled. Must be called on 
+the same Looper thread to which the receiver is attached. 
+
+
+    event - The input event that was finished. 
+    handled - True if the event was handled. 
+
+*android.view.InputEventReceiver.onBatchedInputEventPending()*
+
+public void onBatchedInputEventPending()
+
+Called when a batched input event is pending. 
+
+The batched input event will continue to accumulate additional movement samples 
+until the recipient calls (|android.view.InputEventReceiver|) or an event is 
+received that ends the batch and causes it to be consumed immediately (such as 
+a pointer up event). 
+
+
+
+*android.view.InputEventReceiver.onInputEvent(InputEvent)*
+
+public void onInputEvent(android.view.InputEvent event)
+
+Called when an input event is received. The recipient should process the input 
+event and then call (|android.view.InputEventReceiver|) to indicate whether the 
+event was handled. No new input events will be received until 
+(|android.view.InputEventReceiver|) is called. 
+
+
+    event - The input event that was received. 
+
+

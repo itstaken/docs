@@ -1,0 +1,87 @@
+*android.graphics.Region_Delegate* *Region_Delegate* Delegate implementing the n
+
+public class Region_Delegate
+  extends    |java.lang.Object|
+
+|android.graphics.Region_Delegate_Description|
+|android.graphics.Region_Delegate_Fields|
+|android.graphics.Region_Delegate_Constructors|
+|android.graphics.Region_Delegate_Methods|
+
+================================================================================
+
+*android.graphics.Region_Delegate_Fields*
+|com.android.layoutlib.bridge.impl.DelegateManager<android.graphics.Region_Delegate>_android.graphics.Region_Delegate.sManager|
+
+*android.graphics.Region_Delegate_Constructors*
+|android.graphics.Region_Delegate()|
+
+*android.graphics.Region_Delegate_Methods*
+|android.graphics.Region_Delegate.combineShapes(Shape,Shape,int)|Combines twoSh
+|android.graphics.Region_Delegate.getDelegate(int)|
+|android.graphics.Region_Delegate.getJavaArea()|
+
+*android.graphics.Region_Delegate_Description*
+
+Delegate implementing the native methods of android.graphics.Region 
+
+Through the layoutlib_create tool, the original native methods of Region have 
+been replaced by calls to methods of the same name in this delegate class. 
+
+This class behaves like the original native implementation, but in Java, 
+keeping previously native data into its own objects and mapping them to int 
+that are sent back and forth between it and the original Region class. 
+
+This also serve as a base class for all Region delegate classes. 
+
+
+
+*com.android.layoutlib.bridge.impl.DelegateManager<android.graphics.Region_Delegate>_android.graphics.Region_Delegate.sManager*
+
+
+
+
+
+*android.graphics.Region_Delegate()*
+
+public Region_Delegate()
+
+
+
+
+*android.graphics.Region_Delegate.combineShapes(Shape,Shape,int)*
+
+public static |java.awt.geom.Area| combineShapes(
+  java.awt.Shape shape1,
+  java.awt.Shape shape2,
+  int regionOp)
+
+Combines two (|java.awt.Shape|) into another one (actually an 
+(|java.awt.geom.Area|) ), according to the given (|Region.Op|) . 
+
+If the Op is not one that combines two shapes, then this return null 
+
+
+    shape1 - the firt shape to combine which can be null if there's no original clip. 
+    shape2 - the 2nd shape to combine 
+    regionOp - the operande for the combine 
+
+    Returns: a new area or null. 
+
+*android.graphics.Region_Delegate.getDelegate(int)*
+
+public static |android.graphics.Region_Delegate| getDelegate(int nativeShader)
+
+
+
+
+
+*android.graphics.Region_Delegate.getJavaArea()*
+
+public |java.awt.geom.Area| getJavaArea()
+
+
+
+
+
+

@@ -1,0 +1,232 @@
+*android.hardware.usb.UsbDevice* *UsbDevice* This class represents a USB device 
+
+public class UsbDevice
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.hardware.usb.UsbDevice_Description|
+|android.hardware.usb.UsbDevice_Fields|
+|android.hardware.usb.UsbDevice_Constructors|
+|android.hardware.usb.UsbDevice_Methods|
+
+================================================================================
+
+*android.hardware.usb.UsbDevice_Fields*
+|android.os.Parcelable.Creator<android.hardware.usb.UsbDevice>_android.hardware.usb.UsbDevice.CREATOR|
+
+*android.hardware.usb.UsbDevice_Constructors*
+|android.hardware.usb.UsbDevice(String,int,int,int,int,int,Parcelable[])|UsbDev
+
+*android.hardware.usb.UsbDevice_Methods*
+|android.hardware.usb.UsbDevice.describeContents()|
+|android.hardware.usb.UsbDevice.equals(Object)|
+|android.hardware.usb.UsbDevice.getDeviceClass()|Returns the devices's class fi
+|android.hardware.usb.UsbDevice.getDeviceId()|Returns a unique integer ID for t
+|android.hardware.usb.UsbDevice.getDeviceId(String)|
+|android.hardware.usb.UsbDevice.getDeviceName()|Returns the name of the device.
+|android.hardware.usb.UsbDevice.getDeviceName(int)|
+|android.hardware.usb.UsbDevice.getDeviceProtocol()|Returns the device's protoc
+|android.hardware.usb.UsbDevice.getDeviceSubclass()|Returns the device's subcla
+|android.hardware.usb.UsbDevice.getInterface(int)|Returns theUsbInterfaceat the
+|android.hardware.usb.UsbDevice.getInterfaceCount()|Returns the number ofUsbInt
+|android.hardware.usb.UsbDevice.getProductId()|Returns a product ID for the dev
+|android.hardware.usb.UsbDevice.getVendorId()|Returns a vendor ID for the devic
+|android.hardware.usb.UsbDevice.hashCode()|
+|android.hardware.usb.UsbDevice.toString()|
+|android.hardware.usb.UsbDevice.writeToParcel(Parcel,int)|
+
+*android.hardware.usb.UsbDevice_Description*
+
+This class represents a USB device attached to the android device with the 
+android device acting as the USB host. Each device contains one or more 
+(|android.hardware.usb.UsbInterface|) s, each of which contains a number of 
+(|android.hardware.usb.UsbEndpoint|) s (the channels via which data is 
+transmitted over USB). 
+
+This class contains information (along with 
+(|android.hardware.usb.UsbInterface|) and (|android.hardware.usb.UsbEndpoint|) 
+) that describes the capabilities of the USB device. To communicate with the 
+device, you open a (|android.hardware.usb.UsbDeviceConnection|) for the device 
+and use (|android.hardware.usb.UsbRequest|) to send and receive data on an 
+endpoint. (|android.hardware.usb.UsbDeviceConnection|) is used for control 
+requests on endpoint zero. 
+
+Developer Guides For more information about communicating with USB hardware, 
+read the <a href="guide/topics/usb/index.html">USB developer guide. 
+
+
+
+*android.os.Parcelable.Creator<android.hardware.usb.UsbDevice>_android.hardware.usb.UsbDevice.CREATOR*
+
+
+
+
+
+*android.hardware.usb.UsbDevice(String,int,int,int,int,int,Parcelable[])*
+
+public UsbDevice(
+  java.lang.String name,
+  int vendorId,
+  int productId,
+  int Class,
+  int subClass,
+  int protocol,
+  android.os.Parcelable[] interfaces)
+
+UsbDevice should only be instantiated by UsbService implementation 
+
+
+*android.hardware.usb.UsbDevice.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.hardware.usb.UsbDevice.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.hardware.usb.UsbDevice.getDeviceClass()*
+
+public int getDeviceClass()
+
+Returns the devices's class field. Some useful constants for USB device classes 
+can be found in (|android.hardware.usb.UsbConstants|) . 
+
+
+
+    Returns: the devices's class 
+
+*android.hardware.usb.UsbDevice.getDeviceId()*
+
+public int getDeviceId()
+
+Returns a unique integer ID for the device. This is a convenience for clients 
+that want to use an integer to represent the device, rather than the device 
+name. IDs are not persistent across USB disconnects. 
+
+
+
+    Returns: the device ID 
+
+*android.hardware.usb.UsbDevice.getDeviceId(String)*
+
+public static int getDeviceId(java.lang.String name)
+
+
+
+
+
+*android.hardware.usb.UsbDevice.getDeviceName()*
+
+public |java.lang.String| getDeviceName()
+
+Returns the name of the device. In the standard implementation, this is the 
+path of the device file for the device in the usbfs file system. 
+
+
+
+    Returns: the device name 
+
+*android.hardware.usb.UsbDevice.getDeviceName(int)*
+
+public static |java.lang.String| getDeviceName(int id)
+
+
+
+
+
+*android.hardware.usb.UsbDevice.getDeviceProtocol()*
+
+public int getDeviceProtocol()
+
+Returns the device's protocol field. 
+
+
+
+    Returns: the device's protocol 
+
+*android.hardware.usb.UsbDevice.getDeviceSubclass()*
+
+public int getDeviceSubclass()
+
+Returns the device's subclass field. 
+
+
+
+    Returns: the device's subclass 
+
+*android.hardware.usb.UsbDevice.getInterface(int)*
+
+public |android.hardware.usb.UsbInterface| getInterface(int index)
+
+Returns the (|android.hardware.usb.UsbInterface|) at the given index. 
+
+
+
+    Returns: the interface 
+
+*android.hardware.usb.UsbDevice.getInterfaceCount()*
+
+public int getInterfaceCount()
+
+Returns the number of (|android.hardware.usb.UsbInterface|) s this device 
+contains. 
+
+
+
+    Returns: the number of interfaces 
+
+*android.hardware.usb.UsbDevice.getProductId()*
+
+public int getProductId()
+
+Returns a product ID for the device. 
+
+
+
+    Returns: the device product ID 
+
+*android.hardware.usb.UsbDevice.getVendorId()*
+
+public int getVendorId()
+
+Returns a vendor ID for the device. 
+
+
+
+    Returns: the device vendor ID 
+
+*android.hardware.usb.UsbDevice.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.hardware.usb.UsbDevice.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.hardware.usb.UsbDevice.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,204 @@
+*android.text.util.Linkify* *Linkify* Linkify take a piece of text and a regular
+
+public class Linkify
+  extends    |java.lang.Object|
+
+|android.text.util.Linkify_Description|
+|android.text.util.Linkify_Fields|
+|android.text.util.Linkify_Constructors|
+|android.text.util.Linkify_Methods|
+
+================================================================================
+
+*android.text.util.Linkify_Fields*
+|int_android.text.util.Linkify.ALL|
+|int_android.text.util.Linkify.EMAIL_ADDRESSES|
+|int_android.text.util.Linkify.MAP_ADDRESSES|
+|int_android.text.util.Linkify.PHONE_NUMBERS|
+|android.text.util.Linkify.MatchFilter_android.text.util.Linkify.sPhoneNumberMatchFilter|
+|android.text.util.Linkify.TransformFilter_android.text.util.Linkify.sPhoneNumberTransformFilter|
+|android.text.util.Linkify.MatchFilter_android.text.util.Linkify.sUrlMatchFilter|
+|int_android.text.util.Linkify.WEB_URLS|
+
+*android.text.util.Linkify_Constructors*
+|android.text.util.Linkify()|
+
+*android.text.util.Linkify_Methods*
+|android.text.util.Linkify.addLinks(Spannable,int)|Scans the text of the provid
+|android.text.util.Linkify.addLinks(Spannable,Pattern,String)|Applies a regex t
+|android.text.util.Linkify.addLinks(Spannable,Pattern,String,Linkify.MatchFilter,Linkify.TransformFilter)|
+|android.text.util.Linkify.addLinks(TextView,int)|Scans the text of the provide
+|android.text.util.Linkify.addLinks(TextView,Pattern,String)|Applies a regex to
+|android.text.util.Linkify.addLinks(TextView,Pattern,String,Linkify.MatchFilter,Linkify.TransformFilter)|
+
+*android.text.util.Linkify_Description*
+
+Linkify take a piece of text and a regular expression and turns all of the 
+regex matches in the text into clickable links. This is particularly useful for 
+matching things like email addresses, web urls, etc. and making them 
+actionable. 
+
+Alone with the pattern that is to be matched, a url scheme prefix is also 
+required. Any pattern match that does not begin with the supplied scheme will 
+have the scheme prepended to the matched text when the clickable url is 
+created. For instance, if you are matching web urls you would supply the scheme 
+http://. If the pattern matches example.com, which does not have a url scheme 
+prefix, the supplied scheme will be prepended to create http://example.com when 
+the clickable url link is created. 
+
+
+
+*int_android.text.util.Linkify.ALL*
+
+Bit mask indicating that all available patterns should be matched in methods 
+that take an options mask 
+
+
+*int_android.text.util.Linkify.EMAIL_ADDRESSES*
+
+Bit field indicating that email addresses should be matched in methods that 
+take an options mask 
+
+
+*int_android.text.util.Linkify.MAP_ADDRESSES*
+
+Bit field indicating that street addresses should be matched in methods that 
+take an options mask 
+
+
+*int_android.text.util.Linkify.PHONE_NUMBERS*
+
+Bit field indicating that phone numbers should be matched in methods that take 
+an options mask 
+
+
+*android.text.util.Linkify.MatchFilter_android.text.util.Linkify.sPhoneNumberMatchFilter*
+
+Filters out URL matches that don't have enough digits to be a phone number. 
+
+
+*android.text.util.Linkify.TransformFilter_android.text.util.Linkify.sPhoneNumberTransformFilter*
+
+Transforms matched phone number text into something suitable to be used in a 
+tel: URL. It does this by removing everything but the digits and plus signs. 
+For instance: +1 (919) 555-1212 becomes +19195551212 
+
+
+*android.text.util.Linkify.MatchFilter_android.text.util.Linkify.sUrlMatchFilter*
+
+Filters out web URL matches that occur after an at-sign (@). This is to prevent 
+turning the domain name in an email address into a web link. 
+
+
+*int_android.text.util.Linkify.WEB_URLS*
+
+Bit field indicating that web URLs should be matched in methods that take an 
+options mask 
+
+
+
+*android.text.util.Linkify()*
+
+public Linkify()
+
+
+
+
+*android.text.util.Linkify.addLinks(Spannable,int)*
+
+public static final boolean addLinks(
+  android.text.Spannable text,
+  int mask)
+
+Scans the text of the provided Spannable and turns all occurrences of the link 
+types indicated in the mask into clickable links. If the mask is nonzero, it 
+also removes any existing URLSpans attached to the Spannable, to avoid problems 
+if you call it repeatedly on the same text. 
+
+
+
+*android.text.util.Linkify.addLinks(Spannable,Pattern,String)*
+
+public static final boolean addLinks(
+  android.text.Spannable text,
+  java.util.regex.Pattern pattern,
+  java.lang.String scheme)
+
+Applies a regex to a Spannable turning the matches into links. 
+
+
+    text - Spannable whose text is to be marked-up with links 
+    pattern - Regex pattern to be used for finding links 
+    scheme - Url scheme string (eg http:// to be prepended to the url of links that do not 
+       have a scheme specified in the link text 
+
+*android.text.util.Linkify.addLinks(Spannable,Pattern,String,Linkify.MatchFilter,Linkify.TransformFilter)*
+
+public static final boolean addLinks(
+  android.text.Spannable s,
+  java.util.regex.Pattern p,
+  java.lang.String scheme,
+  android.text.util.Linkify.MatchFilter matchFilter,
+  android.text.util.Linkify.TransformFilter transformFilter)
+
+Applies a regex to a Spannable turning the matches into links. 
+
+
+    s - Spannable whose text is to be marked-up with links 
+    p - Regex pattern to be used for finding links 
+    scheme - Url scheme string (eg http:// to be prepended to the url of links that do not 
+       have a scheme specified in the link text 
+    matchFilter - The filter that is used to allow the client code additional control over which 
+       pattern matches are to be converted into links. 
+
+*android.text.util.Linkify.addLinks(TextView,int)*
+
+public static final boolean addLinks(
+  android.widget.TextView text,
+  int mask)
+
+Scans the text of the provided TextView and turns all occurrences of the link 
+types indicated in the mask into clickable links. If matches are found the 
+movement method for the TextView is set to LinkMovementMethod. 
+
+
+
+*android.text.util.Linkify.addLinks(TextView,Pattern,String)*
+
+public static final void addLinks(
+  android.widget.TextView text,
+  java.util.regex.Pattern pattern,
+  java.lang.String scheme)
+
+Applies a regex to the text of a TextView turning the matches into links. If 
+links are found then UrlSpans are applied to the link text match areas, and the 
+movement method for the text is changed to LinkMovementMethod. 
+
+
+    text - TextView whose text is to be marked-up with links 
+    pattern - Regex pattern to be used for finding links 
+    scheme - Url scheme string (eg http:// to be prepended to the url of links that do not 
+       have a scheme specified in the link text 
+
+*android.text.util.Linkify.addLinks(TextView,Pattern,String,Linkify.MatchFilter,Linkify.TransformFilter)*
+
+public static final void addLinks(
+  android.widget.TextView text,
+  java.util.regex.Pattern p,
+  java.lang.String scheme,
+  android.text.util.Linkify.MatchFilter matchFilter,
+  android.text.util.Linkify.TransformFilter transformFilter)
+
+Applies a regex to the text of a TextView turning the matches into links. If 
+links are found then UrlSpans are applied to the link text match areas, and the 
+movement method for the text is changed to LinkMovementMethod. 
+
+
+    text - TextView whose text is to be marked-up with links 
+    p - Regex pattern to be used for finding links 
+    scheme - Url scheme string (eg http:// to be prepended to the url of links that do not 
+       have a scheme specified in the link text 
+    matchFilter - The filter that is used to allow the client code additional control over which 
+       pattern matches are to be converted into links. 
+
+

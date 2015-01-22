@@ -1,0 +1,693 @@
+*android.widget.ListView* *ListView* A view that shows items in a vertically scr
+
+public class ListView
+  extends    |android.widget.AbsListView|
+
+|android.widget.ListView_Description|
+|android.widget.ListView_Fields|
+|android.widget.ListView_Constructors|
+|android.widget.ListView_Methods|
+
+================================================================================
+
+*android.widget.ListView_Constructors*
+|android.widget.ListView(Context)|
+|android.widget.ListView(Context,AttributeSet)|
+|android.widget.ListView(Context,AttributeSet,int)|
+
+*android.widget.ListView_Methods*
+|android.widget.ListView.addFooterView(View)|Add a fixed view to appear at the 
+|android.widget.ListView.addFooterView(View,Object,boolean)|Add a fixed view to
+|android.widget.ListView.addHeaderView(View)|Add a fixed view to appear at the 
+|android.widget.ListView.addHeaderView(View,Object,boolean)|Add a fixed view to
+|android.widget.ListView.areFooterDividersEnabled()|
+|android.widget.ListView.areHeaderDividersEnabled()|
+|android.widget.ListView.canAnimate()|
+|android.widget.ListView.dispatchDraw(Canvas)|
+|android.widget.ListView.dispatchKeyEvent(KeyEvent)|
+|android.widget.ListView.drawChild(Canvas,View,long)|
+|android.widget.ListView.findViewByPredicateTraversal(Predicate<View>,View)|
+|android.widget.ListView.findViewTraversal(int)|
+|android.widget.ListView.findViewWithTagTraversal(Object)|
+|android.widget.ListView.getAdapter()|Returns the adapter currently in use in t
+|android.widget.ListView.getCheckItemIds()|Returns the set of checked items ids
+|android.widget.ListView.getDivider()|Returns the drawable that will be drawn b
+|android.widget.ListView.getDividerHeight()|
+|android.widget.ListView.getFooterViewsCount()|
+|android.widget.ListView.getHeaderViewsCount()|
+|android.widget.ListView.getItemsCanFocus()|
+|android.widget.ListView.getMaxScrollAmount()|
+|android.widget.ListView.getOverscrollFooter()|
+|android.widget.ListView.getOverscrollHeader()|
+|android.widget.ListView.isOpaque()|
+|android.widget.ListView.layoutChildren()|
+|android.widget.ListView.onFinishInflate()|
+|android.widget.ListView.onFocusChanged(boolean,int,Rect)|
+|android.widget.ListView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.ListView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.ListView.onInitializeAccessibilityNodeInfoForItem(View,int,AccessibilityNodeInfo)|
+|android.widget.ListView.onKeyDown(int,KeyEvent)|
+|android.widget.ListView.onKeyMultiple(int,int,KeyEvent)|
+|android.widget.ListView.onKeyUp(int,KeyEvent)|
+|android.widget.ListView.onMeasure(int,int)|
+|android.widget.ListView.onSizeChanged(int,int,int,int)|
+|android.widget.ListView.recycleOnMeasure()|
+|android.widget.ListView.removeFooterView(View)|Removes a previously-added foot
+|android.widget.ListView.removeHeaderView(View)|Removes a previously-added head
+|android.widget.ListView.requestChildRectangleOnScreen(View,Rect,boolean)|
+|android.widget.ListView.setAdapter(ListAdapter)|Sets the data behind this List
+|android.widget.ListView.setCacheColorHint(int)|
+|android.widget.ListView.setDivider(Drawable)|Sets the drawable that will be dr
+|android.widget.ListView.setDividerHeight(int)|Sets the height of the divider t
+|android.widget.ListView.setFooterDividersEnabled(boolean)|Enables or disables 
+|android.widget.ListView.setHeaderDividersEnabled(boolean)|Enables or disables 
+|android.widget.ListView.setItemsCanFocus(boolean)|Indicates that the views cre
+|android.widget.ListView.setOverscrollFooter(Drawable)|Sets the drawable that w
+|android.widget.ListView.setOverscrollHeader(Drawable)|Sets the drawable that w
+|android.widget.ListView.setRemoteViewsAdapter(Intent)|Sets up this AbsListView
+|android.widget.ListView.setSelection(int)|Sets the currently selected item.
+|android.widget.ListView.setSelectionAfterHeaderView()|setSelectionAfterHeaderV
+|android.widget.ListView.setSelectionFromTop(int,int)|Sets the selected item an
+|android.widget.ListView.smoothScrollByOffset(int)|Smoothly scroll to the speci
+|android.widget.ListView.smoothScrollToPosition(int)|Smoothly scroll to the spe
+
+*android.widget.ListView_Description*
+
+A view that shows items in a vertically scrolling list. The items come from the 
+(|android.widget.ListAdapter|) associated with this view. 
+
+See the <a href="guide/topics/ui/layout/listview.html">List View guide. 
+
+
+
+*android.widget.ListView(Context)*
+
+public ListView(android.content.Context context)
+
+
+
+
+*android.widget.ListView(Context,AttributeSet)*
+
+public ListView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.ListView(Context,AttributeSet,int)*
+
+public ListView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.ListView.addFooterView(View)*
+
+public void addFooterView(android.view.View v)
+
+Add a fixed view to appear at the bottom of the list. If addFooterView is 
+called more than once, the views will appear in the order they were added. 
+Views added using this call can take focus if they want. 
+
+Note: When first introduced, this method could only be called before setting 
+the adapter with (|android.widget.ListView|) . Starting with 
+(|android.os.Build.VERSION_CODES|) , this method may be called at any time. If 
+the ListView's adapter does not extend (|android.widget.HeaderViewListAdapter|) 
+, it will be wrapped with a supporting instance of 
+(|android.widget.WrapperListAdapter|) . 
+
+
+    v - The view to add. 
+
+*android.widget.ListView.addFooterView(View,Object,boolean)*
+
+public void addFooterView(
+  android.view.View v,
+  java.lang.Object data,
+  boolean isSelectable)
+
+Add a fixed view to appear at the bottom of the list. If addFooterView is 
+called more than once, the views will appear in the order they were added. 
+Views added using this call can take focus if they want. 
+
+Note: When first introduced, this method could only be called before setting 
+the adapter with (|android.widget.ListView|) . Starting with 
+(|android.os.Build.VERSION_CODES|) , this method may be called at any time. If 
+the ListView's adapter does not extend (|android.widget.HeaderViewListAdapter|) 
+, it will be wrapped with a supporting instance of 
+(|android.widget.WrapperListAdapter|) . 
+
+
+    v - The view to add. 
+    data - Data to associate with this view 
+    isSelectable - true if the footer view can be selected 
+
+*android.widget.ListView.addHeaderView(View)*
+
+public void addHeaderView(android.view.View v)
+
+Add a fixed view to appear at the top of the list. If addHeaderView is called 
+more than once, the views will appear in the order they were added. Views added 
+using this call can take focus if they want. 
+
+Note: When first introduced, this method could only be called before setting 
+the adapter with (|android.widget.ListView|) . Starting with 
+(|android.os.Build.VERSION_CODES|) , this method may be called at any time. If 
+the ListView's adapter does not extend (|android.widget.HeaderViewListAdapter|) 
+, it will be wrapped with a supporting instance of 
+(|android.widget.WrapperListAdapter|) . 
+
+
+    v - The view to add. 
+
+*android.widget.ListView.addHeaderView(View,Object,boolean)*
+
+public void addHeaderView(
+  android.view.View v,
+  java.lang.Object data,
+  boolean isSelectable)
+
+Add a fixed view to appear at the top of the list. If this method is called 
+more than once, the views will appear in the order they were added. Views added 
+using this call can take focus if they want. 
+
+Note: When first introduced, this method could only be called before setting 
+the adapter with (|android.widget.ListView|) . Starting with 
+(|android.os.Build.VERSION_CODES|) , this method may be called at any time. If 
+the ListView's adapter does not extend (|android.widget.HeaderViewListAdapter|) 
+, it will be wrapped with a supporting instance of 
+(|android.widget.WrapperListAdapter|) . 
+
+
+    v - The view to add. 
+    data - Data to associate with this view 
+    isSelectable - whether the item is selectable 
+
+*android.widget.ListView.areFooterDividersEnabled()*
+
+public boolean areFooterDividersEnabled()
+
+
+
+
+
+    Returns: Whether the drawing of the divider for footer views is enabled 
+
+*android.widget.ListView.areHeaderDividersEnabled()*
+
+public boolean areHeaderDividersEnabled()
+
+
+
+
+
+    Returns: Whether the drawing of the divider for header views is enabled 
+
+*android.widget.ListView.canAnimate()*
+
+protected boolean canAnimate()
+
+
+
+
+
+*android.widget.ListView.dispatchDraw(Canvas)*
+
+protected void dispatchDraw(Canvas canvas)
+
+
+
+
+
+*android.widget.ListView.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.ListView.drawChild(Canvas,View,long)*
+
+protected boolean drawChild(
+  Canvas canvas,
+  android.view.View child,
+  long drawingTime)
+
+
+
+
+
+*android.widget.ListView.findViewByPredicateTraversal(Predicate<View>,View)*
+
+protected |android.view.View| findViewByPredicateTraversal(
+  com.android.internal.util.Predicate<android.view.View> predicate,
+  android.view.View childToSkip)
+
+
+
+
+
+*android.widget.ListView.findViewTraversal(int)*
+
+protected |android.view.View| findViewTraversal(int id)
+
+
+
+
+
+*android.widget.ListView.findViewWithTagTraversal(Object)*
+
+protected |android.view.View| findViewWithTagTraversal(java.lang.Object tag)
+
+
+
+
+
+*android.widget.ListView.getAdapter()*
+
+public |android.widget.ListAdapter| getAdapter()
+
+Returns the adapter currently in use in this ListView. The returned adapter 
+might not be the same adapter passed to (|android.widget.ListView|) but might 
+be a (|android.widget.WrapperListAdapter|) . 
+
+
+
+    Returns: The adapter currently used to display data in this ListView. 
+
+*android.widget.ListView.getCheckItemIds()*
+
+public long[] getCheckItemIds()
+
+Returns the set of checked items ids. The result is only valid if the choice 
+mode has not been set to (|android.widget.ListView|) . 
+
+    Deprecated: Use {@link #getCheckedItemIds()} instead.
+
+
+    Returns: A new array which contains the id of each checked item in the list. 
+
+*android.widget.ListView.getDivider()*
+
+public Drawable getDivider()
+
+Returns the drawable that will be drawn between each item in the list. 
+
+
+
+    Returns: the current drawable drawn between list elements 
+
+*android.widget.ListView.getDividerHeight()*
+
+public int getDividerHeight()
+
+
+
+
+
+    Returns: Returns the height of the divider that will be drawn between each item in the 
+             list. 
+
+*android.widget.ListView.getFooterViewsCount()*
+
+public int getFooterViewsCount()
+
+
+
+
+
+*android.widget.ListView.getHeaderViewsCount()*
+
+public int getHeaderViewsCount()
+
+
+
+
+
+*android.widget.ListView.getItemsCanFocus()*
+
+public boolean getItemsCanFocus()
+
+
+
+
+
+    Returns: Whether the views created by the ListAdapter can contain focusable items. 
+
+*android.widget.ListView.getMaxScrollAmount()*
+
+public int getMaxScrollAmount()
+
+
+
+
+
+    Returns: The maximum amount a list view will scroll in response to an arrow event. 
+
+*android.widget.ListView.getOverscrollFooter()*
+
+public Drawable getOverscrollFooter()
+
+
+
+
+
+    Returns: The drawable that will be drawn below all other list content 
+
+*android.widget.ListView.getOverscrollHeader()*
+
+public Drawable getOverscrollHeader()
+
+
+
+
+
+    Returns: The drawable that will be drawn above all other list content 
+
+*android.widget.ListView.isOpaque()*
+
+public boolean isOpaque()
+
+
+
+
+
+*android.widget.ListView.layoutChildren()*
+
+protected void layoutChildren()
+
+
+
+
+
+*android.widget.ListView.onFinishInflate()*
+
+protected void onFinishInflate()
+
+
+
+
+
+*android.widget.ListView.onFocusChanged(boolean,int,Rect)*
+
+protected void onFocusChanged(
+  boolean gainFocus,
+  int direction,
+  Rect previouslyFocusedRect)
+
+
+
+
+
+*android.widget.ListView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.ListView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ListView.onInitializeAccessibilityNodeInfoForItem(View,int,AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfoForItem(
+  android.view.View view,
+  int position,
+  android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ListView.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.ListView.onKeyMultiple(int,int,KeyEvent)*
+
+public boolean onKeyMultiple(
+  int keyCode,
+  int repeatCount,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.ListView.onKeyUp(int,KeyEvent)*
+
+public boolean onKeyUp(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.ListView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.ListView.onSizeChanged(int,int,int,int)*
+
+protected void onSizeChanged(
+  int w,
+  int h,
+  int oldw,
+  int oldh)
+
+
+
+
+
+*android.widget.ListView.recycleOnMeasure()*
+
+protected boolean recycleOnMeasure()
+
+
+
+
+
+    Returns: True to recycle the views used to measure this ListView in UNSPECIFIED/AT_MOST 
+             modes, false otherwise. 
+
+*android.widget.ListView.removeFooterView(View)*
+
+public boolean removeFooterView(android.view.View v)
+
+Removes a previously-added footer view. 
+
+
+    v - The view to remove 
+
+    Returns: true if the view was removed, false if the view was not a footer view 
+
+*android.widget.ListView.removeHeaderView(View)*
+
+public boolean removeHeaderView(android.view.View v)
+
+Removes a previously-added header view. 
+
+
+    v - The view to remove 
+
+    Returns: true if the view was removed, false if the view was not a header view 
+
+*android.widget.ListView.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rect,
+  boolean immediate)
+
+
+
+
+
+*android.widget.ListView.setAdapter(ListAdapter)*
+
+public void setAdapter(android.widget.ListAdapter adapter)
+
+Sets the data behind this ListView. 
+
+The adapter passed to this method may be wrapped by a 
+(|android.widget.WrapperListAdapter|) , depending on the ListView features 
+currently in use. For instance, adding headers and/or footers will cause the 
+adapter to be wrapped. 
+
+
+    adapter - The ListAdapter which is responsible for maintaining the data backing this list 
+       and for producing a view to represent an item in that data set. 
+
+*android.widget.ListView.setCacheColorHint(int)*
+
+public void setCacheColorHint(int color)
+
+
+
+
+
+*android.widget.ListView.setDivider(Drawable)*
+
+public void setDivider(Drawable divider)
+
+Sets the drawable that will be drawn between each item in the list. If the 
+drawable does not have an intrinsic height, you should also call 
+(|android.widget.ListView|) 
+
+
+    divider - The drawable to use. 
+
+*android.widget.ListView.setDividerHeight(int)*
+
+public void setDividerHeight(int height)
+
+Sets the height of the divider that will be drawn between each item in the 
+list. Calling this will override the intrinsic height as set by 
+(|android.widget.ListView|) 
+
+
+    height - The new height of the divider in pixels. 
+
+*android.widget.ListView.setFooterDividersEnabled(boolean)*
+
+public void setFooterDividersEnabled(boolean footerDividersEnabled)
+
+Enables or disables the drawing of the divider for footer views. 
+
+
+    footerDividersEnabled - True to draw the footers, false otherwise. 
+
+*android.widget.ListView.setHeaderDividersEnabled(boolean)*
+
+public void setHeaderDividersEnabled(boolean headerDividersEnabled)
+
+Enables or disables the drawing of the divider for header views. 
+
+
+    headerDividersEnabled - True to draw the headers, false otherwise. 
+
+*android.widget.ListView.setItemsCanFocus(boolean)*
+
+public void setItemsCanFocus(boolean itemsCanFocus)
+
+Indicates that the views created by the ListAdapter can contain focusable 
+items. 
+
+
+    itemsCanFocus - true if items can get focus, false otherwise 
+
+*android.widget.ListView.setOverscrollFooter(Drawable)*
+
+public void setOverscrollFooter(Drawable footer)
+
+Sets the drawable that will be drawn below all other list content. This area 
+can become visible when the user overscrolls the list, or when the list's 
+content does not fully fill the container area. 
+
+
+    footer - The drawable to use 
+
+*android.widget.ListView.setOverscrollHeader(Drawable)*
+
+public void setOverscrollHeader(Drawable header)
+
+Sets the drawable that will be drawn above all other list content. This area 
+can become visible when the user overscrolls the list. 
+
+
+    header - The drawable to use 
+
+*android.widget.ListView.setRemoteViewsAdapter(Intent)*
+
+public void setRemoteViewsAdapter(android.content.Intent intent)
+
+Sets up this AbsListView to use a remote views adapter which connects to a 
+RemoteViewsService through the specified intent. 
+
+
+    intent - the intent used to identify the RemoteViewsService for the adapter to connect 
+       to. 
+
+*android.widget.ListView.setSelection(int)*
+
+public void setSelection(int position)
+
+Sets the currently selected item. If in touch mode, the item will not be 
+selected but it will still be positioned appropriately. If the specified 
+selection position is less than 0, then the item at position 0 will be 
+selected. 
+
+
+    position - Index (starting at 0) of the data item to be selected. 
+
+*android.widget.ListView.setSelectionAfterHeaderView()*
+
+public void setSelectionAfterHeaderView()
+
+setSelectionAfterHeaderView set the selection to be the first list item after 
+the header views. 
+
+
+
+*android.widget.ListView.setSelectionFromTop(int,int)*
+
+public void setSelectionFromTop(
+  int position,
+  int y)
+
+Sets the selected item and positions the selection y pixels from the top edge 
+of the ListView. (If in touch mode, the item will not be selected but it will 
+still be positioned appropriately.) 
+
+
+    position - Index (starting at 0) of the data item to be selected. 
+    y - The distance from the top edge of the ListView (plus padding) that the item 
+       will be positioned. 
+
+*android.widget.ListView.smoothScrollByOffset(int)*
+
+public void smoothScrollByOffset(int offset)
+
+Smoothly scroll to the specified adapter position offset. The view will scroll 
+such that the indicated position is displayed. 
+
+
+    offset - The amount to offset from the adapter position to scroll to. 
+
+*android.widget.ListView.smoothScrollToPosition(int)*
+
+public void smoothScrollToPosition(int position)
+
+Smoothly scroll to the specified adapter position. The view will scroll such 
+that the indicated position is displayed. 
+
+
+    position - Scroll to this adapter position. 
+
+

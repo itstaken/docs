@@ -1,0 +1,92 @@
+*android.app.backup.WallpaperBackupHelper* *WallpaperBackupHelper* Helper for ba
+
+public class WallpaperBackupHelper
+  extends    |android.app.backup.FileBackupHelperBase|
+  implements |android.app.backup.BackupHelper|
+
+|android.app.backup.WallpaperBackupHelper_Description|
+|android.app.backup.WallpaperBackupHelper_Fields|
+|android.app.backup.WallpaperBackupHelper_Constructors|
+|android.app.backup.WallpaperBackupHelper_Methods|
+
+================================================================================
+
+*android.app.backup.WallpaperBackupHelper_Fields*
+|java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_IMAGE|
+|java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_IMAGE_KEY|
+|java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_INFO|
+|java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_INFO_KEY|
+
+*android.app.backup.WallpaperBackupHelper_Constructors*
+|android.app.backup.WallpaperBackupHelper(Context,String[],String[])|Construct 
+
+*android.app.backup.WallpaperBackupHelper_Methods*
+|android.app.backup.WallpaperBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.WallpaperBackupHelper.restoreEntity(BackupDataInputStream)|
+
+*android.app.backup.WallpaperBackupHelper_Description*
+
+Helper for backing up / restoring wallpapers. Basically an 
+AbsoluteFileBackupHelper, but with logic for deciding what to do with restored 
+wallpaper images. 
+
+
+
+*java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_IMAGE*
+
+
+
+
+*java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_IMAGE_KEY*
+
+
+
+
+*java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_INFO*
+
+
+
+
+*java.lang.String_android.app.backup.WallpaperBackupHelper.WALLPAPER_INFO_KEY*
+
+
+
+
+
+*android.app.backup.WallpaperBackupHelper(Context,String[],String[])*
+
+public WallpaperBackupHelper(
+  android.content.Context context,
+  java.lang.String[] files,
+  java.lang.String[] keys)
+
+Construct a helper for backing up / restoring the files at the given absolute 
+locations within the file system. 
+
+    context - 
+    files - 
+
+*android.app.backup.WallpaperBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public void performBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+
+Based on oldState, determine which of the files from the application's data 
+directory need to be backed up, write them to the data stream, and fill in 
+newState with the state as it exists now. 
+
+
+
+*android.app.backup.WallpaperBackupHelper.restoreEntity(BackupDataInputStream)*
+
+public void restoreEntity(android.app.backup.BackupDataInputStream data)
+
+Restore one absolute file entity from the restore stream. If we're restoring 
+the magic wallpaper file, take specific action to determine whether it is 
+suitable for the current device. 
+
+
+
+

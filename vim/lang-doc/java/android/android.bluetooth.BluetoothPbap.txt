@@ -1,0 +1,194 @@
+*android.bluetooth.BluetoothPbap* *BluetoothPbap* The Android Bluetooth API is n
+
+public class BluetoothPbap
+  extends    |java.lang.Object|
+
+|android.bluetooth.BluetoothPbap_Description|
+|android.bluetooth.BluetoothPbap_Fields|
+|android.bluetooth.BluetoothPbap_Constructors|
+|android.bluetooth.BluetoothPbap_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothPbap_Fields*
+|java.lang.String_android.bluetooth.BluetoothPbap.PBAP_PREVIOUS_STATE|
+|java.lang.String_android.bluetooth.BluetoothPbap.PBAP_STATE|
+|java.lang.String_android.bluetooth.BluetoothPbap.PBAP_STATE_CHANGED_ACTION|
+|int_android.bluetooth.BluetoothPbap.RESULT_CANCELED|
+|int_android.bluetooth.BluetoothPbap.RESULT_FAILURE|
+|int_android.bluetooth.BluetoothPbap.RESULT_SUCCESS|
+|int_android.bluetooth.BluetoothPbap.STATE_CONNECTED|
+|int_android.bluetooth.BluetoothPbap.STATE_CONNECTING|
+|int_android.bluetooth.BluetoothPbap.STATE_DISCONNECTED|
+|int_android.bluetooth.BluetoothPbap.STATE_ERROR|
+
+*android.bluetooth.BluetoothPbap_Constructors*
+|android.bluetooth.BluetoothPbap(Context,BluetoothPbap.ServiceListener)|Create 
+
+*android.bluetooth.BluetoothPbap_Methods*
+|android.bluetooth.BluetoothPbap.close()|Close the connection to the backing se
+|android.bluetooth.BluetoothPbap.disconnect()|Disconnects the current Pbap clie
+|android.bluetooth.BluetoothPbap.doesClassMatchSink(BluetoothClass)|Check class
+|android.bluetooth.BluetoothPbap.finalize()|
+|android.bluetooth.BluetoothPbap.getClient()|Get the currently connected remote
+|android.bluetooth.BluetoothPbap.getState()|Get the current state of the Blueto
+|android.bluetooth.BluetoothPbap.isConnected(BluetoothDevice)|Returns true if t
+
+*android.bluetooth.BluetoothPbap_Description*
+
+The Android Bluetooth API is not finalized, and *will* change. Use at your own 
+risk. 
+
+Public API for controlling the Bluetooth Pbap Service. This includes Bluetooth 
+Phone book Access profile. BluetoothPbap is a proxy object for controlling the 
+Bluetooth Pbap Service via IPC. 
+
+Creating a BluetoothPbap object will create a binding with the BluetoothPbap 
+service. Users of this object should call close() when they are finished with 
+the BluetoothPbap, so that this proxy object can unbind from the service. 
+
+This BluetoothPbap object is not immediately bound to the BluetoothPbap 
+service. Use the ServiceListener interface to obtain a notification when it is 
+bound, this is especially important if you wish to immediately call methods on 
+BluetoothPbap after construction. 
+
+Android only supports one connected Bluetooth Pce at a time. 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothPbap.PBAP_PREVIOUS_STATE*
+
+int extra for PBAP_STATE_CHANGED_ACTION 
+
+
+*java.lang.String_android.bluetooth.BluetoothPbap.PBAP_STATE*
+
+int extra for PBAP_STATE_CHANGED_ACTION 
+
+
+*java.lang.String_android.bluetooth.BluetoothPbap.PBAP_STATE_CHANGED_ACTION*
+
+Indicates the state of a pbap connection state has changed. This intent will 
+always contain PBAP_STATE, PBAP_PREVIOUS_STATE and BluetoothIntent.ADDRESS 
+extras. 
+
+
+*int_android.bluetooth.BluetoothPbap.RESULT_CANCELED*
+
+Connection canceled before completion. 
+
+
+*int_android.bluetooth.BluetoothPbap.RESULT_FAILURE*
+
+
+
+
+*int_android.bluetooth.BluetoothPbap.RESULT_SUCCESS*
+
+
+
+
+*int_android.bluetooth.BluetoothPbap.STATE_CONNECTED*
+
+Client is currently connected 
+
+
+*int_android.bluetooth.BluetoothPbap.STATE_CONNECTING*
+
+Connection attempt in progress 
+
+
+*int_android.bluetooth.BluetoothPbap.STATE_DISCONNECTED*
+
+No client currently connected 
+
+
+*int_android.bluetooth.BluetoothPbap.STATE_ERROR*
+
+There was an error trying to obtain the state 
+
+
+
+*android.bluetooth.BluetoothPbap(Context,BluetoothPbap.ServiceListener)*
+
+public BluetoothPbap(
+  android.content.Context context,
+  android.bluetooth.BluetoothPbap.ServiceListener l)
+
+Create a BluetoothPbap proxy object. 
+
+
+*android.bluetooth.BluetoothPbap.close()*
+
+public synchronized void close()
+
+Close the connection to the backing service. Other public functions of 
+BluetoothPbap will return default error results once close() has been called. 
+Multiple invocations of close() are ok. 
+
+
+
+*android.bluetooth.BluetoothPbap.disconnect()*
+
+public boolean disconnect()
+
+Disconnects the current Pbap client (PCE). Currently this call blocks, it may 
+soon be made asynchronous. Returns false if this proxy object is not currently 
+connected to the Pbap service. 
+
+
+
+*android.bluetooth.BluetoothPbap.doesClassMatchSink(BluetoothClass)*
+
+public static boolean doesClassMatchSink(android.bluetooth.BluetoothClass btClass)
+
+Check class bits for possible PBAP support. This is a simple heuristic that 
+tries to guess if a device with the given class bits might support PBAP. It is 
+not accurate for all devices. It tries to err on the side of false positives. 
+
+
+
+    Returns: True if this device might support PBAP. 
+
+*android.bluetooth.BluetoothPbap.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.bluetooth.BluetoothPbap.getClient()*
+
+public |android.bluetooth.BluetoothDevice| getClient()
+
+Get the currently connected remote Bluetooth device (PCE). 
+
+
+
+    Returns: The remote Bluetooth device, or null if not in connected or connecting state, 
+             or if this proxy object is not connected to the Pbap service. 
+
+*android.bluetooth.BluetoothPbap.getState()*
+
+public int getState()
+
+Get the current state of the BluetoothPbap service. 
+
+
+
+    Returns: One of the STATE_ return codes, or STATE_ERROR if this proxy object is 
+             currently not connected to the Pbap service. 
+
+*android.bluetooth.BluetoothPbap.isConnected(BluetoothDevice)*
+
+public boolean isConnected(android.bluetooth.BluetoothDevice device)
+
+Returns true if the specified Bluetooth device is connected (does not include 
+connecting). Returns false if not connected, or if this proxy object is not 
+currently connected to the Pbap service. 
+
+
+
+

@@ -1,0 +1,647 @@
+*android.support.v7.widget.GridLayout* *GridLayout* A layout that places its chi
+
+public class GridLayout
+  extends    |android.view.ViewGroup|
+
+|android.support.v7.widget.GridLayout_Description|
+|android.support.v7.widget.GridLayout_Fields|
+|android.support.v7.widget.GridLayout_Constructors|
+|android.support.v7.widget.GridLayout_Methods|
+
+================================================================================
+
+*android.support.v7.widget.GridLayout_Fields*
+|int_android.support.v7.widget.GridLayout.ALIGN_BOUNDS|
+|int_android.support.v7.widget.GridLayout.ALIGN_MARGINS|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.BASELINE|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.BOTTOM|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.CENTER|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.END|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.FILL|
+|int_android.support.v7.widget.GridLayout.HORIZONTAL|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.LEFT|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.RIGHT|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.START|
+|android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.TOP|
+|int_android.support.v7.widget.GridLayout.UNDEFINED|
+|int_android.support.v7.widget.GridLayout.VERTICAL|
+
+*android.support.v7.widget.GridLayout_Constructors*
+|android.support.v7.widget.GridLayout(Context)|
+|android.support.v7.widget.GridLayout(Context,AttributeSet)|
+|android.support.v7.widget.GridLayout(Context,AttributeSet,int)|
+
+*android.support.v7.widget.GridLayout_Methods*
+|android.support.v7.widget.GridLayout.checkLayoutParams(ViewGroup.LayoutParams)|
+|android.support.v7.widget.GridLayout.generateDefaultLayoutParams()|
+|android.support.v7.widget.GridLayout.generateLayoutParams(AttributeSet)|
+|android.support.v7.widget.GridLayout.generateLayoutParams(ViewGroup.LayoutParams)|
+|android.support.v7.widget.GridLayout.getAlignmentMode()|Returns the alignment 
+|android.support.v7.widget.GridLayout.getColumnCount()|Returns the current numb
+|android.support.v7.widget.GridLayout.getOrientation()|Returns the current orie
+|android.support.v7.widget.GridLayout.getPrinter()|Return the printer that will
+|android.support.v7.widget.GridLayout.getRowCount()|Returns the current number 
+|android.support.v7.widget.GridLayout.getUseDefaultMargins()|Returns whether or
+|android.support.v7.widget.GridLayout.isColumnOrderPreserved()|Returns whether 
+|android.support.v7.widget.GridLayout.isRowOrderPreserved()|Returns whether or 
+|android.support.v7.widget.GridLayout.onLayout(boolean,int,int,int,int)|
+|android.support.v7.widget.GridLayout.onMeasure(int,int)|
+|android.support.v7.widget.GridLayout.requestLayout()|
+|android.support.v7.widget.GridLayout.setAlignmentMode(int)|Sets the alignment 
+|android.support.v7.widget.GridLayout.setColumnCount(int)|ColumnCount is used o
+|android.support.v7.widget.GridLayout.setColumnOrderPreserved(boolean)|When thi
+|android.support.v7.widget.GridLayout.setOrientation(int)|GridLayout uses the o
+|android.support.v7.widget.GridLayout.setPrinter(Printer)|Set the printer that 
+|android.support.v7.widget.GridLayout.setRowCount(int)|RowCount is used only to
+|android.support.v7.widget.GridLayout.setRowOrderPreserved(boolean)|When this p
+|android.support.v7.widget.GridLayout.setUseDefaultMargins(boolean)|Whentrue, G
+|android.support.v7.widget.GridLayout.spec(int)|Return a Spec,spec, where:     
+|android.support.v7.widget.GridLayout.spec(int,GridLayout.Alignment)|Return a S
+|android.support.v7.widget.GridLayout.spec(int,int)|Return a Spec,spec, where: 
+|android.support.v7.widget.GridLayout.spec(int,int,GridLayout.Alignment)|Return
+
+*android.support.v7.widget.GridLayout_Description*
+
+A layout that places its children in a rectangular grid. 
+
+The grid is composed of a set of infinitely thin lines that separate the 
+viewing area into cells. Throughout the API, grid lines are referenced by grid 
+indices. A grid withNcolumns hasN + 1grid indices that run 
+from0throughNinclusive. Regardless of how GridLayout is configured, grid 
+index0is fixed to the leading edge of the container and grid indexNis fixed to 
+its trailing edge (after padding is taken into account). 
+
+Row and Column Specs 
+
+Children occupy one or more contiguous cells, as defined by their 
+rowSpec(|android.support.v7.widget.GridLayout.LayoutParams|) and 
+columnSpec(|android.support.v7.widget.GridLayout.LayoutParams|) layout 
+parameters. Each spec defines the set of rows or columns that are to be 
+occupied; and how children should be aligned within the resulting group of 
+cells. Although cells do not normally overlap in a GridLayout, GridLayout does 
+not prevent children being defined to occupy the same cell or group of cells. 
+In this case however, there is no guarantee that children will not themselves 
+overlap after the layout operation completes. 
+
+Default Cell Assignment 
+
+If a child does not specify the row and column indices of the cell it wishes to 
+occupy, GridLayout assigns cell locations automatically using its: 
+orientation(|android.support.v7.widget.GridLayout|) , 
+rowCount(|android.support.v7.widget.GridLayout|) and 
+columnCount(|android.support.v7.widget.GridLayout|) properties. 
+
+Space 
+
+Space between children may be specified either by using instances of the 
+dedicated (|android.support.v7.widget.Space|) view or by setting the 
+leftMargin(|ViewGroup.MarginLayoutParams|) , 
+topMargin(|ViewGroup.MarginLayoutParams|) , 
+rightMargin(|ViewGroup.MarginLayoutParams|) and 
+bottomMargin(|ViewGroup.MarginLayoutParams|) layout parameters. When the 
+useDefaultMargins(|android.support.v7.widget.GridLayout|) property is set, 
+default margins around children are automatically allocated based on the 
+prevailing UI style guide for the platform. Each of the margins so defined may 
+be independently overridden by an assignment to the appropriate layout 
+parameter. Default values will generally produce a reasonable spacing between 
+components but values may change between different releases of the platform. 
+
+Excess Space Distribution 
+
+GridLayout's distribution of excess space is based on priority rather than 
+weight. 
+
+A child's ability to stretch is inferred from the alignment properties of its 
+row and column groups (which are typically set by setting the 
+gravity(|android.support.v7.widget.GridLayout.LayoutParams|) property of the 
+child's layout parameters). If alignment was defined along a given axis then 
+the component is taken as flexible in that direction. If no alignment was set, 
+the component is instead assumed to be inflexible. 
+
+Multiple components in the same row or column group are considered to act in 
+parallel. Such a group is flexible only if all of the components within it are 
+flexible. Row and column groups that sit either side of a common boundary are 
+instead considered to act in series. The composite group made of these two 
+elements is flexible if one of its elements is flexible. 
+
+To make a column stretch, make sure all of the components inside it define a 
+gravity. To prevent a column from stretching, ensure that one of the components 
+in the column does not define a gravity. 
+
+When the principle of flexibility does not provide complete disambiguation, 
+GridLayout's algorithms favour rows and columns that are closer to its right 
+and bottom edges. 
+
+Interpretation of GONE 
+
+For layout purposes, GridLayout treats views whose visibility status is 
+GONE(|View|) , as having zero width and height. This is subtly different from 
+the policy of ignoring views that are marked as GONE outright. If, for example, 
+a gone-marked view was alone in a column, that column would itself collapse to 
+zero width if and only if no gravity was defined on the view. If gravity was 
+defined, then the gone-marked view has no effect on the layout and the 
+container should be laid out as if the view had never been added to it. These 
+statements apply equally to rows as well as columns, and to groups of rows or 
+columns. 
+
+Limitations 
+
+GridLayout does not provide support for the principle of weight, as defined in 
+(|LinearLayout.LayoutParams|) . In general, it is not therefore possible to 
+configure a GridLayout to distribute excess space between multiple components. 
+
+Some common use-cases may nevertheless be accommodated as follows. To place 
+equal amounts of space around a component in a cell group; use 
+(|android.support.v7.widget.GridLayout|) alignment (or 
+gravity(|android.support.v7.widget.GridLayout.LayoutParams|) ). For complete 
+control over excess space distribution in a row or column; use a 
+(|LinearLayout|) subview to hold the components in the associated cell group. 
+When using either of these techniques, bear in mind that cell groups may be 
+defined to overlap. 
+
+See (|android.support.v7.widget.GridLayout.LayoutParams|) for a full 
+description of the layout parameters used by GridLayout. 
+
+
+
+*int_android.support.v7.widget.GridLayout.ALIGN_BOUNDS*
+
+This constant is an alignmentMode(|android.support.v7.widget.GridLayout|) . 
+When thealignmentModeis set to (|android.support.v7.widget.GridLayout|) , 
+alignment is made between the edges of each component's raw view boundary: i.e. 
+the area delimited by the component's: top(|android.view.View|) , 
+left(|android.view.View|) , bottom(|android.view.View|) and 
+right(|android.view.View|) properties. 
+
+For example, whenGridLayoutis in (|android.support.v7.widget.GridLayout|) mode, 
+children that belong to a row group that uses 
+(|android.support.v7.widget.GridLayout|) alignment will all return the same 
+value when their (|android.view.View|) method is called. 
+
+
+*int_android.support.v7.widget.GridLayout.ALIGN_MARGINS*
+
+This constant is an alignmentMode(|android.support.v7.widget.GridLayout|) . 
+When thealignmentModeis set to (|android.support.v7.widget.GridLayout|) , the 
+bounds of each view are extended outwards, according to their margins, before 
+the edges of the resulting rectangle are aligned. 
+
+For example, whenGridLayoutis in (|android.support.v7.widget.GridLayout|) mode, 
+the quantitytop - layoutParams.topMarginis the same for all children that 
+belong to a row group that uses (|android.support.v7.widget.GridLayout|) 
+alignment. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.BASELINE*
+
+Indicates that a view should be aligned with the baselines of the other views 
+in its cell group. This constant may only be used as an alignment in 
+rowSpecs(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.BOTTOM*
+
+Indicates that a view should be aligned with the bottom edges of the other 
+views in its cell group. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.CENTER*
+
+Indicates that a view should be centered with the other views in its cell 
+group. This constant may be used in both 
+rowSpecs(|android.support.v7.widget.GridLayout.LayoutParams|) and 
+columnSpecs(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.END*
+
+Indicates that a view should be aligned with the end edges of the other views 
+in its cell group. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.FILL*
+
+Indicates that a view should expanded to fit the boundaries of its cell group. 
+This constant may be used in both 
+rowSpecs(|android.support.v7.widget.GridLayout.LayoutParams|) and 
+columnSpecs(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+*int_android.support.v7.widget.GridLayout.HORIZONTAL*
+
+The horizontal orientation. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.LEFT*
+
+Indicates that a view should be aligned with the left edges of the other views 
+in its cell group. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.RIGHT*
+
+Indicates that a view should be aligned with the right edges of the other views 
+in its cell group. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.START*
+
+Indicates that a view should be aligned with the start edges of the other views 
+in its cell group. 
+
+
+*android.support.v7.widget.GridLayout.Alignment_android.support.v7.widget.GridLayout.TOP*
+
+Indicates that a view should be aligned with the top edges of the other views 
+in its cell group. 
+
+
+*int_android.support.v7.widget.GridLayout.UNDEFINED*
+
+The constant used to indicate that a value is undefined. Fields can use this 
+value to indicate that their values have not yet been set. Similarly, methods 
+can return this value to indicate that there is no suitable value that the 
+implementation can return. The value used for the constant (currently 
+(|java.lang.Integer|) ) is intended to avoid confusion between valid values 
+whose sign may not be known. 
+
+
+*int_android.support.v7.widget.GridLayout.VERTICAL*
+
+The vertical orientation. 
+
+
+
+*android.support.v7.widget.GridLayout(Context)*
+
+public GridLayout(Context context)
+
+
+
+
+*android.support.v7.widget.GridLayout(Context,AttributeSet)*
+
+public GridLayout(
+  Context context,
+  AttributeSet attrs)
+
+
+
+
+*android.support.v7.widget.GridLayout(Context,AttributeSet,int)*
+
+public GridLayout(
+  Context context,
+  AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.support.v7.widget.GridLayout.checkLayoutParams(ViewGroup.LayoutParams)*
+
+protected boolean checkLayoutParams(ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.generateDefaultLayoutParams()*
+
+protected |android.support.v7.widget.GridLayout.LayoutParams| generateDefaultLayoutParams()
+
+
+
+
+
+*android.support.v7.widget.GridLayout.generateLayoutParams(AttributeSet)*
+
+public |android.support.v7.widget.GridLayout.LayoutParams| generateLayoutParams(AttributeSet attrs)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.generateLayoutParams(ViewGroup.LayoutParams)*
+
+protected |android.support.v7.widget.GridLayout.LayoutParams| generateLayoutParams(ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.getAlignmentMode()*
+
+public int getAlignmentMode()
+
+Returns the alignment mode. 
+
+
+
+    Returns: the alignment mode; either {@link #ALIGN_BOUNDS} or {@link #ALIGN_MARGINS} 
+
+*android.support.v7.widget.GridLayout.getColumnCount()*
+
+public int getColumnCount()
+
+Returns the current number of columns. This is either the last value that was 
+set with (|android.support.v7.widget.GridLayout|) or, if no such value was set, 
+the maximum value of each the upper bounds defined in 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+
+    Returns: the current number of columns 
+
+*android.support.v7.widget.GridLayout.getOrientation()*
+
+public int getOrientation()
+
+Returns the current orientation. 
+
+
+
+    Returns: either {@link #HORIZONTAL} or {@link #VERTICAL} 
+
+*android.support.v7.widget.GridLayout.getPrinter()*
+
+public Printer getPrinter()
+
+Return the printer that will log diagnostics from this layout. 
+
+
+
+    Returns: the printer associated with this view 
+
+*android.support.v7.widget.GridLayout.getRowCount()*
+
+public int getRowCount()
+
+Returns the current number of rows. This is either the last value that was set 
+with (|android.support.v7.widget.GridLayout|) or, if no such value was set, the 
+maximum value of each the upper bounds defined in 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+
+    Returns: the current number of rows 
+
+*android.support.v7.widget.GridLayout.getUseDefaultMargins()*
+
+public boolean getUseDefaultMargins()
+
+Returns whether or not this GridLayout will allocate default margins when no 
+corresponding layout parameters are defined. 
+
+
+
+    Returns: {@code true} if default margins should be allocated 
+
+*android.support.v7.widget.GridLayout.isColumnOrderPreserved()*
+
+public boolean isColumnOrderPreserved()
+
+Returns whether or not column boundaries are ordered by their grid indices. 
+
+
+
+    Returns: {@code true} if column boundaries must appear in the order of their indices, 
+             {@code false} otherwise 
+
+*android.support.v7.widget.GridLayout.isRowOrderPreserved()*
+
+public boolean isRowOrderPreserved()
+
+Returns whether or not row boundaries are ordered by their grid indices. 
+
+
+
+    Returns: {@code true} if row boundaries must appear in the order of their indices, 
+             {@code false} otherwise 
+
+*android.support.v7.widget.GridLayout.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthSpec,
+  int heightSpec)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.requestLayout()*
+
+public void requestLayout()
+
+
+
+
+
+*android.support.v7.widget.GridLayout.setAlignmentMode(int)*
+
+public void setAlignmentMode(int alignmentMode)
+
+Sets the alignment mode to be used for all of the alignments between the 
+children of this container. 
+
+The default value of this property is (|android.support.v7.widget.GridLayout|) 
+. 
+
+
+    alignmentMode - either {@link #ALIGN_BOUNDS} or {@link #ALIGN_MARGINS} 
+
+*android.support.v7.widget.GridLayout.setColumnCount(int)*
+
+public void setColumnCount(int columnCount)
+
+ColumnCount is used only to generate default column/column indices when they 
+are not specified by a component's layout parameters. 
+
+
+    columnCount - the number of columns. 
+
+*android.support.v7.widget.GridLayout.setColumnOrderPreserved(boolean)*
+
+public void setColumnOrderPreserved(boolean columnOrderPreserved)
+
+When this property istrue, GridLayout is forced to place the column boundaries 
+so that their associated grid indices are in ascending order in the view. 
+
+When this property isfalseGridLayout is at liberty to place the horizontal 
+column boundaries in whatever order best fits the given constraints. 
+
+The default value of this property istrue. 
+
+
+    columnOrderPreserved - use {@code true} to force GridLayout to respect the order of column boundaries. 
+
+*android.support.v7.widget.GridLayout.setOrientation(int)*
+
+public void setOrientation(int orientation)
+
+GridLayout uses the orientation property for two purposes: 
+
+To control the 'direction' in which default row/column indices are generated 
+when they are not specified in a component's layout parameters. 
+
+To control which axis should be processed first during the layout operation: 
+when orientation is (|android.support.v7.widget.GridLayout|) the horizontal 
+axis is laid out first. 
+
+
+
+The order in which axes are laid out is important if, for example, the height 
+of one of GridLayout's children is dependent on its width - and its width is, 
+in turn, dependent on the widths of other components. 
+
+If your layout contains a (|android.widget.TextView|) (or 
+derivative:Button,EditText,CheckBox, etc.) which is in multi-line mode (the 
+default) it is normally best to leave GridLayout's orientation asHORIZONTAL- 
+becauseTextViewis capable of deriving its height for a given width, but not the 
+other way around. 
+
+Other than the effects above, orientation does not affect the actual layout 
+operation of GridLayout, so it's fine to leave GridLayout inHORIZONTALmode even 
+if the height of the intended layout greatly exceeds its width. 
+
+The default value of this property is (|android.support.v7.widget.GridLayout|) 
+. 
+
+
+    orientation - either {@link #HORIZONTAL} or {@link #VERTICAL} 
+
+*android.support.v7.widget.GridLayout.setPrinter(Printer)*
+
+public void setPrinter(Printer printer)
+
+Set the printer that will log diagnostics from this layout. The default value 
+is created by (|android.util.LogPrinter|) . 
+
+
+    printer - the printer associated with this layout 
+
+*android.support.v7.widget.GridLayout.setRowCount(int)*
+
+public void setRowCount(int rowCount)
+
+RowCount is used only to generate default row/column indices when they are not 
+specified by a component's layout parameters. 
+
+
+    rowCount - the number of rows 
+
+*android.support.v7.widget.GridLayout.setRowOrderPreserved(boolean)*
+
+public void setRowOrderPreserved(boolean rowOrderPreserved)
+
+When this property istrue, GridLayout is forced to place the row boundaries so 
+that their associated grid indices are in ascending order in the view. 
+
+When this property isfalseGridLayout is at liberty to place the vertical row 
+boundaries in whatever order best fits the given constraints. 
+
+The default value of this property istrue. 
+
+
+    rowOrderPreserved - {@code true} to force GridLayout to respect the order of row boundaries 
+
+*android.support.v7.widget.GridLayout.setUseDefaultMargins(boolean)*
+
+public void setUseDefaultMargins(boolean useDefaultMargins)
+
+Whentrue, GridLayout allocates default margins around children based on the 
+child's visual characteristics. Each of the margins so defined may be 
+independently overridden by an assignment to the appropriate layout parameter. 
+
+Whenfalse, the default value of all margins is zero. 
+
+When setting totrue, consider setting the value of the 
+alignmentMode(|android.support.v7.widget.GridLayout|) property to 
+(|android.support.v7.widget.GridLayout|) . 
+
+The default value of this property isfalse. 
+
+
+    useDefaultMargins - use {@code true} to make GridLayout allocate default margins 
+
+*android.support.v7.widget.GridLayout.spec(int)*
+
+public static |android.support.v7.widget.GridLayout.Spec| spec(int start)
+
+Return a Spec,spec, where: 
+
+spec.span = [start, start + 1] 
+
+To leave the start index undefined, use the value 
+(|android.support.v7.widget.GridLayout|) . 
+
+
+    start - the start index 
+
+*android.support.v7.widget.GridLayout.spec(int,GridLayout.Alignment)*
+
+public static |android.support.v7.widget.GridLayout.Spec| spec(
+  int start,
+  android.support.v7.widget.GridLayout.Alignment alignment)
+
+Return a Spec,spec, where: 
+
+spec.span = [start, start + 1] spec.alignment = alignment 
+
+To leave the start index undefined, use the value 
+(|android.support.v7.widget.GridLayout|) . 
+
+
+    start - the start index 
+    alignment - the alignment 
+
+*android.support.v7.widget.GridLayout.spec(int,int)*
+
+public static |android.support.v7.widget.GridLayout.Spec| spec(
+  int start,
+  int size)
+
+Return a Spec,spec, where: 
+
+spec.span = [start, start + size] 
+
+To leave the start index undefined, use the value 
+(|android.support.v7.widget.GridLayout|) . 
+
+
+    start - the start 
+    size - the size 
+
+*android.support.v7.widget.GridLayout.spec(int,int,GridLayout.Alignment)*
+
+public static |android.support.v7.widget.GridLayout.Spec| spec(
+  int start,
+  int size,
+  android.support.v7.widget.GridLayout.Alignment alignment)
+
+Return a Spec,spec, where: 
+
+spec.span = [start, start + size] spec.alignment = alignment 
+
+To leave the start index undefined, use the value 
+(|android.support.v7.widget.GridLayout|) . 
+
+
+    start - the start 
+    size - the size 
+    alignment - the alignment 
+
+

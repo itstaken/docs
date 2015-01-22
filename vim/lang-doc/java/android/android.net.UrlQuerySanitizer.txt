@@ -1,0 +1,486 @@
+*android.net.UrlQuerySanitizer* *UrlQuerySanitizer* Sanitizes the Query portion 
+
+public class UrlQuerySanitizer
+  extends    |java.lang.Object|
+
+|android.net.UrlQuerySanitizer_Description|
+|android.net.UrlQuerySanitizer_Fields|
+|android.net.UrlQuerySanitizer_Constructors|
+|android.net.UrlQuerySanitizer_Methods|
+
+================================================================================
+
+*android.net.UrlQuerySanitizer_Constructors*
+|android.net.UrlQuerySanitizer()|Constructs a UrlQuerySanitizer.
+|android.net.UrlQuerySanitizer(String)|Constructs a UrlQuerySanitizer and parse
+
+*android.net.UrlQuerySanitizer_Methods*
+|android.net.UrlQuerySanitizer.addSanitizedEntry(String,String)|Record a saniti
+|android.net.UrlQuerySanitizer.clear()|Clear the existing entries.
+|android.net.UrlQuerySanitizer.decodeHexDigit(char)|Convert a character that re
+|android.net.UrlQuerySanitizer.getAllButNulAndAngleBracketsLegal()|Return a val
+|android.net.UrlQuerySanitizer.getAllButNulLegal()|Return a value sanitizer tha
+|android.net.UrlQuerySanitizer.getAllButWhitespaceLegal()|Return a value saniti
+|android.net.UrlQuerySanitizer.getAllIllegal()|Return a value sanitizer that do
+|android.net.UrlQuerySanitizer.getAllowUnregisteredParamaters()|Get whether or 
+|android.net.UrlQuerySanitizer.getAmpAndSpaceLegal()|Return a value sanitizer t
+|android.net.UrlQuerySanitizer.getAmpLegal()|Return a value sanitizer that does
+|android.net.UrlQuerySanitizer.getEffectiveValueSanitizer(String)|Get the effec
+|android.net.UrlQuerySanitizer.getParameterList()|An array list of all of the p
+|android.net.UrlQuerySanitizer.getParameterSet()|Get a set of all of the parame
+|android.net.UrlQuerySanitizer.getPreferFirstRepeatedParameter()|Get whether or
+|android.net.UrlQuerySanitizer.getSpaceLegal()|Return a value sanitizer that do
+|android.net.UrlQuerySanitizer.getUnregisteredParameterValueSanitizer()|Get the
+|android.net.UrlQuerySanitizer.getUrlAndSpaceLegal()|Return a value sanitizer t
+|android.net.UrlQuerySanitizer.getUrlLegal()|Return a value sanitizer that allo
+|android.net.UrlQuerySanitizer.getValue(String)|Get the value for a parameter i
+|android.net.UrlQuerySanitizer.getValueSanitizer(String)|Get the value sanitize
+|android.net.UrlQuerySanitizer.hasParameter(String)|Check if a parameter exists
+|android.net.UrlQuerySanitizer.isHexDigit(char)|Test if a character is a hexide
+|android.net.UrlQuerySanitizer.parseEntry(String,String)|Parse an escaped param
+|android.net.UrlQuerySanitizer.parseQuery(String)|Parse a query.
+|android.net.UrlQuerySanitizer.parseUrl(String)|Parse the query parameters out 
+|android.net.UrlQuerySanitizer.registerParameter(String,UrlQuerySanitizer.ValueSanitizer)|
+|android.net.UrlQuerySanitizer.registerParameters(String[],UrlQuerySanitizer.ValueSanitizer)|
+|android.net.UrlQuerySanitizer.setAllowUnregisteredParamaters(boolean)|Set whet
+|android.net.UrlQuerySanitizer.setPreferFirstRepeatedParameter(boolean)|Set whe
+|android.net.UrlQuerySanitizer.setUnregisteredParameterValueSanitizer(UrlQuerySanitizer.ValueSanitizer)|
+|android.net.UrlQuerySanitizer.unescape(String)|Unescape an escaped string.
+
+*android.net.UrlQuerySanitizer_Description*
+
+Sanitizes the Query portion of a URL. Simple example: 
+
+UrlQuerySanitizer sanitizer = new UrlQuerySanitizer(); 
+sanitizer.setAllowUnregisteredParamaters(true); 
+sanitizer.parseUrl("http://example.com/?name=Joe+User"); String name = 
+sanitizer.getValue("name")); // name now contains "Joe_User" 
+
+Register ValueSanitizers to customize the way individual parameters are 
+sanitized: 
+
+UrlQuerySanitizer sanitizer = new UrlQuerySanitizer(); 
+sanitizer.registerParamater("name", UrlQuerySanitizer.createSpaceLegal()); 
+sanitizer.parseUrl("http://example.com/?name=Joe+User"); String name = 
+sanitizer.getValue("name")); // name now contains "Joe User". (The string is 
+first decoded, which // converts the '+' to a ' '. Then the string is 
+sanitized, which // converts the ' ' to an '_'. (The ' ' is converted because 
+the default unregistered parameter sanitizer does not allow any special 
+characters, and ' ' is a special character.) 
+
+There are several ways to create ValueSanitizers. In order of increasing 
+sophistication: 
+
+Call one of the UrlQuerySanitizer.createXXX() methods. Construct your own 
+instance of UrlQuerySanitizer.IllegalCharacterValueSanitizer. Subclass 
+UrlQuerySanitizer.ValueSanitizer to define your own value sanitizer. 
+
+
+
+*android.net.UrlQuerySanitizer()*
+
+public UrlQuerySanitizer()
+
+Constructs a UrlQuerySanitizer. 
+
+Defaults: 
+
+unregistered parameters are not allowed. the last instance of a repeated 
+parameter is preferred. The default value sanitizer is an AllIllegal value 
+sanitizer. 
+
+
+*android.net.UrlQuerySanitizer(String)*
+
+public UrlQuerySanitizer(java.lang.String url)
+
+Constructs a UrlQuerySanitizer and parse a URL. This constructor is provided 
+for convenience when the default parsing behavior is acceptable. 
+
+Because the URL is parsed before the constructor returns, there isn't a chance 
+to configure the sanitizer to change the parsing behavior. 
+
+UrlQuerySanitizer sanitizer = new UrlQuerySanitizer(myUrl); String name = 
+sanitizer.getValue("name"); 
+
+Defaults: 
+
+unregistered parameters are allowed. the last instance of a repeated parameter 
+is preferred. The default value sanitizer is an AllIllegal value sanitizer. 
+
+
+*android.net.UrlQuerySanitizer.addSanitizedEntry(String,String)*
+
+protected void addSanitizedEntry(
+  java.lang.String parameter,
+  java.lang.String value)
+
+Record a sanitized parameter-value pair. Override if you want to do additional 
+filtering or validation. 
+
+
+    parameter - an unescaped parameter 
+    value - a sanitized unescaped value 
+
+*android.net.UrlQuerySanitizer.clear()*
+
+protected void clear()
+
+Clear the existing entries. Called to get ready to parse a new query string. 
+
+
+
+*android.net.UrlQuerySanitizer.decodeHexDigit(char)*
+
+protected int decodeHexDigit(char c)
+
+Convert a character that represents a hexidecimal digit into an integer. If the 
+character is not a hexidecimal digit, then -1 is returned. Both upper case and 
+lower case hex digits are allowed. 
+
+
+    c - the hexidecimal digit. 
+
+    Returns: the integer value of the hexidecimal digit. 
+
+*android.net.UrlQuerySanitizer.getAllButNulAndAngleBracketsLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAllButNulAndAngleBracketsLegal()
+
+Return a value sanitizer that allows any special characters except angle 
+brackets ('') and Nul ('\0'). Allows script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getAllButNulLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAllButNulLegal()
+
+Return a value sanitizer that allows everything except Nul ('\0') characters. 
+Script URLs are allowed. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getAllButWhitespaceLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAllButWhitespaceLegal()
+
+Return a value sanitizer that allows everything except Nul ('\0') characters, 
+space (' '), and other whitespace characters. Script URLs are allowed. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getAllIllegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAllIllegal()
+
+Return a value sanitizer that does not allow any special characters, and also 
+does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getAllowUnregisteredParamaters()*
+
+public boolean getAllowUnregisteredParamaters()
+
+Get whether or not unregistered parameters are allowed. If not allowed, they 
+will be dropped when a query is parsed. 
+
+
+
+    Returns: true if unregistered parameters are allowed. 
+
+*android.net.UrlQuerySanitizer.getAmpAndSpaceLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAmpAndSpaceLegal()
+
+Return a value sanitizer that does not allow any special characters except 
+ampersand ('and space (' '). Does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getAmpLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getAmpLegal()
+
+Return a value sanitizer that does not allow any special characters except 
+ampersand ('Does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getEffectiveValueSanitizer(String)*
+
+public |android.net.UrlQuerySanitizer.ValueSanitizer| getEffectiveValueSanitizer(java.lang.String parameter)
+
+Get the effective value sanitizer for a parameter. Like getValueSanitizer, 
+except if there is no value sanitizer registered for a parameter, and 
+unregistered paramaters are allowed, then the default value sanitizer is 
+returned. 
+
+
+    parameter - an unescaped parameter 
+
+    Returns: the effective value sanitizer for a parameter. 
+
+*android.net.UrlQuerySanitizer.getParameterList()*
+
+public |java.util.List|<ParameterValuePair> getParameterList()
+
+An array list of all of the parameter value pairs in the sanitized query, in 
+the order they appeared in the query. May contain duplicate parameters. Note: 
+Do not modify this list. Treat it as a read-only list. 
+
+
+
+*android.net.UrlQuerySanitizer.getParameterSet()*
+
+public |java.util.Set|<String> getParameterSet()
+
+Get a set of all of the parameters found in the sanitized query. 
+
+Note: Do not modify this set. Treat it as a read-only set. 
+
+
+
+    Returns: all the parameters found in the current query. 
+
+*android.net.UrlQuerySanitizer.getPreferFirstRepeatedParameter()*
+
+public boolean getPreferFirstRepeatedParameter()
+
+Get whether or not the first occurrence of a repeated parameter is preferred. 
+
+
+
+    Returns: true if the first occurrence of a repeated parameter is preferred. 
+
+*android.net.UrlQuerySanitizer.getSpaceLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getSpaceLegal()
+
+Return a value sanitizer that does not allow any special characters except 
+space (' '). Does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getUnregisteredParameterValueSanitizer()*
+
+public |android.net.UrlQuerySanitizer.ValueSanitizer| getUnregisteredParameterValueSanitizer()
+
+Get the current value sanitizer used when processing unregistered parameter 
+values. 
+
+Note: The default unregistered parameter value sanitizer is one that doesn't 
+allow any special characters, similar to what is returned by calling 
+createAllIllegal. 
+
+
+
+    Returns: the current ValueSanitizer used to sanitize unregistered parameter values. 
+
+*android.net.UrlQuerySanitizer.getUrlAndSpaceLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getUrlAndSpaceLegal()
+
+Return a value sanitizer that allows all the characters used by encoded URLs 
+and allows spaces, which are not technically legal in encoded URLs, but 
+commonly appear anyway. Does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getUrlLegal()*
+
+public static final |android.net.UrlQuerySanitizer.ValueSanitizer| getUrlLegal()
+
+Return a value sanitizer that allows all the characters used by encoded URLs. 
+Does not allow script URLs. 
+
+
+
+    Returns: a value sanitizer 
+
+*android.net.UrlQuerySanitizer.getValue(String)*
+
+public |java.lang.String| getValue(java.lang.String parameter)
+
+Get the value for a parameter in the current sanitized query. Returns null if 
+the parameter does not exit. 
+
+
+    parameter - the unencoded name of a parameter. 
+
+    Returns: the sanitized unencoded value of the parameter, or null if the parameter does 
+             not exist. 
+
+*android.net.UrlQuerySanitizer.getValueSanitizer(String)*
+
+public |android.net.UrlQuerySanitizer.ValueSanitizer| getValueSanitizer(java.lang.String parameter)
+
+Get the value sanitizer for a parameter. Returns null if there is no value 
+sanitizer registered for the parameter. 
+
+
+    parameter - the unescaped parameter 
+
+    Returns: the currently registered value sanitizer for this parameter. 
+
+*android.net.UrlQuerySanitizer.hasParameter(String)*
+
+public boolean hasParameter(java.lang.String parameter)
+
+Check if a parameter exists in the current sanitized query. 
+
+
+    parameter - the unencoded name of a parameter. 
+
+    Returns: true if the paramater exists in the current sanitized queary. 
+
+*android.net.UrlQuerySanitizer.isHexDigit(char)*
+
+protected boolean isHexDigit(char c)
+
+Test if a character is a hexidecimal digit. Both upper case and lower case hex 
+digits are allowed. 
+
+
+    c - the character to test 
+
+    Returns: true if c is a hex digit. 
+
+*android.net.UrlQuerySanitizer.parseEntry(String,String)*
+
+protected void parseEntry(
+  java.lang.String parameter,
+  java.lang.String value)
+
+Parse an escaped parameter-value pair. The default implementation unescapes 
+both the parameter and the value, then looks up the effective value sanitizer 
+for the parameter and uses it to sanitize the value. If all goes well then 
+addSanitizedValue is called with the unescaped parameter and the sanitized 
+unescaped value. 
+
+
+    parameter - an escaped parameter 
+    value - an unsanitzied escaped value 
+
+*android.net.UrlQuerySanitizer.parseQuery(String)*
+
+public void parseQuery(java.lang.String query)
+
+Parse a query. A query string is any number of parameter-value clauses 
+separated by any non-zero number of ampersands. A parameter-value clause is a 
+parameter followed by an equal sign, followed by a value. If the equal sign is 
+missing, the value is assumed to be the empty string. 
+
+
+    query - the query to parse. 
+
+*android.net.UrlQuerySanitizer.parseUrl(String)*
+
+public void parseUrl(java.lang.String url)
+
+Parse the query parameters out of an encoded URL. Works by extracting the query 
+portion from the URL and then calling parseQuery(). If there is no query 
+portion it is treated as if the query portion is an empty string. 
+
+
+    url - the encoded URL to parse. 
+
+*android.net.UrlQuerySanitizer.registerParameter(String,UrlQuerySanitizer.ValueSanitizer)*
+
+public void registerParameter(
+  java.lang.String parameter,
+  android.net.UrlQuerySanitizer.ValueSanitizer valueSanitizer)
+
+Register a value sanitizer for a particular parameter. Can also be used to 
+replace or remove an already-set value sanitizer. 
+
+Registering a non-null value sanitizer for a particular parameter makes that 
+parameter a registered parameter. 
+
+
+    parameter - an unencoded parameter name 
+    valueSanitizer - the value sanitizer to use for a particular parameter. May be null in order to 
+       unregister that parameter. 
+
+*android.net.UrlQuerySanitizer.registerParameters(String[],UrlQuerySanitizer.ValueSanitizer)*
+
+public void registerParameters(
+  java.lang.String[] parameters,
+  android.net.UrlQuerySanitizer.ValueSanitizer valueSanitizer)
+
+Register a value sanitizer for an array of parameters. 
+
+
+    parameters - An array of unencoded parameter names. 
+    valueSanitizer - 
+
+*android.net.UrlQuerySanitizer.setAllowUnregisteredParamaters(boolean)*
+
+public void setAllowUnregisteredParamaters(boolean allowUnregisteredParamaters)
+
+Set whether or not unregistered parameters are allowed. If they are not 
+allowed, then they will be dropped when a query is sanitized. 
+
+Defaults to false. 
+
+
+    allowUnregisteredParamaters - true to allow unregistered parameters. 
+
+*android.net.UrlQuerySanitizer.setPreferFirstRepeatedParameter(boolean)*
+
+public void setPreferFirstRepeatedParameter(boolean preferFirstRepeatedParameter)
+
+Set whether or not the first occurrence of a repeated parameter is preferred. 
+True means the first repeated parameter is preferred. False means that the last 
+repeated parameter is preferred. 
+
+The preferred parameter is the one that is returned when getParameter is 
+called. 
+
+defaults to false. 
+
+
+    preferFirstRepeatedParameter - True if the first repeated parameter is preferred. 
+
+*android.net.UrlQuerySanitizer.setUnregisteredParameterValueSanitizer(UrlQuerySanitizer.ValueSanitizer)*
+
+public void setUnregisteredParameterValueSanitizer(android.net.UrlQuerySanitizer.ValueSanitizer sanitizer)
+
+Set the value sanitizer used when processing unregistered parameter values. 
+
+
+    sanitizer - set the ValueSanitizer used to sanitize unregistered parameter values. 
+
+*android.net.UrlQuerySanitizer.unescape(String)*
+
+public |java.lang.String| unescape(java.lang.String string)
+
+Unescape an escaped string. 
+
+'+' characters are replaced by ' ' characters. Valid "%xx" escape sequences are 
+replaced by the corresponding unescaped character. Invalid escape sequences 
+such as %1z", are passed through unchanged. 
+
+
+    string - the escaped string 
+
+    Returns: the unescaped string. 
+
+

@@ -1,0 +1,133 @@
+*android.hardware.camera2.Rational* *Rational* The rational data type used by Ca
+
+public final class Rational
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.Rational_Description|
+|android.hardware.camera2.Rational_Fields|
+|android.hardware.camera2.Rational_Constructors|
+|android.hardware.camera2.Rational_Methods|
+
+================================================================================
+
+*android.hardware.camera2.Rational_Constructors*
+|android.hardware.camera2.Rational(int,int)|Create a Rational with a given nume
+
+*android.hardware.camera2.Rational_Methods*
+|android.hardware.camera2.Rational.equals(Object)|Compare this Rational to anot
+|android.hardware.camera2.Rational.gcd()|Calculates the greatest common divisor
+|android.hardware.camera2.Rational.getDenominator()|Gets the denominator of the
+|android.hardware.camera2.Rational.getNumerator()|Gets the numerator of the rat
+|android.hardware.camera2.Rational.hashCode()|
+|android.hardware.camera2.Rational.toFloat()|Convert to a floating point repres
+|android.hardware.camera2.Rational.toString()|
+
+*android.hardware.camera2.Rational_Description*
+
+The rational data type used by CameraMetadata keys. Contains a pair of ints 
+representing the numerator and denominator of a Rational number. This type is 
+immutable. 
+
+
+
+*android.hardware.camera2.Rational(int,int)*
+
+public Rational(
+  int numerator,
+  int denominator)
+
+Create a Rational with a given numerator and denominator. 
+
+The signs of the numerator and the denominator may be flipped such that the 
+denominator is always positive. 
+
+A rational value with a 0-denominator may be constructed, but will have similar 
+semantics as float NaN and INF values. The int getter functions return 0 in 
+this case. 
+
+    numerator - the numerator of the rational 
+    denominator - the denominator of the rational 
+
+*android.hardware.camera2.Rational.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Compare this Rational to another object and see if they are equal. 
+
+A Rational object can only be equal to another Rational object (comparing 
+against any other type will return false). 
+
+A Rational object is considered equal to another Rational object if and only if 
+one of the following holds: Both are NaN Both are infinities of the same sign 
+Both have the same numerator and denominator in their reduced form 
+
+A reduced form of a Rational is calculated by dividing both the numerator and 
+the denominator by their greatest common divisor. 
+
+
+
+(new Rational(1, 2)).equals(new Rational(1, 2)) == true // trivially true (new 
+Rational(2, 3)).equals(new Rational(1, 2)) == false // trivially false (new 
+Rational(1, 2)).equals(new Rational(2, 4)) == true // true after reduction (new 
+Rational(0, 0)).equals(new Rational(0, 0)) == true // NaN.equals(NaN) (new 
+Rational(1, 0)).equals(new Rational(5, 0)) == true // both are +infinity (new 
+Rational(1, 0)).equals(new Rational(-1, 0)) == false // +infinity != -infinity 
+
+
+    obj - a reference to another object 
+
+    Returns: A boolean that determines whether or not the two Rational objects are equal. 
+
+*android.hardware.camera2.Rational.gcd()*
+
+public int gcd()
+
+Calculates the greatest common divisor using Euclid's algorithm. 
+
+
+
+    Returns: An int value representing the gcd. Always positive. 
+
+*android.hardware.camera2.Rational.getDenominator()*
+
+public int getDenominator()
+
+Gets the denominator of the rational 
+
+
+
+*android.hardware.camera2.Rational.getNumerator()*
+
+public int getNumerator()
+
+Gets the numerator of the rational. 
+
+
+
+*android.hardware.camera2.Rational.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.hardware.camera2.Rational.toFloat()*
+
+public float toFloat()
+
+Convert to a floating point representation. 
+
+
+
+    Returns: The floating point representation of this rational number. 
+
+*android.hardware.camera2.Rational.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

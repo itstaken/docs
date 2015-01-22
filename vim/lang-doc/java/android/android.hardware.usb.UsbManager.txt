@@ -1,0 +1,382 @@
+*android.hardware.usb.UsbManager* *UsbManager* This class allows you to access t
+
+public class UsbManager
+  extends    |java.lang.Object|
+
+|android.hardware.usb.UsbManager_Description|
+|android.hardware.usb.UsbManager_Fields|
+|android.hardware.usb.UsbManager_Constructors|
+|android.hardware.usb.UsbManager_Methods|
+
+================================================================================
+
+*android.hardware.usb.UsbManager_Fields*
+|java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_ACCESSORY_ATTACHED|
+|java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_ACCESSORY_DETACHED|
+|java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_DEVICE_ATTACHED|
+|java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_DEVICE_DETACHED|
+|java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_STATE|
+|java.lang.String_android.hardware.usb.UsbManager.EXTRA_ACCESSORY|
+|java.lang.String_android.hardware.usb.UsbManager.EXTRA_DEVICE|
+|java.lang.String_android.hardware.usb.UsbManager.EXTRA_PERMISSION_GRANTED|
+|java.lang.String_android.hardware.usb.UsbManager.USB_CONFIGURED|
+|java.lang.String_android.hardware.usb.UsbManager.USB_CONNECTED|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_ACCESSORY|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_ADB|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_AUDIO_SOURCE|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_MASS_STORAGE|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_MTP|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_PTP|
+|java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_RNDIS|
+
+*android.hardware.usb.UsbManager_Constructors*
+|android.hardware.usb.UsbManager(Context,IUsbManager)|
+
+*android.hardware.usb.UsbManager_Methods*
+|android.hardware.usb.UsbManager.getAccessoryList()|Returns a list of currently
+|android.hardware.usb.UsbManager.getDefaultFunction()|Returns the current defau
+|android.hardware.usb.UsbManager.getDeviceList()|Returns a HashMap containing a
+|android.hardware.usb.UsbManager.hasPermission(UsbAccessory)|Returns true if th
+|android.hardware.usb.UsbManager.hasPermission(UsbDevice)|Returns true if the c
+|android.hardware.usb.UsbManager.isFunctionEnabled(String)|Returns true if the 
+|android.hardware.usb.UsbManager.openAccessory(UsbAccessory)|Opens a file descr
+|android.hardware.usb.UsbManager.openDevice(UsbDevice)|Opens the device so it c
+|android.hardware.usb.UsbManager.requestPermission(UsbAccessory,PendingIntent)|
+|android.hardware.usb.UsbManager.requestPermission(UsbDevice,PendingIntent)|Req
+|android.hardware.usb.UsbManager.setCurrentFunction(String,boolean)|Sets the cu
+|android.hardware.usb.UsbManager.setMassStorageBackingFile(String)|Sets the fil
+
+*android.hardware.usb.UsbManager_Description*
+
+This class allows you to access the state of USB and communicate with USB 
+devices. Currently only host mode is supported in the public API. 
+
+You can obtain an instance of this class by calling 
+Context.getSystemService()(|android.content.Context|) .UsbManager manager = 
+(UsbManager) getSystemService(Context.USB_SERVICE); Developer Guides For more 
+information about communicating with USB hardware, read the <a 
+href="guide/topics/usb/index.html">USB developer guide. 
+
+
+
+*java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_ACCESSORY_ATTACHED*
+
+Broadcast Action: A broadcast for USB accessory attached event. 
+
+This intent is sent when a USB accessory is attached. 
+
+(|android.hardware.usb.UsbManager|) containing the 
+(|android.hardware.usb.UsbAccessory|) for the attached accessory 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_ACCESSORY_DETACHED*
+
+Broadcast Action: A broadcast for USB accessory detached event. 
+
+This intent is sent when a USB accessory is detached. 
+
+(|android.hardware.usb.UsbManager|) containing the 
+(|android.hardware.usb.UsbAccessory|) for the attached accessory that was 
+detached 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_DEVICE_ATTACHED*
+
+Broadcast Action: A broadcast for USB device attached event. 
+
+This intent is sent when a USB device is attached to the USB bus when in host 
+mode. 
+
+(|android.hardware.usb.UsbManager|) containing the 
+(|android.hardware.usb.UsbDevice|) for the attached device 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_DEVICE_DETACHED*
+
+Broadcast Action: A broadcast for USB device detached event. 
+
+This intent is sent when a USB device is detached from the USB bus when in host 
+mode. 
+
+(|android.hardware.usb.UsbManager|) containing the 
+(|android.hardware.usb.UsbDevice|) for the detached device 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.ACTION_USB_STATE*
+
+Broadcast Action: A sticky broadcast for USB state change events when in device 
+mode. 
+
+This is a sticky broadcast for clients that includes USB connected/disconnected 
+state, 
+
+(|android.hardware.usb.UsbManager|) boolean indicating whether USB is connected 
+or disconnected. (|android.hardware.usb.UsbManager|) boolean indicating whether 
+USB is configured. currently zero if not configured, one for configured. 
+(|android.hardware.usb.UsbManager|) boolean extra indicating whether the mass 
+storage function is enabled (|android.hardware.usb.UsbManager|) boolean extra 
+indicating whether the adb function is enabled 
+(|android.hardware.usb.UsbManager|) boolean extra indicating whether the RNDIS 
+ethernet function is enabled (|android.hardware.usb.UsbManager|) boolean extra 
+indicating whether the MTP function is enabled 
+(|android.hardware.usb.UsbManager|) boolean extra indicating whether the PTP 
+function is enabled (|android.hardware.usb.UsbManager|) boolean extra 
+indicating whether the accessory function is enabled 
+(|android.hardware.usb.UsbManager|) boolean extra indicating whether the audio 
+source function is enabled 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.EXTRA_ACCESSORY*
+
+Name of extra for (|android.hardware.usb.UsbManager|) and 
+(|android.hardware.usb.UsbManager|) broadcasts containing the UsbAccessory 
+object for the accessory. 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.EXTRA_DEVICE*
+
+Name of extra for (|android.hardware.usb.UsbManager|) and 
+(|android.hardware.usb.UsbManager|) broadcasts containing the UsbDevice object 
+for the device. 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.EXTRA_PERMISSION_GRANTED*
+
+Name of extra added to the (|android.app.PendingIntent|) passed into 
+(|android.hardware.usb.UsbManager|) or (|android.hardware.usb.UsbManager|) 
+containing a boolean value indicating whether the user granted permission or 
+not. 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_CONFIGURED*
+
+Boolean extra indicating whether USB is configured. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast. 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_CONNECTED*
+
+Boolean extra indicating whether USB is connected or disconnected. Used in 
+extras for the (|android.hardware.usb.UsbManager|) broadcast. 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_ACCESSORY*
+
+Name of the Accessory USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_ADB*
+
+Name of the adb USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_AUDIO_SOURCE*
+
+Name of the audio source USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_MASS_STORAGE*
+
+Name of the USB mass storage USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_MTP*
+
+Name of the MTP USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_PTP*
+
+Name of the PTP USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+*java.lang.String_android.hardware.usb.UsbManager.USB_FUNCTION_RNDIS*
+
+Name of the RNDIS ethernet USB function. Used in extras for the 
+(|android.hardware.usb.UsbManager|) broadcast 
+
+
+
+*android.hardware.usb.UsbManager(Context,IUsbManager)*
+
+public UsbManager(
+  android.content.Context context,
+  IUsbManager service)
+
+
+
+
+*android.hardware.usb.UsbManager.getAccessoryList()*
+
+public |android.hardware.usb.UsbAccessory|[] getAccessoryList()
+
+Returns a list of currently attached USB accessories. (in the current 
+implementation there can be at most one) 
+
+
+
+    Returns: list of USB accessories, or null if none are attached. 
+
+*android.hardware.usb.UsbManager.getDefaultFunction()*
+
+public |java.lang.String| getDefaultFunction()
+
+Returns the current default USB function. 
+
+
+
+    Returns: name of the default function. 
+
+
+
+*android.hardware.usb.UsbManager.getDeviceList()*
+
+public |java.util.HashMap|<String,UsbDevice> getDeviceList()
+
+Returns a HashMap containing all USB devices currently attached. USB device 
+name is the key for the returned HashMap. The result will be empty if no 
+devices are attached, or if USB host mode is inactive or unsupported. 
+
+
+
+    Returns: HashMap containing all connected USB devices. 
+
+*android.hardware.usb.UsbManager.hasPermission(UsbAccessory)*
+
+public boolean hasPermission(android.hardware.usb.UsbAccessory accessory)
+
+Returns true if the caller has permission to access the accessory. Permission 
+might have been granted temporarily via (|android.hardware.usb.UsbManager|) or 
+by the user choosing the caller as the default application for the accessory. 
+
+
+    accessory - to check permissions for 
+
+    Returns: true if caller has permission 
+
+*android.hardware.usb.UsbManager.hasPermission(UsbDevice)*
+
+public boolean hasPermission(android.hardware.usb.UsbDevice device)
+
+Returns true if the caller has permission to access the device. Permission 
+might have been granted temporarily via (|android.hardware.usb.UsbManager|) or 
+by the user choosing the caller as the default application for the device. 
+
+
+    device - to check permissions for 
+
+    Returns: true if caller has permission 
+
+*android.hardware.usb.UsbManager.isFunctionEnabled(String)*
+
+public boolean isFunctionEnabled(java.lang.String function)
+
+Returns true if the specified USB function is currently enabled. 
+
+
+    function - name of the USB function 
+
+    Returns: true if the USB function is enabled. 
+
+
+
+*android.hardware.usb.UsbManager.openAccessory(UsbAccessory)*
+
+public |android.os.ParcelFileDescriptor| openAccessory(android.hardware.usb.UsbAccessory accessory)
+
+Opens a file descriptor for reading and writing data to the USB accessory. 
+
+
+    accessory - the USB accessory to open 
+
+    Returns: file descriptor, or null if the accessor could not be opened. 
+
+*android.hardware.usb.UsbManager.openDevice(UsbDevice)*
+
+public |android.hardware.usb.UsbDeviceConnection| openDevice(android.hardware.usb.UsbDevice device)
+
+Opens the device so it can be used to send and receive data using 
+(|android.hardware.usb.UsbRequest|) . 
+
+
+    device - the device to open 
+
+    Returns: a {@link UsbDeviceConnection}, or {@code null} if open failed 
+
+*android.hardware.usb.UsbManager.requestPermission(UsbAccessory,PendingIntent)*
+
+public void requestPermission(
+  android.hardware.usb.UsbAccessory accessory,
+  android.app.PendingIntent pi)
+
+Requests temporary permission for the given package to access the accessory. 
+This may result in a system dialog being displayed to the user if permission 
+had not already been granted. Success or failure is returned via the 
+(|android.app.PendingIntent|) pi. If successful, this grants the caller 
+permission to access the accessory only until the device is disconnected. 
+
+The following extras will be added to pi: 
+
+(|android.hardware.usb.UsbManager|) containing the accessory passed into this 
+call (|android.hardware.usb.UsbManager|) containing boolean indicating whether 
+permission was granted by the user 
+
+
+    accessory - to request permissions for 
+    pi - PendingIntent for returning result 
+
+*android.hardware.usb.UsbManager.requestPermission(UsbDevice,PendingIntent)*
+
+public void requestPermission(
+  android.hardware.usb.UsbDevice device,
+  android.app.PendingIntent pi)
+
+Requests temporary permission for the given package to access the device. This 
+may result in a system dialog being displayed to the user if permission had not 
+already been granted. Success or failure is returned via the 
+(|android.app.PendingIntent|) pi. If successful, this grants the caller 
+permission to access the device only until the device is disconnected. 
+
+The following extras will be added to pi: 
+
+(|android.hardware.usb.UsbManager|) containing the device passed into this call 
+(|android.hardware.usb.UsbManager|) containing boolean indicating whether 
+permission was granted by the user 
+
+
+    device - to request permissions for 
+    pi - PendingIntent for returning result 
+
+*android.hardware.usb.UsbManager.setCurrentFunction(String,boolean)*
+
+public void setCurrentFunction(
+  java.lang.String function,
+  boolean makeDefault)
+
+Sets the current USB function. If function is null, then the current function 
+is set to the default function. 
+
+
+    function - name of the USB function, or null to restore the default function 
+    makeDefault - true if the function should be set as the new default function 
+
+{@hide} 
+
+*android.hardware.usb.UsbManager.setMassStorageBackingFile(String)*
+
+public void setMassStorageBackingFile(java.lang.String path)
+
+Sets the file path for USB mass storage backing file. 
+
+
+    path - backing file path 
+
+{@hide} 
+
+

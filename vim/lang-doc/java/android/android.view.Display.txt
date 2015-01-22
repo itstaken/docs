@@ -1,0 +1,583 @@
+*android.view.Display* *Display* Provides information about the size and density
+
+public final class Display
+  extends    |java.lang.Object|
+
+|android.view.Display_Description|
+|android.view.Display_Fields|
+|android.view.Display_Constructors|
+|android.view.Display_Methods|
+
+================================================================================
+
+*android.view.Display_Fields*
+|int_android.view.Display.DEFAULT_DISPLAY|
+|int_android.view.Display.FLAG_PRESENTATION|
+|int_android.view.Display.FLAG_PRIVATE|
+|int_android.view.Display.FLAG_SECURE|
+|int_android.view.Display.FLAG_SUPPORTS_PROTECTED_BUFFERS|
+|int_android.view.Display.TYPE_BUILT_IN|
+|int_android.view.Display.TYPE_HDMI|
+|int_android.view.Display.TYPE_OVERLAY|
+|int_android.view.Display.TYPE_UNKNOWN|
+|int_android.view.Display.TYPE_VIRTUAL|
+|int_android.view.Display.TYPE_WIFI|
+
+*android.view.Display_Constructors*
+|android.view.Display(DisplayManagerGlobal,int,DisplayInfo,DisplayAdjustments)|
+
+*android.view.Display_Methods*
+|android.view.Display.getAddress()|Gets the display address, or null if none.
+|android.view.Display.getCurrentSizeRange(Point,Point)|Return the range of disp
+|android.view.Display.getDisplayAdjustments()|Gets the compatibility info used 
+|android.view.Display.getDisplayId()|Gets the display id.
+|android.view.Display.getDisplayInfo(DisplayInfo)|Gets a full copy of the displ
+|android.view.Display.getFlags()|Returns a combination of flags that describe t
+|android.view.Display.getHeight()|
+|android.view.Display.getLayerStack()|Gets the display's layer stack.
+|android.view.Display.getMaximumSizeDimension()|Return the maximum screen size 
+|android.view.Display.getMetrics(DisplayMetrics)|Gets display metrics that desc
+|android.view.Display.getName()|Gets the name of the display.
+|android.view.Display.getOrientation()|
+|android.view.Display.getOverscanInsets(Rect)|
+|android.view.Display.getOwnerPackageName()|Gets the package name of the applic
+|android.view.Display.getOwnerUid()|Gets the UID of the application that owns t
+|android.view.Display.getPixelFormat()|Gets the pixel format of the display.
+|android.view.Display.getRealMetrics(DisplayMetrics)|Gets display metrics based
+|android.view.Display.getRealSize(Point)|Gets the real size of the display with
+|android.view.Display.getRectSize(Rect)|Gets the size of the display as a recta
+|android.view.Display.getRefreshRate()|Gets the refresh rate of this display in
+|android.view.Display.getRotation()|Returns the rotation of the screen from its
+|android.view.Display.getSize(Point)|Gets the size of the display, in pixels.
+|android.view.Display.getType()|Gets the display type.
+|android.view.Display.getWidth()|
+|android.view.Display.hasAccess(int)|Returns true if the specified UID has acce
+|android.view.Display.hasAccess(int,int,int)|
+|android.view.Display.isPublicPresentation()|Returns true if the display is a p
+|android.view.Display.isValid()|Returns true if this display is still valid, fa
+|android.view.Display.toString()|
+|android.view.Display.typeToString(int)|
+
+*android.view.Display_Description*
+
+Provides information about the size and density of a logical display. 
+
+The display area is described in two different ways. 
+
+The application display area specifies the part of the display that may contain 
+an application window, excluding the system decorations. The application 
+display area may be smaller than the real display area because the system 
+subtracts the space needed for decor elements such as the status bar. Use the 
+following methods to query the application display area: 
+(|android.view.Display|) , (|android.view.Display|) and 
+(|android.view.Display|) . The real display area specifies the part of the 
+display that contains content including the system decorations. Even so, the 
+real display area may be smaller than the physical size of the display if the 
+window manager is emulating a smaller display using (adb shell am 
+display-size). Use the following methods to query the real display area: 
+(|android.view.Display|) , (|android.view.Display|) . 
+
+A logical display does not necessarily represent a particular physical display 
+device such as the built-in screen or an external monitor. The contents of a 
+logical display may be presented on one or more physical displays according to 
+the devices that are currently attached and whether mirroring has been enabled. 
+
+
+
+*int_android.view.Display.DEFAULT_DISPLAY*
+
+The default Display id, which is the id of the built-in primary display 
+assuming there is one. 
+
+
+*int_android.view.Display.FLAG_PRESENTATION*
+
+Display flag: Indicates that the display is a presentation display. 
+
+This flag identifies secondary displays that are suitable for use as 
+presentation displays such as HDMI or Wireless displays. Applications may 
+automatically project their content to presentation displays to provide richer 
+second screen experiences. 
+
+
+*int_android.view.Display.FLAG_PRIVATE*
+
+Display flag: Indicates that the display is private. Only the application that 
+owns the display can create windows on it. 
+
+
+*int_android.view.Display.FLAG_SECURE*
+
+Display flag: Indicates that the display has a secure video output and supports 
+compositing secure surfaces. 
+
+If this flag is set then the display device has a secure video output and is 
+capable of showing secure surfaces. It may also be capable of showing protected 
+buffers(|android.view.Display|) . 
+
+If this flag is not set then the display device may not have a secure video 
+output; the user may see a blank region on the screen instead of the contents 
+of secure surfaces or protected buffers. 
+
+Secure surfaces are used to prevent content rendered into those surfaces by 
+applications from appearing in screenshots or from being viewed on non-secure 
+displays. Protected buffers are used by secure video decoders for a similar 
+purpose. 
+
+An application creates a window with a secure surface by specifying the 
+(|android.view.WindowManager.LayoutParams|) window flag. Likewise, an 
+application creates a (|android.view.SurfaceView|) with a secure surface by 
+calling (|android.view.SurfaceView|) before attaching the secure view to its 
+containing window. 
+
+An application can use the absence of this flag as a hint that it should not 
+create secure surfaces or protected buffers on this display because the content 
+may not be visible. For example, if the flag is not set then the application 
+may choose not to show content on this display, show an informative error 
+message, select an alternate content stream or adopt a different strategy for 
+decoding content that does not rely on secure surfaces or protected buffers. 
+
+
+*int_android.view.Display.FLAG_SUPPORTS_PROTECTED_BUFFERS*
+
+Display flag: Indicates that the display supports compositing content that is 
+stored in protected graphics buffers. 
+
+If this flag is set then the display device supports compositing protected 
+buffers. 
+
+If this flag is not set then the display device may not support compositing 
+protected buffers; the user may see a blank region on the screen instead of the 
+protected content. 
+
+Secure (DRM) video decoders may allocate protected graphics buffers to request 
+that a hardware-protected path be provided between the video decoder and the 
+external display sink. If a hardware-protected path is not available, then 
+content stored in protected graphics buffers may not be composited. 
+
+An application can use the absence of this flag as a hint that it should not 
+use protected buffers for this display because the content may not be visible. 
+For example, if the flag is not set then the application may choose not to show 
+content on this display, show an informative error message, select an alternate 
+content stream or adopt a different strategy for decoding content that does not 
+rely on protected buffers. 
+
+
+*int_android.view.Display.TYPE_BUILT_IN*
+
+Display type: Built-in display. 
+
+
+*int_android.view.Display.TYPE_HDMI*
+
+Display type: HDMI display. 
+
+
+*int_android.view.Display.TYPE_OVERLAY*
+
+Display type: Overlay display. 
+
+
+*int_android.view.Display.TYPE_UNKNOWN*
+
+Display type: Unknown display type. 
+
+
+*int_android.view.Display.TYPE_VIRTUAL*
+
+Display type: Virtual display. 
+
+
+*int_android.view.Display.TYPE_WIFI*
+
+Display type: WiFi display. 
+
+
+
+*android.view.Display(DisplayManagerGlobal,int,DisplayInfo,DisplayAdjustments)*
+
+public Display(
+  android.hardware.display.DisplayManagerGlobal global,
+  int displayId,
+  android.view.DisplayInfo displayInfo,
+  android.view.DisplayAdjustments daj)
+
+Internal method to create a display. Applications should use 
+(|android.view.WindowManager|) or (|android.hardware.display.DisplayManager|) 
+to get a display object. 
+
+
+*android.view.Display.getAddress()*
+
+public |java.lang.String| getAddress()
+
+Gets the display address, or null if none. Interpretation varies by display 
+type. 
+
+
+
+    Returns: The display address. 
+
+*android.view.Display.getCurrentSizeRange(Point,Point)*
+
+public void getCurrentSizeRange(
+  Point outSmallestSize,
+  Point outLargestSize)
+
+Return the range of display sizes an application can expect to encounter under 
+normal operation, as long as there is no physical change in screen size. This 
+is basically the sizes you will see as the orientation changes, taking into 
+account whatever screen decoration there is in each rotation. For example, the 
+status bar is always at the top of the screen, so it will reduce the height 
+both in landscape and portrait, and the smallest height returned here will be 
+the smaller of the two. 
+
+This is intended for applications to get an idea of the range of sizes they 
+will encounter while going through device rotations, to provide a stable UI 
+through rotation. The sizes here take into account all standard system 
+decorations that reduce the size actually available to the application: the 
+status bar, navigation bar, system bar, etc. It does not take into account more 
+transient elements like an IME soft keyboard. 
+
+
+    outSmallestSize - Filled in with the smallest width and height that the application will 
+       encounter, in pixels (not dp units). The x (width) dimension here 
+       directly corresponds to {@link 
+       android.content.res.Configuration#smallestScreenWidthDp 
+       Configuration.smallestScreenWidthDp}, except the value here is in raw 
+       screen pixels rather than dp units. Your application may of course still 
+       get smaller space yet if, for example, a soft keyboard is being 
+       displayed. 
+    outLargestSize - Filled in with the largest width and height that the application will 
+       encounter, in pixels (not dp units). Your application may of course 
+       still get larger space than this if, for example, screen decorations 
+       like the status bar are being hidden. 
+
+*android.view.Display.getDisplayAdjustments()*
+
+public |android.view.DisplayAdjustments| getDisplayAdjustments()
+
+Gets the compatibility info used by this display instance. 
+
+
+
+    Returns: The display adjustments holder, or null if none is required. 
+
+*android.view.Display.getDisplayId()*
+
+public int getDisplayId()
+
+Gets the display id. 
+
+Each logical display has a unique id. The default display has id 
+(|android.view.Display|) . 
+
+
+
+*android.view.Display.getDisplayInfo(DisplayInfo)*
+
+public boolean getDisplayInfo(android.view.DisplayInfo outDisplayInfo)
+
+Gets a full copy of the display information. 
+
+
+    outDisplayInfo - The object to receive the copy of the display information. 
+
+    Returns: True if the display is still valid. 
+
+*android.view.Display.getFlags()*
+
+public int getFlags()
+
+Returns a combination of flags that describe the capabilities of the display. 
+
+
+
+    Returns: The display flags. 
+
+*android.view.Display.getHeight()*
+
+public int getHeight()
+
+
+
+    Deprecated: Use {@link #getSize(Point)} instead.
+
+
+*android.view.Display.getLayerStack()*
+
+public int getLayerStack()
+
+Gets the display's layer stack. 
+
+Each display has its own independent layer stack upon which surfaces are placed 
+to be managed by surface flinger. 
+
+
+
+    Returns: The display's layer stack number. 
+
+*android.view.Display.getMaximumSizeDimension()*
+
+public int getMaximumSizeDimension()
+
+Return the maximum screen size dimension that will happen. This is mostly for 
+wallpapers. 
+
+
+
+*android.view.Display.getMetrics(DisplayMetrics)*
+
+public void getMetrics(android.util.DisplayMetrics outMetrics)
+
+Gets display metrics that describe the size and density of this display. 
+
+The size is adjusted based on the current rotation of the display. 
+
+The size returned by this method does not necessarily represent the actual raw 
+size (native resolution) of the display. The returned size may be adjusted to 
+exclude certain system decor elements that are always visible. It may also be 
+scaled to provide compatibility with older applications that were originally 
+designed for smaller displays. 
+
+
+    outMetrics - A {@link DisplayMetrics} object to receive the metrics. 
+
+*android.view.Display.getName()*
+
+public |java.lang.String| getName()
+
+Gets the name of the display. 
+
+Note that some displays may be renamed by the user. 
+
+
+
+    Returns: The display's name. 
+
+*android.view.Display.getOrientation()*
+
+public int getOrientation()
+
+
+
+    Deprecated: use {@link #getRotation}
+
+
+    Returns: orientation of this display. 
+
+*android.view.Display.getOverscanInsets(Rect)*
+
+public void getOverscanInsets(Rect outRect)
+
+
+
+
+
+*android.view.Display.getOwnerPackageName()*
+
+public |java.lang.String| getOwnerPackageName()
+
+Gets the package name of the application that owns this display, or null if it 
+is owned by the system. 
+
+If the display is private, then only the owner can use it. 
+
+
+
+*android.view.Display.getOwnerUid()*
+
+public int getOwnerUid()
+
+Gets the UID of the application that owns this display, or zero if it is owned 
+by the system. 
+
+If the display is private, then only the owner can use it. 
+
+
+
+*android.view.Display.getPixelFormat()*
+
+public int getPixelFormat()
+
+Gets the pixel format of the display. 
+
+    Deprecated: This method is no longer supported.
+ The result is always {@link PixelFormat#RGBA_8888}.
+
+
+    Returns: One of the constants defined in {@link android.graphics.PixelFormat}. 
+
+*android.view.Display.getRealMetrics(DisplayMetrics)*
+
+public void getRealMetrics(android.util.DisplayMetrics outMetrics)
+
+Gets display metrics based on the real size of this display. 
+
+The size is adjusted based on the current rotation of the display. 
+
+The real size may be smaller than the physical size of the screen when the 
+window manager is emulating a smaller display (using adb shell am 
+display-size). 
+
+
+    outMetrics - A {@link DisplayMetrics} object to receive the metrics. 
+
+*android.view.Display.getRealSize(Point)*
+
+public void getRealSize(Point outSize)
+
+Gets the real size of the display without subtracting any window decor or 
+applying any compatibility scale factors. 
+
+The size is adjusted based on the current rotation of the display. 
+
+The real size may be smaller than the physical size of the screen when the 
+window manager is emulating a smaller display (using adb shell am 
+display-size). 
+
+
+    outSize - Set to the real size of the display. 
+
+*android.view.Display.getRectSize(Rect)*
+
+public void getRectSize(Rect outSize)
+
+Gets the size of the display as a rectangle, in pixels. 
+
+
+    outSize - A {@link Rect} object to receive the size information. 
+
+*android.view.Display.getRefreshRate()*
+
+public float getRefreshRate()
+
+Gets the refresh rate of this display in frames per second. 
+
+
+
+*android.view.Display.getRotation()*
+
+public int getRotation()
+
+Returns the rotation of the screen from its "natural" orientation. The returned 
+value may be Surface.ROTATION_0(|android.view.Surface|) (no rotation), 
+Surface.ROTATION_90(|android.view.Surface|) , 
+Surface.ROTATION_180(|android.view.Surface|) , or 
+Surface.ROTATION_270(|android.view.Surface|) . For example, if a device has a 
+naturally tall screen, and the user has turned it on its side to go into a 
+landscape orientation, the value returned here may be either 
+Surface.ROTATION_90(|android.view.Surface|) or 
+Surface.ROTATION_270(|android.view.Surface|) depending on the direction it was 
+turned. The angle is the rotation of the drawn graphics on the screen, which is 
+the opposite direction of the physical rotation of the device. For example, if 
+the device is rotated 90 degrees counter-clockwise, to compensate rendering 
+will be rotated by 90 degrees clockwise and thus the returned value here will 
+be Surface.ROTATION_90(|android.view.Surface|) . 
+
+
+
+*android.view.Display.getSize(Point)*
+
+public void getSize(Point outSize)
+
+Gets the size of the display, in pixels. 
+
+Note that this value should not be used for computing layouts, since a device 
+will typically have screen decoration (such as a status bar) along the edges of 
+the display that reduce the amount of application space available from the size 
+returned here. Layouts should instead use the window size. 
+
+The size is adjusted based on the current rotation of the display. 
+
+The size returned by this method does not necessarily represent the actual raw 
+size (native resolution) of the display. The returned size may be adjusted to 
+exclude certain system decoration elements that are always visible. It may also 
+be scaled to provide compatibility with older applications that were originally 
+designed for smaller displays. 
+
+
+    outSize - A {@link Point} object to receive the size information. 
+
+*android.view.Display.getType()*
+
+public int getType()
+
+Gets the display type. 
+
+
+
+    Returns: The display type. 
+
+*android.view.Display.getWidth()*
+
+public int getWidth()
+
+
+
+    Deprecated: Use {@link #getSize(Point)} instead.
+
+
+*android.view.Display.hasAccess(int)*
+
+public boolean hasAccess(int uid)
+
+Returns true if the specified UID has access to this display. 
+
+
+
+*android.view.Display.hasAccess(int,int,int)*
+
+public static boolean hasAccess(
+  int uid,
+  int flags,
+  int ownerUid)
+
+
+
+
+
+*android.view.Display.isPublicPresentation()*
+
+public boolean isPublicPresentation()
+
+Returns true if the display is a public presentation display. 
+
+
+
+*android.view.Display.isValid()*
+
+public boolean isValid()
+
+Returns true if this display is still valid, false if the display has been 
+removed. 
+
+If the display is invalid, then the methods of this class will continue to 
+report the most recently observed display information. However, it is unwise 
+(and rather fruitless) to continue using a (|android.view.Display|) object 
+after the display's demise. 
+
+It's possible for a display that was previously invalid to become valid again 
+if a display with the same id is reconnected. 
+
+
+
+    Returns: True if the display is still valid. 
+
+*android.view.Display.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.view.Display.typeToString(int)*
+
+public static |java.lang.String| typeToString(int type)
+
+
+
+
+
+

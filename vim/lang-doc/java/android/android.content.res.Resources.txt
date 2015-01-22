@@ -1,0 +1,1024 @@
+*android.content.res.Resources* *Resources* Class for accessing an application's
+
+public class Resources
+  extends    |java.lang.Object|
+
+|android.content.res.Resources_Description|
+|android.content.res.Resources_Fields|
+|android.content.res.Resources_Constructors|
+|android.content.res.Resources_Methods|
+
+================================================================================
+
+*android.content.res.Resources_Constructors*
+|android.content.res.Resources(AssetManager,DisplayMetrics,Configuration)|Creat
+|android.content.res.Resources(AssetManager,DisplayMetrics,Configuration,CompatibilityInfo,IBinder)|
+
+*android.content.res.Resources_Methods*
+|android.content.res.Resources.finishPreloading()|Called by zygote when it is d
+|android.content.res.Resources.flushLayoutCache()|Call this to remove all cache
+|android.content.res.Resources.getAnimation(int)|Return an XmlResourceParser th
+|android.content.res.Resources.getAssets()|Retrieve underlying AssetManager sto
+|android.content.res.Resources.getBoolean(int)|Return a boolean associated with
+|android.content.res.Resources.getColor(int)|Return a color integer associated 
+|android.content.res.Resources.getColorStateList(int)|Return a color state list
+|android.content.res.Resources.getCompatibilityInfo()|Return the compatibility 
+|android.content.res.Resources.getConfiguration()|Return the current configurat
+|android.content.res.Resources.getDimension(int)|Retrieve a dimensional for a p
+|android.content.res.Resources.getDimensionPixelOffset(int)|Retrieve a dimensio
+|android.content.res.Resources.getDimensionPixelSize(int)|Retrieve a dimensiona
+|android.content.res.Resources.getDisplayMetrics()|Return the current display m
+|android.content.res.Resources.getDrawable(int)|Return a drawable object associ
+|android.content.res.Resources.getDrawableForDensity(int,int)|Return a drawable
+|android.content.res.Resources.getFraction(int,int,int)|Retrieve a fractional u
+|android.content.res.Resources.getIdentifier(String,String,String)|Return a res
+|android.content.res.Resources.getIntArray(int)|Return the int array associated
+|android.content.res.Resources.getInteger(int)|Return an integer associated wit
+|android.content.res.Resources.getLayout(int)|Return an XmlResourceParser throu
+|android.content.res.Resources.getMovie(int)|Return a movie object associated w
+|android.content.res.Resources.getPreloadedDrawables()|
+|android.content.res.Resources.getQuantityString(int,int)|Returns the string ne
+|android.content.res.Resources.getQuantityString(int,int,Object...)|Formats the
+|android.content.res.Resources.getQuantityText(int,int)|Returns the character s
+|android.content.res.Resources.getResourceEntryName(int)|Return the entry name 
+|android.content.res.Resources.getResourceName(int)|Return the full name for a 
+|android.content.res.Resources.getResourcePackageName(int)|Return the package n
+|android.content.res.Resources.getResourceTypeName(int)|Return the type name fo
+|android.content.res.Resources.getString(int)|Return the string value associate
+|android.content.res.Resources.getString(int,Object...)|Return the string value
+|android.content.res.Resources.getStringArray(int)|Return the string array asso
+|android.content.res.Resources.getSystem()|Return a global shared Resources obj
+|android.content.res.Resources.getText(int)|Return the string value associated 
+|android.content.res.Resources.getText(int,CharSequence)|Return the string valu
+|android.content.res.Resources.getTextArray(int)|Return the styled text array a
+|android.content.res.Resources.getValue(int,TypedValue,boolean)|Return the raw 
+|android.content.res.Resources.getValue(String,TypedValue,boolean)|Return the r
+|android.content.res.Resources.getValueForDensity(int,int,TypedValue,boolean)|G
+|android.content.res.Resources.getXml(int)|Return an XmlResourceParser through 
+|android.content.res.Resources.newTheme()|Generate a new Theme object for this 
+|android.content.res.Resources.obtainAttributes(AttributeSet,int[])|Retrieve a 
+|android.content.res.Resources.obtainTypedArray(int)|Return an array of heterog
+|android.content.res.Resources.openRawResource(int)|Open a data stream for read
+|android.content.res.Resources.openRawResource(int,TypedValue)|Open a data stre
+|android.content.res.Resources.openRawResourceFd(int)|Open a file descriptor fo
+|android.content.res.Resources.parseBundleExtra(String,AttributeSet,Bundle)|Par
+|android.content.res.Resources.parseBundleExtras(XmlResourceParser,Bundle)|Pars
+|android.content.res.Resources.resourceHasPackage(int)|Return true if given res
+|android.content.res.Resources.selectDefaultTheme(int,int)|
+|android.content.res.Resources.selectSystemTheme(int,int,int,int,int)|
+|android.content.res.Resources.setCompatibilityInfo(CompatibilityInfo)|This is 
+|android.content.res.Resources.startPreloading()|Start preloading of resource d
+|android.content.res.Resources.updateConfiguration(Configuration,DisplayMetrics)|
+|android.content.res.Resources.updateConfiguration(Configuration,DisplayMetrics,CompatibilityInfo)|
+|android.content.res.Resources.updateSystemConfiguration(Configuration,DisplayMetrics,CompatibilityInfo)|
+
+*android.content.res.Resources_Description*
+
+Class for accessing an application's resources. This sits on top of the asset 
+manager of the application (accessible through 
+(|android.content.res.Resources|) ) and provides a high-level API for getting 
+typed data from the assets. 
+
+The Android resource system keeps track of all non-code assets associated with 
+an application. You can use this class to access your application's resources. 
+You can generally acquire the (|android.content.res.Resources|) instance 
+associated with your application with getResources()(|android.content.Context|) 
+. 
+
+The Android SDK tools compile your application's resources into the application 
+binary at build time. To use a resource, you must install it correctly in the 
+source tree (inside your project'sres/directory) and build your application. As 
+part of the build process, the SDK tools generate symbols for each resource, 
+which you can use in your application code to access the resources. 
+
+Using application resources makes it easy to update various characteristics of 
+your application without modifying code, andby providing sets of alternative 
+resourcesenables you to optimize your application for a variety of device 
+configurations (such as for different languages and screen sizes). This is an 
+important aspect of developing Android applications that are compatible on 
+different types of devices. 
+
+For more information about using resources, see the documentation about <a 
+href="guide/topics/resources/index.html">Application Resources. 
+
+
+
+*android.content.res.Resources(AssetManager,DisplayMetrics,Configuration)*
+
+public Resources(
+  android.content.res.AssetManager assets,
+  android.util.DisplayMetrics metrics,
+  android.content.res.Configuration config)
+
+Create a new Resources object on top of an existing set of assets in an 
+AssetManager. 
+
+    assets - Previously created AssetManager. 
+    metrics - Current display metrics to consider when selecting/computing resource values. 
+    config - Desired device configuration to consider when selecting/computing resource 
+       values (optional). 
+
+*android.content.res.Resources(AssetManager,DisplayMetrics,Configuration,CompatibilityInfo,IBinder)*
+
+public Resources(
+  android.content.res.AssetManager assets,
+  android.util.DisplayMetrics metrics,
+  android.content.res.Configuration config,
+  android.content.res.CompatibilityInfo compatInfo,
+  android.os.IBinder token)
+
+Creates a new Resources object with CompatibilityInfo. 
+
+    assets - Previously created AssetManager. 
+    metrics - Current display metrics to consider when selecting/computing resource values. 
+    config - Desired device configuration to consider when selecting/computing resource 
+       values (optional). 
+    compatInfo - this resource's compatibility info. Must not be null. 
+    token - The Activity token for determining stack affiliation. Usually null. 
+
+*android.content.res.Resources.finishPreloading()*
+
+public final void finishPreloading()
+
+Called by zygote when it is done preloading resources, to change back to normal 
+Resources operation. 
+
+
+
+*android.content.res.Resources.flushLayoutCache()*
+
+public final void flushLayoutCache()
+
+Call this to remove all cached loaded layout resources from the Resources 
+object. Only intended for use with performance testing tools. 
+
+
+
+*android.content.res.Resources.getAnimation(int)*
+
+public |android.content.res.XmlResourceParser| getAnimation(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return an XmlResourceParser through which you can read an animation description 
+for the given resource ID. This parser has limited functionality -- in 
+particular, you can't change its input, and only the high-level events are 
+available. 
+
+This function is really a simple wrapper for calling 
+(|android.content.res.Resources|) with an animation resource. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: A new parser object through which you can read the XML data. 
+
+*android.content.res.Resources.getAssets()*
+
+public final |android.content.res.AssetManager| getAssets()
+
+Retrieve underlying AssetManager storage for these resources. 
+
+
+
+*android.content.res.Resources.getBoolean(int)*
+
+public boolean getBoolean(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a boolean associated with a particular resource ID. This can be used 
+with any integral resource value, and will return true if it is non-zero. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Returns the boolean value contained in the resource. 
+
+*android.content.res.Resources.getColor(int)*
+
+public int getColor(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a color integer associated with a particular resource ID. If the 
+resource holds a complex (|android.content.res.ColorStateList|) , then the 
+default color from the set is returned. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Returns a single color value in the form 0xAARRGGBB. 
+
+*android.content.res.Resources.getColorStateList(int)*
+
+public |android.content.res.ColorStateList| getColorStateList(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a color state list associated with a particular resource ID. The 
+resource may contain either a single raw color value, or a complex 
+(|android.content.res.ColorStateList|) holding multiple possible colors. 
+
+
+    id - The desired resource identifier of a {@link ColorStateList}, as generated by 
+       the aapt tool. This integer encodes the package, type, and resource 
+       entry. The value 0 is an invalid identifier. 
+
+    Returns: Returns a ColorStateList object containing either a single solid color or 
+             multiple colors that can be selected based on a state. 
+
+*android.content.res.Resources.getCompatibilityInfo()*
+
+public |android.content.res.CompatibilityInfo| getCompatibilityInfo()
+
+Return the compatibility mode information for the application. The returned 
+object should be treated as read-only. 
+
+
+
+    Returns: compatibility info. 
+
+*android.content.res.Resources.getConfiguration()*
+
+public |android.content.res.Configuration| getConfiguration()
+
+Return the current configuration that is in effect for this resource object. 
+The returned object should be treated as read-only. 
+
+
+
+    Returns: The resource's current configuration. 
+
+*android.content.res.Resources.getDimension(int)*
+
+public float getDimension(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Retrieve a dimensional for a particular resource ID. Unit conversions are based 
+on the current (|android.util.DisplayMetrics|) associated with the resources. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Resource dimension value multiplied by the appropriate metric. 
+
+*android.content.res.Resources.getDimensionPixelOffset(int)*
+
+public int getDimensionPixelOffset(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Retrieve a dimensional for a particular resource ID for use as an offset in raw 
+pixels. This is the same as (|android.content.res.Resources|) , except the 
+returned value is converted to integer pixels for you. An offset conversion 
+involves simply truncating the base value to an integer. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Resource dimension value multiplied by the appropriate metric and truncated to 
+             integer pixels. 
+
+*android.content.res.Resources.getDimensionPixelSize(int)*
+
+public int getDimensionPixelSize(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Retrieve a dimensional for a particular resource ID for use as a size in raw 
+pixels. This is the same as (|android.content.res.Resources|) , except the 
+returned value is converted to integer pixels for use as a size. A size 
+conversion involves rounding the base value, and ensuring that a non-zero base 
+value is at least one pixel in size. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Resource dimension value multiplied by the appropriate metric and truncated to 
+             integer pixels. 
+
+*android.content.res.Resources.getDisplayMetrics()*
+
+public |android.util.DisplayMetrics| getDisplayMetrics()
+
+Return the current display metrics that are in effect for this resource object. 
+The returned object should be treated as read-only. 
+
+
+
+    Returns: The resource's current display metrics. 
+
+*android.content.res.Resources.getDrawable(int)*
+
+public Drawable getDrawable(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a drawable object associated with a particular resource ID. Various 
+types of objects will be returned depending on the underlying resource -- for 
+example, a solid color, PNG image, scalable image, etc. The Drawable API hides 
+these implementation details. 
+
+Note: Prior to (|android.os.Build.VERSION_CODES|) , this function would not 
+correctly retrieve the final configuration density when the resource ID passed 
+here is an alias to another Drawable resource. This means that if the density 
+configuration of the alias resource is different than the actual resource, the 
+density of the returned Drawable would be incorrect, resulting in bad scaling. 
+To work around this, you can instead retrieve the Drawable through 
+TypedArray.getDrawable(|android.content.res.TypedArray|) . Use 
+Context.obtainStyledAttributes(|android.content.Context|) with an array 
+containing the resource ID of interest to create the TypedArray. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Drawable An object that can be used to draw this resource. 
+
+*android.content.res.Resources.getDrawableForDensity(int,int)*
+
+public Drawable getDrawableForDensity(
+  int id,
+  int density)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a drawable object associated with a particular resource ID for the given 
+screen density in DPI. This will set the drawable's density to be the device's 
+density multiplied by the ratio of actual drawable density to requested 
+density. This allows the drawable to be scaled up to the correct size if 
+needed. Various types of objects will be returned depending on the underlying 
+resource -- for example, a solid color, PNG image, scalable image, etc. The 
+Drawable API hides these implementation details. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    density - the desired screen density indicated by the resource as found in {@link 
+       DisplayMetrics}. 
+
+    Returns: Drawable An object that can be used to draw this resource. 
+
+*android.content.res.Resources.getFraction(int,int,int)*
+
+public float getFraction(
+  int id,
+  int base,
+  int pbase)
+
+Retrieve a fractional unit for a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    base - The base value of this fraction. In other words, a standard fraction is 
+       multiplied by this value. 
+    pbase - The parent base value of this fraction. In other words, a parent fraction 
+       (nn%p) is multiplied by this value. 
+
+    Returns: Attribute fractional value multiplied by the appropriate base value. 
+
+*android.content.res.Resources.getIdentifier(String,String,String)*
+
+public int getIdentifier(
+  java.lang.String name,
+  java.lang.String defType,
+  java.lang.String defPackage)
+
+Return a resource identifier for the given resource name. A fully qualified 
+resource name is of the form "package:type/entry". The first two components 
+(package and type) are optional if defType and defPackage, respectively, are 
+specified here. 
+
+Note: use of this function is discouraged. It is much more efficient to 
+retrieve resources by identifier than by name. 
+
+
+    name - The name of the desired resource. 
+    defType - Optional default resource type to find, if "type/" is not included in the name. 
+       Can be null to require an explicit type. 
+    defPackage - Optional default package to find, if "package:" is not included in the name. 
+       Can be null to require an explicit package. 
+
+    Returns: int The associated resource identifier. Returns 0 if no such resource was 
+             found. (0 is not a valid resource ID.) 
+
+*android.content.res.Resources.getIntArray(int)*
+
+public int[] getIntArray(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the int array associated with a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: The int array associated with the resource. 
+
+*android.content.res.Resources.getInteger(int)*
+
+public int getInteger(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return an integer associated with a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Returns the integer value contained in the resource. 
+
+*android.content.res.Resources.getLayout(int)*
+
+public |android.content.res.XmlResourceParser| getLayout(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return an XmlResourceParser through which you can read a view layout 
+description for the given resource ID. This parser has limited functionality -- 
+in particular, you can't change its input, and only the high-level events are 
+available. 
+
+This function is really a simple wrapper for calling 
+(|android.content.res.Resources|) with a layout resource. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: A new parser object through which you can read the XML data. 
+
+*android.content.res.Resources.getMovie(int)*
+
+public Movie getMovie(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a movie object associated with the particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+*android.content.res.Resources.getPreloadedDrawables()*
+
+public |android.util.LongSparseArray|<ConstantState> getPreloadedDrawables()
+
+
+
+
+
+*android.content.res.Resources.getQuantityString(int,int)*
+
+public |java.lang.String| getQuantityString(
+  int id,
+  int quantity)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Returns the string necessary for grammatically correct pluralization of the 
+given resource ID for the given quantity. Note that the string is selected 
+based solely on grammatical necessity, and that such rules differ between 
+languages. Do not assume you know which string will be returned for a given 
+quantity. See <a 
+href="guide/topics/resources/string-resource.html#Plurals">String Resources for 
+more detail. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    quantity - The number used to get the correct string for the current language's plural 
+       rules. 
+
+    Returns: String The string data associated with the resource, stripped of styled text 
+             information. 
+
+*android.content.res.Resources.getQuantityString(int,int,Object...)*
+
+public |java.lang.String| getQuantityString(
+  int id,
+  int quantity,
+  java.lang.Object[] formatArgs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Formats the string necessary for grammatically correct pluralization of the 
+given resource ID for the given quantity, using the given arguments. Note that 
+the string is selected based solely on grammatical necessity, and that such 
+rules differ between languages. Do not assume you know which string will be 
+returned for a given quantity. See <a 
+href="guide/topics/resources/string-resource.html#Plurals">String Resources for 
+more detail. 
+
+Substitution of format arguments works as if using (|java.util.Formatter|) and 
+(|java.lang.String|) . The resulting string will be stripped of any styled text 
+information. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    quantity - The number used to get the correct string for the current language's plural 
+       rules. 
+    formatArgs - The format arguments that will be used for substitution. 
+
+    Returns: String The string data associated with the resource, stripped of styled text 
+             information. 
+
+*android.content.res.Resources.getQuantityText(int,int)*
+
+public |java.lang.CharSequence| getQuantityText(
+  int id,
+  int quantity)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Returns the character sequence necessary for grammatically correct 
+pluralization of the given resource ID for the given quantity. Note that the 
+character sequence is selected based solely on grammatical necessity, and that 
+such rules differ between languages. Do not assume you know which string will 
+be returned for a given quantity. See <a 
+href="guide/topics/resources/string-resource.html#Plurals">String Resources for 
+more detail. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    quantity - The number used to get the correct string for the current language's plural 
+       rules. 
+
+    Returns: CharSequence The string data associated with the resource, plus possibly styled 
+             text information. 
+
+*android.content.res.Resources.getResourceEntryName(int)*
+
+public |java.lang.String| getResourceEntryName(int resid)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the entry name for a given resource identifier. 
+
+
+    resid - The resource identifier whose entry name is to be retrieved. 
+
+    Returns: A string holding the entry name of the resource. 
+
+*android.content.res.Resources.getResourceName(int)*
+
+public |java.lang.String| getResourceName(int resid)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the full name for a given resource identifier. This name is a single 
+string of the form "package:type/entry". 
+
+
+    resid - The resource identifier whose name is to be retrieved. 
+
+    Returns: A string holding the name of the resource. 
+
+*android.content.res.Resources.getResourcePackageName(int)*
+
+public |java.lang.String| getResourcePackageName(int resid)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the package name for a given resource identifier. 
+
+
+    resid - The resource identifier whose package name is to be retrieved. 
+
+    Returns: A string holding the package name of the resource. 
+
+*android.content.res.Resources.getResourceTypeName(int)*
+
+public |java.lang.String| getResourceTypeName(int resid)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the type name for a given resource identifier. 
+
+
+    resid - The resource identifier whose type name is to be retrieved. 
+
+    Returns: A string holding the type name of the resource. 
+
+*android.content.res.Resources.getString(int)*
+
+public |java.lang.String| getString(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the string value associated with a particular resource ID. It will be 
+stripped of any styled text information. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: String The string data associated with the resource, stripped of styled text 
+             information. 
+
+*android.content.res.Resources.getString(int,Object...)*
+
+public |java.lang.String| getString(
+  int id,
+  java.lang.Object[] formatArgs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the string value associated with a particular resource ID, substituting 
+the format arguments as defined in (|java.util.Formatter|) and 
+(|java.lang.String|) . It will be stripped of any styled text information. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    formatArgs - The format arguments that will be used for substitution. 
+
+    Returns: String The string data associated with the resource, stripped of styled text 
+             information. 
+
+*android.content.res.Resources.getStringArray(int)*
+
+public |java.lang.String|[] getStringArray(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the string array associated with a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: The string array associated with the resource. 
+
+*android.content.res.Resources.getSystem()*
+
+public static |android.content.res.Resources| getSystem()
+
+Return a global shared Resources object that provides access to only system 
+resources (no application resources), and is not configured for the current 
+screen (can not use dimension units, does not change based on orientation, 
+etc). 
+
+
+
+*android.content.res.Resources.getText(int)*
+
+public |java.lang.CharSequence| getText(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the string value associated with a particular resource ID. The returned 
+object will be a String if this is a plain string; it will be some other type 
+of CharSequence if it is styled. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: CharSequence The string data associated with the resource, plus possibly styled 
+             text information. 
+
+*android.content.res.Resources.getText(int,CharSequence)*
+
+public |java.lang.CharSequence| getText(
+  int id,
+  java.lang.CharSequence def)
+
+Return the string value associated with a particular resource ID. The returned 
+object will be a String if this is a plain string; it will be some other type 
+of CharSequence if it is styled. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    def - The default CharSequence to return. 
+
+    Returns: CharSequence The string data associated with the resource, plus possibly styled 
+             text information, or def if id is 0 or not found. 
+
+*android.content.res.Resources.getTextArray(int)*
+
+public |java.lang.CharSequence|[] getTextArray(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the styled text array associated with a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: The styled text array associated with the resource. 
+
+*android.content.res.Resources.getValue(int,TypedValue,boolean)*
+
+public void getValue(
+  int id,
+  android.util.TypedValue outValue,
+  boolean resolveRefs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the raw data associated with a particular resource ID. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+    outValue - Object in which to place the resource data. 
+    resolveRefs - If true, a resource that is a reference to another resource will be followed so 
+       that you receive the actual final resource data. If false, the 
+       TypedValue will be filled in with the reference itself. 
+
+*android.content.res.Resources.getValue(String,TypedValue,boolean)*
+
+public void getValue(
+  java.lang.String name,
+  android.util.TypedValue outValue,
+  boolean resolveRefs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return the raw data associated with a particular resource ID. See 
+getIdentifier() for information on how names are mapped to resource IDs, and 
+getString(int) for information on how string resources are retrieved. 
+
+Note: use of this function is discouraged. It is much more efficient to 
+retrieve resources by identifier than by name. 
+
+
+    name - The name of the desired resource. This is passed to getIdentifier() with a 
+       default type of "string". 
+    outValue - Object in which to place the resource data. 
+    resolveRefs - If true, a resource that is a reference to another resource will be followed so 
+       that you receive the actual final resource data. If false, the 
+       TypedValue will be filled in with the reference itself. 
+
+*android.content.res.Resources.getValueForDensity(int,int,TypedValue,boolean)*
+
+public void getValueForDensity(
+  int id,
+  int density,
+  android.util.TypedValue outValue,
+  boolean resolveRefs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Get the raw value associated with a resource with associated density. 
+
+
+    id - resource identifier 
+    density - density in DPI 
+    resolveRefs - If true, a resource that is a reference to another resource will be followed so 
+       that you receive the actual final resource data. If false, the 
+       TypedValue will be filled in with the reference itself. 
+
+*android.content.res.Resources.getXml(int)*
+
+public |android.content.res.XmlResourceParser| getXml(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return an XmlResourceParser through which you can read a generic XML resource 
+for the given resource ID. 
+
+The XmlPullParser implementation returned here has some limited functionality. 
+In particular, you can't change its input, and only high-level parsing events 
+are available (since the document was pre-parsed for you at build time, which 
+involved merging text and stripping comments). 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: A new parser object through which you can read the XML data. 
+
+*android.content.res.Resources.newTheme()*
+
+public final |android.content.res.Resources.Theme| newTheme()
+
+Generate a new Theme object for this set of Resources. It initially starts out 
+empty. 
+
+
+
+    Returns: Theme The newly created Theme container. 
+
+*android.content.res.Resources.obtainAttributes(AttributeSet,int[])*
+
+public |android.content.res.TypedArray| obtainAttributes(
+  android.util.AttributeSet set,
+  int[] attrs)
+
+Retrieve a set of basic attribute values from an AttributeSet, not performing 
+styling of them using a theme and/or style resources. 
+
+
+    set - The current attribute values to retrieve. 
+    attrs - The specific attributes to be retrieved. 
+
+    Returns: Returns a TypedArray holding an array of the attribute values. Be sure to call 
+             {@link TypedArray#recycle() TypedArray.recycle()} when done with 
+             it. 
+
+*android.content.res.Resources.obtainTypedArray(int)*
+
+public |android.content.res.TypedArray| obtainTypedArray(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return an array of heterogeneous values. 
+
+
+    id - The desired resource identifier, as generated by the aapt tool. This integer 
+       encodes the package, type, and resource entry. The value 0 is an invalid 
+       identifier. 
+
+    Returns: Returns a TypedArray holding an array of the array values. Be sure to call 
+             {@link TypedArray#recycle() TypedArray.recycle()} when done with 
+             it. 
+
+*android.content.res.Resources.openRawResource(int)*
+
+public |java.io.InputStream| openRawResource(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Open a data stream for reading a raw resource. This can only be used with 
+resources whose value is the name of an asset files -- that is, it can be used 
+to open drawable, sound, and raw resources; it will fail on string and color 
+resources. 
+
+
+    id - The resource identifier to open, as generated by the appt tool. 
+
+    Returns: InputStream Access to the resource data. 
+
+*android.content.res.Resources.openRawResource(int,TypedValue)*
+
+public |java.io.InputStream| openRawResource(
+  int id,
+  android.util.TypedValue value)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Open a data stream for reading a raw resource. This can only be used with 
+resources whose value is the name of an asset file -- that is, it can be used 
+to open drawable, sound, and raw resources; it will fail on string and color 
+resources. 
+
+
+    id - The resource identifier to open, as generated by the appt tool. 
+    value - The TypedValue object to hold the resource information. 
+
+    Returns: InputStream Access to the resource data. 
+
+*android.content.res.Resources.openRawResourceFd(int)*
+
+public |android.content.res.AssetFileDescriptor| openRawResourceFd(int id)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Open a file descriptor for reading a raw resource. This can only be used with 
+resources whose value is the name of an asset files -- that is, it can be used 
+to open drawable, sound, and raw resources; it will fail on string and color 
+resources. 
+
+This function only works for resources that are stored in the package as 
+uncompressed data, which typically includes things like mp3 files and png 
+images. 
+
+
+    id - The resource identifier to open, as generated by the appt tool. 
+
+    Returns: AssetFileDescriptor A new file descriptor you can use to read the resource. 
+             This includes the file descriptor itself, as well as the offset 
+             and length of data where the resource appears in the file. A null 
+             is returned if the file exists but is compressed. 
+
+*android.content.res.Resources.parseBundleExtra(String,AttributeSet,Bundle)*
+
+public void parseBundleExtra(
+  java.lang.String tagName,
+  android.util.AttributeSet attrs,
+  android.os.Bundle outBundle)
+  throws |XmlPullParserException|
+         
+Parse a name/value pair out of an XML tag holding that data. The AttributeSet 
+must be holding the data defined by (|android.R.styleable|) . The following 
+value types are supported: 
+
+(|android.util.TypedValue|) : Bundle.putCharSequence()(|android.os.Bundle|) 
+(|android.util.TypedValue|) : Bundle.putBoolean()(|android.os.Bundle|) 
+(|android.util.TypedValue|) - (|android.util.TypedValue|) : 
+Bundle.putBoolean()(|android.os.Bundle|) (|android.util.TypedValue|) : 
+Bundle.putFloat()(|android.os.Bundle|) 
+
+
+    tagName - The name of the tag these attributes come from; this is only used for reporting 
+       error messages. 
+    attrs - The attributes from which to retrieve the name/value pair. 
+    outBundle - The Bundle in which to place the parsed value. 
+
+*android.content.res.Resources.parseBundleExtras(XmlResourceParser,Bundle)*
+
+public void parseBundleExtras(
+  android.content.res.XmlResourceParser parser,
+  android.os.Bundle outBundle)
+  throws |java.io.IOException|
+         |XmlPullParserException|
+         
+Parse a series of &lt;extra&gt;(|android.R.styleable|) tags from an XML file. 
+You call this when you are at the parent tag of the extra tags, and it will 
+return once all of the child tags have been parsed. This will call 
+(|android.content.res.Resources|) for each extra tag encountered. 
+
+
+    parser - The parser from which to retrieve the extras. 
+    outBundle - A Bundle in which to place all parsed extras. 
+
+*android.content.res.Resources.resourceHasPackage(int)*
+
+public static boolean resourceHasPackage(int resid)
+
+Return true if given resource identifier includes a package. 
+
+
+
+*android.content.res.Resources.selectDefaultTheme(int,int)*
+
+public static int selectDefaultTheme(
+  int curTheme,
+  int targetSdkVersion)
+
+
+
+
+
+*android.content.res.Resources.selectSystemTheme(int,int,int,int,int)*
+
+public static int selectSystemTheme(
+  int curTheme,
+  int targetSdkVersion,
+  int orig,
+  int holo,
+  int deviceDefault)
+
+
+
+
+
+*android.content.res.Resources.setCompatibilityInfo(CompatibilityInfo)*
+
+public void setCompatibilityInfo(android.content.res.CompatibilityInfo ci)
+
+This is just for testing. 
+
+
+
+*android.content.res.Resources.startPreloading()*
+
+public final void startPreloading()
+
+Start preloading of resource data using this Resources object. Only for use by 
+the zygote process for loading common system resources. 
+
+
+
+*android.content.res.Resources.updateConfiguration(Configuration,DisplayMetrics)*
+
+public void updateConfiguration(
+  android.content.res.Configuration config,
+  android.util.DisplayMetrics metrics)
+
+Store the newly updated configuration. 
+
+
+
+*android.content.res.Resources.updateConfiguration(Configuration,DisplayMetrics,CompatibilityInfo)*
+
+public void updateConfiguration(
+  android.content.res.Configuration config,
+  android.util.DisplayMetrics metrics,
+  android.content.res.CompatibilityInfo compat)
+
+
+
+
+
+*android.content.res.Resources.updateSystemConfiguration(Configuration,DisplayMetrics,CompatibilityInfo)*
+
+public static void updateSystemConfiguration(
+  android.content.res.Configuration config,
+  android.util.DisplayMetrics metrics,
+  android.content.res.CompatibilityInfo compat)
+
+Update the system resources configuration if they have previously been 
+initialized. 
+
+
+
+

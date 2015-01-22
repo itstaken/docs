@@ -1,0 +1,212 @@
+*android.content.AsyncQueryHandler* *AsyncQueryHandler* A helper class to help m
+
+public abstract class AsyncQueryHandler
+  extends    |android.os.Handler|
+
+|android.content.AsyncQueryHandler_Description|
+|android.content.AsyncQueryHandler_Fields|
+|android.content.AsyncQueryHandler_Constructors|
+|android.content.AsyncQueryHandler_Methods|
+
+================================================================================
+
+*android.content.AsyncQueryHandler_Constructors*
+|android.content.AsyncQueryHandler(ContentResolver)|
+
+*android.content.AsyncQueryHandler_Methods*
+|android.content.AsyncQueryHandler.cancelOperation(int)|Attempts to cancel oper
+|android.content.AsyncQueryHandler.createHandler(Looper)|
+|android.content.AsyncQueryHandler.handleMessage(Message)|
+|android.content.AsyncQueryHandler.onDeleteComplete(int,Object,int)|Called when
+|android.content.AsyncQueryHandler.onInsertComplete(int,Object,Uri)|Called when
+|android.content.AsyncQueryHandler.onQueryComplete(int,Object,Cursor)|Called wh
+|android.content.AsyncQueryHandler.onUpdateComplete(int,Object,int)|Called when
+|android.content.AsyncQueryHandler.startDelete(int,Object,Uri,String,String[])|
+|android.content.AsyncQueryHandler.startInsert(int,Object,Uri,ContentValues)|Th
+|android.content.AsyncQueryHandler.startQuery(int,Object,Uri,String[],String,String[],String)|
+|android.content.AsyncQueryHandler.startUpdate(int,Object,Uri,ContentValues,String,String[])|
+
+*android.content.AsyncQueryHandler_Description*
+
+A helper class to help make handling asynchronous 
+(|android.content.ContentResolver|) queries easier. 
+
+
+
+*android.content.AsyncQueryHandler(ContentResolver)*
+
+public AsyncQueryHandler(android.content.ContentResolver cr)
+
+
+
+
+*android.content.AsyncQueryHandler.cancelOperation(int)*
+
+public final void cancelOperation(int token)
+
+Attempts to cancel operation that has not already started. Note that there is 
+no guarantee that the operation will be canceled. They still may result in a 
+call to on[Query/Insert/Update/Delete]Complete after this call has completed. 
+
+
+    token - The token representing the operation to be canceled. If multiple operations 
+       have the same token they will all be canceled. 
+
+*android.content.AsyncQueryHandler.createHandler(Looper)*
+
+protected |android.os.Handler| createHandler(android.os.Looper looper)
+
+
+
+
+
+*android.content.AsyncQueryHandler.handleMessage(Message)*
+
+public void handleMessage(android.os.Message msg)
+
+
+
+
+
+*android.content.AsyncQueryHandler.onDeleteComplete(int,Object,int)*
+
+protected void onDeleteComplete(
+  int token,
+  java.lang.Object cookie,
+  int result)
+
+Called when an asynchronous delete is completed. 
+
+
+    token - the token to identify the query, passed in from {@link #startDelete}. 
+    cookie - the cookie object that's passed in from {@link #startDelete}. 
+    result - the result returned from the delete operation 
+
+*android.content.AsyncQueryHandler.onInsertComplete(int,Object,Uri)*
+
+protected void onInsertComplete(
+  int token,
+  java.lang.Object cookie,
+  android.net.Uri uri)
+
+Called when an asynchronous insert is completed. 
+
+
+    token - the token to identify the query, passed in from {@link #startInsert}. 
+    cookie - the cookie object that's passed in from {@link #startInsert}. 
+    uri - the uri returned from the insert operation. 
+
+*android.content.AsyncQueryHandler.onQueryComplete(int,Object,Cursor)*
+
+protected void onQueryComplete(
+  int token,
+  java.lang.Object cookie,
+  android.database.Cursor cursor)
+
+Called when an asynchronous query is completed. 
+
+
+    token - the token to identify the query, passed in from {@link #startQuery}. 
+    cookie - the cookie object passed in from {@link #startQuery}. 
+    cursor - The cursor holding the results from the query. 
+
+*android.content.AsyncQueryHandler.onUpdateComplete(int,Object,int)*
+
+protected void onUpdateComplete(
+  int token,
+  java.lang.Object cookie,
+  int result)
+
+Called when an asynchronous update is completed. 
+
+
+    token - the token to identify the query, passed in from {@link #startUpdate}. 
+    cookie - the cookie object that's passed in from {@link #startUpdate}. 
+    result - the result returned from the update operation 
+
+*android.content.AsyncQueryHandler.startDelete(int,Object,Uri,String,String[])*
+
+public final void startDelete(
+  int token,
+  java.lang.Object cookie,
+  android.net.Uri uri,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+This method begins an asynchronous delete. When the delete operation is done 
+(|android.content.AsyncQueryHandler|) is called. 
+
+
+    token - A token passed into {@link #onDeleteComplete} to identify the delete operation. 
+    cookie - An object that gets passed into {@link #onDeleteComplete} 
+    uri - the Uri passed to the delete operation. 
+    selection - the where clause. 
+
+*android.content.AsyncQueryHandler.startInsert(int,Object,Uri,ContentValues)*
+
+public final void startInsert(
+  int token,
+  java.lang.Object cookie,
+  android.net.Uri uri,
+  android.content.ContentValues initialValues)
+
+This method begins an asynchronous insert. When the insert operation is done 
+(|android.content.AsyncQueryHandler|) is called. 
+
+
+    token - A token passed into {@link #onInsertComplete} to identify the insert operation. 
+    cookie - An object that gets passed into {@link #onInsertComplete} 
+    uri - the Uri passed to the insert operation. 
+    initialValues - the ContentValues parameter passed to the insert operation. 
+
+*android.content.AsyncQueryHandler.startQuery(int,Object,Uri,String[],String,String[],String)*
+
+public void startQuery(
+  int token,
+  java.lang.Object cookie,
+  android.net.Uri uri,
+  java.lang.String[] projection,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String orderBy)
+
+This method begins an asynchronous query. When the query is done 
+(|android.content.AsyncQueryHandler|) is called. 
+
+
+    token - A token passed into {@link #onQueryComplete} to identify the query. 
+    cookie - An object that gets passed into {@link #onQueryComplete} 
+    uri - The URI, using the content:// scheme, for the content to retrieve. 
+    projection - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URI. 
+    selectionArgs - You may include ?s in selection, which will be replaced by the values from 
+       selectionArgs, in the order that they appear in the selection. The 
+       values will be bound as Strings. 
+    orderBy - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+
+*android.content.AsyncQueryHandler.startUpdate(int,Object,Uri,ContentValues,String,String[])*
+
+public final void startUpdate(
+  int token,
+  java.lang.Object cookie,
+  android.net.Uri uri,
+  android.content.ContentValues values,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+This method begins an asynchronous update. When the update operation is done 
+(|android.content.AsyncQueryHandler|) is called. 
+
+
+    token - A token passed into {@link #onUpdateComplete} to identify the update operation. 
+    cookie - An object that gets passed into {@link #onUpdateComplete} 
+    uri - the Uri passed to the update operation. 
+    values - the ContentValues parameter passed to the update operation. 
+
+

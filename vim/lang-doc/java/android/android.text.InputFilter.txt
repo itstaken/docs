@@ -1,0 +1,48 @@
+*android.text.InputFilter* *InputFilter* InputFilters can be attached toEditable
+
+public interface interface InputFilter
+
+
+|android.text.InputFilter_Description|
+|android.text.InputFilter_Fields|
+|android.text.InputFilter_Constructors|
+|android.text.InputFilter_Methods|
+
+================================================================================
+
+*android.text.InputFilter_Methods*
+|android.text.InputFilter.filter(CharSequence,int,int,Spanned,int,int)|This met
+
+*android.text.InputFilter_Description*
+
+InputFilters can be attached to (|android.text.Editable|) s to constrain the 
+changes that can be made to them. 
+
+
+
+*android.text.InputFilter.filter(CharSequence,int,int,Spanned,int,int)*
+
+public |java.lang.CharSequence| filter(
+  java.lang.CharSequence source,
+  int start,
+  int end,
+  android.text.Spanned dest,
+  int dstart,
+  int dend)
+
+This method is called when the buffer is going to replace the range dstart dend 
+of dest with the new text from the range start end of source. Return the 
+CharSequence that you would like to have placed there instead, including an 
+empty string if appropriate, or null to accept the original replacement. Be 
+careful to not to reject 0-length replacements, as this is what happens when 
+you delete text. Also beware that you should not attempt to make any changes to 
+dest from this method; you may only examine it for context. 
+
+Note: If source is an instance of (|android.text.Spanned|) or 
+(|android.text.Spannable|) , the span objects in the source should be copied 
+into the filtered result (i.e. the non-null return value). 
+(|android.text.TextUtils|) can be used for convenience. 
+
+
+
+

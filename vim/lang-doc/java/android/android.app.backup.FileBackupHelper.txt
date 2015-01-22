@@ -1,0 +1,77 @@
+*android.app.backup.FileBackupHelper* *FileBackupHelper* A helper class that can
+
+public class FileBackupHelper
+  extends    |android.app.backup.FileBackupHelperBase|
+  implements |android.app.backup.BackupHelper|
+
+|android.app.backup.FileBackupHelper_Description|
+|android.app.backup.FileBackupHelper_Fields|
+|android.app.backup.FileBackupHelper_Constructors|
+|android.app.backup.FileBackupHelper_Methods|
+
+================================================================================
+
+*android.app.backup.FileBackupHelper_Constructors*
+|android.app.backup.FileBackupHelper(Context,String...)|Construct a helper to m
+
+*android.app.backup.FileBackupHelper_Methods*
+|android.app.backup.FileBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.FileBackupHelper.restoreEntity(BackupDataInputStream)|Resto
+
+*android.app.backup.FileBackupHelper_Description*
+
+A helper class that can be used in conjunction with 
+(|android.app.backup.BackupAgentHelper|) to manage the backup of a set of 
+files. Whenever backup is performed, all files changed since the last backup 
+will be saved in their entirety. When backup first occurs, every file in the 
+list provided to (|android.app.backup.FileBackupHelper|) will be backed up. 
+
+During restore, if the helper encounters data for a file that was not specified 
+when the FileBackupHelper object was constructed, that data will be ignored. 
+Note: This should be used only with small configuration files, not large binary 
+files. 
+
+
+
+*android.app.backup.FileBackupHelper(Context,String...)*
+
+public FileBackupHelper(
+  android.content.Context context,
+  java.lang.String[] files)
+
+Construct a helper to manage backup/restore of entire files within the 
+application's data directory hierarchy. 
+
+    context - The backup agent's Context object 
+    files - A list of the files to be backed up or restored. 
+
+*android.app.backup.FileBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public void performBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+
+Based on oldState, determine which of the files from the application's data 
+directory need to be backed up, write them to the data stream, and fill in 
+newState with the state as it exists now. When oldState is null, all the files 
+will be backed up. 
+
+This should only be called directly from within the 
+(|android.app.backup.BackupAgentHelper|) implementation. See 
+(|android.app.backup.BackupAgent|) for a description of parameter meanings. 
+
+
+
+*android.app.backup.FileBackupHelper.restoreEntity(BackupDataInputStream)*
+
+public void restoreEntity(android.app.backup.BackupDataInputStream data)
+
+Restore one record [representing a single file] from the restore dataset. 
+
+This should only be called directly from within the 
+(|android.app.backup.BackupAgentHelper|) implementation. 
+
+
+
+

@@ -1,0 +1,365 @@
+*android.nfc.tech.Ndef* *Ndef* Provides access to NDEF content and operations on
+
+public final class Ndef
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.Ndef_Description|
+|android.nfc.tech.Ndef_Fields|
+|android.nfc.tech.Ndef_Constructors|
+|android.nfc.tech.Ndef_Methods|
+
+================================================================================
+
+*android.nfc.tech.Ndef_Fields*
+|java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_CARDSTATE|
+|java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_MAXLENGTH|
+|java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_MSG|
+|java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_TYPE|
+|java.lang.String_android.nfc.tech.Ndef.ICODE_SLI|
+|java.lang.String_android.nfc.tech.Ndef.MIFARE_CLASSIC|
+|int_android.nfc.tech.Ndef.NDEF_MODE_READ_ONLY|
+|int_android.nfc.tech.Ndef.NDEF_MODE_READ_WRITE|
+|int_android.nfc.tech.Ndef.NDEF_MODE_UNKNOWN|
+|java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_1|
+|java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_2|
+|java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_3|
+|java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_4|
+|int_android.nfc.tech.Ndef.TYPE_1|
+|int_android.nfc.tech.Ndef.TYPE_2|
+|int_android.nfc.tech.Ndef.TYPE_3|
+|int_android.nfc.tech.Ndef.TYPE_4|
+|int_android.nfc.tech.Ndef.TYPE_ICODE_SLI|
+|int_android.nfc.tech.Ndef.TYPE_MIFARE_CLASSIC|
+|int_android.nfc.tech.Ndef.TYPE_OTHER|
+|java.lang.String_android.nfc.tech.Ndef.UNKNOWN|
+
+*android.nfc.tech.Ndef_Constructors*
+|android.nfc.tech.Ndef(Tag)|Internal constructor, to be used by NfcAdapter
+
+*android.nfc.tech.Ndef_Methods*
+|android.nfc.tech.Ndef.canMakeReadOnly()|Indicates whether a tag can be made re
+|android.nfc.tech.Ndef.get(Tag)|Get an instance ofNdeffor the given tag.
+|android.nfc.tech.Ndef.getCachedNdefMessage()|Get theNdefMessagethat was read f
+|android.nfc.tech.Ndef.getMaxSize()|Get the maximum NDEF message size in bytes.
+|android.nfc.tech.Ndef.getNdefMessage()|Read the currentandroid.nfc.NdefMessage
+|android.nfc.tech.Ndef.getType()|Get the NDEF tag type.
+|android.nfc.tech.Ndef.isWritable()|Determine if the tag is writable.
+|android.nfc.tech.Ndef.makeReadOnly()|Make a tag read-only.
+|android.nfc.tech.Ndef.writeNdefMessage(NdefMessage)|Overwrite theNdefMessageon
+
+*android.nfc.tech.Ndef_Description*
+
+Provides access to NDEF content and operations on a (|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.Ndef|) object using (|android.nfc.tech.Ndef|) . 
+
+NDEF is an NFC Forum data format. The data formats are implemented in 
+(|android.nfc.NdefMessage|) and (|android.nfc.NdefRecord|) . This class 
+provides methods to retrieve and modify the (|android.nfc.NdefMessage|) on a 
+tag. 
+
+There are currently four NFC Forum standardized tag types that can be formatted 
+to contain NDEF data. 
+
+NFC Forum Type 1 Tag ( (|android.nfc.tech.Ndef|) ), such as the Innovision 
+Topaz NFC Forum Type 2 Tag ( (|android.nfc.tech.Ndef|) ), such as the NXP 
+MIFARE Ultralight NFC Forum Type 3 Tag ( (|android.nfc.tech.Ndef|) ), such as 
+Sony Felica NFC Forum Type 4 Tag ( (|android.nfc.tech.Ndef|) ), such as NXP 
+MIFARE Desfire 
+
+It is mandatory for all Android devices with NFC to correctly enumerate 
+(|android.nfc.tech.Ndef|) on NFC Forum Tag Types 1-4, and implement all NDEF 
+operations as defined in this class. 
+
+Some vendors have there own well defined specifications for storing NDEF data 
+on tags that do not fall into the above categories. Android devices with NFC 
+should enumerate and implement (|android.nfc.tech.Ndef|) under these vendor 
+specifications where possible, but it is not mandatory. 
+(|android.nfc.tech.Ndef|) returns a String describing this specification, for 
+example (|android.nfc.tech.Ndef|) is com.nxp.ndef.mifareclassic. 
+
+Android devices that support MIFARE Classic must also correctly implement 
+(|android.nfc.tech.Ndef|) on MIFARE Classic tags formatted to NDEF. 
+
+For guaranteed compatibility across all Android devices with NFC, it is 
+recommended to use NFC Forum Types 1-4 in new deployments of NFC tags with NDEF 
+payload. Vendor NDEF formats will not work on all Android devices. 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_CARDSTATE*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_MAXLENGTH*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_MSG*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.EXTRA_NDEF_TYPE*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.ICODE_SLI*
+
+NDEF on iCODE SLI 
+
+
+*java.lang.String_android.nfc.tech.Ndef.MIFARE_CLASSIC*
+
+NDEF on MIFARE Classic 
+
+
+*int_android.nfc.tech.Ndef.NDEF_MODE_READ_ONLY*
+
+
+
+
+*int_android.nfc.tech.Ndef.NDEF_MODE_READ_WRITE*
+
+
+
+
+*int_android.nfc.tech.Ndef.NDEF_MODE_UNKNOWN*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_1*
+
+NFC Forum Tag Type 1 
+
+
+*java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_2*
+
+NFC Forum Tag Type 2 
+
+
+*java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_3*
+
+NFC Forum Tag Type 4 
+
+
+*java.lang.String_android.nfc.tech.Ndef.NFC_FORUM_TYPE_4*
+
+NFC Forum Tag Type 4 
+
+
+*int_android.nfc.tech.Ndef.TYPE_1*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_2*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_3*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_4*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_ICODE_SLI*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_MIFARE_CLASSIC*
+
+
+
+
+*int_android.nfc.tech.Ndef.TYPE_OTHER*
+
+
+
+
+*java.lang.String_android.nfc.tech.Ndef.UNKNOWN*
+
+
+
+
+
+*android.nfc.tech.Ndef(Tag)*
+
+public Ndef(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+Internal constructor, to be used by NfcAdapter 
+
+
+*android.nfc.tech.Ndef.canMakeReadOnly()*
+
+public boolean canMakeReadOnly()
+
+Indicates whether a tag can be made read-only with (|android.nfc.tech.Ndef|) . 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: true if it is possible to make this tag read-only 
+
+*android.nfc.tech.Ndef.get(Tag)*
+
+public static |android.nfc.tech.Ndef| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.Ndef|) for the given tag. 
+
+Returns null if (|android.nfc.tech.Ndef|) was not enumerated in 
+(|android.nfc.Tag|) . This indicates the tag is not NDEF formatted, or that 
+this tag is NDEF formatted but under a vendor specification that this Android 
+device does not implement. 
+
+Does not cause any RF activity and does not block. 
+
+
+    tag - an NDEF compatible tag 
+
+    Returns: 
+
+*android.nfc.tech.Ndef.getCachedNdefMessage()*
+
+public |android.nfc.NdefMessage| getCachedNdefMessage()
+
+Get the (|android.nfc.NdefMessage|) that was read from the tag at discovery 
+time. 
+
+If the NDEF Message is modified by an I/O operation then it will not be updated 
+here, this function only returns what was discovered when the tag entered the 
+field. Note that this method may return null if the tag was in the INITIALIZED 
+state as defined by NFC Forum, as in this state the tag is formatted to support 
+NDEF but does not contain a message yet. Does not cause any RF activity and 
+does not block. 
+
+
+
+    Returns: NDEF Message read from the tag at discovery time, can be null 
+
+*android.nfc.tech.Ndef.getMaxSize()*
+
+public int getMaxSize()
+
+Get the maximum NDEF message size in bytes. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: size in bytes 
+
+*android.nfc.tech.Ndef.getNdefMessage()*
+
+public |android.nfc.NdefMessage| getNdefMessage()
+  throws |android.nfc.FormatException|
+         |java.io.IOException|
+         
+Read the current (|android.nfc.NdefMessage|) on this tag. 
+
+This always reads the current NDEF Message stored on the tag. 
+
+Note that this method may return null if the tag was in the INITIALIZED state 
+as defined by NFC Forum, as in that state the tag is formatted to support NDEF 
+but does not contain a message yet. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.Ndef|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: the NDEF Message, can be null 
+
+*android.nfc.tech.Ndef.getType()*
+
+public |java.lang.String| getType()
+
+Get the NDEF tag type. 
+
+Returns one of (|android.nfc.tech.Ndef|) , (|android.nfc.tech.Ndef|) , 
+(|android.nfc.tech.Ndef|) , (|android.nfc.tech.Ndef|) , 
+(|android.nfc.tech.Ndef|) or another NDEF tag type that has not yet been 
+formalized in this Android API. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: a string representing the NDEF tag type 
+
+*android.nfc.tech.Ndef.isWritable()*
+
+public boolean isWritable()
+
+Determine if the tag is writable. 
+
+NFC Forum tags can be in read-only or read-write states. 
+
+Does not cause any RF activity and does not block. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true if the tag is writable 
+
+*android.nfc.tech.Ndef.makeReadOnly()*
+
+public boolean makeReadOnly()
+  throws |java.io.IOException|
+         
+Make a tag read-only. 
+
+This sets the CC field to indicate the tag is read-only, and where possible 
+permanently sets the lock bits to prevent any further modification of the 
+memory. This is a one-way process and cannot be reverted! 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.Ndef|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true on success, false if it is not possible to make this tag read-only 
+
+*android.nfc.tech.Ndef.writeNdefMessage(NdefMessage)*
+
+public void writeNdefMessage(android.nfc.NdefMessage msg)
+  throws |android.nfc.FormatException|
+         |java.io.IOException|
+         
+Overwrite the (|android.nfc.NdefMessage|) on this tag. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.Ndef|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    msg - the NDEF Message to write, must not be null 
+
+

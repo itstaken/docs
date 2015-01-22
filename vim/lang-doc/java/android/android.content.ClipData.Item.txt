@@ -1,0 +1,219 @@
+*android.content.ClipData.Item* *ClipData.Item* Description of a single item in 
+
+public static class ClipData.Item
+  extends    |java.lang.Object|
+
+|android.content.ClipData.Item_Description|
+|android.content.ClipData.Item_Fields|
+|android.content.ClipData.Item_Constructors|
+|android.content.ClipData.Item_Methods|
+
+================================================================================
+
+*android.content.ClipData.Item_Constructors*
+|android.content.ClipData.Item(CharSequence)|Create an Item consisting of a sin
+|android.content.ClipData.Item(CharSequence,Intent,Uri)|Create a complex Item, 
+|android.content.ClipData.Item(CharSequence,String)|Create an Item consisting o
+|android.content.ClipData.Item(CharSequence,String,Intent,Uri)|Create a complex
+|android.content.ClipData.Item(Intent)|Create an Item consisting of an arbitrar
+|android.content.ClipData.Item(Uri)|Create an Item consisting of an arbitrary U
+
+*android.content.ClipData.Item_Methods*
+|android.content.ClipData.Item.coerceToHtmlText(Context)|Turn this item into HT
+|android.content.ClipData.Item.coerceToStyledText(Context)|Like#coerceToHtmlTex
+|android.content.ClipData.Item.coerceToText(Context)|Turn this item into text, 
+|android.content.ClipData.Item.getHtmlText()|Retrieve the raw HTML text contain
+|android.content.ClipData.Item.getIntent()|Retrieve the raw Intent contained in
+|android.content.ClipData.Item.getText()|Retrieve the raw text contained in thi
+|android.content.ClipData.Item.getUri()|Retrieve the raw URI contained in this 
+|android.content.ClipData.Item.toShortString(StringBuilder)|
+|android.content.ClipData.Item.toString()|
+
+*android.content.ClipData.Item_Description*
+
+Description of a single item in a ClippedData. 
+
+The types than an individual item can currently contain are: 
+
+Text: a basic string of text. This is actually a CharSequence, so it can be 
+formatted text supported by corresponding Android built-in style spans. (Custom 
+application spans are not supported and will be stripped when transporting 
+through the clipboard.) Intent: an arbitrary Intent object. A typical use is 
+the shortcut to create when pasting a clipped item on to the home screen. Uri: 
+a URI reference. This may be any URI (such as an http: URI representing a 
+bookmark), however it is often a content: URI. Using content provider 
+references as clips like this allows an application to share complex or large 
+clips through the standard content provider facilities. 
+
+
+
+*android.content.ClipData.Item(CharSequence)*
+
+public ClipData.Item(java.lang.CharSequence text)
+
+Create an Item consisting of a single block of (possibly styled) text. 
+
+
+*android.content.ClipData.Item(CharSequence,Intent,Uri)*
+
+public ClipData.Item(
+  java.lang.CharSequence text,
+  android.content.Intent intent,
+  android.net.Uri uri)
+
+Create a complex Item, containing multiple representations of text, Intent, 
+and/or URI. 
+
+
+*android.content.ClipData.Item(CharSequence,String)*
+
+public ClipData.Item(
+  java.lang.CharSequence text,
+  java.lang.String htmlText)
+
+Create an Item consisting of a single block of (possibly styled) text, with an 
+alternative HTML formatted representation. You must supply a plain text 
+representation in addition to HTML text; coercion will not be done from HTML 
+formated text into plain text. 
+
+
+*android.content.ClipData.Item(CharSequence,String,Intent,Uri)*
+
+public ClipData.Item(
+  java.lang.CharSequence text,
+  java.lang.String htmlText,
+  android.content.Intent intent,
+  android.net.Uri uri)
+
+Create a complex Item, containing multiple representations of text, HTML text, 
+Intent, and/or URI. If providing HTML text, you must supply a plain text 
+representation as well; coercion will not be done from HTML formated text into 
+plain text. 
+
+
+*android.content.ClipData.Item(Intent)*
+
+public ClipData.Item(android.content.Intent intent)
+
+Create an Item consisting of an arbitrary Intent. 
+
+
+*android.content.ClipData.Item(Uri)*
+
+public ClipData.Item(android.net.Uri uri)
+
+Create an Item consisting of an arbitrary URI. 
+
+
+*android.content.ClipData.Item.coerceToHtmlText(Context)*
+
+public |java.lang.String| coerceToHtmlText(android.content.Context context)
+
+Turn this item into HTML text, regardless of the type of data it actually 
+contains. 
+
+The algorithm for deciding what text to return is: 
+
+If (|android.content.ClipData.Item|) is non-null, return that. If 
+(|android.content.ClipData.Item|) is non-null, return that, converting to valid 
+HTML text. If this text contains style spans, 
+Html.toHtml(Spanned)(|android.text.Html|) is used to convert them to HTML 
+formatting. If (|android.content.ClipData.Item|) is non-null, try to retrieve 
+its data as a text stream from its content provider. If the provider can supply 
+text/html data, that will be preferred and returned as-is. Otherwise, any 
+text/* data will be returned and escaped to HTML. If it is not a content: URI 
+or the content provider does not supply a text representation, HTML text 
+containing a link to the URI will be returned. If 
+(|android.content.ClipData.Item|) is non-null, convert that to an intent: URI 
+and return as an HTML link. Otherwise, return an empty string. 
+
+
+    context - The caller's Context, from which its ContentResolver and other things can be 
+       retrieved. 
+
+    Returns: Returns the item's representation as HTML text. 
+
+*android.content.ClipData.Item.coerceToStyledText(Context)*
+
+public |java.lang.CharSequence| coerceToStyledText(android.content.Context context)
+
+Like (|android.content.ClipData.Item|) , but any text that would be returned as 
+HTML formatting will be returned as text with style spans. 
+
+
+    context - The caller's Context, from which its ContentResolver and other things can be 
+       retrieved. 
+
+    Returns: Returns the item's textual representation. 
+
+*android.content.ClipData.Item.coerceToText(Context)*
+
+public |java.lang.CharSequence| coerceToText(android.content.Context context)
+
+Turn this item into text, regardless of the type of data it actually contains. 
+
+The algorithm for deciding what text to return is: 
+
+If (|android.content.ClipData.Item|) is non-null, return that. If 
+(|android.content.ClipData.Item|) is non-null, try to retrieve its data as a 
+text stream from its content provider. If this succeeds, copy the text into a 
+String and return it. If it is not a content: URI or the content provider does 
+not supply a text representation, return the raw URI as a string. If 
+(|android.content.ClipData.Item|) is non-null, convert that to an intent: URI 
+and return it. Otherwise, return an empty string. 
+
+
+    context - The caller's Context, from which its ContentResolver and other things can be 
+       retrieved. 
+
+    Returns: Returns the item's textual representation. 
+
+*android.content.ClipData.Item.getHtmlText()*
+
+public |java.lang.String| getHtmlText()
+
+Retrieve the raw HTML text contained in this Item. 
+
+
+
+*android.content.ClipData.Item.getIntent()*
+
+public |android.content.Intent| getIntent()
+
+Retrieve the raw Intent contained in this Item. 
+
+
+
+*android.content.ClipData.Item.getText()*
+
+public |java.lang.CharSequence| getText()
+
+Retrieve the raw text contained in this Item. 
+
+
+
+*android.content.ClipData.Item.getUri()*
+
+public |android.net.Uri| getUri()
+
+Retrieve the raw URI contained in this Item. 
+
+
+
+*android.content.ClipData.Item.toShortString(StringBuilder)*
+
+public void toShortString(java.lang.StringBuilder b)
+
+
+
+
+
+*android.content.ClipData.Item.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

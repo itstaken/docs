@@ -1,0 +1,230 @@
+*android.speech.srec.WaveHeader* *WaveHeader* This class represents the header o
+
+public class WaveHeader
+  extends    |java.lang.Object|
+
+|android.speech.srec.WaveHeader_Description|
+|android.speech.srec.WaveHeader_Fields|
+|android.speech.srec.WaveHeader_Constructors|
+|android.speech.srec.WaveHeader_Methods|
+
+================================================================================
+
+*android.speech.srec.WaveHeader_Fields*
+|short_android.speech.srec.WaveHeader.FORMAT_ALAW|
+|short_android.speech.srec.WaveHeader.FORMAT_PCM|
+|short_android.speech.srec.WaveHeader.FORMAT_ULAW|
+
+*android.speech.srec.WaveHeader_Constructors*
+|android.speech.srec.WaveHeader()|Construct a WaveHeader, with all fields defau
+|android.speech.srec.WaveHeader(short,short,int,short,int)|Construct a WaveHead
+
+*android.speech.srec.WaveHeader_Methods*
+|android.speech.srec.WaveHeader.getBitsPerSample()|Get the number of bits per s
+|android.speech.srec.WaveHeader.getFormat()|Get the format field.
+|android.speech.srec.WaveHeader.getNumBytes()|Get the size of audio data after 
+|android.speech.srec.WaveHeader.getNumChannels()|Get the number of channels.
+|android.speech.srec.WaveHeader.getSampleRate()|Get the sample rate.
+|android.speech.srec.WaveHeader.read(InputStream)|Read and initialize a WaveHea
+|android.speech.srec.WaveHeader.setBitsPerSample(short)|Set the number of bits 
+|android.speech.srec.WaveHeader.setFormat(short)|Set the format field.
+|android.speech.srec.WaveHeader.setNumBytes(int)|Set the size of audio data aft
+|android.speech.srec.WaveHeader.setNumChannels(short)|Set the number of channel
+|android.speech.srec.WaveHeader.setSampleRate(int)|Set the sample rate.
+|android.speech.srec.WaveHeader.toString()|
+|android.speech.srec.WaveHeader.write(OutputStream)|Write a WAVE file header.
+
+*android.speech.srec.WaveHeader_Description*
+
+This class represents the header of a WAVE format audio file, which usually 
+have a .wav suffix. The following integer valued fields are contained: 
+
+format - usually PCM, ALAW or ULAW. numChannels - 1 for mono, 2 for stereo. 
+sampleRate - usually 8000, 11025, 16000, 22050, or 44100 hz. bitsPerSample - 
+usually 16 for PCM, 8 for ALAW, or 8 for ULAW. numBytes - size of audio data 
+after this header, in bytes. 
+
+Not yet ready to be supported, so 
+
+
+
+*short_android.speech.srec.WaveHeader.FORMAT_ALAW*
+
+Indicates ALAW format. 
+
+
+*short_android.speech.srec.WaveHeader.FORMAT_PCM*
+
+Indicates PCM format. 
+
+
+*short_android.speech.srec.WaveHeader.FORMAT_ULAW*
+
+Indicates ULAW format. 
+
+
+
+*android.speech.srec.WaveHeader()*
+
+public WaveHeader()
+
+Construct a WaveHeader, with all fields defaulting to zero. 
+
+
+*android.speech.srec.WaveHeader(short,short,int,short,int)*
+
+public WaveHeader(
+  short format,
+  short numChannels,
+  int sampleRate,
+  short bitsPerSample,
+  int numBytes)
+
+Construct a WaveHeader, with fields initialized. 
+
+    format - format of audio data, one of {@link #FORMAT_PCM}, {@link #FORMAT_ULAW}, or 
+       {@link #FORMAT_ALAW}. 
+    numChannels - 1 for mono, 2 for stereo. 
+    sampleRate - typically 8000, 11025, 16000, 22050, or 44100 hz. 
+    bitsPerSample - usually 16 for PCM, 8 for ULAW or 8 for ALAW. 
+    numBytes - size of audio data after this header, in bytes. 
+
+*android.speech.srec.WaveHeader.getBitsPerSample()*
+
+public short getBitsPerSample()
+
+Get the number of bits per sample. 
+
+
+
+    Returns: number of bits per sample, usually 16 for PCM, 8 for ULAW or 8 for ALAW. 
+
+*android.speech.srec.WaveHeader.getFormat()*
+
+public short getFormat()
+
+Get the format field. 
+
+
+
+    Returns: format field, one of {@link #FORMAT_PCM}, {@link #FORMAT_ULAW}, or {@link 
+             #FORMAT_ALAW}. 
+
+*android.speech.srec.WaveHeader.getNumBytes()*
+
+public int getNumBytes()
+
+Get the size of audio data after this header, in bytes. 
+
+
+
+    Returns: size of audio data after this header, in bytes. 
+
+*android.speech.srec.WaveHeader.getNumChannels()*
+
+public short getNumChannels()
+
+Get the number of channels. 
+
+
+
+    Returns: number of channels, 1 for mono, 2 for stereo. 
+
+*android.speech.srec.WaveHeader.getSampleRate()*
+
+public int getSampleRate()
+
+Get the sample rate. 
+
+
+
+    Returns: sample rate, typically 8000, 11025, 16000, 22050, or 44100 hz. 
+
+*android.speech.srec.WaveHeader.read(InputStream)*
+
+public int read(java.io.InputStream in)
+  throws |java.io.IOException|
+         
+Read and initialize a WaveHeader. 
+
+
+    in - {@link java.io.InputStream} to read from. 
+
+    Returns: number of bytes consumed. 
+
+*android.speech.srec.WaveHeader.setBitsPerSample(short)*
+
+public |android.speech.srec.WaveHeader| setBitsPerSample(short bitsPerSample)
+
+Set the number of bits per sample. 
+
+
+    bitsPerSample - number of bits per sample, usually 16 for PCM, 8 for ULAW or 8 for ALAW. 
+
+    Returns: reference to this WaveHeader instance. 
+
+*android.speech.srec.WaveHeader.setFormat(short)*
+
+public |android.speech.srec.WaveHeader| setFormat(short format)
+
+Set the format field. 
+
+
+    format - one of {@link #FORMAT_PCM}, {@link #FORMAT_ULAW}, or {@link #FORMAT_ALAW}. 
+
+    Returns: reference to this WaveHeader instance. 
+
+*android.speech.srec.WaveHeader.setNumBytes(int)*
+
+public |android.speech.srec.WaveHeader| setNumBytes(int numBytes)
+
+Set the size of audio data after this header, in bytes. 
+
+
+    numBytes - size of audio data after this header, in bytes. 
+
+    Returns: reference to this WaveHeader instance. 
+
+*android.speech.srec.WaveHeader.setNumChannels(short)*
+
+public |android.speech.srec.WaveHeader| setNumChannels(short numChannels)
+
+Set the number of channels. 
+
+
+    numChannels - 1 for mono, 2 for stereo. 
+
+    Returns: reference to this WaveHeader instance. 
+
+*android.speech.srec.WaveHeader.setSampleRate(int)*
+
+public |android.speech.srec.WaveHeader| setSampleRate(int sampleRate)
+
+Set the sample rate. 
+
+
+    sampleRate - sample rate, typically 8000, 11025, 16000, 22050, or 44100 hz. 
+
+    Returns: reference to this WaveHeader instance. 
+
+*android.speech.srec.WaveHeader.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.speech.srec.WaveHeader.write(OutputStream)*
+
+public int write(java.io.OutputStream out)
+  throws |java.io.IOException|
+         
+Write a WAVE file header. 
+
+
+    out - {@link java.io.OutputStream} to receive the header. 
+
+    Returns: number of bytes written. 
+
+

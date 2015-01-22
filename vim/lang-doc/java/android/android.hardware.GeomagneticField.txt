@@ -1,0 +1,128 @@
+*android.hardware.GeomagneticField* *GeomagneticField* Estimates magnetic field 
+
+public class GeomagneticField
+  extends    |java.lang.Object|
+
+|android.hardware.GeomagneticField_Description|
+|android.hardware.GeomagneticField_Fields|
+|android.hardware.GeomagneticField_Constructors|
+|android.hardware.GeomagneticField_Methods|
+
+================================================================================
+
+*android.hardware.GeomagneticField_Constructors*
+|android.hardware.GeomagneticField(float,float,float,long)|Estimate the magneti
+
+*android.hardware.GeomagneticField_Methods*
+|android.hardware.GeomagneticField.getDeclination()|
+|android.hardware.GeomagneticField.getFieldStrength()|
+|android.hardware.GeomagneticField.getHorizontalStrength()|
+|android.hardware.GeomagneticField.getInclination()|
+|android.hardware.GeomagneticField.getX()|
+|android.hardware.GeomagneticField.getY()|
+|android.hardware.GeomagneticField.getZ()|
+
+*android.hardware.GeomagneticField_Description*
+
+Estimates magnetic field at a given point on Earth, and in particular, to 
+compute the magnetic declination from true north. 
+
+This uses the World Magnetic Model produced by the United States National 
+Geospatial-Intelligence Agency. More details about the model can be found at 
+http://www.ngdc.noaa.gov/geomag/WMM/DoDWMM.shtml. This class currently uses 
+WMM-2010 which is valid until 2015, but should produce acceptable results for 
+several years after that. Future versions of Android may use a newer version of 
+the model. 
+
+
+
+*android.hardware.GeomagneticField(float,float,float,long)*
+
+public GeomagneticField(
+  float gdLatitudeDeg,
+  float gdLongitudeDeg,
+  float altitudeMeters,
+  long timeMillis)
+
+Estimate the magnetic field at a given point and time. 
+
+    gdLatitudeDeg - Latitude in WGS84 geodetic coordinates -- positive is east. 
+    gdLongitudeDeg - Longitude in WGS84 geodetic coordinates -- positive is north. 
+    altitudeMeters - Altitude in WGS84 geodetic coordinates, in meters. 
+    timeMillis - Time at which to evaluate the declination, in milliseconds since January 1, 
+       1970. (approximate is fine -- the declination changes very slowly). 
+
+*android.hardware.GeomagneticField.getDeclination()*
+
+public float getDeclination()
+
+
+
+
+
+    Returns: The declination of the horizontal component of the magnetic field from true 
+             north, in degrees (i.e. positive means the magnetic field is 
+             rotated east that much from true north). 
+
+*android.hardware.GeomagneticField.getFieldStrength()*
+
+public float getFieldStrength()
+
+
+
+
+
+    Returns: Total field strength in nanoteslas. 
+
+*android.hardware.GeomagneticField.getHorizontalStrength()*
+
+public float getHorizontalStrength()
+
+
+
+
+
+    Returns: Horizontal component of the field strength in nonoteslas. 
+
+*android.hardware.GeomagneticField.getInclination()*
+
+public float getInclination()
+
+
+
+
+
+    Returns: The inclination of the magnetic field in degrees -- positive means the magnetic 
+             field is rotated downwards. 
+
+*android.hardware.GeomagneticField.getX()*
+
+public float getX()
+
+
+
+
+
+    Returns: The X (northward) component of the magnetic field in nanoteslas. 
+
+*android.hardware.GeomagneticField.getY()*
+
+public float getY()
+
+
+
+
+
+    Returns: The Y (eastward) component of the magnetic field in nanoteslas. 
+
+*android.hardware.GeomagneticField.getZ()*
+
+public float getZ()
+
+
+
+
+
+    Returns: The Z (downward) component of the magnetic field in nanoteslas. 
+
+

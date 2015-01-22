@@ -1,0 +1,190 @@
+*android.provider.MediaStore.Video.Thumbnails* *MediaStore.Video.Thumbnails* Thi
+
+public static class MediaStore.Video.Thumbnails
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+
+|android.provider.MediaStore.Video.Thumbnails_Description|
+|android.provider.MediaStore.Video.Thumbnails_Fields|
+|android.provider.MediaStore.Video.Thumbnails_Constructors|
+|android.provider.MediaStore.Video.Thumbnails_Methods|
+
+================================================================================
+
+*android.provider.MediaStore.Video.Thumbnails_Fields*
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.DATA|
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.DEFAULT_SORT_ORDER|
+|android.net.Uri_android.provider.MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI|
+|int_android.provider.MediaStore.Video.Thumbnails.FULL_SCREEN_KIND|
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.HEIGHT|
+|android.net.Uri_android.provider.MediaStore.Video.Thumbnails.INTERNAL_CONTENT_URI|
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.KIND|
+|int_android.provider.MediaStore.Video.Thumbnails.MICRO_KIND|
+|int_android.provider.MediaStore.Video.Thumbnails.MINI_KIND|
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.VIDEO_ID|
+|java.lang.String_android.provider.MediaStore.Video.Thumbnails.WIDTH|
+
+*android.provider.MediaStore.Video.Thumbnails_Constructors*
+|android.provider.MediaStore.Video.Thumbnails()|
+
+*android.provider.MediaStore.Video.Thumbnails_Methods*
+|android.provider.MediaStore.Video.Thumbnails.cancelThumbnailRequest(ContentResolver,long)|
+|android.provider.MediaStore.Video.Thumbnails.cancelThumbnailRequest(ContentResolver,long,long)|
+|android.provider.MediaStore.Video.Thumbnails.getContentUri(String)|Get the con
+|android.provider.MediaStore.Video.Thumbnails.getThumbnail(ContentResolver,long,int,BitmapFactory.Options)|
+|android.provider.MediaStore.Video.Thumbnails.getThumbnail(ContentResolver,long,long,int,BitmapFactory.Options)|
+
+*android.provider.MediaStore.Video.Thumbnails_Description*
+
+This class allows developers to query and get two kinds of thumbnails: 
+MINI_KIND: 512 x 384 thumbnail MICRO_KIND: 96 x 96 thumbnail 
+
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.DATA*
+
+The data stream for the thumbnail Type: DATA STREAM 
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.DEFAULT_SORT_ORDER*
+
+The default sort order for this table 
+
+
+*android.net.Uri_android.provider.MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI*
+
+The content:// style URI for the "primary" external storage volume. 
+
+
+*int_android.provider.MediaStore.Video.Thumbnails.FULL_SCREEN_KIND*
+
+
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.HEIGHT*
+
+The height of the thumbnail Type: INTEGER (long) 
+
+
+*android.net.Uri_android.provider.MediaStore.Video.Thumbnails.INTERNAL_CONTENT_URI*
+
+The content:// style URI for the internal storage. 
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.KIND*
+
+The kind of the thumbnail Type: INTEGER (One of the values below) 
+
+
+*int_android.provider.MediaStore.Video.Thumbnails.MICRO_KIND*
+
+
+
+
+*int_android.provider.MediaStore.Video.Thumbnails.MINI_KIND*
+
+
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.VIDEO_ID*
+
+The original image for the thumbnal Type: INTEGER (ID from Video table) 
+
+
+*java.lang.String_android.provider.MediaStore.Video.Thumbnails.WIDTH*
+
+The width of the thumbnal Type: INTEGER (long) 
+
+
+
+*android.provider.MediaStore.Video.Thumbnails()*
+
+public MediaStore.Video.Thumbnails()
+
+
+
+
+*android.provider.MediaStore.Video.Thumbnails.cancelThumbnailRequest(ContentResolver,long)*
+
+public static void cancelThumbnailRequest(
+  android.content.ContentResolver cr,
+  long origId)
+
+This method cancels the thumbnail request so clients waiting for getThumbnail 
+will be interrupted and return immediately. Only the original process which 
+made the getThumbnail requests can cancel their own requests. 
+
+
+    cr - ContentResolver 
+    origId - original video id 
+
+*android.provider.MediaStore.Video.Thumbnails.cancelThumbnailRequest(ContentResolver,long,long)*
+
+public static void cancelThumbnailRequest(
+  android.content.ContentResolver cr,
+  long origId,
+  long groupId)
+
+This method cancels the thumbnail request so clients waiting for getThumbnail 
+will be interrupted and return immediately. Only the original process which 
+made the getThumbnail requests can cancel their own requests. 
+
+
+    cr - ContentResolver 
+    origId - original video id 
+    groupId - the same groupId used in getThumbnail. 
+
+*android.provider.MediaStore.Video.Thumbnails.getContentUri(String)*
+
+public static |android.net.Uri| getContentUri(java.lang.String volumeName)
+
+Get the content:// style URI for the image media table on the given volume. 
+
+
+    volumeName - the name of the volume to get the URI for 
+
+    Returns: the URI to the image media table on the given volume 
+
+*android.provider.MediaStore.Video.Thumbnails.getThumbnail(ContentResolver,long,int,BitmapFactory.Options)*
+
+public static Bitmap getThumbnail(
+  android.content.ContentResolver cr,
+  long origId,
+  int kind,
+  BitmapFactory.Options options)
+
+This method checks if the thumbnails of the specified image (origId) has been 
+created. It will be blocked until the thumbnails are generated. 
+
+
+    cr - ContentResolver used to dispatch queries to MediaProvider. 
+    origId - Original image id associated with thumbnail of interest. 
+    kind - The type of thumbnail to fetch. Should be either MINI_KIND or MICRO_KIND. 
+    options - this is only used for MINI_KIND when decoding the Bitmap 
+
+    Returns: A Bitmap instance. It could be null if the original image associated with 
+             origId doesn't exist or memory is not enough. 
+
+*android.provider.MediaStore.Video.Thumbnails.getThumbnail(ContentResolver,long,long,int,BitmapFactory.Options)*
+
+public static Bitmap getThumbnail(
+  android.content.ContentResolver cr,
+  long origId,
+  long groupId,
+  int kind,
+  BitmapFactory.Options options)
+
+This method checks if the thumbnails of the specified image (origId) has been 
+created. It will be blocked until the thumbnails are generated. 
+
+
+    cr - ContentResolver used to dispatch queries to MediaProvider. 
+    origId - Original image id associated with thumbnail of interest. 
+    groupId - the id of group to which this request belongs 
+    kind - The type of thumbnail to fetch. Should be either MINI_KIND or MICRO_KIND 
+    options - this is only used for MINI_KIND when decoding the Bitmap 
+
+    Returns: A Bitmap instance. It could be null if the original image associated with 
+             origId doesn't exist or memory is not enough. 
+
+

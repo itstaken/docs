@@ -1,0 +1,86 @@
+*android.net.SntpClient* *SntpClient* Simple SNTP client class for retrieving ne
+
+public class SntpClient
+  extends    |java.lang.Object|
+
+|android.net.SntpClient_Description|
+|android.net.SntpClient_Fields|
+|android.net.SntpClient_Constructors|
+|android.net.SntpClient_Methods|
+
+================================================================================
+
+*android.net.SntpClient_Constructors*
+|android.net.SntpClient()|
+
+*android.net.SntpClient_Methods*
+|android.net.SntpClient.getNtpTime()|Returns the time computed from the NTP tra
+|android.net.SntpClient.getNtpTimeReference()|Returns the reference clock value
+|android.net.SntpClient.getRoundTripTime()|Returns the round trip time of the N
+|android.net.SntpClient.requestTime(String,int)|Sends an SNTP request to the gi
+
+*android.net.SntpClient_Description*
+
+Simple SNTP client class for retrieving network time. 
+
+Sample usage: 
+
+SntpClient client = new SntpClient(); if (client.requestTime("time.foo.com")) { 
+long now = client.getNtpTime() + SystemClock.elapsedRealtime() - 
+client.getNtpTimeReference(); } 
+
+
+
+*android.net.SntpClient()*
+
+public SntpClient()
+
+
+
+
+*android.net.SntpClient.getNtpTime()*
+
+public long getNtpTime()
+
+Returns the time computed from the NTP transaction. 
+
+
+
+    Returns: time value computed from NTP server response. 
+
+*android.net.SntpClient.getNtpTimeReference()*
+
+public long getNtpTimeReference()
+
+Returns the reference clock value (value of SystemClock.elapsedRealtime()) 
+corresponding to the NTP time. 
+
+
+
+    Returns: reference clock corresponding to the NTP time. 
+
+*android.net.SntpClient.getRoundTripTime()*
+
+public long getRoundTripTime()
+
+Returns the round trip time of the NTP transaction 
+
+
+
+    Returns: round trip time in milliseconds. 
+
+*android.net.SntpClient.requestTime(String,int)*
+
+public boolean requestTime(
+  java.lang.String host,
+  int timeout)
+
+Sends an SNTP request to the given host and processes the response. 
+
+
+    host - host name of the server. 
+    timeout - network timeout in milliseconds. 
+
+    Returns: true if the transaction was successful. 
+
+

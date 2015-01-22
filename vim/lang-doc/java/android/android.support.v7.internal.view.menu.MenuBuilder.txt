@@ -1,0 +1,662 @@
+*android.support.v7.internal.view.menu.MenuBuilder* *MenuBuilder* Implementation
+
+public class MenuBuilder
+  extends    |java.lang.Object|
+
+|android.support.v7.internal.view.menu.MenuBuilder_Description|
+|android.support.v7.internal.view.menu.MenuBuilder_Fields|
+|android.support.v7.internal.view.menu.MenuBuilder_Constructors|
+|android.support.v7.internal.view.menu.MenuBuilder_Methods|
+
+================================================================================
+
+*android.support.v7.internal.view.menu.MenuBuilder_Constructors*
+|android.support.v7.internal.view.menu.MenuBuilder(Context)|
+
+*android.support.v7.internal.view.menu.MenuBuilder_Methods*
+|android.support.v7.internal.view.menu.MenuBuilder.add(CharSequence)|
+|android.support.v7.internal.view.menu.MenuBuilder.add(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.add(int,int,int,CharSequence)|
+|android.support.v7.internal.view.menu.MenuBuilder.add(int,int,int,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.addIntentOptions(int,int,int,ComponentName,Intent[],Intent,int,MenuItem[])|
+|android.support.v7.internal.view.menu.MenuBuilder.addMenuPresenter(MenuPresenter)|
+|android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(CharSequence)|
+|android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int,int,int,CharSequence)|
+|android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int,int,int,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.changeMenuMode()|Dispatch a 
+|android.support.v7.internal.view.menu.MenuBuilder.clear()|
+|android.support.v7.internal.view.menu.MenuBuilder.clearAll()|
+|android.support.v7.internal.view.menu.MenuBuilder.clearHeader()|
+|android.support.v7.internal.view.menu.MenuBuilder.close()|
+|android.support.v7.internal.view.menu.MenuBuilder.collapseItemActionView(MenuItemImpl)|
+|android.support.v7.internal.view.menu.MenuBuilder.expandItemActionView(MenuItemImpl)|
+|android.support.v7.internal.view.menu.MenuBuilder.findGroupIndex(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.findGroupIndex(int,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.findItem(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.findItemIndex(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.flagActionItems()|This metho
+|android.support.v7.internal.view.menu.MenuBuilder.getActionViewStatesKey()|
+|android.support.v7.internal.view.menu.MenuBuilder.getContext()|
+|android.support.v7.internal.view.menu.MenuBuilder.getExpandedItem()|
+|android.support.v7.internal.view.menu.MenuBuilder.getHeaderIcon()|
+|android.support.v7.internal.view.menu.MenuBuilder.getHeaderTitle()|
+|android.support.v7.internal.view.menu.MenuBuilder.getHeaderView()|
+|android.support.v7.internal.view.menu.MenuBuilder.getItem(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.getRootMenu()|Gets the root 
+|android.support.v7.internal.view.menu.MenuBuilder.hasVisibleItems()|
+|android.support.v7.internal.view.menu.MenuBuilder.isShortcutKey(int,KeyEvent)|
+|android.support.v7.internal.view.menu.MenuBuilder.isShortcutsVisible()|
+|android.support.v7.internal.view.menu.MenuBuilder.performIdentifierAction(int,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.performItemAction(MenuItem,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.performShortcut(int,KeyEvent,int)|
+|android.support.v7.internal.view.menu.MenuBuilder.removeGroup(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.removeItem(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.removeItemAt(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.removeMenuPresenter(MenuPresenter)|
+|android.support.v7.internal.view.menu.MenuBuilder.restoreActionViewStates(Bundle)|
+|android.support.v7.internal.view.menu.MenuBuilder.restorePresenterStates(Bundle)|
+|android.support.v7.internal.view.menu.MenuBuilder.saveActionViewStates(Bundle)|
+|android.support.v7.internal.view.menu.MenuBuilder.savePresenterStates(Bundle)|
+|android.support.v7.internal.view.menu.MenuBuilder.setCallback(MenuBuilder.Callback)|
+|android.support.v7.internal.view.menu.MenuBuilder.setCurrentMenuInfo(ContextMenu.ContextMenuInfo)|
+|android.support.v7.internal.view.menu.MenuBuilder.setDefaultShowAsAction(int)|
+|android.support.v7.internal.view.menu.MenuBuilder.setGroupCheckable(int,boolean,boolean)|
+|android.support.v7.internal.view.menu.MenuBuilder.setGroupEnabled(int,boolean)|
+|android.support.v7.internal.view.menu.MenuBuilder.setGroupVisible(int,boolean)|
+|android.support.v7.internal.view.menu.MenuBuilder.setHeaderIconInt(Drawable)|S
+|android.support.v7.internal.view.menu.MenuBuilder.setHeaderTitleInt(CharSequence)|
+|android.support.v7.internal.view.menu.MenuBuilder.setHeaderTitleInt(int)|Sets 
+|android.support.v7.internal.view.menu.MenuBuilder.setHeaderViewInt(View)|Sets 
+|android.support.v7.internal.view.menu.MenuBuilder.setQwertyMode(boolean)|
+|android.support.v7.internal.view.menu.MenuBuilder.setShortcutsVisible(boolean)|
+|android.support.v7.internal.view.menu.MenuBuilder.size()|
+|android.support.v7.internal.view.menu.MenuBuilder.startDispatchingItemsChanged()|
+|android.support.v7.internal.view.menu.MenuBuilder.stopDispatchingItemsChanged()|
+
+*android.support.v7.internal.view.menu.MenuBuilder_Description*
+
+Implementation of the (|android.support.v4.internal.view.SupportMenu|) 
+interface for creating a standard menu UI. 
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder(Context)*
+
+public MenuBuilder(Context context)
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.add(CharSequence)*
+
+public MenuItem add(java.lang.CharSequence title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.add(int)*
+
+public MenuItem add(int titleRes)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.add(int,int,int,CharSequence)*
+
+public MenuItem add(
+  int group,
+  int id,
+  int categoryOrder,
+  java.lang.CharSequence title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.add(int,int,int,int)*
+
+public MenuItem add(
+  int group,
+  int id,
+  int categoryOrder,
+  int title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.addIntentOptions(int,int,int,ComponentName,Intent[],Intent,int,MenuItem[])*
+
+public int addIntentOptions(
+  int group,
+  int id,
+  int categoryOrder,
+  ComponentName caller,
+  Intent[] specifics,
+  Intent intent,
+  int flags,
+  MenuItem[] outSpecificItems)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.addMenuPresenter(MenuPresenter)*
+
+public void addMenuPresenter(android.support.v7.internal.view.menu.MenuPresenter presenter)
+
+Add a presenter to this menu. This will only hold a WeakReference; you do not 
+need to explicitly remove a presenter, but you can using 
+(|android.support.v7.internal.view.menu.MenuBuilder|) . 
+
+
+    presenter - The presenter to add 
+
+*android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(CharSequence)*
+
+public SubMenu addSubMenu(java.lang.CharSequence title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int)*
+
+public SubMenu addSubMenu(int titleRes)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int,int,int,CharSequence)*
+
+public SubMenu addSubMenu(
+  int group,
+  int id,
+  int categoryOrder,
+  java.lang.CharSequence title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.addSubMenu(int,int,int,int)*
+
+public SubMenu addSubMenu(
+  int group,
+  int id,
+  int categoryOrder,
+  int title)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.changeMenuMode()*
+
+public void changeMenuMode()
+
+Dispatch a mode change event to this menu's callback. 
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.clear()*
+
+public void clear()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.clearAll()*
+
+public void clearAll()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.clearHeader()*
+
+public void clearHeader()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.close()*
+
+public void close()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.collapseItemActionView(MenuItemImpl)*
+
+public boolean collapseItemActionView(android.support.v7.internal.view.menu.MenuItemImpl item)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.expandItemActionView(MenuItemImpl)*
+
+public boolean expandItemActionView(android.support.v7.internal.view.menu.MenuItemImpl item)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.findGroupIndex(int)*
+
+public int findGroupIndex(int group)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.findGroupIndex(int,int)*
+
+public int findGroupIndex(
+  int group,
+  int start)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.findItem(int)*
+
+public MenuItem findItem(int id)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.findItemIndex(int)*
+
+public int findItemIndex(int id)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.flagActionItems()*
+
+public void flagActionItems()
+
+This method determines which menu items get to be 'action items' that will 
+appear in an action bar and which items should be 'overflow items' in a 
+secondary menu. The rules are as follows: 
+
+Items are considered for inclusion in the order specified within the menu. 
+There is a limit of mMaxActionItems as a total count, optionally including the 
+overflow menu button itself. This is a soft limit; if an item shares a group ID 
+with an item previously included as an action item, the new item will stay with 
+its group and become an action item itself even if it breaks the max item count 
+limit. This is done to limit the conceptual complexity of the items presented 
+within an action bar. Only a few unrelated concepts should be presented to the 
+user in this space, and groups are treated as a single concept. 
+
+There is also a hard limit of consumed measurable space: mActionWidthLimit. 
+This limit may be broken by a single item that exceeds the remaining space, but 
+no further items may be added. If an item that is part of a group cannot fit 
+within the remaining measured width, the entire group will be demoted to 
+overflow. This is done to ensure room for navigation and other affordances in 
+the action bar as well as reduce general UI clutter. 
+
+The space freed by demoting a full group cannot be consumed by future menu 
+items. Once items begin to overflow, all future items become overflow items as 
+well. This is to avoid inadvertent reordering that may break the app's intended 
+design. 
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getActionViewStatesKey()*
+
+protected |java.lang.String| getActionViewStatesKey()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getContext()*
+
+public Context getContext()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getExpandedItem()*
+
+public |android.support.v7.internal.view.menu.MenuItemImpl| getExpandedItem()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getHeaderIcon()*
+
+public Drawable getHeaderIcon()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getHeaderTitle()*
+
+public |java.lang.CharSequence| getHeaderTitle()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getHeaderView()*
+
+public View getHeaderView()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getItem(int)*
+
+public MenuItem getItem(int index)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.getRootMenu()*
+
+public |android.support.v7.internal.view.menu.MenuBuilder| getRootMenu()
+
+Gets the root menu (if this is a submenu, find its root menu). 
+
+
+
+    Returns: The root menu. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.hasVisibleItems()*
+
+public boolean hasVisibleItems()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.isShortcutKey(int,KeyEvent)*
+
+public boolean isShortcutKey(
+  int keyCode,
+  KeyEvent event)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.isShortcutsVisible()*
+
+public boolean isShortcutsVisible()
+
+
+
+
+
+    Returns: Whether shortcuts should be visible on menus. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.performIdentifierAction(int,int)*
+
+public boolean performIdentifierAction(
+  int id,
+  int flags)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.performItemAction(MenuItem,int)*
+
+public boolean performItemAction(
+  MenuItem item,
+  int flags)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.performShortcut(int,KeyEvent,int)*
+
+public boolean performShortcut(
+  int keyCode,
+  KeyEvent event,
+  int flags)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.removeGroup(int)*
+
+public void removeGroup(int group)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.removeItem(int)*
+
+public void removeItem(int id)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.removeItemAt(int)*
+
+public void removeItemAt(int index)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.removeMenuPresenter(MenuPresenter)*
+
+public void removeMenuPresenter(android.support.v7.internal.view.menu.MenuPresenter presenter)
+
+Remove a presenter from this menu. That presenter will no longer receive 
+notifications of updates to this menu's data. 
+
+
+    presenter - The presenter to remove 
+
+*android.support.v7.internal.view.menu.MenuBuilder.restoreActionViewStates(Bundle)*
+
+public void restoreActionViewStates(Bundle states)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.restorePresenterStates(Bundle)*
+
+public void restorePresenterStates(Bundle state)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.saveActionViewStates(Bundle)*
+
+public void saveActionViewStates(Bundle outStates)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.savePresenterStates(Bundle)*
+
+public void savePresenterStates(Bundle outState)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setCallback(MenuBuilder.Callback)*
+
+public void setCallback(android.support.v7.internal.view.menu.MenuBuilder.Callback cb)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setCurrentMenuInfo(ContextMenu.ContextMenuInfo)*
+
+public void setCurrentMenuInfo(ContextMenu.ContextMenuInfo menuInfo)
+
+Sets the current menu info that is set on all items added to this menu (until 
+this is called again with different menu info, in which case that one will be 
+added to all subsequent item additions). 
+
+
+    menuInfo - The extra menu information to add. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.setDefaultShowAsAction(int)*
+
+public |android.support.v7.internal.view.menu.MenuBuilder| setDefaultShowAsAction(int defaultShowAsAction)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setGroupCheckable(int,boolean,boolean)*
+
+public void setGroupCheckable(
+  int group,
+  boolean checkable,
+  boolean exclusive)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setGroupEnabled(int,boolean)*
+
+public void setGroupEnabled(
+  int group,
+  boolean enabled)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setGroupVisible(int,boolean)*
+
+public void setGroupVisible(
+  int group,
+  boolean visible)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setHeaderIconInt(Drawable)*
+
+protected |android.support.v7.internal.view.menu.MenuBuilder| setHeaderIconInt(Drawable icon)
+
+Sets the header's icon. This replaces the header view. Called by the 
+builder-style methods of subclasses. 
+
+
+    icon - The new icon. 
+
+    Returns: This MenuBuilder so additional setters can be called. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.setHeaderTitleInt(CharSequence)*
+
+protected |android.support.v7.internal.view.menu.MenuBuilder| setHeaderTitleInt(java.lang.CharSequence title)
+
+Sets the header's title. This replaces the header view. Called by the 
+builder-style methods of subclasses. 
+
+
+    title - The new title. 
+
+    Returns: This MenuBuilder so additional setters can be called. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.setHeaderTitleInt(int)*
+
+protected |android.support.v7.internal.view.menu.MenuBuilder| setHeaderTitleInt(int titleRes)
+
+Sets the header's title. This replaces the header view. Called by the 
+builder-style methods of subclasses. 
+
+
+    titleRes - The new title (as a resource ID). 
+
+    Returns: This MenuBuilder so additional setters can be called. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.setHeaderViewInt(View)*
+
+protected |android.support.v7.internal.view.menu.MenuBuilder| setHeaderViewInt(View view)
+
+Sets the header's view. This replaces the title and icon. Called by the 
+builder-style methods of subclasses. 
+
+
+    view - The new view. 
+
+    Returns: This MenuBuilder so additional setters can be called. 
+
+*android.support.v7.internal.view.menu.MenuBuilder.setQwertyMode(boolean)*
+
+public void setQwertyMode(boolean isQwerty)
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.setShortcutsVisible(boolean)*
+
+public void setShortcutsVisible(boolean shortcutsVisible)
+
+Sets whether the shortcuts should be visible on menus. Devices without hardware 
+key input will never make shortcuts visible even if this method is passed 
+'true'. 
+
+
+    shortcutsVisible - Whether shortcuts should be visible (if true and a menu item does not have a 
+       shortcut defined, that item will still NOT show a shortcut) 
+
+*android.support.v7.internal.view.menu.MenuBuilder.size()*
+
+public int size()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.startDispatchingItemsChanged()*
+
+public void startDispatchingItemsChanged()
+
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder.stopDispatchingItemsChanged()*
+
+public void stopDispatchingItemsChanged()
+
+Stop dispatching item changed events to presenters until 
+(|android.support.v7.internal.view.menu.MenuBuilder|) is called. Useful when 
+many menu operations are going to be performed as a batch. 
+
+
+
+

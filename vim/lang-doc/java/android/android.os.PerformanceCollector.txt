@@ -1,0 +1,401 @@
+*android.os.PerformanceCollector* *PerformanceCollector* Collects performance da
+
+public class PerformanceCollector
+  extends    |java.lang.Object|
+
+|android.os.PerformanceCollector_Description|
+|android.os.PerformanceCollector_Fields|
+|android.os.PerformanceCollector_Constructors|
+|android.os.PerformanceCollector_Methods|
+
+================================================================================
+
+*android.os.PerformanceCollector_Fields*
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_CPU_TIME|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_EXECUTION_TIME|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GC_INVOCATION_COUNT|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_COUNT|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_SIZE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_FREED_COUNT|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_FREED_SIZE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_ITERATIONS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_ALLOCATED|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_FREE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_PRIVATE_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_PSS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_SHARED_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_SIZE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_LABEL|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_ALLOCATED|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_FREE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_PRIVATE_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_PSS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_SHARED_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_SIZE|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_PRIVATE_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_PSS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_SHARED_DIRTY|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_PRE_RECEIVED_TRANSACTIONS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_PRE_SENT_TRANSACTIONS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_RECEIVED_TRANSACTIONS|
+|java.lang.String_android.os.PerformanceCollector.METRIC_KEY_SENT_TRANSACTIONS|
+
+*android.os.PerformanceCollector_Constructors*
+|android.os.PerformanceCollector()|
+|android.os.PerformanceCollector(PerformanceCollector.PerformanceResultsWriter)|
+
+*android.os.PerformanceCollector_Methods*
+|android.os.PerformanceCollector.addIteration(String)|Add a measured segment, a
+|android.os.PerformanceCollector.addMeasurement(String,float)|Add a float type 
+|android.os.PerformanceCollector.addMeasurement(String,long)|Add an integer typ
+|android.os.PerformanceCollector.addMeasurement(String,String)|Add a string fie
+|android.os.PerformanceCollector.beginSnapshot(String)|Begin collection of memo
+|android.os.PerformanceCollector.endSnapshot()|End collection of memory usage i
+|android.os.PerformanceCollector.setPerformanceResultsWriter(PerformanceCollector.PerformanceResultsWriter)|
+|android.os.PerformanceCollector.startTiming(String)|Start measurement of user 
+|android.os.PerformanceCollector.stopTiming(String)|Stop measurement of user an
+
+*android.os.PerformanceCollector_Description*
+
+Collects performance data between two function calls in Bundle objects and 
+outputs the results using writer of type 
+(|android.os.PerformanceCollector.PerformanceResultsWriter|) . 
+(|android.os.PerformanceCollector|) and (|android.os.PerformanceCollector|) 
+functions collect memory usage information and measure runtime between calls to 
+begin and end. These functions logically wrap around an entire test, and should 
+be called with name of test as the label, e.g. EmailPerformanceTest. 
+(|android.os.PerformanceCollector|) and (|android.os.PerformanceCollector|) 
+functions measure runtime between calls to start and stop. These functions 
+logically wrap around a single test case or a small block of code, and should 
+be called with the name of test case as the label, e.g. 
+testSimpleSendMailSequence. (|android.os.PerformanceCollector|) inserts 
+intermediate measurement point which can be labeled with a String, e.g. Launch 
+email app, compose, send, etc. 
+
+Snapshot and timing functions do not interfere with each other, and thus can be 
+called in any order. The intended structure is to wrap begin/endSnapshot around 
+calls to start/stopTiming, for example: 
+
+beginSnapshot("EmailPerformanceTest"); startTiming("testSimpleSendSequence"); 
+addIteration("Launch email app"); addIteration("Compose"); stopTiming("Send"); 
+startTiming("testComplexSendSequence"); stopTiming(""); 
+startTiming("testAddLabel"); stopTiming(""); endSnapshot(); 
+
+Structure of results output is up to implementor of 
+(|android.os.PerformanceCollector.PerformanceResultsWriter|) .Pending approval 
+for public API. 
+
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_CPU_TIME*
+
+In a results Bundle, this key reports the cpu time of the code block under 
+measurement. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_EXECUTION_TIME*
+
+In a results Bundle, this key reports the execution time of the code block 
+under measurement. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GC_INVOCATION_COUNT*
+
+In a snapshot Bundle, this key reports the number of garbage collection 
+invocations. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_COUNT*
+
+In a snapshot Bundle, this key reports the number of objects allocated 
+globally. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_ALLOC_SIZE*
+
+In a snapshot Bundle, this key reports the size of all objects allocated 
+globally. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_FREED_COUNT*
+
+In a snapshot Bundle, this key reports the number of objects freed globally. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_GLOBAL_FREED_SIZE*
+
+In a snapshot Bundle, this key reports the size of all objects freed globally. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_ITERATIONS*
+
+In a results Bundle, this key references a List of iteration Bundles. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_ALLOCATED*
+
+In a snapshot Bundle, this key reports the amount of allocated memory used by 
+the running program. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_FREE*
+
+In a snapshot Bundle, this key reports the amount of free memory available to 
+the running program. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_PRIVATE_DIRTY*
+
+In a snapshot Bundle, this key reports the number of private dirty pages used 
+by dalvik. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_PSS*
+
+In a snapshot Bundle, this key reports the proportional set size for dalvik. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_SHARED_DIRTY*
+
+In a snapshot Bundle, this key reports the number of shared dirty pages used by 
+dalvik. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_JAVA_SIZE*
+
+In a snapshot Bundle, this key reports the total amount of memory available to 
+the running program. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_LABEL*
+
+In an iteration Bundle, this key describes the iteration. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_ALLOCATED*
+
+In a snapshot Bundle, this key reports the amount of allocated memory in the 
+native heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_FREE*
+
+In a snapshot Bundle, this key reports the amount of free memory in the native 
+heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_PRIVATE_DIRTY*
+
+In a snapshot Bundle, this key reports the number of private dirty pages used 
+by the native heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_PSS*
+
+In a snapshot Bundle, this key reports the proportional set size for the native 
+heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_SHARED_DIRTY*
+
+In a snapshot Bundle, this key reports the number of shared dirty pages used by 
+the native heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_NATIVE_SIZE*
+
+In a snapshot Bundle, this key reports the size of the native heap. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_PRIVATE_DIRTY*
+
+In a snapshot Bundle, this key reports the number of private dirty pages used 
+by everything else. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_PSS*
+
+In a snapshot Bundle, this key reports the proportional set size for everything 
+else. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_OTHER_SHARED_DIRTY*
+
+In a snapshot Bundle, this key reports the number of shared dirty pages used by 
+everything else. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_PRE_RECEIVED_TRANSACTIONS*
+
+In a snapshot Bundle, this key reports the number of received transactions from 
+the binder driver before collection started. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_PRE_SENT_TRANSACTIONS*
+
+In a snapshot Bundle, this key reports the number of transactions sent by the 
+running program before collection started. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_RECEIVED_TRANSACTIONS*
+
+In a snapshot Bundle, this key reports the number of received transactions from 
+the binder driver. 
+
+
+*java.lang.String_android.os.PerformanceCollector.METRIC_KEY_SENT_TRANSACTIONS*
+
+In a snapshot Bundle, this key reports the number of transactions sent by the 
+running program. 
+
+
+
+*android.os.PerformanceCollector()*
+
+public PerformanceCollector()
+
+
+
+
+*android.os.PerformanceCollector(PerformanceCollector.PerformanceResultsWriter)*
+
+public PerformanceCollector(android.os.PerformanceCollector.PerformanceResultsWriter writer)
+
+
+
+
+*android.os.PerformanceCollector.addIteration(String)*
+
+public |android.os.Bundle| addIteration(java.lang.String label)
+
+Add a measured segment, and start measuring the next segment. Returns collected 
+data in a Bundle object. 
+
+
+    label - description of code block between startTiming and addIteration, and between two 
+       calls to addIteration, used to label output 
+
+    Returns: Runtime metrics stored as key/value pairs. Values are of type long, and keys 
+             include: 
+
+{@link #METRIC_KEY_LABEL label} {@link #METRIC_KEY_CPU_TIME cpu_time} {@link 
+             #METRIC_KEY_EXECUTION_TIME execution_time} 
+
+*android.os.PerformanceCollector.addMeasurement(String,float)*
+
+public void addMeasurement(
+  java.lang.String label,
+  float value)
+
+Add a float type measurement to the collector. 
+
+
+    label - short description of the metric that was measured 
+    value - float value of the measurement 
+
+*android.os.PerformanceCollector.addMeasurement(String,long)*
+
+public void addMeasurement(
+  java.lang.String label,
+  long value)
+
+Add an integer type measurement to the collector. 
+
+
+    label - short description of the metric that was measured 
+    value - long value of the measurement 
+
+*android.os.PerformanceCollector.addMeasurement(String,String)*
+
+public void addMeasurement(
+  java.lang.String label,
+  java.lang.String value)
+
+Add a string field to the collector. 
+
+
+    label - short description of the metric that was measured 
+    value - string summary of the measurement 
+
+*android.os.PerformanceCollector.beginSnapshot(String)*
+
+public void beginSnapshot(java.lang.String label)
+
+Begin collection of memory usage information. 
+
+
+    label - description of code block between beginSnapshot and endSnapshot, used to label 
+       output 
+
+*android.os.PerformanceCollector.endSnapshot()*
+
+public |android.os.Bundle| endSnapshot()
+
+End collection of memory usage information. Returns collected data in a Bundle 
+object. 
+
+
+
+    Returns: Memory and runtime metrics stored as key/value pairs. Values are of type long, 
+             and keys include: 
+
+{@link #METRIC_KEY_CPU_TIME cpu_time} {@link #METRIC_KEY_EXECUTION_TIME 
+             execution_time} {@link #METRIC_KEY_PRE_RECEIVED_TRANSACTIONS 
+             pre_received_transactions} {@link 
+             #METRIC_KEY_PRE_SENT_TRANSACTIONS pre_sent_transactions} {@link 
+             #METRIC_KEY_RECEIVED_TRANSACTIONS received_transactions} {@link 
+             #METRIC_KEY_SENT_TRANSACTIONS sent_transactions} {@link 
+             #METRIC_KEY_GC_INVOCATION_COUNT gc_invocation_count} {@link 
+             #METRIC_KEY_JAVA_ALLOCATED java_allocated} {@link 
+             #METRIC_KEY_JAVA_FREE java_free} {@link 
+             #METRIC_KEY_JAVA_PRIVATE_DIRTY java_private_dirty} {@link 
+             #METRIC_KEY_JAVA_PSS java_pss} {@link 
+             #METRIC_KEY_JAVA_SHARED_DIRTY java_shared_dirty} {@link 
+             #METRIC_KEY_JAVA_SIZE java_size} {@link 
+             #METRIC_KEY_NATIVE_ALLOCATED native_allocated} {@link 
+             #METRIC_KEY_NATIVE_FREE native_free} {@link 
+             #METRIC_KEY_NATIVE_PRIVATE_DIRTY native_private_dirty} {@link 
+             #METRIC_KEY_NATIVE_PSS native_pss} {@link 
+             #METRIC_KEY_NATIVE_SHARED_DIRTY native_shared_dirty} {@link 
+             #METRIC_KEY_NATIVE_SIZE native_size} {@link 
+             #METRIC_KEY_GLOBAL_ALLOC_COUNT global_alloc_count} {@link 
+             #METRIC_KEY_GLOBAL_ALLOC_SIZE global_alloc_size} {@link 
+             #METRIC_KEY_GLOBAL_FREED_COUNT global_freed_count} {@link 
+             #METRIC_KEY_GLOBAL_FREED_SIZE global_freed_size} {@link 
+             #METRIC_KEY_OTHER_PRIVATE_DIRTY other_private_dirty} {@link 
+             #METRIC_KEY_OTHER_PSS other_pss} {@link 
+             #METRIC_KEY_OTHER_SHARED_DIRTY other_shared_dirty} 
+
+*android.os.PerformanceCollector.setPerformanceResultsWriter(PerformanceCollector.PerformanceResultsWriter)*
+
+public void setPerformanceResultsWriter(android.os.PerformanceCollector.PerformanceResultsWriter writer)
+
+
+
+
+
+*android.os.PerformanceCollector.startTiming(String)*
+
+public void startTiming(java.lang.String label)
+
+Start measurement of user and cpu time. 
+
+
+    label - description of code block between startTiming and stopTiming, used to label 
+       output 
+
+*android.os.PerformanceCollector.stopTiming(String)*
+
+public |android.os.Bundle| stopTiming(java.lang.String label)
+
+Stop measurement of user and cpu time. 
+
+
+    label - description of code block between addIteration or startTiming and stopTiming, 
+       used to label output 
+
+    Returns: Runtime metrics stored in a bundle, including all iterations between calls to 
+             startTiming and stopTiming. List of iterations is keyed by {@link 
+             #METRIC_KEY_ITERATIONS iterations}. 
+
+

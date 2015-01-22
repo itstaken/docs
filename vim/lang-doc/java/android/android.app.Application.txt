@@ -1,0 +1,157 @@
+*android.app.Application* *Application* Base class for those who need to maintai
+
+public class Application
+  extends    |android.content.ContextWrapper|
+  implements |android.content.ComponentCallbacks2|
+
+|android.app.Application_Description|
+|android.app.Application_Fields|
+|android.app.Application_Constructors|
+|android.app.Application_Methods|
+
+================================================================================
+
+*android.app.Application_Fields*
+|android.app.LoadedApk_android.app.Application.mLoadedApk|
+
+*android.app.Application_Constructors*
+|android.app.Application()|
+
+*android.app.Application_Methods*
+|android.app.Application.onConfigurationChanged(Configuration)|
+|android.app.Application.onCreate()|Called when the application is starting, be
+|android.app.Application.onLowMemory()|
+|android.app.Application.onTerminate()|This method is for use in emulated proce
+|android.app.Application.onTrimMemory(int)|
+|android.app.Application.registerActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks)|
+|android.app.Application.registerComponentCallbacks(ComponentCallbacks)|
+|android.app.Application.registerOnProvideAssistDataListener(Application.OnProvideAssistDataListener)|
+|android.app.Application.unregisterActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks)|
+|android.app.Application.unregisterComponentCallbacks(ComponentCallbacks)|
+|android.app.Application.unregisterOnProvideAssistDataListener(Application.OnProvideAssistDataListener)|
+
+*android.app.Application_Description*
+
+Base class for those who need to maintain global application state. You can 
+provide your own implementation by specifying its name in your 
+AndroidManifest.xml's <application> tag, which will cause that class to be 
+instantiated for you when the process for your application/package is created. 
+
+There is normally no need to subclass Application. In most situation, static 
+singletons can provide the same functionality in a more modular way. If your 
+singleton needs a global context (for example to register broadcast receivers), 
+the function to retrieve it can be given a (|android.content.Context|) which 
+internally uses Context.getApplicationContext()(|android.content.Context|) when 
+first constructing the singleton. 
+
+
+
+*android.app.LoadedApk_android.app.Application.mLoadedApk*
+
+
+
+
+
+*android.app.Application()*
+
+public Application()
+
+
+
+
+*android.app.Application.onConfigurationChanged(Configuration)*
+
+public void onConfigurationChanged(android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.app.Application.onCreate()*
+
+public void onCreate()
+
+Called when the application is starting, before any activity, service, or 
+receiver objects (excluding content providers) have been created. 
+Implementations should be as quick as possible (for example using lazy 
+initialization of state) since the time spent in this function directly impacts 
+the performance of starting the first activity, service, or receiver in a 
+process. If you override this method, be sure to call super.onCreate(). 
+
+
+
+*android.app.Application.onLowMemory()*
+
+public void onLowMemory()
+
+
+
+
+
+*android.app.Application.onTerminate()*
+
+public void onTerminate()
+
+This method is for use in emulated process environments. It will never be 
+called on a production Android device, where processes are removed by simply 
+killing them; no user code (including this callback) is executed when doing so. 
+
+
+
+*android.app.Application.onTrimMemory(int)*
+
+public void onTrimMemory(int level)
+
+
+
+
+
+*android.app.Application.registerActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks)*
+
+public void registerActivityLifecycleCallbacks(android.app.Application.ActivityLifecycleCallbacks callback)
+
+
+
+
+
+*android.app.Application.registerComponentCallbacks(ComponentCallbacks)*
+
+public void registerComponentCallbacks(android.content.ComponentCallbacks callback)
+
+
+
+
+
+*android.app.Application.registerOnProvideAssistDataListener(Application.OnProvideAssistDataListener)*
+
+public void registerOnProvideAssistDataListener(android.app.Application.OnProvideAssistDataListener callback)
+
+
+
+
+
+*android.app.Application.unregisterActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks)*
+
+public void unregisterActivityLifecycleCallbacks(android.app.Application.ActivityLifecycleCallbacks callback)
+
+
+
+
+
+*android.app.Application.unregisterComponentCallbacks(ComponentCallbacks)*
+
+public void unregisterComponentCallbacks(android.content.ComponentCallbacks callback)
+
+
+
+
+
+*android.app.Application.unregisterOnProvideAssistDataListener(Application.OnProvideAssistDataListener)*
+
+public void unregisterOnProvideAssistDataListener(android.app.Application.OnProvideAssistDataListener callback)
+
+
+
+
+
+

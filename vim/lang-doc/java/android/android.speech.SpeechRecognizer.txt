@@ -1,0 +1,231 @@
+*android.speech.SpeechRecognizer* *SpeechRecognizer* This class provides access 
+
+public class SpeechRecognizer
+  extends    |java.lang.Object|
+
+|android.speech.SpeechRecognizer_Description|
+|android.speech.SpeechRecognizer_Fields|
+|android.speech.SpeechRecognizer_Constructors|
+|android.speech.SpeechRecognizer_Methods|
+
+================================================================================
+
+*android.speech.SpeechRecognizer_Fields*
+|java.lang.String_android.speech.SpeechRecognizer.CONFIDENCE_SCORES|
+|int_android.speech.SpeechRecognizer.ERROR_AUDIO|
+|int_android.speech.SpeechRecognizer.ERROR_CLIENT|
+|int_android.speech.SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS|
+|int_android.speech.SpeechRecognizer.ERROR_NETWORK|
+|int_android.speech.SpeechRecognizer.ERROR_NETWORK_TIMEOUT|
+|int_android.speech.SpeechRecognizer.ERROR_NO_MATCH|
+|int_android.speech.SpeechRecognizer.ERROR_RECOGNIZER_BUSY|
+|int_android.speech.SpeechRecognizer.ERROR_SERVER|
+|int_android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT|
+|java.lang.String_android.speech.SpeechRecognizer.RESULTS_RECOGNITION|
+
+*android.speech.SpeechRecognizer_Methods*
+|android.speech.SpeechRecognizer.cancel()|Cancels the speech recognition.
+|android.speech.SpeechRecognizer.createSpeechRecognizer(Context)|Factory method
+|android.speech.SpeechRecognizer.createSpeechRecognizer(Context,ComponentName)|
+|android.speech.SpeechRecognizer.destroy()|Destroys theSpeechRecognizerobject.
+|android.speech.SpeechRecognizer.isRecognitionAvailable(Context)|Checks whether
+|android.speech.SpeechRecognizer.setRecognitionListener(RecognitionListener)|Se
+|android.speech.SpeechRecognizer.startListening(Intent)|Starts listening for sp
+|android.speech.SpeechRecognizer.stopListening()|Stops listening for speech.
+
+*android.speech.SpeechRecognizer_Description*
+
+This class provides access to the speech recognition service. This service 
+allows access to the speech recognizer. Do not instantiate this class directly, 
+instead, call (|android.speech.SpeechRecognizer|) . This class's methods must 
+be invoked only from the main application thread. 
+
+The implementation of this API is likely to stream audio to remote servers to 
+perform speech recognition. As such this API is not intended to be used for 
+continuous recognition, which would consume a significant amount of battery and 
+bandwidth. 
+
+Please note that the application must have (|android.Manifest.permission|) 
+permission to use this class. 
+
+
+
+*java.lang.String_android.speech.SpeechRecognizer.CONFIDENCE_SCORES*
+
+Key used to retrieve a float array from the (|android.os.Bundle|) passed to the 
+(|android.speech.RecognitionListener|) and 
+(|android.speech.RecognitionListener|) methods. The array should be the same 
+size as the ArrayList provided in (|android.speech.SpeechRecognizer|) , and 
+should contain values ranging from 0.0 to 1.0, or -1 to represent an 
+unavailable confidence score. 
+
+Confidence values close to 1.0 indicate high confidence (the speech recognizer 
+is confident that the recognition result is correct), while values close to 0.0 
+indicate low confidence. 
+
+This value is optional and might not be provided. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_AUDIO*
+
+Audio recording error. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_CLIENT*
+
+Other client side errors. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS*
+
+Insufficient permissions 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_NETWORK*
+
+Other network related errors. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_NETWORK_TIMEOUT*
+
+Network operation timed out. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_NO_MATCH*
+
+No recognition result matched. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_RECOGNIZER_BUSY*
+
+RecognitionService busy. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_SERVER*
+
+Server sends error status. 
+
+
+*int_android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT*
+
+No speech input 
+
+
+*java.lang.String_android.speech.SpeechRecognizer.RESULTS_RECOGNITION*
+
+Key used to retrieve anArrayListfrom the (|android.os.Bundle|) passed to the 
+(|android.speech.RecognitionListener|) and 
+(|android.speech.RecognitionListener|) methods. These strings are the possible 
+recognition results, where the first element is the most likely candidate. 
+
+
+
+*android.speech.SpeechRecognizer.cancel()*
+
+public void cancel()
+
+Cancels the speech recognition. Please note that 
+(|android.speech.SpeechRecognizer|) should be called beforehand, otherwise no 
+notifications will be received. 
+
+
+
+*android.speech.SpeechRecognizer.createSpeechRecognizer(Context)*
+
+public static |android.speech.SpeechRecognizer| createSpeechRecognizer(android.content.Context context)
+
+Factory method to create a newSpeechRecognizer. Please note that 
+(|android.speech.SpeechRecognizer|) should be called before dispatching any 
+command to the createdSpeechRecognizer, otherwise no notifications will be 
+received. 
+
+
+    context - in which to create {@code SpeechRecognizer} 
+
+    Returns: a new {@code SpeechRecognizer} 
+
+*android.speech.SpeechRecognizer.createSpeechRecognizer(Context,ComponentName)*
+
+public static |android.speech.SpeechRecognizer| createSpeechRecognizer(
+  android.content.Context context,
+  android.content.ComponentName serviceComponent)
+
+Factory method to create a newSpeechRecognizer. Please note that 
+(|android.speech.SpeechRecognizer|) should be called before dispatching any 
+command to the createdSpeechRecognizer, otherwise no notifications will be 
+received. 
+
+Use this version of the method to specify a specific service to direct this 
+(|android.speech.SpeechRecognizer|) to. Normally you would not use this; use 
+(|android.speech.SpeechRecognizer|) instead to use the system default 
+recognition service. 
+
+
+    context - in which to create {@code SpeechRecognizer} 
+    serviceComponent - the {@link ComponentName} of a specific service to direct this {@code 
+       SpeechRecognizer} to 
+
+    Returns: a new {@code SpeechRecognizer} 
+
+*android.speech.SpeechRecognizer.destroy()*
+
+public void destroy()
+
+Destroys theSpeechRecognizerobject. 
+
+
+
+*android.speech.SpeechRecognizer.isRecognitionAvailable(Context)*
+
+public static boolean isRecognitionAvailable(android.content.Context context)
+
+Checks whether a speech recognition service is available on the system. If this 
+method returnsfalse, (|android.speech.SpeechRecognizer|) will fail. 
+
+
+    context - with which {@code SpeechRecognizer} will be created 
+
+    Returns: {@code true} if recognition is available, {@code false} otherwise 
+
+*android.speech.SpeechRecognizer.setRecognitionListener(RecognitionListener)*
+
+public void setRecognitionListener(android.speech.RecognitionListener listener)
+
+Sets the listener that will receive all the callbacks. The previous unfinished 
+commands will be executed with the old listener, while any following command 
+will be executed with the new listener. 
+
+
+    listener - listener that will receive all the callbacks from the created {@link 
+       SpeechRecognizer}, this must not be null. 
+
+*android.speech.SpeechRecognizer.startListening(Intent)*
+
+public void startListening(android.content.Intent recognizerIntent)
+
+Starts listening for speech. Please note that 
+(|android.speech.SpeechRecognizer|) should be called beforehand, otherwise no 
+notifications will be received. 
+
+
+    recognizerIntent - contains parameters for the recognition to be performed. The intent may also 
+       contain optional extras, see {@link RecognizerIntent}. If these values 
+       are not set explicitly, default values will be used by the recognizer. 
+
+*android.speech.SpeechRecognizer.stopListening()*
+
+public void stopListening()
+
+Stops listening for speech. Speech captured so far will be recognized as if the 
+user had stopped speaking at this point. Note that in the default case, this 
+does not need to be called, as the speech endpointer will automatically stop 
+the recognizer listening when it determines speech has completed. However, you 
+can manipulate endpointer parameters directly using the intent extras defined 
+in (|android.speech.RecognizerIntent|) , in which case you may sometimes want 
+to manually call this method to stop listening sooner. Please note that 
+(|android.speech.SpeechRecognizer|) should be called beforehand, otherwise no 
+notifications will be received. 
+
+
+
+

@@ -1,0 +1,172 @@
+*android.os.SystemClock* *SystemClock* Core timekeeping facilities.
+
+public final class SystemClock
+  extends    |java.lang.Object|
+
+|android.os.SystemClock_Description|
+|android.os.SystemClock_Fields|
+|android.os.SystemClock_Constructors|
+|android.os.SystemClock_Methods|
+
+================================================================================
+
+*android.os.SystemClock_Methods*
+|android.os.SystemClock.currentThreadTimeMicro()|Returns microseconds running i
+|android.os.SystemClock.currentThreadTimeMillis()|Returns milliseconds running 
+|android.os.SystemClock.currentTimeMicro()|Returns current wall time in  micros
+|android.os.SystemClock.elapsedRealtime()|Returns milliseconds since boot, incl
+|android.os.SystemClock.elapsedRealtimeNanos()|Returns nanoseconds since boot, 
+|android.os.SystemClock.setCurrentTimeMillis(long)|Sets the current wall time, 
+|android.os.SystemClock.sleep(long)|Waits a given number of milliseconds (of up
+|android.os.SystemClock.uptimeMillis()|Returns milliseconds since boot, not cou
+
+*android.os.SystemClock_Description*
+
+Core timekeeping facilities. 
+
+Three different clocks are available, and they should not be confused: 
+
+System.currentTimeMillis()(|java.lang.System|) is the standard "wall" clock 
+(time and date) expressing milliseconds since the epoch. The wall clock can be 
+set by the user or the phone network (see (|android.os.SystemClock|) ), so the 
+time may jump backwards or forwards unpredictably. This clock should only be 
+used when correspondence with real-world dates and times is important, such as 
+in a calendar or alarm clock application. Interval or elapsed time measurements 
+should use a different clock. If you are using System.currentTimeMillis(), 
+consider listening to the ACTION_TIME_TICK(|android.content.Intent|) , 
+ACTION_TIME_CHANGED(|android.content.Intent|) and 
+ACTION_TIMEZONE_CHANGED(|android.content.Intent|) 
+Intent(|android.content.Intent|) broadcasts to find out when the time changes. 
+
+(|android.os.SystemClock|) is counted in milliseconds since the system was 
+booted. This clock stops when the system enters deep sleep (CPU off, display 
+dark, device waiting for external input), but is not affected by clock scaling, 
+idle, or other power saving mechanisms. This is the basis for most interval 
+timing such as Thread.sleep(millls)(|java.lang.Thread|) , 
+Object.wait(millis)(|java.lang.Object|) , and 
+System.nanoTime()(|java.lang.System|) . This clock is guaranteed to be 
+monotonic, and is suitable for interval timing when the interval does not span 
+device sleep. Most methods that accept a timestamp value currently expect the 
+(|android.os.SystemClock|) clock. 
+
+(|android.os.SystemClock|) and (|android.os.SystemClock|) return the time since 
+the system was booted, and include deep sleep. This clock is guaranteed to be 
+monotonic, and continues to tick even when the CPU is in power saving modes, so 
+is the recommend basis for general purpose interval timing. 
+
+
+
+There are several mechanisms for controlling the timing of events: 
+
+Standard functions like Thread.sleep(millis)(|java.lang.Thread|) and 
+Object.wait(millis)(|java.lang.Object|) are always available. These functions 
+use the (|android.os.SystemClock|) clock; if the device enters sleep, the 
+remainder of the time will be postponed until the device wakes up. These 
+synchronous functions may be interrupted with 
+Thread.interrupt()(|java.lang.Thread|) , and you must handle 
+(|java.lang.InterruptedException|) . 
+
+SystemClock.sleep(millis)(|android.os.SystemClock|) is a utility function very 
+similar to Thread.sleep(millis)(|java.lang.Thread|) , but it ignores 
+(|java.lang.InterruptedException|) . Use this function for delays if you do not 
+use Thread.interrupt()(|java.lang.Thread|) , as it will preserve the 
+interrupted state of the thread. 
+
+The (|android.os.Handler|) class can schedule asynchronous callbacks at an 
+absolute or relative time. Handler objects also use the 
+(|android.os.SystemClock|) clock, and require an event 
+loop(|android.os.Looper|) (normally present in any GUI application). 
+
+The (|android.app.AlarmManager|) can trigger one-time or recurring events which 
+occur even when the device is in deep sleep or your application is not running. 
+Events may be scheduled with your choice of (|java.lang.System|) (RTC) or 
+(|android.os.SystemClock|) (ELAPSED_REALTIME), and cause an 
+(|android.content.Intent|) broadcast when they occur. 
+
+
+
+*android.os.SystemClock.currentThreadTimeMicro()*
+
+public static native long currentThreadTimeMicro()
+
+Returns microseconds running in the current thread. 
+
+
+
+    Returns: elapsed microseconds in the thread 
+
+*android.os.SystemClock.currentThreadTimeMillis()*
+
+public static native long currentThreadTimeMillis()
+
+Returns milliseconds running in the current thread. 
+
+
+
+    Returns: elapsed milliseconds in the thread 
+
+*android.os.SystemClock.currentTimeMicro()*
+
+public static native long currentTimeMicro()
+
+Returns current wall time in microseconds. 
+
+
+
+    Returns: elapsed microseconds in wall time 
+
+*android.os.SystemClock.elapsedRealtime()*
+
+public static native long elapsedRealtime()
+
+Returns milliseconds since boot, including time spent in sleep. 
+
+
+
+    Returns: elapsed milliseconds since boot. 
+
+*android.os.SystemClock.elapsedRealtimeNanos()*
+
+public static native long elapsedRealtimeNanos()
+
+Returns nanoseconds since boot, including time spent in sleep. 
+
+
+
+    Returns: elapsed nanoseconds since boot. 
+
+*android.os.SystemClock.setCurrentTimeMillis(long)*
+
+public static native boolean setCurrentTimeMillis(long millis)
+
+Sets the current wall time, in milliseconds. Requires the calling process to 
+have appropriate permissions. 
+
+
+
+    Returns: if the clock was successfully set to the specified time. 
+
+*android.os.SystemClock.sleep(long)*
+
+public static void sleep(long ms)
+
+Waits a given number of milliseconds (of uptimeMillis) before returning. 
+Similar to (|java.lang.Thread|) , but does not throw 
+(|java.lang.InterruptedException|) ; (|java.lang.Thread|) events are deferred 
+until the next interruptible operation. Does not return until at least the 
+specified number of milliseconds has elapsed. 
+
+
+    ms - to sleep before returning, in milliseconds of uptime. 
+
+*android.os.SystemClock.uptimeMillis()*
+
+public static native long uptimeMillis()
+
+Returns milliseconds since boot, not counting time spent in deep sleep. 
+
+
+
+    Returns: milliseconds of non-sleep uptime since boot. 
+
+

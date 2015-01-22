@@ -1,0 +1,353 @@
+*android.provider.DocumentsContract* *DocumentsContract* Defines the contract be
+
+public final class DocumentsContract
+  extends    |java.lang.Object|
+
+|android.provider.DocumentsContract_Description|
+|android.provider.DocumentsContract_Fields|
+|android.provider.DocumentsContract_Constructors|
+|android.provider.DocumentsContract_Methods|
+
+================================================================================
+
+*android.provider.DocumentsContract_Fields*
+|java.lang.String_android.provider.DocumentsContract.ACTION_MANAGE_DOCUMENT|
+|java.lang.String_android.provider.DocumentsContract.ACTION_MANAGE_ROOT|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_ERROR|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_INFO|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_LOADING|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_ORIENTATION|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_PACKAGE_NAME|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_SHOW_ADVANCED|
+|java.lang.String_android.provider.DocumentsContract.EXTRA_THUMBNAIL_SIZE|
+|java.lang.String_android.provider.DocumentsContract.METHOD_CREATE_DOCUMENT|
+|java.lang.String_android.provider.DocumentsContract.METHOD_DELETE_DOCUMENT|
+|java.lang.String_android.provider.DocumentsContract.PROVIDER_INTERFACE|
+
+*android.provider.DocumentsContract_Methods*
+|android.provider.DocumentsContract.buildChildDocumentsUri(String,String)|Build
+|android.provider.DocumentsContract.buildDocumentUri(String,String)|Build URI r
+|android.provider.DocumentsContract.buildRecentDocumentsUri(String,String)|Buil
+|android.provider.DocumentsContract.buildRootsUri(String)|Build URI representin
+|android.provider.DocumentsContract.buildRootUri(String,String)|Build URI repre
+|android.provider.DocumentsContract.buildSearchDocumentsUri(String,String,String)|
+|android.provider.DocumentsContract.createDocument(ContentProviderClient,Uri,String,String)|
+|android.provider.DocumentsContract.createDocument(ContentResolver,Uri,String,String)|
+|android.provider.DocumentsContract.deleteDocument(ContentProviderClient,Uri)|
+|android.provider.DocumentsContract.deleteDocument(ContentResolver,Uri)|Delete 
+|android.provider.DocumentsContract.getDocumentId(Uri)|Extract theDocument#COLU
+|android.provider.DocumentsContract.getDocumentThumbnail(ContentProviderClient,Uri,Point,CancellationSignal)|
+|android.provider.DocumentsContract.getDocumentThumbnail(ContentResolver,Uri,Point,CancellationSignal)|
+|android.provider.DocumentsContract.getRootId(Uri)|Extract theRoot#COLUMN_ROOT_
+|android.provider.DocumentsContract.getSearchDocumentsQuery(Uri)|Extract the se
+|android.provider.DocumentsContract.isDocumentUri(Context,Uri)|Test if the give
+|android.provider.DocumentsContract.isManageMode(Uri)|
+|android.provider.DocumentsContract.openImageThumbnail(File)|Open the given ima
+|android.provider.DocumentsContract.setManageMode(Uri)|
+
+*android.provider.DocumentsContract_Description*
+
+Defines the contract between a documents provider and the platform. 
+
+To create a document provider, extend (|android.provider.DocumentsProvider|) , 
+which provides a foundational implementation of this contract. 
+
+
+
+*java.lang.String_android.provider.DocumentsContract.ACTION_MANAGE_DOCUMENT*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.ACTION_MANAGE_ROOT*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_ERROR*
+
+Optional string included in a directory (|android.database.Cursor|) providing 
+an error message that should be shown to a user. For example, a provider may 
+wish to indicate that a network error occurred. The user may choose to retry, 
+resulting in a new query. 
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_INFO*
+
+Optional string included in a directory (|android.database.Cursor|) providing 
+an informational message that should be shown to a user. For example, a 
+provider may wish to indicate that not all documents are available. 
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_LOADING*
+
+Optional boolean flag included in a directory (|android.database.Cursor|) 
+indicating that a document provider is still loading data. For example, a 
+provider has returned some results, but is still waiting on an outstanding 
+network request. The provider must send a content changed notification when 
+loading is finished. 
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_ORIENTATION*
+
+Included in (|android.content.res.AssetFileDescriptor|) when returned thumbnail 
+should be rotated. 
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_PACKAGE_NAME*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_SHOW_ADVANCED*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.EXTRA_THUMBNAIL_SIZE*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.METHOD_CREATE_DOCUMENT*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.METHOD_DELETE_DOCUMENT*
+
+
+
+
+*java.lang.String_android.provider.DocumentsContract.PROVIDER_INTERFACE*
+
+Intent action used to identify (|android.provider.DocumentsProvider|) 
+instances. This is used in theof a. 
+
+
+
+*android.provider.DocumentsContract.buildChildDocumentsUri(String,String)*
+
+public static |android.net.Uri| buildChildDocumentsUri(
+  java.lang.String authority,
+  java.lang.String parentDocumentId)
+
+Build URI representing the children of the given directory in a document 
+provider. When queried, a provider will return zero or more rows with columns 
+defined by (|android.provider.DocumentsContract.Document|) . 
+
+
+    parentDocumentId - the document to return children for, which must be a directory with MIME type 
+       of {@link Document#MIME_TYPE_DIR}. 
+
+*android.provider.DocumentsContract.buildDocumentUri(String,String)*
+
+public static |android.net.Uri| buildDocumentUri(
+  java.lang.String authority,
+  java.lang.String documentId)
+
+Build URI representing the given 
+(|android.provider.DocumentsContract.Document|) in a document provider. When 
+queried, a provider will return a single row with columns defined by 
+(|android.provider.DocumentsContract.Document|) . 
+
+
+
+*android.provider.DocumentsContract.buildRecentDocumentsUri(String,String)*
+
+public static |android.net.Uri| buildRecentDocumentsUri(
+  java.lang.String authority,
+  java.lang.String rootId)
+
+Build URI representing the recently modified documents of a specific root in a 
+document provider. When queried, a provider will return zero or more rows with 
+columns defined by (|android.provider.DocumentsContract.Document|) . 
+
+
+
+*android.provider.DocumentsContract.buildRootsUri(String)*
+
+public static |android.net.Uri| buildRootsUri(java.lang.String authority)
+
+Build URI representing the roots of a document provider. When queried, a 
+provider will return one or more rows with columns defined by 
+(|android.provider.DocumentsContract.Root|) . 
+
+
+
+*android.provider.DocumentsContract.buildRootUri(String,String)*
+
+public static |android.net.Uri| buildRootUri(
+  java.lang.String authority,
+  java.lang.String rootId)
+
+Build URI representing the given (|android.provider.DocumentsContract.Root|) in 
+a document provider. 
+
+
+
+*android.provider.DocumentsContract.buildSearchDocumentsUri(String,String,String)*
+
+public static |android.net.Uri| buildSearchDocumentsUri(
+  java.lang.String authority,
+  java.lang.String rootId,
+  java.lang.String query)
+
+Build URI representing a search for matching documents under a specific root in 
+a document provider. When queried, a provider will return zero or more rows 
+with columns defined by (|android.provider.DocumentsContract.Document|) . 
+
+
+
+*android.provider.DocumentsContract.createDocument(ContentProviderClient,Uri,String,String)*
+
+public static |android.net.Uri| createDocument(
+  android.content.ContentProviderClient client,
+  android.net.Uri parentDocumentUri,
+  java.lang.String mimeType,
+  java.lang.String displayName)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.provider.DocumentsContract.createDocument(ContentResolver,Uri,String,String)*
+
+public static |android.net.Uri| createDocument(
+  android.content.ContentResolver resolver,
+  android.net.Uri parentDocumentUri,
+  java.lang.String mimeType,
+  java.lang.String displayName)
+
+Create a new document with given MIME type and display name. 
+
+
+    parentDocumentUri - directory with {@link Document#FLAG_DIR_SUPPORTS_CREATE} 
+    mimeType - MIME type of new document 
+    displayName - name of new document 
+
+    Returns: newly created document, or {@code null} if failed 
+
+*android.provider.DocumentsContract.deleteDocument(ContentProviderClient,Uri)*
+
+public static void deleteDocument(
+  android.content.ContentProviderClient client,
+  android.net.Uri documentUri)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.provider.DocumentsContract.deleteDocument(ContentResolver,Uri)*
+
+public static boolean deleteDocument(
+  android.content.ContentResolver resolver,
+  android.net.Uri documentUri)
+
+Delete the given document. 
+
+
+    documentUri - document with {@link Document#FLAG_SUPPORTS_DELETE} 
+
+    Returns: if the document was deleted successfully. 
+
+*android.provider.DocumentsContract.getDocumentId(Uri)*
+
+public static |java.lang.String| getDocumentId(android.net.Uri documentUri)
+
+Extract the (|android.provider.DocumentsContract.Document|) from the given URI. 
+
+
+
+*android.provider.DocumentsContract.getDocumentThumbnail(ContentProviderClient,Uri,Point,CancellationSignal)*
+
+public static Bitmap getDocumentThumbnail(
+  android.content.ContentProviderClient client,
+  android.net.Uri documentUri,
+  Point size,
+  android.os.CancellationSignal signal)
+  throws |java.io.IOException|
+         |android.os.RemoteException|
+         
+
+
+
+
+*android.provider.DocumentsContract.getDocumentThumbnail(ContentResolver,Uri,Point,CancellationSignal)*
+
+public static Bitmap getDocumentThumbnail(
+  android.content.ContentResolver resolver,
+  android.net.Uri documentUri,
+  Point size,
+  android.os.CancellationSignal signal)
+
+Return thumbnail representing the document at the given URI. Callers are 
+responsible for their own in-memory caching. 
+
+
+    documentUri - document to return thumbnail for, which must have {@link 
+       Document#FLAG_SUPPORTS_THUMBNAIL} set. 
+    size - optimal thumbnail size desired. A provider may return a thumbnail of a 
+       different size, but never more than double the requested size. 
+    signal - signal used to indicate if caller is no longer interested in the thumbnail. 
+
+    Returns: decoded thumbnail, or {@code null} if problem was encountered. 
+
+*android.provider.DocumentsContract.getRootId(Uri)*
+
+public static |java.lang.String| getRootId(android.net.Uri rootUri)
+
+Extract the (|android.provider.DocumentsContract.Root|) from the given URI. 
+
+
+
+*android.provider.DocumentsContract.getSearchDocumentsQuery(Uri)*
+
+public static |java.lang.String| getSearchDocumentsQuery(android.net.Uri searchDocumentsUri)
+
+Extract the search query from a URI built by 
+(|android.provider.DocumentsContract|) . 
+
+
+
+*android.provider.DocumentsContract.isDocumentUri(Context,Uri)*
+
+public static boolean isDocumentUri(
+  android.content.Context context,
+  android.net.Uri uri)
+
+Test if the given URI represents a 
+(|android.provider.DocumentsContract.Document|) backed by a 
+(|android.provider.DocumentsProvider|) . 
+
+
+
+*android.provider.DocumentsContract.isManageMode(Uri)*
+
+public static boolean isManageMode(android.net.Uri uri)
+
+
+
+
+
+*android.provider.DocumentsContract.openImageThumbnail(File)*
+
+public static |android.content.res.AssetFileDescriptor| openImageThumbnail(java.io.File file)
+  throws |java.io.FileNotFoundException|
+         
+Open the given image for thumbnail purposes, using any embedded EXIF thumbnail 
+if available, and providing orientation hints from the parent image. 
+
+
+
+*android.provider.DocumentsContract.setManageMode(Uri)*
+
+public static |android.net.Uri| setManageMode(android.net.Uri uri)
+
+
+
+
+
+

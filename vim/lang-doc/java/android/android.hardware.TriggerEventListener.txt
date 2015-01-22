@@ -1,0 +1,74 @@
+*android.hardware.TriggerEventListener* *TriggerEventListener* This class is the
+
+public abstract class TriggerEventListener
+  extends    |java.lang.Object|
+
+|android.hardware.TriggerEventListener_Description|
+|android.hardware.TriggerEventListener_Fields|
+|android.hardware.TriggerEventListener_Constructors|
+|android.hardware.TriggerEventListener_Methods|
+
+================================================================================
+
+*android.hardware.TriggerEventListener_Constructors*
+|android.hardware.TriggerEventListener()|
+
+*android.hardware.TriggerEventListener_Methods*
+|android.hardware.TriggerEventListener.onTrigger(TriggerEvent)|The method that 
+
+*android.hardware.TriggerEventListener_Description*
+
+This class is the listener used to handle Trigger Sensors. Trigger Sensors are 
+sensors that trigger an event and are automatically disabled. 
+(|android.hardware.Sensor|) is one such example. 
+(|android.hardware.SensorManager|) lets you access the device's 
+sensors(|android.hardware.Sensor|) . Get an instance of 
+(|android.hardware.SensorManager|) by calling 
+Context.getSystemService()(|android.content.Context|) with the argument 
+(|android.content.Context|) . Here's an example setup for a 
+TriggerEventListener: 
+
+
+
+class TriggerListener extends TriggerEventListener { public void 
+onTrigger(TriggerEvent event) { // Do Work. 
+
+// As it is a one shot sensor, it will be canceled automatically. // 
+SensorManager.requestTriggerSensor(this, mSigMotion); needs to // be called 
+again, if needed. } } public class SensorActivity extends Activity { private 
+final SensorManager mSensorManager; private final Sensor mSigMotion; private 
+final TriggerEventListener mListener = new TriggerEventListener(); 
+
+public SensorActivity() { mSensorManager = 
+(SensorManager)getSystemService(SENSOR_SERVICE); mSigMotion = 
+mSensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION); } 
+
+protected void onResume() { super.onResume(); 
+mSensorManager.requestTriggerSensor(mListener, mSigMotion); } 
+
+protected void onPause() { super.onPause(); // Call disable to ensure that the 
+trigger request has been canceled. 
+mSensorManager.cancelTriggerSensor(mListener, mSigMotion); } 
+
+} 
+
+
+
+*android.hardware.TriggerEventListener()*
+
+public TriggerEventListener()
+
+
+
+
+*android.hardware.TriggerEventListener.onTrigger(TriggerEvent)*
+
+public abstract void onTrigger(android.hardware.TriggerEvent event)
+
+The method that will be called when the sensor is triggered. Override this 
+method in your implementation of this class. 
+
+
+    event - The details of the event. 
+
+

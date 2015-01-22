@@ -1,0 +1,197 @@
+*android.view.VelocityTracker* *VelocityTracker* Helper for tracking the velocit
+
+public final class VelocityTracker
+  extends    |java.lang.Object|
+
+|android.view.VelocityTracker_Description|
+|android.view.VelocityTracker_Fields|
+|android.view.VelocityTracker_Constructors|
+|android.view.VelocityTracker_Methods|
+
+================================================================================
+
+*android.view.VelocityTracker_Methods*
+|android.view.VelocityTracker.addMovement(MotionEvent)|Add a user's movement to
+|android.view.VelocityTracker.clear()|Reset the velocity tracker back to its in
+|android.view.VelocityTracker.computeCurrentVelocity(int)|Equivalent to invokin
+|android.view.VelocityTracker.computeCurrentVelocity(int,float)|Compute the cur
+|android.view.VelocityTracker.finalize()|
+|android.view.VelocityTracker.getEstimator(int,VelocityTracker.Estimator)|Get a
+|android.view.VelocityTracker.getXVelocity()|Retrieve the last computed X veloc
+|android.view.VelocityTracker.getXVelocity(int)|Retrieve the last computed X ve
+|android.view.VelocityTracker.getYVelocity()|Retrieve the last computed Y veloc
+|android.view.VelocityTracker.getYVelocity(int)|Retrieve the last computed Y ve
+|android.view.VelocityTracker.obtain()|Retrieve a new VelocityTracker object to
+|android.view.VelocityTracker.obtain(String)|Obtains a velocity tracker with th
+|android.view.VelocityTracker.recycle()|Return a VelocityTracker object back to
+
+*android.view.VelocityTracker_Description*
+
+Helper for tracking the velocity of touch events, for implementing flinging and 
+other such gestures. 
+
+Use (|android.view.VelocityTracker|) to retrieve a new instance of the class 
+when you are going to begin tracking. Put the motion events you receive into it 
+with (|android.view.VelocityTracker|) . When you want to determine the velocity 
+call (|android.view.VelocityTracker|) and then call 
+(|android.view.VelocityTracker|) and (|android.view.VelocityTracker|) to 
+retrieve the velocity for each pointer id. 
+
+
+
+*android.view.VelocityTracker.addMovement(MotionEvent)*
+
+public void addMovement(android.view.MotionEvent event)
+
+Add a user's movement to the tracker. You should call this for the initial 
+(|android.view.MotionEvent|) , the following (|android.view.MotionEvent|) 
+events that you receive, and the final (|android.view.MotionEvent|) . You can, 
+however, call this for whichever events you desire. 
+
+
+    event - The MotionEvent you received and would like to track. 
+
+*android.view.VelocityTracker.clear()*
+
+public void clear()
+
+Reset the velocity tracker back to its initial state. 
+
+
+
+*android.view.VelocityTracker.computeCurrentVelocity(int)*
+
+public void computeCurrentVelocity(int units)
+
+Equivalent to invoking (|android.view.VelocityTracker|) with a maximum velocity 
+of Float.MAX_VALUE. 
+
+
+
+*android.view.VelocityTracker.computeCurrentVelocity(int,float)*
+
+public void computeCurrentVelocity(
+  int units,
+  float maxVelocity)
+
+Compute the current velocity based on the points that have been collected. Only 
+call this when you actually want to retrieve velocity information, as it is 
+relatively expensive. You can then retrieve the velocity with 
+(|android.view.VelocityTracker|) and (|android.view.VelocityTracker|) . 
+
+
+    units - The units you would like the velocity in. A value of 1 provides pixels per 
+       millisecond, 1000 provides pixels per second, etc. 
+    maxVelocity - The maximum velocity that can be computed by this method. This value must be 
+       declared in the same unit as the units parameter. This value must be 
+       positive. 
+
+*android.view.VelocityTracker.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.VelocityTracker.getEstimator(int,VelocityTracker.Estimator)*
+
+public boolean getEstimator(
+  int id,
+  android.view.VelocityTracker.Estimator outEstimator)
+
+Get an estimator for the movements of a pointer using past movements of the 
+pointer to predict future movements. 
+
+It is not necessary to call (|android.view.VelocityTracker|) before calling 
+this method. 
+
+
+    id - Which pointer's velocity to return. 
+    outEstimator - The estimator to populate. 
+
+    Returns: True if an estimator was obtained, false if there is no information available 
+             about the pointer. 
+
+*android.view.VelocityTracker.getXVelocity()*
+
+public float getXVelocity()
+
+Retrieve the last computed X velocity. You must first call 
+(|android.view.VelocityTracker|) before calling this function. 
+
+
+
+    Returns: The previously computed X velocity. 
+
+*android.view.VelocityTracker.getXVelocity(int)*
+
+public float getXVelocity(int id)
+
+Retrieve the last computed X velocity. You must first call 
+(|android.view.VelocityTracker|) before calling this function. 
+
+
+    id - Which pointer's velocity to return. 
+
+    Returns: The previously computed X velocity. 
+
+*android.view.VelocityTracker.getYVelocity()*
+
+public float getYVelocity()
+
+Retrieve the last computed Y velocity. You must first call 
+(|android.view.VelocityTracker|) before calling this function. 
+
+
+
+    Returns: The previously computed Y velocity. 
+
+*android.view.VelocityTracker.getYVelocity(int)*
+
+public float getYVelocity(int id)
+
+Retrieve the last computed Y velocity. You must first call 
+(|android.view.VelocityTracker|) before calling this function. 
+
+
+    id - Which pointer's velocity to return. 
+
+    Returns: The previously computed Y velocity. 
+
+*android.view.VelocityTracker.obtain()*
+
+public static |android.view.VelocityTracker| obtain()
+
+Retrieve a new VelocityTracker object to watch the velocity of a motion. Be 
+sure to call (|android.view.VelocityTracker|) when done. You should generally 
+only maintain an active object while tracking a movement, so that the 
+VelocityTracker can be re-used elsewhere. 
+
+
+
+    Returns: Returns a new VelocityTracker. 
+
+*android.view.VelocityTracker.obtain(String)*
+
+public static |android.view.VelocityTracker| obtain(java.lang.String strategy)
+
+Obtains a velocity tracker with the specified strategy. For testing and 
+comparison purposes only. 
+
+
+    strategy - The strategy, or null to use the default. 
+
+    Returns: The velocity tracker. 
+
+*android.view.VelocityTracker.recycle()*
+
+public void recycle()
+
+Return a VelocityTracker object back to be re-used by others. You must not 
+touch the object after calling this function. 
+
+
+
+

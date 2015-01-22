@@ -1,0 +1,363 @@
+*android.app.FragmentManager* *FragmentManager* Interface for interacting withFr
+
+public abstract class FragmentManager
+  extends    |java.lang.Object|
+
+|android.app.FragmentManager_Description|
+|android.app.FragmentManager_Fields|
+|android.app.FragmentManager_Constructors|
+|android.app.FragmentManager_Methods|
+
+================================================================================
+
+*android.app.FragmentManager_Fields*
+|int_android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE|
+
+*android.app.FragmentManager_Constructors*
+|android.app.FragmentManager()|
+
+*android.app.FragmentManager_Methods*
+|android.app.FragmentManager.addOnBackStackChangedListener(FragmentManager.OnBackStackChangedListener)|
+|android.app.FragmentManager.beginTransaction()|Start a series of edit operatio
+|android.app.FragmentManager.dump(String,FileDescriptor,PrintWriter,String[])|P
+|android.app.FragmentManager.enableDebugLogging(boolean)|Control whether the fr
+|android.app.FragmentManager.executePendingTransactions()|After aFragmentTransa
+|android.app.FragmentManager.findFragmentById(int)|Finds a fragment that was id
+|android.app.FragmentManager.findFragmentByTag(String)|Finds a fragment that wa
+|android.app.FragmentManager.getBackStackEntryAt(int)|Return the BackStackEntry
+|android.app.FragmentManager.getBackStackEntryCount()|Return the number of entr
+|android.app.FragmentManager.getFragment(Bundle,String)|Retrieve the current Fr
+|android.app.FragmentManager.invalidateOptionsMenu()|Invalidate the attached ac
+|android.app.FragmentManager.isDestroyed()|Returns true if the finalActivity#on
+|android.app.FragmentManager.openTransaction()|
+|android.app.FragmentManager.popBackStack()|Pop the top state off the back stac
+|android.app.FragmentManager.popBackStack(int,int)|Pop all back stack states up
+|android.app.FragmentManager.popBackStack(String,int)|Pop the last fragment tra
+|android.app.FragmentManager.popBackStackImmediate()|Like#popBackStack(), but p
+|android.app.FragmentManager.popBackStackImmediate(int,int)|Like#popBackStack(i
+|android.app.FragmentManager.popBackStackImmediate(String,int)|Like#popBackStac
+|android.app.FragmentManager.putFragment(Bundle,String,Fragment)|Put a referenc
+|android.app.FragmentManager.removeOnBackStackChangedListener(FragmentManager.OnBackStackChangedListener)|
+|android.app.FragmentManager.saveFragmentInstanceState(Fragment)|Save the curre
+
+*android.app.FragmentManager_Description*
+
+Interface for interacting with (|android.app.Fragment|) objects inside of an 
+(|android.app.Activity|) Developer Guides For more information about using 
+fragments, read the <a 
+href="guide/topics/fundamentals/fragments.html">Fragments developer guide. 
+
+While the FragmentManager API was introduced in 
+(|android.os.Build.VERSION_CODES|) , a version of the API at is also available 
+for use on older platforms through (|android.support.v4.app.FragmentActivity|) 
+. See the blog post 
+
+Fragments For All for more details. 
+
+
+
+*int_android.app.FragmentManager.POP_BACK_STACK_INCLUSIVE*
+
+Flag for (|android.app.FragmentManager|) and (|android.app.FragmentManager|) : 
+If set, and the name or ID of a back stack entry has been supplied, then all 
+matching entries will be consumed until one that doesn't match is found or the 
+bottom of the stack is reached. Otherwise, all entries up to but not including 
+that entry will be removed. 
+
+
+
+*android.app.FragmentManager()*
+
+public FragmentManager()
+
+
+
+
+*android.app.FragmentManager.addOnBackStackChangedListener(FragmentManager.OnBackStackChangedListener)*
+
+public abstract void addOnBackStackChangedListener(android.app.FragmentManager.OnBackStackChangedListener listener)
+
+Add a new listener for changes to the fragment back stack. 
+
+
+
+*android.app.FragmentManager.beginTransaction()*
+
+public abstract |android.app.FragmentTransaction| beginTransaction()
+
+Start a series of edit operations on the Fragments associated with this 
+FragmentManager. 
+
+Note: A fragment transaction can only be created/committed prior to an activity 
+saving its state. If you try to commit a transaction after 
+Activity.onSaveInstanceState()(|android.app.Activity|) (and prior to a 
+following Activity.onStart(|android.app.Activity|) or 
+Activity.onResume()(|android.app.Activity|) , you will get an error. This is 
+because the framework takes care of saving your current fragments in the state, 
+and if changes are made after the state is saved then they will be lost. 
+
+
+
+*android.app.FragmentManager.dump(String,FileDescriptor,PrintWriter,String[])*
+
+public abstract void dump(
+  java.lang.String prefix,
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+Print the FragmentManager's state into the given stream. 
+
+
+    prefix - Text to print at the front of each line. 
+    fd - The raw file descriptor that the dump is being sent to. 
+    writer - A PrintWriter to which the dump is to be set. 
+    args - Additional arguments to the dump request. 
+
+*android.app.FragmentManager.enableDebugLogging(boolean)*
+
+public static void enableDebugLogging(boolean enabled)
+
+Control whether the framework's internal fragment manager debugging logs are 
+turned on. If enabled, you will see output in logcat as the framework performs 
+fragment operations. 
+
+
+
+*android.app.FragmentManager.executePendingTransactions()*
+
+public abstract boolean executePendingTransactions()
+
+After a (|android.app.FragmentTransaction|) is committed with 
+FragmentTransaction.commit()(|android.app.FragmentTransaction|) , it is 
+scheduled to be executed asynchronously on the process's main thread. If you 
+want to immediately executing any such pending operations, you can call this 
+function (only from the main thread) to do so. Note that all callbacks and 
+other related behavior will be done from within this call, so be careful about 
+where this is called from. 
+
+
+
+    Returns: Returns true if there were any pending transactions to be executed. 
+
+*android.app.FragmentManager.findFragmentById(int)*
+
+public abstract |android.app.Fragment| findFragmentById(int id)
+
+Finds a fragment that was identified by the given id either when inflated from 
+XML or as the container ID when added in a transaction. This first searches 
+through fragments that are currently added to the manager's activity; if no 
+such fragment is found, then all fragments currently on the back stack 
+associated with this ID are searched. 
+
+
+
+    Returns: The fragment if found or null otherwise. 
+
+*android.app.FragmentManager.findFragmentByTag(String)*
+
+public abstract |android.app.Fragment| findFragmentByTag(java.lang.String tag)
+
+Finds a fragment that was identified by the given tag either when inflated from 
+XML or as supplied when added in a transaction. This first searches through 
+fragments that are currently added to the manager's activity; if no such 
+fragment is found, then all fragments currently on the back stack are searched. 
+
+
+
+    Returns: The fragment if found or null otherwise. 
+
+*android.app.FragmentManager.getBackStackEntryAt(int)*
+
+public abstract |android.app.FragmentManager.BackStackEntry| getBackStackEntryAt(int index)
+
+Return the BackStackEntry at index index in the back stack; entries start index 
+0 being the bottom of the stack. 
+
+
+
+*android.app.FragmentManager.getBackStackEntryCount()*
+
+public abstract int getBackStackEntryCount()
+
+Return the number of entries currently in the back stack. 
+
+
+
+*android.app.FragmentManager.getFragment(Bundle,String)*
+
+public abstract |android.app.Fragment| getFragment(
+  android.os.Bundle bundle,
+  java.lang.String key)
+
+Retrieve the current Fragment instance for a reference previously placed with 
+(|android.app.FragmentManager|) . 
+
+
+    bundle - The bundle from which to retrieve the fragment reference. 
+    key - The name of the entry in the bundle. 
+
+    Returns: Returns the current Fragment instance that is associated with the given 
+             reference. 
+
+*android.app.FragmentManager.invalidateOptionsMenu()*
+
+public void invalidateOptionsMenu()
+
+Invalidate the attached activity's options menu as necessary. This may end up 
+being deferred until we move to the resumed state. 
+
+
+
+*android.app.FragmentManager.isDestroyed()*
+
+public abstract boolean isDestroyed()
+
+Returns true if the final Activity.onDestroy()(|android.app.Activity|) call has 
+been made on the FragmentManager's Activity, so this instance is now dead. 
+
+
+
+*android.app.FragmentManager.openTransaction()*
+
+public |android.app.FragmentTransaction| openTransaction()
+
+
+
+
+
+*android.app.FragmentManager.popBackStack()*
+
+public abstract void popBackStack()
+
+Pop the top state off the back stack. This function is asynchronous -- it 
+enqueues the request to pop, but the action will not be performed until the 
+application returns to its event loop. 
+
+
+
+*android.app.FragmentManager.popBackStack(int,int)*
+
+public abstract void popBackStack(
+  int id,
+  int flags)
+
+Pop all back stack states up to the one with the given identifier. This 
+function is asynchronous -- it enqueues the request to pop, but the action will 
+not be performed until the application returns to its event loop. 
+
+
+    id - Identifier of the stated to be popped. If no identifier exists, false is 
+       returned. The identifier is the number returned by {@link 
+       FragmentTransaction#commit() FragmentTransaction.commit()}. The {@link 
+       #POP_BACK_STACK_INCLUSIVE} flag can be used to control whether the named 
+       state itself is popped. 
+    flags - Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}. 
+
+*android.app.FragmentManager.popBackStack(String,int)*
+
+public abstract void popBackStack(
+  java.lang.String name,
+  int flags)
+
+Pop the last fragment transition from the manager's fragment back stack. If 
+there is nothing to pop, false is returned. This function is asynchronous -- it 
+enqueues the request to pop, but the action will not be performed until the 
+application returns to its event loop. 
+
+
+    name - If non-null, this is the name of a previous back state to look for; if found, 
+       all states up to that state will be popped. The {@link 
+       #POP_BACK_STACK_INCLUSIVE} flag can be used to control whether the named 
+       state itself is popped. If null, only the top state is popped. 
+    flags - Either 0 or {@link #POP_BACK_STACK_INCLUSIVE}. 
+
+*android.app.FragmentManager.popBackStackImmediate()*
+
+public abstract boolean popBackStackImmediate()
+
+Like (|android.app.FragmentManager|) , but performs the operation immediately 
+inside of the call. This is like calling (|android.app.FragmentManager|) 
+afterwards. 
+
+
+
+    Returns: Returns true if there was something popped, else false. 
+
+*android.app.FragmentManager.popBackStackImmediate(int,int)*
+
+public abstract boolean popBackStackImmediate(
+  int id,
+  int flags)
+
+Like (|android.app.FragmentManager|) , but performs the operation immediately 
+inside of the call. This is like calling (|android.app.FragmentManager|) 
+afterwards. 
+
+
+
+    Returns: Returns true if there was something popped, else false. 
+
+*android.app.FragmentManager.popBackStackImmediate(String,int)*
+
+public abstract boolean popBackStackImmediate(
+  java.lang.String name,
+  int flags)
+
+Like (|android.app.FragmentManager|) , but performs the operation immediately 
+inside of the call. This is like calling (|android.app.FragmentManager|) 
+afterwards. 
+
+
+
+    Returns: Returns true if there was something popped, else false. 
+
+*android.app.FragmentManager.putFragment(Bundle,String,Fragment)*
+
+public abstract void putFragment(
+  android.os.Bundle bundle,
+  java.lang.String key,
+  android.app.Fragment fragment)
+
+Put a reference to a fragment in a Bundle. This Bundle can be persisted as 
+saved state, and when later restoring (|android.app.FragmentManager|) will 
+return the current instance of the same fragment. 
+
+
+    bundle - The bundle in which to put the fragment reference. 
+    key - The name of the entry in the bundle. 
+    fragment - The Fragment whose reference is to be stored. 
+
+*android.app.FragmentManager.removeOnBackStackChangedListener(FragmentManager.OnBackStackChangedListener)*
+
+public abstract void removeOnBackStackChangedListener(android.app.FragmentManager.OnBackStackChangedListener listener)
+
+Remove a listener that was previously added with 
+(|android.app.FragmentManager|) . 
+
+
+
+*android.app.FragmentManager.saveFragmentInstanceState(Fragment)*
+
+public abstract |android.app.Fragment.SavedState| saveFragmentInstanceState(android.app.Fragment f)
+
+Save the current instance state of the given Fragment. This can be used later 
+when creating a new instance of the Fragment and adding it to the fragment 
+manager, to have it create itself to match the current state returned here. 
+Note that there are limits on how this can be used: 
+
+The Fragment must currently be attached to the FragmentManager. A new Fragment 
+created using this saved state must be the same class type as the Fragment it 
+was created from. The saved state can not contain dependencies on other 
+fragments -- that is it can't use (|android.app.FragmentManager|) to store a 
+fragment reference because that reference may not be valid when this saved 
+state is later used. Likewise the Fragment's target and result code are not 
+included in this state. 
+
+
+    f - The Fragment whose state is to be saved. 
+
+    Returns: The generated state. This will be null if there was no interesting state 
+             created by the fragment. 
+
+

@@ -1,0 +1,201 @@
+*android.widget.PopupMenu* *PopupMenu* A PopupMenu displays aMenuin a modal popu
+
+public class PopupMenu
+  extends    |java.lang.Object|
+  implements |com.android.internal.view.menu.MenuBuilder.Callback|
+             |com.android.internal.view.menu.MenuPresenter.Callback|
+
+|android.widget.PopupMenu_Description|
+|android.widget.PopupMenu_Fields|
+|android.widget.PopupMenu_Constructors|
+|android.widget.PopupMenu_Methods|
+
+================================================================================
+
+*android.widget.PopupMenu_Constructors*
+|android.widget.PopupMenu(Context,View)|Construct a new PopupMenu.
+|android.widget.PopupMenu(Context,View,int)|Construct a new PopupMenu.
+
+*android.widget.PopupMenu_Methods*
+|android.widget.PopupMenu.dismiss()|Dismiss the menu popup.
+|android.widget.PopupMenu.getDragToOpenListener()|Returns anOnTouchListenerthat
+|android.widget.PopupMenu.getMenu()|
+|android.widget.PopupMenu.getMenuInflater()|
+|android.widget.PopupMenu.inflate(int)|Inflate a menu resource into this PopupM
+|android.widget.PopupMenu.onCloseMenu(MenuBuilder,boolean)|
+|android.widget.PopupMenu.onCloseSubMenu(SubMenuBuilder)|
+|android.widget.PopupMenu.onMenuItemSelected(MenuBuilder,MenuItem)|
+|android.widget.PopupMenu.onMenuModeChange(MenuBuilder)|
+|android.widget.PopupMenu.onOpenSubMenu(MenuBuilder)|
+|android.widget.PopupMenu.setOnDismissListener(PopupMenu.OnDismissListener)|Set
+|android.widget.PopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener)|
+|android.widget.PopupMenu.show()|Show the menu popup anchored to the view speci
+
+*android.widget.PopupMenu_Description*
+
+A PopupMenu displays a (|android.view.Menu|) in a modal popup window anchored 
+to a (|android.view.View|) . The popup will appear below the anchor view if 
+there is room, or above it if there is not. If the IME is visible the popup 
+will not overlap it until it is touched. Touching outside of the popup will 
+dismiss it. 
+
+
+
+*android.widget.PopupMenu(Context,View)*
+
+public PopupMenu(
+  android.content.Context context,
+  android.view.View anchor)
+
+Construct a new PopupMenu. 
+
+    context - Context for the PopupMenu. 
+    anchor - Anchor view for this popup. The popup will appear below the anchor if there is 
+       room, or above it if there is not. 
+
+*android.widget.PopupMenu(Context,View,int)*
+
+public PopupMenu(
+  android.content.Context context,
+  android.view.View anchor,
+  int gravity)
+
+Construct a new PopupMenu. 
+
+    context - Context for the PopupMenu. 
+    anchor - Anchor view for this popup. The popup will appear below the anchor if there is 
+       room, or above it if there is not. 
+    gravity - The {@link Gravity} value for aligning the popup with its anchor 
+
+*android.widget.PopupMenu.dismiss()*
+
+public void dismiss()
+
+Dismiss the menu popup. 
+
+
+
+*android.widget.PopupMenu.getDragToOpenListener()*
+
+public |android.view.View.OnTouchListener| getDragToOpenListener()
+
+Returns an (|android.view.View.OnTouchListener|) that can be added to the 
+anchor view to implement drag-to-open behavior. 
+
+When the listener is set on a view, touching that view and dragging outside of 
+its bounds will open the popup window. Lifting will select the currently 
+touched list item. 
+
+Example usage: 
+
+PopupMenu myPopup = new PopupMenu(context, myAnchor); 
+myAnchor.setOnTouchListener(myPopup.getDragToOpenListener()); 
+
+
+
+    Returns: a touch listener that controls drag-to-open behavior 
+
+*android.widget.PopupMenu.getMenu()*
+
+public |android.view.Menu| getMenu()
+
+
+
+
+
+    Returns: the {@link Menu} associated with this popup. Populate the returned Menu with 
+             items before calling {@link #show()}. 
+
+*android.widget.PopupMenu.getMenuInflater()*
+
+public |android.view.MenuInflater| getMenuInflater()
+
+
+
+
+
+    Returns: a {@link MenuInflater} that can be used to inflate menu items from XML into the 
+             menu returned by {@link #getMenu()}. 
+
+*android.widget.PopupMenu.inflate(int)*
+
+public void inflate(int menuRes)
+
+Inflate a menu resource into this PopupMenu. This is equivalent to calling 
+popupMenu.getMenuInflater().inflate(menuRes, popupMenu.getMenu()). 
+
+
+    menuRes - Menu resource to inflate 
+
+*android.widget.PopupMenu.onCloseMenu(MenuBuilder,boolean)*
+
+public void onCloseMenu(
+  com.android.internal.view.menu.MenuBuilder menu,
+  boolean allMenusAreClosing)
+
+
+
+
+
+*android.widget.PopupMenu.onCloseSubMenu(SubMenuBuilder)*
+
+public void onCloseSubMenu(com.android.internal.view.menu.SubMenuBuilder menu)
+
+
+
+
+
+*android.widget.PopupMenu.onMenuItemSelected(MenuBuilder,MenuItem)*
+
+public boolean onMenuItemSelected(
+  com.android.internal.view.menu.MenuBuilder menu,
+  android.view.MenuItem item)
+
+
+
+
+
+*android.widget.PopupMenu.onMenuModeChange(MenuBuilder)*
+
+public void onMenuModeChange(com.android.internal.view.menu.MenuBuilder menu)
+
+
+
+
+
+*android.widget.PopupMenu.onOpenSubMenu(MenuBuilder)*
+
+public boolean onOpenSubMenu(com.android.internal.view.menu.MenuBuilder subMenu)
+
+
+
+
+
+*android.widget.PopupMenu.setOnDismissListener(PopupMenu.OnDismissListener)*
+
+public void setOnDismissListener(android.widget.PopupMenu.OnDismissListener listener)
+
+Set a listener that will be notified when this menu is dismissed. 
+
+
+    listener - Listener to notify 
+
+*android.widget.PopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener)*
+
+public void setOnMenuItemClickListener(android.widget.PopupMenu.OnMenuItemClickListener listener)
+
+Set a listener that will be notified when the user selects an item from the 
+menu. 
+
+
+    listener - Listener to notify 
+
+*android.widget.PopupMenu.show()*
+
+public void show()
+
+Show the menu popup anchored to the view specified during construction. 
+
+
+
+

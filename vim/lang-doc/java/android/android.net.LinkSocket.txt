@@ -1,0 +1,272 @@
+*android.net.LinkSocket* *LinkSocket* 
+
+public class LinkSocket
+  extends    |java.net.Socket|
+
+|android.net.LinkSocket_Description|
+|android.net.LinkSocket_Fields|
+|android.net.LinkSocket_Constructors|
+|android.net.LinkSocket_Methods|
+
+================================================================================
+
+*android.net.LinkSocket_Constructors*
+|android.net.LinkSocket()|Default constructor
+|android.net.LinkSocket(LinkSocketNotifier)|Creates a new unconnected socket.
+|android.net.LinkSocket(LinkSocketNotifier,Proxy)|Creates a new unconnected soc
+
+*android.net.LinkSocket_Methods*
+|android.net.LinkSocket.bind(SocketAddress)|
+|android.net.LinkSocket.close()|Closes the socket.
+|android.net.LinkSocket.connect()|Connect a duplicate socket socket to the same
+|android.net.LinkSocket.connect(int)|Connect a duplicate socket socket to the s
+|android.net.LinkSocket.connect(SocketAddress)|Connects this socket to the give
+|android.net.LinkSocket.connect(SocketAddress,int)|Connects this socket to the 
+|android.net.LinkSocket.connect(String,int)|Connects this socket to the given r
+|android.net.LinkSocket.connect(String,int,int)|Connects this socket to the giv
+|android.net.LinkSocket.getCapabilities()|
+|android.net.LinkSocket.getCapabilities(Set<Integer>)|Returns this LinkSockets 
+|android.net.LinkSocket.getLinkProperties()|
+|android.net.LinkSocket.getNeededCapabilities()|
+|android.net.LinkSocket.getTrackedCapabilities()|
+|android.net.LinkSocket.log(String)|Debug logging
+|android.net.LinkSocket.requestNewLink(LinkSocket.LinkRequestReason)|Request th
+|android.net.LinkSocket.setNeededCapabilities(LinkCapabilities)|Set theLinkCapa
+|android.net.LinkSocket.setTrackedCapabilities(Set<Integer>)|Provide the set of
+
+*android.net.LinkSocket_Description*
+
+
+
+
+
+*android.net.LinkSocket()*
+
+public LinkSocket()
+
+Default constructor 
+
+
+*android.net.LinkSocket(LinkSocketNotifier)*
+
+public LinkSocket(android.net.LinkSocketNotifier notifier)
+
+Creates a new unconnected socket. 
+
+    notifier - a reference to a class that implements {@code LinkSocketNotifier} 
+
+*android.net.LinkSocket(LinkSocketNotifier,Proxy)*
+
+public LinkSocket(
+  android.net.LinkSocketNotifier notifier,
+  android.net.Proxy proxy)
+
+Creates a new unconnected socket usign the given proxy type. 
+
+    notifier - a reference to a class that implements {@code LinkSocketNotifier} 
+    proxy - the specified proxy for this socket 
+
+*android.net.LinkSocket.bind(SocketAddress)*
+
+public void bind(java.net.SocketAddress localAddr)
+  throws |java.lang.UnsupportedOperationException|
+         
+
+
+    Deprecated: LinkSocket will automatically pick the optimum interface
+             to bind to
+
+    localAddr - the specific address and port on the local machine to bind to 
+
+*android.net.LinkSocket.close()*
+
+public synchronized void close()
+  throws |java.io.IOException|
+         
+Closes the socket. It is not possible to reconnect or rebind to this socket 
+thereafter which means a new socket instance has to be created. 
+
+
+
+*android.net.LinkSocket.connect()*
+
+public void connect()
+  throws |java.io.IOException|
+         
+Connect a duplicate socket socket to the same remote host address and port as 
+the original. 
+
+
+
+*android.net.LinkSocket.connect(int)*
+
+public void connect(int timeout)
+  throws |java.io.IOException|
+         
+Connect a duplicate socket socket to the same remote host address and port as 
+the original with a timeout parameter. 
+
+
+    timeout - the timeout value in milliseconds or 0 for infinite timeout 
+
+*android.net.LinkSocket.connect(SocketAddress)*
+
+public void connect(java.net.SocketAddress remoteAddr)
+  throws |java.io.IOException|
+         
+Connects this socket to the given remote host address and port specified by the 
+SocketAddress. TODO add comment on all these that the network selection happens 
+during connect and may take 30 seconds 
+
+    Deprecated: Use {@code connect(String dstName, int dstPort)}
+             Using this method may result in reduced functionality.
+
+    remoteAddr - the address and port of the remote host to connect to. 
+
+*android.net.LinkSocket.connect(SocketAddress,int)*
+
+public void connect(
+  java.net.SocketAddress remoteAddr,
+  int timeout)
+  throws |java.io.IOException|
+         |java.net.SocketTimeoutException|
+         
+Connects this socket to the given remote host address and port specified by the 
+SocketAddress with the specified timeout. 
+
+    Deprecated: Use {@code connect(String dstName, int dstPort, int timeout)}
+             instead.  Using this method may result in reduced functionality.
+
+    remoteAddr - the address and port of the remote host to connect to 
+
+*android.net.LinkSocket.connect(String,int)*
+
+public void connect(
+  java.lang.String dstName,
+  int dstPort)
+  throws |java.io.IOException|
+         |java.net.UnknownHostException|
+         
+Connects this socket to the given remote host address and port specified by 
+dstName and dstPort. 
+
+
+    dstName - the address of the remote host to connect to 
+    dstPort - the port to connect to on the remote host 
+
+*android.net.LinkSocket.connect(String,int,int)*
+
+public void connect(
+  java.lang.String dstName,
+  int dstPort,
+  int timeout)
+  throws |java.io.IOException|
+         |java.net.SocketTimeoutException|
+         |java.net.UnknownHostException|
+         
+Connects this socket to the given remote host address and port specified by 
+dstName and dstPort. 
+
+
+    dstName - the address of the remote host to connect to 
+    dstPort - the port to connect to on the remote host 
+    timeout - the timeout value in milliseconds or 0 for infinite timeout 
+
+*android.net.LinkSocket.getCapabilities()*
+
+public |android.net.LinkCapabilities| getCapabilities()
+
+
+
+
+
+    Returns: all of the {@code LinkCapabilities} of the link used by this socket 
+
+*android.net.LinkSocket.getCapabilities(Set<Integer>)*
+
+public |android.net.LinkCapabilities| getCapabilities(java.util.Set<java.lang.Integer> capabilities)
+
+Returns this LinkSockets set of capabilities, filtered according to the 
+givenSet. Capabilities in the Set but not available from the link will not be 
+reported in the results. Capabilities of the link but not listed in the Set 
+will also not be reported in the results. 
+
+
+    capabilities - {@code Set} of capabilities requested 
+
+    Returns: the filtered {@code LinkCapabilities} of this LinkSocket, may be empty 
+
+*android.net.LinkSocket.getLinkProperties()*
+
+public |android.net.LinkProperties| getLinkProperties()
+
+
+
+
+
+    Returns: the {@code LinkProperties} for the socket 
+
+*android.net.LinkSocket.getNeededCapabilities()*
+
+public |android.net.LinkCapabilities| getNeededCapabilities()
+
+
+
+
+
+    Returns: the LinkCapabilites set by setNeededCapabilities, empty if none has been set 
+
+*android.net.LinkSocket.getTrackedCapabilities()*
+
+public |java.util.Set|<Integer> getTrackedCapabilities()
+
+
+
+
+
+    Returns: the {@code LinkCapabilities} that are tracked, empty if none has been set. 
+
+*android.net.LinkSocket.log(String)*
+
+protected static void log(java.lang.String s)
+
+Debug logging 
+
+
+
+*android.net.LinkSocket.requestNewLink(LinkSocket.LinkRequestReason)*
+
+public void requestNewLink(android.net.LinkSocket.LinkRequestReason linkRequestReason)
+
+Request that a new LinkSocket be created using a different radio (such as WiFi 
+or 3G) than the current LinkSocket. If a different radio is available a call 
+back will be made viaonBetterLinkAvail. If unable to find a better radio, 
+application will be notified viaonNewLinkUnavailable 
+
+
+    linkRequestReason - reason for requesting a new link. 
+
+*android.net.LinkSocket.setNeededCapabilities(LinkCapabilities)*
+
+public boolean setNeededCapabilities(android.net.LinkCapabilities needs)
+
+Set theLinkCapabiliesneeded for this socket. If the socket is already connected 
+or is a duplicate socket the request is ignored andfalsewill be returned. A 
+needs map can be created via thecreateNeedsMapstatic method. 
+
+
+    needs - the needs of the socket 
+
+    Returns: {@code true} if needs are successfully set, {@code false} otherwise 
+
+*android.net.LinkSocket.setTrackedCapabilities(Set<Integer>)*
+
+public void setTrackedCapabilities(java.util.Set<java.lang.Integer> capabilities)
+
+Provide the set of capabilities the application is interested in tracking for 
+this LinkSocket. 
+
+
+    capabilities - a {@code Set} of capabilities to track 
+
+

@@ -1,0 +1,127 @@
+*android.provider.ContactsContract.Groups* *ContactsContract.Groups* Constants f
+
+public static final class ContactsContract.Groups
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.ContactsContract.GroupsColumns|
+             |android.provider.ContactsContract.SyncColumns|
+
+|android.provider.ContactsContract.Groups_Description|
+|android.provider.ContactsContract.Groups_Fields|
+|android.provider.ContactsContract.Groups_Constructors|
+|android.provider.ContactsContract.Groups_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Groups_Fields*
+|java.lang.String_android.provider.ContactsContract.Groups.CONTENT_ITEM_TYPE|
+|android.net.Uri_android.provider.ContactsContract.Groups.CONTENT_SUMMARY_URI|
+|java.lang.String_android.provider.ContactsContract.Groups.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.Groups.CONTENT_URI|
+
+*android.provider.ContactsContract.Groups_Methods*
+|android.provider.ContactsContract.Groups.newEntityIterator(Cursor)|
+
+*android.provider.ContactsContract.Groups_Description*
+
+Constants for the groups table. Only per-account groups are supported. Columns 
+
+Groups 
+
+long (|android.provider.ContactsContract.Groups|) read-only Row ID. Sync 
+adapter should try to preserve row IDs during updates. In other words, it would 
+be a really bad idea to delete and reinsert a group. A sync adapter should 
+always do an update instead. 
+
+# String (|android.provider.ContactsContract.Groups|) read/write-once 
+
+The data set within the account that this group belongs to. This allows 
+multiple sync adapters for the same account type to distinguish between each 
+others' group data. The combination of 
+(|android.provider.ContactsContract.Groups|) , 
+(|android.provider.ContactsContract.Groups|) , and 
+(|android.provider.ContactsContract.Groups|) identifies a set of data that is 
+associated with a single sync adapter. 
+
+This is empty by default, and is completely optional. It only needs to be 
+populated if multiple sync adapters are entering distinct data for the same 
+account type and account name. 
+
+It should be set at the time the group is inserted and never changed 
+afterwards. 
+
+
+
+String (|android.provider.ContactsContract.Groups|) read/write The display 
+title of this group. 
+
+String (|android.provider.ContactsContract.Groups|) read/write Notes about the 
+group. 
+
+String (|android.provider.ContactsContract.Groups|) read/write The ID of this 
+group if it is a System Group, i.e. a group that has a special meaning to the 
+sync adapter, null otherwise. 
+
+int (|android.provider.ContactsContract.Groups|) read-only The total number of 
+(|android.provider.Contacts|) that have 
+(|android.provider.ContactsContract.CommonDataKinds.GroupMembership|) in this 
+group. Read-only value that is only present when querying 
+(|android.provider.ContactsContract.Groups|) . 
+
+int (|android.provider.ContactsContract.Groups|) read-only The total number of 
+(|android.provider.Contacts|) that have both 
+(|android.provider.ContactsContract.CommonDataKinds.GroupMembership|) in this 
+group, and also have phone numbers. Read-only value that is only present when 
+querying (|android.provider.ContactsContract.Groups|) . 
+
+int (|android.provider.ContactsContract.Groups|) read-only Flag indicating if 
+the contacts belonging to this group should be visible in any user interface. 
+Allowed values: 0 and 1. 
+
+int (|android.provider.ContactsContract.Groups|) read/write The "deleted" flag: 
+"0" by default, "1" if the row has been marked for deletion. When 
+(|android.content.ContentResolver|) is called on a group, it is marked for 
+deletion. The sync adaptor deletes the group on the server and then calls 
+ContactResolver.delete once more, this time setting the the 
+(|android.provider.ContactsContract|) query parameter to finalize the data 
+removal. 
+
+int (|android.provider.ContactsContract.Groups|) read/write Whether this group 
+should be synced if the SYNC_EVERYTHING settings is false for this group's 
+account. 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.Groups.CONTENT_ITEM_TYPE*
+
+The MIME type of a single group. 
+
+
+*android.net.Uri_android.provider.ContactsContract.Groups.CONTENT_SUMMARY_URI*
+
+The content:// style URI for this table joined with details data from 
+(|android.provider.ContactsContract.Data|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.Groups.CONTENT_TYPE*
+
+The MIME type of a directory of groups. 
+
+
+*android.net.Uri_android.provider.ContactsContract.Groups.CONTENT_URI*
+
+The content:// style URI for this table 
+
+
+
+*android.provider.ContactsContract.Groups.newEntityIterator(Cursor)*
+
+public static |android.content.EntityIterator| newEntityIterator(android.database.Cursor cursor)
+
+
+
+
+
+

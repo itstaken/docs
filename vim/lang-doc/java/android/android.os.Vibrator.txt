@@ -1,0 +1,119 @@
+*android.os.Vibrator* *Vibrator* Class that operates the vibrator on the device.
+
+public abstract class Vibrator
+  extends    |java.lang.Object|
+
+|android.os.Vibrator_Description|
+|android.os.Vibrator_Fields|
+|android.os.Vibrator_Constructors|
+|android.os.Vibrator_Methods|
+
+================================================================================
+
+*android.os.Vibrator_Constructors*
+|android.os.Vibrator()|
+
+*android.os.Vibrator_Methods*
+|android.os.Vibrator.cancel()|Turn the vibrator off.
+|android.os.Vibrator.hasVibrator()|Check whether the hardware has a vibrator.
+|android.os.Vibrator.vibrate(int,String,long)|
+|android.os.Vibrator.vibrate(int,String,long[],int)|
+|android.os.Vibrator.vibrate(long)|Vibrate constantly for the specified period 
+|android.os.Vibrator.vibrate(long[],int)|Vibrate with a given pattern.
+
+*android.os.Vibrator_Description*
+
+Class that operates the vibrator on the device. 
+
+If your process exits, any vibration you started with will stop. 
+
+To obtain an instance of the system vibrator, call (|android.content.Context|) 
+with (|android.content.Context|) as argument. 
+
+
+
+*android.os.Vibrator()*
+
+public Vibrator()
+
+
+
+
+*android.os.Vibrator.cancel()*
+
+public abstract void cancel()
+
+Turn the vibrator off. This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+
+*android.os.Vibrator.hasVibrator()*
+
+public abstract boolean hasVibrator()
+
+Check whether the hardware has a vibrator. 
+
+
+
+    Returns: True if the hardware has a vibrator, else false. 
+
+*android.os.Vibrator.vibrate(int,String,long)*
+
+public abstract void vibrate(
+  int owningUid,
+  java.lang.String owningPackage,
+  long milliseconds)
+
+
+
+
+
+*android.os.Vibrator.vibrate(int,String,long[],int)*
+
+public abstract void vibrate(
+  int owningUid,
+  java.lang.String owningPackage,
+  long[] pattern,
+  int repeat)
+
+
+
+
+
+*android.os.Vibrator.vibrate(long)*
+
+public abstract void vibrate(long milliseconds)
+
+Vibrate constantly for the specified period of time. This method requires the 
+caller to hold the permission (|android.Manifest.permission|) . 
+
+
+    milliseconds - The number of milliseconds to vibrate. 
+
+*android.os.Vibrator.vibrate(long[],int)*
+
+public abstract void vibrate(
+  long[] pattern,
+  int repeat)
+
+Vibrate with a given pattern. 
+
+Pass in an array of ints that are the durations for which to turn on or off the 
+vibrator in milliseconds. The first value indicates the number of milliseconds 
+to wait before turning the vibrator on. The next value indicates the number of 
+milliseconds for which to keep the vibrator on before turning it off. 
+Subsequent values alternate between durations in milliseconds to turn the 
+vibrator off or to turn the vibrator on. 
+
+To cause the pattern to repeat, pass the index into the pattern array at which 
+to start the repeat, or -1 to disable repeating. 
+
+This method requires the caller to hold the permission 
+(|android.Manifest.permission|) . 
+
+
+    pattern - an array of longs of times for which to turn the vibrator on or off. 
+    repeat - the index into pattern at which to repeat, or -1 if you don't want to repeat. 
+
+

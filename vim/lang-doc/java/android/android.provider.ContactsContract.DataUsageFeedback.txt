@@ -1,0 +1,121 @@
+*android.provider.ContactsContract.DataUsageFeedback* *ContactsContract.DataUsageFeedback* 
+
+public static final class ContactsContract.DataUsageFeedback
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.DataUsageFeedback_Description|
+|android.provider.ContactsContract.DataUsageFeedback_Fields|
+|android.provider.ContactsContract.DataUsageFeedback_Constructors|
+|android.provider.ContactsContract.DataUsageFeedback_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.DataUsageFeedback_Fields*
+|android.net.Uri_android.provider.ContactsContract.DataUsageFeedback.DELETE_USAGE_URI|
+|android.net.Uri_android.provider.ContactsContract.DataUsageFeedback.FEEDBACK_URI|
+|java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE|
+|java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_CALL|
+|java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_LONG_TEXT|
+|java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_SHORT_TEXT|
+
+*android.provider.ContactsContract.DataUsageFeedback_Constructors*
+|android.provider.ContactsContract.DataUsageFeedback()|
+
+*android.provider.ContactsContract.DataUsageFeedback_Description*
+
+API allowing applications to send usage information for each 
+(|android.provider.ContactsContract.Contacts.Data|) row to the Contacts 
+Provider. Applications can also clear all usage information. 
+
+With the feedback, Contacts Provider may return more contextually appropriate 
+results for Data listing, typically supplied with 
+(|android.provider.ContactsContract.Contacts|) , 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) , 
+(|android.provider.ContactsContract.CommonDataKinds.Phone|) , and users can 
+benefit from better ranked (sorted) lists in applications that show 
+auto-complete list. 
+
+There is no guarantee for how this feedback is used, or even whether it is used 
+at all. The ranking algorithm will make best efforts to use the feedback data, 
+but the exact implementation, the storage data structures as well as the 
+resulting sort order is device and version specific and can change over time. 
+
+When updating usage information, users of this API need to use 
+(|android.content.ContentResolver|) with a Uri constructed from 
+(|android.provider.ContactsContract.DataUsageFeedback|) . The Uri must contain 
+one or more data id(s) as its last path. They also need to append a query 
+parameter to the Uri, to specify the type of the communication, which enables 
+the Contacts Provider to differentiate between kinds of interactions using the 
+same contact data field (for example a phone number can be used to make phone 
+calls or send SMS). 
+
+Selection and selectionArgs are ignored and must be set to null. To get data 
+ids, you may need to call (|android.content.ContentResolver|) toward 
+(|android.provider.ContactsContract.Contacts.Data|) . 
+
+(|android.content.ContentResolver|) returns a positive integer when successful, 
+and returns 0 if no contact with that id was found. 
+
+Example: 
+
+Uri uri = DataUsageFeedback.FEEDBACK_URI.buildUpon() 
+.appendPath(TextUtils.join(",", dataIds)) 
+.appendQueryParameter(DataUsageFeedback.USAGE_TYPE, 
+DataUsageFeedback.USAGE_TYPE_CALL) .build(); boolean successful = 
+resolver.update(uri, new ContentValues(), null, null) > 0; 
+
+
+
+Applications can also clear all usage information with: 
+
+boolean successful = resolver.delete(DataUsageFeedback.DELETE_USAGE_URI, null, 
+null) > 0; 
+
+
+
+
+
+*android.net.Uri_android.provider.ContactsContract.DataUsageFeedback.DELETE_USAGE_URI*
+
+The content:// style URI for deleting all usage information. Must be used with 
+(|android.content.ContentResolver|) . ThewhereandselectionArgsparameters are 
+ignored. 
+
+
+*android.net.Uri_android.provider.ContactsContract.DataUsageFeedback.FEEDBACK_URI*
+
+The content:// style URI for sending usage feedback. Must be used with 
+(|android.content.ContentResolver|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE*
+
+Name for query parameter specifying the type of data usage. 
+
+
+*java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_CALL*
+
+Type of usage for voice interaction, which includes phone call, voice chat, and 
+video chat. 
+
+
+*java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_LONG_TEXT*
+
+Type of usage for text interaction involving longer messages, which includes 
+email. 
+
+
+*java.lang.String_android.provider.ContactsContract.DataUsageFeedback.USAGE_TYPE_SHORT_TEXT*
+
+Type of usage for text interaction involving shorter messages, which includes 
+SMS, text chat with email addresses. 
+
+
+
+*android.provider.ContactsContract.DataUsageFeedback()*
+
+public ContactsContract.DataUsageFeedback()
+
+
+
+

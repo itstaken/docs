@@ -1,0 +1,352 @@
+*android.inputmethodservice.Keyboard* *Keyboard* Loads an XML description of a k
+
+public class Keyboard
+  extends    |java.lang.Object|
+
+|android.inputmethodservice.Keyboard_Description|
+|android.inputmethodservice.Keyboard_Fields|
+|android.inputmethodservice.Keyboard_Constructors|
+|android.inputmethodservice.Keyboard_Methods|
+
+================================================================================
+
+*android.inputmethodservice.Keyboard_Fields*
+|int_android.inputmethodservice.Keyboard.EDGE_BOTTOM|
+|int_android.inputmethodservice.Keyboard.EDGE_LEFT|
+|int_android.inputmethodservice.Keyboard.EDGE_RIGHT|
+|int_android.inputmethodservice.Keyboard.EDGE_TOP|
+|int_android.inputmethodservice.Keyboard.KEYCODE_ALT|
+|int_android.inputmethodservice.Keyboard.KEYCODE_CANCEL|
+|int_android.inputmethodservice.Keyboard.KEYCODE_DELETE|
+|int_android.inputmethodservice.Keyboard.KEYCODE_DONE|
+|int_android.inputmethodservice.Keyboard.KEYCODE_MODE_CHANGE|
+|int_android.inputmethodservice.Keyboard.KEYCODE_SHIFT|
+
+*android.inputmethodservice.Keyboard_Constructors*
+|android.inputmethodservice.Keyboard(Context,int)|Creates a keyboard from the g
+|android.inputmethodservice.Keyboard(Context,int,CharSequence,int,int)|Creates 
+|android.inputmethodservice.Keyboard(Context,int,int)|Creates a keyboard from t
+|android.inputmethodservice.Keyboard(Context,int,int,int,int)|Creates a keyboar
+
+*android.inputmethodservice.Keyboard_Methods*
+|android.inputmethodservice.Keyboard.createKeyFromXml(Resources,Keyboard.Row,int,int,XmlResourceParser)|
+|android.inputmethodservice.Keyboard.createRowFromXml(Resources,XmlResourceParser)|
+|android.inputmethodservice.Keyboard.getHeight()|Returns the total height of th
+|android.inputmethodservice.Keyboard.getHorizontalGap()|
+|android.inputmethodservice.Keyboard.getKeyHeight()|
+|android.inputmethodservice.Keyboard.getKeys()|
+|android.inputmethodservice.Keyboard.getKeyWidth()|
+|android.inputmethodservice.Keyboard.getMinWidth()|
+|android.inputmethodservice.Keyboard.getModifierKeys()|
+|android.inputmethodservice.Keyboard.getNearestKeys(int,int)|Returns the indice
+|android.inputmethodservice.Keyboard.getShiftKeyIndex()|
+|android.inputmethodservice.Keyboard.getShiftKeyIndices()|
+|android.inputmethodservice.Keyboard.getVerticalGap()|
+|android.inputmethodservice.Keyboard.isShifted()|
+|android.inputmethodservice.Keyboard.setHorizontalGap(int)|
+|android.inputmethodservice.Keyboard.setKeyHeight(int)|
+|android.inputmethodservice.Keyboard.setKeyWidth(int)|
+|android.inputmethodservice.Keyboard.setShifted(boolean)|
+|android.inputmethodservice.Keyboard.setVerticalGap(int)|
+
+*android.inputmethodservice.Keyboard_Description*
+
+Loads an XML description of a keyboard and stores the attributes of the keys. A 
+keyboard consists of rows of keys. The layout file for a keyboard contains XML 
+that looks like the following snippet: 
+
+<Keyboard android:keyWidth="%10p" android:keyHeight="50px" 
+android:horizontalGap="2px" android:verticalGap="2px" > <Row 
+android:keyWidth="32px" > <Key android:keyLabel="A" /> ... </Row> ... 
+</Keyboard> 
+
+
+
+*int_android.inputmethodservice.Keyboard.EDGE_BOTTOM*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.EDGE_LEFT*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.EDGE_RIGHT*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.EDGE_TOP*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_ALT*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_CANCEL*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_DELETE*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_DONE*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_MODE_CHANGE*
+
+
+
+
+*int_android.inputmethodservice.Keyboard.KEYCODE_SHIFT*
+
+
+
+
+
+*android.inputmethodservice.Keyboard(Context,int)*
+
+public Keyboard(
+  android.content.Context context,
+  int xmlLayoutResId)
+
+Creates a keyboard from the given xml key layout file. 
+
+    context - the application or service context 
+    xmlLayoutResId - the resource file that contains the keyboard layout and keys. 
+
+*android.inputmethodservice.Keyboard(Context,int,CharSequence,int,int)*
+
+public Keyboard(
+  android.content.Context context,
+  int layoutTemplateResId,
+  java.lang.CharSequence characters,
+  int columns,
+  int horizontalPadding)
+
+Creates a blank keyboard from the given resource file and populates it with the 
+specified characters in left-to-right, top-to-bottom fashion, using the 
+specified number of columns. 
+
+If the specified number of columns is -1, then the keyboard will fit as many 
+keys as possible in each row. 
+
+    context - the application or service context 
+    layoutTemplateResId - the layout template file, containing no keys. 
+    characters - the list of characters to display on the keyboard. One key will be created for 
+       each character. 
+    columns - the number of columns of keys to display. If this number is greater than the 
+       number of keys that can fit in a row, it will be ignored. If this number 
+       is -1, the keyboard will fit as many keys as possible in each row. 
+
+*android.inputmethodservice.Keyboard(Context,int,int)*
+
+public Keyboard(
+  android.content.Context context,
+  int xmlLayoutResId,
+  int modeId)
+
+Creates a keyboard from the given xml key layout file. Weeds out rows that have 
+a keyboard mode defined but don't match the specified mode. 
+
+    context - the application or service context 
+    xmlLayoutResId - the resource file that contains the keyboard layout and keys. 
+    modeId - keyboard mode identifier 
+
+*android.inputmethodservice.Keyboard(Context,int,int,int,int)*
+
+public Keyboard(
+  android.content.Context context,
+  int xmlLayoutResId,
+  int modeId,
+  int width,
+  int height)
+
+Creates a keyboard from the given xml key layout file. Weeds out rows that have 
+a keyboard mode defined but don't match the specified mode. 
+
+    context - the application or service context 
+    xmlLayoutResId - the resource file that contains the keyboard layout and keys. 
+    modeId - keyboard mode identifier 
+    width - sets width of keyboard 
+    height - sets height of keyboard 
+
+*android.inputmethodservice.Keyboard.createKeyFromXml(Resources,Keyboard.Row,int,int,XmlResourceParser)*
+
+protected |android.inputmethodservice.Keyboard.Key| createKeyFromXml(
+  android.content.res.Resources res,
+  android.inputmethodservice.Keyboard.Row parent,
+  int x,
+  int y,
+  android.content.res.XmlResourceParser parser)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.createRowFromXml(Resources,XmlResourceParser)*
+
+protected |android.inputmethodservice.Keyboard.Row| createRowFromXml(
+  android.content.res.Resources res,
+  android.content.res.XmlResourceParser parser)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getHeight()*
+
+public int getHeight()
+
+Returns the total height of the keyboard 
+
+
+
+    Returns: the total height of the keyboard 
+
+*android.inputmethodservice.Keyboard.getHorizontalGap()*
+
+protected int getHorizontalGap()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getKeyHeight()*
+
+protected int getKeyHeight()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getKeys()*
+
+public |java.util.List|<Key> getKeys()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getKeyWidth()*
+
+protected int getKeyWidth()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getMinWidth()*
+
+public int getMinWidth()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getModifierKeys()*
+
+public |java.util.List|<Key> getModifierKeys()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getNearestKeys(int,int)*
+
+public int[] getNearestKeys(
+  int x,
+  int y)
+
+Returns the indices of the keys that are closest to the given point. 
+
+
+    x - the x-coordinate of the point 
+    y - the y-coordinate of the point 
+
+    Returns: the array of integer indices for the nearest keys to the given point. If the 
+             given point is out of range, then an array of size zero is 
+             returned. 
+
+*android.inputmethodservice.Keyboard.getShiftKeyIndex()*
+
+public int getShiftKeyIndex()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getShiftKeyIndices()*
+
+public int[] getShiftKeyIndices()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.getVerticalGap()*
+
+protected int getVerticalGap()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.isShifted()*
+
+public boolean isShifted()
+
+
+
+
+
+*android.inputmethodservice.Keyboard.setHorizontalGap(int)*
+
+protected void setHorizontalGap(int gap)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.setKeyHeight(int)*
+
+protected void setKeyHeight(int height)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.setKeyWidth(int)*
+
+protected void setKeyWidth(int width)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.setShifted(boolean)*
+
+public boolean setShifted(boolean shiftState)
+
+
+
+
+
+*android.inputmethodservice.Keyboard.setVerticalGap(int)*
+
+protected void setVerticalGap(int gap)
+
+
+
+
+
+

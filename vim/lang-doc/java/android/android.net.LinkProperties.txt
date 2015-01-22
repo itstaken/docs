@@ -1,0 +1,501 @@
+*android.net.LinkProperties* *LinkProperties* Describes the properties of a netw
+
+public class LinkProperties
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.net.LinkProperties_Description|
+|android.net.LinkProperties_Fields|
+|android.net.LinkProperties_Constructors|
+|android.net.LinkProperties_Methods|
+
+================================================================================
+
+*android.net.LinkProperties_Fields*
+|android.os.Parcelable.Creator<android.net.LinkProperties>_android.net.LinkProperties.CREATOR|
+
+*android.net.LinkProperties_Constructors*
+|android.net.LinkProperties()|
+|android.net.LinkProperties(LinkProperties)|
+
+*android.net.LinkProperties_Methods*
+|android.net.LinkProperties.addDns(InetAddress)|
+|android.net.LinkProperties.addLinkAddress(LinkAddress)|Adds a link address if 
+|android.net.LinkProperties.addRoute(RouteInfo)|
+|android.net.LinkProperties.addStackedLink(LinkProperties)|Adds a stacked link.
+|android.net.LinkProperties.clear()|
+|android.net.LinkProperties.compareAddresses(LinkProperties)|Compares the addre
+|android.net.LinkProperties.compareAllRoutes(LinkProperties)|Compares all route
+|android.net.LinkProperties.compareDnses(LinkProperties)|Compares the DNS addre
+|android.net.LinkProperties.describeContents()|Implement the Parcelable interfa
+|android.net.LinkProperties.equals(Object)|
+|android.net.LinkProperties.getAddresses()|Returns all the addresses on this li
+|android.net.LinkProperties.getAllAddresses()|Returns all the addresses on this
+|android.net.LinkProperties.getAllInterfaceNames()|
+|android.net.LinkProperties.getAllLinkAddresses()|Returns all the addresses on 
+|android.net.LinkProperties.getAllRoutes()|Returns all the routes on this link 
+|android.net.LinkProperties.getDnses()|
+|android.net.LinkProperties.getDomains()|
+|android.net.LinkProperties.getHttpProxy()|
+|android.net.LinkProperties.getInterfaceName()|
+|android.net.LinkProperties.getLinkAddresses()|Returns all the addresses on thi
+|android.net.LinkProperties.getMtu()|
+|android.net.LinkProperties.getRoutes()|Returns all the routes on this link.
+|android.net.LinkProperties.getStackedLinks()|Returns all the links stacked on 
+|android.net.LinkProperties.hashCode()|
+|android.net.LinkProperties.hasIPv4Address()|Returns true if this link has an I
+|android.net.LinkProperties.hasIPv6Address()|Returns true if this link has an I
+|android.net.LinkProperties.isIdenticalAddresses(LinkProperties)|Compares thisL
+|android.net.LinkProperties.isIdenticalDnses(LinkProperties)|Compares thisLinkP
+|android.net.LinkProperties.isIdenticalHttpProxy(LinkProperties)|Compares thisL
+|android.net.LinkProperties.isIdenticalInterfaceName(LinkProperties)|Compares t
+|android.net.LinkProperties.isIdenticalMtu(LinkProperties)|Compares thisLinkPro
+|android.net.LinkProperties.isIdenticalRoutes(LinkProperties)|Compares thisLink
+|android.net.LinkProperties.isIdenticalStackedLinks(LinkProperties)|Compares th
+|android.net.LinkProperties.removeLinkAddress(LinkAddress)|Removes a link addre
+|android.net.LinkProperties.removeStackedLink(LinkProperties)|Removes a stacked
+|android.net.LinkProperties.setDomains(String)|
+|android.net.LinkProperties.setHttpProxy(ProxyProperties)|
+|android.net.LinkProperties.setInterfaceName(String)|
+|android.net.LinkProperties.setLinkAddresses(Collection<LinkAddress>)|Replaces 
+|android.net.LinkProperties.setMtu(int)|
+|android.net.LinkProperties.toString()|
+|android.net.LinkProperties.writeToParcel(Parcel,int)|Implement the Parcelable 
+
+*android.net.LinkProperties_Description*
+
+Describes the properties of a network link. 
+
+A link represents a connection to a network. It may have multiple addresses and 
+multiple gateways, multiple dns servers but only one http proxy. 
+
+Because it's a single network, the dns's are interchangeable and don't need 
+associating with particular addresses. The gateways similarly don't need 
+associating with particular addresses. 
+
+A dual stack interface works fine in this model: each address has it's own 
+prefix length to describe the local network. The dns servers all return both v4 
+addresses and v6 addresses regardless of the address family of the server 
+itself (rfc4213) and we don't care which is used. The gateways will be selected 
+based on the destination address and the source address has no relavence. 
+
+Links can also be stacked on top of each other. This can be used, for example, 
+to represent a tunnel interface that runs on top of a physical interface. 
+
+
+
+*android.os.Parcelable.Creator<android.net.LinkProperties>_android.net.LinkProperties.CREATOR*
+
+Implement the Parcelable interface. 
+
+
+
+*android.net.LinkProperties()*
+
+public LinkProperties()
+
+
+
+
+*android.net.LinkProperties(LinkProperties)*
+
+public LinkProperties(android.net.LinkProperties source)
+
+
+
+
+*android.net.LinkProperties.addDns(InetAddress)*
+
+public void addDns(java.net.InetAddress dns)
+
+
+
+
+
+*android.net.LinkProperties.addLinkAddress(LinkAddress)*
+
+public boolean addLinkAddress(android.net.LinkAddress address)
+
+Adds a link address if it does not exist, or update it if it does. 
+
+
+    address - The {@code LinkAddress} to add. 
+
+    Returns: true if the address was added, false if it already existed. 
+
+*android.net.LinkProperties.addRoute(RouteInfo)*
+
+public void addRoute(android.net.RouteInfo route)
+
+
+
+
+
+*android.net.LinkProperties.addStackedLink(LinkProperties)*
+
+public boolean addStackedLink(android.net.LinkProperties link)
+
+Adds a stacked link. 
+
+If there is already a stacked link with the same interfacename as link, that 
+link is replaced with link. Otherwise, link is added to the list of stacked 
+links. If link is null, nothing changes. 
+
+
+    link - The link to add. 
+
+    Returns: true if the link was stacked, false otherwise. 
+
+*android.net.LinkProperties.clear()*
+
+public void clear()
+
+
+
+
+
+*android.net.LinkProperties.compareAddresses(LinkProperties)*
+
+public |android.net.LinkProperties.CompareResult|<LinkAddress> compareAddresses(android.net.LinkProperties target)
+
+Compares the addresses in this LinkProperties with another LinkProperties, 
+examining only addresses on the base link. 
+
+
+    target - a LinkProperties with the new list of addresses 
+
+    Returns: the differences between the addresses. 
+
+*android.net.LinkProperties.compareAllRoutes(LinkProperties)*
+
+public |android.net.LinkProperties.CompareResult|<RouteInfo> compareAllRoutes(android.net.LinkProperties target)
+
+Compares all routes in this LinkProperties with another LinkProperties, 
+examining both the the base link and all stacked links. 
+
+
+    target - a LinkProperties with the new list of routes 
+
+    Returns: the differences between the routes. 
+
+*android.net.LinkProperties.compareDnses(LinkProperties)*
+
+public |android.net.LinkProperties.CompareResult|<InetAddress> compareDnses(android.net.LinkProperties target)
+
+Compares the DNS addresses in this LinkProperties with another LinkProperties, 
+examining only DNS addresses on the base link. 
+
+
+    target - a LinkProperties with the new list of dns addresses 
+
+    Returns: the differences between the DNS addresses. 
+
+*android.net.LinkProperties.describeContents()*
+
+public int describeContents()
+
+Implement the Parcelable interface 
+
+
+
+*android.net.LinkProperties.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.net.LinkProperties.getAddresses()*
+
+public |java.util.Collection|<InetAddress> getAddresses()
+
+Returns all the addresses on this link. 
+
+
+
+*android.net.LinkProperties.getAllAddresses()*
+
+public |java.util.Collection|<InetAddress> getAllAddresses()
+
+Returns all the addresses on this link and all the links stacked above it. 
+
+
+
+*android.net.LinkProperties.getAllInterfaceNames()*
+
+public |java.util.Collection|<String> getAllInterfaceNames()
+
+
+
+
+
+*android.net.LinkProperties.getAllLinkAddresses()*
+
+public |java.util.Collection|<LinkAddress> getAllLinkAddresses()
+
+Returns all the addresses on this link and all the links stacked above it. 
+
+
+
+*android.net.LinkProperties.getAllRoutes()*
+
+public |java.util.Collection|<RouteInfo> getAllRoutes()
+
+Returns all the routes on this link and all the links stacked above it. 
+
+
+
+*android.net.LinkProperties.getDnses()*
+
+public |java.util.Collection|<InetAddress> getDnses()
+
+
+
+
+
+*android.net.LinkProperties.getDomains()*
+
+public |java.lang.String| getDomains()
+
+
+
+
+
+*android.net.LinkProperties.getHttpProxy()*
+
+public |android.net.ProxyProperties| getHttpProxy()
+
+
+
+
+
+*android.net.LinkProperties.getInterfaceName()*
+
+public |java.lang.String| getInterfaceName()
+
+
+
+
+
+*android.net.LinkProperties.getLinkAddresses()*
+
+public |java.util.Collection|<LinkAddress> getLinkAddresses()
+
+Returns all the addresses on this link. 
+
+
+
+*android.net.LinkProperties.getMtu()*
+
+public int getMtu()
+
+
+
+
+
+*android.net.LinkProperties.getRoutes()*
+
+public |java.util.Collection|<RouteInfo> getRoutes()
+
+Returns all the routes on this link. 
+
+
+
+*android.net.LinkProperties.getStackedLinks()*
+
+public |java.util.Collection|<LinkProperties> getStackedLinks()
+
+Returns all the links stacked on top of this link. 
+
+
+
+*android.net.LinkProperties.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.net.LinkProperties.hasIPv4Address()*
+
+public boolean hasIPv4Address()
+
+Returns true if this link has an IPv4 address. 
+
+
+
+    Returns: {@code true} if there is an IPv4 address, {@code false} otherwise. 
+
+*android.net.LinkProperties.hasIPv6Address()*
+
+public boolean hasIPv6Address()
+
+Returns true if this link has an IPv6 address. 
+
+
+
+    Returns: {@code true} if there is an IPv6 address, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalAddresses(LinkProperties)*
+
+public boolean isIdenticalAddresses(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesinterface addresses against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalDnses(LinkProperties)*
+
+public boolean isIdenticalDnses(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesDNS addresses against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalHttpProxy(LinkProperties)*
+
+public boolean isIdenticalHttpProxy(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesHttpProxy against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalInterfaceName(LinkProperties)*
+
+public boolean isIdenticalInterfaceName(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesinterface name against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalMtu(LinkProperties)*
+
+public boolean isIdenticalMtu(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesMTU against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalRoutes(LinkProperties)*
+
+public boolean isIdenticalRoutes(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesRoutes against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.isIdenticalStackedLinks(LinkProperties)*
+
+public boolean isIdenticalStackedLinks(android.net.LinkProperties target)
+
+Compares thisLinkPropertiesstacked links against the target 
+
+
+    target - LinkProperties to compare. 
+
+    Returns: {@code true} if both are identical, {@code false} otherwise. 
+
+*android.net.LinkProperties.removeLinkAddress(LinkAddress)*
+
+public boolean removeLinkAddress(android.net.LinkAddress toRemove)
+
+Removes a link address. 
+
+
+    address - The {@code LinkAddress} to remove. 
+
+    Returns: true if the address was removed, false if it did not exist. 
+
+*android.net.LinkProperties.removeStackedLink(LinkProperties)*
+
+public boolean removeStackedLink(android.net.LinkProperties link)
+
+Removes a stacked link. 
+
+If there a stacked link with the same interfacename as link, it is removed. 
+Otherwise, nothing changes. 
+
+
+    link - The link to remove. 
+
+    Returns: true if the link was removed, false otherwise. 
+
+*android.net.LinkProperties.setDomains(String)*
+
+public void setDomains(java.lang.String domains)
+
+
+
+
+
+*android.net.LinkProperties.setHttpProxy(ProxyProperties)*
+
+public void setHttpProxy(android.net.ProxyProperties proxy)
+
+
+
+
+
+*android.net.LinkProperties.setInterfaceName(String)*
+
+public void setInterfaceName(java.lang.String iface)
+
+
+
+
+
+*android.net.LinkProperties.setLinkAddresses(Collection<LinkAddress>)*
+
+public void setLinkAddresses(java.util.Collection<android.net.LinkAddress> addresses)
+
+Replaces the LinkAddresses on this link with the given collection of addresses. 
+
+
+
+*android.net.LinkProperties.setMtu(int)*
+
+public void setMtu(int mtu)
+
+
+
+
+
+*android.net.LinkProperties.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.net.LinkProperties.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Implement the Parcelable interface. 
+
+
+
+

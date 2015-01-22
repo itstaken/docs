@@ -1,0 +1,339 @@
+*android.net.NetworkStateTracker* *NetworkStateTracker* Interface provides theco
+
+public interface interface NetworkStateTracker
+
+
+|android.net.NetworkStateTracker_Description|
+|android.net.NetworkStateTracker_Fields|
+|android.net.NetworkStateTracker_Constructors|
+|android.net.NetworkStateTracker_Methods|
+
+================================================================================
+
+*android.net.NetworkStateTracker_Fields*
+|int_android.net.NetworkStateTracker.EVENT_CONFIGURATION_CHANGED|
+|int_android.net.NetworkStateTracker.EVENT_NETWORK_CONNECTED|
+|int_android.net.NetworkStateTracker.EVENT_NETWORK_DISCONNECTED|
+|int_android.net.NetworkStateTracker.EVENT_NETWORK_SUBTYPE_CHANGED|
+|int_android.net.NetworkStateTracker.EVENT_RESTORE_DEFAULT_NETWORK|
+|int_android.net.NetworkStateTracker.EVENT_STATE_CHANGED|
+
+*android.net.NetworkStateTracker_Methods*
+|android.net.NetworkStateTracker.addStackedLink(LinkProperties)|Informs the sta
+|android.net.NetworkStateTracker.captivePortalCheckComplete()|Ready to switch o
+|android.net.NetworkStateTracker.captivePortalCheckCompleted(boolean)|Captive p
+|android.net.NetworkStateTracker.defaultRouteSet(boolean)|Set a flag indicating
+|android.net.NetworkStateTracker.getLinkCapabilities()|A capability is an Integ
+|android.net.NetworkStateTracker.getLinkProperties()|Return the LinkProperties 
+|android.net.NetworkStateTracker.getLinkQualityInfo()|Get interesting informati
+|android.net.NetworkStateTracker.getNetworkInfo()|Fetch NetworkInfo for the net
+|android.net.NetworkStateTracker.getNetworkInterfaceName()|
+|android.net.NetworkStateTracker.getTcpBufferSizesPropName()|Return the system 
+|android.net.NetworkStateTracker.isAvailable()|Returns an indication of whether
+|android.net.NetworkStateTracker.isDefaultRouteSet()|Check if default route is 
+|android.net.NetworkStateTracker.isPrivateDnsRouteSet()|Check if private DNS ro
+|android.net.NetworkStateTracker.isTeardownRequested()|Check if tear down was r
+|android.net.NetworkStateTracker.privateDnsRouteSet(boolean)|Set a flag indicat
+|android.net.NetworkStateTracker.reconnect()|Reenable connectivity to a network
+|android.net.NetworkStateTracker.removeStackedLink(LinkProperties)|Informs the 
+|android.net.NetworkStateTracker.setDependencyMet(boolean)|An external dependen
+|android.net.NetworkStateTracker.setPolicyDataEnable(boolean)|Policy control of
+|android.net.NetworkStateTracker.setRadio(boolean)|Turn the wireless radio off 
+|android.net.NetworkStateTracker.setTeardownRequested(boolean)|Indicate tear do
+|android.net.NetworkStateTracker.setUserDataEnable(boolean)|User control of dat
+|android.net.NetworkStateTracker.startMonitoring(Context,Handler)|Begin monitor
+|android.net.NetworkStateTracker.startSampling(SamplingDataTracker.SamplingSnapshot)|
+|android.net.NetworkStateTracker.stopSampling(SamplingDataTracker.SamplingSnapshot)|
+|android.net.NetworkStateTracker.supplyMessenger(Messenger)|
+|android.net.NetworkStateTracker.teardown()|Disable connectivity to a network
+
+*android.net.NetworkStateTracker_Description*
+
+Interface provides the (|com.android.server.ConnectivityService|) with three 
+services. Events to the ConnectivityService when changes occur, an API for 
+controlling the network and storage for network specific information. 
+
+The Connectivity will call startMonitoring before any other method is called. 
+
+
+
+*int_android.net.NetworkStateTracker.EVENT_CONFIGURATION_CHANGED*
+
+msg.what = EVENT_CONFIGURATION_CHANGED msg.obj = NetworkInfo object 
+
+
+*int_android.net.NetworkStateTracker.EVENT_NETWORK_CONNECTED*
+
+msg.what = EVENT_NETWORK_CONNECTED msg.obj = LinkProperties object 
+
+
+*int_android.net.NetworkStateTracker.EVENT_NETWORK_DISCONNECTED*
+
+msg.what = EVENT_NETWORK_CONNECTION_DISCONNECTED msg.obj = LinkProperties 
+object, same iface name 
+
+
+*int_android.net.NetworkStateTracker.EVENT_NETWORK_SUBTYPE_CHANGED*
+
+msg.what = EVENT_NETWORK_SUBTYPE_CHANGED msg.obj = NetworkInfo object 
+
+
+*int_android.net.NetworkStateTracker.EVENT_RESTORE_DEFAULT_NETWORK*
+
+msg.what = EVENT_RESTORE_DEFAULT_NETWORK msg.obj = FeatureUser object 
+
+
+*int_android.net.NetworkStateTracker.EVENT_STATE_CHANGED*
+
+The network state has changed and the NetworkInfo object contains the new 
+state. 
+
+msg.what = EVENT_STATE_CHANGED msg.obj = NetworkInfo object 
+
+
+
+*android.net.NetworkStateTracker.addStackedLink(LinkProperties)*
+
+public void addStackedLink(android.net.LinkProperties link)
+
+Informs the state tracker that another interface is stacked on top of it. 
+
+
+
+*android.net.NetworkStateTracker.captivePortalCheckComplete()*
+
+public void captivePortalCheckComplete()
+
+Ready to switch on to the network after captive portal check 
+
+
+
+*android.net.NetworkStateTracker.captivePortalCheckCompleted(boolean)*
+
+public void captivePortalCheckCompleted(boolean isCaptive)
+
+Captive portal check has completed 
+
+
+
+*android.net.NetworkStateTracker.defaultRouteSet(boolean)*
+
+public void defaultRouteSet(boolean enabled)
+
+Set a flag indicating default route is set for the network 
+
+
+
+*android.net.NetworkStateTracker.getLinkCapabilities()*
+
+public |android.net.LinkCapabilities| getLinkCapabilities()
+
+A capability is an Integer/String pair, the capabilities are defined in the 
+class LinkSocket#Key. 
+
+
+
+    Returns: a copy of this connections capabilities, may be empty but never null. 
+
+*android.net.NetworkStateTracker.getLinkProperties()*
+
+public |android.net.LinkProperties| getLinkProperties()
+
+Return the LinkProperties for the connection. 
+
+
+
+    Returns: a copy of the LinkProperties, is never null. 
+
+*android.net.NetworkStateTracker.getLinkQualityInfo()*
+
+public |android.net.LinkQualityInfo| getLinkQualityInfo()
+
+Get interesting information about this network link 
+
+
+
+    Returns: a copy of link information, null if not available 
+
+*android.net.NetworkStateTracker.getNetworkInfo()*
+
+public |android.net.NetworkInfo| getNetworkInfo()
+
+Fetch NetworkInfo for the network 
+
+
+
+*android.net.NetworkStateTracker.getNetworkInterfaceName()*
+
+public |java.lang.String| getNetworkInterfaceName()
+
+
+
+
+
+*android.net.NetworkStateTracker.getTcpBufferSizesPropName()*
+
+public |java.lang.String| getTcpBufferSizesPropName()
+
+Return the system properties name associated with the tcp buffer sizes for this 
+network. 
+
+
+
+*android.net.NetworkStateTracker.isAvailable()*
+
+public boolean isAvailable()
+
+Returns an indication of whether this network is available for connections. A 
+value offalsemeans that some quasi-permanent condition prevents connectivity to 
+this network. 
+
+NOTE that this is broken on multi-connection devices. Should be fixed in J 
+release TODO - fix on multi-pdp devices 
+
+
+
+*android.net.NetworkStateTracker.isDefaultRouteSet()*
+
+public boolean isDefaultRouteSet()
+
+Check if default route is set 
+
+
+
+*android.net.NetworkStateTracker.isPrivateDnsRouteSet()*
+
+public boolean isPrivateDnsRouteSet()
+
+Check if private DNS route is set for the network 
+
+
+
+*android.net.NetworkStateTracker.isTeardownRequested()*
+
+public boolean isTeardownRequested()
+
+Check if tear down was requested 
+
+
+
+*android.net.NetworkStateTracker.privateDnsRouteSet(boolean)*
+
+public void privateDnsRouteSet(boolean enabled)
+
+Set a flag indicating private DNS route is set 
+
+
+
+*android.net.NetworkStateTracker.reconnect()*
+
+public boolean reconnect()
+
+Reenable connectivity to a network after a (|android.net.NetworkStateTracker|) 
+. 
+
+
+
+    Returns: {@code true} if we're connected or expect to be connected 
+
+*android.net.NetworkStateTracker.removeStackedLink(LinkProperties)*
+
+public void removeStackedLink(android.net.LinkProperties link)
+
+Informs the state tracker that a stacked interface has been removed. 
+
+
+
+*android.net.NetworkStateTracker.setDependencyMet(boolean)*
+
+public void setDependencyMet(boolean met)
+
+An external dependency has been met/unmet 
+
+
+
+*android.net.NetworkStateTracker.setPolicyDataEnable(boolean)*
+
+public void setPolicyDataEnable(boolean enabled)
+
+Policy control of data connection through this network, typically not persisted 
+internally. Usually used when (|android.net.NetworkPolicy|) is passed. 
+
+
+
+*android.net.NetworkStateTracker.setRadio(boolean)*
+
+public boolean setRadio(boolean turnOn)
+
+Turn the wireless radio off for a network. 
+
+
+    turnOn - {@code true} to turn the radio on, {@code false} 
+
+*android.net.NetworkStateTracker.setTeardownRequested(boolean)*
+
+public void setTeardownRequested(boolean isRequested)
+
+Indicate tear down requested from connectivity 
+
+
+
+*android.net.NetworkStateTracker.setUserDataEnable(boolean)*
+
+public void setUserDataEnable(boolean enabled)
+
+User control of data connection through this network, typically persisted 
+internally. 
+
+
+
+*android.net.NetworkStateTracker.startMonitoring(Context,Handler)*
+
+public void startMonitoring(
+  android.content.Context context,
+  android.os.Handler target)
+
+Begin monitoring data connectivity. 
+
+This is the first method called when this interface is used. 
+
+
+    context - is the current Android context 
+    target - is the Hander to which to return the events. 
+
+*android.net.NetworkStateTracker.startSampling(SamplingDataTracker.SamplingSnapshot)*
+
+public void startSampling(android.net.SamplingDataTracker.SamplingSnapshot s)
+
+
+
+
+
+*android.net.NetworkStateTracker.stopSampling(SamplingDataTracker.SamplingSnapshot)*
+
+public void stopSampling(android.net.SamplingDataTracker.SamplingSnapshot s)
+
+
+
+
+
+*android.net.NetworkStateTracker.supplyMessenger(Messenger)*
+
+public void supplyMessenger(android.os.Messenger messenger)
+
+
+
+
+
+*android.net.NetworkStateTracker.teardown()*
+
+public boolean teardown()
+
+Disable connectivity to a network 
+
+
+
+    Returns: {@code true} if a teardown occurred, {@code false} if the teardown did not 
+             occur. 
+
+

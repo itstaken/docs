@@ -1,0 +1,103 @@
+*android.speech.RecognitionService* *RecognitionService* This class provides a b
+
+public abstract class RecognitionService
+  extends    |android.app.Service|
+
+|android.speech.RecognitionService_Description|
+|android.speech.RecognitionService_Fields|
+|android.speech.RecognitionService_Constructors|
+|android.speech.RecognitionService_Methods|
+
+================================================================================
+
+*android.speech.RecognitionService_Fields*
+|java.lang.String_android.speech.RecognitionService.SERVICE_INTERFACE|
+|java.lang.String_android.speech.RecognitionService.SERVICE_META_DATA|
+
+*android.speech.RecognitionService_Constructors*
+|android.speech.RecognitionService()|
+
+*android.speech.RecognitionService_Methods*
+|android.speech.RecognitionService.onBind(Intent)|
+|android.speech.RecognitionService.onCancel(RecognitionService.Callback)|Notifi
+|android.speech.RecognitionService.onDestroy()|
+|android.speech.RecognitionService.onStartListening(Intent,RecognitionService.Callback)|
+|android.speech.RecognitionService.onStopListening(RecognitionService.Callback)|
+
+*android.speech.RecognitionService_Description*
+
+This class provides a base class for recognition service implementations. This 
+class should be extended only in case you wish to implement a new speech 
+recognizer. Please note that the implementation of this service is stateless. 
+
+
+
+*java.lang.String_android.speech.RecognitionService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) that must be declared as handled by the service. 
+
+
+*java.lang.String_android.speech.RecognitionService.SERVICE_META_DATA*
+
+Name under which a RecognitionService component publishes information about 
+itself. This meta-data should reference an XML resource containing a < 
+recognition-service(|android.R.styleable|) > tag. 
+
+
+
+*android.speech.RecognitionService()*
+
+public RecognitionService()
+
+
+
+
+*android.speech.RecognitionService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.speech.RecognitionService.onCancel(RecognitionService.Callback)*
+
+protected abstract void onCancel(android.speech.RecognitionService.Callback listener)
+
+Notifies the service that it should cancel the speech recognition. 
+
+
+
+*android.speech.RecognitionService.onDestroy()*
+
+public void onDestroy()
+
+
+
+
+
+*android.speech.RecognitionService.onStartListening(Intent,RecognitionService.Callback)*
+
+protected abstract void onStartListening(
+  android.content.Intent recognizerIntent,
+  android.speech.RecognitionService.Callback listener)
+
+Notifies the service that it should start listening for speech. 
+
+
+    recognizerIntent - contains parameters for the recognition to be performed. The intent may also 
+       contain optional extras, see {@link RecognizerIntent}. If these values 
+       are not set explicitly, default values should be used by the recognizer. 
+    listener - that will receive the service's callbacks 
+
+*android.speech.RecognitionService.onStopListening(RecognitionService.Callback)*
+
+protected abstract void onStopListening(android.speech.RecognitionService.Callback listener)
+
+Notifies the service that it should stop listening for speech. Speech captured 
+so far should be recognized as if the user had stopped speaking at this point. 
+This method is only called if the application calls it explicitly. 
+
+
+
+

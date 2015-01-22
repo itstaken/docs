@@ -1,0 +1,94 @@
+*android.os.ResultReceiver* *ResultReceiver* Generic interface for receiving a c
+
+public class ResultReceiver
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.os.ResultReceiver_Description|
+|android.os.ResultReceiver_Fields|
+|android.os.ResultReceiver_Constructors|
+|android.os.ResultReceiver_Methods|
+
+================================================================================
+
+*android.os.ResultReceiver_Fields*
+|android.os.Parcelable.Creator<android.os.ResultReceiver>_android.os.ResultReceiver.CREATOR|
+
+*android.os.ResultReceiver_Constructors*
+|android.os.ResultReceiver(Handler)|Create a new ResultReceive to receive resul
+
+*android.os.ResultReceiver_Methods*
+|android.os.ResultReceiver.describeContents()|
+|android.os.ResultReceiver.onReceiveResult(int,Bundle)|Override to receive resu
+|android.os.ResultReceiver.send(int,Bundle)|Deliver a result to this receiver.
+|android.os.ResultReceiver.writeToParcel(Parcel,int)|
+
+*android.os.ResultReceiver_Description*
+
+Generic interface for receiving a callback result from someone. Use this by 
+creating a subclass and implement (|android.os.ResultReceiver|) , which you can 
+then pass to others and send through IPC, and receive results they supply with 
+(|android.os.ResultReceiver|) . 
+
+
+
+*android.os.Parcelable.Creator<android.os.ResultReceiver>_android.os.ResultReceiver.CREATOR*
+
+
+
+
+
+*android.os.ResultReceiver(Handler)*
+
+public ResultReceiver(android.os.Handler handler)
+
+Create a new ResultReceive to receive results. Your 
+(|android.os.ResultReceiver|) method will be called from the thread running 
+handler if given, or from an arbitrary thread if null. 
+
+
+*android.os.ResultReceiver.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.ResultReceiver.onReceiveResult(int,Bundle)*
+
+protected void onReceiveResult(
+  int resultCode,
+  android.os.Bundle resultData)
+
+Override to receive results delivered to this object. 
+
+
+    resultCode - Arbitrary result code delivered by the sender, as defined by the sender. 
+    resultData - Any additional data provided by the sender. 
+
+*android.os.ResultReceiver.send(int,Bundle)*
+
+public void send(
+  int resultCode,
+  android.os.Bundle resultData)
+
+Deliver a result to this receiver. Will call (|android.os.ResultReceiver|) , 
+always asynchronously if the receiver has supplied a Handler in which to 
+dispatch the result. 
+
+
+    resultCode - Arbitrary result code to deliver, as defined by you. 
+    resultData - Any additional data provided by you. 
+
+*android.os.ResultReceiver.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

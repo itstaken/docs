@@ -1,0 +1,246 @@
+*android.net.http.HttpResponseCache* *HttpResponseCache* Caches HTTP and HTTPS r
+
+public final class HttpResponseCache
+  extends    |java.net.ResponseCache|
+  implements |java.io.Closeable|
+
+|android.net.http.HttpResponseCache_Description|
+|android.net.http.HttpResponseCache_Fields|
+|android.net.http.HttpResponseCache_Constructors|
+|android.net.http.HttpResponseCache_Methods|
+
+================================================================================
+
+*android.net.http.HttpResponseCache_Methods*
+|android.net.http.HttpResponseCache.close()|Uninstalls the cache and releases a
+|android.net.http.HttpResponseCache.delete()|Uninstalls the cache and deletes a
+|android.net.http.HttpResponseCache.flush()|Force buffered operations to the fi
+|android.net.http.HttpResponseCache.get(URI,String,Map<String,List<String>>)|
+|android.net.http.HttpResponseCache.getHitCount()|Returns the number of HTTP re
+|android.net.http.HttpResponseCache.getInstalled()|Returns the currently-instal
+|android.net.http.HttpResponseCache.getNetworkCount()|Returns the number of HTT
+|android.net.http.HttpResponseCache.getRequestCount()|Returns the total number 
+|android.net.http.HttpResponseCache.install(File,long)|Creates a new HTTP respo
+|android.net.http.HttpResponseCache.maxSize()|Returns the maximum number of byt
+|android.net.http.HttpResponseCache.put(URI,URLConnection)|
+|android.net.http.HttpResponseCache.size()|Returns the number of bytes currentl
+
+*android.net.http.HttpResponseCache_Description*
+
+Caches HTTP and HTTPS responses to the filesystem so they may be reused, saving 
+time and bandwidth. This class supports (|java.net.HttpURLConnection|) and 
+(|javax.net.ssl.HttpsURLConnection|) ; there is no platform-provided cache for 
+(|DefaultHttpClient|) or (|android.net.http.AndroidHttpClient|) . 
+
+Installing an HTTP response cache Enable caching of all of your application's 
+HTTP requests by installing the cache at application startup. For example, this 
+code installs a 10 MiB cache in the application-specific cache 
+directory(|android.content.Context|) of the filesystem}: protected void 
+onCreate(Bundle savedInstanceState) { ... 
+
+try { File httpCacheDir = new File(context.getCacheDir(), "http"); long 
+httpCacheSize = 10 * 1024 * 1024; // 10 MiB 
+HttpResponseCache.install(httpCacheDir, httpCacheSize); } catch (IOException e) 
+{ Log.i(TAG, "HTTP response cache installation failed:" + e); } } 
+
+protected void onStop() { ... 
+
+HttpResponseCache cache = HttpResponseCache.getInstalled(); if (cache != null) 
+{ cache.flush(); } } 
+
+This cache will evict entries as necessary to keep its size from exceeding 10 
+MiB. The best cache size is application specific and depends on the size and 
+frequency of the files being downloaded. Increasing the limit may improve the 
+hit rate, but it may also just waste filesystem space! 
+
+For some applications it may be preferable to create the cache in the external 
+storage directory. There are no access controls on the external storage 
+directory so it should not be used for caches that could contain private data. 
+Although it often has more free space, external storage is optional andeven if 
+availablecan disappear during use. Retrieve the external cache directory using 
+(|android.content.Context|) . If this method returns null, your application 
+should fall back to either not caching or caching on non-external storage. If 
+the external storage is removed during use, the cache hit rate will drop to 
+zero and ongoing cache reads will fail. 
+
+Flushing the cache forces its data to the filesystem. This ensures that all 
+responses written to the cache will be readable the next time the activity 
+starts. 
+
+Cache Optimization To measure cache effectiveness, this class tracks three 
+statistics: 
+
+Request Count:(|android.net.http.HttpResponseCache|) the number of HTTP 
+requests issued since this cache was created. Network 
+Count:(|android.net.http.HttpResponseCache|) the number of those requests that 
+required network use. Hit Count:(|android.net.http.HttpResponseCache|) the 
+number of those requests whose responses were served by the cache. 
+
+Sometimes a request will result in a conditional cache hit. If the cache 
+contains a stale copy of the response, the client will issue a conditionalGET. 
+The server will then send either the updated response if it has changed, or a 
+short 'not modified' response if the client's copy is still valid. Such 
+responses increment both the network count and hit count. 
+
+The best way to improve the cache hit rate is by configuring the web server to 
+return cacheable responses. Although this client honors all HTTP/1.1 (RFC 2068) 
+cache headers, it doesn't cache partial responses. 
+
+Force a Network Response In some situations, such as after a user clicks a 
+'refresh' button, it may be necessary to skip the cache, and fetch data 
+directly from the server. To force a full refresh, add theno-cachedirective: 
+connection.addRequestProperty("Cache-Control", "no-cache"); 
+
+If it is only necessary to force a cached response to be validated by the 
+server, use the more efficientmax-age=0instead: 
+connection.addRequestProperty("Cache-Control", "max-age=0"); 
+
+Force a Cache Response Sometimes you'll want to show resources if they are 
+available immediately, but not otherwise. This can be used so your application 
+can show something while waiting for the latest data to be downloaded. To 
+restrict a request to locally-cached resources, add theonly-if-cacheddirective: 
+try { connection.addRequestProperty("Cache-Control", "only-if-cached"); 
+InputStream cached = connection.getInputStream(); // the resource was cached! 
+show it } catch (FileNotFoundException e) { // the resource was not cached } 
+
+This technique works even better in situations where a stale response is better 
+than no response. To permit stale cached responses, use themax-staledirective 
+with the maximum staleness in seconds: int maxStale = 60 * 60 * 24 * 28; // 
+tolerate 4-weeks stale connection.addRequestProperty("Cache-Control", 
+"max-stale=" + maxStale); 
+
+Working With Earlier Releases This class was added in Android 4.0 (Ice Cream 
+Sandwich). Use reflection to enable the response cache without impacting 
+earlier releases: try { File httpCacheDir = new File(context.getCacheDir(), 
+"http"); long httpCacheSize = 10 * 1024 * 1024; // 10 MiB 
+Class.forName("android.net.http.HttpResponseCache") .getMethod("install", 
+File.class, long.class) .invoke(null, httpCacheDir, httpCacheSize); } catch 
+(Exception httpResponseCacheNotAvailable) { } 
+
+
+
+*android.net.http.HttpResponseCache.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Uninstalls the cache and releases any active resources. Stored contents will 
+remain on the filesystem. 
+
+
+
+*android.net.http.HttpResponseCache.delete()*
+
+public void delete()
+  throws |java.io.IOException|
+         
+Uninstalls the cache and deletes all of its stored contents. 
+
+
+
+*android.net.http.HttpResponseCache.flush()*
+
+public void flush()
+
+Force buffered operations to the filesystem. This ensures that responses 
+written to the cache will be available the next time the cache is opened, even 
+if this process is killed. 
+
+
+
+*android.net.http.HttpResponseCache.get(URI,String,Map<String,List<String>>)*
+
+public |java.net.CacheResponse| get(
+  java.net.URI uri,
+  java.lang.String requestMethod,
+  java.util.Map<java.lang.String, java.util.List<java.lang.String>> requestHeaders)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.HttpResponseCache.getHitCount()*
+
+public int getHitCount()
+
+Returns the number of HTTP requests whose response was provided by the cache. 
+This may include conditionalGETrequests that were validated over the network. 
+
+
+
+*android.net.http.HttpResponseCache.getInstalled()*
+
+public static |android.net.http.HttpResponseCache| getInstalled()
+
+Returns the currently-installedHttpResponseCache, or null if there is no cache 
+installed or it is not aHttpResponseCache. 
+
+
+
+*android.net.http.HttpResponseCache.getNetworkCount()*
+
+public int getNetworkCount()
+
+Returns the number of HTTP requests that required the network to either supply 
+a response or validate a locally cached response. 
+
+
+
+*android.net.http.HttpResponseCache.getRequestCount()*
+
+public int getRequestCount()
+
+Returns the total number of HTTP requests that were made. This includes both 
+client requests and requests that were made on the client's behalf to handle a 
+redirects and retries. 
+
+
+
+*android.net.http.HttpResponseCache.install(File,long)*
+
+public static |android.net.http.HttpResponseCache| install(
+  java.io.File directory,
+  long maxSize)
+  throws |java.io.IOException|
+         
+Creates a new HTTP response cache and sets it(|java.net.ResponseCache|) as the 
+system default cache. 
+
+
+    directory - the directory to hold cache data. 
+    maxSize - the maximum size of the cache in bytes. 
+
+    Returns: the newly-installed cache 
+
+*android.net.http.HttpResponseCache.maxSize()*
+
+public long maxSize()
+
+Returns the maximum number of bytes that this cache should use to store its 
+data. 
+
+
+
+*android.net.http.HttpResponseCache.put(URI,URLConnection)*
+
+public |java.net.CacheRequest| put(
+  java.net.URI uri,
+  java.net.URLConnection urlConnection)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.HttpResponseCache.size()*
+
+public long size()
+
+Returns the number of bytes currently being used to store the values in this 
+cache. This may be greater than the (|android.net.http.HttpResponseCache|) if a 
+background deletion is pending. 
+
+
+
+

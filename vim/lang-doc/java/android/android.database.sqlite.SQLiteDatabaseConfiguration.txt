@@ -1,0 +1,133 @@
+*android.database.sqlite.SQLiteDatabaseConfiguration* *SQLiteDatabaseConfiguration* 
+
+public final class SQLiteDatabaseConfiguration
+  extends    |java.lang.Object|
+
+|android.database.sqlite.SQLiteDatabaseConfiguration_Description|
+|android.database.sqlite.SQLiteDatabaseConfiguration_Fields|
+|android.database.sqlite.SQLiteDatabaseConfiguration_Constructors|
+|android.database.sqlite.SQLiteDatabaseConfiguration_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteDatabaseConfiguration_Fields*
+|java.util.ArrayList<android.database.sqlite.SQLiteCustomFunction>_android.database.sqlite.SQLiteDatabaseConfiguration.customFunctions|
+|boolean_android.database.sqlite.SQLiteDatabaseConfiguration.foreignKeyConstraintsEnabled|
+|java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.label|
+|java.util.Locale_android.database.sqlite.SQLiteDatabaseConfiguration.locale|
+|int_android.database.sqlite.SQLiteDatabaseConfiguration.maxSqlCacheSize|
+|java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.MEMORY_DB_PATH|
+|int_android.database.sqlite.SQLiteDatabaseConfiguration.openFlags|
+|java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.path|
+
+*android.database.sqlite.SQLiteDatabaseConfiguration_Constructors*
+|android.database.sqlite.SQLiteDatabaseConfiguration(SQLiteDatabaseConfiguration)|
+|android.database.sqlite.SQLiteDatabaseConfiguration(String,int)|Creates a data
+
+*android.database.sqlite.SQLiteDatabaseConfiguration_Methods*
+|android.database.sqlite.SQLiteDatabaseConfiguration.isInMemoryDb()|Returns tru
+|android.database.sqlite.SQLiteDatabaseConfiguration.updateParametersFrom(SQLiteDatabaseConfiguration)|
+
+*android.database.sqlite.SQLiteDatabaseConfiguration_Description*
+
+Describes how to configure a database. 
+
+The purpose of this object is to keep track of all of the little configuration 
+settings that are applied to a database after it is opened so that they can be 
+applied to all connections in the connection pool uniformly. 
+
+Each connection maintains its own copy of this object so it can keep track of 
+which settings have already been applied. 
+
+
+
+*java.util.ArrayList<android.database.sqlite.SQLiteCustomFunction>_android.database.sqlite.SQLiteDatabaseConfiguration.customFunctions*
+
+The custom functions to register. 
+
+
+*boolean_android.database.sqlite.SQLiteDatabaseConfiguration.foreignKeyConstraintsEnabled*
+
+True if foreign key constraints are enabled. 
+
+Default is false. 
+
+
+*java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.label*
+
+The label to use to describe the database when it appears in logs. This is 
+derived from the path but is stripped to remove PII. 
+
+
+*java.util.Locale_android.database.sqlite.SQLiteDatabaseConfiguration.locale*
+
+The database locale. 
+
+Default is the value returned by (|java.util.Locale|) . 
+
+
+*int_android.database.sqlite.SQLiteDatabaseConfiguration.maxSqlCacheSize*
+
+The maximum size of the prepared statement cache for each database connection. 
+Must be non-negative. 
+
+Default is 25. 
+
+
+*java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.MEMORY_DB_PATH*
+
+Special path used by in-memory databases. 
+
+
+*int_android.database.sqlite.SQLiteDatabaseConfiguration.openFlags*
+
+The flags used to open the database. 
+
+
+*java.lang.String_android.database.sqlite.SQLiteDatabaseConfiguration.path*
+
+The database path. 
+
+
+
+*android.database.sqlite.SQLiteDatabaseConfiguration(SQLiteDatabaseConfiguration)*
+
+public SQLiteDatabaseConfiguration(android.database.sqlite.SQLiteDatabaseConfiguration other)
+
+Creates a database configuration as a copy of another configuration. 
+
+    other - The other configuration. 
+
+*android.database.sqlite.SQLiteDatabaseConfiguration(String,int)*
+
+public SQLiteDatabaseConfiguration(
+  java.lang.String path,
+  int openFlags)
+
+Creates a database configuration with the required parameters for opening a 
+database and default values for all other parameters. 
+
+    path - The database path. 
+    openFlags - Open flags for the database, such as {@link SQLiteDatabase#OPEN_READWRITE}. 
+
+*android.database.sqlite.SQLiteDatabaseConfiguration.isInMemoryDb()*
+
+public boolean isInMemoryDb()
+
+Returns true if the database is in-memory. 
+
+
+
+    Returns: True if the database is in-memory. 
+
+*android.database.sqlite.SQLiteDatabaseConfiguration.updateParametersFrom(SQLiteDatabaseConfiguration)*
+
+public void updateParametersFrom(android.database.sqlite.SQLiteDatabaseConfiguration other)
+
+Updates the non-immutable parameters of this configuration object from the 
+other configuration object. 
+
+
+    other - The object from which to copy the parameters. 
+
+

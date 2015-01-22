@@ -1,0 +1,247 @@
+*android.content.SyncRequest.Builder* *SyncRequest.Builder* Builder class for aS
+
+public static class SyncRequest.Builder
+  extends    |java.lang.Object|
+
+|android.content.SyncRequest.Builder_Description|
+|android.content.SyncRequest.Builder_Fields|
+|android.content.SyncRequest.Builder_Constructors|
+|android.content.SyncRequest.Builder_Methods|
+
+================================================================================
+
+*android.content.SyncRequest.Builder_Constructors*
+|android.content.SyncRequest.Builder()|
+
+*android.content.SyncRequest.Builder_Methods*
+|android.content.SyncRequest.Builder.build()|Performs validation over the reque
+|android.content.SyncRequest.Builder.setDisallowMetered(boolean)|
+|android.content.SyncRequest.Builder.setExpedited(boolean)|An expedited sync ru
+|android.content.SyncRequest.Builder.setExtras(Bundle)|Optional developer-provi
+|android.content.SyncRequest.Builder.setIgnoreBackoff(boolean)|Convenience func
+|android.content.SyncRequest.Builder.setIgnoreSettings(boolean)|Convenience fun
+|android.content.SyncRequest.Builder.setManual(boolean)|Convenience function fo
+|android.content.SyncRequest.Builder.setNoRetry(boolean)|Convenience function f
+|android.content.SyncRequest.Builder.setPriority(int)|
+|android.content.SyncRequest.Builder.setSyncAdapter(Account,String)|Specify an 
+|android.content.SyncRequest.Builder.setTransferSize(long,long)|Developer can p
+|android.content.SyncRequest.Builder.syncOnce()|Request that a sync occur immed
+|android.content.SyncRequest.Builder.syncPeriodic(long,long)|Build a periodic s
+
+*android.content.SyncRequest.Builder_Description*
+
+Builder class for a (|android.content.SyncRequest|) . As you build your 
+SyncRequest this class will also perform validation. 
+
+
+
+*android.content.SyncRequest.Builder()*
+
+public SyncRequest.Builder()
+
+
+
+
+*android.content.SyncRequest.Builder.build()*
+
+public |android.content.SyncRequest| build()
+
+Performs validation over the request and throws the runtime exception 
+IllegalArgumentException if this validation fails. 
+
+
+
+    Returns: a SyncRequest with the information contained within this builder. 
+
+*android.content.SyncRequest.Builder.setDisallowMetered(boolean)*
+
+public |android.content.SyncRequest.Builder| setDisallowMetered(boolean disallow)
+
+
+
+
+    disallow - true to enforce that this transfer not occur on metered networks. Default 
+       false. 
+
+*android.content.SyncRequest.Builder.setExpedited(boolean)*
+
+public |android.content.SyncRequest.Builder| setExpedited(boolean expedited)
+
+An expedited sync runs immediately and will preempt another non-expedited 
+running sync. 
+
+Not valid for periodic sync and will throw an IllegalArgumentException in 
+(|android.content.SyncRequest.Builder|) . 
+
+
+    expedited - whether to run expedited. Default false. 
+
+*android.content.SyncRequest.Builder.setExtras(Bundle)*
+
+public |android.content.SyncRequest.Builder| setExtras(android.os.Bundle bundle)
+
+Optional developer-provided extras handed back in 
+(|android.content.AbstractThreadedSyncAdapter|) occurs. This bundle is copied 
+into the SyncRequest returned by (|android.content.SyncRequest.Builder|) . 
+
+Example: 
+
+String[] syncItems = {"dog", "cat", "frog", "child"}; SyncRequest.Builder 
+builder = new SyncRequest.Builder() .setSyncAdapter(dummyAccount, 
+dummyProvider) .syncOnce(5 * MINUTES_IN_SECS); 
+
+for (String syncData : syncItems) { Bundle extras = new Bundle(); 
+extras.setString("data", syncData); builder.setExtras(extras); 
+ContentResolver.sync(builder.build()); // Each sync() request is for a unique 
+sync. } 
+
+Only values of the following types may be used in the extras bundle: 
+
+Integer Long Boolean Float Double String Account null 
+
+If any data is present in the bundle not of this type, build() will throw a 
+runtime exception. 
+
+
+    bundle - extras bundle to set. 
+
+*android.content.SyncRequest.Builder.setIgnoreBackoff(boolean)*
+
+public |android.content.SyncRequest.Builder| setIgnoreBackoff(boolean ignoreBackoff)
+
+Convenience function for setting (|android.content.ContentResolver|) . 
+
+Force the sync scheduling process to ignore any back-off that was the result of 
+a failed sync, as well as to invalidate any (|android.content.SyncResult|) 
+value that may have been set by the adapter. Successive failures will not honor 
+this flag. Not valid for periodic sync and will throw an 
+IllegalArgumentException in (|android.content.SyncRequest.Builder|) . 
+
+
+    ignoreBackoff - ignore back-off settings. Default false. 
+
+*android.content.SyncRequest.Builder.setIgnoreSettings(boolean)*
+
+public |android.content.SyncRequest.Builder| setIgnoreSettings(boolean ignoreSettings)
+
+Convenience function for setting (|android.content.ContentResolver|) . 
+
+A sync can specify that system sync settings be ignored (user has turned sync 
+off). Not valid for periodic sync and will throw an IllegalArgumentException in 
+(|android.content.SyncRequest.Builder|) . 
+
+
+    ignoreSettings - true to ignore the sync automatically settings. Default false. 
+
+*android.content.SyncRequest.Builder.setManual(boolean)*
+
+public |android.content.SyncRequest.Builder| setManual(boolean isManual)
+
+Convenience function for setting (|android.content.ContentResolver|) . 
+
+A manual sync is functionally equivalent to calling 
+(|android.content.SyncRequest.Builder|) and 
+(|android.content.SyncRequest.Builder|) . Not valid for periodic sync and will 
+throw an IllegalArgumentException in (|android.content.SyncRequest.Builder|) . 
+
+
+    isManual - User-initiated sync or not. Default false. 
+
+*android.content.SyncRequest.Builder.setNoRetry(boolean)*
+
+public |android.content.SyncRequest.Builder| setNoRetry(boolean noRetry)
+
+Convenience function for setting (|android.content.ContentResolver|) . 
+
+A one-off sync operation that fails will be retried with exponential back-off 
+unless this is set to false. Not valid for periodic sync and will throw an 
+IllegalArgumentException in build(). 
+
+
+    noRetry - true to not retry a failed sync. Default false. 
+
+*android.content.SyncRequest.Builder.setPriority(int)*
+
+public |android.content.SyncRequest.Builder| setPriority(int priority)
+
+
+
+
+    priority - the priority of this request among all requests from the calling app. Range of 
+       [-2,2] similar to how this is done with notifications. 
+
+*android.content.SyncRequest.Builder.setSyncAdapter(Account,String)*
+
+public |android.content.SyncRequest.Builder| setSyncAdapter(
+  android.accounts.Account account,
+  java.lang.String authority)
+
+Specify an authority and account for this transfer. 
+
+
+    authority - String identifying which content provider to sync. 
+    account - Account to sync. Can be null unless this is a periodic sync. 
+
+*android.content.SyncRequest.Builder.setTransferSize(long,long)*
+
+public |android.content.SyncRequest.Builder| setTransferSize(
+  long rxBytes,
+  long txBytes)
+
+Developer can provide insight into their payload size; optional. -1 specifies 
+unknown, so that you are not restricted to defining both fields. 
+
+
+    rxBytes - Bytes expected to be downloaded. 
+    txBytes - Bytes expected to be uploaded. 
+
+*android.content.SyncRequest.Builder.syncOnce()*
+
+public |android.content.SyncRequest.Builder| syncOnce()
+
+Request that a sync occur immediately. 
+
+Example 
+
+SyncRequest.Builder builder = (new SyncRequest.Builder()).syncOnce(); 
+
+
+
+*android.content.SyncRequest.Builder.syncPeriodic(long,long)*
+
+public |android.content.SyncRequest.Builder| syncPeriodic(
+  long pollFrequency,
+  long beforeSeconds)
+
+Build a periodic sync. Either this or syncOnce() must be called for this 
+builder. Syncs are identified by target (|android.provider|) / 
+(|android.accounts.Account|) and by the contents of the extras bundle. You 
+cannot reuse the same builder for one-time syncs (by calling this function) 
+after having specified a periodic sync. If you do, an IllegalArgumentException 
+will be thrown. 
+
+Example usage. 
+
+
+
+Request a periodic sync every 5 hours with 20 minutes of flex. 
+SyncRequest.Builder builder = (new SyncRequest.Builder()).syncPeriodic(5 * 
+HOUR_IN_SECS, 20 * MIN_IN_SECS); 
+
+Schedule a periodic sync every hour at any point in time during that hour. 
+SyncRequest.Builder builder = (new SyncRequest.Builder()).syncPeriodic(1 * 
+HOUR_IN_SECS, 1 * HOUR_IN_SECS); 
+
+N.B.: Periodic syncs are not allowed to have any of 
+(|android.content.ContentResolver|) , (|android.content.ContentResolver|) , 
+(|android.content.ContentResolver|) , (|android.content.ContentResolver|) , 
+(|android.content.ContentResolver|) , (|android.content.ContentResolver|) , 
+(|android.content.ContentResolver|) set to true. If any are supplied then an 
+IllegalArgumentException will be thrown. 
+
+
+    pollFrequency - the amount of time in seconds that you wish to elapse between periodic syncs. 
+    beforeSeconds - the amount of flex time in seconds before {@code pollFrequency} that you permit 
+       for the sync to take place. Must be less than {@code pollFrequency}. 
+
+

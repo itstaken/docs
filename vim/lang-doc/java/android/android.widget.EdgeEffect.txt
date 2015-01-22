@@ -1,0 +1,149 @@
+*android.widget.EdgeEffect* *EdgeEffect* This class performs the graphical effec
+
+public class EdgeEffect
+  extends    |java.lang.Object|
+
+|android.widget.EdgeEffect_Description|
+|android.widget.EdgeEffect_Fields|
+|android.widget.EdgeEffect_Constructors|
+|android.widget.EdgeEffect_Methods|
+
+================================================================================
+
+*android.widget.EdgeEffect_Constructors*
+|android.widget.EdgeEffect(Context)|Construct a new EdgeEffect with a theme app
+
+*android.widget.EdgeEffect_Methods*
+|android.widget.EdgeEffect.draw(Canvas)|Draw into the provided canvas.
+|android.widget.EdgeEffect.finish()|Immediately finish the current animation.
+|android.widget.EdgeEffect.getBounds(boolean)|Returns the bounds of the edge ef
+|android.widget.EdgeEffect.isFinished()|Reports if this EdgeEffect's animation 
+|android.widget.EdgeEffect.onAbsorb(int)|Call when the effect absorbs an impact
+|android.widget.EdgeEffect.onPull(float)|A view should call this when content i
+|android.widget.EdgeEffect.onRelease()|Call when the object is released after b
+|android.widget.EdgeEffect.setSize(int,int)|Set the size of this edge effect in
+
+*android.widget.EdgeEffect_Description*
+
+This class performs the graphical effect used at the edges of scrollable 
+widgets when the user scrolls beyond the content bounds in 2D space. 
+
+EdgeEffect is stateful. Custom widgets using EdgeEffect should create an 
+instance for each edge that should show the effect, feed it input data using 
+the methods (|android.widget.EdgeEffect|) , (|android.widget.EdgeEffect|) , and 
+(|android.widget.EdgeEffect|) , and draw the effect using 
+(|android.widget.EdgeEffect|) in the widget's overridden (|android.view.View|) 
+method. If (|android.widget.EdgeEffect|) returns false after drawing, the edge 
+effect's animation is not yet complete and the widget should schedule another 
+drawing pass to continue the animation. 
+
+When drawing, widgets should draw their main content and child views first, 
+usually by invoking super.draw(canvas) from an overridden draw method. (This 
+will invoke onDraw and dispatch drawing to child views as needed.) The edge 
+effect may then be drawn on top of the view's content using the 
+(|android.widget.EdgeEffect|) method. 
+
+
+
+*android.widget.EdgeEffect(Context)*
+
+public EdgeEffect(android.content.Context context)
+
+Construct a new EdgeEffect with a theme appropriate for the provided context. 
+
+    context - Context used to provide theming and resource information for the EdgeEffect 
+
+*android.widget.EdgeEffect.draw(Canvas)*
+
+public boolean draw(Canvas canvas)
+
+Draw into the provided canvas. Assumes that the canvas has been rotated 
+accordingly and the size has been set. The effect will be drawn the full width 
+of X=0 to X=width, beginning from Y=0 and extending to some factor < 1.f of 
+height. 
+
+
+    canvas - Canvas to draw into 
+
+    Returns: true if drawing should continue beyond this frame to continue the animation 
+
+*android.widget.EdgeEffect.finish()*
+
+public void finish()
+
+Immediately finish the current animation. After this call 
+(|android.widget.EdgeEffect|) will return true. 
+
+
+
+*android.widget.EdgeEffect.getBounds(boolean)*
+
+public Rect getBounds(boolean reverse)
+
+Returns the bounds of the edge effect. 
+
+
+
+*android.widget.EdgeEffect.isFinished()*
+
+public boolean isFinished()
+
+Reports if this EdgeEffect's animation is finished. If this method returns 
+false after a call to (|android.widget.EdgeEffect|) the host widget should 
+schedule another drawing pass to continue the animation. 
+
+
+
+    Returns: true if animation is finished, false if drawing should continue on the next 
+             frame. 
+
+*android.widget.EdgeEffect.onAbsorb(int)*
+
+public void onAbsorb(int velocity)
+
+Call when the effect absorbs an impact at the given velocity. Used when a fling 
+reaches the scroll boundary. 
+
+When using a (|android.widget.Scroller|) or (|android.widget.OverScroller|) , 
+the method getCurrVelocity will provide a reasonable approximation to use here. 
+
+
+    velocity - Velocity at impact in pixels per second. 
+
+*android.widget.EdgeEffect.onPull(float)*
+
+public void onPull(float deltaDistance)
+
+A view should call this when content is pulled away from an edge by the user. 
+This will update the state of the current visual effect and its associated 
+animation. The host view should always (|android.view.View|) after this and 
+draw the results accordingly. 
+
+
+    deltaDistance - Change in distance since the last call. Values may be 0 (no change) to 1.f 
+       (full length of the view) or negative values to express change back 
+       toward the edge reached to initiate the effect. 
+
+*android.widget.EdgeEffect.onRelease()*
+
+public void onRelease()
+
+Call when the object is released after being pulled. This will begin the 
+"decay" phase of the effect. After calling this method the host view should 
+(|android.view.View|) and thereby draw the results accordingly. 
+
+
+
+*android.widget.EdgeEffect.setSize(int,int)*
+
+public void setSize(
+  int width,
+  int height)
+
+Set the size of this edge effect in pixels. 
+
+
+    width - Effect width in pixels 
+    height - Effect height in pixels 
+
+

@@ -1,0 +1,118 @@
+*android.view.GestureDetector.OnGestureListener* *GestureDetector.OnGestureListener* 
+
+public static interface interface GestureDetector.OnGestureListener
+
+
+|android.view.GestureDetector.OnGestureListener_Description|
+|android.view.GestureDetector.OnGestureListener_Fields|
+|android.view.GestureDetector.OnGestureListener_Constructors|
+|android.view.GestureDetector.OnGestureListener_Methods|
+
+================================================================================
+
+*android.view.GestureDetector.OnGestureListener_Methods*
+|android.view.GestureDetector.OnGestureListener.onDown(MotionEvent)|Notified wh
+|android.view.GestureDetector.OnGestureListener.onFling(MotionEvent,MotionEvent,float,float)|
+|android.view.GestureDetector.OnGestureListener.onLongPress(MotionEvent)|Notifi
+|android.view.GestureDetector.OnGestureListener.onScroll(MotionEvent,MotionEvent,float,float)|
+|android.view.GestureDetector.OnGestureListener.onShowPress(MotionEvent)|The us
+|android.view.GestureDetector.OnGestureListener.onSingleTapUp(MotionEvent)|Noti
+
+*android.view.GestureDetector.OnGestureListener_Description*
+
+The listener that is used to notify when gestures occur. If you want to listen 
+for all the different gestures then implement this interface. If you only want 
+to listen for a subset it might be easier to extend 
+(|android.view.GestureDetector.SimpleOnGestureListener|) . 
+
+
+
+*android.view.GestureDetector.OnGestureListener.onDown(MotionEvent)*
+
+public boolean onDown(android.view.MotionEvent e)
+
+Notified when a tap occurs with the down (|android.view.MotionEvent|) that 
+triggered it. This will be triggered immediately for every down event. All 
+other events should be preceded by this. 
+
+
+    e - The down motion event. 
+
+*android.view.GestureDetector.OnGestureListener.onFling(MotionEvent,MotionEvent,float,float)*
+
+public boolean onFling(
+  android.view.MotionEvent e1,
+  android.view.MotionEvent e2,
+  float velocityX,
+  float velocityY)
+
+Notified of a fling event when it occurs with the initial on down 
+(|android.view.MotionEvent|) and the matching up (|android.view.MotionEvent|) . 
+The calculated velocity is supplied along the x and y axis in pixels per 
+second. 
+
+
+    e1 - The first down motion event that started the fling. 
+    e2 - The move motion event that triggered the current onFling. 
+    velocityX - The velocity of this fling measured in pixels per second along the x axis. 
+    velocityY - The velocity of this fling measured in pixels per second along the y axis. 
+
+    Returns: true if the event is consumed, else false 
+
+*android.view.GestureDetector.OnGestureListener.onLongPress(MotionEvent)*
+
+public void onLongPress(android.view.MotionEvent e)
+
+Notified when a long press occurs with the initial on down 
+(|android.view.MotionEvent|) that trigged it. 
+
+
+    e - The initial on down motion event that started the longpress. 
+
+*android.view.GestureDetector.OnGestureListener.onScroll(MotionEvent,MotionEvent,float,float)*
+
+public boolean onScroll(
+  android.view.MotionEvent e1,
+  android.view.MotionEvent e2,
+  float distanceX,
+  float distanceY)
+
+Notified when a scroll occurs with the initial on down 
+(|android.view.MotionEvent|) and the current move (|android.view.MotionEvent|) 
+. The distance in x and y is also supplied for convenience. 
+
+
+    e1 - The first down motion event that started the scrolling. 
+    e2 - The move motion event that triggered the current onScroll. 
+    distanceX - The distance along the X axis that has been scrolled since the last call to 
+       onScroll. This is NOT the distance between {@code e1} and {@code e2}. 
+    distanceY - The distance along the Y axis that has been scrolled since the last call to 
+       onScroll. This is NOT the distance between {@code e1} and {@code e2}. 
+
+    Returns: true if the event is consumed, else false 
+
+*android.view.GestureDetector.OnGestureListener.onShowPress(MotionEvent)*
+
+public void onShowPress(android.view.MotionEvent e)
+
+The user has performed a down (|android.view.MotionEvent|) and not performed a 
+move or up yet. This event is commonly used to provide visual feedback to the 
+user to let them know that their action has been recognized i.e. highlight an 
+element. 
+
+
+    e - The down motion event 
+
+*android.view.GestureDetector.OnGestureListener.onSingleTapUp(MotionEvent)*
+
+public boolean onSingleTapUp(android.view.MotionEvent e)
+
+Notified when a tap occurs with the up (|android.view.MotionEvent|) that 
+triggered it. 
+
+
+    e - The up motion event that completed the first tap 
+
+    Returns: true if the event is consumed, else false 
+
+

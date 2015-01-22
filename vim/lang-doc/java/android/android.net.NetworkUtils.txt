@@ -1,0 +1,296 @@
+*android.net.NetworkUtils* *NetworkUtils* Native methods for managing network in
+
+public class NetworkUtils
+  extends    |java.lang.Object|
+
+|android.net.NetworkUtils_Description|
+|android.net.NetworkUtils_Fields|
+|android.net.NetworkUtils_Constructors|
+|android.net.NetworkUtils_Methods|
+
+================================================================================
+
+*android.net.NetworkUtils_Fields*
+|int_android.net.NetworkUtils.RESET_ALL_ADDRESSES|
+|int_android.net.NetworkUtils.RESET_IPV4_ADDRESSES|
+|int_android.net.NetworkUtils.RESET_IPV6_ADDRESSES|
+
+*android.net.NetworkUtils_Constructors*
+|android.net.NetworkUtils()|
+
+*android.net.NetworkUtils_Methods*
+|android.net.NetworkUtils.addressTypeMatches(InetAddress,InetAddress)|Check if 
+|android.net.NetworkUtils.disableInterface(String)|Bring the named network inte
+|android.net.NetworkUtils.enableInterface(String)|Bring the named network inter
+|android.net.NetworkUtils.getDhcpError()|Return the last DHCP-related error mes
+|android.net.NetworkUtils.getNetworkPart(InetAddress,int)|Get InetAddress maske
+|android.net.NetworkUtils.hexToInet6Address(String)|Convert a 32 char hex strin
+|android.net.NetworkUtils.inetAddressToInt(Inet4Address)|Convert a IPv4 address
+|android.net.NetworkUtils.intToInetAddress(int)|Convert a IPv4 address from an 
+|android.net.NetworkUtils.makeStrings(Collection<InetAddress>)|Create a string 
+|android.net.NetworkUtils.markSocket(int,int)|Set the SO_MARK ofsocketfdtomark
+|android.net.NetworkUtils.netmaskIntToPrefixLength(int)|Convert a IPv4 netmask 
+|android.net.NetworkUtils.numericToInetAddress(String)|Create an InetAddress fr
+|android.net.NetworkUtils.prefixLengthToNetmaskInt(int)|Convert a network prefi
+|android.net.NetworkUtils.releaseDhcpLease(String)|Release the current DHCP lea
+|android.net.NetworkUtils.resetConnections(String,int)|Reset IPv6 or IPv4 socke
+|android.net.NetworkUtils.runDhcp(String,DhcpResults)|Start the DHCP client dae
+|android.net.NetworkUtils.runDhcpRenew(String,DhcpResults)|Initiate renewal on 
+|android.net.NetworkUtils.stopDhcp(String)|Shut down the DHCP client daemon.
+|android.net.NetworkUtils.trimV4AddrZeros(String)|Trim leading zeros from IPv4 
+
+*android.net.NetworkUtils_Description*
+
+Native methods for managing network interfaces. 
+
+
+
+*int_android.net.NetworkUtils.RESET_ALL_ADDRESSES*
+
+Reset all addresses 
+
+
+*int_android.net.NetworkUtils.RESET_IPV4_ADDRESSES*
+
+Setting bit 0 indicates reseting of IPv4 addresses required 
+
+
+*int_android.net.NetworkUtils.RESET_IPV6_ADDRESSES*
+
+Setting bit 1 indicates reseting of IPv4 addresses required 
+
+
+
+*android.net.NetworkUtils()*
+
+public NetworkUtils()
+
+
+
+
+*android.net.NetworkUtils.addressTypeMatches(InetAddress,InetAddress)*
+
+public static boolean addressTypeMatches(
+  java.net.InetAddress left,
+  java.net.InetAddress right)
+
+Check if IP address type is consistent between two InetAddress. 
+
+
+
+    Returns: true if both are the same type. False otherwise. 
+
+*android.net.NetworkUtils.disableInterface(String)*
+
+public static native int disableInterface(java.lang.String interfaceName)
+
+Bring the named network interface down. 
+
+
+
+*android.net.NetworkUtils.enableInterface(String)*
+
+public static native int enableInterface(java.lang.String interfaceName)
+
+Bring the named network interface up. 
+
+
+
+*android.net.NetworkUtils.getDhcpError()*
+
+public static native |java.lang.String| getDhcpError()
+
+Return the last DHCP-related error message that was recorded. NOTE: This string 
+is not localized, but currently it is only used in logging. 
+
+
+
+    Returns: the most recent error message, if any 
+
+*android.net.NetworkUtils.getNetworkPart(InetAddress,int)*
+
+public static |java.net.InetAddress| getNetworkPart(
+  java.net.InetAddress address,
+  int prefixLength)
+
+Get InetAddress masked with prefixLength. Will never return null. 
+
+
+    IP - address which will be masked with specified prefixLength 
+    prefixLength - the prefixLength used to mask the IP 
+
+*android.net.NetworkUtils.hexToInet6Address(String)*
+
+public static |java.net.InetAddress| hexToInet6Address(java.lang.String addrHexString)
+  throws |java.lang.IllegalArgumentException|
+         
+Convert a 32 char hex string into a Inet6Address. throws a runtime exception if 
+the string isn't 32 chars, isn't hex or can't be made into an Inet6Address 
+
+
+    addrHexString - a 32 character hex string representing an IPv6 addr 
+
+    Returns: addr an InetAddress representation for the string 
+
+*android.net.NetworkUtils.inetAddressToInt(Inet4Address)*
+
+public static int inetAddressToInt(java.net.Inet4Address inetAddr)
+  throws |java.lang.IllegalArgumentException|
+         
+Convert a IPv4 address from an InetAddress to an integer 
+
+
+    inetAddr - is an InetAddress corresponding to the IPv4 address 
+
+    Returns: the IP address as an integer in network byte order 
+
+*android.net.NetworkUtils.intToInetAddress(int)*
+
+public static |java.net.InetAddress| intToInetAddress(int hostAddress)
+
+Convert a IPv4 address from an integer to an InetAddress. 
+
+
+    hostAddress - an int corresponding to the IPv4 address in network byte order 
+
+*android.net.NetworkUtils.makeStrings(Collection<InetAddress>)*
+
+public static |java.lang.String|[] makeStrings(java.util.Collection<java.net.InetAddress> addrs)
+
+Create a string array of host addresses from a collection of InetAddresses 
+
+
+    addrs - a Collection of InetAddresses 
+
+    Returns: an array of Strings containing their host addresses 
+
+*android.net.NetworkUtils.markSocket(int,int)*
+
+public static native void markSocket(
+  int socketfd,
+  int mark)
+
+Set the SO_MARK ofsocketfdtomark 
+
+
+
+*android.net.NetworkUtils.netmaskIntToPrefixLength(int)*
+
+public static int netmaskIntToPrefixLength(int netmask)
+
+Convert a IPv4 netmask integer to a prefix length 
+
+
+    netmask - as an integer in network byte order 
+
+    Returns: the network prefix length 
+
+*android.net.NetworkUtils.numericToInetAddress(String)*
+
+public static |java.net.InetAddress| numericToInetAddress(java.lang.String addrString)
+  throws |java.lang.IllegalArgumentException|
+         
+Create an InetAddress from a string where the string must be a standard 
+representation of a V4 or V6 address. Avoids doing a DNS lookup on failure but 
+it will throw an IllegalArgumentException in that case. 
+
+
+    addrString - 
+
+    Returns: the InetAddress 
+
+*android.net.NetworkUtils.prefixLengthToNetmaskInt(int)*
+
+public static int prefixLengthToNetmaskInt(int prefixLength)
+  throws |java.lang.IllegalArgumentException|
+         
+Convert a network prefix length to an IPv4 netmask integer 
+
+
+    prefixLength - 
+
+    Returns: the IPv4 netmask as an integer in network byte order 
+
+*android.net.NetworkUtils.releaseDhcpLease(String)*
+
+public static native boolean releaseDhcpLease(java.lang.String interfaceName)
+
+Release the current DHCP lease. 
+
+
+    interfaceName - the name of the interface for which the lease should be released 
+
+    Returns: {@code true} for success, {@code false} for failure 
+
+*android.net.NetworkUtils.resetConnections(String,int)*
+
+public static native int resetConnections(
+  java.lang.String interfaceName,
+  int mask)
+
+Reset IPv6 or IPv4 sockets that are connected via the named interface. 
+
+
+    interfaceName - is the interface to reset 
+    mask - {@see #RESET_IPV4_ADDRESSES} and {@see #RESET_IPV6_ADDRESSES} 
+
+*android.net.NetworkUtils.runDhcp(String,DhcpResults)*
+
+public static native boolean runDhcp(
+  java.lang.String interfaceName,
+  android.net.DhcpResults dhcpResults)
+
+Start the DHCP client daemon, in order to have it request addresses for the 
+named interface, and then configure the interface with those addresses. This 
+call blocks until it obtains a result (either success or failure) from the 
+daemon. 
+
+
+    interfaceName - the name of the interface to configure 
+    dhcpResults - if the request succeeds, this object is filled in with the IP address 
+       information. 
+
+    Returns: {@code true} for success, {@code false} for failure 
+
+*android.net.NetworkUtils.runDhcpRenew(String,DhcpResults)*
+
+public static native boolean runDhcpRenew(
+  java.lang.String interfaceName,
+  android.net.DhcpResults dhcpResults)
+
+Initiate renewal on the Dhcp client daemon. This call blocks until it obtains a 
+result (either success or failure) from the daemon. 
+
+
+    interfaceName - the name of the interface to configure 
+    dhcpResults - if the request succeeds, this object is filled in with the IP address 
+       information. 
+
+    Returns: {@code true} for success, {@code false} for failure 
+
+*android.net.NetworkUtils.stopDhcp(String)*
+
+public static native boolean stopDhcp(java.lang.String interfaceName)
+
+Shut down the DHCP client daemon. 
+
+
+    interfaceName - the name of the interface for which the daemon should be stopped 
+
+    Returns: {@code true} for success, {@code false} for failure 
+
+*android.net.NetworkUtils.trimV4AddrZeros(String)*
+
+public static |java.lang.String| trimV4AddrZeros(java.lang.String addr)
+
+Trim leading zeros from IPv4 address strings Our base libraries will interpret 
+that as octel.. Must leave non v4 addresses and host names alone. For example, 
+192.168.000.010 -> 192.168.0.10 TODO - fix base libraries and remove this 
+function 
+
+
+    addr - a string representing an ip addr 
+
+    Returns: a string propertly trimmed 
+
+

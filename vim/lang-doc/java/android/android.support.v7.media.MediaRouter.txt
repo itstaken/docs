@@ -1,0 +1,390 @@
+*android.support.v7.media.MediaRouter* *MediaRouter* MediaRouter allows applicat
+
+public final class MediaRouter
+  extends    |java.lang.Object|
+
+|android.support.v7.media.MediaRouter_Description|
+|android.support.v7.media.MediaRouter_Fields|
+|android.support.v7.media.MediaRouter_Constructors|
+|android.support.v7.media.MediaRouter_Methods|
+
+================================================================================
+
+*android.support.v7.media.MediaRouter_Fields*
+|int_android.support.v7.media.MediaRouter.AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE|
+|int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN|
+|int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY|
+|int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_UNFILTERED_EVENTS|
+
+*android.support.v7.media.MediaRouter_Methods*
+|android.support.v7.media.MediaRouter.addCallback(MediaRouteSelector,MediaRouter.Callback)|
+|android.support.v7.media.MediaRouter.addCallback(MediaRouteSelector,MediaRouter.Callback,int)|
+|android.support.v7.media.MediaRouter.addProvider(MediaRouteProvider)|Registers
+|android.support.v7.media.MediaRouter.addRemoteControlClient(Object)|Adds a rem
+|android.support.v7.media.MediaRouter.getDefaultRoute()|Gets the default route 
+|android.support.v7.media.MediaRouter.getInstance(Context)|Gets an instance of 
+|android.support.v7.media.MediaRouter.getProviders()|Gets information about the
+|android.support.v7.media.MediaRouter.getRoutes()|Gets information about theMed
+|android.support.v7.media.MediaRouter.getSelectedRoute()|Gets the currently sel
+|android.support.v7.media.MediaRouter.isRouteAvailable(MediaRouteSelector,int)|
+|android.support.v7.media.MediaRouter.removeCallback(MediaRouter.Callback)|Remo
+|android.support.v7.media.MediaRouter.removeProvider(MediaRouteProvider)|Unregi
+|android.support.v7.media.MediaRouter.removeRemoteControlClient(Object)|Removes
+|android.support.v7.media.MediaRouter.selectRoute(MediaRouter.RouteInfo)|Select
+|android.support.v7.media.MediaRouter.updateSelectedRoute(MediaRouteSelector)|R
+
+*android.support.v7.media.MediaRouter_Description*
+
+MediaRouter allows applications to control the routing of media channels and 
+streams from the current device to external speakers and destination devices. 
+
+A MediaRouter instance is retrieved through 
+(|android.support.v7.media.MediaRouter|) . Applications can query the media 
+router about the currently selected route and its capabilities to determine how 
+to send content to the route's destination. Applications can also send control 
+requests(|android.support.v7.media.MediaRouter.RouteInfo|) to the route to ask 
+the route's destination to perform certain remote control functions such as 
+playing media. 
+
+See also (|android.support.v7.media.MediaRouteProvider|) for information on how 
+an application can publish new media routes to the media router. 
+
+The media router API is not thread-safe; all interactions with it must be done 
+from the main thread of the process. 
+
+
+
+*int_android.support.v7.media.MediaRouter.AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE*
+
+Flag for (|android.support.v7.media.MediaRouter|) : Ignore the default route. 
+
+This flag is used to determine whether a matching non-default route is 
+available. This constraint may be used to decide whether to offer the route 
+chooser dialog to the user. There is no point offering the chooser if there are 
+no non-default choices. 
+
+
+*int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN*
+
+Flag for (|android.support.v7.media.MediaRouter|) : Actively scan for routes 
+while this callback is registered. 
+
+When this flag is specified, the media router will actively scan for new 
+routes. Certain routes, such as wifi display routes, may not be discoverable 
+except when actively scanning. This flag is typically used when the route 
+picker dialog has been opened by the user to ensure that the route information 
+is up to date. 
+
+Active scanning may consume a significant amount of power and may have 
+intrusive effects on wireless connectivity. Therefore it is important that 
+active scanning only be requested when it is actually needed to satisfy a user 
+request to discover and select a new route. 
+
+This flag implies (|android.support.v7.media.MediaRouter|) but performing 
+active scans is much more expensive than a normal discovery request. 
+
+
+*int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY*
+
+Flag for (|android.support.v7.media.MediaRouter|) : Request that route 
+discovery be performed while this callback is registered. 
+
+When this flag is specified, the media router will try to discover routes. 
+Although route discovery is intended to be efficient, checking for new routes 
+may result in some network activity and could slowly drain the battery. 
+Therefore applications should only specify 
+(|android.support.v7.media.MediaRouter|) when they are running in the 
+foreground and would like to provide the user with the option of connecting to 
+new routes. 
+
+Applications should typically add a callback using this flag in the 
+activity's(|android.app.Activity|) onStart(|android.app.Activity|) method and 
+remove it in the onStop(|android.app.Activity|) method. The 
+(|android.support.v7.app.MediaRouteDiscoveryFragment|) fragment may also be 
+used for this purpose. 
+
+
+*int_android.support.v7.media.MediaRouter.CALLBACK_FLAG_UNFILTERED_EVENTS*
+
+Flag for (|android.support.v7.media.MediaRouter|) : Do not filter route events. 
+
+When this flag is specified, the callback will be invoked for events that 
+affect any route even if they do not match the callback's filter. 
+
+
+
+*android.support.v7.media.MediaRouter.addCallback(MediaRouteSelector,MediaRouter.Callback)*
+
+public void addCallback(
+  android.support.v7.media.MediaRouteSelector selector,
+  android.support.v7.media.MediaRouter.Callback callback)
+
+Registers a callback to discover routes that match the selector and to receive 
+events when they change. 
+
+This is a convenience method that has the same effect as calling 
+(|android.support.v7.media.MediaRouter|) without flags. 
+
+
+    selector - A route selector that indicates the kinds of routes that the callback would 
+       like to discover. 
+    callback - The callback to add. 
+
+*android.support.v7.media.MediaRouter.addCallback(MediaRouteSelector,MediaRouter.Callback,int)*
+
+public void addCallback(
+  android.support.v7.media.MediaRouteSelector selector,
+  android.support.v7.media.MediaRouter.Callback callback,
+  int flags)
+
+Registers a callback to discover routes that match the selector and to receive 
+events when they change. 
+
+The selector describes the kinds of routes that the application wants to 
+discover. For example, if the application wants to use live audio routes then 
+it should include the live audio media control intent 
+category(|android.support.v7.media.MediaControlIntent|) in its selector when it 
+adds a callback to the media router. The selector may include any number of 
+categories. 
+
+If the callback has already been registered, then the selector is added to the 
+set of selectors being monitored by the callback. 
+
+By default, the callback will only be invoked for events that affect routes 
+that match the specified selector. Event filtering may be disabled by 
+specifying the (|android.support.v7.media.MediaRouter|) flag when the callback 
+is registered. 
+
+Example 
+
+public class MyActivity extends Activity { private MediaRouter mRouter; private 
+MediaRouter.Callback mCallback; private MediaRouteSelector mSelector; 
+
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+
+mRouter = Mediarouter.getInstance(this); mCallback = new MyCallback(); 
+mSelector = new MediaRouteSelector.Builder() 
+.addControlCategory(MediaControlIntent.CATEGORY_LIVE_AUDIO) 
+.addControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK) .build(); } 
+
+// Add the callback on start to tell the media router what kinds of routes // 
+the application is interested in so that it can try to discover suitable ones. 
+public void onStart() { super.onStart(); 
+
+mediaRouter.addCallback(mSelector, mCallback, 
+MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY); 
+
+MediaRouter.RouteInfo route = mediaRouter.updateSelectedRoute(mSelector); // do 
+something with the route... } 
+
+// Remove the selector on stop to tell the media router that it no longer // 
+needs to invest effort trying to discover routes of these kinds for now. public 
+void onStop() { super.onStop(); 
+
+mediaRouter.removeCallback(mCallback); } 
+
+private final class MyCallback extends MediaRouter.Callback { // Implement 
+callback methods as needed. } } 
+
+
+    selector - A route selector that indicates the kinds of routes that the callback would 
+       like to discover. 
+    callback - The callback to add. 
+    flags - Flags to control the behavior of the callback. May be zero or a combination of 
+       {@link #CALLBACK_FLAG_PERFORM_ACTIVE_SCAN} and {@link 
+       #CALLBACK_FLAG_UNFILTERED_EVENTS}. 
+
+*android.support.v7.media.MediaRouter.addProvider(MediaRouteProvider)*
+
+public void addProvider(android.support.v7.media.MediaRouteProvider providerInstance)
+
+Registers a media route provider within this application process. 
+
+The provider will be added to the list of providers that all 
+(|android.support.v7.media.MediaRouter|) instances within this process can use 
+to discover routes. 
+
+
+    providerInstance - The media route provider instance to add. 
+
+*android.support.v7.media.MediaRouter.addRemoteControlClient(Object)*
+
+public void addRemoteControlClient(java.lang.Object remoteControlClient)
+
+Adds a remote control client to enable remote control of the volume of the 
+selected route. 
+
+The remote control client must have previously been registered with the audio 
+manager using the 
+AudioManager.registerRemoteControlClient(|android.media.AudioManager|) method. 
+
+
+    remoteControlClient - The {@link android.media.RemoteControlClient} to register. 
+
+*android.support.v7.media.MediaRouter.getDefaultRoute()*
+
+public |android.support.v7.media.MediaRouter.RouteInfo| getDefaultRoute()
+
+Gets the default route for playing media content on the system. 
+
+The system always provides a default route. 
+
+
+
+    Returns: The default route, which is guaranteed to never be null. 
+
+*android.support.v7.media.MediaRouter.getInstance(Context)*
+
+public static |android.support.v7.media.MediaRouter| getInstance(Context context)
+
+Gets an instance of the media router service associated with the context. 
+
+The application is responsible for holding a strong reference to the returned 
+(|android.support.v7.media.MediaRouter|) instance, such as by storing the 
+instance in a field of the (|android.app.Activity|) , to ensure that the media 
+router remains alive as long as the application is using its features. 
+
+In other words, the support library only holds a weak 
+reference(|java.lang.ref.WeakReference|) to each media router instance. When 
+there are no remaining strong references to the media router instance, all of 
+its callbacks will be removed and route discovery will no longer be performed 
+on its behalf. 
+
+
+
+    Returns: The media router instance for the context. The application must hold a strong 
+             reference to this object as long as it is in use. 
+
+*android.support.v7.media.MediaRouter.getProviders()*
+
+public |java.util.List|<ProviderInfo> getProviders()
+
+Gets information about the route 
+providers(|android.support.v7.media.MediaRouter.ProviderInfo|) currently known 
+to this media router. 
+
+
+
+*android.support.v7.media.MediaRouter.getRoutes()*
+
+public |java.util.List|<RouteInfo> getRoutes()
+
+Gets information about the 
+routes(|android.support.v7.media.MediaRouter.RouteInfo|) currently known to 
+this media router. 
+
+
+
+*android.support.v7.media.MediaRouter.getSelectedRoute()*
+
+public |android.support.v7.media.MediaRouter.RouteInfo| getSelectedRoute()
+
+Gets the currently selected route. 
+
+The application should examine the route's media control intent 
+filters(|android.support.v7.media.MediaRouter.RouteInfo|) to assess the 
+capabilities of the route before attempting to use it. 
+
+Example 
+
+public boolean playMovie() { MediaRouter mediaRouter = 
+MediaRouter.getInstance(context); MediaRouter.RouteInfo route = 
+mediaRouter.getSelectedRoute(); 
+
+// First try using the remote playback interface, if supported. if 
+(route.supportsControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK)) { 
+// The route supports remote playback. // Try to send it the Uri of the movie 
+to play. Intent intent = new Intent(MediaControlIntent.ACTION_PLAY); 
+intent.addCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK); 
+intent.setDataAndType("http://example.com/videos/movie.mp4", "video/mp4"); if 
+(route.supportsControlRequest(intent)) { route.sendControlRequest(intent, 
+null); return true; // sent the request to play the movie } } 
+
+// If remote playback was not possible, then play locally. if 
+(route.supportsControlCategory(MediaControlIntent.CATEGORY_LIVE_VIDEO)) { // 
+The route supports live video streaming. // Prepare to play content locally in 
+a window or in a presentation. return playMovieInWindow(); } 
+
+// Neither interface is supported, so we can't play the movie to this route. 
+return false; } 
+
+
+
+    Returns: The selected route, which is guaranteed to never be null. 
+
+*android.support.v7.media.MediaRouter.isRouteAvailable(MediaRouteSelector,int)*
+
+public boolean isRouteAvailable(
+  android.support.v7.media.MediaRouteSelector selector,
+  int flags)
+
+Returns true if there is a route that matches the specified selector. 
+
+This method returns true if there are any available routes that match the 
+selector regardless of whether they are enabled or disabled. If the 
+(|android.support.v7.media.MediaRouter|) flag is specified, then the method 
+will only consider non-default routes. 
+
+
+    selector - The selector to match. 
+    flags - Flags to control the determination of whether a route may be available. May be 
+       zero or {@link #AVAILABILITY_FLAG_IGNORE_DEFAULT_ROUTE}. 
+
+    Returns: True if a matching route may be available. 
+
+*android.support.v7.media.MediaRouter.removeCallback(MediaRouter.Callback)*
+
+public void removeCallback(android.support.v7.media.MediaRouter.Callback callback)
+
+Removes the specified callback. It will no longer receive events about changes 
+to media routes. 
+
+
+    callback - The callback to remove. 
+
+*android.support.v7.media.MediaRouter.removeProvider(MediaRouteProvider)*
+
+public void removeProvider(android.support.v7.media.MediaRouteProvider providerInstance)
+
+Unregisters a media route provider within this application process. 
+
+The provider will be removed from the list of providers that all 
+(|android.support.v7.media.MediaRouter|) instances within this process can use 
+to discover routes. 
+
+
+    providerInstance - The media route provider instance to remove. 
+
+*android.support.v7.media.MediaRouter.removeRemoteControlClient(Object)*
+
+public void removeRemoteControlClient(java.lang.Object remoteControlClient)
+
+Removes a remote control client. 
+
+
+    remoteControlClient - The {@link android.media.RemoteControlClient} to register. 
+
+*android.support.v7.media.MediaRouter.selectRoute(MediaRouter.RouteInfo)*
+
+public void selectRoute(android.support.v7.media.MediaRouter.RouteInfo route)
+
+Selects the specified route. 
+
+
+    route - The route to select. 
+
+*android.support.v7.media.MediaRouter.updateSelectedRoute(MediaRouteSelector)*
+
+public |android.support.v7.media.MediaRouter.RouteInfo| updateSelectedRoute(android.support.v7.media.MediaRouteSelector selector)
+
+Returns the selected route if it matches the specified selector, otherwise 
+selects the default route and returns it. 
+
+
+    selector - The selector to match. 
+
+    Returns: The previously selected route if it matched the selector, otherwise the newly 
+             selected default route which is guaranteed to never be null. 
+
+

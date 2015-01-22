@@ -1,0 +1,151 @@
+*android.view.GestureDetector* *GestureDetector* Detects various gestures and ev
+
+public class GestureDetector
+  extends    |java.lang.Object|
+
+|android.view.GestureDetector_Description|
+|android.view.GestureDetector_Fields|
+|android.view.GestureDetector_Constructors|
+|android.view.GestureDetector_Methods|
+
+================================================================================
+
+*android.view.GestureDetector_Constructors*
+|android.view.GestureDetector(Context,GestureDetector.OnGestureListener)|Create
+|android.view.GestureDetector(Context,GestureDetector.OnGestureListener,Handler)|
+|android.view.GestureDetector(Context,GestureDetector.OnGestureListener,Handler,boolean)|
+|android.view.GestureDetector(GestureDetector.OnGestureListener)|Creates a Gest
+|android.view.GestureDetector(GestureDetector.OnGestureListener,Handler)|Create
+
+*android.view.GestureDetector_Methods*
+|android.view.GestureDetector.isLongpressEnabled()|
+|android.view.GestureDetector.onTouchEvent(MotionEvent)|Analyzes the given moti
+|android.view.GestureDetector.setIsLongpressEnabled(boolean)|Set whether longpr
+|android.view.GestureDetector.setOnDoubleTapListener(GestureDetector.OnDoubleTapListener)|
+
+*android.view.GestureDetector_Description*
+
+Detects various gestures and events using the supplied 
+(|android.view.MotionEvent|) s. The 
+(|android.view.GestureDetector.OnGestureListener|) callback will notify users 
+when a particular motion event has occurred. This class should only be used 
+with (|android.view.MotionEvent|) s reported via touch (don't use for trackball 
+events). 
+
+To use this class: 
+
+Create an instance of theGestureDetectorfor your (|android.view.View|) In the 
+(|android.view.View|) method ensure you call (|android.view.GestureDetector|) . 
+The methods defined in your callback will be executed when the events occur. 
+
+
+
+*android.view.GestureDetector(Context,GestureDetector.OnGestureListener)*
+
+public GestureDetector(
+  android.content.Context context,
+  android.view.GestureDetector.OnGestureListener listener)
+
+Creates a GestureDetector with the supplied listener. You may only use this 
+constructor from a (|android.os.Looper|) thread. 
+
+    context - the application's context 
+    listener - the listener invoked for all the callbacks, this must not be null. 
+
+*android.view.GestureDetector(Context,GestureDetector.OnGestureListener,Handler)*
+
+public GestureDetector(
+  android.content.Context context,
+  android.view.GestureDetector.OnGestureListener listener,
+  android.os.Handler handler)
+
+Creates a GestureDetector with the supplied listener that runs deferred events 
+on the thread associated with the supplied (|android.os.Handler|) . 
+
+    context - the application's context 
+    listener - the listener invoked for all the callbacks, this must not be null. 
+    handler - the handler to use for running deferred listener events. 
+
+*android.view.GestureDetector(Context,GestureDetector.OnGestureListener,Handler,boolean)*
+
+public GestureDetector(
+  android.content.Context context,
+  android.view.GestureDetector.OnGestureListener listener,
+  android.os.Handler handler,
+  boolean unused)
+
+Creates a GestureDetector with the supplied listener that runs deferred events 
+on the thread associated with the supplied (|android.os.Handler|) . 
+
+    context - the application's context 
+    listener - the listener invoked for all the callbacks, this must not be null. 
+    handler - the handler to use for running deferred listener events. 
+    unused - currently not used. 
+
+*android.view.GestureDetector(GestureDetector.OnGestureListener)*
+
+public GestureDetector(android.view.GestureDetector.OnGestureListener listener)
+
+Creates a GestureDetector with the supplied listener. You may only use this 
+constructor from a UI thread (this is the usual situation). 
+
+    listener - the listener invoked for all the callbacks, this must not be null. 
+
+*android.view.GestureDetector(GestureDetector.OnGestureListener,Handler)*
+
+public GestureDetector(
+  android.view.GestureDetector.OnGestureListener listener,
+  android.os.Handler handler)
+
+Creates a GestureDetector with the supplied listener. This variant of the 
+constructor should be used from a non-UI thread (as it allows specifying the 
+Handler). 
+
+    listener - the listener invoked for all the callbacks, this must not be null. 
+    handler - the handler to use 
+
+*android.view.GestureDetector.isLongpressEnabled()*
+
+public boolean isLongpressEnabled()
+
+
+
+
+
+    Returns: true if longpress is enabled, else false. 
+
+*android.view.GestureDetector.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent ev)
+
+Analyzes the given motion event and if applicable triggers the appropriate 
+callbacks on the (|android.view.GestureDetector.OnGestureListener|) supplied. 
+
+
+    ev - The current motion event. 
+
+    Returns: true if the {@link OnGestureListener} consumed the event, else false. 
+
+*android.view.GestureDetector.setIsLongpressEnabled(boolean)*
+
+public void setIsLongpressEnabled(boolean isLongpressEnabled)
+
+Set whether longpress is enabled, if this is enabled when a user presses and 
+holds down you get a longpress event and nothing further. If it's disabled the 
+user can press and hold down and then later moved their finger and you will get 
+scroll events. By default longpress is enabled. 
+
+
+    isLongpressEnabled - whether longpress should be enabled. 
+
+*android.view.GestureDetector.setOnDoubleTapListener(GestureDetector.OnDoubleTapListener)*
+
+public void setOnDoubleTapListener(android.view.GestureDetector.OnDoubleTapListener onDoubleTapListener)
+
+Sets the listener which will be called for double-tap and related gestures. 
+
+
+    onDoubleTapListener - the listener invoked for all the callbacks, or null to stop listening for 
+       double-tap gestures. 
+
+

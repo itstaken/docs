@@ -1,0 +1,174 @@
+*android.test.AndroidTestCase* *AndroidTestCase* Extend this if you need to acce
+
+public class AndroidTestCase
+  extends    |TestCase|
+
+|android.test.AndroidTestCase_Description|
+|android.test.AndroidTestCase_Fields|
+|android.test.AndroidTestCase_Constructors|
+|android.test.AndroidTestCase_Methods|
+
+================================================================================
+
+*android.test.AndroidTestCase_Fields*
+|android.content.Context_android.test.AndroidTestCase.mContext|
+
+*android.test.AndroidTestCase_Constructors*
+|android.test.AndroidTestCase()|
+
+*android.test.AndroidTestCase_Methods*
+|android.test.AndroidTestCase.assertActivityRequiresPermission(String,String,String)|
+|android.test.AndroidTestCase.assertReadingContentUriRequiresPermission(Uri,String)|
+|android.test.AndroidTestCase.assertWritingContentUriRequiresPermission(Uri,String)|
+|android.test.AndroidTestCase.getContext()|
+|android.test.AndroidTestCase.getTestContext()|
+|android.test.AndroidTestCase.scrubClass(Class<?>)|This function is called by v
+|android.test.AndroidTestCase.setContext(Context)|
+|android.test.AndroidTestCase.setTestContext(Context)|Test context can be used 
+|android.test.AndroidTestCase.setUp()|
+|android.test.AndroidTestCase.tearDown()|
+|android.test.AndroidTestCase.testAndroidTestCaseSetupProperly()|
+
+*android.test.AndroidTestCase_Description*
+
+Extend this if you need to access Resources or other things that depend on 
+Activity Context. 
+
+
+
+*android.content.Context_android.test.AndroidTestCase.mContext*
+
+
+
+
+
+*android.test.AndroidTestCase()*
+
+public AndroidTestCase()
+
+
+
+
+*android.test.AndroidTestCase.assertActivityRequiresPermission(String,String,String)*
+
+public void assertActivityRequiresPermission(
+  java.lang.String packageName,
+  java.lang.String className,
+  java.lang.String permission)
+
+Asserts that launching a given activity is protected by a particular permission 
+by attempting to start the activity and validating that a 
+(|java.lang.SecurityException|) is thrown that mentions the permission in its 
+error message. 
+
+Note that an instrumentation isn't needed because all we are looking for is a 
+security error and we don't need to wait for the activity to launch and get a 
+handle to the activity. 
+
+
+    packageName - The package name of the activity to launch. 
+    className - The class of the activity to launch. 
+    permission - The name of the permission. 
+
+*android.test.AndroidTestCase.assertReadingContentUriRequiresPermission(Uri,String)*
+
+public void assertReadingContentUriRequiresPermission(
+  android.net.Uri uri,
+  java.lang.String permission)
+
+Asserts that reading from the content uri requires a particular permission by 
+querying the uri and ensuring a (|java.lang.SecurityException|) is thrown 
+mentioning the particular permission. 
+
+
+    uri - The uri that requires a permission to query. 
+    permission - The permission that should be required. 
+
+*android.test.AndroidTestCase.assertWritingContentUriRequiresPermission(Uri,String)*
+
+public void assertWritingContentUriRequiresPermission(
+  android.net.Uri uri,
+  java.lang.String permission)
+
+Asserts that writing to the content uri requires a particular permission by 
+inserting into the uri and ensuring a (|java.lang.SecurityException|) is thrown 
+mentioning the particular permission. 
+
+
+    uri - The uri that requires a permission to query. 
+    permission - The permission that should be required. 
+
+*android.test.AndroidTestCase.getContext()*
+
+public |android.content.Context| getContext()
+
+
+
+
+
+*android.test.AndroidTestCase.getTestContext()*
+
+public |android.content.Context| getTestContext()
+
+
+
+
+
+*android.test.AndroidTestCase.scrubClass(Class<?>)*
+
+protected void scrubClass(java.lang.Class<?> testCaseClass)
+  throws |java.lang.IllegalAccessException|
+         
+This function is called by various TestCase implementations, at tearDown() 
+time, in order to scrub out any class variables. This protects against memory 
+leaks in the case where a test case creates a non-static inner class (thus 
+referencing the test case) and gives it to someone else to hold onto. 
+
+
+    testCaseClass - The class of the derived TestCase implementation. 
+
+*android.test.AndroidTestCase.setContext(Context)*
+
+public void setContext(android.content.Context context)
+
+
+
+
+
+*android.test.AndroidTestCase.setTestContext(Context)*
+
+public void setTestContext(android.content.Context context)
+
+Test context can be used to access resources from the test's own package as 
+opposed to the resources from the test target package. Access to the latter is 
+provided by the context set with the (|android.test.AndroidTestCase|) method. 
+
+
+
+*android.test.AndroidTestCase.setUp()*
+
+protected void setUp()
+  throws |java.lang.Exception|
+         
+
+
+
+
+*android.test.AndroidTestCase.tearDown()*
+
+protected void tearDown()
+  throws |java.lang.Exception|
+         
+
+
+
+
+*android.test.AndroidTestCase.testAndroidTestCaseSetupProperly()*
+
+public void testAndroidTestCaseSetupProperly()
+
+
+
+
+
+

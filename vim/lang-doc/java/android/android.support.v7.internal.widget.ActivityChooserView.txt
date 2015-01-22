@@ -1,0 +1,242 @@
+*android.support.v7.internal.widget.ActivityChooserView* *ActivityChooserView* T
+
+public class ActivityChooserView
+  extends    |ViewGroup|
+  implements |android.support.v7.internal.widget.ActivityChooserModel.ActivityChooserModelClient|
+
+|android.support.v7.internal.widget.ActivityChooserView_Description|
+|android.support.v7.internal.widget.ActivityChooserView_Fields|
+|android.support.v7.internal.widget.ActivityChooserView_Constructors|
+|android.support.v7.internal.widget.ActivityChooserView_Methods|
+
+================================================================================
+
+*android.support.v7.internal.widget.ActivityChooserView_Constructors*
+|android.support.v7.internal.widget.ActivityChooserView(Context)|Create a new i
+|android.support.v7.internal.widget.ActivityChooserView(Context,AttributeSet)|C
+|android.support.v7.internal.widget.ActivityChooserView(Context,AttributeSet,int)|
+
+*android.support.v7.internal.widget.ActivityChooserView_Methods*
+|android.support.v7.internal.widget.ActivityChooserView.dismissPopup()|Dismisse
+|android.support.v7.internal.widget.ActivityChooserView.getDataModel()|
+|android.support.v7.internal.widget.ActivityChooserView.isShowingPopup()|Gets w
+|android.support.v7.internal.widget.ActivityChooserView.onAttachedToWindow()|
+|android.support.v7.internal.widget.ActivityChooserView.onDetachedFromWindow()|
+|android.support.v7.internal.widget.ActivityChooserView.onLayout(boolean,int,int,int,int)|
+|android.support.v7.internal.widget.ActivityChooserView.onMeasure(int,int)|
+|android.support.v7.internal.widget.ActivityChooserView.setActivityChooserModel(ActivityChooserModel)|
+|android.support.v7.internal.widget.ActivityChooserView.setDefaultActionButtonContentDescription(int)|
+|android.support.v7.internal.widget.ActivityChooserView.setExpandActivityOverflowButtonContentDescription(int)|
+|android.support.v7.internal.widget.ActivityChooserView.setExpandActivityOverflowButtonDrawable(Drawable)|
+|android.support.v7.internal.widget.ActivityChooserView.setInitialActivityCount(int)|
+|android.support.v7.internal.widget.ActivityChooserView.setOnDismissListener(PopupWindow.OnDismissListener)|
+|android.support.v7.internal.widget.ActivityChooserView.setProvider(ActionProvider)|
+|android.support.v7.internal.widget.ActivityChooserView.showPopup()|Shows the p
+
+*android.support.v7.internal.widget.ActivityChooserView_Description*
+
+This class is a view for choosing an activity for handling a given (|Intent|) . 
+
+The view is composed of two adjacent buttons: 
+
+The left button is an immediate action and allows one click activity choosing. 
+Tapping this button immediately executes the intent without requiring any 
+further user input. Long press on this button shows a popup for changing the 
+default activity. 
+
+The right button is an overflow action and provides an optimized menu of 
+additional activities. Tapping this button shows a popup anchored to this view, 
+listing the most frequently used activities. This list is initially limited to 
+a small number of items in frequency used order. The last item, "Show all..." 
+serves as an affordance to display all available activities. 
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView(Context)*
+
+public ActivityChooserView(Context context)
+
+Create a new instance. 
+
+    context - The application environment. 
+
+*android.support.v7.internal.widget.ActivityChooserView(Context,AttributeSet)*
+
+public ActivityChooserView(
+  Context context,
+  AttributeSet attrs)
+
+Create a new instance. 
+
+    context - The application environment. 
+    attrs - A collection of attributes. 
+
+*android.support.v7.internal.widget.ActivityChooserView(Context,AttributeSet,int)*
+
+public ActivityChooserView(
+  Context context,
+  AttributeSet attrs,
+  int defStyle)
+
+Create a new instance. 
+
+    context - The application environment. 
+    attrs - A collection of attributes. 
+    defStyle - The default style to apply to this view. 
+
+*android.support.v7.internal.widget.ActivityChooserView.dismissPopup()*
+
+public boolean dismissPopup()
+
+Dismisses the popup window with activities. 
+
+
+
+    Returns: True if dismissed, false if already dismissed. 
+
+*android.support.v7.internal.widget.ActivityChooserView.getDataModel()*
+
+public |android.support.v7.internal.widget.ActivityChooserModel| getDataModel()
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.isShowingPopup()*
+
+public boolean isShowingPopup()
+
+Gets whether the popup window with activities is shown. 
+
+
+
+    Returns: True if the popup is shown. 
+
+*android.support.v7.internal.widget.ActivityChooserView.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.setActivityChooserModel(ActivityChooserModel)*
+
+public void setActivityChooserModel(android.support.v7.internal.widget.ActivityChooserModel dataModel)
+
+
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.setDefaultActionButtonContentDescription(int)*
+
+public void setDefaultActionButtonContentDescription(int resourceId)
+
+Sets a content description of the default action button. This resource should 
+be a string taking one formatting argument and will be used for formatting the 
+content description of the button dynamically as the default target changes. 
+For example, a resource pointing to the string "share with %1$s" will result in 
+a content description "share with Bluetooth" for the Bluetooth activity. 
+
+
+    resourceId - The resource id. 
+
+*android.support.v7.internal.widget.ActivityChooserView.setExpandActivityOverflowButtonContentDescription(int)*
+
+public void setExpandActivityOverflowButtonContentDescription(int resourceId)
+
+Sets the content description for the button that expands the activity overflow 
+list. 
+
+description as a clue about the action performed by the button. For example, if 
+a share activity is to be chosen the content description should be something 
+like "Share with". 
+
+
+    resourceId - The content description resource id. 
+
+*android.support.v7.internal.widget.ActivityChooserView.setExpandActivityOverflowButtonDrawable(Drawable)*
+
+public void setExpandActivityOverflowButtonDrawable(Drawable drawable)
+
+Sets the background for the button that expands the activity overflow list. 
+
+Note: Clients would like to set this drawable as a clue about the action the 
+chosen activity will perform. For example, if a share activity is to be chosen 
+the drawable should give a clue that sharing is to be performed. 
+
+
+    drawable - The drawable. 
+
+*android.support.v7.internal.widget.ActivityChooserView.setInitialActivityCount(int)*
+
+public void setInitialActivityCount(int itemCount)
+
+Sets the initial count of items shown in the activities popup i.e. the items 
+before the popup is expanded. This is an upper bound since it is not guaranteed 
+that such number of intent handlers exist. 
+
+
+    itemCount - The initial popup item count. 
+
+*android.support.v7.internal.widget.ActivityChooserView.setOnDismissListener(PopupWindow.OnDismissListener)*
+
+public void setOnDismissListener(PopupWindow.OnDismissListener listener)
+
+Sets a listener to receive a callback when the popup is dismissed. 
+
+
+    listener - The listener to be notified. 
+
+*android.support.v7.internal.widget.ActivityChooserView.setProvider(ActionProvider)*
+
+public void setProvider(ActionProvider provider)
+
+Set the provider hosting this view, if applicable. 
+
+
+
+*android.support.v7.internal.widget.ActivityChooserView.showPopup()*
+
+public boolean showPopup()
+
+Shows the popup window with activities. 
+
+
+
+    Returns: True if the popup was shown, false if already showing. 
+
+

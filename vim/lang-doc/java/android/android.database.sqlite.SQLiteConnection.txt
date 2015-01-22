@@ -1,0 +1,291 @@
+*android.database.sqlite.SQLiteConnection* *SQLiteConnection* Represents a SQLit
+
+public final class SQLiteConnection
+  extends    |java.lang.Object|
+  implements |android.os.CancellationSignal.OnCancelListener|
+
+|android.database.sqlite.SQLiteConnection_Description|
+|android.database.sqlite.SQLiteConnection_Fields|
+|android.database.sqlite.SQLiteConnection_Constructors|
+|android.database.sqlite.SQLiteConnection_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteConnection_Methods*
+|android.database.sqlite.SQLiteConnection.dump(Printer,boolean)|Dumps debugging
+|android.database.sqlite.SQLiteConnection.execute(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForBlobFileDescriptor(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForChangedRowCount(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForCursorWindow(String,Object[],CursorWindow,int,int,boolean,CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForLong(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.executeForString(String,Object[],CancellationSignal)|
+|android.database.sqlite.SQLiteConnection.finalize()|
+|android.database.sqlite.SQLiteConnection.getConnectionId()|Gets the unique id 
+|android.database.sqlite.SQLiteConnection.isPrimaryConnection()|Returns true if
+|android.database.sqlite.SQLiteConnection.onCancel()|
+|android.database.sqlite.SQLiteConnection.prepare(String,SQLiteStatementInfo)|P
+|android.database.sqlite.SQLiteConnection.toString()|
+
+*android.database.sqlite.SQLiteConnection_Description*
+
+Represents a SQLite database connection. Each connection wraps an instance of a 
+native sqlite3 object. 
+
+When database connection pooling is enabled, there can be multiple active 
+connections to the same database. Otherwise there is typically only one 
+connection per database. 
+
+When the SQLite WAL feature is enabled, multiple readers and one writer can 
+concurrently access the database. Without WAL, readers and writers are mutually 
+exclusive. 
+
+Ownership and concurrency guarantees 
+
+Connection objects are not thread-safe. They are acquired as needed to perform 
+a database operation and are then returned to the pool. At any given time, a 
+connection is either owned and used by a 
+(|android.database.sqlite.SQLiteSession|) object or the 
+(|android.database.sqlite.SQLiteConnectionPool|) . Those classes are 
+responsible for serializing operations to guard against concurrent use of a 
+connection. 
+
+The guarantee of having a single owner allows this class to be implemented 
+without locks and greatly simplifies resource management. 
+
+Encapsulation guarantees 
+
+The connection object object owns *all* of the SQLite related native objects 
+that are associated with the connection. What's more, there are no other 
+objects in the system that are capable of obtaining handles to those native 
+objects. Consequently, when the connection is closed, we do not have to worry 
+about what other components might have references to its associated SQLite 
+state -- there are none. 
+
+Encapsulation is what ensures that the connection object's lifecycle does not 
+become a tortured mess of finalizers and reference queues. 
+
+Reentrance 
+
+This class must tolerate reentrant execution of SQLite operations because 
+triggers may call custom SQLite functions that perform additional queries. 
+
+
+
+*android.database.sqlite.SQLiteConnection.dump(Printer,boolean)*
+
+public void dump(
+  android.util.Printer printer,
+  boolean verbose)
+
+Dumps debugging information about this connection. 
+
+
+    printer - The printer to receive the dump, not null. 
+    verbose - True to dump more verbose information. 
+
+*android.database.sqlite.SQLiteConnection.execute(String,Object[],CancellationSignal)*
+
+public void execute(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that does not return a result. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+*android.database.sqlite.SQLiteConnection.executeForBlobFileDescriptor(String,Object[],CancellationSignal)*
+
+public |android.os.ParcelFileDescriptor| executeForBlobFileDescriptor(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that returns a single BLOB result as a file descriptor to 
+a shared memory region. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The file descriptor for a shared memory region that contains the value of the 
+             first column in the first row of the result set as a BLOB, or null 
+             if none. 
+
+*android.database.sqlite.SQLiteConnection.executeForChangedRowCount(String,Object[],CancellationSignal)*
+
+public int executeForChangedRowCount(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that returns a count of the number of rows that were 
+changed. Use for UPDATE or DELETE SQL statements. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The number of rows that were changed. 
+
+*android.database.sqlite.SQLiteConnection.executeForCursorWindow(String,Object[],CursorWindow,int,int,boolean,CancellationSignal)*
+
+public int executeForCursorWindow(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.database.CursorWindow window,
+  int startPos,
+  int requiredPos,
+  boolean countAllRows,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement and populates the specified 
+(|android.database.CursorWindow|) with a range of results. Returns the number 
+of rows that were counted during query execution. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    window - The cursor window to clear and fill. 
+    startPos - The start position for filling the window. 
+    requiredPos - The position of a row that MUST be in the window. If it won't fit, then the 
+       query should discard part of what it filled so that it does. Must be 
+       greater than or equal to startPos. 
+    countAllRows - True to count all rows that the query would return regagless of whether they 
+       fit in the window. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The number of rows that were counted during query execution. Might not be all 
+             rows in the result set unless countAllRows is true. 
+
+*android.database.sqlite.SQLiteConnection.executeForLastInsertedRowId(String,Object[],CancellationSignal)*
+
+public long executeForLastInsertedRowId(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that returns the row id of the last row inserted by the 
+statement. Use for INSERT SQL statements. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The row id of the last row that was inserted, or 0 if none. 
+
+*android.database.sqlite.SQLiteConnection.executeForLong(String,Object[],CancellationSignal)*
+
+public long executeForLong(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that returns a single long result. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The value of the first column in the first row of the result set as a long, or 
+             zero if none. 
+
+*android.database.sqlite.SQLiteConnection.executeForString(String,Object[],CancellationSignal)*
+
+public |java.lang.String| executeForString(
+  java.lang.String sql,
+  java.lang.Object[] bindArgs,
+  android.os.CancellationSignal cancellationSignal)
+
+Executes a statement that returns a single (|java.lang.String|) result. 
+
+
+    sql - The SQL statement to execute. 
+    bindArgs - The arguments to bind, or null if none. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. 
+
+    Returns: The value of the first column in the first row of the result set as a String, 
+             or null if none. 
+
+*android.database.sqlite.SQLiteConnection.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.database.sqlite.SQLiteConnection.getConnectionId()*
+
+public int getConnectionId()
+
+Gets the unique id of this connection. 
+
+
+
+    Returns: The connection id. 
+
+*android.database.sqlite.SQLiteConnection.isPrimaryConnection()*
+
+public boolean isPrimaryConnection()
+
+Returns true if this is the primary database connection. 
+
+
+
+    Returns: True if this is the primary database connection. 
+
+*android.database.sqlite.SQLiteConnection.onCancel()*
+
+public void onCancel()
+
+
+
+
+
+*android.database.sqlite.SQLiteConnection.prepare(String,SQLiteStatementInfo)*
+
+public void prepare(
+  java.lang.String sql,
+  android.database.sqlite.SQLiteStatementInfo outStatementInfo)
+
+Prepares a statement for execution but does not bind its parameters or execute 
+it. 
+
+This method can be used to check for syntax errors during compilation prior to 
+execution of the statement. If theoutStatementInfoargument is not null, the 
+provided (|android.database.sqlite.SQLiteStatementInfo|) object is populated 
+with information about the statement. 
+
+A prepared statement makes no reference to the arguments that may eventually be 
+bound to it, consequently it it possible to cache certain prepared statements 
+such as SELECT or INSERT/UPDATE statements. If the statement is cacheable, then 
+it will be stored in the cache for later. 
+
+To take advantage of this behavior as an optimization, the connection pool 
+provides a method to acquire a connection that already has a given SQL 
+statement in its prepared statement cache so that it is ready for execution. 
+
+
+    sql - The SQL statement to prepare. 
+    outStatementInfo - The {@link SQLiteStatementInfo} object to populate with information about the 
+       statement, or null if none. 
+
+*android.database.sqlite.SQLiteConnection.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

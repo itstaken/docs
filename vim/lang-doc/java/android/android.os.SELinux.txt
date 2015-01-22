@@ -1,0 +1,228 @@
+*android.os.SELinux* *SELinux* This class provides access to the centralized jni
+
+public class SELinux
+  extends    |java.lang.Object|
+
+|android.os.SELinux_Description|
+|android.os.SELinux_Fields|
+|android.os.SELinux_Constructors|
+|android.os.SELinux_Methods|
+
+================================================================================
+
+*android.os.SELinux_Constructors*
+|android.os.SELinux()|
+
+*android.os.SELinux_Methods*
+|android.os.SELinux.checkSELinuxAccess(String,String,String,String)|Check permi
+|android.os.SELinux.getBooleanNames()|Gets a list of the SELinux boolean names.
+|android.os.SELinux.getBooleanValue(String)|Gets the value for the given SELinu
+|android.os.SELinux.getContext()|Gets the security context of the current proce
+|android.os.SELinux.getFileContext(String)|Get the security context of a file o
+|android.os.SELinux.getPeerContext(FileDescriptor)|Get the security context of 
+|android.os.SELinux.getPidContext(int)|Gets the security context of a given pro
+|android.os.SELinux.isSELinuxEnabled()|Determine whether SELinux is disabled or
+|android.os.SELinux.isSELinuxEnforced()|Determine whether SELinux is permissive
+|android.os.SELinux.restorecon(File)|Restores a file to its default SELinux sec
+|android.os.SELinux.restorecon(String)|Restores a file to its default SELinux s
+|android.os.SELinux.setBooleanValue(String,boolean)|Sets the value for the give
+|android.os.SELinux.setFileContext(String,String)|Change the security context o
+|android.os.SELinux.setFSCreateContext(String)|Sets the security context for ne
+|android.os.SELinux.setSELinuxEnforce(boolean)|Set whether SELinux is permissiv
+
+*android.os.SELinux_Description*
+
+This class provides access to the centralized jni bindings for SELinux 
+interaction. 
+
+
+
+*android.os.SELinux()*
+
+public SELinux()
+
+
+
+
+*android.os.SELinux.checkSELinuxAccess(String,String,String,String)*
+
+public static final native boolean checkSELinuxAccess(
+  java.lang.String scon,
+  java.lang.String tcon,
+  java.lang.String tclass,
+  java.lang.String perm)
+
+Check permissions between two security contexts. 
+
+
+    scon - The source or subject security context. 
+    tcon - The target or object security context. 
+    tclass - The object security class name. 
+    perm - The permission name. 
+
+    Returns: a boolean indicating whether permission was granted. 
+
+*android.os.SELinux.getBooleanNames()*
+
+public static final native |java.lang.String|[] getBooleanNames()
+
+Gets a list of the SELinux boolean names. 
+
+
+
+    Returns: an array of strings containing the SELinux boolean names. 
+
+*android.os.SELinux.getBooleanValue(String)*
+
+public static final native boolean getBooleanValue(java.lang.String name)
+
+Gets the value for the given SELinux boolean name. 
+
+
+    String - The name of the SELinux boolean. 
+
+    Returns: a boolean indicating whether the SELinux boolean is set. 
+
+*android.os.SELinux.getContext()*
+
+public static final native |java.lang.String| getContext()
+
+Gets the security context of the current process. 
+
+
+
+    Returns: a String representing the security context of the current process. 
+
+*android.os.SELinux.getFileContext(String)*
+
+public static final native |java.lang.String| getFileContext(java.lang.String path)
+
+Get the security context of a file object. 
+
+
+    path - the pathname of the file object. 
+
+    Returns: a security context given as a String. 
+
+*android.os.SELinux.getPeerContext(FileDescriptor)*
+
+public static final native |java.lang.String| getPeerContext(java.io.FileDescriptor fd)
+
+Get the security context of a peer socket. 
+
+
+    fd - FileDescriptor class of the peer socket. 
+
+    Returns: a String representing the peer socket security context. 
+
+*android.os.SELinux.getPidContext(int)*
+
+public static final native |java.lang.String| getPidContext(int pid)
+
+Gets the security context of a given process id. Use of this function is 
+discouraged for Binder transactions. Use Binder.getCallingSecctx() instead. 
+
+
+    pid - an int representing the process id to check. 
+
+    Returns: a String representing the security context of the given pid. 
+
+*android.os.SELinux.isSELinuxEnabled()*
+
+public static final native boolean isSELinuxEnabled()
+
+Determine whether SELinux is disabled or enabled. 
+
+
+
+    Returns: a boolean indicating whether SELinux is enabled. 
+
+*android.os.SELinux.isSELinuxEnforced()*
+
+public static final native boolean isSELinuxEnforced()
+
+Determine whether SELinux is permissive or enforcing. 
+
+
+
+    Returns: a boolean indicating whether SELinux is enforcing. 
+
+*android.os.SELinux.restorecon(File)*
+
+public static boolean restorecon(java.io.File file)
+  throws |java.lang.NullPointerException|
+         
+Restores a file to its default SELinux security context. If the system is not 
+compiled with SELinux, thentrueis automatically returned. If SELinux is 
+compiled in, but disabled, thentrueis returned. 
+
+
+    file - The File object representing the path to be relabeled. 
+
+    Returns: a boolean indicating whether the relabeling succeeded. 
+
+*android.os.SELinux.restorecon(String)*
+
+public static boolean restorecon(java.lang.String pathname)
+  throws |java.lang.NullPointerException|
+         
+Restores a file to its default SELinux security context. If the system is not 
+compiled with SELinux, thentrueis automatically returned. If SELinux is 
+compiled in, but disabled, thentrueis returned. 
+
+
+    pathname - The pathname of the file to be relabeled. 
+
+    Returns: a boolean indicating whether the relabeling succeeded. 
+
+*android.os.SELinux.setBooleanValue(String,boolean)*
+
+public static final native boolean setBooleanValue(
+  java.lang.String name,
+  boolean value)
+
+Sets the value for the given SELinux boolean name. 
+
+
+    String - The name of the SELinux boolean. 
+    Boolean - The new value of the SELinux boolean. 
+
+    Returns: a boolean indicating whether or not the operation succeeded. 
+
+*android.os.SELinux.setFileContext(String,String)*
+
+public static final native boolean setFileContext(
+  java.lang.String path,
+  java.lang.String context)
+
+Change the security context of an existing file object. 
+
+
+    path - representing the path of file object to relabel. 
+    con - new security context given as a String. 
+
+    Returns: a boolean indicating whether the operation succeeded. 
+
+*android.os.SELinux.setFSCreateContext(String)*
+
+public static final native boolean setFSCreateContext(java.lang.String context)
+
+Sets the security context for newly created file objects. 
+
+
+    context - a security context given as a String. 
+
+    Returns: a boolean indicating whether the operation succeeded. 
+
+*android.os.SELinux.setSELinuxEnforce(boolean)*
+
+public static final native boolean setSELinuxEnforce(boolean value)
+
+Set whether SELinux is permissive or enforcing. 
+
+
+    boolean - representing whether to set SELinux to enforcing 
+
+    Returns: a boolean representing whether the desired mode was set 
+
+

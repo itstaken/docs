@@ -1,0 +1,66 @@
+*android.provider.CalendarContract.Attendees* *CalendarContract.Attendees* Field
+
+public static final class CalendarContract.Attendees
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.CalendarContract.AttendeesColumns|
+             |android.provider.CalendarContract.EventsColumns|
+
+|android.provider.CalendarContract.Attendees_Description|
+|android.provider.CalendarContract.Attendees_Fields|
+|android.provider.CalendarContract.Attendees_Constructors|
+|android.provider.CalendarContract.Attendees_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.Attendees_Fields*
+|android.net.Uri_android.provider.CalendarContract.Attendees.CONTENT_URI|
+
+*android.provider.CalendarContract.Attendees_Methods*
+|android.provider.CalendarContract.Attendees.query(ContentResolver,long,String[])|
+
+*android.provider.CalendarContract.Attendees_Description*
+
+Fields and helpers for interacting with Attendees. Each row of this table 
+represents a single attendee or guest of an event. Calling 
+(|android.provider.CalendarContract.Attendees|) will return a list of attendees 
+for the event with the given eventId. Both apps and sync adapters may write to 
+this table. There are six writable fields and all of them except 
+(|android.provider.CalendarContract.Attendees|) must be included when inserting 
+a new attendee. They are: 
+
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+(|android.provider.CalendarContract.Attendees|) 
+
+
+
+*android.net.Uri_android.provider.CalendarContract.Attendees.CONTENT_URI*
+
+The content:// style URL for accessing Attendees data 
+
+
+
+*android.provider.CalendarContract.Attendees.query(ContentResolver,long,String[])*
+
+public static final |android.database.Cursor| query(
+  android.content.ContentResolver cr,
+  long eventId,
+  java.lang.String[] projection)
+
+Queries all attendees associated with the given event. This is a blocking call 
+and should not be done on the UI thread. 
+
+
+    cr - The content resolver to use for the query 
+    eventId - The id of the event to retrieve attendees for 
+    projection - the columns to return in the cursor 
+
+    Returns: A Cursor containing all attendees for the event 
+
+

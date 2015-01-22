@@ -1,0 +1,147 @@
+*android.provider.CalendarContract.Calendars* *CalendarContract.Calendars* Const
+
+public static final class CalendarContract.Calendars
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.CalendarContract.SyncColumns|
+             |android.provider.CalendarContract.CalendarColumns|
+
+|android.provider.CalendarContract.Calendars_Description|
+|android.provider.CalendarContract.Calendars_Fields|
+|android.provider.CalendarContract.Calendars_Constructors|
+|android.provider.CalendarContract.Calendars_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.Calendars_Fields*
+|java.lang.String_android.provider.CalendarContract.Calendars.CALENDAR_LOCATION|
+|android.net.Uri_android.provider.CalendarContract.Calendars.CONTENT_URI|
+|java.lang.String_android.provider.CalendarContract.Calendars.DEFAULT_SORT_ORDER|
+|java.lang.String_android.provider.CalendarContract.Calendars.NAME|
+|java.lang.String[]_android.provider.CalendarContract.Calendars.SYNC_WRITABLE_COLUMNS|
+
+*android.provider.CalendarContract.Calendars_Description*
+
+Constants and helpers for the Calendars table, which contains details for 
+individual calendars. Operations All operations can be done either as an app or 
+as a sync adapter. To perform an operation as a sync adapter 
+(|android.provider.CalendarContract.Calendars|) should be set to true and 
+(|android.provider.CalendarContract.Calendars|) and 
+(|android.provider.CalendarContract.Calendars|) must be set in the Uri 
+parameters. See (|Uri.Builder|) for details on adding parameters. Sync adapters 
+have write access to more columns but are restricted to a single account at a 
+time. Calendars are designed to be primarily managed by a sync adapter and 
+inserting new calendars should be done as a sync adapter. For the most part, 
+apps should only update calendars (such as changing the color or display name). 
+If a local calendar is required an app can do so by inserting as a sync adapter 
+and using an (|android.provider.CalendarContract.Calendars|) of 
+(|android.provider.CalendarContract.Calendars|) . 
+
+Insert When inserting a new calendar the following fields must be included: 
+
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+
+The following fields are not required when inserting a Calendar but are 
+generally a good idea to include: 
+
+(|android.provider.CalendarContract.Calendars|) set to 1 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+
+Update To perform an update on a calendar the 
+(|android.provider.CalendarContract.Calendars|) of the calendar should be 
+provided either as an appended id to the Uri ( (|android.content.ContentUris|) 
+) or as the first selection item--the selection should start with "_id=?" and 
+the first selectionArg should be the _id of the calendar. Calendars may also be 
+updated using a selection without the id. In general, the 
+(|android.provider.CalendarContract.Calendars|) and 
+(|android.provider.CalendarContract.Calendars|) should not be changed after a 
+calendar is created as this can cause issues for sync adapters. Delete 
+Calendars can be deleted either by the 
+(|android.provider.CalendarContract.Calendars|) as an appended id on the Uri or 
+using any standard selection. Deleting a calendar should generally be handled 
+by a sync adapter as it will remove the calendar from the database and all 
+associated data (aka events). Query Querying the Calendars table will get you 
+all information about a set of calendars. There will be one row returned for 
+each calendar that matches the query selection, or at most a single row if the 
+(|android.provider.CalendarContract.Calendars|) is appended to the Uri. 
+
+Calendar Columns The following Calendar columns are writable by both an app and 
+a sync adapter. 
+
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+
+The following Calendars columns are writable only by a sync adapter 
+
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+(|android.provider.CalendarContract.Calendars|) 
+
+
+
+*java.lang.String_android.provider.CalendarContract.Calendars.CALENDAR_LOCATION*
+
+The default location for the calendar. Column name. Type: TEXT 
+
+
+*android.net.Uri_android.provider.CalendarContract.Calendars.CONTENT_URI*
+
+The content:// style URL for accessing Calendars 
+
+
+*java.lang.String_android.provider.CalendarContract.Calendars.DEFAULT_SORT_ORDER*
+
+The default sort order for this table 
+
+
+*java.lang.String_android.provider.CalendarContract.Calendars.NAME*
+
+The name of the calendar. Column name. Type: TEXT 
+
+
+*java.lang.String[]_android.provider.CalendarContract.Calendars.SYNC_WRITABLE_COLUMNS*
+
+These fields are only writable by a sync adapter. To modify them the caller 
+must include (|android.provider.CalendarContract.Calendars|) , 
+(|android.provider.CalendarContract.Calendars|) , and 
+(|android.provider.CalendarContract.Calendars|) in the Uri's query parameters. 
+TODO move to provider 
+
+
+

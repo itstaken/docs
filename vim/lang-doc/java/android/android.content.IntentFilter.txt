@@ -1,0 +1,972 @@
+*android.content.IntentFilter* *IntentFilter* Structured description of Intent v
+
+public class IntentFilter
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.IntentFilter_Description|
+|android.content.IntentFilter_Fields|
+|android.content.IntentFilter_Constructors|
+|android.content.IntentFilter_Methods|
+
+================================================================================
+
+*android.content.IntentFilter_Fields*
+|android.os.Parcelable.Creator<android.content.IntentFilter>_android.content.IntentFilter.CREATOR|
+|int_android.content.IntentFilter.MATCH_ADJUSTMENT_MASK|
+|int_android.content.IntentFilter.MATCH_ADJUSTMENT_NORMAL|
+|int_android.content.IntentFilter.MATCH_CATEGORY_EMPTY|
+|int_android.content.IntentFilter.MATCH_CATEGORY_HOST|
+|int_android.content.IntentFilter.MATCH_CATEGORY_MASK|
+|int_android.content.IntentFilter.MATCH_CATEGORY_PATH|
+|int_android.content.IntentFilter.MATCH_CATEGORY_PORT|
+|int_android.content.IntentFilter.MATCH_CATEGORY_SCHEME|
+|int_android.content.IntentFilter.MATCH_CATEGORY_SCHEME_SPECIFIC_PART|
+|int_android.content.IntentFilter.MATCH_CATEGORY_TYPE|
+|int_android.content.IntentFilter.NO_MATCH_ACTION|
+|int_android.content.IntentFilter.NO_MATCH_CATEGORY|
+|int_android.content.IntentFilter.NO_MATCH_DATA|
+|int_android.content.IntentFilter.NO_MATCH_TYPE|
+|int_android.content.IntentFilter.SYSTEM_HIGH_PRIORITY|
+|int_android.content.IntentFilter.SYSTEM_LOW_PRIORITY|
+
+*android.content.IntentFilter_Constructors*
+|android.content.IntentFilter()|New empty IntentFilter.
+|android.content.IntentFilter(IntentFilter)|New IntentFilter containing a copy 
+|android.content.IntentFilter(String)|New IntentFilter that matches a single ac
+|android.content.IntentFilter(String,String)|New IntentFilter that matches a si
+
+*android.content.IntentFilter_Methods*
+|android.content.IntentFilter.actionsIterator()|Return an iterator over the fil
+|android.content.IntentFilter.addAction(String)|Add a new Intent action to matc
+|android.content.IntentFilter.addCategory(String)|Add a new Intent category to 
+|android.content.IntentFilter.addDataAuthority(IntentFilter.AuthorityEntry)|
+|android.content.IntentFilter.addDataAuthority(String,String)|Add a new Intent 
+|android.content.IntentFilter.addDataPath(PatternMatcher)|
+|android.content.IntentFilter.addDataPath(String,int)|Add a new Intent data pat
+|android.content.IntentFilter.addDataScheme(String)|Add a new Intent data schem
+|android.content.IntentFilter.addDataSchemeSpecificPart(PatternMatcher)|
+|android.content.IntentFilter.addDataSchemeSpecificPart(String,int)|Add a new I
+|android.content.IntentFilter.addDataType(String)|Add a new Intent data type to
+|android.content.IntentFilter.authoritiesIterator()|Return an iterator over the
+|android.content.IntentFilter.categoriesIterator()|Return an iterator over the 
+|android.content.IntentFilter.countActions()|Return the number of actions in th
+|android.content.IntentFilter.countCategories()|Return the number of categories
+|android.content.IntentFilter.countDataAuthorities()|Return the number of data 
+|android.content.IntentFilter.countDataPaths()|Return the number of data paths 
+|android.content.IntentFilter.countDataSchemes()|Return the number of data sche
+|android.content.IntentFilter.countDataSchemeSpecificParts()|Return the number 
+|android.content.IntentFilter.countDataTypes()|Return the number of data types 
+|android.content.IntentFilter.create(String,String)|Create a new IntentFilter i
+|android.content.IntentFilter.debugCheck()|For debugging -- perform a check on 
+|android.content.IntentFilter.describeContents()|
+|android.content.IntentFilter.dump(Printer,String)|
+|android.content.IntentFilter.getAction(int)|Return an action in the filter.
+|android.content.IntentFilter.getCategory(int)|Return a category in the filter.
+|android.content.IntentFilter.getDataAuthority(int)|Return a data authority in 
+|android.content.IntentFilter.getDataPath(int)|Return a data path in the filter
+|android.content.IntentFilter.getDataScheme(int)|Return a data scheme in the fi
+|android.content.IntentFilter.getDataSchemeSpecificPart(int)|Return a data sche
+|android.content.IntentFilter.getDataType(int)|Return a data type in the filter
+|android.content.IntentFilter.getPriority()|Return the priority of this filter.
+|android.content.IntentFilter.hasAction(String)|Is the given action included in
+|android.content.IntentFilter.hasCategory(String)|Is the given category include
+|android.content.IntentFilter.hasDataAuthority(Uri)|Is the given data authority
+|android.content.IntentFilter.hasDataPath(String)|Is the given data path includ
+|android.content.IntentFilter.hasDataScheme(String)|Is the given data scheme in
+|android.content.IntentFilter.hasDataSchemeSpecificPart(String)|Is the given da
+|android.content.IntentFilter.hasDataType(String)|Is the given data type includ
+|android.content.IntentFilter.match(ContentResolver,Intent,boolean,String)|Test
+|android.content.IntentFilter.match(String,String,String,Uri,Set<String>,String)|
+|android.content.IntentFilter.matchAction(String)|Match this filter against an 
+|android.content.IntentFilter.matchCategories(Set<String>)|Match this filter ag
+|android.content.IntentFilter.matchData(String,String,Uri)|Match this filter ag
+|android.content.IntentFilter.matchDataAuthority(Uri)|Match this intent filter 
+|android.content.IntentFilter.pathsIterator()|Return an iterator over the filte
+|android.content.IntentFilter.readFromXml(XmlPullParser)|
+|android.content.IntentFilter.schemesIterator()|Return an iterator over the fil
+|android.content.IntentFilter.schemeSpecificPartsIterator()|Return an iterator 
+|android.content.IntentFilter.setPriority(int)|Modify priority of this filter.
+|android.content.IntentFilter.typesIterator()|Return an iterator over the filte
+|android.content.IntentFilter.writeToParcel(Parcel,int)|
+|android.content.IntentFilter.writeToXml(XmlSerializer)|Write the contents of t
+
+*android.content.IntentFilter_Description*
+
+Structured description of Intent values to be matched. An IntentFilter can 
+match against actions, categories, and data (either via its type, scheme, 
+and/or path) in an Intent. It also includes a "priority" value which is used to 
+order multiple matching filters. 
+
+IntentFilter objects are often created in XML as part of a package's 
+AndroidManifest.xml(|android.R.styleable|) file, using 
+intent-filter(|android.R.styleable|) tags. 
+
+There are three Intent characteristics you can filter on: the action, data, and 
+categories. For each of these characteristics you can provide multiple possible 
+matching values (via (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , and (|android.content.IntentFilter|) , 
+respectively). For actions, the field will not be tested if no values have been 
+given (treating it as a wildcard); if no data characteristics are specified, 
+however, then the filter will only match intents that contain no data. 
+
+The data characteristic is itself divided into three attributes: type, scheme, 
+authority, and path. Any that are specified must match the contents of the 
+Intent. If you specify a scheme but no type, only Intent that does not have a 
+type (such as mailto:) will match; a content: URI will never match because they 
+always have a MIME type that is supplied by their content provider. Specifying 
+a type with no scheme has somewhat special meaning: it will match either an 
+Intent with no URI field, or an Intent with a content: or file: URI. If you 
+specify neither, then only an Intent with no data or type will match. To 
+specify an authority, you must also specify one or more schemes that it is 
+associated with. To specify a path, you also must specify both one or more 
+authorities and one or more schemes it is associated with. 
+
+Developer Guides For information about how to create and resolve intents, read 
+the <a href="guide/topics/intents/intents-filters.html">Intents and Intent 
+Filters developer guide. 
+
+Filter Rules A match is based on the following rules. Note that for an 
+IntentFilter to match an Intent, three conditions must hold: the action and 
+category must match, and the data (both the data type and data 
+scheme+authority+path if specified) must match (see 
+(|android.content.IntentFilter|) for more details on how the data fields 
+match). 
+
+Action matches if any of the given values match the Intent action; if the 
+filter specifies no actions, then it will only match Intents that do not 
+contain an action. 
+
+Data Type matches if any of the given values match the Intent type. The Intent 
+type is determined by calling (|android.content.Intent|) . A wildcard can be 
+used for the MIME sub-type, in both the Intent and IntentFilter, so that the 
+type "audio/*" will match "audio/mpeg", "audio/aiff", "audio/*", etc. Note that 
+MIME type matching here is case sensitive, unlike formal RFC MIME types! You 
+should thus always use lower case letters for your MIME types. 
+
+Data Scheme matches if any of the given values match the Intent data's scheme. 
+The Intent scheme is determined by calling (|android.content.Intent|) and 
+(|android.net.Uri|) on that URI. Note that scheme matching here is case 
+sensitive, unlike formal RFC schemes! You should thus always use lower case 
+letters for your schemes. 
+
+Data Scheme Specific Part matches if any of the given values match the Intent's 
+data scheme specific part and one of the data schemes in the filter has matched 
+the Intent, or no scheme specific parts were supplied in the filter. The Intent 
+scheme specific part is determined by calling (|android.content.Intent|) and 
+(|android.net.Uri|) on that URI. Note that scheme specific part matching is 
+case sensitive. 
+
+Data Authority matches if any of the given values match the Intent's data 
+authority and one of the data schemes in the filter has matched the Intent, or 
+no authories were supplied in the filter. The Intent authority is determined by 
+calling (|android.content.Intent|) and (|android.net.Uri|) on that URI. Note 
+that authority matching here is case sensitive, unlike formal RFC host names! 
+You should thus always use lower case letters for your authority. 
+
+Data Path matches if any of the given values match the Intent's data path and 
+both a scheme and authority in the filter has matched against the Intent, or no 
+paths were supplied in the filter. The Intent authority is determined by 
+calling (|android.content.Intent|) and (|android.net.Uri|) on that URI. 
+
+Categories match if all of the categories in the Intent match categories given 
+in the filter. Extra categories in the filter that are not in the Intent will 
+not cause the match to fail. Note that unlike the action, an IntentFilter with 
+no categories will only match an Intent that does not have any categories. 
+
+
+
+*android.os.Parcelable.Creator<android.content.IntentFilter>_android.content.IntentFilter.CREATOR*
+
+
+
+
+*int_android.content.IntentFilter.MATCH_ADJUSTMENT_MASK*
+
+The part of a match constant that applies a quality adjustment to the basic 
+category of match. The value (|android.content.IntentFilter|) is no adjustment; 
+higher numbers than that improve the quality, while lower numbers reduce it. 
+
+
+*int_android.content.IntentFilter.MATCH_ADJUSTMENT_NORMAL*
+
+Quality adjustment applied to the category of match that signifies the default, 
+base value; higher numbers improve the quality while lower numbers reduce it. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_EMPTY*
+
+The filter matched an intent that had no data specified. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_HOST*
+
+The filter matched an intent with the same data URI scheme and authority host. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_MASK*
+
+The part of a match constant that describes the category of match that 
+occurred. May be either (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , (|android.content.IntentFilter|) , 
+(|android.content.IntentFilter|) , or (|android.content.IntentFilter|) . Higher 
+values indicate a better match. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_PATH*
+
+The filter matched an intent with the same data URI scheme, authority, and 
+path. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_PORT*
+
+The filter matched an intent with the same data URI scheme and authority host 
+and port. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_SCHEME*
+
+The filter matched an intent with the same data URI scheme. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_SCHEME_SPECIFIC_PART*
+
+The filter matched an intent with the same data URI scheme and scheme specific 
+part. 
+
+
+*int_android.content.IntentFilter.MATCH_CATEGORY_TYPE*
+
+The filter matched an intent with the same data MIME type. 
+
+
+*int_android.content.IntentFilter.NO_MATCH_ACTION*
+
+The filter didn't match due to different actions. 
+
+
+*int_android.content.IntentFilter.NO_MATCH_CATEGORY*
+
+The filter didn't match because it required one or more categories that were 
+not in the Intent. 
+
+
+*int_android.content.IntentFilter.NO_MATCH_DATA*
+
+The filter didn't match due to different data URIs. 
+
+
+*int_android.content.IntentFilter.NO_MATCH_TYPE*
+
+The filter didn't match due to different MIME types. 
+
+
+*int_android.content.IntentFilter.SYSTEM_HIGH_PRIORITY*
+
+The filter (|android.content.IntentFilter|) value at which system high-priority 
+receivers are placed; that is, receivers that should execute before application 
+code. Applications should never use filters with this or higher priorities. 
+
+
+*int_android.content.IntentFilter.SYSTEM_LOW_PRIORITY*
+
+The filter (|android.content.IntentFilter|) value at which system low-priority 
+receivers are placed; that is, receivers that should execute after application 
+code. Applications should never use filters with this or lower priorities. 
+
+
+
+*android.content.IntentFilter()*
+
+public IntentFilter()
+
+New empty IntentFilter. 
+
+
+*android.content.IntentFilter(IntentFilter)*
+
+public IntentFilter(android.content.IntentFilter o)
+
+New IntentFilter containing a copy of an existing filter. 
+
+    o - The original filter to copy. 
+
+*android.content.IntentFilter(String)*
+
+public IntentFilter(java.lang.String action)
+
+New IntentFilter that matches a single action with no data. If no data 
+characteristics are subsequently specified, then the filter will only match 
+intents that contain no data. 
+
+    action - The action to match, i.e. Intent.ACTION_MAIN. 
+
+*android.content.IntentFilter(String,String)*
+
+public IntentFilter(
+  java.lang.String action,
+  java.lang.String dataType)
+  throws |android.content.IntentFilter.MalformedMimeTypeException|
+         
+New IntentFilter that matches a single action and data type. 
+
+Note: MIME type matching in the Android framework is case-sensitive, unlike 
+formal RFC MIME types. As a result, you should always write your MIME types 
+with lower case letters, and any MIME types you receive from outside of Android 
+should be converted to lower case before supplying them here. 
+
+Throws (|android.content.IntentFilter.MalformedMimeTypeException|) if the given 
+MIME type is not syntactically correct. 
+
+    action - The action to match, i.e. Intent.ACTION_VIEW. 
+    dataType - The type to match, i.e. "vnd.android.cursor.dir/person". 
+
+*android.content.IntentFilter.actionsIterator()*
+
+public final |java.util.Iterator|<String> actionsIterator()
+
+Return an iterator over the filter's actions. If there are no actions, returns 
+null. 
+
+
+
+*android.content.IntentFilter.addAction(String)*
+
+public final void addAction(java.lang.String action)
+
+Add a new Intent action to match against. If any actions are included in the 
+filter, then an Intent's action must be one of those values for it to match. If 
+no actions are included, the Intent action is ignored. 
+
+
+    action - Name of the action to match, i.e. Intent.ACTION_VIEW. 
+
+*android.content.IntentFilter.addCategory(String)*
+
+public final void addCategory(java.lang.String category)
+
+Add a new Intent category to match against. The semantics of categories is the 
+opposite of actions -- an Intent includes the categories that it requires, all 
+of which must be included in the filter in order to match. In other words, 
+adding a category to the filter has no impact on matching unless that category 
+is specified in the intent. 
+
+
+    category - Name of category to match, i.e. Intent.CATEGORY_EMBED. 
+
+*android.content.IntentFilter.addDataAuthority(IntentFilter.AuthorityEntry)*
+
+public final void addDataAuthority(android.content.IntentFilter.AuthorityEntry ent)
+
+
+
+
+
+*android.content.IntentFilter.addDataAuthority(String,String)*
+
+public final void addDataAuthority(
+  java.lang.String host,
+  java.lang.String port)
+
+Add a new Intent data authority to match against. The filter must include one 
+or more schemes (via (|android.content.IntentFilter|) ) for the authority to be 
+considered. If any authorities are included in the filter, then an Intent's 
+data must match one of them. If no authorities are included, then only the 
+scheme must match. 
+
+Note: host name in the Android framework is case-sensitive, unlike formal RFC 
+host names. As a result, you should always write your host names with lower 
+case letters, and any host names you receive from outside of Android should be 
+converted to lower case before supplying them here. 
+
+
+    host - The host part of the authority to match. May start with a single '*' to 
+       wildcard the front of the host name. 
+    port - Optional port part of the authority to match. If null, any port is allowed. 
+
+*android.content.IntentFilter.addDataPath(PatternMatcher)*
+
+public final void addDataPath(android.os.PatternMatcher path)
+
+
+
+
+
+*android.content.IntentFilter.addDataPath(String,int)*
+
+public final void addDataPath(
+  java.lang.String path,
+  int type)
+
+Add a new Intent data path to match against. The filter must include one or 
+more schemes (via (|android.content.IntentFilter|) ) and one or more 
+authorities (via (|android.content.IntentFilter|) ) for the path to be 
+considered. If any paths are included in the filter, then an Intent's data must 
+match one of them. If no paths are included, then only the scheme/authority 
+must match. 
+
+The path given here can either be a literal that must directly match or match 
+against a prefix, or it can be a simple globbing pattern. If the latter, you 
+can use '*' anywhere in the pattern to match zero or more instances of the 
+previous character, '.' as a wildcard to match any character, and '\' to escape 
+the next character. 
+
+
+    path - Either a raw string that must exactly match the file path, or a simple pattern, 
+       depending on type. 
+    type - Determines how path will be compared to determine a match: either {@link 
+       PatternMatcher#PATTERN_LITERAL}, {@link PatternMatcher#PATTERN_PREFIX}, 
+       or {@link PatternMatcher#PATTERN_SIMPLE_GLOB}. 
+
+*android.content.IntentFilter.addDataScheme(String)*
+
+public final void addDataScheme(java.lang.String scheme)
+
+Add a new Intent data scheme to match against. If any schemes are included in 
+the filter, then an Intent's data must be either one of these schemes or a 
+matching data type. If no schemes are included, then an Intent will match only 
+if it includes no data. 
+
+Note: scheme matching in the Android framework is case-sensitive, unlike formal 
+RFC schemes. As a result, you should always write your schemes with lower case 
+letters, and any schemes you receive from outside of Android should be 
+converted to lower case before supplying them here. 
+
+
+    scheme - Name of the scheme to match, i.e. "http". 
+
+*android.content.IntentFilter.addDataSchemeSpecificPart(PatternMatcher)*
+
+public final void addDataSchemeSpecificPart(android.os.PatternMatcher ssp)
+
+
+
+
+
+*android.content.IntentFilter.addDataSchemeSpecificPart(String,int)*
+
+public final void addDataSchemeSpecificPart(
+  java.lang.String ssp,
+  int type)
+
+Add a new Intent data "scheme specific part" to match against. The filter must 
+include one or more schemes (via (|android.content.IntentFilter|) ) for the 
+scheme specific part to be considered. If any scheme specific parts are 
+included in the filter, then an Intent's data must match one of them. If no 
+scheme specific parts are included, then only the scheme must match. 
+
+The "scheme specific part" that this matches against is the string returned by 
+Uri.getSchemeSpecificPart(|android.net.Uri|) . For Uris that contain a path, 
+this kind of matching is not generally of interest, since 
+(|android.content.IntentFilter|) and (|android.content.IntentFilter|) can 
+provide a better mechanism for matching them. However, for Uris that do not 
+contain a path, the authority and path are empty, so this is the only way to 
+match against the non-scheme part. 
+
+
+    ssp - Either a raw string that must exactly match the scheme specific part path, or a 
+       simple pattern, depending on type. 
+    type - Determines how ssp will be compared to determine a match: either {@link 
+       PatternMatcher#PATTERN_LITERAL}, {@link PatternMatcher#PATTERN_PREFIX}, 
+       or {@link PatternMatcher#PATTERN_SIMPLE_GLOB}. 
+
+*android.content.IntentFilter.addDataType(String)*
+
+public final void addDataType(java.lang.String type)
+  throws |android.content.IntentFilter.MalformedMimeTypeException|
+         
+Add a new Intent data type to match against. If any types are included in the 
+filter, then an Intent's data must be either one of these types or a matching 
+scheme. If no data types are included, then an Intent will only match if it 
+specifies no data. 
+
+Note: MIME type matching in the Android framework is case-sensitive, unlike 
+formal RFC MIME types. As a result, you should always write your MIME types 
+with lower case letters, and any MIME types you receive from outside of Android 
+should be converted to lower case before supplying them here. 
+
+Throws (|android.content.IntentFilter.MalformedMimeTypeException|) if the given 
+MIME type is not syntactically correct. 
+
+
+    type - Name of the data type to match, i.e. "vnd.android.cursor.dir/person". 
+
+*android.content.IntentFilter.authoritiesIterator()*
+
+public final |java.util.Iterator|<AuthorityEntry> authoritiesIterator()
+
+Return an iterator over the filter's data authorities. 
+
+
+
+*android.content.IntentFilter.categoriesIterator()*
+
+public final |java.util.Iterator|<String> categoriesIterator()
+
+Return an iterator over the filter's categories. 
+
+
+
+    Returns: Iterator if this filter has categories or {@code null} if none. 
+
+*android.content.IntentFilter.countActions()*
+
+public final int countActions()
+
+Return the number of actions in the filter. 
+
+
+
+*android.content.IntentFilter.countCategories()*
+
+public final int countCategories()
+
+Return the number of categories in the filter. 
+
+
+
+*android.content.IntentFilter.countDataAuthorities()*
+
+public final int countDataAuthorities()
+
+Return the number of data authorities in the filter. 
+
+
+
+*android.content.IntentFilter.countDataPaths()*
+
+public final int countDataPaths()
+
+Return the number of data paths in the filter. 
+
+
+
+*android.content.IntentFilter.countDataSchemes()*
+
+public final int countDataSchemes()
+
+Return the number of data schemes in the filter. 
+
+
+
+*android.content.IntentFilter.countDataSchemeSpecificParts()*
+
+public final int countDataSchemeSpecificParts()
+
+Return the number of data scheme specific parts in the filter. 
+
+
+
+*android.content.IntentFilter.countDataTypes()*
+
+public final int countDataTypes()
+
+Return the number of data types in the filter. 
+
+
+
+*android.content.IntentFilter.create(String,String)*
+
+public static |android.content.IntentFilter| create(
+  java.lang.String action,
+  java.lang.String dataType)
+
+Create a new IntentFilter instance with a specified action and MIME type, where 
+you know the MIME type is correctly formatted. This catches the 
+(|android.content.IntentFilter.MalformedMimeTypeException|) exception that the 
+constructor can call and turns it into a runtime exception. 
+
+
+    action - The action to match, i.e. Intent.ACTION_VIEW. 
+    dataType - The type to match, i.e. "vnd.android.cursor.dir/person". 
+
+    Returns: A new IntentFilter for the given action and type. 
+
+*android.content.IntentFilter.debugCheck()*
+
+public boolean debugCheck()
+
+For debugging -- perform a check on the filter, return true if it passed or 
+false if it failed. 
+
+
+
+*android.content.IntentFilter.describeContents()*
+
+public final int describeContents()
+
+
+
+
+
+*android.content.IntentFilter.dump(Printer,String)*
+
+public void dump(
+  android.util.Printer du,
+  java.lang.String prefix)
+
+
+
+
+
+*android.content.IntentFilter.getAction(int)*
+
+public final |java.lang.String| getAction(int index)
+
+Return an action in the filter. 
+
+
+
+*android.content.IntentFilter.getCategory(int)*
+
+public final |java.lang.String| getCategory(int index)
+
+Return a category in the filter. 
+
+
+
+*android.content.IntentFilter.getDataAuthority(int)*
+
+public final |android.content.IntentFilter.AuthorityEntry| getDataAuthority(int index)
+
+Return a data authority in the filter. 
+
+
+
+*android.content.IntentFilter.getDataPath(int)*
+
+public final |android.os.PatternMatcher| getDataPath(int index)
+
+Return a data path in the filter. 
+
+
+
+*android.content.IntentFilter.getDataScheme(int)*
+
+public final |java.lang.String| getDataScheme(int index)
+
+Return a data scheme in the filter. 
+
+
+
+*android.content.IntentFilter.getDataSchemeSpecificPart(int)*
+
+public final |android.os.PatternMatcher| getDataSchemeSpecificPart(int index)
+
+Return a data scheme specific part in the filter. 
+
+
+
+*android.content.IntentFilter.getDataType(int)*
+
+public final |java.lang.String| getDataType(int index)
+
+Return a data type in the filter. 
+
+
+
+*android.content.IntentFilter.getPriority()*
+
+public final int getPriority()
+
+Return the priority of this filter. 
+
+
+
+    Returns: The priority of the filter. 
+
+*android.content.IntentFilter.hasAction(String)*
+
+public final boolean hasAction(java.lang.String action)
+
+Is the given action included in the filter? Note that if the filter does not 
+include any actions, false will always be returned. 
+
+
+    action - The action to look for. 
+
+    Returns: True if the action is explicitly mentioned in the filter. 
+
+*android.content.IntentFilter.hasCategory(String)*
+
+public final boolean hasCategory(java.lang.String category)
+
+Is the given category included in the filter? 
+
+
+    category - The category that the filter supports. 
+
+    Returns: True if the category is explicitly mentioned in the filter. 
+
+*android.content.IntentFilter.hasDataAuthority(Uri)*
+
+public final boolean hasDataAuthority(android.net.Uri data)
+
+Is the given data authority included in the filter? Note that if the filter 
+does not include any authorities, false will always be returned. 
+
+
+    data - The data whose authority is being looked for. 
+
+    Returns: Returns true if the data string matches an authority listed in the filter. 
+
+*android.content.IntentFilter.hasDataPath(String)*
+
+public final boolean hasDataPath(java.lang.String data)
+
+Is the given data path included in the filter? Note that if the filter does not 
+include any paths, false will always be returned. 
+
+
+    data - The data path to look for. This is without the scheme prefix. 
+
+    Returns: True if the data string matches a path listed in the filter. 
+
+*android.content.IntentFilter.hasDataScheme(String)*
+
+public final boolean hasDataScheme(java.lang.String scheme)
+
+Is the given data scheme included in the filter? Note that if the filter does 
+not include any scheme, false will always be returned. 
+
+
+    scheme - The data scheme to look for. 
+
+    Returns: True if the scheme is explicitly mentioned in the filter. 
+
+*android.content.IntentFilter.hasDataSchemeSpecificPart(String)*
+
+public final boolean hasDataSchemeSpecificPart(java.lang.String data)
+
+Is the given data scheme specific part included in the filter? Note that if the 
+filter does not include any scheme specific parts, false will always be 
+returned. 
+
+
+    data - The scheme specific part that is being looked for. 
+
+    Returns: Returns true if the data string matches a scheme specific part listed in the 
+             filter. 
+
+*android.content.IntentFilter.hasDataType(String)*
+
+public final boolean hasDataType(java.lang.String type)
+
+Is the given data type included in the filter? Note that if the filter does not 
+include any type, false will always be returned. 
+
+
+    type - The data type to look for. 
+
+    Returns: True if the type is explicitly mentioned in the filter. 
+
+*android.content.IntentFilter.match(ContentResolver,Intent,boolean,String)*
+
+public final int match(
+  android.content.ContentResolver resolver,
+  android.content.Intent intent,
+  boolean resolve,
+  java.lang.String logTag)
+
+Test whether this filter matches the given intent. 
+
+
+    intent - The Intent to compare against. 
+    resolve - If true, the intent's type will be resolved by calling Intent.resolveType(); 
+       otherwise a simple match against Intent.type will be performed. 
+    logTag - Tag to use in debugging messages. 
+
+    Returns: Returns either a valid match constant (a combination of {@link 
+             #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}), or one 
+             of the error codes {@link #NO_MATCH_TYPE} if the type didn't 
+             match, {@link #NO_MATCH_DATA} if the scheme/path didn't match, 
+             {@link #NO_MATCH_ACTION if the action didn't match, or {@link 
+             #NO_MATCH_CATEGORY} if one or more categories didn't match. 
+    Returns: How well the filter matches. Negative if it doesn't match, zero or positive 
+             positive value if it does with a higher value representing a 
+             better match. 
+
+*android.content.IntentFilter.match(String,String,String,Uri,Set<String>,String)*
+
+public final int match(
+  java.lang.String action,
+  java.lang.String type,
+  java.lang.String scheme,
+  android.net.Uri data,
+  java.util.Set<java.lang.String> categories,
+  java.lang.String logTag)
+
+Test whether this filter matches the given intent data. A match is only 
+successful if the actions and categories in the Intent match against the 
+filter, as described in (|android.content.IntentFilter|) ; in that case, the 
+match result returned will be as per (|android.content.IntentFilter|) . 
+
+
+    action - The intent action to match against (Intent.getAction). 
+    type - The intent type to match against (Intent.resolveType()). 
+    scheme - The data scheme to match against (Intent.getScheme()). 
+    data - The data URI to match against (Intent.getData()). 
+    categories - The categories to match against (Intent.getCategories()). 
+    logTag - Tag to use in debugging messages. 
+
+    Returns: Returns either a valid match constant (a combination of {@link 
+             #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}), or one 
+             of the error codes {@link #NO_MATCH_TYPE} if the type didn't 
+             match, {@link #NO_MATCH_DATA} if the scheme/path didn't match, 
+             {@link #NO_MATCH_ACTION if the action didn't match, or {@link 
+             #NO_MATCH_CATEGORY} if one or more categories didn't match. 
+
+*android.content.IntentFilter.matchAction(String)*
+
+public final boolean matchAction(java.lang.String action)
+
+Match this filter against an Intent's action. If the filter does not specify 
+any actions, the match will always fail. 
+
+
+    action - The desired action to look for. 
+
+    Returns: True if the action is listed in the filter. 
+
+*android.content.IntentFilter.matchCategories(Set<String>)*
+
+public final |java.lang.String| matchCategories(java.util.Set<java.lang.String> categories)
+
+Match this filter against an Intent's categories. Each category in the Intent 
+must be specified by the filter; if any are not in the filter, the match fails. 
+
+
+    categories - The categories included in the intent, as returned by Intent.getCategories(). 
+
+    Returns: If all categories match (success), null; else the name of the first category 
+             that didn't match. 
+
+*android.content.IntentFilter.matchData(String,String,Uri)*
+
+public final int matchData(
+  java.lang.String type,
+  java.lang.String scheme,
+  android.net.Uri data)
+
+Match this filter against an Intent's data (type, scheme and path). If the 
+filter does not specify any types and does not specify any schemes/paths, the 
+match will only succeed if the intent does not also specify a type or data. If 
+the filter does not specify any schemes, it will implicitly match intents with 
+no scheme, or the schemes "content:" or "file:" (basically performing a 
+MIME-type only match). If the filter does not specify any MIME types, the 
+Intent also must not specify a MIME type. 
+
+Be aware that to match against an authority, you must also specify a base 
+scheme the authority is in. To match against a data path, both a scheme and 
+authority must be specified. If the filter does not specify any types or 
+schemes that it matches against, it is considered to be empty (any authority or 
+data path given is ignored, as if it were empty as well). 
+
+Note: MIME type, Uri scheme, and host name matching in the Android framework is 
+case-sensitive, unlike the formal RFC definitions. As a result, you should 
+always write these elements with lower case letters, and normalize any MIME 
+types or Uris you receive from outside of Android to ensure these elements are 
+lower case before supplying them here. 
+
+
+    type - The desired data type to look for, as returned by Intent.resolveType(). 
+    scheme - The desired data scheme to look for, as returned by Intent.getScheme(). 
+    data - The full data string to match against, as supplied in Intent.data. 
+
+    Returns: Returns either a valid match constant (a combination of {@link 
+             #MATCH_CATEGORY_MASK} and {@link #MATCH_ADJUSTMENT_MASK}), or one 
+             of the error codes {@link #NO_MATCH_TYPE} if the type didn't match 
+             or {@link #NO_MATCH_DATA} if the scheme/path didn't match. 
+
+*android.content.IntentFilter.matchDataAuthority(Uri)*
+
+public final int matchDataAuthority(android.net.Uri data)
+
+Match this intent filter against the given Intent data. This ignores the data 
+scheme -- unlike (|android.content.IntentFilter|) , the authority will match 
+regardless of whether there is a matching scheme. 
+
+
+    data - The data whose authority is being looked for. 
+
+    Returns: Returns either {@link #MATCH_CATEGORY_HOST}, {@link #MATCH_CATEGORY_PORT}, 
+             {@link #NO_MATCH_DATA}. 
+
+*android.content.IntentFilter.pathsIterator()*
+
+public final |java.util.Iterator|<PatternMatcher> pathsIterator()
+
+Return an iterator over the filter's data paths. 
+
+
+
+*android.content.IntentFilter.readFromXml(XmlPullParser)*
+
+public void readFromXml(XmlPullParser parser)
+  throws |java.io.IOException|
+         |XmlPullParserException|
+         
+
+
+
+
+*android.content.IntentFilter.schemesIterator()*
+
+public final |java.util.Iterator|<String> schemesIterator()
+
+Return an iterator over the filter's data schemes. 
+
+
+
+*android.content.IntentFilter.schemeSpecificPartsIterator()*
+
+public final |java.util.Iterator|<PatternMatcher> schemeSpecificPartsIterator()
+
+Return an iterator over the filter's data scheme specific parts. 
+
+
+
+*android.content.IntentFilter.setPriority(int)*
+
+public final void setPriority(int priority)
+
+Modify priority of this filter. The default priority is 0. Positive values will 
+be before the default, lower values will be after it. Applications must use a 
+value that is larger than (|android.content.IntentFilter|) and smaller than 
+(|android.content.IntentFilter|) . 
+
+
+    priority - The new priority value. 
+
+*android.content.IntentFilter.typesIterator()*
+
+public final |java.util.Iterator|<String> typesIterator()
+
+Return an iterator over the filter's data types. 
+
+
+
+*android.content.IntentFilter.writeToParcel(Parcel,int)*
+
+public final void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+*android.content.IntentFilter.writeToXml(XmlSerializer)*
+
+public void writeToXml(XmlSerializer serializer)
+  throws |java.io.IOException|
+         
+Write the contents of the IntentFilter as an XML stream. 
+
+
+
+

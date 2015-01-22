@@ -1,0 +1,131 @@
+*android.net.DhcpStateMachine* *DhcpStateMachine* StateMachine that interacts wi
+
+public class DhcpStateMachine
+  extends    |com.android.internal.util.StateMachine|
+
+|android.net.DhcpStateMachine_Description|
+|android.net.DhcpStateMachine_Fields|
+|android.net.DhcpStateMachine_Constructors|
+|android.net.DhcpStateMachine_Methods|
+
+================================================================================
+
+*android.net.DhcpStateMachine_Fields*
+|int_android.net.DhcpStateMachine.CMD_ON_QUIT|
+|int_android.net.DhcpStateMachine.CMD_POST_DHCP_ACTION|
+|int_android.net.DhcpStateMachine.CMD_PRE_DHCP_ACTION|
+|int_android.net.DhcpStateMachine.CMD_PRE_DHCP_ACTION_COMPLETE|
+|int_android.net.DhcpStateMachine.CMD_RENEW_DHCP|
+|int_android.net.DhcpStateMachine.CMD_START_DHCP|
+|int_android.net.DhcpStateMachine.CMD_STOP_DHCP|
+|int_android.net.DhcpStateMachine.DHCP_FAILURE|
+|int_android.net.DhcpStateMachine.DHCP_SUCCESS|
+
+*android.net.DhcpStateMachine_Methods*
+|android.net.DhcpStateMachine.doQuit()|Quit the DhcpStateMachine.
+|android.net.DhcpStateMachine.makeDhcpStateMachine(Context,StateMachine,String)|
+|android.net.DhcpStateMachine.onQuitting()|
+|android.net.DhcpStateMachine.registerForPreDhcpNotification()|This sends a not
+
+*android.net.DhcpStateMachine_Description*
+
+StateMachine that interacts with the native DHCP client and can talk to a 
+controller that also needs to be a StateMachine 
+
+The Dhcp state machine provides the following features: - Wakeup and renewal 
+using the native DHCP client (which will not renew on its own when the device 
+is in suspend state and this can lead to device holding IP address beyond 
+expiry) - A notification right before DHCP request or renewal is started. This 
+can be used for any additional setup before DHCP. For example, wifi sets 
+BT-Wifi coex settings right before DHCP is initiated 
+
+
+
+*int_android.net.DhcpStateMachine.CMD_ON_QUIT*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_POST_DHCP_ACTION*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_PRE_DHCP_ACTION*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_PRE_DHCP_ACTION_COMPLETE*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_RENEW_DHCP*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_START_DHCP*
+
+
+
+
+*int_android.net.DhcpStateMachine.CMD_STOP_DHCP*
+
+
+
+
+*int_android.net.DhcpStateMachine.DHCP_FAILURE*
+
+
+
+
+*int_android.net.DhcpStateMachine.DHCP_SUCCESS*
+
+
+
+
+
+*android.net.DhcpStateMachine.doQuit()*
+
+public void doQuit()
+
+Quit the DhcpStateMachine. 
+
+
+
+*android.net.DhcpStateMachine.makeDhcpStateMachine(Context,StateMachine,String)*
+
+public static |android.net.DhcpStateMachine| makeDhcpStateMachine(
+  android.content.Context context,
+  com.android.internal.util.StateMachine controller,
+  java.lang.String intf)
+
+
+
+
+
+*android.net.DhcpStateMachine.onQuitting()*
+
+protected void onQuitting()
+
+
+
+
+
+*android.net.DhcpStateMachine.registerForPreDhcpNotification()*
+
+public void registerForPreDhcpNotification()
+
+This sends a notification right before DHCP request/renewal so that the 
+controller can do certain actions before DHCP packets are sent out. When the 
+controller is ready, it sends a CMD_PRE_DHCP_ACTION_COMPLETE message to 
+indicate DHCP can continue 
+
+This is used by Wifi at this time for the purpose of doing BT-Wifi coex 
+handling during Dhcp 
+
+
+
+

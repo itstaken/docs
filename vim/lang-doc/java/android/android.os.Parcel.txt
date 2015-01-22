@@ -1,0 +1,1398 @@
+*android.os.Parcel* *Parcel* Container for a message (data and object references
+
+public final class Parcel
+  extends    |java.lang.Object|
+
+|android.os.Parcel_Description|
+|android.os.Parcel_Fields|
+|android.os.Parcel_Constructors|
+|android.os.Parcel_Methods|
+
+================================================================================
+
+*android.os.Parcel_Fields*
+|android.os.Parcelable.Creator<java.lang.String>_android.os.Parcel.STRING_CREATOR|
+
+*android.os.Parcel_Methods*
+|android.os.Parcel.appendFrom(Parcel,int,int)|
+|android.os.Parcel.createBinderArray()|
+|android.os.Parcel.createBinderArrayList()|Read and return a new ArrayList cont
+|android.os.Parcel.createBooleanArray()|
+|android.os.Parcel.createByteArray()|Read and return a byte[] object from the p
+|android.os.Parcel.createCharArray()|
+|android.os.Parcel.createDoubleArray()|
+|android.os.Parcel.createFloatArray()|
+|android.os.Parcel.createIntArray()|
+|android.os.Parcel.createLongArray()|
+|android.os.Parcel.createStringArray()|
+|android.os.Parcel.createStringArrayList()|Read and return a new ArrayList cont
+|android.os.Parcel.createTypedArray(Parcelable.Creator<T>)|Read and return a ne
+|android.os.Parcel.createTypedArrayList(Parcelable.Creator<T>)|Read and return 
+|android.os.Parcel.dataAvail()|Returns the amount of data remaining to be read 
+|android.os.Parcel.dataCapacity()|Returns the total amount of space in the parc
+|android.os.Parcel.dataPosition()|Returns the current position in the parcel da
+|android.os.Parcel.dataSize()|Returns the total amount of data contained in the
+|android.os.Parcel.enforceInterface(String)|
+|android.os.Parcel.finalize()|
+|android.os.Parcel.hasFileDescriptors()|Report whether the parcel contains any 
+|android.os.Parcel.marshall()|Returns the raw bytes of the parcel.
+|android.os.Parcel.obtain()|Retrieve a new Parcel object from the pool.
+|android.os.Parcel.obtain(int)|
+|android.os.Parcel.pushAllowFds(boolean)|
+|android.os.Parcel.readArray(ClassLoader)|Read and return a new Object array fr
+|android.os.Parcel.readArrayList(ClassLoader)|Read and return a new ArrayList o
+|android.os.Parcel.readBinderArray(IBinder[])|
+|android.os.Parcel.readBinderList(List<IBinder>)|Read into the given List items
+|android.os.Parcel.readBooleanArray(boolean[])|
+|android.os.Parcel.readBundle()|Read and return a new Bundle object from the pa
+|android.os.Parcel.readBundle(ClassLoader)|Read and return a new Bundle object 
+|android.os.Parcel.readByte()|Read a byte value from the parcel at the current 
+|android.os.Parcel.readByteArray(byte[])|Read a byte[] object from the parcel a
+|android.os.Parcel.readCharArray(char[])|
+|android.os.Parcel.readCharSequence()|Read a CharSequence value from the parcel
+|android.os.Parcel.readCharSequenceArray()|Read and return a CharSequence[] obj
+|android.os.Parcel.readCreator(Parcelable.Creator<T>,ClassLoader)|
+|android.os.Parcel.readDouble()|Read a double precision floating point value fr
+|android.os.Parcel.readDoubleArray(double[])|
+|android.os.Parcel.readException()|Special function for reading an exception re
+|android.os.Parcel.readException(int,String)|Use this function for customized e
+|android.os.Parcel.readExceptionCode()|Parses the header of a Binder call's res
+|android.os.Parcel.readFileDescriptor()|Read a FileDescriptor from the parcel a
+|android.os.Parcel.readFloat()|Read a floating point value from the parcel at t
+|android.os.Parcel.readFloatArray(float[])|
+|android.os.Parcel.readHashMap(ClassLoader)|Please use#readBundle(ClassLoader)i
+|android.os.Parcel.readInt()|Read an integer value from the parcel at the curre
+|android.os.Parcel.readIntArray(int[])|
+|android.os.Parcel.readList(List,ClassLoader)|Read into an existing List object
+|android.os.Parcel.readLong()|Read a long integer value from the parcel at the 
+|android.os.Parcel.readLongArray(long[])|
+|android.os.Parcel.readMap(Map,ClassLoader)|Please use#readBundle(ClassLoader)i
+|android.os.Parcel.readParcelable(ClassLoader)|Read and return a new Parcelable
+|android.os.Parcel.readParcelableArray(ClassLoader)|Read and return a new Parce
+|android.os.Parcel.readParcelableCreator(ClassLoader)|
+|android.os.Parcel.readRawFileDescriptor()|
+|android.os.Parcel.readSerializable()|Read and return a new Serializable object
+|android.os.Parcel.readSparseArray(ClassLoader)|Read and return a new SparseArr
+|android.os.Parcel.readSparseBooleanArray()|Read and return a new SparseBoolean
+|android.os.Parcel.readString()|Read a string value from the parcel at the curr
+|android.os.Parcel.readStringArray()|Read and return a String[] object from the
+|android.os.Parcel.readStringArray(String[])|
+|android.os.Parcel.readStringList(List<String>)|Read into the given List items 
+|android.os.Parcel.readStrongBinder()|Read an object from the parcel at the cur
+|android.os.Parcel.readTypedArray(Parcelable.Creator<T>)|
+|android.os.Parcel.readTypedArray(T[],Parcelable.Creator<T>)|
+|android.os.Parcel.readTypedList(List<T>,Parcelable.Creator<T>)|Read into the g
+|android.os.Parcel.readValue(ClassLoader)|Read a typed object from a parcel.
+|android.os.Parcel.recycle()|Put a Parcel object back into the pool.
+|android.os.Parcel.restoreAllowFds(boolean)|
+|android.os.Parcel.setDataCapacity(int)|Change the capacity (current available 
+|android.os.Parcel.setDataPosition(int)|Move the current read/write position in
+|android.os.Parcel.setDataSize(int)|Change the amount of data in the parcel.
+|android.os.Parcel.unmarshall(byte[],int,int)|Set the bytes in data to be the r
+|android.os.Parcel.writeArray(Object[])|Flatten an Object array into the parcel
+|android.os.Parcel.writeBinderArray(IBinder[])|
+|android.os.Parcel.writeBinderList(List<IBinder>)|Flatten a List containing IBi
+|android.os.Parcel.writeBooleanArray(boolean[])|
+|android.os.Parcel.writeBundle(Bundle)|Flatten a Bundle into the parcel at the 
+|android.os.Parcel.writeByte(byte)|Write a byte value into the parcel at the cu
+|android.os.Parcel.writeByteArray(byte[])|Write a byte array into the parcel at
+|android.os.Parcel.writeByteArray(byte[],int,int)|Write a byte array into the p
+|android.os.Parcel.writeCharArray(char[])|
+|android.os.Parcel.writeCharSequence(CharSequence)|Write a CharSequence value i
+|android.os.Parcel.writeCharSequenceArray(CharSequence[])|
+|android.os.Parcel.writeDouble(double)|Write a double precision floating point 
+|android.os.Parcel.writeDoubleArray(double[])|
+|android.os.Parcel.writeException(Exception)|Special function for writing an ex
+|android.os.Parcel.writeFileDescriptor(FileDescriptor)|Write a FileDescriptor i
+|android.os.Parcel.writeFloat(float)|Write a floating point value into the parc
+|android.os.Parcel.writeFloatArray(float[])|
+|android.os.Parcel.writeInt(int)|Write an integer value into the parcel at the 
+|android.os.Parcel.writeIntArray(int[])|
+|android.os.Parcel.writeInterfaceToken(String)|Store or read an IBinder interfa
+|android.os.Parcel.writeList(List)|Flatten a List into the parcel at the curren
+|android.os.Parcel.writeLong(long)|Write a long integer value into the parcel a
+|android.os.Parcel.writeLongArray(long[])|
+|android.os.Parcel.writeMap(Map)|Please use#writeBundleinstead.
+|android.os.Parcel.writeNoException()|Special function for writing information 
+|android.os.Parcel.writeParcelable(Parcelable,int)|Flatten the name of the clas
+|android.os.Parcel.writeParcelableArray(T[],int)|Write a heterogeneous array of
+|android.os.Parcel.writeParcelableCreator(Parcelable)|
+|android.os.Parcel.writeSerializable(Serializable)|Write a generic serializable
+|android.os.Parcel.writeSparseArray(SparseArray<Object>)|Flatten a generic Spar
+|android.os.Parcel.writeSparseBooleanArray(SparseBooleanArray)|
+|android.os.Parcel.writeString(String)|Write a string value into the parcel at 
+|android.os.Parcel.writeStringArray(String[])|
+|android.os.Parcel.writeStringList(List<String>)|Flatten a List containing Stri
+|android.os.Parcel.writeStrongBinder(IBinder)|Write an object into the parcel a
+|android.os.Parcel.writeStrongInterface(IInterface)|Write an object into the pa
+|android.os.Parcel.writeTypedArray(T[],int)|Flatten a heterogeneous array conta
+|android.os.Parcel.writeTypedList(List<T>)|Flatten a List containing a particul
+|android.os.Parcel.writeValue(Object)|Flatten a generic object in to a parcel.
+
+*android.os.Parcel_Description*
+
+Container for a message (data and object references) that can be sent through 
+an IBinder. A Parcel can contain both flattened data that will be unflattened 
+on the other side of the IPC (using the various methods here for writing 
+specific types, or the general (|android.os.Parcelable|) interface), and 
+references to live (|android.os.IBinder|) objects that will result in the other 
+side receiving a proxy IBinder connected with the original IBinder in the 
+Parcel. 
+
+Parcel is not a general-purpose serialization mechanism. This class (and the 
+corresponding (|android.os.Parcelable|) API for placing arbitrary objects into 
+a Parcel) is designed as a high-performance IPC transport. As such, it is not 
+appropriate to place any Parcel data in to persistent storage: changes in the 
+underlying implementation of any of the data in the Parcel can render older 
+data unreadable. 
+
+The bulk of the Parcel API revolves around reading and writing data of various 
+types. There are six major classes of such functions available. 
+
+Primitives 
+
+The most basic data functions are for writing and reading primitive data types: 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) . Most 
+other data operations are built on top of these. The given data is written and 
+read using the endianess of the host CPU. 
+
+Primitive Arrays 
+
+There are a variety of methods for reading and writing raw arrays of primitive 
+objects, which generally result in writing a 4-byte length followed by the 
+primitive data items. The methods for reading can either read the data into an 
+existing array, or create and return a new array. These available types are: 
+
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) . (|android.os.Parcel|) , (|android.os.Parcel|) . 
+
+Parcelables 
+
+The (|android.os.Parcelable|) protocol provides an extremely efficient (but 
+low-level) protocol for objects to write and read themselves from Parcels. You 
+can use the direct methods (|android.os.Parcel|) and (|android.os.Parcel|) or 
+(|android.os.Parcel|) and (|android.os.Parcel|) to write or read. These methods 
+write both the class type and its data to the Parcel, allowing that class to be 
+reconstructed from the appropriate class loader when later reading. 
+
+There are also some methods that provide a more efficient way to work with 
+Parcelables: (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) and (|android.os.Parcel|) . These methods do not write 
+the class information of the original object: instead, the caller of the read 
+function must know what type to expect and pass in the appropriate 
+Parcelable.Creator(|android.os.Parcelable.Creator|) instead to properly 
+construct the new object and read its data. (To more efficient write and read a 
+single Parceable object, you can directly call 
+Parcelable.writeToParcel(|android.os.Parcelable|) and 
+Parcelable.Creator.createFromParcel(|android.os.Parcelable.Creator|) yourself.) 
+
+Bundles 
+
+A special type-safe container, called (|android.os.Bundle|) , is available for 
+key/value maps of heterogeneous values. This has many optimizations for 
+improved performance when reading and writing data, and its type-safe API 
+avoids difficult to debug type errors when finally marshalling the data 
+contents into a Parcel. The methods to use are (|android.os.Parcel|) , 
+(|android.os.Parcel|) , and (|android.os.Parcel|) . 
+
+Active Objects 
+
+An unusual feature of Parcel is the ability to read and write active objects. 
+For these objects the actual contents of the object is not written, rather a 
+special token referencing the object is written. When reading the object back 
+from the Parcel, you do not get a new instance of the object, but rather a 
+handle that operates on the exact same object that was originally written. 
+There are two forms of active objects available. 
+
+(|android.os.Binder|) objects are a core facility of Android's general 
+cross-process communication system. The (|android.os.IBinder|) interface 
+describes an abstract protocol with a Binder object. Any such interface can be 
+written in to a Parcel, and upon reading you will receive either the original 
+object implementing that interface or a special proxy implementation that 
+communicates calls back to the original object. The methods to use are 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) . 
+
+FileDescriptor objects, representing raw Linux file descriptor identifiers, can 
+be written and (|android.os.ParcelFileDescriptor|) objects returned to operate 
+on the original file descriptor. The returned file descriptor is a dup of the 
+original file descriptor: the object and fd is different, but operating on the 
+same underlying file stream, with the same position, etc. The methods to use 
+are (|android.os.Parcel|) , (|android.os.Parcel|) . 
+
+Untyped Containers 
+
+A final class of methods are for writing and reading standard Java containers 
+of arbitrary types. These all revolve around the (|android.os.Parcel|) and 
+(|android.os.Parcel|) methods which define the types of objects allowed. The 
+container methods are (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) , (|android.os.Parcel|) , (|android.os.Parcel|) , 
+(|android.os.Parcel|) . 
+
+
+
+*android.os.Parcelable.Creator<java.lang.String>_android.os.Parcel.STRING_CREATOR*
+
+
+
+
+
+*android.os.Parcel.appendFrom(Parcel,int,int)*
+
+public final void appendFrom(
+  android.os.Parcel parcel,
+  int offset,
+  int length)
+
+
+
+
+
+*android.os.Parcel.createBinderArray()*
+
+public final |android.os.IBinder|[] createBinderArray()
+
+
+
+
+
+*android.os.Parcel.createBinderArrayList()*
+
+public final |java.util.ArrayList|<IBinder> createBinderArrayList()
+
+Read and return a new ArrayList containing IBinder objects from the parcel that 
+was written with (|android.os.Parcel|) at the current dataPosition(). Returns 
+null if the previously written list object was null. 
+
+
+
+    Returns: A newly created ArrayList containing strings with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.createBooleanArray()*
+
+public final boolean[] createBooleanArray()
+
+
+
+
+
+*android.os.Parcel.createByteArray()*
+
+public final byte[] createByteArray()
+
+Read and return a byte[] object from the parcel. 
+
+
+
+*android.os.Parcel.createCharArray()*
+
+public final char[] createCharArray()
+
+
+
+
+
+*android.os.Parcel.createDoubleArray()*
+
+public final double[] createDoubleArray()
+
+
+
+
+
+*android.os.Parcel.createFloatArray()*
+
+public final float[] createFloatArray()
+
+
+
+
+
+*android.os.Parcel.createIntArray()*
+
+public final int[] createIntArray()
+
+
+
+
+
+*android.os.Parcel.createLongArray()*
+
+public final long[] createLongArray()
+
+
+
+
+
+*android.os.Parcel.createStringArray()*
+
+public final |java.lang.String|[] createStringArray()
+
+
+
+
+
+*android.os.Parcel.createStringArrayList()*
+
+public final |java.util.ArrayList|<String> createStringArrayList()
+
+Read and return a new ArrayList containing String objects from the parcel that 
+was written with (|android.os.Parcel|) at the current dataPosition(). Returns 
+null if the previously written list object was null. 
+
+
+
+    Returns: A newly created ArrayList containing strings with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.createTypedArray(Parcelable.Creator<T>)*
+
+public final |T|[] createTypedArray(android.os.Parcelable.Creator<T> c)
+
+Read and return a new array containing a particular object type from the parcel 
+at the current dataPosition(). Returns null if the previously written array was 
+null. The array must have previously been written via (|android.os.Parcel|) 
+with the same object type. 
+
+
+
+    Returns: A newly created array containing objects with the same data as those that were 
+             previously written. 
+
+*android.os.Parcel.createTypedArrayList(Parcelable.Creator<T>)*
+
+public final |java.util.ArrayList|<T> createTypedArrayList(android.os.Parcelable.Creator<T> c)
+
+Read and return a new ArrayList containing a particular object type from the 
+parcel that was written with (|android.os.Parcel|) at the current 
+dataPosition(). Returns null if the previously written list object was null. 
+The list must have previously been written via (|android.os.Parcel|) with the 
+same object type. 
+
+
+
+    Returns: A newly created ArrayList containing objects with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.dataAvail()*
+
+public final int dataAvail()
+
+Returns the amount of data remaining to be read from the parcel. That is, 
+(|android.os.Parcel|) - (|android.os.Parcel|) . 
+
+
+
+*android.os.Parcel.dataCapacity()*
+
+public final int dataCapacity()
+
+Returns the total amount of space in the parcel. This is always >= 
+(|android.os.Parcel|) . The difference between it and dataSize() is the amount 
+of room left until the parcel needs to re-allocate its data buffer. 
+
+
+
+*android.os.Parcel.dataPosition()*
+
+public final int dataPosition()
+
+Returns the current position in the parcel data. Never more than 
+(|android.os.Parcel|) . 
+
+
+
+*android.os.Parcel.dataSize()*
+
+public final int dataSize()
+
+Returns the total amount of data contained in the parcel. 
+
+
+
+*android.os.Parcel.enforceInterface(String)*
+
+public final void enforceInterface(java.lang.String interfaceName)
+
+
+
+
+
+*android.os.Parcel.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.Parcel.hasFileDescriptors()*
+
+public final boolean hasFileDescriptors()
+
+Report whether the parcel contains any marshalled file descriptors. 
+
+
+
+*android.os.Parcel.marshall()*
+
+public final byte[] marshall()
+
+Returns the raw bytes of the parcel. 
+
+The data you retrieve here must not be placed in any kind of persistent storage 
+(on local disk, across a network, etc). For that, you should use standard 
+serialization or another kind of general serialization mechanism. The Parcel 
+marshalled representation is highly optimized for local IPC, and as such does 
+not attempt to maintain compatibility with data created in different versions 
+of the platform. 
+
+
+
+*android.os.Parcel.obtain()*
+
+public static |android.os.Parcel| obtain()
+
+Retrieve a new Parcel object from the pool. 
+
+
+
+*android.os.Parcel.obtain(int)*
+
+protected static final |android.os.Parcel| obtain(int obj)
+
+
+
+
+
+*android.os.Parcel.pushAllowFds(boolean)*
+
+public final boolean pushAllowFds(boolean allowFds)
+
+
+
+
+
+*android.os.Parcel.readArray(ClassLoader)*
+
+public final |java.lang.Object|[] readArray(java.lang.ClassLoader loader)
+
+Read and return a new Object array from the parcel at the current 
+dataPosition(). Returns null if the previously written array was null. The 
+given class loader will be used to load any enclosed Parcelables. 
+
+
+
+*android.os.Parcel.readArrayList(ClassLoader)*
+
+public final |java.util.ArrayList| readArrayList(java.lang.ClassLoader loader)
+
+Read and return a new ArrayList object from the parcel at the current 
+dataPosition(). Returns null if the previously written list object was null. 
+The given class loader will be used to load any enclosed Parcelables. 
+
+
+
+*android.os.Parcel.readBinderArray(IBinder[])*
+
+public final void readBinderArray(android.os.IBinder[] val)
+
+
+
+
+
+*android.os.Parcel.readBinderList(List<IBinder>)*
+
+public final void readBinderList(java.util.List<android.os.IBinder> list)
+
+Read into the given List items IBinder objects that were written with 
+(|android.os.Parcel|) at the current dataPosition(). 
+
+
+
+    Returns: A newly created ArrayList containing strings with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.readBooleanArray(boolean[])*
+
+public final void readBooleanArray(boolean[] val)
+
+
+
+
+
+*android.os.Parcel.readBundle()*
+
+public final |android.os.Bundle| readBundle()
+
+Read and return a new Bundle object from the parcel at the current 
+dataPosition(). Returns null if the previously written Bundle object was null. 
+
+
+
+*android.os.Parcel.readBundle(ClassLoader)*
+
+public final |android.os.Bundle| readBundle(java.lang.ClassLoader loader)
+
+Read and return a new Bundle object from the parcel at the current 
+dataPosition(), using the given class loader to initialize the class loader of 
+the Bundle for later retrieval of Parcelable objects. Returns null if the 
+previously written Bundle object was null. 
+
+
+
+*android.os.Parcel.readByte()*
+
+public final byte readByte()
+
+Read a byte value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readByteArray(byte[])*
+
+public final void readByteArray(byte[] val)
+
+Read a byte[] object from the parcel and copy it into the given byte array. 
+
+
+
+*android.os.Parcel.readCharArray(char[])*
+
+public final void readCharArray(char[] val)
+
+
+
+
+
+*android.os.Parcel.readCharSequence()*
+
+public final |java.lang.CharSequence| readCharSequence()
+
+Read a CharSequence value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readCharSequenceArray()*
+
+public final |java.lang.CharSequence|[] readCharSequenceArray()
+
+Read and return a CharSequence[] object from the parcel. 
+
+
+
+*android.os.Parcel.readCreator(Parcelable.Creator<T>,ClassLoader)*
+
+public final |T| readCreator(
+  android.os.Parcelable.Creator<T> creator,
+  java.lang.ClassLoader loader)
+
+
+
+
+
+*android.os.Parcel.readDouble()*
+
+public final double readDouble()
+
+Read a double precision floating point value from the parcel at the current 
+dataPosition(). 
+
+
+
+*android.os.Parcel.readDoubleArray(double[])*
+
+public final void readDoubleArray(double[] val)
+
+
+
+
+
+*android.os.Parcel.readException()*
+
+public final void readException()
+
+Special function for reading an exception result from the header of a parcel, 
+to be used after receiving the result of a transaction. This will throw the 
+exception for you if it had been written to the Parcel, otherwise return and 
+let you read the normal result data from the Parcel. 
+
+
+
+*android.os.Parcel.readException(int,String)*
+
+public final void readException(
+  int code,
+  java.lang.String msg)
+
+Use this function for customized exception handling. customized method call 
+this method for all unknown case 
+
+
+    code - exception code 
+    msg - exception message 
+
+*android.os.Parcel.readExceptionCode()*
+
+public final int readExceptionCode()
+
+Parses the header of a Binder call's response Parcel and returns the exception 
+code. Deals with lite or fat headers. In the common successful case, this 
+header is generally zero. In less common cases, it's a small negative number 
+and will be followed by an error string. 
+
+This exists purely for android.database.DatabaseUtils and insulating it from 
+having to handle fat headers as returned by e.g. StrictMode-induced RPC 
+responses. 
+
+
+
+*android.os.Parcel.readFileDescriptor()*
+
+public final |android.os.ParcelFileDescriptor| readFileDescriptor()
+
+Read a FileDescriptor from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readFloat()*
+
+public final float readFloat()
+
+Read a floating point value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readFloatArray(float[])*
+
+public final void readFloatArray(float[] val)
+
+
+
+
+
+*android.os.Parcel.readHashMap(ClassLoader)*
+
+public final |java.util.HashMap| readHashMap(java.lang.ClassLoader loader)
+
+Please use (|android.os.Parcel|) instead (whose data must have been written 
+with (|android.os.Parcel|) . Read and return a new HashMap object from the 
+parcel at the current dataPosition(), using the given class loader to load any 
+enclosed Parcelables. Returns null if the previously written map object was 
+null. 
+
+
+
+*android.os.Parcel.readInt()*
+
+public final int readInt()
+
+Read an integer value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readIntArray(int[])*
+
+public final void readIntArray(int[] val)
+
+
+
+
+
+*android.os.Parcel.readList(List,ClassLoader)*
+
+public final void readList(
+  java.util.List outVal,
+  java.lang.ClassLoader loader)
+
+Read into an existing List object from the parcel at the current 
+dataPosition(), using the given class loader to load any enclosed Parcelables. 
+If it is null, the default class loader is used. 
+
+
+
+*android.os.Parcel.readLong()*
+
+public final long readLong()
+
+Read a long integer value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readLongArray(long[])*
+
+public final void readLongArray(long[] val)
+
+
+
+
+
+*android.os.Parcel.readMap(Map,ClassLoader)*
+
+public final void readMap(
+  java.util.Map outVal,
+  java.lang.ClassLoader loader)
+
+Please use (|android.os.Parcel|) instead (whose data must have been written 
+with (|android.os.Parcel|) . Read into an existing Map object from the parcel 
+at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readParcelable(ClassLoader)*
+
+public final |T| readParcelable(java.lang.ClassLoader loader)
+
+Read and return a new Parcelable from the parcel. The given class loader will 
+be used to load any enclosed Parcelables. If it is null, the default class 
+loader will be used. 
+
+
+    loader - A ClassLoader from which to instantiate the Parcelable object, or null for the 
+       default class loader. 
+
+    Returns: Returns the newly created Parcelable, or null if a null object has been 
+             written. 
+
+*android.os.Parcel.readParcelableArray(ClassLoader)*
+
+public final |android.os.Parcelable|[] readParcelableArray(java.lang.ClassLoader loader)
+
+Read and return a new Parcelable array from the parcel. The given class loader 
+will be used to load any enclosed Parcelables. 
+
+
+
+    Returns: the Parcelable array, or null if the array is null 
+
+*android.os.Parcel.readParcelableCreator(ClassLoader)*
+
+public final |android.os.Parcelable.Creator|<T extends android.os.Parcelable> readParcelableCreator(java.lang.ClassLoader loader)
+
+
+
+
+
+*android.os.Parcel.readRawFileDescriptor()*
+
+public final |java.io.FileDescriptor| readRawFileDescriptor()
+
+
+
+
+
+*android.os.Parcel.readSerializable()*
+
+public final |java.io.Serializable| readSerializable()
+
+Read and return a new Serializable object from the parcel. 
+
+
+
+    Returns: the Serializable object, or null if the Serializable name wasn't found in the 
+             parcel. 
+
+*android.os.Parcel.readSparseArray(ClassLoader)*
+
+public final |android.util.SparseArray| readSparseArray(java.lang.ClassLoader loader)
+
+Read and return a new SparseArray object from the parcel at the current 
+dataPosition(). Returns null if the previously written list object was null. 
+The given class loader will be used to load any enclosed Parcelables. 
+
+
+
+*android.os.Parcel.readSparseBooleanArray()*
+
+public final |android.util.SparseBooleanArray| readSparseBooleanArray()
+
+Read and return a new SparseBooleanArray object from the parcel at the current 
+dataPosition(). Returns null if the previously written list object was null. 
+
+
+
+*android.os.Parcel.readString()*
+
+public final |java.lang.String| readString()
+
+Read a string value from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readStringArray()*
+
+public final |java.lang.String|[] readStringArray()
+
+Read and return a String[] object from the parcel. 
+
+
+
+*android.os.Parcel.readStringArray(String[])*
+
+public final void readStringArray(java.lang.String[] val)
+
+
+
+
+
+*android.os.Parcel.readStringList(List<String>)*
+
+public final void readStringList(java.util.List<java.lang.String> list)
+
+Read into the given List items String objects that were written with 
+(|android.os.Parcel|) at the current dataPosition(). 
+
+
+
+    Returns: A newly created ArrayList containing strings with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.readStrongBinder()*
+
+public final |android.os.IBinder| readStrongBinder()
+
+Read an object from the parcel at the current dataPosition(). 
+
+
+
+*android.os.Parcel.readTypedArray(Parcelable.Creator<T>)*
+
+public final |T|[] readTypedArray(android.os.Parcelable.Creator<T> c)
+
+
+
+    Deprecated
+
+
+*android.os.Parcel.readTypedArray(T[],Parcelable.Creator<T>)*
+
+public final void readTypedArray(
+  T[] val,
+  android.os.Parcelable.Creator<T> c)
+
+
+
+
+
+*android.os.Parcel.readTypedList(List<T>,Parcelable.Creator<T>)*
+
+public final void readTypedList(
+  java.util.List<T> list,
+  android.os.Parcelable.Creator<T> c)
+
+Read into the given List items containing a particular object type that were 
+written with (|android.os.Parcel|) at the current dataPosition(). The list must 
+have previously been written via (|android.os.Parcel|) with the same object 
+type. 
+
+
+
+    Returns: A newly created ArrayList containing objects with the same data as those that 
+             were previously written. 
+
+*android.os.Parcel.readValue(ClassLoader)*
+
+public final |java.lang.Object| readValue(java.lang.ClassLoader loader)
+
+Read a typed object from a parcel. The given class loader will be used to load 
+any enclosed Parcelables. If it is null, the default class loader will be used. 
+
+
+
+*android.os.Parcel.recycle()*
+
+public final void recycle()
+
+Put a Parcel object back into the pool. You must not touch the object after 
+this call. 
+
+
+
+*android.os.Parcel.restoreAllowFds(boolean)*
+
+public final void restoreAllowFds(boolean lastValue)
+
+
+
+
+
+*android.os.Parcel.setDataCapacity(int)*
+
+public final void setDataCapacity(int size)
+
+Change the capacity (current available space) of the parcel. 
+
+
+    size - The new capacity of the parcel, in bytes. Can not be less than {@link 
+       #dataSize} -- that is, you can not drop existing data with this method. 
+
+*android.os.Parcel.setDataPosition(int)*
+
+public final void setDataPosition(int pos)
+
+Move the current read/write position in the parcel. 
+
+
+    pos - New offset in the parcel; must be between 0 and {@link #dataSize}. 
+
+*android.os.Parcel.setDataSize(int)*
+
+public final void setDataSize(int size)
+
+Change the amount of data in the parcel. Can be either smaller or larger than 
+the current size. If larger than the current capacity, more memory will be 
+allocated. 
+
+
+    size - The new number of bytes in the Parcel. 
+
+*android.os.Parcel.unmarshall(byte[],int,int)*
+
+public final void unmarshall(
+  byte[] data,
+  int offest,
+  int length)
+
+Set the bytes in data to be the raw bytes of this Parcel. 
+
+
+
+*android.os.Parcel.writeArray(Object[])*
+
+public final void writeArray(java.lang.Object[] val)
+
+Flatten an Object array into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. The array values are written using 
+(|android.os.Parcel|) and must follow the specification there. 
+
+
+
+*android.os.Parcel.writeBinderArray(IBinder[])*
+
+public final void writeBinderArray(android.os.IBinder[] val)
+
+
+
+
+
+*android.os.Parcel.writeBinderList(List<IBinder>)*
+
+public final void writeBinderList(java.util.List<android.os.IBinder> val)
+
+Flatten a List containing IBinder objects into the parcel, at the current 
+dataPosition() and growing dataCapacity() if needed. They can later be 
+retrieved with (|android.os.Parcel|) or (|android.os.Parcel|) . 
+
+
+    val - The list of strings to be written. 
+
+*android.os.Parcel.writeBooleanArray(boolean[])*
+
+public final void writeBooleanArray(boolean[] val)
+
+
+
+
+
+*android.os.Parcel.writeBundle(Bundle)*
+
+public final void writeBundle(android.os.Bundle val)
+
+Flatten a Bundle into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeByte(byte)*
+
+public final void writeByte(byte val)
+
+Write a byte value into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeByteArray(byte[])*
+
+public final void writeByteArray(byte[] b)
+
+Write a byte array into the parcel at the current (|android.os.Parcel|) , 
+growing (|android.os.Parcel|) if needed. 
+
+
+    b - Bytes to place into the parcel. 
+
+*android.os.Parcel.writeByteArray(byte[],int,int)*
+
+public final void writeByteArray(
+  byte[] b,
+  int offset,
+  int len)
+
+Write a byte array into the parcel at the current (|android.os.Parcel|) , 
+growing (|android.os.Parcel|) if needed. 
+
+
+    b - Bytes to place into the parcel. 
+    offset - Index of first byte to be written. 
+    len - Number of bytes to write. 
+
+*android.os.Parcel.writeCharArray(char[])*
+
+public final void writeCharArray(char[] val)
+
+
+
+
+
+*android.os.Parcel.writeCharSequence(CharSequence)*
+
+public final void writeCharSequence(java.lang.CharSequence val)
+
+Write a CharSequence value into the parcel at the current dataPosition(), 
+growing dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeCharSequenceArray(CharSequence[])*
+
+public final void writeCharSequenceArray(java.lang.CharSequence[] val)
+
+
+
+
+
+*android.os.Parcel.writeDouble(double)*
+
+public final void writeDouble(double val)
+
+Write a double precision floating point value into the parcel at the current 
+dataPosition(), growing dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeDoubleArray(double[])*
+
+public final void writeDoubleArray(double[] val)
+
+
+
+
+
+*android.os.Parcel.writeException(Exception)*
+
+public final void writeException(java.lang.Exception e)
+
+Special function for writing an exception result at the header of a parcel, to 
+be used when returning an exception from a transaction. Note that this 
+currently only supports a few exception types; any other exception will be 
+re-thrown by this function as a RuntimeException (to be caught by the system's 
+last-resort exception handling when dispatching a transaction). 
+
+The supported exception types are: 
+
+(|android.os.BadParcelableException|) (|java.lang.IllegalArgumentException|) 
+(|java.lang.IllegalStateException|) (|java.lang.NullPointerException|) 
+(|java.lang.SecurityException|) (|android.os.NetworkOnMainThreadException|) 
+
+
+    e - The Exception to be written. 
+
+*android.os.Parcel.writeFileDescriptor(FileDescriptor)*
+
+public final void writeFileDescriptor(java.io.FileDescriptor val)
+
+Write a FileDescriptor into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+The file descriptor will not be closed, which may result in file descriptor 
+leaks when objects are returned from Binder calls. Use 
+(|android.os.ParcelFileDescriptor|) instead, which accepts contextual flags and 
+will close the original file descriptor if (|android.os.Parcelable|) is set. 
+
+
+
+*android.os.Parcel.writeFloat(float)*
+
+public final void writeFloat(float val)
+
+Write a floating point value into the parcel at the current dataPosition(), 
+growing dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeFloatArray(float[])*
+
+public final void writeFloatArray(float[] val)
+
+
+
+
+
+*android.os.Parcel.writeInt(int)*
+
+public final void writeInt(int val)
+
+Write an integer value into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeIntArray(int[])*
+
+public final void writeIntArray(int[] val)
+
+
+
+
+
+*android.os.Parcel.writeInterfaceToken(String)*
+
+public final void writeInterfaceToken(java.lang.String interfaceName)
+
+Store or read an IBinder interface token in the parcel at the current 
+(|android.os.Parcel|) . This is used to validate that the marshalled 
+transaction is intended for the target interface. 
+
+
+
+*android.os.Parcel.writeList(List)*
+
+public final void writeList(java.util.List val)
+
+Flatten a List into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. The List values are written using 
+(|android.os.Parcel|) and must follow the specification there. 
+
+
+
+*android.os.Parcel.writeLong(long)*
+
+public final void writeLong(long val)
+
+Write a long integer value into the parcel at the current dataPosition(), 
+growing dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeLongArray(long[])*
+
+public final void writeLongArray(long[] val)
+
+
+
+
+
+*android.os.Parcel.writeMap(Map)*
+
+public final void writeMap(java.util.Map val)
+
+Please use (|android.os.Parcel|) instead. Flattens a Map into the parcel at the 
+current dataPosition(), growing dataCapacity() if needed. The Map keys must be 
+String objects. The Map values are written using (|android.os.Parcel|) and must 
+follow the specification there. 
+
+It is strongly recommended to use (|android.os.Parcel|) instead of this method, 
+since the Bundle class provides a type-safe API that allows you to avoid 
+mysterious type errors at the point of marshalling. 
+
+
+
+*android.os.Parcel.writeNoException()*
+
+public final void writeNoException()
+
+Special function for writing information at the front of the Parcel indicating 
+that no exception occurred. 
+
+
+
+*android.os.Parcel.writeParcelable(Parcelable,int)*
+
+public final void writeParcelable(
+  android.os.Parcelable p,
+  int parcelableFlags)
+
+Flatten the name of the class of the Parcelable and its contents into the 
+parcel. 
+
+
+    p - The Parcelable object to be written. 
+    parcelableFlags - Contextual flags as per {@link Parcelable#writeToParcel(Parcel, int) 
+       Parcelable.writeToParcel()}. 
+
+*android.os.Parcel.writeParcelableArray(T[],int)*
+
+public final void writeParcelableArray(
+  T[] value,
+  int parcelableFlags)
+
+Write a heterogeneous array of Parcelable objects into the Parcel. Each object 
+in the array is written along with its class name, so that the correct class 
+can later be instantiated. As a result, this has significantly more overhead 
+than (|android.os.Parcel|) , but will correctly handle an array containing more 
+than one type of object. 
+
+
+    value - The array of objects to be written. 
+    parcelableFlags - Contextual flags as per {@link Parcelable#writeToParcel(Parcel, int) 
+       Parcelable.writeToParcel()}. 
+
+*android.os.Parcel.writeParcelableCreator(Parcelable)*
+
+public final void writeParcelableCreator(android.os.Parcelable p)
+
+
+
+
+
+*android.os.Parcel.writeSerializable(Serializable)*
+
+public final void writeSerializable(java.io.Serializable s)
+
+Write a generic serializable object in to a Parcel. It is strongly recommended 
+that this method be avoided, since the serialization overhead is extremely 
+large, and this approach will be much slower than using the other approaches to 
+writing data in to a Parcel. 
+
+
+
+*android.os.Parcel.writeSparseArray(SparseArray<Object>)*
+
+public final void writeSparseArray(android.util.SparseArray<java.lang.Object> val)
+
+Flatten a generic SparseArray into the parcel at the current dataPosition(), 
+growing dataCapacity() if needed. The SparseArray values are written using 
+(|android.os.Parcel|) and must follow the specification there. 
+
+
+
+*android.os.Parcel.writeSparseBooleanArray(SparseBooleanArray)*
+
+public final void writeSparseBooleanArray(android.util.SparseBooleanArray val)
+
+
+
+
+
+*android.os.Parcel.writeString(String)*
+
+public final void writeString(java.lang.String val)
+
+Write a string value into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeStringArray(String[])*
+
+public final void writeStringArray(java.lang.String[] val)
+
+
+
+
+
+*android.os.Parcel.writeStringList(List<String>)*
+
+public final void writeStringList(java.util.List<java.lang.String> val)
+
+Flatten a List containing String objects into the parcel, at the current 
+dataPosition() and growing dataCapacity() if needed. They can later be 
+retrieved with (|android.os.Parcel|) or (|android.os.Parcel|) . 
+
+
+    val - The list of strings to be written. 
+
+*android.os.Parcel.writeStrongBinder(IBinder)*
+
+public final void writeStrongBinder(android.os.IBinder val)
+
+Write an object into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeStrongInterface(IInterface)*
+
+public final void writeStrongInterface(android.os.IInterface val)
+
+Write an object into the parcel at the current dataPosition(), growing 
+dataCapacity() if needed. 
+
+
+
+*android.os.Parcel.writeTypedArray(T[],int)*
+
+public final void writeTypedArray(
+  T[] val,
+  int parcelableFlags)
+
+Flatten a heterogeneous array containing a particular object type into the 
+parcel, at the current dataPosition() and growing dataCapacity() if needed. The 
+type of the objects in the array must be one that implements Parcelable. Unlike 
+the (|android.os.Parcel|) method, however, only the raw data of the objects is 
+written and not their type, so you must use (|android.os.Parcel|) with the 
+correct corresponding (|android.os.Parcelable.Creator|) implementation to 
+unmarshall them. 
+
+
+    val - The array of objects to be written. 
+    parcelableFlags - Contextual flags as per {@link Parcelable#writeToParcel(Parcel, int) 
+       Parcelable.writeToParcel()}. 
+
+*android.os.Parcel.writeTypedList(List<T>)*
+
+public final void writeTypedList(java.util.List<T> val)
+
+Flatten a List containing a particular object type into the parcel, at the 
+current dataPosition() and growing dataCapacity() if needed. The type of the 
+objects in the list must be one that implements Parcelable. Unlike the generic 
+writeList() method, however, only the raw data of the objects is written and 
+not their type, so you must use the corresponding readTypedList() to unmarshall 
+them. 
+
+
+    val - The list of objects to be written. 
+
+*android.os.Parcel.writeValue(Object)*
+
+public final void writeValue(java.lang.Object v)
+
+Flatten a generic object in to a parcel. The given Object value may currently 
+be one of the following types: 
+
+null String Byte Short Integer Long Float Double Boolean String[] boolean[] 
+byte[] int[] long[] Object[] (supporting objects of the same type defined 
+here). (|android.os.Bundle|) Map (as supported by (|android.os.Parcel|) ). Any 
+object that implements the (|android.os.Parcelable|) protocol. Parcelable[] 
+CharSequence (as supported by (|android.text.TextUtils|) ). List (as supported 
+by (|android.os.Parcel|) ). (|android.util.SparseArray|) (as supported by 
+(|android.os.Parcel|) ). (|android.os.IBinder|) Any object that implements 
+Serializable (but see (|android.os.Parcel|) for caveats). Note that all of the 
+previous types have relatively efficient implementations for writing to a 
+Parcel; having to rely on the generic serialization approach is much less 
+efficient and should be avoided whenever possible. 
+
+(|android.os.Parcelable|) objects are written with (|android.os.Parcelable|) 
+using contextual flags of 0. When serializing objects containing 
+(|android.os.ParcelFileDescriptor|) s, this may result in file descriptor leaks 
+when they are returned from Binder calls (where (|android.os.Parcelable|) 
+should be used). 
+
+
+
+

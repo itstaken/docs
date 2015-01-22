@@ -1,0 +1,89 @@
+*android.os.CountDownTimer* *CountDownTimer* Schedule a countdown until a time i
+
+public abstract class CountDownTimer
+  extends    |java.lang.Object|
+
+|android.os.CountDownTimer_Description|
+|android.os.CountDownTimer_Fields|
+|android.os.CountDownTimer_Constructors|
+|android.os.CountDownTimer_Methods|
+
+================================================================================
+
+*android.os.CountDownTimer_Constructors*
+|android.os.CountDownTimer(long,long)|
+
+*android.os.CountDownTimer_Methods*
+|android.os.CountDownTimer.cancel()|Cancel the countdown.
+|android.os.CountDownTimer.onFinish()|Callback fired when the time is up.
+|android.os.CountDownTimer.onTick(long)|Callback fired on regular interval.
+|android.os.CountDownTimer.start()|Start the countdown.
+
+*android.os.CountDownTimer_Description*
+
+Schedule a countdown until a time in the future, with regular notifications on 
+intervals along the way. 
+
+Example of showing a 30 second countdown in a text field: 
+
+new CountDownTimer(30000, 1000) { 
+
+public void onTick(long millisUntilFinished) { mTextField.setText("seconds 
+remaining: " + millisUntilFinished / 1000); } 
+
+public void onFinish() { mTextField.setText("done!"); } }.start(); 
+
+The calls to (|android.os.CountDownTimer|) are synchronized to this object so 
+that one call to (|android.os.CountDownTimer|) won't ever occur before the 
+previous callback is complete. This is only relevant when the implementation of 
+(|android.os.CountDownTimer|) takes an amount of time to execute that is 
+significant compared to the countdown interval. 
+
+
+
+*android.os.CountDownTimer(long,long)*
+
+public CountDownTimer(
+  long millisInFuture,
+  long countDownInterval)
+
+
+
+    millisInFuture - The number of millis in the future from the call to {@link #start()} until the 
+       countdown is done and {@link #onFinish()} is called. 
+    countDownInterval - The interval along the way to receive {@link #onTick(long)} callbacks. 
+
+*android.os.CountDownTimer.cancel()*
+
+public final void cancel()
+
+Cancel the countdown. 
+
+
+
+*android.os.CountDownTimer.onFinish()*
+
+public abstract void onFinish()
+
+Callback fired when the time is up. 
+
+
+
+*android.os.CountDownTimer.onTick(long)*
+
+public abstract void onTick(long millisUntilFinished)
+
+Callback fired on regular interval. 
+
+
+    millisUntilFinished - The amount of time until finished. 
+
+*android.os.CountDownTimer.start()*
+
+public final synchronized |android.os.CountDownTimer| start()
+
+Start the countdown. 
+
+
+
+

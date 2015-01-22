@@ -1,0 +1,130 @@
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix* *ScriptIntrinsicColorMatrix* 
+
+public class ScriptIntrinsicColorMatrix
+  extends    |android.support.v8.renderscript.ScriptIntrinsic|
+
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Description|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Fields|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Constructors|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Methods|
+
+================================================================================
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Constructors*
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix(int,RenderScript)|
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Methods*
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.create(RenderScript,Element)|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.forEach(Allocation,Allocation)|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.getKernelID()|Get a
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setColorMatrix(Matrix3f)|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setColorMatrix(Matrix4f)|
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setGreyscale()|Set 
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setRGBtoYUV()|Set t
+|android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setYUVtoRGB()|Set t
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix_Description*
+
+Intrinsic for applying a color matrix to allocations. 
+
+This has the same effect as loading each element and converting it to a 
+(|android.support.v8.renderscript.Element|) , multiplying the result by the 4x4 
+color matrix as performed by rsMatrixMultiply() and writing it to the output 
+after conversion back to (|android.support.v8.renderscript.Element|) . 
+
+
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix(int,RenderScript)*
+
+protected ScriptIntrinsicColorMatrix(
+  int id,
+  android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.create(RenderScript,Element)*
+
+public static |android.support.v8.renderscript.ScriptIntrinsicColorMatrix| create(
+  android.support.v8.renderscript.RenderScript rs,
+  android.support.v8.renderscript.Element e)
+
+Create an intrinsic for applying a color matrix to an allocation. 
+
+Supported elements types are (|android.support.v8.renderscript.Element|) 
+
+
+    rs - The RenderScript context 
+    e - Element type for intputs and outputs 
+
+    Returns: ScriptIntrinsicColorMatrix 
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.forEach(Allocation,Allocation)*
+
+public void forEach(
+  android.support.v8.renderscript.Allocation ain,
+  android.support.v8.renderscript.Allocation aout)
+
+Invoke the kernel and apply the matrix to each cell of ain and copy to aout. 
+
+
+    ain - Input allocation 
+    aout - Output allocation 
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.getKernelID()*
+
+public |android.support.v8.renderscript.Script.KernelID| getKernelID()
+
+Get a KernelID for this intrinsic kernel. 
+
+
+
+    Returns: Script.KernelID The KernelID object. 
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setColorMatrix(Matrix3f)*
+
+public void setColorMatrix(android.support.v8.renderscript.Matrix3f m)
+
+Set the color matrix which will be applied to each cell of the image. This will 
+set the alpha channel to be a copy. 
+
+
+    m - The 3x3 matrix to set. 
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setColorMatrix(Matrix4f)*
+
+public void setColorMatrix(android.support.v8.renderscript.Matrix4f m)
+
+Set the color matrix which will be applied to each cell of the image. 
+
+
+    m - The 4x4 matrix to set. 
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setGreyscale()*
+
+public void setGreyscale()
+
+Set a color matrix to convert from RGB to luminance. The alpha channel will be 
+a copy. 
+
+
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setRGBtoYUV()*
+
+public void setRGBtoYUV()
+
+Set the matrix to convert from RGB to YUV with a direct copy of the 4th 
+channel. 
+
+
+
+*android.support.v8.renderscript.ScriptIntrinsicColorMatrix.setYUVtoRGB()*
+
+public void setYUVtoRGB()
+
+Set the matrix to convert from YUV to RGB with a direct copy of the 4th 
+channel. 
+
+
+
+

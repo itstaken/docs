@@ -1,0 +1,329 @@
+*android.os.storage.StorageVolume* *StorageVolume* Description of a storage volu
+
+public class StorageVolume
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.os.storage.StorageVolume_Description|
+|android.os.storage.StorageVolume_Fields|
+|android.os.storage.StorageVolume_Constructors|
+|android.os.storage.StorageVolume_Methods|
+
+================================================================================
+
+*android.os.storage.StorageVolume_Fields*
+|android.os.Parcelable.Creator<android.os.storage.StorageVolume>_android.os.storage.StorageVolume.CREATOR|
+|java.lang.String_android.os.storage.StorageVolume.EXTRA_STORAGE_VOLUME|
+
+*android.os.storage.StorageVolume_Constructors*
+|android.os.storage.StorageVolume(File,int,boolean,boolean,boolean,int,boolean,long,UserHandle)|
+
+*android.os.storage.StorageVolume_Methods*
+|android.os.storage.StorageVolume.allowMassStorage()|Returns true if this volum
+|android.os.storage.StorageVolume.describeContents()|
+|android.os.storage.StorageVolume.dump(IndentingPrintWriter)|
+|android.os.storage.StorageVolume.equals(Object)|
+|android.os.storage.StorageVolume.fromTemplate(StorageVolume,File,UserHandle)|
+|android.os.storage.StorageVolume.getDescription(Context)|Returns a user visibl
+|android.os.storage.StorageVolume.getDescriptionId()|
+|android.os.storage.StorageVolume.getFatVolumeId()|Parse and return volume UUID
+|android.os.storage.StorageVolume.getMaxFileSize()|Returns maximum file size fo
+|android.os.storage.StorageVolume.getMtpReserveSpace()|Number of megabytes of s
+|android.os.storage.StorageVolume.getOwner()|
+|android.os.storage.StorageVolume.getPath()|Returns the mount path for the volu
+|android.os.storage.StorageVolume.getPathFile()|
+|android.os.storage.StorageVolume.getState()|
+|android.os.storage.StorageVolume.getStorageId()|Returns the MTP storage ID for
+|android.os.storage.StorageVolume.getUserLabel()|
+|android.os.storage.StorageVolume.getUuid()|
+|android.os.storage.StorageVolume.hashCode()|
+|android.os.storage.StorageVolume.isEmulated()|Returns true if the volume is em
+|android.os.storage.StorageVolume.isPrimary()|
+|android.os.storage.StorageVolume.isRemovable()|Returns true if the volume is r
+|android.os.storage.StorageVolume.setState(String)|
+|android.os.storage.StorageVolume.setStorageId(int)|Do not call this unless you
+|android.os.storage.StorageVolume.setUserLabel(String)|
+|android.os.storage.StorageVolume.setUuid(String)|
+|android.os.storage.StorageVolume.toString()|
+|android.os.storage.StorageVolume.writeToParcel(Parcel,int)|
+
+*android.os.storage.StorageVolume_Description*
+
+Description of a storage volume and its capabilities, including the filesystem 
+path where it may be mounted. 
+
+
+
+*android.os.Parcelable.Creator<android.os.storage.StorageVolume>_android.os.storage.StorageVolume.CREATOR*
+
+
+
+
+*java.lang.String_android.os.storage.StorageVolume.EXTRA_STORAGE_VOLUME*
+
+
+
+
+
+*android.os.storage.StorageVolume(File,int,boolean,boolean,boolean,int,boolean,long,UserHandle)*
+
+public StorageVolume(
+  java.io.File path,
+  int descriptionId,
+  boolean primary,
+  boolean removable,
+  boolean emulated,
+  int mtpReserveSpace,
+  boolean allowMassStorage,
+  long maxFileSize,
+  android.os.UserHandle owner)
+
+
+
+
+*android.os.storage.StorageVolume.allowMassStorage()*
+
+public boolean allowMassStorage()
+
+Returns true if this volume can be shared via USB mass storage. 
+
+
+
+    Returns: whether mass storage is allowed 
+
+*android.os.storage.StorageVolume.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.storage.StorageVolume.dump(IndentingPrintWriter)*
+
+public void dump(com.android.internal.util.IndentingPrintWriter pw)
+
+
+
+
+
+*android.os.storage.StorageVolume.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.os.storage.StorageVolume.fromTemplate(StorageVolume,File,UserHandle)*
+
+public static |android.os.storage.StorageVolume| fromTemplate(
+  android.os.storage.StorageVolume template,
+  java.io.File path,
+  android.os.UserHandle owner)
+
+
+
+
+
+*android.os.storage.StorageVolume.getDescription(Context)*
+
+public |java.lang.String| getDescription(android.content.Context context)
+
+Returns a user visible description of the volume. 
+
+
+
+    Returns: the volume description 
+
+*android.os.storage.StorageVolume.getDescriptionId()*
+
+public int getDescriptionId()
+
+
+
+
+
+*android.os.storage.StorageVolume.getFatVolumeId()*
+
+public int getFatVolumeId()
+
+Parse and return volume UUID as FAT volume ID, or return -1 if unable to parse 
+or UUID is unknown. 
+
+
+
+*android.os.storage.StorageVolume.getMaxFileSize()*
+
+public long getMaxFileSize()
+
+Returns maximum file size for the volume, or zero if it is unbounded. 
+
+
+
+    Returns: maximum file size 
+
+*android.os.storage.StorageVolume.getMtpReserveSpace()*
+
+public int getMtpReserveSpace()
+
+Number of megabytes of space to leave unallocated by MTP. MTP will subtract 
+this value from the free space it reports back to the host via GetStorageInfo, 
+and will not allow new files to be added via MTP if there is less than this 
+amount left free in the storage. If MTP has dedicated storage this value should 
+be zero, but if MTP is sharing storage with the rest of the system, set this to 
+a positive value to ensure that MTP activity does not result in the storage 
+being too close to full. 
+
+
+
+    Returns: MTP reserve space 
+
+*android.os.storage.StorageVolume.getOwner()*
+
+public |android.os.UserHandle| getOwner()
+
+
+
+
+
+*android.os.storage.StorageVolume.getPath()*
+
+public |java.lang.String| getPath()
+
+Returns the mount path for the volume. 
+
+
+
+    Returns: the mount path 
+
+*android.os.storage.StorageVolume.getPathFile()*
+
+public |java.io.File| getPathFile()
+
+
+
+
+
+*android.os.storage.StorageVolume.getState()*
+
+public |java.lang.String| getState()
+
+
+
+
+
+*android.os.storage.StorageVolume.getStorageId()*
+
+public int getStorageId()
+
+Returns the MTP storage ID for the volume. this is also used for the storage_id 
+column in the media provider. 
+
+
+
+    Returns: MTP storage ID 
+
+*android.os.storage.StorageVolume.getUserLabel()*
+
+public |java.lang.String| getUserLabel()
+
+
+
+
+
+*android.os.storage.StorageVolume.getUuid()*
+
+public |java.lang.String| getUuid()
+
+
+
+
+
+*android.os.storage.StorageVolume.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.os.storage.StorageVolume.isEmulated()*
+
+public boolean isEmulated()
+
+Returns true if the volume is emulated. 
+
+
+
+    Returns: 
+
+*android.os.storage.StorageVolume.isPrimary()*
+
+public boolean isPrimary()
+
+
+
+
+
+*android.os.storage.StorageVolume.isRemovable()*
+
+public boolean isRemovable()
+
+Returns true if the volume is removable. 
+
+
+
+    Returns: 
+
+*android.os.storage.StorageVolume.setState(String)*
+
+public void setState(java.lang.String state)
+
+
+
+
+
+*android.os.storage.StorageVolume.setStorageId(int)*
+
+public void setStorageId(int index)
+
+Do not call this unless you are MountService 
+
+
+
+*android.os.storage.StorageVolume.setUserLabel(String)*
+
+public void setUserLabel(java.lang.String userLabel)
+
+
+
+
+
+*android.os.storage.StorageVolume.setUuid(String)*
+
+public void setUuid(java.lang.String uuid)
+
+
+
+
+
+*android.os.storage.StorageVolume.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.os.storage.StorageVolume.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+
+
+
+
+

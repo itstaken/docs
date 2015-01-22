@@ -1,0 +1,94 @@
+*android.view.KeyEvent.Callback* *KeyEvent.Callback* 
+
+public static interface interface KeyEvent.Callback
+
+
+|android.view.KeyEvent.Callback_Description|
+|android.view.KeyEvent.Callback_Fields|
+|android.view.KeyEvent.Callback_Constructors|
+|android.view.KeyEvent.Callback_Methods|
+
+================================================================================
+
+*android.view.KeyEvent.Callback_Methods*
+|android.view.KeyEvent.Callback.onKeyDown(int,KeyEvent)|Called when a key down 
+|android.view.KeyEvent.Callback.onKeyLongPress(int,KeyEvent)|Called when a long
+|android.view.KeyEvent.Callback.onKeyMultiple(int,int,KeyEvent)|Called when mul
+|android.view.KeyEvent.Callback.onKeyUp(int,KeyEvent)|Called when a key up even
+
+*android.view.KeyEvent.Callback_Description*
+
+
+
+
+
+*android.view.KeyEvent.Callback.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  android.view.KeyEvent event)
+
+Called when a key down event has occurred. If you return true, you can first 
+call KeyEvent.startTracking()(|android.view.KeyEvent|) to have the framework 
+track the event through its (|android.view.KeyEvent.Callback|) and also call 
+your (|android.view.KeyEvent.Callback|) if it occurs. 
+
+
+    keyCode - The value in event.getKeyCode(). 
+    event - Description of the key event. 
+
+    Returns: If you handled the event, return true. If you want to allow the event to be 
+             handled by the next receiver, return false. 
+
+*android.view.KeyEvent.Callback.onKeyLongPress(int,KeyEvent)*
+
+public boolean onKeyLongPress(
+  int keyCode,
+  android.view.KeyEvent event)
+
+Called when a long press has occurred. If you return true, the final key up 
+will have (|android.view.KeyEvent|) and (|android.view.KeyEvent|) set. Note 
+that in order to receive this callback, someone in the event change must return 
+true from (|android.view.KeyEvent.Callback|) and call (|android.view.KeyEvent|) 
+on the event. 
+
+
+    keyCode - The value in event.getKeyCode(). 
+    event - Description of the key event. 
+
+    Returns: If you handled the event, return true. If you want to allow the event to be 
+             handled by the next receiver, return false. 
+
+*android.view.KeyEvent.Callback.onKeyMultiple(int,int,KeyEvent)*
+
+public boolean onKeyMultiple(
+  int keyCode,
+  int count,
+  android.view.KeyEvent event)
+
+Called when multiple down/up pairs of the same key have occurred in a row. 
+
+
+    keyCode - The value in event.getKeyCode(). 
+    count - Number of pairs as returned by event.getRepeatCount(). 
+    event - Description of the key event. 
+
+    Returns: If you handled the event, return true. If you want to allow the event to be 
+             handled by the next receiver, return false. 
+
+*android.view.KeyEvent.Callback.onKeyUp(int,KeyEvent)*
+
+public boolean onKeyUp(
+  int keyCode,
+  android.view.KeyEvent event)
+
+Called when a key up event has occurred. 
+
+
+    keyCode - The value in event.getKeyCode(). 
+    event - Description of the key event. 
+
+    Returns: If you handled the event, return true. If you want to allow the event to be 
+             handled by the next receiver, return false. 
+
+

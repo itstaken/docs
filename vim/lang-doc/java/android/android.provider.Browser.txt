@@ -1,0 +1,419 @@
+*android.provider.Browser* *Browser* 
+
+public class Browser
+  extends    |java.lang.Object|
+
+|android.provider.Browser_Description|
+|android.provider.Browser_Fields|
+|android.provider.Browser_Constructors|
+|android.provider.Browser_Methods|
+
+================================================================================
+
+*android.provider.Browser_Fields*
+|android.net.Uri_android.provider.Browser.BOOKMARKS_URI|
+|java.lang.String_android.provider.Browser.EXTRA_APPLICATION_ID|
+|java.lang.String_android.provider.Browser.EXTRA_CREATE_NEW_TAB|
+|java.lang.String_android.provider.Browser.EXTRA_HEADERS|
+|java.lang.String_android.provider.Browser.EXTRA_SHARE_FAVICON|
+|java.lang.String_android.provider.Browser.EXTRA_SHARE_SCREENSHOT|
+|java.lang.String[]_android.provider.Browser.HISTORY_PROJECTION|
+|int_android.provider.Browser.HISTORY_PROJECTION_BOOKMARK_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_DATE_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_FAVICON_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_ID_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_THUMBNAIL_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_TITLE_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_TOUCH_ICON_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_URL_INDEX|
+|int_android.provider.Browser.HISTORY_PROJECTION_VISITS_INDEX|
+|java.lang.String_android.provider.Browser.INITIAL_ZOOM_LEVEL|
+|java.lang.String[]_android.provider.Browser.SEARCHES_PROJECTION|
+|int_android.provider.Browser.SEARCHES_PROJECTION_DATE_INDEX|
+|int_android.provider.Browser.SEARCHES_PROJECTION_SEARCH_INDEX|
+|android.net.Uri_android.provider.Browser.SEARCHES_URI|
+|java.lang.String[]_android.provider.Browser.TRUNCATE_HISTORY_PROJECTION|
+|int_android.provider.Browser.TRUNCATE_HISTORY_PROJECTION_ID_INDEX|
+|int_android.provider.Browser.TRUNCATE_N_OLDEST|
+
+*android.provider.Browser_Constructors*
+|android.provider.Browser()|
+
+*android.provider.Browser_Methods*
+|android.provider.Browser.addSearchUrl(ContentResolver,String)|Add a search str
+|android.provider.Browser.canClearHistory(ContentResolver)|Returns whether ther
+|android.provider.Browser.clearHistory(ContentResolver)|Delete all entries from
+|android.provider.Browser.clearSearches(ContentResolver)|Remove all searches fr
+|android.provider.Browser.deleteFromHistory(ContentResolver,String)|Remove a sp
+|android.provider.Browser.deleteHistoryTimeFrame(ContentResolver,long,long)|Del
+|android.provider.Browser.getAllBookmarks(ContentResolver)|Return a cursor poin
+|android.provider.Browser.getAllVisitedUrls(ContentResolver)|Return a cursor po
+|android.provider.Browser.getVisitedHistory(ContentResolver)|Returns all the UR
+|android.provider.Browser.requestAllIcons(ContentResolver,String,WebIconDatabase.IconListener)|
+|android.provider.Browser.saveBookmark(Context,String,String)|Open an activity 
+|android.provider.Browser.sendString(Context,String)|Sends the given string usi
+|android.provider.Browser.sendString(Context,String,String)|Find an application
+|android.provider.Browser.truncateHistory(ContentResolver)|If there are more th
+|android.provider.Browser.updateVisitedHistory(ContentResolver,String,boolean)|
+
+*android.provider.Browser_Description*
+
+
+
+
+
+*android.net.Uri_android.provider.Browser.BOOKMARKS_URI*
+
+A table containing both bookmarks and history items. The columns of the table 
+are defined in (|android.provider.Browser.BookmarkColumns|) . Reading this 
+table requires the (|android.Manifest.permission|) permission and writing to it 
+requires the (|android.Manifest.permission|) permission. 
+
+
+*java.lang.String_android.provider.Browser.EXTRA_APPLICATION_ID*
+
+The name of the extra data when starting the Browser from another application. 
+
+The value is a unique identification string that will be used to identify the 
+calling application. The Browser will attempt to reuse the same window each 
+time the application launches the Browser with the same identifier. 
+
+
+*java.lang.String_android.provider.Browser.EXTRA_CREATE_NEW_TAB*
+
+Boolean extra passed along with an Intent to a browser, specifying that a new 
+tab be created. Overrides EXTRA_APPLICATION_ID; if both are set, a new tab will 
+be used, rather than using the same one. 
+
+
+*java.lang.String_android.provider.Browser.EXTRA_HEADERS*
+
+The name of the extra data in the VIEW intent. The data are key/value pairs in 
+the format of Bundle. They will be sent in the HTTP request headers for the 
+provided url. The keys can't be the standard HTTP headers as they are set by 
+the WebView. The url's schema must be http(s). 
+
+
+*java.lang.String_android.provider.Browser.EXTRA_SHARE_FAVICON*
+
+Stores a Bitmap extra in an (|android.content.Intent|) representing the favicon 
+of a page to share. When receiving an (|android.content.Intent|) from the 
+Browser, use this to access the favicon. 
+
+
+*java.lang.String_android.provider.Browser.EXTRA_SHARE_SCREENSHOT*
+
+Stores a Bitmap extra in an (|android.content.Intent|) representing the 
+screenshot of a page to share. When receiving an (|android.content.Intent|) 
+from the Browser, use this to access the screenshot. 
+
+
+*java.lang.String[]_android.provider.Browser.HISTORY_PROJECTION*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_BOOKMARK_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_DATE_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_FAVICON_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_ID_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_THUMBNAIL_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_TITLE_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_TOUCH_ICON_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_URL_INDEX*
+
+
+
+
+*int_android.provider.Browser.HISTORY_PROJECTION_VISITS_INDEX*
+
+
+
+
+*java.lang.String_android.provider.Browser.INITIAL_ZOOM_LEVEL*
+
+The name of extra data when starting Browser with ACTION_VIEW or ACTION_SEARCH 
+intent. 
+
+The value should be an integer between 0 and 1000. If not set or set to 0, the 
+Browser will use default. If set to 100, the Browser will start with 100%. 
+
+
+*java.lang.String[]_android.provider.Browser.SEARCHES_PROJECTION*
+
+A projection of (|android.provider.Browser|) that contains 
+(|android.provider.Browser.SearchColumns|) , 
+(|android.provider.Browser.SearchColumns|) , and 
+(|android.provider.Browser.SearchColumns|) . 
+
+
+*int_android.provider.Browser.SEARCHES_PROJECTION_DATE_INDEX*
+
+
+
+
+*int_android.provider.Browser.SEARCHES_PROJECTION_SEARCH_INDEX*
+
+
+
+
+*android.net.Uri_android.provider.Browser.SEARCHES_URI*
+
+A table containing a log of browser searches. The columns of the table are 
+defined in (|android.provider.Browser.SearchColumns|) . Reading this table 
+requires the (|android.Manifest.permission|) permission and writing to it 
+requires the (|android.Manifest.permission|) permission. 
+
+
+*java.lang.String[]_android.provider.Browser.TRUNCATE_HISTORY_PROJECTION*
+
+
+
+
+*int_android.provider.Browser.TRUNCATE_HISTORY_PROJECTION_ID_INDEX*
+
+
+
+
+*int_android.provider.Browser.TRUNCATE_N_OLDEST*
+
+
+
+
+
+*android.provider.Browser()*
+
+public Browser()
+
+
+
+
+*android.provider.Browser.addSearchUrl(ContentResolver,String)*
+
+public static final void addSearchUrl(
+  android.content.ContentResolver cr,
+  java.lang.String search)
+
+Add a search string to the searches database. Requires 
+(|android.Manifest.permission|) Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+    search - The string to add to the searches database. 
+
+*android.provider.Browser.canClearHistory(ContentResolver)*
+
+public static final boolean canClearHistory(android.content.ContentResolver cr)
+
+Returns whether there is any history to clear. Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+    Returns: boolean True if the history can be cleared. 
+
+*android.provider.Browser.clearHistory(ContentResolver)*
+
+public static final void clearHistory(android.content.ContentResolver cr)
+
+Delete all entries from the bookmarks/history table which are not bookmarks. 
+Also set all visited bookmarks to unvisited. Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.clearSearches(ContentResolver)*
+
+public static final void clearSearches(android.content.ContentResolver cr)
+
+Remove all searches from the search database. Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.deleteFromHistory(ContentResolver,String)*
+
+public static final void deleteFromHistory(
+  android.content.ContentResolver cr,
+  java.lang.String url)
+
+Remove a specific url from the history database. Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+    url - url to remove. 
+
+*android.provider.Browser.deleteHistoryTimeFrame(ContentResolver,long,long)*
+
+public static final void deleteHistoryTimeFrame(
+  android.content.ContentResolver cr,
+  long begin,
+  long end)
+
+Delete all history items from begin to end. Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+    begin - First date to remove. If -1, all dates before end. Inclusive. 
+    end - Last date to remove. If -1, all dates after begin. Non-inclusive. 
+
+*android.provider.Browser.getAllBookmarks(ContentResolver)*
+
+public static final |android.database.Cursor| getAllBookmarks(android.content.ContentResolver cr)
+  throws |java.lang.IllegalStateException|
+         
+Return a cursor pointing to a list of all the bookmarks. The cursor will have a 
+single column, (|android.provider.Browser.BookmarkColumns|) . 
+
+Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.getAllVisitedUrls(ContentResolver)*
+
+public static final |android.database.Cursor| getAllVisitedUrls(android.content.ContentResolver cr)
+  throws |java.lang.IllegalStateException|
+         
+Return a cursor pointing to a list of all visited site urls. The cursor will 
+have a single column, (|android.provider.Browser.BookmarkColumns|) . 
+
+Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.getVisitedHistory(ContentResolver)*
+
+public static final |java.lang.String|[] getVisitedHistory(android.content.ContentResolver cr)
+
+Returns all the URLs in the history. Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.requestAllIcons(ContentResolver,String,WebIconDatabase.IconListener)*
+
+public static final void requestAllIcons(
+  android.content.ContentResolver cr,
+  java.lang.String where,
+  android.webkit.WebIconDatabase.IconListener listener)
+
+Request all icons from the database. This call must either be called in the 
+main thread or have had Looper.prepare() invoked in the calling thread. 
+Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+    where - Clause to be used to limit the query from the database. Must be an allowable 
+       string to be passed into a database query. 
+    listener - IconListener that gets the icons once they are retrieved. 
+
+*android.provider.Browser.saveBookmark(Context,String,String)*
+
+public static final void saveBookmark(
+  android.content.Context c,
+  java.lang.String title,
+  java.lang.String url)
+
+Open an activity to save a bookmark. Launch with a title and/or a url, both of 
+which can be edited by the user before saving. 
+
+
+    c - Context used to launch the activity to add a bookmark. 
+    title - Title for the bookmark. Can be null or empty string. 
+    url - Url for the bookmark. Can be null or empty string. 
+
+*android.provider.Browser.sendString(Context,String)*
+
+public static final void sendString(
+  android.content.Context context,
+  java.lang.String string)
+
+Sends the given string using an Intent with (|android.content.Intent|) and a 
+mime type of text/plain. The string is put into (|android.content.Intent|) . 
+
+
+    context - the context used to start the activity 
+    string - the string to send 
+
+*android.provider.Browser.sendString(Context,String,String)*
+
+public static final void sendString(
+  android.content.Context c,
+  java.lang.String stringToSend,
+  java.lang.String chooserDialogTitle)
+
+Find an application to handle the given string and, if found, invoke it with 
+the given string as a parameter. 
+
+
+    c - Context used to launch the new activity. 
+    stringToSend - The string to be handled. 
+    chooserDialogTitle - The title of the dialog that allows the user to select between multiple 
+       applications that are all capable of handling the string. 
+
+*android.provider.Browser.truncateHistory(ContentResolver)*
+
+public static final void truncateHistory(android.content.ContentResolver cr)
+
+If there are more than MAX_HISTORY_COUNT non-bookmark history items in the 
+bookmark/history table, delete TRUNCATE_N_OLDEST of them. This is used to keep 
+our history table to a reasonable size. Note: it does not prune bookmarks. If 
+the user wants 1000 bookmarks, the user gets 1000 bookmarks. Requires 
+(|android.Manifest.permission|) Requires (|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+
+*android.provider.Browser.updateVisitedHistory(ContentResolver,String,boolean)*
+
+public static final void updateVisitedHistory(
+  android.content.ContentResolver cr,
+  java.lang.String url,
+  boolean real)
+
+Update the visited history to acknowledge that a site has been visited. 
+Requires (|android.Manifest.permission|) Requires 
+(|android.Manifest.permission|) 
+
+
+    cr - The ContentResolver used to access the database. 
+    url - The site being visited. 
+    real - If true, this is an actual visit, and should add to the number of visits. If 
+       false, the user entered it manually. 
+
+

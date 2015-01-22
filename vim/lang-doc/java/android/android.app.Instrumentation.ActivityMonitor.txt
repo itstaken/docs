@@ -1,0 +1,135 @@
+*android.app.Instrumentation.ActivityMonitor* *Instrumentation.ActivityMonitor* 
+
+public static class Instrumentation.ActivityMonitor
+  extends    |java.lang.Object|
+
+|android.app.Instrumentation.ActivityMonitor_Description|
+|android.app.Instrumentation.ActivityMonitor_Fields|
+|android.app.Instrumentation.ActivityMonitor_Constructors|
+|android.app.Instrumentation.ActivityMonitor_Methods|
+
+================================================================================
+
+*android.app.Instrumentation.ActivityMonitor_Constructors*
+|android.app.Instrumentation.ActivityMonitor(IntentFilter,Instrumentation.ActivityResult,boolean)|
+|android.app.Instrumentation.ActivityMonitor(String,Instrumentation.ActivityResult,boolean)|
+
+*android.app.Instrumentation.ActivityMonitor_Methods*
+|android.app.Instrumentation.ActivityMonitor.getFilter()|Retrieve the filter as
+|android.app.Instrumentation.ActivityMonitor.getHits()|Retrieve the number of t
+|android.app.Instrumentation.ActivityMonitor.getLastActivity()|Retrieve the mos
+|android.app.Instrumentation.ActivityMonitor.getResult()|Retrieve the result as
+|android.app.Instrumentation.ActivityMonitor.isBlocking()|Check whether this mo
+|android.app.Instrumentation.ActivityMonitor.waitForActivity()|Block until an A
+|android.app.Instrumentation.ActivityMonitor.waitForActivityWithTimeout(long)|B
+
+*android.app.Instrumentation.ActivityMonitor_Description*
+
+Information about a particular kind of Intent that is being monitored. An 
+instance of this class is added to the current instrumentation through 
+(|android.app.Instrumentation.ActivityMonitor|) ; after being added, when a new 
+activity is being started the monitor will be checked and, if matching, its hit 
+count updated and (optionally) the call stopped and a canned result returned. 
+
+An ActivityMonitor can also be used to look for the creation of an activity, 
+through the (|android.app.Instrumentation.ActivityMonitor|) method. This will 
+return after a matching activity has been created with that activity object. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor(IntentFilter,Instrumentation.ActivityResult,boolean)*
+
+public Instrumentation.ActivityMonitor(
+  android.content.IntentFilter which,
+  android.app.Instrumentation.ActivityResult result,
+  boolean block)
+
+Create a new ActivityMonitor that looks for a particular kind of intent to be 
+started. 
+
+    which - The set of intents this monitor is responsible for. 
+    result - A canned result to return if the monitor is hit; can be null. 
+    block - Controls whether the monitor should block the activity start (returning its 
+       canned result) or let the call proceed. 
+
+*android.app.Instrumentation.ActivityMonitor(String,Instrumentation.ActivityResult,boolean)*
+
+public Instrumentation.ActivityMonitor(
+  java.lang.String cls,
+  android.app.Instrumentation.ActivityResult result,
+  boolean block)
+
+Create a new ActivityMonitor that looks for a specific activity class to be 
+started. 
+
+    cls - The activity class this monitor is responsible for. 
+    result - A canned result to return if the monitor is hit; can be null. 
+    block - Controls whether the monitor should block the activity start (returning its 
+       canned result) or let the call proceed. 
+
+*android.app.Instrumentation.ActivityMonitor.getFilter()*
+
+public final |android.content.IntentFilter| getFilter()
+
+Retrieve the filter associated with this ActivityMonitor. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor.getHits()*
+
+public final int getHits()
+
+Retrieve the number of times the monitor has been hit so far. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor.getLastActivity()*
+
+public final |android.app.Activity| getLastActivity()
+
+Retrieve the most recent activity class that was seen by this monitor. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor.getResult()*
+
+public final |android.app.Instrumentation.ActivityResult| getResult()
+
+Retrieve the result associated with this ActivityMonitor, or null if none. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor.isBlocking()*
+
+public final boolean isBlocking()
+
+Check whether this monitor blocks activity starts (not allowing the actual 
+activity to run) or allows them to execute normally. 
+
+
+
+*android.app.Instrumentation.ActivityMonitor.waitForActivity()*
+
+public final |android.app.Activity| waitForActivity()
+
+Block until an Activity is created that matches this monitor, returning the 
+resulting activity. 
+
+
+
+    Returns: 
+
+*android.app.Instrumentation.ActivityMonitor.waitForActivityWithTimeout(long)*
+
+public final |android.app.Activity| waitForActivityWithTimeout(long timeOut)
+
+Block until an Activity is created that matches this monitor, returning the 
+resulting activity or till the timeOut period expires. If the timeOut expires 
+before the activity is started, return null. 
+
+
+    timeOut - Time to wait before the activity is created. 
+
+    Returns: 
+
+

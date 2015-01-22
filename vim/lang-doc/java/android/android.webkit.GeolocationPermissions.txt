@@ -1,0 +1,122 @@
+*android.webkit.GeolocationPermissions* *GeolocationPermissions* This class is u
+
+public class GeolocationPermissions
+  extends    |java.lang.Object|
+
+|android.webkit.GeolocationPermissions_Description|
+|android.webkit.GeolocationPermissions_Fields|
+|android.webkit.GeolocationPermissions_Constructors|
+|android.webkit.GeolocationPermissions_Methods|
+
+================================================================================
+
+*android.webkit.GeolocationPermissions_Constructors*
+|android.webkit.GeolocationPermissions()|This class should not be instantiated 
+
+*android.webkit.GeolocationPermissions_Methods*
+|android.webkit.GeolocationPermissions.allow(String)|Allows the specified origi
+|android.webkit.GeolocationPermissions.clear(String)|Clears the Geolocation per
+|android.webkit.GeolocationPermissions.clearAll()|Clears the Geolocation permis
+|android.webkit.GeolocationPermissions.getAllowed(String,ValueCallback<Boolean>)|
+|android.webkit.GeolocationPermissions.getInstance()|Gets the singleton instanc
+|android.webkit.GeolocationPermissions.getOrigins(ValueCallback<Set<String>>)|G
+
+*android.webkit.GeolocationPermissions_Description*
+
+This class is used to manage permissions for the WebView's Geolocation 
+JavaScript API. 
+
+Geolocation permissions are applied to an origin, which consists of the host, 
+scheme and port of a URI. In order for web content to use the Geolocation API, 
+permission must be granted for that content's origin. 
+
+This class stores Geolocation permissions. An origin's permission state can be 
+either allowed or denied. This class uses Strings to represent an origin. 
+
+When an origin attempts to use the Geolocation API, but no permission state is 
+currently set for that origin, 
+WebChromeClient.onGeolocationPermissionsShowPrompt()(|android.webkit.WebChromeClient|)
+is called. This allows the permission state to be set for that origin. 
+
+The methods of this class can be used to modify and interrogate the stored 
+Geolocation permissions at any time. 
+
+
+
+*android.webkit.GeolocationPermissions()*
+
+public GeolocationPermissions()
+
+This class should not be instantiated directly, applications must only use 
+(|android.webkit.GeolocationPermissions|) to obtain the instance. Note this 
+constructor was erroneously public and published in SDK levels prior to 16, but 
+applications using it would receive a non-functional instance of this class 
+(there was no way to call createHandler() and createUIHandler(), so it would 
+not work). 
+
+
+*android.webkit.GeolocationPermissions.allow(String)*
+
+public void allow(java.lang.String origin)
+
+Allows the specified origin to use the Geolocation API. 
+
+
+    origin - the origin for which Geolocation API use is allowed 
+
+*android.webkit.GeolocationPermissions.clear(String)*
+
+public void clear(java.lang.String origin)
+
+Clears the Geolocation permission state for the specified origin. 
+
+
+    origin - the origin for which Geolocation permissions are cleared 
+
+*android.webkit.GeolocationPermissions.clearAll()*
+
+public void clearAll()
+
+Clears the Geolocation permission state for all origins. 
+
+
+
+*android.webkit.GeolocationPermissions.getAllowed(String,ValueCallback<Boolean>)*
+
+public void getAllowed(
+  java.lang.String origin,
+  android.webkit.ValueCallback<java.lang.Boolean> callback)
+
+Gets the Geolocation permission state for the specified origin. 
+
+
+    origin - the origin for which Geolocation permission is requested 
+    callback - a {@link ValueCallback} to receive the result of this request. This object's 
+       {@link ValueCallback#onReceiveValue(T) onReceiveValue()} method will be 
+       invoked asynchronously with a boolean indicating whether or not the 
+       origin can use the Geolocation API. 
+
+*android.webkit.GeolocationPermissions.getInstance()*
+
+public static |android.webkit.GeolocationPermissions| getInstance()
+
+Gets the singleton instance of this class. This method cannot be called before 
+the application instantiates a (|android.webkit.WebView|) instance. 
+
+
+
+    Returns: the singleton {@link GeolocationPermissions} instance 
+
+*android.webkit.GeolocationPermissions.getOrigins(ValueCallback<Set<String>>)*
+
+public void getOrigins(android.webkit.ValueCallback<java.util.Set<java.lang.String>> callback)
+
+Gets the set of origins for which Geolocation permissions are stored. 
+
+
+    callback - a {@link ValueCallback} to receive the result of this request. This object's 
+       {@link ValueCallback#onReceiveValue(T) onReceiveValue()} method will be 
+       invoked asynchronously with a set of Strings containing the origins for 
+       which Geolocation permissions are stored. 
+
+

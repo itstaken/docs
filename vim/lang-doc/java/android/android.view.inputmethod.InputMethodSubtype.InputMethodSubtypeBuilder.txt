@@ -1,0 +1,160 @@
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder* *InputMethodSubtype.InputMethodSubtypeBuilder* 
+
+public static class InputMethodSubtype.InputMethodSubtypeBuilder
+  extends    |java.lang.Object|
+
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Description|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Fields|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Constructors|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Methods|
+
+================================================================================
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Constructors*
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder()|
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Methods*
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.build()|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setIsAsciiCapable(boolean)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setIsAuxiliary(boolean)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setOverridesImplicitlyEnabledSubtype(boolean)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeExtraValue(String)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeIconResId(int)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeId(int)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeLocale(String)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeMode(String)|
+|android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeNameResId(int)|
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder_Description*
+
+InputMethodSubtypeBuilder is a builder class of InputMethodSubtype. This class 
+is designed to be used with (|android.view.inputmethod.InputMethodManager|) . 
+The developer needs to be aware of what each parameter means. 
+
+
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder()*
+
+public InputMethodSubtype.InputMethodSubtypeBuilder()
+
+
+
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.build()*
+
+public |android.view.inputmethod.InputMethodSubtype| build()
+
+
+
+
+
+    Returns: InputMethodSubtype using parameters in this InputMethodSubtypeBuilder. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setIsAsciiCapable(boolean)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setIsAsciiCapable(boolean isAsciiCapable)
+
+
+
+
+    isAsciiCapable - should be true if this subtype is ASCII capable. If the subtype is ASCII 
+       capable, it should guarantee that the user can input ASCII characters 
+       with this subtype. This is important because many password fields only 
+       allow ASCII-characters. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setIsAuxiliary(boolean)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setIsAuxiliary(boolean isAuxiliary)
+
+
+
+
+    isAuxiliary - should true when this subtype is auxiliary, false otherwise. An auxiliary 
+       subtype has the following differences with a regular subtype: - An 
+       auxiliary subtype cannot be chosen as the default IME in Settings. - The 
+       framework will never switch to this subtype through {@link 
+       android.view.inputmethod.InputMethodManager#switchToLastInputMethod}. 
+       Note that the subtype will still be available in the IME switcher. The 
+       intent is to allow for IMEs to specify they are meant to be invoked 
+       temporarily in a one-shot way, and to return to the previous IME once 
+       finished (e.g. voice input). 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setOverridesImplicitlyEnabledSubtype(boolean)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setOverridesImplicitlyEnabledSubtype(boolean overridesImplicitlyEnabledSubtype)
+
+
+
+
+    overridesImplicitlyEnabledSubtype - should be true if this subtype should be enabled by default if no other 
+       subtypes in the IME are enabled explicitly. Note that a subtype with 
+       this parameter set will not be shown in the list of subtypes in each 
+       IME's subtype enabler. A canonical use of this would be for an IME to 
+       supply an "automatic" subtype that adapts to the current system 
+       language. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeExtraValue(String)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeExtraValue(java.lang.String subtypeExtraValue)
+
+
+
+
+    subtypeExtraValue - is the extra value of the subtype. This string is free-form, but the API 
+       supplies tools to deal with a key-value comma-separated list; see {@link 
+       #containsExtraValueKey} and {@link #getExtraValueOf}. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeIconResId(int)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeIconResId(int subtypeIconResId)
+
+
+
+
+    subtypeIconResId - is a resource ID of the subtype icon drawable. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeId(int)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeId(int subtypeId)
+
+
+
+
+    subtypeId - is the unique ID for this subtype. The input method framework keeps track of 
+       enabled subtypes by ID. When the IME package gets upgraded, enabled IDs 
+       will stay enabled even if other attributes are different. If the ID is 
+       unspecified or 0, Arrays.hashCode(new Object[] {locale, mode, 
+       extraValue, isAuxiliary, overridesImplicitlyEnabledSubtype}) will be 
+       used instead. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeLocale(String)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeLocale(java.lang.String subtypeLocale)
+
+
+
+
+    subtypeLocale - is the locale supported by this subtype. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeMode(String)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeMode(java.lang.String subtypeMode)
+
+
+
+
+    subtypeMode - is the mode supported by this subtype. 
+
+*android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder.setSubtypeNameResId(int)*
+
+public |android.view.inputmethod.InputMethodSubtype.InputMethodSubtypeBuilder| setSubtypeNameResId(int subtypeNameResId)
+
+
+
+
+    subtypeNameResId - is the resource ID of the subtype name string. The string resource may have 
+       exactly one %s in it. If present, the %s part will be replaced with the 
+       locale's display name by the formatter. Please refer to {@link 
+       #getDisplayName} for details. 
+
+

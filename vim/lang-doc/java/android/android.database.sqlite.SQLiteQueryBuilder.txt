@@ -1,0 +1,469 @@
+*android.database.sqlite.SQLiteQueryBuilder* *SQLiteQueryBuilder* This is a conv
+
+public class SQLiteQueryBuilder
+  extends    |java.lang.Object|
+
+|android.database.sqlite.SQLiteQueryBuilder_Description|
+|android.database.sqlite.SQLiteQueryBuilder_Fields|
+|android.database.sqlite.SQLiteQueryBuilder_Constructors|
+|android.database.sqlite.SQLiteQueryBuilder_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteQueryBuilder_Constructors*
+|android.database.sqlite.SQLiteQueryBuilder()|
+
+*android.database.sqlite.SQLiteQueryBuilder_Methods*
+|android.database.sqlite.SQLiteQueryBuilder.appendColumns(StringBuilder,String[])|
+|android.database.sqlite.SQLiteQueryBuilder.appendWhere(CharSequence)|Append a 
+|android.database.sqlite.SQLiteQueryBuilder.appendWhereEscapeString(String)|App
+|android.database.sqlite.SQLiteQueryBuilder.buildQuery(String[],String,String[],String,String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.buildQuery(String[],String,String,String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.buildQueryString(boolean,String,String[],String,String,String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.buildUnionQuery(String[],String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.buildUnionSubQuery(String,String[],Set<String>,int,String,String,String[],String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.buildUnionSubQuery(String,String[],Set<String>,int,String,String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.getTables()|Returns the list of tab
+|android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String,String)|
+|android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String,String,CancellationSignal)|
+|android.database.sqlite.SQLiteQueryBuilder.setCursorFactory(SQLiteDatabase.CursorFactory)|
+|android.database.sqlite.SQLiteQueryBuilder.setDistinct(boolean)|Mark the query
+|android.database.sqlite.SQLiteQueryBuilder.setProjectionMap(Map<String,String>)|
+|android.database.sqlite.SQLiteQueryBuilder.setStrict(boolean)|When set, the se
+|android.database.sqlite.SQLiteQueryBuilder.setTables(String)|Sets the list of 
+
+*android.database.sqlite.SQLiteQueryBuilder_Description*
+
+This is a convience class that helps build SQL queries to be sent to 
+(|android.database.sqlite.SQLiteDatabase|) objects. 
+
+
+
+*android.database.sqlite.SQLiteQueryBuilder()*
+
+public SQLiteQueryBuilder()
+
+
+
+
+*android.database.sqlite.SQLiteQueryBuilder.appendColumns(StringBuilder,String[])*
+
+public static void appendColumns(
+  java.lang.StringBuilder s,
+  java.lang.String[] columns)
+
+Add the names that are non-null in columns to s, separating them with commas. 
+
+
+
+*android.database.sqlite.SQLiteQueryBuilder.appendWhere(CharSequence)*
+
+public void appendWhere(java.lang.CharSequence inWhere)
+
+Append a chunk to the WHERE clause of the query. All chunks appended are 
+surrounded by parenthesis and ANDed with the selection passed to 
+(|android.database.sqlite.SQLiteQueryBuilder|) . The final WHERE clause looks 
+like: 
+
+WHERE (<append chunk 1><append chunk2>) AND (<query() selection parameter>) 
+
+
+    inWhere - the chunk of text to append to the WHERE clause. 
+
+*android.database.sqlite.SQLiteQueryBuilder.appendWhereEscapeString(String)*
+
+public void appendWhereEscapeString(java.lang.String inWhere)
+
+Append a chunk to the WHERE clause of the query. All chunks appended are 
+surrounded by parenthesis and ANDed with the selection passed to 
+(|android.database.sqlite.SQLiteQueryBuilder|) . The final WHERE clause looks 
+like: 
+
+WHERE (<append chunk 1><append chunk2>) AND (<query() selection parameter>) 
+
+
+    inWhere - the chunk of text to append to the WHERE clause. it will be escaped to avoid 
+       SQL injection attacks 
+
+*android.database.sqlite.SQLiteQueryBuilder.buildQuery(String[],String,String[],String,String,String,String)*
+
+public |java.lang.String| buildQuery(
+  java.lang.String[] projectionIn,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String sortOrder,
+  java.lang.String limit)
+
+
+
+    Deprecated: This method's signature is misleading since no SQL parameter
+ substitution is carried out.  The selection arguments parameter does not get
+ used at all.  To avoid confusion, call
+ {@link #buildQuery(String[], String, String, String, String, String)} instead.
+
+
+*android.database.sqlite.SQLiteQueryBuilder.buildQuery(String[],String,String,String,String,String)*
+
+public |java.lang.String| buildQuery(
+  java.lang.String[] projectionIn,
+  java.lang.String selection,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String sortOrder,
+  java.lang.String limit)
+
+Construct a SELECT statement suitable for use in a group of SELECT statements 
+that will be joined through UNION operators in buildUnionQuery. 
+
+
+    projectionIn - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+    sortOrder - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+    limit - Limits the number of rows returned by the query, formatted as LIMIT clause. 
+       Passing null denotes no LIMIT clause. 
+
+    Returns: the resulting SQL SELECT statement 
+
+*android.database.sqlite.SQLiteQueryBuilder.buildQueryString(boolean,String,String[],String,String,String,String,String)*
+
+public static |java.lang.String| buildQueryString(
+  boolean distinct,
+  java.lang.String tables,
+  java.lang.String[] columns,
+  java.lang.String where,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String orderBy,
+  java.lang.String limit)
+
+Build an SQL query string from the given clauses. 
+
+
+    distinct - true if you want each row to be unique, false otherwise. 
+    tables - The table names to compile the query against. 
+    columns - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    where - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+    orderBy - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+    limit - Limits the number of rows returned by the query, formatted as LIMIT clause. 
+       Passing null denotes no LIMIT clause. 
+
+    Returns: the SQL query string 
+
+*android.database.sqlite.SQLiteQueryBuilder.buildUnionQuery(String[],String,String)*
+
+public |java.lang.String| buildUnionQuery(
+  java.lang.String[] subQueries,
+  java.lang.String sortOrder,
+  java.lang.String limit)
+
+Given a set of subqueries, all of which are SELECT statements, construct a 
+query that returns the union of what those subqueries return. 
+
+
+    subQueries - an array of SQL SELECT statements, all of which must have the same columns as 
+       the same positions in their results 
+    sortOrder - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+    limit - The limit clause, which applies to the entire union result set 
+
+    Returns: the resulting SQL SELECT statement 
+
+*android.database.sqlite.SQLiteQueryBuilder.buildUnionSubQuery(String,String[],Set<String>,int,String,String,String[],String,String)*
+
+public |java.lang.String| buildUnionSubQuery(
+  java.lang.String typeDiscriminatorColumn,
+  java.lang.String[] unionColumns,
+  java.util.Set<java.lang.String> columnsPresentInTable,
+  int computedColumnsOffset,
+  java.lang.String typeDiscriminatorValue,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String groupBy,
+  java.lang.String having)
+
+
+
+    Deprecated: This method's signature is misleading since no SQL parameter
+ substitution is carried out.  The selection arguments parameter does not get
+ used at all.  To avoid confusion, call
+ {@link #buildUnionSubQuery}
+ instead.
+
+
+*android.database.sqlite.SQLiteQueryBuilder.buildUnionSubQuery(String,String[],Set<String>,int,String,String,String,String)*
+
+public |java.lang.String| buildUnionSubQuery(
+  java.lang.String typeDiscriminatorColumn,
+  java.lang.String[] unionColumns,
+  java.util.Set<java.lang.String> columnsPresentInTable,
+  int computedColumnsOffset,
+  java.lang.String typeDiscriminatorValue,
+  java.lang.String selection,
+  java.lang.String groupBy,
+  java.lang.String having)
+
+Construct a SELECT statement suitable for use in a group of SELECT statements 
+that will be joined through UNION operators in buildUnionQuery. 
+
+
+    typeDiscriminatorColumn - the name of the result column whose cells will contain the name of the table 
+       from which each row was drawn. 
+    unionColumns - the names of the columns to appear in the result. This may include columns that 
+       do not appear in the table this SELECT is querying (i.e. mTables), but 
+       that do appear in one of the other tables in the UNION query that we are 
+       constructing. 
+    columnsPresentInTable - a Set of the names of the columns that appear in this table (i.e. in the table 
+       whose name is mTables). Since columns in unionColumns include columns 
+       that appear only in other tables, we use this array to distinguish which 
+       ones actually are present. Other columns will have NULL values for 
+       results from this subquery. 
+    computedColumnsOffset - all columns in unionColumns before this index are included under the assumption 
+       that they're computed and therefore won't appear in 
+       columnsPresentInTable, e.g. "date * 1000 as normalized_date" 
+    typeDiscriminatorValue - the value used for the type-discriminator column in this subquery 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+
+    Returns: the resulting SQL SELECT statement 
+
+*android.database.sqlite.SQLiteQueryBuilder.getTables()*
+
+public |java.lang.String| getTables()
+
+Returns the list of tables being queried 
+
+
+
+    Returns: the list of tables being queried 
+
+*android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String)*
+
+public |android.database.Cursor| query(
+  android.database.sqlite.SQLiteDatabase db,
+  java.lang.String[] projectionIn,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String sortOrder)
+
+Perform a query by combining all current settings and the information passed 
+into this method. 
+
+
+    db - the database to query on 
+    projectionIn - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    selectionArgs - You may include ?s in selection, which will be replaced by the values from 
+       selectionArgs, in order that they appear in the selection. The values 
+       will be bound as Strings. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+    sortOrder - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+
+    Returns: a cursor over the result set 
+
+*android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String,String)*
+
+public |android.database.Cursor| query(
+  android.database.sqlite.SQLiteDatabase db,
+  java.lang.String[] projectionIn,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String sortOrder,
+  java.lang.String limit)
+
+Perform a query by combining all current settings and the information passed 
+into this method. 
+
+
+    db - the database to query on 
+    projectionIn - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    selectionArgs - You may include ?s in selection, which will be replaced by the values from 
+       selectionArgs, in order that they appear in the selection. The values 
+       will be bound as Strings. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+    sortOrder - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+    limit - Limits the number of rows returned by the query, formatted as LIMIT clause. 
+       Passing null denotes no LIMIT clause. 
+
+    Returns: a cursor over the result set 
+
+*android.database.sqlite.SQLiteQueryBuilder.query(SQLiteDatabase,String[],String,String[],String,String,String,String,CancellationSignal)*
+
+public |android.database.Cursor| query(
+  android.database.sqlite.SQLiteDatabase db,
+  java.lang.String[] projectionIn,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String groupBy,
+  java.lang.String having,
+  java.lang.String sortOrder,
+  java.lang.String limit,
+  android.os.CancellationSignal cancellationSignal)
+
+Perform a query by combining all current settings and the information passed 
+into this method. 
+
+
+    db - the database to query on 
+    projectionIn - A list of which columns to return. Passing null will return all columns, which 
+       is discouraged to prevent reading data from storage that isn't going to 
+       be used. 
+    selection - A filter declaring which rows to return, formatted as an SQL WHERE clause 
+       (excluding the WHERE itself). Passing null will return all rows for the 
+       given URL. 
+    selectionArgs - You may include ?s in selection, which will be replaced by the values from 
+       selectionArgs, in order that they appear in the selection. The values 
+       will be bound as Strings. 
+    groupBy - A filter declaring how to group rows, formatted as an SQL GROUP BY clause 
+       (excluding the GROUP BY itself). Passing null will cause the rows to not 
+       be grouped. 
+    having - A filter declare which row groups to include in the cursor, if row grouping is 
+       being used, formatted as an SQL HAVING clause (excluding the HAVING 
+       itself). Passing null will cause all row groups to be included, and is 
+       required when row grouping is not being used. 
+    sortOrder - How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER 
+       BY itself). Passing null will use the default sort order, which may be 
+       unordered. 
+    limit - Limits the number of rows returned by the query, formatted as LIMIT clause. 
+       Passing null denotes no LIMIT clause. 
+    cancellationSignal - A signal to cancel the operation in progress, or null if none. If the operation 
+       is canceled, then {@link OperationCanceledException} will be thrown when 
+       the query is executed. 
+
+    Returns: a cursor over the result set 
+
+*android.database.sqlite.SQLiteQueryBuilder.setCursorFactory(SQLiteDatabase.CursorFactory)*
+
+public void setCursorFactory(android.database.sqlite.SQLiteDatabase.CursorFactory factory)
+
+Sets the cursor factory to be used for the query. You can use one factory for 
+all queries on a database but it is normally easier to specify the factory when 
+doing this query. 
+
+
+    factory - the factory to use. 
+
+*android.database.sqlite.SQLiteQueryBuilder.setDistinct(boolean)*
+
+public void setDistinct(boolean distinct)
+
+Mark the query as DISTINCT. 
+
+
+    distinct - if true the query is DISTINCT, otherwise it isn't 
+
+*android.database.sqlite.SQLiteQueryBuilder.setProjectionMap(Map<String,String>)*
+
+public void setProjectionMap(java.util.Map<java.lang.String, java.lang.String> columnMap)
+
+Sets the projection map for the query. The projection map maps from column 
+names that the caller passes into query to database column names. This is 
+useful for renaming columns as well as disambiguating column names when doing 
+joins. For example you could map "name" to "people.name". If a projection map 
+is set it must contain all column names the user may request, even if the key 
+and value are the same. 
+
+
+    columnMap - maps from the user column names to the database column names 
+
+*android.database.sqlite.SQLiteQueryBuilder.setStrict(boolean)*
+
+public void setStrict(boolean flag)
+
+When set, the selection is verified against malicious arguments. When using 
+this class to create a statement using 
+(|android.database.sqlite.SQLiteQueryBuilder|) , non-numeric limits will raise 
+an exception. If a projection map is specified, fields not in that map will be 
+ignored. If this class is used to execute the statement directly using 
+(|android.database.sqlite.SQLiteQueryBuilder|) or 
+(|android.database.sqlite.SQLiteQueryBuilder|) , additionally also parenthesis 
+escaping selection are caught. 
+
+To summarize: To get maximum protection against malicious third party apps (for 
+example content provider consumers), make sure to do the following: 
+
+Set this value to true Use a projection map Use one of the query overloads 
+instead of getting the statement as a sql string 
+
+By default, this value is false. 
+
+
+
+*android.database.sqlite.SQLiteQueryBuilder.setTables(String)*
+
+public void setTables(java.lang.String inTables)
+
+Sets the list of tables to query. Multiple tables can be specified to perform a 
+join. For example: setTables("foo, bar") setTables("foo LEFT OUTER JOIN bar ON 
+(foo.id = bar.foo_id)") 
+
+
+    inTables - the list of tables to query on 
+
+

@@ -1,0 +1,653 @@
+*android.app.Service* *Service* A Service is an application component representi
+
+public abstract class Service
+  extends    |android.content.ContextWrapper|
+  implements |android.content.ComponentCallbacks2|
+
+|android.app.Service_Description|
+|android.app.Service_Fields|
+|android.app.Service_Constructors|
+|android.app.Service_Methods|
+
+================================================================================
+
+*android.app.Service_Fields*
+|int_android.app.Service.START_CONTINUATION_MASK|
+|int_android.app.Service.START_FLAG_REDELIVERY|
+|int_android.app.Service.START_FLAG_RETRY|
+|int_android.app.Service.START_NOT_STICKY|
+|int_android.app.Service.START_REDELIVER_INTENT|
+|int_android.app.Service.START_STICKY|
+|int_android.app.Service.START_STICKY_COMPATIBILITY|
+|int_android.app.Service.START_TASK_REMOVED_COMPLETE|
+
+*android.app.Service_Constructors*
+|android.app.Service()|
+
+*android.app.Service_Methods*
+|android.app.Service.attach(Context,ActivityThread,String,IBinder,Application,Object)|
+|android.app.Service.dump(FileDescriptor,PrintWriter,String[])|Print the Servic
+|android.app.Service.getApplication()|Return the application that owns this ser
+|android.app.Service.onBind(Intent)|Return the communication channel to the ser
+|android.app.Service.onConfigurationChanged(Configuration)|
+|android.app.Service.onCreate()|Called by the system when the service is first 
+|android.app.Service.onDestroy()|Called by the system to notify a Service that 
+|android.app.Service.onLowMemory()|
+|android.app.Service.onRebind(Intent)|Called when new clients have connected to
+|android.app.Service.onStart(Intent,int)|
+|android.app.Service.onStartCommand(Intent,int,int)|Called by the system every 
+|android.app.Service.onTaskRemoved(Intent)|This is called if the service is cur
+|android.app.Service.onTrimMemory(int)|
+|android.app.Service.onUnbind(Intent)|Called when all clients have disconnected
+|android.app.Service.setForeground(boolean)|
+|android.app.Service.startForeground(int,Notification)|Make this service run in
+|android.app.Service.stopForeground(boolean)|Remove this service from foregroun
+|android.app.Service.stopSelf()|Stop the service, if it was previously started.
+|android.app.Service.stopSelf(int)|Old version of#stopSelfResultthat doesn't re
+|android.app.Service.stopSelfResult(int)|Stop the service if the most recent ti
+
+*android.app.Service_Description*
+
+A Service is an application component representing either an application's 
+desire to perform a longer-running operation while not interacting with the 
+user or to supply functionality for other applications to use. Each service 
+class must have a corresponding &lt;service&gt;(|android.R.styleable|) 
+declaration in its package's AndroidManifest.xml. Services can be started with 
+Context.startService()(|android.content.Context|) and 
+Context.bindService()(|android.content.Context|) . 
+
+Note that services, like other application objects, run in the main thread of 
+their hosting process. This means that, if your service is going to do any CPU 
+intensive (such as MP3 playback) or blocking (such as networking) operations, 
+it should spawn its own thread in which to do that work. More information on 
+this can be found in <a 
+href="guide/topics/fundamentals/processes-and-threads.html">Processes and 
+Threads. The (|android.app.IntentService|) class is available as a standard 
+implementation of Service that has its own thread where it schedules its work 
+to be done. 
+
+Topics covered here: 
+
+What is a Service? Service Lifecycle Permissions Process Lifecycle Local 
+Service Sample Remote Messenger Service Sample 
+
+Developer Guides For a detailed discussion about how to create services, read 
+the <a href="guide/topics/fundamentals/services.html">Services developer guide. 
+
+What is a Service? 
+
+Most confusion about the Service class actually revolves around what it is not: 
+
+A Service is not a separate process. The Service object itself does not imply 
+it is running in its own process; unless otherwise specified, it runs in the 
+same process as the application it is part of. A Service is not a thread. It is 
+not a means itself to do work off of the main thread (to avoid Application Not 
+Responding errors). 
+
+Thus a Service itself is actually very simple, providing two main features: 
+
+A facility for the application to tell the system about something it wants to 
+be doing in the background (even when the user is not directly interacting with 
+the application). This corresponds to calls to 
+Context.startService()(|android.content.Context|) , which ask the system to 
+schedule work for the service, to be run until the service or someone else 
+explicitly stop it. A facility for an application to expose some of its 
+functionality to other applications. This corresponds to calls to 
+Context.bindService()(|android.content.Context|) , which allows a long-standing 
+connection to be made to the service in order to interact with it. 
+
+When a Service component is actually created, for either of these reasons, all 
+that the system actually does is instantiate the component and call its 
+(|android.app.Service|) and any other appropriate callbacks on the main thread. 
+It is up to the Service to implement these with the appropriate behavior, such 
+as creating a secondary thread in which it does its work. 
+
+Note that because Service itself is so simple, you can make your interaction 
+with it as simple or complicated as you want: from treating it as a local Java 
+object that you make direct method calls on (as illustrated by Local Service 
+Sample), to providing a full remoteable interface using AIDL. 
+
+Service Lifecycle 
+
+There are two reasons that a service can be run by the system. If someone calls 
+Context.startService()(|android.content.Context|) then the system will retrieve 
+the service (creating it and calling its (|android.app.Service|) method if 
+needed) and then call its (|android.app.Service|) method with the arguments 
+supplied by the client. The service will at this point continue running until 
+Context.stopService()(|android.content.Context|) or (|android.app.Service|) is 
+called. Note that multiple calls to Context.startService() do not nest (though 
+they do result in multiple corresponding calls to onStartCommand()), so no 
+matter how many times it is started a service will be stopped once 
+Context.stopService() or stopSelf() is called; however, services can use their 
+(|android.app.Service|) method to ensure the service is not stopped until 
+started intents have been processed. 
+
+For started services, there are two additional major modes of operation they 
+can decide to run in, depending on the value they return from onStartCommand(): 
+(|android.app.Service|) is used for services that are explicitly started and 
+stopped as needed, while (|android.app.Service|) or (|android.app.Service|) are 
+used for services that should only remain running while processing any commands 
+sent to them. See the linked documentation for more detail on the semantics. 
+
+Clients can also use Context.bindService()(|android.content.Context|) to obtain 
+a persistent connection to a service. This likewise creates the service if it 
+is not already running (calling (|android.app.Service|) while doing so), but 
+does not call onStartCommand(). The client will receive the 
+(|android.os.IBinder|) object that the service returns from its 
+(|android.app.Service|) method, allowing the client to then make calls back to 
+the service. The service will remain running as long as the connection is 
+established (whether or not the client retains a reference on the service's 
+IBinder). Usually the IBinder returned is for a complex interface that has been 
+<a href="guide/components/aidl.html">written in aidl. 
+
+A service can be both started and have connections bound to it. In such a case, 
+the system will keep the service running as long as either it is started or 
+there are one or more connections to it with the 
+Context.BIND_AUTO_CREATE(|android.content.Context|) flag. Once neither of these 
+situations hold, the service's (|android.app.Service|) method is called and the 
+service is effectively terminated. All cleanup (stopping threads, unregistering 
+receivers) should be complete upon returning from onDestroy(). 
+
+Permissions 
+
+Global access to a service can be enforced when it is declared in its 
+manifest's &lt;service&gt;(|android.R.styleable|) tag. By doing so, other 
+applications will need to declare a corresponding 
+&lt;uses-permission&gt;(|android.R.styleable|) element in their own manifest to 
+be able to start, stop, or bind to the service. 
+
+As of (|android.os.Build.VERSION_CODES|) , when using 
+Context.startService(Intent)(|android.content.Context|) , you can also set 
+Intent.FLAG_GRANT_READ_URI_PERMISSION(|android.content.Intent|) and/or 
+Intent.FLAG_GRANT_WRITE_URI_PERMISSION(|android.content.Intent|) on the Intent. 
+This will grant the Service temporary access to the specific URIs in the 
+Intent. Access will remain until the Service has called (|android.app.Service|) 
+for that start command or a later one, or until the Service has been completely 
+stopped. This works for granting access to the other apps that have not 
+requested the permission protecting the Service, or even when the Service is 
+not exported at all. 
+
+In addition, a service can protect individual IPC calls into it with 
+permissions, by calling the (|android.app.Service|) method before executing the 
+implementation of that call. 
+
+See the <a href="guide/topics/security/security.html">Security and Permissions 
+document for more information on permissions and security in general. 
+
+Process Lifecycle 
+
+The Android system will attempt to keep the process hosting a service around as 
+long as the service has been started or has clients bound to it. When running 
+low on memory and needing to kill existing processes, the priority of a process 
+hosting the service will be the higher of the following possibilities: 
+
+If the service is currently executing code in its 
+onCreate()(|android.app.Service|) , onStartCommand()(|android.app.Service|) , 
+or onDestroy()(|android.app.Service|) methods, then the hosting process will be 
+a foreground process to ensure this code can execute without being killed. If 
+the service has been started, then its hosting process is considered to be less 
+important than any processes that are currently visible to the user on-screen, 
+but more important than any process not visible. Because only a few processes 
+are generally visible to the user, this means that the service should not be 
+killed except in extreme low memory conditions. If there are clients bound to 
+the service, then the service's hosting process is never less important than 
+the most important client. That is, if one of its clients is visible to the 
+user, then the service itself is considered to be visible. A started service 
+can use the (|android.app.Service|) API to put the service in a foreground 
+state, where the system considers it to be something the user is actively aware 
+of and thus not a candidate for killing when low on memory. (It is still 
+theoretically possible for the service to be killed under extreme memory 
+pressure from the current foreground application, but in practice this should 
+not be a concern.) 
+
+Note this means that most of the time your service is running, it may be killed 
+by the system if it is under heavy memory pressure. If this happens, the system 
+will later try to restart the service. An important consequence of this is that 
+if you implement onStartCommand()(|android.app.Service|) to schedule work to be 
+done asynchronously or in another thread, then you may want to use 
+(|android.app.Service|) to have the system re-deliver an Intent for you so that 
+it does not get lost if your service is killed while processing it. 
+
+Other application components running in the same process as the service (such 
+as an (|android.app.Activity|) ) can, of course, increase the importance of the 
+overall process beyond just the importance of the service itself. 
+
+Local Service Sample 
+
+One of the most common uses of a Service is as a secondary component running 
+alongside other parts of an application, in the same process as the rest of the 
+components. All components of an .apk run in the same process unless explicitly 
+stated otherwise, so this is a typical situation. 
+
+When used in this way, by assuming the components are in the same process, you 
+can greatly simplify the interaction between them: clients of the service can 
+simply cast the IBinder they receive from it to a concrete class published by 
+the service. 
+
+An example of this use of a Service is shown here. First is the Service itself, 
+publishing a custom class when 
+bound:development/samples/ApiDemos/src/com/example/android/apis/app/LocalService.java
+serviceWith that done, one can now write client code that directly accesses the 
+running service, such 
+as:development/samples/ApiDemos/src/com/example/android/apis/app/LocalServiceActivities.java
+bind Remote Messenger Service Sample 
+
+If you need to be able to write a Service that can perform complicated 
+communication with clients in remote processes (beyond simply the use of 
+Context.startService(|android.content.Context|) to send commands to it), then 
+you can use the (|android.os.Messenger|) class instead of writing full AIDL 
+files. 
+
+An example of a Service that uses Messenger as its client interface is shown 
+here. First is the Service itself, publishing a Messenger to an internal 
+Handler when 
+bound:development/samples/ApiDemos/src/com/example/android/apis/app/MessengerService.java
+serviceIf we want to make this service run in a remote process (instead of the 
+standard one for its .apk), we can use android:process in its manifest tag to 
+specify one:development/samples/ApiDemos/AndroidManifest.xml 
+remote_service_declarationNote that the name "remote" chosen here is arbitrary, 
+and you can use other names if you want additional processes. The ':' prefix 
+appends the name to your package's standard process name. 
+
+With that done, clients can now bind to the service and send messages to it. 
+Note that this allows clients to register with it to receive messages back as 
+well:development/samples/ApiDemos/src/com/example/android/apis/app/MessengerServiceActivities.java
+bind 
+
+
+
+*int_android.app.Service.START_CONTINUATION_MASK*
+
+Bits returned by (|android.app.Service|) describing how to continue the service 
+if it is killed. May be (|android.app.Service|) , (|android.app.Service|) , 
+(|android.app.Service|) , or (|android.app.Service|) . 
+
+
+*int_android.app.Service.START_FLAG_REDELIVERY*
+
+This flag is set in (|android.app.Service|) if the Intent is a re-delivery of a 
+previously delivered intent, because the service had previously returned 
+(|android.app.Service|) but had been killed before calling 
+(|android.app.Service|) for that Intent. 
+
+
+*int_android.app.Service.START_FLAG_RETRY*
+
+This flag is set in (|android.app.Service|) if the Intent is a a retry because 
+the original attempt never got to or returned from (|android.app.Service|) . 
+
+
+*int_android.app.Service.START_NOT_STICKY*
+
+Constant to return from (|android.app.Service|) : if this service's process is 
+killed while it is started (after returning from (|android.app.Service|) ), and 
+there are no new start intents to deliver to it, then take the service out of 
+the started state and don't recreate until a future explicit call to 
+Context.startService(Intent)(|android.content.Context|) . The service will not 
+receive a (|android.app.Service|) call with a null Intent because it will not 
+be re-started if there are no pending Intents to deliver. 
+
+This mode makes sense for things that want to do some work as a result of being 
+started, but can be stopped when under memory pressure and will explicit start 
+themselves again later to do more work. An example of such a service would be 
+one that polls for data from a server: it could schedule an alarm to poll every 
+N minutes by having the alarm start its service. When its 
+(|android.app.Service|) is called from the alarm, it schedules a new alarm for 
+N minutes later, and spawns a thread to do its networking. If its process is 
+killed while doing that check, the service will not be restarted until the 
+alarm goes off. 
+
+
+*int_android.app.Service.START_REDELIVER_INTENT*
+
+Constant to return from (|android.app.Service|) : if this service's process is 
+killed while it is started (after returning from (|android.app.Service|) ), 
+then it will be scheduled for a restart and the last delivered Intent 
+re-delivered to it again via (|android.app.Service|) . This Intent will remain 
+scheduled for redelivery until the service calls (|android.app.Service|) with 
+the start ID provided to (|android.app.Service|) . The service will not receive 
+a (|android.app.Service|) call with a null Intent because it will will only be 
+re-started if it is not finished processing all Intents sent to it (and any 
+such pending events will be delivered at the point of restart). 
+
+
+*int_android.app.Service.START_STICKY*
+
+Constant to return from (|android.app.Service|) : if this service's process is 
+killed while it is started (after returning from (|android.app.Service|) ), 
+then leave it in the started state but don't retain this delivered intent. 
+Later the system will try to re-create the service. Because it is in the 
+started state, it will guarantee to call (|android.app.Service|) after creating 
+the new service instance; if there are not any pending start commands to be 
+delivered to the service, it will be called with a null intent object, so you 
+must take care to check for this. 
+
+This mode makes sense for things that will be explicitly started and stopped to 
+run for arbitrary periods of time, such as a service performing background 
+music playback. 
+
+
+*int_android.app.Service.START_STICKY_COMPATIBILITY*
+
+Constant to return from (|android.app.Service|) : compatibility version of 
+(|android.app.Service|) that does not guarantee that (|android.app.Service|) 
+will be called again after being killed. 
+
+
+*int_android.app.Service.START_TASK_REMOVED_COMPLETE*
+
+Special constant for reporting that we are done processing 
+(|android.app.Service|) . 
+
+
+
+*android.app.Service()*
+
+public Service()
+
+
+
+
+*android.app.Service.attach(Context,ActivityThread,String,IBinder,Application,Object)*
+
+public final void attach(
+  android.content.Context context,
+  android.app.ActivityThread thread,
+  java.lang.String className,
+  android.os.IBinder token,
+  android.app.Application application,
+  java.lang.Object activityManager)
+
+
+
+
+
+*android.app.Service.dump(FileDescriptor,PrintWriter,String[])*
+
+protected void dump(
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+Print the Service's state into the given stream. This gets invoked if you run 
+"adb shell dumpsys activity service <yourservicename>" (note that for this 
+command to work, the service must be running, and you must specify a 
+fully-qualified service name). This is distinct from "dumpsys <servicename>", 
+which only works for named system services and which invokes the 
+(|android.os.IBinder|) method on the (|android.os.IBinder|) interface 
+registered with ServiceManager. 
+
+
+    fd - The raw file descriptor that the dump is being sent to. 
+    writer - The PrintWriter to which you should dump your state. This will be closed for 
+       you after you return. 
+    args - additional arguments to the dump request. 
+
+*android.app.Service.getApplication()*
+
+public final |android.app.Application| getApplication()
+
+Return the application that owns this service. 
+
+
+
+*android.app.Service.onBind(Intent)*
+
+public abstract |android.os.IBinder| onBind(android.content.Intent intent)
+
+Return the communication channel to the service. May return null if clients can 
+not bind to the service. The returned (|android.os.IBinder|) is usually for a 
+complex interface that has been <a href="guide/components/aidl.html">described 
+using aidl. 
+
+Note that unlike other application components, calls on to the IBinder 
+interface returned here may not happen on the main thread of the process. More 
+information about the main thread can be found in <a 
+href="guide/topics/fundamentals/processes-and-threads.html">Processes and 
+Threads. 
+
+
+    intent - The Intent that was used to bind to this service, as given to {@link 
+       android.content.Context#bindService Context.bindService}. Note that any 
+       extras that were included with the Intent at that point will not be seen 
+       here. 
+
+    Returns: Return an IBinder through which clients can call on to the service. 
+
+*android.app.Service.onConfigurationChanged(Configuration)*
+
+public void onConfigurationChanged(android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.app.Service.onCreate()*
+
+public void onCreate()
+
+Called by the system when the service is first created. Do not call this method 
+directly. 
+
+
+
+*android.app.Service.onDestroy()*
+
+public void onDestroy()
+
+Called by the system to notify a Service that it is no longer used and is being 
+removed. The service should clean up any resources it holds (threads, 
+registered receivers, etc) at this point. Upon return, there will be no more 
+calls in to this Service object and it is effectively dead. Do not call this 
+method directly. 
+
+
+
+*android.app.Service.onLowMemory()*
+
+public void onLowMemory()
+
+
+
+
+
+*android.app.Service.onRebind(Intent)*
+
+public void onRebind(android.content.Intent intent)
+
+Called when new clients have connected to the service, after it had previously 
+been notified that all had disconnected in its (|android.app.Service|) . This 
+will only be called if the implementation of (|android.app.Service|) was 
+overridden to return true. 
+
+
+    intent - The Intent that was used to bind to this service, as given to {@link 
+       android.content.Context#bindService Context.bindService}. Note that any 
+       extras that were included with the Intent at that point will not be seen 
+       here. 
+
+*android.app.Service.onStart(Intent,int)*
+
+public void onStart(
+  android.content.Intent intent,
+  int startId)
+
+
+
+    Deprecated: Implement {@link #onStartCommand(Intent, int, int)} instead.
+
+
+*android.app.Service.onStartCommand(Intent,int,int)*
+
+public int onStartCommand(
+  android.content.Intent intent,
+  int flags,
+  int startId)
+
+Called by the system every time a client explicitly starts the service by 
+calling (|android.content.Context|) , providing the arguments it supplied and a 
+unique integer token representing the start request. Do not call this method 
+directly. 
+
+For backwards compatibility, the default implementation calls 
+(|android.app.Service|) and returns either (|android.app.Service|) or 
+(|android.app.Service|) . 
+
+If you need your application to run on platform versions prior to API level 5, 
+you can use the following model to handle the older (|android.app.Service|) 
+callback in that case. The handleCommand method is implemented by you as 
+appropriate:development/samples/ApiDemos/src/com/example/android/apis/app/ForegroundService.java
+start_compatibilityNote that the system calls this on your service's main 
+thread. A service's main thread is the same thread where UI operations take 
+place for Activities running in the same process. You should always avoid 
+stalling the main thread's event loop. When doing long-running operations, 
+network calls, or heavy disk I/O, you should kick off a new thread, or use 
+(|android.os.AsyncTask|) . 
+
+
+    intent - The Intent supplied to {@link android.content.Context#startService}, as given. 
+       This may be null if the service is being restarted after its process has 
+       gone away, and it had previously returned anything except {@link 
+       #START_STICKY_COMPATIBILITY}. 
+    flags - Additional data about this start request. Currently either 0, {@link 
+       #START_FLAG_REDELIVERY}, or {@link #START_FLAG_RETRY}. 
+    startId - A unique integer representing this specific request to start. Use with {@link 
+       #stopSelfResult(int)}. 
+
+    Returns: The return value indicates what semantics the system should use for the 
+             service's current started state. It may be one of the constants 
+             associated with the {@link #START_CONTINUATION_MASK} bits. 
+
+*android.app.Service.onTaskRemoved(Intent)*
+
+public void onTaskRemoved(android.content.Intent rootIntent)
+
+This is called if the service is currently running and the user has removed a 
+task that comes from the service's application. If you have set 
+ServiceInfo.FLAG_STOP_WITH_TASK(|android.content.pm.ServiceInfo|) then you will 
+not receive this callback; instead, the service will simply be stopped. 
+
+
+    rootIntent - The original root Intent that was used to launch the task that is being 
+       removed. 
+
+*android.app.Service.onTrimMemory(int)*
+
+public void onTrimMemory(int level)
+
+
+
+
+
+*android.app.Service.onUnbind(Intent)*
+
+public boolean onUnbind(android.content.Intent intent)
+
+Called when all clients have disconnected from a particular interface published 
+by the service. The default implementation does nothing and returns false. 
+
+
+    intent - The Intent that was used to bind to this service, as given to {@link 
+       android.content.Context#bindService Context.bindService}. Note that any 
+       extras that were included with the Intent at that point will not be seen 
+       here. 
+
+    Returns: Return true if you would like to have the service's {@link #onRebind} method 
+             later called when new clients bind to it. 
+
+*android.app.Service.setForeground(boolean)*
+
+public final void setForeground(boolean isForeground)
+
+
+
+    Deprecated: This is a now a no-op, use
+ {@link #startForeground(int, Notification)} instead.  This method
+ has been turned into a no-op rather than simply being deprecated
+ because analysis of numerous poorly behaving devices has shown that
+ increasingly often the trouble is being caused in part by applications
+ that are abusing it.  Thus, given a choice between introducing
+ problems in existing applications using this API (by allowing them to
+ be killed when they would like to avoid it), vs allowing the performance
+ of the entire system to be decreased, this method was deemed less
+ important.
+
+
+*android.app.Service.startForeground(int,Notification)*
+
+public final void startForeground(
+  int id,
+  android.app.Notification notification)
+
+Make this service run in the foreground, supplying the ongoing notification to 
+be shown to the user while in this state. By default services are background, 
+meaning that if the system needs to kill them to reclaim more memory (such as 
+to display a large page in a web browser), they can be killed without too much 
+harm. You can set this flag if killing your service would be disruptive to the 
+user, such as if your service is performing background music playback, so the 
+user would notice if their music stopped playing. 
+
+If you need your application to run on platform versions prior to API level 5, 
+you can use the following model to call the the older setForeground() or this 
+modern method as 
+appropriate:development/samples/ApiDemos/src/com/example/android/apis/app/ForegroundService.java
+foreground_compatibility 
+
+
+    id - The identifier for this notification as per {@link 
+       NotificationManager#notify(int, Notification) 
+       NotificationManager.notify(int, Notification)}; must not be 0. 
+    notification - The Notification to be displayed. 
+
+*android.app.Service.stopForeground(boolean)*
+
+public final void stopForeground(boolean removeNotification)
+
+Remove this service from foreground state, allowing it to be killed if more 
+memory is needed. 
+
+
+    removeNotification - If true, the notification previously provided to {@link #startForeground} will 
+       be removed. Otherwise it will remain until a later call removes it (or 
+       the service is destroyed). 
+
+*android.app.Service.stopSelf()*
+
+public final void stopSelf()
+
+Stop the service, if it was previously started. This is the same as calling 
+(|android.content.Context|) for this particular service. 
+
+
+
+*android.app.Service.stopSelf(int)*
+
+public final void stopSelf(int startId)
+
+Old version of (|android.app.Service|) that doesn't return a result. 
+
+
+
+*android.app.Service.stopSelfResult(int)*
+
+public final boolean stopSelfResult(int startId)
+
+Stop the service if the most recent time it was started was startId. This is 
+the same as calling (|android.content.Context|) for this particular service but 
+allows you to safely avoid stopping if there is a start request from a client 
+that you haven't yet seen in (|android.app.Service|) . 
+
+Be careful about ordering of your calls to this function.. If you call this 
+function with the most-recently received ID before you have called it for 
+previously received IDs, the service will be immediately stopped anyway. If you 
+may end up processing IDs out of order (such as by dispatching them on separate 
+threads), then you are responsible for stopping them in the same order you 
+received them. 
+
+
+    startId - The most recent start identifier received in {@link #onStart}. 
+
+    Returns: Returns true if the startId matches the last start request and the service will 
+             be stopped, else false. 
+
+

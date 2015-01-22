@@ -1,0 +1,573 @@
+*android.service.dreams.DreamService* *DreamService* Extend this class to implem
+
+public class DreamService
+  extends    |android.app.Service|
+  implements |android.view.Window.Callback|
+
+|android.service.dreams.DreamService_Description|
+|android.service.dreams.DreamService_Fields|
+|android.service.dreams.DreamService_Constructors|
+|android.service.dreams.DreamService_Methods|
+
+================================================================================
+
+*android.service.dreams.DreamService_Fields*
+|java.lang.String_android.service.dreams.DreamService.DREAM_META_DATA|
+|java.lang.String_android.service.dreams.DreamService.DREAM_SERVICE|
+|java.lang.String_android.service.dreams.DreamService.SERVICE_INTERFACE|
+
+*android.service.dreams.DreamService_Constructors*
+|android.service.dreams.DreamService()|
+
+*android.service.dreams.DreamService_Methods*
+|android.service.dreams.DreamService.addContentView(View,ViewGroup.LayoutParams)|
+|android.service.dreams.DreamService.dispatchGenericMotionEvent(MotionEvent)|
+|android.service.dreams.DreamService.dispatchKeyEvent(KeyEvent)|
+|android.service.dreams.DreamService.dispatchKeyShortcutEvent(KeyEvent)|
+|android.service.dreams.DreamService.dispatchPopulateAccessibilityEvent(AccessibilityEvent)|
+|android.service.dreams.DreamService.dispatchTouchEvent(MotionEvent)|
+|android.service.dreams.DreamService.dispatchTrackballEvent(MotionEvent)|
+|android.service.dreams.DreamService.dump(FileDescriptor,PrintWriter,String[])|
+|android.service.dreams.DreamService.findViewById(int)|Finds a view that was id
+|android.service.dreams.DreamService.finish()|Stops the dream, detaches from th
+|android.service.dreams.DreamService.getWindow()|Retrieves the currentandroid.v
+|android.service.dreams.DreamService.getWindowManager()|Retrieves the currentan
+|android.service.dreams.DreamService.isFullscreen()|Returns whether or not this
+|android.service.dreams.DreamService.isInteractive()|Returns whether or not thi
+|android.service.dreams.DreamService.isLowProfile()|Returns whether or not this
+|android.service.dreams.DreamService.isScreenBright()|Returns whether or not th
+|android.service.dreams.DreamService.onActionModeFinished(ActionMode)|
+|android.service.dreams.DreamService.onActionModeStarted(ActionMode)|
+|android.service.dreams.DreamService.onAttachedToWindow()|
+|android.service.dreams.DreamService.onBind(Intent)|
+|android.service.dreams.DreamService.onContentChanged()|
+|android.service.dreams.DreamService.onCreate()|Called when this Dream is const
+|android.service.dreams.DreamService.onCreatePanelMenu(int,Menu)|
+|android.service.dreams.DreamService.onCreatePanelView(int)|
+|android.service.dreams.DreamService.onDestroy()|
+|android.service.dreams.DreamService.onDetachedFromWindow()|
+|android.service.dreams.DreamService.onDreamingStarted()|Called when the dream'
+|android.service.dreams.DreamService.onDreamingStopped()|Called when this Dream
+|android.service.dreams.DreamService.onMenuItemSelected(int,MenuItem)|
+|android.service.dreams.DreamService.onMenuOpened(int,Menu)|
+|android.service.dreams.DreamService.onPanelClosed(int,Menu)|
+|android.service.dreams.DreamService.onPreparePanel(int,View,Menu)|
+|android.service.dreams.DreamService.onSearchRequested()|
+|android.service.dreams.DreamService.onWindowAttributesChanged(WindowManager.LayoutParams)|
+|android.service.dreams.DreamService.onWindowFocusChanged(boolean)|
+|android.service.dreams.DreamService.onWindowStartingActionMode(ActionMode.Callback)|
+|android.service.dreams.DreamService.setContentView(int)|Inflates a layout reso
+|android.service.dreams.DreamService.setContentView(View)|Sets a view to be the
+|android.service.dreams.DreamService.setContentView(View,ViewGroup.LayoutParams)|
+|android.service.dreams.DreamService.setDebug(boolean)|
+|android.service.dreams.DreamService.setFullscreen(boolean)|Controlsandroid.vie
+|android.service.dreams.DreamService.setInteractive(boolean)|Marks this dream a
+|android.service.dreams.DreamService.setLowProfile(boolean)|Sets View.SYSTEM_UI
+|android.service.dreams.DreamService.setScreenBright(boolean)|Marks this dream 
+
+*android.service.dreams.DreamService_Description*
+
+Extend this class to implement a custom dream (available to the user as a 
+"Daydream"). 
+
+Dreams are interactive screensavers launched when a charging device is idle, or 
+docked in a desk dock. Dreams provide another modality for apps to express 
+themselves, tailored for an exhibition/lean-back experience. 
+
+TheDreamServicelifecycle is as follows: 
+
+(|android.service.dreams.DreamService|) Use this for initial setup, such as 
+calling setContentView()(|android.service.dreams.DreamService|) . 
+(|android.service.dreams.DreamService|) Your dream has started, so you should 
+begin animations or other behaviors here. 
+(|android.service.dreams.DreamService|) Use this to stop the things you started 
+in (|android.service.dreams.DreamService|) . 
+(|android.service.dreams.DreamService|) Use this to dismantle resources (for 
+example, detach from handlers and listeners). 
+
+In addition, onCreate and onDestroy (from the Service interface) will also be 
+called, but initialization and teardown should be done by overriding the hooks 
+above. 
+
+To be available to the system, yourDreamServiceshould be declared in the 
+manifest as follows: 
+
+<service android:name=".MyDream" android:exported="true" 
+android:icon="@drawable/my_icon" android:label="@string/my_dream_label" > 
+
+<intent-filter> <action android:name="android.service.dreams.DreamService" /> 
+<category android:name="android.intent.category.DEFAULT" /> </intent-filter> 
+
+<!-- Point to additional information for this dream (optional) --> <meta-data 
+android:name="android.service.dream" android:resource="@xml/my_dream" /> 
+</service> 
+
+If specified with the<meta-data>element, additional information for the dream 
+is defined using the &lt;dream&gt;(|android.R.styleable|) element in a separate 
+XML file. Currently, the only addtional information you can provide is for a 
+settings activity that allows the user to configure the dream behavior. For 
+example: res/xml/my_dream.xml 
+
+<dream xmlns:android="http://schemas.android.com/apk/res/android" 
+android:settingsActivity="com.example.app/.MyDreamSettingsActivity" /> 
+
+This makes a Settings button available alongside your dream's listing in the 
+system settings, which when pressed opens the specified activity. 
+
+To specify your dream layout, call (|android.service.dreams.DreamService|) , 
+typically during the (|android.service.dreams.DreamService|) callback. For 
+example: 
+
+public class MyDream extends DreamService { 
+
+Override public void onAttachedToWindow() { super.onAttachedToWindow(); 
+
+// Exit dream upon user touch setInteractive(false); // Hide system UI 
+setFullscreen(true); // Set the dream layout setContentView(R.layout.dream); } 
+} 
+
+
+
+*java.lang.String_android.service.dreams.DreamService.DREAM_META_DATA*
+
+Name under which a Dream publishes information about itself. This meta-data 
+must reference an XML resource containing a < dream(|android.R.styleable|) > 
+tag. 
+
+
+*java.lang.String_android.service.dreams.DreamService.DREAM_SERVICE*
+
+The name of the dream manager service. 
+
+
+*java.lang.String_android.service.dreams.DreamService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) that must be declared as handled by the service. 
+
+
+
+*android.service.dreams.DreamService()*
+
+public DreamService()
+
+
+
+
+*android.service.dreams.DreamService.addContentView(View,ViewGroup.LayoutParams)*
+
+public void addContentView(
+  android.view.View view,
+  android.view.ViewGroup.LayoutParams params)
+
+Adds a view to the Dream's window, leaving other content views in place. 
+
+Note: Requires a window, do not call before 
+(|android.service.dreams.DreamService|) 
+
+
+    view - The desired content to display. 
+    params - Layout parameters for the view. 
+
+*android.service.dreams.DreamService.dispatchGenericMotionEvent(MotionEvent)*
+
+public boolean dispatchGenericMotionEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dispatchKeyShortcutEvent(KeyEvent)*
+
+public boolean dispatchKeyShortcutEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dispatchPopulateAccessibilityEvent(AccessibilityEvent)*
+
+public boolean dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dispatchTouchEvent(MotionEvent)*
+
+public boolean dispatchTouchEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dispatchTrackballEvent(MotionEvent)*
+
+public boolean dispatchTrackballEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.service.dreams.DreamService.dump(FileDescriptor,PrintWriter,String[])*
+
+protected void dump(
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter pw,
+  java.lang.String[] args)
+
+
+
+
+
+*android.service.dreams.DreamService.findViewById(int)*
+
+public |android.view.View| findViewById(int id)
+
+Finds a view that was identified by the id attribute from the XML that was 
+processed in (|android.service.dreams.DreamService|) . 
+
+Note: Requires a window, do not call before 
+(|android.service.dreams.DreamService|) 
+
+
+
+    Returns: The view if found or null otherwise. 
+
+*android.service.dreams.DreamService.finish()*
+
+public final void finish()
+
+Stops the dream, detaches from the window, and wakes up. 
+
+
+
+*android.service.dreams.DreamService.getWindow()*
+
+public |android.view.Window| getWindow()
+
+Retrieves the current (|android.view.Window|) for the dream. Behaves similarly 
+to (|android.app.Activity|) . 
+
+
+
+    Returns: The current window, or null if the dream is not started. 
+
+*android.service.dreams.DreamService.getWindowManager()*
+
+public |android.view.WindowManager| getWindowManager()
+
+Retrieves the current (|android.view.WindowManager|) for the dream. Behaves 
+similarly to (|android.app.Activity|) . 
+
+
+
+    Returns: The current window manager, or null if the dream is not started. 
+
+*android.service.dreams.DreamService.isFullscreen()*
+
+public boolean isFullscreen()
+
+Returns whether or not this dream is in fullscreen mode. Defaults to false. 
+
+
+
+*android.service.dreams.DreamService.isInteractive()*
+
+public boolean isInteractive()
+
+Returns whether or not this dream is interactive. Defaults to false. 
+
+
+
+*android.service.dreams.DreamService.isLowProfile()*
+
+public boolean isLowProfile()
+
+Returns whether or not this dream is in low profile mode. Defaults to true. 
+
+
+
+*android.service.dreams.DreamService.isScreenBright()*
+
+public boolean isScreenBright()
+
+Returns whether or not this dream keeps the screen bright while dreaming. 
+Defaults to false, allowing the screen to dim if necessary. 
+
+
+
+*android.service.dreams.DreamService.onActionModeFinished(ActionMode)*
+
+public void onActionModeFinished(android.view.ActionMode mode)
+
+
+
+
+
+*android.service.dreams.DreamService.onActionModeStarted(ActionMode)*
+
+public void onActionModeStarted(android.view.ActionMode mode)
+
+
+
+
+
+*android.service.dreams.DreamService.onAttachedToWindow()*
+
+public void onAttachedToWindow()
+
+
+
+
+
+*android.service.dreams.DreamService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.service.dreams.DreamService.onContentChanged()*
+
+public void onContentChanged()
+
+
+
+
+
+*android.service.dreams.DreamService.onCreate()*
+
+public void onCreate()
+
+Called when this Dream is constructed. 
+
+
+
+*android.service.dreams.DreamService.onCreatePanelMenu(int,Menu)*
+
+public boolean onCreatePanelMenu(
+  int featureId,
+  android.view.Menu menu)
+
+
+
+
+
+*android.service.dreams.DreamService.onCreatePanelView(int)*
+
+public |android.view.View| onCreatePanelView(int featureId)
+
+
+
+
+
+*android.service.dreams.DreamService.onDestroy()*
+
+public void onDestroy()
+
+
+
+
+
+*android.service.dreams.DreamService.onDetachedFromWindow()*
+
+public void onDetachedFromWindow()
+
+
+
+
+
+*android.service.dreams.DreamService.onDreamingStarted()*
+
+public void onDreamingStarted()
+
+Called when the dream's window has been created and is visible and animation 
+may now begin. 
+
+
+
+*android.service.dreams.DreamService.onDreamingStopped()*
+
+public void onDreamingStopped()
+
+Called when this Dream is stopped, either by external request or by calling 
+finish(), before the window has been removed. 
+
+
+
+*android.service.dreams.DreamService.onMenuItemSelected(int,MenuItem)*
+
+public boolean onMenuItemSelected(
+  int featureId,
+  android.view.MenuItem item)
+
+
+
+
+
+*android.service.dreams.DreamService.onMenuOpened(int,Menu)*
+
+public boolean onMenuOpened(
+  int featureId,
+  android.view.Menu menu)
+
+
+
+
+
+*android.service.dreams.DreamService.onPanelClosed(int,Menu)*
+
+public void onPanelClosed(
+  int featureId,
+  android.view.Menu menu)
+
+
+
+
+
+*android.service.dreams.DreamService.onPreparePanel(int,View,Menu)*
+
+public boolean onPreparePanel(
+  int featureId,
+  android.view.View view,
+  android.view.Menu menu)
+
+
+
+
+
+*android.service.dreams.DreamService.onSearchRequested()*
+
+public boolean onSearchRequested()
+
+
+
+
+
+*android.service.dreams.DreamService.onWindowAttributesChanged(WindowManager.LayoutParams)*
+
+public void onWindowAttributesChanged(android.view.WindowManager.LayoutParams attrs)
+
+
+
+
+
+*android.service.dreams.DreamService.onWindowFocusChanged(boolean)*
+
+public void onWindowFocusChanged(boolean hasFocus)
+
+
+
+
+
+*android.service.dreams.DreamService.onWindowStartingActionMode(ActionMode.Callback)*
+
+public |android.view.ActionMode| onWindowStartingActionMode(android.view.ActionMode.Callback callback)
+
+
+
+
+
+*android.service.dreams.DreamService.setContentView(int)*
+
+public void setContentView(int layoutResID)
+
+Inflates a layout resource and set it to be the content view for this Dream. 
+Behaves similarly to (|android.app.Activity|) . 
+
+Note: Requires a window, do not call before 
+(|android.service.dreams.DreamService|) 
+
+
+    layoutResID - Resource ID to be inflated. 
+
+*android.service.dreams.DreamService.setContentView(View)*
+
+public void setContentView(android.view.View view)
+
+Sets a view to be the content view for this Dream. Behaves similarly to 
+(|android.app.Activity|) in an activity, including using 
+(|ViewGroup.LayoutParams|) as the layout height and width of the view. 
+
+Note: This requires a window, so you should usually call it during 
+(|android.service.dreams.DreamService|) and never earlier (you cannot call it 
+during (|android.service.dreams.DreamService|) ). 
+
+
+
+*android.service.dreams.DreamService.setContentView(View,ViewGroup.LayoutParams)*
+
+public void setContentView(
+  android.view.View view,
+  android.view.ViewGroup.LayoutParams params)
+
+Sets a view to be the content view for this Dream. Behaves similarly to 
+(|android.app.Activity|) in an activity. 
+
+Note: This requires a window, so you should usually call it during 
+(|android.service.dreams.DreamService|) and never earlier (you cannot call it 
+during (|android.service.dreams.DreamService|) ). 
+
+
+    view - The desired content to display. 
+    params - Layout parameters for the view. 
+
+*android.service.dreams.DreamService.setDebug(boolean)*
+
+public void setDebug(boolean dbg)
+
+
+
+
+
+*android.service.dreams.DreamService.setFullscreen(boolean)*
+
+public void setFullscreen(boolean fullscreen)
+
+Controls (|android.view.WindowManager.LayoutParams|) on the dream's window. 
+
+
+    fullscreen - If true, the fullscreen flag will be set; else it will be cleared. 
+
+*android.service.dreams.DreamService.setInteractive(boolean)*
+
+public void setInteractive(boolean interactive)
+
+Marks this dream as interactive to receive input events. 
+
+Non-interactive dreams (default) will dismiss on the first input event. 
+
+Interactive dreams should call (|android.service.dreams.DreamService|) to 
+dismiss themselves. 
+
+
+    interactive - True if this dream will handle input events. 
+
+*android.service.dreams.DreamService.setLowProfile(boolean)*
+
+public void setLowProfile(boolean lowProfile)
+
+Sets View.SYSTEM_UI_FLAG_LOW_PROFILE on the content view. 
+
+
+    lowProfile - True to set View.SYSTEM_UI_FLAG_LOW_PROFILE 
+
+*android.service.dreams.DreamService.setScreenBright(boolean)*
+
+public void setScreenBright(boolean screenBright)
+
+Marks this dream as keeping the screen bright while dreaming. 
+
+
+    screenBright - True to keep the screen bright while dreaming. 
+
+

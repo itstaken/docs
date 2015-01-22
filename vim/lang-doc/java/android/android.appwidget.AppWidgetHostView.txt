@@ -1,0 +1,270 @@
+*android.appwidget.AppWidgetHostView* *AppWidgetHostView* Provides the glue to s
+
+public class AppWidgetHostView
+  extends    |android.widget.FrameLayout|
+
+|android.appwidget.AppWidgetHostView_Description|
+|android.appwidget.AppWidgetHostView_Fields|
+|android.appwidget.AppWidgetHostView_Constructors|
+|android.appwidget.AppWidgetHostView_Methods|
+
+================================================================================
+
+*android.appwidget.AppWidgetHostView_Constructors*
+|android.appwidget.AppWidgetHostView(Context)|Create a host view.
+|android.appwidget.AppWidgetHostView(Context,int,int)|Create a host view.
+|android.appwidget.AppWidgetHostView(Context,RemoteViews.OnClickHandler)|
+
+*android.appwidget.AppWidgetHostView_Methods*
+|android.appwidget.AppWidgetHostView.dispatchRestoreInstanceState(SparseArray<Parcelable>)|
+|android.appwidget.AppWidgetHostView.dispatchSaveInstanceState(SparseArray<Parcelable>)|
+|android.appwidget.AppWidgetHostView.drawChild(Canvas,View,long)|
+|android.appwidget.AppWidgetHostView.generateLayoutParams(AttributeSet)|
+|android.appwidget.AppWidgetHostView.getAppWidgetId()|
+|android.appwidget.AppWidgetHostView.getAppWidgetInfo()|
+|android.appwidget.AppWidgetHostView.getDefaultPaddingForWidget(Context,ComponentName,Rect)|
+|android.appwidget.AppWidgetHostView.getDefaultView()|Inflate and return the de
+|android.appwidget.AppWidgetHostView.getErrorView()|Inflate and return a view t
+|android.appwidget.AppWidgetHostView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.appwidget.AppWidgetHostView.prepareView(View)|Prepare the given view t
+|android.appwidget.AppWidgetHostView.setAppWidget(int,AppWidgetProviderInfo)|Se
+|android.appwidget.AppWidgetHostView.setOnClickHandler(RemoteViews.OnClickHandler)|
+|android.appwidget.AppWidgetHostView.setUserId(int)|
+|android.appwidget.AppWidgetHostView.updateAppWidget(RemoteViews)|Process a set
+|android.appwidget.AppWidgetHostView.updateAppWidgetOptions(Bundle)|Specify som
+|android.appwidget.AppWidgetHostView.updateAppWidgetSize(Bundle,int,int,int,int)|
+|android.appwidget.AppWidgetHostView.updateAppWidgetSize(Bundle,int,int,int,int,boolean)|
+
+*android.appwidget.AppWidgetHostView_Description*
+
+Provides the glue to show AppWidget views. This class offers automatic 
+animation between updates, and will try recycling old views for each incoming 
+(|android.widget.RemoteViews|) . 
+
+
+
+*android.appwidget.AppWidgetHostView(Context)*
+
+public AppWidgetHostView(android.content.Context context)
+
+Create a host view. Uses default fade animations. 
+
+
+*android.appwidget.AppWidgetHostView(Context,int,int)*
+
+public AppWidgetHostView(
+  android.content.Context context,
+  int animationIn,
+  int animationOut)
+
+Create a host view. Uses specified animations when pushing 
+(|android.appwidget.AppWidgetHostView|) . 
+
+    animationIn - Resource ID of in animation to use 
+    animationOut - Resource ID of out animation to use 
+
+*android.appwidget.AppWidgetHostView(Context,RemoteViews.OnClickHandler)*
+
+public AppWidgetHostView(
+  android.content.Context context,
+  android.widget.RemoteViews.OnClickHandler handler)
+
+
+
+
+*android.appwidget.AppWidgetHostView.dispatchRestoreInstanceState(SparseArray<Parcelable>)*
+
+protected void dispatchRestoreInstanceState(android.util.SparseArray<android.os.Parcelable> container)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.dispatchSaveInstanceState(SparseArray<Parcelable>)*
+
+protected void dispatchSaveInstanceState(android.util.SparseArray<android.os.Parcelable> container)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.drawChild(Canvas,View,long)*
+
+protected boolean drawChild(
+  Canvas canvas,
+  android.view.View child,
+  long drawingTime)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.generateLayoutParams(AttributeSet)*
+
+public |android.widget.FrameLayout.LayoutParams| generateLayoutParams(android.util.AttributeSet attrs)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.getAppWidgetId()*
+
+public int getAppWidgetId()
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.getAppWidgetInfo()*
+
+public |android.appwidget.AppWidgetProviderInfo| getAppWidgetInfo()
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.getDefaultPaddingForWidget(Context,ComponentName,Rect)*
+
+public static Rect getDefaultPaddingForWidget(
+  android.content.Context context,
+  android.content.ComponentName component,
+  Rect padding)
+
+As of ICE_CREAM_SANDWICH we are automatically adding padding to widgets 
+targeting ICE_CREAM_SANDWICH and higher. The new widget design guidelines 
+strongly recommend that widget developers do not add extra padding to their 
+widgets. This will help achieve consistency among widgets. 
+
+Note: this method is only needed by developers of AppWidgetHosts. The method is 
+provided in order for the AppWidgetHost to account for the automatic padding 
+when computing the number of cells to allocate to a particular widget. 
+
+
+    context - the current context 
+    component - the component name of the widget 
+    padding - Rect in which to place the output, if null, a new Rect will be allocated and 
+       returned 
+
+    Returns: default padding for this widget, in pixels 
+
+*android.appwidget.AppWidgetHostView.getDefaultView()*
+
+protected |android.view.View| getDefaultView()
+
+Inflate and return the default layout requested by AppWidget provider. 
+
+
+
+*android.appwidget.AppWidgetHostView.getErrorView()*
+
+protected |android.view.View| getErrorView()
+
+Inflate and return a view that represents an error state. 
+
+
+
+*android.appwidget.AppWidgetHostView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.prepareView(View)*
+
+protected void prepareView(android.view.View view)
+
+Prepare the given view to be shown. This might include adjusting 
+(|FrameLayout.LayoutParams|) before inserting. 
+
+
+
+*android.appwidget.AppWidgetHostView.setAppWidget(int,AppWidgetProviderInfo)*
+
+public void setAppWidget(
+  int appWidgetId,
+  android.appwidget.AppWidgetProviderInfo info)
+
+Set the AppWidget that will be displayed by this view. This method also adds 
+default padding to widgets, as described in 
+(|android.appwidget.AppWidgetHostView|) and can be overridden in order to add 
+custom padding. 
+
+
+
+*android.appwidget.AppWidgetHostView.setOnClickHandler(RemoteViews.OnClickHandler)*
+
+public void setOnClickHandler(android.widget.RemoteViews.OnClickHandler handler)
+
+Pass the given handler to RemoteViews when updating this widget. Unless this is 
+done immediatly after construction, a call to 
+(|android.appwidget.AppWidgetHostView|) should be made. 
+
+
+    handler - 
+
+*android.appwidget.AppWidgetHostView.setUserId(int)*
+
+public void setUserId(int userId)
+
+
+
+
+
+*android.appwidget.AppWidgetHostView.updateAppWidget(RemoteViews)*
+
+public void updateAppWidget(android.widget.RemoteViews remoteViews)
+
+Process a set of (|android.widget.RemoteViews|) coming in as an update from the 
+AppWidget provider. Will animate into these new views as needed 
+
+
+
+*android.appwidget.AppWidgetHostView.updateAppWidgetOptions(Bundle)*
+
+public void updateAppWidgetOptions(android.os.Bundle options)
+
+Specify some extra information for the widget provider. Causes a callback to 
+the AppWidgetProvider. 
+
+
+    options - The bundle of options information. 
+
+*android.appwidget.AppWidgetHostView.updateAppWidgetSize(Bundle,int,int,int,int)*
+
+public void updateAppWidgetSize(
+  android.os.Bundle newOptions,
+  int minWidth,
+  int minHeight,
+  int maxWidth,
+  int maxHeight)
+
+Provide guidance about the size of this widget to the AppWidgetManager. The 
+widths and heights should correspond to the full area the AppWidgetHostView is 
+given. Padding added by the framework will be accounted for automatically. This 
+information gets embedded into the AppWidget options and causes a callback to 
+the AppWidgetProvider. 
+
+
+    newOptions - The bundle of options, in addition to the size information, can be null. 
+    minWidth - The minimum width in dips that the widget will be displayed at. 
+    minHeight - The maximum height in dips that the widget will be displayed at. 
+    maxWidth - The maximum width in dips that the widget will be displayed at. 
+    maxHeight - The maximum height in dips that the widget will be displayed at. 
+
+*android.appwidget.AppWidgetHostView.updateAppWidgetSize(Bundle,int,int,int,int,boolean)*
+
+public void updateAppWidgetSize(
+  android.os.Bundle newOptions,
+  int minWidth,
+  int minHeight,
+  int maxWidth,
+  int maxHeight,
+  boolean ignorePadding)
+
+
+
+
+
+

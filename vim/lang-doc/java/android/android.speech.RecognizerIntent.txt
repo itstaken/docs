@@ -1,0 +1,421 @@
+*android.speech.RecognizerIntent* *RecognizerIntent* Constants for supporting sp
+
+public class RecognizerIntent
+  extends    |java.lang.Object|
+
+|android.speech.RecognizerIntent_Description|
+|android.speech.RecognizerIntent_Fields|
+|android.speech.RecognizerIntent_Constructors|
+|android.speech.RecognizerIntent_Methods|
+
+================================================================================
+
+*android.speech.RecognizerIntent_Fields*
+|java.lang.String_android.speech.RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS|
+|java.lang.String_android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH|
+|java.lang.String_android.speech.RecognizerIntent.ACTION_VOICE_SEARCH_HANDS_FREE|
+|java.lang.String_android.speech.RecognizerIntent.ACTION_WEB_SEARCH|
+|java.lang.String_android.speech.RecognizerIntent.DETAILS_META_DATA|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_CALLING_PACKAGE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_CONFIDENCE_SCORES|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_MAX_RESULTS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_ORIGIN|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_PARTIAL_RESULTS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_PROMPT|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT_BUNDLE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_SECURE|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES|
+|java.lang.String_android.speech.RecognizerIntent.EXTRA_WEB_SEARCH_ONLY|
+|java.lang.String_android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM|
+|java.lang.String_android.speech.RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH|
+|int_android.speech.RecognizerIntent.RESULT_AUDIO_ERROR|
+|int_android.speech.RecognizerIntent.RESULT_CLIENT_ERROR|
+|int_android.speech.RecognizerIntent.RESULT_NETWORK_ERROR|
+|int_android.speech.RecognizerIntent.RESULT_NO_MATCH|
+|int_android.speech.RecognizerIntent.RESULT_SERVER_ERROR|
+
+*android.speech.RecognizerIntent_Methods*
+|android.speech.RecognizerIntent.getVoiceDetailsIntent(Context)|Returns the bro
+
+*android.speech.RecognizerIntent_Description*
+
+Constants for supporting speech recognition through starting an 
+(|android.content.Intent|) 
+
+
+
+*java.lang.String_android.speech.RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS*
+
+A broadcast intent which can be fired to the 
+(|android.content.BroadcastReceiver|) component specified in the meta-data 
+defined in the (|android.speech.RecognizerIntent|) meta-data of an 
+(|android.app.Activity|) satisfying (|android.speech.RecognizerIntent|) . 
+
+When fired with (|android.content.Context|) , a (|android.os.Bundle|) of extras 
+will be returned to the provided result receiver, and should ideally contain 
+values for (|android.speech.RecognizerIntent|) and 
+(|android.speech.RecognizerIntent|) . 
+
+(Whether these are actually provided is up to the particular implementation. It 
+is recommended that (|android.app.Activity|) s implementing 
+(|android.speech.RecognizerIntent|) provide this information, but it is not 
+required.) 
+
+
+*java.lang.String_android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH*
+
+Starts an activity that will prompt the user for speech and send it through a 
+speech recognizer. The results will be returned via activity results (in 
+(|android.app.Activity|) , if you start the intent using 
+(|android.app.Activity|) ), or forwarded via a PendingIntent if one is 
+provided. 
+
+Starting this intent with just (|android.app.Activity|) is not supported. You 
+must either use (|android.app.Activity|) , or provide a PendingIntent, to 
+receive recognition results. 
+
+The implementation of this API is likely to stream audio to remote servers to 
+perform speech recognition which can use a substantial amount of bandwidth. 
+
+Required extras: 
+
+(|android.speech.RecognizerIntent|) 
+
+Optional extras: 
+
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+(|android.speech.RecognizerIntent|) 
+
+Result extras (returned in the result, not to be specified in the request): 
+
+(|android.speech.RecognizerIntent|) 
+
+NOTE: There may not be any applications installed to handle this action, so you 
+should make sure to catch (|android.content.ActivityNotFoundException|) . 
+
+
+*java.lang.String_android.speech.RecognizerIntent.ACTION_VOICE_SEARCH_HANDS_FREE*
+
+Starts an activity that will prompt the user for speech without requiring the 
+user's visual attention or touch input. It will send it through a speech 
+recognizer, and either synthesize speech for a web search result or trigger 
+another type of action based on the user's speech. 
+
+This activity may be launched while device is locked in a secure mode. Special 
+care must be taken to ensure that the voice actions that are performed while 
+hands free cannot compromise the device's security. The activity should check 
+the value of the (|android.speech.RecognizerIntent|) extra to determine whether 
+the device has been securely locked. If so, the activity should either restrict 
+the set of voice actions that are permitted or require some form of secure 
+authentication before proceeding. 
+
+To ensure that the activity's user interface is visible while the lock screen 
+is showing, the activity should set the 
+(|android.view.WindowManager.LayoutParams|) window flag. Otherwise the 
+activity's user interface may be hidden by the lock screen. The activity should 
+take care not to leak private information when the device is securely locked. 
+
+Optional extras: 
+
+(|android.speech.RecognizerIntent|) 
+
+
+*java.lang.String_android.speech.RecognizerIntent.ACTION_WEB_SEARCH*
+
+Starts an activity that will prompt the user for speech, send it through a 
+speech recognizer, and either display a web search result or trigger another 
+type of action based on the user's speech. 
+
+If you want to avoid triggering any type of action besides web search, you can 
+use the (|android.speech.RecognizerIntent|) extra. 
+
+Required extras: 
+
+(|android.speech.RecognizerIntent|) 
+
+Optional extras: 
+
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+
+Result extras (returned in the result, not to be specified in the request): 
+
+(|android.speech.RecognizerIntent|) (|android.speech.RecognizerIntent|) 
+(optional) 
+
+NOTE: There may not be any applications installed to handle this action, so you 
+should make sure to catch (|android.content.ActivityNotFoundException|) . 
+
+
+*java.lang.String_android.speech.RecognizerIntent.DETAILS_META_DATA*
+
+Meta-data name under which an (|android.app.Activity|) implementing 
+(|android.speech.RecognizerIntent|) can use to expose the class name of a 
+(|android.content.BroadcastReceiver|) which can respond to request for more 
+information, from any of the broadcast intents specified in this class. 
+
+Broadcast intents can be directed to the class name specified in the meta-data 
+by creating an (|android.content.Intent|) , setting the component with 
+(|android.content.Intent|) , and using (|android.content.Context|) with another 
+(|android.content.BroadcastReceiver|) which can receive the results. 
+
+The (|android.speech.RecognizerIntent|) method is provided as a convenience to 
+create a broadcast intent based on the value of this meta-data, if available. 
+
+This is optional and not all (|android.app.Activity|) s which implement 
+(|android.speech.RecognizerIntent|) are required to implement this. Thus 
+retrieving this meta-data may be null. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_CALLING_PACKAGE*
+
+The extra key used in an intent to the speech recognizer for voice search. Not 
+generally to be used by developers. The system search dialog uses this, for 
+example, to set a calling package for identification by a voice search API. If 
+this extra is set by anyone but the system process, it should be overridden by 
+the voice search implementation. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_CONFIDENCE_SCORES*
+
+A float array of confidence scores of the recognition results when performing 
+(|android.speech.RecognizerIntent|) . The array should be the same size as the 
+ArrayList returned in (|android.speech.RecognizerIntent|) , and should contain 
+values ranging from 0.0 to 1.0, or -1 to represent an unavailable confidence 
+score. 
+
+Confidence values close to 1.0 indicate high confidence (the speech recognizer 
+is confident that the recognition result is correct), while values close to 0.0 
+indicate low confidence. 
+
+Returned in the results; not to be specified in the recognition request. This 
+extra is optional and might not be provided. Only present when 
+(|android.app.Activity|) is returned in an activity result. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE*
+
+Optional IETF language tag (as defined by BCP 47), for example "en-US". This 
+tag informs the recognizer to perform speech recognition in a language 
+different than the one set in the (|java.util.Locale|) . 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL*
+
+Informs the recognizer which speech model to prefer when performing 
+(|android.speech.RecognizerIntent|) . The recognizer uses this information to 
+fine tune the results. This extra is required. Activities implementing 
+(|android.speech.RecognizerIntent|) may interpret the values as they see fit. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE*
+
+The key to the extra in the (|android.os.Bundle|) returned by 
+(|android.speech.RecognizerIntent|) which is a (|java.lang.String|) that 
+represents the current language preference this user has specified - a locale 
+string like "en-US". 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_MAX_RESULTS*
+
+Optional limit on the maximum number of results to return. If omitted the 
+recognizer will choose how many results to return. Must be an integer. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE*
+
+Specify this boolean extra in a broadcast of 
+(|android.speech.RecognizerIntent|) to indicate that only the current language 
+preference is needed in the response. This avoids any additional computation if 
+all you need is (|android.speech.RecognizerIntent|) in the response. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_ORIGIN*
+
+Optional value which can be used to indicate the referer url of a page in which 
+speech was requested. For example, a web browser may choose to provide this for 
+uses of speech on a given page. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_PARTIAL_RESULTS*
+
+Optional boolean to indicate whether partial results should be returned by the 
+recognizer as the user speaks (default is false). The server may ignore a 
+request for partial results in some or all cases. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_PROMPT*
+
+Optional text prompt to show to the user when asking them to speak. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS*
+
+An ArrayList<String> of the recognition results when performing 
+(|android.speech.RecognizerIntent|) . Generally this list should be ordered in 
+descending order of speech recognizer confidence. (See 
+(|android.speech.RecognizerIntent|) ). Returned in the results; not to be 
+specified in the recognition request. Only present when 
+(|android.app.Activity|) is returned in an activity result. In a PendingIntent, 
+the lack of this extra indicates failure. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT*
+
+When the intent is (|android.speech.RecognizerIntent|) , the speech input 
+activity will return results to you via the activity results mechanism. 
+Alternatively, if you use this extra to supply a PendingIntent, the results 
+will be added to its bundle and the PendingIntent will be sent to its target. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT_BUNDLE*
+
+If you use (|android.speech.RecognizerIntent|) to supply a forwarding intent, 
+you can also use this extra to supply additional extras for the final intent. 
+The search results will be added to this bundle, and the combined bundle will 
+be sent to the target. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_SECURE*
+
+Optional boolean to indicate that a "hands free" voice search was performed 
+while the device was in a secure mode. An example of secure mode is when the 
+device's screen lock is active, and it requires some form of authentication to 
+be unlocked. 
+
+When the device is securely locked, the voice search activity should either 
+restrict the set of voice actions that are permitted, or require some form of 
+secure authentication before proceeding. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS*
+
+The amount of time that it should take after we stop hearing speech to consider 
+the input complete. 
+
+Note that it is extremely rare you'd want to specify this value in an intent. 
+If you don't have a very good reason to change these, you should leave them as 
+they are. Note also that certain values may cause undesired or unexpected 
+results - use judiciously! Additionally, depending on the recognizer 
+implementation, these values may have no effect. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS*
+
+The minimum length of an utterance. We will not stop recording before this 
+amount of time. 
+
+Note that it is extremely rare you'd want to specify this value in an intent. 
+If you don't have a very good reason to change these, you should leave them as 
+they are. Note also that certain values may cause undesired or unexpected 
+results - use judiciously! Additionally, depending on the recognizer 
+implementation, these values may have no effect. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS*
+
+The amount of time that it should take after we stop hearing speech to consider 
+the input possibly complete. This is used to prevent the endpointer cutting off 
+during very short mid-speech pauses. 
+
+Note that it is extremely rare you'd want to specify this value in an intent. 
+If you don't have a very good reason to change these, you should leave them as 
+they are. Note also that certain values may cause undesired or unexpected 
+results - use judiciously! Additionally, depending on the recognizer 
+implementation, these values may have no effect. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES*
+
+The key to the extra in the (|android.os.Bundle|) returned by 
+(|android.speech.RecognizerIntent|) which is an (|java.util.ArrayList|) of 
+(|java.lang.String|) s that represents the languages supported by this 
+implementation of voice recognition - a list of strings like "en-US", 
+"cmn-Hans-CN", etc. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.EXTRA_WEB_SEARCH_ONLY*
+
+Optional boolean, to be used with (|android.speech.RecognizerIntent|) , to 
+indicate whether to only fire web searches in response to a user's speech. The 
+default is false, meaning that other types of actions can be taken based on the 
+user's speech. 
+
+
+*java.lang.String_android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM*
+
+Use a language model based on free-form speech recognition. This is a value to 
+use for (|android.speech.RecognizerIntent|) . 
+
+
+*java.lang.String_android.speech.RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH*
+
+Use a language model based on web search terms. This is a value to use for 
+(|android.speech.RecognizerIntent|) . 
+
+
+*int_android.speech.RecognizerIntent.RESULT_AUDIO_ERROR*
+
+Result code returned when an audio error was encountered 
+
+
+*int_android.speech.RecognizerIntent.RESULT_CLIENT_ERROR*
+
+Result code returned when there is a generic client error 
+
+
+*int_android.speech.RecognizerIntent.RESULT_NETWORK_ERROR*
+
+Result code returned when a network error was encountered 
+
+
+*int_android.speech.RecognizerIntent.RESULT_NO_MATCH*
+
+Result code returned when no matches are found for the given speech 
+
+
+*int_android.speech.RecognizerIntent.RESULT_SERVER_ERROR*
+
+Result code returned when the recognition server returns an error 
+
+
+
+*android.speech.RecognizerIntent.getVoiceDetailsIntent(Context)*
+
+public static final |android.content.Intent| getVoiceDetailsIntent(android.content.Context context)
+
+Returns the broadcast intent to fire with (|android.content.Context|) to 
+receive details from the package that implements voice search. 
+
+This is based on the value specified by the voice search 
+(|android.app.Activity|) in (|android.speech.RecognizerIntent|) , and if this 
+is not specified, will return null. Also if there is no chosen default to 
+resolve for (|android.speech.RecognizerIntent|) , this will return null. 
+
+If an intent is returned and is fired, a (|android.os.Bundle|) of extras will 
+be returned to the provided result receiver, and should ideally contain values 
+for (|android.speech.RecognizerIntent|) and (|android.speech.RecognizerIntent|) 
+. 
+
+(Whether these are actually provided is up to the particular implementation. It 
+is recommended that (|android.app.Activity|) s implementing 
+(|android.speech.RecognizerIntent|) provide this information, but it is not 
+required.) 
+
+
+    context - a context object 
+
+    Returns: the broadcast intent to fire or null if not available 
+
+

@@ -1,0 +1,171 @@
+*android.util.TimeUtils* *TimeUtils* A class containing utility methods related 
+
+public class TimeUtils
+  extends    |java.lang.Object|
+
+|android.util.TimeUtils_Description|
+|android.util.TimeUtils_Fields|
+|android.util.TimeUtils_Constructors|
+|android.util.TimeUtils_Methods|
+
+================================================================================
+
+*android.util.TimeUtils_Fields*
+|int_android.util.TimeUtils.HUNDRED_DAY_FIELD_LEN|
+
+*android.util.TimeUtils_Constructors*
+|android.util.TimeUtils()|
+
+*android.util.TimeUtils_Methods*
+|android.util.TimeUtils.formatDuration(long,long,PrintWriter)|
+|android.util.TimeUtils.formatDuration(long,PrintWriter)|
+|android.util.TimeUtils.formatDuration(long,PrintWriter,int)|
+|android.util.TimeUtils.formatDuration(long,StringBuilder)|
+|android.util.TimeUtils.formatUptime(long)|
+|android.util.TimeUtils.getTimeZone(int,boolean,long,String)|Tries to return a 
+|android.util.TimeUtils.getTimeZoneDatabaseVersion()|Returns a String indicatin
+|android.util.TimeUtils.getTimeZones(String)|Returns the time zones for the cou
+|android.util.TimeUtils.getTimeZonesWithUniqueOffsets(String)|Return list of un
+|android.util.TimeUtils.logTimeOfDay(long)|Convert a System.currentTimeMillis()
+
+*android.util.TimeUtils_Description*
+
+A class containing utility methods related to time zones. 
+
+
+
+*int_android.util.TimeUtils.HUNDRED_DAY_FIELD_LEN*
+
+
+
+
+
+*android.util.TimeUtils()*
+
+public TimeUtils()
+
+
+
+
+*android.util.TimeUtils.formatDuration(long,long,PrintWriter)*
+
+public static void formatDuration(
+  long time,
+  long now,
+  java.io.PrintWriter pw)
+
+
+
+
+
+*android.util.TimeUtils.formatDuration(long,PrintWriter)*
+
+public static void formatDuration(
+  long duration,
+  java.io.PrintWriter pw)
+
+
+
+
+
+*android.util.TimeUtils.formatDuration(long,PrintWriter,int)*
+
+public static void formatDuration(
+  long duration,
+  java.io.PrintWriter pw,
+  int fieldLen)
+
+
+
+
+
+*android.util.TimeUtils.formatDuration(long,StringBuilder)*
+
+public static void formatDuration(
+  long duration,
+  java.lang.StringBuilder builder)
+
+
+
+
+
+*android.util.TimeUtils.formatUptime(long)*
+
+public static |java.lang.String| formatUptime(long time)
+
+
+
+
+
+*android.util.TimeUtils.getTimeZone(int,boolean,long,String)*
+
+public static |java.util.TimeZone| getTimeZone(
+  int offset,
+  boolean dst,
+  long when,
+  java.lang.String country)
+
+Tries to return a time zone that would have had the specified offset and DST 
+value at the specified moment in the specified country. Returns null if no 
+suitable zone could be found. 
+
+
+
+*android.util.TimeUtils.getTimeZoneDatabaseVersion()*
+
+public static |java.lang.String| getTimeZoneDatabaseVersion()
+
+Returns a String indicating the version of the time zone database currently in 
+use. The format of the string is dependent on the underlying time zone database 
+implementation, but will typically contain the year in which the database was 
+updated plus a letter from a to z indicating changes made within that year. 
+
+Time zone database updates should be expected to occur periodically due to 
+political and legal changes that cannot be anticipated in advance. Therefore, 
+when computing the UTC time for a future event, applications should be aware 
+that the results may differ following a time zone database update. This method 
+allows applications to detect that a database change has occurred, and to 
+recalculate any cached times accordingly. 
+
+The time zone database may be assumed to change only when the device runtime is 
+restarted. Therefore, it is not necessary to re-query the database version 
+during the lifetime of an activity. 
+
+
+
+*android.util.TimeUtils.getTimeZones(String)*
+
+public static |java.util.ArrayList|<TimeZone> getTimeZones(java.lang.String country)
+
+Returns the time zones for the country, which is the code attribute of the 
+timezone element in time_zones_by_country.xml. Do not modify. 
+
+
+    country - is a two character country code. 
+
+    Returns: TimeZone list, maybe empty but never null. Do not modify. 
+
+*android.util.TimeUtils.getTimeZonesWithUniqueOffsets(String)*
+
+public static |java.util.ArrayList|<TimeZone> getTimeZonesWithUniqueOffsets(java.lang.String country)
+
+Return list of unique time zones for the country. Do not modify 
+
+
+    country - to find 
+
+    Returns: list of unique time zones, maybe empty but never null. Do not modify. 
+
+*android.util.TimeUtils.logTimeOfDay(long)*
+
+public static |java.lang.String| logTimeOfDay(long millis)
+
+Convert a System.currentTimeMillis() value to a time of day value like that 
+printed in logs. MM-DD HH:MM:SS.MMM 
+
+
+    millis - since the epoch (1/1/1970) 
+
+    Returns: String representation of the time. 
+
+

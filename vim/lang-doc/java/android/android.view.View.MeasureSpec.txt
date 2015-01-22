@@ -1,0 +1,141 @@
+*android.view.View.MeasureSpec* *View.MeasureSpec* A MeasureSpec encapsulates th
+
+public static class View.MeasureSpec
+  extends    |java.lang.Object|
+
+|android.view.View.MeasureSpec_Description|
+|android.view.View.MeasureSpec_Fields|
+|android.view.View.MeasureSpec_Constructors|
+|android.view.View.MeasureSpec_Methods|
+
+================================================================================
+
+*android.view.View.MeasureSpec_Fields*
+|int_android.view.View.MeasureSpec.AT_MOST|
+|int_android.view.View.MeasureSpec.EXACTLY|
+|int_android.view.View.MeasureSpec.UNSPECIFIED|
+
+*android.view.View.MeasureSpec_Constructors*
+|android.view.View.MeasureSpec()|
+
+*android.view.View.MeasureSpec_Methods*
+|android.view.View.MeasureSpec.getMode(int)|Extracts the mode from the supplied
+|android.view.View.MeasureSpec.getSize(int)|Extracts the size from the supplied
+|android.view.View.MeasureSpec.makeMeasureSpec(int,int)|Creates a measure speci
+|android.view.View.MeasureSpec.toString(int)|Returns a String representation of
+
+*android.view.View.MeasureSpec_Description*
+
+A MeasureSpec encapsulates the layout requirements passed from parent to child. 
+Each MeasureSpec represents a requirement for either the width or the height. A 
+MeasureSpec is comprised of a size and a mode. There are three possible modes: 
+
+UNSPECIFIED 
+
+The parent has not imposed any constraint on the child. It can be whatever size 
+it wants. 
+
+EXACTLY 
+
+The parent has determined an exact size for the child. The child is going to be 
+given those bounds regardless of how big it wants to be. 
+
+AT_MOST 
+
+The child can be as large as it wants up to the specified size. 
+
+
+
+MeasureSpecs are implemented as ints to reduce object allocation. This class is 
+provided to pack and unpack the <size, mode> tuple into the int. 
+
+
+
+*int_android.view.View.MeasureSpec.AT_MOST*
+
+Measure specification mode: The child can be as large as it wants up to the 
+specified size. 
+
+
+*int_android.view.View.MeasureSpec.EXACTLY*
+
+Measure specification mode: The parent has determined an exact size for the 
+child. The child is going to be given those bounds regardless of how big it 
+wants to be. 
+
+
+*int_android.view.View.MeasureSpec.UNSPECIFIED*
+
+Measure specification mode: The parent has not imposed any constraint on the 
+child. It can be whatever size it wants. 
+
+
+
+*android.view.View.MeasureSpec()*
+
+public View.MeasureSpec()
+
+
+
+
+*android.view.View.MeasureSpec.getMode(int)*
+
+public static int getMode(int measureSpec)
+
+Extracts the mode from the supplied measure specification. 
+
+
+    measureSpec - the measure specification to extract the mode from 
+
+    Returns: {@link android.view.View.MeasureSpec#UNSPECIFIED}, {@link 
+             android.view.View.MeasureSpec#AT_MOST} or {@link 
+             android.view.View.MeasureSpec#EXACTLY} 
+
+*android.view.View.MeasureSpec.getSize(int)*
+
+public static int getSize(int measureSpec)
+
+Extracts the size from the supplied measure specification. 
+
+
+    measureSpec - the measure specification to extract the size from 
+
+    Returns: the size in pixels defined in the supplied measure specification 
+
+*android.view.View.MeasureSpec.makeMeasureSpec(int,int)*
+
+public static int makeMeasureSpec(
+  int size,
+  int mode)
+
+Creates a measure specification based on the supplied size and mode. 
+
+The mode must always be one of the following: 
+
+(|android.view.View.MeasureSpec|) (|android.view.View.MeasureSpec|) 
+(|android.view.View.MeasureSpec|) 
+
+Note: On API level 17 and lower, makeMeasureSpec's implementation was such that 
+the order of arguments did not matter and overflow in either value could impact 
+the resulting MeasureSpec. (|android.widget.RelativeLayout|) was affected by 
+this bug. Apps targeting API levels greater than 17 will get the fixed, more 
+strict behavior. 
+
+
+    size - the size of the measure specification 
+    mode - the mode of the measure specification 
+
+    Returns: the measure specification based on size and mode 
+
+*android.view.View.MeasureSpec.toString(int)*
+
+public static |java.lang.String| toString(int measureSpec)
+
+Returns a String representation of the specified measure specification. 
+
+
+    measureSpec - the measure specification to convert to a String 
+
+    Returns: a String with the following format: "MeasureSpec: MODE SIZE" 
+
+

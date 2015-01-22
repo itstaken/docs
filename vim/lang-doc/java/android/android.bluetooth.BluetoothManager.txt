@@ -1,0 +1,147 @@
+*android.bluetooth.BluetoothManager* *BluetoothManager* High level manager used 
+
+public final class BluetoothManager
+  extends    |java.lang.Object|
+
+|android.bluetooth.BluetoothManager_Description|
+|android.bluetooth.BluetoothManager_Fields|
+|android.bluetooth.BluetoothManager_Constructors|
+|android.bluetooth.BluetoothManager_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothManager_Constructors*
+|android.bluetooth.BluetoothManager(Context)|
+
+*android.bluetooth.BluetoothManager_Methods*
+|android.bluetooth.BluetoothManager.getAdapter()|Get the default BLUETOOTH Adap
+|android.bluetooth.BluetoothManager.getConnectedDevices(int)|Get connected devi
+|android.bluetooth.BluetoothManager.getConnectionState(BluetoothDevice,int)|Get
+|android.bluetooth.BluetoothManager.getDevicesMatchingConnectionStates(int,int[])|
+|android.bluetooth.BluetoothManager.openGattServer(Context,BluetoothGattServerCallback)|
+
+*android.bluetooth.BluetoothManager_Description*
+
+High level manager used to obtain an instance of an 
+(|android.bluetooth.BluetoothAdapter|) and to conduct overall Bluetooth 
+Management. 
+
+Use (|android.content.Context|) with (|android.content.Context|) to create an 
+(|android.bluetooth.BluetoothManager|) , then call 
+(|android.bluetooth.BluetoothManager|) to obtain the 
+(|android.bluetooth.BluetoothAdapter|) . 
+
+Alternately, you can just call the static helper 
+(|android.bluetooth.BluetoothAdapter|) . 
+
+Developer Guides For more information about using BLUETOOTH, read the <a 
+href="guide/topics/connectivity/bluetooth.html">Bluetooth developer guide. 
+
+
+
+*android.bluetooth.BluetoothManager(Context)*
+
+public BluetoothManager(android.content.Context context)
+
+
+
+
+*android.bluetooth.BluetoothManager.getAdapter()*
+
+public |android.bluetooth.BluetoothAdapter| getAdapter()
+
+Get the default BLUETOOTH Adapter for this device. 
+
+
+
+    Returns: the default BLUETOOTH Adapter 
+
+*android.bluetooth.BluetoothManager.getConnectedDevices(int)*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices(int profile)
+
+Get connected devices for the specified profile. 
+
+Return the set of devices which are in state 
+(|android.bluetooth.BluetoothProfile|) This is not specific to any application 
+configuration but represents the connection state of Bluetooth for this 
+profile. This can be used by applications like status bar which would just like 
+to know the state of Bluetooth. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    profile - GATT or GATT_SERVER 
+
+    Returns: List of devices. The list will be empty on error. 
+
+*android.bluetooth.BluetoothManager.getConnectionState(BluetoothDevice,int)*
+
+public int getConnectionState(
+  android.bluetooth.BluetoothDevice device,
+  int profile)
+
+Get the current connection state of the profile to the remote device. 
+
+This is not specific to any application configuration but represents the 
+connection state of the local Bluetooth adapter for certain profile. This can 
+be used by applications like status bar which would just like to know the state 
+of Bluetooth. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote bluetooth device. 
+    profile - GATT or GATT_SERVER 
+
+    Returns: State of the profile connection. One of {@link 
+             BluetoothProfile#STATE_CONNECTED}, {@link 
+             BluetoothProfile#STATE_CONNECTING}, {@link 
+             BluetoothProfile#STATE_DISCONNECTED}, {@link 
+             BluetoothProfile#STATE_DISCONNECTING} 
+
+*android.bluetooth.BluetoothManager.getDevicesMatchingConnectionStates(int,int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(
+  int profile,
+  int[] states)
+
+Get a list of devices that match any of the given connection states. 
+
+If none of the devices match any of the given states, an empty list will be 
+returned. 
+
+This is not specific to any application configuration but represents the 
+connection state of the local Bluetooth adapter for this profile. This can be 
+used by applications like status bar which would just like to know the state of 
+the local adapter. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    profile - GATT or GATT_SERVER 
+    states - Array of states. States can be one of {@link BluetoothProfile#STATE_CONNECTED}, 
+       {@link BluetoothProfile#STATE_CONNECTING}, {@link 
+       BluetoothProfile#STATE_DISCONNECTED}, {@link 
+       BluetoothProfile#STATE_DISCONNECTING}, 
+
+    Returns: List of devices. The list will be empty on error. 
+
+*android.bluetooth.BluetoothManager.openGattServer(Context,BluetoothGattServerCallback)*
+
+public |android.bluetooth.BluetoothGattServer| openGattServer(
+  android.content.Context context,
+  android.bluetooth.BluetoothGattServerCallback callback)
+
+Open a GATT Server The callback is used to deliver results to Caller, such as 
+connection status as well as the results of any other GATT server operations. 
+The method returns a BluetoothGattServer instance. You can use 
+BluetoothGattServer to conduct GATT server operations. 
+
+
+    context - App context 
+    callback - GATT server callback handler that will receive asynchronous callbacks. 
+
+    Returns: BluetoothGattServer instance 
+
+

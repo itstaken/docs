@@ -1,0 +1,538 @@
+*android.nfc.NdefRecord* *NdefRecord* Represents an immutable NDEF Record.
+
+public final class NdefRecord
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.nfc.NdefRecord_Description|
+|android.nfc.NdefRecord_Fields|
+|android.nfc.NdefRecord_Constructors|
+|android.nfc.NdefRecord_Methods|
+
+================================================================================
+
+*android.nfc.NdefRecord_Fields*
+|android.os.Parcelable.Creator<android.nfc.NdefRecord>_android.nfc.NdefRecord.CREATOR|
+|byte[]_android.nfc.NdefRecord.RTD_ALTERNATIVE_CARRIER|
+|byte[]_android.nfc.NdefRecord.RTD_ANDROID_APP|
+|byte[]_android.nfc.NdefRecord.RTD_HANDOVER_CARRIER|
+|byte[]_android.nfc.NdefRecord.RTD_HANDOVER_REQUEST|
+|byte[]_android.nfc.NdefRecord.RTD_HANDOVER_SELECT|
+|byte[]_android.nfc.NdefRecord.RTD_SMART_POSTER|
+|byte[]_android.nfc.NdefRecord.RTD_TEXT|
+|byte[]_android.nfc.NdefRecord.RTD_URI|
+|short_android.nfc.NdefRecord.TNF_ABSOLUTE_URI|
+|short_android.nfc.NdefRecord.TNF_EMPTY|
+|short_android.nfc.NdefRecord.TNF_EXTERNAL_TYPE|
+|short_android.nfc.NdefRecord.TNF_MIME_MEDIA|
+|short_android.nfc.NdefRecord.TNF_RESERVED|
+|short_android.nfc.NdefRecord.TNF_UNCHANGED|
+|short_android.nfc.NdefRecord.TNF_UNKNOWN|
+|short_android.nfc.NdefRecord.TNF_WELL_KNOWN|
+
+*android.nfc.NdefRecord_Constructors*
+|android.nfc.NdefRecord(byte[])|Construct an NDEF Record from raw bytes.
+|android.nfc.NdefRecord(short,byte[],byte[],byte[])|Construct an NDEF Record fr
+
+*android.nfc.NdefRecord_Methods*
+|android.nfc.NdefRecord.createApplicationRecord(String)|Create a new Android Ap
+|android.nfc.NdefRecord.createExternal(String,String,byte[])|Create a new NDEF 
+|android.nfc.NdefRecord.createMime(String,byte[])|Create a new NDEF Record cont
+|android.nfc.NdefRecord.createUri(String)|Create a new NDEF Record containing a
+|android.nfc.NdefRecord.createUri(Uri)|Create a new NDEF Record containing a UR
+|android.nfc.NdefRecord.describeContents()|
+|android.nfc.NdefRecord.equals(Object)|Returns true if the specified NDEF Recor
+|android.nfc.NdefRecord.getId()|Returns the variable length ID.
+|android.nfc.NdefRecord.getPayload()|Returns the variable length payload.
+|android.nfc.NdefRecord.getTnf()|Returns the 3-bit TNF.
+|android.nfc.NdefRecord.getType()|Returns the variable length Type field.
+|android.nfc.NdefRecord.hashCode()|
+|android.nfc.NdefRecord.toByteArray()|Return this NDEF Record as a byte array.
+|android.nfc.NdefRecord.toMimeType()|Map this record to a MIME type, or return 
+|android.nfc.NdefRecord.toString()|
+|android.nfc.NdefRecord.toUri()|Map this record to a URI, or return null if it 
+|android.nfc.NdefRecord.writeToParcel(Parcel,int)|
+
+*android.nfc.NdefRecord_Description*
+
+Represents an immutable NDEF Record. 
+
+NDEF (NFC Data Exchange Format) is a light-weight binary format, used to 
+encapsulate typed data. It is specified by the NFC Forum, for transmission and 
+storage with NFC, however it is transport agnostic. 
+
+NDEF defines messages and records. An NDEF Record contains typed data, such as 
+MIME-type media, a URI, or a custom application payload. An NDEF Message is a 
+container for one or more NDEF Records. 
+
+This class represents logical (complete) NDEF Records, and can not be used to 
+represent chunked (partial) NDEF Records. However (|android.nfc.NdefMessage|) 
+can be used to parse a message containing chunked records, and will return a 
+message with unchunked (complete) records. 
+
+A logical NDEF Record always contains a 3-bit TNF (Type Name Field) that 
+provides high level typing for the rest of the record. The remaining fields are 
+variable length and not always present: 
+
+type: detailed typing for the payload id: identifier meta-data, not commonly 
+used payload: the actual payload 
+
+Helpers such as (|android.nfc.NdefRecord|) , (|android.nfc.NdefRecord|) and 
+(|android.nfc.NdefRecord|) are included to create well-formatted NDEF Records 
+with correctly set tnf, type, id and payload fields, please use these helpers 
+whenever possible. 
+
+Use the constructor (|android.nfc.NdefRecord|) if you know what you are doing 
+and what to set the fields individually. Only basic validation is performed 
+with this constructor, so it is possible to create records that do not confirm 
+to the strict NFC Forum specifications. 
+
+The binary representation of an NDEF Record includes additional flags to 
+indicate location with an NDEF message, provide support for chunking of NDEF 
+records, and to pack optional fields. This class does not expose those details. 
+To write an NDEF Record as binary you must first put it into an 
+(|android.nfc.NdefMessage|) , then call (|android.nfc.NdefMessage|) . 
+(|android.nfc.NdefMessage|) and (|android.nfc.NdefRecord|) implementations are 
+always available, even on Android devices that do not have NFC hardware. 
+(|android.nfc.NdefRecord|) s are intended to be immutable (and thread-safe), 
+however they may contain mutable fields. So take care not to modify mutable 
+fields passed into constructors, or modify mutable fields obtained by getter 
+methods, unless such modification is explicitly marked as safe. 
+
+
+
+*android.os.Parcelable.Creator<android.nfc.NdefRecord>_android.nfc.NdefRecord.CREATOR*
+
+
+
+
+*byte[]_android.nfc.NdefRecord.RTD_ALTERNATIVE_CARRIER*
+
+RTD Alternative Carrier type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_ANDROID_APP*
+
+RTD Android app type. For use withTNF_EXTERNAL. 
+
+The payload of a record with type RTD_ANDROID_APP should be the package name 
+identifying an application. Multiple RTD_ANDROID_APP records may be included in 
+a single (|android.nfc.NdefMessage|) . 
+
+Use (|android.nfc.NdefRecord|) to create RTD_ANDROID_APP records. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_HANDOVER_CARRIER*
+
+RTD Handover Carrier type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_HANDOVER_REQUEST*
+
+RTD Handover Request type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_HANDOVER_SELECT*
+
+RTD Handover Select type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_SMART_POSTER*
+
+RTD Smart Poster type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_TEXT*
+
+RTD Text type. For use withTNF_WELL_KNOWN. 
+
+
+*byte[]_android.nfc.NdefRecord.RTD_URI*
+
+RTD URI type. For use withTNF_WELL_KNOWN. 
+
+
+*short_android.nfc.NdefRecord.TNF_ABSOLUTE_URI*
+
+Indicates the type field contains an absolute-URI BNF construct defined by RFC 
+3986. When creating new records prefer (|android.nfc.NdefRecord|) , since it 
+offers more compact URI encoding (#RTD_URIallows compression of common URI 
+prefixes). 
+
+
+*short_android.nfc.NdefRecord.TNF_EMPTY*
+
+Indicates the record is empty. Type, id and payload fields are empty in 
+aTNF_EMPTYrecord. 
+
+
+*short_android.nfc.NdefRecord.TNF_EXTERNAL_TYPE*
+
+Indicates the type field contains an external type name. Used to encode custom 
+payloads. When creating new records use the helper (|android.nfc.NdefRecord|) . 
+The external-type RTD format is specified in NFCForum-TS-RTD_1.0. 
+
+Note this TNF should not be used with RTD_TEXT or RTD_URI constants. Those are 
+well known RTD constants, not external RTD constants. 
+
+
+*short_android.nfc.NdefRecord.TNF_MIME_MEDIA*
+
+Indicates the type field contains a media-type BNF construct, defined by RFC 
+2046. Use this with MIME type names such as"image/jpeg", or using the helper 
+(|android.nfc.NdefRecord|) . 
+
+
+*short_android.nfc.NdefRecord.TNF_RESERVED*
+
+Reserved TNF type. 
+
+The NFC Forum NDEF Specification v1.0 suggests for NDEF parsers to treat this 
+value like TNF_UNKNOWN. 
+
+
+*short_android.nfc.NdefRecord.TNF_UNCHANGED*
+
+Indicates the payload is an intermediate or final chunk of a chunked NDEF 
+Record.TNF_UNCHANGEDcan not be used with this class since all 
+(|android.nfc.NdefRecord|) s are already unchunked, however they may appear in 
+the binary format. 
+
+
+*short_android.nfc.NdefRecord.TNF_UNKNOWN*
+
+Indicates the payload type is unknown. NFC Forum explains this should be 
+treated similarly to the "application/octet-stream" MIME type. The payload type 
+is not explicitly encoded within the record. 
+
+The type field is empty in anTNF_UNKNOWNrecord. 
+
+
+*short_android.nfc.NdefRecord.TNF_WELL_KNOWN*
+
+Indicates the type field contains a well-known RTD type name. Use this tnf with 
+RTD types such as (|android.nfc.NdefRecord|) , (|android.nfc.NdefRecord|) . 
+
+The RTD type name format is specified in NFCForum-TS-RTD_1.0. 
+
+
+
+*android.nfc.NdefRecord(byte[])*
+
+public NdefRecord(byte[] data)
+  throws |android.nfc.FormatException|
+         
+Construct an NDEF Record from raw bytes. This method is deprecated, use 
+(|android.nfc.NdefMessage|) instead. This is because it does not make sense to 
+parse a record: the NDEF binary format is only defined for a message, and the 
+record flags MB and ME do not make sense outside of the context of an entire 
+message. This implementation will attempt to parse a single record by ignoring 
+the MB and ME flags, and otherwise following the rules of 
+(|android.nfc.NdefMessage|) . 
+
+    data - raw bytes to parse 
+
+*android.nfc.NdefRecord(short,byte[],byte[],byte[])*
+
+public NdefRecord(
+  short tnf,
+  byte[] type,
+  byte[] id,
+  byte[] payload)
+
+Construct an NDEF Record from its component fields. Recommend to use helpers 
+such as {#createUri} or { (|android.nfc.NdefRecord|) where possible, since they 
+perform stricter validation that the record is correctly formatted as per NDEF 
+specifications. However if you know what you are doing then this constructor 
+offers the most flexibility. An (|android.nfc.NdefRecord|) represents a logical 
+(complete) record, and cannot represent NDEF Record chunks. Basic validation of 
+the tnf, type, id and payload is performed as per the following rules: 
+
+The tnf paramter must be a 3-bit value. Records with a tnf of 
+(|android.nfc.NdefRecord|) cannot have a type, id or payload. Records with a 
+tnf of (|android.nfc.NdefRecord|) or0x07cannot have a type. Records with a tnf 
+of (|android.nfc.NdefRecord|) are not allowed since this class only represents 
+complete (unchunked) records. 
+
+This minimal validation is specified by NFCForum-TS-NDEF_1.0 section 3.2.6 
+(Type Name Format). If any of the above validation steps fail then 
+(|java.lang.IllegalArgumentException|) is thrown. Deep inspection of the type, 
+id and payload fields is not performed, so it is possible to create NDEF 
+Records that conform to section 3.2.6 but fail other more strict NDEF 
+specification requirements. For example, the payload may be invalid given the 
+tnf and type. 
+
+To omit a type, id or payload field, set the parameter to an empty byte array 
+or null. 
+
+    tnf - a 3-bit TNF constant 
+    type - byte array, containing zero to 255 bytes, or null 
+    id - byte array, containing zero to 255 bytes, or null 
+    payload - byte array, containing zero to (2 ** 32 - 1) bytes, or null 
+
+*android.nfc.NdefRecord.createApplicationRecord(String)*
+
+public static |android.nfc.NdefRecord| createApplicationRecord(java.lang.String packageName)
+
+Create a new Android Application Record (AAR). 
+
+This record indicates to other Android devices the package that should be used 
+to handle the entire NDEF message. You can embed this record anywhere into your 
+message to ensure that the intended package receives the message. 
+
+When an Android device dispatches an (|android.nfc.NdefMessage|) containing one 
+or more Android application records, the applications contained in those 
+records will be the preferred target for the (|android.nfc.NfcAdapter|) intent, 
+in the order in which they appear in the message. This dispatch behavior was 
+first added to Android in Ice Cream Sandwich. 
+
+If none of the applications have a are installed on the device, a Market link 
+will be opened to the first application. 
+
+Note that Android application records do not overrule applications that have 
+called (|android.nfc.NfcAdapter|) . 
+
+
+    packageName - Android package name 
+
+    Returns: Android application NDEF record 
+
+*android.nfc.NdefRecord.createExternal(String,String,byte[])*
+
+public static |android.nfc.NdefRecord| createExternal(
+  java.lang.String domain,
+  java.lang.String type,
+  byte[] data)
+
+Create a new NDEF Record containing external (application-specific) data. Use 
+this method to encode application specific data into an NDEF Record. The data 
+is typed by a domain name (usually your Android package name) and a 
+domain-specific type. This data is packaged into a "NFC Forum External Type" 
+NDEF Record. NFC Forum requires that the domain and type used in an external 
+record are treated as case insensitive, however Android intent filtering is 
+always case sensitive. So this method will force the domain and type to 
+lower-case before creating the NDEF Record. The unchecked exception 
+(|java.lang.IllegalArgumentException|) will be thrown if the domain and type 
+have serious problems, for example if either field is empty, so always catch 
+this exception if you are passing user-generated data into this method. There 
+are no such restrictions on the payload data. For efficiency, This method might 
+not make an internal copy of the data byte array, so take care not to modify 
+the data byte array while still using the returned NdefRecord. 
+
+Reference specification: NFCForum-TS-RTD_1.0 
+
+
+    domain - domain-name of issuing organization 
+    type - domain-specific type of data 
+    data - payload as bytes 
+
+*android.nfc.NdefRecord.createMime(String,byte[])*
+
+public static |android.nfc.NdefRecord| createMime(
+  java.lang.String mimeType,
+  byte[] mimeData)
+
+Create a new NDEF Record containing MIME data. Use this method to encode 
+MIME-typed data into an NDEF Record, such as "text/plain", or "image/jpeg". The 
+mimeType parameter will be normalized with (|android.content.Intent|) to follow 
+Android best practices for intent filtering, for example to force lower-case. 
+However the unchecked exception (|java.lang.IllegalArgumentException|) may be 
+thrown if the mimeType parameter has serious problems, for example if it is 
+empty, so always catch this exception if you are passing user-generated data 
+into this method. 
+
+For efficiency, This method might not make an internal copy of the mimeData 
+byte array, so take care not to modify the mimeData byte array while still 
+using the returned NdefRecord. 
+
+
+    mimeType - a valid MIME type 
+    mimeData - MIME data as bytes 
+
+    Returns: an NDEF Record containing the MIME-typed data 
+
+*android.nfc.NdefRecord.createUri(String)*
+
+public static |android.nfc.NdefRecord| createUri(java.lang.String uriString)
+
+Create a new NDEF Record containing a URI. Use this method to encode a URI (or 
+URL) into an NDEF Record. Uses the well known URI type representation: 
+(|android.nfc.NdefRecord|) and (|android.nfc.NdefRecord|) . This is the most 
+efficient encoding of a URI into NDEF. The uriString parameter will be 
+normalized with (|android.net.Uri|) to set the scheme to lower case to follow 
+Android best practices for intent filtering. However the unchecked exception 
+(|java.lang.IllegalArgumentException|) may be thrown if the uriString parameter 
+has serious problems, for example if it is empty, so always catch this 
+exception if you are passing user-generated data into this method. 
+
+Reference specification: NFCForum-TS-RTD_URI_1.0 
+
+
+    uriString - string URI to encode. 
+
+    Returns: an NDEF Record containing the URI 
+
+*android.nfc.NdefRecord.createUri(Uri)*
+
+public static |android.nfc.NdefRecord| createUri(android.net.Uri uri)
+
+Create a new NDEF Record containing a URI. Use this method to encode a URI (or 
+URL) into an NDEF Record. Uses the well known URI type representation: 
+(|android.nfc.NdefRecord|) and (|android.nfc.NdefRecord|) . This is the most 
+efficient encoding of a URI into NDEF. The uri parameter will be normalized 
+with (|android.net.Uri|) to set the scheme to lower case to follow Android best 
+practices for intent filtering. However the unchecked exception 
+(|java.lang.IllegalArgumentException|) may be thrown if the uri parameter has 
+serious problems, for example if it is empty, so always catch this exception if 
+you are passing user-generated data into this method. 
+
+Reference specification: NFCForum-TS-RTD_URI_1.0 
+
+
+    uri - URI to encode. 
+
+    Returns: an NDEF Record containing the URI 
+
+*android.nfc.NdefRecord.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.nfc.NdefRecord.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+Returns true if the specified NDEF Record contains identical tnf, type, id and 
+payload fields. 
+
+
+
+*android.nfc.NdefRecord.getId()*
+
+public byte[] getId()
+
+Returns the variable length ID. 
+
+Returns an empty byte array if this record does not have an id field. 
+
+
+
+*android.nfc.NdefRecord.getPayload()*
+
+public byte[] getPayload()
+
+Returns the variable length payload. 
+
+Returns an empty byte array if this record does not have a payload field. 
+
+
+
+*android.nfc.NdefRecord.getTnf()*
+
+public short getTnf()
+
+Returns the 3-bit TNF. 
+
+TNF is the top-level type. 
+
+
+
+*android.nfc.NdefRecord.getType()*
+
+public byte[] getType()
+
+Returns the variable length Type field. 
+
+This should be used in conjunction with the TNF field to determine the payload 
+format. 
+
+Returns an empty byte array if this record does not have a type field. 
+
+
+
+*android.nfc.NdefRecord.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.nfc.NdefRecord.toByteArray()*
+
+public byte[] toByteArray()
+
+Return this NDEF Record as a byte array. This method is deprecated, use 
+(|android.nfc.NdefMessage|) instead. This is because the NDEF binary format is 
+not defined for a record outside of the context of a message: the MB and ME 
+flags cannot be set without knowing the location inside a message. This 
+implementation will attempt to serialize a single record by always setting the 
+MB and ME flags (in other words, assume this is a single-record NDEF Message). 
+
+    Deprecated: use {@link NdefMessage#toByteArray()} instead
+
+
+*android.nfc.NdefRecord.toMimeType()*
+
+public |java.lang.String| toMimeType()
+
+Map this record to a MIME type, or return null if it cannot be mapped. 
+Currently this method considers all (|android.nfc.NdefRecord|) records to be 
+MIME records, as well as some (|android.nfc.NdefRecord|) records such as 
+(|android.nfc.NdefRecord|) . If this is a MIME record then the MIME type as 
+string is returned, otherwise null is returned. This method does not perform 
+validation that the MIME type is actually valid. It always attempts to return a 
+string containing the type if this is a MIME record. The returned MIME type 
+will by normalized to lower-case using (|android.content.Intent|) . The MIME 
+payload can be obtained using (|android.nfc.NdefRecord|) . 
+
+
+
+    Returns: MIME type as a string, or null if this is not a MIME record 
+
+*android.nfc.NdefRecord.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.nfc.NdefRecord.toUri()*
+
+public |android.net.Uri| toUri()
+
+Map this record to a URI, or return null if it cannot be mapped. Currently this 
+method considers the following to be URI records: 
+
+(|android.nfc.NdefRecord|) records. (|android.nfc.NdefRecord|) with a type of 
+(|android.nfc.NdefRecord|) . (|android.nfc.NdefRecord|) with a type of 
+(|android.nfc.NdefRecord|) and containing a URI record in the NDEF message 
+nested in the payload. 
+
+(|android.nfc.NdefRecord|) records. 
+
+If this is not a URI record by the above rules, then null is returned. This 
+method does not perform validation that the URI is actually valid: it always 
+attempts to create and return a URI if this record appears to be a URI record 
+by the above rules. The returned URI will be normalized to have a lower case 
+scheme using (|android.net.Uri|) . 
+
+
+
+    Returns: URI, or null if this is not a URI record 
+
+*android.nfc.NdefRecord.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,307 @@
+*android.view.Window.Callback* *Window.Callback* API from a Window back to its c
+
+public static interface interface Window.Callback
+
+
+|android.view.Window.Callback_Description|
+|android.view.Window.Callback_Fields|
+|android.view.Window.Callback_Constructors|
+|android.view.Window.Callback_Methods|
+
+================================================================================
+
+*android.view.Window.Callback_Methods*
+|android.view.Window.Callback.dispatchGenericMotionEvent(MotionEvent)|Called to
+|android.view.Window.Callback.dispatchKeyEvent(KeyEvent)|Called to process key 
+|android.view.Window.Callback.dispatchKeyShortcutEvent(KeyEvent)|Called to proc
+|android.view.Window.Callback.dispatchPopulateAccessibilityEvent(AccessibilityEvent)|
+|android.view.Window.Callback.dispatchTouchEvent(MotionEvent)|Called to process
+|android.view.Window.Callback.dispatchTrackballEvent(MotionEvent)|Called to pro
+|android.view.Window.Callback.onActionModeFinished(ActionMode)|Called when an a
+|android.view.Window.Callback.onActionModeStarted(ActionMode)|Called when an ac
+|android.view.Window.Callback.onAttachedToWindow()|Called when the window has b
+|android.view.Window.Callback.onContentChanged()|This hook is called whenever t
+|android.view.Window.Callback.onCreatePanelMenu(int,Menu)|Initialize the conten
+|android.view.Window.Callback.onCreatePanelView(int)|Instantiate the view to di
+|android.view.Window.Callback.onDetachedFromWindow()|Called when the window has
+|android.view.Window.Callback.onMenuItemSelected(int,MenuItem)|Called when a pa
+|android.view.Window.Callback.onMenuOpened(int,Menu)|Called when a panel's menu
+|android.view.Window.Callback.onPanelClosed(int,Menu)|Called when a panel is be
+|android.view.Window.Callback.onPreparePanel(int,View,Menu)|Prepare a panel to 
+|android.view.Window.Callback.onSearchRequested()|Called when the user signals 
+|android.view.Window.Callback.onWindowAttributesChanged(WindowManager.LayoutParams)|
+|android.view.Window.Callback.onWindowFocusChanged(boolean)|This hook is called
+|android.view.Window.Callback.onWindowStartingActionMode(ActionMode.Callback)|C
+
+*android.view.Window.Callback_Description*
+
+API from a Window back to its caller. This allows the client to intercept key 
+dispatching, panels and menus, etc. 
+
+
+
+*android.view.Window.Callback.dispatchGenericMotionEvent(MotionEvent)*
+
+public boolean dispatchGenericMotionEvent(android.view.MotionEvent event)
+
+Called to process generic motion events. At the very least your implementation 
+must call (|android.view.Window|) to do the standard processing. 
+
+
+    event - The generic motion event. 
+
+    Returns: boolean Return true if this event was consumed. 
+
+*android.view.Window.Callback.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+Called to process key events. At the very least your implementation must call 
+(|android.view.Window|) to do the standard key processing. 
+
+
+    event - The key event. 
+
+    Returns: boolean Return true if this event was consumed. 
+
+*android.view.Window.Callback.dispatchKeyShortcutEvent(KeyEvent)*
+
+public boolean dispatchKeyShortcutEvent(android.view.KeyEvent event)
+
+Called to process a key shortcut event. At the very least your implementation 
+must call (|android.view.Window|) to do the standard key shortcut processing. 
+
+
+    event - The key shortcut event. 
+
+    Returns: True if this event was consumed. 
+
+*android.view.Window.Callback.dispatchPopulateAccessibilityEvent(AccessibilityEvent)*
+
+public boolean dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+Called to process population of 
+(|android.view.accessibility.AccessibilityEvent|) s. 
+
+
+    event - The event. 
+
+    Returns: boolean Return true if event population was completed. 
+
+*android.view.Window.Callback.dispatchTouchEvent(MotionEvent)*
+
+public boolean dispatchTouchEvent(android.view.MotionEvent event)
+
+Called to process touch screen events. At the very least your implementation 
+must call (|android.view.Window|) to do the standard touch screen processing. 
+
+
+    event - The touch screen event. 
+
+    Returns: boolean Return true if this event was consumed. 
+
+*android.view.Window.Callback.dispatchTrackballEvent(MotionEvent)*
+
+public boolean dispatchTrackballEvent(android.view.MotionEvent event)
+
+Called to process trackball events. At the very least your implementation must 
+call (|android.view.Window|) to do the standard trackball processing. 
+
+
+    event - The trackball event. 
+
+    Returns: boolean Return true if this event was consumed. 
+
+*android.view.Window.Callback.onActionModeFinished(ActionMode)*
+
+public void onActionModeFinished(android.view.ActionMode mode)
+
+Called when an action mode has been finished. The appropriate mode callback 
+method will have already been invoked. 
+
+
+    mode - The mode that was just finished. 
+
+*android.view.Window.Callback.onActionModeStarted(ActionMode)*
+
+public void onActionModeStarted(android.view.ActionMode mode)
+
+Called when an action mode has been started. The appropriate mode callback 
+method will have already been invoked. 
+
+
+    mode - The new mode that has just been started. 
+
+*android.view.Window.Callback.onAttachedToWindow()*
+
+public void onAttachedToWindow()
+
+Called when the window has been attached to the window manager. See 
+View.onAttachedToWindow()(|android.view.View|) for more information. 
+
+
+
+*android.view.Window.Callback.onContentChanged()*
+
+public void onContentChanged()
+
+This hook is called whenever the content view of the screen changes (due to a 
+call to Window.setContentView(|android.view.Window|) or 
+Window.addContentView(|android.view.Window|) ). 
+
+
+
+*android.view.Window.Callback.onCreatePanelMenu(int,Menu)*
+
+public boolean onCreatePanelMenu(
+  int featureId,
+  android.view.Menu menu)
+
+Initialize the contents of the menu for panel 'featureId'. This is called if 
+onCreatePanelView() returns null, giving you a standard menu in which you can 
+place your items. It is only called once for the panel, the first time it is 
+shown. 
+
+You can safely hold on to menu (and any items created from it), making 
+modifications to it as desired, until the next time onCreatePanelMenu() is 
+called for this feature. 
+
+
+    featureId - The panel being created. 
+    menu - The menu inside the panel. 
+
+    Returns: boolean You must return true for the panel to be displayed; if you return false 
+             it will not be shown. 
+
+*android.view.Window.Callback.onCreatePanelView(int)*
+
+public |android.view.View| onCreatePanelView(int featureId)
+
+Instantiate the view to display in the panel for 'featureId'. You can return 
+null, in which case the default content (typically a menu) will be created for 
+you. 
+
+
+    featureId - Which panel is being created. 
+
+    Returns: view The top-level view to place in the panel. 
+
+*android.view.Window.Callback.onDetachedFromWindow()*
+
+public void onDetachedFromWindow()
+
+Called when the window has been attached to the window manager. See 
+View.onDetachedFromWindow()(|android.view.View|) for more information. 
+
+
+
+*android.view.Window.Callback.onMenuItemSelected(int,MenuItem)*
+
+public boolean onMenuItemSelected(
+  int featureId,
+  android.view.MenuItem item)
+
+Called when a panel's menu item has been selected by the user. 
+
+
+    featureId - The panel that the menu is in. 
+    item - The menu item that was selected. 
+
+    Returns: boolean Return true to finish processing of selection, or false to perform the 
+             normal menu handling (calling its Runnable or sending a Message to 
+             its target Handler). 
+
+*android.view.Window.Callback.onMenuOpened(int,Menu)*
+
+public boolean onMenuOpened(
+  int featureId,
+  android.view.Menu menu)
+
+Called when a panel's menu is opened by the user. This may also be called when 
+the menu is changing from one type to another (for example, from the icon menu 
+to the expanded menu). 
+
+
+    featureId - The panel that the menu is in. 
+    menu - The menu that is opened. 
+
+    Returns: Return true to allow the menu to open, or false to prevent the menu from 
+             opening. 
+
+*android.view.Window.Callback.onPanelClosed(int,Menu)*
+
+public void onPanelClosed(
+  int featureId,
+  android.view.Menu menu)
+
+Called when a panel is being closed. If another logical subsequent panel is 
+being opened (and this panel is being closed to make room for the subsequent 
+panel), this method will NOT be called. 
+
+
+    featureId - The panel that is being displayed. 
+    menu - If onCreatePanelView() returned null, this is the Menu being displayed in the 
+       panel. 
+
+*android.view.Window.Callback.onPreparePanel(int,View,Menu)*
+
+public boolean onPreparePanel(
+  int featureId,
+  android.view.View view,
+  android.view.Menu menu)
+
+Prepare a panel to be displayed. This is called right before the panel window 
+is shown, every time it is shown. 
+
+
+    featureId - The panel that is being displayed. 
+    view - The View that was returned by onCreatePanelView(). 
+    menu - If onCreatePanelView() returned null, this is the Menu being displayed in the 
+       panel. 
+
+    Returns: boolean You must return true for the panel to be displayed; if you return false 
+             it will not be shown. 
+
+*android.view.Window.Callback.onSearchRequested()*
+
+public boolean onSearchRequested()
+
+Called when the user signals the desire to start a search. 
+
+
+
+    Returns: true if search launched, false if activity refuses (blocks) 
+
+*android.view.Window.Callback.onWindowAttributesChanged(WindowManager.LayoutParams)*
+
+public void onWindowAttributesChanged(android.view.WindowManager.LayoutParams attrs)
+
+This is called whenever the current window attributes change. 
+
+
+
+*android.view.Window.Callback.onWindowFocusChanged(boolean)*
+
+public void onWindowFocusChanged(boolean hasFocus)
+
+This hook is called whenever the window focus changes. See 
+View.onWindowFocusChanged(boolean)(|android.view.View|) for more information. 
+
+
+    hasFocus - Whether the window now has focus. 
+
+*android.view.Window.Callback.onWindowStartingActionMode(ActionMode.Callback)*
+
+public |android.view.ActionMode| onWindowStartingActionMode(android.view.ActionMode.Callback callback)
+
+Called when an action mode is being started for this window. Gives the callback 
+an opportunity to handle the action mode in its own unique and beautiful way. 
+If this method returns null the system can choose a way to present the mode or 
+choose not to start the mode at all. 
+
+
+    callback - Callback to control the lifecycle of this action mode 
+
+    Returns: The ActionMode that was started, or null if the system should present it 
+
+

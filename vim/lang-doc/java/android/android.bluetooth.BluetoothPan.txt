@@ -1,0 +1,222 @@
+*android.bluetooth.BluetoothPan* *BluetoothPan* This class provides the APIs to 
+
+public final class BluetoothPan
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothPan_Description|
+|android.bluetooth.BluetoothPan_Fields|
+|android.bluetooth.BluetoothPan_Constructors|
+|android.bluetooth.BluetoothPan_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothPan_Fields*
+|java.lang.String_android.bluetooth.BluetoothPan.ACTION_CONNECTION_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothPan.EXTRA_LOCAL_ROLE|
+|int_android.bluetooth.BluetoothPan.LOCAL_NAP_ROLE|
+|int_android.bluetooth.BluetoothPan.LOCAL_PANU_ROLE|
+|int_android.bluetooth.BluetoothPan.PAN_CONNECT_FAILED_ALREADY_CONNECTED|
+|int_android.bluetooth.BluetoothPan.PAN_CONNECT_FAILED_ATTEMPT_FAILED|
+|int_android.bluetooth.BluetoothPan.PAN_DISCONNECT_FAILED_NOT_CONNECTED|
+|int_android.bluetooth.BluetoothPan.PAN_OPERATION_GENERIC_FAILURE|
+|int_android.bluetooth.BluetoothPan.PAN_OPERATION_SUCCESS|
+|int_android.bluetooth.BluetoothPan.PAN_ROLE_NONE|
+|int_android.bluetooth.BluetoothPan.REMOTE_NAP_ROLE|
+|int_android.bluetooth.BluetoothPan.REMOTE_PANU_ROLE|
+
+*android.bluetooth.BluetoothPan_Methods*
+|android.bluetooth.BluetoothPan.connect(BluetoothDevice)|Initiate connection to
+|android.bluetooth.BluetoothPan.disconnect(BluetoothDevice)|Initiate disconnect
+|android.bluetooth.BluetoothPan.finalize()|
+|android.bluetooth.BluetoothPan.getConnectedDevices()|
+|android.bluetooth.BluetoothPan.getConnectionState(BluetoothDevice)|
+|android.bluetooth.BluetoothPan.getDevicesMatchingConnectionStates(int[])|
+|android.bluetooth.BluetoothPan.isTetheringOn()|
+|android.bluetooth.BluetoothPan.setBluetoothTethering(boolean)|
+
+*android.bluetooth.BluetoothPan_Description*
+
+This class provides the APIs to control the Bluetooth Pan Profile. 
+
+BluetoothPan is a proxy object for controlling the Bluetooth Service via IPC. 
+Use (|android.bluetooth.BluetoothAdapter|) to get the BluetoothPan proxy 
+object. 
+
+Each method is protected with its appropriate permission. 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothPan.ACTION_CONNECTION_STATE_CHANGED*
+
+Intent used to broadcast the change in connection state of the Pan profile. 
+
+This intent will have 4 extras: 
+
+(|android.bluetooth.BluetoothPan|) - The current state of the profile. 
+(|android.bluetooth.BluetoothPan|) - The previous state of the profile. 
+(|android.bluetooth.BluetoothDevice|) - The remote device. 
+(|android.bluetooth.BluetoothPan|) - Which local role the remote device is 
+bound to. 
+
+(|android.bluetooth.BluetoothPan|) or (|android.bluetooth.BluetoothPan|) can be 
+any of (|android.bluetooth.BluetoothPan|) , (|android.bluetooth.BluetoothPan|) 
+, (|android.bluetooth.BluetoothPan|) , (|android.bluetooth.BluetoothPan|) . 
+
+(|android.bluetooth.BluetoothPan|) can be one of 
+(|android.bluetooth.BluetoothPan|) or (|android.bluetooth.BluetoothPan|) 
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothPan.EXTRA_LOCAL_ROLE*
+
+Extra for (|android.bluetooth.BluetoothPan|) intent The local role of the PAN 
+profile that the remote device is bound to. It can be one of 
+(|android.bluetooth.BluetoothPan|) or (|android.bluetooth.BluetoothPan|) . 
+
+
+*int_android.bluetooth.BluetoothPan.LOCAL_NAP_ROLE*
+
+The local device is acting as a Network Access Point. 
+
+
+*int_android.bluetooth.BluetoothPan.LOCAL_PANU_ROLE*
+
+The local device is acting as a PAN User. 
+
+
+*int_android.bluetooth.BluetoothPan.PAN_CONNECT_FAILED_ALREADY_CONNECTED*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.PAN_CONNECT_FAILED_ATTEMPT_FAILED*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.PAN_DISCONNECT_FAILED_NOT_CONNECTED*
+
+Return codes for the connect and disconnect Bluez / Dbus calls. 
+
+
+*int_android.bluetooth.BluetoothPan.PAN_OPERATION_GENERIC_FAILURE*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.PAN_OPERATION_SUCCESS*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.PAN_ROLE_NONE*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.REMOTE_NAP_ROLE*
+
+
+
+
+*int_android.bluetooth.BluetoothPan.REMOTE_PANU_ROLE*
+
+
+
+
+
+*android.bluetooth.BluetoothPan.connect(BluetoothDevice)*
+
+public boolean connect(android.bluetooth.BluetoothDevice device)
+
+Initiate connection to a profile of the remote bluetooth device. 
+
+This API returns false in scenarios like the profile on the device is already 
+connected or Bluetooth is not turned on. When this API returns true, it is 
+guaranteed that connection state intent for the profile will be broadcasted 
+with the state. Users can get the connection state of the profile from this 
+intent. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothPan.disconnect(BluetoothDevice)*
+
+public boolean disconnect(android.bluetooth.BluetoothDevice device)
+
+Initiate disconnection from a profile 
+
+This API will return false in scenarios like the profile on the Bluetooth 
+device is not in connected state etc. When this API returns, true, it is 
+guaranteed that the connection state change intent will be broadcasted with the 
+state. Users can get the disconnection state of the profile from this intent. 
+
+If the disconnection is initiated by a remote device, the state will transition 
+from (|android.bluetooth.BluetoothPan|) to (|android.bluetooth.BluetoothPan|) . 
+If the disconnect is initiated by the host (local) device the state will 
+transition from (|android.bluetooth.BluetoothPan|) to state 
+(|android.bluetooth.BluetoothPan|) to state (|android.bluetooth.BluetoothPan|) 
+. The transition to (|android.bluetooth.BluetoothPan|) can be used to 
+distinguish between the two scenarios. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothPan.finalize()*
+
+protected void finalize()
+
+
+
+
+
+*android.bluetooth.BluetoothPan.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+
+
+
+
+*android.bluetooth.BluetoothPan.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+
+
+
+
+*android.bluetooth.BluetoothPan.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+
+
+
+
+*android.bluetooth.BluetoothPan.isTetheringOn()*
+
+public boolean isTetheringOn()
+
+
+
+
+
+*android.bluetooth.BluetoothPan.setBluetoothTethering(boolean)*
+
+public void setBluetoothTethering(boolean value)
+
+
+
+
+
+

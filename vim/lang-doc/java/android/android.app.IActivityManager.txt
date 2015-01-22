@@ -1,0 +1,3224 @@
+*android.app.IActivityManager* *IActivityManager* System private API for talking
+
+public interface interface IActivityManager
+
+  implements |android.os.IInterface|
+
+|android.app.IActivityManager_Description|
+|android.app.IActivityManager_Fields|
+|android.app.IActivityManager_Constructors|
+|android.app.IActivityManager_Methods|
+
+================================================================================
+
+*android.app.IActivityManager_Fields*
+|int_android.app.IActivityManager.ACTIVITY_DESTROYED_TRANSACTION|
+|int_android.app.IActivityManager.ACTIVITY_IDLE_TRANSACTION|
+|int_android.app.IActivityManager.ACTIVITY_PAUSED_TRANSACTION|
+|int_android.app.IActivityManager.ACTIVITY_RESUMED_TRANSACTION|
+|int_android.app.IActivityManager.ACTIVITY_SLEPT_TRANSACTION|
+|int_android.app.IActivityManager.ACTIVITY_STOPPED_TRANSACTION|
+|int_android.app.IActivityManager.APP_NOT_RESPONDING_VIA_PROVIDER_TRANSACTION|
+|int_android.app.IActivityManager.ATTACH_APPLICATION_TRANSACTION|
+|int_android.app.IActivityManager.BACKUP_AGENT_CREATED_TRANSACTION|
+|int_android.app.IActivityManager.BIND_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.BROADCAST_INTENT_TRANSACTION|
+|int_android.app.IActivityManager.CANCEL_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.CHECK_GRANT_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.CHECK_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.CHECK_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.CLEAR_APP_DATA_TRANSACTION|
+|int_android.app.IActivityManager.CLEAR_PENDING_BACKUP_TRANSACTION|
+|int_android.app.IActivityManager.CLOSE_SYSTEM_DIALOGS_TRANSACTION|
+|int_android.app.IActivityManager.CONVERT_FROM_TRANSLUCENT_TRANSACTION|
+|int_android.app.IActivityManager.CONVERT_TO_TRANSLUCENT_TRANSACTION|
+|int_android.app.IActivityManager.CRASH_APPLICATION_TRANSACTION|
+|int_android.app.IActivityManager.CREATE_STACK_TRANSACTION|
+|java.lang.String_android.app.IActivityManager.descriptor|
+|int_android.app.IActivityManager.DISMISS_KEYGUARD_ON_NEXT_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.DUMP_HEAP_TRANSACTION|
+|int_android.app.IActivityManager.ENTER_SAFE_MODE_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_ACTIVITY_AFFINITY_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_HEAVY_WEIGHT_APP_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_INSTRUMENTATION_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_RECEIVER_TRANSACTION|
+|int_android.app.IActivityManager.FINISH_SUB_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.FORCE_STOP_PACKAGE_TRANSACTION|
+|int_android.app.IActivityManager.GET_ACTIVITY_CLASS_FOR_TOKEN_TRANSACTION|
+|int_android.app.IActivityManager.GET_ASSIST_CONTEXT_EXTRAS_TRANSACTION|
+|int_android.app.IActivityManager.GET_CALLING_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.GET_CALLING_PACKAGE_TRANSACTION|
+|int_android.app.IActivityManager.GET_CONFIGURATION_TRANSACTION|
+|int_android.app.IActivityManager.GET_CONTENT_PROVIDER_EXTERNAL_TRANSACTION|
+|int_android.app.IActivityManager.GET_CONTENT_PROVIDER_TRANSACTION|
+|int_android.app.IActivityManager.GET_CURRENT_USER_TRANSACTION|
+|int_android.app.IActivityManager.GET_DEVICE_CONFIGURATION_TRANSACTION|
+|int_android.app.IActivityManager.GET_FRONT_ACTIVITY_SCREEN_COMPAT_MODE_TRANSACTION|
+|int_android.app.IActivityManager.GET_INTENT_FOR_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.GET_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.GET_LAUNCHED_FROM_PACKAGE_TRANSACTION|
+|int_android.app.IActivityManager.GET_LAUNCHED_FROM_UID_TRANSACTION|
+|int_android.app.IActivityManager.GET_MEMORY_INFO_TRANSACTION|
+|int_android.app.IActivityManager.GET_MY_MEMORY_STATE_TRANSACTION|
+|int_android.app.IActivityManager.GET_PACKAGE_ASK_SCREEN_COMPAT_TRANSACTION|
+|int_android.app.IActivityManager.GET_PACKAGE_FOR_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.GET_PACKAGE_FOR_TOKEN_TRANSACTION|
+|int_android.app.IActivityManager.GET_PACKAGE_SCREEN_COMPAT_MODE_TRANSACTION|
+|int_android.app.IActivityManager.GET_PERSISTED_URI_PERMISSIONS_TRANSACTION|
+|int_android.app.IActivityManager.GET_PROCESS_LIMIT_TRANSACTION|
+|int_android.app.IActivityManager.GET_PROCESS_MEMORY_INFO_TRANSACTION|
+|int_android.app.IActivityManager.GET_PROCESS_PSS_TRANSACTION|
+|int_android.app.IActivityManager.GET_PROCESSES_IN_ERROR_STATE_TRANSACTION|
+|int_android.app.IActivityManager.GET_PROVIDER_MIME_TYPE_TRANSACTION|
+|int_android.app.IActivityManager.GET_RECENT_TASKS_TRANSACTION|
+|int_android.app.IActivityManager.GET_REQUESTED_ORIENTATION_TRANSACTION|
+|int_android.app.IActivityManager.GET_RUNNING_APP_PROCESSES_TRANSACTION|
+|int_android.app.IActivityManager.GET_RUNNING_EXTERNAL_APPLICATIONS_TRANSACTION|
+|int_android.app.IActivityManager.GET_RUNNING_SERVICE_CONTROL_PANEL_TRANSACTION|
+|int_android.app.IActivityManager.GET_RUNNING_USER_IDS_TRANSACTION|
+|int_android.app.IActivityManager.GET_SERVICES_TRANSACTION|
+|int_android.app.IActivityManager.GET_STACK_BOX_INFO_TRANSACTION|
+|int_android.app.IActivityManager.GET_STACK_BOXES_TRANSACTION|
+|int_android.app.IActivityManager.GET_TASK_FOR_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.GET_TASK_THUMBNAILS_TRANSACTION|
+|int_android.app.IActivityManager.GET_TASK_TOP_THUMBNAIL_TRANSACTION|
+|int_android.app.IActivityManager.GET_TASKS_TRANSACTION|
+|int_android.app.IActivityManager.GET_UID_FOR_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.GOING_TO_SLEEP_TRANSACTION|
+|int_android.app.IActivityManager.GRANT_URI_PERMISSION_FROM_OWNER_TRANSACTION|
+|int_android.app.IActivityManager.GRANT_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.HANDLE_APPLICATION_CRASH_TRANSACTION|
+|int_android.app.IActivityManager.HANDLE_APPLICATION_STRICT_MODE_VIOLATION_TRANSACTION|
+|int_android.app.IActivityManager.HANDLE_APPLICATION_WTF_TRANSACTION|
+|int_android.app.IActivityManager.HANDLE_INCOMING_USER_TRANSACTION|
+|int_android.app.IActivityManager.HANG_TRANSACTION|
+|int_android.app.IActivityManager.INPUT_DISPATCHING_TIMED_OUT_TRANSACTION|
+|int_android.app.IActivityManager.IS_IMMERSIVE_TRANSACTION|
+|int_android.app.IActivityManager.IS_INTENT_SENDER_AN_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.IS_INTENT_SENDER_TARGETED_TO_PACKAGE_TRANSACTION|
+|int_android.app.IActivityManager.IS_TOP_ACTIVITY_IMMERSIVE_TRANSACTION|
+|int_android.app.IActivityManager.IS_USER_A_MONKEY_TRANSACTION|
+|int_android.app.IActivityManager.IS_USER_RUNNING_TRANSACTION|
+|int_android.app.IActivityManager.KILL_ALL_BACKGROUND_PROCESSES_TRANSACTION|
+|int_android.app.IActivityManager.KILL_APPLICATION_PROCESS_TRANSACTION|
+|int_android.app.IActivityManager.KILL_APPLICATION_WITH_APPID_TRANSACTION|
+|int_android.app.IActivityManager.KILL_BACKGROUND_PROCESSES_TRANSACTION|
+|int_android.app.IActivityManager.KILL_PIDS_TRANSACTION|
+|int_android.app.IActivityManager.KILL_PROCESSES_BELOW_FOREGROUND_TRANSACTION|
+|int_android.app.IActivityManager.KILL_UID_TRANSACTION|
+|int_android.app.IActivityManager.MOVE_ACTIVITY_TASK_TO_BACK_TRANSACTION|
+|int_android.app.IActivityManager.MOVE_TASK_BACKWARDS_TRANSACTION|
+|int_android.app.IActivityManager.MOVE_TASK_TO_BACK_TRANSACTION|
+|int_android.app.IActivityManager.MOVE_TASK_TO_FRONT_TRANSACTION|
+|int_android.app.IActivityManager.MOVE_TASK_TO_STACK_TRANSACTION|
+|int_android.app.IActivityManager.NAVIGATE_UP_TO_TRANSACTION|
+|int_android.app.IActivityManager.NEW_URI_PERMISSION_OWNER_TRANSACTION|
+|int_android.app.IActivityManager.NOTE_WAKEUP_ALARM_TRANSACTION|
+|int_android.app.IActivityManager.NOTIFY_ACTIVITY_DRAWN_TRANSACTION|
+|int_android.app.IActivityManager.OPEN_CONTENT_URI_TRANSACTION|
+|int_android.app.IActivityManager.OVERRIDE_PENDING_TRANSITION_TRANSACTION|
+|int_android.app.IActivityManager.PEEK_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.PERFORM_IDLE_MAINTENANCE_TRANSACTION|
+|int_android.app.IActivityManager.PROFILE_CONTROL_TRANSACTION|
+|int_android.app.IActivityManager.PUBLISH_CONTENT_PROVIDERS_TRANSACTION|
+|int_android.app.IActivityManager.PUBLISH_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.REF_CONTENT_PROVIDER_TRANSACTION|
+|int_android.app.IActivityManager.REGISTER_PROCESS_OBSERVER_TRANSACTION|
+|int_android.app.IActivityManager.REGISTER_RECEIVER_TRANSACTION|
+|int_android.app.IActivityManager.REGISTER_USER_SWITCH_OBSERVER_TRANSACTION|
+|int_android.app.IActivityManager.RELEASE_PERSISTABLE_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.REMOVE_CONTENT_PROVIDER_EXTERNAL_TRANSACTION|
+|int_android.app.IActivityManager.REMOVE_CONTENT_PROVIDER_TRANSACTION|
+|int_android.app.IActivityManager.REMOVE_SUB_TASK_TRANSACTION|
+|int_android.app.IActivityManager.REMOVE_TASK_TRANSACTION|
+|int_android.app.IActivityManager.REPORT_ACTIVITY_FULLY_DRAWN_TRANSACTION|
+|int_android.app.IActivityManager.REPORT_ASSIST_CONTEXT_EXTRAS_TRANSACTION|
+|int_android.app.IActivityManager.REPORT_THUMBNAIL_TRANSACTION|
+|int_android.app.IActivityManager.REQUEST_BUG_REPORT_TRANSACTION|
+|int_android.app.IActivityManager.RESIZE_STACK_TRANSACTION|
+|int_android.app.IActivityManager.RESTART_TRANSACTION|
+|int_android.app.IActivityManager.RESUME_APP_SWITCHES_TRANSACTION|
+|int_android.app.IActivityManager.REVOKE_URI_PERMISSION_FROM_OWNER_TRANSACTION|
+|int_android.app.IActivityManager.REVOKE_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.SERVICE_DONE_EXECUTING_TRANSACTION|
+|int_android.app.IActivityManager.SET_ACTIVITY_CONTROLLER_TRANSACTION|
+|int_android.app.IActivityManager.SET_ALWAYS_FINISH_TRANSACTION|
+|int_android.app.IActivityManager.SET_DEBUG_APP_TRANSACTION|
+|int_android.app.IActivityManager.SET_FOCUSED_STACK_TRANSACTION|
+|int_android.app.IActivityManager.SET_FRONT_ACTIVITY_SCREEN_COMPAT_MODE_TRANSACTION|
+|int_android.app.IActivityManager.SET_IMMERSIVE_TRANSACTION|
+|int_android.app.IActivityManager.SET_LOCK_SCREEN_SHOWN_TRANSACTION|
+|int_android.app.IActivityManager.SET_PACKAGE_ASK_SCREEN_COMPAT_TRANSACTION|
+|int_android.app.IActivityManager.SET_PACKAGE_SCREEN_COMPAT_MODE_TRANSACTION|
+|int_android.app.IActivityManager.SET_PROCESS_FOREGROUND_TRANSACTION|
+|int_android.app.IActivityManager.SET_PROCESS_LIMIT_TRANSACTION|
+|int_android.app.IActivityManager.SET_REQUESTED_ORIENTATION_TRANSACTION|
+|int_android.app.IActivityManager.SET_SERVICE_FOREGROUND_TRANSACTION|
+|int_android.app.IActivityManager.SET_USER_IS_MONKEY_TRANSACTION|
+|int_android.app.IActivityManager.SHOW_BOOT_MESSAGE_TRANSACTION|
+|int_android.app.IActivityManager.SHOW_WAITING_FOR_DEBUGGER_TRANSACTION|
+|int_android.app.IActivityManager.SHUTDOWN_TRANSACTION|
+|int_android.app.IActivityManager.SIGNAL_PERSISTENT_PROCESSES_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITIES_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITY_AND_WAIT_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITY_AS_USER_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITY_INTENT_SENDER_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.START_ACTIVITY_WITH_CONFIG_TRANSACTION|
+|int_android.app.IActivityManager.START_BACKUP_AGENT_TRANSACTION|
+|int_android.app.IActivityManager.START_INSTRUMENTATION_TRANSACTION|
+|int_android.app.IActivityManager.START_NEXT_MATCHING_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.START_RUNNING_TRANSACTION|
+|int_android.app.IActivityManager.START_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.STOP_APP_SWITCHES_TRANSACTION|
+|int_android.app.IActivityManager.STOP_SERVICE_TOKEN_TRANSACTION|
+|int_android.app.IActivityManager.STOP_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.STOP_USER_TRANSACTION|
+|int_android.app.IActivityManager.SWITCH_USER_TRANSACTION|
+|int_android.app.IActivityManager.TAKE_PERSISTABLE_URI_PERMISSION_TRANSACTION|
+|int_android.app.IActivityManager.TARGET_TASK_AFFINITY_MATCHES_ACTIVITY_TRANSACTION|
+|int_android.app.IActivityManager.UNBIND_BACKUP_AGENT_TRANSACTION|
+|int_android.app.IActivityManager.UNBIND_FINISHED_TRANSACTION|
+|int_android.app.IActivityManager.UNBIND_SERVICE_TRANSACTION|
+|int_android.app.IActivityManager.UNBROADCAST_INTENT_TRANSACTION|
+|int_android.app.IActivityManager.UNHANDLED_BACK_TRANSACTION|
+|int_android.app.IActivityManager.UNREGISTER_PROCESS_OBSERVER_TRANSACTION|
+|int_android.app.IActivityManager.UNREGISTER_RECEIVER_TRANSACTION|
+|int_android.app.IActivityManager.UNREGISTER_USER_SWITCH_OBSERVER_TRANSACTION|
+|int_android.app.IActivityManager.UNSTABLE_PROVIDER_DIED_TRANSACTION|
+|int_android.app.IActivityManager.UPDATE_CONFIGURATION_TRANSACTION|
+|int_android.app.IActivityManager.UPDATE_PERSISTENT_CONFIGURATION_TRANSACTION|
+|int_android.app.IActivityManager.WAKING_UP_TRANSACTION|
+|int_android.app.IActivityManager.WILL_ACTIVITY_BE_VISIBLE_TRANSACTION|
+
+*android.app.IActivityManager_Methods*
+|android.app.IActivityManager.activityDestroyed(IBinder)|
+|android.app.IActivityManager.activityIdle(IBinder,Configuration,boolean)|
+|android.app.IActivityManager.activityPaused(IBinder)|
+|android.app.IActivityManager.activityResumed(IBinder)|
+|android.app.IActivityManager.activitySlept(IBinder)|
+|android.app.IActivityManager.activityStopped(IBinder,Bundle,Bitmap,CharSequence)|
+|android.app.IActivityManager.appNotRespondingViaProvider(IBinder)|
+|android.app.IActivityManager.attachApplication(IApplicationThread)|
+|android.app.IActivityManager.backupAgentCreated(String,IBinder)|
+|android.app.IActivityManager.bindBackupAgent(ApplicationInfo,int)|
+|android.app.IActivityManager.bindService(IApplicationThread,IBinder,Intent,String,IServiceConnection,int,int)|
+|android.app.IActivityManager.broadcastIntent(IApplicationThread,Intent,String,IIntentReceiver,int,String,Bundle,String,int,boolean,boolean,int)|
+|android.app.IActivityManager.cancelIntentSender(IIntentSender)|
+|android.app.IActivityManager.checkGrantUriPermission(int,String,Uri,int)|
+|android.app.IActivityManager.checkPermission(String,int,int)|
+|android.app.IActivityManager.checkUriPermission(Uri,int,int,int)|
+|android.app.IActivityManager.clearApplicationUserData(String,IPackageDataObserver,int)|
+|android.app.IActivityManager.clearPendingBackup()|
+|android.app.IActivityManager.closeSystemDialogs(String)|
+|android.app.IActivityManager.convertFromTranslucent(IBinder)|
+|android.app.IActivityManager.convertToTranslucent(IBinder)|
+|android.app.IActivityManager.crashApplication(int,int,String,String)|
+|android.app.IActivityManager.createStack(int,int,int,float)|
+|android.app.IActivityManager.dismissKeyguardOnNextActivity()|
+|android.app.IActivityManager.dumpHeap(String,int,boolean,String,ParcelFileDescriptor)|
+|android.app.IActivityManager.enterSafeMode()|
+|android.app.IActivityManager.finishActivity(IBinder,int,Intent)|
+|android.app.IActivityManager.finishActivityAffinity(IBinder)|
+|android.app.IActivityManager.finishHeavyWeightApp()|
+|android.app.IActivityManager.finishInstrumentation(IApplicationThread,int,Bundle)|
+|android.app.IActivityManager.finishReceiver(IBinder,int,String,Bundle,boolean)|
+|android.app.IActivityManager.finishSubActivity(IBinder,String,int)|
+|android.app.IActivityManager.forceStopPackage(String,int)|
+|android.app.IActivityManager.getActivityClassForToken(IBinder)|
+|android.app.IActivityManager.getAssistContextExtras(int)|
+|android.app.IActivityManager.getCallingActivity(IBinder)|
+|android.app.IActivityManager.getCallingPackage(IBinder)|
+|android.app.IActivityManager.getConfiguration()|
+|android.app.IActivityManager.getContentProvider(IApplicationThread,String,int,boolean)|
+|android.app.IActivityManager.getContentProviderExternal(String,int,IBinder)|
+|android.app.IActivityManager.getCurrentUser()|
+|android.app.IActivityManager.getDeviceConfigurationInfo()|
+|android.app.IActivityManager.getFrontActivityScreenCompatMode()|
+|android.app.IActivityManager.getIntentForIntentSender(IIntentSender)|
+|android.app.IActivityManager.getIntentSender(int,String,IBinder,String,int,Intent[],String[],int,Bundle,int)|
+|android.app.IActivityManager.getLaunchedFromPackage(IBinder)|
+|android.app.IActivityManager.getLaunchedFromUid(IBinder)|
+|android.app.IActivityManager.getMemoryInfo(ActivityManager.MemoryInfo)|
+|android.app.IActivityManager.getMyMemoryState(ActivityManager.RunningAppProcessInfo)|
+|android.app.IActivityManager.getPackageAskScreenCompat(String)|
+|android.app.IActivityManager.getPackageForIntentSender(IIntentSender)|
+|android.app.IActivityManager.getPackageForToken(IBinder)|
+|android.app.IActivityManager.getPackageScreenCompatMode(String)|
+|android.app.IActivityManager.getPersistedUriPermissions(String,boolean)|
+|android.app.IActivityManager.getProcessesInErrorState()|
+|android.app.IActivityManager.getProcessLimit()|
+|android.app.IActivityManager.getProcessMemoryInfo(int[])|
+|android.app.IActivityManager.getProcessPss(int[])|
+|android.app.IActivityManager.getProviderMimeType(Uri,int)|
+|android.app.IActivityManager.getRecentTasks(int,int,int)|
+|android.app.IActivityManager.getRequestedOrientation(IBinder)|
+|android.app.IActivityManager.getRunningAppProcesses()|
+|android.app.IActivityManager.getRunningExternalApplications()|
+|android.app.IActivityManager.getRunningServiceControlPanel(ComponentName)|
+|android.app.IActivityManager.getRunningUserIds()|
+|android.app.IActivityManager.getServices(int,int)|
+|android.app.IActivityManager.getStackBoxes()|
+|android.app.IActivityManager.getStackBoxInfo(int)|
+|android.app.IActivityManager.getTaskForActivity(IBinder,boolean)|
+|android.app.IActivityManager.getTasks(int,int,IThumbnailReceiver)|
+|android.app.IActivityManager.getTaskThumbnails(int)|
+|android.app.IActivityManager.getTaskTopThumbnail(int)|
+|android.app.IActivityManager.getUidForIntentSender(IIntentSender)|
+|android.app.IActivityManager.goingToSleep()|
+|android.app.IActivityManager.grantUriPermission(IApplicationThread,String,Uri,int)|
+|android.app.IActivityManager.grantUriPermissionFromOwner(IBinder,int,String,Uri,int)|
+|android.app.IActivityManager.handleApplicationCrash(IBinder,ApplicationErrorReport.CrashInfo)|
+|android.app.IActivityManager.handleApplicationStrictModeViolation(IBinder,int,StrictMode.ViolationInfo)|
+|android.app.IActivityManager.handleApplicationWtf(IBinder,String,ApplicationErrorReport.CrashInfo)|
+|android.app.IActivityManager.handleIncomingUser(int,int,int,boolean,boolean,String,String)|
+|android.app.IActivityManager.hang(IBinder,boolean)|
+|android.app.IActivityManager.inputDispatchingTimedOut(int,boolean,String)|
+|android.app.IActivityManager.isImmersive(IBinder)|
+|android.app.IActivityManager.isIntentSenderAnActivity(IIntentSender)|
+|android.app.IActivityManager.isIntentSenderTargetedToPackage(IIntentSender)|
+|android.app.IActivityManager.isTopActivityImmersive()|
+|android.app.IActivityManager.isUserAMonkey()|
+|android.app.IActivityManager.isUserRunning(int,boolean)|
+|android.app.IActivityManager.killAllBackgroundProcesses()|
+|android.app.IActivityManager.killApplicationProcess(String,int)|
+|android.app.IActivityManager.killApplicationWithAppId(String,int,String)|
+|android.app.IActivityManager.killBackgroundProcesses(String,int)|
+|android.app.IActivityManager.killPids(int[],String,boolean)|
+|android.app.IActivityManager.killProcessesBelowForeground(String)|
+|android.app.IActivityManager.killUid(int,String)|
+|android.app.IActivityManager.moveActivityTaskToBack(IBinder,boolean)|
+|android.app.IActivityManager.moveTaskBackwards(int)|
+|android.app.IActivityManager.moveTaskToBack(int)|
+|android.app.IActivityManager.moveTaskToFront(int,int,Bundle)|
+|android.app.IActivityManager.moveTaskToStack(int,int,boolean)|
+|android.app.IActivityManager.navigateUpTo(IBinder,Intent,int,Intent)|
+|android.app.IActivityManager.newUriPermissionOwner(String)|
+|android.app.IActivityManager.noteWakeupAlarm(IIntentSender)|
+|android.app.IActivityManager.notifyActivityDrawn(IBinder)|
+|android.app.IActivityManager.openContentUri(Uri)|
+|android.app.IActivityManager.overridePendingTransition(IBinder,String,int,int)|
+|android.app.IActivityManager.peekService(Intent,String)|
+|android.app.IActivityManager.performIdleMaintenance()|
+|android.app.IActivityManager.profileControl(String,int,boolean,String,ParcelFileDescriptor,int)|
+|android.app.IActivityManager.publishContentProviders(IApplicationThread,List<IActivityManager.ContentProviderHolder>)|
+|android.app.IActivityManager.publishService(IBinder,Intent,IBinder)|
+|android.app.IActivityManager.refContentProvider(IBinder,int,int)|
+|android.app.IActivityManager.registerProcessObserver(IProcessObserver)|
+|android.app.IActivityManager.registerReceiver(IApplicationThread,String,IIntentReceiver,IntentFilter,String,int)|
+|android.app.IActivityManager.registerUserSwitchObserver(IUserSwitchObserver)|
+|android.app.IActivityManager.releasePersistableUriPermission(Uri,int)|
+|android.app.IActivityManager.removeContentProvider(IBinder,boolean)|
+|android.app.IActivityManager.removeContentProviderExternal(String,IBinder)|
+|android.app.IActivityManager.removeSubTask(int,int)|
+|android.app.IActivityManager.removeTask(int,int)|
+|android.app.IActivityManager.reportActivityFullyDrawn(IBinder)|
+|android.app.IActivityManager.reportAssistContextExtras(IBinder,Bundle)|
+|android.app.IActivityManager.reportThumbnail(IBinder,Bitmap,CharSequence)|
+|android.app.IActivityManager.requestBugReport()|
+|android.app.IActivityManager.resizeStackBox(int,float)|
+|android.app.IActivityManager.restart()|
+|android.app.IActivityManager.resumeAppSwitches()|
+|android.app.IActivityManager.revokeUriPermission(IApplicationThread,Uri,int)|
+|android.app.IActivityManager.revokeUriPermissionFromOwner(IBinder,Uri,int)|
+|android.app.IActivityManager.serviceDoneExecuting(IBinder,int,int,int)|
+|android.app.IActivityManager.setActivityController(IActivityController)|
+|android.app.IActivityManager.setAlwaysFinish(boolean)|
+|android.app.IActivityManager.setDebugApp(String,boolean,boolean)|
+|android.app.IActivityManager.setFocusedStack(int)|
+|android.app.IActivityManager.setFrontActivityScreenCompatMode(int)|
+|android.app.IActivityManager.setImmersive(IBinder,boolean)|
+|android.app.IActivityManager.setLockScreenShown(boolean)|
+|android.app.IActivityManager.setPackageAskScreenCompat(String,boolean)|
+|android.app.IActivityManager.setPackageScreenCompatMode(String,int)|
+|android.app.IActivityManager.setProcessForeground(IBinder,int,boolean)|
+|android.app.IActivityManager.setProcessLimit(int)|
+|android.app.IActivityManager.setRequestedOrientation(IBinder,int)|
+|android.app.IActivityManager.setServiceForeground(ComponentName,IBinder,int,Notification,boolean)|
+|android.app.IActivityManager.setUserIsMonkey(boolean)|
+|android.app.IActivityManager.showBootMessage(CharSequence,boolean)|
+|android.app.IActivityManager.showWaitingForDebugger(IApplicationThread,boolean)|
+|android.app.IActivityManager.shutdown(int)|
+|android.app.IActivityManager.signalPersistentProcesses(int)|
+|android.app.IActivityManager.startActivities(IApplicationThread,String,Intent[],String[],IBinder,Bundle,int)|
+|android.app.IActivityManager.startActivity(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle)|
+|android.app.IActivityManager.startActivityAndWait(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle,int)|
+|android.app.IActivityManager.startActivityAsUser(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle,int)|
+|android.app.IActivityManager.startActivityIntentSender(IApplicationThread,IntentSender,Intent,String,IBinder,String,int,int,int,Bundle)|
+|android.app.IActivityManager.startActivityWithConfig(IApplicationThread,String,Intent,String,IBinder,String,int,int,Configuration,Bundle,int)|
+|android.app.IActivityManager.startInstrumentation(ComponentName,String,int,Bundle,IInstrumentationWatcher,IUiAutomationConnection,int)|
+|android.app.IActivityManager.startNextMatchingActivity(IBinder,Intent,Bundle)|
+|android.app.IActivityManager.startRunning(String,String,String,String)|
+|android.app.IActivityManager.startService(IApplicationThread,Intent,String,int)|
+|android.app.IActivityManager.stopAppSwitches()|
+|android.app.IActivityManager.stopService(IApplicationThread,Intent,String,int)|
+|android.app.IActivityManager.stopServiceToken(ComponentName,IBinder,int)|
+|android.app.IActivityManager.stopUser(int,IStopUserCallback)|
+|android.app.IActivityManager.switchUser(int)|
+|android.app.IActivityManager.takePersistableUriPermission(Uri,int)|
+|android.app.IActivityManager.targetTaskAffinityMatchesActivity(IBinder,String)|
+|android.app.IActivityManager.testIsSystemReady()|
+|android.app.IActivityManager.unbindBackupAgent(ApplicationInfo)|
+|android.app.IActivityManager.unbindFinished(IBinder,Intent,boolean)|
+|android.app.IActivityManager.unbindService(IServiceConnection)|
+|android.app.IActivityManager.unbroadcastIntent(IApplicationThread,Intent,int)|
+|android.app.IActivityManager.unhandledBack()|
+|android.app.IActivityManager.unregisterProcessObserver(IProcessObserver)|
+|android.app.IActivityManager.unregisterReceiver(IIntentReceiver)|
+|android.app.IActivityManager.unregisterUserSwitchObserver(IUserSwitchObserver)|
+|android.app.IActivityManager.unstableProviderDied(IBinder)|
+|android.app.IActivityManager.updateConfiguration(Configuration)|
+|android.app.IActivityManager.updatePersistentConfiguration(Configuration)|
+|android.app.IActivityManager.wakingUp()|
+|android.app.IActivityManager.willActivityBeVisible(IBinder)|
+
+*android.app.IActivityManager_Description*
+
+System private API for talking with the activity manager service. This provides 
+calls from the application back to the activity manager. 
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_DESTROYED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_IDLE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_PAUSED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_RESUMED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_SLEPT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ACTIVITY_STOPPED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.APP_NOT_RESPONDING_VIA_PROVIDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ATTACH_APPLICATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.BACKUP_AGENT_CREATED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.BIND_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.BROADCAST_INTENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CANCEL_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CHECK_GRANT_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CHECK_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CHECK_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CLEAR_APP_DATA_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CLEAR_PENDING_BACKUP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CLOSE_SYSTEM_DIALOGS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CONVERT_FROM_TRANSLUCENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CONVERT_TO_TRANSLUCENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CRASH_APPLICATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.CREATE_STACK_TRANSACTION*
+
+
+
+
+*java.lang.String_android.app.IActivityManager.descriptor*
+
+
+
+
+*int_android.app.IActivityManager.DISMISS_KEYGUARD_ON_NEXT_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.DUMP_HEAP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.ENTER_SAFE_MODE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_ACTIVITY_AFFINITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_HEAVY_WEIGHT_APP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_INSTRUMENTATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_RECEIVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FINISH_SUB_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.FORCE_STOP_PACKAGE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_ACTIVITY_CLASS_FOR_TOKEN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_ASSIST_CONTEXT_EXTRAS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CALLING_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CALLING_PACKAGE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CONFIGURATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CONTENT_PROVIDER_EXTERNAL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CONTENT_PROVIDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_CURRENT_USER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_DEVICE_CONFIGURATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_FRONT_ACTIVITY_SCREEN_COMPAT_MODE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_INTENT_FOR_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_LAUNCHED_FROM_PACKAGE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_LAUNCHED_FROM_UID_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_MEMORY_INFO_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_MY_MEMORY_STATE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PACKAGE_ASK_SCREEN_COMPAT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PACKAGE_FOR_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PACKAGE_FOR_TOKEN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PACKAGE_SCREEN_COMPAT_MODE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PERSISTED_URI_PERMISSIONS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PROCESS_LIMIT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PROCESS_MEMORY_INFO_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PROCESS_PSS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PROCESSES_IN_ERROR_STATE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_PROVIDER_MIME_TYPE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_RECENT_TASKS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_REQUESTED_ORIENTATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_RUNNING_APP_PROCESSES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_RUNNING_EXTERNAL_APPLICATIONS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_RUNNING_SERVICE_CONTROL_PANEL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_RUNNING_USER_IDS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_SERVICES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_STACK_BOX_INFO_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_STACK_BOXES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_TASK_FOR_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_TASK_THUMBNAILS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_TASK_TOP_THUMBNAIL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_TASKS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GET_UID_FOR_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GOING_TO_SLEEP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GRANT_URI_PERMISSION_FROM_OWNER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.GRANT_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.HANDLE_APPLICATION_CRASH_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.HANDLE_APPLICATION_STRICT_MODE_VIOLATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.HANDLE_APPLICATION_WTF_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.HANDLE_INCOMING_USER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.HANG_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.INPUT_DISPATCHING_TIMED_OUT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_IMMERSIVE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_INTENT_SENDER_AN_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_INTENT_SENDER_TARGETED_TO_PACKAGE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_TOP_ACTIVITY_IMMERSIVE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_USER_A_MONKEY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.IS_USER_RUNNING_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_ALL_BACKGROUND_PROCESSES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_APPLICATION_PROCESS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_APPLICATION_WITH_APPID_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_BACKGROUND_PROCESSES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_PIDS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_PROCESSES_BELOW_FOREGROUND_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.KILL_UID_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.MOVE_ACTIVITY_TASK_TO_BACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.MOVE_TASK_BACKWARDS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.MOVE_TASK_TO_BACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.MOVE_TASK_TO_FRONT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.MOVE_TASK_TO_STACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.NAVIGATE_UP_TO_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.NEW_URI_PERMISSION_OWNER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.NOTE_WAKEUP_ALARM_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.NOTIFY_ACTIVITY_DRAWN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.OPEN_CONTENT_URI_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.OVERRIDE_PENDING_TRANSITION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.PEEK_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.PERFORM_IDLE_MAINTENANCE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.PROFILE_CONTROL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.PUBLISH_CONTENT_PROVIDERS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.PUBLISH_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REF_CONTENT_PROVIDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REGISTER_PROCESS_OBSERVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REGISTER_RECEIVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REGISTER_USER_SWITCH_OBSERVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.RELEASE_PERSISTABLE_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REMOVE_CONTENT_PROVIDER_EXTERNAL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REMOVE_CONTENT_PROVIDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REMOVE_SUB_TASK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REMOVE_TASK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REPORT_ACTIVITY_FULLY_DRAWN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REPORT_ASSIST_CONTEXT_EXTRAS_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REPORT_THUMBNAIL_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REQUEST_BUG_REPORT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.RESIZE_STACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.RESTART_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.RESUME_APP_SWITCHES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REVOKE_URI_PERMISSION_FROM_OWNER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.REVOKE_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SERVICE_DONE_EXECUTING_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_ACTIVITY_CONTROLLER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_ALWAYS_FINISH_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_DEBUG_APP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_FOCUSED_STACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_FRONT_ACTIVITY_SCREEN_COMPAT_MODE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_IMMERSIVE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_LOCK_SCREEN_SHOWN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_PACKAGE_ASK_SCREEN_COMPAT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_PACKAGE_SCREEN_COMPAT_MODE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_PROCESS_FOREGROUND_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_PROCESS_LIMIT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_REQUESTED_ORIENTATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_SERVICE_FOREGROUND_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SET_USER_IS_MONKEY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SHOW_BOOT_MESSAGE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SHOW_WAITING_FOR_DEBUGGER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SHUTDOWN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SIGNAL_PERSISTENT_PROCESSES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITIES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITY_AND_WAIT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITY_AS_USER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITY_INTENT_SENDER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_ACTIVITY_WITH_CONFIG_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_BACKUP_AGENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_INSTRUMENTATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_NEXT_MATCHING_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_RUNNING_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.START_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.STOP_APP_SWITCHES_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.STOP_SERVICE_TOKEN_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.STOP_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.STOP_USER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.SWITCH_USER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.TAKE_PERSISTABLE_URI_PERMISSION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.TARGET_TASK_AFFINITY_MATCHES_ACTIVITY_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNBIND_BACKUP_AGENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNBIND_FINISHED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNBIND_SERVICE_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNBROADCAST_INTENT_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNHANDLED_BACK_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNREGISTER_PROCESS_OBSERVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNREGISTER_RECEIVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNREGISTER_USER_SWITCH_OBSERVER_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UNSTABLE_PROVIDER_DIED_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UPDATE_CONFIGURATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.UPDATE_PERSISTENT_CONFIGURATION_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.WAKING_UP_TRANSACTION*
+
+
+
+
+*int_android.app.IActivityManager.WILL_ACTIVITY_BE_VISIBLE_TRANSACTION*
+
+
+
+
+
+*android.app.IActivityManager.activityDestroyed(IBinder)*
+
+public void activityDestroyed(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.activityIdle(IBinder,Configuration,boolean)*
+
+public void activityIdle(
+  android.os.IBinder token,
+  android.content.res.Configuration config,
+  boolean stopProfiling)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.activityPaused(IBinder)*
+
+public void activityPaused(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.activityResumed(IBinder)*
+
+public void activityResumed(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.activitySlept(IBinder)*
+
+public void activitySlept(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.activityStopped(IBinder,Bundle,Bitmap,CharSequence)*
+
+public void activityStopped(
+  android.os.IBinder token,
+  android.os.Bundle state,
+  Bitmap thumbnail,
+  java.lang.CharSequence description)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.appNotRespondingViaProvider(IBinder)*
+
+public void appNotRespondingViaProvider(android.os.IBinder connection)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.attachApplication(IApplicationThread)*
+
+public void attachApplication(android.app.IApplicationThread app)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.backupAgentCreated(String,IBinder)*
+
+public void backupAgentCreated(
+  java.lang.String packageName,
+  android.os.IBinder agent)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.bindBackupAgent(ApplicationInfo,int)*
+
+public boolean bindBackupAgent(
+  android.content.pm.ApplicationInfo appInfo,
+  int backupRestoreMode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.bindService(IApplicationThread,IBinder,Intent,String,IServiceConnection,int,int)*
+
+public int bindService(
+  android.app.IApplicationThread caller,
+  android.os.IBinder token,
+  android.content.Intent service,
+  java.lang.String resolvedType,
+  IServiceConnection connection,
+  int flags,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.broadcastIntent(IApplicationThread,Intent,String,IIntentReceiver,int,String,Bundle,String,int,boolean,boolean,int)*
+
+public int broadcastIntent(
+  android.app.IApplicationThread caller,
+  android.content.Intent intent,
+  java.lang.String resolvedType,
+  IIntentReceiver resultTo,
+  int resultCode,
+  java.lang.String resultData,
+  android.os.Bundle map,
+  java.lang.String requiredPermission,
+  int appOp,
+  boolean serialized,
+  boolean sticky,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.cancelIntentSender(IIntentSender)*
+
+public void cancelIntentSender(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.checkGrantUriPermission(int,String,Uri,int)*
+
+public int checkGrantUriPermission(
+  int callingUid,
+  java.lang.String targetPkg,
+  android.net.Uri uri,
+  int modeFlags)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.checkPermission(String,int,int)*
+
+public int checkPermission(
+  java.lang.String permission,
+  int pid,
+  int uid)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.checkUriPermission(Uri,int,int,int)*
+
+public int checkUriPermission(
+  android.net.Uri uri,
+  int pid,
+  int uid,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.clearApplicationUserData(String,IPackageDataObserver,int)*
+
+public boolean clearApplicationUserData(
+  java.lang.String packageName,
+  IPackageDataObserver observer,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.clearPendingBackup()*
+
+public void clearPendingBackup()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.closeSystemDialogs(String)*
+
+public void closeSystemDialogs(java.lang.String reason)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.convertFromTranslucent(IBinder)*
+
+public boolean convertFromTranslucent(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.convertToTranslucent(IBinder)*
+
+public boolean convertToTranslucent(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.crashApplication(int,int,String,String)*
+
+public void crashApplication(
+  int uid,
+  int initialPid,
+  java.lang.String packageName,
+  java.lang.String message)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.createStack(int,int,int,float)*
+
+public int createStack(
+  int taskId,
+  int relativeStackBoxId,
+  int position,
+  float weight)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.dismissKeyguardOnNextActivity()*
+
+public void dismissKeyguardOnNextActivity()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.dumpHeap(String,int,boolean,String,ParcelFileDescriptor)*
+
+public boolean dumpHeap(
+  java.lang.String process,
+  int userId,
+  boolean managed,
+  java.lang.String path,
+  android.os.ParcelFileDescriptor fd)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.enterSafeMode()*
+
+public void enterSafeMode()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishActivity(IBinder,int,Intent)*
+
+public boolean finishActivity(
+  android.os.IBinder token,
+  int code,
+  android.content.Intent data)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishActivityAffinity(IBinder)*
+
+public boolean finishActivityAffinity(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishHeavyWeightApp()*
+
+public void finishHeavyWeightApp()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishInstrumentation(IApplicationThread,int,Bundle)*
+
+public void finishInstrumentation(
+  android.app.IApplicationThread target,
+  int resultCode,
+  android.os.Bundle results)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishReceiver(IBinder,int,String,Bundle,boolean)*
+
+public void finishReceiver(
+  android.os.IBinder who,
+  int resultCode,
+  java.lang.String resultData,
+  android.os.Bundle map,
+  boolean abortBroadcast)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.finishSubActivity(IBinder,String,int)*
+
+public void finishSubActivity(
+  android.os.IBinder token,
+  java.lang.String resultWho,
+  int requestCode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.forceStopPackage(String,int)*
+
+public void forceStopPackage(
+  java.lang.String packageName,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getActivityClassForToken(IBinder)*
+
+public |android.content.ComponentName| getActivityClassForToken(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getAssistContextExtras(int)*
+
+public |android.os.Bundle| getAssistContextExtras(int requestType)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getCallingActivity(IBinder)*
+
+public |android.content.ComponentName| getCallingActivity(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getCallingPackage(IBinder)*
+
+public |java.lang.String| getCallingPackage(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getConfiguration()*
+
+public |android.content.res.Configuration| getConfiguration()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getContentProvider(IApplicationThread,String,int,boolean)*
+
+public |android.app.IActivityManager.ContentProviderHolder| getContentProvider(
+  android.app.IApplicationThread caller,
+  java.lang.String name,
+  int userId,
+  boolean stable)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getContentProviderExternal(String,int,IBinder)*
+
+public |android.app.IActivityManager.ContentProviderHolder| getContentProviderExternal(
+  java.lang.String name,
+  int userId,
+  android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getCurrentUser()*
+
+public |android.content.pm.UserInfo| getCurrentUser()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getDeviceConfigurationInfo()*
+
+public |android.content.pm.ConfigurationInfo| getDeviceConfigurationInfo()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getFrontActivityScreenCompatMode()*
+
+public int getFrontActivityScreenCompatMode()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getIntentForIntentSender(IIntentSender)*
+
+public |android.content.Intent| getIntentForIntentSender(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getIntentSender(int,String,IBinder,String,int,Intent[],String[],int,Bundle,int)*
+
+public IIntentSender getIntentSender(
+  int type,
+  java.lang.String packageName,
+  android.os.IBinder token,
+  java.lang.String resultWho,
+  int requestCode,
+  android.content.Intent[] intents,
+  java.lang.String[] resolvedTypes,
+  int flags,
+  android.os.Bundle options,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getLaunchedFromPackage(IBinder)*
+
+public |java.lang.String| getLaunchedFromPackage(android.os.IBinder activityToken)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getLaunchedFromUid(IBinder)*
+
+public int getLaunchedFromUid(android.os.IBinder activityToken)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getMemoryInfo(ActivityManager.MemoryInfo)*
+
+public void getMemoryInfo(android.app.ActivityManager.MemoryInfo outInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getMyMemoryState(ActivityManager.RunningAppProcessInfo)*
+
+public void getMyMemoryState(android.app.ActivityManager.RunningAppProcessInfo outInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getPackageAskScreenCompat(String)*
+
+public boolean getPackageAskScreenCompat(java.lang.String packageName)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getPackageForIntentSender(IIntentSender)*
+
+public |java.lang.String| getPackageForIntentSender(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getPackageForToken(IBinder)*
+
+public |java.lang.String| getPackageForToken(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getPackageScreenCompatMode(String)*
+
+public int getPackageScreenCompatMode(java.lang.String packageName)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getPersistedUriPermissions(String,boolean)*
+
+public |android.content.pm.ParceledListSlice|<UriPermission> getPersistedUriPermissions(
+  java.lang.String packageName,
+  boolean incoming)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getProcessesInErrorState()*
+
+public |java.util.List|<ProcessErrorStateInfo> getProcessesInErrorState()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getProcessLimit()*
+
+public int getProcessLimit()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getProcessMemoryInfo(int[])*
+
+public |android.os.Debug.MemoryInfo|[] getProcessMemoryInfo(int[] pids)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getProcessPss(int[])*
+
+public long[] getProcessPss(int[] pids)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getProviderMimeType(Uri,int)*
+
+public |java.lang.String| getProviderMimeType(
+  android.net.Uri uri,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRecentTasks(int,int,int)*
+
+public |java.util.List|<RecentTaskInfo> getRecentTasks(
+  int maxNum,
+  int flags,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRequestedOrientation(IBinder)*
+
+public int getRequestedOrientation(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRunningAppProcesses()*
+
+public |java.util.List|<RunningAppProcessInfo> getRunningAppProcesses()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRunningExternalApplications()*
+
+public |java.util.List|<ApplicationInfo> getRunningExternalApplications()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRunningServiceControlPanel(ComponentName)*
+
+public |android.app.PendingIntent| getRunningServiceControlPanel(android.content.ComponentName service)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getRunningUserIds()*
+
+public int[] getRunningUserIds()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getServices(int,int)*
+
+public |java.util.List|<RunningServiceInfo> getServices(
+  int maxNum,
+  int flags)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getStackBoxes()*
+
+public |java.util.List|<StackBoxInfo> getStackBoxes()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getStackBoxInfo(int)*
+
+public |android.app.ActivityManager.StackBoxInfo| getStackBoxInfo(int stackBoxId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getTaskForActivity(IBinder,boolean)*
+
+public int getTaskForActivity(
+  android.os.IBinder token,
+  boolean onlyRoot)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getTasks(int,int,IThumbnailReceiver)*
+
+public |java.util.List|<RunningTaskInfo> getTasks(
+  int maxNum,
+  int flags,
+  IThumbnailReceiver receiver)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getTaskThumbnails(int)*
+
+public |android.app.ActivityManager.TaskThumbnails| getTaskThumbnails(int taskId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getTaskTopThumbnail(int)*
+
+public Bitmap getTaskTopThumbnail(int taskId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.getUidForIntentSender(IIntentSender)*
+
+public int getUidForIntentSender(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.goingToSleep()*
+
+public void goingToSleep()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.grantUriPermission(IApplicationThread,String,Uri,int)*
+
+public void grantUriPermission(
+  android.app.IApplicationThread caller,
+  java.lang.String targetPkg,
+  android.net.Uri uri,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.grantUriPermissionFromOwner(IBinder,int,String,Uri,int)*
+
+public void grantUriPermissionFromOwner(
+  android.os.IBinder owner,
+  int fromUid,
+  java.lang.String targetPkg,
+  android.net.Uri uri,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.handleApplicationCrash(IBinder,ApplicationErrorReport.CrashInfo)*
+
+public void handleApplicationCrash(
+  android.os.IBinder app,
+  android.app.ApplicationErrorReport.CrashInfo crashInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.handleApplicationStrictModeViolation(IBinder,int,StrictMode.ViolationInfo)*
+
+public void handleApplicationStrictModeViolation(
+  android.os.IBinder app,
+  int violationMask,
+  android.os.StrictMode.ViolationInfo crashInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.handleApplicationWtf(IBinder,String,ApplicationErrorReport.CrashInfo)*
+
+public boolean handleApplicationWtf(
+  android.os.IBinder app,
+  java.lang.String tag,
+  android.app.ApplicationErrorReport.CrashInfo crashInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.handleIncomingUser(int,int,int,boolean,boolean,String,String)*
+
+public int handleIncomingUser(
+  int callingPid,
+  int callingUid,
+  int userId,
+  boolean allowAll,
+  boolean requireFull,
+  java.lang.String name,
+  java.lang.String callerPackage)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.hang(IBinder,boolean)*
+
+public void hang(
+  android.os.IBinder who,
+  boolean allowRestart)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.inputDispatchingTimedOut(int,boolean,String)*
+
+public long inputDispatchingTimedOut(
+  int pid,
+  boolean aboveSystem,
+  java.lang.String reason)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isImmersive(IBinder)*
+
+public boolean isImmersive(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isIntentSenderAnActivity(IIntentSender)*
+
+public boolean isIntentSenderAnActivity(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isIntentSenderTargetedToPackage(IIntentSender)*
+
+public boolean isIntentSenderTargetedToPackage(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isTopActivityImmersive()*
+
+public boolean isTopActivityImmersive()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isUserAMonkey()*
+
+public boolean isUserAMonkey()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.isUserRunning(int,boolean)*
+
+public boolean isUserRunning(
+  int userid,
+  boolean orStopping)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killAllBackgroundProcesses()*
+
+public void killAllBackgroundProcesses()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killApplicationProcess(String,int)*
+
+public void killApplicationProcess(
+  java.lang.String processName,
+  int uid)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killApplicationWithAppId(String,int,String)*
+
+public void killApplicationWithAppId(
+  java.lang.String pkg,
+  int appid,
+  java.lang.String reason)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killBackgroundProcesses(String,int)*
+
+public void killBackgroundProcesses(
+  java.lang.String packageName,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killPids(int[],String,boolean)*
+
+public boolean killPids(
+  int[] pids,
+  java.lang.String reason,
+  boolean secure)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killProcessesBelowForeground(String)*
+
+public boolean killProcessesBelowForeground(java.lang.String reason)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.killUid(int,String)*
+
+public void killUid(
+  int uid,
+  java.lang.String reason)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.moveActivityTaskToBack(IBinder,boolean)*
+
+public boolean moveActivityTaskToBack(
+  android.os.IBinder token,
+  boolean nonRoot)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.moveTaskBackwards(int)*
+
+public void moveTaskBackwards(int task)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.moveTaskToBack(int)*
+
+public void moveTaskToBack(int task)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.moveTaskToFront(int,int,Bundle)*
+
+public void moveTaskToFront(
+  int task,
+  int flags,
+  android.os.Bundle options)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.moveTaskToStack(int,int,boolean)*
+
+public void moveTaskToStack(
+  int taskId,
+  int stackId,
+  boolean toTop)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.navigateUpTo(IBinder,Intent,int,Intent)*
+
+public boolean navigateUpTo(
+  android.os.IBinder token,
+  android.content.Intent target,
+  int resultCode,
+  android.content.Intent resultData)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.newUriPermissionOwner(String)*
+
+public |android.os.IBinder| newUriPermissionOwner(java.lang.String name)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.noteWakeupAlarm(IIntentSender)*
+
+public void noteWakeupAlarm(IIntentSender sender)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.notifyActivityDrawn(IBinder)*
+
+public void notifyActivityDrawn(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.openContentUri(Uri)*
+
+public |android.os.ParcelFileDescriptor| openContentUri(android.net.Uri uri)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.overridePendingTransition(IBinder,String,int,int)*
+
+public void overridePendingTransition(
+  android.os.IBinder token,
+  java.lang.String packageName,
+  int enterAnim,
+  int exitAnim)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.peekService(Intent,String)*
+
+public |android.os.IBinder| peekService(
+  android.content.Intent service,
+  java.lang.String resolvedType)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.performIdleMaintenance()*
+
+public void performIdleMaintenance()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.profileControl(String,int,boolean,String,ParcelFileDescriptor,int)*
+
+public boolean profileControl(
+  java.lang.String process,
+  int userId,
+  boolean start,
+  java.lang.String path,
+  android.os.ParcelFileDescriptor fd,
+  int profileType)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.publishContentProviders(IApplicationThread,List<IActivityManager.ContentProviderHolder>)*
+
+public void publishContentProviders(
+  android.app.IApplicationThread caller,
+  java.util.List<android.app.IActivityManager.ContentProviderHolder> providers)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.publishService(IBinder,Intent,IBinder)*
+
+public void publishService(
+  android.os.IBinder token,
+  android.content.Intent intent,
+  android.os.IBinder service)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.refContentProvider(IBinder,int,int)*
+
+public boolean refContentProvider(
+  android.os.IBinder connection,
+  int stableDelta,
+  int unstableDelta)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.registerProcessObserver(IProcessObserver)*
+
+public void registerProcessObserver(IProcessObserver observer)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.registerReceiver(IApplicationThread,String,IIntentReceiver,IntentFilter,String,int)*
+
+public |android.content.Intent| registerReceiver(
+  android.app.IApplicationThread caller,
+  java.lang.String callerPackage,
+  IIntentReceiver receiver,
+  android.content.IntentFilter filter,
+  java.lang.String requiredPermission,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.registerUserSwitchObserver(IUserSwitchObserver)*
+
+public void registerUserSwitchObserver(IUserSwitchObserver observer)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.releasePersistableUriPermission(Uri,int)*
+
+public void releasePersistableUriPermission(
+  android.net.Uri uri,
+  int modeFlags)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.removeContentProvider(IBinder,boolean)*
+
+public void removeContentProvider(
+  android.os.IBinder connection,
+  boolean stable)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.removeContentProviderExternal(String,IBinder)*
+
+public void removeContentProviderExternal(
+  java.lang.String name,
+  android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.removeSubTask(int,int)*
+
+public boolean removeSubTask(
+  int taskId,
+  int subTaskIndex)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.removeTask(int,int)*
+
+public boolean removeTask(
+  int taskId,
+  int flags)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.reportActivityFullyDrawn(IBinder)*
+
+public void reportActivityFullyDrawn(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.reportAssistContextExtras(IBinder,Bundle)*
+
+public void reportAssistContextExtras(
+  android.os.IBinder token,
+  android.os.Bundle extras)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.reportThumbnail(IBinder,Bitmap,CharSequence)*
+
+public void reportThumbnail(
+  android.os.IBinder token,
+  Bitmap thumbnail,
+  java.lang.CharSequence description)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.requestBugReport()*
+
+public void requestBugReport()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.resizeStackBox(int,float)*
+
+public void resizeStackBox(
+  int stackBoxId,
+  float weight)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.restart()*
+
+public void restart()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.resumeAppSwitches()*
+
+public void resumeAppSwitches()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.revokeUriPermission(IApplicationThread,Uri,int)*
+
+public void revokeUriPermission(
+  android.app.IApplicationThread caller,
+  android.net.Uri uri,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.revokeUriPermissionFromOwner(IBinder,Uri,int)*
+
+public void revokeUriPermissionFromOwner(
+  android.os.IBinder owner,
+  android.net.Uri uri,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.serviceDoneExecuting(IBinder,int,int,int)*
+
+public void serviceDoneExecuting(
+  android.os.IBinder token,
+  int type,
+  int startId,
+  int res)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setActivityController(IActivityController)*
+
+public void setActivityController(IActivityController watcher)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setAlwaysFinish(boolean)*
+
+public void setAlwaysFinish(boolean enabled)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setDebugApp(String,boolean,boolean)*
+
+public void setDebugApp(
+  java.lang.String packageName,
+  boolean waitForDebugger,
+  boolean persistent)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setFocusedStack(int)*
+
+public void setFocusedStack(int stackId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setFrontActivityScreenCompatMode(int)*
+
+public void setFrontActivityScreenCompatMode(int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setImmersive(IBinder,boolean)*
+
+public void setImmersive(
+  android.os.IBinder token,
+  boolean immersive)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setLockScreenShown(boolean)*
+
+public void setLockScreenShown(boolean shown)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setPackageAskScreenCompat(String,boolean)*
+
+public void setPackageAskScreenCompat(
+  java.lang.String packageName,
+  boolean ask)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setPackageScreenCompatMode(String,int)*
+
+public void setPackageScreenCompatMode(
+  java.lang.String packageName,
+  int mode)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setProcessForeground(IBinder,int,boolean)*
+
+public void setProcessForeground(
+  android.os.IBinder token,
+  int pid,
+  boolean isForeground)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setProcessLimit(int)*
+
+public void setProcessLimit(int max)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setRequestedOrientation(IBinder,int)*
+
+public void setRequestedOrientation(
+  android.os.IBinder token,
+  int requestedOrientation)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setServiceForeground(ComponentName,IBinder,int,Notification,boolean)*
+
+public void setServiceForeground(
+  android.content.ComponentName className,
+  android.os.IBinder token,
+  int id,
+  android.app.Notification notification,
+  boolean keepNotification)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.setUserIsMonkey(boolean)*
+
+public void setUserIsMonkey(boolean monkey)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.showBootMessage(CharSequence,boolean)*
+
+public void showBootMessage(
+  java.lang.CharSequence msg,
+  boolean always)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.showWaitingForDebugger(IApplicationThread,boolean)*
+
+public void showWaitingForDebugger(
+  android.app.IApplicationThread who,
+  boolean waiting)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.shutdown(int)*
+
+public boolean shutdown(int timeout)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.signalPersistentProcesses(int)*
+
+public void signalPersistentProcesses(int signal)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivities(IApplicationThread,String,Intent[],String[],IBinder,Bundle,int)*
+
+public int startActivities(
+  android.app.IApplicationThread caller,
+  java.lang.String callingPackage,
+  android.content.Intent[] intents,
+  java.lang.String[] resolvedTypes,
+  android.os.IBinder resultTo,
+  android.os.Bundle options,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivity(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle)*
+
+public int startActivity(
+  android.app.IApplicationThread caller,
+  java.lang.String callingPackage,
+  android.content.Intent intent,
+  java.lang.String resolvedType,
+  android.os.IBinder resultTo,
+  java.lang.String resultWho,
+  int requestCode,
+  int flags,
+  java.lang.String profileFile,
+  android.os.ParcelFileDescriptor profileFd,
+  android.os.Bundle options)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivityAndWait(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle,int)*
+
+public |android.app.IActivityManager.WaitResult| startActivityAndWait(
+  android.app.IApplicationThread caller,
+  java.lang.String callingPackage,
+  android.content.Intent intent,
+  java.lang.String resolvedType,
+  android.os.IBinder resultTo,
+  java.lang.String resultWho,
+  int requestCode,
+  int flags,
+  java.lang.String profileFile,
+  android.os.ParcelFileDescriptor profileFd,
+  android.os.Bundle options,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivityAsUser(IApplicationThread,String,Intent,String,IBinder,String,int,int,String,ParcelFileDescriptor,Bundle,int)*
+
+public int startActivityAsUser(
+  android.app.IApplicationThread caller,
+  java.lang.String callingPackage,
+  android.content.Intent intent,
+  java.lang.String resolvedType,
+  android.os.IBinder resultTo,
+  java.lang.String resultWho,
+  int requestCode,
+  int flags,
+  java.lang.String profileFile,
+  android.os.ParcelFileDescriptor profileFd,
+  android.os.Bundle options,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivityIntentSender(IApplicationThread,IntentSender,Intent,String,IBinder,String,int,int,int,Bundle)*
+
+public int startActivityIntentSender(
+  android.app.IApplicationThread caller,
+  android.content.IntentSender intent,
+  android.content.Intent fillInIntent,
+  java.lang.String resolvedType,
+  android.os.IBinder resultTo,
+  java.lang.String resultWho,
+  int requestCode,
+  int flagsMask,
+  int flagsValues,
+  android.os.Bundle options)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startActivityWithConfig(IApplicationThread,String,Intent,String,IBinder,String,int,int,Configuration,Bundle,int)*
+
+public int startActivityWithConfig(
+  android.app.IApplicationThread caller,
+  java.lang.String callingPackage,
+  android.content.Intent intent,
+  java.lang.String resolvedType,
+  android.os.IBinder resultTo,
+  java.lang.String resultWho,
+  int requestCode,
+  int startFlags,
+  android.content.res.Configuration newConfig,
+  android.os.Bundle options,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startInstrumentation(ComponentName,String,int,Bundle,IInstrumentationWatcher,IUiAutomationConnection,int)*
+
+public boolean startInstrumentation(
+  android.content.ComponentName className,
+  java.lang.String profileFile,
+  int flags,
+  android.os.Bundle arguments,
+  IInstrumentationWatcher watcher,
+  IUiAutomationConnection connection,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startNextMatchingActivity(IBinder,Intent,Bundle)*
+
+public boolean startNextMatchingActivity(
+  android.os.IBinder callingActivity,
+  android.content.Intent intent,
+  android.os.Bundle options)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startRunning(String,String,String,String)*
+
+public void startRunning(
+  java.lang.String pkg,
+  java.lang.String cls,
+  java.lang.String action,
+  java.lang.String data)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.startService(IApplicationThread,Intent,String,int)*
+
+public |android.content.ComponentName| startService(
+  android.app.IApplicationThread caller,
+  android.content.Intent service,
+  java.lang.String resolvedType,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.stopAppSwitches()*
+
+public void stopAppSwitches()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.stopService(IApplicationThread,Intent,String,int)*
+
+public int stopService(
+  android.app.IApplicationThread caller,
+  android.content.Intent service,
+  java.lang.String resolvedType,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.stopServiceToken(ComponentName,IBinder,int)*
+
+public boolean stopServiceToken(
+  android.content.ComponentName className,
+  android.os.IBinder token,
+  int startId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.stopUser(int,IStopUserCallback)*
+
+public int stopUser(
+  int userid,
+  IStopUserCallback callback)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.switchUser(int)*
+
+public boolean switchUser(int userid)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.takePersistableUriPermission(Uri,int)*
+
+public void takePersistableUriPermission(
+  android.net.Uri uri,
+  int modeFlags)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.targetTaskAffinityMatchesActivity(IBinder,String)*
+
+public boolean targetTaskAffinityMatchesActivity(
+  android.os.IBinder token,
+  java.lang.String destAffinity)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.testIsSystemReady()*
+
+public boolean testIsSystemReady()
+
+
+
+
+
+*android.app.IActivityManager.unbindBackupAgent(ApplicationInfo)*
+
+public void unbindBackupAgent(android.content.pm.ApplicationInfo appInfo)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unbindFinished(IBinder,Intent,boolean)*
+
+public void unbindFinished(
+  android.os.IBinder token,
+  android.content.Intent service,
+  boolean doRebind)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unbindService(IServiceConnection)*
+
+public boolean unbindService(IServiceConnection connection)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unbroadcastIntent(IApplicationThread,Intent,int)*
+
+public void unbroadcastIntent(
+  android.app.IApplicationThread caller,
+  android.content.Intent intent,
+  int userId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unhandledBack()*
+
+public void unhandledBack()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unregisterProcessObserver(IProcessObserver)*
+
+public void unregisterProcessObserver(IProcessObserver observer)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unregisterReceiver(IIntentReceiver)*
+
+public void unregisterReceiver(IIntentReceiver receiver)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unregisterUserSwitchObserver(IUserSwitchObserver)*
+
+public void unregisterUserSwitchObserver(IUserSwitchObserver observer)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.unstableProviderDied(IBinder)*
+
+public void unstableProviderDied(android.os.IBinder connection)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.updateConfiguration(Configuration)*
+
+public void updateConfiguration(android.content.res.Configuration values)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.updatePersistentConfiguration(Configuration)*
+
+public void updatePersistentConfiguration(android.content.res.Configuration values)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.wakingUp()*
+
+public void wakingUp()
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.app.IActivityManager.willActivityBeVisible(IBinder)*
+
+public boolean willActivityBeVisible(android.os.IBinder token)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+

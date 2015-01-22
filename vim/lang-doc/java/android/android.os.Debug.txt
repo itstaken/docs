@@ -1,0 +1,1113 @@
+*android.os.Debug* *Debug* Provides various debugging methods for Android applic
+
+public final class Debug
+  extends    |java.lang.Object|
+
+|android.os.Debug_Description|
+|android.os.Debug_Fields|
+|android.os.Debug_Constructors|
+|android.os.Debug_Methods|
+
+================================================================================
+
+*android.os.Debug_Fields*
+|int_android.os.Debug.MEMINFO_BUFFERS|
+|int_android.os.Debug.MEMINFO_CACHED|
+|int_android.os.Debug.MEMINFO_COUNT|
+|int_android.os.Debug.MEMINFO_FREE|
+|int_android.os.Debug.MEMINFO_SHMEM|
+|int_android.os.Debug.MEMINFO_SLAB|
+|int_android.os.Debug.MEMINFO_SWAP_FREE|
+|int_android.os.Debug.MEMINFO_SWAP_TOTAL|
+|int_android.os.Debug.MEMINFO_TOTAL|
+|int_android.os.Debug.MEMINFO_ZRAM_TOTAL|
+|int_android.os.Debug.SHOW_CLASSLOADER|
+|int_android.os.Debug.SHOW_FULL_DETAIL|
+|int_android.os.Debug.SHOW_INITIALIZED|
+|int_android.os.Debug.TRACE_COUNT_ALLOCS|
+
+*android.os.Debug_Methods*
+|android.os.Debug.cacheRegisterMap(String)|Primes the register map cache.
+|android.os.Debug.changeDebugPort(int)|Change the JDWP port.
+|android.os.Debug.countInstancesOfClass(Class)|Returns a count of the extant in
+|android.os.Debug.dumpHprofData(String)|Dump "hprof" data to the specified file
+|android.os.Debug.dumpHprofData(String,FileDescriptor)|Like dumpHprofData(Strin
+|android.os.Debug.dumpHprofDataDdms()|Collect "hprof" and send it to DDMS.
+|android.os.Debug.dumpNativeBacktraceToFile(int,String)|Have the stack traces o
+|android.os.Debug.dumpNativeHeap(FileDescriptor)|Writes native heap data to the
+|android.os.Debug.dumpReferenceTables()|Dumps the contents of VM reference tabl
+|android.os.Debug.dumpService(String,FileDescriptor,String[])|Get a debugging d
+|android.os.Debug.enableEmulatorTraceOutput()|Enable "emulator traces", in whic
+|android.os.Debug.getBinderDeathObjectCount()|Returns the number of death notif
+|android.os.Debug.getBinderLocalObjectCount()|Returns the number of active loca
+|android.os.Debug.getBinderProxyObjectCount()|Returns the number of references 
+|android.os.Debug.getBinderReceivedTransactions()|Returns the number of receive
+|android.os.Debug.getBinderSentTransactions()|Returns the number of sent transa
+|android.os.Debug.getCaller()|
+|android.os.Debug.getCallers(int)|Return a string consisting of methods and loc
+|android.os.Debug.getCallers(int,int)|Return a string consisting of methods and
+|android.os.Debug.getCallers(int,String)|Like#getCallers(int), but each locatio
+|android.os.Debug.getGlobalAllocCount()|Returns the global count of objects all
+|android.os.Debug.getGlobalAllocSize()|Returns the global size, in bytes, of ob
+|android.os.Debug.getGlobalClassInitCount()|Returns the number of classes succe
+|android.os.Debug.getGlobalClassInitTime()|Returns the time spent successfully 
+|android.os.Debug.getGlobalExternalAllocCount()|This method exists for compatib
+|android.os.Debug.getGlobalExternalAllocSize()|This method exists for compatibi
+|android.os.Debug.getGlobalExternalFreedCount()|This method exists for compatib
+|android.os.Debug.getGlobalExternalFreedSize()|This method exists for compatibi
+|android.os.Debug.getGlobalFreedCount()|Returns the global count of objects fre
+|android.os.Debug.getGlobalFreedSize()|Returns the global size, in bytes, of ob
+|android.os.Debug.getGlobalGcInvocationCount()|Returns the number of non-concur
+|android.os.Debug.getLoadedClassCount()|Get the number of loaded classes.
+|android.os.Debug.getMemInfo(long[])|Retrieves /proc/meminfo.
+|android.os.Debug.getMemoryInfo(Debug.MemoryInfo)|Retrieves information about t
+|android.os.Debug.getMemoryInfo(int,Debug.MemoryInfo)|Note: currently only work
+|android.os.Debug.getMethodTracingMode()|Determine whether method tracing is cu
+|android.os.Debug.getNativeHeapAllocatedSize()|Returns the amount of allocated 
+|android.os.Debug.getNativeHeapFreeSize()|Returns the amount of free memory in 
+|android.os.Debug.getNativeHeapSize()|Returns the size of the native heap.
+|android.os.Debug.getPss()|Retrieves the PSS memory used by the process as give
+|android.os.Debug.getPss(int,long[])|Retrieves the PSS memory used by the proce
+|android.os.Debug.getThreadAllocCount()|Returns the thread-local count of objec
+|android.os.Debug.getThreadAllocSize()|Returns the thread-local size of objects
+|android.os.Debug.getThreadExternalAllocCount()|This method exists for compatib
+|android.os.Debug.getThreadExternalAllocSize()|This method exists for compatibi
+|android.os.Debug.getThreadGcInvocationCount()|Returns the number of thread-loc
+|android.os.Debug.getVmFeatureList()|Returns an array of strings that identify 
+|android.os.Debug.isDebuggerConnected()|Determine if a debugger is currently at
+|android.os.Debug.printLoadedClasses(int)|Dump a list of all currently loaded c
+|android.os.Debug.resetAllCounts()|Clears all the global and thread-local memor
+|android.os.Debug.resetGlobalAllocCount()|Clears the global count of objects al
+|android.os.Debug.resetGlobalAllocSize()|Clears the global size of objects allo
+|android.os.Debug.resetGlobalClassInitCount()|Clears the count of classes initi
+|android.os.Debug.resetGlobalClassInitTime()|Clears the count of time spent ini
+|android.os.Debug.resetGlobalExternalAllocCount()|This method exists for compat
+|android.os.Debug.resetGlobalExternalAllocSize()|This method exists for compati
+|android.os.Debug.resetGlobalExternalFreedCount()|This method exists for compat
+|android.os.Debug.resetGlobalExternalFreedSize()|This method exists for compati
+|android.os.Debug.resetGlobalFreedCount()|Clears the global count of objects fr
+|android.os.Debug.resetGlobalFreedSize()|Clears the global size of objects free
+|android.os.Debug.resetGlobalGcInvocationCount()|Clears the count of non-concur
+|android.os.Debug.resetThreadAllocCount()|Clears the thread-local count of obje
+|android.os.Debug.resetThreadAllocSize()|Clears the thread-local count of objec
+|android.os.Debug.resetThreadExternalAllocCount()|This method exists for compat
+|android.os.Debug.resetThreadExternalAllocSize()|This method exists for compati
+|android.os.Debug.resetThreadGcInvocationCount()|Clears the thread-local count 
+|android.os.Debug.setAllocationLimit(int)|Establish an object allocation limit 
+|android.os.Debug.setFieldsOn(Class<?>)|Equivalent to setFieldsOn(cl, false).
+|android.os.Debug.setFieldsOn(Class<?>,boolean)|Reflectively sets static fields
+|android.os.Debug.setGlobalAllocationLimit(int)|Establish a global object alloc
+|android.os.Debug.startAllocCounting()|Start counting the number and aggregate 
+|android.os.Debug.startMethodTracing()|Start method tracing with default log na
+|android.os.Debug.startMethodTracing(String)|Start method tracing, specifying t
+|android.os.Debug.startMethodTracing(String,FileDescriptor,int,int)|Like startM
+|android.os.Debug.startMethodTracing(String,int)|Start method tracing, specifyi
+|android.os.Debug.startMethodTracing(String,int,int)|Start method tracing, spec
+|android.os.Debug.startMethodTracingDdms(int,int,boolean,int)|Starts method tra
+|android.os.Debug.startNativeTracing()|Enable qemu tracing.
+|android.os.Debug.stopAllocCounting()|Stop counting the number and aggregate si
+|android.os.Debug.stopMethodTracing()|Stop method tracing.
+|android.os.Debug.stopNativeTracing()|Stop qemu tracing.
+|android.os.Debug.threadCpuTimeNanos()|Get an indication of thread CPU usage.
+|android.os.Debug.waitForDebugger()|Wait until a debugger attaches.
+|android.os.Debug.waitingForDebugger()|Returns "true" if one or more threads is
+
+*android.os.Debug_Description*
+
+Provides various debugging methods for Android applications, including tracing 
+and allocation counts. Logging Trace Files Debug can create log files that give 
+details about an application, such as a call stack and start/stop times for any 
+running methods. See <a href="guide/developing/tools/traceview.html">Traceview: 
+A Graphical Log Viewer for information about reading trace files. To start 
+logging trace files, call one of the startMethodTracing() methods. To stop 
+tracing, call (|android.os.Debug|) . 
+
+
+
+*int_android.os.Debug.MEMINFO_BUFFERS*
+
+
+
+
+*int_android.os.Debug.MEMINFO_CACHED*
+
+
+
+
+*int_android.os.Debug.MEMINFO_COUNT*
+
+
+
+
+*int_android.os.Debug.MEMINFO_FREE*
+
+
+
+
+*int_android.os.Debug.MEMINFO_SHMEM*
+
+
+
+
+*int_android.os.Debug.MEMINFO_SLAB*
+
+
+
+
+*int_android.os.Debug.MEMINFO_SWAP_FREE*
+
+
+
+
+*int_android.os.Debug.MEMINFO_SWAP_TOTAL*
+
+
+
+
+*int_android.os.Debug.MEMINFO_TOTAL*
+
+
+
+
+*int_android.os.Debug.MEMINFO_ZRAM_TOTAL*
+
+
+
+
+*int_android.os.Debug.SHOW_CLASSLOADER*
+
+
+
+
+*int_android.os.Debug.SHOW_FULL_DETAIL*
+
+Flags for printLoadedClasses(). Default behavior is to only show the class 
+name. 
+
+
+*int_android.os.Debug.SHOW_INITIALIZED*
+
+
+
+
+*int_android.os.Debug.TRACE_COUNT_ALLOCS*
+
+Flags for startMethodTracing(). These can be ORed together. 
+
+TRACE_COUNT_ALLOCS adds the results from startAllocCounting to the trace key 
+file. 
+
+
+
+*android.os.Debug.cacheRegisterMap(String)*
+
+public static final boolean cacheRegisterMap(java.lang.String classAndMethodDesc)
+
+Primes the register map cache. 
+
+Only works for classes in the bootstrap class loader. Does not cause classes to 
+be loaded if they're not already present. 
+
+The classAndMethodDesc argument is a concatentation of the VM-internal class 
+descriptor, method name, and method descriptor. Examples: 
+Landroid/os/Looper;.loop:()V 
+Landroid/app/ActivityThread;.main:([Ljava/lang/String;)V 
+
+
+    classAndMethodDesc - the method to prepare 
+
+*android.os.Debug.changeDebugPort(int)*
+
+public static void changeDebugPort(int port)
+
+Change the JDWP port. 
+
+    Deprecated: no longer needed or useful
+
+
+*android.os.Debug.countInstancesOfClass(Class)*
+
+public static long countInstancesOfClass(java.lang.Class cls)
+
+Returns a count of the extant instances of a class. 
+
+
+
+*android.os.Debug.dumpHprofData(String)*
+
+public static void dumpHprofData(java.lang.String fileName)
+  throws |java.io.IOException|
+         
+Dump "hprof" data to the specified file. This may cause a GC. 
+
+
+    fileName - Full pathname of output file (e.g. "/sdcard/dump.hprof"). 
+
+*android.os.Debug.dumpHprofData(String,FileDescriptor)*
+
+public static void dumpHprofData(
+  java.lang.String fileName,
+  java.io.FileDescriptor fd)
+  throws |java.io.IOException|
+         
+Like dumpHprofData(String), but takes an already-opened FileDescriptor to which 
+the trace is written. The file name is also supplied simply for logging. Makes 
+a dup of the file descriptor. 
+
+Primarily for use by the "am" shell command. 
+
+
+
+*android.os.Debug.dumpHprofDataDdms()*
+
+public static void dumpHprofDataDdms()
+
+Collect "hprof" and send it to DDMS. This may cause a GC. 
+
+
+
+*android.os.Debug.dumpNativeBacktraceToFile(int,String)*
+
+public static native void dumpNativeBacktraceToFile(
+  int pid,
+  java.lang.String file)
+
+Have the stack traces of the given native process dumped to the specified file. 
+Will be appended to the file. 
+
+
+
+*android.os.Debug.dumpNativeHeap(FileDescriptor)*
+
+public static native void dumpNativeHeap(java.io.FileDescriptor fd)
+
+Writes native heap data to the specified file descriptor. 
+
+
+
+*android.os.Debug.dumpReferenceTables()*
+
+public static final void dumpReferenceTables()
+
+Dumps the contents of VM reference tables (e.g. JNI locals and globals) to the 
+log file. 
+
+
+
+*android.os.Debug.dumpService(String,FileDescriptor,String[])*
+
+public static boolean dumpService(
+  java.lang.String name,
+  java.io.FileDescriptor fd,
+  java.lang.String[] args)
+
+Get a debugging dump of a system service by name. 
+
+Most services require the caller to hold android.permission.DUMP. 
+
+
+    name - of the service to dump 
+    fd - to write dump output to (usually an output log file) 
+    args - to pass to the service's dump method, may be null 
+
+    Returns: true if the service was dumped successfully, false if the service could not be 
+             found or had an error while dumping 
+
+*android.os.Debug.enableEmulatorTraceOutput()*
+
+public static void enableEmulatorTraceOutput()
+
+Enable "emulator traces", in which information about the current method is made 
+available to the "emulator -trace" feature. There is no corresponding "disable" 
+call -- this is intended for use by the framework when tracing should be turned 
+on and left that way, so that traces captured with F9/F10 will include the 
+necessary data. 
+
+This puts the VM into "profile" mode, which has performance consequences. 
+
+To temporarily enable tracing, use (|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getBinderDeathObjectCount()*
+
+public static final native int getBinderDeathObjectCount()
+
+Returns the number of death notification links to Binder objects that exist in 
+the current process. 
+
+
+
+*android.os.Debug.getBinderLocalObjectCount()*
+
+public static final native int getBinderLocalObjectCount()
+
+Returns the number of active local Binder objects that exist in the current 
+process. 
+
+
+
+*android.os.Debug.getBinderProxyObjectCount()*
+
+public static final native int getBinderProxyObjectCount()
+
+Returns the number of references to remote proxy Binder objects that exist in 
+the current process. 
+
+
+
+*android.os.Debug.getBinderReceivedTransactions()*
+
+public static native int getBinderReceivedTransactions()
+
+Returns the number of received transactions from the binder driver. 
+
+
+
+    Returns: The number of received transactions or -1 if it could not read the stats. 
+
+*android.os.Debug.getBinderSentTransactions()*
+
+public static native int getBinderSentTransactions()
+
+Returns the number of sent transactions from this process. 
+
+
+
+    Returns: The number of sent transactions or -1 if it could not read t. 
+
+*android.os.Debug.getCaller()*
+
+public static |java.lang.String| getCaller()
+
+
+
+
+
+    Returns: a String describing the immediate caller of the calling method. {@hide} 
+
+*android.os.Debug.getCallers(int)*
+
+public static |java.lang.String| getCallers(int depth)
+
+Return a string consisting of methods and locations at multiple call stack 
+levels. 
+
+
+    depth - the number of levels to return, starting with the immediate caller. 
+
+    Returns: a string describing the call stack. {@hide} 
+
+*android.os.Debug.getCallers(int,int)*
+
+public static |java.lang.String| getCallers(
+  int start,
+  int depth)
+
+Return a string consisting of methods and locations at multiple call stack 
+levels. 
+
+
+    depth - the number of levels to return, starting with the immediate caller. 
+
+    Returns: a string describing the call stack. {@hide} 
+
+*android.os.Debug.getCallers(int,String)*
+
+public static |java.lang.String| getCallers(
+  int depth,
+  java.lang.String linePrefix)
+
+Like (|android.os.Debug|) , but each location is append to the string as a new 
+line with linePrefix in front of it. 
+
+
+    depth - the number of levels to return, starting with the immediate caller. 
+    linePrefix - prefix to put in front of each location. 
+
+    Returns: a string describing the call stack. {@hide} 
+
+*android.os.Debug.getGlobalAllocCount()*
+
+public static int getGlobalAllocCount()
+
+Returns the global count of objects allocated by the runtime between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalAllocSize()*
+
+public static int getGlobalAllocSize()
+
+Returns the global size, in bytes, of objects allocated by the runtime between 
+a start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalClassInitCount()*
+
+public static int getGlobalClassInitCount()
+
+Returns the number of classes successfully initialized (ie those that executed 
+without throwing an exception) between a start(|android.os.Debug|) and 
+stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalClassInitTime()*
+
+public static int getGlobalClassInitTime()
+
+Returns the time spent successfully initializing classes between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalExternalAllocCount()*
+
+public static int getGlobalExternalAllocCount()
+
+This method exists for compatibility and always returns 0. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getGlobalExternalAllocSize()*
+
+public static int getGlobalExternalAllocSize()
+
+This method exists for compatibility and always returns 0. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getGlobalExternalFreedCount()*
+
+public static int getGlobalExternalFreedCount()
+
+This method exists for compatibility and always returns 0. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getGlobalExternalFreedSize()*
+
+public static int getGlobalExternalFreedSize()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getGlobalFreedCount()*
+
+public static int getGlobalFreedCount()
+
+Returns the global count of objects freed by the runtime between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalFreedSize()*
+
+public static int getGlobalFreedSize()
+
+Returns the global size, in bytes, of objects freed by the runtime between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getGlobalGcInvocationCount()*
+
+public static int getGlobalGcInvocationCount()
+
+Returns the number of non-concurrent GC invocations between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getLoadedClassCount()*
+
+public static int getLoadedClassCount()
+
+Get the number of loaded classes. 
+
+
+
+    Returns: the number of loaded classes. 
+
+*android.os.Debug.getMemInfo(long[])*
+
+public static native void getMemInfo(long[] outSizes)
+
+Retrieves /proc/meminfo. outSizes is filled with fields as defined by MEMINFO_* 
+offsets. 
+
+
+
+*android.os.Debug.getMemoryInfo(Debug.MemoryInfo)*
+
+public static native void getMemoryInfo(android.os.Debug.MemoryInfo memoryInfo)
+
+Retrieves information about this processes memory usages. This information is 
+broken down by how much is in use by dalivk, the native heap, and everything 
+else. 
+
+
+
+*android.os.Debug.getMemoryInfo(int,Debug.MemoryInfo)*
+
+public static native void getMemoryInfo(
+  int pid,
+  android.os.Debug.MemoryInfo memoryInfo)
+
+Note: currently only works when the requested pid has the same UID as the 
+caller. 
+
+
+
+*android.os.Debug.getMethodTracingMode()*
+
+public static int getMethodTracingMode()
+
+Determine whether method tracing is currently active and what type is active. 
+
+
+
+*android.os.Debug.getNativeHeapAllocatedSize()*
+
+public static native long getNativeHeapAllocatedSize()
+
+Returns the amount of allocated memory in the native heap. 
+
+
+
+    Returns: The allocated size in bytes. 
+
+*android.os.Debug.getNativeHeapFreeSize()*
+
+public static native long getNativeHeapFreeSize()
+
+Returns the amount of free memory in the native heap. 
+
+
+
+    Returns: The freed size in bytes. 
+
+*android.os.Debug.getNativeHeapSize()*
+
+public static native long getNativeHeapSize()
+
+Returns the size of the native heap. 
+
+
+
+    Returns: The size of the native heap in bytes. 
+
+*android.os.Debug.getPss()*
+
+public static native long getPss()
+
+Retrieves the PSS memory used by the process as given by the smaps. 
+
+
+
+*android.os.Debug.getPss(int,long[])*
+
+public static native long getPss(
+  int pid,
+  long[] outUss)
+
+Retrieves the PSS memory used by the process as given by the smaps. Optionally 
+supply a long array of 1 entry to also receive the uss of the process. @hide 
+
+
+
+*android.os.Debug.getThreadAllocCount()*
+
+public static int getThreadAllocCount()
+
+Returns the thread-local count of objects allocated by the runtime between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getThreadAllocSize()*
+
+public static int getThreadAllocSize()
+
+Returns the thread-local size of objects allocated by the runtime between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+    Returns: The allocated size in bytes. 
+
+*android.os.Debug.getThreadExternalAllocCount()*
+
+public static int getThreadExternalAllocCount()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getThreadExternalAllocSize()*
+
+public static int getThreadExternalAllocSize()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.getThreadGcInvocationCount()*
+
+public static int getThreadGcInvocationCount()
+
+Returns the number of thread-local non-concurrent GC invocations between a 
+start(|android.os.Debug|) and stop(|android.os.Debug|) . 
+
+
+
+*android.os.Debug.getVmFeatureList()*
+
+public static |java.lang.String|[] getVmFeatureList()
+
+Returns an array of strings that identify VM features. This is used by DDMS to 
+determine what sorts of operations the VM can perform. 
+
+
+
+*android.os.Debug.isDebuggerConnected()*
+
+public static boolean isDebuggerConnected()
+
+Determine if a debugger is currently attached. 
+
+
+
+*android.os.Debug.printLoadedClasses(int)*
+
+public static void printLoadedClasses(int flags)
+
+Dump a list of all currently loaded class to the log file. 
+
+
+    flags - See constants above. 
+
+*android.os.Debug.resetAllCounts()*
+
+public static void resetAllCounts()
+
+Clears all the global and thread-local memory allocation counters. 
+
+
+
+*android.os.Debug.resetGlobalAllocCount()*
+
+public static void resetGlobalAllocCount()
+
+Clears the global count of objects allocated. 
+
+
+
+*android.os.Debug.resetGlobalAllocSize()*
+
+public static void resetGlobalAllocSize()
+
+Clears the global size of objects allocated. 
+
+
+
+*android.os.Debug.resetGlobalClassInitCount()*
+
+public static void resetGlobalClassInitCount()
+
+Clears the count of classes initialized. 
+
+
+
+*android.os.Debug.resetGlobalClassInitTime()*
+
+public static void resetGlobalClassInitTime()
+
+Clears the count of time spent initializing classes. 
+
+
+
+*android.os.Debug.resetGlobalExternalAllocCount()*
+
+public static void resetGlobalExternalAllocCount()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetGlobalExternalAllocSize()*
+
+public static void resetGlobalExternalAllocSize()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetGlobalExternalFreedCount()*
+
+public static void resetGlobalExternalFreedCount()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetGlobalExternalFreedSize()*
+
+public static void resetGlobalExternalFreedSize()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetGlobalFreedCount()*
+
+public static void resetGlobalFreedCount()
+
+Clears the global count of objects freed. 
+
+
+
+*android.os.Debug.resetGlobalFreedSize()*
+
+public static void resetGlobalFreedSize()
+
+Clears the global size of objects freed. 
+
+
+
+*android.os.Debug.resetGlobalGcInvocationCount()*
+
+public static void resetGlobalGcInvocationCount()
+
+Clears the count of non-concurrent GC invocations. 
+
+
+
+*android.os.Debug.resetThreadAllocCount()*
+
+public static void resetThreadAllocCount()
+
+Clears the thread-local count of objects allocated. 
+
+
+
+*android.os.Debug.resetThreadAllocSize()*
+
+public static void resetThreadAllocSize()
+
+Clears the thread-local count of objects allocated. 
+
+
+
+*android.os.Debug.resetThreadExternalAllocCount()*
+
+public static void resetThreadExternalAllocCount()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetThreadExternalAllocSize()*
+
+public static void resetThreadExternalAllocSize()
+
+This method exists for compatibility and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.resetThreadGcInvocationCount()*
+
+public static void resetThreadGcInvocationCount()
+
+Clears the thread-local count of non-concurrent GC invocations. 
+
+
+
+*android.os.Debug.setAllocationLimit(int)*
+
+public static int setAllocationLimit(int limit)
+
+Establish an object allocation limit in the current thread. This feature was 
+never enabled in release builds. The allocation limits feature was removed in 
+Honeycomb. This method exists for compatibility and always returns -1 and has 
+no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.setFieldsOn(Class<?>)*
+
+public static void setFieldsOn(java.lang.Class<?> cl)
+
+Equivalent to setFieldsOn(cl, false). 
+
+
+
+*android.os.Debug.setFieldsOn(Class<?>,boolean)*
+
+public static void setFieldsOn(
+  java.lang.Class<?> cl,
+  boolean partial)
+
+Reflectively sets static fields of a class based on internal debugging 
+properties. This method is a no-op if false is false. 
+
+NOTE TO APPLICATION DEVELOPERS: false will always be false in release builds. 
+This API is typically only useful for platform developers. 
+
+Class setup: define a class whose only fields are non-final, static primitive 
+types (except for "char") or Strings. In a static block after the field 
+definitions/initializations, pass the class to this method, 
+Debug.setFieldsOn(). Example: 
+
+package com.example; 
+
+import android.os.Debug; 
+
+public class MyDebugVars { public static String s = "a string"; public static 
+String s2 = "second string"; public static String ns = null; public static 
+boolean b = false; public static int i = 5; 
+
+
+    cl - The class to (possibly) modify 
+    partial - If false, sets all static fields, otherwise, only set fields with the {@link 
+       android.os.Debug.DebugProperty} annotation 
+
+*android.os.Debug.setGlobalAllocationLimit(int)*
+
+public static int setGlobalAllocationLimit(int limit)
+
+Establish a global object allocation limit. This feature was never enabled in 
+release builds. The allocation limits feature was removed in Honeycomb. This 
+method exists for compatibility and always returns -1 and has no effect. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.os.Debug.startAllocCounting()*
+
+public static void startAllocCounting()
+
+Start counting the number and aggregate size of memory allocations. 
+
+The start(|android.os.Debug|) method resets the counts and enables counting. 
+The stop(|android.os.Debug|) method disables the counting so that the analysis 
+code doesn't cause additional allocations. The various get methods return the 
+specified value. And the various reset methods reset the specified count. 
+
+Counts are kept for the system as a whole (global) and for each thread. The 
+per-thread counts for threads other than the current thread are not cleared by 
+the "reset" or "start" calls. 
+
+    Deprecated: Accurate counting is a burden on the runtime and may be removed.
+
+
+*android.os.Debug.startMethodTracing()*
+
+public static void startMethodTracing()
+
+Start method tracing with default log name and buffer size. See <a 
+href="guide/developing/tools/traceview.html">Traceview: A Graphical Log Viewer 
+for information about reading these files. Call stopMethodTracing() to stop 
+tracing. 
+
+
+
+*android.os.Debug.startMethodTracing(String)*
+
+public static void startMethodTracing(java.lang.String traceName)
+
+Start method tracing, specifying the trace log file name. The trace file will 
+be put under "/sdcard" unless an absolute path is given. See <a 
+href="guide/developing/tools/traceview.html">Traceview: A Graphical Log Viewer 
+for information about reading trace files. 
+
+
+    traceName - Name for the trace log file to create. If no name argument is given, this value 
+       defaults to "/sdcard/dmtrace.trace". If the files already exist, they 
+       will be truncated. If the trace file given does not end in ".trace", it 
+       will be appended for you. 
+
+*android.os.Debug.startMethodTracing(String,FileDescriptor,int,int)*
+
+public static void startMethodTracing(
+  java.lang.String traceName,
+  java.io.FileDescriptor fd,
+  int bufferSize,
+  int flags)
+
+Like startMethodTracing(String, int, int), but taking an already-opened 
+FileDescriptor in which the trace is written. The file name is also supplied 
+simply for logging. Makes a dup of the file descriptor. 
+
+Not exposed in the SDK unless we are really comfortable with supporting this 
+and find it would be useful. 
+
+
+
+*android.os.Debug.startMethodTracing(String,int)*
+
+public static void startMethodTracing(
+  java.lang.String traceName,
+  int bufferSize)
+
+Start method tracing, specifying the trace log file name and the buffer size. 
+The trace files will be put under "/sdcard" unless an absolute path is given. 
+See <a href="guide/developing/tools/traceview.html">Traceview: A Graphical Log 
+Viewer for information about reading trace files. 
+
+
+    traceName - Name for the trace log file to create. If no name argument is given, this value 
+       defaults to "/sdcard/dmtrace.trace". If the files already exist, they 
+       will be truncated. If the trace file given does not end in ".trace", it 
+       will be appended for you. 
+    bufferSize - The maximum amount of trace data we gather. If not given, it defaults to 8MB. 
+
+*android.os.Debug.startMethodTracing(String,int,int)*
+
+public static void startMethodTracing(
+  java.lang.String traceName,
+  int bufferSize,
+  int flags)
+
+Start method tracing, specifying the trace log file name and the buffer size. 
+The trace files will be put under "/sdcard" unless an absolute path is given. 
+See <a href="guide/developing/tools/traceview.html">Traceview: A Graphical Log 
+Viewer for information about reading trace files. 
+
+When method tracing is enabled, the VM will run more slowly than usual, so the 
+timings from the trace files should only be considered in relative terms (e.g. 
+was run #1 faster than run #2). The times for native methods will not change, 
+so don't try to use this to compare the performance of interpreted and native 
+implementations of the same method. As an alternative, consider using "native" 
+tracing in the emulator via (|android.os.Debug|) . 
+
+
+    traceName - Name for the trace log file to create. If no name argument is given, this value 
+       defaults to "/sdcard/dmtrace.trace". If the files already exist, they 
+       will be truncated. If the trace file given does not end in ".trace", it 
+       will be appended for you. 
+    bufferSize - The maximum amount of trace data we gather. If not given, it defaults to 8MB. 
+
+*android.os.Debug.startMethodTracingDdms(int,int,boolean,int)*
+
+public static void startMethodTracingDdms(
+  int bufferSize,
+  int flags,
+  boolean samplingEnabled,
+  int intervalUs)
+
+Starts method tracing without a backing file. When stopMethodTracing is called, 
+the result is sent directly to DDMS. (If DDMS is not attached when tracing 
+ends, the profiling data will be discarded.) 
+
+
+
+*android.os.Debug.startNativeTracing()*
+
+public static void startNativeTracing()
+
+Enable qemu tracing. For this to work requires running everything inside the 
+qemu emulator; otherwise, this method will have no effect. The trace file is 
+specified on the command line when the emulator is started. For example, the 
+following command line emulator -trace foo will start running the emulator and 
+create a trace file named "foo". This method simply enables writing the trace 
+records to the trace file. 
+
+The main differences between this and (|android.os.Debug|) are that tracing in 
+the qemu emulator traces every cpu instruction of every process, including 
+kernel code, so we have more complete information, including all context 
+switches. We can also get more detailed information such as cache misses. The 
+sequence of calls is determined by post-processing the instruction trace. The 
+qemu tracing is also done without modifying the application or perturbing the 
+timing of calls because no instrumentation is added to the application being 
+traced. 
+
+One limitation of using this method compared to using (|android.os.Debug|) on 
+the real device is that the emulator does not model all of the real hardware 
+effects such as memory and bus contention. The emulator also has a simple cache 
+model and cannot capture all the complexities of a real cache. 
+
+
+
+*android.os.Debug.stopAllocCounting()*
+
+public static void stopAllocCounting()
+
+Stop counting the number and aggregate size of memory allocations. 
+
+
+
+*android.os.Debug.stopMethodTracing()*
+
+public static void stopMethodTracing()
+
+Stop method tracing. 
+
+
+
+*android.os.Debug.stopNativeTracing()*
+
+public static void stopNativeTracing()
+
+Stop qemu tracing. See (|android.os.Debug|) to start tracing. 
+
+Tracing can be started and stopped as many times as desired. When the qemu 
+emulator itself is stopped then the buffered trace records are flushed and 
+written to the trace file. In fact, it is not necessary to call this method at 
+all; simply killing qemu is sufficient. But starting and stopping a trace is 
+useful for examining a specific region of code. 
+
+
+
+*android.os.Debug.threadCpuTimeNanos()*
+
+public static long threadCpuTimeNanos()
+
+Get an indication of thread CPU usage. The value returned indicates the amount 
+of time that the current thread has spent executing code or waiting for certain 
+types of I/O. 
+
+The time is expressed in nanoseconds, and is only meaningful when compared to 
+the result from an earlier call. Note that nanosecond resolution does not imply 
+nanosecond accuracy. 
+
+On system which don't support this operation, the call returns -1. 
+
+
+
+*android.os.Debug.waitForDebugger()*
+
+public static void waitForDebugger()
+
+Wait until a debugger attaches. As soon as the debugger attaches, this returns, 
+so you will need to place a breakpoint after the waitForDebugger() call if you 
+want to start tracing immediately. 
+
+
+
+*android.os.Debug.waitingForDebugger()*
+
+public static boolean waitingForDebugger()
+
+Returns "true" if one or more threads is waiting for a debugger to attach. 
+
+
+
+

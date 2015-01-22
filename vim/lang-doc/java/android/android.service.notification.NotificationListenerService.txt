@@ -1,0 +1,159 @@
+*android.service.notification.NotificationListenerService* *NotificationListenerService* 
+
+public abstract class NotificationListenerService
+  extends    |android.app.Service|
+
+|android.service.notification.NotificationListenerService_Description|
+|android.service.notification.NotificationListenerService_Fields|
+|android.service.notification.NotificationListenerService_Constructors|
+|android.service.notification.NotificationListenerService_Methods|
+
+================================================================================
+
+*android.service.notification.NotificationListenerService_Fields*
+|java.lang.String_android.service.notification.NotificationListenerService.SERVICE_INTERFACE|
+
+*android.service.notification.NotificationListenerService_Constructors*
+|android.service.notification.NotificationListenerService()|
+
+*android.service.notification.NotificationListenerService_Methods*
+|android.service.notification.NotificationListenerService.cancelAllNotifications()|
+|android.service.notification.NotificationListenerService.cancelNotification(String,String,int)|
+|android.service.notification.NotificationListenerService.getActiveNotifications()|
+|android.service.notification.NotificationListenerService.onBind(Intent)|
+|android.service.notification.NotificationListenerService.onNotificationPosted(StatusBarNotification)|
+|android.service.notification.NotificationListenerService.onNotificationRemoved(StatusBarNotification)|
+
+*android.service.notification.NotificationListenerService_Description*
+
+A service that receives calls from the system when new notifications are posted 
+or removed. To extend this class, you must declare the service in your manifest 
+file with the (|android.Manifest.permission|) permission and include an intent 
+filter with the (|android.service.notification.NotificationListenerService|) 
+action. For example: 
+
+<service android:name=".NotificationListener" 
+android:label="string/service_name" 
+android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"> 
+<intent-filter> <action 
+android:name="android.service.notification.NotificationListenerService" /> 
+</intent-filter> </service> 
+
+
+
+*java.lang.String_android.service.notification.NotificationListenerService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) that must be declared as handled by the service. 
+
+
+
+*android.service.notification.NotificationListenerService()*
+
+public NotificationListenerService()
+
+
+
+
+*android.service.notification.NotificationListenerService.cancelAllNotifications()*
+
+public final void cancelAllNotifications()
+
+Inform the notification manager about dismissal of all notifications. 
+
+Use this if your listener has a user interface that allows the user to dismiss 
+all notifications, similar to the behavior of Android's status bar and 
+notification panel. It should be called after the user invokes the "dismiss 
+all" function of your UI; upon being informed, the notification manager will 
+actually remove all active notifications and you will get multiple 
+(|android.service.notification.NotificationListenerService|) callbacks. 
+(|android.service.notification.NotificationListenerService|) 
+
+
+
+*android.service.notification.NotificationListenerService.cancelNotification(String,String,int)*
+
+public final void cancelNotification(
+  java.lang.String pkg,
+  java.lang.String tag,
+  int id)
+
+Inform the notification manager about dismissal of a single notification. 
+
+Use this if your listener has a user interface that allows the user to dismiss 
+individual notifications, similar to the behavior of Android's status bar and 
+notification panel. It should be called after the user dismisses a single 
+notification using your UI; upon being informed, the notification manager will 
+actually remove the notification and you will get an 
+(|android.service.notification.NotificationListenerService|) callback. 
+
+Note: If your listener allows the user to fire a notification's 
+(|android.app.Notification|) by tapping/clicking/etc., you should call this 
+method at that time if the Notification in question has the 
+(|android.app.Notification|) flag set. 
+
+
+    pkg - Package of the notifying app. 
+    tag - Tag of the notification as specified by the notifying app in {@link 
+       android.app.NotificationManager#notify(String, int, 
+       android.app.Notification)}. 
+    id - ID of the notification as specified by the notifying app in {@link 
+       android.app.NotificationManager#notify(String, int, 
+       android.app.Notification)}. 
+
+*android.service.notification.NotificationListenerService.getActiveNotifications()*
+
+public |android.service.notification.StatusBarNotification|[] getActiveNotifications()
+
+Request the list of outstanding notifications (that is, those that are visible 
+to the current user). Useful when starting up and you don't know what's already 
+been posted. 
+
+
+
+    Returns: An array of active notifications. 
+
+*android.service.notification.NotificationListenerService.onBind(Intent)*
+
+public |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.service.notification.NotificationListenerService.onNotificationPosted(StatusBarNotification)*
+
+public abstract void onNotificationPosted(android.service.notification.StatusBarNotification sbn)
+
+Implement this method to learn about new notifications as they are posted by 
+apps. 
+
+
+    sbn - A data structure encapsulating the original {@link android.app.Notification} 
+       object as well as its identifying information (tag and id) and source 
+       (package name). 
+
+*android.service.notification.NotificationListenerService.onNotificationRemoved(StatusBarNotification)*
+
+public abstract void onNotificationRemoved(android.service.notification.StatusBarNotification sbn)
+
+Implement this method to learn when notifications are removed. 
+
+This might occur because the user has dismissed the notification using system 
+UI (or another notification listener) or because the app has withdrawn the 
+notification. 
+
+NOTE: The (|android.service.notification.StatusBarNotification|) object you 
+receive will be "light"; that is, the result from 
+(|android.service.notification.StatusBarNotification|) may be missing some 
+heavyweight fields such as (|android.app.Notification|) and 
+(|android.app.Notification|) . However, all other fields on 
+(|android.service.notification.StatusBarNotification|) , sufficient to match 
+this call with a prior call to 
+(|android.service.notification.NotificationListenerService|) , will be intact. 
+
+
+    sbn - A data structure encapsulating at least the original information (tag and id) 
+       and source (package name) used to post the {@link 
+       android.app.Notification} that was just removed. 
+
+

@@ -1,0 +1,81 @@
+*android.provider.CalendarContract.SyncColumns* *CalendarContract.SyncColumns* C
+
+protected static interface interface CalendarContract.SyncColumns
+
+  implements |android.provider.CalendarContract.CalendarSyncColumns|
+
+|android.provider.CalendarContract.SyncColumns_Description|
+|android.provider.CalendarContract.SyncColumns_Fields|
+|android.provider.CalendarContract.SyncColumns_Constructors|
+|android.provider.CalendarContract.SyncColumns_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.SyncColumns_Fields*
+|java.lang.String_android.provider.CalendarContract.SyncColumns._SYNC_ID|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.ACCOUNT_NAME|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.ACCOUNT_TYPE|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.CAN_PARTIALLY_UPDATE|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.DELETED|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.DIRTY|
+|java.lang.String_android.provider.CalendarContract.SyncColumns.MUTATORS|
+
+*android.provider.CalendarContract.SyncColumns_Description*
+
+Columns for Sync information used by Calendars and Events tables. These have 
+specific uses which are expected to be consistent by the app and sync adapter. 
+
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns._SYNC_ID*
+
+The unique ID for a row assigned by the sync source. NULL if the row has never 
+been synced. This is used as a reference id for exceptions along with 
+(|android.provider.BaseColumns|) . Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.ACCOUNT_NAME*
+
+The account that was used to sync the entry to the device. If the account_type 
+is not (|android.provider.CalendarContract.SyncColumns|) then the name and type 
+must match an account on the device or the calendar will be deleted. Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.ACCOUNT_TYPE*
+
+The type of the account that was used to sync the entry to the device. A type 
+of (|android.provider.CalendarContract.SyncColumns|) will keep this event form 
+being deleted if there are no matching accounts on the device. Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.CAN_PARTIALLY_UPDATE*
+
+If set to 1 this causes events on this calendar to be duplicated with 
+(|android.provider.CalendarContract.Events|) set to 1 whenever the event 
+transitions from non-dirty to dirty. The duplicated event will not be expanded 
+in the instances table and will only show up in sync adapter queries of the 
+events table. It will also be deleted when the originating event has its dirty 
+flag cleared by the sync adapter. Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.DELETED*
+
+Whether the row has been deleted but not synced to the server. A deleted row 
+should be ignored. 
+
+Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.DIRTY*
+
+Used to indicate that local, unsynced, changes are present. Type: INTEGER 
+(long) 
+
+
+*java.lang.String_android.provider.CalendarContract.SyncColumns.MUTATORS*
+
+Used in conjunction with (|android.provider.CalendarContract.SyncColumns|) to 
+indicate what packages wrote local changes. Type: TEXT 
+
+
+

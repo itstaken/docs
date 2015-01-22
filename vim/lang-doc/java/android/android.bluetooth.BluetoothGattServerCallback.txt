@@ -1,0 +1,173 @@
+*android.bluetooth.BluetoothGattServerCallback* *BluetoothGattServerCallback* Th
+
+public abstract class BluetoothGattServerCallback
+  extends    |java.lang.Object|
+
+|android.bluetooth.BluetoothGattServerCallback_Description|
+|android.bluetooth.BluetoothGattServerCallback_Fields|
+|android.bluetooth.BluetoothGattServerCallback_Constructors|
+|android.bluetooth.BluetoothGattServerCallback_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothGattServerCallback_Constructors*
+|android.bluetooth.BluetoothGattServerCallback()|
+
+*android.bluetooth.BluetoothGattServerCallback_Methods*
+|android.bluetooth.BluetoothGattServerCallback.onCharacteristicReadRequest(BluetoothDevice,int,int,BluetoothGattCharacteristic)|
+|android.bluetooth.BluetoothGattServerCallback.onCharacteristicWriteRequest(BluetoothDevice,int,BluetoothGattCharacteristic,boolean,boolean,int,byte[])|
+|android.bluetooth.BluetoothGattServerCallback.onConnectionStateChange(BluetoothDevice,int,int)|
+|android.bluetooth.BluetoothGattServerCallback.onDescriptorReadRequest(BluetoothDevice,int,int,BluetoothGattDescriptor)|
+|android.bluetooth.BluetoothGattServerCallback.onDescriptorWriteRequest(BluetoothDevice,int,BluetoothGattDescriptor,boolean,boolean,int,byte[])|
+|android.bluetooth.BluetoothGattServerCallback.onExecuteWrite(BluetoothDevice,int,boolean)|
+|android.bluetooth.BluetoothGattServerCallback.onServiceAdded(int,BluetoothGattService)|
+
+*android.bluetooth.BluetoothGattServerCallback_Description*
+
+This abstract class is used to implement 
+(|android.bluetooth.BluetoothGattServer|) callbacks. 
+
+
+
+*android.bluetooth.BluetoothGattServerCallback()*
+
+public BluetoothGattServerCallback()
+
+
+
+
+*android.bluetooth.BluetoothGattServerCallback.onCharacteristicReadRequest(BluetoothDevice,int,int,BluetoothGattCharacteristic)*
+
+public void onCharacteristicReadRequest(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  int offset,
+  android.bluetooth.BluetoothGattCharacteristic characteristic)
+
+A remote client has requested to read a local characteristic. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to complete 
+the request. 
+
+
+    device - The remote device that has requested the read operation 
+    requestId - The Id of the request 
+    offset - Offset into the value of the characteristic 
+    characteristic - Characteristic to be read 
+
+*android.bluetooth.BluetoothGattServerCallback.onCharacteristicWriteRequest(BluetoothDevice,int,BluetoothGattCharacteristic,boolean,boolean,int,byte[])*
+
+public void onCharacteristicWriteRequest(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  android.bluetooth.BluetoothGattCharacteristic characteristic,
+  boolean preparedWrite,
+  boolean responseNeeded,
+  int offset,
+  byte[] value)
+
+A remote client has requested to write to a local characteristic. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to complete 
+the request. 
+
+
+    device - The remote device that has requested the write operation 
+    requestId - The Id of the request 
+    characteristic - Characteristic to be written to. 
+    preparedWrite - true, if this write operation should be queued for later execution. 
+    responseNeeded - true, if the remote device requires a response 
+    offset - The offset given for the value 
+    value - The value the client wants to assign to the characteristic 
+
+*android.bluetooth.BluetoothGattServerCallback.onConnectionStateChange(BluetoothDevice,int,int)*
+
+public void onConnectionStateChange(
+  android.bluetooth.BluetoothDevice device,
+  int status,
+  int newState)
+
+Callback indicating when a remote device has been connected or disconnected. 
+
+
+    device - Remote device that has been connected or disconnected. 
+    status - Status of the connect or disconnect operation. 
+    newState - Returns the new connection state. Can be one of {@link 
+       BluetoothProfile#STATE_DISCONNECTED} or {@link 
+       BluetoothProfile#STATE_CONNECTED} 
+
+*android.bluetooth.BluetoothGattServerCallback.onDescriptorReadRequest(BluetoothDevice,int,int,BluetoothGattDescriptor)*
+
+public void onDescriptorReadRequest(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  int offset,
+  android.bluetooth.BluetoothGattDescriptor descriptor)
+
+A remote client has requested to read a local descriptor. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to complete 
+the request. 
+
+
+    device - The remote device that has requested the read operation 
+    requestId - The Id of the request 
+    offset - Offset into the value of the characteristic 
+    descriptor - Descriptor to be read 
+
+*android.bluetooth.BluetoothGattServerCallback.onDescriptorWriteRequest(BluetoothDevice,int,BluetoothGattDescriptor,boolean,boolean,int,byte[])*
+
+public void onDescriptorWriteRequest(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  android.bluetooth.BluetoothGattDescriptor descriptor,
+  boolean preparedWrite,
+  boolean responseNeeded,
+  int offset,
+  byte[] value)
+
+A remote client has requested to write to a local descriptor. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to complete 
+the request. 
+
+
+    device - The remote device that has requested the write operation 
+    requestId - The Id of the request 
+    descriptor - Descriptor to be written to. 
+    preparedWrite - true, if this write operation should be queued for later execution. 
+    responseNeeded - true, if the remote device requires a response 
+    offset - The offset given for the value 
+    value - The value the client wants to assign to the descriptor 
+
+*android.bluetooth.BluetoothGattServerCallback.onExecuteWrite(BluetoothDevice,int,boolean)*
+
+public void onExecuteWrite(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  boolean execute)
+
+Execute all pending write operations for this device. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to complete 
+the request. 
+
+
+    device - The remote device that has requested the write operations 
+    requestId - The Id of the request 
+    execute - Whether the pending writes should be executed (true) or cancelled (false) 
+
+*android.bluetooth.BluetoothGattServerCallback.onServiceAdded(int,BluetoothGattService)*
+
+public void onServiceAdded(
+  int status,
+  android.bluetooth.BluetoothGattService service)
+
+Indicates whether a local service has been added successfully. 
+
+
+    status - Returns {@link BluetoothGatt#GATT_SUCCESS} if the service was added 
+       successfully. 
+    service - The service that has been added 
+
+

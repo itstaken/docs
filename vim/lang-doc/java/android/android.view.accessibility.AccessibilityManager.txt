@@ -1,0 +1,248 @@
+*android.view.accessibility.AccessibilityManager* *AccessibilityManager* System 
+
+public final class AccessibilityManager
+  extends    |java.lang.Object|
+
+|android.view.accessibility.AccessibilityManager_Description|
+|android.view.accessibility.AccessibilityManager_Fields|
+|android.view.accessibility.AccessibilityManager_Constructors|
+|android.view.accessibility.AccessibilityManager_Methods|
+
+================================================================================
+
+*android.view.accessibility.AccessibilityManager_Fields*
+|int_android.view.accessibility.AccessibilityManager.STATE_FLAG_ACCESSIBILITY_ENABLED|
+|int_android.view.accessibility.AccessibilityManager.STATE_FLAG_TOUCH_EXPLORATION_ENABLED|
+
+*android.view.accessibility.AccessibilityManager_Constructors*
+|android.view.accessibility.AccessibilityManager(Context,IAccessibilityManager,int)|
+
+*android.view.accessibility.AccessibilityManager_Methods*
+|android.view.accessibility.AccessibilityManager.addAccessibilityInteractionConnection(IWindow,IAccessibilityInteractionConnection)|
+|android.view.accessibility.AccessibilityManager.addAccessibilityStateChangeListener(AccessibilityManager.AccessibilityStateChangeListener)|
+|android.view.accessibility.AccessibilityManager.addTouchExplorationStateChangeListener(AccessibilityManager.TouchExplorationStateChangeListener)|
+|android.view.accessibility.AccessibilityManager.getAccessibilityServiceList()|
+|android.view.accessibility.AccessibilityManager.getClient()|Returns the client
+|android.view.accessibility.AccessibilityManager.getEnabledAccessibilityServiceList(int)|
+|android.view.accessibility.AccessibilityManager.getInstalledAccessibilityServiceList()|
+|android.view.accessibility.AccessibilityManager.getInstance(Context)|Get an Ac
+|android.view.accessibility.AccessibilityManager.interrupt()|Requests feedback 
+|android.view.accessibility.AccessibilityManager.isEnabled()|Returns if the acc
+|android.view.accessibility.AccessibilityManager.isTouchExplorationEnabled()|Re
+|android.view.accessibility.AccessibilityManager.removeAccessibilityInteractionConnection(IWindow)|
+|android.view.accessibility.AccessibilityManager.removeAccessibilityStateChangeListener(AccessibilityManager.AccessibilityStateChangeListener)|
+|android.view.accessibility.AccessibilityManager.removeTouchExplorationStateChangeListener(AccessibilityManager.TouchExplorationStateChangeListener)|
+|android.view.accessibility.AccessibilityManager.sendAccessibilityEvent(AccessibilityEvent)|
+
+*android.view.accessibility.AccessibilityManager_Description*
+
+System level service that serves as an event dispatch for 
+(|android.view.accessibility.AccessibilityEvent|) s, and provides facilities 
+for querying the accessibility state of the system. Accessibility events are 
+generated when something notable happens in the user interface, for example an 
+(|android.app.Activity|) starts, the focus or selection of a 
+(|android.view.View|) changes etc. Parties interested in handling accessibility 
+events implement and register an accessibility service which extends 
+(|android.accessibilityservice.AccessibilityService|) . 
+
+To obtain a handle to the accessibility manager do the following: 
+
+
+
+AccessibilityManager accessibilityManager = (AccessibilityManager) 
+context.getSystemService(Context.ACCESSIBILITY_SERVICE); 
+
+
+
+
+
+*int_android.view.accessibility.AccessibilityManager.STATE_FLAG_ACCESSIBILITY_ENABLED*
+
+
+
+
+*int_android.view.accessibility.AccessibilityManager.STATE_FLAG_TOUCH_EXPLORATION_ENABLED*
+
+
+
+
+
+*android.view.accessibility.AccessibilityManager(Context,IAccessibilityManager,int)*
+
+public AccessibilityManager(
+  android.content.Context context,
+  IAccessibilityManager service,
+  int userId)
+
+Create an instance. 
+
+    context - A {@link Context}. 
+    service - An interface to the backing service. 
+    userId - User id under which to run. 
+
+*android.view.accessibility.AccessibilityManager.addAccessibilityInteractionConnection(IWindow,IAccessibilityInteractionConnection)*
+
+public int addAccessibilityInteractionConnection(
+  IWindow windowToken,
+  IAccessibilityInteractionConnection connection)
+
+Adds an accessibility interaction connection interface for a given window. 
+
+
+    windowToken - The window token to which a connection is added. 
+    connection - The connection. 
+
+*android.view.accessibility.AccessibilityManager.addAccessibilityStateChangeListener(AccessibilityManager.AccessibilityStateChangeListener)*
+
+public boolean addAccessibilityStateChangeListener(android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener listener)
+
+Registers an 
+(|android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener|)
+for changes in the global accessibility state of the system. 
+
+
+    listener - The listener. 
+
+    Returns: True if successfully registered. 
+
+*android.view.accessibility.AccessibilityManager.addTouchExplorationStateChangeListener(AccessibilityManager.TouchExplorationStateChangeListener)*
+
+public boolean addTouchExplorationStateChangeListener(android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener listener)
+
+Registers a 
+(|android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener|)
+for changes in the global touch exploration state of the system. 
+
+
+    listener - The listener. 
+
+    Returns: True if successfully registered. 
+
+*android.view.accessibility.AccessibilityManager.getAccessibilityServiceList()*
+
+public |java.util.List|<ServiceInfo> getAccessibilityServiceList()
+
+Returns the (|android.content.pm.ServiceInfo|) s of the installed accessibility 
+services. 
+
+    Deprecated: Use {@link #getInstalledAccessibilityServiceList()}
+
+
+    Returns: An unmodifiable list with {@link ServiceInfo}s. 
+
+*android.view.accessibility.AccessibilityManager.getClient()*
+
+public IAccessibilityManagerClient getClient()
+
+Returns the client interface this instance registers in the centralized 
+accessibility manager service. 
+
+
+
+    Returns: 
+
+*android.view.accessibility.AccessibilityManager.getEnabledAccessibilityServiceList(int)*
+
+public |java.util.List|<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int feedbackTypeFlags)
+
+Returns the (|android.accessibilityservice.AccessibilityServiceInfo|) s of the 
+enabled accessibility services for a given feedback type. 
+
+
+    feedbackTypeFlags - The feedback type flags. 
+
+    Returns: An unmodifiable list with {@link AccessibilityServiceInfo}s. 
+
+*android.view.accessibility.AccessibilityManager.getInstalledAccessibilityServiceList()*
+
+public |java.util.List|<AccessibilityServiceInfo> getInstalledAccessibilityServiceList()
+
+Returns the (|android.accessibilityservice.AccessibilityServiceInfo|) s of the 
+installed accessibility services. 
+
+
+
+    Returns: An unmodifiable list with {@link AccessibilityServiceInfo}s. 
+
+*android.view.accessibility.AccessibilityManager.getInstance(Context)*
+
+public static |android.view.accessibility.AccessibilityManager| getInstance(android.content.Context context)
+
+Get an AccessibilityManager instance (create one if necessary). 
+
+
+    context - Context in which this manager operates. 
+
+*android.view.accessibility.AccessibilityManager.interrupt()*
+
+public void interrupt()
+
+Requests feedback interruption from all accessibility services. 
+
+
+
+*android.view.accessibility.AccessibilityManager.isEnabled()*
+
+public boolean isEnabled()
+
+Returns if the accessibility in the system is enabled. 
+
+
+
+    Returns: True if accessibility is enabled, false otherwise. 
+
+*android.view.accessibility.AccessibilityManager.isTouchExplorationEnabled()*
+
+public boolean isTouchExplorationEnabled()
+
+Returns if the touch exploration in the system is enabled. 
+
+
+
+    Returns: True if touch exploration is enabled, false otherwise. 
+
+*android.view.accessibility.AccessibilityManager.removeAccessibilityInteractionConnection(IWindow)*
+
+public void removeAccessibilityInteractionConnection(IWindow windowToken)
+
+Removed an accessibility interaction connection interface for a given window. 
+
+
+    windowToken - The window token to which a connection is removed. 
+
+*android.view.accessibility.AccessibilityManager.removeAccessibilityStateChangeListener(AccessibilityManager.AccessibilityStateChangeListener)*
+
+public boolean removeAccessibilityStateChangeListener(android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener listener)
+
+Unregisters an 
+(|android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener|)
+. 
+
+
+    listener - The listener. 
+
+    Returns: True if successfully unregistered. 
+
+*android.view.accessibility.AccessibilityManager.removeTouchExplorationStateChangeListener(AccessibilityManager.TouchExplorationStateChangeListener)*
+
+public boolean removeTouchExplorationStateChangeListener(android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener listener)
+
+Unregisters a 
+(|android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener|)
+. 
+
+
+    listener - The listener. 
+
+    Returns: True if successfully unregistered. 
+
+*android.view.accessibility.AccessibilityManager.sendAccessibilityEvent(AccessibilityEvent)*
+
+public void sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+Sends an (|android.view.accessibility.AccessibilityEvent|) . 
+
+
+    event - The event to send. 
+
+

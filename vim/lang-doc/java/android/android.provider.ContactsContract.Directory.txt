@@ -1,0 +1,350 @@
+*android.provider.ContactsContract.Directory* *ContactsContract.Directory* A Dir
+
+public static final class ContactsContract.Directory
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+
+|android.provider.ContactsContract.Directory_Description|
+|android.provider.ContactsContract.Directory_Fields|
+|android.provider.ContactsContract.Directory_Constructors|
+|android.provider.ContactsContract.Directory_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Directory_Fields*
+|java.lang.String_android.provider.ContactsContract.Directory.ACCOUNT_NAME|
+|java.lang.String_android.provider.ContactsContract.Directory.ACCOUNT_TYPE|
+|java.lang.String_android.provider.ContactsContract.Directory.CONTENT_ITEM_TYPE|
+|java.lang.String_android.provider.ContactsContract.Directory.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.Directory.CONTENT_URI|
+|long_android.provider.ContactsContract.Directory.DEFAULT|
+|java.lang.String_android.provider.ContactsContract.Directory.DIRECTORY_AUTHORITY|
+|java.lang.String_android.provider.ContactsContract.Directory.DISPLAY_NAME|
+|java.lang.String_android.provider.ContactsContract.Directory.EXPORT_SUPPORT|
+|int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_ANY_ACCOUNT|
+|int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_NONE|
+|int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_SAME_ACCOUNT_ONLY|
+|long_android.provider.ContactsContract.Directory.LOCAL_INVISIBLE|
+|java.lang.String_android.provider.ContactsContract.Directory.PACKAGE_NAME|
+|java.lang.String_android.provider.ContactsContract.Directory.PHOTO_SUPPORT|
+|int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_FULL|
+|int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_FULL_SIZE_ONLY|
+|int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_NONE|
+|int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_THUMBNAIL_ONLY|
+|java.lang.String_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT|
+|int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_DATA_ITEMS_ONLY|
+|int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_FULL|
+|int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_NONE|
+|java.lang.String_android.provider.ContactsContract.Directory.TYPE_RESOURCE_ID|
+
+*android.provider.ContactsContract.Directory_Methods*
+|android.provider.ContactsContract.Directory.notifyDirectoryChange(ContentResolver)|
+
+*android.provider.ContactsContract.Directory_Description*
+
+A Directory represents a contacts corpus, e.g. Local contacts, Google Apps 
+Global Address List or Corporate Global Address List. 
+
+A Directory is implemented as a content provider with its unique authority and 
+the same API as the main Contacts Provider. However, there is no expectation 
+that every directory provider will implement this Contract in its entirety. If 
+a directory provider does not have an implementation for a specific request, it 
+should throw an UnsupportedOperationException. 
+
+The most important use case for Directories is search. A Directory provider is 
+expected to support at least 
+Contacts.CONTENT_FILTER_URI(|android.provider.ContactsContract.Contacts|) . If 
+a Directory provider wants to participate in email and phone lookup 
+functionalities, it should also implement 
+CommonDataKinds.Email.CONTENT_FILTER_URI(|android.provider.ContactsContract.CommonDataKinds.Email|)
+and 
+CommonDataKinds.Phone.CONTENT_FILTER_URI(|android.provider.ContactsContract.CommonDataKinds.Phone|)
+. 
+
+A directory provider should return NULL for every projection field it does not 
+recognize, rather than throwing an exception. This way it will not be broken if 
+ContactsContract is extended with new fields in the future. 
+
+The client interacts with a directory via Contacts Provider by supplying an 
+optionaldirectory=query parameter. 
+
+When the Contacts Provider receives the request, it transforms the URI and 
+forwards the request to the corresponding directory content provider. The URI 
+is transformed in the following fashion: 
+
+The URI authority is replaced with the corresponding 
+(|android.provider.ContactsContract.Directory|) . 
+TheaccountName=andaccountType=parameters are added or replaced using the 
+corresponding (|android.provider.ContactsContract.Directory|) and 
+(|android.provider.ContactsContract.Directory|) values. 
+
+
+
+Clients should send directory requests to Contacts Provider and let it forward 
+them to the respective providers rather than constructing directory provider 
+URIs by themselves. This level of indirection allows Contacts Provider to 
+implement additional system-level features and optimizations. Access to 
+Contacts Provider is protected by the READ_CONTACTS permission, but access to 
+the directory provider is protected by BIND_DIRECTORY_SEARCH. This permission 
+was introduced at the API level 17, for previous platform versions the provider 
+should perform the following check to make sure the call is coming from the 
+ContactsProvider: 
+
+private boolean isCallerAllowed() { PackageManager pm = 
+getContext().getPackageManager(); for (String packageName: 
+pm.getPackagesForUid(Binder.getCallingUid())) { if 
+(packageName.equals("com.android.providers.contacts")) { return true; } } 
+return false; } 
+
+
+
+The Directory table is read-only and is maintained by the Contacts Provider 
+automatically. 
+
+It always has at least these two rows: 
+
+The local directory. It has 
+Directory._ID(|android.provider.ContactsContract.Directory|) = 
+Directory.DEFAULT(|android.provider.ContactsContract.Directory|) . This 
+directory can be used to access locally stored contacts. The same can be 
+achieved by omitting thedirectory=parameter altogether. 
+
+The local invisible contacts. The corresponding directory ID is 
+Directory.LOCAL_INVISIBLE(|android.provider.ContactsContract.Directory|) . 
+
+
+
+Custom Directories are discovered by the Contacts Provider following this 
+procedure: 
+
+It finds all installed content providers with meta data identifying them as 
+directory providers in AndroidManifest.xml: 
+
+<meta-data android:name="android.content.ContactDirectory" android:value="true" 
+/> 
+
+This tag should be placed inside the corresponding content provider 
+declaration. 
+
+
+
+Then Contacts Provider sends a 
+Directory.CONTENT_URI(|android.provider.ContactsContract.Directory|) query to 
+each of the directory authorities. A directory provider must implement this 
+query and return a list of directories. Each directory returned by the provider 
+must have a unique combination for the 
+(|android.provider.ContactsContract.Directory|) and 
+(|android.provider.ContactsContract.Directory|) columns (nulls are allowed). 
+Since directory IDs are assigned automatically, the _ID field will not be part 
+of the query projection. 
+
+Contacts Provider compiles directory lists received from all directory 
+providers into one, assigns each individual directory a globally unique ID and 
+stores all directory records in the Directory table. 
+
+
+
+Contacts Provider automatically interrogates newly installed or replaced 
+packages. Thus simply installing a package containing a directory provider is 
+sufficient to have that provider registered. A package supplying a directory 
+provider does not have to contain launchable activities. 
+
+Every row in the Directory table is automatically associated with the 
+corresponding package (apk). If the package is later uninstalled, all 
+corresponding directory rows are automatically removed from the Contacts 
+Provider. 
+
+When the list of directories handled by a directory provider changes (for 
+instance when the user adds a new Directory account), the directory provider 
+should call (|android.provider.ContactsContract.Directory|) to notify the 
+Contacts Provider of the change. In response, the Contacts Provider will 
+requery the directory provider to obtain the new list of directories. 
+
+A directory row can be optionally associated with an existing account (see 
+(|android.accounts.AccountManager|) ). If the account is later removed, the 
+corresponding directory rows are automatically removed from the Contacts 
+Provider. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.ACCOUNT_NAME*
+
+The account with which this directory is associated. If the account is later 
+removed, the directories it owns are automatically removed from this table. 
+
+TYPE: text 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.ACCOUNT_TYPE*
+
+The account type which this directory is associated. 
+
+TYPE: text 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.CONTENT_ITEM_TYPE*
+
+The MIME type of a (|android.provider.ContactsContract.Directory|) item. 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.CONTENT_TYPE*
+
+The MIME-type of (|android.provider.ContactsContract.Directory|) providing a 
+directory of contact directories. 
+
+
+*android.net.Uri_android.provider.ContactsContract.Directory.CONTENT_URI*
+
+The content:// style URI for this table. Requests to this URI can be performed 
+on the UI thread because they are always unblocking. 
+
+
+*long_android.provider.ContactsContract.Directory.DEFAULT*
+
+_ID of the default directory, which represents locally stored contacts. 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.DIRECTORY_AUTHORITY*
+
+The authority of the Directory Provider. Contacts Provider will use this 
+authority to forward requests to the directory provider. A directory provider 
+can leave this column empty - Contacts Provider will fill it in. 
+
+Clients of this API should not send requests directly to this authority. All 
+directory requests must be routed through Contacts Provider. 
+
+TYPE: text 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.DISPLAY_NAME*
+
+An optional name that can be used in the UI to represent this directory, e.g. 
+"Acme Corp" TYPE: text 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.EXPORT_SUPPORT*
+
+One of (|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) . This is the expectation the 
+directory has for data exported from it. Clients must obey this setting. 
+
+
+*int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_ANY_ACCOUNT*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory allow its data copied to any contacts account. 
+
+
+*int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_NONE*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory does not allow any data to be copied out of it. 
+
+
+*int_android.provider.ContactsContract.Directory.EXPORT_SUPPORT_SAME_ACCOUNT_ONLY*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory allow its data copied only to the account specified by 
+(|android.provider.ContactsContract.Directory|) / 
+(|android.provider.ContactsContract.Directory|) . 
+
+
+*long_android.provider.ContactsContract.Directory.LOCAL_INVISIBLE*
+
+_ID of the directory that represents locally stored invisible contacts. 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.PACKAGE_NAME*
+
+The name of the package that owns this directory. Contacts Provider fill it in 
+with the name of the package containing the directory provider. If the package 
+is later uninstalled, the directories it owns are automatically removed from 
+this table. 
+
+TYPE: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.PHOTO_SUPPORT*
+
+One of (|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) . This is a feature flag 
+indicating the extent to which the directory supports contact photos. 
+
+
+*int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_FULL*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory can produce thumbnails as well as full-size contact photos. 
+
+
+*int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_FULL_SIZE_ONLY*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory has full-size contact photos, but cannot provide scaled 
+thumbnails. 
+
+
+*int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_NONE*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory does not provide any photos. 
+
+
+*int_android.provider.ContactsContract.Directory.PHOTO_SUPPORT_THUMBNAIL_ONLY*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory can only produce small size thumbnails of contact photos. 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT*
+
+One of (|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) , 
+(|android.provider.ContactsContract.Directory|) . This is the expectation the 
+directory has for shortcuts created for its elements. Clients must obey this 
+setting. 
+
+
+*int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_DATA_ITEMS_ONLY*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory allow creation of shortcuts for data items like email, phone or 
+postal address, but not the entire contact. 
+
+
+*int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_FULL*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory allow creation of shortcuts for contact as well as their 
+constituent elements. 
+
+
+*int_android.provider.ContactsContract.Directory.SHORTCUT_SUPPORT_NONE*
+
+An (|android.provider.ContactsContract.Directory|) setting that indicates that 
+the directory does not allow any shortcuts created for its contacts. 
+
+
+*java.lang.String_android.provider.ContactsContract.Directory.TYPE_RESOURCE_ID*
+
+The type of directory captured as a resource ID in the context of the package 
+(|android.provider.ContactsContract.Directory|) , e.g. "Corporate Directory" 
+
+TYPE: INTEGER 
+
+
+
+*android.provider.ContactsContract.Directory.notifyDirectoryChange(ContentResolver)*
+
+public static void notifyDirectoryChange(android.content.ContentResolver resolver)
+
+Notifies the system of a change in the list of directories handled by a 
+particular directory provider. The Contacts provider will turn around and send 
+a query to the directory provider for the full list of directories, which will 
+replace the previous list. 
+
+
+
+

@@ -1,0 +1,180 @@
+*android.net.VpnService* *VpnService* VpnService is a base class for application
+
+public class VpnService
+  extends    |android.app.Service|
+
+|android.net.VpnService_Description|
+|android.net.VpnService_Fields|
+|android.net.VpnService_Constructors|
+|android.net.VpnService_Methods|
+
+================================================================================
+
+*android.net.VpnService_Fields*
+|java.lang.String_android.net.VpnService.SERVICE_INTERFACE|
+
+*android.net.VpnService_Constructors*
+|android.net.VpnService()|
+
+*android.net.VpnService_Methods*
+|android.net.VpnService.onBind(Intent)|Return the communication interface to th
+|android.net.VpnService.onRevoke()|Invoked when the application is revoked.
+|android.net.VpnService.prepare(Context)|Prepare to establish a VPN connection.
+|android.net.VpnService.protect(DatagramSocket)|Convenience method to protect a
+|android.net.VpnService.protect(int)|Protect a socket from VPN connections.
+|android.net.VpnService.protect(Socket)|Convenience method to protect aSocketfr
+
+*android.net.VpnService_Description*
+
+VpnService is a base class for applications to extend and build their own VPN 
+solutions. In general, it creates a virtual network interface, configures 
+addresses and routing rules, and returns a file descriptor to the application. 
+Each read from the descriptor retrieves an outgoing packet which was routed to 
+the interface. Each write to the descriptor injects an incoming packet just 
+like it was received from the interface. The interface is running on Internet 
+Protocol (IP), so packets are always started with IP headers. The application 
+then completes a VPN connection by processing and exchanging packets with the 
+remote server over a tunnel. 
+
+Letting applications intercept packets raises huge security concerns. A VPN 
+application can easily break the network. Besides, two of them may conflict 
+with each other. The system takes several actions to address these issues. Here 
+are some key points: 
+
+User action is required to create a VPN connection. There can be only one VPN 
+connection running at the same time. The existing interface is deactivated when 
+a new one is created. A system-managed notification is shown during the 
+lifetime of a VPN connection. A system-managed dialog gives the information of 
+the current VPN connection. It also provides a button to disconnect. The 
+network is restored automatically when the file descriptor is closed. It also 
+covers the cases when a VPN application is crashed or killed by the system. 
+
+There are two primary methods in this class: (|android.net.VpnService|) and 
+(|android.net.VpnService.Builder|) . The former deals with user action and 
+stops the VPN connection created by another application. The latter creates a 
+VPN interface using the parameters supplied to the 
+(|android.net.VpnService.Builder|) . An application must call 
+(|android.net.VpnService|) to grant the right to use other methods in this 
+class, and the right can be revoked at any time. Here are the general steps to 
+create a VPN connection: 
+
+When the user press the button to connect, call (|android.net.VpnService|) and 
+launch the returned intent. When the application becomes prepared, start the 
+service. Create a tunnel to the remote server and negotiate the network 
+parameters for the VPN connection. Supply those parameters to a 
+(|android.net.VpnService.Builder|) and create a VPN interface by calling 
+(|android.net.VpnService.Builder|) . Process and exchange packets between the 
+tunnel and the returned file descriptor. When (|android.net.VpnService|) is 
+invoked, close the file descriptor and shut down the tunnel gracefully. 
+
+Services extended this class need to be declared with appropriate permission 
+and intent filter. Their access must be secured by 
+(|android.Manifest.permission|) permission, and their intent filter must match 
+(|android.net.VpnService|) action. Here is an example of declaring a VPN 
+service inAndroidManifest.xml: 
+
+<service android:name=".ExampleVpnService" 
+android:permission="android.permission.BIND_VPN_SERVICE"> <intent-filter> 
+<action android:name="android.net.VpnService"/> </intent-filter> </service> 
+
+
+
+*java.lang.String_android.net.VpnService.SERVICE_INTERFACE*
+
+The action must be matched by the intent filter of this service. It also needs 
+to require (|android.Manifest.permission|) permission so that other 
+applications cannot abuse it. 
+
+
+
+*android.net.VpnService()*
+
+public VpnService()
+
+
+
+
+*android.net.VpnService.onBind(Intent)*
+
+public |android.os.IBinder| onBind(android.content.Intent intent)
+
+Return the communication interface to the service. This method returnsnullon 
+(|android.content.Intent|) s other than (|android.net.VpnService|) action. 
+Applications overriding this method must identify the intent and return the 
+corresponding interface accordingly. 
+
+
+
+*android.net.VpnService.onRevoke()*
+
+public void onRevoke()
+
+Invoked when the application is revoked. At this moment, the VPN interface is 
+already deactivated by the system. The application should close the file 
+descriptor and shut down gracefully. The default implementation of this method 
+is calling (|android.app.Service|) . 
+
+Calls to this method may not happen on the main thread of the process. 
+
+
+
+*android.net.VpnService.prepare(Context)*
+
+public static |android.content.Intent| prepare(android.content.Context context)
+
+Prepare to establish a VPN connection. This method returnsnullif the VPN 
+application is already prepared. Otherwise, it returns an 
+(|android.content.Intent|) to a system activity. The application should launch 
+the activity using (|android.app.Activity|) to get itself prepared. The 
+activity may pop up a dialog to require user action, and the result will come 
+back via its (|android.app.Activity|) . If the result is 
+(|android.app.Activity|) , the application becomes prepared and is granted to 
+use other methods in this class. 
+
+Only one application can be granted at the same time. The right is revoked when 
+another application is granted. The application losing the right will be 
+notified via its (|android.net.VpnService|) . Unless it becomes prepared again, 
+subsequent calls to other methods in this class will fail. 
+
+
+
+*android.net.VpnService.protect(DatagramSocket)*
+
+public boolean protect(java.net.DatagramSocket socket)
+
+Convenience method to protect a (|java.net.DatagramSocket|) from VPN 
+connections. 
+
+
+
+    Returns: {@code true} on success. 
+
+*android.net.VpnService.protect(int)*
+
+public boolean protect(int socket)
+
+Protect a socket from VPN connections. The socket will be bound to the current 
+default network interface, so its traffic will not be forwarded through VPN. 
+This method is useful if some connections need to be kept outside of VPN. For 
+example, a VPN tunnel should protect itself if its destination is covered by 
+VPN routes. Otherwise its outgoing packets will be sent back to the VPN 
+interface and cause an infinite loop. This method will fail if the application 
+is not prepared or is revoked. 
+
+The socket is NOT closed by this method. 
+
+
+
+    Returns: {@code true} on success. 
+
+*android.net.VpnService.protect(Socket)*
+
+public boolean protect(java.net.Socket socket)
+
+Convenience method to protect a (|java.net.Socket|) from VPN connections. 
+
+
+
+    Returns: {@code true} on success. 
+
+

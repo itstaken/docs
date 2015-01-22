@@ -1,0 +1,44 @@
+*android.database.sqlite.SQLiteMisuseException* *SQLiteMisuseException* This err
+
+public class SQLiteMisuseException
+  extends    |android.database.sqlite.SQLiteException|
+
+|android.database.sqlite.SQLiteMisuseException_Description|
+|android.database.sqlite.SQLiteMisuseException_Fields|
+|android.database.sqlite.SQLiteMisuseException_Constructors|
+|android.database.sqlite.SQLiteMisuseException_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteMisuseException_Constructors*
+|android.database.sqlite.SQLiteMisuseException()|
+|android.database.sqlite.SQLiteMisuseException(String)|
+
+*android.database.sqlite.SQLiteMisuseException_Description*
+
+This error can occur if the application creates a SQLiteStatement object and 
+allows multiple threads in the application use it at the same time. Sqlite 
+returns this error if bind and execute methods on this object occur at the same 
+time from multiple threads, like so: thread # 1: in execute() method of the 
+SQLiteStatement object while thread # 2: is in bind..() on the same object. 
+
+FIX this by NEVER sharing the same SQLiteStatement object between threads. 
+Create a local instance of the SQLiteStatement whenever it is needed, use it 
+and close it ASAP. NEVER make it globally available. 
+
+
+
+*android.database.sqlite.SQLiteMisuseException()*
+
+public SQLiteMisuseException()
+
+
+
+
+*android.database.sqlite.SQLiteMisuseException(String)*
+
+public SQLiteMisuseException(java.lang.String error)
+
+
+
+

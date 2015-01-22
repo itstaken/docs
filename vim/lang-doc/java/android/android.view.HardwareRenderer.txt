@@ -1,0 +1,171 @@
+*android.view.HardwareRenderer* *HardwareRenderer* Interface for rendering a vie
+
+public abstract class HardwareRenderer
+  extends    |java.lang.Object|
+
+|android.view.HardwareRenderer_Description|
+|android.view.HardwareRenderer_Fields|
+|android.view.HardwareRenderer_Constructors|
+|android.view.HardwareRenderer_Methods|
+
+================================================================================
+
+*android.view.HardwareRenderer_Fields*
+|java.lang.String_android.view.HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY|
+|java.lang.String_android.view.HardwareRenderer.DEBUG_OVERDRAW_PROPERTY|
+|java.lang.String_android.view.HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY|
+|java.lang.String_android.view.HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY|
+|java.lang.String_android.view.HardwareRenderer.OVERDRAW_PROPERTY_COUNT|
+|java.lang.String_android.view.HardwareRenderer.OVERDRAW_PROPERTY_SHOW|
+|java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY|
+|java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY_VISUALIZE_BARS|
+|java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY_VISUALIZE_LINES|
+|boolean_android.view.HardwareRenderer.sRendererDisabled|
+|boolean_android.view.HardwareRenderer.sSystemRendererDisabled|
+
+*android.view.HardwareRenderer_Constructors*
+|android.view.HardwareRenderer()|
+
+*android.view.HardwareRenderer_Methods*
+|android.view.HardwareRenderer.createDisplayList(String)|Creates a new display 
+|android.view.HardwareRenderer.disable(boolean)|Invoke this method to disable h
+|android.view.HardwareRenderer.isAvailable()|Indicates whether hardware acceler
+|android.view.HardwareRenderer.setupDiskCache(File)|Sets the directory to use a
+
+*android.view.HardwareRenderer_Description*
+
+Interface for rendering a view hierarchy using hardware acceleration. 
+
+
+
+*java.lang.String_android.view.HardwareRenderer.DEBUG_DIRTY_REGIONS_PROPERTY*
+
+Turn on to draw dirty regions every other frame. 
+
+Possible values: "true", to enable dirty regions debugging "false", to disable 
+dirty regions debugging 
+
+
+*java.lang.String_android.view.HardwareRenderer.DEBUG_OVERDRAW_PROPERTY*
+
+Controls overdraw debugging. 
+
+Possible values: "false", to disable overdraw debugging "show", to show 
+overdraw areas on screen "count", to display an overdraw counter 
+
+
+*java.lang.String_android.view.HardwareRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY*
+
+Turn on to flash hardware layers when they update. 
+
+Possible values: "true", to enable hardware layers updates debugging "false", 
+to disable hardware layers updates debugging 
+
+
+*java.lang.String_android.view.HardwareRenderer.DEBUG_SHOW_NON_RECTANGULAR_CLIP_PROPERTY*
+
+Turn on to debug non-rectangular clip operations. 
+
+Possible values: "hide", to disable this debug mode "highlight", highlight 
+drawing commands tested against a non-rectangular clip "stencil", renders the 
+clip region on screen when set 
+
+
+*java.lang.String_android.view.HardwareRenderer.OVERDRAW_PROPERTY_COUNT*
+
+Value for (|android.view.HardwareRenderer|) . When the property is set to this 
+value, an overdraw counter will be shown on screen. 
+
+
+*java.lang.String_android.view.HardwareRenderer.OVERDRAW_PROPERTY_SHOW*
+
+Value for (|android.view.HardwareRenderer|) . When the property is set to this 
+value, overdraw will be shown on screen by coloring pixels. 
+
+
+*java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY*
+
+System property used to enable or disable hardware rendering profiling. The 
+default value of this property is assumed to be false. 
+
+When profiling is enabled, the adb shell dumpsys gfxinfo command will output 
+extra information about the time taken to execute by the last frames. 
+
+Possible values: "true", to enable profiling "visual_bars", to enable profiling 
+and visualize the results on screen "visual_lines", to enable profiling and 
+visualize the results on screen "false", to disable profiling 
+
+
+*java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY_VISUALIZE_BARS*
+
+Value for (|android.view.HardwareRenderer|) . When the property is set to this 
+value, profiling data will be visualized on screen as a bar chart. 
+
+
+*java.lang.String_android.view.HardwareRenderer.PROFILE_PROPERTY_VISUALIZE_LINES*
+
+Value for (|android.view.HardwareRenderer|) . When the property is set to this 
+value, profiling data will be visualized on screen as a line chart. 
+
+
+*boolean_android.view.HardwareRenderer.sRendererDisabled*
+
+A process can set this flag to false to prevent the use of hardware rendering. 
+
+
+*boolean_android.view.HardwareRenderer.sSystemRendererDisabled*
+
+Further hardware renderer disabling for the system process. 
+
+
+
+*android.view.HardwareRenderer()*
+
+public HardwareRenderer()
+
+
+
+
+*android.view.HardwareRenderer.createDisplayList(String)*
+
+public abstract |android.view.DisplayList| createDisplayList(java.lang.String name)
+
+Creates a new display list that can be used to record batches of drawing 
+operations. 
+
+
+    name - The name of the display list, used for debugging purpose. May be null. 
+
+    Returns: A new display list. 
+
+*android.view.HardwareRenderer.disable(boolean)*
+
+public static void disable(boolean system)
+
+Invoke this method to disable hardware rendering in the current process. 
+
+
+
+*android.view.HardwareRenderer.isAvailable()*
+
+public static boolean isAvailable()
+
+Indicates whether hardware acceleration is available under any form for the 
+view hierarchy. 
+
+
+
+    Returns: True if the view hierarchy can potentially be hardware accelerated, false 
+             otherwise 
+
+*android.view.HardwareRenderer.setupDiskCache(File)*
+
+public static void setupDiskCache(java.io.File cacheDir)
+
+Sets the directory to use as a persistent storage for hardware rendering 
+resources. 
+
+
+    cacheDir - A directory the current process can write to 
+
+

@@ -1,0 +1,112 @@
+*android.app.backup.BackupDataInputStream* *BackupDataInputStream* Provides anja
+
+public class BackupDataInputStream
+  extends    |java.io.InputStream|
+
+|android.app.backup.BackupDataInputStream_Description|
+|android.app.backup.BackupDataInputStream_Fields|
+|android.app.backup.BackupDataInputStream_Constructors|
+|android.app.backup.BackupDataInputStream_Methods|
+
+================================================================================
+
+*android.app.backup.BackupDataInputStream_Methods*
+|android.app.backup.BackupDataInputStream.getKey()|Report the key string associ
+|android.app.backup.BackupDataInputStream.read()|Read one byte of entity data f
+|android.app.backup.BackupDataInputStream.read(byte[])|Read enough entity data 
+|android.app.backup.BackupDataInputStream.read(byte[],int,int)|Read up tosizeby
+|android.app.backup.BackupDataInputStream.size()|Report the total number of byt
+
+*android.app.backup.BackupDataInputStream_Description*
+
+Provides an (|java.io.InputStream|) -like interface for accessing an entity's 
+data during a restore operation. Used by (|android.app.backup.BackupHelper|) 
+classes within the (|android.app.backup.BackupAgentHelper|) mechanism. 
+
+When BackupHelper.restoreEntity()(|android.app.backup.BackupHelper|) is called, 
+the current entity's header has already been read from the underlying 
+(|android.app.backup.BackupDataInput|) . The entity's key string and total data 
+size are available through this class's 
+(|android.app.backup.BackupDataInputStream|) and 
+(|android.app.backup.BackupDataInputStream|) methods, respectively. 
+
+Note: The caller should take care not to seek or close the underlying data 
+source, nor read more than (|android.app.backup.BackupDataInputStream|) bytes 
+from the stream. 
+
+
+
+*android.app.backup.BackupDataInputStream.getKey()*
+
+public |java.lang.String| getKey()
+
+Report the key string associated with this entity within the backup data set. 
+
+
+
+    Returns: The key string for this entity, equivalent to calling {@link 
+             BackupDataInput#getKey()} on the underlying {@link 
+             BackupDataInput}. 
+
+*android.app.backup.BackupDataInputStream.read()*
+
+public int read()
+  throws |java.io.IOException|
+         
+Read one byte of entity data from the stream, returning it as an integer value. 
+If more than (|android.app.backup.BackupDataInputStream|) bytes of data are 
+read from the stream, the output of this method is undefined. 
+
+
+
+    Returns: The byte read, or undefined if the end of the stream has been reached. 
+
+*android.app.backup.BackupDataInputStream.read(byte[])*
+
+public int read(byte[] b)
+  throws |java.io.IOException|
+         
+Read enough entity data into a byte array to fill the array. 
+
+
+    b - Byte array to fill with data from the stream. If the stream does not have 
+       sufficient data to fill the array, then the contents of the remainder of 
+       the array will be undefined. 
+
+    Returns: The number of bytes of data read, or zero if all of the entity's data has 
+             already been read. 
+
+*android.app.backup.BackupDataInputStream.read(byte[],int,int)*
+
+public int read(
+  byte[] b,
+  int offset,
+  int size)
+  throws |java.io.IOException|
+         
+Read up tosizebytes of data into a byte array, beginning at 
+positionoffsetwithin the array. 
+
+
+    b - Byte array into which the data will be read 
+    offset - The data will be stored in {@code b} beginning at this index within the array. 
+    size - The number of bytes to read in this operation. If insufficient data exists 
+       within the entity to fulfill this request, only as much data will be 
+       read as is available. 
+
+    Returns: The number of bytes of data read, or zero if all of the entity's data has 
+             already been read. 
+
+*android.app.backup.BackupDataInputStream.size()*
+
+public int size()
+
+Report the total number of bytes of data available for the current entity. 
+
+
+
+    Returns: The number of data bytes available, equivalent to calling {@link 
+             BackupDataInput#getDataSize()} on the underlying {@link 
+             BackupDataInput}. 
+
+

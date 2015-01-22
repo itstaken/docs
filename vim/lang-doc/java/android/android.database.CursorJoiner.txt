@@ -1,0 +1,106 @@
+*android.database.CursorJoiner* *CursorJoiner* Does a join on two cursors using 
+
+public final class CursorJoiner
+  extends    |java.lang.Object|
+  implements |java.util.Iterator|
+             |java.lang.Iterable|
+
+|android.database.CursorJoiner_Description|
+|android.database.CursorJoiner_Fields|
+|android.database.CursorJoiner_Constructors|
+|android.database.CursorJoiner_Methods|
+
+================================================================================
+
+*android.database.CursorJoiner_Constructors*
+|android.database.CursorJoiner(Cursor,String[],Cursor,String[])|Initializes the
+
+*android.database.CursorJoiner_Methods*
+|android.database.CursorJoiner.hasNext()|Returns whether or not there are more 
+|android.database.CursorJoiner.iterator()|
+|android.database.CursorJoiner.next()|Returns the comparison result of the next
+|android.database.CursorJoiner.remove()|
+
+*android.database.CursorJoiner_Description*
+
+Does a join on two cursors using the specified columns. The cursors must 
+already be sorted on each of the specified columns in ascending order. This 
+joiner only supports the case where the tuple of key column values is unique. 
+
+Typical usage: 
+
+
+
+CursorJoiner joiner = new CursorJoiner(cursorA, keyColumnsofA, cursorB, 
+keyColumnsofB); for (CursorJointer.Result joinerResult : joiner) { switch 
+(joinerResult) { case LEFT: // handle case where a row in cursorA is unique 
+break; case RIGHT: // handle case where a row in cursorB is unique break; case 
+BOTH: // handle case where a row with the same key is in both cursors break; } 
+} 
+
+
+
+*android.database.CursorJoiner(Cursor,String[],Cursor,String[])*
+
+public CursorJoiner(
+  android.database.Cursor cursorLeft,
+  java.lang.String[] columnNamesLeft,
+  android.database.Cursor cursorRight,
+  java.lang.String[] columnNamesRight)
+
+Initializes the CursorJoiner and resets the cursors to the first row. The left 
+and right column name arrays must have the same number of columns. 
+
+    cursorLeft - The left cursor to compare 
+    columnNamesLeft - The column names to compare from the left cursor 
+    cursorRight - The right cursor to compare 
+    columnNamesRight - The column names to compare from the right cursor 
+
+*android.database.CursorJoiner.hasNext()*
+
+public boolean hasNext()
+
+Returns whether or not there are more rows to compare using next(). 
+
+
+
+    Returns: true if there are more rows to compare 
+
+*android.database.CursorJoiner.iterator()*
+
+public |java.util.Iterator|<Result> iterator()
+
+
+
+
+
+*android.database.CursorJoiner.next()*
+
+public |android.database.CursorJoiner.Result| next()
+
+Returns the comparison result of the next row from each cursor. If one cursor 
+has no more rows but the other does then subsequent calls to this will indicate 
+that the remaining rows are unique. 
+
+The caller must check that hasNext() returns true before calling this. 
+
+Once next() has been called the cursors specified in the result of the call to 
+next() are guaranteed to point to the row that was indicated. Reading values 
+from the cursor that was not indicated in the call to next() will result in 
+undefined behavior. 
+
+
+
+    Returns: LEFT, if the row pointed to by the left cursor is unique, RIGHT if the row 
+             pointed to by the right cursor is unique, BOTH if the rows in both 
+             cursors are the same. 
+
+*android.database.CursorJoiner.remove()*
+
+public void remove()
+
+
+
+
+
+

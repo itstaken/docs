@@ -1,0 +1,174 @@
+*android.provider.ContactsContract.CommonDataKinds.Email* *ContactsContract.CommonDataKinds.Email* 
+
+public static final class ContactsContract.CommonDataKinds.Email
+  extends    |java.lang.Object|
+  implements |android.provider.ContactsContract.DataColumnsWithJoins|
+             |android.provider.ContactsContract.CommonDataKinds.CommonColumns|
+
+|android.provider.ContactsContract.CommonDataKinds.Email_Description|
+|android.provider.ContactsContract.CommonDataKinds.Email_Fields|
+|android.provider.ContactsContract.CommonDataKinds.Email_Constructors|
+|android.provider.ContactsContract.CommonDataKinds.Email_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.CommonDataKinds.Email_Fields*
+|java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.ADDRESS|
+|android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_FILTER_URI|
+|java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE|
+|android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI|
+|java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_URI|
+|java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.DISPLAY_NAME|
+|int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_HOME|
+|int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE|
+|int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_OTHER|
+|int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_WORK|
+
+*android.provider.ContactsContract.CommonDataKinds.Email_Methods*
+|android.provider.ContactsContract.CommonDataKinds.Email.getTypeLabel(Resources,int,CharSequence)|
+|android.provider.ContactsContract.CommonDataKinds.Email.getTypeLabelResource(int)|
+
+*android.provider.ContactsContract.CommonDataKinds.Email_Description*
+
+A data kind representing an email address. 
+
+You can use all columns defined for (|android.provider.ContactsContract.Data|) 
+as well as the following aliases. 
+
+Column aliases 
+
+Type AliasData column 
+
+String (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) Email address 
+itself. 
+
+int (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) Allowed values are: 
+
+(|android.provider.ContactsContract.CommonDataKinds.Email|) . Put the actual 
+type in (|android.provider.ContactsContract.CommonDataKinds.Email|) . 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) 
+
+
+
+
+
+String (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.ADDRESS*
+
+The email address. Type: TEXT 
+
+
+*android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_FILTER_URI*
+
+The content:// style URL for email lookup using a filter. The filter returns 
+records of MIME type 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) . The filter is 
+applied to display names as well as email addresses. The filter argument should 
+be passed as an additional path segment after this URI. 
+
+The query in the following example will return "Robert Parr 
+(bob@incredibles.com)" as well as "Bob Parr (incredible@android.com)". 
+
+Uri uri = Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, Uri.encode("bob")); 
+Cursor c = getContentResolver().query(uri, new String[]{Email.DISPLAY_NAME, 
+Email.DATA}, null, null, null); 
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE*
+
+MIME type used when storing this in data table. 
+
+
+*android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI*
+
+The content:// style URL for looking up data rows by email address. The lookup 
+argument, an email address, should be passed as an additional path segment 
+after this URI. 
+
+Example: 
+
+Uri uri = Uri.withAppendedPath(Email.CONTENT_LOOKUP_URI, Uri.encode(email)); 
+Cursor c = getContentResolver().query(uri, new String[]{Email.CONTACT_ID, 
+Email.DISPLAY_NAME, Email.DATA}, null, null, null); 
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_TYPE*
+
+The MIME type of (|android.provider.ContactsContract.CommonDataKinds.Email|) 
+providing a directory of email addresses. 
+
+
+*android.net.Uri_android.provider.ContactsContract.CommonDataKinds.Email.CONTENT_URI*
+
+The content:// style URI for all data records of the 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) MIME type, combined 
+with the associated raw contact and aggregate contact data. 
+
+
+*java.lang.String_android.provider.ContactsContract.CommonDataKinds.Email.DISPLAY_NAME*
+
+The display name for the email address Type: TEXT 
+
+
+*int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_HOME*
+
+
+
+
+*int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE*
+
+
+
+
+*int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_OTHER*
+
+
+
+
+*int_android.provider.ContactsContract.CommonDataKinds.Email.TYPE_WORK*
+
+
+
+
+
+*android.provider.ContactsContract.CommonDataKinds.Email.getTypeLabel(Resources,int,CharSequence)*
+
+public static final |java.lang.CharSequence| getTypeLabel(
+  android.content.res.Resources res,
+  int type,
+  java.lang.CharSequence label)
+
+Return a (|java.lang.CharSequence|) that best describes the given type, 
+possibly substituting the given 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) value for 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) . 
+
+
+
+*android.provider.ContactsContract.CommonDataKinds.Email.getTypeLabelResource(int)*
+
+public static final int getTypeLabelResource(int type)
+
+Return the string resource that best describes the given 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) . Will always 
+return a valid resource. 
+
+
+
+

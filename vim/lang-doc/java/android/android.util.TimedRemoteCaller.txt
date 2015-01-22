@@ -1,0 +1,95 @@
+*android.util.TimedRemoteCaller* *TimedRemoteCaller* This is a helper class for 
+
+public abstract class TimedRemoteCaller<T>
+  extends    |java.lang.Object|
+
+|android.util.TimedRemoteCaller_Description|
+|android.util.TimedRemoteCaller_Fields|
+|android.util.TimedRemoteCaller_Constructors|
+|android.util.TimedRemoteCaller_Methods|
+
+================================================================================
+
+*android.util.TimedRemoteCaller_Fields*
+|long_android.util.TimedRemoteCaller.DEFAULT_CALL_TIMEOUT_MILLIS|
+
+*android.util.TimedRemoteCaller_Constructors*
+|android.util.TimedRemoteCaller(long)|
+
+*android.util.TimedRemoteCaller_Methods*
+|android.util.TimedRemoteCaller.getResultTimed(int)|
+|android.util.TimedRemoteCaller.onBeforeRemoteCall()|
+|android.util.TimedRemoteCaller.onRemoteMethodResult(T,int)|
+
+*android.util.TimedRemoteCaller_Description*
+
+This is a helper class for making an async one way call and its async one way 
+response response in a sync fashion within a timeout. The key idea is to call 
+the remote method with a sequence number and a callback and then starting to 
+wait for the response. The remote method calls back with the result and the 
+sequence number. If the response comes within the timeout and its sequence 
+number is the one sent in the method invocation, then the call succeeded. If 
+the response does not come within the timeout then the call failed. Older 
+result received when waiting for the result are ignored. 
+
+Typical usage is: 
+
+
+
+public class MyMethodCaller extends TimeoutRemoteCallHelper { // The one way 
+remote method to call. private final IRemoteInterface mTarget; 
+
+// One way callback invoked when the remote method is done. private final 
+IRemoteCallback mCallback = new IRemoteCallback.Stub() { public void 
+onCompleted(Object result, int sequence) { onRemoteMethodResult(result, 
+sequence); } }; 
+
+public MyMethodCaller(IRemoteInterface target) { mTarget = target; } 
+
+public Object onCallMyMethod(Object arg) throws RemoteException { final int 
+sequence = onBeforeRemoteCall(); mTarget.myMethod(arg, sequence); return 
+getResultTimed(sequence); } } 
+
+
+
+*long_android.util.TimedRemoteCaller.DEFAULT_CALL_TIMEOUT_MILLIS*
+
+
+
+
+
+*android.util.TimedRemoteCaller(long)*
+
+public TimedRemoteCaller(long callTimeoutMillis)
+
+
+
+
+*android.util.TimedRemoteCaller.getResultTimed(int)*
+
+public final |T| getResultTimed(int sequence)
+  throws |java.util.concurrent.TimeoutException|
+         
+
+
+
+
+*android.util.TimedRemoteCaller.onBeforeRemoteCall()*
+
+public final int onBeforeRemoteCall()
+
+
+
+
+
+*android.util.TimedRemoteCaller.onRemoteMethodResult(T,int)*
+
+public final void onRemoteMethodResult(
+  T result,
+  int sequence)
+
+
+
+
+
+

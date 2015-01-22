@@ -1,0 +1,256 @@
+*android.hardware.display.DisplayManagerGlobal* *DisplayManagerGlobal* Manager c
+
+public final class DisplayManagerGlobal
+  extends    |java.lang.Object|
+
+|android.hardware.display.DisplayManagerGlobal_Description|
+|android.hardware.display.DisplayManagerGlobal_Fields|
+|android.hardware.display.DisplayManagerGlobal_Constructors|
+|android.hardware.display.DisplayManagerGlobal_Methods|
+
+================================================================================
+
+*android.hardware.display.DisplayManagerGlobal_Fields*
+|int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_ADDED|
+|int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_CHANGED|
+|int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_REMOVED|
+
+*android.hardware.display.DisplayManagerGlobal_Methods*
+|android.hardware.display.DisplayManagerGlobal.connectWifiDisplay(String)|
+|android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(Context,String,int,int,int,Surface,int)|
+|android.hardware.display.DisplayManagerGlobal.disconnectWifiDisplay()|
+|android.hardware.display.DisplayManagerGlobal.forgetWifiDisplay(String)|
+|android.hardware.display.DisplayManagerGlobal.getCompatibleDisplay(int,DisplayAdjustments)|
+|android.hardware.display.DisplayManagerGlobal.getDisplayIds()|Gets all current
+|android.hardware.display.DisplayManagerGlobal.getDisplayInfo(int)|Get informat
+|android.hardware.display.DisplayManagerGlobal.getInstance()|Gets an instance o
+|android.hardware.display.DisplayManagerGlobal.getRealDisplay(int)|Gets informa
+|android.hardware.display.DisplayManagerGlobal.getRealDisplay(int,IBinder)|Gets
+|android.hardware.display.DisplayManagerGlobal.getWifiDisplayStatus()|
+|android.hardware.display.DisplayManagerGlobal.pauseWifiDisplay()|
+|android.hardware.display.DisplayManagerGlobal.registerDisplayListener(DisplayManager.DisplayListener,Handler)|
+|android.hardware.display.DisplayManagerGlobal.releaseVirtualDisplay(IBinder)|
+|android.hardware.display.DisplayManagerGlobal.renameWifiDisplay(String,String)|
+|android.hardware.display.DisplayManagerGlobal.resumeWifiDisplay()|
+|android.hardware.display.DisplayManagerGlobal.startWifiDisplayScan()|
+|android.hardware.display.DisplayManagerGlobal.stopWifiDisplayScan()|
+|android.hardware.display.DisplayManagerGlobal.unregisterDisplayListener(DisplayManager.DisplayListener)|
+
+*android.hardware.display.DisplayManagerGlobal_Description*
+
+Manager communication with the display manager service on behalf of an 
+application process. You're probably looking for 
+(|android.hardware.display.DisplayManager|) . 
+
+
+
+*int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_ADDED*
+
+
+
+
+*int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_CHANGED*
+
+
+
+
+*int_android.hardware.display.DisplayManagerGlobal.EVENT_DISPLAY_REMOVED*
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.connectWifiDisplay(String)*
+
+public void connectWifiDisplay(java.lang.String deviceAddress)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.createVirtualDisplay(Context,String,int,int,int,Surface,int)*
+
+public |android.hardware.display.VirtualDisplay| createVirtualDisplay(
+  android.content.Context context,
+  java.lang.String name,
+  int width,
+  int height,
+  int densityDpi,
+  android.view.Surface surface,
+  int flags)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.disconnectWifiDisplay()*
+
+public void disconnectWifiDisplay()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.forgetWifiDisplay(String)*
+
+public void forgetWifiDisplay(java.lang.String deviceAddress)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.getCompatibleDisplay(int,DisplayAdjustments)*
+
+public |android.view.Display| getCompatibleDisplay(
+  int displayId,
+  android.view.DisplayAdjustments daj)
+
+Gets information about a logical display. 
+
+The display metrics may be adjusted to provide compatibility for legacy 
+applications or limited screen areas. 
+
+
+    displayId - The logical display id. 
+    daj - The compatibility info and activityToken. 
+
+    Returns: The display object, or null if there is no display with the given id. 
+
+*android.hardware.display.DisplayManagerGlobal.getDisplayIds()*
+
+public int[] getDisplayIds()
+
+Gets all currently valid logical display ids. 
+
+
+
+    Returns: An array containing all display ids. 
+
+*android.hardware.display.DisplayManagerGlobal.getDisplayInfo(int)*
+
+public |android.view.DisplayInfo| getDisplayInfo(int displayId)
+
+Get information about a particular logical display. 
+
+
+    displayId - The logical display id. 
+
+    Returns: Information about the specified display, or null if it does not exist. This 
+             object belongs to an internal cache and should be treated as if it 
+             were immutable. 
+
+*android.hardware.display.DisplayManagerGlobal.getInstance()*
+
+public static |android.hardware.display.DisplayManagerGlobal| getInstance()
+
+Gets an instance of the display manager global singleton. 
+
+
+
+    Returns: The display manager instance, may be null early in system startup before the 
+             display manager has been fully initialized. 
+
+*android.hardware.display.DisplayManagerGlobal.getRealDisplay(int)*
+
+public |android.view.Display| getRealDisplay(int displayId)
+
+Gets information about a logical display without applying any compatibility 
+metrics. 
+
+
+    displayId - The logical display id. 
+
+    Returns: The display object, or null if there is no display with the given id. 
+
+*android.hardware.display.DisplayManagerGlobal.getRealDisplay(int,IBinder)*
+
+public |android.view.Display| getRealDisplay(
+  int displayId,
+  android.os.IBinder token)
+
+Gets information about a logical display without applying any compatibility 
+metrics. 
+
+
+    displayId - The logical display id. 
+    IBinder - the activity token for this display. 
+
+    Returns: The display object, or null if there is no display with the given id. 
+
+*android.hardware.display.DisplayManagerGlobal.getWifiDisplayStatus()*
+
+public |android.hardware.display.WifiDisplayStatus| getWifiDisplayStatus()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.pauseWifiDisplay()*
+
+public void pauseWifiDisplay()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.registerDisplayListener(DisplayManager.DisplayListener,Handler)*
+
+public void registerDisplayListener(
+  android.hardware.display.DisplayManager.DisplayListener listener,
+  android.os.Handler handler)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.releaseVirtualDisplay(IBinder)*
+
+public void releaseVirtualDisplay(android.os.IBinder token)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.renameWifiDisplay(String,String)*
+
+public void renameWifiDisplay(
+  java.lang.String deviceAddress,
+  java.lang.String alias)
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.resumeWifiDisplay()*
+
+public void resumeWifiDisplay()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.startWifiDisplayScan()*
+
+public void startWifiDisplayScan()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.stopWifiDisplayScan()*
+
+public void stopWifiDisplayScan()
+
+
+
+
+
+*android.hardware.display.DisplayManagerGlobal.unregisterDisplayListener(DisplayManager.DisplayListener)*
+
+public void unregisterDisplayListener(android.hardware.display.DisplayManager.DisplayListener listener)
+
+
+
+
+
+

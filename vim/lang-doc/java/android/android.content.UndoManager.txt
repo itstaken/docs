@@ -1,0 +1,423 @@
+*android.content.UndoManager* *UndoManager* Top-level class for managing and int
+
+public class UndoManager
+  extends    |java.lang.Object|
+
+|android.content.UndoManager_Description|
+|android.content.UndoManager_Fields|
+|android.content.UndoManager_Constructors|
+|android.content.UndoManager_Methods|
+
+================================================================================
+
+*android.content.UndoManager_Fields*
+|int_android.content.UndoManager.MERGE_MODE_ANY|
+|int_android.content.UndoManager.MERGE_MODE_NONE|
+|int_android.content.UndoManager.MERGE_MODE_UNIQUE|
+
+*android.content.UndoManager_Constructors*
+|android.content.UndoManager()|
+
+*android.content.UndoManager_Methods*
+|android.content.UndoManager.addOperation(UndoOperation<?>,int)|Add a new UndoO
+|android.content.UndoManager.beginUpdate(CharSequence)|Start creating a new und
+|android.content.UndoManager.commitState(UndoOwner)|Commit the last finished un
+|android.content.UndoManager.countRedos(UndoOwner[])|Return the number of redo 
+|android.content.UndoManager.countUndos(UndoOwner[])|Return the number of undo 
+|android.content.UndoManager.endUpdate()|Finish the creation of an undo state, 
+|android.content.UndoManager.forgetRedos(UndoOwner[],int)|
+|android.content.UndoManager.forgetUndos(UndoOwner[],int)|
+|android.content.UndoManager.getHistorySize()|Return the current maximum number
+|android.content.UndoManager.getLastOperation(Class<T>,UndoOwner,int)|Return th
+|android.content.UndoManager.getLastOperation(int)|Return the most recentUndoOp
+|android.content.UndoManager.getLastOperation(UndoOwner,int)|Return the most re
+|android.content.UndoManager.getOwner(String,Object)|
+|android.content.UndoManager.getRedoLabel(UndoOwner[])|Return the user-visible 
+|android.content.UndoManager.getUndoLabel(UndoOwner[])|Return the user-visible 
+|android.content.UndoManager.getUpdateNestingLevel()|Return the number of times
+|android.content.UndoManager.hasOperation(UndoOwner)|Check whether there is anU
+|android.content.UndoManager.isInUndo()|Returns true if we are currently inside
+|android.content.UndoManager.isInUpdate()|Returns true if currently inside of a
+|android.content.UndoManager.redo(UndoOwner[],int)|Perform redo of last/top cou
+|android.content.UndoManager.restoreInstanceState(Parcelable)|Restore an undo s
+|android.content.UndoManager.saveInstanceState()|Flatten the current undo state
+|android.content.UndoManager.setHistorySize(int)|Set the maximum number of undo
+|android.content.UndoManager.setUndoLabel(CharSequence)|Forcibly set a new for 
+|android.content.UndoManager.suggestUndoLabel(CharSequence)|Set a new for the n
+|android.content.UndoManager.uncommitState(int,UndoOwner)|Attempt to undo a pre
+|android.content.UndoManager.undo(UndoOwner[],int)|Perform undo of last/top cou
+
+*android.content.UndoManager_Description*
+
+Top-level class for managing and interacting with the global undo state for a 
+document or application. This class supports both undo and redo and has helpers 
+for merging undoable operations together as they are performed. 
+
+A single undoable operation is represented by (|android.content.UndoOperation|) 
+which apps implement to define their undo/redo behavior. The UndoManager keeps 
+a stack of undo states; each state can have one or more undo operations inside 
+of it. 
+
+Updates to the stack must be done inside of a (|android.content.UndoManager|) / 
+(|android.content.UndoManager|) pair. During this time you can add new 
+operations to the stack with (|android.content.UndoManager|) , retrieve and 
+modify existing operations with (|android.content.UndoManager|) , control the 
+label shown to the user for this operation with (|android.content.UndoManager|) 
+and (|android.content.UndoManager|) , etc. 
+
+Every {link UndoOperation} is associated with an (|android.content.UndoOwner|) 
+, which identifies the data it belongs to. The owner is used to indicate how 
+operations are dependent on each other -- operations with the same owner are 
+dependent on others with the same owner. For example, you may have a document 
+with multiple embedded objects. If the document itself and each embedded object 
+use different owners, then you can provide undo semantics appropriate to the 
+user's context: while within an embedded object, only edits to that object are 
+seen and the user can undo/redo them without needing to impact edits in other 
+objects; while within the larger document, all edits can be seen and the user 
+must undo/redo them as a single stream. 
+
+
+
+*int_android.content.UndoManager.MERGE_MODE_ANY*
+
+Always allow merge with the last undo state, if possible. 
+
+
+*int_android.content.UndoManager.MERGE_MODE_NONE*
+
+Never merge with the last undo state. 
+
+
+*int_android.content.UndoManager.MERGE_MODE_UNIQUE*
+
+Allow merge with the last undo state only if it contains operations with the 
+caller's owner. 
+
+
+
+*android.content.UndoManager()*
+
+public UndoManager()
+
+
+
+
+*android.content.UndoManager.addOperation(UndoOperation<?>,int)*
+
+public void addOperation(
+  android.content.UndoOperation<?> op,
+  int mergeMode)
+
+Add a new UndoOperation to the current update. 
+
+
+    op - The new operation to add. 
+    mergeMode - May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE}, or {@link 
+       #MERGE_MODE_ANY}. 
+
+*android.content.UndoManager.beginUpdate(CharSequence)*
+
+public void beginUpdate(java.lang.CharSequence label)
+
+Start creating a new undo state. Multiple calls to this function will nest 
+until they are all matched by a later call to (|android.content.UndoManager|) . 
+
+
+    label - Optional user-visible label for this new undo state. 
+
+*android.content.UndoManager.commitState(UndoOwner)*
+
+public int commitState(android.content.UndoOwner owner)
+
+Commit the last finished undo state. This undo state can no longer be modified 
+with further (|android.content.UndoManager|) or (|android.content.UndoManager|) 
+merge modes. If called while inside of an update, this will push any changes in 
+the current update on to the undo stack and result with a fresh undo state, 
+behaving as if (|android.content.UndoManager|) had been called enough to unwind 
+the current update, then the last state committed, and 
+(|android.content.UndoManager|) called to restore the update nesting. 
+
+
+    owner - The optional owner to determine whether to perform the commit. If this is 
+       non-null, the commit will only execute if the current top undo state 
+       contains an operation with the given owner. 
+
+    Returns: Returns an integer identifier for the committed undo state, which can later be 
+             used to try to uncommit the state to perform further edits on it. 
+
+*android.content.UndoManager.countRedos(UndoOwner[])*
+
+public int countRedos(android.content.UndoOwner[] owners)
+
+Return the number of redo states on the undo stack. 
+
+
+    owners - If non-null, only those states containing an operation with one of the owners 
+       supplied here will be counted. 
+
+*android.content.UndoManager.countUndos(UndoOwner[])*
+
+public int countUndos(android.content.UndoOwner[] owners)
+
+Return the number of undo states on the undo stack. 
+
+
+    owners - If non-null, only those states containing an operation with one of the owners 
+       supplied here will be counted. 
+
+*android.content.UndoManager.endUpdate()*
+
+public void endUpdate()
+
+Finish the creation of an undo state, matching a previous call to 
+(|android.content.UndoManager|) . 
+
+
+
+*android.content.UndoManager.forgetRedos(UndoOwner[],int)*
+
+public int forgetRedos(
+  android.content.UndoOwner[] owners,
+  int count)
+
+
+
+
+
+*android.content.UndoManager.forgetUndos(UndoOwner[],int)*
+
+public int forgetUndos(
+  android.content.UndoOwner[] owners,
+  int count)
+
+
+
+
+
+*android.content.UndoManager.getHistorySize()*
+
+public int getHistorySize()
+
+Return the current maximum number of undo states. 
+
+
+
+*android.content.UndoManager.getLastOperation(Class<T>,UndoOwner,int)*
+
+public |T| getLastOperation(
+  java.lang.Class<T> clazz,
+  android.content.UndoOwner owner,
+  int mergeMode)
+
+Return the most recent (|android.content.UndoOperation|) that was added to the 
+update and has the given owner. 
+
+
+    clazz - Optional class of the last operation to retrieve. If null, the last operation 
+       regardless of class will be retrieved; if non-null, the last operation 
+       whose class is the same as the given class will be retrieved. 
+    owner - Optional owner of last operation to retrieve. If null, the last operation 
+       regardless of owner will be retrieved; if non-null, the last operation 
+       matching the given owner will be retrieved. 
+    mergeMode - May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE}, or {@link 
+       #MERGE_MODE_ANY}. 
+
+*android.content.UndoManager.getLastOperation(int)*
+
+public |android.content.UndoOperation|<?> getLastOperation(int mergeMode)
+
+Return the most recent (|android.content.UndoOperation|) that was added to the 
+update. 
+
+
+    mergeMode - May be either {@link #MERGE_MODE_NONE} or {@link #MERGE_MODE_ANY}. 
+
+*android.content.UndoManager.getLastOperation(UndoOwner,int)*
+
+public |android.content.UndoOperation|<?> getLastOperation(
+  android.content.UndoOwner owner,
+  int mergeMode)
+
+Return the most recent (|android.content.UndoOperation|) that was added to the 
+update and has the given owner. 
+
+
+    owner - Optional owner of last operation to retrieve. If null, the last operation 
+       regardless of owner will be retrieved; if non-null, the last operation 
+       matching the given owner will be retrieved. 
+    mergeMode - May be either {@link #MERGE_MODE_NONE}, {@link #MERGE_MODE_UNIQUE}, or {@link 
+       #MERGE_MODE_ANY}. 
+
+*android.content.UndoManager.getOwner(String,Object)*
+
+public |android.content.UndoOwner| getOwner(
+  java.lang.String tag,
+  java.lang.Object data)
+
+
+
+
+
+*android.content.UndoManager.getRedoLabel(UndoOwner[])*
+
+public |java.lang.CharSequence| getRedoLabel(android.content.UndoOwner[] owners)
+
+Return the user-visible label for the top redo state on the stack. 
+
+
+    owners - If non-null, will select the top-most undo state containing an operation with 
+       one of the owners supplied here. 
+
+*android.content.UndoManager.getUndoLabel(UndoOwner[])*
+
+public |java.lang.CharSequence| getUndoLabel(android.content.UndoOwner[] owners)
+
+Return the user-visible label for the top undo state on the stack. 
+
+
+    owners - If non-null, will select the top-most undo state containing an operation with 
+       one of the owners supplied here. 
+
+*android.content.UndoManager.getUpdateNestingLevel()*
+
+public int getUpdateNestingLevel()
+
+Return the number of times (|android.content.UndoManager|) has been called 
+without a matching (|android.content.UndoManager|) call. 
+
+
+
+*android.content.UndoManager.hasOperation(UndoOwner)*
+
+public boolean hasOperation(android.content.UndoOwner owner)
+
+Check whether there is an (|android.content.UndoOperation|) in the current 
+(|android.content.UndoManager|) undo state. 
+
+
+    owner - Optional owner of the operation to look for. If null, will succeed if there is 
+       any operation; if non-null, will only succeed if there is an operation 
+       with the given owner. 
+
+    Returns: Returns true if there is a matching operation in the current undo state. 
+
+*android.content.UndoManager.isInUndo()*
+
+public boolean isInUndo()
+
+Returns true if we are currently inside of an undo/redo operation. This is 
+useful for editors to know whether they should be generating new undo state 
+when they see edit operations happening. 
+
+
+
+*android.content.UndoManager.isInUpdate()*
+
+public boolean isInUpdate()
+
+Returns true if currently inside of a (|android.content.UndoManager|) . 
+
+
+
+*android.content.UndoManager.redo(UndoOwner[],int)*
+
+public int redo(
+  android.content.UndoOwner[] owners,
+  int count)
+
+Perform redo of last/top count undo states in the transient redo stack. The 
+states impacted by this can be limited through owners. 
+
+
+    owners - Optional set of owners that should be impacted. If null, all undo states will 
+       be visible and available for undo. If non-null, only those states that 
+       contain one of the owners specified here will be visible. 
+    count - Number of undo states to pop. 
+
+    Returns: Returns the number of undo states that were actually redone. 
+
+*android.content.UndoManager.restoreInstanceState(Parcelable)*
+
+public void restoreInstanceState(android.os.Parcelable state)
+
+Restore an undo state previously created with (|android.content.UndoManager|) . 
+This will restore the UndoManager's state to almost exactly what it was at the 
+point it had been previously saved; the only information not restored is the 
+data object associated with each (|android.content.UndoOwner|) , which requires 
+separate calls to (|android.content.UndoManager|) to re-associate the owner 
+with its data. 
+
+
+
+*android.content.UndoManager.saveInstanceState()*
+
+public |android.os.Parcelable| saveInstanceState()
+
+Flatten the current undo state into a Parcelable object, which can later be 
+restored with (|android.content.UndoManager|) . 
+
+
+
+*android.content.UndoManager.setHistorySize(int)*
+
+public void setHistorySize(int size)
+
+Set the maximum number of undo states that will be retained. 
+
+
+
+*android.content.UndoManager.setUndoLabel(CharSequence)*
+
+public void setUndoLabel(java.lang.CharSequence label)
+
+Forcibly set a new for the new undo state being built within a 
+(|android.content.UndoManager|) . Any existing label will be replaced with this 
+one. 
+
+
+
+*android.content.UndoManager.suggestUndoLabel(CharSequence)*
+
+public void suggestUndoLabel(java.lang.CharSequence label)
+
+Set a new for the new undo state being built within a 
+(|android.content.UndoManager|) , but only if there is not a label currently 
+set for it. 
+
+
+
+*android.content.UndoManager.uncommitState(int,UndoOwner)*
+
+public boolean uncommitState(
+  int commitId,
+  android.content.UndoOwner owner)
+
+Attempt to undo a previous call to (|android.content.UndoManager|) . This will 
+work if the undo state at the top of the stack has the given id, and has not 
+been involved in an undo operation. Otherwise false is returned. 
+
+
+    commitId - The identifier for the state to be uncommitted, as returned by {@link 
+       #commitState}. 
+    owner - Optional owner that must appear in the committed state. 
+
+    Returns: Returns true if the uncommit is successful, else false. 
+
+*android.content.UndoManager.undo(UndoOwner[],int)*
+
+public int undo(
+  android.content.UndoOwner[] owners,
+  int count)
+
+Perform undo of last/top count undo states. The states impacted by this can be 
+limited through owners. 
+
+
+    owners - Optional set of owners that should be impacted. If null, all undo states will 
+       be visible and available for undo. If non-null, only those states that 
+       contain one of the owners specified here will be visible. 
+    count - Number of undo states to pop. 
+
+    Returns: Returns the number of undo states that were actually popped. 
+
+

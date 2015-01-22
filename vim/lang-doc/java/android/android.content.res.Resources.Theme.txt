@@ -1,0 +1,194 @@
+*android.content.res.Resources.Theme* *Resources.Theme* This class holds the cur
+
+public final class Resources.Theme
+  extends    |java.lang.Object|
+
+|android.content.res.Resources.Theme_Description|
+|android.content.res.Resources.Theme_Fields|
+|android.content.res.Resources.Theme_Constructors|
+|android.content.res.Resources.Theme_Methods|
+
+================================================================================
+
+*android.content.res.Resources.Theme_Methods*
+|android.content.res.Resources.Theme.applyStyle(int,boolean)|Place new attribut
+|android.content.res.Resources.Theme.dump(int,String,String)|Print contents of 
+|android.content.res.Resources.Theme.finalize()|
+|android.content.res.Resources.Theme.obtainStyledAttributes(AttributeSet,int[],int,int)|
+|android.content.res.Resources.Theme.obtainStyledAttributes(int[])|Return a Typ
+|android.content.res.Resources.Theme.obtainStyledAttributes(int,int[])|Return a
+|android.content.res.Resources.Theme.resolveAttribute(int,TypedValue,boolean)|R
+|android.content.res.Resources.Theme.setTo(Resources.Theme)|Set this theme to h
+
+*android.content.res.Resources.Theme_Description*
+
+This class holds the current attribute values for a particular theme. In other 
+words, a Theme is a set of values for resource attributes; these are used in 
+conjunction with (|android.content.res.TypedArray|) to resolve the final value 
+for an attribute. 
+
+The Theme's attributes come into play in two ways: (1) a styled attribute can 
+explicit reference a value in the theme through the "?themeAttribute" syntax; 
+(2) if no value has been defined for a particular styled attribute, as a last 
+resort we will try to find that attribute's value in the Theme. 
+
+You will normally use the (|android.content.res.Resources.Theme|) APIs to 
+retrieve XML attributes with style and theme information applied. 
+
+
+
+*android.content.res.Resources.Theme.applyStyle(int,boolean)*
+
+public void applyStyle(
+  int resid,
+  boolean force)
+
+Place new attribute values into the theme. The style resource specified by 
+resid will be retrieved from this Theme's resources, its values placed into the 
+Theme object. 
+
+The semantics of this function depends on the force argument: If false, only 
+values that are not already defined in the theme will be copied from the system 
+resource; otherwise, if any of the style's attributes are already defined in 
+the theme, the current values in the theme will be overwritten. 
+
+
+    resid - The resource ID of a style resource from which to obtain attribute values. 
+    force - If true, values in the style resource will always be used in the theme; 
+       otherwise, they will only be used if not already defined in the theme. 
+
+*android.content.res.Resources.Theme.dump(int,String,String)*
+
+public void dump(
+  int priority,
+  java.lang.String tag,
+  java.lang.String prefix)
+
+Print contents of this theme out to the log. For debugging only. 
+
+
+    priority - The log priority to use. 
+    tag - The log tag to use. 
+    prefix - Text to prefix each line printed. 
+
+*android.content.res.Resources.Theme.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.content.res.Resources.Theme.obtainStyledAttributes(AttributeSet,int[],int,int)*
+
+public |android.content.res.TypedArray| obtainStyledAttributes(
+  android.util.AttributeSet set,
+  int[] attrs,
+  int defStyleAttr,
+  int defStyleRes)
+
+Return a TypedArray holding the attribute values in set that are listed in 
+attrs. In addition, if the given AttributeSet specifies a style class (through 
+the "style" attribute), that style will be applied on top of the base 
+attributes it defines. 
+
+Be sure to call TypedArray.recycle()(|android.content.res.TypedArray|) when you 
+are done with the array. 
+
+When determining the final value of a particular attribute, there are four 
+inputs that come into play: 
+
+Any attribute values in the given AttributeSet. The style resource specified in 
+the AttributeSet (named "style"). The default style specified by defStyleAttr 
+and defStyleRes The base values in this theme. 
+
+Each of these inputs is considered in-order, with the first listed taking 
+precedence over the following ones. In other words, if in the AttributeSet you 
+have supplied <Button textColor="#ff000000">, then the button's text will 
+always be black, regardless of what is specified in any of the styles. 
+
+
+    set - The base set of attribute values. May be null. 
+    attrs - The desired attributes to be retrieved. 
+    defStyleAttr - An attribute in the current theme that contains a reference to a style resource 
+       that supplies defaults values for the TypedArray. Can be 0 to not look 
+       for defaults. 
+    defStyleRes - A resource identifier of a style resource that supplies default values for the 
+       TypedArray, used only if defStyleAttr is 0 or can not be found in the 
+       theme. Can be 0 to not look for defaults. 
+
+    Returns: Returns a TypedArray holding an array of the attribute values. Be sure to call 
+             {@link TypedArray#recycle() TypedArray.recycle()} when done with 
+             it. 
+
+*android.content.res.Resources.Theme.obtainStyledAttributes(int[])*
+
+public |android.content.res.TypedArray| obtainStyledAttributes(int[] attrs)
+
+Return a TypedArray holding the values defined by Theme which are listed in 
+attrs. 
+
+Be sure to call TypedArray.recycle()(|android.content.res.TypedArray|) when you 
+are done with the array. 
+
+
+    attrs - The desired attributes. 
+
+    Returns: Returns a TypedArray holding an array of the attribute values. Be sure to call 
+             {@link TypedArray#recycle() TypedArray.recycle()} when done with 
+             it. 
+
+*android.content.res.Resources.Theme.obtainStyledAttributes(int,int[])*
+
+public |android.content.res.TypedArray| obtainStyledAttributes(
+  int resid,
+  int[] attrs)
+  throws |android.content.res.Resources.NotFoundException|
+         
+Return a TypedArray holding the values defined by the style resource resid 
+which are listed in attrs. 
+
+Be sure to call TypedArray.recycle()(|android.content.res.TypedArray|) when you 
+are done with the array. 
+
+
+    resid - The desired style resource. 
+    attrs - The desired attributes in the style. 
+
+    Returns: Returns a TypedArray holding an array of the attribute values. Be sure to call 
+             {@link TypedArray#recycle() TypedArray.recycle()} when done with 
+             it. 
+
+*android.content.res.Resources.Theme.resolveAttribute(int,TypedValue,boolean)*
+
+public boolean resolveAttribute(
+  int resid,
+  android.util.TypedValue outValue,
+  boolean resolveRefs)
+
+Retrieve the value of an attribute in the Theme. The contents of outValue are 
+ultimately filled in by (|android.content.res.Resources|) . 
+
+
+    resid - The resource identifier of the desired theme attribute. 
+    outValue - Filled in with the ultimate resource value supplied by the attribute. 
+    resolveRefs - If true, resource references will be walked; if false, outValue may be a 
+       TYPE_REFERENCE. In either case, it will never be a TYPE_ATTRIBUTE. 
+
+    Returns: boolean Returns true if the attribute was found and outValue is valid, else 
+             false. 
+
+*android.content.res.Resources.Theme.setTo(Resources.Theme)*
+
+public void setTo(android.content.res.Resources.Theme other)
+
+Set this theme to hold the same contents as the theme other. If both of these 
+themes are from the same Resources object, they will be identical after this 
+function returns. If they are from different Resources, only the resources they 
+have in common will be set in this theme. 
+
+
+    other - The existing Theme to copy from. 
+
+

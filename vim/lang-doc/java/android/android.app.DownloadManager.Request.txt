@@ -1,0 +1,324 @@
+*android.app.DownloadManager.Request* *DownloadManager.Request* This class conta
+
+public static class DownloadManager.Request
+  extends    |java.lang.Object|
+
+|android.app.DownloadManager.Request_Description|
+|android.app.DownloadManager.Request_Fields|
+|android.app.DownloadManager.Request_Constructors|
+|android.app.DownloadManager.Request_Methods|
+
+================================================================================
+
+*android.app.DownloadManager.Request_Fields*
+|int_android.app.DownloadManager.Request.NETWORK_BLUETOOTH|
+|int_android.app.DownloadManager.Request.NETWORK_MOBILE|
+|int_android.app.DownloadManager.Request.NETWORK_WIFI|
+|int_android.app.DownloadManager.Request.VISIBILITY_HIDDEN|
+|int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE|
+|int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED|
+|int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION|
+
+*android.app.DownloadManager.Request_Constructors*
+|android.app.DownloadManager.Request(Uri)|
+
+*android.app.DownloadManager.Request_Methods*
+|android.app.DownloadManager.Request.addRequestHeader(String,String)|Add an HTT
+|android.app.DownloadManager.Request.allowScanningByMediaScanner()|If the file 
+|android.app.DownloadManager.Request.setAllowedNetworkTypes(int)|Restrict the t
+|android.app.DownloadManager.Request.setAllowedOverMetered(boolean)|Set whether
+|android.app.DownloadManager.Request.setAllowedOverRoaming(boolean)|Set whether
+|android.app.DownloadManager.Request.setDescription(CharSequence)|Set a descrip
+|android.app.DownloadManager.Request.setDestinationInExternalFilesDir(Context,String,String)|
+|android.app.DownloadManager.Request.setDestinationInExternalPublicDir(String,String)|
+|android.app.DownloadManager.Request.setDestinationToSystemCache()|Set the loca
+|android.app.DownloadManager.Request.setDestinationUri(Uri)|Set the local desti
+|android.app.DownloadManager.Request.setMimeType(String)|Set the MIME content t
+|android.app.DownloadManager.Request.setNotificationVisibility(int)|Control whe
+|android.app.DownloadManager.Request.setShowRunningNotification(boolean)|Contro
+|android.app.DownloadManager.Request.setTitle(CharSequence)|Set the title of th
+|android.app.DownloadManager.Request.setVisibleInDownloadsUi(boolean)|Set wheth
+
+*android.app.DownloadManager.Request_Description*
+
+This class contains all the information necessary to request a new download. 
+The URI is the only required parameter. 
+
+Note that the default download destination is a shared volume where the system 
+might delete your file if it needs to reclaim space for system use. If this is 
+a problem, use a location on external storage (see 
+(|android.app.DownloadManager.Request|) . 
+
+
+
+*int_android.app.DownloadManager.Request.NETWORK_BLUETOOTH*
+
+Bit flag for (|android.app.DownloadManager.Request|) corresponding to 
+(|android.net.ConnectivityManager|) . 
+
+
+*int_android.app.DownloadManager.Request.NETWORK_MOBILE*
+
+Bit flag for (|android.app.DownloadManager.Request|) corresponding to 
+(|android.net.ConnectivityManager|) . 
+
+
+*int_android.app.DownloadManager.Request.NETWORK_WIFI*
+
+Bit flag for (|android.app.DownloadManager.Request|) corresponding to 
+(|android.net.ConnectivityManager|) . 
+
+
+*int_android.app.DownloadManager.Request.VISIBILITY_HIDDEN*
+
+This download doesn't show in the UI or in the notifications. 
+
+
+*int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE*
+
+This download is visible but only shows in the notifications while it's in 
+progress. 
+
+
+*int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED*
+
+This download is visible and shows in the notifications while in progress and 
+after completion. 
+
+
+*int_android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION*
+
+This download shows in the notifications after completion ONLY. It is usuable 
+only with (|android.app.DownloadManager|) . 
+
+
+
+*android.app.DownloadManager.Request(Uri)*
+
+public DownloadManager.Request(android.net.Uri uri)
+
+
+
+    uri - the HTTP URI to download. 
+
+*android.app.DownloadManager.Request.addRequestHeader(String,String)*
+
+public |android.app.DownloadManager.Request| addRequestHeader(
+  java.lang.String header,
+  java.lang.String value)
+
+Add an HTTP header to be included with the download request. The header will be 
+added to the end of the list. 
+
+
+    header - HTTP header name 
+    value - header value 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.allowScanningByMediaScanner()*
+
+public void allowScanningByMediaScanner()
+
+If the file to be downloaded is to be scanned by MediaScanner, this method 
+should be called before (|android.app.DownloadManager|) is called. 
+
+
+
+*android.app.DownloadManager.Request.setAllowedNetworkTypes(int)*
+
+public |android.app.DownloadManager.Request| setAllowedNetworkTypes(int flags)
+
+Restrict the types of networks over which this download may proceed. By 
+default, all network types are allowed. Consider using 
+(|android.app.DownloadManager.Request|) instead, since it's more flexible. 
+
+
+    flags - any combination of the NETWORK_* bit flags. 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setAllowedOverMetered(boolean)*
+
+public |android.app.DownloadManager.Request| setAllowedOverMetered(boolean allow)
+
+Set whether this download may proceed over a metered network connection. By 
+default, metered networks are allowed. 
+
+
+
+*android.app.DownloadManager.Request.setAllowedOverRoaming(boolean)*
+
+public |android.app.DownloadManager.Request| setAllowedOverRoaming(boolean allowed)
+
+Set whether this download may proceed over a roaming connection. By default, 
+roaming is allowed. 
+
+
+    allowed - whether to allow a roaming connection to be used 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setDescription(CharSequence)*
+
+public |android.app.DownloadManager.Request| setDescription(java.lang.CharSequence description)
+
+Set a description of this download, to be displayed in notifications (if 
+enabled) 
+
+
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setDestinationInExternalFilesDir(Context,String,String)*
+
+public |android.app.DownloadManager.Request| setDestinationInExternalFilesDir(
+  android.content.Context context,
+  java.lang.String dirType,
+  java.lang.String subPath)
+
+Set the local destination for the downloaded file to a path within the 
+application's external files directory (as returned by 
+(|android.content.Context|) . 
+
+The downloaded file is not scanned by MediaScanner. But it can be made 
+scannable by calling (|android.app.DownloadManager.Request|) . 
+
+
+    context - the {@link Context} to use in determining the external files directory 
+    dirType - the directory type to pass to {@link Context#getExternalFilesDir(String)} 
+    subPath - the path within the external directory, including the destination filename 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setDestinationInExternalPublicDir(String,String)*
+
+public |android.app.DownloadManager.Request| setDestinationInExternalPublicDir(
+  java.lang.String dirType,
+  java.lang.String subPath)
+
+Set the local destination for the downloaded file to a path within the public 
+external storage directory (as returned by (|android.os.Environment|) ). 
+
+The downloaded file is not scanned by MediaScanner. But it can be made 
+scannable by calling (|android.app.DownloadManager.Request|) . 
+
+
+    dirType - the directory type to pass to {@link 
+       Environment#getExternalStoragePublicDirectory(String)} 
+    subPath - the path within the external directory, including the destination filename 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setDestinationToSystemCache()*
+
+public |android.app.DownloadManager.Request| setDestinationToSystemCache()
+
+Set the local destination for the downloaded file to the system cache dir 
+(/cache). This is only available to System apps with the permission 
+(|android.Manifest.permission|) . 
+
+The downloaded file is not scanned by MediaScanner. But it can be made 
+scannable by calling (|android.app.DownloadManager.Request|) . 
+
+Files downloaded to /cache may be deleted by the system at any time to reclaim 
+space. 
+
+
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setDestinationUri(Uri)*
+
+public |android.app.DownloadManager.Request| setDestinationUri(android.net.Uri uri)
+
+Set the local destination for the downloaded file. Must be a file URI to a path 
+on external storage, and the calling application must have the 
+WRITE_EXTERNAL_STORAGE permission. 
+
+The downloaded file is not scanned by MediaScanner. But it can be made 
+scannable by calling (|android.app.DownloadManager.Request|) . 
+
+By default, downloads are saved to a generated filename in the shared download 
+cache and may be deleted by the system at any time to reclaim space. 
+
+
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setMimeType(String)*
+
+public |android.app.DownloadManager.Request| setMimeType(java.lang.String mimeType)
+
+Set the MIME content type of this download. This will override the content type 
+declared in the server's response. 
+
+
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setNotificationVisibility(int)*
+
+public |android.app.DownloadManager.Request| setNotificationVisibility(int visibility)
+
+Control whether a system notification is posted by the download manager while 
+this download is running or when it is completed. If enabled, the download 
+manager posts notifications about downloads through the system 
+(|android.app.NotificationManager|) . By default, a notification is shown only 
+when the download is in progress. 
+
+It can take the following values: (|android.app.DownloadManager.Request|) , 
+(|android.app.DownloadManager.Request|) , 
+(|android.app.DownloadManager.Request|) . 
+
+If set to (|android.app.DownloadManager.Request|) , this requires the 
+permission android.permission.DOWNLOAD_WITHOUT_NOTIFICATION. 
+
+
+    visibility - the visibility setting value 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setShowRunningNotification(boolean)*
+
+public |android.app.DownloadManager.Request| setShowRunningNotification(boolean show)
+
+Control whether a system notification is posted by the download manager while 
+this download is running. If enabled, the download manager posts notifications 
+about downloads through the system (|android.app.NotificationManager|) . By 
+default, a notification is shown. 
+
+If set to false, this requires the permission 
+android.permission.DOWNLOAD_WITHOUT_NOTIFICATION. 
+
+    Deprecated: use {@link #setNotificationVisibility(int)}
+
+    show - whether the download manager should show a notification for this download. 
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setTitle(CharSequence)*
+
+public |android.app.DownloadManager.Request| setTitle(java.lang.CharSequence title)
+
+Set the title of this download, to be displayed in notifications (if enabled). 
+If no title is given, a default one will be assigned based on the download 
+filename, once the download starts. 
+
+
+
+    Returns: 
+
+*android.app.DownloadManager.Request.setVisibleInDownloadsUi(boolean)*
+
+public |android.app.DownloadManager.Request| setVisibleInDownloadsUi(boolean isVisible)
+
+Set whether this download should be displayed in the system's Downloads UI. 
+True by default. 
+
+
+    isVisible - whether to display this download in the Downloads UI 
+
+    Returns: 
+
+

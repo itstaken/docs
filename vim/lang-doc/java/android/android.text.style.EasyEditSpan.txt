@@ -1,0 +1,142 @@
+*android.text.style.EasyEditSpan* *EasyEditSpan* Provides an easy way to edit a 
+
+public class EasyEditSpan
+  extends    |java.lang.Object|
+  implements |android.text.ParcelableSpan|
+
+|android.text.style.EasyEditSpan_Description|
+|android.text.style.EasyEditSpan_Fields|
+|android.text.style.EasyEditSpan_Constructors|
+|android.text.style.EasyEditSpan_Methods|
+
+================================================================================
+
+*android.text.style.EasyEditSpan_Fields*
+|java.lang.String_android.text.style.EasyEditSpan.EXTRA_TEXT_CHANGED_TYPE|
+|int_android.text.style.EasyEditSpan.TEXT_DELETED|
+|int_android.text.style.EasyEditSpan.TEXT_MODIFIED|
+
+*android.text.style.EasyEditSpan_Constructors*
+|android.text.style.EasyEditSpan()|Creates the span.
+|android.text.style.EasyEditSpan(Parcel)|Constructor called fromTextUtilsto res
+|android.text.style.EasyEditSpan(PendingIntent)|
+
+*android.text.style.EasyEditSpan_Methods*
+|android.text.style.EasyEditSpan.describeContents()|
+|android.text.style.EasyEditSpan.getPendingIntent()|
+|android.text.style.EasyEditSpan.getSpanTypeId()|
+|android.text.style.EasyEditSpan.isDeleteEnabled()|
+|android.text.style.EasyEditSpan.setDeleteEnabled(boolean)|Enables or disables 
+|android.text.style.EasyEditSpan.writeToParcel(Parcel,int)|
+
+*android.text.style.EasyEditSpan_Description*
+
+Provides an easy way to edit a portion of text. 
+
+The (|android.widget.TextView|) uses this span to allow the user to delete a 
+chuck of text in one click. (|android.widget.TextView|) removes the span when 
+the user deletes the whole text or modifies it. 
+
+This span can be also used to receive notification when the user deletes or 
+modifies the text; 
+
+
+
+*java.lang.String_android.text.style.EasyEditSpan.EXTRA_TEXT_CHANGED_TYPE*
+
+The extra key field in the pending intent that describes how the text changed. 
+
+
+*int_android.text.style.EasyEditSpan.TEXT_DELETED*
+
+The value of (|android.text.style.EasyEditSpan|) when the text wrapped by this 
+span is deleted. 
+
+
+*int_android.text.style.EasyEditSpan.TEXT_MODIFIED*
+
+The value of (|android.text.style.EasyEditSpan|) when the text wrapped by this 
+span is modified. 
+
+
+
+*android.text.style.EasyEditSpan()*
+
+public EasyEditSpan()
+
+Creates the span. No intent is sent when the wrapped text is modified or 
+deleted. 
+
+
+*android.text.style.EasyEditSpan(Parcel)*
+
+public EasyEditSpan(android.os.Parcel source)
+
+Constructor called from (|android.text.TextUtils|) to restore the span. 
+
+
+*android.text.style.EasyEditSpan(PendingIntent)*
+
+public EasyEditSpan(android.app.PendingIntent pendingIntent)
+
+
+
+    pendingIntent - The intent will be sent when the wrapped text is deleted or modified. When the 
+       pending intent is sent, {@link #EXTRA_TEXT_CHANGED_TYPE} is added in the 
+       intent to describe how the text changed. 
+
+*android.text.style.EasyEditSpan.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.text.style.EasyEditSpan.getPendingIntent()*
+
+public |android.app.PendingIntent| getPendingIntent()
+
+
+
+
+
+    Returns: the pending intent to send when the wrapped text is deleted or modified. 
+
+*android.text.style.EasyEditSpan.getSpanTypeId()*
+
+public int getSpanTypeId()
+
+
+
+
+
+*android.text.style.EasyEditSpan.isDeleteEnabled()*
+
+public boolean isDeleteEnabled()
+
+
+
+
+
+    Returns: True if the {@link TextView} should offer the ability to delete the text. 
+
+*android.text.style.EasyEditSpan.setDeleteEnabled(boolean)*
+
+public void setDeleteEnabled(boolean value)
+
+Enables or disables the deletion of the text. 
+
+
+
+*android.text.style.EasyEditSpan.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

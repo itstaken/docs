@@ -1,0 +1,185 @@
+*android.widget.BaseExpandableListAdapter* *BaseExpandableListAdapter* Base clas
+
+public abstract class BaseExpandableListAdapter
+  extends    |java.lang.Object|
+  implements |android.widget.ExpandableListAdapter|
+             |android.widget.HeterogeneousExpandableList|
+
+|android.widget.BaseExpandableListAdapter_Description|
+|android.widget.BaseExpandableListAdapter_Fields|
+|android.widget.BaseExpandableListAdapter_Constructors|
+|android.widget.BaseExpandableListAdapter_Methods|
+
+================================================================================
+
+*android.widget.BaseExpandableListAdapter_Constructors*
+|android.widget.BaseExpandableListAdapter()|
+
+*android.widget.BaseExpandableListAdapter_Methods*
+|android.widget.BaseExpandableListAdapter.areAllItemsEnabled()|
+|android.widget.BaseExpandableListAdapter.getChildType(int,int)|
+|android.widget.BaseExpandableListAdapter.getChildTypeCount()|
+|android.widget.BaseExpandableListAdapter.getCombinedChildId(long,long)|Overrid
+|android.widget.BaseExpandableListAdapter.getCombinedGroupId(long)|Override thi
+|android.widget.BaseExpandableListAdapter.getGroupType(int)|
+|android.widget.BaseExpandableListAdapter.getGroupTypeCount()|
+|android.widget.BaseExpandableListAdapter.isEmpty()|
+|android.widget.BaseExpandableListAdapter.notifyDataSetChanged()|
+|android.widget.BaseExpandableListAdapter.notifyDataSetInvalidated()|
+|android.widget.BaseExpandableListAdapter.onGroupCollapsed(int)|
+|android.widget.BaseExpandableListAdapter.onGroupExpanded(int)|
+|android.widget.BaseExpandableListAdapter.registerDataSetObserver(DataSetObserver)|
+|android.widget.BaseExpandableListAdapter.unregisterDataSetObserver(DataSetObserver)|
+
+*android.widget.BaseExpandableListAdapter_Description*
+
+Base class for a (|android.widget.ExpandableListAdapter|) used to provide data 
+and Views from some data to an expandable list view. 
+
+Adapters inheriting this class should verify that the base implementations of 
+(|android.widget.BaseExpandableListAdapter|) and 
+(|android.widget.BaseExpandableListAdapter|) are correct in generating unique 
+IDs from the group/children IDs. 
+
+
+
+*android.widget.BaseExpandableListAdapter()*
+
+public BaseExpandableListAdapter()
+
+
+
+
+*android.widget.BaseExpandableListAdapter.areAllItemsEnabled()*
+
+public boolean areAllItemsEnabled()
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.getChildType(int,int)*
+
+public int getChildType(
+  int groupPosition,
+  int childPosition)
+
+
+
+
+
+    Returns: 0 for any group or child position, since only one child type count is declared. 
+
+*android.widget.BaseExpandableListAdapter.getChildTypeCount()*
+
+public int getChildTypeCount()
+
+
+
+
+
+    Returns: 1 as a default value in BaseExpandableListAdapter. 
+
+*android.widget.BaseExpandableListAdapter.getCombinedChildId(long,long)*
+
+public long getCombinedChildId(
+  long groupId,
+  long childId)
+
+Override this method if you foresee a clash in IDs based on this scheme: 
+
+Base implementation returns a long: bit 0: Whether this ID points to a child 
+(unset) or group (set), so for this method this bit will be 1. bit 1-31: Lower 
+31 bits of the groupId bit 32-63: Lower 32 bits of the childId. 
+
+
+
+*android.widget.BaseExpandableListAdapter.getCombinedGroupId(long)*
+
+public long getCombinedGroupId(long groupId)
+
+Override this method if you foresee a clash in IDs based on this scheme: 
+
+Base implementation returns a long: bit 0: Whether this ID points to a child 
+(unset) or group (set), so for this method this bit will be 0. bit 1-31: Lower 
+31 bits of the groupId bit 32-63: Lower 32 bits of the childId. 
+
+
+
+*android.widget.BaseExpandableListAdapter.getGroupType(int)*
+
+public int getGroupType(int groupPosition)
+
+
+
+
+
+    Returns: 0 for any groupPosition, since only one group type count is declared. 
+
+*android.widget.BaseExpandableListAdapter.getGroupTypeCount()*
+
+public int getGroupTypeCount()
+
+
+
+
+
+    Returns: 1 as a default value in BaseExpandableListAdapter. 
+
+*android.widget.BaseExpandableListAdapter.isEmpty()*
+
+public boolean isEmpty()
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.notifyDataSetChanged()*
+
+public void notifyDataSetChanged()
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.notifyDataSetInvalidated()*
+
+public void notifyDataSetInvalidated()
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.onGroupCollapsed(int)*
+
+public void onGroupCollapsed(int groupPosition)
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.onGroupExpanded(int)*
+
+public void onGroupExpanded(int groupPosition)
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.registerDataSetObserver(DataSetObserver)*
+
+public void registerDataSetObserver(android.database.DataSetObserver observer)
+
+
+
+
+
+*android.widget.BaseExpandableListAdapter.unregisterDataSetObserver(DataSetObserver)*
+
+public void unregisterDataSetObserver(android.database.DataSetObserver observer)
+
+
+
+
+
+

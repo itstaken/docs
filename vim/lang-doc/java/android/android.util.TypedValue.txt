@@ -1,0 +1,544 @@
+*android.util.TypedValue* *TypedValue* Container for a dynamically typed data va
+
+public class TypedValue
+  extends    |java.lang.Object|
+
+|android.util.TypedValue_Description|
+|android.util.TypedValue_Fields|
+|android.util.TypedValue_Constructors|
+|android.util.TypedValue_Methods|
+
+================================================================================
+
+*android.util.TypedValue_Fields*
+|int_android.util.TypedValue.assetCookie|
+|int_android.util.TypedValue.changingConfigurations|
+|int_android.util.TypedValue.COMPLEX_MANTISSA_MASK|
+|int_android.util.TypedValue.COMPLEX_MANTISSA_SHIFT|
+|int_android.util.TypedValue.COMPLEX_RADIX_0p23|
+|int_android.util.TypedValue.COMPLEX_RADIX_16p7|
+|int_android.util.TypedValue.COMPLEX_RADIX_23p0|
+|int_android.util.TypedValue.COMPLEX_RADIX_8p15|
+|int_android.util.TypedValue.COMPLEX_RADIX_MASK|
+|int_android.util.TypedValue.COMPLEX_RADIX_SHIFT|
+|int_android.util.TypedValue.COMPLEX_UNIT_DIP|
+|int_android.util.TypedValue.COMPLEX_UNIT_FRACTION|
+|int_android.util.TypedValue.COMPLEX_UNIT_FRACTION_PARENT|
+|int_android.util.TypedValue.COMPLEX_UNIT_IN|
+|int_android.util.TypedValue.COMPLEX_UNIT_MASK|
+|int_android.util.TypedValue.COMPLEX_UNIT_MM|
+|int_android.util.TypedValue.COMPLEX_UNIT_PT|
+|int_android.util.TypedValue.COMPLEX_UNIT_PX|
+|int_android.util.TypedValue.COMPLEX_UNIT_SHIFT|
+|int_android.util.TypedValue.COMPLEX_UNIT_SP|
+|int_android.util.TypedValue.data|
+|int_android.util.TypedValue.density|
+|int_android.util.TypedValue.DENSITY_DEFAULT|
+|int_android.util.TypedValue.DENSITY_NONE|
+|int_android.util.TypedValue.resourceId|
+|java.lang.CharSequence_android.util.TypedValue.string|
+|int_android.util.TypedValue.type|
+|int_android.util.TypedValue.TYPE_ATTRIBUTE|
+|int_android.util.TypedValue.TYPE_DIMENSION|
+|int_android.util.TypedValue.TYPE_FIRST_COLOR_INT|
+|int_android.util.TypedValue.TYPE_FIRST_INT|
+|int_android.util.TypedValue.TYPE_FLOAT|
+|int_android.util.TypedValue.TYPE_FRACTION|
+|int_android.util.TypedValue.TYPE_INT_BOOLEAN|
+|int_android.util.TypedValue.TYPE_INT_COLOR_ARGB4|
+|int_android.util.TypedValue.TYPE_INT_COLOR_ARGB8|
+|int_android.util.TypedValue.TYPE_INT_COLOR_RGB4|
+|int_android.util.TypedValue.TYPE_INT_COLOR_RGB8|
+|int_android.util.TypedValue.TYPE_INT_DEC|
+|int_android.util.TypedValue.TYPE_INT_HEX|
+|int_android.util.TypedValue.TYPE_LAST_COLOR_INT|
+|int_android.util.TypedValue.TYPE_LAST_INT|
+|int_android.util.TypedValue.TYPE_NULL|
+|int_android.util.TypedValue.TYPE_REFERENCE|
+|int_android.util.TypedValue.TYPE_STRING|
+
+*android.util.TypedValue_Constructors*
+|android.util.TypedValue()|
+
+*android.util.TypedValue_Methods*
+|android.util.TypedValue.applyDimension(int,float,DisplayMetrics)|Converts an u
+|android.util.TypedValue.coerceToString()|Regardless of the actual type of the 
+|android.util.TypedValue.coerceToString(int,int)|Perform type conversion as per
+|android.util.TypedValue.complexToDimension(int,DisplayMetrics)|Converts a comp
+|android.util.TypedValue.complexToDimensionNoisy(int,DisplayMetrics)|
+|android.util.TypedValue.complexToDimensionPixelOffset(int,DisplayMetrics)|Conv
+|android.util.TypedValue.complexToDimensionPixelSize(int,DisplayMetrics)|Conver
+|android.util.TypedValue.complexToFloat(int)|Retrieve the base value from a com
+|android.util.TypedValue.complexToFraction(int,float,float)|Converts a complex 
+|android.util.TypedValue.getDimension(DisplayMetrics)|Return the data for this 
+|android.util.TypedValue.getFloat()|Return the data for this value as a float.
+|android.util.TypedValue.getFraction(float,float)|Return the data for this valu
+|android.util.TypedValue.setTo(TypedValue)|
+|android.util.TypedValue.toString()|
+
+*android.util.TypedValue_Description*
+
+Container for a dynamically typed data value. Primarily used with 
+(|android.content.res.Resources|) for holding resource values. 
+
+
+
+*int_android.util.TypedValue.assetCookie*
+
+Additional information about where the value came from; only set for strings. 
+
+
+*int_android.util.TypedValue.changingConfigurations*
+
+If Value came from a resource, these are the configurations for which its 
+contents can change. 
+
+
+*int_android.util.TypedValue.COMPLEX_MANTISSA_MASK*
+
+Complex data: mask to extract mantissa information (after shifting by 
+(|android.util.TypedValue|) ). This gives us 23 bits of precision; the top bit 
+is the sign. 
+
+
+*int_android.util.TypedValue.COMPLEX_MANTISSA_SHIFT*
+
+Complex data: bit location of mantissa information. 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_0p23*
+
+Complex data: the mantissa magnitude is 0 bits -- i.e, 0x0.nnnnnn 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_16p7*
+
+Complex data: the mantissa magnitude is 16 bits -- i.e, 0xnnnn.nn 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_23p0*
+
+Complex data: the mantissa is an integral number -- i.e., 0xnnnnnn.0 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_8p15*
+
+Complex data: the mantissa magnitude is 8 bits -- i.e, 0xnn.nnnn 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_MASK*
+
+Complex data: mask to extract radix information (after shifting by 
+(|android.util.TypedValue|) ). This give us 4 possible fixed point 
+representations as defined below. 
+
+
+*int_android.util.TypedValue.COMPLEX_RADIX_SHIFT*
+
+Complex data: where the radix information is, telling where the decimal place 
+appears in the mantissa. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_DIP*
+
+(|android.util.TypedValue|) complex unit: Value is Device Independent Pixels. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_FRACTION*
+
+(|android.util.TypedValue|) complex unit: A basic fraction of the overall size. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_FRACTION_PARENT*
+
+(|android.util.TypedValue|) complex unit: A fraction of the parent size. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_IN*
+
+(|android.util.TypedValue|) complex unit: Value is in inches. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_MASK*
+
+Complex data: mask to extract unit information (after shifting by 
+(|android.util.TypedValue|) ). This gives us 16 possible types, as defined 
+below. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_MM*
+
+(|android.util.TypedValue|) complex unit: Value is in millimeters. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_PT*
+
+(|android.util.TypedValue|) complex unit: Value is in points. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_PX*
+
+(|android.util.TypedValue|) complex unit: Value is raw pixels. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_SHIFT*
+
+Complex data: bit location of unit information. 
+
+
+*int_android.util.TypedValue.COMPLEX_UNIT_SP*
+
+(|android.util.TypedValue|) complex unit: Value is a scaled pixel. 
+
+
+*int_android.util.TypedValue.data*
+
+Basic data in the value, interpreted according to (|android.util.TypedValue|) 
+
+
+*int_android.util.TypedValue.density*
+
+If the Value came from a resource, this holds the corresponding pixel density. 
+
+
+*int_android.util.TypedValue.DENSITY_DEFAULT*
+
+If (|android.util.TypedValue|) is equal to this value, then the density should 
+be treated as the system's default density value: 
+(|android.util.DisplayMetrics|) . 
+
+
+*int_android.util.TypedValue.DENSITY_NONE*
+
+If (|android.util.TypedValue|) is equal to this value, then there is no density 
+associated with the resource and it should not be scaled. 
+
+
+*int_android.util.TypedValue.resourceId*
+
+If Value came from a resource, this holds the corresponding resource id. 
+
+
+*java.lang.CharSequence_android.util.TypedValue.string*
+
+If the value holds a string, this is it. 
+
+
+*int_android.util.TypedValue.type*
+
+The type held by this value, as defined by the constants here. This tells you 
+how to interpret the other fields in the object. 
+
+
+*int_android.util.TypedValue.TYPE_ATTRIBUTE*
+
+The data field holds an attribute resource identifier (referencing an attribute 
+in the current theme style, not a resource entry). 
+
+
+*int_android.util.TypedValue.TYPE_DIMENSION*
+
+The data field holds a complex number encoding a dimension value. 
+
+
+*int_android.util.TypedValue.TYPE_FIRST_COLOR_INT*
+
+Identifies the start of integer values that were specified as color constants 
+(starting with '#'). 
+
+
+*int_android.util.TypedValue.TYPE_FIRST_INT*
+
+Identifies the start of plain integer values. Any type value from this to 
+(|android.util.TypedValue|) means the data field holds a generic integer value. 
+
+
+*int_android.util.TypedValue.TYPE_FLOAT*
+
+The data field holds an IEEE 754 floating point number. 
+
+
+*int_android.util.TypedValue.TYPE_FRACTION*
+
+The data field holds a complex number encoding a fraction of a container. 
+
+
+*int_android.util.TypedValue.TYPE_INT_BOOLEAN*
+
+The data field holds 0 or 1 that was originally specified as "false" or "true". 
+
+
+*int_android.util.TypedValue.TYPE_INT_COLOR_ARGB4*
+
+The data field holds a color that was originally specified as #argb. 
+
+
+*int_android.util.TypedValue.TYPE_INT_COLOR_ARGB8*
+
+The data field holds a color that was originally specified as #aarrggbb. 
+
+
+*int_android.util.TypedValue.TYPE_INT_COLOR_RGB4*
+
+The data field holds a color that was originally specified as #rgb. 
+
+
+*int_android.util.TypedValue.TYPE_INT_COLOR_RGB8*
+
+The data field holds a color that was originally specified as #rrggbb. 
+
+
+*int_android.util.TypedValue.TYPE_INT_DEC*
+
+The data field holds a number that was originally specified in decimal. 
+
+
+*int_android.util.TypedValue.TYPE_INT_HEX*
+
+The data field holds a number that was originally specified in hexadecimal 
+(0xn). 
+
+
+*int_android.util.TypedValue.TYPE_LAST_COLOR_INT*
+
+Identifies the end of integer values that were specified as color constants. 
+
+
+*int_android.util.TypedValue.TYPE_LAST_INT*
+
+Identifies the end of plain integer values. 
+
+
+*int_android.util.TypedValue.TYPE_NULL*
+
+The value contains no data. 
+
+
+*int_android.util.TypedValue.TYPE_REFERENCE*
+
+The data field holds a resource identifier. 
+
+
+*int_android.util.TypedValue.TYPE_STRING*
+
+The string field holds string data. In addition, if data is non-zero then it is 
+the string block index of the string and assetCookie is the set of assets the 
+string came from. 
+
+
+
+*android.util.TypedValue()*
+
+public TypedValue()
+
+
+
+
+*android.util.TypedValue.applyDimension(int,float,DisplayMetrics)*
+
+public static float applyDimension(
+  int unit,
+  float value,
+  android.util.DisplayMetrics metrics)
+
+Converts an unpacked complex data value holding a dimension to its final 
+floating point value. The two parameters unit and value are as in 
+(|android.util.TypedValue|) . 
+
+
+    unit - The unit to convert from. 
+    value - The value to apply the unit to. 
+    metrics - Current display metrics to use in the conversion -- supplies display density 
+       and scaling information. 
+
+    Returns: The complex floating point value multiplied by the appropriate metrics 
+             depending on its unit. 
+
+*android.util.TypedValue.coerceToString()*
+
+public final |java.lang.CharSequence| coerceToString()
+
+Regardless of the actual type of the value, try to convert it to a string 
+value. For example, a color type will be converted to a string of the form 
+#aarrggbb. 
+
+
+
+    Returns: CharSequence The coerced string value. If the value is null or the type is not 
+             known, null is returned. 
+
+*android.util.TypedValue.coerceToString(int,int)*
+
+public static final |java.lang.String| coerceToString(
+  int type,
+  int data)
+
+Perform type conversion as per (|android.util.TypedValue|) on an explicitly 
+supplied type and data. 
+
+
+    type - The data type identifier. 
+    data - The data value. 
+
+    Returns: String The coerced string value. If the value is null or the type is not known, 
+             null is returned. 
+
+*android.util.TypedValue.complexToDimension(int,DisplayMetrics)*
+
+public static float complexToDimension(
+  int data,
+  android.util.DisplayMetrics metrics)
+
+Converts a complex data value holding a dimension to its final floating point 
+value. The given data must be structured as a (|android.util.TypedValue|) . 
+
+
+    data - A complex data value holding a unit, magnitude, and mantissa. 
+    metrics - Current display metrics to use in the conversion -- supplies display density 
+       and scaling information. 
+
+    Returns: The complex floating point value multiplied by the appropriate metrics 
+             depending on its unit. 
+
+*android.util.TypedValue.complexToDimensionNoisy(int,DisplayMetrics)*
+
+public static float complexToDimensionNoisy(
+  int data,
+  android.util.DisplayMetrics metrics)
+
+
+
+
+
+*android.util.TypedValue.complexToDimensionPixelOffset(int,DisplayMetrics)*
+
+public static int complexToDimensionPixelOffset(
+  int data,
+  android.util.DisplayMetrics metrics)
+
+Converts a complex data value holding a dimension to its final value as an 
+integer pixel offset. This is the same as (|android.util.TypedValue|) , except 
+the raw floating point value is truncated to an integer (pixel) value. The 
+given data must be structured as a (|android.util.TypedValue|) . 
+
+
+    data - A complex data value holding a unit, magnitude, and mantissa. 
+    metrics - Current display metrics to use in the conversion -- supplies display density 
+       and scaling information. 
+
+    Returns: The number of pixels specified by the data and its desired multiplier and 
+             units. 
+
+*android.util.TypedValue.complexToDimensionPixelSize(int,DisplayMetrics)*
+
+public static int complexToDimensionPixelSize(
+  int data,
+  android.util.DisplayMetrics metrics)
+
+Converts a complex data value holding a dimension to its final value as an 
+integer pixel size. This is the same as (|android.util.TypedValue|) , except 
+the raw floating point value is converted to an integer (pixel) value for use 
+as a size. A size conversion involves rounding the base value, and ensuring 
+that a non-zero base value is at least one pixel in size. The given data must 
+be structured as a (|android.util.TypedValue|) . 
+
+
+    data - A complex data value holding a unit, magnitude, and mantissa. 
+    metrics - Current display metrics to use in the conversion -- supplies display density 
+       and scaling information. 
+
+    Returns: The number of pixels specified by the data and its desired multiplier and 
+             units. 
+
+*android.util.TypedValue.complexToFloat(int)*
+
+public static float complexToFloat(int complex)
+
+Retrieve the base value from a complex data integer. This uses the 
+(|android.util.TypedValue|) and (|android.util.TypedValue|) fields of the data 
+to compute a floating point representation of the number they describe. The 
+units are ignored. 
+
+
+    complex - A complex data value. 
+
+    Returns: A floating point value corresponding to the complex data. 
+
+*android.util.TypedValue.complexToFraction(int,float,float)*
+
+public static float complexToFraction(
+  int data,
+  float base,
+  float pbase)
+
+Converts a complex data value holding a fraction to its final floating point 
+value. The given data must be structured as a (|android.util.TypedValue|) . 
+
+
+    data - A complex data value holding a unit, magnitude, and mantissa. 
+    base - The base value of this fraction. In other words, a standard fraction is 
+       multiplied by this value. 
+    pbase - The parent base value of this fraction. In other words, a parent fraction 
+       (nn%p) is multiplied by this value. 
+
+    Returns: The complex floating point value multiplied by the appropriate base value 
+             depending on its unit. 
+
+*android.util.TypedValue.getDimension(DisplayMetrics)*
+
+public float getDimension(android.util.DisplayMetrics metrics)
+
+Return the data for this value as a dimension. Only use for values whose type 
+is (|android.util.TypedValue|) . 
+
+
+    metrics - Current display metrics to use in the conversion -- supplies display density 
+       and scaling information. 
+
+    Returns: The complex floating point value multiplied by the appropriate metrics 
+             depending on its unit. 
+
+*android.util.TypedValue.getFloat()*
+
+public final float getFloat()
+
+Return the data for this value as a float. Only use for values whose type is 
+(|android.util.TypedValue|) . 
+
+
+
+*android.util.TypedValue.getFraction(float,float)*
+
+public float getFraction(
+  float base,
+  float pbase)
+
+Return the data for this value as a fraction. Only use for values whose type is 
+(|android.util.TypedValue|) . 
+
+
+    base - The base value of this fraction. In other words, a standard fraction is 
+       multiplied by this value. 
+    pbase - The parent base value of this fraction. In other words, a parent fraction 
+       (nn%p) is multiplied by this value. 
+
+    Returns: The complex floating point value multiplied by the appropriate base value 
+             depending on its unit. 
+
+*android.util.TypedValue.setTo(TypedValue)*
+
+public void setTo(android.util.TypedValue other)
+
+
+
+
+
+*android.util.TypedValue.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

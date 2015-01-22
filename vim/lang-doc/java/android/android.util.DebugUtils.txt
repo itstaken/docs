@@ -1,0 +1,77 @@
+*android.util.DebugUtils* *DebugUtils* Various utilities for debugging and loggi
+
+public class DebugUtils
+  extends    |java.lang.Object|
+
+|android.util.DebugUtils_Description|
+|android.util.DebugUtils_Fields|
+|android.util.DebugUtils_Constructors|
+|android.util.DebugUtils_Methods|
+
+================================================================================
+
+*android.util.DebugUtils_Constructors*
+|android.util.DebugUtils()|
+
+*android.util.DebugUtils_Methods*
+|android.util.DebugUtils.buildShortClassTag(Object,StringBuilder)|
+|android.util.DebugUtils.isObjectSelected(Object)|Filters objects against the A
+
+*android.util.DebugUtils_Description*
+
+Various utilities for debugging and logging. 
+
+
+
+*android.util.DebugUtils()*
+
+public DebugUtils()
+
+
+
+
+*android.util.DebugUtils.buildShortClassTag(Object,StringBuilder)*
+
+public static void buildShortClassTag(
+  java.lang.Object cls,
+  java.lang.StringBuilder out)
+
+
+
+
+
+*android.util.DebugUtils.isObjectSelected(Object)*
+
+public static boolean isObjectSelected(java.lang.Object object)
+
+Filters objects against the ANDROID_OBJECT_FILTER environment variable. This 
+environment variable can filter objects based on their class name and attribute 
+values. 
+
+Here is the syntax for ANDROID_OBJECT_FILTER: 
+
+ClassName@attribute1=value1@attribute2=value2... 
+
+Examples: 
+
+Select TextView instances: TextView Select TextView instances of text "Loading" 
+and bottom offset of 22: TextView@text=Loading.*@bottom=22 
+
+The class name and the values are regular expressions. 
+
+This class is useful for debugging and logging purpose: 
+
+if (DEBUG) { if (DebugUtils.isObjectSelected(childView) LOGV_ENABLED) { 
+Log.v(TAG, "Object " + childView + " logged!"); } } 
+
+NOTE: This method is very expensive as it relies heavily on regular expressions 
+and reflection. Calls to this method should always be stripped out of the 
+release binaries and avoided as much as possible in debug mode. 
+
+
+    object - any object to match against the ANDROID_OBJECT_FILTER environement variable 
+
+    Returns: true if object is selected by the ANDROID_OBJECT_FILTER environment variable, 
+             false otherwise 
+
+

@@ -1,0 +1,234 @@
+*android.view.ActionProvider* *ActionProvider* An ActionProvider defines rich me
+
+public abstract class ActionProvider
+  extends    |java.lang.Object|
+
+|android.view.ActionProvider_Description|
+|android.view.ActionProvider_Fields|
+|android.view.ActionProvider_Constructors|
+|android.view.ActionProvider_Methods|
+
+================================================================================
+
+*android.view.ActionProvider_Constructors*
+|android.view.ActionProvider(Context)|Creates a new instance.
+
+*android.view.ActionProvider_Methods*
+|android.view.ActionProvider.hasSubMenu()|Determines if this ActionProvider has
+|android.view.ActionProvider.isVisible()|If#overridesItemVisibility()returns tr
+|android.view.ActionProvider.onCreateActionView()|Factory method called by the 
+|android.view.ActionProvider.onCreateActionView(MenuItem)|Factory method called
+|android.view.ActionProvider.onPerformDefaultAction()|Performs an optional defa
+|android.view.ActionProvider.onPrepareSubMenu(SubMenu)|Called to prepare an ass
+|android.view.ActionProvider.overridesItemVisibility()|The result of this metho
+|android.view.ActionProvider.refreshVisibility()|If this ActionProvider is asso
+|android.view.ActionProvider.setSubUiVisibilityListener(ActionProvider.SubUiVisibilityListener)|
+|android.view.ActionProvider.setVisibilityListener(ActionProvider.VisibilityListener)|
+|android.view.ActionProvider.subUiVisibilityChanged(boolean)|Notify the system 
+
+*android.view.ActionProvider_Description*
+
+An ActionProvider defines rich menu interaction in a single component. 
+ActionProvider can generate action views for use in the action bar, dynamically 
+populate submenus of a MenuItem, and handle default menu item invocations. 
+
+An ActionProvider can be optionally specified for a (|android.view.MenuItem|) 
+and will be responsible for creating the action view that appears in the 
+(|android.app.ActionBar|) in place of a simple button in the bar. When the menu 
+item is presented in a way that does not allow custom action views, (e.g. in an 
+overflow menu,) the ActionProvider can perform a default action. 
+
+There are two ways to use an action provider: 
+
+Set the action provider on a (|android.view.MenuItem|) directly by calling 
+(|android.view.MenuItem|) . 
+
+Declare the action provider in an XML menu resource. For example: 
+
+<item android:id="@+id/my_menu_item" android:title="Title" 
+android:icon="@drawable/my_menu_item_icon" android:showAsAction="ifRoom" 
+android:actionProviderClass="foo.bar.SomeActionProvider" /> 
+
+
+
+
+
+
+
+
+
+*android.view.ActionProvider(Context)*
+
+public ActionProvider(android.content.Context context)
+
+Creates a new instance. ActionProvider classes should always implement a 
+constructor that takes a single Context parameter for inflating from menu XML. 
+
+    context - Context for accessing resources. 
+
+*android.view.ActionProvider.hasSubMenu()*
+
+public boolean hasSubMenu()
+
+Determines if this ActionProvider has a submenu associated with it. 
+
+Associated submenus will be shown when an action view is not. This provider 
+instance will receive a call to (|android.view.ActionProvider|) after the call 
+to (|android.view.ActionProvider|) and before a submenu is displayed to the 
+user. 
+
+
+
+    Returns: true if the item backed by this provider should have an associated submenu 
+
+*android.view.ActionProvider.isVisible()*
+
+public boolean isVisible()
+
+If (|android.view.ActionProvider|) returns true, the return value of this 
+method will help determine the visibility of the (|android.view.MenuItem|) this 
+ActionProvider is bound to. 
+
+If the MenuItem's visibility is explicitly set to false by the application, the 
+MenuItem will not be shown, even if this method returns true. 
+
+
+
+    Returns: true if the MenuItem this ActionProvider is bound to is visible, false if it is 
+             invisible. The default implementation returns true. 
+
+*android.view.ActionProvider.onCreateActionView()*
+
+public abstract |android.view.View| onCreateActionView()
+
+Factory method called by the Android framework to create new action views. 
+
+This method has been deprecated in favor of (|android.view.ActionProvider|) . 
+Newer apps that wish to support platform versions prior to API 16 should also 
+implement this method to return a valid action view. 
+
+    Deprecated: use {@link #onCreateActionView(MenuItem)}
+
+
+    Returns: A new action view. 
+
+*android.view.ActionProvider.onCreateActionView(MenuItem)*
+
+public |android.view.View| onCreateActionView(android.view.MenuItem forItem)
+
+Factory method called by the Android framework to create new action views. This 
+method returns a new action view for the given MenuItem. 
+
+If your ActionProvider implementation overrides the deprecated no-argument 
+overload (|android.view.ActionProvider|) , overriding this method for devices 
+running API 16 or later is recommended but optional. The default implementation 
+calls (|android.view.ActionProvider|) for compatibility with applications 
+written for older platform versions. 
+
+
+    forItem - MenuItem to create the action view for 
+
+    Returns: the new action view 
+
+*android.view.ActionProvider.onPerformDefaultAction()*
+
+public boolean onPerformDefaultAction()
+
+Performs an optional default action. 
+
+For the case of an action provider placed in a menu item not shown as an action 
+this method is invoked if previous callbacks for processing menu selection has 
+handled the event. 
+
+A menu item selection is processed in the following order: 
+
+Receiving a call to 
+MenuItem.OnMenuItemClickListener.onMenuItemClick(|android.view.MenuItem.OnMenuItemClickListener|)
+. 
+
+Receiving a call to 
+Activity.onOptionsItemSelected(MenuItem)(|android.app.Activity|) 
+
+Receiving a call to 
+Fragment.onOptionsItemSelected(MenuItem)(|android.app.Fragment|) 
+
+Launching the (|android.content.Intent|) set via 
+MenuItem.setIntent(android.content.Intent)(|android.view.MenuItem|) 
+
+Invoking this method. 
+
+
+
+The default implementation does not perform any action and returns false. 
+
+
+
+*android.view.ActionProvider.onPrepareSubMenu(SubMenu)*
+
+public void onPrepareSubMenu(android.view.SubMenu subMenu)
+
+Called to prepare an associated submenu for the menu item backed by this 
+ActionProvider. 
+
+if (|android.view.ActionProvider|) returns true, this method will be called 
+when the menu item is selected to prepare the submenu for presentation to the 
+user. Apps may use this to create or alter submenu content right before 
+display. 
+
+
+    subMenu - Submenu that will be displayed 
+
+*android.view.ActionProvider.overridesItemVisibility()*
+
+public boolean overridesItemVisibility()
+
+The result of this method determines whether or not 
+(|android.view.ActionProvider|) will be used by the (|android.view.MenuItem|) 
+this ActionProvider is bound to help determine its visibility. 
+
+
+
+    Returns: true if this ActionProvider overrides the visibility of the MenuItem it is 
+             bound to, false otherwise. The default implementation returns 
+             false. 
+
+*android.view.ActionProvider.refreshVisibility()*
+
+public void refreshVisibility()
+
+If this ActionProvider is associated with an item in a menu, refresh the 
+visibility of the item based on (|android.view.ActionProvider|) and 
+(|android.view.ActionProvider|) . If (|android.view.ActionProvider|) returns 
+false, this call will have no effect. 
+
+
+
+*android.view.ActionProvider.setSubUiVisibilityListener(ActionProvider.SubUiVisibilityListener)*
+
+public void setSubUiVisibilityListener(android.view.ActionProvider.SubUiVisibilityListener listener)
+
+
+
+
+
+*android.view.ActionProvider.setVisibilityListener(ActionProvider.VisibilityListener)*
+
+public void setVisibilityListener(android.view.ActionProvider.VisibilityListener listener)
+
+Set a listener to be notified when this ActionProvider's overridden visibility 
+changes. This should only be used by MenuItem implementations. 
+
+
+    listener - listener to set 
+
+*android.view.ActionProvider.subUiVisibilityChanged(boolean)*
+
+public void subUiVisibilityChanged(boolean isVisible)
+
+Notify the system that the visibility of an action view's sub-UI such as an 
+anchored popup has changed. This will affect how other system visibility 
+notifications occur. 
+
+
+
+

@@ -1,0 +1,402 @@
+*android.net.NetworkStatsHistory* *NetworkStatsHistory* Collection of historical
+
+public class NetworkStatsHistory
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.net.NetworkStatsHistory_Description|
+|android.net.NetworkStatsHistory_Fields|
+|android.net.NetworkStatsHistory_Constructors|
+|android.net.NetworkStatsHistory_Methods|
+
+================================================================================
+
+*android.net.NetworkStatsHistory_Fields*
+|android.os.Parcelable.Creator<android.net.NetworkStatsHistory>_android.net.NetworkStatsHistory.CREATOR|
+|int_android.net.NetworkStatsHistory.FIELD_ACTIVE_TIME|
+|int_android.net.NetworkStatsHistory.FIELD_ALL|
+|int_android.net.NetworkStatsHistory.FIELD_OPERATIONS|
+|int_android.net.NetworkStatsHistory.FIELD_RX_BYTES|
+|int_android.net.NetworkStatsHistory.FIELD_RX_PACKETS|
+|int_android.net.NetworkStatsHistory.FIELD_TX_BYTES|
+|int_android.net.NetworkStatsHistory.FIELD_TX_PACKETS|
+
+*android.net.NetworkStatsHistory_Constructors*
+|android.net.NetworkStatsHistory(DataInputStream)|
+|android.net.NetworkStatsHistory(long)|
+|android.net.NetworkStatsHistory(long,int)|
+|android.net.NetworkStatsHistory(long,int,int)|
+|android.net.NetworkStatsHistory(NetworkStatsHistory,long)|
+|android.net.NetworkStatsHistory(Parcel)|
+
+*android.net.NetworkStatsHistory_Methods*
+|android.net.NetworkStatsHistory.describeContents()|
+|android.net.NetworkStatsHistory.dump(IndentingPrintWriter,boolean)|
+|android.net.NetworkStatsHistory.estimateResizeBuckets(long)|
+|android.net.NetworkStatsHistory.generateRandom(long,long,long)|
+|android.net.NetworkStatsHistory.generateRandom(long,long,long,long,long,long,long,Random)|
+|android.net.NetworkStatsHistory.getBucketDuration()|
+|android.net.NetworkStatsHistory.getEnd()|
+|android.net.NetworkStatsHistory.getIndexAfter(long)|Return index of bucket tha
+|android.net.NetworkStatsHistory.getIndexBefore(long)|Return index of bucket th
+|android.net.NetworkStatsHistory.getStart()|
+|android.net.NetworkStatsHistory.getTotalBytes()|Return total bytes represented
+|android.net.NetworkStatsHistory.getValues(int,NetworkStatsHistory.Entry)|Retur
+|android.net.NetworkStatsHistory.getValues(long,long,long,NetworkStatsHistory.Entry)|
+|android.net.NetworkStatsHistory.getValues(long,long,NetworkStatsHistory.Entry)|
+|android.net.NetworkStatsHistory.randomLong(Random,long,long)|
+|android.net.NetworkStatsHistory.recordData(long,long,long,long)|Record that da
+|android.net.NetworkStatsHistory.recordData(long,long,NetworkStats.Entry)|Recor
+|android.net.NetworkStatsHistory.recordEntireHistory(NetworkStatsHistory)|Recor
+|android.net.NetworkStatsHistory.recordHistory(NetworkStatsHistory,long,long)|R
+|android.net.NetworkStatsHistory.removeBucketsBefore(long)|Remove buckets older
+|android.net.NetworkStatsHistory.size()|
+|android.net.NetworkStatsHistory.toString()|
+|android.net.NetworkStatsHistory.writeToParcel(Parcel,int)|
+|android.net.NetworkStatsHistory.writeToStream(DataOutputStream)|
+
+*android.net.NetworkStatsHistory_Description*
+
+Collection of historical network statistics, recorded into equally-sized 
+"buckets" in time. Internally it stores data inlongseries for more efficient 
+persistence. 
+
+Each bucket is defined by a (|android.net.NetworkStatsHistory|) timestamp, and 
+lasts for (|android.net.NetworkStatsHistory|) . Internally assumes that 
+(|android.net.NetworkStatsHistory|) is sorted at all times. 
+
+
+
+*android.os.Parcelable.Creator<android.net.NetworkStatsHistory>_android.net.NetworkStatsHistory.CREATOR*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_ACTIVE_TIME*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_ALL*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_OPERATIONS*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_RX_BYTES*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_RX_PACKETS*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_TX_BYTES*
+
+
+
+
+*int_android.net.NetworkStatsHistory.FIELD_TX_PACKETS*
+
+
+
+
+
+*android.net.NetworkStatsHistory(DataInputStream)*
+
+public NetworkStatsHistory(java.io.DataInputStream in)
+  throws |java.io.IOException|
+         
+
+
+
+*android.net.NetworkStatsHistory(long)*
+
+public NetworkStatsHistory(long bucketDuration)
+
+
+
+
+*android.net.NetworkStatsHistory(long,int)*
+
+public NetworkStatsHistory(
+  long bucketDuration,
+  int initialSize)
+
+
+
+
+*android.net.NetworkStatsHistory(long,int,int)*
+
+public NetworkStatsHistory(
+  long bucketDuration,
+  int initialSize,
+  int fields)
+
+
+
+
+*android.net.NetworkStatsHistory(NetworkStatsHistory,long)*
+
+public NetworkStatsHistory(
+  android.net.NetworkStatsHistory existing,
+  long bucketDuration)
+
+
+
+
+*android.net.NetworkStatsHistory(Parcel)*
+
+public NetworkStatsHistory(android.os.Parcel in)
+
+
+
+
+*android.net.NetworkStatsHistory.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.net.NetworkStatsHistory.dump(IndentingPrintWriter,boolean)*
+
+public void dump(
+  com.android.internal.util.IndentingPrintWriter pw,
+  boolean fullHistory)
+
+
+
+
+
+*android.net.NetworkStatsHistory.estimateResizeBuckets(long)*
+
+public int estimateResizeBuckets(long newBucketDuration)
+
+
+
+
+
+*android.net.NetworkStatsHistory.generateRandom(long,long,long)*
+
+public void generateRandom(
+  long start,
+  long end,
+  long bytes)
+
+
+
+    Deprecated: only for temporary testing
+
+
+*android.net.NetworkStatsHistory.generateRandom(long,long,long,long,long,long,long,Random)*
+
+public void generateRandom(
+  long start,
+  long end,
+  long rxBytes,
+  long rxPackets,
+  long txBytes,
+  long txPackets,
+  long operations,
+  java.util.Random r)
+
+
+
+    Deprecated: only for temporary testing
+
+
+*android.net.NetworkStatsHistory.getBucketDuration()*
+
+public long getBucketDuration()
+
+
+
+
+
+*android.net.NetworkStatsHistory.getEnd()*
+
+public long getEnd()
+
+
+
+
+
+*android.net.NetworkStatsHistory.getIndexAfter(long)*
+
+public int getIndexAfter(long time)
+
+Return index of bucket that contains or is immediately after the requested 
+time. 
+
+
+
+*android.net.NetworkStatsHistory.getIndexBefore(long)*
+
+public int getIndexBefore(long time)
+
+Return index of bucket that contains or is immediately before the requested 
+time. 
+
+
+
+*android.net.NetworkStatsHistory.getStart()*
+
+public long getStart()
+
+
+
+
+
+*android.net.NetworkStatsHistory.getTotalBytes()*
+
+public long getTotalBytes()
+
+Return total bytes represented by this history. 
+
+
+
+*android.net.NetworkStatsHistory.getValues(int,NetworkStatsHistory.Entry)*
+
+public |android.net.NetworkStatsHistory.Entry| getValues(
+  int i,
+  android.net.NetworkStatsHistory.Entry recycle)
+
+Return specific stats entry. 
+
+
+
+*android.net.NetworkStatsHistory.getValues(long,long,long,NetworkStatsHistory.Entry)*
+
+public |android.net.NetworkStatsHistory.Entry| getValues(
+  long start,
+  long end,
+  long now,
+  android.net.NetworkStatsHistory.Entry recycle)
+
+Return interpolated data usage across the requested range. Interpolates across 
+buckets, so values may be rounded slightly. 
+
+
+
+*android.net.NetworkStatsHistory.getValues(long,long,NetworkStatsHistory.Entry)*
+
+public |android.net.NetworkStatsHistory.Entry| getValues(
+  long start,
+  long end,
+  android.net.NetworkStatsHistory.Entry recycle)
+
+Return interpolated data usage across the requested range. Interpolates across 
+buckets, so values may be rounded slightly. 
+
+
+
+*android.net.NetworkStatsHistory.randomLong(Random,long,long)*
+
+public static long randomLong(
+  java.util.Random r,
+  long start,
+  long end)
+
+
+
+
+
+*android.net.NetworkStatsHistory.recordData(long,long,long,long)*
+
+public void recordData(
+  long start,
+  long end,
+  long rxBytes,
+  long txBytes)
+
+Record that data traffic occurred in the given time range. Will distribute 
+across internal buckets, creating new buckets as needed. 
+
+
+
+*android.net.NetworkStatsHistory.recordData(long,long,NetworkStats.Entry)*
+
+public void recordData(
+  long start,
+  long end,
+  android.net.NetworkStats.Entry entry)
+
+Record that data traffic occurred in the given time range. Will distribute 
+across internal buckets, creating new buckets as needed. 
+
+
+
+*android.net.NetworkStatsHistory.recordEntireHistory(NetworkStatsHistory)*
+
+public void recordEntireHistory(android.net.NetworkStatsHistory input)
+
+Record an entire (|android.net.NetworkStatsHistory|) into this history. Usually 
+for combining together stats for external reporting. 
+
+
+
+*android.net.NetworkStatsHistory.recordHistory(NetworkStatsHistory,long,long)*
+
+public void recordHistory(
+  android.net.NetworkStatsHistory input,
+  long start,
+  long end)
+
+Record given (|android.net.NetworkStatsHistory|) into this history, copying 
+only buckets that atomically occur in the inclusive time range. Doesn't 
+interpolate across partial buckets. 
+
+
+
+*android.net.NetworkStatsHistory.removeBucketsBefore(long)*
+
+public void removeBucketsBefore(long cutoff)
+
+Remove buckets older than requested cutoff. 
+
+
+
+*android.net.NetworkStatsHistory.size()*
+
+public int size()
+
+
+
+
+
+*android.net.NetworkStatsHistory.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.net.NetworkStatsHistory.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+*android.net.NetworkStatsHistory.writeToStream(DataOutputStream)*
+
+public void writeToStream(java.io.DataOutputStream out)
+  throws |java.io.IOException|
+         
+
+
+
+
+

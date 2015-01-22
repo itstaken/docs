@@ -1,0 +1,664 @@
+*android.animation.ValueAnimator* *ValueAnimator* This class provides a simple t
+
+public class ValueAnimator
+  extends    |android.animation.Animator|
+
+|android.animation.ValueAnimator_Description|
+|android.animation.ValueAnimator_Fields|
+|android.animation.ValueAnimator_Constructors|
+|android.animation.ValueAnimator_Methods|
+
+================================================================================
+
+*android.animation.ValueAnimator_Fields*
+|int_android.animation.ValueAnimator.INFINITE|
+|int_android.animation.ValueAnimator.RESTART|
+|int_android.animation.ValueAnimator.REVERSE|
+|java.lang.ThreadLocal<android.animation.ValueAnimator.AnimationHandler>_android.animation.ValueAnimator.sAnimationHandler|
+
+*android.animation.ValueAnimator_Constructors*
+|android.animation.ValueAnimator()|Creates a new ValueAnimator object.
+
+*android.animation.ValueAnimator_Methods*
+|android.animation.ValueAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener)|
+|android.animation.ValueAnimator.cancel()|
+|android.animation.ValueAnimator.clearAllAnimations()|Clear all animations on t
+|android.animation.ValueAnimator.clone()|
+|android.animation.ValueAnimator.end()|
+|android.animation.ValueAnimator.getAnimatedFraction()|Returns the current anim
+|android.animation.ValueAnimator.getAnimatedValue()|The most recent value calcu
+|android.animation.ValueAnimator.getAnimatedValue(String)|The most recent value
+|android.animation.ValueAnimator.getCurrentAnimationsCount()|Return the number 
+|android.animation.ValueAnimator.getCurrentPlayTime()|Gets the current position
+|android.animation.ValueAnimator.getDuration()|Gets the length of the animation
+|android.animation.ValueAnimator.getDurationScale()|
+|android.animation.ValueAnimator.getFrameDelay()|The amount of time, in millise
+|android.animation.ValueAnimator.getInterpolator()|Returns the timing interpola
+|android.animation.ValueAnimator.getRepeatCount()|Defines how many times the an
+|android.animation.ValueAnimator.getRepeatMode()|Defines what this animation sh
+|android.animation.ValueAnimator.getStartDelay()|The amount of time, in millise
+|android.animation.ValueAnimator.getValues()|Returns the values that this Value
+|android.animation.ValueAnimator.isRunning()|
+|android.animation.ValueAnimator.isStarted()|
+|android.animation.ValueAnimator.ofFloat(float...)|Constructs and returns a Val
+|android.animation.ValueAnimator.ofInt(int...)|Constructs and returns a ValueAn
+|android.animation.ValueAnimator.ofObject(TypeEvaluator,Object...)|Constructs a
+|android.animation.ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder...)|
+|android.animation.ValueAnimator.pause()|
+|android.animation.ValueAnimator.removeAllUpdateListeners()|Removes all listene
+|android.animation.ValueAnimator.removeUpdateListener(ValueAnimator.AnimatorUpdateListener)|
+|android.animation.ValueAnimator.resume()|
+|android.animation.ValueAnimator.reverse()|Plays the ValueAnimator in reverse.
+|android.animation.ValueAnimator.setCurrentPlayTime(long)|Sets the position of 
+|android.animation.ValueAnimator.setDuration(long)|Sets the length of the anima
+|android.animation.ValueAnimator.setDurationScale(float)|
+|android.animation.ValueAnimator.setEvaluator(TypeEvaluator)|The type evaluator
+|android.animation.ValueAnimator.setFloatValues(float...)|Sets float values tha
+|android.animation.ValueAnimator.setFrameDelay(long)|The amount of time, in mil
+|android.animation.ValueAnimator.setInterpolator(TimeInterpolator)|The time int
+|android.animation.ValueAnimator.setIntValues(int...)|Sets int values that will
+|android.animation.ValueAnimator.setObjectValues(Object...)|Sets the values to 
+|android.animation.ValueAnimator.setRepeatCount(int)|Sets how many times the an
+|android.animation.ValueAnimator.setRepeatMode(int)|Defines what this animation
+|android.animation.ValueAnimator.setStartDelay(long)|The amount of time, in mil
+|android.animation.ValueAnimator.setValues(PropertyValuesHolder...)|Sets the va
+|android.animation.ValueAnimator.start()|
+|android.animation.ValueAnimator.toString()|
+
+*android.animation.ValueAnimator_Description*
+
+This class provides a simple timing engine for running animations which 
+calculate animated values and set them on target objects. 
+
+There is a single timing pulse that all animations use. It runs in a custom 
+handler to ensure that property changes happen on the UI thread. 
+
+By default, ValueAnimator uses non-linear time interpolation, via the 
+(|android.view.animation.AccelerateDecelerateInterpolator|) class, which 
+accelerates into and decelerates out of an animation. This behavior can be 
+changed by calling (|android.animation.ValueAnimator|) . 
+
+Developer Guides For more information about animating withValueAnimator, read 
+the <a href="guide/topics/graphics/prop-animation.html#value-animator">Property 
+Animation developer guide. 
+
+
+
+*int_android.animation.ValueAnimator.INFINITE*
+
+This value used used with the (|android.animation.ValueAnimator|) property to 
+repeat the animation indefinitely. 
+
+
+*int_android.animation.ValueAnimator.RESTART*
+
+When the animation reaches the end and repeatCount is INFINITE or a positive 
+value, the animation restarts from the beginning. 
+
+
+*int_android.animation.ValueAnimator.REVERSE*
+
+When the animation reaches the end and repeatCount is INFINITE or a positive 
+value, the animation reverses direction on every iteration. 
+
+
+*java.lang.ThreadLocal<android.animation.ValueAnimator.AnimationHandler>_android.animation.ValueAnimator.sAnimationHandler*
+
+
+
+
+
+*android.animation.ValueAnimator()*
+
+public ValueAnimator()
+
+Creates a new ValueAnimator object. This default constructor is primarily for 
+use internally; the factory methods which take parameters are more generally 
+useful. 
+
+
+*android.animation.ValueAnimator.addUpdateListener(ValueAnimator.AnimatorUpdateListener)*
+
+public void addUpdateListener(android.animation.ValueAnimator.AnimatorUpdateListener listener)
+
+Adds a listener to the set of listeners that are sent update events through the 
+life of an animation. This method is called on all listeners for every frame of 
+the animation, after the values for the animation have been calculated. 
+
+
+    listener - the listener to be added to the current set of listeners for this animation. 
+
+*android.animation.ValueAnimator.cancel()*
+
+public void cancel()
+
+
+
+
+
+*android.animation.ValueAnimator.clearAllAnimations()*
+
+public static void clearAllAnimations()
+
+Clear all animations on this thread, without canceling or ending them. This 
+should be used with caution. 
+
+
+
+*android.animation.ValueAnimator.clone()*
+
+public |android.animation.ValueAnimator| clone()
+
+
+
+
+
+*android.animation.ValueAnimator.end()*
+
+public void end()
+
+
+
+
+
+*android.animation.ValueAnimator.getAnimatedFraction()*
+
+public float getAnimatedFraction()
+
+Returns the current animation fraction, which is the elapsed/interpolated 
+fraction used in the most recent frame update on the animation. 
+
+
+
+    Returns: Elapsed/interpolated fraction of the animation. 
+
+*android.animation.ValueAnimator.getAnimatedValue()*
+
+public |java.lang.Object| getAnimatedValue()
+
+The most recent value calculated by this ValueAnimator when there is just one 
+property being animated. This value is only sensible while the animation is 
+running. The main purpose for this read-only property is to retrieve the value 
+from the ValueAnimator during a call to 
+(|android.animation.ValueAnimator.AnimatorUpdateListener|) , which is called 
+during each animation frame, immediately after the value is calculated. 
+
+
+
+    Returns: animatedValue The value most recently calculated by this ValueAnimator for the 
+             single property being animated. If there are several properties 
+             being animated (specified by several PropertyValuesHolder objects 
+             in the constructor), this function returns the animated value for 
+             the first of those objects. 
+
+*android.animation.ValueAnimator.getAnimatedValue(String)*
+
+public |java.lang.Object| getAnimatedValue(java.lang.String propertyName)
+
+The most recent value calculated by this ValueAnimator for propertyName. The 
+main purpose for this read-only property is to retrieve the value from the 
+ValueAnimator during a call to 
+(|android.animation.ValueAnimator.AnimatorUpdateListener|) , which is called 
+during each animation frame, immediately after the value is calculated. 
+
+
+
+    Returns: animatedValue The value most recently calculated for the named property by this 
+             ValueAnimator. 
+
+*android.animation.ValueAnimator.getCurrentAnimationsCount()*
+
+public static int getCurrentAnimationsCount()
+
+Return the number of animations currently running. 
+
+Used by StrictMode internally to annotate violations. May be called on 
+arbitrary threads! 
+
+
+
+*android.animation.ValueAnimator.getCurrentPlayTime()*
+
+public long getCurrentPlayTime()
+
+Gets the current position of the animation in time, which is equal to the 
+current time minus the time that the animation started. An animation that is 
+not yet started will return a value of zero. 
+
+
+
+    Returns: The current position in time of the animation. 
+
+*android.animation.ValueAnimator.getDuration()*
+
+public long getDuration()
+
+Gets the length of the animation. The default duration is 300 milliseconds. 
+
+
+
+    Returns: The length of the animation, in milliseconds. 
+
+*android.animation.ValueAnimator.getDurationScale()*
+
+public static float getDurationScale()
+
+
+
+
+
+*android.animation.ValueAnimator.getFrameDelay()*
+
+public static long getFrameDelay()
+
+The amount of time, in milliseconds, between each frame of the animation. This 
+is a requested time that the animation will attempt to honor, but the actual 
+delay between frames may be different, depending on system load and 
+capabilities. This is a static function because the same delay will be applied 
+to all animations, since they are all run off of a single timing loop. 
+
+The frame delay may be ignored when the animation system uses an external 
+timing source, such as the display refresh rate (vsync), to govern animations. 
+
+
+
+    Returns: the requested time between frames, in milliseconds 
+
+*android.animation.ValueAnimator.getInterpolator()*
+
+public |android.animation.TimeInterpolator| getInterpolator()
+
+Returns the timing interpolator that this ValueAnimator uses. 
+
+
+
+    Returns: The timing interpolator for this ValueAnimator. 
+
+*android.animation.ValueAnimator.getRepeatCount()*
+
+public int getRepeatCount()
+
+Defines how many times the animation should repeat. The default value is 0. 
+
+
+
+    Returns: the number of times the animation should repeat, or {@link #INFINITE} 
+
+*android.animation.ValueAnimator.getRepeatMode()*
+
+public int getRepeatMode()
+
+Defines what this animation should do when it reaches the end. 
+
+
+
+    Returns: either one of {@link #REVERSE} or {@link #RESTART} 
+
+*android.animation.ValueAnimator.getStartDelay()*
+
+public long getStartDelay()
+
+The amount of time, in milliseconds, to delay starting the animation after 
+(|android.animation.ValueAnimator|) is called. 
+
+
+
+    Returns: the number of milliseconds to delay running the animation 
+
+*android.animation.ValueAnimator.getValues()*
+
+public |android.animation.PropertyValuesHolder|[] getValues()
+
+Returns the values that this ValueAnimator animates between. These values are 
+stored in PropertyValuesHolder objects, even if the ValueAnimator was created 
+with a simple list of value objects instead. 
+
+
+
+    Returns: PropertyValuesHolder[] An array of PropertyValuesHolder objects which hold the 
+             values, per property, that define the animation. 
+
+*android.animation.ValueAnimator.isRunning()*
+
+public boolean isRunning()
+
+
+
+
+
+*android.animation.ValueAnimator.isStarted()*
+
+public boolean isStarted()
+
+
+
+
+
+*android.animation.ValueAnimator.ofFloat(float...)*
+
+public static |android.animation.ValueAnimator| ofFloat(float[] values)
+
+Constructs and returns a ValueAnimator that animates between float values. A 
+single value implies that that value is the one being animated to. However, 
+this is not typically useful in a ValueAnimator object because there is no way 
+for the object to determine the starting value for the animation (unlike 
+ObjectAnimator, which can derive that value from the target object and property 
+being animated). Therefore, there should typically be two or more values. 
+
+
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: A ValueAnimator object that is set up to animate between the given values. 
+
+*android.animation.ValueAnimator.ofInt(int...)*
+
+public static |android.animation.ValueAnimator| ofInt(int[] values)
+
+Constructs and returns a ValueAnimator that animates between int values. A 
+single value implies that that value is the one being animated to. However, 
+this is not typically useful in a ValueAnimator object because there is no way 
+for the object to determine the starting value for the animation (unlike 
+ObjectAnimator, which can derive that value from the target object and property 
+being animated). Therefore, there should typically be two or more values. 
+
+
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: A ValueAnimator object that is set up to animate between the given values. 
+
+*android.animation.ValueAnimator.ofObject(TypeEvaluator,Object...)*
+
+public static |android.animation.ValueAnimator| ofObject(
+  android.animation.TypeEvaluator evaluator,
+  java.lang.Object[] values)
+
+Constructs and returns a ValueAnimator that animates between Object values. A 
+single value implies that that value is the one being animated to. However, 
+this is not typically useful in a ValueAnimator object because there is no way 
+for the object to determine the starting value for the animation (unlike 
+ObjectAnimator, which can derive that value from the target object and property 
+being animated). Therefore, there should typically be two or more values. 
+
+Since ValueAnimator does not know how to animate between arbitrary Objects, 
+this factory method also takes a TypeEvaluator object that the ValueAnimator 
+will use to perform that interpolation. 
+
+
+    evaluator - A TypeEvaluator that will be called on each animation frame to provide the 
+       ncessry interpolation between the Object values to derive the animated 
+       value. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: A ValueAnimator object that is set up to animate between the given values. 
+
+*android.animation.ValueAnimator.ofPropertyValuesHolder(PropertyValuesHolder...)*
+
+public static |android.animation.ValueAnimator| ofPropertyValuesHolder(android.animation.PropertyValuesHolder[] values)
+
+Constructs and returns a ValueAnimator that animates between the values 
+specified in the PropertyValuesHolder objects. 
+
+
+    values - A set of PropertyValuesHolder objects whose values will be animated between 
+       over time. 
+
+    Returns: A ValueAnimator object that is set up to animate between the given values. 
+
+*android.animation.ValueAnimator.pause()*
+
+public void pause()
+
+
+
+
+
+*android.animation.ValueAnimator.removeAllUpdateListeners()*
+
+public void removeAllUpdateListeners()
+
+Removes all listeners from the set listening to frame updates for this 
+animation. 
+
+
+
+*android.animation.ValueAnimator.removeUpdateListener(ValueAnimator.AnimatorUpdateListener)*
+
+public void removeUpdateListener(android.animation.ValueAnimator.AnimatorUpdateListener listener)
+
+Removes a listener from the set listening to frame updates for this animation. 
+
+
+    listener - the listener to be removed from the current set of update listeners for this 
+       animation. 
+
+*android.animation.ValueAnimator.resume()*
+
+public void resume()
+
+
+
+
+
+*android.animation.ValueAnimator.reverse()*
+
+public void reverse()
+
+Plays the ValueAnimator in reverse. If the animation is already running, it 
+will stop itself and play backwards from the point reached when reverse was 
+called. If the animation is not currently running, then it will start from the 
+end and play backwards. This behavior is only set for the current animation; 
+future playing of the animation will use the default behavior of playing 
+forward. 
+
+
+
+*android.animation.ValueAnimator.setCurrentPlayTime(long)*
+
+public void setCurrentPlayTime(long playTime)
+
+Sets the position of the animation to the specified point in time. This time 
+should be between 0 and the total duration of the animation, including any 
+repetition. If the animation has not yet been started, then it will not advance 
+forward after it is set to this time; it will simply set the time to this value 
+and perform any appropriate actions based on that time. If the animation is 
+already running, then setCurrentPlayTime() will set the current playing time to 
+this value and continue playing from that point. 
+
+
+    playTime - The time, in milliseconds, to which the animation is advanced or rewound. 
+
+*android.animation.ValueAnimator.setDuration(long)*
+
+public |android.animation.ValueAnimator| setDuration(long duration)
+
+Sets the length of the animation. The default duration is 300 milliseconds. 
+
+
+    duration - The length of the animation, in milliseconds. This value cannot be negative. 
+
+    Returns: ValueAnimator The object called with setDuration(). This return value makes it 
+             easier to compose statements together that construct and then set 
+             the duration, as in ValueAnimator.ofInt(0, 
+             10).setDuration(500).start(). 
+
+*android.animation.ValueAnimator.setDurationScale(float)*
+
+public static void setDurationScale(float durationScale)
+
+
+
+
+
+*android.animation.ValueAnimator.setEvaluator(TypeEvaluator)*
+
+public void setEvaluator(android.animation.TypeEvaluator value)
+
+The type evaluator to be used when calculating the animated values of this 
+animation. The system will automatically assign a float or int evaluator based 
+on the type of startValue and endValue in the constructor. But if these values 
+are not one of these primitive types, or if different evaluation is desired 
+(such as is necessary with int values that represent colors), a custom 
+evaluator needs to be assigned. For example, when running an animation on color 
+values, the (|android.animation.ArgbEvaluator|) should be used to get correct 
+RGB color interpolation. 
+
+If this ValueAnimator has only one set of values being animated between, this 
+evaluator will be used for that set. If there are several sets of values being 
+animated, which is the case if PropertyValuesHolder objects were set on the 
+ValueAnimator, then the evaluator is assigned just to the first 
+PropertyValuesHolder object. 
+
+
+    value - the evaluator to be used this animation 
+
+*android.animation.ValueAnimator.setFloatValues(float...)*
+
+public void setFloatValues(float[] values)
+
+Sets float values that will be animated between. A single value implies that 
+that value is the one being animated to. However, this is not typically useful 
+in a ValueAnimator object because there is no way for the object to determine 
+the starting value for the animation (unlike ObjectAnimator, which can derive 
+that value from the target object and property being animated). Therefore, 
+there should typically be two or more values. 
+
+If there are already multiple sets of values defined for this ValueAnimator via 
+more than one PropertyValuesHolder object, this method will set the values for 
+the first of those objects. 
+
+
+    values - A set of values that the animation will animate between over time. 
+
+*android.animation.ValueAnimator.setFrameDelay(long)*
+
+public static void setFrameDelay(long frameDelay)
+
+The amount of time, in milliseconds, between each frame of the animation. This 
+is a requested time that the animation will attempt to honor, but the actual 
+delay between frames may be different, depending on system load and 
+capabilities. This is a static function because the same delay will be applied 
+to all animations, since they are all run off of a single timing loop. 
+
+The frame delay may be ignored when the animation system uses an external 
+timing source, such as the display refresh rate (vsync), to govern animations. 
+
+
+    frameDelay - the requested time between frames, in milliseconds 
+
+*android.animation.ValueAnimator.setInterpolator(TimeInterpolator)*
+
+public void setInterpolator(android.animation.TimeInterpolator value)
+
+The time interpolator used in calculating the elapsed fraction of this 
+animation. The interpolator determines whether the animation runs with linear 
+or non-linear motion, such as acceleration and deceleration. The default value 
+is (|android.view.animation.AccelerateDecelerateInterpolator|) 
+
+
+    value - the interpolator to be used by this animation. A value of null will result in 
+       linear interpolation. 
+
+*android.animation.ValueAnimator.setIntValues(int...)*
+
+public void setIntValues(int[] values)
+
+Sets int values that will be animated between. A single value implies that that 
+value is the one being animated to. However, this is not typically useful in a 
+ValueAnimator object because there is no way for the object to determine the 
+starting value for the animation (unlike ObjectAnimator, which can derive that 
+value from the target object and property being animated). Therefore, there 
+should typically be two or more values. 
+
+If there are already multiple sets of values defined for this ValueAnimator via 
+more than one PropertyValuesHolder object, this method will set the values for 
+the first of those objects. 
+
+
+    values - A set of values that the animation will animate between over time. 
+
+*android.animation.ValueAnimator.setObjectValues(Object...)*
+
+public void setObjectValues(java.lang.Object[] values)
+
+Sets the values to animate between for this animation. A single value implies 
+that that value is the one being animated to. However, this is not typically 
+useful in a ValueAnimator object because there is no way for the object to 
+determine the starting value for the animation (unlike ObjectAnimator, which 
+can derive that value from the target object and property being animated). 
+Therefore, there should typically be two or more values. 
+
+If there are already multiple sets of values defined for this ValueAnimator via 
+more than one PropertyValuesHolder object, this method will set the values for 
+the first of those objects. 
+
+There should be a TypeEvaluator set on the ValueAnimator that knows how to 
+interpolate between these value objects. ValueAnimator only knows how to 
+interpolate between the primitive types specified in the other setValues() 
+methods. 
+
+
+    values - The set of values to animate between. 
+
+*android.animation.ValueAnimator.setRepeatCount(int)*
+
+public void setRepeatCount(int value)
+
+Sets how many times the animation should be repeated. If the repeat count is 0, 
+the animation is never repeated. If the repeat count is greater than 0 or 
+(|android.animation.ValueAnimator|) , the repeat mode will be taken into 
+account. The repeat count is 0 by default. 
+
+
+    value - the number of times the animation should be repeated 
+
+*android.animation.ValueAnimator.setRepeatMode(int)*
+
+public void setRepeatMode(int value)
+
+Defines what this animation should do when it reaches the end. This setting is 
+applied only when the repeat count is either greater than 0 or 
+(|android.animation.ValueAnimator|) . Defaults to 
+(|android.animation.ValueAnimator|) . 
+
+
+    value - {@link #RESTART} or {@link #REVERSE} 
+
+*android.animation.ValueAnimator.setStartDelay(long)*
+
+public void setStartDelay(long startDelay)
+
+The amount of time, in milliseconds, to delay starting the animation after 
+(|android.animation.ValueAnimator|) is called. 
+
+
+    startDelay - The amount of the delay, in milliseconds 
+
+*android.animation.ValueAnimator.setValues(PropertyValuesHolder...)*
+
+public void setValues(android.animation.PropertyValuesHolder[] values)
+
+Sets the values, per property, being animated between. This function is called 
+internally by the constructors of ValueAnimator that take a list of values. But 
+a ValueAnimator can be constructed without values and this method can be called 
+to set the values manually instead. 
+
+
+    values - The set of values, per property, being animated between. 
+
+*android.animation.ValueAnimator.start()*
+
+public void start()
+
+
+
+
+
+*android.animation.ValueAnimator.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

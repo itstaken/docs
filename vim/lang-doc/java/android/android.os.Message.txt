@@ -1,0 +1,388 @@
+*android.os.Message* *Message* Defines a message containing a description and ar
+
+public final class Message
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.os.Message_Description|
+|android.os.Message_Fields|
+|android.os.Message_Constructors|
+|android.os.Message_Methods|
+
+================================================================================
+
+*android.os.Message_Fields*
+|int_android.os.Message.arg1|
+|int_android.os.Message.arg2|
+|android.os.Parcelable.Creator<android.os.Message>_android.os.Message.CREATOR|
+|java.lang.Object_android.os.Message.obj|
+|android.os.Messenger_android.os.Message.replyTo|
+|int_android.os.Message.what|
+
+*android.os.Message_Constructors*
+|android.os.Message()|Constructor (but the preferred way to get a Message is to
+
+*android.os.Message_Methods*
+|android.os.Message.copyFrom(Message)|Make this message like o.
+|android.os.Message.describeContents()|
+|android.os.Message.getCallback()|Retrieve callback object that will execute wh
+|android.os.Message.getData()|Obtains a Bundle of arbitrary data associated wit
+|android.os.Message.getTarget()|Retrieve the aandroid.os.Handler Handlerimpleme
+|android.os.Message.getWhen()|Return the targeted delivery time of this message
+|android.os.Message.isAsynchronous()|Returns true if the message is asynchronou
+|android.os.Message.obtain()|Return a new Message instance from the global pool
+|android.os.Message.obtain(Handler)|Same as#obtain(), but sets the value for th
+|android.os.Message.obtain(Handler,int)|Same as#obtain(), but sets the values f
+|android.os.Message.obtain(Handler,int,int,int)|Same as#obtain(), but sets the 
+|android.os.Message.obtain(Handler,int,int,int,Object)|Same as#obtain(), but se
+|android.os.Message.obtain(Handler,int,Object)|Same as#obtain(), but sets the v
+|android.os.Message.obtain(Handler,Runnable)|Same as#obtain(Handler), but assig
+|android.os.Message.obtain(Message)|Same as#obtain(), but copies the values of 
+|android.os.Message.peekData()|Like getData(), but does not lazily create the B
+|android.os.Message.recycle()|Return a Message instance to the global pool.
+|android.os.Message.sendToTarget()|Sends this Message to the Handler specified 
+|android.os.Message.setAsynchronous(boolean)|Sets whether the message is asynch
+|android.os.Message.setData(Bundle)|Sets a Bundle of arbitrary data values.
+|android.os.Message.setTarget(Handler)|
+|android.os.Message.toString()|
+|android.os.Message.writeToParcel(Parcel,int)|
+
+*android.os.Message_Description*
+
+Defines a message containing a description and arbitrary data object that can 
+be sent to a (|android.os.Handler|) . This object contains two extra int fields 
+and an extra object field that allow you to not do allocations in many cases. 
+
+While the constructor of Message is public, the best way to get one of these is 
+to call Message.obtain()(|android.os.Message|) or one of the 
+Handler.obtainMessage()(|android.os.Handler|) methods, which will pull them 
+from a pool of recycled objects. 
+
+
+
+*int_android.os.Message.arg1*
+
+arg1 and arg2 are lower-cost alternatives to using 
+setData()(|android.os.Message|) if you only need to store a few integer values. 
+
+
+*int_android.os.Message.arg2*
+
+arg1 and arg2 are lower-cost alternatives to using 
+setData()(|android.os.Message|) if you only need to store a few integer values. 
+
+
+*android.os.Parcelable.Creator<android.os.Message>_android.os.Message.CREATOR*
+
+
+
+
+*java.lang.Object_android.os.Message.obj*
+
+An arbitrary object to send to the recipient. When using 
+(|android.os.Messenger|) to send the message across processes this can only be 
+non-null if it contains a Parcelable of a framework class (not one implemented 
+by the application). For other data transfer use (|android.os.Message|) . 
+
+Note that Parcelable objects here are not supported prior to the 
+(|android.os.Build.VERSION_CODES|) release. 
+
+
+*android.os.Messenger_android.os.Message.replyTo*
+
+Optional Messenger where replies to this message can be sent. The semantics of 
+exactly how this is used are up to the sender and receiver. 
+
+
+*int_android.os.Message.what*
+
+User-defined message code so that the recipient can identify what this message 
+is about. Each (|android.os.Handler|) has its own name-space for message codes, 
+so you do not need to worry about yours conflicting with other handlers. 
+
+
+
+*android.os.Message()*
+
+public Message()
+
+Constructor (but the preferred way to get a Message is to call 
+Message.obtain()(|android.os.Message|) ). 
+
+
+*android.os.Message.copyFrom(Message)*
+
+public void copyFrom(android.os.Message o)
+
+Make this message like o. Performs a shallow copy of the data field. Does not 
+copy the linked list fields, nor the timestamp or target/callback of the 
+original message. 
+
+
+
+*android.os.Message.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.Message.getCallback()*
+
+public |java.lang.Runnable| getCallback()
+
+Retrieve callback object that will execute when this message is handled. This 
+object must implement Runnable. This is called by the target 
+(|android.os.Handler|) that is receiving this Message to dispatch it. If not 
+set, the message will be dispatched to the receiving Handler's 
+(|android.os.Handler|) . 
+
+
+
+*android.os.Message.getData()*
+
+public |android.os.Bundle| getData()
+
+Obtains a Bundle of arbitrary data associated with this event, lazily creating 
+it if necessary. Set this value by calling (|android.os.Message|) . Note that 
+when transferring data across processes via (|android.os.Messenger|) , you will 
+need to set your ClassLoader on the Bundle via 
+Bundle.setClassLoader()(|android.os.Bundle|) so that it can instantiate your 
+objects when you retrieve them. 
+
+
+
+*android.os.Message.getTarget()*
+
+public |android.os.Handler| getTarget()
+
+Retrieve the a Handler(|android.os.Handler|) implementation that will receive 
+this message. The object must implement 
+Handler.handleMessage()(|android.os.Handler|) . Each Handler has its own 
+name-space for message codes, so you do not need to worry about yours 
+conflicting with other handlers. 
+
+
+
+*android.os.Message.getWhen()*
+
+public long getWhen()
+
+Return the targeted delivery time of this message, in milliseconds. 
+
+
+
+*android.os.Message.isAsynchronous()*
+
+public boolean isAsynchronous()
+
+Returns true if the message is asynchronous. 
+
+Asynchronous messages represent interrupts or events that do not require global 
+ordering with represent to synchronous messages. Asynchronous messages are not 
+subject to the synchronization barriers introduced by 
+(|android.os.MessageQueue|) . 
+
+
+
+    Returns: True if the message is asynchronous. 
+
+*android.os.Message.obtain()*
+
+public static |android.os.Message| obtain()
+
+Return a new Message instance from the global pool. Allows us to avoid 
+allocating new objects in many cases. 
+
+
+
+*android.os.Message.obtain(Handler)*
+
+public static |android.os.Message| obtain(android.os.Handler h)
+
+Same as (|android.os.Message|) , but sets the value for the target member on 
+the Message returned. 
+
+
+    h - Handler to assign to the returned Message object's target member. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Handler,int)*
+
+public static |android.os.Message| obtain(
+  android.os.Handler h,
+  int what)
+
+Same as (|android.os.Message|) , but sets the values for both target and what 
+members on the Message. 
+
+
+    h - Value to assign to the target member. 
+    what - Value to assign to the what member. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Handler,int,int,int)*
+
+public static |android.os.Message| obtain(
+  android.os.Handler h,
+  int what,
+  int arg1,
+  int arg2)
+
+Same as (|android.os.Message|) , but sets the values of the target, what, arg1, 
+and arg2 members. 
+
+
+    h - The target value to set. 
+    what - The what value to set. 
+    arg1 - The arg1 value to set. 
+    arg2 - The arg2 value to set. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Handler,int,int,int,Object)*
+
+public static |android.os.Message| obtain(
+  android.os.Handler h,
+  int what,
+  int arg1,
+  int arg2,
+  java.lang.Object obj)
+
+Same as (|android.os.Message|) , but sets the values of the target, what, arg1, 
+arg2, and obj members. 
+
+
+    h - The target value to set. 
+    what - The what value to set. 
+    arg1 - The arg1 value to set. 
+    arg2 - The arg2 value to set. 
+    obj - The obj value to set. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Handler,int,Object)*
+
+public static |android.os.Message| obtain(
+  android.os.Handler h,
+  int what,
+  java.lang.Object obj)
+
+Same as (|android.os.Message|) , but sets the values of the target, what, and 
+obj members. 
+
+
+    h - The target value to set. 
+    what - The what value to set. 
+    obj - The object method to set. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Handler,Runnable)*
+
+public static |android.os.Message| obtain(
+  android.os.Handler h,
+  java.lang.Runnable callback)
+
+Same as (|android.os.Message|) , but assigns a callback Runnable on the Message 
+that is returned. 
+
+
+    h - Handler to assign to the returned Message object's target member. 
+    callback - Runnable that will execute when the message is handled. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.obtain(Message)*
+
+public static |android.os.Message| obtain(android.os.Message orig)
+
+Same as (|android.os.Message|) , but copies the values of an existing message 
+(including its target) into the new one. 
+
+
+    orig - Original message to copy. 
+
+    Returns: A Message object from the global pool. 
+
+*android.os.Message.peekData()*
+
+public |android.os.Bundle| peekData()
+
+Like getData(), but does not lazily create the Bundle. A null is returned if 
+the Bundle does not already exist. See (|android.os.Message|) for further 
+information on this. 
+
+
+
+*android.os.Message.recycle()*
+
+public void recycle()
+
+Return a Message instance to the global pool. You MUST NOT touch the Message 
+after calling this function -- it has effectively been freed. 
+
+
+
+*android.os.Message.sendToTarget()*
+
+public void sendToTarget()
+
+Sends this Message to the Handler specified by (|android.os.Message|) . Throws 
+a null pointer exception if this field has not been set. 
+
+
+
+*android.os.Message.setAsynchronous(boolean)*
+
+public void setAsynchronous(boolean async)
+
+Sets whether the message is asynchronous. 
+
+Asynchronous messages represent interrupts or events that do not require global 
+ordering with represent to synchronous messages. Asynchronous messages are not 
+subject to the synchronization barriers introduced by 
+(|android.os.MessageQueue|) . 
+
+
+    async - True if the message is asynchronous. 
+
+*android.os.Message.setData(Bundle)*
+
+public void setData(android.os.Bundle data)
+
+Sets a Bundle of arbitrary data values. Use arg1 and arg1 members as a lower 
+cost way to send a few simple integer values, if you can. 
+
+
+
+*android.os.Message.setTarget(Handler)*
+
+public void setTarget(android.os.Handler target)
+
+
+
+
+
+*android.os.Message.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.os.Message.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,280 @@
+*android.app.UiAutomation* *UiAutomation* Class for interacting with the device'
+
+public final class UiAutomation
+  extends    |java.lang.Object|
+
+|android.app.UiAutomation_Description|
+|android.app.UiAutomation_Fields|
+|android.app.UiAutomation_Constructors|
+|android.app.UiAutomation_Methods|
+
+================================================================================
+
+*android.app.UiAutomation_Fields*
+|int_android.app.UiAutomation.ROTATION_FREEZE_0|
+|int_android.app.UiAutomation.ROTATION_FREEZE_180|
+|int_android.app.UiAutomation.ROTATION_FREEZE_270|
+|int_android.app.UiAutomation.ROTATION_FREEZE_90|
+|int_android.app.UiAutomation.ROTATION_FREEZE_CURRENT|
+|int_android.app.UiAutomation.ROTATION_UNFREEZE|
+
+*android.app.UiAutomation_Constructors*
+|android.app.UiAutomation(Looper,IUiAutomationConnection)|Creates a new instanc
+
+*android.app.UiAutomation_Methods*
+|android.app.UiAutomation.connect()|Connects this UiAutomation to the accessibi
+|android.app.UiAutomation.disconnect()|Disconnects this UiAutomation from the a
+|android.app.UiAutomation.executeAndWaitForEvent(Runnable,UiAutomation.AccessibilityEventFilter,long)|
+|android.app.UiAutomation.getConnectionId()|The id of theIAccessibilityInteract
+|android.app.UiAutomation.getRootInActiveWindow()|Gets the rootAccessibilityNod
+|android.app.UiAutomation.getServiceInfo()|Gets the anAccessibilityServiceInfod
+|android.app.UiAutomation.injectInputEvent(InputEvent,boolean)|A method for inj
+|android.app.UiAutomation.performGlobalAction(int)|Performs a global action.
+|android.app.UiAutomation.setOnAccessibilityEventListener(UiAutomation.OnAccessibilityEventListener)|
+|android.app.UiAutomation.setRotation(int)|Sets the device rotation.
+|android.app.UiAutomation.setRunAsMonkey(boolean)|Sets whether this UiAutomatio
+|android.app.UiAutomation.setServiceInfo(AccessibilityServiceInfo)|Sets theAcce
+|android.app.UiAutomation.takeScreenshot()|Takes a screenshot.
+|android.app.UiAutomation.waitForIdle(long,long)|Waits for the accessibility ev
+
+*android.app.UiAutomation_Description*
+
+Class for interacting with the device's UI by simulation user actions and 
+introspection of the screen content. It relies on the platform accessibility 
+APIs to introspect the screen and to perform some actions on the remote view 
+tree. It also allows injecting of arbitrary raw input events simulating user 
+interaction with keyboards and touch devices. One can think of a UiAutomation 
+as a special type of (|android.accessibilityservice.AccessibilityService|) 
+which does not provide hooks for the service life cycle and exposes other APIs 
+that are useful for UI test automation. 
+
+The APIs exposed by this class are low-level to maximize flexibility when 
+developing UI test automation tools and libraries. Generally, a UiAutomation 
+client should be using a higher-level library or implement high-level 
+functions. For example, performing a tap on the screen requires construction 
+and injecting of a touch down and up events which have to be delivered to the 
+system by a call to (|android.app.UiAutomation|) . 
+
+The APIs exposed by this class operate across applications enabling a client to 
+write tests that cover use cases spanning over multiple applications. For 
+example, going to the settings application to change a setting and then 
+interacting with another application whose behavior depends on that setting. 
+
+
+
+*int_android.app.UiAutomation.ROTATION_FREEZE_0*
+
+Rotation constant: Freeze rotation to 0 degrees (natural orientation) 
+
+
+*int_android.app.UiAutomation.ROTATION_FREEZE_180*
+
+Rotation constant: Freeze rotation to 180 degrees . 
+
+
+*int_android.app.UiAutomation.ROTATION_FREEZE_270*
+
+Rotation constant: Freeze rotation to 270 degrees . 
+
+
+*int_android.app.UiAutomation.ROTATION_FREEZE_90*
+
+Rotation constant: Freeze rotation to 90 degrees . 
+
+
+*int_android.app.UiAutomation.ROTATION_FREEZE_CURRENT*
+
+Rotation constant: Freeze rotation to its current state. 
+
+
+*int_android.app.UiAutomation.ROTATION_UNFREEZE*
+
+Rotation constant: Unfreeze rotation (rotating the device changes its rotation 
+state). 
+
+
+
+*android.app.UiAutomation(Looper,IUiAutomationConnection)*
+
+public UiAutomation(
+  android.os.Looper looper,
+  IUiAutomationConnection connection)
+
+Creates a new instance that will handle callbacks from the accessibility layer 
+on the thread of the provided looper and perform requests for privileged 
+operations on the provided connection. 
+
+    looper - The looper on which to execute accessibility callbacks. 
+    connection - The connection for performing privileged operations. 
+
+*android.app.UiAutomation.connect()*
+
+public void connect()
+
+Connects this UiAutomation to the accessibility introspection APIs. 
+
+
+
+*android.app.UiAutomation.disconnect()*
+
+public void disconnect()
+
+Disconnects this UiAutomation from the accessibility introspection APIs. 
+
+
+
+*android.app.UiAutomation.executeAndWaitForEvent(Runnable,UiAutomation.AccessibilityEventFilter,long)*
+
+public |android.view.accessibility.AccessibilityEvent| executeAndWaitForEvent(
+  java.lang.Runnable command,
+  android.app.UiAutomation.AccessibilityEventFilter filter,
+  long timeoutMillis)
+  throws |java.util.concurrent.TimeoutException|
+         
+Executes a command and waits for a specific accessibility event up to a given 
+wait timeout. To detect a sequence of events one can implement a filter that 
+keeps track of seen events of the expected sequence and returns true after the 
+last event of that sequence is received. 
+
+Note: It is caller's responsibility to recycle the returned event. 
+
+
+    command - The command to execute. 
+    filter - Filter that recognizes the expected event. 
+    timeoutMillis - The wait timeout in milliseconds. 
+
+*android.app.UiAutomation.getConnectionId()*
+
+public int getConnectionId()
+
+The id of the (|IAccessibilityInteractionConnection|) for querying the screen 
+content. This is here for legacy purposes since some tools use hidden APIs to 
+introspect the screen. 
+
+
+
+*android.app.UiAutomation.getRootInActiveWindow()*
+
+public |android.view.accessibility.AccessibilityNodeInfo| getRootInActiveWindow()
+
+Gets the root (|android.view.accessibility.AccessibilityNodeInfo|) in the 
+active window. 
+
+
+
+    Returns: The root info. 
+
+*android.app.UiAutomation.getServiceInfo()*
+
+public final |android.accessibilityservice.AccessibilityServiceInfo| getServiceInfo()
+
+Gets the an (|android.accessibilityservice.AccessibilityServiceInfo|) 
+describing this UiAutomation. This method is useful if one wants to change some 
+of the dynamically configurable properties at runtime. 
+
+
+
+    Returns: The accessibility service info. 
+
+*android.app.UiAutomation.injectInputEvent(InputEvent,boolean)*
+
+public boolean injectInputEvent(
+  android.view.InputEvent event,
+  boolean sync)
+
+A method for injecting an arbitrary input event. 
+
+Note: It is caller's responsibility to recycle the event. 
+
+
+    event - The event to inject. 
+    sync - Whether to inject the event synchronously. 
+
+    Returns: Whether event injection succeeded. 
+
+*android.app.UiAutomation.performGlobalAction(int)*
+
+public final boolean performGlobalAction(int action)
+
+Performs a global action. Such an action can be performed at any moment 
+regardless of the current application or user location in that application. For 
+example going back, going home, opening recents, etc. 
+
+
+    action - The action to perform. 
+
+    Returns: Whether the action was successfully performed. 
+
+*android.app.UiAutomation.setOnAccessibilityEventListener(UiAutomation.OnAccessibilityEventListener)*
+
+public void setOnAccessibilityEventListener(android.app.UiAutomation.OnAccessibilityEventListener listener)
+
+Sets a callback for observing the stream of 
+(|android.view.accessibility.AccessibilityEvent|) s. 
+
+
+    listener - The callback. 
+
+*android.app.UiAutomation.setRotation(int)*
+
+public boolean setRotation(int rotation)
+
+Sets the device rotation. A client can freeze the rotation in desired state or 
+freeze the rotation to its current state or unfreeze the rotation (rotating the 
+device changes its rotation state). 
+
+
+    rotation - The desired rotation. 
+
+    Returns: Whether the rotation was set successfully. 
+
+*android.app.UiAutomation.setRunAsMonkey(boolean)*
+
+public void setRunAsMonkey(boolean enable)
+
+Sets whether this UiAutomation to run in a "monkey" mode. Applications can 
+query whether they are executed in a "monkey" mode, i.e. run by a test 
+framework, and avoid doing potentially undesirable actions such as calling 911 
+or posting on public forums etc. 
+
+
+    enable - whether to run in a "monkey" mode or not. Default is not. 
+
+*android.app.UiAutomation.setServiceInfo(AccessibilityServiceInfo)*
+
+public final void setServiceInfo(android.accessibilityservice.AccessibilityServiceInfo info)
+
+Sets the (|android.accessibilityservice.AccessibilityServiceInfo|) that 
+describes how this UiAutomation will be handled by the platform accessibility 
+layer. 
+
+
+    info - The info. 
+
+*android.app.UiAutomation.takeScreenshot()*
+
+public Bitmap takeScreenshot()
+
+Takes a screenshot. 
+
+
+
+    Returns: The screenshot bitmap on success, null otherwise. 
+
+*android.app.UiAutomation.waitForIdle(long,long)*
+
+public void waitForIdle(
+  long idleTimeoutMillis,
+  long globalTimeoutMillis)
+  throws |java.util.concurrent.TimeoutException|
+         
+Waits for the accessibility event stream to become idle, which is not to have 
+received an accessibility event within idleTimeoutMillis. The total time spent 
+to wait for an idle accessibility event stream is bounded by the 
+globalTimeoutMillis. 
+
+
+    idleTimeoutMillis - The timeout in milliseconds between two events to consider the device idle. 
+    globalTimeoutMillis - The maximal global timeout in milliseconds in which to wait for an idle state. 
+
+

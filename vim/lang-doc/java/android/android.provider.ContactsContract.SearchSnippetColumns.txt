@@ -1,0 +1,67 @@
+*android.provider.ContactsContract.SearchSnippetColumns* *ContactsContract.SearchSnippetColumns* 
+
+public static class ContactsContract.SearchSnippetColumns
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.SearchSnippetColumns_Description|
+|android.provider.ContactsContract.SearchSnippetColumns_Fields|
+|android.provider.ContactsContract.SearchSnippetColumns_Constructors|
+|android.provider.ContactsContract.SearchSnippetColumns_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.SearchSnippetColumns_Fields*
+|java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.DEFERRED_SNIPPETING_KEY|
+|java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.SNIPPET|
+|java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.SNIPPET_ARGS_PARAM_KEY|
+
+*android.provider.ContactsContract.SearchSnippetColumns_Constructors*
+|android.provider.ContactsContract.SearchSnippetColumns()|
+
+*android.provider.ContactsContract.SearchSnippetColumns_Description*
+
+Additional column returned by the (|android.provider.Contacts|) providing the 
+explanation of why the filter matched the contact. Specifically, it contains 
+the data elements that matched the query. The overall number of words in the 
+snippet can be capped. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.DEFERRED_SNIPPETING_KEY*
+
+A key to ask the provider to defer the snippeting to the client if possible. 
+Value of 1 implies true, 0 implies false when 0 is the default. When a cursor 
+is returned to the client, it should check for an extra with the name 
+(|android.provider.ContactsContract|) in the cursor. If it exists, the client 
+should do its own snippeting. If it doesn't exist, the snippet column in the 
+cursor should already contain a snippetized string. 
+
+
+*java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.SNIPPET*
+
+The search snippet constructed according to the SQLite rules, see 
+http://www.sqlite.org/fts3.html#snippet 
+
+The snippet may contain (parts of) several data elements comprising the 
+contact. 
+
+
+*java.lang.String_android.provider.ContactsContract.SearchSnippetColumns.SNIPPET_ARGS_PARAM_KEY*
+
+Comma-separated parameters for the generation of the snippet: 
+
+The "start match" text. Default is <b> The "end match" text. Default is </b> 
+The "ellipsis" text. Default is <b>...</b> Maximum number of tokens to include 
+in the snippet. Can be either a positive or a negative number: A positive 
+number indicates how many tokens can be returned in total. A negative number 
+indicates how many tokens can be returned per occurrence of the search terms. 
+
+
+
+*android.provider.ContactsContract.SearchSnippetColumns()*
+
+public ContactsContract.SearchSnippetColumns()
+
+
+
+

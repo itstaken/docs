@@ -1,0 +1,486 @@
+*android.accessibilityservice.AccessibilityService* *AccessibilityService* An ac
+
+public abstract class AccessibilityService
+  extends    |android.app.Service|
+
+|android.accessibilityservice.AccessibilityService_Description|
+|android.accessibilityservice.AccessibilityService_Fields|
+|android.accessibilityservice.AccessibilityService_Constructors|
+|android.accessibilityservice.AccessibilityService_Methods|
+
+================================================================================
+
+*android.accessibilityservice.AccessibilityService_Fields*
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_LEFT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_RIGHT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_UP|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_DOWN|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_RIGHT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_UP|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_DOWN|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_LEFT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_UP|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_DOWN|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_LEFT|
+|int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_RIGHT|
+|int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK|
+|int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME|
+|int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS|
+|int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS|
+|int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_RECENTS|
+|java.lang.String_android.accessibilityservice.AccessibilityService.SERVICE_INTERFACE|
+|java.lang.String_android.accessibilityservice.AccessibilityService.SERVICE_META_DATA|
+
+*android.accessibilityservice.AccessibilityService_Constructors*
+|android.accessibilityservice.AccessibilityService()|
+
+*android.accessibilityservice.AccessibilityService_Methods*
+|android.accessibilityservice.AccessibilityService.getRootInActiveWindow()|Gets
+|android.accessibilityservice.AccessibilityService.getServiceInfo()|Gets the an
+|android.accessibilityservice.AccessibilityService.onAccessibilityEvent(AccessibilityEvent)|
+|android.accessibilityservice.AccessibilityService.onBind(Intent)|Implement to 
+|android.accessibilityservice.AccessibilityService.onGesture(int)|Called by the
+|android.accessibilityservice.AccessibilityService.onInterrupt()|Callback for i
+|android.accessibilityservice.AccessibilityService.onKeyEvent(KeyEvent)|Callbac
+|android.accessibilityservice.AccessibilityService.onServiceConnected()|This me
+|android.accessibilityservice.AccessibilityService.performGlobalAction(int)|Per
+|android.accessibilityservice.AccessibilityService.setServiceInfo(AccessibilityServiceInfo)|
+
+*android.accessibilityservice.AccessibilityService_Description*
+
+An accessibility service runs in the background and receives callbacks by the 
+system when (|android.view.accessibility.AccessibilityEvent|) s are fired. Such 
+events denote some state transition in the user interface, for example, the 
+focus has changed, a button has been clicked, etc. Such a service can 
+optionally request the capability for querying the content of the active 
+window. Development of an accessibility service requires extending this class 
+and implementing its abstract methods. 
+
+Developer Guides For more information about creating AccessibilityServices, 
+read the <a href="guide/topics/ui/accessibility/index.html">Accessibility 
+developer guide. 
+
+Lifecycle 
+
+The lifecycle of an accessibility service is managed exclusively by the system 
+and follows the established service life cycle. Additionally, starting or 
+stopping an accessibility service is triggered exclusively by an explicit user 
+action through enabling or disabling it in the device settings. After the 
+system binds to a service it calls 
+(|android.accessibilityservice.AccessibilityService|) . This method can be 
+overriden by clients that want to perform post binding setup. 
+
+Declaration 
+
+An accessibility is declared as any other service in an AndroidManifest.xml but 
+it must also specify that it handles the 
+"android.accessibilityservice.AccessibilityService" (|android.content.Intent|) 
+. Failure to declare this intent will cause the system to ignore the 
+accessibility service. Additionally an accessibility service must request the 
+(|android.Manifest.permission|) permission to ensure that only the system can 
+bind to it. Failure to declare this intent will cause the system to ignore the 
+accessibility service. Following is an example declaration: 
+
+<service android:name=".MyAccessibilityService" 
+android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"> 
+<intent-filter> <action 
+android:name="android.accessibilityservice.AccessibilityService" /> 
+</intent-filter> . . . </service> 
+
+Configuration 
+
+An accessibility service can be configured to receive specific types of 
+accessibility events, listen only to specific packages, get events from each 
+type only once in a given time frame, retrieve window content, specify a 
+settings activity, etc. 
+
+There are two approaches for configuring an accessibility service: 
+
+
+
+Providing a meta-data(|android.accessibilityservice.AccessibilityService|) 
+entry in the manifest when declaring the service. A service declaration with a 
+meta-data tag is presented below: 
+
+<service android:name=".MyAccessibilityService"> <intent-filter> <action 
+android:name="android.accessibilityservice.AccessibilityService" /> 
+</intent-filter> <meta-data android:name="android.accessibilityservice" 
+android:resource="@xml/accessibilityservice" /> </service> 
+
+Note: This approach enables setting all properties. 
+
+For more details refer to (|android.accessibilityservice.AccessibilityService|) 
+and < accessibility-service(|android.R.styleable|) >. 
+
+
+
+Calling (|android.accessibilityservice.AccessibilityService|) . Note that this 
+method can be called any time to dynamically change the service configuration. 
+
+Note: This approach enables setting only dynamically configurable properties: 
+(|android.accessibilityservice.AccessibilityServiceInfo|) , 
+(|android.accessibilityservice.AccessibilityServiceInfo|) , 
+(|android.accessibilityservice.AccessibilityServiceInfo|) , 
+(|android.accessibilityservice.AccessibilityServiceInfo|) , 
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+
+For more details refer to 
+(|android.accessibilityservice.AccessibilityServiceInfo|) . 
+
+
+
+Retrieving window content 
+
+A service can specify in its declaration that it can retrieve the active window 
+content which is represented as a tree of 
+(|android.view.accessibility.AccessibilityNodeInfo|) . Note that declaring this 
+capability requires that the service declares its configuration via an XML 
+resource referenced by (|android.accessibilityservice.AccessibilityService|) . 
+
+For security purposes an accessibility service can retrieve only the content of 
+the currently active window. The currently active window is defined as the 
+window from which was fired the last event of the following types: 
+(|android.view.accessibility.AccessibilityEvent|) , 
+(|android.view.accessibility.AccessibilityEvent|) , 
+(|android.view.accessibility.AccessibilityEvent|) , In other words, the last 
+window that was shown or the last window that the user has touched during touch 
+exploration. 
+
+The entry point for retrieving window content is through calling 
+AccessibilityEvent.getSource()(|android.view.accessibility.AccessibilityEvent|) 
+of the last received event of the above types or a previous event from the same 
+window (see 
+AccessibilityEvent.getWindowId()(|android.view.accessibility.AccessibilityEvent|)
+). Invoking this method will return an 
+(|android.view.accessibility.AccessibilityNodeInfo|) that can be used to 
+traverse the window content which represented as a tree of such objects. 
+
+Note An accessibility service may have requested to be notified for a subset of 
+the event types, thus be unaware that the active window has changed. Therefore 
+accessibility service that would like to retrieve window content should: 
+
+Register for all event types with no notification timeout and keep track for 
+the active window by calling (|android.view.accessibility.AccessibilityEvent|) 
+of the last received event and compare this with the 
+(|android.view.accessibility.AccessibilityNodeInfo|) before calling retrieval 
+methods on the latter. 
+
+Prepare that a retrieval method on 
+(|android.view.accessibility.AccessibilityNodeInfo|) may fail since the active 
+window has changed and the service did not get the accessibility event yet. 
+Note that it is possible to have a retrieval method failing even adopting the 
+strategy specified in the previous bullet because the accessibility event 
+dispatch is asynchronous and crosses process boundaries. 
+
+
+
+Notification strategy 
+
+For each feedback type only one accessibility service is notified. Services are 
+notified in the order of registration. Hence, if two services are registered 
+for the same feedback type in the same package the first one wins. It is 
+possible however, to register a service as the default one for a given feedback 
+type. In such a case this service is invoked if no other service was interested 
+in the event. In other words, default services do not compete with other 
+services and are notified last regardless of the registration order. This 
+enables "generic" accessibility services that work reasonably well with most 
+applications to coexist with "polished" ones that are targeted for specific 
+applications. 
+
+Note: The event notification timeout is useful to avoid propagating events to 
+the client too frequently since this is accomplished via an expensive 
+interprocess call. One can think of the timeout as a criteria to determine when 
+event generation has settled down. Event types 
+
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) 
+(|android.view.accessibility.AccessibilityEvent|) Feedback types 
+
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+(|android.accessibilityservice.AccessibilityServiceInfo|) 
+
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN*
+
+The user has performed a swipe down gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_LEFT*
+
+The user has performed an down and left gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_RIGHT*
+
+The user has performed an down and right gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_DOWN_AND_UP*
+
+The user has performed a swipe down and up gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT*
+
+The user has performed a swipe left gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_DOWN*
+
+The user has performed a left and down gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_RIGHT*
+
+The user has performed a swipe left and right gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_LEFT_AND_UP*
+
+The user has performed a left and up gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT*
+
+The user has performed a swipe right gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_DOWN*
+
+The user has performed a right and down gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_LEFT*
+
+The user has performed a swipe right and left gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_RIGHT_AND_UP*
+
+The user has performed a right and up gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP*
+
+The user has performed a swipe up gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_DOWN*
+
+The user has performed a swipe up and down gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_LEFT*
+
+The user has performed an up and left gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GESTURE_SWIPE_UP_AND_RIGHT*
+
+The user has performed an up and right gesture on the touch screen. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK*
+
+Action to go back. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME*
+
+Action to go home. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS*
+
+Action to open the notifications. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS*
+
+Action to open the quick settings. 
+
+
+*int_android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_RECENTS*
+
+Action to open the recent apps. 
+
+
+*java.lang.String_android.accessibilityservice.AccessibilityService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) that must be declared as handled by the service. 
+
+
+*java.lang.String_android.accessibilityservice.AccessibilityService.SERVICE_META_DATA*
+
+Name under which an AccessibilityService component publishes information about 
+itself. This meta-data must reference an XML resource containing an < 
+accessibility-service(|android.R.styleable|) > tag. This is a a sample XML file 
+configuring an accessibility service: 
+
+<accessibility-service 
+android:accessibilityEventTypes="typeViewClicked|typeViewFocused" 
+android:packageNames="foo.bar, foo.baz" 
+android:accessibilityFeedbackType="feedbackSpoken" 
+android:notificationTimeout="100" android:accessibilityFlags="flagDefault" 
+android:settingsActivity="foo.bar.TestBackActivity" 
+android:canRetrieveWindowContent="true" 
+android:canRequestTouchExplorationMode="true" 
+android:canRequestEnhancedWebAccessibility="true" . . . /> 
+
+
+
+*android.accessibilityservice.AccessibilityService()*
+
+public AccessibilityService()
+
+
+
+
+*android.accessibilityservice.AccessibilityService.getRootInActiveWindow()*
+
+public |android.view.accessibility.AccessibilityNodeInfo| getRootInActiveWindow()
+
+Gets the root node in the currently active window if this service can retrieve 
+window content. 
+
+
+
+    Returns: The root node if this service can retrieve window content. 
+
+*android.accessibilityservice.AccessibilityService.getServiceInfo()*
+
+public final |android.accessibilityservice.AccessibilityServiceInfo| getServiceInfo()
+
+Gets the an (|android.accessibilityservice.AccessibilityServiceInfo|) 
+describing this (|android.accessibilityservice.AccessibilityService|) . This 
+method is useful if one wants to change some of the dynamically configurable 
+properties at runtime. 
+
+
+
+    Returns: The accessibility service info. 
+
+*android.accessibilityservice.AccessibilityService.onAccessibilityEvent(AccessibilityEvent)*
+
+public abstract void onAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+Callback for (|android.view.accessibility.AccessibilityEvent|) s. 
+
+
+    event - An event. 
+
+*android.accessibilityservice.AccessibilityService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+Implement to return the implementation of the internal accessibility service 
+interface. 
+
+
+
+*android.accessibilityservice.AccessibilityService.onGesture(int)*
+
+protected boolean onGesture(int gestureId)
+
+Called by the system when the user performs a specific gesture on the touch 
+screen. 
+
+Note: To receive gestures an accessibility service must request that the device 
+is in touch exploration mode by setting the 
+(|android.accessibilityservice.AccessibilityServiceInfo|) flag. 
+
+
+    gestureId - The unique id of the performed gesture. 
+
+    Returns: Whether the gesture was handled. 
+
+*android.accessibilityservice.AccessibilityService.onInterrupt()*
+
+public abstract void onInterrupt()
+
+Callback for interrupting the accessibility feedback. 
+
+
+
+*android.accessibilityservice.AccessibilityService.onKeyEvent(KeyEvent)*
+
+protected boolean onKeyEvent(android.view.KeyEvent event)
+
+Callback that allows an accessibility service to observe the key events before 
+they are passed to the rest of the system. This means that the events are first 
+delivered here before they are passed to the device policy, the input method, 
+or applications. 
+
+Note: It is important that key events are handled in such a way that the event 
+stream that would be passed to the rest of the system is well-formed. For 
+example, handling the down event but not the up event and vice versa would 
+generate an inconsistent event stream. 
+
+Note: The key events delivered in this method are copies and modifying them 
+will have no effect on the events that will be passed to the system. This 
+method is intended to perform purely filtering functionality. 
+
+
+    event - The event to be processed. 
+
+    Returns: If true then the event will be consumed and not delivered to applications, 
+             otherwise it will be delivered as usual. 
+
+*android.accessibilityservice.AccessibilityService.onServiceConnected()*
+
+protected void onServiceConnected()
+
+This method is a part of the 
+(|android.accessibilityservice.AccessibilityService|) lifecycle and is called 
+after the system has successfully bound to the service. If is convenient to use 
+this method for setting the 
+(|android.accessibilityservice.AccessibilityServiceInfo|) . 
+
+
+
+*android.accessibilityservice.AccessibilityService.performGlobalAction(int)*
+
+public final boolean performGlobalAction(int action)
+
+Performs a global action. Such an action can be performed at any moment 
+regardless of the current application or user location in that application. For 
+example going back, going home, opening recents, etc. 
+
+
+    action - The action to perform. 
+
+    Returns: Whether the action was successfully performed. 
+
+*android.accessibilityservice.AccessibilityService.setServiceInfo(AccessibilityServiceInfo)*
+
+public final void setServiceInfo(android.accessibilityservice.AccessibilityServiceInfo info)
+
+Sets the (|android.accessibilityservice.AccessibilityServiceInfo|) that 
+describes this service. 
+
+Note: You can call this method any time but the info will be picked up after 
+the system has bound to this service and when this method is called thereafter. 
+
+
+    info - The info. 
+
+

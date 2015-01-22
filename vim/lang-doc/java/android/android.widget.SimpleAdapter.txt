@@ -1,0 +1,214 @@
+*android.widget.SimpleAdapter* *SimpleAdapter* An easy adapter to map static dat
+
+public class SimpleAdapter
+  extends    |android.widget.BaseAdapter|
+  implements |android.widget.Filterable|
+
+|android.widget.SimpleAdapter_Description|
+|android.widget.SimpleAdapter_Fields|
+|android.widget.SimpleAdapter_Constructors|
+|android.widget.SimpleAdapter_Methods|
+
+================================================================================
+
+*android.widget.SimpleAdapter_Constructors*
+|android.widget.SimpleAdapter(Context,List<?extendsMap<String,?>>,int,String[],int[])|
+
+*android.widget.SimpleAdapter_Methods*
+|android.widget.SimpleAdapter.getCount()|
+|android.widget.SimpleAdapter.getDropDownView(int,View,ViewGroup)|
+|android.widget.SimpleAdapter.getFilter()|
+|android.widget.SimpleAdapter.getItem(int)|
+|android.widget.SimpleAdapter.getItemId(int)|
+|android.widget.SimpleAdapter.getView(int,View,ViewGroup)|
+|android.widget.SimpleAdapter.getViewBinder()|Returns theViewBinderused to bind
+|android.widget.SimpleAdapter.setDropDownViewResource(int)|Sets the layout reso
+|android.widget.SimpleAdapter.setViewBinder(SimpleAdapter.ViewBinder)|Sets the 
+|android.widget.SimpleAdapter.setViewImage(ImageView,int)|Called by bindView() 
+|android.widget.SimpleAdapter.setViewImage(ImageView,String)|Called by bindView
+|android.widget.SimpleAdapter.setViewText(TextView,String)|Called by bindView()
+
+*android.widget.SimpleAdapter_Description*
+
+An easy adapter to map static data to views defined in an XML file. You can 
+specify the data backing the list as an ArrayList of Maps. Each entry in the 
+ArrayList corresponds to one row in the list. The Maps contain the data for 
+each row. You also specify an XML file that defines the views used to display 
+the row, and a mapping from keys in the Map to specific views. 
+
+Binding data to views occurs in two phases. First, if a 
+(|android.widget.SimpleAdapter.ViewBinder|) is available, 
+(|android.widget.SimpleAdapter.ViewBinder|) is invoked. If the returned value 
+is true, binding has occurred. If the returned value is false, the following 
+views are then tried in order: 
+
+A view that implements Checkable (e.g. CheckBox). The expected bind value is a 
+boolean. TextView. The expected bind value is a string and 
+(|android.widget.SimpleAdapter|) is invoked. ImageView. The expected bind value 
+is a resource id or a string and (|android.widget.SimpleAdapter|) or 
+(|android.widget.SimpleAdapter|) is invoked. 
+
+If no appropriate binding can be found, an (|java.lang.IllegalStateException|) 
+is thrown. 
+
+
+
+*android.widget.SimpleAdapter(Context,List<?extendsMap<String,?>>,int,String[],int[])*
+
+public SimpleAdapter(
+  android.content.Context context,
+  java.util.List<? extends java.util.Map<java.lang.String, ?>> data,
+  int resource,
+  java.lang.String[] from,
+  int[] to)
+
+Constructor 
+
+    context - The context where the View associated with this SimpleAdapter is running 
+    data - A List of Maps. Each entry in the List corresponds to one row in the list. The 
+       Maps contain the data for each row, and should include all the entries 
+       specified in "from" 
+    resource - Resource identifier of a view layout that defines the views for this list item. 
+       The layout file should include at least those named views defined in 
+       "to" 
+    from - A list of column names that will be added to the Map associated with each item. 
+    to - The views that should display column in the "from" parameter. These should all 
+       be TextViews. The first N views in this list are given the values of the 
+       first N columns in the from parameter. 
+
+*android.widget.SimpleAdapter.getCount()*
+
+public int getCount()
+
+
+
+
+
+*android.widget.SimpleAdapter.getDropDownView(int,View,ViewGroup)*
+
+public |android.view.View| getDropDownView(
+  int position,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.SimpleAdapter.getFilter()*
+
+public |android.widget.Filter| getFilter()
+
+
+
+
+
+*android.widget.SimpleAdapter.getItem(int)*
+
+public |java.lang.Object| getItem(int position)
+
+
+
+
+
+*android.widget.SimpleAdapter.getItemId(int)*
+
+public long getItemId(int position)
+
+
+
+
+
+*android.widget.SimpleAdapter.getView(int,View,ViewGroup)*
+
+public |android.view.View| getView(
+  int position,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.SimpleAdapter.getViewBinder()*
+
+public |android.widget.SimpleAdapter.ViewBinder| getViewBinder()
+
+Returns the (|android.widget.SimpleAdapter.ViewBinder|) used to bind data to 
+views. 
+
+
+
+    Returns: a ViewBinder or null if the binder does not exist 
+
+*android.widget.SimpleAdapter.setDropDownViewResource(int)*
+
+public void setDropDownViewResource(int resource)
+
+Sets the layout resource to create the drop down views. 
+
+
+    resource - the layout resource defining the drop down views 
+
+*android.widget.SimpleAdapter.setViewBinder(SimpleAdapter.ViewBinder)*
+
+public void setViewBinder(android.widget.SimpleAdapter.ViewBinder viewBinder)
+
+Sets the binder used to bind data to views. 
+
+
+    viewBinder - the binder used to bind data to views, can be null to remove the existing 
+       binder 
+
+*android.widget.SimpleAdapter.setViewImage(ImageView,int)*
+
+public void setViewImage(
+  android.widget.ImageView v,
+  int value)
+
+Called by bindView() to set the image for an ImageView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to an 
+ImageView. 
+
+This method is called instead of (|android.widget.SimpleAdapter|) if the 
+supplied data is an int or Integer. 
+
+
+    v - ImageView to receive an image 
+    value - the value retrieved from the data set 
+
+*android.widget.SimpleAdapter.setViewImage(ImageView,String)*
+
+public void setViewImage(
+  android.widget.ImageView v,
+  java.lang.String value)
+
+Called by bindView() to set the image for an ImageView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to an 
+ImageView. 
+
+By default, the value will be treated as an image resource. If the value cannot 
+be used as an image resource, the value is used as an image Uri. 
+
+This method is called instead of (|android.widget.SimpleAdapter|) if the 
+supplied data is not an int or Integer. 
+
+
+    v - ImageView to receive an image 
+    value - the value retrieved from the data set 
+
+*android.widget.SimpleAdapter.setViewText(TextView,String)*
+
+public void setViewText(
+  android.widget.TextView v,
+  java.lang.String text)
+
+Called by bindView() to set the text for a TextView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to a 
+TextView. 
+
+
+    v - TextView to receive text 
+    text - the text to be set for the TextView 
+
+

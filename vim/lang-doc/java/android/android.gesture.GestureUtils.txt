@@ -1,0 +1,104 @@
+*android.gesture.GestureUtils* *GestureUtils* Utility functions for gesture proc
+
+public final class GestureUtils
+  extends    |java.lang.Object|
+
+|android.gesture.GestureUtils_Description|
+|android.gesture.GestureUtils_Fields|
+|android.gesture.GestureUtils_Constructors|
+|android.gesture.GestureUtils_Methods|
+
+================================================================================
+
+*android.gesture.GestureUtils_Methods*
+|android.gesture.GestureUtils.computeOrientedBoundingBox(ArrayList<GesturePoint>)|
+|android.gesture.GestureUtils.computeOrientedBoundingBox(float[])|Computes an o
+|android.gesture.GestureUtils.spatialSampling(Gesture,int)|Samples the gesture 
+|android.gesture.GestureUtils.spatialSampling(Gesture,int,boolean)|Samples the 
+|android.gesture.GestureUtils.temporalSampling(GestureStroke,int)|Samples a str
+
+*android.gesture.GestureUtils_Description*
+
+Utility functions for gesture processing & analysis, including methods for: 
+
+feature extraction (e.g., samplers and those for calculating bounding boxes and 
+gesture path lengths); geometric transformation (e.g., translation, rotation 
+and scaling); gesture similarity comparison (e.g., calculating Euclidean or 
+Cosine distances between two gestures). 
+
+
+
+*android.gesture.GestureUtils.computeOrientedBoundingBox(ArrayList<GesturePoint>)*
+
+public static |android.gesture.OrientedBoundingBox| computeOrientedBoundingBox(java.util.ArrayList<android.gesture.GesturePoint> originalPoints)
+
+Computes an oriented, minimum bounding box of a set of points. 
+
+
+    originalPoints - 
+
+    Returns: an oriented bounding box 
+
+*android.gesture.GestureUtils.computeOrientedBoundingBox(float[])*
+
+public static |android.gesture.OrientedBoundingBox| computeOrientedBoundingBox(float[] originalPoints)
+
+Computes an oriented, minimum bounding box of a set of points. 
+
+
+    originalPoints - 
+
+    Returns: an oriented bounding box 
+
+*android.gesture.GestureUtils.spatialSampling(Gesture,int)*
+
+public static float[] spatialSampling(
+  android.gesture.Gesture gesture,
+  int bitmapSize)
+
+Samples the gesture spatially by rendering the gesture into a 2D grayscale 
+bitmap. Scales the gesture to fit the size of the bitmap. The scaling does not 
+necessarily keep the aspect ratio of the gesture. 
+
+
+    gesture - the gesture to be sampled 
+    bitmapSize - the size of the bitmap 
+
+    Returns: a bitmapSize x bitmapSize grayscale bitmap that is represented as a 1D array. 
+             The float at index i represents the grayscale value at pixel 
+             [i%bitmapSize, i/bitmapSize] 
+
+*android.gesture.GestureUtils.spatialSampling(Gesture,int,boolean)*
+
+public static float[] spatialSampling(
+  android.gesture.Gesture gesture,
+  int bitmapSize,
+  boolean keepAspectRatio)
+
+Samples the gesture spatially by rendering the gesture into a 2D grayscale 
+bitmap. Scales the gesture to fit the size of the bitmap. 
+
+
+    gesture - the gesture to be sampled 
+    bitmapSize - the size of the bitmap 
+    keepAspectRatio - if the scaling should keep the gesture's aspect ratio 
+
+    Returns: a bitmapSize x bitmapSize grayscale bitmap that is represented as a 1D array. 
+             The float at index i represents the grayscale value at pixel 
+             [i%bitmapSize, i/bitmapSize] 
+
+*android.gesture.GestureUtils.temporalSampling(GestureStroke,int)*
+
+public static float[] temporalSampling(
+  android.gesture.GestureStroke stroke,
+  int numPoints)
+
+Samples a stroke temporally into a given number of evenly-distributed points. 
+
+
+    stroke - the gesture stroke to be sampled 
+    numPoints - the number of points 
+
+    Returns: the sampled points in the form of [x1, y1, x2, y2, ..., xn, yn] 
+
+

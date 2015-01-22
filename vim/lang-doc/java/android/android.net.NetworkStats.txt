@@ -1,0 +1,473 @@
+*android.net.NetworkStats* *NetworkStats* Collection of active network statistic
+
+public class NetworkStats
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.net.NetworkStats_Description|
+|android.net.NetworkStats_Fields|
+|android.net.NetworkStats_Constructors|
+|android.net.NetworkStats_Methods|
+
+================================================================================
+
+*android.net.NetworkStats_Fields*
+|android.os.Parcelable.Creator<android.net.NetworkStats>_android.net.NetworkStats.CREATOR|
+|java.lang.String_android.net.NetworkStats.IFACE_ALL|
+|int_android.net.NetworkStats.SET_ALL|
+|int_android.net.NetworkStats.SET_DEFAULT|
+|int_android.net.NetworkStats.SET_FOREGROUND|
+|int_android.net.NetworkStats.TAG_NONE|
+|int_android.net.NetworkStats.UID_ALL|
+
+*android.net.NetworkStats_Constructors*
+|android.net.NetworkStats(long,int)|
+|android.net.NetworkStats(Parcel)|
+
+*android.net.NetworkStats_Methods*
+|android.net.NetworkStats.addIfaceValues(String,long,long,long,long)|
+|android.net.NetworkStats.addValues(NetworkStats.Entry)|Add new stats entry, co
+|android.net.NetworkStats.addValues(String,int,int,int,long,long,long,long,long)|
+|android.net.NetworkStats.clone()|
+|android.net.NetworkStats.combineAllValues(NetworkStats)|Combine all values fro
+|android.net.NetworkStats.combineValues(NetworkStats.Entry)|Combine given value
+|android.net.NetworkStats.combineValues(String,int,int,int,long,long,long,long,long)|
+|android.net.NetworkStats.combineValues(String,int,int,long,long,long,long,long)|
+|android.net.NetworkStats.describeContents()|
+|android.net.NetworkStats.dump(String,PrintWriter)|
+|android.net.NetworkStats.findIndex(String,int,int,int)|Find first stats index 
+|android.net.NetworkStats.findIndexHinted(String,int,int,int,int)|Find first st
+|android.net.NetworkStats.getElapsedRealtime()|
+|android.net.NetworkStats.getElapsedRealtimeAge()|Return age of thisNetworkStat
+|android.net.NetworkStats.getTotal(NetworkStats.Entry)|Return total of all fiel
+|android.net.NetworkStats.getTotal(NetworkStats.Entry,HashSet<String>)|Return t
+|android.net.NetworkStats.getTotal(NetworkStats.Entry,int)|Return total of all 
+|android.net.NetworkStats.getTotalBytes()|Return total bytes represented by thi
+|android.net.NetworkStats.getTotalIncludingTags(NetworkStats.Entry)|
+|android.net.NetworkStats.getUniqueIfaces()|Return list of unique interfaces kn
+|android.net.NetworkStats.getUniqueUids()|Return list of unique UIDs known by t
+|android.net.NetworkStats.getValues(int,NetworkStats.Entry)|Return specific sta
+|android.net.NetworkStats.groupedByIface()|Return total statistics grouped by#i
+|android.net.NetworkStats.groupedByUid()|Return total statistics grouped by#uid
+|android.net.NetworkStats.internalSize()|
+|android.net.NetworkStats.setToString(int)|Return text description of#setvalue.
+|android.net.NetworkStats.size()|
+|android.net.NetworkStats.spliceOperationsFrom(NetworkStats)|Splice in#operatio
+|android.net.NetworkStats.subtract(NetworkStats)|Subtract the givenNetworkStats
+|android.net.NetworkStats.subtract(NetworkStats,NetworkStats,NetworkStats.NonMonotonicObserver<C>,C)|
+|android.net.NetworkStats.tagToString(int)|Return text description of#tagvalue.
+|android.net.NetworkStats.toString()|
+|android.net.NetworkStats.withoutUids(int[])|Return all rows except those attri
+|android.net.NetworkStats.writeToParcel(Parcel,int)|
+
+*android.net.NetworkStats_Description*
+
+Collection of active network statistics. Can contain summary details across all 
+interfaces, or details with per-UID granularity. Internally stores data as a 
+large table, closely matching/proc/data format. This structure optimizes for 
+rapid in-memory comparison, but consider using 
+(|android.net.NetworkStatsHistory|) when persisting. 
+
+
+
+*android.os.Parcelable.Creator<android.net.NetworkStats>_android.net.NetworkStats.CREATOR*
+
+
+
+
+*java.lang.String_android.net.NetworkStats.IFACE_ALL*
+
+(|android.net.NetworkStats|) value when interface details unavailable. 
+
+
+*int_android.net.NetworkStats.SET_ALL*
+
+(|android.net.NetworkStats|) value when all sets combined. 
+
+
+*int_android.net.NetworkStats.SET_DEFAULT*
+
+(|android.net.NetworkStats|) value where background data is accounted. 
+
+
+*int_android.net.NetworkStats.SET_FOREGROUND*
+
+(|android.net.NetworkStats|) value where foreground data is accounted. 
+
+
+*int_android.net.NetworkStats.TAG_NONE*
+
+(|android.net.NetworkStats|) value for total data across all tags. 
+
+
+*int_android.net.NetworkStats.UID_ALL*
+
+(|android.net.NetworkStats|) value when UID details unavailable. 
+
+
+
+*android.net.NetworkStats(long,int)*
+
+public NetworkStats(
+  long elapsedRealtime,
+  int initialSize)
+
+
+
+
+*android.net.NetworkStats(Parcel)*
+
+public NetworkStats(android.os.Parcel parcel)
+
+
+
+
+*android.net.NetworkStats.addIfaceValues(String,long,long,long,long)*
+
+public |android.net.NetworkStats| addIfaceValues(
+  java.lang.String iface,
+  long rxBytes,
+  long rxPackets,
+  long txBytes,
+  long txPackets)
+
+
+
+
+
+*android.net.NetworkStats.addValues(NetworkStats.Entry)*
+
+public |android.net.NetworkStats| addValues(android.net.NetworkStats.Entry entry)
+
+Add new stats entry, copying from given (|android.net.NetworkStats.Entry|) . 
+The (|android.net.NetworkStats.Entry|) object can be recycled across multiple 
+calls. 
+
+
+
+*android.net.NetworkStats.addValues(String,int,int,int,long,long,long,long,long)*
+
+public |android.net.NetworkStats| addValues(
+  java.lang.String iface,
+  int uid,
+  int set,
+  int tag,
+  long rxBytes,
+  long rxPackets,
+  long txBytes,
+  long txPackets,
+  long operations)
+
+
+
+
+
+*android.net.NetworkStats.clone()*
+
+public |android.net.NetworkStats| clone()
+
+
+
+
+
+*android.net.NetworkStats.combineAllValues(NetworkStats)*
+
+public void combineAllValues(android.net.NetworkStats another)
+
+Combine all values from another (|android.net.NetworkStats|) into this object. 
+
+
+
+*android.net.NetworkStats.combineValues(NetworkStats.Entry)*
+
+public |android.net.NetworkStats| combineValues(android.net.NetworkStats.Entry entry)
+
+Combine given values with an existing row, or create a new row if 
+(|android.net.NetworkStats|) is unable to find match. Can also be used to 
+subtract values from existing rows. 
+
+
+
+*android.net.NetworkStats.combineValues(String,int,int,int,long,long,long,long,long)*
+
+public |android.net.NetworkStats| combineValues(
+  java.lang.String iface,
+  int uid,
+  int set,
+  int tag,
+  long rxBytes,
+  long rxPackets,
+  long txBytes,
+  long txPackets,
+  long operations)
+
+
+
+
+
+*android.net.NetworkStats.combineValues(String,int,int,long,long,long,long,long)*
+
+public |android.net.NetworkStats| combineValues(
+  java.lang.String iface,
+  int uid,
+  int tag,
+  long rxBytes,
+  long rxPackets,
+  long txBytes,
+  long txPackets,
+  long operations)
+
+
+
+
+
+*android.net.NetworkStats.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.net.NetworkStats.dump(String,PrintWriter)*
+
+public void dump(
+  java.lang.String prefix,
+  java.io.PrintWriter pw)
+
+
+
+
+
+*android.net.NetworkStats.findIndex(String,int,int,int)*
+
+public int findIndex(
+  java.lang.String iface,
+  int uid,
+  int set,
+  int tag)
+
+Find first stats index that matches the requested parameters. 
+
+
+
+*android.net.NetworkStats.findIndexHinted(String,int,int,int,int)*
+
+public int findIndexHinted(
+  java.lang.String iface,
+  int uid,
+  int set,
+  int tag,
+  int hintIndex)
+
+Find first stats index that matches the requested parameters, starting search 
+around the hinted index as an optimization. 
+
+
+
+*android.net.NetworkStats.getElapsedRealtime()*
+
+public long getElapsedRealtime()
+
+
+
+
+
+*android.net.NetworkStats.getElapsedRealtimeAge()*
+
+public long getElapsedRealtimeAge()
+
+Return age of this (|android.net.NetworkStats|) object with respect to 
+(|android.os.SystemClock|) . 
+
+
+
+*android.net.NetworkStats.getTotal(NetworkStats.Entry)*
+
+public |android.net.NetworkStats.Entry| getTotal(android.net.NetworkStats.Entry recycle)
+
+Return total of all fields represented by this snapshot object. 
+
+
+
+*android.net.NetworkStats.getTotal(NetworkStats.Entry,HashSet<String>)*
+
+public |android.net.NetworkStats.Entry| getTotal(
+  android.net.NetworkStats.Entry recycle,
+  java.util.HashSet<java.lang.String> limitIface)
+
+Return total of all fields represented by this snapshot object matching the 
+requested (|android.net.NetworkStats|) . 
+
+
+
+*android.net.NetworkStats.getTotal(NetworkStats.Entry,int)*
+
+public |android.net.NetworkStats.Entry| getTotal(
+  android.net.NetworkStats.Entry recycle,
+  int limitUid)
+
+Return total of all fields represented by this snapshot object matching the 
+requested (|android.net.NetworkStats|) . 
+
+
+
+*android.net.NetworkStats.getTotalBytes()*
+
+public long getTotalBytes()
+
+Return total bytes represented by this snapshot object, usually used when 
+checking if a (|android.net.NetworkStats|) delta passes a threshold. 
+
+
+
+*android.net.NetworkStats.getTotalIncludingTags(NetworkStats.Entry)*
+
+public |android.net.NetworkStats.Entry| getTotalIncludingTags(android.net.NetworkStats.Entry recycle)
+
+
+
+
+
+*android.net.NetworkStats.getUniqueIfaces()*
+
+public |java.lang.String|[] getUniqueIfaces()
+
+Return list of unique interfaces known by this data structure. 
+
+
+
+*android.net.NetworkStats.getUniqueUids()*
+
+public int[] getUniqueUids()
+
+Return list of unique UIDs known by this data structure. 
+
+
+
+*android.net.NetworkStats.getValues(int,NetworkStats.Entry)*
+
+public |android.net.NetworkStats.Entry| getValues(
+  int i,
+  android.net.NetworkStats.Entry recycle)
+
+Return specific stats entry. 
+
+
+
+*android.net.NetworkStats.groupedByIface()*
+
+public |android.net.NetworkStats| groupedByIface()
+
+Return total statistics grouped by (|android.net.NetworkStats|) ; doesn't 
+mutate the original structure. 
+
+
+
+*android.net.NetworkStats.groupedByUid()*
+
+public |android.net.NetworkStats| groupedByUid()
+
+Return total statistics grouped by (|android.net.NetworkStats|) ; doesn't 
+mutate the original structure. 
+
+
+
+*android.net.NetworkStats.internalSize()*
+
+public int internalSize()
+
+
+
+
+
+*android.net.NetworkStats.setToString(int)*
+
+public static |java.lang.String| setToString(int set)
+
+Return text description of (|android.net.NetworkStats|) value. 
+
+
+
+*android.net.NetworkStats.size()*
+
+public int size()
+
+
+
+
+
+*android.net.NetworkStats.spliceOperationsFrom(NetworkStats)*
+
+public void spliceOperationsFrom(android.net.NetworkStats stats)
+
+Splice in (|android.net.NetworkStats|) from the given 
+(|android.net.NetworkStats|) based on matching (|android.net.NetworkStats|) and 
+(|android.net.NetworkStats|) rows. Ignores (|android.net.NetworkStats|) , since 
+operation counts are at data layer. 
+
+
+
+*android.net.NetworkStats.subtract(NetworkStats)*
+
+public |android.net.NetworkStats| subtract(android.net.NetworkStats right)
+
+Subtract the given (|android.net.NetworkStats|) , effectively leaving the delta 
+between two snapshots in time. Assumes that statistics rows collect over time, 
+and that none of them have disappeared. 
+
+
+
+*android.net.NetworkStats.subtract(NetworkStats,NetworkStats,NetworkStats.NonMonotonicObserver<C>,C)*
+
+public static |android.net.NetworkStats| subtract(
+  android.net.NetworkStats left,
+  android.net.NetworkStats right,
+  android.net.NetworkStats.NonMonotonicObserver<C> observer,
+  C cookie)
+
+Subtract the two given (|android.net.NetworkStats|) objects, returning the 
+delta between two snapshots in time. Assumes that statistics rows collect over 
+time, and that none of them have disappeared. 
+
+If counters have rolled backwards, they are clamped to0and reported to the 
+given (|android.net.NetworkStats.NonMonotonicObserver|) . 
+
+
+
+*android.net.NetworkStats.tagToString(int)*
+
+public static |java.lang.String| tagToString(int tag)
+
+Return text description of (|android.net.NetworkStats|) value. 
+
+
+
+*android.net.NetworkStats.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.net.NetworkStats.withoutUids(int[])*
+
+public |android.net.NetworkStats| withoutUids(int[] uids)
+
+Return all rows except those attributed to the requested UID; doesn't mutate 
+the original structure. 
+
+
+
+*android.net.NetworkStats.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

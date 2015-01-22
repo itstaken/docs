@@ -1,0 +1,243 @@
+*android.util.LongSparseArray* *LongSparseArray* SparseArray mapping longs to Ob
+
+public class LongSparseArray<E>
+  extends    |java.lang.Object|
+  implements |java.lang.Cloneable|
+
+|android.util.LongSparseArray_Description|
+|android.util.LongSparseArray_Fields|
+|android.util.LongSparseArray_Constructors|
+|android.util.LongSparseArray_Methods|
+
+================================================================================
+
+*android.util.LongSparseArray_Constructors*
+|android.util.LongSparseArray()|Creates a new LongSparseArray containing no map
+|android.util.LongSparseArray(int)|Creates a new LongSparseArray containing no 
+
+*android.util.LongSparseArray_Methods*
+|android.util.LongSparseArray.append(long,E)|Puts a key/value pair into the arr
+|android.util.LongSparseArray.clear()|Removes all key-value mappings from this 
+|android.util.LongSparseArray.clone()|
+|android.util.LongSparseArray.delete(long)|Removes the mapping from the specifi
+|android.util.LongSparseArray.get(long)|Gets the Object mapped from the specifi
+|android.util.LongSparseArray.get(long,E)|Gets the Object mapped from the speci
+|android.util.LongSparseArray.indexOfKey(long)|Returns the index for which#keyA
+|android.util.LongSparseArray.indexOfValue(E)|Returns an index for which#valueA
+|android.util.LongSparseArray.keyAt(int)|Given an index in the range 0...size()
+|android.util.LongSparseArray.put(long,E)|Adds a mapping from the specified key
+|android.util.LongSparseArray.remove(long)|Alias for#delete(long).
+|android.util.LongSparseArray.removeAt(int)|Removes the mapping at the specifie
+|android.util.LongSparseArray.setValueAt(int,E)|Given an index in the range 0..
+|android.util.LongSparseArray.size()|Returns the number of key-value mappings t
+|android.util.LongSparseArray.toString()|
+|android.util.LongSparseArray.valueAt(int)|Given an index in the range 0...size
+
+*android.util.LongSparseArray_Description*
+
+SparseArray mapping longs to Objects. Unlike a normal array of Objects, there 
+can be gaps in the indices. It is intended to be more memory efficient than 
+using a HashMap to map Longs to Objects, both because it avoids auto-boxing 
+keys and its data structure doesn't rely on an extra entry object for each 
+mapping. 
+
+Note that this container keeps its mappings in an array data structure, using a 
+binary search to find keys. The implementation is not intended to be 
+appropriate for data structures that may contain large numbers of items. It is 
+generally slower than a traditional HashMap, since lookups require a binary 
+search and adds and removes require inserting and deleting entries in the 
+array. For containers holding up to hundreds of items, the performance 
+difference is not significant, less than 50%. 
+
+To help with performance, the container includes an optimization when removing 
+keys: instead of compacting its array immediately, it leaves the removed entry 
+marked as deleted. The entry can then be re-used for the same key, or compacted 
+later in a single garbage collection step of all removed entries. This garbage 
+collection will need to be performed at any time the array needs to be grown or 
+the the map size or entry values are retrieved. 
+
+It is possible to iterate over the items in this container using 
+(|android.util.LongSparseArray|) and (|android.util.LongSparseArray|) . 
+Iterating over the keys using keyAt(int) with ascending values of the index 
+will return the keys in ascending order, or the values corresponding to the 
+keys in ascending order in the case of valueAt(int). 
+
+
+
+*android.util.LongSparseArray()*
+
+public LongSparseArray()
+
+Creates a new LongSparseArray containing no mappings. 
+
+
+*android.util.LongSparseArray(int)*
+
+public LongSparseArray(int initialCapacity)
+
+Creates a new LongSparseArray containing no mappings that will not require any 
+additional memory allocation to store the specified number of mappings. If you 
+supply an initial capacity of 0, the sparse array will be initialized with a 
+light-weight representation not requiring any additional array allocations. 
+
+
+*android.util.LongSparseArray.append(long,E)*
+
+public void append(
+  long key,
+  E value)
+
+Puts a key/value pair into the array, optimizing for the case where the key is 
+greater than all existing keys in the array. 
+
+
+
+*android.util.LongSparseArray.clear()*
+
+public void clear()
+
+Removes all key-value mappings from this LongSparseArray. 
+
+
+
+*android.util.LongSparseArray.clone()*
+
+public |android.util.LongSparseArray|<E> clone()
+
+
+
+
+
+*android.util.LongSparseArray.delete(long)*
+
+public void delete(long key)
+
+Removes the mapping from the specified key, if there was any. 
+
+
+
+*android.util.LongSparseArray.get(long)*
+
+public |E| get(long key)
+
+Gets the Object mapped from the specified key, or null if no such mapping has 
+been made. 
+
+
+
+*android.util.LongSparseArray.get(long,E)*
+
+public |E| get(
+  long key,
+  E valueIfKeyNotFound)
+
+Gets the Object mapped from the specified key, or the specified Object if no 
+such mapping has been made. 
+
+
+
+*android.util.LongSparseArray.indexOfKey(long)*
+
+public int indexOfKey(long key)
+
+Returns the index for which (|android.util.LongSparseArray|) would return the 
+specified key, or a negative number if the specified key is not mapped. 
+
+
+
+*android.util.LongSparseArray.indexOfValue(E)*
+
+public int indexOfValue(E value)
+
+Returns an index for which (|android.util.LongSparseArray|) would return the 
+specified key, or a negative number if no keys map to the specified value. 
+Beware that this is a linear search, unlike lookups by key, and that multiple 
+keys can map to the same value and this will find only one of them. 
+
+
+
+*android.util.LongSparseArray.keyAt(int)*
+
+public long keyAt(int index)
+
+Given an index in the range 0...size()-1, returns the key from the indexth 
+key-value mapping that this LongSparseArray stores. 
+
+The keys corresponding to indices in ascending order are guaranteed to be in 
+ascending order, e.g., keyAt(0) will return the smallest key and 
+keyAt(size()-1) will return the largest key. 
+
+
+
+*android.util.LongSparseArray.put(long,E)*
+
+public void put(
+  long key,
+  E value)
+
+Adds a mapping from the specified key to the specified value, replacing the 
+previous mapping from the specified key if there was one. 
+
+
+
+*android.util.LongSparseArray.remove(long)*
+
+public void remove(long key)
+
+Alias for (|android.util.LongSparseArray|) . 
+
+
+
+*android.util.LongSparseArray.removeAt(int)*
+
+public void removeAt(int index)
+
+Removes the mapping at the specified index. 
+
+
+
+*android.util.LongSparseArray.setValueAt(int,E)*
+
+public void setValueAt(
+  int index,
+  E value)
+
+Given an index in the range 0...size()-1, sets a new value for the indexth 
+key-value mapping that this LongSparseArray stores. 
+
+
+
+*android.util.LongSparseArray.size()*
+
+public int size()
+
+Returns the number of key-value mappings that this LongSparseArray currently 
+stores. 
+
+
+
+*android.util.LongSparseArray.toString()*
+
+public |java.lang.String| toString()
+
+This implementation composes a string by iterating over its mappings. If this 
+map contains itself as a value, the string "(this Map)" will appear in its 
+place. 
+
+
+
+*android.util.LongSparseArray.valueAt(int)*
+
+public |E| valueAt(int index)
+
+Given an index in the range 0...size()-1, returns the value from the indexth 
+key-value mapping that this LongSparseArray stores. 
+
+The values corresponding to indices in ascending order are guaranteed to be 
+associated with keys in ascending order, e.g., valueAt(0) will return the value 
+associated with the smallest key and valueAt(size()-1) will return the value 
+associated with the largest key. 
+
+
+
+

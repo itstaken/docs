@@ -1,0 +1,109 @@
+*android.webkit.WebViewFactoryProvider* *WebViewFactoryProvider* This is the mai
+
+public interface interface WebViewFactoryProvider
+
+
+|android.webkit.WebViewFactoryProvider_Description|
+|android.webkit.WebViewFactoryProvider_Fields|
+|android.webkit.WebViewFactoryProvider_Constructors|
+|android.webkit.WebViewFactoryProvider_Methods|
+
+================================================================================
+
+*android.webkit.WebViewFactoryProvider_Methods*
+|android.webkit.WebViewFactoryProvider.createWebView(WebView,WebView.PrivateAccess)|
+|android.webkit.WebViewFactoryProvider.getCookieManager()|Gets the singleton Co
+|android.webkit.WebViewFactoryProvider.getGeolocationPermissions()|Gets the sin
+|android.webkit.WebViewFactoryProvider.getStatics()|
+|android.webkit.WebViewFactoryProvider.getWebIconDatabase()|Gets the singleton 
+|android.webkit.WebViewFactoryProvider.getWebStorage()|Gets the singleton WebSt
+|android.webkit.WebViewFactoryProvider.getWebViewDatabase(Context)|Gets the sin
+
+*android.webkit.WebViewFactoryProvider_Description*
+
+This is the main entry-point into the WebView back end implementations, which 
+the WebView proxy class uses to instantiate all the other objects as needed. 
+The backend must provide an implementation of this interface, and make it 
+available to the WebView via mechanism TBD. 
+
+
+
+*android.webkit.WebViewFactoryProvider.createWebView(WebView,WebView.PrivateAccess)*
+
+public |android.webkit.WebViewProvider| createWebView(
+  android.webkit.WebView webView,
+  android.webkit.WebView.PrivateAccess privateAccess)
+
+Construct a new WebViewProvider. 
+
+
+    webView - the WebView instance bound to this implementation instance. Note it will not 
+       necessarily be fully constructed at the point of this call: defer real 
+       initialization to WebViewProvider.init(). 
+    privateAccess - provides access into WebView internal methods. 
+
+*android.webkit.WebViewFactoryProvider.getCookieManager()*
+
+public |android.webkit.CookieManager| getCookieManager()
+
+Gets the singleton CookieManager instance for this WebView implementation. The 
+implementation must return the same instance on subsequent calls. 
+
+
+
+    Returns: the singleton CookieManager instance 
+
+*android.webkit.WebViewFactoryProvider.getGeolocationPermissions()*
+
+public |android.webkit.GeolocationPermissions| getGeolocationPermissions()
+
+Gets the singleton GeolocationPermissions instance for this WebView 
+implementation. The implementation must return the same instance on subsequent 
+calls. 
+
+
+
+    Returns: the single GeolocationPermissions instance. 
+
+*android.webkit.WebViewFactoryProvider.getStatics()*
+
+public |android.webkit.WebViewFactoryProvider.Statics| getStatics()
+
+
+
+
+
+*android.webkit.WebViewFactoryProvider.getWebIconDatabase()*
+
+public |android.webkit.WebIconDatabase| getWebIconDatabase()
+
+Gets the singleton WebIconDatabase instance for this WebView implementation. 
+The implementation must return the same instance on subsequent calls. 
+
+
+
+    Returns: the singleton WebIconDatabase instance 
+
+*android.webkit.WebViewFactoryProvider.getWebStorage()*
+
+public |android.webkit.WebStorage| getWebStorage()
+
+Gets the singleton WebStorage instance for this WebView implementation. The 
+implementation must return the same instance on subsequent calls. 
+
+
+
+    Returns: the singleton WebStorage instance 
+
+*android.webkit.WebViewFactoryProvider.getWebViewDatabase(Context)*
+
+public |android.webkit.WebViewDatabase| getWebViewDatabase(android.content.Context context)
+
+Gets the singleton WebViewDatabase instance for this WebView implementation. 
+The implementation must return the same instance on subsequent calls. 
+
+
+
+    Returns: the singleton WebViewDatabase instance 
+
+

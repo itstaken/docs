@@ -1,0 +1,252 @@
+*android.hardware.camera2.impl.CameraMetadataNative* *CameraMetadataNative* Impl
+
+public class CameraMetadataNative
+  extends    |android.hardware.camera2.CameraMetadata|
+  implements |android.os.Parcelable|
+
+|android.hardware.camera2.impl.CameraMetadataNative_Description|
+|android.hardware.camera2.impl.CameraMetadataNative_Fields|
+|android.hardware.camera2.impl.CameraMetadataNative_Constructors|
+|android.hardware.camera2.impl.CameraMetadataNative_Methods|
+
+================================================================================
+
+*android.hardware.camera2.impl.CameraMetadataNative_Fields*
+|android.os.Parcelable.Creator<android.hardware.camera2.impl.CameraMetadataNative>_android.hardware.camera2.impl.CameraMetadataNative.CREATOR|
+|int_android.hardware.camera2.impl.CameraMetadataNative.NUM_TYPES|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_BYTE|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_DOUBLE|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_FLOAT|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_INT32|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_INT64|
+|int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_RATIONAL|
+
+*android.hardware.camera2.impl.CameraMetadataNative_Constructors*
+|android.hardware.camera2.impl.CameraMetadataNative()|
+|android.hardware.camera2.impl.CameraMetadataNative(CameraMetadataNative)|Copy 
+
+*android.hardware.camera2.impl.CameraMetadataNative_Methods*
+|android.hardware.camera2.impl.CameraMetadataNative.describeContents()|
+|android.hardware.camera2.impl.CameraMetadataNative.finalize()|
+|android.hardware.camera2.impl.CameraMetadataNative.get(CameraMetadata.Key<T>)|
+|android.hardware.camera2.impl.CameraMetadataNative.getEntryCount()|
+|android.hardware.camera2.impl.CameraMetadataNative.getNativeType(int)|Get the 
+|android.hardware.camera2.impl.CameraMetadataNative.getTag(String)|Convert a ke
+|android.hardware.camera2.impl.CameraMetadataNative.isEmpty()|Does this metadat
+|android.hardware.camera2.impl.CameraMetadataNative.readFromParcel(Parcel)|
+|android.hardware.camera2.impl.CameraMetadataNative.readValues(int)|Returns a b
+|android.hardware.camera2.impl.CameraMetadataNative.registerEnumValues(Class<T>,int[])|
+|android.hardware.camera2.impl.CameraMetadataNative.set(CameraMetadata.Key<T>,T)|
+|android.hardware.camera2.impl.CameraMetadataNative.swap(CameraMetadataNative)|
+|android.hardware.camera2.impl.CameraMetadataNative.writeToParcel(Parcel,int)|
+|android.hardware.camera2.impl.CameraMetadataNative.writeValues(int,byte[])|Upd
+
+*android.hardware.camera2.impl.CameraMetadataNative_Description*
+
+Implementation of camera metadata marshal/unmarshal across Binder to the camera 
+service 
+
+
+
+*android.os.Parcelable.Creator<android.hardware.camera2.impl.CameraMetadataNative>_android.hardware.camera2.impl.CameraMetadataNative.CREATOR*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.NUM_TYPES*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_BYTE*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_DOUBLE*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_FLOAT*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_INT32*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_INT64*
+
+
+
+
+*int_android.hardware.camera2.impl.CameraMetadataNative.TYPE_RATIONAL*
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative()*
+
+public CameraMetadataNative()
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative(CameraMetadataNative)*
+
+public CameraMetadataNative(android.hardware.camera2.impl.CameraMetadataNative other)
+
+Copy constructor - clone metadata 
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.get(CameraMetadata.Key<T>)*
+
+public |T| get(android.hardware.camera2.CameraMetadata.Key<T> key)
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.getEntryCount()*
+
+public int getEntryCount()
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.getNativeType(int)*
+
+public static int getNativeType(int tag)
+
+Get the underlying native type for a tag. 
+
+
+    tag - An integer tag, see e.g. {@link #getTag} 
+
+    Returns: An int enum for the metadata type, see e.g. {@link #TYPE_BYTE} 
+
+*android.hardware.camera2.impl.CameraMetadataNative.getTag(String)*
+
+public static int getTag(java.lang.String key)
+
+Convert a key string into the equivalent native tag. 
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.isEmpty()*
+
+public boolean isEmpty()
+
+Does this metadata contain at least 1 entry? 
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.readFromParcel(Parcel)*
+
+public void readFromParcel(android.os.Parcel in)
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.readValues(int)*
+
+public byte[] readValues(int tag)
+
+Returns a byte[] of data corresponding to this tag. Use a wrapped bytebuffer to 
+unserialize the data properly. 
+
+An empty array can be returned to denote an existing entry with 0 elements. 
+
+
+    tag - An integer tag, see e.g. {@link #getTag} 
+
+    Returns: {@code null} if there were 0 entries for this tag, a byte[] otherwise. 
+
+*android.hardware.camera2.impl.CameraMetadataNative.registerEnumValues(Class<T>,int[])*
+
+public static void registerEnumValues(
+  java.lang.Class<T> enumType,
+  int[] values)
+
+Register a non-sequential set of values to be used with the pack/unpack 
+functions. This enables get/set to correctly marshal the enum into a value that 
+is C-compatible. 
+
+
+    enumType - The class for an enum 
+    values - A list of values mapping to the ordinals of the enum 
+
+*android.hardware.camera2.impl.CameraMetadataNative.set(CameraMetadata.Key<T>,T)*
+
+public void set(
+  android.hardware.camera2.CameraMetadata.Key<T> key,
+  T value)
+
+Set a camera metadata field to a value. The field definitions can be found in 
+(|android.hardware.camera2.CameraCharacteristics|) , 
+(|android.hardware.camera2.CaptureResult|) , and (|CaptureRequest|) . 
+
+
+    key - The metadata field to write. 
+    value - The value to set the field to, which must be of a matching type to the key. 
+
+*android.hardware.camera2.impl.CameraMetadataNative.swap(CameraMetadataNative)*
+
+public void swap(android.hardware.camera2.impl.CameraMetadataNative other)
+
+Perform a 0-copy swap of the internal metadata with another object. 
+
+Useful to convert a CameraMetadata into e.g. a CaptureRequest. 
+
+
+    other - Metadata to swap with 
+
+*android.hardware.camera2.impl.CameraMetadataNative.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+*android.hardware.camera2.impl.CameraMetadataNative.writeValues(int,byte[])*
+
+public void writeValues(
+  int tag,
+  byte[] src)
+
+Updates the existing entry for tag with the new bytes pointed by src, erasing 
+the entry if src was null. 
+
+An empty array can be passed in to update the entry to 0 elements. 
+
+
+    tag - An integer tag, see e.g. {@link #getTag} 
+    src - An array of bytes, or null to erase the entry 
+
+

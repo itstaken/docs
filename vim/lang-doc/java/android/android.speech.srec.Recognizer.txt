@@ -1,0 +1,355 @@
+*android.speech.srec.Recognizer* *Recognizer* Simple, synchronous speech recogni
+
+public final class Recognizer
+  extends    |java.lang.Object|
+
+|android.speech.srec.Recognizer_Description|
+|android.speech.srec.Recognizer_Fields|
+|android.speech.srec.Recognizer_Constructors|
+|android.speech.srec.Recognizer_Methods|
+
+================================================================================
+
+*android.speech.srec.Recognizer_Fields*
+|int_android.speech.srec.Recognizer.EVENT_END_OF_VOICING|
+|int_android.speech.srec.Recognizer.EVENT_INCOMPLETE|
+|int_android.speech.srec.Recognizer.EVENT_INVALID|
+|int_android.speech.srec.Recognizer.EVENT_MAX_SPEECH|
+|int_android.speech.srec.Recognizer.EVENT_NEED_MORE_AUDIO|
+|int_android.speech.srec.Recognizer.EVENT_NO_MATCH|
+|int_android.speech.srec.Recognizer.EVENT_RECOGNITION_RESULT|
+|int_android.speech.srec.Recognizer.EVENT_RECOGNITION_TIMEOUT|
+|int_android.speech.srec.Recognizer.EVENT_SPOKE_TOO_SOON|
+|int_android.speech.srec.Recognizer.EVENT_START_OF_UTTERANCE_TIMEOUT|
+|int_android.speech.srec.Recognizer.EVENT_START_OF_VOICING|
+|int_android.speech.srec.Recognizer.EVENT_STARTED|
+|int_android.speech.srec.Recognizer.EVENT_STOPPED|
+|java.lang.String_android.speech.srec.Recognizer.KEY_CONFIDENCE|
+|java.lang.String_android.speech.srec.Recognizer.KEY_LITERAL|
+|java.lang.String_android.speech.srec.Recognizer.KEY_MEANING|
+
+*android.speech.srec.Recognizer_Constructors*
+|android.speech.srec.Recognizer(String)|Create an instance of a SREC speech rec
+
+*android.speech.srec.Recognizer_Methods*
+|android.speech.srec.Recognizer.advance()|Process some audio and return the cur
+|android.speech.srec.Recognizer.destroy()|Clean up resources.
+|android.speech.srec.Recognizer.eventToString(int)|Produce a displayable string
+|android.speech.srec.Recognizer.finalize()|Clean up resources.
+|android.speech.srec.Recognizer.getAcousticState()|Get the acoustic state vecto
+|android.speech.srec.Recognizer.getConfigDir(Locale)|Get the pathname of the SR
+|android.speech.srec.Recognizer.getResult(int,String)|Get a result value.
+|android.speech.srec.Recognizer.getResultCount()|Get the number of recognition 
+|android.speech.srec.Recognizer.getResultKeys(int)|Get a set of keys for the re
+|android.speech.srec.Recognizer.putAudio(byte[],int,int,boolean)|Put audio samp
+|android.speech.srec.Recognizer.putAudio(InputStream)|Read audio samples from a
+|android.speech.srec.Recognizer.resetAcousticState()|Reset the acoustic state v
+|android.speech.srec.Recognizer.setAcousticState(String)|Set the acoustic state
+|android.speech.srec.Recognizer.start()|Start recognition
+|android.speech.srec.Recognizer.stop()|Stop the Recognizer.
+
+*android.speech.srec.Recognizer_Description*
+
+Simple, synchronous speech recognizer, using the Nuance SREC package. Usages 
+proceeds as follows: 
+
+Create a Recognizer. Create a Recognizer.Grammar. Setup the Recognizer.Grammar. 
+Reset the Recognizer.Grammar slots, if needed. Fill the Recognizer.Grammar 
+slots, if needed. Compile the Recognizer.Grammar, if needed. Save the filled 
+Recognizer.Grammar, if needed. Start the Recognizer. Loop over advance and 
+putAudio until recognition complete. Fetch and process results, or notify of 
+failure. Stop the Recognizer. Destroy the Recognizer. 
+
+Below is example code 
+
+
+
+// create and start audio input InputStream audio = new 
+MicrophoneInputStream(11025, 11025*5); // create a Recognizer String cdir = 
+Recognizer.getConfigDir(null); Recognizer recognizer = new Recognizer(cdir + 
+"/baseline11k.par"); // create and load a Grammar Recognizer.Grammar grammar = 
+recognizer.new Grammar(cdir + "/grammars/VoiceDialer.g2g"); // setup the 
+Grammar to work with the Recognizer grammar.setupRecognizer(); // fill the 
+Grammar slots with names and save, if required grammar.resetAllSlots(); for 
+(String name : names) grammar.addWordToSlot("@Names", name, null, 1, "V=1"); 
+grammar.compile(); grammar.save(".../foo.g2g"); // start the Recognizer 
+recognizer.start(); // loop over Recognizer events while (true) { switch 
+(recognizer.advance()) { case Recognizer.EVENT_INCOMPLETE: case 
+Recognizer.EVENT_STARTED: case Recognizer.EVENT_START_OF_VOICING: case 
+Recognizer.EVENT_END_OF_VOICING: // let the Recognizer continue to run 
+continue; case Recognizer.EVENT_RECOGNITION_RESULT: // success, so fetch 
+results here! for (int i = 0; i < recognizer.getResultCount(); i++) { String 
+result = recognizer.getResult(i, Recognizer.KEY_LITERAL); } break; case 
+Recognizer.EVENT_NEED_MORE_AUDIO: // put more audio in the Recognizer 
+recognizer.putAudio(audio); continue; default: notifyFailure(); break; } break; 
+} // stop the Recognizer recognizer.stop(); // destroy the Recognizer 
+recognizer.destroy(); // stop the audio device audio.close(); 
+
+
+
+
+
+*int_android.speech.srec.Recognizer.EVENT_END_OF_VOICING*
+
+End of speech detected. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_INCOMPLETE*
+
+Recognizer processed one frame of audio. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_INVALID*
+
+Reserved value. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_MAX_SPEECH*
+
+More audio encountered than is allowed by 'swirec_max_speech_duration'. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_NEED_MORE_AUDIO*
+
+Not enough samples to process one frame. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_NO_MATCH*
+
+Recognizer could not find a match for the utterance. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_RECOGNITION_RESULT*
+
+Recognition match detected. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_RECOGNITION_TIMEOUT*
+
+Timeout occured before speech recognition could complete. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_SPOKE_TOO_SOON*
+
+Beginning of utterance occured too soon. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_START_OF_UTTERANCE_TIMEOUT*
+
+Timeout occured before beginning of utterance. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_START_OF_VOICING*
+
+Beginning of speech detected. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_STARTED*
+
+Recognizer has just been started. 
+
+
+*int_android.speech.srec.Recognizer.EVENT_STOPPED*
+
+Recognizer is stopped. 
+
+
+*java.lang.String_android.speech.srec.Recognizer.KEY_CONFIDENCE*
+
+Result key corresponding to confidence score. 
+
+
+*java.lang.String_android.speech.srec.Recognizer.KEY_LITERAL*
+
+Result key corresponding to literal text. 
+
+
+*java.lang.String_android.speech.srec.Recognizer.KEY_MEANING*
+
+Result key corresponding to semantic meaning text. 
+
+
+
+*android.speech.srec.Recognizer(String)*
+
+public Recognizer(java.lang.String configFile)
+  throws |java.io.IOException|
+         
+Create an instance of a SREC speech recognizer. 
+
+    configFile - pathname of the baseline*.par configuration file, which in turn contains 
+       references to dictionaries, speech models, and other data needed to 
+       configure and operate the recognizer. A separate config file is needed 
+       for each audio sample rate. Two files, baseline11k.par and 
+       baseline8k.par, which correspond to 11025 and 8000 hz, are present in 
+       the directory indicated by {@link #getConfigDir}. 
+
+*android.speech.srec.Recognizer.advance()*
+
+public int advance()
+
+Process some audio and return the current status. 
+
+
+
+    Returns: recognition event, one of: 
+
+EVENT_INVALID EVENT_NO_MATCH EVENT_INCOMPLETE EVENT_STARTED EVENT_STOPPED 
+             EVENT_START_OF_VOICING EVENT_END_OF_VOICING EVENT_SPOKE_TOO_SOON 
+             EVENT_RECOGNITION_RESULT EVENT_START_OF_UTTERANCE_TIMEOUT 
+             EVENT_RECOGNITION_TIMEOUT EVENT_NEED_MORE_AUDIO EVENT_MAX_SPEECH 
+
+*android.speech.srec.Recognizer.destroy()*
+
+public void destroy()
+
+Clean up resources. 
+
+
+
+*android.speech.srec.Recognizer.eventToString(int)*
+
+public static |java.lang.String| eventToString(int event)
+
+Produce a displayable string from an advance event. 
+
+
+    event - 
+
+    Returns: String representing the event. 
+
+*android.speech.srec.Recognizer.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+Clean up resources. 
+
+
+
+*android.speech.srec.Recognizer.getAcousticState()*
+
+public |java.lang.String| getAcousticState()
+
+Get the acoustic state vector. 
+
+
+
+    Returns: String containing the acoustic state vector. 
+
+*android.speech.srec.Recognizer.getConfigDir(Locale)*
+
+public static |java.lang.String| getConfigDir(java.util.Locale locale)
+
+Get the pathname of the SREC configuration directory corresponding to the 
+language indicated by the Locale. This directory contains dictionaries, speech 
+models, configuration files, and other data needed by the Recognizer. 
+
+
+    locale - Locale corresponding to the desired language, or null for default, currently 
+       Locale.US. 
+
+    Returns: Pathname of the configuration directory. 
+
+*android.speech.srec.Recognizer.getResult(int,String)*
+
+public |java.lang.String| getResult(
+  int index,
+  java.lang.String key)
+
+Get a result value. Must be called after EVENT_RECOGNITION_RESULT is returned 
+by advance, but before stop. 
+
+
+    index - index of the result. 
+    key - key of the result. This is typically one of KEY_CONFIDENCE, KEY_LITERAL, or 
+       KEY_MEANING, but the user can also define their own keys in a grxml 
+       file, or in the tag slot of Grammar.addWordToSlot. 
+
+    Returns: 
+
+*android.speech.srec.Recognizer.getResultCount()*
+
+public int getResultCount()
+
+Get the number of recognition results. Must be called after 
+EVENT_RECOGNITION_RESULT is returned by advance, but before stop. 
+
+
+
+    Returns: number of results in nbest list. 
+
+*android.speech.srec.Recognizer.getResultKeys(int)*
+
+public |java.lang.String|[] getResultKeys(int index)
+
+Get a set of keys for the result. Must be called after EVENT_RECOGNITION_RESULT 
+is returned by advance, but before stop. 
+
+
+    index - index of result. 
+
+    Returns: array of keys. 
+
+*android.speech.srec.Recognizer.putAudio(byte[],int,int,boolean)*
+
+public int putAudio(
+  byte[] buf,
+  int offset,
+  int length,
+  boolean isLast)
+
+Put audio samples into the Recognizer. 
+
+
+    buf - holds the audio samples. 
+    offset - offset of the first sample. 
+    length - number of bytes containing samples. 
+    isLast - indicates no more audio data, normally false. 
+
+    Returns: number of bytes accepted. 
+
+*android.speech.srec.Recognizer.putAudio(InputStream)*
+
+public void putAudio(java.io.InputStream audio)
+  throws |java.io.IOException|
+         
+Read audio samples from an InputStream and put them in the Recognizer. 
+
+
+    audio - InputStream containing PCM audio samples. 
+
+*android.speech.srec.Recognizer.resetAcousticState()*
+
+public void resetAcousticState()
+
+Reset the acoustic state vectorto it's default value. 
+
+
+
+*android.speech.srec.Recognizer.setAcousticState(String)*
+
+public void setAcousticState(java.lang.String state)
+
+Set the acoustic state vector. 
+
+
+    state - String containing the acoustic state vector. 
+
+*android.speech.srec.Recognizer.start()*
+
+public void start()
+
+Start recognition 
+
+
+
+*android.speech.srec.Recognizer.stop()*
+
+public void stop()
+
+Stop the Recognizer. 
+
+
+
+

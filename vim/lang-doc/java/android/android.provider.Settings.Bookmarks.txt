@@ -1,0 +1,167 @@
+*android.provider.Settings.Bookmarks* *Settings.Bookmarks* User-defined bookmark
+
+public static final class Settings.Bookmarks
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+
+|android.provider.Settings.Bookmarks_Description|
+|android.provider.Settings.Bookmarks_Fields|
+|android.provider.Settings.Bookmarks_Constructors|
+|android.provider.Settings.Bookmarks_Methods|
+
+================================================================================
+
+*android.provider.Settings.Bookmarks_Fields*
+|android.net.Uri_android.provider.Settings.Bookmarks.CONTENT_URI|
+|java.lang.String_android.provider.Settings.Bookmarks.FOLDER|
+|java.lang.String_android.provider.Settings.Bookmarks.ID|
+|java.lang.String_android.provider.Settings.Bookmarks.INTENT|
+|java.lang.String_android.provider.Settings.Bookmarks.ORDERING|
+|java.lang.String_android.provider.Settings.Bookmarks.SHORTCUT|
+|java.lang.String_android.provider.Settings.Bookmarks.TITLE|
+
+*android.provider.Settings.Bookmarks_Constructors*
+|android.provider.Settings.Bookmarks()|
+
+*android.provider.Settings.Bookmarks_Methods*
+|android.provider.Settings.Bookmarks.add(ContentResolver,Intent,String,String,char,int)|
+|android.provider.Settings.Bookmarks.getIntentForShortcut(ContentResolver,char)|
+|android.provider.Settings.Bookmarks.getLabelForFolder(Resources,String)|Return
+|android.provider.Settings.Bookmarks.getTitle(Context,Cursor)|Return the title 
+
+*android.provider.Settings.Bookmarks_Description*
+
+User-defined bookmarks and shortcuts. The target of each bookmark is an Intent 
+URL, allowing it to be either a web page or a particular application activity. 
+
+
+
+*android.net.Uri_android.provider.Settings.Bookmarks.CONTENT_URI*
+
+The content:// style URL for this table 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.FOLDER*
+
+Arbitrary string (displayed to the user) that allows bookmarks to be organized 
+into categories. There are some special names for standard folders, which all 
+start with '@'. The label displayed for the folder changes with the locale (via 
+(|android.provider.Settings.Bookmarks|) ) but the folder name does not change 
+so you can consistently query for the folder regardless of the current locale. 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.ID*
+
+The row ID. Type: INTEGER 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.INTENT*
+
+The Intent URL of the bookmark, describing what it points to. This value is 
+given to (|android.content.Intent|) to create an Intent that can be launched. 
+Type: TEXT 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.ORDERING*
+
+The order in which the bookmark should be displayed Type: INTEGER 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.SHORTCUT*
+
+Optional shortcut character associated with this bookmark. Type: INTEGER 
+
+
+*java.lang.String_android.provider.Settings.Bookmarks.TITLE*
+
+Descriptive name of the bookmark that can be displayed to the user. If this is 
+empty, the title should be resolved at display time (use 
+(|android.provider.Settings.Bookmarks|) any time you want to display the title 
+of a bookmark.) 
+
+Type: TEXT 
+
+
+
+*android.provider.Settings.Bookmarks()*
+
+public Settings.Bookmarks()
+
+
+
+
+*android.provider.Settings.Bookmarks.add(ContentResolver,Intent,String,String,char,int)*
+
+public static |android.net.Uri| add(
+  android.content.ContentResolver cr,
+  android.content.Intent intent,
+  java.lang.String title,
+  java.lang.String folder,
+  char shortcut,
+  int ordering)
+
+Add a new bookmark to the system. 
+
+
+    cr - The ContentResolver to query. 
+    intent - The desired target of the bookmark. 
+    title - Bookmark title that is shown to the user; null if none or it should be resolved 
+       to the intent's title. 
+    folder - Folder in which to place the bookmark; null if none. 
+    shortcut - Shortcut that will invoke the bookmark; 0 if none. If this is non-zero and 
+       there is an existing bookmark entry with this same shortcut, then that 
+       existing shortcut is cleared (the bookmark is not removed). 
+
+    Returns: The unique content URL for the new bookmark entry. 
+
+*android.provider.Settings.Bookmarks.getIntentForShortcut(ContentResolver,char)*
+
+public static |android.content.Intent| getIntentForShortcut(
+  android.content.ContentResolver cr,
+  char shortcut)
+
+Convenience function to retrieve the bookmarked Intent for a particular 
+shortcut key. 
+
+
+    cr - The ContentResolver to query. 
+    shortcut - The shortcut key. 
+
+    Returns: Intent The bookmarked URL, or null if there is no bookmark matching the given 
+             shortcut. 
+
+*android.provider.Settings.Bookmarks.getLabelForFolder(Resources,String)*
+
+public static |java.lang.CharSequence| getLabelForFolder(
+  android.content.res.Resources r,
+  java.lang.String folder)
+
+Return the folder name as it should be displayed to the user. This takes care 
+of localizing special folders. 
+
+
+    r - Resources object for current locale; only need access to system resources. 
+    folder - The value found in the {@link #FOLDER} column. 
+
+    Returns: CharSequence The label for this folder that should be shown to the user. 
+
+*android.provider.Settings.Bookmarks.getTitle(Context,Cursor)*
+
+public static |java.lang.CharSequence| getTitle(
+  android.content.Context context,
+  android.database.Cursor cursor)
+
+Return the title as it should be displayed to the user. This takes care of 
+localizing bookmarks that point to activities. 
+
+
+    context - A context. 
+    cursor - A cursor pointing to the row whose title should be returned. The cursor must 
+       contain at least the {@link #TITLE} and {@link #INTENT} columns. 
+
+    Returns: A title that is localized and can be displayed to the user, or the empty string 
+             if one could not be found. 
+
+

@@ -1,0 +1,92 @@
+*android.database.CrossProcessCursor* *CrossProcessCursor* A cross process curso
+
+public interface interface CrossProcessCursor
+
+  implements |android.database.Cursor|
+
+|android.database.CrossProcessCursor_Description|
+|android.database.CrossProcessCursor_Fields|
+|android.database.CrossProcessCursor_Constructors|
+|android.database.CrossProcessCursor_Methods|
+
+================================================================================
+
+*android.database.CrossProcessCursor_Methods*
+|android.database.CrossProcessCursor.fillWindow(int,CursorWindow)|Copies cursor
+|android.database.CrossProcessCursor.getWindow()|Returns a pre-filled window th
+|android.database.CrossProcessCursor.onMove(int,int)|This function is called ev
+
+*android.database.CrossProcessCursor_Description*
+
+A cross process cursor is an extension of a (|android.database.Cursor|) that 
+also supports usage from remote processes. 
+
+The contents of a cross process cursor are marshalled to the remote process by 
+filling (|android.database.CursorWindow|) objects using 
+(|android.database.CrossProcessCursor|) . As an optimization, the cursor can 
+provide a pre-filled window to use via (|android.database.CrossProcessCursor|) 
+thereby obviating the need to copy the data to yet another cursor window. 
+
+
+
+*android.database.CrossProcessCursor.fillWindow(int,CursorWindow)*
+
+public void fillWindow(
+  int position,
+  android.database.CursorWindow window)
+
+Copies cursor data into the window. 
+
+Clears the window and fills it with data beginning at the requested row 
+position until all of the data in the cursor is exhausted or the window runs 
+out of space. 
+
+The filled window uses the same row indices as the original cursor. For 
+example, if you fill a window starting from row 5 from the cursor, you can 
+query the contents of row 5 from the window just by asking it for row 5 because 
+there is a direct correspondence between the row indices used by the cursor and 
+the window. 
+
+The current position of the cursor, as returned by 
+(|android.database.CrossProcessCursor|) , is not changed by this method. 
+
+
+    position - The zero-based index of the first row to copy into the window. 
+    window - The window to fill. 
+
+*android.database.CrossProcessCursor.getWindow()*
+
+public |android.database.CursorWindow| getWindow()
+
+Returns a pre-filled window that contains the data within this cursor. 
+
+In particular, the window contains the row indicated by 
+(|android.database.Cursor|) . The window's contents are automatically scrolled 
+whenever the current row moved outside the range covered by the window. 
+
+
+
+    Returns: The pre-filled window, or null if none. 
+
+*android.database.CrossProcessCursor.onMove(int,int)*
+
+public boolean onMove(
+  int oldPosition,
+  int newPosition)
+
+This function is called every time the cursor is successfully scrolled to a new 
+position, giving the subclass a chance to update any state it may have. If it 
+returns false the move function will also do so and the cursor will scroll to 
+the beforeFirst position. 
+
+This function should be called by methods such as 
+(|android.database.CrossProcessCursor|) , so it will typically not be called 
+from outside of the cursor class itself. 
+
+
+    oldPosition - The position that we're moving from. 
+    newPosition - The position that we're moving to. 
+
+    Returns: True if the move is successful, false otherwise. 
+
+

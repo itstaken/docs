@@ -1,0 +1,105 @@
+*android.provider.ContactsContract.RawContactsColumns* *ContactsContract.RawContactsColumns* 
+
+protected static interface interface ContactsContract.RawContactsColumns
+
+
+|android.provider.ContactsContract.RawContactsColumns_Description|
+|android.provider.ContactsContract.RawContactsColumns_Fields|
+|android.provider.ContactsContract.RawContactsColumns_Constructors|
+|android.provider.ContactsContract.RawContactsColumns_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.RawContactsColumns_Fields*
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.ACCOUNT_TYPE_AND_DATA_SET|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.AGGREGATION_MODE|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.CONTACT_ID|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.DATA_SET|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.DELETED|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.NAME_VERIFIED|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.RAW_CONTACT_IS_READ_ONLY|
+|java.lang.String_android.provider.ContactsContract.RawContactsColumns.RAW_CONTACT_IS_USER_PROFILE|
+
+*android.provider.ContactsContract.RawContactsColumns_Description*
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.ACCOUNT_TYPE_AND_DATA_SET*
+
+A concatenation of the account type and data set (delimited by a forward slash) 
+- if the data set is empty, this will be the same as the account type. For 
+applications that need to be aware of the data set, this can be used instead of 
+account type to distinguish sets of data. This is never intended to be used for 
+specifying accounts. 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.AGGREGATION_MODE*
+
+The aggregation mode for this contact. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.CONTACT_ID*
+
+A reference to the (|android.provider.ContactsContract.Contacts|) that this 
+data belongs to. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.DATA_SET*
+
+The data set within the account that this row belongs to. This allows multiple 
+sync adapters for the same account type to distinguish between each others' 
+data. 
+
+This is empty by default, and is completely optional. It only needs to be 
+populated if multiple sync adapters are entering distinct data for the same 
+account type and account name. Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.DELETED*
+
+The "deleted" flag: "0" by default, "1" if the row has been marked for 
+deletion. When (|android.content.ContentResolver|) is called on a raw contact, 
+it is marked for deletion and removed from its aggregate contact. The sync 
+adaptor deletes the raw contact on the server and then calls 
+ContactResolver.delete once more, this time passing the 
+(|android.provider.ContactsContract|) query parameter to finalize the data 
+removal. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.NAME_VERIFIED*
+
+The "name_verified" flag: "1" means that the name fields on this raw contact 
+can be trusted and therefore should be used for the entire aggregated contact. 
+
+If an aggregated contact contains more than one raw contact with a verified 
+name, one of those verified names is chosen at random. If an aggregated contact 
+contains no verified names, the name is chosen randomly from the constituent 
+raw contacts. 
+
+Updating this flag from "0" to "1" automatically resets it to "0" on all other 
+raw contacts in the same aggregated contact. 
+
+Sync adapters should only specify a value for this column when inserting a raw 
+contact and leave it out when doing an update. 
+
+The default value is "0" 
+
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.RAW_CONTACT_IS_READ_ONLY*
+
+The "read-only" flag: "0" by default, "1" if the row cannot be modified or 
+deleted except by a sync adapter. See (|android.provider.ContactsContract|) . 
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsColumns.RAW_CONTACT_IS_USER_PROFILE*
+
+Flag that reflects whether this raw contact belongs to the user's personal 
+profile entry. 
+
+
+

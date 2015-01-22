@@ -1,0 +1,333 @@
+*android.animation.PropertyValuesHolder* *PropertyValuesHolder* This class holds
+
+public class PropertyValuesHolder
+  extends    |java.lang.Object|
+  implements |java.lang.Cloneable|
+
+|android.animation.PropertyValuesHolder_Description|
+|android.animation.PropertyValuesHolder_Fields|
+|android.animation.PropertyValuesHolder_Constructors|
+|android.animation.PropertyValuesHolder_Methods|
+
+================================================================================
+
+*android.animation.PropertyValuesHolder_Fields*
+|android.util.Property_android.animation.PropertyValuesHolder.mProperty|
+
+*android.animation.PropertyValuesHolder_Methods*
+|android.animation.PropertyValuesHolder.clone()|
+|android.animation.PropertyValuesHolder.getPropertyName()|Gets the name of the 
+|android.animation.PropertyValuesHolder.ofFloat(Property<?,Float>,float...)|Con
+|android.animation.PropertyValuesHolder.ofFloat(String,float...)|Constructs and
+|android.animation.PropertyValuesHolder.ofInt(Property<?,Integer>,int...)|Const
+|android.animation.PropertyValuesHolder.ofInt(String,int...)|Constructs and ret
+|android.animation.PropertyValuesHolder.ofKeyframe(Property,Keyframe...)|Constr
+|android.animation.PropertyValuesHolder.ofKeyframe(String,Keyframe...)|Construc
+|android.animation.PropertyValuesHolder.ofObject(Property,TypeEvaluator<V>,V...)|
+|android.animation.PropertyValuesHolder.ofObject(String,TypeEvaluator,Object...)|
+|android.animation.PropertyValuesHolder.setEvaluator(TypeEvaluator)|The TypeEva
+|android.animation.PropertyValuesHolder.setFloatValues(float...)|Set the animat
+|android.animation.PropertyValuesHolder.setIntValues(int...)|Set the animated v
+|android.animation.PropertyValuesHolder.setKeyframes(Keyframe...)|Set the anima
+|android.animation.PropertyValuesHolder.setObjectValues(Object...)|Set the anim
+|android.animation.PropertyValuesHolder.setProperty(Property)|Sets the property
+|android.animation.PropertyValuesHolder.setPropertyName(String)|Sets the name o
+|android.animation.PropertyValuesHolder.toString()|
+
+*android.animation.PropertyValuesHolder_Description*
+
+This class holds information about a property and the values that that property 
+should take on during an animation. PropertyValuesHolder objects can be used to 
+create animations with ValueAnimator or ObjectAnimator that operate on several 
+different properties in parallel. 
+
+
+
+*android.util.Property_android.animation.PropertyValuesHolder.mProperty*
+
+
+
+
+
+*android.animation.PropertyValuesHolder.clone()*
+
+public |android.animation.PropertyValuesHolder| clone()
+
+
+
+
+
+*android.animation.PropertyValuesHolder.getPropertyName()*
+
+public |java.lang.String| getPropertyName()
+
+Gets the name of the property that will be animated. This name will be used to 
+derive a setter function that will be called to set animated values. For 
+example, a property name of foo will result in a call to the function setFoo() 
+on the target object. If either valueFrom or valueTo is null, then a getter 
+function will also be derived and called. 
+
+
+
+*android.animation.PropertyValuesHolder.ofFloat(Property<?,Float>,float...)*
+
+public static |android.animation.PropertyValuesHolder| ofFloat(
+  android.util.Property<?, java.lang.Float> property,
+  float[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property and set of 
+float values. 
+
+
+    property - The property being animated. Should not be null. 
+    values - The values that the property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.ofFloat(String,float...)*
+
+public static |android.animation.PropertyValuesHolder| ofFloat(
+  java.lang.String propertyName,
+  float[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property name and 
+set of float values. 
+
+
+    propertyName - The name of the property being animated. 
+    values - The values that the named property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.ofInt(Property<?,Integer>,int...)*
+
+public static |android.animation.PropertyValuesHolder| ofInt(
+  android.util.Property<?, java.lang.Integer> property,
+  int[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property and set of 
+int values. 
+
+
+    property - The property being animated. Should not be null. 
+    values - The values that the property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.ofInt(String,int...)*
+
+public static |android.animation.PropertyValuesHolder| ofInt(
+  java.lang.String propertyName,
+  int[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property name and 
+set of int values. 
+
+
+    propertyName - The name of the property being animated. 
+    values - The values that the named property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.ofKeyframe(Property,Keyframe...)*
+
+public static |android.animation.PropertyValuesHolder| ofKeyframe(
+  android.util.Property property,
+  android.animation.Keyframe[] values)
+
+Constructs and returns a PropertyValuesHolder object with the specified 
+property and set of values. These values can be of any type, but the type 
+should be consistent so that an appropriate (|android.animation.TypeEvaluator|) 
+can be found that matches the common type. If there is only one value, it is 
+assumed to be the end value of an animation, and an initial value will be 
+derived, if possible, by calling the property's (|android.util.Property|) 
+function. Also, if any value is null, the value will be filled in when the 
+animation starts in the same way. This mechanism of automatically getting null 
+values only works if the PropertyValuesHolder object is used in conjunction 
+with (|android.animation.ObjectAnimator|) , since otherwise 
+PropertyValuesHolder has no way of determining what the value should be. 
+
+
+    property - The property associated with this set of values. Should not be null. 
+    values - The set of values to animate between. 
+
+*android.animation.PropertyValuesHolder.ofKeyframe(String,Keyframe...)*
+
+public static |android.animation.PropertyValuesHolder| ofKeyframe(
+  java.lang.String propertyName,
+  android.animation.Keyframe[] values)
+
+Constructs and returns a PropertyValuesHolder object with the specified 
+property name and set of values. These values can be of any type, but the type 
+should be consistent so that an appropriate (|android.animation.TypeEvaluator|) 
+can be found that matches the common type. If there is only one value, it is 
+assumed to be the end value of an animation, and an initial value will be 
+derived, if possible, by calling a getter function on the object. Also, if any 
+value is null, the value will be filled in when the animation starts in the 
+same way. This mechanism of automatically getting null values only works if the 
+PropertyValuesHolder object is used in conjunction 
+(|android.animation.ObjectAnimator|) , and with a getter function derived 
+automatically from propertyName, since otherwise PropertyValuesHolder has no 
+way of determining what the value should be. 
+
+
+    propertyName - The name of the property associated with this set of values. This can be the 
+       actual property name to be used when using a ObjectAnimator object, or 
+       just a name used to get animated values, such as if this object is used 
+       with an ValueAnimator object. 
+    values - The set of values to animate between. 
+
+*android.animation.PropertyValuesHolder.ofObject(Property,TypeEvaluator<V>,V...)*
+
+public static |android.animation.PropertyValuesHolder| ofObject(
+  android.util.Property property,
+  android.animation.TypeEvaluator<V> evaluator,
+  V[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property and set of 
+Object values. This variant also takes a TypeEvaluator because the system 
+cannot automatically interpolate between objects of unknown type. 
+
+
+    property - The property being animated. Should not be null. 
+    evaluator - A TypeEvaluator that will be called on each animation frame to provide the 
+       necessary interpolation between the Object values to derive the animated 
+       value. 
+    values - The values that the property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.ofObject(String,TypeEvaluator,Object...)*
+
+public static |android.animation.PropertyValuesHolder| ofObject(
+  java.lang.String propertyName,
+  android.animation.TypeEvaluator evaluator,
+  java.lang.Object[] values)
+
+Constructs and returns a PropertyValuesHolder with a given property name and 
+set of Object values. This variant also takes a TypeEvaluator because the 
+system cannot automatically interpolate between objects of unknown type. 
+
+
+    propertyName - The name of the property being animated. 
+    evaluator - A TypeEvaluator that will be called on each animation frame to provide the 
+       necessary interpolation between the Object values to derive the animated 
+       value. 
+    values - The values that the named property will animate between. 
+
+    Returns: PropertyValuesHolder The constructed PropertyValuesHolder object. 
+
+*android.animation.PropertyValuesHolder.setEvaluator(TypeEvaluator)*
+
+public void setEvaluator(android.animation.TypeEvaluator evaluator)
+
+The TypeEvaluator will be automatically determined based on the type of values 
+supplied to PropertyValuesHolder. The evaluator can be manually set, however, 
+if so desired. This may be important in cases where either the type of the 
+values supplied do not match the way that they should be interpolated between, 
+or if the values are of a custom type or one not currently understood by the 
+animation system. Currently, only values of type float and int (and their 
+Object equivalents: Float and Integer) are correctly interpolated; all other 
+types require setting a TypeEvaluator. 
+
+
+    evaluator - 
+
+*android.animation.PropertyValuesHolder.setFloatValues(float...)*
+
+public void setFloatValues(float[] values)
+
+Set the animated values for this object to this set of floats. If there is only 
+one value, it is assumed to be the end value of an animation, and an initial 
+value will be derived, if possible, by calling a getter function on the object. 
+Also, if any value is null, the value will be filled in when the animation 
+starts in the same way. This mechanism of automatically getting null values 
+only works if the PropertyValuesHolder object is used in conjunction 
+(|android.animation.ObjectAnimator|) , and with a getter function derived 
+automatically from propertyName, since otherwise PropertyValuesHolder has no 
+way of determining what the value should be. 
+
+
+    values - One or more values that the animation will animate between. 
+
+*android.animation.PropertyValuesHolder.setIntValues(int...)*
+
+public void setIntValues(int[] values)
+
+Set the animated values for this object to this set of ints. If there is only 
+one value, it is assumed to be the end value of an animation, and an initial 
+value will be derived, if possible, by calling a getter function on the object. 
+Also, if any value is null, the value will be filled in when the animation 
+starts in the same way. This mechanism of automatically getting null values 
+only works if the PropertyValuesHolder object is used in conjunction 
+(|android.animation.ObjectAnimator|) , and with a getter function derived 
+automatically from propertyName, since otherwise PropertyValuesHolder has no 
+way of determining what the value should be. 
+
+
+    values - One or more values that the animation will animate between. 
+
+*android.animation.PropertyValuesHolder.setKeyframes(Keyframe...)*
+
+public void setKeyframes(android.animation.Keyframe[] values)
+
+Set the animated values for this object to this set of Keyframes. 
+
+
+    values - One or more values that the animation will animate between. 
+
+*android.animation.PropertyValuesHolder.setObjectValues(Object...)*
+
+public void setObjectValues(java.lang.Object[] values)
+
+Set the animated values for this object to this set of Objects. If there is 
+only one value, it is assumed to be the end value of an animation, and an 
+initial value will be derived, if possible, by calling a getter function on the 
+object. Also, if any value is null, the value will be filled in when the 
+animation starts in the same way. This mechanism of automatically getting null 
+values only works if the PropertyValuesHolder object is used in conjunction 
+(|android.animation.ObjectAnimator|) , and with a getter function derived 
+automatically from propertyName, since otherwise PropertyValuesHolder has no 
+way of determining what the value should be. 
+
+
+    values - One or more values that the animation will animate between. 
+
+*android.animation.PropertyValuesHolder.setProperty(Property)*
+
+public void setProperty(android.util.Property property)
+
+Sets the property that will be animated. 
+
+Note that if this PropertyValuesHolder object is used with ObjectAnimator, the 
+property must exist on the target object specified in that ObjectAnimator. 
+
+
+    property - The property being animated. 
+
+*android.animation.PropertyValuesHolder.setPropertyName(String)*
+
+public void setPropertyName(java.lang.String propertyName)
+
+Sets the name of the property that will be animated. This name is used to 
+derive a setter function that will be called to set animated values. For 
+example, a property name of foo will result in a call to the function setFoo() 
+on the target object. If either valueFrom or valueTo is null, then a getter 
+function will also be derived and called. 
+
+Note that the setter function derived from this property name must take the 
+same parameter type as the valueFrom and valueTo properties, otherwise the call 
+to the setter function will fail. 
+
+
+    propertyName - The name of the property being animated. 
+
+*android.animation.PropertyValuesHolder.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

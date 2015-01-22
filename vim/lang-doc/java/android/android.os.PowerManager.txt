@@ -1,0 +1,500 @@
+*android.os.PowerManager* *PowerManager* This class gives you control of the pow
+
+public final class PowerManager
+  extends    |java.lang.Object|
+
+|android.os.PowerManager_Description|
+|android.os.PowerManager_Fields|
+|android.os.PowerManager_Constructors|
+|android.os.PowerManager_Methods|
+
+================================================================================
+
+*android.os.PowerManager_Fields*
+|int_android.os.PowerManager.ACQUIRE_CAUSES_WAKEUP|
+|int_android.os.PowerManager.BRIGHTNESS_OFF|
+|int_android.os.PowerManager.BRIGHTNESS_ON|
+|int_android.os.PowerManager.FULL_WAKE_LOCK|
+|int_android.os.PowerManager.GO_TO_SLEEP_REASON_DEVICE_ADMIN|
+|int_android.os.PowerManager.GO_TO_SLEEP_REASON_TIMEOUT|
+|int_android.os.PowerManager.GO_TO_SLEEP_REASON_USER|
+|int_android.os.PowerManager.ON_AFTER_RELEASE|
+|int_android.os.PowerManager.PARTIAL_WAKE_LOCK|
+|int_android.os.PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK|
+|int_android.os.PowerManager.SCREEN_BRIGHT_WAKE_LOCK|
+|int_android.os.PowerManager.SCREEN_DIM_WAKE_LOCK|
+|int_android.os.PowerManager.USER_ACTIVITY_EVENT_BUTTON|
+|int_android.os.PowerManager.USER_ACTIVITY_EVENT_OTHER|
+|int_android.os.PowerManager.USER_ACTIVITY_EVENT_TOUCH|
+|int_android.os.PowerManager.USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS|
+|int_android.os.PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE|
+|int_android.os.PowerManager.WAKE_LOCK_LEVEL_MASK|
+
+*android.os.PowerManager_Constructors*
+|android.os.PowerManager(Context,IPowerManager,Handler)|
+
+*android.os.PowerManager_Methods*
+|android.os.PowerManager.getDefaultScreenBrightnessSetting()|Gets the default s
+|android.os.PowerManager.getMaximumScreenBrightnessSetting()|Gets the maximum s
+|android.os.PowerManager.getMinimumScreenBrightnessSetting()|Gets the minimum s
+|android.os.PowerManager.goToSleep(long)|Forces the device to go to sleep.
+|android.os.PowerManager.isScreenOn()|Returns whether the screen is currently o
+|android.os.PowerManager.isWakeLockLevelSupported(int)|Returns true if the spec
+|android.os.PowerManager.nap(long)|Forces the device to start napping.
+|android.os.PowerManager.newWakeLock(int,String)|Creates a new wake lock with t
+|android.os.PowerManager.reboot(String)|Reboot the device.
+|android.os.PowerManager.setBacklightBrightness(int)|Sets the brightness of the
+|android.os.PowerManager.userActivity(long,boolean)|Notifies the power manager 
+|android.os.PowerManager.useScreenAutoBrightnessAdjustmentFeature()|Returns tru
+|android.os.PowerManager.useTwilightAdjustmentFeature()|Returns true if the twi
+|android.os.PowerManager.validateWakeLockParameters(int,String)|
+|android.os.PowerManager.wakeUp(long)|Forces the device to wake up from sleep.
+
+*android.os.PowerManager_Description*
+
+This class gives you control of the power state of the device. 
+
+Device battery life will be significantly affected by the use of this API. Do 
+not acquire (|android.os.PowerManager.WakeLock|) s unless you really need them, 
+use the minimum levels possible, and be sure to release them as soon as 
+possible. 
+
+You can obtain an instance of this class by calling 
+Context.getSystemService()(|android.content.Context|) . 
+
+The primary API you'll use is newWakeLock()(|android.os.PowerManager|) . This 
+will create a (|android.os.PowerManager.WakeLock|) object. You can then use 
+methods on the wake lock object to control the power state of the device. 
+
+In practice it's quite simple:PowerManager pm = (PowerManager) 
+getSystemService(Context.POWER_SERVICE); PowerManager.WakeLock wl = 
+pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag"); wl.acquire(); 
+..screen will stay on during this section.. wl.release(); The following wake 
+lock levels are defined, with varying effects on system power. These levels are 
+mutually exclusive - you may only specify one of them. 
+
+Flag Value CPU Screen Keyboard 
+
+(|android.os.PowerManager|) On* Off Off 
+
+(|android.os.PowerManager|) On Dim Off 
+
+(|android.os.PowerManager|) On Bright Off 
+
+(|android.os.PowerManager|) On Bright Bright 
+
+
+
+*If you hold a partial wake lock, the CPU will continue to run, regardless of 
+any display timeouts or the state of the screen and even after the user presses 
+the power button. In all other wake locks, the CPU will run, but the user can 
+still put the device to sleep using the power button. 
+
+In addition, you can add two more flags, which affect behavior of the screen 
+only. These flags have no effect when combined with a 
+(|android.os.PowerManager|) . 
+
+Flag Value Description 
+
+(|android.os.PowerManager|) Normal wake locks don't actually turn on the 
+illumination. Instead, they cause the illumination to remain on once it turns 
+on (e.g. from user activity). This flag will force the screen and/or keyboard 
+to turn on immediately, when the WakeLock is acquired. A typical use would be 
+for notifications which are important for the user to see immediately. 
+
+(|android.os.PowerManager|) If this flag is set, the user activity timer will 
+be reset when the WakeLock is released, causing the illumination to remain on a 
+bit longer. This can be used to reduce flicker if you are cycling between wake 
+lock conditions. 
+
+
+
+Any application using a WakeLock must request 
+theandroid.permission.WAKE_LOCKpermission in an<uses-permission>element of the 
+application's manifest. 
+
+
+
+*int_android.os.PowerManager.ACQUIRE_CAUSES_WAKEUP*
+
+Wake lock flag: Turn the screen on when the wake lock is acquired. 
+
+Normally wake locks don't actually wake the device, they just cause the screen 
+to remain on once it's already on. Think of the video player application as the 
+normal behavior. Notifications that pop up and want the device to be on are the 
+exception; use this flag to be like them. 
+
+Cannot be used with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.BRIGHTNESS_OFF*
+
+Brightness value for fully off. 
+
+
+*int_android.os.PowerManager.BRIGHTNESS_ON*
+
+Brightness value for fully on. 
+
+
+*int_android.os.PowerManager.FULL_WAKE_LOCK*
+
+Wake lock level: Ensures that the screen and keyboard backlight are on at full 
+brightness. 
+
+If the user presses the power button, then the (|android.os.PowerManager|) will 
+be implicitly released by the system, causing both the screen and the CPU to be 
+turned off. Contrast with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.GO_TO_SLEEP_REASON_DEVICE_ADMIN*
+
+Go to sleep reason code: Going to sleep due by request of the device 
+administration policy. 
+
+
+*int_android.os.PowerManager.GO_TO_SLEEP_REASON_TIMEOUT*
+
+Go to sleep reason code: Going to sleep due to a screen timeout. 
+
+
+*int_android.os.PowerManager.GO_TO_SLEEP_REASON_USER*
+
+Go to sleep reason code: Going to sleep due by user request. 
+
+
+*int_android.os.PowerManager.ON_AFTER_RELEASE*
+
+Wake lock flag: When this wake lock is released, poke the user activity timer 
+so the screen stays on for a little longer. 
+
+Will not turn the screen on if it is not already on. See 
+(|android.os.PowerManager|) if you want that. 
+
+Cannot be used with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.PARTIAL_WAKE_LOCK*
+
+Wake lock level: Ensures that the CPU is running; the screen and keyboard 
+backlight will be allowed to go off. 
+
+If the user presses the power button, then the screen will be turned off but 
+the CPU will be kept on until all partial wake locks have been released. 
+
+
+*int_android.os.PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK*
+
+Wake lock level: Turns the screen off when the proximity sensor activates. 
+
+If the proximity sensor detects that an object is nearby, the screen turns off 
+immediately. Shortly after the object moves away, the screen turns on again. 
+
+A proximity wake lock does not prevent the device from falling asleep unlike 
+(|android.os.PowerManager|) , (|android.os.PowerManager|) and 
+(|android.os.PowerManager|) . If there is no user activity and no other wake 
+locks are held, then the device will fall asleep (and lock) as usual. However, 
+the device will not fall asleep while the screen has been turned off by the 
+proximity sensor because it effectively counts as ongoing user activity. 
+
+Since not all devices have proximity sensors, use (|android.os.PowerManager|) 
+to determine whether this wake lock level is supported. 
+
+Cannot be used with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.SCREEN_BRIGHT_WAKE_LOCK*
+
+Wake lock level: Ensures that the screen is on at full brightness; the keyboard 
+backlight will be allowed to go off. 
+
+If the user presses the power button, then the (|android.os.PowerManager|) will 
+be implicitly released by the system, causing both the screen and the CPU to be 
+turned off. Contrast with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.SCREEN_DIM_WAKE_LOCK*
+
+Wake lock level: Ensures that the screen is on (but may be dimmed); the 
+keyboard backlight will be allowed to go off. 
+
+If the user presses the power button, then the (|android.os.PowerManager|) will 
+be implicitly released by the system, causing both the screen and the CPU to be 
+turned off. Contrast with (|android.os.PowerManager|) . 
+
+
+*int_android.os.PowerManager.USER_ACTIVITY_EVENT_BUTTON*
+
+User activity event type: Button or key pressed or released. 
+
+
+*int_android.os.PowerManager.USER_ACTIVITY_EVENT_OTHER*
+
+User activity event type: Unspecified event type. 
+
+
+*int_android.os.PowerManager.USER_ACTIVITY_EVENT_TOUCH*
+
+User activity event type: Touch down, move or up. 
+
+
+*int_android.os.PowerManager.USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS*
+
+User activity flag: Do not restart the user activity timeout or brighten the 
+display in response to user activity if it is already dimmed. 
+
+
+*int_android.os.PowerManager.WAIT_FOR_PROXIMITY_NEGATIVE*
+
+Flag for release(int)(|android.os.PowerManager.WakeLock|) to defer releasing a 
+(|android.os.PowerManager|) wake lock until the proximity sensor returns a 
+negative value. 
+
+
+*int_android.os.PowerManager.WAKE_LOCK_LEVEL_MASK*
+
+Mask for the wake lock level component of a combined wake lock level and flags 
+integer. 
+
+
+
+*android.os.PowerManager(Context,IPowerManager,Handler)*
+
+public PowerManager(
+  android.content.Context context,
+  IPowerManager service,
+  android.os.Handler handler)
+
+
+
+
+*android.os.PowerManager.getDefaultScreenBrightnessSetting()*
+
+public int getDefaultScreenBrightnessSetting()
+
+Gets the default screen brightness setting. 
+
+
+
+*android.os.PowerManager.getMaximumScreenBrightnessSetting()*
+
+public int getMaximumScreenBrightnessSetting()
+
+Gets the maximum supported screen brightness setting. The screen may be allowed 
+to become dimmer than this value but this is the maximum value that can be set 
+by the user. 
+
+
+
+*android.os.PowerManager.getMinimumScreenBrightnessSetting()*
+
+public int getMinimumScreenBrightnessSetting()
+
+Gets the minimum supported screen brightness setting. The screen may be allowed 
+to become dimmer than this value but this is the minimum value that can be set 
+by the user. 
+
+
+
+*android.os.PowerManager.goToSleep(long)*
+
+public void goToSleep(long time)
+
+Forces the device to go to sleep. 
+
+Overrides all the wake locks that are held. This is what happens when the power 
+key is pressed to turn off the screen. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    time - The time when the request to go to sleep was issued, in the {@link 
+       SystemClock#uptimeMillis()} time base. This timestamp is used to 
+       correctly order the go to sleep request with other power management 
+       functions. It should be set to the timestamp of the input event that 
+       caused the request to go to sleep. 
+
+*android.os.PowerManager.isScreenOn()*
+
+public boolean isScreenOn()
+
+Returns whether the screen is currently on. 
+
+Only indicates whether the screen is on. The screen could be either bright or 
+dim. PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE); 
+boolean isScreenOn = pm.isScreenOn(); 
+
+
+
+    Returns: whether the screen is on (bright or dim). 
+
+*android.os.PowerManager.isWakeLockLevelSupported(int)*
+
+public boolean isWakeLockLevelSupported(int level)
+
+Returns true if the specified wake lock level is supported. 
+
+
+    level - The wake lock level to check. 
+
+    Returns: True if the specified wake lock level is supported. 
+
+
+
+*android.os.PowerManager.nap(long)*
+
+public void nap(long time)
+
+Forces the device to start napping. 
+
+If the device is currently awake, starts dreaming, otherwise does nothing. When 
+the dream ends or if the dream cannot be started, the device will either wake 
+up or go to sleep depending on whether there has been recent user activity. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    time - The time when the request to nap was issued, in the {@link 
+       SystemClock#uptimeMillis()} time base. This timestamp is used to 
+       correctly order the nap request with other power management functions. 
+       It should be set to the timestamp of the input event that caused the 
+       request to nap. 
+
+*android.os.PowerManager.newWakeLock(int,String)*
+
+public |android.os.PowerManager.WakeLock| newWakeLock(
+  int levelAndFlags,
+  java.lang.String tag)
+
+Creates a new wake lock with the specified level and flags. 
+
+ThelevelAndFlagsparameter specifies a wake lock level and optional flags 
+combined using the logical OR operator. 
+
+The wake lock levels are: (|android.os.PowerManager|) , 
+(|android.os.PowerManager|) , (|android.os.PowerManager|) and 
+(|android.os.PowerManager|) . Exactly one wake lock level must be specified as 
+part of thelevelAndFlagsparameter. 
+
+The wake lock flags are: (|android.os.PowerManager|) and 
+(|android.os.PowerManager|) . Multiple flags can be combined as part of 
+thelevelAndFlagsparameters. 
+
+Call acquire()(|android.os.PowerManager.WakeLock|) on the object to acquire the 
+wake lock, and release()(|android.os.PowerManager.WakeLock|) when you are done. 
+PowerManager pm = (PowerManager)mContext.getSystemService( 
+Context.POWER_SERVICE); PowerManager.WakeLock wl = pm.newWakeLock( 
+PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, TAG); 
+wl.acquire(); // ... do work... wl.release(); Although a wake lock can be 
+created without special permissions, the (|android.Manifest.permission|) 
+permission is required to actually acquire or release the wake lock that is 
+returned. 
+
+If using this to keep the screen on, you should strongly consider using 
+(|android.view.WindowManager.LayoutParams|) instead. This window flag will be 
+correctly managed by the platform as the user moves between applications and 
+doesn't require a special permission. 
+
+
+    levelAndFlags - Combination of wake lock level and flag values defining the requested behavior 
+       of the WakeLock. 
+    tag - Your class name (or other tag) for debugging purposes. 
+
+*android.os.PowerManager.reboot(String)*
+
+public void reboot(java.lang.String reason)
+
+Reboot the device. Will not return if the reboot is successful. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    reason - code to pass to the kernel (e.g., "recovery") to request special boot modes, or 
+       null. 
+
+*android.os.PowerManager.setBacklightBrightness(int)*
+
+public void setBacklightBrightness(int brightness)
+
+Sets the brightness of the backlights (screen, keyboard, button). 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    brightness - The brightness value from 0 to 255. 
+
+{@hide} 
+
+*android.os.PowerManager.userActivity(long,boolean)*
+
+public void userActivity(
+  long when,
+  boolean noChangeLights)
+
+Notifies the power manager that user activity happened. 
+
+Resets the auto-off timer and brightens the screen if the device is not asleep. 
+This is what happens normally when a key or the touch screen is pressed or when 
+some other user activity occurs. This method does not wake up the device if it 
+has been put to sleep. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    when - The time of the user activity, in the {@link SystemClock#uptimeMillis()} time 
+       base. This timestamp is used to correctly order the user activity 
+       request with other power management functions. It should be set to the 
+       timestamp of the input event that caused the user activity. 
+    noChangeLights - If true, does not cause the keyboard backlight to turn on because of this 
+       event. This is set when the power key is pressed. We want the device to 
+       stay on while the button is down, but we're about to turn off the screen 
+       so we don't want the keyboard backlight to turn on again. Otherwise the 
+       lights flash on and then off and it looks weird. 
+
+*android.os.PowerManager.useScreenAutoBrightnessAdjustmentFeature()*
+
+public static boolean useScreenAutoBrightnessAdjustmentFeature()
+
+Returns true if the screen auto-brightness adjustment setting should be 
+available in the UI. This setting is experimental and disabled by default. 
+
+
+
+*android.os.PowerManager.useTwilightAdjustmentFeature()*
+
+public static boolean useTwilightAdjustmentFeature()
+
+Returns true if the twilight service should be used to adjust screen brightness 
+policy. This setting is experimental and disabled by default. 
+
+
+
+*android.os.PowerManager.validateWakeLockParameters(int,String)*
+
+public static void validateWakeLockParameters(
+  int levelAndFlags,
+  java.lang.String tag)
+
+
+
+
+
+*android.os.PowerManager.wakeUp(long)*
+
+public void wakeUp(long time)
+
+Forces the device to wake up from sleep. 
+
+If the device is currently asleep, wakes it up, otherwise does nothing. This is 
+what happens when the power key is pressed to turn on the screen. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    time - The time when the request to wake up was issued, in the {@link 
+       SystemClock#uptimeMillis()} time base. This timestamp is used to 
+       correctly order the wake up request with other power management 
+       functions. It should be set to the timestamp of the input event that 
+       caused the request to wake up. 
+
+

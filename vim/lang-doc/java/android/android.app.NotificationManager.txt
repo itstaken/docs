@@ -1,0 +1,156 @@
+*android.app.NotificationManager* *NotificationManager* Class to notify the user
+
+public class NotificationManager
+  extends    |java.lang.Object|
+
+|android.app.NotificationManager_Description|
+|android.app.NotificationManager_Fields|
+|android.app.NotificationManager_Constructors|
+|android.app.NotificationManager_Methods|
+
+================================================================================
+
+*android.app.NotificationManager_Methods*
+|android.app.NotificationManager.cancel(int)|Cancel a previously shown notifica
+|android.app.NotificationManager.cancel(String,int)|Cancel a previously shown n
+|android.app.NotificationManager.cancelAll()|Cancel all previously shown notifi
+|android.app.NotificationManager.cancelAsUser(String,int,UserHandle)|
+|android.app.NotificationManager.from(Context)|
+|android.app.NotificationManager.getService()|
+|android.app.NotificationManager.notify(int,Notification)|Post a notification t
+|android.app.NotificationManager.notify(String,int,Notification)|Post a notific
+|android.app.NotificationManager.notifyAsUser(String,int,Notification,UserHandle)|
+
+*android.app.NotificationManager_Description*
+
+Class to notify the user of events that happen. This is how you tell the user 
+that something has happened in the background.Notifications can take different 
+forms: 
+
+A persistent icon that goes in the status bar and is accessible through the 
+launcher, (when the user selects it, a designated Intent can be launched), 
+Turning on or flashing LEDs on the device, or Alerting the user by flashing the 
+backlight, playing a sound, or vibrating. 
+
+Each of the notify methods takes an int id parameter and optionally a 
+(|java.lang.String|) tag parameter, which may benull. These parameters are used 
+to form a pair (tag, id), or (null, id) if tag is unspecified. This pair 
+identifies this notification from your app to the system, so that pair should 
+be unique within your app. If you call one of the notify methods with a (tag, 
+id) pair that is currently active and a new set of notification parameters, it 
+will be updated. For example, if you pass a new status bar icon, the old icon 
+in the status bar will be replaced with the new one. This is also the same tag 
+and id you pass to the (|android.app.NotificationManager|) or 
+(|android.app.NotificationManager|) method to clear this notification. 
+
+You do not instantiate this class directly; instead, retrieve it through 
+(|android.content.Context|) . 
+
+Developer Guides For a guide to creating notifications, read the <a 
+href="guide/topics/ui/notifiers/notifications.html">Status Bar Notifications 
+developer guide. 
+
+
+
+*android.app.NotificationManager.cancel(int)*
+
+public void cancel(int id)
+
+Cancel a previously shown notification. If it's transient, the view will be 
+hidden. If it's persistent, it will be removed from the status bar. 
+
+
+
+*android.app.NotificationManager.cancel(String,int)*
+
+public void cancel(
+  java.lang.String tag,
+  int id)
+
+Cancel a previously shown notification. If it's transient, the view will be 
+hidden. If it's persistent, it will be removed from the status bar. 
+
+
+
+*android.app.NotificationManager.cancelAll()*
+
+public void cancelAll()
+
+Cancel all previously shown notifications. See 
+(|android.app.NotificationManager|) for the detailed behavior. 
+
+
+
+*android.app.NotificationManager.cancelAsUser(String,int,UserHandle)*
+
+public void cancelAsUser(
+  java.lang.String tag,
+  int id,
+  android.os.UserHandle user)
+
+
+
+
+
+*android.app.NotificationManager.from(Context)*
+
+public static |android.app.NotificationManager| from(android.content.Context context)
+
+
+
+
+
+*android.app.NotificationManager.getService()*
+
+public static INotificationManager getService()
+
+
+
+
+
+*android.app.NotificationManager.notify(int,Notification)*
+
+public void notify(
+  int id,
+  android.app.Notification notification)
+
+Post a notification to be shown in the status bar. If a notification with the 
+same id has already been posted by your application and has not yet been 
+canceled, it will be replaced by the updated information. 
+
+
+    id - An identifier for this notification unique within your application. 
+    notification - A {@link Notification} object describing what to show the user. Must not be 
+       null. 
+
+*android.app.NotificationManager.notify(String,int,Notification)*
+
+public void notify(
+  java.lang.String tag,
+  int id,
+  android.app.Notification notification)
+
+Post a notification to be shown in the status bar. If a notification with the 
+same tag and id has already been posted by your application and has not yet 
+been canceled, it will be replaced by the updated information. 
+
+
+    tag - A string identifier for this notification. May be {@code null}. 
+    id - An identifier for this notification. The pair (tag, id) must be unique within 
+       your application. 
+    notification - A {@link Notification} object describing what to show the user. Must not be 
+       null. 
+
+*android.app.NotificationManager.notifyAsUser(String,int,Notification,UserHandle)*
+
+public void notifyAsUser(
+  java.lang.String tag,
+  int id,
+  android.app.Notification notification,
+  android.os.UserHandle user)
+
+
+
+
+
+

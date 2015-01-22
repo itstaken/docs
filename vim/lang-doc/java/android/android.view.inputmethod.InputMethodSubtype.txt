@@ -1,0 +1,334 @@
+*android.view.inputmethod.InputMethodSubtype* *InputMethodSubtype* This class is
+
+public final class InputMethodSubtype
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.inputmethod.InputMethodSubtype_Description|
+|android.view.inputmethod.InputMethodSubtype_Fields|
+|android.view.inputmethod.InputMethodSubtype_Constructors|
+|android.view.inputmethod.InputMethodSubtype_Methods|
+
+================================================================================
+
+*android.view.inputmethod.InputMethodSubtype_Fields*
+|android.os.Parcelable.Creator<android.view.inputmethod.InputMethodSubtype>_android.view.inputmethod.InputMethodSubtype.CREATOR|
+
+*android.view.inputmethod.InputMethodSubtype_Constructors*
+|android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean)|
+|android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean,boolean)|
+|android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean,boolean,int)|
+
+*android.view.inputmethod.InputMethodSubtype_Methods*
+|android.view.inputmethod.InputMethodSubtype.containsExtraValueKey(String)|The 
+|android.view.inputmethod.InputMethodSubtype.describeContents()|
+|android.view.inputmethod.InputMethodSubtype.equals(Object)|
+|android.view.inputmethod.InputMethodSubtype.getDisplayName(Context,String,ApplicationInfo)|
+|android.view.inputmethod.InputMethodSubtype.getExtraValue()|
+|android.view.inputmethod.InputMethodSubtype.getExtraValueOf(String)|The string
+|android.view.inputmethod.InputMethodSubtype.getIconResId()|
+|android.view.inputmethod.InputMethodSubtype.getLocale()|
+|android.view.inputmethod.InputMethodSubtype.getMode()|
+|android.view.inputmethod.InputMethodSubtype.getNameResId()|
+|android.view.inputmethod.InputMethodSubtype.hashCode()|
+|android.view.inputmethod.InputMethodSubtype.isAsciiCapable()|
+|android.view.inputmethod.InputMethodSubtype.isAuxiliary()|
+|android.view.inputmethod.InputMethodSubtype.overridesImplicitlyEnabledSubtype()|
+|android.view.inputmethod.InputMethodSubtype.sort(Context,int,InputMethodInfo,List<InputMethodSubtype>)|
+|android.view.inputmethod.InputMethodSubtype.writeToParcel(Parcel,int)|
+
+*android.view.inputmethod.InputMethodSubtype_Description*
+
+This class is used to specify meta information of a subtype contained in an 
+input method editor (IME). Subtype can describe locale (e.g. en_US, fr_FR...) 
+and mode (e.g. voice, keyboard...), and is used for IME switch and settings. 
+The input method subtype allows the system to bring up the specified subtype of 
+the designated IME directly. 
+
+It should be defined in an XML resource file of the input method with the 
+<subtype> element, which resides within an<input-method>element. For more 
+information, see the guide to <a 
+href="guide/topics/text/creating-input-method.html"> Creating an Input Method. 
+
+
+
+*android.os.Parcelable.Creator<android.view.inputmethod.InputMethodSubtype>_android.view.inputmethod.InputMethodSubtype.CREATOR*
+
+
+
+
+
+*android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean)*
+
+public InputMethodSubtype(
+  int nameId,
+  int iconId,
+  java.lang.String locale,
+  java.lang.String mode,
+  java.lang.String extraValue,
+  boolean isAuxiliary)
+
+Constructor with no subtype ID specified, overridesImplicitlyEnabledSubtype not 
+specified. Arguments for this constructor have the same meanings as 
+(|android.view.inputmethod.InputMethodSubtype|) except "id" and 
+"overridesImplicitlyEnabledSubtype". 
+
+
+*android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean,boolean)*
+
+public InputMethodSubtype(
+  int nameId,
+  int iconId,
+  java.lang.String locale,
+  java.lang.String mode,
+  java.lang.String extraValue,
+  boolean isAuxiliary,
+  boolean overridesImplicitlyEnabledSubtype)
+
+Constructor with no subtype ID specified. 
+
+
+*android.view.inputmethod.InputMethodSubtype(int,int,String,String,String,boolean,boolean,int)*
+
+public InputMethodSubtype(
+  int nameId,
+  int iconId,
+  java.lang.String locale,
+  java.lang.String mode,
+  java.lang.String extraValue,
+  boolean isAuxiliary,
+  boolean overridesImplicitlyEnabledSubtype,
+  int id)
+
+Constructor. 
+
+    nameId - Resource ID of the subtype name string. The string resource may have exactly 
+       one %s in it. If there is, the %s part will be replaced with the 
+       locale's display name by the formatter. Please refer to {@link 
+       #getDisplayName} for details. 
+    iconId - Resource ID of the subtype icon drawable. 
+    locale - The locale supported by the subtype 
+    mode - The mode supported by the subtype 
+    extraValue - The extra value of the subtype. This string is free-form, but the API supplies 
+       tools to deal with a key-value comma-separated list; see {@link 
+       #containsExtraValueKey} and {@link #getExtraValueOf}. 
+    isAuxiliary - true when this subtype is auxiliary, false otherwise. An auxiliary subtype will 
+       not be shown in the list of enabled IMEs for choosing the current IME in 
+       the Settings even when this subtype is enabled. Please note that this 
+       subtype will still be shown in the list of IMEs in the IME switcher to 
+       allow the user to tentatively switch to this subtype while an IME is 
+       shown. The framework will never switch the current IME to this subtype 
+       by {@link 
+       android.view.inputmethod.InputMethodManager#switchToLastInputMethod}. 
+       The intent of having this flag is to allow for IMEs that are invoked in 
+       a one-shot way as auxiliary input mode, and return to the previous IME 
+       once it is finished (e.g. voice input). 
+    overridesImplicitlyEnabledSubtype - true when this subtype should be enabled by default if no other subtypes in the 
+       IME are enabled explicitly. Note that a subtype with this parameter 
+       being true will not be shown in the list of subtypes in each IME's 
+       subtype enabler. Having an "automatic" subtype is an example use of this 
+       flag. 
+    id - The unique ID for the subtype. The input method framework keeps track of 
+       enabled subtypes by ID. When the IME package gets upgraded, enabled IDs 
+       will stay enabled even if other attributes are different. If the ID is 
+       unspecified or 0, Arrays.hashCode(new Object[] {locale, mode, 
+       extraValue, isAuxiliary, overridesImplicitlyEnabledSubtype}) will be 
+       used instead. 
+
+*android.view.inputmethod.InputMethodSubtype.containsExtraValueKey(String)*
+
+public boolean containsExtraValueKey(java.lang.String key)
+
+The string of ExtraValue in subtype should be defined as follows: example: 
+key0,key1=value1,key2,key3,key4=value4 
+
+
+    key - The key of extra value 
+
+    Returns: The subtype contains specified the extra value 
+
+*android.view.inputmethod.InputMethodSubtype.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.inputmethod.InputMethodSubtype.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.view.inputmethod.InputMethodSubtype.getDisplayName(Context,String,ApplicationInfo)*
+
+public |java.lang.CharSequence| getDisplayName(
+  android.content.Context context,
+  java.lang.String packageName,
+  android.content.pm.ApplicationInfo appInfo)
+
+
+
+
+    context - Context will be used for getting Locale and PackageManager. 
+    packageName - The package name of the IME 
+    appInfo - The application info of the IME 
+
+    Returns: a display name for this subtype. The string resource of the label 
+             (mSubtypeNameResId) may have exactly one %s in it. If there is, 
+             the %s part will be replaced with the locale's display name by the 
+             formatter. If there is not, this method returns the string 
+             specified by mSubtypeNameResId. If mSubtypeNameResId is not 
+             specified (== 0), it's up to the framework to generate an 
+             appropriate display name. 
+
+*android.view.inputmethod.InputMethodSubtype.getExtraValue()*
+
+public |java.lang.String| getExtraValue()
+
+
+
+
+
+    Returns: The extra value of the subtype. 
+
+*android.view.inputmethod.InputMethodSubtype.getExtraValueOf(String)*
+
+public |java.lang.String| getExtraValueOf(java.lang.String key)
+
+The string of ExtraValue in subtype should be defined as follows: example: 
+key0,key1=value1,key2,key3,key4=value4 
+
+
+    key - The key of extra value 
+
+    Returns: The value of the specified key 
+
+*android.view.inputmethod.InputMethodSubtype.getIconResId()*
+
+public int getIconResId()
+
+
+
+
+
+    Returns: Resource ID of the subtype icon drawable. 
+
+*android.view.inputmethod.InputMethodSubtype.getLocale()*
+
+public |java.lang.String| getLocale()
+
+
+
+
+
+    Returns: The locale of the subtype. This method returns the "locale" string parameter 
+             passed to the constructor. 
+
+*android.view.inputmethod.InputMethodSubtype.getMode()*
+
+public |java.lang.String| getMode()
+
+
+
+
+
+    Returns: The mode of the subtype. 
+
+*android.view.inputmethod.InputMethodSubtype.getNameResId()*
+
+public int getNameResId()
+
+
+
+
+
+    Returns: Resource ID of the subtype name string. 
+
+*android.view.inputmethod.InputMethodSubtype.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.view.inputmethod.InputMethodSubtype.isAsciiCapable()*
+
+public boolean isAsciiCapable()
+
+
+
+
+
+    Returns: true if this subtype is Ascii capable, false otherwise. If the subtype is ASCII 
+             capable, it should guarantee that the user can input ASCII 
+             characters with this subtype. This is important because many 
+             password fields only allow ASCII-characters. 
+
+*android.view.inputmethod.InputMethodSubtype.isAuxiliary()*
+
+public boolean isAuxiliary()
+
+
+
+
+
+    Returns: true if this subtype is auxiliary, false otherwise. An auxiliary subtype will 
+             not be shown in the list of enabled IMEs for choosing the current 
+             IME in the Settings even when this subtype is enabled. Please note 
+             that this subtype will still be shown in the list of IMEs in the 
+             IME switcher to allow the user to tentatively switch to this 
+             subtype while an IME is shown. The framework will never switch the 
+             current IME to this subtype by {@link 
+             android.view.inputmethod.InputMethodManager#switchToLastInputMethod}. 
+             The intent of having this flag is to allow for IMEs that are 
+             invoked in a one-shot way as auxiliary input mode, and return to 
+             the previous IME once it is finished (e.g. voice input). 
+
+*android.view.inputmethod.InputMethodSubtype.overridesImplicitlyEnabledSubtype()*
+
+public boolean overridesImplicitlyEnabledSubtype()
+
+
+
+
+
+    Returns: true when this subtype will be enabled by default if no other subtypes in the 
+             IME are enabled explicitly, false otherwise. Note that a subtype 
+             with this method returning true will not be shown in the list of 
+             subtypes in each IME's subtype enabler. Having an "automatic" 
+             subtype is an example use of this flag. 
+
+*android.view.inputmethod.InputMethodSubtype.sort(Context,int,InputMethodInfo,List<InputMethodSubtype>)*
+
+public static |java.util.List|<InputMethodSubtype> sort(
+  android.content.Context context,
+  int flags,
+  android.view.inputmethod.InputMethodInfo imi,
+  java.util.List<android.view.inputmethod.InputMethodSubtype> subtypeList)
+
+Sort the list of InputMethodSubtype 
+
+
+    context - Context will be used for getting localized strings from IME 
+    flags - Flags for the sort order 
+    imi - InputMethodInfo of which subtypes are subject to be sorted 
+    subtypeList - List of InputMethodSubtype which will be sorted 
+
+    Returns: Sorted list of subtypes 
+
+*android.view.inputmethod.InputMethodSubtype.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int parcelableFlags)
+
+
+
+
+
+

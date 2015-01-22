@@ -1,0 +1,372 @@
+*android.hardware.SensorEvent* *SensorEvent* This class represents aandroid.hard
+
+public class SensorEvent
+  extends    |java.lang.Object|
+
+|android.hardware.SensorEvent_Description|
+|android.hardware.SensorEvent_Fields|
+|android.hardware.SensorEvent_Constructors|
+|android.hardware.SensorEvent_Methods|
+
+================================================================================
+
+*android.hardware.SensorEvent_Fields*
+|int_android.hardware.SensorEvent.accuracy|
+|android.hardware.Sensor_android.hardware.SensorEvent.sensor|
+|long_android.hardware.SensorEvent.timestamp|
+|float[]_android.hardware.SensorEvent.values|
+
+*android.hardware.SensorEvent_Description*
+
+This class represents a Sensor(|android.hardware.Sensor|) event and holds 
+informations such as the sensor's type, the time-stamp, accuracy and of course 
+the sensor's data(|android.hardware.SensorEvent|) . 
+
+Definition of the coordinate system used by the SensorEvent API. 
+
+The coordinate-system is defined relative to the screen of the phone in its 
+default orientation. The axes are not swapped when the device's screen 
+orientation changes. 
+
+The X axis is horizontal and points to the right, the Y axis is vertical and 
+points up and the Z axis points towards the outside of the front face of the 
+screen. In this system, coordinates behind the screen have negative Z values. 
+
+
+
+
+
+Note: This coordinate system is different from the one used in the Android 2D 
+APIs where the origin is in the top-left corner. 
+
+
+
+*int_android.hardware.SensorEvent.accuracy*
+
+The accuracy of this event. See SensorManager(|android.hardware.SensorManager|) 
+for details. 
+
+
+*android.hardware.Sensor_android.hardware.SensorEvent.sensor*
+
+The sensor that generated this event. See 
+SensorManager(|android.hardware.SensorManager|) for details. 
+
+
+*long_android.hardware.SensorEvent.timestamp*
+
+The time in nanosecond at which the event happened 
+
+
+*float[]_android.hardware.SensorEvent.values*
+
+The length and contents of the values(|android.hardware.SensorEvent|) array 
+depends on which sensor(|android.hardware.Sensor|) type is being monitored (see 
+also (|android.hardware.SensorEvent|) for a definition of the coordinate system 
+used). 
+
+Sensor.TYPE_ACCELEROMETER(|android.hardware.Sensor|) : All values are in SI 
+units (m/s^2) 
+
+values[0]: Acceleration minus Gx on the x-axis values[1]: Acceleration minus Gy 
+on the y-axis values[2]: Acceleration minus Gz on the z-axis 
+
+A sensor of this type measures the acceleration applied to the device (Ad). 
+Conceptually, it does so by measuring forces applied to the sensor itself (Fs) 
+using the relation: 
+
+Ad = - Fs / mass 
+
+In particular, the force of gravity is always influencing the measured 
+acceleration: 
+
+Ad = -g - F / mass 
+
+For this reason, when the device is sitting on a table (and obviously not 
+accelerating), the accelerometer reads a magnitude of g = 9.81 m/s^2 
+
+Similarly, when the device is in free-fall and therefore dangerously 
+accelerating towards to ground at 9.81 m/s^2, its accelerometer reads a 
+magnitude of 0 m/s^2. 
+
+It should be apparent that in order to measure the real acceleration of the 
+device, the contribution of the force of gravity must be eliminated. This can 
+be achieved by applying a high-pass filter. Conversely, a low-pass filter can 
+be used to isolate the force of gravity. 
+
+
+
+public void onSensorChanged(SensorEvent event) { // alpha is calculated as t / 
+(t + dT) // with t, the low-pass filter's time-constant // and dT, the event 
+delivery rate 
+
+final float alpha = 0.8; 
+
+gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0]; gravity[1] = 
+alpha * gravity[1] + (1 - alpha) * event.values[1]; gravity[2] = alpha * 
+gravity[2] + (1 - alpha) * event.values[2]; 
+
+linear_acceleration[0] = event.values[0] - gravity[0]; linear_acceleration[1] = 
+event.values[1] - gravity[1]; linear_acceleration[2] = event.values[2] - 
+gravity[2]; } 
+
+Examples: 
+
+When the device lies flat on a table and is pushed on its left side toward the 
+right, the x acceleration value is positive. 
+
+When the device lies flat on a table, the acceleration value is +9.81, which 
+correspond to the acceleration of the device (0 m/s^2) minus the force of 
+gravity (-9.81 m/s^2). 
+
+When the device lies flat on a table and is pushed toward the sky with an 
+acceleration of A m/s^2, the acceleration value is equal to A+9.81 which 
+correspond to the acceleration of the device (+A m/s^2) minus the force of 
+gravity (-9.81 m/s^2). 
+
+Sensor.TYPE_MAGNETIC_FIELD(|android.hardware.Sensor|) : All values are in 
+micro-Tesla (uT) and measure the ambient magnetic field in the X, Y and Z axis. 
+
+Sensor.TYPE_GYROSCOPE(|android.hardware.Sensor|) : All values are in 
+radians/second and measure the rate of rotation around the device's local X, Y 
+and Z axis. The coordinate system is the same as is used for the acceleration 
+sensor. Rotation is positive in the counter-clockwise direction. That is, an 
+observer looking from some positive location on the x, y or z axis at a device 
+positioned on the origin would report positive rotation if the device appeared 
+to be rotating counter clockwise. Note that this is the standard mathematical 
+definition of positive rotation and does not agree with the definition of roll 
+given earlier. 
+
+values[0]: Angular speed around the x-axis values[1]: Angular speed around the 
+y-axis values[2]: Angular speed around the z-axis 
+
+Typically the output of the gyroscope is integrated over time to calculate a 
+rotation describing the change of angles over the timestep, for example: 
+
+private static final float NS2S = 1.0f / 1000000000.0f; private final float[] 
+deltaRotationVector = new float[4](); private float timestamp; 
+
+public void onSensorChanged(SensorEvent event) { // This timestep's delta 
+rotation to be multiplied by the current rotation // after computing it from 
+the gyro sample data. if (timestamp != 0) { final float dT = (event.timestamp - 
+timestamp) * NS2S; // Axis of the rotation sample, not normalized yet. float 
+axisX = event.values[0]; float axisY = event.values[1]; float axisZ = 
+event.values[2]; 
+
+// Calculate the angular speed of the sample float omegaMagnitude = 
+sqrt(axisX*axisX + axisY*axisY + axisZ*axisZ); 
+
+// Normalize the rotation vector if it's big enough to get the axis if 
+(omegaMagnitude > EPSILON) { axisX /= omegaMagnitude; axisY /= omegaMagnitude; 
+axisZ /= omegaMagnitude; } 
+
+// Integrate around this axis with the angular speed by the timestep // in 
+order to get a delta rotation from this sample over the timestep // We will 
+convert this axis-angle representation of the delta rotation // into a 
+quaternion before turning it into the rotation matrix. float thetaOverTwo = 
+omegaMagnitude * dT / 2.0f; float sinThetaOverTwo = sin(thetaOverTwo); float 
+cosThetaOverTwo = cos(thetaOverTwo); deltaRotationVector[0] = sinThetaOverTwo * 
+axisX; deltaRotationVector[1] = sinThetaOverTwo * axisY; deltaRotationVector[2] 
+= sinThetaOverTwo * axisZ; deltaRotationVector[3] = cosThetaOverTwo; } 
+timestamp = event.timestamp; float[] deltaRotationMatrix = new float[9]; 
+SensorManager.getRotationMatrixFromVector(deltaRotationMatrix, 
+deltaRotationVector); // User code should concatenate the delta rotation we 
+computed with the current rotation // in order to get the updated rotation. // 
+rotationCurrent = rotationCurrent * deltaRotationMatrix; } 
+
+In practice, the gyroscope noise and offset will introduce some errors which 
+need to be compensated for. This is usually done using the information from 
+other sensors, but is beyond the scope of this document. 
+
+Sensor.TYPE_LIGHT(|android.hardware.Sensor|) : 
+
+values[0]: Ambient light level in SI lux units 
+
+Sensor.TYPE_PRESSURE(|android.hardware.Sensor|) : 
+
+values[0]: Atmospheric pressure in hPa (millibar) 
+
+Sensor.TYPE_PROXIMITY(|android.hardware.Sensor|) : 
+
+values[0]: Proximity sensor distance measured in centimeters 
+
+Note: Some proximity sensors only support a binary near or far measurement. In 
+this case, the sensor should report its maximum 
+range(|android.hardware.Sensor|) value in the far state and a lesser value in 
+the near state. 
+
+Sensor.TYPE_GRAVITY(|android.hardware.Sensor|) : A three dimensional vector 
+indicating the direction and magnitude of gravity. Units are m/s^2. The 
+coordinate system is the same as is used by the acceleration sensor. Note: When 
+the device is at rest, the output of the gravity sensor should be identical to 
+that of the accelerometer. 
+
+Sensor.TYPE_LINEAR_ACCELERATION(|android.hardware.Sensor|) : A three 
+dimensional vector indicating acceleration along each device axis, not 
+including gravity. All values have units of m/s^2. The coordinate system is the 
+same as is used by the acceleration sensor. The output of the accelerometer, 
+gravity and linear-acceleration sensors must obey the following relation: 
+acceleration = gravity + linear-acceleration 
+
+Sensor.TYPE_ROTATION_VECTOR(|android.hardware.Sensor|) : The rotation vector 
+represents the orientation of the device as a combination of an angle and an 
+axis, in which the device has rotated through an angle around an axis <x, y, 
+z>. The three elements of the rotation vector are <x*sin(y*sin(z*sin(such that 
+the magnitude of the rotation vector is equal to sin(and the direction of the 
+rotation vector is equal to the direction of the axis of rotation. The three 
+elements of the rotation vector are equal to the last three components of a 
+unit quaternion <cos(x*sin(y*sin(z*sin( Elements of the rotation vector are 
+unitless. The x,y, and z axis are defined in the same way as the acceleration 
+sensor. The reference coordinate system is defined as a direct orthonormal 
+basis, where: 
+
+X is defined as the vector product Y.Z (It is tangential to the ground at the 
+device's current location and roughly points East). Y is tangential to the 
+ground at the device's current location and points towards magnetic north. Z 
+points towards the sky and is perpendicular to the ground. 
+
+
+
+
+
+values[0]: x*sin( values[1]: y*sin( values[2]: z*sin( values[3]: cos( 
+values[4]: estimated heading Accuracy (in radians) (-1 if unavailable) 
+
+values[3], originally optional, will always be present from SDK Level 18 
+onwards. values[4] is a new value that has been added in SDK Level 18. 
+
+Sensor.TYPE_ORIENTATION(|android.hardware.Sensor|) : All values are angles in 
+degrees. 
+
+values[0]: Azimuth, angle between the magnetic north direction and the y-axis, 
+around the z-axis (0 to 359). 0=North, 90=East, 180=South, 270=West 
+
+values[1]: Pitch, rotation around x-axis (-180 to 180), with positive values 
+when the z-axis moves toward the y-axis. 
+
+values[2]: Roll, rotation around the x-axis (-90 to 90) increasing as the 
+device moves clockwise. 
+
+
+
+Note: This definition is different from yaw, pitch and roll used in aviation 
+where the X axis is along the long side of the plane (tail to nose). 
+
+Note: This sensor type exists for legacy reasons, please use 
+getRotationMatrix()(|android.hardware.SensorManager|) in conjunction with 
+remapCoordinateSystem()(|android.hardware.SensorManager|) and 
+getOrientation()(|android.hardware.SensorManager|) to compute these values 
+instead. 
+
+Important note: For historical reasons the roll angle is positive in the 
+clockwise direction (mathematically speaking, it should be positive in the 
+counter-clockwise direction). 
+
+Sensor.TYPE_RELATIVE_HUMIDITY(|android.hardware.Sensor|) : 
+
+values[0]: Relative ambient air humidity in percent 
+
+When relative ambient air humidity and ambient temperature are measured, the 
+dew point and absolute humidity can be calculated. 
+
+Dew Point 
+
+The dew point is the temperature to which a given parcel of air must be cooled, 
+at constant barometric pressure, for water vapor to condense into water. 
+
+
+
+ln(RH/100%) + mt/(Tn+t) td(t,RH) = Tn ------------------------------ m - 
+[ln(RH/100%) + mt/(Tn+t)] 
+
+td dew point temperature in C t actual temperature in C RH actual relative 
+humidity in % m 17.62 Tn 243.12 C 
+
+for example: 
+
+h = Math.log(rh / 100.0) + (17.62 * t) / (243.12 + t); td = 243.12 * h / (17.62 
+- h); 
+
+Absolute Humidity 
+
+The absolute humidity is the mass of water vapor in a particular volume of dry 
+air. The unit is g/m3. 
+
+
+
+RH/100%Aexp(mt/(Tn+t)) dv(t,RH) = 216.7 ------------------------- 273.15 + t 
+
+dv absolute humidity in g/m3 t actual temperature in C RH actual relative 
+humidity in % m 17.62 Tn 243.12 C A 6.112 hPa 
+
+for example: 
+
+dv = 216.7 * (rh / 100.0 * 6.112 * Math.exp(17.62 * t / (243.12 + t)) / (273.15 
++ t)); 
+
+Sensor.TYPE_AMBIENT_TEMPERATURE(|android.hardware.Sensor|) : 
+
+values[0]: ambient (room) temperature in degree Celsius. 
+
+Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED(|android.hardware.Sensor|) : Similar to 
+(|android.hardware.Sensor|) , but the hard iron calibration is reported 
+separately instead of being included in the measurement. Factory calibration 
+and temperature compensation will still be applied to the "uncalibrated" 
+measurement. Assumptions that the magnetic field is due to the Earth's poles is 
+avoided. 
+
+The values array is shown below: 
+
+values[0] = x_uncalib values[1] = y_uncalib values[2] = z_uncalib values[3] = 
+x_bias values[4] = y_bias values[5] = z_bias 
+
+
+
+x_uncalib, y_uncalib, z_uncalib are the measured magnetic field in X, Y, Z 
+axes. Soft iron and temperature calibrations are applied. But the hard iron 
+calibration is not applied. The values are in micro-Tesla (uT). 
+
+x_bias, y_bias, z_bias give the iron bias estimated in X, Y, Z axes. Each field 
+is a component of the estimated hard iron calibration. The values are in 
+micro-Tesla (uT). 
+
+Hard iron - These distortions arise due to the magnetized iron, steel or 
+permanenet magnets on the device. Soft iron - These distortions arise due to 
+the interaction with the earth's magentic field. 
+
+(|android.hardware.Sensor|) : Identical to (|android.hardware.Sensor|) except 
+that it doesn't use the geomagnetic field. Therefore the Y axis doesn't point 
+north, but instead to some other reference, that reference is allowed to drift 
+by the same order of magnitude as the gyroscope drift around the Z axis. 
+
+In the ideal case, a phone rotated and returning to the same real-world 
+orientation will report the same game rotation vector (without using the 
+earth's geomagnetic field). However, the orientation may drift somewhat over 
+time. See (|android.hardware.Sensor|) for a detailed description of the values. 
+This sensor will not have the estimated heading accuracy value. 
+
+Sensor.TYPE_GYROSCOPE_UNCALIBRATED(|android.hardware.Sensor|) : All values are 
+in radians/second and measure the rate of rotation around the X, Y and Z axis. 
+An estimation of the drift on each axis is reported as well. 
+
+No gyro-drift compensation is performed. Factory calibration and temperature 
+compensation is still applied to the rate of rotation (angular speeds). 
+
+The coordinate system is the same as is used for the 
+(|android.hardware.Sensor|) Rotation is positive in the counter-clockwise 
+direction (right-hand rule). That is, an observer looking from some positive 
+location on the x, y or z axis at a device positioned on the origin would 
+report positive rotation if the device appeared to be rotating counter 
+clockwise. The range would at least be 17.45 rad/s (ie: ~1000 deg/s). 
+
+values[0] : angular speed (w/o drift compensation) around the X axis in rad/s 
+values[1] : angular speed (w/o drift compensation) around the Y axis in rad/s 
+values[2] : angular speed (w/o drift compensation) around the Z axis in rad/s 
+values[3] : estimated drift around X axis in rad/s values[4] : estimated drift 
+around Y axis in rad/s values[5] : estimated drift around Z axis in rad/s 
+
+Pro Tip: Always use the length of the values array while performing operations 
+on it. In earlier versions, this used to be always 3 which has changed now. 
+
+
+

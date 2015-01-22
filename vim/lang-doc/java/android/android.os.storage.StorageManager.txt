@@ -1,0 +1,268 @@
+*android.os.storage.StorageManager* *StorageManager* StorageManager is the inter
+
+public class StorageManager
+  extends    |java.lang.Object|
+
+|android.os.storage.StorageManager_Description|
+|android.os.storage.StorageManager_Fields|
+|android.os.storage.StorageManager_Constructors|
+|android.os.storage.StorageManager_Methods|
+
+================================================================================
+
+*android.os.storage.StorageManager_Constructors*
+|android.os.storage.StorageManager(ContentResolver,Looper)|Constructs a Storage
+
+*android.os.storage.StorageManager_Methods*
+|android.os.storage.StorageManager.disableUsbMassStorage()|Disables USB Mass St
+|android.os.storage.StorageManager.enableUsbMassStorage()|Enables USB Mass Stor
+|android.os.storage.StorageManager.from(Context)|
+|android.os.storage.StorageManager.getMountedObbPath(String)|Check the mounted 
+|android.os.storage.StorageManager.getPrimaryVolume()|
+|android.os.storage.StorageManager.getPrimaryVolume(StorageVolume[])|
+|android.os.storage.StorageManager.getStorageFullBytes(File)|Return the number 
+|android.os.storage.StorageManager.getStorageLowBytes(File)|Return the number o
+|android.os.storage.StorageManager.getVolumeList()|Returns list of all mountabl
+|android.os.storage.StorageManager.getVolumePaths()|Returns list of paths for a
+|android.os.storage.StorageManager.getVolumeState(String)|Gets the state of a v
+|android.os.storage.StorageManager.isObbMounted(String)|Check whether an Opaque
+|android.os.storage.StorageManager.isUsbMassStorageConnected()|Query if a USB M
+|android.os.storage.StorageManager.isUsbMassStorageEnabled()|Query if a USB Mas
+|android.os.storage.StorageManager.mountObb(String,String,OnObbStateChangeListener)|
+|android.os.storage.StorageManager.registerListener(StorageEventListener)|Regis
+|android.os.storage.StorageManager.unmountObb(String,boolean,OnObbStateChangeListener)|
+|android.os.storage.StorageManager.unregisterListener(StorageEventListener)|Unr
+
+*android.os.storage.StorageManager_Description*
+
+StorageManager is the interface to the systems storage service. The storage 
+manager handles storage-related items such as Opaque Binary Blobs (OBBs). 
+
+OBBs contain a filesystem that maybe be encrypted on disk and mounted on-demand 
+from an application. OBBs are a good way of providing large amounts of binary 
+assets without packaging them into APKs as they may be multiple gigabytes in 
+size. However, due to their size, they're most likely stored in a shared 
+storage pool accessible from all programs. The system does not guarantee the 
+security of the OBB file itself: if any program modifies the OBB, there is no 
+guarantee that a read from that OBB will produce the expected output. 
+
+Get an instance of this class by calling (|android.content.Context|) with an 
+argument of (|android.content.Context|) . 
+
+
+
+*android.os.storage.StorageManager(ContentResolver,Looper)*
+
+public StorageManager(
+  android.content.ContentResolver resolver,
+  android.os.Looper tgtLooper)
+  throws |android.os.RemoteException|
+         
+Constructs a StorageManager object through which an application can can 
+communicate with the systems mount service. 
+
+    tgtLooper - The {@link android.os.Looper} which events will be received on. 
+
+Applications can get instance of this class by calling {@link 
+       android.content.Context#getSystemService(java.lang.String)} with an 
+       argument of {@link android.content.Context#STORAGE_SERVICE}. 
+
+*android.os.storage.StorageManager.disableUsbMassStorage()*
+
+public void disableUsbMassStorage()
+
+Disables USB Mass Storage (UMS) on the device. 
+
+
+
+*android.os.storage.StorageManager.enableUsbMassStorage()*
+
+public void enableUsbMassStorage()
+
+Enables USB Mass Storage (UMS) on the device. 
+
+
+
+*android.os.storage.StorageManager.from(Context)*
+
+public static |android.os.storage.StorageManager| from(android.content.Context context)
+
+
+
+
+
+*android.os.storage.StorageManager.getMountedObbPath(String)*
+
+public |java.lang.String| getMountedObbPath(java.lang.String rawPath)
+
+Check the mounted path of an Opaque Binary Blob (OBB) file. This will give you 
+the path to where you can obtain access to the internals of the OBB. 
+
+
+    rawPath - path to OBB image 
+
+    Returns: absolute path to mounted OBB image data or null if not mounted or exception 
+             encountered trying to read status 
+
+*android.os.storage.StorageManager.getPrimaryVolume()*
+
+public |android.os.storage.StorageVolume| getPrimaryVolume()
+
+
+
+
+
+*android.os.storage.StorageManager.getPrimaryVolume(StorageVolume[])*
+
+public static |android.os.storage.StorageVolume| getPrimaryVolume(android.os.storage.StorageVolume[] volumes)
+
+
+
+
+
+*android.os.storage.StorageManager.getStorageFullBytes(File)*
+
+public long getStorageFullBytes(java.io.File path)
+
+Return the number of available bytes at which the given path is considered 
+full. 
+
+
+
+*android.os.storage.StorageManager.getStorageLowBytes(File)*
+
+public long getStorageLowBytes(java.io.File path)
+
+Return the number of available bytes at which the given path is considered 
+running low on storage. 
+
+
+
+*android.os.storage.StorageManager.getVolumeList()*
+
+public |android.os.storage.StorageVolume|[] getVolumeList()
+
+Returns list of all mountable volumes. 
+
+
+
+*android.os.storage.StorageManager.getVolumePaths()*
+
+public |java.lang.String|[] getVolumePaths()
+
+Returns list of paths for all mountable volumes. 
+
+
+
+*android.os.storage.StorageManager.getVolumeState(String)*
+
+public |java.lang.String| getVolumeState(java.lang.String mountPoint)
+
+Gets the state of a volume via its mountpoint. 
+
+
+
+*android.os.storage.StorageManager.isObbMounted(String)*
+
+public boolean isObbMounted(java.lang.String rawPath)
+
+Check whether an Opaque Binary Blob (OBB) is mounted or not. 
+
+
+    rawPath - path to OBB image 
+
+    Returns: true if OBB is mounted; false if not mounted or on error 
+
+*android.os.storage.StorageManager.isUsbMassStorageConnected()*
+
+public boolean isUsbMassStorageConnected()
+
+Query if a USB Mass Storage (UMS) host is connected. 
+
+
+
+    Returns: true if UMS host is connected. 
+
+*android.os.storage.StorageManager.isUsbMassStorageEnabled()*
+
+public boolean isUsbMassStorageEnabled()
+
+Query if a USB Mass Storage (UMS) is enabled on the device. 
+
+
+
+    Returns: true if UMS host is enabled. 
+
+*android.os.storage.StorageManager.mountObb(String,String,OnObbStateChangeListener)*
+
+public boolean mountObb(
+  java.lang.String rawPath,
+  java.lang.String key,
+  android.os.storage.OnObbStateChangeListener listener)
+
+Mount an Opaque Binary Blob (OBB) file. If a key is specified, it is supplied 
+to the mounting process to be used in any encryption used in the OBB. 
+
+The OBB will remain mounted for as long as the StorageManager reference is held 
+by the application. As soon as this reference is lost, the OBBs in use will be 
+unmounted. The (|android.os.storage.OnObbStateChangeListener|) registered with 
+this call will receive the success or failure of this operation. 
+
+Note: you can only mount OBB files for which the OBB tag on the file matches a 
+package ID that is owned by the calling program's UID. That is, shared UID 
+applications can attempt to mount any other application's OBB that shares its 
+UID. 
+
+
+    rawPath - the path to the OBB file 
+    key - secret used to encrypt the OBB; may be null if no encryption was used on the 
+       OBB. 
+    listener - will receive the success or failure of the operation 
+
+    Returns: whether the mount call was successfully queued or not 
+
+*android.os.storage.StorageManager.registerListener(StorageEventListener)*
+
+public void registerListener(android.os.storage.StorageEventListener listener)
+
+Registers a StorageEventListener(|android.os.storage.StorageEventListener|) . 
+
+
+    listener - A {@link android.os.storage.StorageEventListener StorageEventListener} object. 
+
+*android.os.storage.StorageManager.unmountObb(String,boolean,OnObbStateChangeListener)*
+
+public boolean unmountObb(
+  java.lang.String rawPath,
+  boolean force,
+  android.os.storage.OnObbStateChangeListener listener)
+
+Unmount an Opaque Binary Blob (OBB) file asynchronously. If the force flag is 
+true, it will kill any application needed to unmount the given OBB (even the 
+calling application). 
+
+The (|android.os.storage.OnObbStateChangeListener|) registered with this call 
+will receive the success or failure of this operation. 
+
+Note: you can only mount OBB files for which the OBB tag on the file matches a 
+package ID that is owned by the calling program's UID. That is, shared UID 
+applications can obtain access to any other application's OBB that shares its 
+UID. 
+
+
+    rawPath - path to the OBB file 
+    force - whether to kill any programs using this in order to unmount it 
+    listener - will receive the success or failure of the operation 
+
+    Returns: whether the unmount call was successfully queued or not 
+
+*android.os.storage.StorageManager.unregisterListener(StorageEventListener)*
+
+public void unregisterListener(android.os.storage.StorageEventListener listener)
+
+Unregisters a StorageEventListener(|android.os.storage.StorageEventListener|) . 
+
+
+    listener - A {@link android.os.storage.StorageEventListener StorageEventListener} object. 
+
+

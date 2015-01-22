@@ -1,0 +1,157 @@
+*android.provider.CalendarContract.Instances* *CalendarContract.Instances* Field
+
+public static final class CalendarContract.Instances
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.CalendarContract.EventsColumns|
+             |android.provider.CalendarContract.CalendarColumns|
+
+|android.provider.CalendarContract.Instances_Description|
+|android.provider.CalendarContract.Instances_Fields|
+|android.provider.CalendarContract.Instances_Constructors|
+|android.provider.CalendarContract.Instances_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.Instances_Fields*
+|java.lang.String_android.provider.CalendarContract.Instances.BEGIN|
+|android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_BY_DAY_URI|
+|android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_SEARCH_BY_DAY_URI|
+|android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_SEARCH_URI|
+|android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_URI|
+|java.lang.String_android.provider.CalendarContract.Instances.END|
+|java.lang.String_android.provider.CalendarContract.Instances.END_DAY|
+|java.lang.String_android.provider.CalendarContract.Instances.END_MINUTE|
+|java.lang.String_android.provider.CalendarContract.Instances.EVENT_ID|
+|java.lang.String_android.provider.CalendarContract.Instances.START_DAY|
+|java.lang.String_android.provider.CalendarContract.Instances.START_MINUTE|
+
+*android.provider.CalendarContract.Instances_Methods*
+|android.provider.CalendarContract.Instances.query(ContentResolver,String[],long,long)|
+|android.provider.CalendarContract.Instances.query(ContentResolver,String[],long,long,String)|
+
+*android.provider.CalendarContract.Instances_Description*
+
+Fields and helpers for interacting with Instances. An instance is a single 
+occurrence of an event including time zone specific start and end days and 
+minutes. The instances table is not writable and only provides a way to query 
+event occurrences. 
+
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.BEGIN*
+
+The beginning time of the instance, in UTC milliseconds. Column name. Type: 
+INTEGER (long; millis since epoch) 
+
+
+*android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_BY_DAY_URI*
+
+The content:// style URL for querying an instance range by Julian Day. The 
+start and end day should be added as path segments if this is used directly. 
+
+
+*android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_SEARCH_BY_DAY_URI*
+
+The content:// style URL for querying an instance range with a search term. The 
+start day, end day, and search string should be appended as path segments if 
+this is used directly. 
+
+
+*android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_SEARCH_URI*
+
+The content:// style URL for querying an instance range with a search term. The 
+begin, end, and search string should be appended as path segments if this is 
+used directly. 
+
+
+*android.net.Uri_android.provider.CalendarContract.Instances.CONTENT_URI*
+
+The content:// style URL for querying an instance range. The begin and end of 
+the range to query should be added as path segments if this is used directly. 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.END*
+
+The ending time of the instance, in UTC milliseconds. Column name. Type: 
+INTEGER (long; millis since epoch) 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.END_DAY*
+
+The Julian end day of the instance, relative to the local time zone. Column 
+name. Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.END_MINUTE*
+
+The end minute of the instance measured from midnight in the local time zone. 
+Column name. Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.EVENT_ID*
+
+The _id of the event for this instance. Column name. Type: INTEGER (long, 
+foreign key to the Events table) 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.START_DAY*
+
+The Julian start day of the instance, relative to the local time zone. Column 
+name. Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.CalendarContract.Instances.START_MINUTE*
+
+The start minute of the instance measured from midnight in the local time zone. 
+Column name. Type: INTEGER (int) 
+
+
+
+*android.provider.CalendarContract.Instances.query(ContentResolver,String[],long,long)*
+
+public static final |android.database.Cursor| query(
+  android.content.ContentResolver cr,
+  java.lang.String[] projection,
+  long begin,
+  long end)
+
+Performs a query to return all visible instances in the given range. This is a 
+blocking function and should not be done on the UI thread. This will cause an 
+expansion of recurring events to fill this time range if they are not already 
+expanded and will slow down for larger time ranges with many recurring events. 
+
+
+    cr - The ContentResolver to use for the query 
+    projection - The columns to return 
+    begin - The start of the time range to query in UTC millis since epoch 
+    end - The end of the time range to query in UTC millis since epoch 
+
+    Returns: A Cursor containing all instances in the given range 
+
+*android.provider.CalendarContract.Instances.query(ContentResolver,String[],long,long,String)*
+
+public static final |android.database.Cursor| query(
+  android.content.ContentResolver cr,
+  java.lang.String[] projection,
+  long begin,
+  long end,
+  java.lang.String searchQuery)
+
+Performs a query to return all visible instances in the given range that match 
+the given query. This is a blocking function and should not be done on the UI 
+thread. This will cause an expansion of recurring events to fill this time 
+range if they are not already expanded and will slow down for larger time 
+ranges with many recurring events. 
+
+
+    cr - The ContentResolver to use for the query 
+    projection - The columns to return 
+    begin - The start of the time range to query in UTC millis since epoch 
+    end - The end of the time range to query in UTC millis since epoch 
+    searchQuery - A string of space separated search terms. Segments enclosed by double quotes 
+       will be treated as a single term. 
+
+    Returns: A Cursor of instances matching the search terms in the given time range 
+
+

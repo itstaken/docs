@@ -1,0 +1,261 @@
+*android.database.AbstractWindowedCursor* *AbstractWindowedCursor* A base class 
+
+public abstract class AbstractWindowedCursor
+  extends    |android.database.AbstractCursor|
+
+|android.database.AbstractWindowedCursor_Description|
+|android.database.AbstractWindowedCursor_Fields|
+|android.database.AbstractWindowedCursor_Constructors|
+|android.database.AbstractWindowedCursor_Methods|
+
+================================================================================
+
+*android.database.AbstractWindowedCursor_Fields*
+|android.database.CursorWindow_android.database.AbstractWindowedCursor.mWindow|
+
+*android.database.AbstractWindowedCursor_Constructors*
+|android.database.AbstractWindowedCursor()|
+
+*android.database.AbstractWindowedCursor_Methods*
+|android.database.AbstractWindowedCursor.checkPosition()|
+|android.database.AbstractWindowedCursor.clearOrCreateWindow(String)|If there i
+|android.database.AbstractWindowedCursor.closeWindow()|Closes the cursor window
+|android.database.AbstractWindowedCursor.copyStringToBuffer(int,CharArrayBuffer)|
+|android.database.AbstractWindowedCursor.getBlob(int)|
+|android.database.AbstractWindowedCursor.getDouble(int)|
+|android.database.AbstractWindowedCursor.getFloat(int)|
+|android.database.AbstractWindowedCursor.getInt(int)|
+|android.database.AbstractWindowedCursor.getLong(int)|
+|android.database.AbstractWindowedCursor.getShort(int)|
+|android.database.AbstractWindowedCursor.getString(int)|
+|android.database.AbstractWindowedCursor.getType(int)|
+|android.database.AbstractWindowedCursor.getWindow()|
+|android.database.AbstractWindowedCursor.hasWindow()|Returns true if the cursor
+|android.database.AbstractWindowedCursor.isBlob(int)|
+|android.database.AbstractWindowedCursor.isFloat(int)|
+|android.database.AbstractWindowedCursor.isLong(int)|
+|android.database.AbstractWindowedCursor.isNull(int)|
+|android.database.AbstractWindowedCursor.isString(int)|
+|android.database.AbstractWindowedCursor.onDeactivateOrClose()|
+|android.database.AbstractWindowedCursor.setWindow(CursorWindow)|Sets a new cur
+
+*android.database.AbstractWindowedCursor_Description*
+
+A base class for Cursors that store their data in 
+(|android.database.CursorWindow|) s. 
+
+The cursor owns the cursor window it uses. When the cursor is closed, its 
+window is also closed. Likewise, when the window used by the cursor is changed, 
+its old window is closed. This policy of strict ownership ensures that cursor 
+windows are not leaked. 
+
+Subclasses are responsible for filling the cursor window with data during 
+(|android.database.AbstractWindowedCursor|) , allocating a new cursor window if 
+necessary. During (|android.database.AbstractWindowedCursor|) , the existing 
+cursor window should be cleared and filled with new data. 
+
+If the contents of the cursor change or become invalid, the old window must be 
+closed (because it is owned by the cursor) and set to null. 
+
+
+
+*android.database.CursorWindow_android.database.AbstractWindowedCursor.mWindow*
+
+The cursor window owned by this cursor. 
+
+
+
+*android.database.AbstractWindowedCursor()*
+
+public AbstractWindowedCursor()
+
+
+
+
+*android.database.AbstractWindowedCursor.checkPosition()*
+
+protected void checkPosition()
+
+
+
+
+
+*android.database.AbstractWindowedCursor.clearOrCreateWindow(String)*
+
+protected void clearOrCreateWindow(java.lang.String name)
+
+If there is a window, clear it. Otherwise, creates a new window. 
+
+
+    name - The window name. 
+
+*android.database.AbstractWindowedCursor.closeWindow()*
+
+protected void closeWindow()
+
+Closes the cursor window and sets (|android.database.AbstractWindowedCursor|) 
+to null. 
+
+
+
+*android.database.AbstractWindowedCursor.copyStringToBuffer(int,CharArrayBuffer)*
+
+public void copyStringToBuffer(
+  int columnIndex,
+  android.database.CharArrayBuffer buffer)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getBlob(int)*
+
+public byte[] getBlob(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getDouble(int)*
+
+public double getDouble(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getFloat(int)*
+
+public float getFloat(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getInt(int)*
+
+public int getInt(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getLong(int)*
+
+public long getLong(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getShort(int)*
+
+public short getShort(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getString(int)*
+
+public |java.lang.String| getString(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getType(int)*
+
+public int getType(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.getWindow()*
+
+public |android.database.CursorWindow| getWindow()
+
+
+
+
+
+*android.database.AbstractWindowedCursor.hasWindow()*
+
+public boolean hasWindow()
+
+Returns true if the cursor has an associated cursor window. 
+
+
+
+    Returns: True if the cursor has an associated cursor window. 
+
+*android.database.AbstractWindowedCursor.isBlob(int)*
+
+public boolean isBlob(int columnIndex)
+
+
+
+    Deprecated: Use {@link #getType}
+
+
+*android.database.AbstractWindowedCursor.isFloat(int)*
+
+public boolean isFloat(int columnIndex)
+
+
+
+    Deprecated: Use {@link #getType}
+
+
+*android.database.AbstractWindowedCursor.isLong(int)*
+
+public boolean isLong(int columnIndex)
+
+
+
+    Deprecated: Use {@link #getType}
+
+
+*android.database.AbstractWindowedCursor.isNull(int)*
+
+public boolean isNull(int columnIndex)
+
+
+
+
+
+*android.database.AbstractWindowedCursor.isString(int)*
+
+public boolean isString(int columnIndex)
+
+
+
+    Deprecated: Use {@link #getType}
+
+
+*android.database.AbstractWindowedCursor.onDeactivateOrClose()*
+
+protected void onDeactivateOrClose()
+
+
+
+
+
+*android.database.AbstractWindowedCursor.setWindow(CursorWindow)*
+
+public void setWindow(android.database.CursorWindow window)
+
+Sets a new cursor window for the cursor to use. 
+
+The cursor takes ownership of the provided cursor window; the cursor window 
+will be closed when the cursor is closed or when the cursor adopts a new cursor 
+window. 
+
+If the cursor previously had a cursor window, then it is closed when the new 
+cursor window is assigned. 
+
+
+    window - The new cursor window, typically a remote cursor window. 
+
+

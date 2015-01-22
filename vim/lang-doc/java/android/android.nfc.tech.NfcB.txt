@@ -1,0 +1,135 @@
+*android.nfc.tech.NfcB* *NfcB* Provides access to NFC-B (ISO 14443-3B) propertie
+
+public final class NfcB
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NfcB_Description|
+|android.nfc.tech.NfcB_Fields|
+|android.nfc.tech.NfcB_Constructors|
+|android.nfc.tech.NfcB_Methods|
+
+================================================================================
+
+*android.nfc.tech.NfcB_Fields*
+|java.lang.String_android.nfc.tech.NfcB.EXTRA_APPDATA|
+|java.lang.String_android.nfc.tech.NfcB.EXTRA_PROTINFO|
+
+*android.nfc.tech.NfcB_Constructors*
+|android.nfc.tech.NfcB(Tag)|
+
+*android.nfc.tech.NfcB_Methods*
+|android.nfc.tech.NfcB.get(Tag)|Get an instance ofNfcBfor the given tag.
+|android.nfc.tech.NfcB.getApplicationData()|Return the Application Data bytes f
+|android.nfc.tech.NfcB.getMaxTransceiveLength()|Return the maximum number of by
+|android.nfc.tech.NfcB.getProtocolInfo()|Return the Protocol Info bytes from AT
+|android.nfc.tech.NfcB.transceive(byte[])|Send raw NFC-B commands to the tag an
+
+*android.nfc.tech.NfcB_Description*
+
+Provides access to NFC-B (ISO 14443-3B) properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.NfcB|) object using (|android.nfc.tech.NfcB|) . 
+The primary NFC-B I/O operation is (|android.nfc.tech.NfcB|) . Applications 
+must implement their own protocol stack on top of (|android.nfc.tech.NfcB|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.NfcB.EXTRA_APPDATA*
+
+
+
+
+*java.lang.String_android.nfc.tech.NfcB.EXTRA_PROTINFO*
+
+
+
+
+
+*android.nfc.tech.NfcB(Tag)*
+
+public NfcB(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.NfcB.get(Tag)*
+
+public static |android.nfc.tech.NfcB| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NfcB|) for the given tag. Returns null if 
+(|android.nfc.tech.NfcB|) was not enumerated in (|android.nfc.Tag|) . This 
+indicates the tag does not support NFC-B. Does not cause any RF activity and 
+does not block. 
+
+
+    tag - an NFC-B compatible tag 
+
+    Returns: 
+
+*android.nfc.tech.NfcB.getApplicationData()*
+
+public byte[] getApplicationData()
+
+Return the Application Data bytes from ATQB/SENSB_RES at tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: Application Data bytes from ATQB/SENSB_RES bytes 
+
+*android.nfc.tech.NfcB.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.NfcB|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.NfcB.getProtocolInfo()*
+
+public byte[] getProtocolInfo()
+
+Return the Protocol Info bytes from ATQB/SENSB_RES at tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: Protocol Info bytes from ATQB/SENSB_RES bytes 
+
+*android.nfc.tech.NfcB.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NFC-B commands to the tag and receive the response. 
+
+Applications must not append the EoD (CRC) to the payload, it will be 
+automatically calculated. Applications must not send commands that manage the 
+polling loop and initialization (SENSB_REQ, SLOT_MARKER etc). 
+
+Use (|android.nfc.tech.NfcB|) to retrieve the maximum number of bytes that can 
+be sent with (|android.nfc.tech.NfcB|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NfcB|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    data - bytes to send 
+
+    Returns: bytes received in response 
+
+

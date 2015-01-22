@@ -1,0 +1,54 @@
+*android.nfc.NfcAdapter.CreateNdefMessageCallback* *NfcAdapter.CreateNdefMessageCallback* 
+
+public static interface interface NfcAdapter.CreateNdefMessageCallback
+
+
+|android.nfc.NfcAdapter.CreateNdefMessageCallback_Description|
+|android.nfc.NfcAdapter.CreateNdefMessageCallback_Fields|
+|android.nfc.NfcAdapter.CreateNdefMessageCallback_Constructors|
+|android.nfc.NfcAdapter.CreateNdefMessageCallback_Methods|
+
+================================================================================
+
+*android.nfc.NfcAdapter.CreateNdefMessageCallback_Methods*
+|android.nfc.NfcAdapter.CreateNdefMessageCallback.createNdefMessage(NfcEvent)|C
+
+*android.nfc.NfcAdapter.CreateNdefMessageCallback_Description*
+
+A callback to be invoked when another NFC device capable of NDEF push (Android 
+Beam) is within range. Implement this interface and pass it to 
+setNdefPushMessageCallback()(|android.nfc.NfcAdapter|) in order to create an 
+(|android.nfc.NdefMessage|) at the moment that another device is within range 
+for NFC. Using this callback allows you to create a message with data that 
+might vary based on the content currently visible to the user. Alternatively, 
+you can call 
+setNdefPushMessage()(|android.nfc.NfcAdapter.CreateNdefMessageCallback|) if the 
+(|android.nfc.NdefMessage|) always contains the same data. 
+
+
+
+*android.nfc.NfcAdapter.CreateNdefMessageCallback.createNdefMessage(NfcEvent)*
+
+public |android.nfc.NdefMessage| createNdefMessage(android.nfc.NfcEvent event)
+
+Called to provide a (|android.nfc.NdefMessage|) to push. 
+
+This callback is usually made on a binder thread (not the UI thread). 
+
+Called when this device is in range of another device that might support NDEF 
+push. It allows the application to create the NDEF message only when it is 
+required. 
+
+NDEF push cannot occur until this method returns, so do not block for too long. 
+
+The Android operating system will usually show a system UI on top of your 
+activity during this time, so do not try to request input from the user to 
+complete the callback, or provide custom NDEF push UI. The user probably will 
+not see it. 
+
+
+    event - {@link NfcEvent} with the {@link NfcEvent#nfcAdapter} field set 
+
+    Returns: NDEF message to push, or null to not provide a message 
+
+

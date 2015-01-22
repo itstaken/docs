@@ -1,0 +1,263 @@
+*android.view.SurfaceView* *SurfaceView* Provides a dedicated drawing surface em
+
+public class SurfaceView
+  extends    |android.view.View|
+
+|android.view.SurfaceView_Description|
+|android.view.SurfaceView_Fields|
+|android.view.SurfaceView_Constructors|
+|android.view.SurfaceView_Methods|
+
+================================================================================
+
+*android.view.SurfaceView_Constructors*
+|android.view.SurfaceView(Context)|
+|android.view.SurfaceView(Context,AttributeSet)|
+|android.view.SurfaceView(Context,AttributeSet,int)|
+
+*android.view.SurfaceView_Methods*
+|android.view.SurfaceView.dispatchDraw(Canvas)|
+|android.view.SurfaceView.draw(Canvas)|
+|android.view.SurfaceView.gatherTransparentRegion(Region)|
+|android.view.SurfaceView.getHolder()|Return the SurfaceHolder providing access
+|android.view.SurfaceView.isFixedSize()|Check to see if the surface has fixed s
+|android.view.SurfaceView.onAttachedToWindow()|
+|android.view.SurfaceView.onDetachedFromWindow()|
+|android.view.SurfaceView.onMeasure(int,int)|
+|android.view.SurfaceView.onWindowVisibilityChanged(int)|
+|android.view.SurfaceView.setFrame(int,int,int,int)|
+|android.view.SurfaceView.setSecure(boolean)|Control whether the surface view's
+|android.view.SurfaceView.setVisibility(int)|
+|android.view.SurfaceView.setWindowType(int)|Hack to allow special layering of 
+|android.view.SurfaceView.setZOrderMediaOverlay(boolean)|Control whether the su
+|android.view.SurfaceView.setZOrderOnTop(boolean)|Control whether the surface v
+
+*android.view.SurfaceView_Description*
+
+Provides a dedicated drawing surface embedded inside of a view hierarchy. You 
+can control the format of this surface and, if you like, its size; the 
+SurfaceView takes care of placing the surface at the correct location on the 
+screen 
+
+The surface is Z ordered so that it is behind the window holding its 
+SurfaceView; the SurfaceView punches a hole in its window to allow its surface 
+to be displayed. The view hierarchy will take care of correctly compositing 
+with the Surface any siblings of the SurfaceView that would normally appear on 
+top of it. This can be used to place overlays such as buttons on top of the 
+Surface, though note however that it can have an impact on performance since a 
+full alpha-blended composite will be performed each time the Surface changes. 
+
+The transparent region that makes the surface visible is based on the layout 
+positions in the view hierarchy. If the post-layout transform properties are 
+used to draw a sibling view on top of the SurfaceView, the view may not be 
+properly composited with the surface. 
+
+Access to the underlying surface is provided via the SurfaceHolder interface, 
+which can be retrieved by calling (|android.view.SurfaceView|) . 
+
+The Surface will be created for you while the SurfaceView's window is visible; 
+you should implement (|android.view.SurfaceHolder.Callback|) and 
+(|android.view.SurfaceHolder.Callback|) to discover when the Surface is created 
+and destroyed as the window is shown and hidden. 
+
+One of the purposes of this class is to provide a surface in which a secondary 
+thread can render into the screen. If you are going to use it this way, you 
+need to be aware of some threading semantics: 
+
+All SurfaceView and 
+SurfaceHolder.Callback(|android.view.SurfaceHolder.Callback|) methods will be 
+called from the thread running the SurfaceView's window (typically the main 
+thread of the application). They thus need to correctly synchronize with any 
+state that is also touched by the drawing thread. You must ensure that the 
+drawing thread only touches the underlying Surface while it is valid -- between 
+SurfaceHolder.Callback.surfaceCreated()(|android.view.SurfaceHolder.Callback|) 
+and 
+SurfaceHolder.Callback.surfaceDestroyed()(|android.view.SurfaceHolder.Callback|)
+. 
+
+
+
+*android.view.SurfaceView(Context)*
+
+public SurfaceView(android.content.Context context)
+
+
+
+
+*android.view.SurfaceView(Context,AttributeSet)*
+
+public SurfaceView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.view.SurfaceView(Context,AttributeSet,int)*
+
+public SurfaceView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.view.SurfaceView.dispatchDraw(Canvas)*
+
+protected void dispatchDraw(Canvas canvas)
+
+
+
+
+
+*android.view.SurfaceView.draw(Canvas)*
+
+public void draw(Canvas canvas)
+
+
+
+
+
+*android.view.SurfaceView.gatherTransparentRegion(Region)*
+
+public boolean gatherTransparentRegion(Region region)
+
+
+
+
+
+*android.view.SurfaceView.getHolder()*
+
+public |android.view.SurfaceHolder| getHolder()
+
+Return the SurfaceHolder providing access and control over this SurfaceView's 
+underlying surface. 
+
+
+
+    Returns: SurfaceHolder The holder of the surface. 
+
+*android.view.SurfaceView.isFixedSize()*
+
+public boolean isFixedSize()
+
+Check to see if the surface has fixed size dimensions or if the surface's 
+dimensions are dimensions are dependent on its current layout. 
+
+
+
+    Returns: true if the surface has dimensions that are fixed in size 
+
+*android.view.SurfaceView.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.view.SurfaceView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.view.SurfaceView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.view.SurfaceView.onWindowVisibilityChanged(int)*
+
+protected void onWindowVisibilityChanged(int visibility)
+
+
+
+
+
+*android.view.SurfaceView.setFrame(int,int,int,int)*
+
+protected boolean setFrame(
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.view.SurfaceView.setSecure(boolean)*
+
+public void setSecure(boolean isSecure)
+
+Control whether the surface view's content should be treated as secure, 
+preventing it from appearing in screenshots or from being viewed on non-secure 
+displays. 
+
+Note that this must be set before the surface view's containing window is 
+attached to the window manager. 
+
+See (|android.view.Display|) for details. 
+
+
+    isSecure - True if the surface view is secure. 
+
+*android.view.SurfaceView.setVisibility(int)*
+
+public void setVisibility(int visibility)
+
+
+
+
+
+*android.view.SurfaceView.setWindowType(int)*
+
+public void setWindowType(int type)
+
+Hack to allow special layering of windows. The type is one of the types in 
+WindowManager.LayoutParams. This is a hack so: 
+
+
+
+*android.view.SurfaceView.setZOrderMediaOverlay(boolean)*
+
+public void setZOrderMediaOverlay(boolean isMediaOverlay)
+
+Control whether the surface view's surface is placed on top of another regular 
+surface view in the window (but still behind the window itself). This is 
+typically used to place overlays on top of an underlying media surface view. 
+
+Note that this must be set before the surface view's containing window is 
+attached to the window manager. 
+
+Calling this overrides any previous call to (|android.view.SurfaceView|) . 
+
+
+
+*android.view.SurfaceView.setZOrderOnTop(boolean)*
+
+public void setZOrderOnTop(boolean onTop)
+
+Control whether the surface view's surface is placed on top of its window. 
+Normally it is placed behind the window, to allow it to (for the most part) 
+appear to composite with the views in the hierarchy. By setting this, you cause 
+it to be placed above the window. This means that none of the contents of the 
+window this SurfaceView is in will be visible on top of its surface. 
+
+Note that this must be set before the surface view's containing window is 
+attached to the window manager. 
+
+Calling this overrides any previous call to (|android.view.SurfaceView|) . 
+
+
+
+

@@ -1,0 +1,168 @@
+*android.provider.ContactsContract.QuickContact* *ContactsContract.QuickContact* 
+
+public static final class ContactsContract.QuickContact
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.QuickContact_Description|
+|android.provider.ContactsContract.QuickContact_Fields|
+|android.provider.ContactsContract.QuickContact_Constructors|
+|android.provider.ContactsContract.QuickContact_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.QuickContact_Fields*
+|java.lang.String_android.provider.ContactsContract.QuickContact.ACTION_QUICK_CONTACT|
+|java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_EXCLUDE_MIMES|
+|java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_MODE|
+|java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_TARGET_RECT|
+|int_android.provider.ContactsContract.QuickContact.MODE_LARGE|
+|int_android.provider.ContactsContract.QuickContact.MODE_MEDIUM|
+|int_android.provider.ContactsContract.QuickContact.MODE_SMALL|
+
+*android.provider.ContactsContract.QuickContact_Constructors*
+|android.provider.ContactsContract.QuickContact()|
+
+*android.provider.ContactsContract.QuickContact_Methods*
+|android.provider.ContactsContract.QuickContact.composeQuickContactsIntent(Context,Rect,Uri,int,String[])|
+|android.provider.ContactsContract.QuickContact.composeQuickContactsIntent(Context,View,Uri,int,String[])|
+|android.provider.ContactsContract.QuickContact.showQuickContact(Context,Rect,Uri,int,String[])|
+|android.provider.ContactsContract.QuickContact.showQuickContact(Context,View,Uri,int,String[])|
+
+*android.provider.ContactsContract.QuickContact_Description*
+
+Helper methods to display QuickContact dialogs that allow users to pivot on a 
+specific (|android.provider.Contacts|) entry. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.QuickContact.ACTION_QUICK_CONTACT*
+
+Action used to trigger person pivot dialog. 
+
+
+*java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_EXCLUDE_MIMES*
+
+Extra used to indicate a list of specific MIME-types to exclude and not 
+display. Stored as a (|java.lang.String|) array. 
+
+
+*java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_MODE*
+
+Extra used to specify size of pivot dialog. 
+
+
+*java.lang.String_android.provider.ContactsContract.QuickContact.EXTRA_TARGET_RECT*
+
+Extra used to specify pivot dialog location in screen coordinates. 
+
+
+*int_android.provider.ContactsContract.QuickContact.MODE_LARGE*
+
+Large QuickContact mode, includes actions and larger, card-like summary of the 
+(|android.provider.Contacts|) entry being shown. This may include detailed 
+information, such as a photo. 
+
+
+*int_android.provider.ContactsContract.QuickContact.MODE_MEDIUM*
+
+Medium QuickContact mode, includes actions and light summary describing the 
+(|android.provider.Contacts|) entry being shown. This may include social status 
+and presence details. 
+
+
+*int_android.provider.ContactsContract.QuickContact.MODE_SMALL*
+
+Small QuickContact mode, usually presented with minimal actions. 
+
+
+
+*android.provider.ContactsContract.QuickContact()*
+
+public ContactsContract.QuickContact()
+
+
+
+
+*android.provider.ContactsContract.QuickContact.composeQuickContactsIntent(Context,Rect,Uri,int,String[])*
+
+public static |android.content.Intent| composeQuickContactsIntent(
+  android.content.Context context,
+  Rect target,
+  android.net.Uri lookupUri,
+  int mode,
+  java.lang.String[] excludeMimes)
+
+Constructs the QuickContacts intent. 
+
+
+
+*android.provider.ContactsContract.QuickContact.composeQuickContactsIntent(Context,View,Uri,int,String[])*
+
+public static |android.content.Intent| composeQuickContactsIntent(
+  android.content.Context context,
+  android.view.View target,
+  android.net.Uri lookupUri,
+  int mode,
+  java.lang.String[] excludeMimes)
+
+Constructs the QuickContacts intent with a view's rect. 
+
+
+
+*android.provider.ContactsContract.QuickContact.showQuickContact(Context,Rect,Uri,int,String[])*
+
+public static void showQuickContact(
+  android.content.Context context,
+  Rect target,
+  android.net.Uri lookupUri,
+  int mode,
+  java.lang.String[] excludeMimes)
+
+Trigger a dialog that lists the various methods of interacting with the 
+requested (|android.provider.Contacts|) entry. This may be based on available 
+(|android.provider.ContactsContract.Data|) rows under that contact, and may 
+also include social status and presence details. 
+
+
+    context - The parent {@link Context} that may be used as the parent for this dialog. 
+    target - Specific {@link Rect} that this dialog should be centered around, in screen 
+       coordinates. In particular, if the dialog has a "callout" arrow, it will 
+       be pointed and centered around this {@link Rect}. If you are running at 
+       a non-native density, you need to manually adjust using {@link 
+       DisplayMetrics#density} before calling. 
+    lookupUri - A {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style {@link Uri} that 
+       describes a specific contact to feature in this dialog. 
+    mode - Any of {@link #MODE_SMALL}, {@link #MODE_MEDIUM}, or {@link #MODE_LARGE}, 
+       indicating the desired dialog size, when supported. 
+    excludeMimes - Optional list of {@link Data#MIMETYPE} MIME-types to exclude when showing this 
+       dialog. For example, when already viewing the contact details card, this 
+       can be used to omit the details entry from the dialog. 
+
+*android.provider.ContactsContract.QuickContact.showQuickContact(Context,View,Uri,int,String[])*
+
+public static void showQuickContact(
+  android.content.Context context,
+  android.view.View target,
+  android.net.Uri lookupUri,
+  int mode,
+  java.lang.String[] excludeMimes)
+
+Trigger a dialog that lists the various methods of interacting with the 
+requested (|android.provider.Contacts|) entry. This may be based on available 
+(|android.provider.ContactsContract.Data|) rows under that contact, and may 
+also include social status and presence details. 
+
+
+    context - The parent {@link Context} that may be used as the parent for this dialog. 
+    target - Specific {@link View} from your layout that this dialog should be centered 
+       around. In particular, if the dialog has a "callout" arrow, it will be 
+       pointed and centered around this {@link View}. 
+    lookupUri - A {@link ContactsContract.Contacts#CONTENT_LOOKUP_URI} style {@link Uri} that 
+       describes a specific contact to feature in this dialog. 
+    mode - Any of {@link #MODE_SMALL}, {@link #MODE_MEDIUM}, or {@link #MODE_LARGE}, 
+       indicating the desired dialog size, when supported. 
+    excludeMimes - Optional list of {@link Data#MIMETYPE} MIME-types to exclude when showing this 
+       dialog. For example, when already viewing the contact details card, this 
+       can be used to omit the details entry from the dialog. 
+
+

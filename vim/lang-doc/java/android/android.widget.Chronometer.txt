@@ -1,0 +1,201 @@
+*android.widget.Chronometer* *Chronometer* Class that implements a simple timer.
+
+public class Chronometer
+  extends    |android.widget.TextView|
+
+|android.widget.Chronometer_Description|
+|android.widget.Chronometer_Fields|
+|android.widget.Chronometer_Constructors|
+|android.widget.Chronometer_Methods|
+
+================================================================================
+
+*android.widget.Chronometer_Constructors*
+|android.widget.Chronometer(Context)|Initialize this Chronometer object.
+|android.widget.Chronometer(Context,AttributeSet)|Initialize with standard view
+|android.widget.Chronometer(Context,AttributeSet,int)|Initialize with standard 
+
+*android.widget.Chronometer_Methods*
+|android.widget.Chronometer.getBase()|Return the base time as set through#setBa
+|android.widget.Chronometer.getFormat()|Returns the current format string as se
+|android.widget.Chronometer.getOnChronometerTickListener()|
+|android.widget.Chronometer.onDetachedFromWindow()|
+|android.widget.Chronometer.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.Chronometer.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.Chronometer.onWindowVisibilityChanged(int)|
+|android.widget.Chronometer.setBase(long)|Set the time that the count-up timer 
+|android.widget.Chronometer.setFormat(String)|Sets the format string used for d
+|android.widget.Chronometer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener)|
+|android.widget.Chronometer.setStarted(boolean)|The same as calling#startor#sto
+|android.widget.Chronometer.start()|Start counting up.
+|android.widget.Chronometer.stop()|Stop counting up.
+
+*android.widget.Chronometer_Description*
+
+Class that implements a simple timer. 
+
+You can give it a start time in the (|android.os.SystemClock|) timebase, and it 
+counts up from that, or if you don't give it a base time, it will use the time 
+at which you call (|android.widget.Chronometer|) . By default it will display 
+the current timer value in the form "MM:SS" or "H:MM:SS", or you can use 
+(|android.widget.Chronometer|) to format the timer value into an arbitrary 
+string. 
+
+
+
+*android.widget.Chronometer(Context)*
+
+public Chronometer(android.content.Context context)
+
+Initialize this Chronometer object. Sets the base to the current time. 
+
+
+*android.widget.Chronometer(Context,AttributeSet)*
+
+public Chronometer(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Initialize with standard view layout information. Sets the base to the current 
+time. 
+
+
+*android.widget.Chronometer(Context,AttributeSet,int)*
+
+public Chronometer(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+Initialize with standard view layout information and style. Sets the base to 
+the current time. 
+
+
+*android.widget.Chronometer.getBase()*
+
+public long getBase()
+
+Return the base time as set through (|android.widget.Chronometer|) . 
+
+
+
+*android.widget.Chronometer.getFormat()*
+
+public |java.lang.String| getFormat()
+
+Returns the current format string as set through (|android.widget.Chronometer|) 
+. 
+
+
+
+*android.widget.Chronometer.getOnChronometerTickListener()*
+
+public |android.widget.Chronometer.OnChronometerTickListener| getOnChronometerTickListener()
+
+
+
+
+
+    Returns: The listener (may be null) that is listening for chronometer change events. 
+
+*android.widget.Chronometer.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.widget.Chronometer.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.Chronometer.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.Chronometer.onWindowVisibilityChanged(int)*
+
+protected void onWindowVisibilityChanged(int visibility)
+
+
+
+
+
+*android.widget.Chronometer.setBase(long)*
+
+public void setBase(long base)
+
+Set the time that the count-up timer is in reference to. 
+
+
+    base - Use the {@link SystemClock#elapsedRealtime} time base. 
+
+*android.widget.Chronometer.setFormat(String)*
+
+public void setFormat(java.lang.String format)
+
+Sets the format string used for display. The Chronometer will display this 
+string, with the first "%s" replaced by the current timer value in "MM:SS" or 
+"H:MM:SS" form. 
+
+If the format string is null, or if you never call setFormat(), the Chronometer 
+will simply display the timer value in "MM:SS" or "H:MM:SS" form. 
+
+
+    format - the format string. 
+
+*android.widget.Chronometer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener)*
+
+public void setOnChronometerTickListener(android.widget.Chronometer.OnChronometerTickListener listener)
+
+Sets the listener to be called when the chronometer changes. 
+
+
+    listener - The listener. 
+
+*android.widget.Chronometer.setStarted(boolean)*
+
+public void setStarted(boolean started)
+
+The same as calling (|android.widget.Chronometer|) or 
+(|android.widget.Chronometer|) . 
+
+
+
+*android.widget.Chronometer.start()*
+
+public void start()
+
+Start counting up. This does not affect the base as set from 
+(|android.widget.Chronometer|) , just the view display. 
+
+Chronometer works by regularly scheduling messages to the handler, even when 
+the Widget is not visible. To make sure resource leaks do not occur, the user 
+should make sure that each start() call has a reciprocal call to 
+(|android.widget.Chronometer|) . 
+
+
+
+*android.widget.Chronometer.stop()*
+
+public void stop()
+
+Stop counting up. This does not affect the base as set from 
+(|android.widget.Chronometer|) , just the view display. 
+
+This stops the messages to the handler, effectively releasing resources that 
+would be held as the chronometer is running, via (|android.widget.Chronometer|) 
+. 
+
+
+
+

@@ -1,0 +1,235 @@
+*android.widget.SimpleCursorTreeAdapter* *SimpleCursorTreeAdapter* An easy adapt
+
+public abstract class SimpleCursorTreeAdapter
+  extends    |android.widget.ResourceCursorTreeAdapter|
+
+|android.widget.SimpleCursorTreeAdapter_Description|
+|android.widget.SimpleCursorTreeAdapter_Fields|
+|android.widget.SimpleCursorTreeAdapter_Constructors|
+|android.widget.SimpleCursorTreeAdapter_Methods|
+
+================================================================================
+
+*android.widget.SimpleCursorTreeAdapter_Constructors*
+|android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,int,String[],int[],int,int,String[],int[])|
+|android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,int,String[],int[],int,String[],int[])|
+|android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,String[],int[],int,String[],int[])|
+
+*android.widget.SimpleCursorTreeAdapter_Methods*
+|android.widget.SimpleCursorTreeAdapter.bindChildView(View,Context,Cursor,boolean)|
+|android.widget.SimpleCursorTreeAdapter.bindGroupView(View,Context,Cursor,boolean)|
+|android.widget.SimpleCursorTreeAdapter.getViewBinder()|Returns theViewBinderus
+|android.widget.SimpleCursorTreeAdapter.setViewBinder(SimpleCursorTreeAdapter.ViewBinder)|
+|android.widget.SimpleCursorTreeAdapter.setViewImage(ImageView,String)|Called b
+|android.widget.SimpleCursorTreeAdapter.setViewText(TextView,String)|Called by 
+
+*android.widget.SimpleCursorTreeAdapter_Description*
+
+An easy adapter to map columns from a cursor to TextViews or ImageViews defined 
+in an XML file. You can specify which columns you want, which views you want to 
+display the columns, and the XML file that defines the appearance of these 
+views. Separate XML files for child and groups are possible. 
+
+Binding occurs in two phases. First, if a 
+(|android.widget.SimpleCursorTreeAdapter.ViewBinder|) is available, 
+(|android.widget.SimpleCursorTreeAdapter.ViewBinder|) is invoked. If the 
+returned value is true, binding has occurred. If the returned value is false 
+and the view to bind is a TextView, (|android.widget.SimpleCursorTreeAdapter|) 
+is invoked. If the returned value is false and the view to bind is an 
+ImageView, (|android.widget.SimpleCursorTreeAdapter|) is invoked. If no 
+appropriate binding can be found, an (|java.lang.IllegalStateException|) is 
+thrown. 
+
+
+
+*android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,int,String[],int[],int,int,String[],int[])*
+
+public SimpleCursorTreeAdapter(
+  android.content.Context context,
+  android.database.Cursor cursor,
+  int collapsedGroupLayout,
+  int expandedGroupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  int childLayout,
+  int lastChildLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor. 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleCursorTreeAdapter} is running 
+    cursor - The database cursor 
+    collapsedGroupLayout - The resource identifier of a layout file that defines the views for a collapsed 
+       group. The layout file should include at least those named views defined 
+       in groupTo. 
+    expandedGroupLayout - The resource identifier of a layout file that defines the views for an expanded 
+       group. The layout file should include at least those named views defined 
+       in groupTo. 
+    groupFrom - A list of column names that will be used to display the data for a group. 
+    groupTo - The group views (from the group layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+    childLayout - The resource identifier of a layout file that defines the views for a child 
+       (except the last). The layout file should include at least those named 
+       views defined in childTo. 
+    lastChildLayout - The resource identifier of a layout file that defines the views for the last 
+       child within a group. The layout file should include at least those 
+       named views defined in childTo. 
+    childFrom - A list of column names that will be used to display the data for a child. 
+    childTo - The child views (from the child layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+
+*android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,int,String[],int[],int,String[],int[])*
+
+public SimpleCursorTreeAdapter(
+  android.content.Context context,
+  android.database.Cursor cursor,
+  int collapsedGroupLayout,
+  int expandedGroupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  int childLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor. 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleCursorTreeAdapter} is running 
+    cursor - The database cursor 
+    collapsedGroupLayout - The resource identifier of a layout file that defines the views for a collapsed 
+       group. The layout file should include at least those named views defined 
+       in groupTo. 
+    expandedGroupLayout - The resource identifier of a layout file that defines the views for an expanded 
+       group. The layout file should include at least those named views defined 
+       in groupTo. 
+    groupFrom - A list of column names that will be used to display the data for a group. 
+    groupTo - The group views (from the group layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+    childLayout - The resource identifier of a layout file that defines the views for a child. 
+       The layout file should include at least those named views defined in 
+       childTo. 
+    childFrom - A list of column names that will be used to display the data for a child. 
+    childTo - The child views (from the child layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+
+*android.widget.SimpleCursorTreeAdapter(Context,Cursor,int,String[],int[],int,String[],int[])*
+
+public SimpleCursorTreeAdapter(
+  android.content.Context context,
+  android.database.Cursor cursor,
+  int groupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  int childLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor. 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleCursorTreeAdapter} is running 
+    cursor - The database cursor 
+    groupLayout - The resource identifier of a layout file that defines the views for a group. 
+       The layout file should include at least those named views defined in 
+       groupTo. 
+    groupFrom - A list of column names that will be used to display the data for a group. 
+    groupTo - The group views (from the group layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+    childLayout - The resource identifier of a layout file that defines the views for a child. 
+       The layout file should include at least those named views defined in 
+       childTo. 
+    childFrom - A list of column names that will be used to display the data for a child. 
+    childTo - The child views (from the child layouts) that should display column in the 
+       "from" parameter. These should all be TextViews or ImageViews. The first 
+       N views in this list are given the values of the first N columns in the 
+       from parameter. 
+
+*android.widget.SimpleCursorTreeAdapter.bindChildView(View,Context,Cursor,boolean)*
+
+protected void bindChildView(
+  android.view.View view,
+  android.content.Context context,
+  android.database.Cursor cursor,
+  boolean isLastChild)
+
+
+
+
+
+*android.widget.SimpleCursorTreeAdapter.bindGroupView(View,Context,Cursor,boolean)*
+
+protected void bindGroupView(
+  android.view.View view,
+  android.content.Context context,
+  android.database.Cursor cursor,
+  boolean isExpanded)
+
+
+
+
+
+*android.widget.SimpleCursorTreeAdapter.getViewBinder()*
+
+public |android.widget.SimpleCursorTreeAdapter.ViewBinder| getViewBinder()
+
+Returns the (|android.widget.SimpleCursorTreeAdapter.ViewBinder|) used to bind 
+data to views. 
+
+
+
+    Returns: a ViewBinder or null if the binder does not exist 
+
+*android.widget.SimpleCursorTreeAdapter.setViewBinder(SimpleCursorTreeAdapter.ViewBinder)*
+
+public void setViewBinder(android.widget.SimpleCursorTreeAdapter.ViewBinder viewBinder)
+
+Sets the binder used to bind data to views. 
+
+
+    viewBinder - the binder used to bind data to views, can be null to remove the existing 
+       binder 
+
+*android.widget.SimpleCursorTreeAdapter.setViewImage(ImageView,String)*
+
+protected void setViewImage(
+  android.widget.ImageView v,
+  java.lang.String value)
+
+Called by bindView() to set the image for an ImageView. By default, the value 
+will be treated as a Uri. Intended to be overridden by Adapters that need to 
+filter strings retrieved from the database. 
+
+
+    v - ImageView to receive an image 
+    value - the value retrieved from the cursor 
+
+*android.widget.SimpleCursorTreeAdapter.setViewText(TextView,String)*
+
+public void setViewText(
+  android.widget.TextView v,
+  java.lang.String text)
+
+Called by bindView() to set the text for a TextView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to a 
+TextView. 
+
+Intended to be overridden by Adapters that need to filter strings retrieved 
+from the database. 
+
+
+    v - TextView to receive text 
+    text - the text to be set for the TextView 
+
+

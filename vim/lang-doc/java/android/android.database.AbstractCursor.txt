@@ -1,0 +1,567 @@
+*android.database.AbstractCursor* *AbstractCursor* This is an abstract cursor cl
+
+public abstract class AbstractCursor
+  extends    |java.lang.Object|
+  implements |android.database.CrossProcessCursor|
+
+|android.database.AbstractCursor_Description|
+|android.database.AbstractCursor_Fields|
+|android.database.AbstractCursor_Constructors|
+|android.database.AbstractCursor_Methods|
+
+================================================================================
+
+*android.database.AbstractCursor_Fields*
+|boolean_android.database.AbstractCursor.mClosed|
+|android.content.ContentResolver_android.database.AbstractCursor.mContentResolver|
+|java.lang.Long_android.database.AbstractCursor.mCurrentRowID|
+|int_android.database.AbstractCursor.mPos|
+|int_android.database.AbstractCursor.mRowIdColumnIndex|
+|java.util.HashMap<java.lang.Long, java.util.Map<java.lang.String, java.lang.Object>>_android.database.AbstractCursor.mUpdatedRows|
+
+*android.database.AbstractCursor_Constructors*
+|android.database.AbstractCursor()|
+
+*android.database.AbstractCursor_Methods*
+|android.database.AbstractCursor.checkPosition()|This function throws CursorInd
+|android.database.AbstractCursor.close()|
+|android.database.AbstractCursor.copyStringToBuffer(int,CharArrayBuffer)|
+|android.database.AbstractCursor.deactivate()|
+|android.database.AbstractCursor.fillWindow(int,CursorWindow)|
+|android.database.AbstractCursor.finalize()|
+|android.database.AbstractCursor.getBlob(int)|
+|android.database.AbstractCursor.getColumnCount()|
+|android.database.AbstractCursor.getColumnIndex(String)|
+|android.database.AbstractCursor.getColumnIndexOrThrow(String)|
+|android.database.AbstractCursor.getColumnName(int)|
+|android.database.AbstractCursor.getColumnNames()|
+|android.database.AbstractCursor.getCount()|
+|android.database.AbstractCursor.getDouble(int)|
+|android.database.AbstractCursor.getExtras()|
+|android.database.AbstractCursor.getFloat(int)|
+|android.database.AbstractCursor.getInt(int)|
+|android.database.AbstractCursor.getLong(int)|
+|android.database.AbstractCursor.getNotificationUri()|
+|android.database.AbstractCursor.getPosition()|
+|android.database.AbstractCursor.getShort(int)|
+|android.database.AbstractCursor.getString(int)|
+|android.database.AbstractCursor.getType(int)|
+|android.database.AbstractCursor.getUpdatedField(int)|
+|android.database.AbstractCursor.getWantsAllOnMoveCalls()|
+|android.database.AbstractCursor.getWindow()|If the cursor is backed by aCursor
+|android.database.AbstractCursor.isAfterLast()|
+|android.database.AbstractCursor.isBeforeFirst()|
+|android.database.AbstractCursor.isClosed()|
+|android.database.AbstractCursor.isFieldUpdated(int)|
+|android.database.AbstractCursor.isFirst()|
+|android.database.AbstractCursor.isLast()|
+|android.database.AbstractCursor.isNull(int)|
+|android.database.AbstractCursor.move(int)|
+|android.database.AbstractCursor.moveToFirst()|
+|android.database.AbstractCursor.moveToLast()|
+|android.database.AbstractCursor.moveToNext()|
+|android.database.AbstractCursor.moveToPosition(int)|
+|android.database.AbstractCursor.moveToPrevious()|
+|android.database.AbstractCursor.onChange(boolean)|Subclasses must call this me
+|android.database.AbstractCursor.onDeactivateOrClose()|
+|android.database.AbstractCursor.onMove(int,int)|This function is called every 
+|android.database.AbstractCursor.registerContentObserver(ContentObserver)|
+|android.database.AbstractCursor.registerDataSetObserver(DataSetObserver)|
+|android.database.AbstractCursor.requery()|
+|android.database.AbstractCursor.respond(Bundle)|
+|android.database.AbstractCursor.setExtras(Bundle)|Sets aBundlethat will be ret
+|android.database.AbstractCursor.setNotificationUri(ContentResolver,Uri)|Specif
+|android.database.AbstractCursor.setNotificationUri(ContentResolver,Uri,int)|
+|android.database.AbstractCursor.unregisterContentObserver(ContentObserver)|
+|android.database.AbstractCursor.unregisterDataSetObserver(DataSetObserver)|
+
+*android.database.AbstractCursor_Description*
+
+This is an abstract cursor class that handles a lot of the common code that all 
+cursors need to deal with and is provided for convenience reasons. 
+
+
+
+*boolean_android.database.AbstractCursor.mClosed*
+
+
+
+
+*android.content.ContentResolver_android.database.AbstractCursor.mContentResolver*
+
+
+
+
+*java.lang.Long_android.database.AbstractCursor.mCurrentRowID*
+
+If (|android.database.AbstractCursor|) is not -1 this contains contains the 
+value of the column at (|android.database.AbstractCursor|) for the current row 
+this cursor is pointing at. 
+
+
+*int_android.database.AbstractCursor.mPos*
+
+
+
+
+*int_android.database.AbstractCursor.mRowIdColumnIndex*
+
+This must be set to the index of the row ID column by any subclass that wishes 
+to support updates. 
+
+
+*java.util.HashMap<java.lang.Long, java.util.Map<java.lang.String, java.lang.Object>>_android.database.AbstractCursor.mUpdatedRows*
+
+
+
+
+
+*android.database.AbstractCursor()*
+
+public AbstractCursor()
+
+
+
+
+*android.database.AbstractCursor.checkPosition()*
+
+protected void checkPosition()
+
+This function throws CursorIndexOutOfBoundsException if the cursor position is 
+out of bounds. Subclass implementations of the get functions should call this 
+before attempting to retrieve data. 
+
+
+
+*android.database.AbstractCursor.close()*
+
+public void close()
+
+
+
+
+
+*android.database.AbstractCursor.copyStringToBuffer(int,CharArrayBuffer)*
+
+public void copyStringToBuffer(
+  int columnIndex,
+  android.database.CharArrayBuffer buffer)
+
+
+
+
+
+*android.database.AbstractCursor.deactivate()*
+
+public void deactivate()
+
+
+
+
+
+*android.database.AbstractCursor.fillWindow(int,CursorWindow)*
+
+public void fillWindow(
+  int position,
+  android.database.CursorWindow window)
+
+
+
+
+
+*android.database.AbstractCursor.finalize()*
+
+protected void finalize()
+
+
+
+
+
+*android.database.AbstractCursor.getBlob(int)*
+
+public byte[] getBlob(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getColumnCount()*
+
+public int getColumnCount()
+
+
+
+
+
+*android.database.AbstractCursor.getColumnIndex(String)*
+
+public int getColumnIndex(java.lang.String columnName)
+
+
+
+
+
+*android.database.AbstractCursor.getColumnIndexOrThrow(String)*
+
+public int getColumnIndexOrThrow(java.lang.String columnName)
+
+
+
+
+
+*android.database.AbstractCursor.getColumnName(int)*
+
+public |java.lang.String| getColumnName(int columnIndex)
+
+
+
+
+
+*android.database.AbstractCursor.getColumnNames()*
+
+public abstract |java.lang.String|[] getColumnNames()
+
+
+
+
+
+*android.database.AbstractCursor.getCount()*
+
+public abstract int getCount()
+
+
+
+
+
+*android.database.AbstractCursor.getDouble(int)*
+
+public abstract double getDouble(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getExtras()*
+
+public |android.os.Bundle| getExtras()
+
+
+
+
+
+*android.database.AbstractCursor.getFloat(int)*
+
+public abstract float getFloat(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getInt(int)*
+
+public abstract int getInt(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getLong(int)*
+
+public abstract long getLong(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getNotificationUri()*
+
+public |android.net.Uri| getNotificationUri()
+
+
+
+
+
+*android.database.AbstractCursor.getPosition()*
+
+public final int getPosition()
+
+
+
+
+
+*android.database.AbstractCursor.getShort(int)*
+
+public abstract short getShort(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getString(int)*
+
+public abstract |java.lang.String| getString(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getType(int)*
+
+public int getType(int column)
+
+
+
+
+
+*android.database.AbstractCursor.getUpdatedField(int)*
+
+protected |java.lang.Object| getUpdatedField(int columnIndex)
+
+
+
+    Deprecated: Always returns null since Cursors do not support updating rows
+
+
+*android.database.AbstractCursor.getWantsAllOnMoveCalls()*
+
+public boolean getWantsAllOnMoveCalls()
+
+
+
+
+
+*android.database.AbstractCursor.getWindow()*
+
+public |android.database.CursorWindow| getWindow()
+
+If the cursor is backed by a (|android.database.CursorWindow|) , returns a 
+pre-filled window with the contents of the cursor, otherwise null. 
+
+
+
+    Returns: The pre-filled window that backs this cursor, or null if none. 
+
+*android.database.AbstractCursor.isAfterLast()*
+
+public final boolean isAfterLast()
+
+
+
+
+
+*android.database.AbstractCursor.isBeforeFirst()*
+
+public final boolean isBeforeFirst()
+
+
+
+
+
+*android.database.AbstractCursor.isClosed()*
+
+public boolean isClosed()
+
+
+
+
+
+*android.database.AbstractCursor.isFieldUpdated(int)*
+
+protected boolean isFieldUpdated(int columnIndex)
+
+
+
+    Deprecated: Always returns false since Cursors do not support updating rows
+
+
+*android.database.AbstractCursor.isFirst()*
+
+public final boolean isFirst()
+
+
+
+
+
+*android.database.AbstractCursor.isLast()*
+
+public final boolean isLast()
+
+
+
+
+
+*android.database.AbstractCursor.isNull(int)*
+
+public abstract boolean isNull(int column)
+
+
+
+
+
+*android.database.AbstractCursor.move(int)*
+
+public final boolean move(int offset)
+
+
+
+
+
+*android.database.AbstractCursor.moveToFirst()*
+
+public final boolean moveToFirst()
+
+
+
+
+
+*android.database.AbstractCursor.moveToLast()*
+
+public final boolean moveToLast()
+
+
+
+
+
+*android.database.AbstractCursor.moveToNext()*
+
+public final boolean moveToNext()
+
+
+
+
+
+*android.database.AbstractCursor.moveToPosition(int)*
+
+public final boolean moveToPosition(int position)
+
+
+
+
+
+*android.database.AbstractCursor.moveToPrevious()*
+
+public final boolean moveToPrevious()
+
+
+
+
+
+*android.database.AbstractCursor.onChange(boolean)*
+
+protected void onChange(boolean selfChange)
+
+Subclasses must call this method when they finish committing updates to notify 
+all observers. 
+
+
+    selfChange - 
+
+*android.database.AbstractCursor.onDeactivateOrClose()*
+
+protected void onDeactivateOrClose()
+
+
+
+
+
+*android.database.AbstractCursor.onMove(int,int)*
+
+public boolean onMove(
+  int oldPosition,
+  int newPosition)
+
+This function is called every time the cursor is successfully scrolled to a new 
+position, giving the subclass a chance to update any state it may have. If it 
+returns false the move function will also do so and the cursor will scroll to 
+the beforeFirst position. 
+
+
+    oldPosition - the position that we're moving from 
+    newPosition - the position that we're moving to 
+
+    Returns: true if the move is successful, false otherwise 
+
+*android.database.AbstractCursor.registerContentObserver(ContentObserver)*
+
+public void registerContentObserver(android.database.ContentObserver observer)
+
+
+
+
+
+*android.database.AbstractCursor.registerDataSetObserver(DataSetObserver)*
+
+public void registerDataSetObserver(android.database.DataSetObserver observer)
+
+
+
+
+
+*android.database.AbstractCursor.requery()*
+
+public boolean requery()
+
+
+
+
+
+*android.database.AbstractCursor.respond(Bundle)*
+
+public |android.os.Bundle| respond(android.os.Bundle extras)
+
+
+
+
+
+*android.database.AbstractCursor.setExtras(Bundle)*
+
+public void setExtras(android.os.Bundle extras)
+
+Sets a (|android.os.Bundle|) that will be returned by 
+(|android.database.AbstractCursor|) . null will be converted into 
+(|android.os.Bundle|) . 
+
+
+    extras - {@link Bundle} to set. 
+
+*android.database.AbstractCursor.setNotificationUri(ContentResolver,Uri)*
+
+public void setNotificationUri(
+  android.content.ContentResolver cr,
+  android.net.Uri notifyUri)
+
+Specifies a content URI to watch for changes. 
+
+
+    cr - The content resolver from the caller's context. 
+    notifyUri - The URI to watch for changes. This can be a specific row URI, or a base URI for 
+       a whole class of content. 
+
+*android.database.AbstractCursor.setNotificationUri(ContentResolver,Uri,int)*
+
+public void setNotificationUri(
+  android.content.ContentResolver cr,
+  android.net.Uri notifyUri,
+  int userHandle)
+
+
+
+
+
+*android.database.AbstractCursor.unregisterContentObserver(ContentObserver)*
+
+public void unregisterContentObserver(android.database.ContentObserver observer)
+
+
+
+
+
+*android.database.AbstractCursor.unregisterDataSetObserver(DataSetObserver)*
+
+public void unregisterDataSetObserver(android.database.DataSetObserver observer)
+
+
+
+
+
+

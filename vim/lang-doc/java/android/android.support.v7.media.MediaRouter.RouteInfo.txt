@@ -1,0 +1,413 @@
+*android.support.v7.media.MediaRouter.RouteInfo* *MediaRouter.RouteInfo* Provide
+
+public static final class MediaRouter.RouteInfo
+  extends    |java.lang.Object|
+
+|android.support.v7.media.MediaRouter.RouteInfo_Description|
+|android.support.v7.media.MediaRouter.RouteInfo_Fields|
+|android.support.v7.media.MediaRouter.RouteInfo_Constructors|
+|android.support.v7.media.MediaRouter.RouteInfo_Methods|
+
+================================================================================
+
+*android.support.v7.media.MediaRouter.RouteInfo_Fields*
+|int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_TYPE_LOCAL|
+|int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_TYPE_REMOTE|
+|int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_VOLUME_FIXED|
+|int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_VOLUME_VARIABLE|
+
+*android.support.v7.media.MediaRouter.RouteInfo_Methods*
+|android.support.v7.media.MediaRouter.RouteInfo.getControlFilters()|Gets a list
+|android.support.v7.media.MediaRouter.RouteInfo.getDescription()|Gets the user-
+|android.support.v7.media.MediaRouter.RouteInfo.getExtras()|Gets a collection o
+|android.support.v7.media.MediaRouter.RouteInfo.getId()|Gets the unique id of t
+|android.support.v7.media.MediaRouter.RouteInfo.getName()|Gets the user-visible
+|android.support.v7.media.MediaRouter.RouteInfo.getPlaybackStream()|Gets the au
+|android.support.v7.media.MediaRouter.RouteInfo.getPlaybackType()|Gets the type
+|android.support.v7.media.MediaRouter.RouteInfo.getPresentationDisplay()|Gets t
+|android.support.v7.media.MediaRouter.RouteInfo.getProvider()|Gets information 
+|android.support.v7.media.MediaRouter.RouteInfo.getVolume()|Gets the current vo
+|android.support.v7.media.MediaRouter.RouteInfo.getVolumeHandling()|Gets inform
+|android.support.v7.media.MediaRouter.RouteInfo.getVolumeMax()|Gets the maximum
+|android.support.v7.media.MediaRouter.RouteInfo.isConnecting()|Returns true if 
+|android.support.v7.media.MediaRouter.RouteInfo.isDefault()|Returns true if thi
+|android.support.v7.media.MediaRouter.RouteInfo.isEnabled()|Returns true if thi
+|android.support.v7.media.MediaRouter.RouteInfo.isSelected()|Returns true if th
+|android.support.v7.media.MediaRouter.RouteInfo.matchesSelector(MediaRouteSelector)|
+|android.support.v7.media.MediaRouter.RouteInfo.requestSetVolume(int)|Requests 
+|android.support.v7.media.MediaRouter.RouteInfo.requestUpdateVolume(int)|Reques
+|android.support.v7.media.MediaRouter.RouteInfo.select()|Selects this media rou
+|android.support.v7.media.MediaRouter.RouteInfo.sendControlRequest(Intent,MediaRouter.ControlRequestCallback)|
+|android.support.v7.media.MediaRouter.RouteInfo.supportsControlAction(String,String)|
+|android.support.v7.media.MediaRouter.RouteInfo.supportsControlCategory(String)|
+|android.support.v7.media.MediaRouter.RouteInfo.supportsControlRequest(Intent)|
+|android.support.v7.media.MediaRouter.RouteInfo.toString()|
+
+*android.support.v7.media.MediaRouter.RouteInfo_Description*
+
+Provides information about a media route. 
+
+Each media route has a list of media 
+control(|android.support.v7.media.MediaControlIntent|) intent 
+filters(|android.support.v7.media.MediaRouter.RouteInfo|) that describe the 
+capabilities of the route and the manner in which it is used and controlled. 
+
+
+
+*int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_TYPE_LOCAL*
+
+The default playback type, "local", indicating the presentation of the media is 
+happening on the same device (e.g. a phone, a tablet) as where it is controlled 
+from. 
+
+
+*int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_TYPE_REMOTE*
+
+A playback type indicating the presentation of the media is happening on a 
+different device (i.e. the remote device) than where it is controlled from. 
+
+
+*int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_VOLUME_FIXED*
+
+Playback information indicating the playback volume is fixed, i.e. it cannot be 
+controlled from this object. An example of fixed playback volume is a remote 
+player, playing over HDMI where the user prefers to control the volume on the 
+HDMI sink, rather than attenuate at the source. 
+
+
+*int_android.support.v7.media.MediaRouter.RouteInfo.PLAYBACK_VOLUME_VARIABLE*
+
+Playback information indicating the playback volume is variable and can be 
+controlled from this object. 
+
+
+
+*android.support.v7.media.MediaRouter.RouteInfo.getControlFilters()*
+
+public |java.util.List|<IntentFilter> getControlFilters()
+
+Gets a list of media control 
+intent(|android.support.v7.media.MediaControlIntent|) filters that describe the 
+capabilities of this route and the media control actions that it supports. 
+
+
+
+    Returns: A list of intent filters that specifies the media control intents that this 
+             route supports. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getDescription()*
+
+public |java.lang.String| getDescription()
+
+Gets the user-visible description of the route. 
+
+The route description describes the kind of destination represented by the 
+route. It may be a user-supplied string, a model number or brand of device. 
+
+
+
+    Returns: The description of the route, or null if none. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getExtras()*
+
+public Bundle getExtras()
+
+Gets a collection of extra properties about this route that were supplied by 
+its media route provider, or null if none. 
+
+
+
+*android.support.v7.media.MediaRouter.RouteInfo.getId()*
+
+public |java.lang.String| getId()
+
+Gets the unique id of the route. 
+
+The route unique id functions as a stable identifier by which the route is 
+known. For example, an application can use this id as a token to remember the 
+selected route across restarts or to communicate its identity to a service. 
+
+
+
+    Returns: The unique id of the route, never null. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getName()*
+
+public |java.lang.String| getName()
+
+Gets the user-visible name of the route. 
+
+The route name identifies the destination represented by the route. It may be a 
+user-supplied name, an alias, or device serial number. 
+
+
+
+    Returns: The user-visible name of a media route. This is the string presented to users 
+             who may select this as the active route. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getPlaybackStream()*
+
+public int getPlaybackStream()
+
+Gets the audio stream over which the playback associated with this route is 
+performed. 
+
+
+
+    Returns: The stream over which the playback associated with this route is performed. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getPlaybackType()*
+
+public int getPlaybackType()
+
+Gets the type of playback associated with this route. 
+
+
+
+    Returns: The type of playback associated with this route: {@link #PLAYBACK_TYPE_LOCAL} 
+             or {@link #PLAYBACK_TYPE_REMOTE}. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getPresentationDisplay()*
+
+public Display getPresentationDisplay()
+
+Gets the (|Display|) that should be used by the application to show a 
+(|android.app.Presentation|) on an external display when this route is 
+selected. Depending on the route, this may only be valid if the route is 
+currently selected. 
+
+The preferred presentation display may change independently of the route being 
+selected or unselected. For example, the presentation display of the default 
+system route may change when an external HDMI display is connected or 
+disconnected even though the route itself has not changed. 
+
+This method may return null if there is no external display associated with the 
+route or if the display is not ready to show UI yet. 
+
+The application should listen for changes to the presentation display using the 
+(|android.support.v7.media.MediaRouter.Callback|) callback and show or dismiss 
+its (|android.app.Presentation|) accordingly when the display becomes available 
+or is removed. 
+
+This method only makes sense for live 
+video(|android.support.v7.media.MediaControlIntent|) routes. 
+
+
+
+    Returns: The preferred presentation display to use when this route is selected or null 
+             if none. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getProvider()*
+
+public |android.support.v7.media.MediaRouter.ProviderInfo| getProvider()
+
+Gets information about the provider of this media route. 
+
+
+
+*android.support.v7.media.MediaRouter.RouteInfo.getVolume()*
+
+public int getVolume()
+
+Gets the current volume for this route. Depending on the route, this may only 
+be valid if the route is currently selected. 
+
+
+
+    Returns: The volume at which the playback associated with this route is performed. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getVolumeHandling()*
+
+public int getVolumeHandling()
+
+Gets information about how volume is handled on the route. 
+
+
+
+    Returns: How volume is handled on the route: {@link #PLAYBACK_VOLUME_FIXED} or {@link 
+             #PLAYBACK_VOLUME_VARIABLE}. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.getVolumeMax()*
+
+public int getVolumeMax()
+
+Gets the maximum volume at which the playback associated with this route is 
+performed. 
+
+
+
+    Returns: The maximum volume at which the playback associated with this route is 
+             performed. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.isConnecting()*
+
+public boolean isConnecting()
+
+Returns true if the route is in the process of connecting and is not yet ready 
+for use. 
+
+
+
+    Returns: True if this route is in the process of connecting. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.isDefault()*
+
+public boolean isDefault()
+
+Returns true if this route is the default route. 
+
+
+
+    Returns: True if this route is the default route. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.isEnabled()*
+
+public boolean isEnabled()
+
+Returns true if this route is enabled and may be selected. 
+
+
+
+    Returns: True if this route is enabled. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.isSelected()*
+
+public boolean isSelected()
+
+Returns true if this route is currently selected. 
+
+
+
+    Returns: True if this route is currently selected. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.matchesSelector(MediaRouteSelector)*
+
+public boolean matchesSelector(android.support.v7.media.MediaRouteSelector selector)
+
+Returns true if the route supports at least one of the capabilities described 
+by a media route selector. 
+
+
+    selector - The selector that specifies the capabilities to check. 
+
+    Returns: True if the route supports at least one of the capabilities described in the 
+             media route selector. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.requestSetVolume(int)*
+
+public void requestSetVolume(int volume)
+
+Requests a volume change for this route asynchronously. 
+
+This function may only be called on a selected route. It will have no effect if 
+the route is currently unselected. 
+
+
+    volume - The new volume value between 0 and {@link #getVolumeMax}. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.requestUpdateVolume(int)*
+
+public void requestUpdateVolume(int delta)
+
+Requests an incremental volume update for this route asynchronously. 
+
+This function may only be called on a selected route. It will have no effect if 
+the route is currently unselected. 
+
+
+    delta - The delta to add to the current volume. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.select()*
+
+public void select()
+
+Selects this media route. 
+
+
+
+*android.support.v7.media.MediaRouter.RouteInfo.sendControlRequest(Intent,MediaRouter.ControlRequestCallback)*
+
+public void sendControlRequest(
+  Intent intent,
+  android.support.v7.media.MediaRouter.ControlRequestCallback callback)
+
+Sends a media control(|android.support.v7.media.MediaControlIntent|) request to 
+be performed asynchronously by the route's destination. 
+
+Media control requests are used to request the route to perform actions such as 
+starting remote playback of a media item. 
+
+This function may only be called on a selected route. Control requests sent to 
+unselected routes will fail. 
+
+
+    intent - A {@link MediaControlIntent media control intent}. 
+    callback - A {@link ControlRequestCallback} to invoke with the result of the request, or 
+       null if no result is required. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.supportsControlAction(String,String)*
+
+public boolean supportsControlAction(
+  java.lang.String category,
+  java.lang.String action)
+
+Returns true if the route supports the specified media 
+control(|android.support.v7.media.MediaControlIntent|) category and action. 
+
+Media control actions describe specific requests that an application can ask a 
+route to perform. 
+
+
+    category - A {@link MediaControlIntent media control} category such as {@link 
+       MediaControlIntent#CATEGORY_LIVE_AUDIO}, {@link 
+       MediaControlIntent#CATEGORY_LIVE_VIDEO}, {@link 
+       MediaControlIntent#CATEGORY_REMOTE_PLAYBACK}, or a provider-defined 
+       media control category. 
+    action - A {@link MediaControlIntent media control} action such as {@link 
+       MediaControlIntent#ACTION_PLAY}. 
+
+    Returns: True if the route supports the specified intent action. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.supportsControlCategory(String)*
+
+public boolean supportsControlCategory(java.lang.String category)
+
+Returns true if the route supports the specified media 
+control(|android.support.v7.media.MediaControlIntent|) category. 
+
+Media control categories describe the capabilities of this route such as 
+whether it supports live audio streaming or remote playback. 
+
+
+    category - A {@link MediaControlIntent media control} category such as {@link 
+       MediaControlIntent#CATEGORY_LIVE_AUDIO}, {@link 
+       MediaControlIntent#CATEGORY_LIVE_VIDEO}, {@link 
+       MediaControlIntent#CATEGORY_REMOTE_PLAYBACK}, or a provider-defined 
+       media control category. 
+
+    Returns: True if the route supports the specified intent category. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.supportsControlRequest(Intent)*
+
+public boolean supportsControlRequest(Intent intent)
+
+Returns true if the route supports the specified media 
+control(|android.support.v7.media.MediaControlIntent|) request. 
+
+Media control requests are used to request the route to perform actions such as 
+starting remote playback of a media item. 
+
+
+    intent - A {@link MediaControlIntent media control intent}. 
+
+    Returns: True if the route can handle the specified intent. 
+
+*android.support.v7.media.MediaRouter.RouteInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

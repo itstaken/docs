@@ -1,0 +1,80 @@
+*android.net.http.CertificateChainValidator* *CertificateChainValidator* Class r
+
+public class CertificateChainValidator
+  extends    |java.lang.Object|
+
+|android.net.http.CertificateChainValidator_Description|
+|android.net.http.CertificateChainValidator_Fields|
+|android.net.http.CertificateChainValidator_Constructors|
+|android.net.http.CertificateChainValidator_Methods|
+
+================================================================================
+
+*android.net.http.CertificateChainValidator_Methods*
+|android.net.http.CertificateChainValidator.doHandshakeAndValidateServerCertificates(HttpsConnection,SSLSocket,String)|
+|android.net.http.CertificateChainValidator.getInstance()|
+|android.net.http.CertificateChainValidator.handleTrustStorageUpdate()|Handles 
+|android.net.http.CertificateChainValidator.verifyServerCertificates(byte[][],String,String)|
+
+*android.net.http.CertificateChainValidator_Description*
+
+Class responsible for all server certificate validation functionality 
+
+
+
+*android.net.http.CertificateChainValidator.doHandshakeAndValidateServerCertificates(HttpsConnection,SSLSocket,String)*
+
+public |android.net.http.SslError| doHandshakeAndValidateServerCertificates(
+  android.net.http.HttpsConnection connection,
+  javax.net.ssl.SSLSocket sslSocket,
+  java.lang.String domain)
+  throws |java.io.IOException|
+         
+Performs the handshake and server certificates validation Notice a new chain 
+will be rebuilt by tracing the issuer and subject before calling 
+checkServerTrusted(). And if the last traced certificate is self issued and it 
+is expired, it will be dropped. 
+
+
+    sslSocket - The secure connection socket 
+    domain - The website domain 
+
+    Returns: An SSL error object if there is an error and null otherwise 
+
+*android.net.http.CertificateChainValidator.getInstance()*
+
+public static |android.net.http.CertificateChainValidator| getInstance()
+
+
+
+
+
+    Returns: The singleton instance of the certificates chain validator 
+
+*android.net.http.CertificateChainValidator.handleTrustStorageUpdate()*
+
+public static void handleTrustStorageUpdate()
+
+Handles updates to credential storage. 
+
+
+
+*android.net.http.CertificateChainValidator.verifyServerCertificates(byte[][],String,String)*
+
+public static |android.net.http.SslError| verifyServerCertificates(
+  byte[][] certChain,
+  java.lang.String domain,
+  java.lang.String authType)
+  throws |java.io.IOException|
+         
+Similar to doHandshakeAndValidateServerCertificates but exposed to JNI for use 
+by Chromium HTTPS stack to validate the cert chain. 
+
+
+    certChain - The bytes for certificates in ASN.1 DER encoded certificates format. 
+    domain - The full website hostname and domain 
+    authType - The authentication type for the cert chain 
+
+    Returns: An SSL error object if there is an error and null otherwise 
+
+

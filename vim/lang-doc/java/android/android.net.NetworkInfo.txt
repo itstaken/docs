@@ -1,0 +1,336 @@
+*android.net.NetworkInfo* *NetworkInfo* Describes the status of a network interf
+
+public class NetworkInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.net.NetworkInfo_Description|
+|android.net.NetworkInfo_Fields|
+|android.net.NetworkInfo_Constructors|
+|android.net.NetworkInfo_Methods|
+
+================================================================================
+
+*android.net.NetworkInfo_Fields*
+|android.os.Parcelable.Creator<android.net.NetworkInfo>_android.net.NetworkInfo.CREATOR|
+
+*android.net.NetworkInfo_Constructors*
+|android.net.NetworkInfo(int)|
+|android.net.NetworkInfo(int,int,String,String)|
+|android.net.NetworkInfo(NetworkInfo)|
+
+*android.net.NetworkInfo_Methods*
+|android.net.NetworkInfo.describeContents()|Implement the Parcelable interface
+|android.net.NetworkInfo.getDetailedState()|Reports the current fine-grained st
+|android.net.NetworkInfo.getExtraInfo()|Report the extra information about the 
+|android.net.NetworkInfo.getReason()|Report the reason an attempt to establish 
+|android.net.NetworkInfo.getState()|Reports the current coarse-grained state of
+|android.net.NetworkInfo.getSubtype()|Return a network-type-specific integer de
+|android.net.NetworkInfo.getSubtypeName()|Return a human-readable name describi
+|android.net.NetworkInfo.getType()|Reports the type of network to which the  in
+|android.net.NetworkInfo.getTypeName()|Return a human-readable name describe th
+|android.net.NetworkInfo.isAvailable()|Indicates whether network connectivity i
+|android.net.NetworkInfo.isConnected()|Indicates whether network connectivity e
+|android.net.NetworkInfo.isConnectedOrConnecting()|Indicates whether network co
+|android.net.NetworkInfo.isConnectedToProvisioningNetwork()|
+|android.net.NetworkInfo.isFailover()|Indicates whether the current attempt to 
+|android.net.NetworkInfo.isRoaming()|Indicates whether the device is currently 
+|android.net.NetworkInfo.setDetailedState(NetworkInfo.DetailedState,String,String)|
+|android.net.NetworkInfo.setExtraInfo(String)|Set the extraInfo field.
+|android.net.NetworkInfo.setFailover(boolean)|Set the failover boolean.
+|android.net.NetworkInfo.setIsAvailable(boolean)|Sets if the network is availab
+|android.net.NetworkInfo.setIsConnectedToProvisioningNetwork(boolean)|
+|android.net.NetworkInfo.setRoaming(boolean)|
+|android.net.NetworkInfo.toString()|
+|android.net.NetworkInfo.writeToParcel(Parcel,int)|Implement the Parcelable int
+
+*android.net.NetworkInfo_Description*
+
+Describes the status of a network interface. Use 
+(|android.net.ConnectivityManager|) to get an instance that represents the 
+current network connection. 
+
+
+
+*android.os.Parcelable.Creator<android.net.NetworkInfo>_android.net.NetworkInfo.CREATOR*
+
+Implement the Parcelable interface. 
+
+
+
+*android.net.NetworkInfo(int)*
+
+public NetworkInfo(int type)
+
+
+
+    type - network type 
+
+*android.net.NetworkInfo(int,int,String,String)*
+
+public NetworkInfo(
+  int type,
+  int subtype,
+  java.lang.String typeName,
+  java.lang.String subtypeName)
+
+
+
+
+*android.net.NetworkInfo(NetworkInfo)*
+
+public NetworkInfo(android.net.NetworkInfo source)
+
+
+
+
+*android.net.NetworkInfo.describeContents()*
+
+public int describeContents()
+
+Implement the Parcelable interface 
+
+
+
+*android.net.NetworkInfo.getDetailedState()*
+
+public |android.net.NetworkInfo.DetailedState| getDetailedState()
+
+Reports the current fine-grained state of the network. 
+
+
+
+    Returns: the fine-grained state 
+
+*android.net.NetworkInfo.getExtraInfo()*
+
+public |java.lang.String| getExtraInfo()
+
+Report the extra information about the network state, if any was provided by 
+the lower networking layers., if one is available. 
+
+
+
+    Returns: the extra information, or null if not available 
+
+*android.net.NetworkInfo.getReason()*
+
+public |java.lang.String| getReason()
+
+Report the reason an attempt to establish connectivity failed, if one is 
+available. 
+
+
+
+    Returns: the reason for failure, or null if not available 
+
+*android.net.NetworkInfo.getState()*
+
+public |android.net.NetworkInfo.State| getState()
+
+Reports the current coarse-grained state of the network. 
+
+
+
+    Returns: the coarse-grained state 
+
+*android.net.NetworkInfo.getSubtype()*
+
+public int getSubtype()
+
+Return a network-type-specific integer describing the subtype of the network. 
+
+
+
+    Returns: the network subtype 
+
+*android.net.NetworkInfo.getSubtypeName()*
+
+public |java.lang.String| getSubtypeName()
+
+Return a human-readable name describing the subtype of the network. 
+
+
+
+    Returns: the name of the network subtype 
+
+*android.net.NetworkInfo.getType()*
+
+public int getType()
+
+Reports the type of network to which the info in thisNetworkInfopertains. 
+
+
+
+    Returns: one of {@link ConnectivityManager#TYPE_MOBILE}, {@link 
+             ConnectivityManager#TYPE_WIFI}, {@link 
+             ConnectivityManager#TYPE_WIMAX}, {@link 
+             ConnectivityManager#TYPE_ETHERNET}, {@link 
+             ConnectivityManager#TYPE_BLUETOOTH}, or other types defined by 
+             {@link ConnectivityManager} 
+
+*android.net.NetworkInfo.getTypeName()*
+
+public |java.lang.String| getTypeName()
+
+Return a human-readable name describe the type of the network, for example 
+"WIFI" or "MOBILE". 
+
+
+
+    Returns: the name of the network type 
+
+*android.net.NetworkInfo.isAvailable()*
+
+public boolean isAvailable()
+
+Indicates whether network connectivity is possible. A network is unavailable 
+when a persistent or semi-persistent condition prevents the possibility of 
+connecting to that network. Examples include 
+
+The device is out of the coverage area for any network of this type. The device 
+is on a network other than the home network (i.e., roaming), and data roaming 
+has been disabled. The device's radio is turned off, e.g., because airplane 
+mode is enabled. 
+
+
+
+    Returns: {@code true} if the network is available, {@code false} otherwise 
+
+*android.net.NetworkInfo.isConnected()*
+
+public boolean isConnected()
+
+Indicates whether network connectivity exists and it is possible to establish 
+connections and pass data. Always call this before attempting to perform data 
+transactions. 
+
+
+
+    Returns: {@code true} if network connectivity exists, {@code false} otherwise. 
+
+*android.net.NetworkInfo.isConnectedOrConnecting()*
+
+public boolean isConnectedOrConnecting()
+
+Indicates whether network connectivity exists or is in the process of being 
+established. This is good for applications that need to do anything related to 
+the network other than read or write data. For the latter, call 
+(|android.net.NetworkInfo|) instead, which guarantees that the network is fully 
+usable. 
+
+
+
+    Returns: {@code true} if network connectivity exists or is in the process of being 
+             established, {@code false} otherwise. 
+
+*android.net.NetworkInfo.isConnectedToProvisioningNetwork()*
+
+public boolean isConnectedToProvisioningNetwork()
+
+
+
+
+
+*android.net.NetworkInfo.isFailover()*
+
+public boolean isFailover()
+
+Indicates whether the current attempt to connect to the network resulted from 
+the ConnectivityManager trying to fail over to this network following a 
+disconnect from another network. 
+
+
+
+    Returns: {@code true} if this is a failover attempt, {@code false} otherwise. 
+
+*android.net.NetworkInfo.isRoaming()*
+
+public boolean isRoaming()
+
+Indicates whether the device is currently roaming on this network. Whentrue, it 
+suggests that use of data on this network may incur extra costs. 
+
+
+
+    Returns: {@code true} if roaming is in effect, {@code false} otherwise. 
+
+*android.net.NetworkInfo.setDetailedState(NetworkInfo.DetailedState,String,String)*
+
+public void setDetailedState(
+  android.net.NetworkInfo.DetailedState detailedState,
+  java.lang.String reason,
+  java.lang.String extraInfo)
+
+Sets the fine-grained state of the network. 
+
+
+    detailedState - the {@link DetailedState}. 
+    reason - a {@code String} indicating the reason for the state change, if one was 
+       supplied. May be {@code null}. 
+    extraInfo - an optional {@code String} providing addditional network state information 
+       passed up from the lower networking layers. 
+
+*android.net.NetworkInfo.setExtraInfo(String)*
+
+public void setExtraInfo(java.lang.String extraInfo)
+
+Set the extraInfo field. 
+
+
+    extraInfo - an optional {@code String} providing addditional network state information 
+       passed up from the lower networking layers. 
+
+*android.net.NetworkInfo.setFailover(boolean)*
+
+public void setFailover(boolean isFailover)
+
+Set the failover boolean. 
+
+
+    isFailover - {@code true} to mark the current connection attempt as a failover. 
+
+*android.net.NetworkInfo.setIsAvailable(boolean)*
+
+public void setIsAvailable(boolean isAvailable)
+
+Sets if the network is available, ie, if the connectivity is possible. 
+
+
+    isAvailable - the new availability value. 
+
+*android.net.NetworkInfo.setIsConnectedToProvisioningNetwork(boolean)*
+
+public void setIsConnectedToProvisioningNetwork(boolean val)
+
+
+
+
+
+*android.net.NetworkInfo.setRoaming(boolean)*
+
+public void setRoaming(boolean isRoaming)
+
+
+
+
+
+*android.net.NetworkInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.net.NetworkInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Implement the Parcelable interface. 
+
+
+
+

@@ -1,0 +1,89 @@
+*android.app.backup.RestoreObserver* *RestoreObserver* Callback class for receiv
+
+public abstract class RestoreObserver
+  extends    |java.lang.Object|
+
+|android.app.backup.RestoreObserver_Description|
+|android.app.backup.RestoreObserver_Fields|
+|android.app.backup.RestoreObserver_Constructors|
+|android.app.backup.RestoreObserver_Methods|
+
+================================================================================
+
+*android.app.backup.RestoreObserver_Constructors*
+|android.app.backup.RestoreObserver()|
+
+*android.app.backup.RestoreObserver_Methods*
+|android.app.backup.RestoreObserver.onUpdate(int,String)|An indication of which
+|android.app.backup.RestoreObserver.restoreFinished(int)|The restore process ha
+|android.app.backup.RestoreObserver.restoreSetsAvailable(RestoreSet[])|Supply a
+|android.app.backup.RestoreObserver.restoreStarting(int)|The restore operation 
+
+*android.app.backup.RestoreObserver_Description*
+
+Callback class for receiving progress reports during a restore operation. These 
+methods will all be called on your application's main thread. 
+
+
+
+*android.app.backup.RestoreObserver()*
+
+public RestoreObserver()
+
+
+
+
+*android.app.backup.RestoreObserver.onUpdate(int,String)*
+
+public void onUpdate(
+  int nowBeingRestored,
+  java.lang.String currentPackage)
+
+An indication of which package is being restored currently, out of the total 
+number provided in the (|android.app.backup.RestoreObserver|) callback. This 
+method is not guaranteed to be called: if the transport is unable to obtain 
+data for one or more of the requested packages, no onUpdate() call will occur 
+for those packages. 
+
+
+    nowBeingRestored - The index, between 1 and the numPackages parameter to the {@link 
+       #restoreStarting(int)} callback, of the package now being restored. This 
+       may be non-monotonic; it is intended purely as a rough indication of the 
+       backup manager's progress through the overall restore process. 
+    currentPackage - The name of the package now being restored. 
+
+*android.app.backup.RestoreObserver.restoreFinished(int)*
+
+public void restoreFinished(int error)
+
+The restore process has completed. This method will always be called, even if 
+no individual package restore operations were attempted. 
+
+
+    error - Zero on success; a nonzero error code if the restore operation as a whole 
+       failed. 
+
+*android.app.backup.RestoreObserver.restoreSetsAvailable(RestoreSet[])*
+
+public void restoreSetsAvailable(android.app.backup.RestoreSet[] result)
+
+Supply a list of the restore datasets available from the current transport. 
+This method is invoked as a callback following the application's use of the 
+(|android.app.backup.IRestoreSession.getAvailableRestoreSets|) method. 
+
+
+    result - An array of {@link android.app.backup.RestoreSet RestoreSet} objects describing 
+       all of the available datasets that are candidates for restoring to the 
+       current device. If no applicable datasets exist, {@code result} will be 
+       {@code null}. 
+
+*android.app.backup.RestoreObserver.restoreStarting(int)*
+
+public void restoreStarting(int numPackages)
+
+The restore operation has begun. 
+
+
+    numPackages - The total number of packages being processed in this restore operation. 
+
+

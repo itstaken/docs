@@ -1,0 +1,133 @@
+*android.os.HandlerThread* *HandlerThread* Handy class for starting a new thread
+
+public class HandlerThread
+  extends    |java.lang.Thread|
+
+|android.os.HandlerThread_Description|
+|android.os.HandlerThread_Fields|
+|android.os.HandlerThread_Constructors|
+|android.os.HandlerThread_Methods|
+
+================================================================================
+
+*android.os.HandlerThread_Constructors*
+|android.os.HandlerThread(String)|
+|android.os.HandlerThread(String,int)|Constructs a HandlerThread.
+
+*android.os.HandlerThread_Methods*
+|android.os.HandlerThread.getLooper()|This method returns the Looper associated
+|android.os.HandlerThread.getThreadId()|Returns the identifier of this thread.
+|android.os.HandlerThread.onLooperPrepared()|Call back method that can be expli
+|android.os.HandlerThread.quit()|Quits the handler thread's looper.
+|android.os.HandlerThread.quitSafely()|Quits the handler thread's looper safely
+|android.os.HandlerThread.run()|
+
+*android.os.HandlerThread_Description*
+
+Handy class for starting a new thread that has a looper. The looper can then be 
+used to create handler classes. Note that start() must still be called. 
+
+
+
+*android.os.HandlerThread(String)*
+
+public HandlerThread(java.lang.String name)
+
+
+
+
+*android.os.HandlerThread(String,int)*
+
+public HandlerThread(
+  java.lang.String name,
+  int priority)
+
+Constructs a HandlerThread. 
+
+    name - 
+    priority - The priority to run the thread at. The value supplied must be from {@link 
+       android.os.Process} and not from java.lang.Thread. 
+
+*android.os.HandlerThread.getLooper()*
+
+public |android.os.Looper| getLooper()
+
+This method returns the Looper associated with this thread. If this thread not 
+been started or for any reason is isAlive() returns false, this method will 
+return null. If this thread has been started, this method will block until the 
+looper has been initialized. 
+
+
+
+    Returns: 
+
+*android.os.HandlerThread.getThreadId()*
+
+public int getThreadId()
+
+Returns the identifier of this thread. See Process.myTid(). 
+
+
+
+*android.os.HandlerThread.onLooperPrepared()*
+
+protected void onLooperPrepared()
+
+Call back method that can be explicitly overridden if needed to execute some 
+setup before Looper loops. 
+
+
+
+*android.os.HandlerThread.quit()*
+
+public boolean quit()
+
+Quits the handler thread's looper. 
+
+Causes the handler thread's looper to terminate without processing any more 
+messages in the message queue. 
+
+Any attempt to post messages to the queue after the looper is asked to quit 
+will fail. For example, the (|android.os.Handler|) method will return false. 
+
+Using this method may be unsafe because some messages may not be delivered 
+before the looper terminates. Consider using (|android.os.HandlerThread|) 
+instead to ensure that all pending work is completed in an orderly manner. 
+
+
+
+    Returns: True if the looper looper has been asked to quit or false if the thread had not 
+             yet started running. 
+
+*android.os.HandlerThread.quitSafely()*
+
+public boolean quitSafely()
+
+Quits the handler thread's looper safely. 
+
+Causes the handler thread's looper to terminate as soon as all remaining 
+messages in the message queue that are already due to be delivered have been 
+handled. Pending delayed messages with due times in the future will not be 
+delivered. 
+
+Any attempt to post messages to the queue after the looper is asked to quit 
+will fail. For example, the (|android.os.Handler|) method will return false. 
+
+If the thread has not been started or has finished (that is if 
+(|android.os.HandlerThread|) returns null), then false is returned. Otherwise 
+the looper is asked to quit and true is returned. 
+
+
+
+    Returns: True if the looper looper has been asked to quit or false if the thread had not 
+             yet started running. 
+
+*android.os.HandlerThread.run()*
+
+public void run()
+
+
+
+
+
+

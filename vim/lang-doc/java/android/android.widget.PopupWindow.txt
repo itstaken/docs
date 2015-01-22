@@ -1,0 +1,921 @@
+*android.widget.PopupWindow* *PopupWindow* A popup window that can be used to di
+
+public class PopupWindow
+  extends    |java.lang.Object|
+
+|android.widget.PopupWindow_Description|
+|android.widget.PopupWindow_Fields|
+|android.widget.PopupWindow_Constructors|
+|android.widget.PopupWindow_Methods|
+
+================================================================================
+
+*android.widget.PopupWindow_Fields*
+|int_android.widget.PopupWindow.INPUT_METHOD_FROM_FOCUSABLE|
+|int_android.widget.PopupWindow.INPUT_METHOD_NEEDED|
+|int_android.widget.PopupWindow.INPUT_METHOD_NOT_NEEDED|
+
+*android.widget.PopupWindow_Constructors*
+|android.widget.PopupWindow()|Create a new empty, non focusable popup window of
+|android.widget.PopupWindow(Context)|Create a new empty, non focusable popup wi
+|android.widget.PopupWindow(Context,AttributeSet)|Create a new empty, non focus
+|android.widget.PopupWindow(Context,AttributeSet,int)|Create a new empty, non f
+|android.widget.PopupWindow(Context,AttributeSet,int,int)|Create a new, empty, 
+|android.widget.PopupWindow(int,int)|Create a new empty, non focusable popup wi
+|android.widget.PopupWindow(View)|Create a new non focusable popup window which
+|android.widget.PopupWindow(View,int,int)|Create a new non focusable popup wind
+|android.widget.PopupWindow(View,int,int,boolean)|Create a new popup window whi
+
+*android.widget.PopupWindow_Methods*
+|android.widget.PopupWindow.dismiss()|Dispose of the popup window.
+|android.widget.PopupWindow.getAnimationStyle()|Return the animation style to u
+|android.widget.PopupWindow.getBackground()|Return the drawable used as the pop
+|android.widget.PopupWindow.getContentView()|Return the view used as the conten
+|android.widget.PopupWindow.getHeight()|Return this popup's height MeasureSpec
+|android.widget.PopupWindow.getInputMethodMode()|Return the current value in#se
+|android.widget.PopupWindow.getMaxAvailableHeight(View)|Returns the maximum hei
+|android.widget.PopupWindow.getMaxAvailableHeight(View,int)|Returns the maximum
+|android.widget.PopupWindow.getMaxAvailableHeight(View,int,boolean)|Returns the
+|android.widget.PopupWindow.getSoftInputMode()|Returns the current value in#set
+|android.widget.PopupWindow.getWidth()|Return this popup's width MeasureSpec
+|android.widget.PopupWindow.getWindowLayoutType()|
+|android.widget.PopupWindow.isAboveAnchor()|Indicates whether the popup is show
+|android.widget.PopupWindow.isClippingEnabled()|Indicates whether clipping of t
+|android.widget.PopupWindow.isFocusable()|Indicate whether the popup window can
+|android.widget.PopupWindow.isLayoutInScreenEnabled()|Indicates whether the pop
+|android.widget.PopupWindow.isOutsideTouchable()|Indicates whether the popup wi
+|android.widget.PopupWindow.isShowing()|Indicate whether this popup window is s
+|android.widget.PopupWindow.isSplitTouchEnabled()|Indicates whether the popup w
+|android.widget.PopupWindow.isTouchable()|Indicates whether the popup window re
+|android.widget.PopupWindow.setAnimationStyle(int)|Change the animation style r
+|android.widget.PopupWindow.setBackgroundDrawable(Drawable)|Change the backgrou
+|android.widget.PopupWindow.setClippingEnabled(boolean)|Allows the popup window
+|android.widget.PopupWindow.setClipToScreenEnabled(boolean)|Clip this popup win
+|android.widget.PopupWindow.setContentView(View)|Change the popup's content.
+|android.widget.PopupWindow.setFocusable(boolean)|Changes the focusability of t
+|android.widget.PopupWindow.setHeight(int)|Change the popup's height MeasureSpe
+|android.widget.PopupWindow.setIgnoreCheekPress()|Set the flag on popup to igno
+|android.widget.PopupWindow.setInputMethodMode(int)|Control how the popup opera
+|android.widget.PopupWindow.setLayoutInScreenEnabled(boolean)|Allows the popup 
+|android.widget.PopupWindow.setLayoutInsetDecor(boolean)|Allows the popup windo
+|android.widget.PopupWindow.setOnDismissListener(PopupWindow.OnDismissListener)|
+|android.widget.PopupWindow.setOutsideTouchable(boolean)|Controls whether the p
+|android.widget.PopupWindow.setSoftInputMode(int)|Sets the operating mode for t
+|android.widget.PopupWindow.setSplitTouchEnabled(boolean)|Allows the popup wind
+|android.widget.PopupWindow.setTouchable(boolean)|Changes the touchability of t
+|android.widget.PopupWindow.setTouchInterceptor(View.OnTouchListener)|Set a cal
+|android.widget.PopupWindow.setTouchModal(boolean)|Set whether this window is t
+|android.widget.PopupWindow.setWidth(int)|Change the popup's width MeasureSpec
+|android.widget.PopupWindow.setWindowLayoutMode(int,int)|Change the width and h
+|android.widget.PopupWindow.setWindowLayoutType(int)|Set the layout type for th
+|android.widget.PopupWindow.showAsDropDown(View)|Display the content view in a 
+|android.widget.PopupWindow.showAsDropDown(View,int,int)|Display the content vi
+|android.widget.PopupWindow.showAsDropDown(View,int,int,int)|Display the conten
+|android.widget.PopupWindow.showAtLocation(IBinder,int,int,int)|Display the con
+|android.widget.PopupWindow.showAtLocation(View,int,int,int)|Display the conten
+|android.widget.PopupWindow.update()|Updates the state of the popup window, if 
+|android.widget.PopupWindow.update(int,int)|Updates the dimension of the popup 
+|android.widget.PopupWindow.update(int,int,int,int)|Updates the position and th
+|android.widget.PopupWindow.update(int,int,int,int,boolean)|Updates the positio
+|android.widget.PopupWindow.update(View,int,int)|Updates the position and the d
+|android.widget.PopupWindow.update(View,int,int,int,int)|Updates the position a
+
+*android.widget.PopupWindow_Description*
+
+A popup window that can be used to display an arbitrary view. The popup window 
+is a floating container that appears on top of the current activity. 
+
+
+
+*int_android.widget.PopupWindow.INPUT_METHOD_FROM_FOCUSABLE*
+
+Mode for (|android.widget.PopupWindow|) : the requirements for the input method 
+should be based on the focusability of the popup. That is if it is focusable 
+than it needs to work with the input method, else it doesn't. 
+
+
+*int_android.widget.PopupWindow.INPUT_METHOD_NEEDED*
+
+Mode for (|android.widget.PopupWindow|) : this popup always needs to work with 
+an input method, regardless of whether it is focusable. This means that it will 
+always be displayed so that the user can also operate the input method while it 
+is shown. 
+
+
+*int_android.widget.PopupWindow.INPUT_METHOD_NOT_NEEDED*
+
+Mode for (|android.widget.PopupWindow|) : this popup never needs to work with 
+an input method, regardless of whether it is focusable. This means that it will 
+always be displayed to use as much space on the screen as needed, regardless of 
+whether this covers the input method. 
+
+
+
+*android.widget.PopupWindow()*
+
+public PopupWindow()
+
+Create a new empty, non focusable popup window of dimension (0,0). 
+
+The popup does not provide any background. This should be handled by the 
+content view. 
+
+
+*android.widget.PopupWindow(Context)*
+
+public PopupWindow(android.content.Context context)
+
+Create a new empty, non focusable popup window of dimension (0,0). 
+
+The popup does provide a background. 
+
+
+*android.widget.PopupWindow(Context,AttributeSet)*
+
+public PopupWindow(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Create a new empty, non focusable popup window of dimension (0,0). 
+
+The popup does provide a background. 
+
+
+*android.widget.PopupWindow(Context,AttributeSet,int)*
+
+public PopupWindow(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+Create a new empty, non focusable popup window of dimension (0,0). 
+
+The popup does provide a background. 
+
+
+*android.widget.PopupWindow(Context,AttributeSet,int,int)*
+
+public PopupWindow(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyleAttr,
+  int defStyleRes)
+
+Create a new, empty, non focusable popup window of dimension (0,0). 
+
+The popup does not provide a background. 
+
+
+*android.widget.PopupWindow(int,int)*
+
+public PopupWindow(
+  int width,
+  int height)
+
+Create a new empty, non focusable popup window. The dimension of the window 
+must be passed to this constructor. 
+
+The popup does not provide any background. This should be handled by the 
+content view. 
+
+    width - the popup's width 
+    height - the popup's height 
+
+*android.widget.PopupWindow(View)*
+
+public PopupWindow(android.view.View contentView)
+
+Create a new non focusable popup window which can display the contentView. The 
+dimension of the window are (0,0). 
+
+The popup does not provide any background. This should be handled by the 
+content view. 
+
+    contentView - the popup's content 
+
+*android.widget.PopupWindow(View,int,int)*
+
+public PopupWindow(
+  android.view.View contentView,
+  int width,
+  int height)
+
+Create a new non focusable popup window which can display the contentView. The 
+dimension of the window must be passed to this constructor. 
+
+The popup does not provide any background. This should be handled by the 
+content view. 
+
+    contentView - the popup's content 
+    width - the popup's width 
+    height - the popup's height 
+
+*android.widget.PopupWindow(View,int,int,boolean)*
+
+public PopupWindow(
+  android.view.View contentView,
+  int width,
+  int height,
+  boolean focusable)
+
+Create a new popup window which can display the contentView. The dimension of 
+the window must be passed to this constructor. 
+
+The popup does not provide any background. This should be handled by the 
+content view. 
+
+    contentView - the popup's content 
+    width - the popup's width 
+    height - the popup's height 
+    focusable - true if the popup can be focused, false otherwise 
+
+*android.widget.PopupWindow.dismiss()*
+
+public void dismiss()
+
+Dispose of the popup window. This method can be invoked only after 
+(|android.widget.PopupWindow|) has been executed. Failing that, calling this 
+method will have no effect. 
+
+
+
+*android.widget.PopupWindow.getAnimationStyle()*
+
+public int getAnimationStyle()
+
+Return the animation style to use the popup appears and disappears 
+
+
+
+    Returns: the animation style to use the popup appears and disappears 
+
+*android.widget.PopupWindow.getBackground()*
+
+public Drawable getBackground()
+
+Return the drawable used as the popup window's background. 
+
+
+
+    Returns: the background drawable or null 
+
+*android.widget.PopupWindow.getContentView()*
+
+public |android.view.View| getContentView()
+
+Return the view used as the content of the popup window. 
+
+
+
+    Returns: a {@link android.view.View} representing the popup's content 
+
+*android.widget.PopupWindow.getHeight()*
+
+public int getHeight()
+
+Return this popup's height MeasureSpec 
+
+
+
+    Returns: the height MeasureSpec of the popup 
+
+*android.widget.PopupWindow.getInputMethodMode()*
+
+public int getInputMethodMode()
+
+Return the current value in (|android.widget.PopupWindow|) . 
+
+
+
+*android.widget.PopupWindow.getMaxAvailableHeight(View)*
+
+public int getMaxAvailableHeight(android.view.View anchor)
+
+Returns the maximum height that is available for the popup to be completely 
+shown. It is recommended that this height be the maximum for the popup's 
+height, otherwise it is possible that the popup will be clipped. 
+
+
+    anchor - The view on which the popup window must be anchored. 
+
+    Returns: The maximum available height for the popup to be completely shown. 
+
+*android.widget.PopupWindow.getMaxAvailableHeight(View,int)*
+
+public int getMaxAvailableHeight(
+  android.view.View anchor,
+  int yOffset)
+
+Returns the maximum height that is available for the popup to be completely 
+shown. It is recommended that this height be the maximum for the popup's 
+height, otherwise it is possible that the popup will be clipped. 
+
+
+    anchor - The view on which the popup window must be anchored. 
+    yOffset - y offset from the view's bottom edge 
+
+    Returns: The maximum available height for the popup to be completely shown. 
+
+*android.widget.PopupWindow.getMaxAvailableHeight(View,int,boolean)*
+
+public int getMaxAvailableHeight(
+  android.view.View anchor,
+  int yOffset,
+  boolean ignoreBottomDecorations)
+
+Returns the maximum height that is available for the popup to be completely 
+shown, optionally ignoring any bottom decorations such as the input method. It 
+is recommended that this height be the maximum for the popup's height, 
+otherwise it is possible that the popup will be clipped. 
+
+
+    anchor - The view on which the popup window must be anchored. 
+    yOffset - y offset from the view's bottom edge 
+    ignoreBottomDecorations - if true, the height returned will be all the way to the bottom of the display, 
+       ignoring any bottom decorations 
+
+    Returns: The maximum available height for the popup to be completely shown. 
+
+*android.widget.PopupWindow.getSoftInputMode()*
+
+public int getSoftInputMode()
+
+Returns the current value in (|android.widget.PopupWindow|) . 
+
+
+
+*android.widget.PopupWindow.getWidth()*
+
+public int getWidth()
+
+Return this popup's width MeasureSpec 
+
+
+
+    Returns: the width MeasureSpec of the popup 
+
+*android.widget.PopupWindow.getWindowLayoutType()*
+
+public int getWindowLayoutType()
+
+
+
+
+
+    Returns: The layout type for this window. 
+
+*android.widget.PopupWindow.isAboveAnchor()*
+
+public boolean isAboveAnchor()
+
+Indicates whether the popup is showing above (the y coordinate of the popup's 
+bottom is less than the y coordinate of the anchor) or below the anchor view 
+(the y coordinate of the popup is greater than y coordinate of the anchor's 
+bottom). 
+
+The value returned by this method is meaningful only after 
+(|android.widget.PopupWindow|) or (|android.widget.PopupWindow|) was invoked. 
+
+
+
+    Returns: True if this popup is showing above the anchor view, false otherwise. 
+
+*android.widget.PopupWindow.isClippingEnabled()*
+
+public boolean isClippingEnabled()
+
+Indicates whether clipping of the popup window is enabled. 
+
+
+
+    Returns: true if the clipping is enabled, false otherwise 
+
+*android.widget.PopupWindow.isFocusable()*
+
+public boolean isFocusable()
+
+Indicate whether the popup window can grab the focus. 
+
+
+
+    Returns: true if the popup is focusable, false otherwise 
+
+*android.widget.PopupWindow.isLayoutInScreenEnabled()*
+
+public boolean isLayoutInScreenEnabled()
+
+Indicates whether the popup window will be forced into using absolute screen 
+coordinates for positioning. 
+
+
+
+    Returns: true if the window will always be positioned in screen coordinates. 
+
+*android.widget.PopupWindow.isOutsideTouchable()*
+
+public boolean isOutsideTouchable()
+
+Indicates whether the popup window will be informed of touch events outside of 
+its window. 
+
+
+
+    Returns: true if the popup is outside touchable, false otherwise 
+
+*android.widget.PopupWindow.isShowing()*
+
+public boolean isShowing()
+
+Indicate whether this popup window is showing on screen. 
+
+
+
+    Returns: true if the popup is showing, false otherwise 
+
+*android.widget.PopupWindow.isSplitTouchEnabled()*
+
+public boolean isSplitTouchEnabled()
+
+Indicates whether the popup window supports splitting touches. 
+
+
+
+    Returns: true if the touch splitting is enabled, false otherwise 
+
+*android.widget.PopupWindow.isTouchable()*
+
+public boolean isTouchable()
+
+Indicates whether the popup window receives touch events. 
+
+
+
+    Returns: true if the popup is touchable, false otherwise 
+
+*android.widget.PopupWindow.setAnimationStyle(int)*
+
+public void setAnimationStyle(int animationStyle)
+
+Change the animation style resource for this popup. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+    animationStyle - animation style to use when the popup appears and disappears. Set to -1 for the 
+       default animation, 0 for no animation, or a resource identifier for an 
+       explicit animation. 
+
+*android.widget.PopupWindow.setBackgroundDrawable(Drawable)*
+
+public void setBackgroundDrawable(Drawable background)
+
+Change the background drawable for this popup window. The background can be set 
+to null. 
+
+
+    background - the popup's background 
+
+*android.widget.PopupWindow.setClippingEnabled(boolean)*
+
+public void setClippingEnabled(boolean enabled)
+
+Allows the popup window to extend beyond the bounds of the screen. By default 
+the window is clipped to the screen boundaries. Setting this to false will 
+allow windows to be accurately positioned. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+    enabled - false if the window should be allowed to extend outside of the screen 
+
+*android.widget.PopupWindow.setClipToScreenEnabled(boolean)*
+
+public void setClipToScreenEnabled(boolean enabled)
+
+Clip this popup window to the screen, but not to the containing window. 
+
+
+    enabled - True to clip to the screen. 
+
+*android.widget.PopupWindow.setContentView(View)*
+
+public void setContentView(android.view.View contentView)
+
+Change the popup's content. The content is represented by an instance of 
+(|android.view.View|) . 
+
+This method has no effect if called when the popup is showing. 
+
+
+    contentView - the new content for the popup 
+
+*android.widget.PopupWindow.setFocusable(boolean)*
+
+public void setFocusable(boolean focusable)
+
+Changes the focusability of the popup window. When focusable, the window will 
+grab the focus from the current focused widget if the popup contains a 
+focusable (|android.view.View|) . By default a popup window is not focusable. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+    focusable - true if the popup should grab focus, false otherwise. 
+
+*android.widget.PopupWindow.setHeight(int)*
+
+public void setHeight(int height)
+
+Change the popup's height MeasureSpec 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown. 
+
+
+    height - the height MeasureSpec of the popup 
+
+*android.widget.PopupWindow.setIgnoreCheekPress()*
+
+public void setIgnoreCheekPress()
+
+Set the flag on popup to ignore cheek press eventt; by default this flag is set 
+to false which means the pop wont ignore cheek press dispatch events. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+
+*android.widget.PopupWindow.setInputMethodMode(int)*
+
+public void setInputMethodMode(int mode)
+
+Control how the popup operates with an input method: one of 
+(|android.widget.PopupWindow|) , (|android.widget.PopupWindow|) , or 
+(|android.widget.PopupWindow|) . 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+
+*android.widget.PopupWindow.setLayoutInScreenEnabled(boolean)*
+
+public void setLayoutInScreenEnabled(boolean enabled)
+
+Allows the popup window to force the flag (|WindowManager.LayoutParams|) , 
+overriding default behavior. This will cause the popup to be positioned in 
+absolute screen coordinates. 
+
+
+    enabled - true if the popup should always be positioned in screen coordinates 
+
+*android.widget.PopupWindow.setLayoutInsetDecor(boolean)*
+
+public void setLayoutInsetDecor(boolean enabled)
+
+Allows the popup window to force the flag (|WindowManager.LayoutParams|) , 
+overriding default behavior. This will cause the popup to inset its content to 
+account for system windows overlaying the screen, such as the status bar. 
+
+This will often be combined with (|android.widget.PopupWindow|) . 
+
+
+    enabled - true if the popup's views should inset content to account for system windows, 
+       the way that decor views behave for full-screen windows. 
+
+*android.widget.PopupWindow.setOnDismissListener(PopupWindow.OnDismissListener)*
+
+public void setOnDismissListener(android.widget.PopupWindow.OnDismissListener onDismissListener)
+
+Sets the listener to be called when the window is dismissed. 
+
+
+    onDismissListener - The listener. 
+
+*android.widget.PopupWindow.setOutsideTouchable(boolean)*
+
+public void setOutsideTouchable(boolean touchable)
+
+Controls whether the pop-up will be informed of touch events outside of its 
+window. This only makes sense for pop-ups that are touchable but not focusable, 
+which means touches outside of the window will be delivered to the window 
+behind. The default is false. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+    touchable - true if the popup should receive outside touch events, false otherwise 
+
+*android.widget.PopupWindow.setSoftInputMode(int)*
+
+public void setSoftInputMode(int mode)
+
+Sets the operating mode for the soft input area. 
+
+
+    mode - The desired mode, see {@link 
+       android.view.WindowManager.LayoutParams#softInputMode} for the full list 
+
+*android.widget.PopupWindow.setSplitTouchEnabled(boolean)*
+
+public void setSplitTouchEnabled(boolean enabled)
+
+Allows the popup window to split touches across other windows that also support 
+split touch. When this flag is false, the first pointer that goes down 
+determines the window to which all subsequent touches go until all pointers go 
+up. When this flag is true, each pointer (not necessarily the first) that goes 
+down determines the window to which all subsequent touches of that pointer will 
+go until that pointer goes up thereby enabling touches with multiple pointers 
+to be split across multiple windows. 
+
+
+    enabled - true if the split touches should be enabled, false otherwise 
+
+*android.widget.PopupWindow.setTouchable(boolean)*
+
+public void setTouchable(boolean touchable)
+
+Changes the touchability of the popup window. When touchable, the window will 
+receive touch events, otherwise touch events will go to the window below it. By 
+default the window is touchable. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown or through a manual call to one of the 
+(|android.widget.PopupWindow|) methods. 
+
+
+    touchable - true if the popup should receive touch events, false otherwise 
+
+*android.widget.PopupWindow.setTouchInterceptor(View.OnTouchListener)*
+
+public void setTouchInterceptor(android.view.View.OnTouchListener l)
+
+Set a callback for all touch events being dispatched to the popup window. 
+
+
+
+*android.widget.PopupWindow.setTouchModal(boolean)*
+
+public void setTouchModal(boolean touchModal)
+
+Set whether this window is touch modal or if outside touches will be sent to 
+other windows behind it. 
+
+
+
+*android.widget.PopupWindow.setWidth(int)*
+
+public void setWidth(int width)
+
+Change the popup's width MeasureSpec 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown. 
+
+
+    width - the width MeasureSpec of the popup 
+
+*android.widget.PopupWindow.setWindowLayoutMode(int,int)*
+
+public void setWindowLayoutMode(
+  int widthSpec,
+  int heightSpec)
+
+Change the width and height measure specs that are given to the window manager 
+by the popup. By default these are 0, meaning that the current width or height 
+is requested as an explicit size from the window manager. You can supply 
+(|ViewGroup.LayoutParams|) or (|ViewGroup.LayoutParams|) to have that measure 
+spec supplied instead, replacing the absolute width and height that has been 
+set in the popup. 
+
+If the popup is showing, calling this method will take effect only the next 
+time the popup is shown. 
+
+
+    widthSpec - an explicit width measure spec mode, either {@link 
+       ViewGroup.LayoutParams#WRAP_CONTENT}, {@link 
+       ViewGroup.LayoutParams#MATCH_PARENT}, or 0 to use the absolute width. 
+    heightSpec - an explicit height measure spec mode, either {@link 
+       ViewGroup.LayoutParams#WRAP_CONTENT}, {@link 
+       ViewGroup.LayoutParams#MATCH_PARENT}, or 0 to use the absolute height. 
+
+*android.widget.PopupWindow.setWindowLayoutType(int)*
+
+public void setWindowLayoutType(int layoutType)
+
+Set the layout type for this window. Should be one of the TYPE constants 
+defined in (|WindowManager.LayoutParams|) . 
+
+
+    layoutType - Layout type for this window. 
+
+*android.widget.PopupWindow.showAsDropDown(View)*
+
+public void showAsDropDown(android.view.View anchor)
+
+Display the content view in a popup window anchored to the bottom-left corner 
+of the anchor view. If there is not enough room on screen to show the popup in 
+its entirety, this method tries to find a parent scroll view to scroll. If no 
+parent scroll view can be scrolled, the bottom-left corner of the popup is 
+pinned at the top left corner of the anchor view. 
+
+
+    anchor - the view on which to pin the popup window 
+
+*android.widget.PopupWindow.showAsDropDown(View,int,int)*
+
+public void showAsDropDown(
+  android.view.View anchor,
+  int xoff,
+  int yoff)
+
+Display the content view in a popup window anchored to the bottom-left corner 
+of the anchor view offset by the specified x and y coordinates. If there is not 
+enough room on screen to show the popup in its entirety, this method tries to 
+find a parent scroll view to scroll. If no parent scroll view can be scrolled, 
+the bottom-left corner of the popup is pinned at the top left corner of the 
+anchor view. If the view later scrolls to move anchor to a different location, 
+the popup will be moved correspondingly. 
+
+
+    anchor - the view on which to pin the popup window 
+    xoff - A horizontal offset from the anchor in pixels 
+    yoff - A vertical offset from the anchor in pixels 
+
+*android.widget.PopupWindow.showAsDropDown(View,int,int,int)*
+
+public void showAsDropDown(
+  android.view.View anchor,
+  int xoff,
+  int yoff,
+  int gravity)
+
+Display the content view in a popup window anchored to the bottom-left corner 
+of the anchor view offset by the specified x and y coordinates. If there is not 
+enough room on screen to show the popup in its entirety, this method tries to 
+find a parent scroll view to scroll. If no parent scroll view can be scrolled, 
+the bottom-left corner of the popup is pinned at the top left corner of the 
+anchor view. If the view later scrolls to move anchor to a different location, 
+the popup will be moved correspondingly. 
+
+
+    anchor - the view on which to pin the popup window 
+    xoff - A horizontal offset from the anchor in pixels 
+    yoff - A vertical offset from the anchor in pixels 
+    gravity - Alignment of the popup relative to the anchor 
+
+*android.widget.PopupWindow.showAtLocation(IBinder,int,int,int)*
+
+public void showAtLocation(
+  android.os.IBinder token,
+  int gravity,
+  int x,
+  int y)
+
+Display the content view in a popup window at the specified location. 
+
+
+    token - Window token to use for creating the new window 
+    gravity - the gravity which controls the placement of the popup window 
+    x - the popup's x location offset 
+    y - the popup's y location offset 
+
+*android.widget.PopupWindow.showAtLocation(View,int,int,int)*
+
+public void showAtLocation(
+  android.view.View parent,
+  int gravity,
+  int x,
+  int y)
+
+Display the content view in a popup window at the specified location. If the 
+popup window cannot fit on screen, it will be clipped. See 
+(|android.view.WindowManager.LayoutParams|) for more information on how gravity 
+and the x and y parameters are related. Specifying a gravity of 
+(|android.view.Gravity|) is similar to specifying Gravity.LEFT | Gravity.TOP. 
+
+
+    parent - a parent view to get the {@link android.view.View#getWindowToken()} token from 
+    gravity - the gravity which controls the placement of the popup window 
+    x - the popup's x location offset 
+    y - the popup's y location offset 
+
+*android.widget.PopupWindow.update()*
+
+public void update()
+
+Updates the state of the popup window, if it is currently being displayed, from 
+the currently set state. This include: (|android.widget.PopupWindow|) , 
+(|android.widget.PopupWindow|) , (|android.widget.PopupWindow|) , 
+(|android.widget.PopupWindow|) , (|android.widget.PopupWindow|) , and 
+(|android.widget.PopupWindow|) . 
+
+
+
+*android.widget.PopupWindow.update(int,int)*
+
+public void update(
+  int width,
+  int height)
+
+Updates the dimension of the popup window. Calling this function also updates 
+the window with the current popup state as described for 
+(|android.widget.PopupWindow|) . 
+
+
+    width - the new width 
+    height - the new height 
+
+*android.widget.PopupWindow.update(int,int,int,int)*
+
+public void update(
+  int x,
+  int y,
+  int width,
+  int height)
+
+Updates the position and the dimension of the popup window. Width and height 
+can be set to -1 to update location only. Calling this function also updates 
+the window with the current popup state as described for 
+(|android.widget.PopupWindow|) . 
+
+
+    x - the new x location 
+    y - the new y location 
+    width - the new width, can be -1 to ignore 
+    height - the new height, can be -1 to ignore 
+
+*android.widget.PopupWindow.update(int,int,int,int,boolean)*
+
+public void update(
+  int x,
+  int y,
+  int width,
+  int height,
+  boolean force)
+
+Updates the position and the dimension of the popup window. Width and height 
+can be set to -1 to update location only. Calling this function also updates 
+the window with the current popup state as described for 
+(|android.widget.PopupWindow|) . 
+
+
+    x - the new x location 
+    y - the new y location 
+    width - the new width, can be -1 to ignore 
+    height - the new height, can be -1 to ignore 
+    force - reposition the window even if the specified position already seems to 
+       correspond to the LayoutParams 
+
+*android.widget.PopupWindow.update(View,int,int)*
+
+public void update(
+  android.view.View anchor,
+  int width,
+  int height)
+
+Updates the position and the dimension of the popup window. Calling this 
+function also updates the window with the current popup state as described for 
+(|android.widget.PopupWindow|) . 
+
+
+    anchor - the popup's anchor view 
+    width - the new width, can be -1 to ignore 
+    height - the new height, can be -1 to ignore 
+
+*android.widget.PopupWindow.update(View,int,int,int,int)*
+
+public void update(
+  android.view.View anchor,
+  int xoff,
+  int yoff,
+  int width,
+  int height)
+
+Updates the position and the dimension of the popup window. Width and height 
+can be set to -1 to update location only. Calling this function also updates 
+the window with the current popup state as described for 
+(|android.widget.PopupWindow|) . 
+
+If the view later scrolls to move anchor to a different location, the popup 
+will be moved correspondingly. 
+
+
+    anchor - the popup's anchor view 
+    xoff - x offset from the view's left edge 
+    yoff - y offset from the view's bottom edge 
+    width - the new width, can be -1 to ignore 
+    height - the new height, can be -1 to ignore 
+
+

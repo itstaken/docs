@@ -1,0 +1,519 @@
+*android.view.Menu* *Menu* Interface for managing the items in a menu.
+
+public interface interface Menu
+
+
+|android.view.Menu_Description|
+|android.view.Menu_Fields|
+|android.view.Menu_Constructors|
+|android.view.Menu_Methods|
+
+================================================================================
+
+*android.view.Menu_Fields*
+|int_android.view.Menu.CATEGORY_ALTERNATIVE|
+|int_android.view.Menu.CATEGORY_CONTAINER|
+|int_android.view.Menu.CATEGORY_MASK|
+|int_android.view.Menu.CATEGORY_SECONDARY|
+|int_android.view.Menu.CATEGORY_SHIFT|
+|int_android.view.Menu.CATEGORY_SYSTEM|
+|int_android.view.Menu.FIRST|
+|int_android.view.Menu.FLAG_ALWAYS_PERFORM_CLOSE|
+|int_android.view.Menu.FLAG_APPEND_TO_GROUP|
+|int_android.view.Menu.FLAG_PERFORM_NO_CLOSE|
+|int_android.view.Menu.NONE|
+|int_android.view.Menu.USER_MASK|
+|int_android.view.Menu.USER_SHIFT|
+
+*android.view.Menu_Methods*
+|android.view.Menu.add(CharSequence)|Add a new item to the menu.
+|android.view.Menu.add(int)|Add a new item to the menu.
+|android.view.Menu.add(int,int,int,CharSequence)|Add a new item to the menu.
+|android.view.Menu.add(int,int,int,int)|Variation on#add(int, int, int, CharSeq
+|android.view.Menu.addIntentOptions(int,int,int,ComponentName,Intent[],Intent,int,MenuItem[])|
+|android.view.Menu.addSubMenu(CharSequence)|Add a new sub-menu to the menu.
+|android.view.Menu.addSubMenu(int)|Add a new sub-menu to the menu.
+|android.view.Menu.addSubMenu(int,int,int,CharSequence)|Add a new sub-menu to t
+|android.view.Menu.addSubMenu(int,int,int,int)|Variation on#addSubMenu(int, int
+|android.view.Menu.clear()|Remove all existing items from the menu, leaving it 
+|android.view.Menu.close()|Closes the menu, if open.
+|android.view.Menu.findItem(int)|Return the menu item with a particular identif
+|android.view.Menu.getItem(int)|Gets the menu item at the given index.
+|android.view.Menu.hasVisibleItems()|Return whether the menu currently has item
+|android.view.Menu.isShortcutKey(int,KeyEvent)|Is a keypress one of the defined
+|android.view.Menu.performIdentifierAction(int,int)|Execute the menu item actio
+|android.view.Menu.performShortcut(int,KeyEvent,int)|Execute the menu item acti
+|android.view.Menu.removeGroup(int)|Remove all items in the given group.
+|android.view.Menu.removeItem(int)|Remove the item with the given identifier.
+|android.view.Menu.setGroupCheckable(int,boolean,boolean)|Control whether a par
+|android.view.Menu.setGroupEnabled(int,boolean)|Enable or disable all menu item
+|android.view.Menu.setGroupVisible(int,boolean)|Show or hide all menu items tha
+|android.view.Menu.setQwertyMode(boolean)|Control whether the menu should be ru
+|android.view.Menu.size()|Get the number of items in the menu.
+
+*android.view.Menu_Description*
+
+Interface for managing the items in a menu. 
+
+By default, every Activity supports an options menu of actions or options. You 
+can add items to this menu and handle clicks on your additions. The easiest way 
+of adding menu items is inflating an XML file into the (|android.view.Menu|) 
+via (|android.view.MenuInflater|) . The easiest way of attaching code to clicks 
+is via (|android.app.Activity|) and (|android.app.Activity|) . 
+
+Different menu types support different features: 
+
+Context menus: Do not support item shortcuts and item icons. Options menus: The 
+icon menus do not support item check marks and only show the item's condensed 
+title(|android.view.MenuItem|) . The expanded menus (only available if six or 
+more menu items are visible, reached via the 'More' item in the icon menu) do 
+not show item icons, and item check marks are discouraged. Sub menus: Do not 
+support item icons, or nested sub menus. 
+
+Developer Guides For more information about creating menus, read the <a 
+href="guide/topics/ui/menus.html">Menus developer guide. 
+
+
+
+*int_android.view.Menu.CATEGORY_ALTERNATIVE*
+
+Category code for the order integer for items/groups that are alternative 
+actions on the data that is currently displayed -- or/add this with your base 
+value. 
+
+
+*int_android.view.Menu.CATEGORY_CONTAINER*
+
+Category code for the order integer for items/groups that are part of a 
+container -- or/add this with your base value. 
+
+
+*int_android.view.Menu.CATEGORY_MASK*
+
+This is the part of an order integer that supplies the category of the item. 
+
+
+*int_android.view.Menu.CATEGORY_SECONDARY*
+
+Category code for the order integer for items/groups that are user-supplied 
+secondary (infrequently used) options -- or/add this with your base value. 
+
+
+*int_android.view.Menu.CATEGORY_SHIFT*
+
+Bit shift of the category portion of the order integer. 
+
+
+*int_android.view.Menu.CATEGORY_SYSTEM*
+
+Category code for the order integer for items/groups that are provided by the 
+system -- or/add this with your base value. 
+
+
+*int_android.view.Menu.FIRST*
+
+First value for group and item identifier integers. 
+
+
+*int_android.view.Menu.FLAG_ALWAYS_PERFORM_CLOSE*
+
+Flag for (|android.view.Menu|) : if set, always close the menu after executing 
+the shortcut. Closing the menu also resets the prepared state. 
+
+
+*int_android.view.Menu.FLAG_APPEND_TO_GROUP*
+
+Flag for (|android.view.Menu|) : if set, do not automatically remove any 
+existing menu items in the same group. 
+
+
+*int_android.view.Menu.FLAG_PERFORM_NO_CLOSE*
+
+Flag for (|android.view.Menu|) : if set, do not close the menu after executing 
+the shortcut. 
+
+
+*int_android.view.Menu.NONE*
+
+Value to use for group and item identifier integers when you don't care about 
+them. 
+
+
+*int_android.view.Menu.USER_MASK*
+
+This is the part of an order integer that the user can provide. 
+
+
+*int_android.view.Menu.USER_SHIFT*
+
+Bit shift of the user portion of the order integer. 
+
+
+
+*android.view.Menu.add(CharSequence)*
+
+public |android.view.MenuItem| add(java.lang.CharSequence title)
+
+Add a new item to the menu. This item displays the given title for its label. 
+
+
+    title - The text to display for the item. 
+
+    Returns: The newly added menu item. 
+
+*android.view.Menu.add(int)*
+
+public |android.view.MenuItem| add(int titleRes)
+
+Add a new item to the menu. This item displays the given title for its label. 
+
+
+    titleRes - Resource identifier of title string. 
+
+    Returns: The newly added menu item. 
+
+*android.view.Menu.add(int,int,int,CharSequence)*
+
+public |android.view.MenuItem| add(
+  int groupId,
+  int itemId,
+  int order,
+  java.lang.CharSequence title)
+
+Add a new item to the menu. This item displays the given title for its label. 
+
+
+    groupId - The group identifier that this item should be part of. This can be used to 
+       define groups of items for batch state changes. Normally use {@link 
+       #NONE} if an item should not be in a group. 
+    itemId - Unique item ID. Use {@link #NONE} if you do not need a unique ID. 
+    order - The order for the item. Use {@link #NONE} if you do not care about the order. 
+       See {@link MenuItem#getOrder()}. 
+    title - The text to display for the item. 
+
+    Returns: The newly added menu item. 
+
+*android.view.Menu.add(int,int,int,int)*
+
+public |android.view.MenuItem| add(
+  int groupId,
+  int itemId,
+  int order,
+  int titleRes)
+
+Variation on (|android.view.Menu|) that takes a string resource identifier 
+instead of the string itself. 
+
+
+    groupId - The group identifier that this item should be part of. This can also be used to 
+       define groups of items for batch state changes. Normally use {@link 
+       #NONE} if an item should not be in a group. 
+    itemId - Unique item ID. Use {@link #NONE} if you do not need a unique ID. 
+    order - The order for the item. Use {@link #NONE} if you do not care about the order. 
+       See {@link MenuItem#getOrder()}. 
+    titleRes - Resource identifier of title string. 
+
+    Returns: The newly added menu item. 
+
+*android.view.Menu.addIntentOptions(int,int,int,ComponentName,Intent[],Intent,int,MenuItem[])*
+
+public int addIntentOptions(
+  int groupId,
+  int itemId,
+  int order,
+  android.content.ComponentName caller,
+  android.content.Intent[] specifics,
+  android.content.Intent intent,
+  int flags,
+  android.view.MenuItem[] outSpecificItems)
+
+Add a group of menu items corresponding to actions that can be performed for a 
+particular Intent. The Intent is most often configured with a null action, the 
+data that the current activity is working with, and includes either the 
+(|android.content.Intent|) or (|android.content.Intent|) to find activities 
+that have said they would like to be included as optional action. You can, 
+however, use any Intent you want. 
+
+See (|android.content.pm.PackageManager|) for more * details on the caller, 
+specifics, and intent arguments. The list returned by that function is used to 
+populate the resulting menu items. 
+
+All of the menu items of possible options for the intent will be added with the 
+given group and id. You can use the group to control ordering of the items in 
+relation to other items in the menu. Normally this function will automatically 
+remove any existing items in the menu in the same group and place a divider 
+above and below the added items; this behavior can be modified with the flags 
+parameter. For each of the generated items (|android.view.MenuItem|) is called 
+to associate the appropriate Intent with the item; this means the activity will 
+automatically be started for you without having to do anything else. 
+
+
+    groupId - The group identifier that the items should be part of. This can also be used to 
+       define groups of items for batch state changes. Normally use {@link 
+       #NONE} if the items should not be in a group. 
+    itemId - Unique item ID. Use {@link #NONE} if you do not need a unique ID. 
+    order - The order for the items. Use {@link #NONE} if you do not care about the order. 
+       See {@link MenuItem#getOrder()}. 
+    caller - The current activity component name as defined by queryIntentActivityOptions(). 
+    specifics - Specific items to place first as defined by queryIntentActivityOptions(). 
+    intent - Intent describing the kinds of items to populate in the list as defined by 
+       queryIntentActivityOptions(). 
+    flags - Additional options controlling how the items are added. 
+    outSpecificItems - Optional array in which to place the menu items that were generated for each of 
+       the specifics that were requested. Entries may be null if no activity 
+       was found for that specific action. 
+
+    Returns: The number of menu items that were added. 
+
+*android.view.Menu.addSubMenu(CharSequence)*
+
+public |android.view.SubMenu| addSubMenu(java.lang.CharSequence title)
+
+Add a new sub-menu to the menu. This item displays the given title for its 
+label. To modify other attributes on the submenu's menu item, use 
+(|android.view.SubMenu|) . 
+
+
+    title - The text to display for the item. 
+
+    Returns: The newly added sub-menu 
+
+*android.view.Menu.addSubMenu(int)*
+
+public |android.view.SubMenu| addSubMenu(int titleRes)
+
+Add a new sub-menu to the menu. This item displays the given title for its 
+label. To modify other attributes on the submenu's menu item, use 
+(|android.view.SubMenu|) . 
+
+
+    titleRes - Resource identifier of title string. 
+
+    Returns: The newly added sub-menu 
+
+*android.view.Menu.addSubMenu(int,int,int,CharSequence)*
+
+public |android.view.SubMenu| addSubMenu(
+  int groupId,
+  int itemId,
+  int order,
+  java.lang.CharSequence title)
+
+Add a new sub-menu to the menu. This item displays the given title for its 
+label. To modify other attributes on the submenu's menu item, use 
+(|android.view.SubMenu|) . 
+
+Note that you can only have one level of sub-menus, i.e. you cannnot add a 
+subMenu to a subMenu: An (|java.lang.UnsupportedOperationException|) will be 
+thrown if you try. 
+
+
+    groupId - The group identifier that this item should be part of. This can also be used to 
+       define groups of items for batch state changes. Normally use {@link 
+       #NONE} if an item should not be in a group. 
+    itemId - Unique item ID. Use {@link #NONE} if you do not need a unique ID. 
+    order - The order for the item. Use {@link #NONE} if you do not care about the order. 
+       See {@link MenuItem#getOrder()}. 
+    title - The text to display for the item. 
+
+    Returns: The newly added sub-menu 
+
+*android.view.Menu.addSubMenu(int,int,int,int)*
+
+public |android.view.SubMenu| addSubMenu(
+  int groupId,
+  int itemId,
+  int order,
+  int titleRes)
+
+Variation on (|android.view.Menu|) that takes a string resource identifier for 
+the title instead of the string itself. 
+
+
+    groupId - The group identifier that this item should be part of. This can also be used to 
+       define groups of items for batch state changes. Normally use {@link 
+       #NONE} if an item should not be in a group. 
+    itemId - Unique item ID. Use {@link #NONE} if you do not need a unique ID. 
+    order - The order for the item. Use {@link #NONE} if you do not care about the order. 
+       See {@link MenuItem#getOrder()}. 
+    titleRes - Resource identifier of title string. 
+
+    Returns: The newly added sub-menu 
+
+*android.view.Menu.clear()*
+
+public void clear()
+
+Remove all existing items from the menu, leaving it empty as if it had just 
+been created. 
+
+
+
+*android.view.Menu.close()*
+
+public void close()
+
+Closes the menu, if open. 
+
+
+
+*android.view.Menu.findItem(int)*
+
+public |android.view.MenuItem| findItem(int id)
+
+Return the menu item with a particular identifier. 
+
+
+    id - The identifier to find. 
+
+    Returns: The menu item object, or null if there is no item with this identifier. 
+
+*android.view.Menu.getItem(int)*
+
+public |android.view.MenuItem| getItem(int index)
+
+Gets the menu item at the given index. 
+
+
+    index - The index of the menu item to return. 
+
+    Returns: The menu item. 
+
+*android.view.Menu.hasVisibleItems()*
+
+public boolean hasVisibleItems()
+
+Return whether the menu currently has item items that are visible. 
+
+
+
+    Returns: True if there is one or more item visible, else false. 
+
+*android.view.Menu.isShortcutKey(int,KeyEvent)*
+
+public boolean isShortcutKey(
+  int keyCode,
+  android.view.KeyEvent event)
+
+Is a keypress one of the defined shortcut keys for this window. 
+
+
+    keyCode - the key code from {@link KeyEvent} to check. 
+    event - the {@link KeyEvent} to use to help check. 
+
+*android.view.Menu.performIdentifierAction(int,int)*
+
+public boolean performIdentifierAction(
+  int id,
+  int flags)
+
+Execute the menu item action associated with the given menu identifier. 
+
+
+    id - Identifier associated with the menu item. 
+    flags - Additional option flags or 0. 
+
+    Returns: If the given identifier exists and is shown, returns true; else returns false. 
+
+*android.view.Menu.performShortcut(int,KeyEvent,int)*
+
+public boolean performShortcut(
+  int keyCode,
+  android.view.KeyEvent event,
+  int flags)
+
+Execute the menu item action associated with the given shortcut character. 
+
+
+    keyCode - The keycode of the shortcut key. 
+    event - Key event message. 
+    flags - Additional option flags or 0. 
+
+    Returns: If the given shortcut exists and is shown, returns true; else returns false. 
+
+*android.view.Menu.removeGroup(int)*
+
+public void removeGroup(int groupId)
+
+Remove all items in the given group. 
+
+
+    groupId - The group to be removed. If there are no items in this group, nothing happens. 
+
+*android.view.Menu.removeItem(int)*
+
+public void removeItem(int id)
+
+Remove the item with the given identifier. 
+
+
+    id - The item to be removed. If there is no item with this identifier, nothing 
+       happens. 
+
+*android.view.Menu.setGroupCheckable(int,boolean,boolean)*
+
+public void setGroupCheckable(
+  int group,
+  boolean checkable,
+  boolean exclusive)
+
+Control whether a particular group of items can show a check mark. This is 
+similar to calling (|android.view.MenuItem|) on all of the menu items with the 
+given group identifier, but in addition you can control whether this group 
+contains a mutually-exclusive set items. This should be called after the items 
+of the group have been added to the menu. 
+
+
+    group - The group of items to operate on. 
+    checkable - Set to true to allow a check mark, false to disallow. The default is false. 
+    exclusive - If set to true, only one item in this group can be checked at a time; checking 
+       an item will automatically uncheck all others in the group. If set to 
+       false, each item can be checked independently of the others. 
+
+*android.view.Menu.setGroupEnabled(int,boolean)*
+
+public void setGroupEnabled(
+  int group,
+  boolean enabled)
+
+Enable or disable all menu items that are in the given group. 
+
+
+    group - The group of items to operate on. 
+    enabled - If true the items will be enabled, else they will be disabled. 
+
+*android.view.Menu.setGroupVisible(int,boolean)*
+
+public void setGroupVisible(
+  int group,
+  boolean visible)
+
+Show or hide all menu items that are in the given group. 
+
+
+    group - The group of items to operate on. 
+    visible - If true the items are visible, else they are hidden. 
+
+*android.view.Menu.setQwertyMode(boolean)*
+
+public void setQwertyMode(boolean isQwerty)
+
+Control whether the menu should be running in qwerty mode (alphabetic 
+shortcuts) or 12-key mode (numeric shortcuts). 
+
+
+    isQwerty - If true the menu will use alphabetic shortcuts; else it will use numeric 
+       shortcuts. 
+
+*android.view.Menu.size()*
+
+public int size()
+
+Get the number of items in the menu. Note that this will change any times items 
+are added or removed from the menu. 
+
+
+
+    Returns: The item count. 
+
+

@@ -1,0 +1,212 @@
+*android.support.v7.app.MediaRouteActionProvider* *MediaRouteActionProvider* The
+
+public class MediaRouteActionProvider
+  extends    |ActionProvider|
+
+|android.support.v7.app.MediaRouteActionProvider_Description|
+|android.support.v7.app.MediaRouteActionProvider_Fields|
+|android.support.v7.app.MediaRouteActionProvider_Constructors|
+|android.support.v7.app.MediaRouteActionProvider_Methods|
+
+================================================================================
+
+*android.support.v7.app.MediaRouteActionProvider_Constructors*
+|android.support.v7.app.MediaRouteActionProvider(Context)|Creates the action pr
+
+*android.support.v7.app.MediaRouteActionProvider_Methods*
+|android.support.v7.app.MediaRouteActionProvider.getDialogFactory()|Gets the me
+|android.support.v7.app.MediaRouteActionProvider.getMediaRouteButton()|Gets the
+|android.support.v7.app.MediaRouteActionProvider.getRouteSelector()|Gets the me
+|android.support.v7.app.MediaRouteActionProvider.isVisible()|
+|android.support.v7.app.MediaRouteActionProvider.onCreateActionView()|
+|android.support.v7.app.MediaRouteActionProvider.onCreateMediaRouteButton()|Cal
+|android.support.v7.app.MediaRouteActionProvider.onPerformDefaultAction()|
+|android.support.v7.app.MediaRouteActionProvider.overridesItemVisibility()|
+|android.support.v7.app.MediaRouteActionProvider.setDialogFactory(MediaRouteDialogFactory)|
+|android.support.v7.app.MediaRouteActionProvider.setRouteSelector(MediaRouteSelector)|
+
+*android.support.v7.app.MediaRouteActionProvider_Description*
+
+The media route action provider displays a media route 
+button(|android.support.v7.app.MediaRouteButton|) in the application's 
+(|ActionBar|) to allow the user to select routes and to control the currently 
+selected route. 
+
+The application must specify the kinds of routes that the user should be 
+allowed to select by specifying a 
+selector(|android.support.v7.media.MediaRouteSelector|) with the 
+(|android.support.v7.app.MediaRouteActionProvider|) method. 
+
+Refer to (|android.support.v7.app.MediaRouteButton|) for a description of the 
+button that will appear in the action bar menu. Note that instead of disabling 
+the button when no routes are available, the action provider will instead make 
+the menu item invisible. In this way, the button will only be visible when it 
+is possible for the user to discover and select a matching route. 
+
+Prerequisites 
+
+To use the media route action provider, the activity must be a subclass of 
+(|ActionBarActivity|) from the android.support.v7.appcompat support library. 
+Refer to support library documentation for details. 
+
+Example 
+
+The application should define a menu resource to include the provider in the 
+action bar options menu. Note that the support library action bar uses 
+attributes that are defined in the application's resource namespace rather than 
+the framework's resource namespace to configure each item. 
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+xmlns:app="http://schemas.android.com/apk/res-auto"> <item 
+android:id="@+id/media_route_menu_item" 
+android:title="@string/media_route_menu_title" app:showAsAction="always" 
+app:actionProviderClass="android.support.v7.app.MediaRouteActionProvider"/> 
+</menu> 
+
+Then configure the menu and set the route selector for the chooser. 
+
+public class MyActivity extends ActionBarActivity { private MediaRouter 
+mRouter; private MediaRouter.Callback mCallback; private MediaRouteSelector 
+mSelector; 
+
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+
+mRouter = Mediarouter.getInstance(this); mSelector = new 
+MediaRouteSelector.Builder() 
+.addControlCategory(MediaControlIntent.CATEGORY_LIVE_AUDIO) 
+.addControlCategory(MediaControlIntent.CATEGORY_REMOTE_PLAYBACK) .build(); 
+mCallback = new MyCallback(); } 
+
+// Add the callback on start to tell the media router what kinds of routes // 
+the application is interested in so that it can try to discover suitable ones. 
+public void onStart() { super.onStart(); 
+
+mediaRouter.addCallback(mSelector, mCallback, 
+MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY); 
+
+MediaRouter.RouteInfo route = mediaRouter.updateSelectedRoute(mSelector); // do 
+something with the route... } 
+
+// Remove the selector on stop to tell the media router that it no longer // 
+needs to invest effort trying to discover routes of these kinds for now. public 
+void onStop() { super.onStop(); 
+
+mediaRouter.removeCallback(mCallback); } 
+
+public boolean onCreateOptionsMenu(Menu menu) { 
+super.onCreateOptionsMenu(menu); 
+
+getMenuInflater().inflate(R.menu.sample_media_router_menu, menu); 
+
+MenuItem mediaRouteMenuItem = menu.findItem(R.id.media_route_menu_item); 
+MediaRouteActionProvider mediaRouteActionProvider = 
+(MediaRouteActionProvider)MenuItemCompat.getActionProvider(mediaRouteMenuItem); 
+mediaRouteActionProvider.setRouteSelector(mSelector); return true; } 
+
+private final class MyCallback extends MediaRouter.Callback { // Implement 
+callback methods as needed. } } 
+
+
+
+*android.support.v7.app.MediaRouteActionProvider(Context)*
+
+public MediaRouteActionProvider(Context context)
+
+Creates the action provider. 
+
+    context - The context. 
+
+*android.support.v7.app.MediaRouteActionProvider.getDialogFactory()*
+
+public |android.support.v7.app.MediaRouteDialogFactory| getDialogFactory()
+
+Gets the media route dialog factory to use when showing the route chooser or 
+controller dialog. 
+
+
+
+    Returns: The dialog factory, never null. 
+
+*android.support.v7.app.MediaRouteActionProvider.getMediaRouteButton()*
+
+public |android.support.v7.app.MediaRouteButton| getMediaRouteButton()
+
+Gets the associated media route button, or null if it has not yet been created. 
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.getRouteSelector()*
+
+public |android.support.v7.media.MediaRouteSelector| getRouteSelector()
+
+Gets the media route selector for filtering the routes that the user can select 
+using the media route chooser dialog. 
+
+
+
+    Returns: The selector, never null. 
+
+*android.support.v7.app.MediaRouteActionProvider.isVisible()*
+
+public boolean isVisible()
+
+
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.onCreateActionView()*
+
+public View onCreateActionView()
+
+
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.onCreateMediaRouteButton()*
+
+public |android.support.v7.app.MediaRouteButton| onCreateMediaRouteButton()
+
+Called when the media route button is being created. 
+
+Subclasses may override this method to customize the button. 
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.onPerformDefaultAction()*
+
+public boolean onPerformDefaultAction()
+
+
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.overridesItemVisibility()*
+
+public boolean overridesItemVisibility()
+
+
+
+
+
+*android.support.v7.app.MediaRouteActionProvider.setDialogFactory(MediaRouteDialogFactory)*
+
+public void setDialogFactory(android.support.v7.app.MediaRouteDialogFactory factory)
+
+Sets the media route dialog factory to use when showing the route chooser or 
+controller dialog. 
+
+
+    factory - The dialog factory, must not be null. 
+
+*android.support.v7.app.MediaRouteActionProvider.setRouteSelector(MediaRouteSelector)*
+
+public void setRouteSelector(android.support.v7.media.MediaRouteSelector selector)
+
+Sets the media route selector for filtering the routes that the user can select 
+using the media route chooser dialog. 
+
+
+    selector - The selector, must not be null. 
+
+

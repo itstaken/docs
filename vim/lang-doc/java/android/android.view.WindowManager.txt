@@ -1,0 +1,70 @@
+*android.view.WindowManager* *WindowManager* The interface that apps use to talk
+
+public interface interface WindowManager
+
+  implements |android.view.ViewManager|
+
+|android.view.WindowManager_Description|
+|android.view.WindowManager_Fields|
+|android.view.WindowManager_Constructors|
+|android.view.WindowManager_Methods|
+
+================================================================================
+
+*android.view.WindowManager_Methods*
+|android.view.WindowManager.getDefaultDisplay()|Returns theDisplayupon which th
+|android.view.WindowManager.removeViewImmediate(View)|Special variation of#remo
+
+*android.view.WindowManager_Description*
+
+The interface that apps use to talk to the window manager. 
+
+Use Context.getSystemService(Context.WINDOW_SERVICE) to get one of these. 
+
+Each window manager instance is bound to a particular (|android.view.Display|) 
+. To obtain a (|android.view.WindowManager|) for a different display, use 
+(|android.content.Context|) to obtain a (|android.content.Context|) for that 
+display, then use Context.getSystemService(Context.WINDOW_SERVICE) to get the 
+WindowManager. 
+
+The simplest way to show a window on another display is to create a 
+(|android.app.Presentation|) . The presentation will automatically obtain a 
+(|android.view.WindowManager|) and (|android.content.Context|) for that 
+display. 
+
+
+
+*android.view.WindowManager.getDefaultDisplay()*
+
+public |android.view.Display| getDefaultDisplay()
+
+Returns the (|android.view.Display|) upon which this 
+(|android.view.WindowManager|) instance will create new windows. 
+
+Despite the name of this method, the display that is returned is not 
+necessarily the primary display of the system (see (|android.view.Display|) ). 
+The returned display could instead be a secondary display that this window 
+manager instance is managing. Think of it as the display that this 
+(|android.view.WindowManager|) instance uses by default. 
+
+To create windows on a different display, you need to obtain a 
+(|android.view.WindowManager|) for that (|android.view.Display|) . (See the 
+(|android.view.WindowManager|) class documentation for more information.) 
+
+
+
+    Returns: The display that this window manager is managing. 
+
+*android.view.WindowManager.removeViewImmediate(View)*
+
+public void removeViewImmediate(android.view.View view)
+
+Special variation of (|android.view.WindowManager|) that immediately invokes 
+the given view hierarchy's View.onDetachedFromWindow()(|android.view.View|) 
+methods before returning. This is not for normal applications; using it 
+correctly requires great care. 
+
+
+    view - The view to be removed. 
+
+

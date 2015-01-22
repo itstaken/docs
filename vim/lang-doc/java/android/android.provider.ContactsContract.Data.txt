@@ -1,0 +1,445 @@
+*android.provider.ContactsContract.Data* *ContactsContract.Data* 
+ Constants for
+
+public static final class ContactsContract.Data
+  extends    |java.lang.Object|
+  implements |android.provider.ContactsContract.DataColumnsWithJoins|
+
+|android.provider.ContactsContract.Data_Description|
+|android.provider.ContactsContract.Data_Fields|
+|android.provider.ContactsContract.Data_Constructors|
+|android.provider.ContactsContract.Data_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Data_Fields*
+|java.lang.String_android.provider.ContactsContract.Data.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.Data.CONTENT_URI|
+|java.lang.String_android.provider.ContactsContract.Data.VISIBLE_CONTACTS_ONLY|
+
+*android.provider.ContactsContract.Data_Methods*
+|android.provider.ContactsContract.Data.getContactLookupUri(ContentResolver,Uri)|
+
+*android.provider.ContactsContract.Data_Description*
+
+Constants for the data table, which contains data points tied to a raw contact. 
+Each row of the data table is typically used to store a single piece of contact 
+information (such as a phone number) and its associated metadata (such as 
+whether it is a work or home number). 
+
+Data kinds 
+
+Data is a generic table that can hold any kind of contact data. The kind of 
+data stored in a given row is specified by the row's 
+(|android.provider.ContactsContract.Data|) value, which determines the meaning 
+of the generic columns (|android.provider.ContactsContract.Data|) through 
+(|android.provider.ContactsContract.Data|) . For example, if the data kind is 
+Phone.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Phone|)
+, then the column (|android.provider.ContactsContract.Data|) stores the phone 
+number, but if the data kind is 
+Email.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Email|)
+, then (|android.provider.ContactsContract.Data|) stores the email address. 
+Sync adapters and applications can introduce their own data kinds. 
+
+ContactsContract defines a small number of pre-defined data kinds, e.g. 
+(|android.provider.ContactsContract.CommonDataKinds.Phone|) , 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) etc. As a 
+convenience, these classes define data kind specific aliases for DATA1 etc. For 
+example, 
+Phone.NUMBER(|android.provider.ContactsContract.CommonDataKinds.Phone|) is the 
+same as Data.DATA1(|android.provider.ContactsContract.Data|) . 
+
+(|android.provider.ContactsContract.Data|) is an indexed column and should be 
+used for the data element that is expected to be most frequently used in query 
+selections. For example, in the case of a row representing email addresses 
+(|android.provider.ContactsContract.Data|) should probably be used for the 
+email address itself, while (|android.provider.ContactsContract.Data|) etc can 
+be used for auxiliary information like type of email address. 
+
+By convention, (|android.provider.ContactsContract.Data|) is used for storing 
+BLOBs (binary data). 
+
+The sync adapter for a given account type must correctly handle every data type 
+used in the corresponding raw contacts. Otherwise it could result in lost or 
+corrupted data. 
+
+Similarly, you should refrain from introducing new kinds of data for an other 
+party's account types. For example, if you add a data row for "favorite song" 
+to a raw contact owned by a Google account, it will not get synced to the 
+server, because the Google sync adapter does not know how to handle this data 
+kind. Thus new data kinds are typically introduced along with new account 
+types, i.e. new sync adapters. 
+
+Batch operations 
+
+Data rows can be inserted/updated/deleted using the traditional 
+(|android.content.ContentResolver|) , (|android.content.ContentResolver|) and 
+(|android.content.ContentResolver|) methods, however the newer mechanism based 
+on a batch of (|android.content.ContentProviderOperation|) will prove to be a 
+better choice in almost all cases. All operations in a batch are executed in a 
+single transaction, which ensures that the phone-side and server-side state of 
+a raw contact are always consistent. Also, the batch-based approach is far more 
+efficient: not only are the database operations faster when executed in a 
+single transaction, but also sending a batch of commands to the content 
+provider saves a lot of time on context switching between your process and the 
+process in which the content provider runs. 
+
+The flip side of using batched operations is that a large batch may lock up the 
+database for a long time preventing other applications from accessing data and 
+potentially causing ANRs ("Application Not Responding" dialogs.) 
+
+To avoid such lockups of the database, make sure to insert "yield points" in 
+the batch. A yield point indicates to the content provider that before 
+executing the next operation it can commit the changes that have already been 
+made, yield to other requests, open another transaction and continue processing 
+operations. A yield point will not automatically commit the transaction, but 
+only if there is another request waiting on the database. Normally a sync 
+adapter should insert a yield point at the beginning of each raw contact 
+operation sequence in the batch. See (|ContentProviderOperation.Builder|) . 
+
+Operations 
+
+Insert 
+
+An individual data row can be inserted using the traditional 
+(|android.content.ContentResolver|) method. Multiple rows should always be 
+inserted as a batch. 
+
+An example of a traditional insert: 
+
+ContentValues values = new ContentValues(); values.put(Data.RAW_CONTACT_ID, 
+rawContactId); values.put(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE); 
+values.put(Phone.NUMBER, "1-800-GOOG-411"); values.put(Phone.TYPE, 
+Phone.TYPE_CUSTOM); values.put(Phone.LABEL, "free directory assistance"); Uri 
+dataUri = getContentResolver().insert(Data.CONTENT_URI, values); 
+
+The same done using ContentProviderOperations: 
+
+ArrayList<ContentProviderOperation> ops = new 
+ArrayList<ContentProviderOperation>(); 
+
+ops.add(ContentProviderOperation.newInsert(Data.CONTENT_URI) 
+.withValue(Data.RAW_CONTACT_ID, rawContactId) .withValue(Data.MIMETYPE, 
+Phone.CONTENT_ITEM_TYPE) .withValue(Phone.NUMBER, "1-800-GOOG-411") 
+.withValue(Phone.TYPE, Phone.TYPE_CUSTOM) .withValue(Phone.LABEL, "free 
+directory assistance") .build()); 
+getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops); 
+
+Update 
+
+Just as with insert, update can be done incrementally or as a batch, the batch 
+mode being the preferred method: 
+
+ArrayList<ContentProviderOperation> ops = new 
+ArrayList<ContentProviderOperation>(); 
+
+ops.add(ContentProviderOperation.newUpdate(Data.CONTENT_URI) 
+.withSelection(Data._ID + "=?", new String[]{String.valueOf(dataId)}) 
+.withValue(Email.DATA, "somebody@android.com") .build()); 
+getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops); 
+
+
+
+Delete 
+
+Just as with insert and update, deletion can be done either using the 
+(|android.content.ContentResolver|) method or using a ContentProviderOperation: 
+
+ArrayList<ContentProviderOperation> ops = new 
+ArrayList<ContentProviderOperation>(); 
+
+ops.add(ContentProviderOperation.newDelete(Data.CONTENT_URI) 
+.withSelection(Data._ID + "=?", new String[]{String.valueOf(dataId)}) 
+.build()); getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops); 
+
+
+
+Query 
+
+
+
+Finding all Data of a given type for a given contact 
+
+
+
+Cursor c = getContentResolver().query(Data.CONTENT_URI, new String[] {Data._ID, 
+Phone.NUMBER, Phone.TYPE, Phone.LABEL}, Data.CONTACT_ID + =? + " AND " + 
+Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "'", new String[] 
+{String.valueOf(contactId)}, null); 
+
+
+
+Finding all Data of a given type for a given raw contact 
+
+
+
+Cursor c = getContentResolver().query(Data.CONTENT_URI, new String[] {Data._ID, 
+Phone.NUMBER, Phone.TYPE, Phone.LABEL}, Data.RAW_CONTACT_ID + =? + " AND " + 
+Data.MIMETYPE + "='" + Phone.CONTENT_ITEM_TYPE + "'", new String[] 
+{String.valueOf(rawContactId)}, null); 
+
+Finding all Data for a given raw contact 
+
+Most sync adapters will want to read all data rows for a raw contact along with 
+the raw contact itself. For that you should use the 
+(|android.provider.ContactsContract.RawContactsEntity|) . See also 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+
+
+
+
+Columns 
+
+Many columns are available via a 
+(|android.provider.ContactsContract.Contacts.Data|) query. For best performance 
+you should explicitly specify a projection to only those columns that you need. 
+
+
+
+Data 
+
+long (|android.provider.ContactsContract.Data|) read-only Row ID. Sync adapter 
+should try to preserve row IDs during updates. In other words, it would be a 
+bad idea to delete and reinsert a data row. A sync adapter should always do an 
+update instead. 
+
+String (|android.provider.ContactsContract.Data|) read/write-once 
+
+The MIME type of the item represented by this row. Examples of common MIME 
+types are: 
+
+StructuredName.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.StructuredName|)
+Phone.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Phone|)
+Email.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Email|)
+Photo.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Photo|)
+Organization.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Organization|)
+Im.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Im|) 
+Nickname.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Nickname|)
+Note.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Note|)
+StructuredPostal.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.StructuredPostal|)
+GroupMembership.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.GroupMembership|)
+Website.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Website|)
+Event.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Event|)
+Relation.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.Relation|)
+SipAddress.CONTENT_ITEM_TYPE(|android.provider.ContactsContract.CommonDataKinds.SipAddress|)
+
+
+
+
+
+
+long (|android.provider.ContactsContract.Data|) read/write-once The id of the 
+row in the (|android.provider.ContactsContract.RawContacts|) table that this 
+data belongs to. 
+
+int (|android.provider.ContactsContract.Data|) read/write Whether this is the 
+primary entry of its kind for the raw contact it belongs to. "1" if true, "0" 
+if false. 
+
+
+
+int (|android.provider.ContactsContract.Data|) read/write Whether this is the 
+primary entry of its kind for the aggregate contact it belongs to. Any data 
+record that is "super primary" must also be "primary". For example, the 
+super-primary entry may be interpreted as the default contact value of its kind 
+(for example, the default phone number to use for the contact). 
+
+int (|android.provider.ContactsContract.Data|) read-only The version of this 
+data record. Whenever the data row changes the version goes up. This value is 
+monotonically increasing. 
+
+Any type (|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) read/write 
+
+Generic data columns. The meaning of each column is determined by the 
+(|android.provider.ContactsContract.Data|) . By convention, 
+(|android.provider.ContactsContract.Data|) is used for storing BLOBs (binary 
+data). 
+
+Data columns whose meaning is not explicitly defined for a given MIMETYPE 
+should not be used. There is no guarantee that any sync adapter will preserve 
+them. Sync adapters themselves should not use such columns either, but should 
+instead use (|android.provider.ContactsContract.Data|) - 
+(|android.provider.ContactsContract.Data|) . 
+
+
+
+Any type (|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) 
+(|android.provider.ContactsContract.Data|) read/write Generic columns for use 
+by sync adapters. For example, a Photo row may store the image URL in SYNC1, a 
+status (not loaded, loading, loaded, error) in SYNC2, server-side version 
+number in SYNC3 and error code in SYNC4. 
+
+
+
+Some columns from the most recent associated status update are also available 
+through an implicit join. 
+
+
+
+Join with (|android.provider.ContactsContract.StatusUpdates|) 
+
+int (|android.provider.ContactsContract.Data|) read-only IM presence status 
+linked to this data row. Compare with 
+(|android.provider.ContactsContract.Data|) , which contains the contact's 
+presence across all IM rows. See 
+(|android.provider.ContactsContract.StatusUpdates|) for individual status 
+definitions. The provider may choose not to store this value in persistent 
+storage. The expectation is that presence status will be updated on a regular 
+basis. 
+
+
+
+String (|android.provider.ContactsContract.Data|) read-only Latest status 
+update linked with this data row. 
+
+long (|android.provider.ContactsContract.Data|) read-only The absolute time in 
+milliseconds when the latest status was inserted/updated for this data row. 
+
+String (|android.provider.ContactsContract.Data|) read-only The package 
+containing resources for this status: label and icon. 
+
+long (|android.provider.ContactsContract.Data|) read-only The resource ID of 
+the label describing the source of status update linked to this data row. This 
+resource is scoped by the (|android.provider.ContactsContract.Data|) . 
+
+long (|android.provider.ContactsContract.Data|) read-only The resource ID of 
+the icon for the source of the status update linked to this data row. This 
+resource is scoped by the (|android.provider.ContactsContract.Data|) . 
+
+
+
+Some columns from the associated raw contact are also available through an 
+implicit join. The other columns are excluded as uninteresting in this context. 
+
+
+
+Join with (|android.provider.ContactsContract.RawContacts|) 
+
+long (|android.provider.ContactsContract.Data|) read-only The id of the row in 
+the (|android.provider.Contacts|) table that this data belongs to. 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+
+
+The ID column for the associated aggregated contact table 
+(|android.provider.ContactsContract.Contacts|) is available via the implicit 
+join to the (|android.provider.ContactsContract.RawContacts|) table, see above. 
+The remaining columns from this table are also available, through an implicit 
+join. This facilitates lookup by the value of a single data element, such as 
+the email address. 
+
+
+
+Join with (|android.provider.ContactsContract.Contacts|) 
+
+String (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) 
+
+String (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) 
+
+long (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+long (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+String (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+int (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+String (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+long (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+String (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+long (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+long (|android.provider.ContactsContract.Data|) read-only See 
+(|android.provider.ContactsContract.Contacts|) . 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.Data.CONTENT_TYPE*
+
+The MIME type of the results from (|android.provider.ContactsContract.Data|) . 
+
+
+*android.net.Uri_android.provider.ContactsContract.Data.CONTENT_URI*
+
+The content:// style URI for this table, which requests a directory of data 
+rows matching the selection criteria. 
+
+
+*java.lang.String_android.provider.ContactsContract.Data.VISIBLE_CONTACTS_ONLY*
+
+A boolean parameter for (|android.provider.ContactsContract.Contacts.Data|) . 
+This specifies whether or not the returned data items should be filtered to 
+show data items belonging to visible contacts only. 
+
+
+
+*android.provider.ContactsContract.Data.getContactLookupUri(ContentResolver,Uri)*
+
+public static |android.net.Uri| getContactLookupUri(
+  android.content.ContentResolver resolver,
+  android.net.Uri dataUri)
+
+Build a (|android.provider.ContactsContract.Contacts|) style 
+(|android.net.Uri|) for the parent 
+(|android.provider.ContactsContract.Contacts|) entry of the given 
+(|android.provider.ContactsContract.Data|) entry. 
+
+Returns the Uri for the contact in the first entry returned by 
+(|android.content.ContentResolver|) for the provideddataUri. If the query 
+returns null or empty results, silently returns null. 
+
+
+
+

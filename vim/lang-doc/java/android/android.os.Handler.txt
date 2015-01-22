@@ -1,0 +1,658 @@
+*android.os.Handler* *Handler* A Handler allows you to send and processMessagean
+
+public class Handler
+  extends    |java.lang.Object|
+
+|android.os.Handler_Description|
+|android.os.Handler_Fields|
+|android.os.Handler_Constructors|
+|android.os.Handler_Methods|
+
+================================================================================
+
+*android.os.Handler_Constructors*
+|android.os.Handler()|Default constructor associates this handler with theLoope
+|android.os.Handler(boolean)|Use theLooperfor the current thread  and set wheth
+|android.os.Handler(Handler.Callback)|Constructor associates this handler with 
+|android.os.Handler(Handler.Callback,boolean)|Use theLooperfor the current thre
+|android.os.Handler(Looper)|Use the providedLooperinstead of the default one.
+|android.os.Handler(Looper,Handler.Callback)|Use the providedLooperinstead of t
+|android.os.Handler(Looper,Handler.Callback,boolean)|Use the providedLooperinst
+
+*android.os.Handler_Methods*
+|android.os.Handler.dispatchMessage(Message)|Handle system messages here.
+|android.os.Handler.dump(Printer,String)|
+|android.os.Handler.getLooper()|
+|android.os.Handler.getMessageName(Message)|Returns a string representing the n
+|android.os.Handler.handleMessage(Message)|Subclasses must implement this to re
+|android.os.Handler.hasCallbacks(Runnable)|Check if there are any pending posts
+|android.os.Handler.hasMessages(int)|Check if there are any pending posts of me
+|android.os.Handler.hasMessages(int,Object)|Check if there are any pending post
+|android.os.Handler.obtainMessage()|Returns a newandroid.os.Message Messagefrom
+|android.os.Handler.obtainMessage(int)|Same as#obtainMessage(), except that it 
+|android.os.Handler.obtainMessage(int,int,int)|Same as#obtainMessage(), except 
+|android.os.Handler.obtainMessage(int,int,int,Object)|Same as#obtainMessage(), 
+|android.os.Handler.obtainMessage(int,Object)|Same as#obtainMessage(), except t
+|android.os.Handler.post(Runnable)|Causes the Runnable r to be added to the mes
+|android.os.Handler.postAtFrontOfQueue(Runnable)|Posts a message to an object t
+|android.os.Handler.postAtTime(Runnable,long)|Causes the Runnable r to be added
+|android.os.Handler.postAtTime(Runnable,Object,long)|Causes the Runnable r to b
+|android.os.Handler.postDelayed(Runnable,long)|Causes the Runnable r to be adde
+|android.os.Handler.removeCallbacks(Runnable)|Remove any pending posts of Runna
+|android.os.Handler.removeCallbacks(Runnable,Object)|Remove any pending posts o
+|android.os.Handler.removeCallbacksAndMessages(Object)|Remove any pending posts
+|android.os.Handler.removeMessages(int)|Remove any pending posts of messages wi
+|android.os.Handler.removeMessages(int,Object)|Remove any pending posts of mess
+|android.os.Handler.runWithScissors(Runnable,long)|Runs the specified task sync
+|android.os.Handler.sendEmptyMessage(int)|Sends a Message containing only the w
+|android.os.Handler.sendEmptyMessageAtTime(int,long)|Sends a Message containing
+|android.os.Handler.sendEmptyMessageDelayed(int,long)|Sends a Message containin
+|android.os.Handler.sendMessage(Message)|Pushes a message onto the end of the m
+|android.os.Handler.sendMessageAtFrontOfQueue(Message)|Enqueue a message at the
+|android.os.Handler.sendMessageAtTime(Message,long)|Enqueue a message into the 
+|android.os.Handler.sendMessageDelayed(Message,long)|Enqueue a message into the
+|android.os.Handler.toString()|
+
+*android.os.Handler_Description*
+
+A Handler allows you to send and process (|android.os.Message|) and Runnable 
+objects associated with a thread's (|android.os.MessageQueue|) . Each Handler 
+instance is associated with a single thread and that thread's message queue. 
+When you create a new Handler, it is bound to the thread / message queue of the 
+thread that is creating it -- from that point on, it will deliver messages and 
+runnables to that message queue and execute them as they come out of the 
+message queue. 
+
+There are two main uses for a Handler: (1) to schedule messages and runnables 
+to be executed as some point in the future; and (2) to enqueue an action to be 
+performed on a different thread than your own. 
+
+Scheduling messages is accomplished with the (|android.os.Handler|) , 
+(|android.os.Handler|) , (|android.os.Handler|) , (|android.os.Handler|) , 
+(|android.os.Handler|) , (|android.os.Handler|) , and (|android.os.Handler|) 
+methods. The post versions allow you to enqueue Runnable objects to be called 
+by the message queue when they are received; the sendMessage versions allow you 
+to enqueue a (|android.os.Message|) object containing a bundle of data that 
+will be processed by the Handler's (|android.os.Handler|) method (requiring 
+that you implement a subclass of Handler). 
+
+When posting or sending to a Handler, you can either allow the item to be 
+processed as soon as the message queue is ready to do so, or specify a delay 
+before it gets processed or absolute time for it to be processed. The latter 
+two allow you to implement timeouts, ticks, and other timing-based behavior. 
+
+When a process is created for your application, its main thread is dedicated to 
+running a message queue that takes care of managing the top-level application 
+objects (activities, broadcast receivers, etc) and any windows they create. You 
+can create your own threads, and communicate back with the main application 
+thread through a Handler. This is done by calling the same post or sendMessage 
+methods as before, but from your new thread. The given Runnable or Message will 
+then be scheduled in the Handler's message queue and processed when 
+appropriate. 
+
+
+
+*android.os.Handler()*
+
+public Handler()
+
+Default constructor associates this handler with the (|android.os.Looper|) for 
+the current thread. 
+
+If this thread does not have a looper, this handler won't be able to receive 
+messages so an exception is thrown. 
+
+
+*android.os.Handler(boolean)*
+
+public Handler(boolean async)
+
+Use the (|android.os.Looper|) for the current thread and set whether the 
+handler should be asynchronous. 
+
+Handlers are synchronous by default unless this constructor is used to make one 
+that is strictly asynchronous. 
+
+Asynchronous messages represent interrupts or events that do not require global 
+ordering with represent to synchronous messages. Asynchronous messages are not 
+subject to the synchronization barriers introduced by 
+(|android.os.MessageQueue|) . 
+
+    async - If true, the handler calls {@link Message#setAsynchronous(boolean)} for each 
+       {@link Message} that is sent to it or {@link Runnable} that is posted to 
+       it. 
+
+*android.os.Handler(Handler.Callback)*
+
+public Handler(android.os.Handler.Callback callback)
+
+Constructor associates this handler with the (|android.os.Looper|) for the 
+current thread and takes a callback interface in which you can handle messages. 
+
+If this thread does not have a looper, this handler won't be able to receive 
+messages so an exception is thrown. 
+
+    callback - The callback interface in which to handle messages, or null. 
+
+*android.os.Handler(Handler.Callback,boolean)*
+
+public Handler(
+  android.os.Handler.Callback callback,
+  boolean async)
+
+Use the (|android.os.Looper|) for the current thread with the specified 
+callback interface and set whether the handler should be asynchronous. 
+
+Handlers are synchronous by default unless this constructor is used to make one 
+that is strictly asynchronous. 
+
+Asynchronous messages represent interrupts or events that do not require global 
+ordering with represent to synchronous messages. Asynchronous messages are not 
+subject to the synchronization barriers introduced by 
+(|android.os.MessageQueue|) . 
+
+    callback - The callback interface in which to handle messages, or null. 
+    async - If true, the handler calls {@link Message#setAsynchronous(boolean)} for each 
+       {@link Message} that is sent to it or {@link Runnable} that is posted to 
+       it. 
+
+*android.os.Handler(Looper)*
+
+public Handler(android.os.Looper looper)
+
+Use the provided (|android.os.Looper|) instead of the default one. 
+
+    looper - The looper, must not be null. 
+
+*android.os.Handler(Looper,Handler.Callback)*
+
+public Handler(
+  android.os.Looper looper,
+  android.os.Handler.Callback callback)
+
+Use the provided (|android.os.Looper|) instead of the default one and take a 
+callback interface in which to handle messages. 
+
+    looper - The looper, must not be null. 
+    callback - The callback interface in which to handle messages, or null. 
+
+*android.os.Handler(Looper,Handler.Callback,boolean)*
+
+public Handler(
+  android.os.Looper looper,
+  android.os.Handler.Callback callback,
+  boolean async)
+
+Use the provided (|android.os.Looper|) instead of the default one and take a 
+callback interface in which to handle messages. Also set whether the handler 
+should be asynchronous. 
+
+Handlers are synchronous by default unless this constructor is used to make one 
+that is strictly asynchronous. 
+
+Asynchronous messages represent interrupts or events that do not require global 
+ordering with represent to synchronous messages. Asynchronous messages are not 
+subject to the synchronization barriers introduced by 
+(|android.os.MessageQueue|) . 
+
+    looper - The looper, must not be null. 
+    callback - The callback interface in which to handle messages, or null. 
+    async - If true, the handler calls {@link Message#setAsynchronous(boolean)} for each 
+       {@link Message} that is sent to it or {@link Runnable} that is posted to 
+       it. 
+
+*android.os.Handler.dispatchMessage(Message)*
+
+public void dispatchMessage(android.os.Message msg)
+
+Handle system messages here. 
+
+
+
+*android.os.Handler.dump(Printer,String)*
+
+public final void dump(
+  android.util.Printer pw,
+  java.lang.String prefix)
+
+
+
+
+
+*android.os.Handler.getLooper()*
+
+public final |android.os.Looper| getLooper()
+
+
+
+
+
+*android.os.Handler.getMessageName(Message)*
+
+public |java.lang.String| getMessageName(android.os.Message message)
+
+Returns a string representing the name of the specified message. The default 
+implementation will either return the class name of the message callback if 
+any, or the hexadecimal representation of the message "what" field. 
+
+
+    message - The message whose name is being queried 
+
+*android.os.Handler.handleMessage(Message)*
+
+public void handleMessage(android.os.Message msg)
+
+Subclasses must implement this to receive messages. 
+
+
+
+*android.os.Handler.hasCallbacks(Runnable)*
+
+public final boolean hasCallbacks(java.lang.Runnable r)
+
+Check if there are any pending posts of messages with callback r in the message 
+queue. 
+
+
+
+*android.os.Handler.hasMessages(int)*
+
+public final boolean hasMessages(int what)
+
+Check if there are any pending posts of messages with code 'what' in the 
+message queue. 
+
+
+
+*android.os.Handler.hasMessages(int,Object)*
+
+public final boolean hasMessages(
+  int what,
+  java.lang.Object object)
+
+Check if there are any pending posts of messages with code 'what' and whose obj 
+is 'object' in the message queue. 
+
+
+
+*android.os.Handler.obtainMessage()*
+
+public final |android.os.Message| obtainMessage()
+
+Returns a new Message(|android.os.Message|) from the global message pool. More 
+efficient than creating and allocating new instances. The retrieved message has 
+its handler set to this instance (Message.target == this). If you don't want 
+that facility, just call Message.obtain() instead. 
+
+
+
+*android.os.Handler.obtainMessage(int)*
+
+public final |android.os.Message| obtainMessage(int what)
+
+Same as (|android.os.Handler|) , except that it also sets the what member of 
+the returned Message. 
+
+
+    what - Value to assign to the returned Message.what field. 
+
+    Returns: A Message from the global message pool. 
+
+*android.os.Handler.obtainMessage(int,int,int)*
+
+public final |android.os.Message| obtainMessage(
+  int what,
+  int arg1,
+  int arg2)
+
+Same as (|android.os.Handler|) , except that it also sets the what, arg1 and 
+arg2 members of the returned Message. 
+
+
+    what - Value to assign to the returned Message.what field. 
+    arg1 - Value to assign to the returned Message.arg1 field. 
+    arg2 - Value to assign to the returned Message.arg2 field. 
+
+    Returns: A Message from the global message pool. 
+
+*android.os.Handler.obtainMessage(int,int,int,Object)*
+
+public final |android.os.Message| obtainMessage(
+  int what,
+  int arg1,
+  int arg2,
+  java.lang.Object obj)
+
+Same as (|android.os.Handler|) , except that it also sets the what, obj, 
+arg1,and arg2 values on the returned Message. 
+
+
+    what - Value to assign to the returned Message.what field. 
+    arg1 - Value to assign to the returned Message.arg1 field. 
+    arg2 - Value to assign to the returned Message.arg2 field. 
+    obj - Value to assign to the returned Message.obj field. 
+
+    Returns: A Message from the global message pool. 
+
+*android.os.Handler.obtainMessage(int,Object)*
+
+public final |android.os.Message| obtainMessage(
+  int what,
+  java.lang.Object obj)
+
+Same as (|android.os.Handler|) , except that it also sets the what and obj 
+members of the returned Message. 
+
+
+    what - Value to assign to the returned Message.what field. 
+    obj - Value to assign to the returned Message.obj field. 
+
+    Returns: A Message from the global message pool. 
+
+*android.os.Handler.post(Runnable)*
+
+public final boolean post(java.lang.Runnable r)
+
+Causes the Runnable r to be added to the message queue. The runnable will be 
+run on the thread to which this handler is attached. 
+
+
+    r - The Runnable that will be executed. 
+
+    Returns: Returns true if the Runnable was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.postAtFrontOfQueue(Runnable)*
+
+public final boolean postAtFrontOfQueue(java.lang.Runnable r)
+
+Posts a message to an object that implements Runnable. Causes the Runnable r to 
+executed on the next iteration through the message queue. The runnable will be 
+run on the thread to which this handler is attached. This method is only for 
+use in very special circumstances -- it can easily starve the message queue, 
+cause ordering problems, or have other unexpected side-effects. 
+
+
+    r - The Runnable that will be executed. 
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.postAtTime(Runnable,long)*
+
+public final boolean postAtTime(
+  java.lang.Runnable r,
+  long uptimeMillis)
+
+Causes the Runnable r to be added to the message queue, to be run at a specific 
+time given by uptimeMillis. The time-base is (|android.os.SystemClock|) . The 
+runnable will be run on the thread to which this handler is attached. 
+
+
+    r - The Runnable that will be executed. 
+    uptimeMillis - The absolute time at which the callback should run, using the {@link 
+       android.os.SystemClock#uptimeMillis} time-base. 
+
+    Returns: Returns true if the Runnable was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. Note that a result of true does not 
+             mean the Runnable will be processed -- if the looper is quit 
+             before the delivery time of the message occurs then the message 
+             will be dropped. 
+
+*android.os.Handler.postAtTime(Runnable,Object,long)*
+
+public final boolean postAtTime(
+  java.lang.Runnable r,
+  java.lang.Object token,
+  long uptimeMillis)
+
+Causes the Runnable r to be added to the message queue, to be run at a specific 
+time given by uptimeMillis. The time-base is (|android.os.SystemClock|) . The 
+runnable will be run on the thread to which this handler is attached. 
+
+
+    r - The Runnable that will be executed. 
+    uptimeMillis - The absolute time at which the callback should run, using the {@link 
+       android.os.SystemClock#uptimeMillis} time-base. 
+
+    Returns: Returns true if the Runnable was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. Note that a result of true does not 
+             mean the Runnable will be processed -- if the looper is quit 
+             before the delivery time of the message occurs then the message 
+             will be dropped. 
+
+*android.os.Handler.postDelayed(Runnable,long)*
+
+public final boolean postDelayed(
+  java.lang.Runnable r,
+  long delayMillis)
+
+Causes the Runnable r to be added to the message queue, to be run after the 
+specified amount of time elapses. The runnable will be run on the thread to 
+which this handler is attached. 
+
+
+    r - The Runnable that will be executed. 
+    delayMillis - The delay (in milliseconds) until the Runnable will be executed. 
+
+    Returns: Returns true if the Runnable was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. Note that a result of true does not 
+             mean the Runnable will be processed -- if the looper is quit 
+             before the delivery time of the message occurs then the message 
+             will be dropped. 
+
+*android.os.Handler.removeCallbacks(Runnable)*
+
+public final void removeCallbacks(java.lang.Runnable r)
+
+Remove any pending posts of Runnable r that are in the message queue. 
+
+
+
+*android.os.Handler.removeCallbacks(Runnable,Object)*
+
+public final void removeCallbacks(
+  java.lang.Runnable r,
+  java.lang.Object token)
+
+Remove any pending posts of Runnable r with Object token that are in the 
+message queue. If token is null, all callbacks will be removed. 
+
+
+
+*android.os.Handler.removeCallbacksAndMessages(Object)*
+
+public final void removeCallbacksAndMessages(java.lang.Object token)
+
+Remove any pending posts of callbacks and sent messages whose obj is token. If 
+token is null, all callbacks and messages will be removed. 
+
+
+
+*android.os.Handler.removeMessages(int)*
+
+public final void removeMessages(int what)
+
+Remove any pending posts of messages with code 'what' that are in the message 
+queue. 
+
+
+
+*android.os.Handler.removeMessages(int,Object)*
+
+public final void removeMessages(
+  int what,
+  java.lang.Object object)
+
+Remove any pending posts of messages with code 'what' and whose obj is 'object' 
+that are in the message queue. If object is null, all messages will be removed. 
+
+
+
+*android.os.Handler.runWithScissors(Runnable,long)*
+
+public final boolean runWithScissors(
+  java.lang.Runnable r,
+  long timeout)
+
+Runs the specified task synchronously. 
+
+If the current thread is the same as the handler thread, then the runnable runs 
+immediately without being enqueued. Otherwise, posts the runnable to the 
+handler and waits for it to complete before returning. 
+
+This method is dangerous! Improper use can result in deadlocks. Never call this 
+method while any locks are held or use it in a possibly re-entrant manner. 
+
+This method is occasionally useful in situations where a background thread must 
+synchronously await completion of a task that must run on the handler's thread. 
+However, this problem is often a symptom of bad design. Consider improving the 
+design (if possible) before resorting to this method. 
+
+One example of where you might want to use this method is when you just set up 
+a Handler thread and need to perform some initialization steps on it before 
+continuing execution. 
+
+If timeout occurs then this method returns false but the runnable will remain 
+posted on the handler and may already be in progress or complete at a later 
+time. 
+
+When using this method, be sure to use (|android.os.Looper|) when quitting the 
+looper. Otherwise (|android.os.Handler|) may hang indefinitely. (TODO: We 
+should fix this by making MessageQueue aware of blocking runnables.) 
+
+
+    r - The Runnable that will be executed synchronously. 
+    timeout - The timeout in milliseconds, or 0 to wait indefinitely. 
+
+    Returns: Returns true if the Runnable was successfully executed. Returns false on 
+             failure, usually because the looper processing the message queue 
+             is exiting. 
+
+*android.os.Handler.sendEmptyMessage(int)*
+
+public final boolean sendEmptyMessage(int what)
+
+Sends a Message containing only the what value. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.sendEmptyMessageAtTime(int,long)*
+
+public final boolean sendEmptyMessageAtTime(
+  int what,
+  long uptimeMillis)
+
+Sends a Message containing only the what value, to be delivered at a specific 
+time. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.sendEmptyMessageDelayed(int,long)*
+
+public final boolean sendEmptyMessageDelayed(
+  int what,
+  long delayMillis)
+
+Sends a Message containing only the what value, to be delivered after the 
+specified amount of time elapses. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.sendMessage(Message)*
+
+public final boolean sendMessage(android.os.Message msg)
+
+Pushes a message onto the end of the message queue after all pending messages 
+before the current time. It will be received in (|android.os.Handler|) , in the 
+thread attached to this handler. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.sendMessageAtFrontOfQueue(Message)*
+
+public final boolean sendMessageAtFrontOfQueue(android.os.Message msg)
+
+Enqueue a message at the front of the message queue, to be processed on the 
+next iteration of the message loop. You will receive it in 
+(|android.os.Handler|) , in the thread attached to this handler. This method is 
+only for use in very special circumstances -- it can easily starve the message 
+queue, cause ordering problems, or have other unexpected side-effects. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. 
+
+*android.os.Handler.sendMessageAtTime(Message,long)*
+
+public boolean sendMessageAtTime(
+  android.os.Message msg,
+  long uptimeMillis)
+
+Enqueue a message into the message queue after all pending messages before the 
+absolute time (in milliseconds) uptimeMillis. The time-base is 
+(|android.os.SystemClock|) . You will receive it in (|android.os.Handler|) , in 
+the thread attached to this handler. 
+
+
+    uptimeMillis - The absolute time at which the message should be delivered, using the {@link 
+       android.os.SystemClock#uptimeMillis} time-base. 
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. Note that a result of true does not 
+             mean the message will be processed -- if the looper is quit before 
+             the delivery time of the message occurs then the message will be 
+             dropped. 
+
+*android.os.Handler.sendMessageDelayed(Message,long)*
+
+public final boolean sendMessageDelayed(
+  android.os.Message msg,
+  long delayMillis)
+
+Enqueue a message into the message queue after all pending messages before 
+(current time + delayMillis). You will receive it in (|android.os.Handler|) , 
+in the thread attached to this handler. 
+
+
+
+    Returns: Returns true if the message was successfully placed in to the message queue. 
+             Returns false on failure, usually because the looper processing 
+             the message queue is exiting. Note that a result of true does not 
+             mean the message will be processed -- if the looper is quit before 
+             the delivery time of the message occurs then the message will be 
+             dropped. 
+
+*android.os.Handler.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

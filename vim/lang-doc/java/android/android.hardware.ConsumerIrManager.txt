@@ -1,0 +1,76 @@
+*android.hardware.ConsumerIrManager* *ConsumerIrManager* Class that operates con
+
+public final class ConsumerIrManager
+  extends    |java.lang.Object|
+
+|android.hardware.ConsumerIrManager_Description|
+|android.hardware.ConsumerIrManager_Fields|
+|android.hardware.ConsumerIrManager_Constructors|
+|android.hardware.ConsumerIrManager_Methods|
+
+================================================================================
+
+*android.hardware.ConsumerIrManager_Constructors*
+|android.hardware.ConsumerIrManager(Context)|
+
+*android.hardware.ConsumerIrManager_Methods*
+|android.hardware.ConsumerIrManager.getCarrierFrequencies()|Query the infrared 
+|android.hardware.ConsumerIrManager.hasIrEmitter()|Check whether the device has
+|android.hardware.ConsumerIrManager.transmit(int,int[])|Tansmit and infrared pa
+
+*android.hardware.ConsumerIrManager_Description*
+
+Class that operates consumer infrared on the device. 
+
+To obtain an instance of the system infrared transmitter, call 
+Context.getSystemService()(|android.content.Context|) with 
+(|android.content.Context|) as the argument. 
+
+
+
+*android.hardware.ConsumerIrManager(Context)*
+
+public ConsumerIrManager(android.content.Context context)
+
+
+
+
+*android.hardware.ConsumerIrManager.getCarrierFrequencies()*
+
+public |android.hardware.ConsumerIrManager.CarrierFrequencyRange|[] getCarrierFrequencies()
+
+Query the infrared transmitter's supported carrier frequencies 
+
+
+
+    Returns: an array of {@link android.hardware.ConsumerIrManager.CarrierFrequencyRange} 
+             objects representing the ranges that the transmitter can support, 
+             or null if there was an error communicating with the Consumer IR 
+             Service. 
+
+*android.hardware.ConsumerIrManager.hasIrEmitter()*
+
+public boolean hasIrEmitter()
+
+Check whether the device has an infrared emitter. 
+
+
+
+    Returns: true if the device has an infrared emitter, else false. 
+
+*android.hardware.ConsumerIrManager.transmit(int,int[])*
+
+public void transmit(
+  int carrierFrequency,
+  int[] pattern)
+
+Tansmit and infrared pattern 
+
+This method is synchronous; when it returns the pattern has been transmitted. 
+Only patterns shorter than 2 seconds will be transmitted. 
+
+
+    carrierFrequency - The IR carrier frequency in Hertz. 
+    pattern - The alternating on/off pattern in microseconds to transmit. 
+
+

@@ -1,0 +1,341 @@
+*android.view.VolumePanel* *VolumePanel* Handle the volume up and down keys.
+
+public class VolumePanel
+  extends    |android.os.Handler|
+  implements |android.widget.SeekBar.OnSeekBarChangeListener|
+             |android.view.View.OnClickListener|
+
+|android.view.VolumePanel_Description|
+|android.view.VolumePanel_Fields|
+|android.view.VolumePanel_Constructors|
+|android.view.VolumePanel_Methods|
+
+================================================================================
+
+*android.view.VolumePanel_Fields*
+|AudioService_android.view.VolumePanel.mAudioService|
+|android.content.Context_android.view.VolumePanel.mContext|
+|int_android.view.VolumePanel.PLAY_SOUND_DELAY|
+|int_android.view.VolumePanel.VIBRATE_DELAY|
+
+*android.view.VolumePanel_Constructors*
+|android.view.VolumePanel(Context,AudioService)|
+
+*android.view.VolumePanel_Methods*
+|android.view.VolumePanel.handleMessage(Message)|
+|android.view.VolumePanel.onClick(View)|
+|android.view.VolumePanel.onDisplaySafeVolumeWarning(int)|
+|android.view.VolumePanel.onFreeResources()|
+|android.view.VolumePanel.onMuteChanged(int,int)|
+|android.view.VolumePanel.onPlaySound(int,int)|
+|android.view.VolumePanel.onProgressChanged(SeekBar,int,boolean)|
+|android.view.VolumePanel.onRemoteVolumeChanged(int,int)|
+|android.view.VolumePanel.onRemoteVolumeUpdateIfShown()|
+|android.view.VolumePanel.onShowVolumeChanged(int,int)|
+|android.view.VolumePanel.onSliderVisibilityChanged(int,int)|Handler for MSG_SL
+|android.view.VolumePanel.onStartTrackingTouch(SeekBar)|
+|android.view.VolumePanel.onStopSounds()|
+|android.view.VolumePanel.onStopTrackingTouch(SeekBar)|
+|android.view.VolumePanel.onVibrate()|
+|android.view.VolumePanel.onVolumeChanged(int,int)|Override this if you have ot
+|android.view.VolumePanel.postDisplaySafeVolumeWarning(int)|
+|android.view.VolumePanel.postHasNewRemotePlaybackInfo()|Called by AudioService
+|android.view.VolumePanel.postMasterMuteChanged(int)|
+|android.view.VolumePanel.postMasterVolumeChanged(int)|
+|android.view.VolumePanel.postMuteChanged(int,int)|
+|android.view.VolumePanel.postRemoteSliderVisibility(boolean)|
+|android.view.VolumePanel.postRemoteVolumeChanged(int,int)|
+|android.view.VolumePanel.postVolumeChanged(int,int)|
+|android.view.VolumePanel.setLayoutDirection(int)|
+|android.view.VolumePanel.updateStates()|
+
+*android.view.VolumePanel_Description*
+
+Handle the volume up and down keys. 
+
+This code really should be moved elsewhere. 
+
+Seriously, it really really should be moved elsewhere. This is used by 
+android.media.AudioService, which actually runs in the system process, to show 
+the volume dialog when the user changes the volume. What a mess. 
+
+
+
+*AudioService_android.view.VolumePanel.mAudioService*
+
+
+
+
+*android.content.Context_android.view.VolumePanel.mContext*
+
+
+
+
+*int_android.view.VolumePanel.PLAY_SOUND_DELAY*
+
+The delay before playing a sound. This small period exists so the user can 
+press another key (non-volume keys, too) to have it NOT be audible. 
+
+PhoneWindow will implement this part. 
+
+
+*int_android.view.VolumePanel.VIBRATE_DELAY*
+
+The delay before vibrating. This small period exists so if the user is moving 
+to silent mode, it will not emit a short vibrate (it normally would since 
+vibrate is between normal mode and silent mode using hardware keys). 
+
+
+
+*android.view.VolumePanel(Context,AudioService)*
+
+public VolumePanel(
+  android.content.Context context,
+  AudioService volumeService)
+
+
+
+
+*android.view.VolumePanel.handleMessage(Message)*
+
+public void handleMessage(android.os.Message msg)
+
+
+
+
+
+*android.view.VolumePanel.onClick(View)*
+
+public void onClick(android.view.View v)
+
+
+
+
+
+*android.view.VolumePanel.onDisplaySafeVolumeWarning(int)*
+
+protected void onDisplaySafeVolumeWarning(int flags)
+
+
+
+
+
+*android.view.VolumePanel.onFreeResources()*
+
+protected void onFreeResources()
+
+
+
+
+
+*android.view.VolumePanel.onMuteChanged(int,int)*
+
+protected void onMuteChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.onPlaySound(int,int)*
+
+protected void onPlaySound(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.onProgressChanged(SeekBar,int,boolean)*
+
+public void onProgressChanged(
+  android.widget.SeekBar seekBar,
+  int progress,
+  boolean fromUser)
+
+
+
+
+
+*android.view.VolumePanel.onRemoteVolumeChanged(int,int)*
+
+protected void onRemoteVolumeChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.onRemoteVolumeUpdateIfShown()*
+
+protected void onRemoteVolumeUpdateIfShown()
+
+
+
+
+
+*android.view.VolumePanel.onShowVolumeChanged(int,int)*
+
+protected void onShowVolumeChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.onSliderVisibilityChanged(int,int)*
+
+protected synchronized void onSliderVisibilityChanged(
+  int streamType,
+  int visible)
+
+Handler for MSG_SLIDER_VISIBILITY_CHANGED Hide or show a slider 
+
+
+    streamType - can be a valid stream type value, or VolumePanel.STREAM_MASTER, or 
+       AudioService.STREAM_REMOTE_MUSIC 
+    visible - 
+
+*android.view.VolumePanel.onStartTrackingTouch(SeekBar)*
+
+public void onStartTrackingTouch(android.widget.SeekBar seekBar)
+
+
+
+
+
+*android.view.VolumePanel.onStopSounds()*
+
+protected void onStopSounds()
+
+
+
+
+
+*android.view.VolumePanel.onStopTrackingTouch(SeekBar)*
+
+public void onStopTrackingTouch(android.widget.SeekBar seekBar)
+
+
+
+
+
+*android.view.VolumePanel.onVibrate()*
+
+protected void onVibrate()
+
+
+
+
+
+*android.view.VolumePanel.onVolumeChanged(int,int)*
+
+protected void onVolumeChanged(
+  int streamType,
+  int flags)
+
+Override this if you have other work to do when the volume changes (for 
+example, vibrating, playing a sound, etc.). Make sure to call through to the 
+superclass implementation. 
+
+
+
+*android.view.VolumePanel.postDisplaySafeVolumeWarning(int)*
+
+public void postDisplaySafeVolumeWarning(int flags)
+
+
+
+
+
+*android.view.VolumePanel.postHasNewRemotePlaybackInfo()*
+
+public void postHasNewRemotePlaybackInfo()
+
+Called by AudioService when it has received new remote playback information 
+that would affect the VolumePanel display (mainly volumes). The difference with 
+(|android.view.VolumePanel|) is that the handling of the posted message 
+(MSG_REMOTE_VOLUME_UPDATE_IF_SHOWN) will only update the volume slider if it is 
+being displayed. This special code path is due to the fact that remote volume 
+updates arrive to AudioService asynchronously. So after AudioService has sent 
+the volume update (which should be treated as a request to update the volume), 
+the application will likely set a new volume. If the UI is still up, we need to 
+refresh the display to show this new value. 
+
+
+
+*android.view.VolumePanel.postMasterMuteChanged(int)*
+
+public void postMasterMuteChanged(int flags)
+
+
+
+
+
+*android.view.VolumePanel.postMasterVolumeChanged(int)*
+
+public void postMasterVolumeChanged(int flags)
+
+
+
+
+
+*android.view.VolumePanel.postMuteChanged(int,int)*
+
+public void postMuteChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.postRemoteSliderVisibility(boolean)*
+
+public void postRemoteSliderVisibility(boolean visible)
+
+
+
+
+
+*android.view.VolumePanel.postRemoteVolumeChanged(int,int)*
+
+public void postRemoteVolumeChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.postVolumeChanged(int,int)*
+
+public void postVolumeChanged(
+  int streamType,
+  int flags)
+
+
+
+
+
+*android.view.VolumePanel.setLayoutDirection(int)*
+
+public void setLayoutDirection(int layoutDirection)
+
+
+
+
+
+*android.view.VolumePanel.updateStates()*
+
+public void updateStates()
+
+
+
+
+
+

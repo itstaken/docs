@@ -1,0 +1,382 @@
+*android.view.DragEvent* *DragEvent* Represents an event that is sent out by the
+
+public class DragEvent
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.DragEvent_Description|
+|android.view.DragEvent_Fields|
+|android.view.DragEvent_Constructors|
+|android.view.DragEvent_Methods|
+
+================================================================================
+
+*android.view.DragEvent_Fields*
+|int_android.view.DragEvent.ACTION_DRAG_ENDED|
+|int_android.view.DragEvent.ACTION_DRAG_ENTERED|
+|int_android.view.DragEvent.ACTION_DRAG_EXITED|
+|int_android.view.DragEvent.ACTION_DRAG_LOCATION|
+|int_android.view.DragEvent.ACTION_DRAG_STARTED|
+|int_android.view.DragEvent.ACTION_DROP|
+|android.os.Parcelable.Creator<android.view.DragEvent>_android.view.DragEvent.CREATOR|
+
+*android.view.DragEvent_Methods*
+|android.view.DragEvent.describeContents()|Returns information about theandroid
+|android.view.DragEvent.getAction()|Inspect the action value of this event.
+|android.view.DragEvent.getClipData()|Returns theandroid.content.ClipDataobject
+|android.view.DragEvent.getClipDescription()|Returns theandroid.content.ClipDes
+|android.view.DragEvent.getLocalState()|Returns the local state object sent to 
+|android.view.DragEvent.getResult()|Returns an indication of the result of the 
+|android.view.DragEvent.getX()|Gets the X coordinate of the drag point.
+|android.view.DragEvent.getY()|Gets the Y coordinate of the drag point.
+|android.view.DragEvent.obtain(DragEvent)|
+|android.view.DragEvent.obtain(int,float,float,Object,ClipDescription,ClipData,boolean)|
+|android.view.DragEvent.recycle()|Recycle the DragEvent, to be re-used by a lat
+|android.view.DragEvent.toString()|Returns a string containing a concise, human
+|android.view.DragEvent.writeToParcel(Parcel,int)|Creates aandroid.os.Parcelobj
+
+*android.view.DragEvent_Description*
+
+Represents an event that is sent out by the system at various times during a 
+drag and drop operation. It is a complex data structure that contains several 
+important pieces of data about the operation and the underlying data. 
+
+View objects that receive a DragEvent call (|android.view.DragEvent|) , which 
+returns an action type that indicates the state of the drag and drop operation. 
+This allows a View object to react to a change in state by changing its 
+appearance or performing other actions. For example, a View can react to the 
+(|android.view.DragEvent|) action type by by changing one or more colors in its 
+displayed image. 
+
+During a drag and drop operation, the system displays an image that the user 
+drags. This image is called a drag shadow. Several action types reflect the 
+position of the drag shadow relative to the View receiving the event. 
+
+Most methods return valid data only for certain event actions. This is 
+summarized in the following table. Each possible (|android.view.DragEvent|) 
+value is listed in the first column. The other columns indicate which method or 
+methods return valid data for that getAction() value: 
+
+
+
+getAction() Value getClipDescription() getLocalState() getX() getY() 
+getClipData() getResult() 
+
+ACTION_DRAG_STARTED X X X X 
+
+
+
+ACTION_DRAG_ENTERED X X 
+
+
+
+
+
+ACTION_DRAG_LOCATION X X X X 
+
+
+
+ACTION_DRAG_EXITED X X 
+
+
+
+
+
+ACTION_DROP X X X X X 
+
+
+
+ACTION_DRAG_ENDED X X 
+
+
+
+X 
+
+
+
+The (|android.view.DragEvent|) , (|android.view.DragEvent|) , 
+(|android.view.DragEvent|) , and (|android.view.DragEvent|) methods always 
+return valid data. 
+
+Developer Guides For a guide to implementing drag and drop features, read the 
+<a href="guide/topics/ui/drag-drop.html">Drag and Drop developer guide. 
+
+
+
+*int_android.view.DragEvent.ACTION_DRAG_ENDED*
+
+Action constant returned by (|android.view.DragEvent|) : Signals to a View that 
+the drag and drop operation has concluded. A View that changed its appearance 
+during the operation should return to its usual drawing state in response to 
+this event. 
+
+All views that received an ACTION_DRAG_STARTED event will receive the 
+ACTION_DRAG_ENDED event even if they are not currently visible when the drag 
+ends. 
+
+The View object can call (|android.view.DragEvent|) to see the result of the 
+operation. If a View returnedtruein response to (|android.view.DragEvent|) , 
+then getResult() returnstrue, otherwise it returnsfalse. 
+
+
+*int_android.view.DragEvent.ACTION_DRAG_ENTERED*
+
+Action constant returned by (|android.view.DragEvent|) : Signals to a View that 
+the drag point has entered the bounding box of the View. 
+
+If the View can accept a drop, it can react to ACTION_DRAG_ENTERED by changing 
+its appearance in a way that tells the user that the View is the current drop 
+target. 
+
+The system stops sending ACTION_DRAG_LOCATION events to a View once the user 
+moves the drag shadow out of the View object's bounding box. If the user moves 
+the drag shadow back into the View object's bounding box, the View receives an 
+ACTION_DRAG_ENTERED again before receiving any more ACTION_DRAG_LOCATION 
+events. 
+
+
+*int_android.view.DragEvent.ACTION_DRAG_EXITED*
+
+Action constant returned by (|android.view.DragEvent|) : Signals that the user 
+has moved the drag shadow outside the bounding box of the View. The View can 
+react by changing its appearance in a way that tells the user that View is no 
+longer the immediate drop target. 
+
+After the system sends an ACTION_DRAG_EXITED event to the View, the View 
+receives no more ACTION_DRAG_LOCATION events until the user drags the drag 
+shadow back over the View. 
+
+
+*int_android.view.DragEvent.ACTION_DRAG_LOCATION*
+
+Action constant returned by (|android.view.DragEvent|) : Sent to a View after 
+(|android.view.DragEvent|) if the drag shadow is still within the View object's 
+bounding box. The (|android.view.DragEvent|) and (|android.view.DragEvent|) 
+methods supply the X and Y position of of the drag point within the View 
+object's bounding box. 
+
+A View receives an (|android.view.DragEvent|) event before receiving any 
+ACTION_DRAG_LOCATION events. 
+
+The system stops sending ACTION_DRAG_LOCATION events to a View once the user 
+moves the drag shadow out of the View object's bounding box. If the user moves 
+the drag shadow back into the View object's bounding box, the View receives an 
+ACTION_DRAG_ENTERED again before receiving any more ACTION_DRAG_LOCATION 
+events. 
+
+
+*int_android.view.DragEvent.ACTION_DRAG_STARTED*
+
+Action constant returned by (|android.view.DragEvent|) : Signals the start of a 
+drag and drop operation. The View should returntruefrom its 
+onDragEvent()(|android.view.View|) handler method or 
+OnDragListener.onDrag()(|View.View.OnDragListener|) listener if it can accept a 
+drop. The onDragEvent() or onDrag() methods usually inspect the metadata from 
+(|android.view.DragEvent|) to determine if they can accept the data contained 
+in this drag. For an operation that doesn't represent data transfer, these 
+methods may perform other actions to determine whether or not the View should 
+accept the drag. If the View wants to indicate that it is a valid drop target, 
+it can also react by changing its appearance. 
+
+A View only receives further drag events if it returnstruein response to 
+ACTION_DRAG_STARTED. 
+
+
+*int_android.view.DragEvent.ACTION_DROP*
+
+Action constant returned by (|android.view.DragEvent|) : Signals to a View that 
+the user has released the drag shadow, and the drag point is within the 
+bounding box of the View. The View should retrieve the data from the DragEvent 
+by calling (|android.view.DragEvent|) . The methods (|android.view.DragEvent|) 
+and (|android.view.DragEvent|) return the X and Y position of the drop point 
+within the View object's bounding box. 
+
+The View should returntruefrom its (|android.view.View|) handler or 
+OnDragListener.onDrag()(|View.View.OnDragListener|) listener if it accepted the 
+drop, andfalseif it ignored the drop. 
+
+The View can also react to this action by changing its appearance. 
+
+
+*android.os.Parcelable.Creator<android.view.DragEvent>_android.view.DragEvent.CREATOR*
+
+A container for creating a DragEvent from a Parcel. 
+
+
+
+*android.view.DragEvent.describeContents()*
+
+public int describeContents()
+
+Returns information about the (|android.os.Parcel|) representation of this 
+DragEvent object. 
+
+
+
+    Returns: Information about the {@link android.os.Parcel} representation. 
+
+*android.view.DragEvent.getAction()*
+
+public int getAction()
+
+Inspect the action value of this event. 
+
+
+
+    Returns: One of the following action constants, in the order in which they usually occur 
+             during a drag and drop operation: 
+
+{@link #ACTION_DRAG_STARTED} {@link #ACTION_DRAG_ENTERED} {@link 
+             #ACTION_DRAG_LOCATION} {@link #ACTION_DROP} {@link 
+             #ACTION_DRAG_EXITED} {@link #ACTION_DRAG_ENDED} 
+
+*android.view.DragEvent.getClipData()*
+
+public |android.content.ClipData| getClipData()
+
+Returns the (|android.content.ClipData|) object sent to the system as part of 
+the call to startDrag()(|android.view.View|) . This method only returns valid 
+data if the event action is (|android.view.DragEvent|) . 
+
+
+
+    Returns: The ClipData sent to the system by startDrag(). 
+
+*android.view.DragEvent.getClipDescription()*
+
+public |android.content.ClipDescription| getClipDescription()
+
+Returns the (|android.content.ClipDescription|) object contained in the 
+(|android.content.ClipData|) object sent to the system as part of the call to 
+startDrag()(|android.view.View|) . The drag handler or listener for a View can 
+use the metadata in this object to decide if the View can accept the dragged 
+View object's data. 
+
+This method returns valid data for all event actions. 
+
+
+
+    Returns: The ClipDescription that was part of the ClipData sent to the system by 
+             startDrag(). 
+
+*android.view.DragEvent.getLocalState()*
+
+public |java.lang.Object| getLocalState()
+
+Returns the local state object sent to the system as part of the call to 
+startDrag()(|android.view.View|) . The object is intended to provide local 
+information about the drag and drop operation. For example, it can indicate 
+whether the drag and drop operation is a copy or a move. 
+
+This method returns valid data for all event actions. 
+
+
+
+    Returns: The local state object sent to the system by startDrag(). 
+
+*android.view.DragEvent.getResult()*
+
+public boolean getResult()
+
+Returns an indication of the result of the drag and drop operation. This method 
+only returns valid data if the action type is (|android.view.DragEvent|) . The 
+return value depends on what happens after the user releases the drag shadow. 
+
+If the user releases the drag shadow on a View that can accept a drop, the 
+system sends an (|android.view.DragEvent|) event to the View object's drag 
+event listener. If the listener returnstrue, then getResult() will returntrue. 
+If the listener returnsfalse, then getResult() returnsfalse. 
+
+Notice that getResult() also returnsfalseif no (|android.view.DragEvent|) is 
+sent. This happens, for example, when the user releases the drag shadow over an 
+area outside of the application. In this case, the system sends out 
+(|android.view.DragEvent|) for the current operation, but never sends out 
+(|android.view.DragEvent|) . 
+
+
+
+    Returns: {@code true} if a drag event listener returned {@code true} in response to 
+             {@link #ACTION_DROP}. If the system did not send {@link 
+             #ACTION_DROP} before {@link #ACTION_DRAG_ENDED}, or if the 
+             listener returned {@code false} in response to {@link 
+             #ACTION_DROP}, then {@code false} is returned. 
+
+*android.view.DragEvent.getX()*
+
+public float getX()
+
+Gets the X coordinate of the drag point. The value is only valid if the event 
+action is (|android.view.DragEvent|) or (|android.view.DragEvent|) . 
+
+
+
+    Returns: The current drag point's Y coordinate 
+
+*android.view.DragEvent.getY()*
+
+public float getY()
+
+Gets the Y coordinate of the drag point. The value is valid if the event action 
+is (|android.view.DragEvent|) , (|android.view.DragEvent|) , 
+(|android.view.DragEvent|) , or (|android.view.DragEvent|) . 
+
+
+
+    Returns: The current drag point's Y coordinate 
+
+*android.view.DragEvent.obtain(DragEvent)*
+
+public static |android.view.DragEvent| obtain(android.view.DragEvent source)
+
+
+
+
+
+*android.view.DragEvent.obtain(int,float,float,Object,ClipDescription,ClipData,boolean)*
+
+public static |android.view.DragEvent| obtain(
+  int action,
+  float x,
+  float y,
+  java.lang.Object localState,
+  android.content.ClipDescription description,
+  android.content.ClipData data,
+  boolean result)
+
+
+
+
+
+*android.view.DragEvent.recycle()*
+
+public final void recycle()
+
+Recycle the DragEvent, to be re-used by a later caller. After calling this 
+function you must never touch the event again. 
+
+
+
+*android.view.DragEvent.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string containing a concise, human-readable representation of this 
+DragEvent object. 
+
+
+
+    Returns: A string representation of the DragEvent object. 
+
+*android.view.DragEvent.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Creates a (|android.os.Parcel|) object from this DragEvent object. 
+
+
+    dest - A {@link android.os.Parcel} object in which to put the DragEvent object. 
+    flags - Flags to store in the Parcel. 
+
+

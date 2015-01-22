@@ -1,0 +1,47 @@
+*android.text.util.Linkify.MatchFilter* *Linkify.MatchFilter* MatchFilter enable
+
+public static interface interface Linkify.MatchFilter
+
+
+|android.text.util.Linkify.MatchFilter_Description|
+|android.text.util.Linkify.MatchFilter_Fields|
+|android.text.util.Linkify.MatchFilter_Constructors|
+|android.text.util.Linkify.MatchFilter_Methods|
+
+================================================================================
+
+*android.text.util.Linkify.MatchFilter_Methods*
+|android.text.util.Linkify.MatchFilter.acceptMatch(CharSequence,int,int)|Examin
+
+*android.text.util.Linkify.MatchFilter_Description*
+
+MatchFilter enables client code to have more control over what is allowed to 
+match and become a link, and what is not. 
+
+For example: when matching web urls you would like things like 
+http://www.example.com to match, as well as just example.com itelf. However, 
+you would not want to match against the domain in support@example.com. So, when 
+matching against a web url pattern you might also include a MatchFilter that 
+disallows the match if it is immediately preceded by an at-sign (@). 
+
+
+
+*android.text.util.Linkify.MatchFilter.acceptMatch(CharSequence,int,int)*
+
+public boolean acceptMatch(
+  java.lang.CharSequence s,
+  int start,
+  int end)
+
+Examines the character span matched by the pattern and determines if the match 
+should be turned into an actionable link. 
+
+
+    s - The body of text against which the pattern was matched 
+    start - The index of the first character in s that was matched by the pattern - 
+       inclusive 
+    end - The index of the last character in s that was matched - exclusive 
+
+    Returns: Whether this match should be turned into a link 
+
+

@@ -1,0 +1,112 @@
+*android.os.PerformanceCollector.PerformanceResultsWriter* *PerformanceCollector.PerformanceResultsWriter* 
+
+public static interface interface PerformanceCollector.PerformanceResultsWriter
+
+
+|android.os.PerformanceCollector.PerformanceResultsWriter_Description|
+|android.os.PerformanceCollector.PerformanceResultsWriter_Fields|
+|android.os.PerformanceCollector.PerformanceResultsWriter_Constructors|
+|android.os.PerformanceCollector.PerformanceResultsWriter_Methods|
+
+================================================================================
+
+*android.os.PerformanceCollector.PerformanceResultsWriter_Methods*
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeBeginSnapshot(String)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeEndSnapshot(Bundle)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,float)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,long)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,String)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeStartTiming(String)|
+|android.os.PerformanceCollector.PerformanceResultsWriter.writeStopTiming(Bundle)|
+
+*android.os.PerformanceCollector.PerformanceResultsWriter_Description*
+
+Interface for reporting performance data. 
+
+
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeBeginSnapshot(String)*
+
+public void writeBeginSnapshot(java.lang.String label)
+
+Callback invoked as first action in PerformanceCollector#beginSnapshot(String) 
+for reporting the start of a performance snapshot. 
+
+
+    label - description of code block between beginSnapshot and 
+       PerformanceCollector#endSnapshot() 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeEndSnapshot(Bundle)*
+
+public void writeEndSnapshot(android.os.Bundle results)
+
+Callback invoked as last action in PerformanceCollector#endSnapshot() for 
+reporting performance data collected in the snapshot. 
+
+
+    results - memory and runtime metrics stored as key/value pairs, in the same structure as 
+       returned by PerformanceCollector#endSnapshot() 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,float)*
+
+public void writeMeasurement(
+  java.lang.String label,
+  float value)
+
+Callback invoked as last action in (|android.os.PerformanceCollector|) for 
+reporting a float type measurement. 
+
+
+    label - short description of the metric that was measured 
+    value - float value of the measurement 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,long)*
+
+public void writeMeasurement(
+  java.lang.String label,
+  long value)
+
+Callback invoked as last action in (|android.os.PerformanceCollector|) for 
+reporting an integer type measurement. 
+
+
+    label - short description of the metric that was measured 
+    value - long value of the measurement 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeMeasurement(String,String)*
+
+public void writeMeasurement(
+  java.lang.String label,
+  java.lang.String value)
+
+Callback invoked as last action in (|android.os.PerformanceCollector|) for 
+reporting a string field. 
+
+
+    label - short description of the metric that was measured 
+    value - string summary of the measurement 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeStartTiming(String)*
+
+public void writeStartTiming(java.lang.String label)
+
+Callback invoked as first action in PerformanceCollector#startTiming(String) 
+for reporting the start of a timing measurement. 
+
+
+    label - description of code block between startTiming and 
+       PerformanceCollector#stopTiming(String) 
+
+*android.os.PerformanceCollector.PerformanceResultsWriter.writeStopTiming(Bundle)*
+
+public void writeStopTiming(android.os.Bundle results)
+
+Callback invoked as last action in (|android.os.PerformanceCollector|) for 
+reporting the sequence of timings measured. 
+
+
+    results - runtime metrics of code block between calls to startTiming and stopTiming, in 
+       the same structure as returned by 
+       PerformanceCollector#stopTiming(String) 
+
+

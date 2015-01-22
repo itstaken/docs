@@ -1,0 +1,115 @@
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl* *AbstractInputMethodService.AbstractInputMethodSessionImpl* 
+
+public abstract class AbstractInputMethodService.AbstractInputMethodSessionImpl
+  extends    |java.lang.Object|
+  implements |android.view.inputmethod.InputMethodSession|
+
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Description|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Fields|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Constructors|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Methods|
+
+================================================================================
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Constructors*
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl()|
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Methods*
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchGenericMotionEvent(int,MotionEvent,InputMethodSession.EventCallback)|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchKeyEvent(int,KeyEvent,InputMethodSession.EventCallback)|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchTrackballEvent(int,MotionEvent,InputMethodSession.EventCallback)|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.isEnabled()|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.isRevoked()|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.revokeSelf()|
+|android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.setEnabled(boolean)|
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl_Description*
+
+Base class for derived classes to implement their 
+(|android.view.inputmethod.InputMethodSession|) interface. This takes care of 
+basic maintenance of the session, but most behavior must be implemented in a 
+derived class. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl()*
+
+public AbstractInputMethodService.AbstractInputMethodSessionImpl()
+
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchGenericMotionEvent(int,MotionEvent,InputMethodSession.EventCallback)*
+
+public void dispatchGenericMotionEvent(
+  int seq,
+  android.view.MotionEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+Take care of dispatching incoming generic motion events to the appropriate 
+callbacks on the service, and tell the client when this is done. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchKeyEvent(int,KeyEvent,InputMethodSession.EventCallback)*
+
+public void dispatchKeyEvent(
+  int seq,
+  android.view.KeyEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+Take care of dispatching incoming key events to the appropriate callbacks on 
+the service, and tell the client when this is done. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.dispatchTrackballEvent(int,MotionEvent,InputMethodSession.EventCallback)*
+
+public void dispatchTrackballEvent(
+  int seq,
+  android.view.MotionEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+Take care of dispatching incoming trackball events to the appropriate callbacks 
+on the service, and tell the client when this is done. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.isEnabled()*
+
+public boolean isEnabled()
+
+Check whether this session has been enabled by the system. If not enabled, you 
+should not execute any calls on to it. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.isRevoked()*
+
+public boolean isRevoked()
+
+Check whether this session has been revoked by the system. Revoked session is 
+also always disabled, so there is generally no need to explicitly check for 
+this. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.revokeSelf()*
+
+public void revokeSelf()
+
+Revoke the session from the client. This disabled the session, and prevents it 
+from ever being enabled again. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl.setEnabled(boolean)*
+
+public void setEnabled(boolean enabled)
+
+Change the enabled state of the session. This only works if the session has not 
+been revoked. 
+
+
+
+

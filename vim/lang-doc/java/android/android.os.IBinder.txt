@@ -1,0 +1,286 @@
+*android.os.IBinder* *IBinder* Base interface for a remotable object, the core p
+
+public interface interface IBinder
+
+
+|android.os.IBinder_Description|
+|android.os.IBinder_Fields|
+|android.os.IBinder_Constructors|
+|android.os.IBinder_Methods|
+
+================================================================================
+
+*android.os.IBinder_Fields*
+|int_android.os.IBinder.DUMP_TRANSACTION|
+|int_android.os.IBinder.FIRST_CALL_TRANSACTION|
+|int_android.os.IBinder.FLAG_ONEWAY|
+|int_android.os.IBinder.INTERFACE_TRANSACTION|
+|int_android.os.IBinder.LAST_CALL_TRANSACTION|
+|int_android.os.IBinder.LIKE_TRANSACTION|
+|int_android.os.IBinder.PING_TRANSACTION|
+|int_android.os.IBinder.SYSPROPS_TRANSACTION|
+|int_android.os.IBinder.TWEET_TRANSACTION|
+
+*android.os.IBinder_Methods*
+|android.os.IBinder.dump(FileDescriptor,String[])|Print the object's state into
+|android.os.IBinder.dumpAsync(FileDescriptor,String[])|Like#dump(FileDescriptor
+|android.os.IBinder.getInterfaceDescriptor()|Get the canonical name of the inte
+|android.os.IBinder.isBinderAlive()|Check to see if the process that the binder
+|android.os.IBinder.linkToDeath(IBinder.DeathRecipient,int)|Register the recipi
+|android.os.IBinder.pingBinder()|Check to see if the object still exists.
+|android.os.IBinder.queryLocalInterface(String)|Attempt to retrieve a local imp
+|android.os.IBinder.transact(int,Parcel,Parcel,int)|Perform a generic operation
+|android.os.IBinder.unlinkToDeath(IBinder.DeathRecipient,int)|Remove a previous
+
+*android.os.IBinder_Description*
+
+Base interface for a remotable object, the core part of a lightweight remote 
+procedure call mechanism designed for high performance when performing 
+in-process and cross-process calls. This interface describes the abstract 
+protocol for interacting with a remotable object. Do not implement this 
+interface directly, instead extend from (|android.os.Binder|) . 
+
+The key IBinder API is transact()(|android.os.IBinder|) matched by 
+Binder.onTransact()(|android.os.Binder|) . These methods allow you to send a 
+call to an IBinder object and receive a call coming in to a Binder object, 
+respectively. This transaction API is synchronous, such that a call to 
+transact()(|android.os.IBinder|) does not return until the target has returned 
+from Binder.onTransact()(|android.os.Binder|) ; this is the expected behavior 
+when calling an object that exists in the local process, and the underlying 
+inter-process communication (IPC) mechanism ensures that these same semantics 
+apply when going across processes. 
+
+The data sent through transact() is a (|android.os.Parcel|) , a generic buffer 
+of data that also maintains some meta-data about its contents. The meta data is 
+used to manage IBinder object references in the buffer, so that those 
+references can be maintained as the buffer moves across processes. This 
+mechanism ensures that when an IBinder is written into a Parcel and sent to 
+another process, if that other process sends a reference to that same IBinder 
+back to the original process, then the original process will receive the same 
+IBinder object back. These semantics allow IBinder/Binder objects to be used as 
+a unique identity (to serve as a token or for other purposes) that can be 
+managed across processes. 
+
+The system maintains a pool of transaction threads in each process that it runs 
+in. These threads are used to dispatch all IPCs coming in from other processes. 
+For example, when an IPC is made from process A to process B, the calling 
+thread in A blocks in transact() as it sends the transaction to process B. The 
+next available pool thread in B receives the incoming transaction, calls 
+Binder.onTransact() on the target object, and replies with the result Parcel. 
+Upon receiving its result, the thread in process A returns to allow its 
+execution to continue. In effect, other processes appear to use as additional 
+threads that you did not create executing in your own process. 
+
+The Binder system also supports recursion across processes. For example if 
+process A performs a transaction to process B, and process B while handling 
+that transaction calls transact() on an IBinder that is implemented in A, then 
+the thread in A that is currently waiting for the original transaction to 
+finish will take care of calling Binder.onTransact() on the object being called 
+by B. This ensures that the recursion semantics when calling remote binder 
+object are the same as when calling local objects. 
+
+When working with remote objects, you often want to find out when they are no 
+longer valid. There are three ways this can be determined: 
+
+The transact()(|android.os.IBinder|) method will throw a 
+(|android.os.RemoteException|) exception if you try to call it on an IBinder 
+whose process no longer exists. The (|android.os.IBinder|) method can be 
+called, and will return false if the remote process no longer exists. The 
+linkToDeath()(|android.os.IBinder|) method can be used to register a 
+(|android.os.IBinder.DeathRecipient|) with the IBinder, which will be called 
+when its containing process goes away. 
+
+
+
+*int_android.os.IBinder.DUMP_TRANSACTION*
+
+IBinder protocol transaction code: dump internal state. 
+
+
+*int_android.os.IBinder.FIRST_CALL_TRANSACTION*
+
+The first transaction code available for user commands. 
+
+
+*int_android.os.IBinder.FLAG_ONEWAY*
+
+Flag to (|android.os.IBinder|) : this is a one-way call, meaning that the 
+caller returns immediately, without waiting for a result from the callee. 
+Applies only if the caller and callee are in different processes. 
+
+
+*int_android.os.IBinder.INTERFACE_TRANSACTION*
+
+IBinder protocol transaction code: interrogate the recipient side of the 
+transaction for its canonical interface descriptor. 
+
+
+*int_android.os.IBinder.LAST_CALL_TRANSACTION*
+
+The last transaction code available for user commands. 
+
+
+*int_android.os.IBinder.LIKE_TRANSACTION*
+
+IBinder protocol transaction code: tell an app asynchronously that the caller 
+likes it. The app is responsible for incrementing and maintaining its own like 
+counter, and may display this value to the user to indicate the quality of the 
+app. This is an optional command that applications do not need to handle, so 
+the default implementation is to do nothing. 
+
+There is no response returned and nothing about the system will be functionally 
+affected by it, but it will improve the app's self-esteem. 
+
+
+*int_android.os.IBinder.PING_TRANSACTION*
+
+IBinder protocol transaction code: pingBinder(). 
+
+
+*int_android.os.IBinder.SYSPROPS_TRANSACTION*
+
+
+
+
+*int_android.os.IBinder.TWEET_TRANSACTION*
+
+IBinder protocol transaction code: send a tweet to the target object. The data 
+in the parcel is intended to be delivered to a shared messaging service 
+associated with the object; it can be anything, as long as it is not more than 
+130 UTF-8 characters to conservatively fit within common messaging services. As 
+part of (|android.os.Build.VERSION_CODES|) , all Binder objects are expected to 
+support this protocol for fully integrated tweeting across the platform. To 
+support older code, the default implementation logs the tweet to the main log 
+as a simple emulation of broadcasting it publicly over the Internet. 
+
+Also, upon completing the dispatch, the object must make a cup of tea, return 
+it to the caller, and exclaim "jolly good message old boy!". 
+
+
+
+*android.os.IBinder.dump(FileDescriptor,String[])*
+
+public void dump(
+  java.io.FileDescriptor fd,
+  java.lang.String[] args)
+  throws |android.os.RemoteException|
+         
+Print the object's state into the given stream. 
+
+
+    fd - The raw file descriptor that the dump is being sent to. 
+    args - additional arguments to the dump request. 
+
+*android.os.IBinder.dumpAsync(FileDescriptor,String[])*
+
+public void dumpAsync(
+  java.io.FileDescriptor fd,
+  java.lang.String[] args)
+  throws |android.os.RemoteException|
+         
+Like (|android.os.IBinder|) but always executes asynchronously. If the object 
+is local, a new thread is created to perform the dump. 
+
+
+    fd - The raw file descriptor that the dump is being sent to. 
+    args - additional arguments to the dump request. 
+
+*android.os.IBinder.getInterfaceDescriptor()*
+
+public |java.lang.String| getInterfaceDescriptor()
+  throws |android.os.RemoteException|
+         
+Get the canonical name of the interface supported by this binder. 
+
+
+
+*android.os.IBinder.isBinderAlive()*
+
+public boolean isBinderAlive()
+
+Check to see if the process that the binder is in is still alive. 
+
+
+
+    Returns: false if the process is not alive. Note that if it returns true, the process 
+             may have died while the call is returning. 
+
+*android.os.IBinder.linkToDeath(IBinder.DeathRecipient,int)*
+
+public void linkToDeath(
+  android.os.IBinder.DeathRecipient recipient,
+  int flags)
+  throws |android.os.RemoteException|
+         
+Register the recipient for a notification if this binder goes away. If this 
+binder object unexpectedly goes away (typically because its hosting process has 
+been killed), then the given (|android.os.IBinder.DeathRecipient|) 's 
+DeathRecipient.binderDied()(|android.os.IBinder.DeathRecipient|) method will be 
+called. 
+
+You will only receive death notifications for remote binders, as local binders 
+by definition can't die without you dying as well. 
+
+
+
+*android.os.IBinder.pingBinder()*
+
+public boolean pingBinder()
+
+Check to see if the object still exists. 
+
+
+
+    Returns: Returns false if the hosting process is gone, otherwise the result (always by 
+             default true) returned by the pingBinder() implementation on the 
+             other side. 
+
+*android.os.IBinder.queryLocalInterface(String)*
+
+public |android.os.IInterface| queryLocalInterface(java.lang.String descriptor)
+
+Attempt to retrieve a local implementation of an interface for this Binder 
+object. If null is returned, you will need to instantiate a proxy class to 
+marshall calls through the transact() method. 
+
+
+
+*android.os.IBinder.transact(int,Parcel,Parcel,int)*
+
+public boolean transact(
+  int code,
+  android.os.Parcel data,
+  android.os.Parcel reply,
+  int flags)
+  throws |android.os.RemoteException|
+         
+Perform a generic operation with the object. 
+
+
+    code - The action to perform. This should be a number between {@link 
+       #FIRST_CALL_TRANSACTION} and {@link #LAST_CALL_TRANSACTION}. 
+    data - Marshalled data to send to the target. Must not be null. If you are not sending 
+       any data, you must create an empty Parcel that is given here. 
+    reply - Marshalled data to be received from the target. May be null if you are not 
+       interested in the return value. 
+    flags - Additional operation flags. Either 0 for a normal RPC, or {@link #FLAG_ONEWAY} 
+       for a one-way RPC. 
+
+*android.os.IBinder.unlinkToDeath(IBinder.DeathRecipient,int)*
+
+public boolean unlinkToDeath(
+  android.os.IBinder.DeathRecipient recipient,
+  int flags)
+
+Remove a previously registered death notification. The recipient will no longer 
+be called if this object dies. 
+
+
+
+    Returns: {@code true} if the recipient is successfully unlinked, assuring you that its 
+             {@link DeathRecipient#binderDied DeathRecipient.binderDied()} 
+             method will not be called; {@code false} if the target IBinder has 
+             already died, meaning the method has been (or soon will be) 
+             called. 
+
+

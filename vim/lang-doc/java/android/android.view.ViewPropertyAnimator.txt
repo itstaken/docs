@@ -1,0 +1,502 @@
+*android.view.ViewPropertyAnimator* *ViewPropertyAnimator* This class enables au
+
+public class ViewPropertyAnimator
+  extends    |java.lang.Object|
+
+|android.view.ViewPropertyAnimator_Description|
+|android.view.ViewPropertyAnimator_Fields|
+|android.view.ViewPropertyAnimator_Constructors|
+|android.view.ViewPropertyAnimator_Methods|
+
+================================================================================
+
+*android.view.ViewPropertyAnimator_Methods*
+|android.view.ViewPropertyAnimator.alpha(float)|This method will cause the View
+|android.view.ViewPropertyAnimator.alphaBy(float)|This method will cause the Vi
+|android.view.ViewPropertyAnimator.cancel()|Cancels all property animations tha
+|android.view.ViewPropertyAnimator.getDuration()|Returns the current duration o
+|android.view.ViewPropertyAnimator.getInterpolator()|Returns the timing interpo
+|android.view.ViewPropertyAnimator.getStartDelay()|Returns the current startDel
+|android.view.ViewPropertyAnimator.rotation(float)|This method will cause the V
+|android.view.ViewPropertyAnimator.rotationBy(float)|This method will cause the
+|android.view.ViewPropertyAnimator.rotationX(float)|This method will cause the 
+|android.view.ViewPropertyAnimator.rotationXBy(float)|This method will cause th
+|android.view.ViewPropertyAnimator.rotationY(float)|This method will cause the 
+|android.view.ViewPropertyAnimator.rotationYBy(float)|This method will cause th
+|android.view.ViewPropertyAnimator.scaleX(float)|This method will cause the Vie
+|android.view.ViewPropertyAnimator.scaleXBy(float)|This method will cause the V
+|android.view.ViewPropertyAnimator.scaleY(float)|This method will cause the Vie
+|android.view.ViewPropertyAnimator.scaleYBy(float)|This method will cause the V
+|android.view.ViewPropertyAnimator.setDuration(long)|Sets the duration for the 
+|android.view.ViewPropertyAnimator.setInterpolator(TimeInterpolator)|Sets the i
+|android.view.ViewPropertyAnimator.setListener(Animator.AnimatorListener)|Sets 
+|android.view.ViewPropertyAnimator.setStartDelay(long)|Sets the startDelay for 
+|android.view.ViewPropertyAnimator.setUpdateListener(ValueAnimator.AnimatorUpdateListener)|
+|android.view.ViewPropertyAnimator.start()|Starts the currently pending propert
+|android.view.ViewPropertyAnimator.translationX(float)|This method will cause t
+|android.view.ViewPropertyAnimator.translationXBy(float)|This method will cause
+|android.view.ViewPropertyAnimator.translationY(float)|This method will cause t
+|android.view.ViewPropertyAnimator.translationYBy(float)|This method will cause
+|android.view.ViewPropertyAnimator.withEndAction(Runnable)|Specifies an action 
+|android.view.ViewPropertyAnimator.withLayer()|The View associated with this Vi
+|android.view.ViewPropertyAnimator.withStartAction(Runnable)|Specifies an actio
+|android.view.ViewPropertyAnimator.x(float)|This method will cause the View's x
+|android.view.ViewPropertyAnimator.xBy(float)|This method will cause the View's
+|android.view.ViewPropertyAnimator.y(float)|This method will cause the View's y
+|android.view.ViewPropertyAnimator.yBy(float)|This method will cause the View's
+
+*android.view.ViewPropertyAnimator_Description*
+
+This class enables automatic and optimized animation of select properties on 
+View objects. If only one or two properties on a View object are being 
+animated, then using an (|android.animation.ObjectAnimator|) is fine; the 
+property setters called by ObjectAnimator are well equipped to do the right 
+thing to set the property and invalidate the view appropriately. But if several 
+properties are animated simultaneously, or if you just want a more convenient 
+syntax to animate a specific property, then ViewPropertyAnimator might be more 
+well-suited to the task. 
+
+This class may provide better performance for several simultaneous animations, 
+because it will optimize invalidate calls to take place only once for several 
+properties instead of each animated property independently causing its own 
+invalidation. Also, the syntax of using this class could be easier to use 
+because the caller need only tell the View object which property to animate, 
+and the value to animate either to or by, and this class handles the details of 
+configuring the underlying Animator class and starting it. 
+
+This class is not constructed by the caller, but rather by the View whose 
+properties it will animate. Calls to (|android.view.View|) will return a 
+reference to the appropriate ViewPropertyAnimator object for that View. 
+
+
+
+*android.view.ViewPropertyAnimator.alpha(float)*
+
+public |android.view.ViewPropertyAnimator| alpha(float value)
+
+This method will cause the View's alpha property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.alphaBy(float)*
+
+public |android.view.ViewPropertyAnimator| alphaBy(float value)
+
+This method will cause the View's alpha property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.cancel()*
+
+public void cancel()
+
+Cancels all property animations that are currently running or pending. 
+
+
+
+*android.view.ViewPropertyAnimator.getDuration()*
+
+public long getDuration()
+
+Returns the current duration of property animations. If the duration was set on 
+this object, that value is returned. Otherwise, the default value of the 
+underlying Animator is returned. 
+
+
+
+    Returns: The duration of animations, in milliseconds. 
+
+*android.view.ViewPropertyAnimator.getInterpolator()*
+
+public |android.animation.TimeInterpolator| getInterpolator()
+
+Returns the timing interpolator that this animation uses. 
+
+
+
+    Returns: The timing interpolator for this animation. 
+
+*android.view.ViewPropertyAnimator.getStartDelay()*
+
+public long getStartDelay()
+
+Returns the current startDelay of property animations. If the startDelay was 
+set on this object, that value is returned. Otherwise, the default value of the 
+underlying Animator is returned. 
+
+
+
+    Returns: The startDelay of animations, in milliseconds. 
+
+*android.view.ViewPropertyAnimator.rotation(float)*
+
+public |android.view.ViewPropertyAnimator| rotation(float value)
+
+This method will cause the View's rotation property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.rotationBy(float)*
+
+public |android.view.ViewPropertyAnimator| rotationBy(float value)
+
+This method will cause the View's rotation property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.rotationX(float)*
+
+public |android.view.ViewPropertyAnimator| rotationX(float value)
+
+This method will cause the View's rotationX property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.rotationXBy(float)*
+
+public |android.view.ViewPropertyAnimator| rotationXBy(float value)
+
+This method will cause the View's rotationX property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.rotationY(float)*
+
+public |android.view.ViewPropertyAnimator| rotationY(float value)
+
+This method will cause the View's rotationY property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.rotationYBy(float)*
+
+public |android.view.ViewPropertyAnimator| rotationYBy(float value)
+
+This method will cause the View's rotationY property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.scaleX(float)*
+
+public |android.view.ViewPropertyAnimator| scaleX(float value)
+
+This method will cause the View's scaleX property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.scaleXBy(float)*
+
+public |android.view.ViewPropertyAnimator| scaleXBy(float value)
+
+This method will cause the View's scaleX property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.scaleY(float)*
+
+public |android.view.ViewPropertyAnimator| scaleY(float value)
+
+This method will cause the View's scaleY property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.scaleYBy(float)*
+
+public |android.view.ViewPropertyAnimator| scaleYBy(float value)
+
+This method will cause the View's scaleY property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.setDuration(long)*
+
+public |android.view.ViewPropertyAnimator| setDuration(long duration)
+
+Sets the duration for the underlying animator that animates the requested 
+properties. By default, the animator uses the default value for ValueAnimator. 
+Calling this method will cause the declared value to be used instead. 
+
+
+    duration - The length of ensuing property animations, in milliseconds. The value cannot be 
+       negative. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.setInterpolator(TimeInterpolator)*
+
+public |android.view.ViewPropertyAnimator| setInterpolator(android.animation.TimeInterpolator interpolator)
+
+Sets the interpolator for the underlying animator that animates the requested 
+properties. By default, the animator uses the default interpolator for 
+ValueAnimator. Calling this method will cause the declared object to be used 
+instead. 
+
+
+    interpolator - The TimeInterpolator to be used for ensuing property animations. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.setListener(Animator.AnimatorListener)*
+
+public |android.view.ViewPropertyAnimator| setListener(android.animation.Animator.AnimatorListener listener)
+
+Sets a listener for events in the underlying Animators that run the property 
+animations. 
+
+
+    listener - The listener to be called with AnimatorListener events. A value of null removes 
+       any existing listener. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.setStartDelay(long)*
+
+public |android.view.ViewPropertyAnimator| setStartDelay(long startDelay)
+
+Sets the startDelay for the underlying animator that animates the requested 
+properties. By default, the animator uses the default value for ValueAnimator. 
+Calling this method will cause the declared value to be used instead. 
+
+
+    startDelay - The delay of ensuing property animations, in milliseconds. The value cannot be 
+       negative. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.setUpdateListener(ValueAnimator.AnimatorUpdateListener)*
+
+public |android.view.ViewPropertyAnimator| setUpdateListener(android.animation.ValueAnimator.AnimatorUpdateListener listener)
+
+Sets a listener for update events in the underlying ValueAnimator that runs the 
+property animations. Note that the underlying animator is animating between 0 
+and 1 (these values are then turned into the actual property values internally 
+by ViewPropertyAnimator). So the animator cannot give information on the 
+current values of the properties being animated by this ViewPropertyAnimator, 
+although the view object itself can be queried to get the current values. 
+
+
+    listener - The listener to be called with update events. A value of null removes any 
+       existing listener. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.start()*
+
+public void start()
+
+Starts the currently pending property animations immediately. Calling start() 
+is optional because all animations start automatically at the next opportunity. 
+However, if the animations are needed to start immediately and synchronously 
+(not at the time when the next event is processed by the hierarchy, which is 
+when the animations would begin otherwise), then this method can be used. 
+
+
+
+*android.view.ViewPropertyAnimator.translationX(float)*
+
+public |android.view.ViewPropertyAnimator| translationX(float value)
+
+This method will cause the View's translationX property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.translationXBy(float)*
+
+public |android.view.ViewPropertyAnimator| translationXBy(float value)
+
+This method will cause the View's translationX property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.translationY(float)*
+
+public |android.view.ViewPropertyAnimator| translationY(float value)
+
+This method will cause the View's translationY property to be animated to the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.translationYBy(float)*
+
+public |android.view.ViewPropertyAnimator| translationYBy(float value)
+
+This method will cause the View's translationY property to be animated by the 
+specified value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.withEndAction(Runnable)*
+
+public |android.view.ViewPropertyAnimator| withEndAction(java.lang.Runnable runnable)
+
+Specifies an action to take place when the next animation ends. The action is 
+only run if the animation ends normally; if the ViewPropertyAnimator is 
+canceled during that animation, the runnable will not run. This method, along 
+with (|android.view.ViewPropertyAnimator|) , is intended to help facilitate 
+choreographing ViewPropertyAnimator animations with other animations or actions 
+in the application. 
+
+For example, the following code animates a view to x=200 and then back to 0: 
+
+Runnable endAction = new Runnable() { public void run() { view.animate().x(0); 
+} }; view.animate().x(200).withEndAction(endAction); 
+
+
+    runnable - The action to run when the next animation ends. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.withLayer()*
+
+public |android.view.ViewPropertyAnimator| withLayer()
+
+The View associated with this ViewPropertyAnimator will have its layer 
+type(|android.view.View|) set to (|android.view.View|) for the duration of the 
+next animation. As stated in the documentation for (|android.view.View|) , the 
+actual type of layer used internally depends on the runtime situation of the 
+view. If the activity and this view are hardware-accelerated, then the layer 
+will be accelerated as well. If the activity or the view is not accelerated, 
+then the layer will effectively be the same as (|android.view.View|) . 
+
+This state is not persistent, either on the View or on this 
+ViewPropertyAnimator: the layer type of the View will be restored when the 
+animation ends to what it was when this method was called, and this setting on 
+ViewPropertyAnimator is only valid for the next animation. Note that calling 
+this method and then independently setting the layer type of the View (by a 
+direct call to (|android.view.View|) ) will result in some inconsistency, 
+including having the layer type restored to its pre-withLayer() value when the 
+animation ends. 
+
+
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.withStartAction(Runnable)*
+
+public |android.view.ViewPropertyAnimator| withStartAction(java.lang.Runnable runnable)
+
+Specifies an action to take place when the next animation runs. If there is a 
+startDelay(|android.view.ViewPropertyAnimator|) set on this 
+ViewPropertyAnimator, then the action will run after that startDelay expires, 
+when the actual animation begins. This method, along with 
+(|android.view.ViewPropertyAnimator|) , is intended to help facilitate 
+choreographing ViewPropertyAnimator animations with other animations or actions 
+in the application. 
+
+
+    runnable - The action to run when the next animation starts. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.x(float)*
+
+public |android.view.ViewPropertyAnimator| x(float value)
+
+This method will cause the View's x property to be animated to the specified 
+value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.xBy(float)*
+
+public |android.view.ViewPropertyAnimator| xBy(float value)
+
+This method will cause the View's x property to be animated by the specified 
+value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.y(float)*
+
+public |android.view.ViewPropertyAnimator| y(float value)
+
+This method will cause the View's y property to be animated to the specified 
+value. Animations already running on the property will be canceled. 
+
+
+    value - The value to be animated to. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+*android.view.ViewPropertyAnimator.yBy(float)*
+
+public |android.view.ViewPropertyAnimator| yBy(float value)
+
+This method will cause the View's y property to be animated by the specified 
+value. Animations already running on the property will be canceled. 
+
+
+    value - The amount to be animated by, as an offset from the current value. 
+
+    Returns: This object, allowing calls to methods in this class to be chained. 
+
+

@@ -1,0 +1,274 @@
+*android.os.FileUtils* *FileUtils* Tools for managing files.
+
+public class FileUtils
+  extends    |java.lang.Object|
+
+|android.os.FileUtils_Description|
+|android.os.FileUtils_Fields|
+|android.os.FileUtils_Constructors|
+|android.os.FileUtils_Methods|
+
+================================================================================
+
+*android.os.FileUtils_Fields*
+|int_android.os.FileUtils.S_IRGRP|
+|int_android.os.FileUtils.S_IROTH|
+|int_android.os.FileUtils.S_IRUSR|
+|int_android.os.FileUtils.S_IRWXG|
+|int_android.os.FileUtils.S_IRWXO|
+|int_android.os.FileUtils.S_IRWXU|
+|int_android.os.FileUtils.S_IWGRP|
+|int_android.os.FileUtils.S_IWOTH|
+|int_android.os.FileUtils.S_IWUSR|
+|int_android.os.FileUtils.S_IXGRP|
+|int_android.os.FileUtils.S_IXOTH|
+|int_android.os.FileUtils.S_IXUSR|
+
+*android.os.FileUtils_Constructors*
+|android.os.FileUtils()|
+
+*android.os.FileUtils_Methods*
+|android.os.FileUtils.checksumCrc32(File)|Computes the checksum of a file using
+|android.os.FileUtils.copyFile(File,File)|
+|android.os.FileUtils.copyToFile(InputStream,File)|Copy data from a source stre
+|android.os.FileUtils.deleteOlderFiles(File,int,long)|Delete older files in a d
+|android.os.FileUtils.getUid(String)|Return owning UID of given path, otherwise
+|android.os.FileUtils.isFilenameSafe(File)|Check if a filename is "safe" (no me
+|android.os.FileUtils.readTextFile(File,int,String)|Read a text file into a Str
+|android.os.FileUtils.setPermissions(FileDescriptor,int,int,int)|Set owner and 
+|android.os.FileUtils.setPermissions(File,int,int,int)|Set owner and mode of of
+|android.os.FileUtils.setPermissions(String,int,int,int)|Set owner and mode of 
+|android.os.FileUtils.stringToFile(String,String)|Writes string to file.
+|android.os.FileUtils.sync(FileOutputStream)|Perform an fsync on the given File
+
+*android.os.FileUtils_Description*
+
+Tools for managing files. Not for public consumption. 
+
+
+
+*int_android.os.FileUtils.S_IRGRP*
+
+
+
+
+*int_android.os.FileUtils.S_IROTH*
+
+
+
+
+*int_android.os.FileUtils.S_IRUSR*
+
+
+
+
+*int_android.os.FileUtils.S_IRWXG*
+
+
+
+
+*int_android.os.FileUtils.S_IRWXO*
+
+
+
+
+*int_android.os.FileUtils.S_IRWXU*
+
+
+
+
+*int_android.os.FileUtils.S_IWGRP*
+
+
+
+
+*int_android.os.FileUtils.S_IWOTH*
+
+
+
+
+*int_android.os.FileUtils.S_IWUSR*
+
+
+
+
+*int_android.os.FileUtils.S_IXGRP*
+
+
+
+
+*int_android.os.FileUtils.S_IXOTH*
+
+
+
+
+*int_android.os.FileUtils.S_IXUSR*
+
+
+
+
+
+*android.os.FileUtils()*
+
+public FileUtils()
+
+
+
+
+*android.os.FileUtils.checksumCrc32(File)*
+
+public static long checksumCrc32(java.io.File file)
+  throws |java.io.FileNotFoundException|
+         |java.io.IOException|
+         
+Computes the checksum of a file using the CRC32 checksum routine. The value of 
+the checksum is returned. 
+
+
+    file - the file to checksum, must not be null 
+
+    Returns: the checksum value or an exception is thrown. 
+
+*android.os.FileUtils.copyFile(File,File)*
+
+public static boolean copyFile(
+  java.io.File srcFile,
+  java.io.File destFile)
+
+
+
+
+
+*android.os.FileUtils.copyToFile(InputStream,File)*
+
+public static boolean copyToFile(
+  java.io.InputStream inputStream,
+  java.io.File destFile)
+
+Copy data from a source stream to destFile. Return true if succeed, return 
+false if failed. 
+
+
+
+*android.os.FileUtils.deleteOlderFiles(File,int,long)*
+
+public static void deleteOlderFiles(
+  java.io.File dir,
+  int minCount,
+  long minAge)
+
+Delete older files in a directory until only those matching the given 
+constraints remain. 
+
+
+    minCount - Always keep at least this many files. 
+    minAge - Always keep files younger than this age. 
+
+*android.os.FileUtils.getUid(String)*
+
+public static int getUid(java.lang.String path)
+
+Return owning UID of given path, otherwise -1. 
+
+
+
+*android.os.FileUtils.isFilenameSafe(File)*
+
+public static boolean isFilenameSafe(java.io.File file)
+
+Check if a filename is "safe" (no metacharacters or spaces). 
+
+
+    file - The file to check 
+
+*android.os.FileUtils.readTextFile(File,int,String)*
+
+public static |java.lang.String| readTextFile(
+  java.io.File file,
+  int max,
+  java.lang.String ellipsis)
+  throws |java.io.IOException|
+         
+Read a text file into a String, optionally limiting the length. 
+
+
+    file - to read (will not seek, so things like /proc files are OK) 
+    max - length (positive for head, negative of tail, 0 for no limit) 
+    ellipsis - to add of the file was truncated (can be null) 
+
+    Returns: the contents of the file, possibly truncated 
+
+*android.os.FileUtils.setPermissions(FileDescriptor,int,int,int)*
+
+public static int setPermissions(
+  java.io.FileDescriptor fd,
+  int mode,
+  int uid,
+  int gid)
+
+Set owner and mode of of given (|java.io.FileDescriptor|) . 
+
+
+    mode - to apply through {@code chmod} 
+    uid - to apply through {@code chown}, or -1 to leave unchanged 
+    gid - to apply through {@code chown}, or -1 to leave unchanged 
+
+    Returns: 0 on success, otherwise errno. 
+
+*android.os.FileUtils.setPermissions(File,int,int,int)*
+
+public static int setPermissions(
+  java.io.File path,
+  int mode,
+  int uid,
+  int gid)
+
+Set owner and mode of of given (|java.io.File|) . 
+
+
+    mode - to apply through {@code chmod} 
+    uid - to apply through {@code chown}, or -1 to leave unchanged 
+    gid - to apply through {@code chown}, or -1 to leave unchanged 
+
+    Returns: 0 on success, otherwise errno. 
+
+*android.os.FileUtils.setPermissions(String,int,int,int)*
+
+public static int setPermissions(
+  java.lang.String path,
+  int mode,
+  int uid,
+  int gid)
+
+Set owner and mode of of given path. 
+
+
+    mode - to apply through {@code chmod} 
+    uid - to apply through {@code chown}, or -1 to leave unchanged 
+    gid - to apply through {@code chown}, or -1 to leave unchanged 
+
+    Returns: 0 on success, otherwise errno. 
+
+*android.os.FileUtils.stringToFile(String,String)*
+
+public static void stringToFile(
+  java.lang.String filename,
+  java.lang.String string)
+  throws |java.io.IOException|
+         
+Writes string to file. Basically same as "echo -n $string > $filename" 
+
+
+    filename - 
+    string - 
+
+*android.os.FileUtils.sync(FileOutputStream)*
+
+public static boolean sync(java.io.FileOutputStream stream)
+
+Perform an fsync on the given FileOutputStream. The stream at this point must 
+be flushed but not yet closed. 
+
+
+
+

@@ -1,0 +1,148 @@
+*android.hardware.usb.UsbRequest* *UsbRequest* A class representing USB request 
+
+public class UsbRequest
+  extends    |java.lang.Object|
+
+|android.hardware.usb.UsbRequest_Description|
+|android.hardware.usb.UsbRequest_Fields|
+|android.hardware.usb.UsbRequest_Constructors|
+|android.hardware.usb.UsbRequest_Methods|
+
+================================================================================
+
+*android.hardware.usb.UsbRequest_Constructors*
+|android.hardware.usb.UsbRequest()|
+
+*android.hardware.usb.UsbRequest_Methods*
+|android.hardware.usb.UsbRequest.cancel()|Cancels a pending queue operation.
+|android.hardware.usb.UsbRequest.close()|Releases all resources related to this
+|android.hardware.usb.UsbRequest.finalize()|
+|android.hardware.usb.UsbRequest.getClientData()|Returns the client data for th
+|android.hardware.usb.UsbRequest.getEndpoint()|Returns the endpoint for the req
+|android.hardware.usb.UsbRequest.initialize(UsbDeviceConnection,UsbEndpoint)|In
+|android.hardware.usb.UsbRequest.queue(ByteBuffer,int)|Queues the request to se
+|android.hardware.usb.UsbRequest.setClientData(Object)|Sets the client data for
+
+*android.hardware.usb.UsbRequest_Description*
+
+A class representing USB request packet. This can be used for both reading and 
+writing data to or from a (|android.hardware.usb.UsbDeviceConnection|) . 
+UsbRequests can be used to transfer data on bulk and interrupt endpoints. 
+Requests on bulk endpoints can be sent synchronously via 
+(|android.hardware.usb.UsbDeviceConnection|) or asynchronously via 
+(|android.hardware.usb.UsbRequest|) and 
+(|android.hardware.usb.UsbDeviceConnection|) . Requests on interrupt endpoints 
+are only send and received asynchronously. 
+
+Requests on endpoint zero are not supported by this class; use 
+(|android.hardware.usb.UsbDeviceConnection|) for endpoint zero requests 
+instead. 
+
+
+
+*android.hardware.usb.UsbRequest()*
+
+public UsbRequest()
+
+
+
+
+*android.hardware.usb.UsbRequest.cancel()*
+
+public boolean cancel()
+
+Cancels a pending queue operation. 
+
+
+
+    Returns: true if cancelling succeeded 
+
+*android.hardware.usb.UsbRequest.close()*
+
+public void close()
+
+Releases all resources related to this request. 
+
+
+
+*android.hardware.usb.UsbRequest.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.hardware.usb.UsbRequest.getClientData()*
+
+public |java.lang.Object| getClientData()
+
+Returns the client data for the request. This can be used in conjunction with 
+(|android.hardware.usb.UsbRequest|) to associate another object with this 
+request, which can be useful for maintaining state between calls to 
+(|android.hardware.usb.UsbRequest|) and 
+(|android.hardware.usb.UsbDeviceConnection|) 
+
+
+
+    Returns: the client data for the request 
+
+*android.hardware.usb.UsbRequest.getEndpoint()*
+
+public |android.hardware.usb.UsbEndpoint| getEndpoint()
+
+Returns the endpoint for the request, or null if the request is not opened. 
+
+
+
+    Returns: the request's endpoint 
+
+*android.hardware.usb.UsbRequest.initialize(UsbDeviceConnection,UsbEndpoint)*
+
+public boolean initialize(
+  android.hardware.usb.UsbDeviceConnection connection,
+  android.hardware.usb.UsbEndpoint endpoint)
+
+Initializes the request so it can read or write data on the given endpoint. 
+Whether the request allows reading or writing depends on the direction of the 
+endpoint. 
+
+
+    endpoint - the endpoint to be used for this request. 
+
+    Returns: true if the request was successfully opened. 
+
+*android.hardware.usb.UsbRequest.queue(ByteBuffer,int)*
+
+public boolean queue(
+  java.nio.ByteBuffer buffer,
+  int length)
+
+Queues the request to send or receive data on its endpoint. For OUT endpoints, 
+the given buffer data will be sent on the endpoint. For IN endpoints, the 
+endpoint will attempt to read the given number of bytes into the specified 
+buffer. If the queueing operation is successful, we return true and the result 
+will be returned via (|android.hardware.usb.UsbDeviceConnection|) 
+
+
+    buffer - the buffer containing the bytes to write, or location to store the results of a 
+       read 
+    length - number of bytes to read or write 
+
+    Returns: true if the queueing operation succeeded 
+
+*android.hardware.usb.UsbRequest.setClientData(Object)*
+
+public void setClientData(java.lang.Object data)
+
+Sets the client data for the request. This can be used in conjunction with 
+(|android.hardware.usb.UsbRequest|) to associate another object with this 
+request, which can be useful for maintaining state between calls to 
+(|android.hardware.usb.UsbRequest|) and 
+(|android.hardware.usb.UsbDeviceConnection|) 
+
+
+    data - the client data for the request 
+
+

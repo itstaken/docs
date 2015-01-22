@@ -1,0 +1,196 @@
+*android.view.InputEventConsistencyVerifier* *InputEventConsistencyVerifier* Che
+
+public final class InputEventConsistencyVerifier
+  extends    |java.lang.Object|
+
+|android.view.InputEventConsistencyVerifier_Description|
+|android.view.InputEventConsistencyVerifier_Fields|
+|android.view.InputEventConsistencyVerifier_Constructors|
+|android.view.InputEventConsistencyVerifier_Methods|
+
+================================================================================
+
+*android.view.InputEventConsistencyVerifier_Fields*
+|int_android.view.InputEventConsistencyVerifier.FLAG_RAW_DEVICE_INPUT|
+
+*android.view.InputEventConsistencyVerifier_Constructors*
+|android.view.InputEventConsistencyVerifier(Object,int)|Creates an input consis
+|android.view.InputEventConsistencyVerifier(Object,int,String)|Creates an input
+
+*android.view.InputEventConsistencyVerifier_Methods*
+|android.view.InputEventConsistencyVerifier.isInstrumentationEnabled()|Determin
+|android.view.InputEventConsistencyVerifier.onGenericMotionEvent(MotionEvent,int)|
+|android.view.InputEventConsistencyVerifier.onInputEvent(InputEvent,int)|Checks
+|android.view.InputEventConsistencyVerifier.onKeyEvent(KeyEvent,int)|Checks a k
+|android.view.InputEventConsistencyVerifier.onTouchEvent(MotionEvent,int)|Check
+|android.view.InputEventConsistencyVerifier.onTrackballEvent(MotionEvent,int)|C
+|android.view.InputEventConsistencyVerifier.onUnhandledEvent(InputEvent,int)|No
+|android.view.InputEventConsistencyVerifier.reset()|Resets the state of the inp
+
+*android.view.InputEventConsistencyVerifier_Description*
+
+Checks whether a sequence of input events is self-consistent. Logs a 
+description of each problem detected. 
+
+When a problem is detected, the event is tainted. This mechanism prevents the 
+same error from being reported multiple times. 
+
+
+
+*int_android.view.InputEventConsistencyVerifier.FLAG_RAW_DEVICE_INPUT*
+
+Indicates that the verifier is intended to act on raw device input event 
+streams. Disables certain checks for invariants that are established by the 
+input dispatcher itself as it delivers input events, such as key repeating 
+behavior. 
+
+
+
+*android.view.InputEventConsistencyVerifier(Object,int)*
+
+public InputEventConsistencyVerifier(
+  java.lang.Object caller,
+  int flags)
+
+Creates an input consistency verifier. 
+
+    caller - The object to which the verifier is attached. 
+    flags - Flags to the verifier, or 0 if none. 
+
+*android.view.InputEventConsistencyVerifier(Object,int,String)*
+
+public InputEventConsistencyVerifier(
+  java.lang.Object caller,
+  int flags,
+  java.lang.String logTag)
+
+Creates an input consistency verifier. 
+
+    caller - The object to which the verifier is attached. 
+    flags - Flags to the verifier, or 0 if none. 
+    logTag - Tag for logging. If null defaults to the short class name. 
+
+*android.view.InputEventConsistencyVerifier.isInstrumentationEnabled()*
+
+public static boolean isInstrumentationEnabled()
+
+Determines whether the instrumentation should be enabled. 
+
+
+
+    Returns: True if it should be enabled. 
+
+*android.view.InputEventConsistencyVerifier.onGenericMotionEvent(MotionEvent,int)*
+
+public void onGenericMotionEvent(
+  android.view.MotionEvent event,
+  int nestingLevel)
+
+Checks a generic motion event. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.onInputEvent(InputEvent,int)*
+
+public void onInputEvent(
+  android.view.InputEvent event,
+  int nestingLevel)
+
+Checks an arbitrary input event. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.onKeyEvent(KeyEvent,int)*
+
+public void onKeyEvent(
+  android.view.KeyEvent event,
+  int nestingLevel)
+
+Checks a key event. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.onTouchEvent(MotionEvent,int)*
+
+public void onTouchEvent(
+  android.view.MotionEvent event,
+  int nestingLevel)
+
+Checks a touch event. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.onTrackballEvent(MotionEvent,int)*
+
+public void onTrackballEvent(
+  android.view.MotionEvent event,
+  int nestingLevel)
+
+Checks a trackball event. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.onUnhandledEvent(InputEvent,int)*
+
+public void onUnhandledEvent(
+  android.view.InputEvent event,
+  int nestingLevel)
+
+Notifies the verifier that a given event was unhandled and the rest of the 
+trace for the event should be ignored. This method should only be called if the 
+event was previously checked by the consistency verifier using 
+(|android.view.InputEventConsistencyVerifier|) and other methods. 
+
+
+    event - The event. 
+    nestingLevel - The nesting level: 0 if called from the base class, or 1 from a subclass. If 
+       the event was already checked by this consistency verifier at a higher 
+       nesting level, it will not be checked again. Used to handle the 
+       situation where a subclass dispatching method delegates to its 
+       superclass's dispatching method and both dispatching methods call into 
+       the consistency verifier. 
+
+*android.view.InputEventConsistencyVerifier.reset()*
+
+public void reset()
+
+Resets the state of the input event consistency verifier. 
+
+
+
+

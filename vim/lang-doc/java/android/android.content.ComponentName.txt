@@ -1,0 +1,308 @@
+*android.content.ComponentName* *ComponentName* Identifier for a specific applic
+
+public final class ComponentName
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+             |java.lang.Cloneable|
+             |java.lang.Comparable|
+
+|android.content.ComponentName_Description|
+|android.content.ComponentName_Fields|
+|android.content.ComponentName_Constructors|
+|android.content.ComponentName_Methods|
+
+================================================================================
+
+*android.content.ComponentName_Fields*
+|android.os.Parcelable.Creator<android.content.ComponentName>_android.content.ComponentName.CREATOR|
+
+*android.content.ComponentName_Constructors*
+|android.content.ComponentName(Context,Class<?>)|Create a new component identif
+|android.content.ComponentName(Context,String)|Create a new component identifie
+|android.content.ComponentName(Parcel)|Instantiate a new ComponentName from the
+|android.content.ComponentName(String,String)|Create a new component identifier
+
+*android.content.ComponentName_Methods*
+|android.content.ComponentName.appendShortString(StringBuilder)|
+|android.content.ComponentName.appendShortString(StringBuilder,String,String)|
+|android.content.ComponentName.clone()|
+|android.content.ComponentName.compareTo(ComponentName)|
+|android.content.ComponentName.describeContents()|
+|android.content.ComponentName.equals(Object)|
+|android.content.ComponentName.flattenToShortString()|The same as#flattenToStri
+|android.content.ComponentName.flattenToString()|Return a String that unambiguo
+|android.content.ComponentName.getClassName()|Return the class name of this com
+|android.content.ComponentName.getPackageName()|Return the package name of this
+|android.content.ComponentName.getShortClassName()|Return the class name, eithe
+|android.content.ComponentName.hashCode()|
+|android.content.ComponentName.printShortString(PrintWriter,String,String)|
+|android.content.ComponentName.readFromParcel(Parcel)|Read a ComponentName from
+|android.content.ComponentName.toShortString()|Return string representation of 
+|android.content.ComponentName.toString()|
+|android.content.ComponentName.unflattenFromString(String)|Recover a ComponentN
+|android.content.ComponentName.writeToParcel(ComponentName,Parcel)|Write a Comp
+|android.content.ComponentName.writeToParcel(Parcel,int)|
+
+*android.content.ComponentName_Description*
+
+Identifier for a specific application component ( (|android.app.Activity|) , 
+(|android.app.Service|) , (|android.content.BroadcastReceiver|) , or 
+(|android.content.ContentProvider|) ) that is available. Two pieces of 
+information, encapsulated here, are required to identify a component: the 
+package (a String) it exists in, and the class (a String) name inside of that 
+package. 
+
+
+
+*android.os.Parcelable.Creator<android.content.ComponentName>_android.content.ComponentName.CREATOR*
+
+
+
+
+
+*android.content.ComponentName(Context,Class<?>)*
+
+public ComponentName(
+  android.content.Context pkg,
+  java.lang.Class<?> cls)
+
+Create a new component identifier from a Context and Class object. 
+
+    pkg - A Context for the package implementing the component, from which the actual 
+       package name will be retrieved. 
+    cls - The Class object of the desired component, from which the actual class name 
+       will be retrieved. 
+
+*android.content.ComponentName(Context,String)*
+
+public ComponentName(
+  android.content.Context pkg,
+  java.lang.String cls)
+
+Create a new component identifier from a Context and class name. 
+
+    pkg - A Context for the package implementing the component, from which the actual 
+       package name will be retrieved. 
+    cls - The name of the class inside of pkg that implements the component. 
+
+*android.content.ComponentName(Parcel)*
+
+public ComponentName(android.os.Parcel in)
+
+Instantiate a new ComponentName from the data in a Parcel that was previously 
+written with (|android.content.ComponentName|) . Note that you must not use 
+this with data written by (|android.content.ComponentName|) since it is not 
+possible to handle a null ComponentObject here. 
+
+    in - The Parcel containing the previously written ComponentName, positioned at the 
+       location in the buffer where it was written. 
+
+*android.content.ComponentName(String,String)*
+
+public ComponentName(
+  java.lang.String pkg,
+  java.lang.String cls)
+
+Create a new component identifier. 
+
+    pkg - The name of the package that the component exists in. Can not be null. 
+    cls - The name of the class inside of pkg that implements the component. Can not be 
+       null. 
+
+*android.content.ComponentName.appendShortString(StringBuilder)*
+
+public void appendShortString(java.lang.StringBuilder sb)
+
+
+
+
+
+*android.content.ComponentName.appendShortString(StringBuilder,String,String)*
+
+public static void appendShortString(
+  java.lang.StringBuilder sb,
+  java.lang.String packageName,
+  java.lang.String className)
+
+
+
+
+
+*android.content.ComponentName.clone()*
+
+public |android.content.ComponentName| clone()
+
+
+
+
+
+*android.content.ComponentName.compareTo(ComponentName)*
+
+public int compareTo(android.content.ComponentName that)
+
+
+
+
+
+*android.content.ComponentName.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.ComponentName.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.content.ComponentName.flattenToShortString()*
+
+public |java.lang.String| flattenToShortString()
+
+The same as (|android.content.ComponentName|) , but abbreviates the class name 
+if it is a suffix of the package. The result can still be used with 
+(|android.content.ComponentName|) . 
+
+
+
+    Returns: Returns a new String holding the package and class names. This is represented 
+             as the package name, concatenated with a '/' and then the class 
+             name. 
+
+*android.content.ComponentName.flattenToString()*
+
+public |java.lang.String| flattenToString()
+
+Return a String that unambiguously describes both the package and class names 
+contained in the ComponentName. You can later recover the ComponentName from 
+this string through (|android.content.ComponentName|) . 
+
+
+
+    Returns: Returns a new String holding the package and class names. This is represented 
+             as the package name, concatenated with a '/' and then the class 
+             name. 
+
+*android.content.ComponentName.getClassName()*
+
+public |java.lang.String| getClassName()
+
+Return the class name of this component. 
+
+
+
+*android.content.ComponentName.getPackageName()*
+
+public |java.lang.String| getPackageName()
+
+Return the package name of this component. 
+
+
+
+*android.content.ComponentName.getShortClassName()*
+
+public |java.lang.String| getShortClassName()
+
+Return the class name, either fully qualified or in a shortened form (with a 
+leading '.') if it is a suffix of the package. 
+
+
+
+*android.content.ComponentName.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.content.ComponentName.printShortString(PrintWriter,String,String)*
+
+public static void printShortString(
+  java.io.PrintWriter pw,
+  java.lang.String packageName,
+  java.lang.String className)
+
+
+
+
+
+*android.content.ComponentName.readFromParcel(Parcel)*
+
+public static |android.content.ComponentName| readFromParcel(android.os.Parcel in)
+
+Read a ComponentName from a Parcel that was previously written with 
+(|android.content.ComponentName|) , returning either a null or new object as 
+appropriate. 
+
+
+    in - The Parcel from which to read the ComponentName 
+
+    Returns: Returns a new ComponentName matching the previously written object, or null if 
+             a null had been written. 
+
+*android.content.ComponentName.toShortString()*
+
+public |java.lang.String| toShortString()
+
+Return string representation of this class without the class's name as a 
+prefix. 
+
+
+
+*android.content.ComponentName.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.ComponentName.unflattenFromString(String)*
+
+public static |android.content.ComponentName| unflattenFromString(java.lang.String str)
+
+Recover a ComponentName from a String that was previously created with 
+(|android.content.ComponentName|) . It splits the string at the first '/', 
+taking the part before as the package name and the part after as the class 
+name. As a special convenience (to use, for example, when parsing component 
+names on the command line), if the '/' is immediately followed by a '.' then 
+the final class name will be the concatenation of the package name with the 
+string following the '/'. Thus "com.foo/.Blah" becomes package="com.foo" 
+class="com.foo.Blah". 
+
+
+    str - The String that was returned by flattenToString(). 
+
+    Returns: Returns a new ComponentName containing the package and class names that were 
+             encoded in str 
+
+*android.content.ComponentName.writeToParcel(ComponentName,Parcel)*
+
+public static void writeToParcel(
+  android.content.ComponentName c,
+  android.os.Parcel out)
+
+Write a ComponentName to a Parcel, handling null pointers. Must be read with 
+(|android.content.ComponentName|) . 
+
+
+    c - The ComponentName to be written. 
+    out - The Parcel in which the ComponentName will be placed. 
+
+*android.content.ComponentName.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

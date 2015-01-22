@@ -1,0 +1,330 @@
+*android.view.animation.LayoutAnimationController* *LayoutAnimationController* A
+
+public class LayoutAnimationController
+  extends    |java.lang.Object|
+
+|android.view.animation.LayoutAnimationController_Description|
+|android.view.animation.LayoutAnimationController_Fields|
+|android.view.animation.LayoutAnimationController_Constructors|
+|android.view.animation.LayoutAnimationController_Methods|
+
+================================================================================
+
+*android.view.animation.LayoutAnimationController_Fields*
+|android.view.animation.Animation_android.view.animation.LayoutAnimationController.mAnimation|
+|android.view.animation.Interpolator_android.view.animation.LayoutAnimationController.mInterpolator|
+|java.util.Random_android.view.animation.LayoutAnimationController.mRandomizer|
+|int_android.view.animation.LayoutAnimationController.ORDER_NORMAL|
+|int_android.view.animation.LayoutAnimationController.ORDER_RANDOM|
+|int_android.view.animation.LayoutAnimationController.ORDER_REVERSE|
+
+*android.view.animation.LayoutAnimationController_Constructors*
+|android.view.animation.LayoutAnimationController(Animation)|Creates a new layo
+|android.view.animation.LayoutAnimationController(Animation,float)|Creates a ne
+|android.view.animation.LayoutAnimationController(Context,AttributeSet)|Creates
+
+*android.view.animation.LayoutAnimationController_Methods*
+|android.view.animation.LayoutAnimationController.getAnimation()|Returns the an
+|android.view.animation.LayoutAnimationController.getAnimationForView(View)|Ret
+|android.view.animation.LayoutAnimationController.getDelay()|Returns the delay 
+|android.view.animation.LayoutAnimationController.getDelayForView(View)|Returns
+|android.view.animation.LayoutAnimationController.getInterpolator()|Returns the
+|android.view.animation.LayoutAnimationController.getOrder()|Returns the order 
+|android.view.animation.LayoutAnimationController.getTransformedIndex(LayoutAnimationController.AnimationParameters)|
+|android.view.animation.LayoutAnimationController.isDone()|Indicates whether th
+|android.view.animation.LayoutAnimationController.setAnimation(Animation)|Sets 
+|android.view.animation.LayoutAnimationController.setAnimation(Context,int)|Set
+|android.view.animation.LayoutAnimationController.setDelay(float)|Sets the dela
+|android.view.animation.LayoutAnimationController.setInterpolator(Context,int)|
+|android.view.animation.LayoutAnimationController.setInterpolator(Interpolator)|
+|android.view.animation.LayoutAnimationController.setOrder(int)|Sets the order 
+|android.view.animation.LayoutAnimationController.start()|Starts the animation.
+|android.view.animation.LayoutAnimationController.willOverlap()|Indicates wheth
+
+*android.view.animation.LayoutAnimationController_Description*
+
+A layout animation controller is used to animated a layout's, or a view 
+group's, children. Each child uses the same animation but for every one of 
+them, the animation starts at a different time. A layout animation controller 
+is used by (|android.view.ViewGroup|) to compute the delay by which each 
+child's animation start must be offset. The delay is computed by using 
+characteristics of each child, like its index in the view group. 
+
+This standard implementation computes the delay by multiplying a fixed amount 
+of miliseconds by the index of the child in its parent view group. Subclasses 
+are supposed to override (|android.view.animation.LayoutAnimationController|) 
+to implement a different way of computing the delay. For instance, a 
+(|android.view.animation.GridLayoutAnimationController|) will compute the delay 
+based on the column and row indices of the child in its parent view group. 
+
+Information used to compute the animation delay of each child are stored in an 
+instance of 
+(|android.view.animation.LayoutAnimationController.AnimationParameters|) , 
+itself stored in the (|android.view.ViewGroup.LayoutParams|) of the view. 
+
+
+
+*android.view.animation.Animation_android.view.animation.LayoutAnimationController.mAnimation*
+
+The animation applied on each child of the view group on which this layout 
+animation controller is set. 
+
+
+*android.view.animation.Interpolator_android.view.animation.LayoutAnimationController.mInterpolator*
+
+The interpolator used to interpolate the delays. 
+
+
+*java.util.Random_android.view.animation.LayoutAnimationController.mRandomizer*
+
+The randomizer used when the order is set to random. Subclasses should use this 
+object to avoid creating their own. 
+
+
+*int_android.view.animation.LayoutAnimationController.ORDER_NORMAL*
+
+Distributes the animation delays in the order in which view were added to their 
+view group. 
+
+
+*int_android.view.animation.LayoutAnimationController.ORDER_RANDOM*
+
+Randomly distributes the animation delays. 
+
+
+*int_android.view.animation.LayoutAnimationController.ORDER_REVERSE*
+
+Distributes the animation delays in the reverse order in which view were added 
+to their view group. 
+
+
+
+*android.view.animation.LayoutAnimationController(Animation)*
+
+public LayoutAnimationController(android.view.animation.Animation animation)
+
+Creates a new layout animation controller with a delay of 50% and the specified 
+animation. 
+
+    animation - the animation to use on each child of the view group 
+
+*android.view.animation.LayoutAnimationController(Animation,float)*
+
+public LayoutAnimationController(
+  android.view.animation.Animation animation,
+  float delay)
+
+Creates a new layout animation controller with the specified delay and the 
+specified animation. 
+
+    animation - the animation to use on each child of the view group 
+    delay - the delay by which each child's animation must be offset 
+
+*android.view.animation.LayoutAnimationController(Context,AttributeSet)*
+
+public LayoutAnimationController(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Creates a new layout animation controller from external resources. 
+
+    context - the Context the view group is running in, through which it can access the 
+       resources 
+    attrs - the attributes of the XML tag that is inflating the layout animation controller 
+
+*android.view.animation.LayoutAnimationController.getAnimation()*
+
+public |android.view.animation.Animation| getAnimation()
+
+Returns the animation applied to each child of the view group on which this 
+controller is set. 
+
+
+
+    Returns: an {@link android.view.animation.Animation} instance 
+
+*android.view.animation.LayoutAnimationController.getAnimationForView(View)*
+
+public final |android.view.animation.Animation| getAnimationForView(android.view.View view)
+
+Returns the animation to be applied to the specified view. The returned 
+animation is delayed by an offset computed according to the information 
+provided by 
+(|android.view.animation.LayoutAnimationController.AnimationParameters|) . This 
+method is called by view groups to obtain the animation to set on a specific 
+child. 
+
+
+    view - the view to animate 
+
+    Returns: an animation delayed by the number of milliseconds returned by {@link 
+             #getDelayForView(android.view.View)} 
+
+*android.view.animation.LayoutAnimationController.getDelay()*
+
+public float getDelay()
+
+Returns the delay by which the children's animation are offset. The delay is 
+expressed as a fraction of the animation duration. 
+
+
+
+    Returns: a fraction of the animation duration 
+
+*android.view.animation.LayoutAnimationController.getDelayForView(View)*
+
+protected long getDelayForView(android.view.View view)
+
+Returns the amount of milliseconds by which the specified view's animation must 
+be delayed or offset. Subclasses should override this method to return a 
+suitable value. 
+
+This implementation returns child animation delay milliseconds where: 
+
+
+
+child animation delay = child index * delay 
+
+The index is retrieved from the 
+(|android.view.animation.LayoutAnimationController.AnimationParameters|) found 
+in the view's (|android.view.ViewGroup.LayoutParams|) . 
+
+
+    view - the view for which to obtain the animation's delay 
+
+    Returns: a delay in milliseconds 
+
+*android.view.animation.LayoutAnimationController.getInterpolator()*
+
+public |android.view.animation.Interpolator| getInterpolator()
+
+Returns the interpolator used to interpolate the delays between the children. 
+
+
+
+    Returns: an {@link android.view.animation.Interpolator} 
+
+*android.view.animation.LayoutAnimationController.getOrder()*
+
+public int getOrder()
+
+Returns the order used to compute the delay of each child's animation. 
+
+
+
+    Returns: one of {@link #ORDER_NORMAL}, {@link #ORDER_REVERSE} or {@link #ORDER_RANDOM) 
+
+*android.view.animation.LayoutAnimationController.getTransformedIndex(LayoutAnimationController.AnimationParameters)*
+
+protected int getTransformedIndex(android.view.animation.LayoutAnimationController.AnimationParameters params)
+
+Transforms the index stored in 
+(|android.view.animation.LayoutAnimationController.AnimationParameters|) by the 
+order returned by (|android.view.animation.LayoutAnimationController|) . 
+Subclasses should override this method to provide additional support for other 
+types of ordering. This method should be invoked by 
+(|android.view.animation.LayoutAnimationController|) prior to any computation. 
+
+
+    params - the animation parameters containing the index 
+
+    Returns: a transformed index 
+
+*android.view.animation.LayoutAnimationController.isDone()*
+
+public boolean isDone()
+
+Indicates whether the layout animation is over or not. A layout animation is 
+considered done when the animation with the longest delay is done. 
+
+
+
+    Returns: true if all of the children's animations are over, false otherwise 
+
+*android.view.animation.LayoutAnimationController.setAnimation(Animation)*
+
+public void setAnimation(android.view.animation.Animation animation)
+
+Sets the animation to be run on each child of the view group on which this 
+layout animation controller is . 
+
+
+    animation - the animation to run on each child of the view group 
+
+*android.view.animation.LayoutAnimationController.setAnimation(Context,int)*
+
+public void setAnimation(
+  android.content.Context context,
+  int resourceID)
+
+Sets the animation to be run on each child of the view group on which this 
+layout animation controller is . 
+
+
+    context - the context from which the animation must be inflated 
+    resourceID - the resource identifier of the animation 
+
+*android.view.animation.LayoutAnimationController.setDelay(float)*
+
+public void setDelay(float delay)
+
+Sets the delay, as a fraction of the animation duration, by which the 
+children's animations are offset. The general formula is: 
+
+
+
+child animation delay = child index * delay * animation duration 
+
+
+    delay - a fraction of the animation duration 
+
+*android.view.animation.LayoutAnimationController.setInterpolator(Context,int)*
+
+public void setInterpolator(
+  android.content.Context context,
+  int resourceID)
+
+Sets the interpolator used to interpolate the delays between the children. 
+
+
+    context - the context from which the interpolator must be inflated 
+    resourceID - the resource identifier of the interpolator 
+
+*android.view.animation.LayoutAnimationController.setInterpolator(Interpolator)*
+
+public void setInterpolator(android.view.animation.Interpolator interpolator)
+
+Sets the interpolator used to interpolate the delays between the children. 
+
+
+    interpolator - the interpolator 
+
+*android.view.animation.LayoutAnimationController.setOrder(int)*
+
+public void setOrder(int order)
+
+Sets the order used to compute the delay of each child's animation. 
+
+
+    order - one of {@link #ORDER_NORMAL}, {@link #ORDER_REVERSE} or {@link #ORDER_RANDOM} 
+
+*android.view.animation.LayoutAnimationController.start()*
+
+public void start()
+
+Starts the animation. 
+
+
+
+*android.view.animation.LayoutAnimationController.willOverlap()*
+
+public boolean willOverlap()
+
+Indicates whether two children's animations will overlap. Animations overlap 
+when the delay is lower than 100% (or 1.0). 
+
+
+
+    Returns: true if animations will overlap, false otherwise 
+
+

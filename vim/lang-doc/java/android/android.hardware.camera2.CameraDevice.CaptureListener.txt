@@ -1,0 +1,155 @@
+*android.hardware.camera2.CameraDevice.CaptureListener* *CameraDevice.CaptureListener* 
+
+public abstract static class CameraDevice.CaptureListener
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CameraDevice.CaptureListener_Description|
+|android.hardware.camera2.CameraDevice.CaptureListener_Fields|
+|android.hardware.camera2.CameraDevice.CaptureListener_Constructors|
+|android.hardware.camera2.CameraDevice.CaptureListener_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CameraDevice.CaptureListener_Constructors*
+|android.hardware.camera2.CameraDevice.CaptureListener()|
+
+*android.hardware.camera2.CameraDevice.CaptureListener_Methods*
+|android.hardware.camera2.CameraDevice.CaptureListener.onCaptureCompleted(CameraDevice,CaptureRequest,CaptureResult)|
+|android.hardware.camera2.CameraDevice.CaptureListener.onCaptureFailed(CameraDevice,CaptureRequest,CaptureFailure)|
+|android.hardware.camera2.CameraDevice.CaptureListener.onCapturePartial(CameraDevice,CaptureRequest,CaptureResult)|
+|android.hardware.camera2.CameraDevice.CaptureListener.onCaptureSequenceCompleted(CameraDevice,int,int)|
+|android.hardware.camera2.CameraDevice.CaptureListener.onCaptureStarted(CameraDevice,CaptureRequest,long)|
+
+*android.hardware.camera2.CameraDevice.CaptureListener_Description*
+
+A listener for tracking the progress of a 
+(|android.hardware.camera2.CaptureRequest|) submitted to the camera device. 
+
+This listener is called when a request triggers a capture to start, and when 
+the capture is complete. In case on an error capturing an image, the error 
+method is triggered instead of the completion method. 
+
+
+
+*android.hardware.camera2.CameraDevice.CaptureListener()*
+
+public CameraDevice.CaptureListener()
+
+
+
+
+*android.hardware.camera2.CameraDevice.CaptureListener.onCaptureCompleted(CameraDevice,CaptureRequest,CaptureResult)*
+
+public void onCaptureCompleted(
+  android.hardware.camera2.CameraDevice camera,
+  android.hardware.camera2.CaptureRequest request,
+  android.hardware.camera2.CaptureResult result)
+
+This method is called when an image capture has completed and the result 
+metadata is available. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - The CameraDevice sending the callback. 
+    request - The request that was given to the CameraDevice 
+    result - The output metadata from the capture, including the final capture parameters 
+       and the state of the camera system during capture. 
+
+*android.hardware.camera2.CameraDevice.CaptureListener.onCaptureFailed(CameraDevice,CaptureRequest,CaptureFailure)*
+
+public void onCaptureFailed(
+  android.hardware.camera2.CameraDevice camera,
+  android.hardware.camera2.CaptureRequest request,
+  android.hardware.camera2.CaptureFailure failure)
+
+This method is called instead of 
+(|android.hardware.camera2.CameraDevice.CaptureListener|) when the camera 
+device failed to produce a (|android.hardware.camera2.CaptureResult|) for the 
+request. 
+
+Other requests are unaffected, and some or all image buffers from the capture 
+may have been pushed to their respective output streams. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - The CameraDevice sending the callback. 
+    request - The request that was given to the CameraDevice 
+    failure - The output failure from the capture, including the failure reason and the frame 
+       number. 
+
+*android.hardware.camera2.CameraDevice.CaptureListener.onCapturePartial(CameraDevice,CaptureRequest,CaptureResult)*
+
+public void onCapturePartial(
+  android.hardware.camera2.CameraDevice camera,
+  android.hardware.camera2.CaptureRequest request,
+  android.hardware.camera2.CaptureResult result)
+
+This method is called when some results from an image capture are available. 
+
+The result provided here will contain some subset of the fields of a full 
+result. Multiple onCapturePartial calls may happen per capture; a given result 
+field will only be present in one partial capture at most. The final 
+onCaptureCompleted call will always contain all the fields, whether 
+onCapturePartial was called or not. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - The CameraDevice sending the callback. 
+    request - The request that was given to the CameraDevice 
+    result - The partial output metadata from the capture, which includes a subset of the 
+       CaptureResult fields. 
+
+*android.hardware.camera2.CameraDevice.CaptureListener.onCaptureSequenceCompleted(CameraDevice,int,int)*
+
+public void onCaptureSequenceCompleted(
+  android.hardware.camera2.CameraDevice camera,
+  int sequenceId,
+  int frameNumber)
+
+This method is called independently of the others in CaptureListener, when a 
+capture sequence finishes and all (|android.hardware.camera2.CaptureResult|) or 
+(|android.hardware.camera2.CaptureFailure|) for it have been returned via this 
+listener. 
+
+
+    camera - The CameraDevice sending the callback. 
+    sequenceId - A sequence ID returned by the {@link #capture} family of functions. 
+    frameNumber - The last frame number (returned by {@link CaptureResult#getFrameNumber} or 
+       {@link CaptureFailure#getFrameNumber}) in the capture sequence. 
+
+*android.hardware.camera2.CameraDevice.CaptureListener.onCaptureStarted(CameraDevice,CaptureRequest,long)*
+
+public void onCaptureStarted(
+  android.hardware.camera2.CameraDevice camera,
+  android.hardware.camera2.CaptureRequest request,
+  long timestamp)
+
+This method is called when the camera device has started capturing the output 
+image for the request, at the beginning of image exposure. 
+
+This callback is invoked right as the capture of a frame begins, so it is the 
+most appropriate time for playing a shutter sound, or triggering UI indicators 
+of capture. 
+
+The request that is being used for this capture is provided, along with the 
+actual timestamp for the start of exposure. This timestamp matches the 
+timestamp that will be included in the result timestamp 
+field(|android.hardware.camera2.CaptureResult|) , and in the buffers sent to 
+each output Surface. These buffer timestamps are accessible through, for 
+example, Image.getTimestamp()(|android.media.Image|) or 
+(|android.graphics.SurfaceTexture|) . 
+
+For the simplest way to play a shutter sound camera shutter or a video 
+recording start/stop sound, see the (|android.media.MediaActionSound|) class. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - the CameraDevice sending the callback 
+    request - the request for the capture that just begun 
+    timestamp - the timestamp at start of capture, in nanoseconds. 
+
+

@@ -1,0 +1,738 @@
+*android.transition.Transition* *Transition* A Transition holds information abou
+
+public abstract class Transition
+  extends    |java.lang.Object|
+  implements |java.lang.Cloneable|
+
+|android.transition.Transition_Description|
+|android.transition.Transition_Fields|
+|android.transition.Transition_Constructors|
+|android.transition.Transition_Methods|
+
+================================================================================
+
+*android.transition.Transition_Constructors*
+|android.transition.Transition()|Constructs a Transition object with no target 
+
+*android.transition.Transition_Methods*
+|android.transition.Transition.addListener(Transition.TransitionListener)|Adds 
+|android.transition.Transition.addTarget(int)|Adds the id of a target view that
+|android.transition.Transition.addTarget(View)|Sets the target view instances t
+|android.transition.Transition.animate(Animator)|This is a utility method used 
+|android.transition.Transition.cancel()|This method cancels a transition that i
+|android.transition.Transition.captureEndValues(TransitionValues)|Captures the 
+|android.transition.Transition.captureStartValues(TransitionValues)|Captures th
+|android.transition.Transition.clone()|
+|android.transition.Transition.createAnimator(ViewGroup,TransitionValues,TransitionValues)|
+|android.transition.Transition.createAnimators(ViewGroup,TransitionValuesMaps,TransitionValuesMaps)|
+|android.transition.Transition.end()|This method is called automatically by the
+|android.transition.Transition.excludeChildren(Class,boolean)|Whether to add th
+|android.transition.Transition.excludeChildren(int,boolean)|Whether to add the 
+|android.transition.Transition.excludeChildren(View,boolean)|Whether to add the
+|android.transition.Transition.excludeTarget(Class,boolean)|Whether to add the 
+|android.transition.Transition.excludeTarget(int,boolean)|Whether to add the gi
+|android.transition.Transition.excludeTarget(View,boolean)|Whether to add the g
+|android.transition.Transition.getDuration()|Returns the duration set on this t
+|android.transition.Transition.getInterpolator()|Returns the interpolator set o
+|android.transition.Transition.getName()|Returns the name of this Transition.
+|android.transition.Transition.getStartDelay()|Returns the startDelay set on th
+|android.transition.Transition.getTargetIds()|Returns the array of target IDs t
+|android.transition.Transition.getTargets()|Returns the array of target views t
+|android.transition.Transition.getTransitionProperties()|Returns the set of pro
+|android.transition.Transition.getTransitionValues(View,boolean)|This method ca
+|android.transition.Transition.pause()|Pauses this transition, sending out call
+|android.transition.Transition.removeListener(Transition.TransitionListener)|Re
+|android.transition.Transition.removeTarget(int)|Removes the given targetId fro
+|android.transition.Transition.removeTarget(View)|Removes the given target from
+|android.transition.Transition.resume()|Resumes this transition, sending out ca
+|android.transition.Transition.runAnimators()|This is called internally once al
+|android.transition.Transition.setDuration(long)|Sets the duration of this tran
+|android.transition.Transition.setInterpolator(TimeInterpolator)|Sets the inter
+|android.transition.Transition.setStartDelay(long)|Sets the startDelay of this 
+|android.transition.Transition.start()|This method is called automatically by t
+|android.transition.Transition.toString()|
+
+*android.transition.Transition_Description*
+
+A Transition holds information about animations that will be run on its targets 
+during a scene change. Subclasses of this abstract class may choreograph 
+several child transitions ( (|android.transition.TransitionSet|) or they may 
+perform custom animations themselves. Any Transition has two main jobs: (1) 
+capture property values, and (2) play animations based on changes to captured 
+property values. A custom transition knows what property values on View objects 
+are of interest to it, and also knows how to animate changes to those values. 
+For example, the (|android.transition.Fade|) transition tracks changes to 
+visibility-related properties and is able to construct and run animations that 
+fade items in or out based on changes to those properties. 
+
+Note: Transitions may not work correctly with either 
+(|android.view.SurfaceView|) or (|android.view.TextureView|) , due to the way 
+that these views are displayed on the screen. For SurfaceView, the problem is 
+that the view is updated from a non-UI thread, so changes to the view due to 
+transitions (such as moving and resizing the view) may be out of sync with the 
+display inside those bounds. TextureView is more compatible with transitions in 
+general, but some specific transitions (such as (|android.transition.Fade|) ) 
+may not be compatible with TextureView because they rely on 
+(|android.view.ViewOverlay|) functionality, which does not currently work with 
+TextureView. 
+
+Transitions can be declared in XML resource files inside the res/transition 
+directory. Transition resources consist of a tag name for one of the Transition 
+subclasses along with attributes to define some of the attributes of that 
+transition. For example, here is a minimal resource file that declares a 
+(|android.transition.ChangeBounds|) 
+transition:development/samples/ApiDemos/res/transition/changebounds.xml 
+ChangeBoundsNote that attributes for the transition are not required, just as 
+they are optional when declared in code; Transitions created from XML resources 
+will use the same defaults as their code-created equivalents. Here is a 
+slightly more elaborate example which declares a 
+(|android.transition.TransitionSet|) transition with 
+(|android.transition.ChangeBounds|) and (|android.transition.Fade|) child 
+transitions:development/samples/ApiDemos/res/transition/changebounds_fadeout_sequential.xml
+TransitionSetIn this example, the transitionOrdering attribute is used on the 
+TransitionSet object to change from the default 
+(|android.transition.TransitionSet|) behavior to be 
+(|android.transition.TransitionSet|) instead. Also, the 
+(|android.transition.Fade|) transition uses a fadingMode of 
+(|android.transition.Fade|) instead of the default out-in behavior. Finally, 
+note the use of the targets sub-tag, which takes a set of 
+target(|android.R.styleable|) tags, each of which lists a specific targetId 
+which this transition acts upon. Use of targets is optional, but can be used to 
+either limit the time spent checking attributes on unchanging views, or 
+limiting the types of animations run on specific views. In this case, we know 
+that only the grayscaleContainer will be disappearing, so we choose to limit 
+the (|android.transition.Fade|) transition to only that view. 
+
+Further information on XML resource descriptions for transitions can be found 
+for (|android.R.styleable|) , (|android.R.styleable|) , (|android.R.styleable|) 
+, and (|android.R.styleable|) . 
+
+
+
+*android.transition.Transition()*
+
+public Transition()
+
+Constructs a Transition object with no target objects. A transition with no 
+targets defaults to running on all target objects in the scene hierarchy (if 
+the transition is not contained in a TransitionSet), or all target objects 
+passed down from its parent (if it is in a TransitionSet). 
+
+
+*android.transition.Transition.addListener(Transition.TransitionListener)*
+
+public |android.transition.Transition| addListener(android.transition.Transition.TransitionListener listener)
+
+Adds a listener to the set of listeners that are sent events through the life 
+of an animation, such as start, repeat, and end. 
+
+
+    listener - the listener to be added to the current set of listeners for this animation. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.addTarget(int)*
+
+public |android.transition.Transition| addTarget(int targetId)
+
+Adds the id of a target view that this Transition is interested in animating. 
+By default, there are no targetIds, and a Transition will listen for changes on 
+every view in the hierarchy below the sceneRoot of the Scene being transitioned 
+into. Setting targetIds constrains the Transition to only listen for, and act 
+on, views with these IDs. Views with different IDs, or no IDs whatsoever, will 
+be ignored. 
+
+Note that using ids to specify targets implies that ids should be unique within 
+the view hierarchy underneat the scene root. 
+
+
+    targetId - The id of a target view, must be a positive number. 
+
+    Returns: The Transition to which the targetId is added. Returning the same object makes 
+             it easier to chain calls during construction, such as 
+             transitionSet.addTransitions(new Fade()).addTarget(someId); 
+
+*android.transition.Transition.addTarget(View)*
+
+public |android.transition.Transition| addTarget(android.view.View target)
+
+Sets the target view instances that this Transition is interested in animating. 
+By default, there are no targets, and a Transition will listen for changes on 
+every view in the hierarchy below the sceneRoot of the Scene being transitioned 
+into. Setting targets constrains the Transition to only listen for, and act on, 
+these views. All other views will be ignored. 
+
+The target list is like the targetId(|android.transition.Transition|) list 
+except this list specifies the actual View instances, not the ids of the views. 
+This is an important distinction when scene changes involve view hierarchies 
+which have been inflated separately; different views may share the same id but 
+not actually be the same instance. If the transition should treat those views 
+as the same, then (|android.transition.Transition|) should be used instead of 
+(|android.transition.Transition|) . If, on the other hand, scene changes 
+involve changes all within the same view hierarchy, among views which do not 
+necessarily have ids set on them, then the target list of views may be more 
+convenient. 
+
+
+    target - A View on which the Transition will act, must be non-null. 
+
+    Returns: The Transition to which the target is added. Returning the same object makes it 
+             easier to chain calls during construction, such as 
+             transitionSet.addTransitions(new Fade()).addTarget(someView); 
+
+*android.transition.Transition.animate(Animator)*
+
+protected void animate(android.animation.Animator animator)
+
+This is a utility method used by subclasses to handle standard parts of setting 
+up and running an Animator: it sets the 
+duration(|android.transition.Transition|) and the 
+startDelay(|android.transition.Transition|) , starts the animation, and, when 
+the animator ends, calls (|android.transition.Transition|) . 
+
+
+    animator - The Animator to be run during this transition. 
+
+*android.transition.Transition.cancel()*
+
+protected void cancel()
+
+This method cancels a transition that is currently running. 
+
+
+
+*android.transition.Transition.captureEndValues(TransitionValues)*
+
+public abstract void captureEndValues(android.transition.TransitionValues transitionValues)
+
+Captures the values in the end scene for the properties that this transition 
+monitors. These values are then passed as the endValues structure in a later 
+call to (|android.transition.Transition|) . The main concern for an 
+implementation is what the properties are that the transition cares about and 
+what the values are for all of those properties. The start and end values will 
+be compared later during the (|android.transition.Transition|) method to 
+determine what, if any, animations, should be run. 
+
+Subclasses must implement this method. The method should only be called by the 
+transition system; it is not intended to be called from external classes. 
+
+
+    transitionValues - The holder for any values that the Transition wishes to store. Values are 
+       stored in the values field of this TransitionValues object and are keyed 
+       from a String value. For example, to store a view's rotation value, a 
+       transition might call 
+       transitionValues.values.put("appname:transitionname:rotation", 
+       view.getRotation()). The target view will already be stored in the 
+       transitionValues structure when this method is called. 
+
+*android.transition.Transition.captureStartValues(TransitionValues)*
+
+public abstract void captureStartValues(android.transition.TransitionValues transitionValues)
+
+Captures the values in the start scene for the properties that this transition 
+monitors. These values are then passed as the startValues structure in a later 
+call to (|android.transition.Transition|) . The main concern for an 
+implementation is what the properties are that the transition cares about and 
+what the values are for all of those properties. The start and end values will 
+be compared later during the (|android.transition.Transition|) method to 
+determine what, if any, animations, should be run. 
+
+Subclasses must implement this method. The method should only be called by the 
+transition system; it is not intended to be called from external classes. 
+
+
+    transitionValues - The holder for any values that the Transition wishes to store. Values are 
+       stored in the values field of this TransitionValues object and are keyed 
+       from a String value. For example, to store a view's rotation value, a 
+       transition might call 
+       transitionValues.values.put("appname:transitionname:rotation", 
+       view.getRotation()). The target view will already be stored in the 
+       transitionValues structure when this method is called. 
+
+*android.transition.Transition.clone()*
+
+public |android.transition.Transition| clone()
+
+
+
+
+
+*android.transition.Transition.createAnimator(ViewGroup,TransitionValues,TransitionValues)*
+
+public |android.animation.Animator| createAnimator(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  android.transition.TransitionValues endValues)
+
+This method creates an animation that will be run for this transition given the 
+information in the startValues and endValues structures captured earlier for 
+the start and end scenes. Subclasses of Transition should override this method. 
+The method should only be called by the transition system; it is not intended 
+to be called from external classes. 
+
+This method is called by the transition's parent (all the way up to the topmost 
+Transition in the hierarchy) with the sceneRoot and start/end values that the 
+transition may need to set up initial target values and construct an 
+appropriate animation. For example, if an overall Transition is a 
+(|android.transition.TransitionSet|) consisting of several child transitions in 
+sequence, then some of the child transitions may want to set initial values on 
+target views prior to the overall Transition commencing, to put them in an 
+appropriate state for the delay between that start and the child Transition 
+start time. For example, a transition that fades an item in may wish to set the 
+starting alpha value to 0, to avoid it blinking in prior to the transition 
+actually starting the animation. This is necessary because the scene change 
+that triggers the Transition will automatically set the end-scene on all target 
+views, so a Transition that wants to animate from a different value should set 
+that value prior to returning from this method. 
+
+Additionally, a Transition can perform logic to determine whether the 
+transition needs to run on the given target and start/end values. For example, 
+a transition that resizes objects on the screen may wish to avoid running for 
+views which are not present in either the start or end scenes. 
+
+If there is an animator created and returned from this method, the transition 
+mechanism will apply any applicable duration, startDelay, and interpolator to 
+that animation and start it. A return value of null indicates that no animation 
+should run. The default implementation returns null. 
+
+The method is called for every applicable target object, which is stored in the 
+(|android.transition.TransitionValues|) field. 
+
+
+    sceneRoot - The root of the transition hierarchy. 
+    startValues - The values for a specific target in the start scene. 
+    endValues - The values for the target in the end scene. 
+
+    Returns: A Animator to be started at the appropriate time in the overall transition for 
+             this scene change. A null value means no animation should be run. 
+
+*android.transition.Transition.createAnimators(ViewGroup,TransitionValuesMaps,TransitionValuesMaps)*
+
+protected void createAnimators(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValuesMaps startValues,
+  android.transition.TransitionValuesMaps endValues)
+
+This method, essentially a wrapper around all calls to createAnimator for all 
+possible target views, is called with the entire set of start/end values. The 
+implementation in Transition iterates through these lists and calls 
+(|android.transition.Transition|) with each set of start/end values on this 
+transition. The TransitionSet subclass overrides this method and delegates it 
+to each of its children in succession. 
+
+
+
+*android.transition.Transition.end()*
+
+protected void end()
+
+This method is called automatically by the Transition and TransitionSet classes 
+when a transition finishes, either because a transition did nothing (returned a 
+null Animator from (|android.transition.Transition|) ) or because the 
+transition returned a valid Animator and end() was called in the 
+onAnimationEnd() callback of the AnimatorListener. 
+
+
+
+*android.transition.Transition.excludeChildren(Class,boolean)*
+
+public |android.transition.Transition| excludeChildren(
+  java.lang.Class type,
+  boolean exclude)
+
+Whether to add the given type to the list of types whose children should be 
+excluded from this transition. The exclude parameter specifies whether the 
+target type should be added to or removed from the excluded list. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    type - The type to ignore when running this transition. 
+    exclude - Whether to add the target type to or remove it from the current list of 
+       excluded target types. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.excludeChildren(int,boolean)*
+
+public |android.transition.Transition| excludeChildren(
+  int targetId,
+  boolean exclude)
+
+Whether to add the children of the given id to the list of targets to exclude 
+from this transition. The exclude parameter specifies whether the children of 
+the target should be added to or removed from the excluded list. Excluding 
+children in this way provides a simple mechanism for excluding all children of 
+specific targets, rather than individually excluding each child individually. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    targetId - The id of a target whose children should be ignored when running this 
+       transition. 
+    exclude - Whether to add the target to or remove the target from the current list of 
+       excluded-child targets. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.excludeChildren(View,boolean)*
+
+public |android.transition.Transition| excludeChildren(
+  android.view.View target,
+  boolean exclude)
+
+Whether to add the children of given target to the list of target children to 
+exclude from this transition. The exclude parameter specifies whether the 
+target should be added to or removed from the excluded list. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    target - The target to ignore when running this transition. 
+    exclude - Whether to add the target to or remove the target from the current list of 
+       excluded targets. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.excludeTarget(Class,boolean)*
+
+public |android.transition.Transition| excludeTarget(
+  java.lang.Class type,
+  boolean exclude)
+
+Whether to add the given type to the list of types to exclude from this 
+transition. The exclude parameter specifies whether the target type should be 
+added to or removed from the excluded list. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    type - The type to ignore when running this transition. 
+    exclude - Whether to add the target type to or remove it from the current list of 
+       excluded target types. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.excludeTarget(int,boolean)*
+
+public |android.transition.Transition| excludeTarget(
+  int targetId,
+  boolean exclude)
+
+Whether to add the given id to the list of target ids to exclude from this 
+transition. The exclude parameter specifies whether the target should be added 
+to or removed from the excluded list. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    targetId - The id of a target to ignore when running this transition. 
+    exclude - Whether to add the target to or remove the target from the current list of 
+       excluded targets. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.excludeTarget(View,boolean)*
+
+public |android.transition.Transition| excludeTarget(
+  android.view.View target,
+  boolean exclude)
+
+Whether to add the given target to the list of targets to exclude from this 
+transition. The exclude parameter specifies whether the target should be added 
+to or removed from the excluded list. 
+
+Excluding targets is a general mechanism for allowing transitions to run on a 
+view hierarchy while skipping target views that should not be part of the 
+transition. For example, you may want to avoid animating children of a specific 
+ListView or Spinner. Views can be excluded either by their id, or by their 
+instance reference, or by the Class of that view (eg, 
+(|android.widget.Spinner|) ). 
+
+
+    target - The target to ignore when running this transition. 
+    exclude - Whether to add the target to or remove the target from the current list of 
+       excluded targets. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.getDuration()*
+
+public long getDuration()
+
+Returns the duration set on this transition. If no duration has been set, the 
+returned value will be negative, indicating that resulting animators will 
+retain their own durations. 
+
+
+
+    Returns: The duration set on this transition, in milliseconds, if one has been set, 
+             otherwise returns a negative number. 
+
+*android.transition.Transition.getInterpolator()*
+
+public |android.animation.TimeInterpolator| getInterpolator()
+
+Returns the interpolator set on this transition. If no interpolator has been 
+set, the returned value will be null, indicating that resulting animators will 
+retain their own interpolators. 
+
+
+
+    Returns: The interpolator set on this transition, if one has been set, otherwise returns 
+             null. 
+
+*android.transition.Transition.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name of this Transition. This name is used internally to 
+distinguish between different transitions to determine when interrupting 
+transitions overlap. For example, a ChangeBounds running on the same target 
+view as another ChangeBounds should determine whether the old transition is 
+animating to different end values and should be canceled in favor of the new 
+transition. 
+
+By default, a Transition's name is simply the value of (|java.lang.Class|) , 
+but subclasses are free to override and return something different. 
+
+
+
+    Returns: The name of this transition. 
+
+*android.transition.Transition.getStartDelay()*
+
+public long getStartDelay()
+
+Returns the startDelay set on this transition. If no startDelay has been set, 
+the returned value will be negative, indicating that resulting animators will 
+retain their own startDelays. 
+
+
+
+    Returns: The startDelay set on this transition, in milliseconds, if one has been set, 
+             otherwise returns a negative number. 
+
+*android.transition.Transition.getTargetIds()*
+
+public |java.util.List|<Integer> getTargetIds()
+
+Returns the array of target IDs that this transition limits itself to tracking 
+and animating. If the array is null for both this method and 
+(|android.transition.Transition|) , then this transition is not limited to 
+specific views, and will handle changes to any views in the hierarchy of a 
+scene change. 
+
+
+
+    Returns: the list of target IDs 
+
+*android.transition.Transition.getTargets()*
+
+public |java.util.List|<View> getTargets()
+
+Returns the array of target views that this transition limits itself to 
+tracking and animating. If the array is null for both this method and 
+(|android.transition.Transition|) , then this transition is not limited to 
+specific views, and will handle changes to any views in the hierarchy of a 
+scene change. 
+
+
+
+    Returns: the list of target views 
+
+*android.transition.Transition.getTransitionProperties()*
+
+public |java.lang.String|[] getTransitionProperties()
+
+Returns the set of property names used stored in the 
+(|android.transition.TransitionValues|) object passed into 
+(|android.transition.Transition|) that this transition cares about for the 
+purposes of canceling overlapping animations. When any transition is started on 
+a given scene root, all transitions currently running on that same scene root 
+are checked to see whether the properties on which they based their animations 
+agree with the end values of the same properties in the new transition. If the 
+end values are not equal, then the old animation is canceled since the new 
+transition will start a new animation to these new values. If the values are 
+equal, the old animation is allowed to continue and no new animation is started 
+for that transition. 
+
+A transition does not need to override this method. However, not doing so will 
+mean that the cancellation logic outlined in the previous paragraph will be 
+skipped for that transition, possibly leading to artifacts as old transitions 
+and new transitions on the same targets run in parallel, animating views toward 
+potentially different end values. 
+
+
+
+    Returns: An array of property names as described in the class documentation for {@link 
+             TransitionValues}. The default implementation returns null. 
+
+*android.transition.Transition.getTransitionValues(View,boolean)*
+
+public |android.transition.TransitionValues| getTransitionValues(
+  android.view.View view,
+  boolean start)
+
+This method can be called by transitions to get the TransitionValues for any 
+particular view during the transition-playing process. This might be necessary, 
+for example, to query the before/after state of related views for a given 
+transition. 
+
+
+
+*android.transition.Transition.pause()*
+
+public void pause()
+
+Pauses this transition, sending out calls to 
+(|android.transition.Transition.TransitionListener|) to all listeners and 
+pausing all running animators started by this transition. 
+
+
+
+*android.transition.Transition.removeListener(Transition.TransitionListener)*
+
+public |android.transition.Transition| removeListener(android.transition.Transition.TransitionListener listener)
+
+Removes a listener from the set listening to this animation. 
+
+
+    listener - the listener to be removed from the current set of listeners for this 
+       transition. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.removeTarget(int)*
+
+public |android.transition.Transition| removeTarget(int targetId)
+
+Removes the given targetId from the list of ids that this Transition is 
+interested in animating. 
+
+
+    targetId - The id of a target view, must be a positive number. 
+
+    Returns: The Transition from which the targetId is removed. Returning the same object 
+             makes it easier to chain calls during construction, such as 
+             transitionSet.addTransitions(new Fade()).removeTargetId(someId); 
+
+*android.transition.Transition.removeTarget(View)*
+
+public |android.transition.Transition| removeTarget(android.view.View target)
+
+Removes the given target from the list of targets that this Transition is 
+interested in animating. 
+
+
+    target - The target view, must be non-null. 
+
+    Returns: Transition The Transition from which the target is removed. Returning the same 
+             object makes it easier to chain calls during construction, such as 
+             transitionSet.addTransitions(new Fade()).removeTarget(someView); 
+
+*android.transition.Transition.resume()*
+
+public void resume()
+
+Resumes this transition, sending out calls to 
+(|android.transition.Transition.TransitionListener|) to all listeners and 
+pausing all running animators started by this transition. 
+
+
+
+*android.transition.Transition.runAnimators()*
+
+protected void runAnimators()
+
+This is called internally once all animations have been set up by the 
+transition hierarchy. \ 
+
+
+
+*android.transition.Transition.setDuration(long)*
+
+public |android.transition.Transition| setDuration(long duration)
+
+Sets the duration of this transition. By default, there is no duration 
+(indicated by a negative number), which means that the Animator created by the 
+transition will have its own specified duration. If the duration of a 
+Transition is set, that duration will override the Animator duration. 
+
+
+    duration - The length of the animation, in milliseconds. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.setInterpolator(TimeInterpolator)*
+
+public |android.transition.Transition| setInterpolator(android.animation.TimeInterpolator interpolator)
+
+Sets the interpolator of this transition. By default, the interpolator is null, 
+which means that the Animator created by the transition will have its own 
+specified interpolator. If the interpolator of a Transition is set, that 
+interpolator will override the Animator interpolator. 
+
+
+    interpolator - The time interpolator used by the transition 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.setStartDelay(long)*
+
+public |android.transition.Transition| setStartDelay(long startDelay)
+
+Sets the startDelay of this transition. By default, there is no delay 
+(indicated by a negative number), which means that the Animator created by the 
+transition will have its own specified startDelay. If the delay of a Transition 
+is set, that delay will override the Animator delay. 
+
+
+    startDelay - The length of the delay, in milliseconds. 
+
+    Returns: This transition object. 
+
+*android.transition.Transition.start()*
+
+protected void start()
+
+This method is called automatically by the transition and TransitionSet classes 
+prior to a Transition subclass starting; subclasses should not need to call it 
+directly. 
+
+
+
+*android.transition.Transition.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

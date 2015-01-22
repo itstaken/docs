@@ -1,0 +1,112 @@
+*android.net.DnsPinger* *DnsPinger* Performs a simple DNS "ping" by sending a "s
+
+public final class DnsPinger
+  extends    |android.os.Handler|
+
+|android.net.DnsPinger_Description|
+|android.net.DnsPinger_Fields|
+|android.net.DnsPinger_Constructors|
+|android.net.DnsPinger_Methods|
+
+================================================================================
+
+*android.net.DnsPinger_Fields*
+|int_android.net.DnsPinger.DNS_PING_RESULT|
+|int_android.net.DnsPinger.SOCKET_EXCEPTION|
+|int_android.net.DnsPinger.TIMEOUT|
+
+*android.net.DnsPinger_Constructors*
+|android.net.DnsPinger(Context,String,Looper,Handler,int)|
+
+*android.net.DnsPinger_Methods*
+|android.net.DnsPinger.cancelPings()|
+|android.net.DnsPinger.getDnsList()|Returns a list of DNS addresses, coming fro
+|android.net.DnsPinger.handleMessage(Message)|
+|android.net.DnsPinger.pingDnsAsync(InetAddress,int,int)|Send a ping.
+
+*android.net.DnsPinger_Description*
+
+Performs a simple DNS "ping" by sending a "server status" query packet to the 
+DNS server. As long as the server replies, we consider it a success. 
+
+We do not use a simple hostname lookup because that could be cached and the API 
+may not differentiate between a time out and a failure lookup (which we really 
+care about). 
+
+
+
+*int_android.net.DnsPinger.DNS_PING_RESULT*
+
+Async response packet for dns pings. arg1 is the ID of the ping, also returned 
+by (|android.net.DnsPinger|) arg2 is the delay, or is negative on error. 
+
+
+*int_android.net.DnsPinger.SOCKET_EXCEPTION*
+
+An error code for a (|android.net.DnsPinger|) packet 
+
+
+*int_android.net.DnsPinger.TIMEOUT*
+
+An error code for a (|android.net.DnsPinger|) packet 
+
+
+
+*android.net.DnsPinger(Context,String,Looper,Handler,int)*
+
+public DnsPinger(
+  android.content.Context context,
+  java.lang.String TAG,
+  android.os.Looper looper,
+  android.os.Handler target,
+  int connectionType)
+
+
+
+
+*android.net.DnsPinger.cancelPings()*
+
+public void cancelPings()
+
+
+
+
+
+*android.net.DnsPinger.getDnsList()*
+
+public |java.util.List|<InetAddress> getDnsList()
+
+Returns a list of DNS addresses, coming from either the link properties of the 
+specified connection or the default system DNS if the link properties has no 
+dnses. 
+
+
+
+    Returns: a non-empty non-null list 
+
+*android.net.DnsPinger.handleMessage(Message)*
+
+public void handleMessage(android.os.Message msg)
+
+
+
+
+
+*android.net.DnsPinger.pingDnsAsync(InetAddress,int,int)*
+
+public int pingDnsAsync(
+  java.net.InetAddress dns,
+  int timeout,
+  int delay)
+
+Send a ping. The response will come via a (|android.net.DnsPinger|) to the 
+handler specified at creation. 
+
+
+    dns - address of dns server to ping 
+    timeout - timeout for ping 
+
+    Returns: an ID field, which will also be included in the {@link #DNS_PING_RESULT} 
+             message. 
+
+

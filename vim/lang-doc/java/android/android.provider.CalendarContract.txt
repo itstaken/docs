@@ -1,0 +1,155 @@
+*android.provider.CalendarContract* *CalendarContract* 
+ The contract between th
+
+public final class CalendarContract
+  extends    |java.lang.Object|
+
+|android.provider.CalendarContract_Description|
+|android.provider.CalendarContract_Fields|
+|android.provider.CalendarContract_Constructors|
+|android.provider.CalendarContract_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract_Fields*
+|java.lang.String_android.provider.CalendarContract.ACCOUNT_TYPE_LOCAL|
+|java.lang.String_android.provider.CalendarContract.ACTION_EVENT_REMINDER|
+|java.lang.String_android.provider.CalendarContract.ACTION_HANDLE_CUSTOM_EVENT|
+|java.lang.String_android.provider.CalendarContract.AUTHORITY|
+|java.lang.String_android.provider.CalendarContract.CALLER_IS_SYNCADAPTER|
+|android.net.Uri_android.provider.CalendarContract.CONTENT_URI|
+|java.lang.String_android.provider.CalendarContract.EXTRA_CUSTOM_APP_URI|
+|java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY|
+|java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME|
+|java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_END_TIME|
+
+*android.provider.CalendarContract_Description*
+
+The contract between the calendar provider and applications. Contains 
+definitions for the supported URIs and data columns. 
+
+Overview 
+
+CalendarContract defines the data model of calendar and event related 
+information. This data is stored in a number of tables: 
+
+The (|android.provider.CalendarContract.Calendars|) table holds the calendar 
+specific information. Each row in this table contains the details for a single 
+calendar, such as the name, color, sync info, etc. The 
+(|android.provider.CalendarContract.Events|) table holds the event specific 
+information. Each row in this table has the info for a single event. It 
+contains information such as event title, location, start time, end time, etc. 
+The event can occur one-time or can recur multiple times. Attendees, reminders, 
+and extended properties are stored on separate tables and reference the 
+(|android.provider.CalendarContract.Events|) to link them with the event. The 
+(|android.provider.CalendarContract.Instances|) table holds the start and end 
+time for occurrences of an event. Each row in this table represents a single 
+occurrence. For one-time events there will be a 1:1 mapping of instances to 
+events. For recurring events, multiple rows will automatically be generated 
+which correspond to multiple occurrences of that event. The 
+(|android.provider.CalendarContract.Attendees|) table holds the event attendee 
+or guest information. Each row represents a single guest of an event. It 
+specifies the type of guest they are and their attendance response for the 
+event. The (|android.provider.CalendarContract.Reminders|) table holds the 
+alert/notification data. Each row represents a single alert for an event. An 
+event can have multiple reminders. The number of reminders per event is 
+specified in (|android.provider.CalendarContract.Calendars|) which is set by 
+the Sync Adapter that owns the given calendar. Reminders are specified in 
+minutes before the event and have a type. The 
+(|android.provider.CalendarContract.ExtendedProperties|) table holds opaque 
+data fields used by the sync adapter. The provider takes no action with items 
+in this table except to delete them when their related events are deleted. 
+
+Other tables include: 
+
+(|android.provider.CalendarContract.SyncState|) , which contains free-form data 
+maintained by the sync adapters 
+
+
+
+*java.lang.String_android.provider.CalendarContract.ACCOUNT_TYPE_LOCAL*
+
+A special account type for calendars not associated with any account. Normally 
+calendars that do not match an account on the device will be removed. Setting 
+the account_type on a calendar to this will prevent it from being wiped if it 
+does not match an existing account. 
+
+
+*java.lang.String_android.provider.CalendarContract.ACTION_EVENT_REMINDER*
+
+Broadcast Action: This is the intent that gets fired when an alarm notification 
+needs to be posted for a reminder. 
+
+
+*java.lang.String_android.provider.CalendarContract.ACTION_HANDLE_CUSTOM_EVENT*
+
+Activity Action: Display the event to the user in the custom app as specified 
+in (|android.provider.CalendarContract.EventsColumns|) . The custom app will be 
+started via (|android.app.Activity|) and it should call 
+(|android.app.Activity|) with (|android.app.Activity|) or 
+(|android.app.Activity|) to acknowledge whether the action was handled or not. 
+
+The custom app should have an intent filter like the following: 
+
+<intent-filter> <action 
+android:name="android.provider.calendar.action.HANDLE_CUSTOM_EVENT" /> 
+<category android:name="android.intent.category.DEFAULT" /> <data 
+android:mimeType="vnd.android.cursor.item/event" /> </intent-filter> 
+
+Input: (|android.content.Intent|) has the event URI. The extra 
+(|android.provider.CalendarContract|) has the start time of the instance. The 
+extra (|android.provider.CalendarContract|) will have the 
+(|android.provider.CalendarContract.EventsColumns|) . 
+
+Output: (|android.app.Activity|) if this was handled; otherwise 
+(|android.app.Activity|) . 
+
+
+*java.lang.String_android.provider.CalendarContract.AUTHORITY*
+
+This authority is used for writing to or querying from the calendar provider. 
+Note: This is set at first run and cannot be changed without breaking apps that 
+access the provider. 
+
+
+*java.lang.String_android.provider.CalendarContract.CALLER_IS_SYNCADAPTER*
+
+An optional insert, update or delete URI parameter that allows the caller to 
+specify that it is a sync adapter. The default value is false. If set to true, 
+the modified row is not marked as "dirty" (needs to be synced) and when the 
+provider calls (|android.content.ContentResolver|) , the third parameter 
+"syncToNetwork" is set to false. Furthermore, if set to true, the caller must 
+also include (|android.provider.CalendarContract.Calendars|) and 
+(|android.provider.CalendarContract.Calendars|) as query parameters. 
+
+
+*android.net.Uri_android.provider.CalendarContract.CONTENT_URI*
+
+The content:// style URL for the top-level calendar authority 
+
+
+*java.lang.String_android.provider.CalendarContract.EXTRA_CUSTOM_APP_URI*
+
+Intent Extras key: (|android.provider.CalendarContract.EventsColumns|) for the 
+event in the (|android.provider.CalendarContract|) intent 
+
+
+*java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY*
+
+Intent Extras key: When creating an event, set this to true to create an 
+all-day event by default 
+
+
+*java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME*
+
+Intent Extras key: The start time of an event or an instance of a recurring 
+event. (milliseconds since epoch) 
+
+
+*java.lang.String_android.provider.CalendarContract.EXTRA_EVENT_END_TIME*
+
+Intent Extras key: The end time of an event or an instance of a recurring 
+event. (milliseconds since epoch) 
+
+
+

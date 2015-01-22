@@ -1,0 +1,138 @@
+*android.content.UndoOperation* *UndoOperation* A single undoable operation.
+
+public abstract class UndoOperation<DATA>
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.UndoOperation_Description|
+|android.content.UndoOperation_Fields|
+|android.content.UndoOperation_Constructors|
+|android.content.UndoOperation_Methods|
+
+================================================================================
+
+*android.content.UndoOperation_Constructors*
+|android.content.UndoOperation(Parcel,ClassLoader)|Construct from a Parcel.
+|android.content.UndoOperation(UndoOwner)|Create a new instance of the operatio
+
+*android.content.UndoOperation_Methods*
+|android.content.UndoOperation.allowMerge()|Return true if this operation can b
+|android.content.UndoOperation.commit()|Called when this undo state is being co
+|android.content.UndoOperation.describeContents()|
+|android.content.UndoOperation.getOwner()|Owning object as given to#UndoOperati
+|android.content.UndoOperation.getOwnerData()|Synonym for#getOwner().android.co
+|android.content.UndoOperation.hasData()|Return true if this operation actually
+|android.content.UndoOperation.matchOwner(UndoOwner)|Return true if this undo o
+|android.content.UndoOperation.redo()|Called when this undo state is being push
+|android.content.UndoOperation.undo()|Called when this undo state is being popp
+
+*android.content.UndoOperation_Description*
+
+A single undoable operation. You must subclass this to implement the state and 
+behavior for your operation. Instances of this class are placed and managed in 
+an (|android.content.UndoManager|) . 
+
+
+
+*android.content.UndoOperation(Parcel,ClassLoader)*
+
+protected UndoOperation(
+  android.os.Parcel src,
+  java.lang.ClassLoader loader)
+
+Construct from a Parcel. 
+
+
+*android.content.UndoOperation(UndoOwner)*
+
+public UndoOperation(android.content.UndoOwner owner)
+
+Create a new instance of the operation. 
+
+    owner - Who owns the data being modified by this undo state; must be returned by {@link 
+       UndoManager#getOwner(String, Object) UndoManager.getOwner}. 
+
+*android.content.UndoOperation.allowMerge()*
+
+public boolean allowMerge()
+
+Return true if this operation can be merged with a later operation. The default 
+implementation always returns true. 
+
+
+
+*android.content.UndoOperation.commit()*
+
+public abstract void commit()
+
+Called when this undo state is being committed to the undo stack. The 
+implementation should perform the initial edits and save any state that may be 
+needed to undo them. 
+
+
+
+*android.content.UndoOperation.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.UndoOperation.getOwner()*
+
+public |android.content.UndoOwner| getOwner()
+
+Owning object as given to (|android.content.UndoOperation|) . 
+
+
+
+*android.content.UndoOperation.getOwnerData()*
+
+public |DATA| getOwnerData()
+
+Synonym for (|android.content.UndoOperation|) . (|android.content.UndoOwner|) . 
+
+
+
+*android.content.UndoOperation.hasData()*
+
+public boolean hasData()
+
+Return true if this operation actually contains modification data. The default 
+implementation always returns true. If you return false, the operation will be 
+dropped when the final undo state is being built. 
+
+
+
+*android.content.UndoOperation.matchOwner(UndoOwner)*
+
+public boolean matchOwner(android.content.UndoOwner owner)
+
+Return true if this undo operation is a member of the given owner. The default 
+implementation is owner == getOwner(). You can override this to provide more 
+sophisticated dependencies between owners. 
+
+
+
+*android.content.UndoOperation.redo()*
+
+public abstract void redo()
+
+Called when this undo state is being pushed back from the transient redo stack 
+to the main undo stack. The implementation should re-apply the edits that were 
+previously removed by (|android.content.UndoOperation|) . 
+
+
+
+*android.content.UndoOperation.undo()*
+
+public abstract void undo()
+
+Called when this undo state is being popped off the undo stack (in to the 
+temporary redo stack). The implementation should remove the original edits and 
+thus restore the target object to its prior value. 
+
+
+
+

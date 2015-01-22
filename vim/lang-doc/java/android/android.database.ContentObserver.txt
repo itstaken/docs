@@ -1,0 +1,151 @@
+*android.database.ContentObserver* *ContentObserver* Receives call backs for cha
+
+public abstract class ContentObserver
+  extends    |java.lang.Object|
+
+|android.database.ContentObserver_Description|
+|android.database.ContentObserver_Fields|
+|android.database.ContentObserver_Constructors|
+|android.database.ContentObserver_Methods|
+
+================================================================================
+
+*android.database.ContentObserver_Constructors*
+|android.database.ContentObserver(Handler)|Creates a content observer.
+
+*android.database.ContentObserver_Methods*
+|android.database.ContentObserver.deliverSelfNotifications()|Returns true if th
+|android.database.ContentObserver.dispatchChange(boolean)|Dispatches a change n
+|android.database.ContentObserver.dispatchChange(boolean,Uri)|Dispatches a chan
+|android.database.ContentObserver.getContentObserver()|Gets access to the binde
+|android.database.ContentObserver.onChange(boolean)|This method is called when 
+|android.database.ContentObserver.onChange(boolean,Uri)|This method is called w
+|android.database.ContentObserver.releaseContentObserver()|Gets access to the b
+
+*android.database.ContentObserver_Description*
+
+Receives call backs for changes to content. Must be implemented by objects 
+which are added to a (|android.database.ContentObservable|) . 
+
+
+
+*android.database.ContentObserver(Handler)*
+
+public ContentObserver(android.os.Handler handler)
+
+Creates a content observer. 
+
+    handler - The handler to run {@link #onChange} on, or null if none. 
+
+*android.database.ContentObserver.deliverSelfNotifications()*
+
+public boolean deliverSelfNotifications()
+
+Returns true if this observer is interested receiving self-change 
+notifications. 
+
+Subclasses should override this method to indicate whether the observer is 
+interested in receiving notifications for changes that it made to the content 
+itself. 
+
+
+
+    Returns: True if self-change notifications should be delivered to the observer. 
+
+*android.database.ContentObserver.dispatchChange(boolean)*
+
+public final void dispatchChange(boolean selfChange)
+
+Dispatches a change notification to the observer. 
+
+If a (|android.os.Handler|) was supplied to the 
+(|android.database.ContentObserver|) constructor, then a call to the 
+(|android.database.ContentObserver|) method is posted to the handler's message 
+queue. Otherwise, the (|android.database.ContentObserver|) method is invoked 
+immediately on this thread. 
+
+    Deprecated: Use {@link #dispatchChange(boolean, Uri)} instead.
+
+    selfChange - True if this is a self-change notification. 
+
+*android.database.ContentObserver.dispatchChange(boolean,Uri)*
+
+public final void dispatchChange(
+  boolean selfChange,
+  android.net.Uri uri)
+
+Dispatches a change notification to the observer. Includes the changed content 
+Uri when available. 
+
+If a (|android.os.Handler|) was supplied to the 
+(|android.database.ContentObserver|) constructor, then a call to the 
+(|android.database.ContentObserver|) method is posted to the handler's message 
+queue. Otherwise, the (|android.database.ContentObserver|) method is invoked 
+immediately on this thread. 
+
+
+    selfChange - True if this is a self-change notification. 
+    uri - The Uri of the changed content, or null if unknown. 
+
+*android.database.ContentObserver.getContentObserver()*
+
+public IContentObserver getContentObserver()
+
+Gets access to the binder transport object. Not for public consumption. 
+
+
+
+*android.database.ContentObserver.onChange(boolean)*
+
+public void onChange(boolean selfChange)
+
+This method is called when a content change occurs. 
+
+Subclasses should override this method to handle content changes. 
+
+
+    selfChange - True if this is a self-change notification. 
+
+*android.database.ContentObserver.onChange(boolean,Uri)*
+
+public void onChange(
+  boolean selfChange,
+  android.net.Uri uri)
+
+This method is called when a content change occurs. Includes the changed 
+content Uri when available. 
+
+Subclasses should override this method to handle content changes. To ensure 
+correct operation on older versions of the framework that did not provide a Uri 
+argument, applications should also implement the 
+(|android.database.ContentObserver|) overload of this method whenever they 
+implement the (|android.database.ContentObserver|) overload. 
+
+Example implementation: 
+
+// Implement the onChange(boolean) method to delegate the change notification 
+to // the onChange(boolean, Uri) method to ensure correct operation on older 
+versions // of the framework that did not have the onChange(boolean, Uri) 
+method.@Overridepublic void onChange(boolean selfChange) { onChange(selfChange, 
+null); } 
+
+// Implement the onChange(boolean, Uri) method to take advantage of the new Uri 
+argument.@Overridepublic void onChange(boolean selfChange, Uri uri) { // Handle 
+change. } 
+
+
+
+
+    selfChange - True if this is a self-change notification. 
+    uri - The Uri of the changed content, or null if unknown. 
+
+*android.database.ContentObserver.releaseContentObserver()*
+
+public IContentObserver releaseContentObserver()
+
+Gets access to the binder transport object, and unlinks the transport object 
+from the ContentObserver. Not for public consumption. 
+
+
+
+

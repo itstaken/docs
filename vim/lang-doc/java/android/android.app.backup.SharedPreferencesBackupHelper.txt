@@ -1,0 +1,94 @@
+*android.app.backup.SharedPreferencesBackupHelper* *SharedPreferencesBackupHelper* 
+
+public class SharedPreferencesBackupHelper
+  extends    |android.app.backup.FileBackupHelperBase|
+  implements |android.app.backup.BackupHelper|
+
+|android.app.backup.SharedPreferencesBackupHelper_Description|
+|android.app.backup.SharedPreferencesBackupHelper_Fields|
+|android.app.backup.SharedPreferencesBackupHelper_Constructors|
+|android.app.backup.SharedPreferencesBackupHelper_Methods|
+
+================================================================================
+
+*android.app.backup.SharedPreferencesBackupHelper_Constructors*
+|android.app.backup.SharedPreferencesBackupHelper(Context,String...)|Construct 
+
+*android.app.backup.SharedPreferencesBackupHelper_Methods*
+|android.app.backup.SharedPreferencesBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.SharedPreferencesBackupHelper.restoreEntity(BackupDataInputStream)|
+
+*android.app.backup.SharedPreferencesBackupHelper_Description*
+
+A helper class that can be used in conjunction with 
+(|android.app.backup.BackupAgentHelper|) to manage the backup of 
+(|android.content.SharedPreferences|) . Whenever a backup is performed, it will 
+back up all named shared preferences that have changed since the last backup 
+operation. 
+
+To use this class, the application's backup agent class should extend 
+(|android.app.backup.BackupAgentHelper|) . Then, in the agent's 
+(|android.app.backup.BackupAgent|) method, an instance of this class should be 
+allocated and installed as a backup/restore handler within the 
+BackupAgentHelper framework. For example, an agent supporting backup and 
+restore for an application with two groups of 
+(|android.content.SharedPreferences|) data might look something like this: 
+
+import android.app.backup.BackupAgentHelper; import 
+android.app.backup.SharedPreferencesBackupHelper; 
+
+public class MyBackupAgent extends BackupAgentHelper { // The names of the 
+SharedPreferences groups that the application maintains. These // are the same 
+strings that are passed to (|android.content.Context|) . static final String 
+PREFS_DISPLAY = "displayprefs"; static final String PREFS_SCORES = 
+"highscores"; 
+
+// An arbitrary string used within the BackupAgentHelper implementation to // 
+identify the SharedPreferenceBackupHelper's data. static final String 
+MY_PREFS_BACKUP_KEY = "myprefs"; 
+
+// Simply allocate a helper and install it void onCreate() { 
+SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, 
+PREFS_DISPLAY, PREFS_SCORES); addHelper(MY_PREFS_BACKUP_KEY, helper); } } 
+
+No further implementation is needed; the 
+(|android.app.backup.BackupAgentHelper|) mechanism automatically dispatches the 
+BackupAgent.onBackup()(|android.app.backup.BackupAgent|) and 
+BackupAgent.onRestore()(|android.app.backup.BackupAgent|) callbacks to the 
+SharedPreferencesBackupHelper as appropriate. 
+
+
+
+*android.app.backup.SharedPreferencesBackupHelper(Context,String...)*
+
+public SharedPreferencesBackupHelper(
+  android.content.Context context,
+  java.lang.String[] prefGroups)
+
+Construct a helper for backing up and restoring the 
+(|android.content.SharedPreferences|) under the given names. 
+
+    context - The application {@link android.content.Context} 
+    prefGroups - The names of each {@link android.content.SharedPreferences} file to back up 
+
+*android.app.backup.SharedPreferencesBackupHelper.performBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public void performBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+
+Backs up the configured (|android.content.SharedPreferences|) groups. 
+
+
+
+*android.app.backup.SharedPreferencesBackupHelper.restoreEntity(BackupDataInputStream)*
+
+public void restoreEntity(android.app.backup.BackupDataInputStream data)
+
+Restores one entity from the restore data stream to its proper shared 
+preferences file store. 
+
+
+
+

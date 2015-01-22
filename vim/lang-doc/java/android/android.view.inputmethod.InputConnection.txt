@@ -1,0 +1,711 @@
+*android.view.inputmethod.InputConnection* *InputConnection* The InputConnection
+
+public interface interface InputConnection
+
+
+|android.view.inputmethod.InputConnection_Description|
+|android.view.inputmethod.InputConnection_Fields|
+|android.view.inputmethod.InputConnection_Constructors|
+|android.view.inputmethod.InputConnection_Methods|
+
+================================================================================
+
+*android.view.inputmethod.InputConnection_Fields*
+|int_android.view.inputmethod.InputConnection.GET_EXTRACTED_TEXT_MONITOR|
+|int_android.view.inputmethod.InputConnection.GET_TEXT_WITH_STYLES|
+
+*android.view.inputmethod.InputConnection_Methods*
+|android.view.inputmethod.InputConnection.beginBatchEdit()|Tell the editor that
+|android.view.inputmethod.InputConnection.clearMetaKeyStates(int)|Clear the giv
+|android.view.inputmethod.InputConnection.commitCompletion(CompletionInfo)|Comm
+|android.view.inputmethod.InputConnection.commitCorrection(CorrectionInfo)|Comm
+|android.view.inputmethod.InputConnection.commitText(CharSequence,int)|Commit t
+|android.view.inputmethod.InputConnection.deleteSurroundingText(int,int)|Delete
+|android.view.inputmethod.InputConnection.endBatchEdit()|Tell the editor that y
+|android.view.inputmethod.InputConnection.finishComposingText()|Have the text e
+|android.view.inputmethod.InputConnection.getCursorCapsMode(int)|Retrieve the c
+|android.view.inputmethod.InputConnection.getExtractedText(ExtractedTextRequest,int)|
+|android.view.inputmethod.InputConnection.getSelectedText(int)|Gets the selecte
+|android.view.inputmethod.InputConnection.getTextAfterCursor(int,int)|Get n cha
+|android.view.inputmethod.InputConnection.getTextBeforeCursor(int,int)|Get n ch
+|android.view.inputmethod.InputConnection.performContextMenuAction(int)|Perform
+|android.view.inputmethod.InputConnection.performEditorAction(int)|Have the edi
+|android.view.inputmethod.InputConnection.performPrivateCommand(String,Bundle)|
+|android.view.inputmethod.InputConnection.reportFullscreenMode(boolean)|Called 
+|android.view.inputmethod.InputConnection.sendKeyEvent(KeyEvent)|Send a key eve
+|android.view.inputmethod.InputConnection.setComposingRegion(int,int)|Mark a ce
+|android.view.inputmethod.InputConnection.setComposingText(CharSequence,int)|Re
+|android.view.inputmethod.InputConnection.setSelection(int,int)|Set the selecti
+
+*android.view.inputmethod.InputConnection_Description*
+
+The InputConnection interface is the communication channel from an 
+(|android.view.inputmethod.InputMethod|) back to the application that is 
+receiving its input. It is used to perform such things as reading text around 
+the cursor, committing text to the text box, and sending raw key events to the 
+application. 
+
+Applications should never directly implement this interface, but instead 
+subclass from (|android.view.inputmethod.BaseInputConnection|) . This will 
+ensure that the application does not break when new methods are added to the 
+interface. 
+
+Implementing an IME or an editor Text input is the result of the synergy of two 
+essential components: an Input Method Engine (IME) and an editor. The IME can 
+be a software keyboard, a handwriting interface, an emoji palette, a 
+speech-to-text engine, and so on. There are typically several IMEs installed on 
+any given Android device. In Android, IMEs extend 
+(|android.inputmethodservice.InputMethodService|) . For more information about 
+how to create an IME, see the <a 
+href="guide/topics/text/creating-input-method.html"> Creating an input method 
+guide. 
+
+The editor is the component that receives text and displays it. Typically, this 
+is an (|android.widget.EditText|) instance, but some applications may choose to 
+implement their own editor for various reasons. This is a large and complicated 
+task, and an application that does this needs to make sure the behavior is 
+consistent with standard EditText behavior in Android. An editor needs to 
+interact with the IME, receiving commands through this InputConnection 
+interface, and sending commands through 
+(|android.view.inputmethod.InputMethodManager|) . An editor should start by 
+implementing (|android.view.View|) to return its own input connection. 
+
+If you are implementing your own IME, you will need to call the methods in this 
+interface to interact with the application. Be sure to test your IME with a 
+wide range of applications, including browsers and rich text editors, as some 
+may have peculiarities you need to deal with. Remember your IME may not be the 
+only source of changes on the text, and try to be as conservative as possible 
+in the data you send and as liberal as possible in the data you receive. 
+
+If you are implementing your own editor, you will probably need to provide your 
+own subclass of (|android.view.inputmethod.BaseInputConnection|) to answer to 
+the commands from IMEs. Please be sure to test your editor with as many IMEs as 
+you can as their behavior can vary a lot. Also be sure to test with various 
+languages, including CJK languages and right-to-left languages like Arabic, as 
+these may have different input requirements. When in doubt about the behavior 
+you should adopt for a particular call, please mimic the default TextView 
+implementation in the latest Android version, and if you decide to drift from 
+it, please consider carefully that inconsistencies in text edition behavior is 
+almost universally felt as a bad thing by users. 
+
+Cursors, selections and compositions In Android, the cursor and the selection 
+are one and the same thing. A "cursor" is just the special case of a zero-sized 
+selection. As such, this documentation uses them interchangeably. Any method 
+acting "before the cursor" would act before the start of the selection if there 
+is one, and any method acting "after the cursor" would act after the end of the 
+selection. 
+
+An editor needs to be able to keep track of a currently "composing" region, 
+like the standard edition widgets do. The composition is marked in a specific 
+style: see (|android.text.Spanned|) . IMEs use this to help the user keep track 
+of what part of the text they are currently focusing on, and interact with the 
+editor using (|android.view.inputmethod.InputConnection|) , 
+(|android.view.inputmethod.InputConnection|) and 
+(|android.view.inputmethod.InputConnection|) . The composing region and the 
+selection are completely independent of each other, and the IME may use them 
+however they see fit. 
+
+
+
+*int_android.view.inputmethod.InputConnection.GET_EXTRACTED_TEXT_MONITOR*
+
+Flag for use with (|android.view.inputmethod.InputConnection|) to indicate you 
+would like to receive updates when the extracted text changes. 
+
+
+*int_android.view.inputmethod.InputConnection.GET_TEXT_WITH_STYLES*
+
+Flag for use with (|android.view.inputmethod.InputConnection|) and 
+(|android.view.inputmethod.InputConnection|) to have style information returned 
+along with the text. If not set, (|android.view.inputmethod.InputConnection|) 
+sends only the raw text, without style or other spans. If set, it may return a 
+complex CharSequence of both text and style spans. Editor authors: you should 
+strive to send text with styles if possible, but it is not required. 
+
+
+
+*android.view.inputmethod.InputConnection.beginBatchEdit()*
+
+public boolean beginBatchEdit()
+
+Tell the editor that you are starting a batch of editor operations. The editor 
+will try to avoid sending you updates about its state until 
+(|android.view.inputmethod.InputConnection|) is called. Batch edits nest. 
+
+IME authors: use this to avoid getting calls to 
+(|android.inputmethodservice.InputMethodService|) corresponding to intermediate 
+state. Also, use this to avoid flickers that may arise from displaying 
+intermediate state. Be sure to call 
+(|android.view.inputmethod.InputConnection|) for each call to this, or you may 
+block updates in the editor. 
+
+Editor authors: while a batch edit is in progress, take care not to send 
+updates to the input method and not to update the display. IMEs use this 
+intensively to this effect. Also please note that batch edits need to nest 
+correctly. 
+
+
+
+    Returns: true if a batch edit is now in progress, false otherwise. Since this method 
+             starts a batch edit, that means it will always return true unless 
+             the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.clearMetaKeyStates(int)*
+
+public boolean clearMetaKeyStates(int states)
+
+Clear the given meta key pressed states in the given input connection. 
+
+This can be used by the IME to clear the meta key states set by a hardware 
+keyboard with latched meta keys, if the editor keeps track of these. 
+
+
+    states - The states to be cleared, may be one or more bits as per {@link 
+       KeyEvent#getMetaState() KeyEvent.getMetaState()}. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.commitCompletion(CompletionInfo)*
+
+public boolean commitCompletion(android.view.inputmethod.CompletionInfo text)
+
+Commit a completion the user has selected from the possible ones previously 
+reported to 
+InputMethodSession#displayCompletions(CompletionInfo[])(|android.view.inputmethod.InputMethodSession|)
+or InputMethodManager#displayCompletions(View, 
+CompletionInfo[])(|android.view.inputmethod.InputMethodManager|) . This will 
+result in the same behavior as if the user had selected the completion from the 
+actual UI. In all other respects, this behaves like 
+(|android.view.inputmethod.InputConnection|) . 
+
+IME authors: please take care to send the same object that you received through 
+(|android.inputmethodservice.InputMethodService|) . 
+
+Editor authors: if you never call 
+(|android.view.inputmethod.InputMethodSession|) or 
+(|android.view.inputmethod.InputMethodManager|) then a well-behaved IME should 
+never call this on your input connection, but be ready to deal with misbehaving 
+IMEs without crashing. 
+
+Calling this method (with a valid (|android.view.inputmethod.CompletionInfo|) 
+object) will cause the editor to call 
+(|android.inputmethodservice.InputMethodService|) on the current IME after the 
+batch input is over. Editor authors, for this to happen you need to make the 
+changes known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. 
+
+
+    text - The committed completion. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.commitCorrection(CorrectionInfo)*
+
+public boolean commitCorrection(android.view.inputmethod.CorrectionInfo correctionInfo)
+
+Commit a correction automatically performed on the raw user's input. A typical 
+example would be to correct typos using a dictionary. 
+
+Calling this method will cause the editor to call 
+(|android.inputmethodservice.InputMethodService|) on the current IME after the 
+batch input is over. Editor authors, for this to happen you need to make the 
+changes known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. 
+
+
+    correctionInfo - Detailed information about the correction. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.commitText(CharSequence,int)*
+
+public boolean commitText(
+  java.lang.CharSequence text,
+  int newCursorPosition)
+
+Commit text to the text box and set the new cursor position. 
+
+This method removes the contents of the currently composing text and replaces 
+it with the passed CharSequence, and then moves the cursor according 
+tonewCursorPosition. If there is no composing text when this method is called, 
+the new text is inserted at the cursor position, removing text inside the 
+selection if any. This behaves like calling setComposingText(text, 
+newCursorPosition)(|android.view.inputmethod.InputConnection|) then 
+(|android.view.inputmethod.InputConnection|) . 
+
+Calling this method will cause the editor to call 
+(|android.inputmethodservice.InputMethodService|) on the current IME after the 
+batch input is over. Editor authors, for this to happen you need to make the 
+changes known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. 
+
+
+    text - The text to commit. This may include styles. 
+    newCursorPosition - The new cursor position around the text, in Java characters. If > 0, this is 
+       relative to the end of the text - 1; if <= 0, this is relative to the 
+       start of the text. So a value of 1 will always advance the cursor to the 
+       position after the full text being inserted. Note that this means you 
+       can't position the cursor within the text, because the editor can make 
+       modifications to the text you are providing so it is not possible to 
+       correctly specify locations there. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.deleteSurroundingText(int,int)*
+
+public boolean deleteSurroundingText(
+  int beforeLength,
+  int afterLength)
+
+Delete beforeLength characters of text before the current cursor position, and 
+delete afterLength characters of text after the current cursor position, 
+excluding the selection. Before and after refer to the order of the characters 
+in the string, not to their visual representation: this means you don't have to 
+figure out the direction of the text and can just use the indices as-is. 
+
+The lengths are supplied in Java chars, not in code points or in glyphs. 
+
+Since this method only operates on text before and after the selection, it 
+can't affect the contents of the selection. This may affect the composing span 
+if the span includes characters that are to be deleted, but otherwise will not 
+change it. If some characters in the composing span are deleted, the composing 
+span will persist but get shortened by however many chars inside it have been 
+removed. 
+
+IME authors: please be careful not to delete only half of a surrogate pair. 
+Also take care not to delete more characters than are in the editor, as that 
+may have ill effects on the application. Calling this method will cause the 
+editor to call (|android.inputmethodservice.InputMethodService|) on your 
+service after the batch input is over. 
+
+Editor authors: please be careful of race conditions in implementing this call. 
+An IME can make a change to the text or change the selection position and use 
+this method right away; you need to make sure the effects are consistent with 
+the results of the latest edits. Also, although the IME should not send lengths 
+bigger than the contents of the string, you should check the values for 
+overflows and trim the indices to the size of the contents to avoid crashes. 
+Since this changes the contents of the editor, you need to make the changes 
+known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. 
+
+
+    beforeLength - The number of characters to be deleted before the current cursor position. 
+    afterLength - The number of characters to be deleted after the current cursor position. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.endBatchEdit()*
+
+public boolean endBatchEdit()
+
+Tell the editor that you are done with a batch edit previously initiated with 
+(|android.view.inputmethod.InputConnection|) . This ends the latest batch only. 
+
+IME authors: make sure you call this exactly once for each call to 
+(|android.view.inputmethod.InputConnection|) . 
+
+Editor authors: please be careful about batch edit nesting. Updates still to be 
+held back until the end of the last batch edit. 
+
+
+
+    Returns: true if there is still a batch edit in progress after closing the latest one 
+             (in other words, if the nesting count is > 0), false otherwise or 
+             if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.finishComposingText()*
+
+public boolean finishComposingText()
+
+Have the text editor finish whatever composing text is currently active. This 
+simply leaves the text as-is, removing any special composing styling or other 
+state that was around it. The cursor position remains unchanged. 
+
+IME authors: be aware that this call may be expensive with some editors. 
+
+Editor authors: please note that the cursor may be anywhere in the contents 
+when this is called, including in the middle of the composing span or in a 
+completely unrelated place. It must not move. 
+
+
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.getCursorCapsMode(int)*
+
+public int getCursorCapsMode(int reqModes)
+
+Retrieve the current capitalization mode in effect at the current cursor 
+position in the text. See TextUtils.getCapsMode(|android.text.TextUtils|) for 
+more information. 
+
+This method may fail either if the input connection has become invalid (such as 
+its process crashing) or the client is taking too long to respond with the text 
+(it is given a couple seconds to return). In either case, 0 is returned. 
+
+This method does not affect the text in the editor in any way, nor does it 
+affect the selection or composing spans. 
+
+Editor authors: please be careful of race conditions in implementing this call. 
+An IME can change the cursor position and use this method right away; you need 
+to make sure the returned value is consistent with the results of the latest 
+edits and changes to the cursor position. 
+
+
+    reqModes - The desired modes to retrieve, as defined by {@link 
+       android.text.TextUtils#getCapsMode TextUtils.getCapsMode}. These 
+       constants are defined so that you can simply pass the current {@link 
+       EditorInfo#inputType TextBoxAttribute.contentType} value directly in to 
+       here. 
+
+    Returns: the caps mode flags that are in effect at the current cursor position. See 
+             TYPE_TEXT_FLAG_CAPS_* in {@link android.text.InputType}. 
+
+*android.view.inputmethod.InputConnection.getExtractedText(ExtractedTextRequest,int)*
+
+public |android.view.inputmethod.ExtractedText| getExtractedText(
+  android.view.inputmethod.ExtractedTextRequest request,
+  int flags)
+
+Retrieve the current text in the input connection's editor, and monitor for any 
+changes to it. This function returns with the current text, and optionally the 
+input connection can send updates to the input method when its text changes. 
+
+This method may fail either if the input connection has become invalid (such as 
+its process crashing) or the client is taking too long to respond with the text 
+(it is given a couple seconds to return). In either case, null is returned. 
+
+Editor authors: as a general rule, try to comply with the fields in request for 
+how many chars to return, but if performance or convenience dictates otherwise, 
+please feel free to do what is most appropriate for your case. Also, if the 
+(|android.view.inputmethod.InputConnection|) flag is set, you should be calling 
+(|android.view.inputmethod.InputMethodManager|) whenever you call 
+(|android.view.inputmethod.InputMethodManager|) . 
+
+
+    request - Description of how the text should be returned. {@link 
+       android.view.inputmethod.ExtractedTextRequest} 
+    flags - Additional options to control the client, either 0 or {@link 
+       #GET_EXTRACTED_TEXT_MONITOR}. 
+
+    Returns: an {@link android.view.inputmethod.ExtractedText} object describing the state 
+             of the text view and containing the extracted text itself, or null 
+             if the input connection is no longer valid of the editor can't 
+             comply with the request for some reason. 
+
+*android.view.inputmethod.InputConnection.getSelectedText(int)*
+
+public |java.lang.CharSequence| getSelectedText(int flags)
+
+Gets the selected text, if any. 
+
+This method may fail if either the input connection has become invalid (such as 
+its process crashing) or the client is taking too long to respond with the text 
+(it is given a couple of seconds to return). In either case, null is returned. 
+
+This method must not cause any changes in the editor's state. 
+
+If (|android.view.inputmethod.InputConnection|) is supplied as flags, the 
+editor should return a (|android.text.SpannableString|) with all the spans set 
+on the text. 
+
+IME authors: please consider this will trigger an IPC round-trip that will take 
+some time. Assume this method consumes a lot of time. 
+
+Editor authors: please be careful of race conditions in implementing this call. 
+An IME can make a change to the text or change the selection position and use 
+this method right away; you need to make sure the returned value is consistent 
+with the results of the latest edits. 
+
+
+    flags - Supplies additional options controlling how the text is returned. May be either 
+       0 or {@link #GET_TEXT_WITH_STYLES}. 
+
+    Returns: the text that is currently selected, if any, or null if no text is selected. 
+
+*android.view.inputmethod.InputConnection.getTextAfterCursor(int,int)*
+
+public |java.lang.CharSequence| getTextAfterCursor(
+  int n,
+  int flags)
+
+Get n characters of text after the current cursor position. 
+
+This method may fail either if the input connection has become invalid (such as 
+its process crashing) or the client is taking too long to respond with the text 
+(it is given a couple seconds to return). In either case, null is returned. 
+
+This method does not affect the text in the editor in any way, nor does it 
+affect the selection or composing spans. 
+
+If (|android.view.inputmethod.InputConnection|) is supplied as flags, the 
+editor should return a (|android.text.SpannableString|) with all the spans set 
+on the text. 
+
+IME authors: please consider this will trigger an IPC round-trip that will take 
+some time. Assume this method consumes a lot of time. 
+
+Editor authors: please be careful of race conditions in implementing this call. 
+An IME can make a change to the text and use this method right away; you need 
+to make sure the returned value is consistent with the result of the latest 
+edits. Also, you may return less than n characters if performance dictates so, 
+but keep in mind IMEs are relying on this for many functions: you should not, 
+for example, limit the returned value to the current line, and specifically do 
+not return 0 characters unless the cursor is really at the end of the text. 
+
+
+    n - The expected length of the text. 
+    flags - Supplies additional options controlling how the text is returned. May be either 
+       0 or {@link #GET_TEXT_WITH_STYLES}. 
+
+    Returns: the text after the cursor position; the length of the returned text might be 
+             less than n. 
+
+*android.view.inputmethod.InputConnection.getTextBeforeCursor(int,int)*
+
+public |java.lang.CharSequence| getTextBeforeCursor(
+  int n,
+  int flags)
+
+Get n characters of text before the current cursor position. 
+
+This method may fail either if the input connection has become invalid (such as 
+its process crashing) or the editor is taking too long to respond with the text 
+(it is given a couple seconds to return). In either case, null is returned. 
+This method does not affect the text in the editor in any way, nor does it 
+affect the selection or composing spans. 
+
+If (|android.view.inputmethod.InputConnection|) is supplied as flags, the 
+editor should return a (|android.text.SpannableString|) with all the spans set 
+on the text. 
+
+IME authors: please consider this will trigger an IPC round-trip that will take 
+some time. Assume this method consumes a lot of time. Also, please keep in mind 
+the Editor may choose to return less characters than requested even if they are 
+available for performance reasons. 
+
+Editor authors: please be careful of race conditions in implementing this call. 
+An IME can make a change to the text and use this method right away; you need 
+to make sure the returned value is consistent with the result of the latest 
+edits. Also, you may return less than n characters if performance dictates so, 
+but keep in mind IMEs are relying on this for many functions: you should not, 
+for example, limit the returned value to the current line, and specifically do 
+not return 0 characters unless the cursor is really at the start of the text. 
+
+
+    n - The expected length of the text. 
+    flags - Supplies additional options controlling how the text is returned. May be either 
+       0 or {@link #GET_TEXT_WITH_STYLES}. 
+
+    Returns: the text before the cursor position; the length of the returned text might be 
+             less than n. 
+
+*android.view.inputmethod.InputConnection.performContextMenuAction(int)*
+
+public boolean performContextMenuAction(int id)
+
+Perform a context menu action on the field. The given id may be one of: 
+(|android.R.id|) , (|android.R.id|) , (|android.R.id|) , (|android.R.id|) , 
+(|android.R.id|) , (|android.R.id|) , (|android.R.id|) , or (|android.R.id|) 
+
+
+
+*android.view.inputmethod.InputConnection.performEditorAction(int)*
+
+public boolean performEditorAction(int editorAction)
+
+Have the editor perform an action it has said it can do. 
+
+This is typically used by IMEs when the user presses the key associated with 
+the action. 
+
+
+    editorAction - This must be one of the action constants for {@link EditorInfo#imeOptions 
+       EditorInfo.editorType}, such as {@link EditorInfo#IME_ACTION_GO 
+       EditorInfo.EDITOR_ACTION_GO}. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.performPrivateCommand(String,Bundle)*
+
+public boolean performPrivateCommand(
+  java.lang.String action,
+  android.os.Bundle data)
+
+API to send private commands from an input method to its connected editor. This 
+can be used to provide domain-specific features that are only known between 
+certain input methods and their clients. Note that because the InputConnection 
+protocol is asynchronous, you have no way to get a result back or know if the 
+client understood the command; you can use the information in 
+(|android.view.inputmethod.EditorInfo|) to determine if a client supports a 
+particular command. 
+
+
+    action - Name of the command to be performed. This must be a scoped name, i.e. prefixed 
+       with a package name you own, so that different developers will not 
+       create conflicting commands. 
+    data - Any data to include with the command. 
+
+    Returns: true if the command was sent (whether or not the associated editor understood 
+             it), false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.reportFullscreenMode(boolean)*
+
+public boolean reportFullscreenMode(boolean enabled)
+
+Called by the IME to tell the client when it switches between fullscreen and 
+normal modes. This will normally be called for you by the standard 
+implementation of (|android.inputmethodservice.InputMethodService|) . 
+
+
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.sendKeyEvent(KeyEvent)*
+
+public boolean sendKeyEvent(android.view.KeyEvent event)
+
+Send a key event to the process that is currently attached through this input 
+connection. The event will be dispatched like a normal key event, to the 
+currently focused view; this generally is the view that is providing this 
+InputConnection, but due to the asynchronous nature of this protocol that can 
+not be guaranteed and the focus may have changed by the time the event is 
+received. 
+
+This method can be used to send key events to the application. For example, an 
+on-screen keyboard may use this method to simulate a hardware keyboard. There 
+are three types of standard keyboards, numeric (12-key), predictive (20-key) 
+and ALPHA (QWERTY). You can specify the keyboard type by specify the device id 
+of the key event. 
+
+You will usually want to set the flag 
+KeyEvent.FLAG_SOFT_KEYBOARD(|android.view.KeyEvent|) on all key event objects 
+you give to this API; the flag will not be set for you. 
+
+Note that it's discouraged to send such key events in normal operation; this is 
+mainly for use with (|android.text.InputType|) type text fields. Use the 
+(|android.view.inputmethod.InputConnection|) family of methods to send text to 
+the application instead. 
+
+
+    event - The key event. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.setComposingRegion(int,int)*
+
+public boolean setComposingRegion(
+  int start,
+  int end)
+
+Mark a certain region of text as composing text. If there was a composing 
+region, the characters are left as they were and the composing span removed, as 
+if (|android.view.inputmethod.InputConnection|) has been called. The default 
+style for composing text is used. 
+
+The passed indices are clipped to the contents bounds. If the resulting region 
+is zero-sized, no region is marked and the effect is the same as that of 
+calling (|android.view.inputmethod.InputConnection|) . The order of start and 
+end is not important. In effect, the region from start to end and the region 
+from end to start is the same. Editor authors, be ready to accept a start that 
+is greater than end. 
+
+Since this does not change the contents of the text, editors should not call 
+(|android.view.inputmethod.InputMethodManager|) and IMEs should not receive 
+(|android.inputmethodservice.InputMethodService|) . 
+
+This has no impact on the cursor/selection position. It may result in the 
+cursor being anywhere inside or outside the composing region, including cases 
+where the selection and the composing region overlap partially or entirely. 
+
+
+    start - the position in the text at which the composing region begins 
+    end - the position in the text at which the composing region ends 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.setComposingText(CharSequence,int)*
+
+public boolean setComposingText(
+  java.lang.CharSequence text,
+  int newCursorPosition)
+
+Replace the currently composing text with the given text, and set the new 
+cursor position. Any composing text set previously will be removed 
+automatically. 
+
+If there is any composing span currently active, all characters that it 
+comprises are removed. The passed text is added in its place, and a composing 
+span is added to this text. If there is no composing span active, the passed 
+text is added at the cursor position (removing selected characters first if 
+any), and a composing span is added on the new text. Finally, the cursor is 
+moved to the location specified by newCursorPosition. 
+
+This is usually called by IMEs to add or remove or change characters in the 
+composing span. Calling this method will cause the editor to call 
+(|android.inputmethodservice.InputMethodService|) on the current IME after the 
+batch input is over. 
+
+Editor authors: please keep in mind the text may be very similar or completely 
+different than what was in the composing span at call time, or there may not be 
+a composing span at all. Please note that although it's not typical use, the 
+string may be empty. Treat this normally, replacing the currently composing 
+text with an empty string. Also, be careful with the cursor position. IMEs rely 
+on this working exactly as described above. Since this changes the contents of 
+the editor, you need to make the changes known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. Note that this method can set the 
+cursor position on either edge of the composing text or entirely outside it, 
+but the IME may also go on to move the cursor position to within the composing 
+text in a subsequent call so you should make no assumption at all: the 
+composing text and the selection are entirely independent. 
+
+
+    text - The composing text with styles if necessary. If no style object attached to the 
+       text, the default style for composing text is used. See {@link 
+       android.text.Spanned} for how to attach style object to the text. {@link 
+       android.text.SpannableString} and {@link 
+       android.text.SpannableStringBuilder} are two implementations of the 
+       interface {@link android.text.Spanned}. 
+    newCursorPosition - The new cursor position around the text. If > 0, this is relative to the end of 
+       the text - 1; if <= 0, this is relative to the start of the text. So a 
+       value of 1 will always advance you to the position after the full text 
+       being inserted. Note that this means you can't position the cursor 
+       within the text, because the editor can make modifications to the text 
+       you are providing so it is not possible to correctly specify locations 
+       there. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+*android.view.inputmethod.InputConnection.setSelection(int,int)*
+
+public boolean setSelection(
+  int start,
+  int end)
+
+Set the selection of the text editor. To set the cursor position, start and end 
+should have the same value. 
+
+Since this moves the cursor, calling this method will cause the editor to call 
+(|android.inputmethodservice.InputMethodService|) on the current IME after the 
+batch input is over. Editor authors, for this to happen you need to make the 
+changes known to the input method by calling 
+(|android.view.inputmethod.InputMethodManager|) , but be careful to wait until 
+the batch edit is over if one is in progress. 
+
+This has no effect on the composing region which must stay unchanged. The order 
+of start and end is not important. In effect, the region from start to end and 
+the region from end to start is the same. Editor authors, be ready to accept a 
+start that is greater than end. 
+
+
+    start - the character index where the selection should start. 
+    end - the character index where the selection should end. 
+
+    Returns: true on success, false if the input connection is no longer valid. 
+
+

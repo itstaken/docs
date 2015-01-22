@@ -1,0 +1,222 @@
+*android.bluetooth.BluetoothGattService* *BluetoothGattService* Represents a Blu
+
+public class BluetoothGattService
+  extends    |java.lang.Object|
+
+|android.bluetooth.BluetoothGattService_Description|
+|android.bluetooth.BluetoothGattService_Fields|
+|android.bluetooth.BluetoothGattService_Constructors|
+|android.bluetooth.BluetoothGattService_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothGattService_Fields*
+|java.util.List<android.bluetooth.BluetoothGattCharacteristic>_android.bluetooth.BluetoothGattService.mCharacteristics|
+|android.bluetooth.BluetoothDevice_android.bluetooth.BluetoothGattService.mDevice|
+|int_android.bluetooth.BluetoothGattService.mHandles|
+|java.util.List<android.bluetooth.BluetoothGattService>_android.bluetooth.BluetoothGattService.mIncludedServices|
+|int_android.bluetooth.BluetoothGattService.mInstanceId|
+|int_android.bluetooth.BluetoothGattService.mServiceType|
+|java.util.UUID_android.bluetooth.BluetoothGattService.mUuid|
+|int_android.bluetooth.BluetoothGattService.SERVICE_TYPE_PRIMARY|
+|int_android.bluetooth.BluetoothGattService.SERVICE_TYPE_SECONDARY|
+
+*android.bluetooth.BluetoothGattService_Constructors*
+|android.bluetooth.BluetoothGattService(UUID,int)|Create a new BluetoothGattSer
+
+*android.bluetooth.BluetoothGattService_Methods*
+|android.bluetooth.BluetoothGattService.addCharacteristic(BluetoothGattCharacteristic)|
+|android.bluetooth.BluetoothGattService.addService(BluetoothGattService)|Add an
+|android.bluetooth.BluetoothGattService.getCharacteristic(UUID)|Returns a chara
+|android.bluetooth.BluetoothGattService.getCharacteristics()|Returns a list of 
+|android.bluetooth.BluetoothGattService.getIncludedServices()|Get the list of i
+|android.bluetooth.BluetoothGattService.getInstanceId()|Returns the instance ID
+|android.bluetooth.BluetoothGattService.getType()|Get the type of this service 
+|android.bluetooth.BluetoothGattService.getUuid()|Returns the UUID of this serv
+|android.bluetooth.BluetoothGattService.setHandles(int)|Force the number of han
+|android.bluetooth.BluetoothGattService.setInstanceId(int)|Force the instance I
+
+*android.bluetooth.BluetoothGattService_Description*
+
+Represents a Bluetooth GATT Service 
+
+Gatt Service contains a collection of 
+(|android.bluetooth.BluetoothGattCharacteristic|) , as well as referenced 
+services. 
+
+
+
+*java.util.List<android.bluetooth.BluetoothGattCharacteristic>_android.bluetooth.BluetoothGattService.mCharacteristics*
+
+List of characteristics included in this service. 
+
+
+*android.bluetooth.BluetoothDevice_android.bluetooth.BluetoothGattService.mDevice*
+
+The remote device his service is associated with. This applies to client 
+applications only. 
+
+
+*int_android.bluetooth.BluetoothGattService.mHandles*
+
+Handle counter override (for conformance testing). 
+
+
+*java.util.List<android.bluetooth.BluetoothGattService>_android.bluetooth.BluetoothGattService.mIncludedServices*
+
+List of included services for this service. 
+
+
+*int_android.bluetooth.BluetoothGattService.mInstanceId*
+
+Instance ID for this service. 
+
+
+*int_android.bluetooth.BluetoothGattService.mServiceType*
+
+Service type (Primary/Secondary). 
+
+
+*java.util.UUID_android.bluetooth.BluetoothGattService.mUuid*
+
+The UUID of this service. 
+
+
+*int_android.bluetooth.BluetoothGattService.SERVICE_TYPE_PRIMARY*
+
+Primary service 
+
+
+*int_android.bluetooth.BluetoothGattService.SERVICE_TYPE_SECONDARY*
+
+Secondary service (included by primary services) 
+
+
+
+*android.bluetooth.BluetoothGattService(UUID,int)*
+
+public BluetoothGattService(
+  java.util.UUID uuid,
+  int serviceType)
+
+Create a new BluetoothGattService. Requires (|android.Manifest.permission|) 
+permission. 
+
+    uuid - The UUID for this service 
+    serviceType - The type of this service, {@link BluetoothGattService#SERVICE_TYPE_PRIMARY} or 
+       {@link BluetoothGattService#SERVICE_TYPE_SECONDARY} 
+
+*android.bluetooth.BluetoothGattService.addCharacteristic(BluetoothGattCharacteristic)*
+
+public boolean addCharacteristic(android.bluetooth.BluetoothGattCharacteristic characteristic)
+
+Add a characteristic to this service. Requires (|android.Manifest.permission|) 
+permission. 
+
+
+    characteristic - The characteristics to be added 
+
+    Returns: true, if the characteristic was added to the service 
+
+*android.bluetooth.BluetoothGattService.addService(BluetoothGattService)*
+
+public boolean addService(android.bluetooth.BluetoothGattService service)
+
+Add an included service to this service. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    service - The service to be added 
+
+    Returns: true, if the included service was added to the service 
+
+*android.bluetooth.BluetoothGattService.getCharacteristic(UUID)*
+
+public |android.bluetooth.BluetoothGattCharacteristic| getCharacteristic(java.util.UUID uuid)
+
+Returns a characteristic with a given UUID out of the list of characteristics 
+offered by this service. 
+
+This is a convenience function to allow access to a given characteristic 
+without enumerating over the list returned by 
+(|android.bluetooth.BluetoothGattService|) manually. 
+
+If a remote service offers multiple characteristics with the same UUID, the 
+first instance of a characteristic with the given UUID is returned. 
+
+
+
+    Returns: GATT characteristic object or null if no characteristic with the given UUID was 
+             found. 
+
+*android.bluetooth.BluetoothGattService.getCharacteristics()*
+
+public |java.util.List|<BluetoothGattCharacteristic> getCharacteristics()
+
+Returns a list of characteristics included in this service. 
+
+
+
+    Returns: Characteristics included in this service 
+
+*android.bluetooth.BluetoothGattService.getIncludedServices()*
+
+public |java.util.List|<BluetoothGattService> getIncludedServices()
+
+Get the list of included GATT services for this service. 
+
+
+
+    Returns: List of included services or empty list if no included services were 
+             discovered. 
+
+*android.bluetooth.BluetoothGattService.getInstanceId()*
+
+public int getInstanceId()
+
+Returns the instance ID for this service 
+
+If a remote device offers multiple services with the same UUID (ex. multiple 
+battery services for different batteries), the instance ID is used to 
+distuinguish services. 
+
+
+
+    Returns: Instance ID of this service 
+
+*android.bluetooth.BluetoothGattService.getType()*
+
+public int getType()
+
+Get the type of this service (primary/secondary) 
+
+
+
+*android.bluetooth.BluetoothGattService.getUuid()*
+
+public |java.util.UUID| getUuid()
+
+Returns the UUID of this service 
+
+
+
+    Returns: UUID of this service 
+
+*android.bluetooth.BluetoothGattService.setHandles(int)*
+
+public void setHandles(int handles)
+
+Force the number of handles to reserve for this service. This is needed for 
+conformance testing only. 
+
+
+
+*android.bluetooth.BluetoothGattService.setInstanceId(int)*
+
+public void setInstanceId(int instanceId)
+
+Force the instance ID. This is needed for conformance testing only. 
+
+
+
+

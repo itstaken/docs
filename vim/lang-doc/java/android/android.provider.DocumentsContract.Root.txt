@@ -1,0 +1,153 @@
+*android.provider.DocumentsContract.Root* *DocumentsContract.Root* Constants rel
+
+public static final class DocumentsContract.Root
+  extends    |java.lang.Object|
+
+|android.provider.DocumentsContract.Root_Description|
+|android.provider.DocumentsContract.Root_Fields|
+|android.provider.DocumentsContract.Root_Constructors|
+|android.provider.DocumentsContract.Root_Methods|
+
+================================================================================
+
+*android.provider.DocumentsContract.Root_Fields*
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_AVAILABLE_BYTES|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_DOCUMENT_ID|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_FLAGS|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_ICON|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_MIME_TYPES|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_ROOT_ID|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_SUMMARY|
+|java.lang.String_android.provider.DocumentsContract.Root.COLUMN_TITLE|
+|int_android.provider.DocumentsContract.Root.FLAG_ADVANCED|
+|int_android.provider.DocumentsContract.Root.FLAG_EMPTY|
+|int_android.provider.DocumentsContract.Root.FLAG_LOCAL_ONLY|
+|int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_CREATE|
+|int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_RECENTS|
+|int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_SEARCH|
+|java.lang.String_android.provider.DocumentsContract.Root.MIME_TYPE_ITEM|
+
+*android.provider.DocumentsContract.Root_Description*
+
+Constants related to a root of documents, including (|android.database.Cursor|) 
+column names and flags. A root is the start of a tree of documents, such as a 
+physical storage device, or an account. Each root starts at the directory 
+referenced by (|android.provider.DocumentsContract.Root|) , which can 
+recursively contain both documents and directories. 
+
+All columns are read-only to client applications. 
+
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_AVAILABLE_BYTES*
+
+Number of bytes available in this root. This column is optional, and may 
+benullif unknown or unbounded. 
+
+Type: INTEGER (long) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_DOCUMENT_ID*
+
+Document which is a directory that represents the top directory of this root. 
+This column is required. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_FLAGS*
+
+Flags that apply to a root. This column is required. 
+
+Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_ICON*
+
+Icon resource ID for a root. This column is required. 
+
+Type: INTEGER (int) 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_MIME_TYPES*
+
+MIME types supported by this root. This column is optional, and ifnullthe root 
+is assumed to support all MIME types. Multiple MIME types can be separated by a 
+newline. For example, a root supporting audio might return 
+"audio/*\napplication/x-flac". 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_ROOT_ID*
+
+Unique ID of a root. This ID is both provided by and interpreted by a 
+(|android.provider.DocumentsProvider|) , and should be treated as an opaque 
+value by client applications. This column is required. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_SUMMARY*
+
+Summary for this root, which may be shown to a user. This column is optional, 
+and may benull. For a single storage service surfacing multiple accounts as 
+different roots, this summary should be the name of the account. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.COLUMN_TITLE*
+
+Title for a root, which will be shown to a user. This column is required. For a 
+single storage service surfacing multiple accounts as different roots, this 
+title should be the name of the service. 
+
+Type: STRING 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_ADVANCED*
+
+Flag indicating that this root should only be visible to advanced users. 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_EMPTY*
+
+Flag indicating that this root is currently empty. This may be used to hide the 
+root when opening documents, but the root will still be shown when creating 
+documents and (|android.provider.DocumentsContract.Root|) is also set. If the 
+value of this flag changes, such as when a root becomes non-empty, you must 
+send a content changed notification for (|android.provider.DocumentsContract|) 
+. 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_LOCAL_ONLY*
+
+Flag indicating that this root offers content that is strictly local on the 
+device. That is, no network requests are made for the content. 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_CREATE*
+
+Flag indicating that at least one directory under this root supports creating 
+content. Roots with this flag will be shown when an application interacts with 
+(|android.content.Intent|) . 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_RECENTS*
+
+Flag indicating that this root can be queried to provide recently modified 
+documents. 
+
+
+*int_android.provider.DocumentsContract.Root.FLAG_SUPPORTS_SEARCH*
+
+Flag indicating that this root supports search. 
+
+
+*java.lang.String_android.provider.DocumentsContract.Root.MIME_TYPE_ITEM*
+
+
+
+
+

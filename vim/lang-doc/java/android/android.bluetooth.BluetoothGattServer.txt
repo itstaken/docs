@@ -1,0 +1,246 @@
+*android.bluetooth.BluetoothGattServer* *BluetoothGattServer* Public API for the
+
+public final class BluetoothGattServer
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothGattServer_Description|
+|android.bluetooth.BluetoothGattServer_Fields|
+|android.bluetooth.BluetoothGattServer_Constructors|
+|android.bluetooth.BluetoothGattServer_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothGattServer_Methods*
+|android.bluetooth.BluetoothGattServer.addService(BluetoothGattService)|Add a s
+|android.bluetooth.BluetoothGattServer.cancelConnection(BluetoothDevice)|Discon
+|android.bluetooth.BluetoothGattServer.clearServices()|Remove all services from
+|android.bluetooth.BluetoothGattServer.close()|Close this GATT server instance.
+|android.bluetooth.BluetoothGattServer.connect(BluetoothDevice,boolean)|Initiat
+|android.bluetooth.BluetoothGattServer.getConnectedDevices()|Not supported - pl
+|android.bluetooth.BluetoothGattServer.getConnectionState(BluetoothDevice)|Not 
+|android.bluetooth.BluetoothGattServer.getDevicesMatchingConnectionStates(int[])|
+|android.bluetooth.BluetoothGattServer.getService(UUID)|Returns aBluetoothGattS
+|android.bluetooth.BluetoothGattServer.getServices()|Returns a list of GATT ser
+|android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged(BluetoothDevice,BluetoothGattCharacteristic,boolean)|
+|android.bluetooth.BluetoothGattServer.removeService(BluetoothGattService)|Remo
+|android.bluetooth.BluetoothGattServer.sendResponse(BluetoothDevice,int,int,int,byte[])|
+
+*android.bluetooth.BluetoothGattServer_Description*
+
+Public API for the Bluetooth GATT Profile server role. 
+
+This class provides Bluetooth GATT server role functionality, allowing 
+applications to create and advertise Bluetooth Smart services and 
+characteristics. 
+
+BluetoothGattServer is a proxy object for controlling the Bluetooth Service via 
+IPC. Use (|android.bluetooth.BluetoothAdapter|) to get the BluetoothGatt proxy 
+object. 
+
+
+
+*android.bluetooth.BluetoothGattServer.addService(BluetoothGattService)*
+
+public boolean addService(android.bluetooth.BluetoothGattService service)
+
+Add a service to the list of services to be hosted. 
+
+Once a service has been addded to the the list, the service and it's included 
+characteristics will be provided by the local device. 
+
+If the local device has already exposed services when this function is called, 
+a service update notification will be sent to all clients. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    service - Service to be added to the list of services provided by this device. 
+
+    Returns: true, if the service has been added successfully 
+
+*android.bluetooth.BluetoothGattServer.cancelConnection(BluetoothDevice)*
+
+public void cancelConnection(android.bluetooth.BluetoothDevice device)
+
+Disconnects an established connection, or cancels a connection attempt 
+currently in progress. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote device 
+
+*android.bluetooth.BluetoothGattServer.clearServices()*
+
+public void clearServices()
+
+Remove all services from the list of provided services. Requires 
+(|android.Manifest.permission|) permission. 
+
+
+
+*android.bluetooth.BluetoothGattServer.close()*
+
+public void close()
+
+Close this GATT server instance. 
+
+Application should call this method as early as possible after it is done with 
+this GATT server. 
+
+
+
+*android.bluetooth.BluetoothGattServer.connect(BluetoothDevice,boolean)*
+
+public boolean connect(
+  android.bluetooth.BluetoothDevice device,
+  boolean autoConnect)
+
+Initiate a connection to a Bluetooth GATT capable device. 
+
+The connection may not be established right away, but will be completed when 
+the remote device is available. A 
+(|android.bluetooth.BluetoothGattServerCallback|) callback will be invoked when 
+the connection state changes as a result of this function. 
+
+The autoConnect paramter determines whether to actively connect to the remote 
+device, or rather passively scan and finalize the connection when the remote 
+device is in range/available. Generally, the first ever connection to a device 
+should be direct (autoConnect set to false) and subsequent connections to known 
+devices should be invoked with the autoConnect parameter set to true. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    autoConnect - Whether to directly connect to the remote device (false) or to automatically 
+       connect as soon as the remote device becomes available (true). 
+
+    Returns: true, if the connection attempt was initiated successfully 
+
+*android.bluetooth.BluetoothGattServer.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as argument 
+
+
+
+*android.bluetooth.BluetoothGattServer.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as argument 
+
+
+
+*android.bluetooth.BluetoothGattServer.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as first argument 
+
+
+
+*android.bluetooth.BluetoothGattServer.getService(UUID)*
+
+public |android.bluetooth.BluetoothGattService| getService(java.util.UUID uuid)
+
+Returns a (|android.bluetooth.BluetoothGattService|) from the list of services 
+offered by this device. 
+
+If multiple instances of the same service (as identified by UUID) exist, the 
+first instance of the service is returned. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    uuid - UUID of the requested service 
+
+    Returns: BluetoothGattService if supported, or null if the requested service is not 
+             offered by this device. 
+
+*android.bluetooth.BluetoothGattServer.getServices()*
+
+public |java.util.List|<BluetoothGattService> getServices()
+
+Returns a list of GATT services offered by this device. 
+
+An application must call (|android.bluetooth.BluetoothGattServer|) to add a 
+serice to the list of services offered by this device. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: List of services. Returns an empty list if no services have been added yet. 
+
+*android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged(BluetoothDevice,BluetoothGattCharacteristic,boolean)*
+
+public boolean notifyCharacteristicChanged(
+  android.bluetooth.BluetoothDevice device,
+  android.bluetooth.BluetoothGattCharacteristic characteristic,
+  boolean confirm)
+
+Send a notification or indication that a local characteristic has been updated. 
+
+A notification or indication is sent to the remote device to signal that the 
+characteristic has been updated. This function should be invoked for every 
+client that requests notifications/indications by writing to the "Client 
+Configuration" descriptor for the given characteristic. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - The remote device to receive the notification/indication 
+    characteristic - The local characteristic that has been updated 
+    confirm - true to request confirmation from the client (indication), false to send a 
+       notification 
+
+    Returns: true, if the notification has been triggered successfully 
+
+*android.bluetooth.BluetoothGattServer.removeService(BluetoothGattService)*
+
+public boolean removeService(android.bluetooth.BluetoothGattService service)
+
+Removes a service from the list of services to be provided. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    service - Service to be removed. 
+
+    Returns: true, if the service has been removed 
+
+*android.bluetooth.BluetoothGattServer.sendResponse(BluetoothDevice,int,int,int,byte[])*
+
+public boolean sendResponse(
+  android.bluetooth.BluetoothDevice device,
+  int requestId,
+  int status,
+  int offset,
+  byte[] value)
+
+Send a response to a read or write request to a remote device. 
+
+This function must be invoked in when a remote read/write request is received 
+by one of these callback methods: 
+
+(|android.bluetooth.BluetoothGattServerCallback|) 
+(|android.bluetooth.BluetoothGattServerCallback|) 
+(|android.bluetooth.BluetoothGattServerCallback|) 
+(|android.bluetooth.BluetoothGattServerCallback|) 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - The remote device to send this response to 
+    requestId - The ID of the request that was received with the callback 
+    status - The status of the request to be sent to the remote devices 
+    offset - Value offset for partial read/write response 
+    value - The value of the attribute that was read/written (optional) 
+
+

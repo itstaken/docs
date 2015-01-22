@@ -1,0 +1,71 @@
+*android.view.SurfaceHolder.Callback* *SurfaceHolder.Callback* A client may impl
+
+public static interface interface SurfaceHolder.Callback
+
+
+|android.view.SurfaceHolder.Callback_Description|
+|android.view.SurfaceHolder.Callback_Fields|
+|android.view.SurfaceHolder.Callback_Constructors|
+|android.view.SurfaceHolder.Callback_Methods|
+
+================================================================================
+
+*android.view.SurfaceHolder.Callback_Methods*
+|android.view.SurfaceHolder.Callback.surfaceChanged(SurfaceHolder,int,int,int)|
+|android.view.SurfaceHolder.Callback.surfaceCreated(SurfaceHolder)|This is call
+|android.view.SurfaceHolder.Callback.surfaceDestroyed(SurfaceHolder)|This is ca
+
+*android.view.SurfaceHolder.Callback_Description*
+
+A client may implement this interface to receive information about changes to 
+the surface. When used with a (|android.view.SurfaceView|) , the Surface being 
+held is only available between calls to (|android.view.SurfaceHolder.Callback|) 
+and (|android.view.SurfaceHolder.Callback|) . The Callback is set with 
+SurfaceHolder.addCallback(|android.view.SurfaceHolder|) method. 
+
+
+
+*android.view.SurfaceHolder.Callback.surfaceChanged(SurfaceHolder,int,int,int)*
+
+public void surfaceChanged(
+  android.view.SurfaceHolder holder,
+  int format,
+  int width,
+  int height)
+
+This is called immediately after any structural changes (format or size) have 
+been made to the surface. You should at this point update the imagery in the 
+surface. This method is always called at least once, after 
+(|android.view.SurfaceHolder.Callback|) . 
+
+
+    holder - The SurfaceHolder whose surface has changed. 
+    format - The new PixelFormat of the surface. 
+    width - The new width of the surface. 
+    height - The new height of the surface. 
+
+*android.view.SurfaceHolder.Callback.surfaceCreated(SurfaceHolder)*
+
+public void surfaceCreated(android.view.SurfaceHolder holder)
+
+This is called immediately after the surface is first created. Implementations 
+of this should start up whatever rendering code they desire. Note that only one 
+thread can ever draw into a (|android.view.Surface|) , so you should not draw 
+into the Surface here if your normal rendering will be in another thread. 
+
+
+    holder - The SurfaceHolder whose surface is being created. 
+
+*android.view.SurfaceHolder.Callback.surfaceDestroyed(SurfaceHolder)*
+
+public void surfaceDestroyed(android.view.SurfaceHolder holder)
+
+This is called immediately before a surface is being destroyed. After returning 
+from this call, you should no longer try to access this surface. If you have a 
+rendering thread that directly accesses the surface, you must ensure that 
+thread is no longer touching the Surface before returning from this function. 
+
+
+    holder - The SurfaceHolder whose surface is being destroyed. 
+
+

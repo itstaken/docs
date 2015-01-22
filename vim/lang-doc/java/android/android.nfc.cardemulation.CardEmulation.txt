@@ -1,0 +1,210 @@
+*android.nfc.cardemulation.CardEmulation* *CardEmulation* This class can be used
+
+public final class CardEmulation
+  extends    |java.lang.Object|
+
+|android.nfc.cardemulation.CardEmulation_Description|
+|android.nfc.cardemulation.CardEmulation_Fields|
+|android.nfc.cardemulation.CardEmulation_Constructors|
+|android.nfc.cardemulation.CardEmulation_Methods|
+
+================================================================================
+
+*android.nfc.cardemulation.CardEmulation_Fields*
+|java.lang.String_android.nfc.cardemulation.CardEmulation.ACTION_CHANGE_DEFAULT|
+|java.lang.String_android.nfc.cardemulation.CardEmulation.CATEGORY_OTHER|
+|java.lang.String_android.nfc.cardemulation.CardEmulation.CATEGORY_PAYMENT|
+|java.lang.String_android.nfc.cardemulation.CardEmulation.EXTRA_CATEGORY|
+|java.lang.String_android.nfc.cardemulation.CardEmulation.EXTRA_SERVICE_COMPONENT|
+|int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_ALWAYS_ASK|
+|int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_ASK_IF_CONFLICT|
+|int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_PREFER_DEFAULT|
+
+*android.nfc.cardemulation.CardEmulation_Methods*
+|android.nfc.cardemulation.CardEmulation.getInstance(NfcAdapter)|Helper to get 
+|android.nfc.cardemulation.CardEmulation.getSelectionModeForCategory(String)|Re
+|android.nfc.cardemulation.CardEmulation.getServices(String)|
+|android.nfc.cardemulation.CardEmulation.isDefaultServiceForAid(ComponentName,String)|
+|android.nfc.cardemulation.CardEmulation.isDefaultServiceForCategory(ComponentName,String)|
+|android.nfc.cardemulation.CardEmulation.setDefaultForNextTap(ComponentName)|
+|android.nfc.cardemulation.CardEmulation.setDefaultServiceForCategory(ComponentName,String)|
+
+*android.nfc.cardemulation.CardEmulation_Description*
+
+This class can be used to query the state of NFC card emulation services. 
+
+For a general introduction into NFC card emulation, please read the <a 
+href="guide/topics/nfc/ce.html"> NFC card emulation developer guide. 
+
+Use of this class requires the (|android.content.pm.PackageManager|) to be 
+present on the device. 
+
+
+
+*java.lang.String_android.nfc.cardemulation.CardEmulation.ACTION_CHANGE_DEFAULT*
+
+Activity action: ask the user to change the default card emulation service for 
+a certain category. This will show a dialog that asks the user whether he wants 
+to replace the current default service with the service identified with the 
+ComponentName specified in (|android.nfc.cardemulation.CardEmulation|) , for 
+the category specified in (|android.nfc.cardemulation.CardEmulation|) 
+
+
+*java.lang.String_android.nfc.cardemulation.CardEmulation.CATEGORY_OTHER*
+
+Category that can be used for all other card emulation services. 
+
+
+*java.lang.String_android.nfc.cardemulation.CardEmulation.CATEGORY_PAYMENT*
+
+Category used for NFC payment services. 
+
+
+*java.lang.String_android.nfc.cardemulation.CardEmulation.EXTRA_CATEGORY*
+
+The category extra for (|android.nfc.cardemulation.CardEmulation|) . 
+
+
+*java.lang.String_android.nfc.cardemulation.CardEmulation.EXTRA_SERVICE_COMPONENT*
+
+The service (|android.content.ComponentName|) object passed in as an extra for 
+(|android.nfc.cardemulation.CardEmulation|) . 
+
+
+*int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_ALWAYS_ASK*
+
+Return value for (|android.nfc.cardemulation.CardEmulation|) . 
+
+In this mode, when using ISO-DEP card emulation with 
+(|android.nfc.cardemulation.HostApduService|) or 
+(|android.nfc.cardemulation.OffHostApduService|) , whenever an Application ID 
+(AID) of this category is selected, the user is asked which service he wants to 
+use to handle the transaction, even if there is only one matching service. 
+
+
+*int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_ASK_IF_CONFLICT*
+
+Return value for (|android.nfc.cardemulation.CardEmulation|) . 
+
+In this mode, when using ISO-DEP card emulation with 
+(|android.nfc.cardemulation.HostApduService|) or 
+(|android.nfc.cardemulation.OffHostApduService|) , the user will only be asked 
+to select a service if the Application ID (AID) selected by the reader has been 
+registered by multiple services. If there is only one service that has 
+registered for the AID, that service will be invoked directly. 
+
+
+*int_android.nfc.cardemulation.CardEmulation.SELECTION_MODE_PREFER_DEFAULT*
+
+Return value for (|android.nfc.cardemulation.CardEmulation|) . 
+
+In this mode, the user has set a default service for this category. 
+
+When using ISO-DEP card emulation with 
+(|android.nfc.cardemulation.HostApduService|) or 
+(|android.nfc.cardemulation.OffHostApduService|) , if a remote NFC device 
+selects any of the Application IDs (AIDs) that the default service has 
+registered in this category, that service will automatically be bound to to 
+handle the transaction. 
+
+
+
+*android.nfc.cardemulation.CardEmulation.getInstance(NfcAdapter)*
+
+public static synchronized |android.nfc.cardemulation.CardEmulation| getInstance(android.nfc.NfcAdapter adapter)
+
+Helper to get an instance of this class. 
+
+
+    adapter - A reference to an NfcAdapter object. 
+
+    Returns: 
+
+*android.nfc.cardemulation.CardEmulation.getSelectionModeForCategory(String)*
+
+public int getSelectionModeForCategory(java.lang.String category)
+
+Returns the service selection mode for the passed in category. Valid return 
+values are: (|android.nfc.cardemulation.CardEmulation|) the user has requested 
+a default service for this category, which will be preferred. 
+(|android.nfc.cardemulation.CardEmulation|) the user has requested to be asked 
+every time what service he would like to use in this category. 
+(|android.nfc.cardemulation.CardEmulation|) the user will only be asked to pick 
+a service if there is a conflict. 
+
+
+    category - The category, for example {@link #CATEGORY_PAYMENT} 
+
+    Returns: the selection mode for the passed in category 
+
+*android.nfc.cardemulation.CardEmulation.getServices(String)*
+
+public |java.util.List|<ApduServiceInfo> getServices(java.lang.String category)
+
+
+
+
+
+*android.nfc.cardemulation.CardEmulation.isDefaultServiceForAid(ComponentName,String)*
+
+public boolean isDefaultServiceForAid(
+  android.content.ComponentName service,
+  java.lang.String aid)
+
+Allows an application to query whether a service is currently the default 
+handler for a specified ISO7816-4 Application ID. 
+
+
+    service - The ComponentName of the service 
+    aid - The ISO7816-4 Application ID 
+
+    Returns: whether the service is the default handler for the specified AID 
+
+Requires the {@link android.Manifest.permission#NFC} permission. 
+
+*android.nfc.cardemulation.CardEmulation.isDefaultServiceForCategory(ComponentName,String)*
+
+public boolean isDefaultServiceForCategory(
+  android.content.ComponentName service,
+  java.lang.String category)
+
+Allows an application to query whether a service is currently the default 
+service to handle a card emulation category. 
+
+Note that if (|android.nfc.cardemulation.CardEmulation|) returns 
+(|android.nfc.cardemulation.CardEmulation|) or 
+(|android.nfc.cardemulation.CardEmulation|) , this method will always return 
+false. That is because in these selection modes a default can't be set at the 
+category level. For categories where the selection mode is 
+(|android.nfc.cardemulation.CardEmulation|) or 
+(|android.nfc.cardemulation.CardEmulation|) , use 
+(|android.nfc.cardemulation.CardEmulation|) to determine whether a service is 
+the default for a specific AID. 
+
+
+    service - The ComponentName of the service 
+    category - The category 
+
+    Returns: whether service is currently the default service for the category. 
+
+Requires the {@link android.Manifest.permission#NFC} permission. 
+
+*android.nfc.cardemulation.CardEmulation.setDefaultForNextTap(ComponentName)*
+
+public boolean setDefaultForNextTap(android.content.ComponentName service)
+
+
+
+
+
+*android.nfc.cardemulation.CardEmulation.setDefaultServiceForCategory(ComponentName,String)*
+
+public boolean setDefaultServiceForCategory(
+  android.content.ComponentName service,
+  java.lang.String category)
+
+
+
+
+
+

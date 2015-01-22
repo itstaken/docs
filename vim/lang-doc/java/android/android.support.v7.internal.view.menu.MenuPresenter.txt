@@ -1,0 +1,178 @@
+*android.support.v7.internal.view.menu.MenuPresenter* *MenuPresenter* A MenuPres
+
+public interface interface MenuPresenter
+
+
+|android.support.v7.internal.view.menu.MenuPresenter_Description|
+|android.support.v7.internal.view.menu.MenuPresenter_Fields|
+|android.support.v7.internal.view.menu.MenuPresenter_Constructors|
+|android.support.v7.internal.view.menu.MenuPresenter_Methods|
+
+================================================================================
+
+*android.support.v7.internal.view.menu.MenuPresenter_Methods*
+|android.support.v7.internal.view.menu.MenuPresenter.collapseItemActionView(MenuBuilder,MenuItemImpl)|
+|android.support.v7.internal.view.menu.MenuPresenter.expandItemActionView(MenuBuilder,MenuItemImpl)|
+|android.support.v7.internal.view.menu.MenuPresenter.flagActionItems()|Called b
+|android.support.v7.internal.view.menu.MenuPresenter.getId()|Returns an ID for 
+|android.support.v7.internal.view.menu.MenuPresenter.getMenuView(ViewGroup)|Ret
+|android.support.v7.internal.view.menu.MenuPresenter.initForMenu(Context,MenuBuilder)|
+|android.support.v7.internal.view.menu.MenuPresenter.onCloseMenu(MenuBuilder,boolean)|
+|android.support.v7.internal.view.menu.MenuPresenter.onRestoreInstanceState(Parcelable)|
+|android.support.v7.internal.view.menu.MenuPresenter.onSaveInstanceState()|Retu
+|android.support.v7.internal.view.menu.MenuPresenter.onSubMenuSelected(SubMenuBuilder)|
+|android.support.v7.internal.view.menu.MenuPresenter.setCallback(MenuPresenter.Callback)|
+|android.support.v7.internal.view.menu.MenuPresenter.updateMenuView(boolean)|Up
+
+*android.support.v7.internal.view.menu.MenuPresenter_Description*
+
+A MenuPresenter is responsible for building views for a Menu object. It takes 
+over some responsibility from the old style monolithic MenuBuilder class. 
+
+
+
+*android.support.v7.internal.view.menu.MenuPresenter.collapseItemActionView(MenuBuilder,MenuItemImpl)*
+
+public boolean collapseItemActionView(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  android.support.v7.internal.view.menu.MenuItemImpl item)
+
+Called when a menu item with a collapsable action view should collapse its 
+action view. 
+
+
+    menu - Menu containing the item to be collapsed 
+    item - Item to be collapsed 
+
+    Returns: true if this presenter collapsed the action view, false otherwise. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.expandItemActionView(MenuBuilder,MenuItemImpl)*
+
+public boolean expandItemActionView(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  android.support.v7.internal.view.menu.MenuItemImpl item)
+
+Called when a menu item with a collapsable action view should expand its action 
+view. 
+
+
+    menu - Menu containing the item to be expanded 
+    item - Item to be expanded 
+
+    Returns: true if this presenter expanded the action view, false otherwise. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.flagActionItems()*
+
+public boolean flagActionItems()
+
+Called by Menu implementations to flag items that will be shown as actions. 
+
+
+
+    Returns: true if this presenter changed the action status of any items. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.getId()*
+
+public int getId()
+
+Returns an ID for determining how to save/restore instance state. 
+
+
+
+    Returns: a valid ID value. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.getMenuView(ViewGroup)*
+
+public |android.support.v7.internal.view.menu.MenuView| getMenuView(ViewGroup root)
+
+Retrieve a MenuView to display the menu specified in 
+(|android.support.v7.internal.view.menu.MenuPresenter|) . 
+
+
+    root - Intended parent of the MenuView. 
+
+    Returns: A freshly created MenuView. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.initForMenu(Context,MenuBuilder)*
+
+public void initForMenu(
+  Context context,
+  android.support.v7.internal.view.menu.MenuBuilder menu)
+
+Initialize this presenter for the given context and menu. This method is called 
+by MenuBuilder when a presenter is added. See 
+(|android.support.v7.internal.view.menu.MenuBuilder|) 
+
+
+    context - Context for this presenter; used for view creation and resource management 
+    menu - Menu to host 
+
+*android.support.v7.internal.view.menu.MenuPresenter.onCloseMenu(MenuBuilder,boolean)*
+
+public void onCloseMenu(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  boolean allMenusAreClosing)
+
+Called by Menu implementations to indicate that a menu or submenu is closing. 
+Presenter implementations should close the representation of the menu indicated 
+as necessary and notify a registered callback. 
+
+
+    menu - Menu or submenu that is closing. 
+    allMenusAreClosing - True if all associated menus are closing. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.onRestoreInstanceState(Parcelable)*
+
+public void onRestoreInstanceState(Parcelable state)
+
+Supplies the previously saved instance state to be restored. 
+
+
+    state - The previously saved instance state 
+
+*android.support.v7.internal.view.menu.MenuPresenter.onSaveInstanceState()*
+
+public Parcelable onSaveInstanceState()
+
+Returns a Parcelable describing the current state of the presenter. It will be 
+passed to the (|android.support.v7.internal.view.menu.MenuPresenter|) method of 
+the presenter sharing the same ID later. 
+
+
+
+    Returns: The saved instance state 
+
+*android.support.v7.internal.view.menu.MenuPresenter.onSubMenuSelected(SubMenuBuilder)*
+
+public boolean onSubMenuSelected(android.support.v7.internal.view.menu.SubMenuBuilder subMenu)
+
+Called by Menu implementations to indicate that a submenu item has been 
+selected. An active Callback should be notified, and if applicable the 
+presenter should present the submenu. 
+
+
+    subMenu - SubMenu being opened 
+
+    Returns: true if the the event was handled, false otherwise. 
+
+*android.support.v7.internal.view.menu.MenuPresenter.setCallback(MenuPresenter.Callback)*
+
+public void setCallback(android.support.v7.internal.view.menu.MenuPresenter.Callback cb)
+
+Set a callback object that will be notified of menu events related to this 
+specific presentation. 
+
+
+    cb - Callback that will be notified of future events 
+
+*android.support.v7.internal.view.menu.MenuPresenter.updateMenuView(boolean)*
+
+public void updateMenuView(boolean cleared)
+
+Update the menu UI in response to a change. Called by MenuBuilder during the 
+normal course of operation. 
+
+
+    cleared - true if the menu was entirely cleared 
+
+

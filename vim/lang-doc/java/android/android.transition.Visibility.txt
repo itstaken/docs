@@ -1,0 +1,145 @@
+*android.transition.Visibility* *Visibility* This transition tracks changes to t
+
+public abstract class Visibility
+  extends    |android.transition.Transition|
+
+|android.transition.Visibility_Description|
+|android.transition.Visibility_Fields|
+|android.transition.Visibility_Constructors|
+|android.transition.Visibility_Methods|
+
+================================================================================
+
+*android.transition.Visibility_Constructors*
+|android.transition.Visibility()|
+
+*android.transition.Visibility_Methods*
+|android.transition.Visibility.captureEndValues(TransitionValues)|
+|android.transition.Visibility.captureStartValues(TransitionValues)|
+|android.transition.Visibility.createAnimator(ViewGroup,TransitionValues,TransitionValues)|
+|android.transition.Visibility.getTransitionProperties()|
+|android.transition.Visibility.isVisible(TransitionValues)|Returns whether the 
+|android.transition.Visibility.onAppear(ViewGroup,TransitionValues,int,TransitionValues,int)|
+|android.transition.Visibility.onDisappear(ViewGroup,TransitionValues,int,TransitionValues,int)|
+
+*android.transition.Visibility_Description*
+
+This transition tracks changes to the visibility of target views in the start 
+and end scenes. Visibility is determined not just by the (|android.view.View|) 
+state of views, but also whether views exist in the current view hierarchy. The 
+class is intended to be a utility for subclasses such as 
+(|android.transition.Fade|) , which use this visibility information to 
+determine the specific animations to run when visibility changes occur. 
+Subclasses should implement one or both of the methods 
+(|android.transition.Visibility|) , (|android.transition.Visibility|) , 
+
+
+
+*android.transition.Visibility()*
+
+public Visibility()
+
+
+
+
+*android.transition.Visibility.captureEndValues(TransitionValues)*
+
+public void captureEndValues(android.transition.TransitionValues transitionValues)
+
+
+
+
+
+*android.transition.Visibility.captureStartValues(TransitionValues)*
+
+public void captureStartValues(android.transition.TransitionValues transitionValues)
+
+
+
+
+
+*android.transition.Visibility.createAnimator(ViewGroup,TransitionValues,TransitionValues)*
+
+public |android.animation.Animator| createAnimator(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  android.transition.TransitionValues endValues)
+
+
+
+
+
+*android.transition.Visibility.getTransitionProperties()*
+
+public |java.lang.String|[] getTransitionProperties()
+
+
+
+
+
+*android.transition.Visibility.isVisible(TransitionValues)*
+
+public boolean isVisible(android.transition.TransitionValues values)
+
+Returns whether the view is 'visible' according to the given values object. 
+This is determined by testing the same properties in the values object that are 
+used to determine whether the object is appearing or disappearing in the 
+(|android.transition.Transition|) method. This method can be called by, for 
+example, subclasses that want to know whether the object is visible in the same 
+way that Visibility determines it for the actual animation. 
+
+
+    values - The TransitionValues object that holds the information by which visibility is 
+       determined. 
+
+    Returns: True if the view reference by values is visible, false otherwise. 
+
+*android.transition.Visibility.onAppear(ViewGroup,TransitionValues,int,TransitionValues,int)*
+
+public |android.animation.Animator| onAppear(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  int startVisibility,
+  android.transition.TransitionValues endValues,
+  int endVisibility)
+
+The default implementation of this method does nothing. Subclasses should 
+override if they need to create an Animator when targets appear. The method 
+should only be called by the Visibility class; it is not intended to be called 
+from external classes. 
+
+
+    sceneRoot - The root of the transition hierarchy 
+    startValues - The target values in the start scene 
+    startVisibility - The target visibility in the start scene 
+    endValues - The target values in the end scene 
+    endVisibility - The target visibility in the end scene 
+
+    Returns: An Animator to be started at the appropriate time in the overall transition for 
+             this scene change. A null value means no animation should be run. 
+
+*android.transition.Visibility.onDisappear(ViewGroup,TransitionValues,int,TransitionValues,int)*
+
+public |android.animation.Animator| onDisappear(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValues startValues,
+  int startVisibility,
+  android.transition.TransitionValues endValues,
+  int endVisibility)
+
+The default implementation of this method does nothing. Subclasses should 
+override if they need to create an Animator when targets disappear. The method 
+should only be called by the Visibility class; it is not intended to be called 
+from external classes. 
+
+
+    sceneRoot - The root of the transition hierarchy 
+    startValues - The target values in the start scene 
+    startVisibility - The target visibility in the start scene 
+    endValues - The target values in the end scene 
+    endVisibility - The target visibility in the end scene 
+
+    Returns: An Animator to be started at the appropriate time in the overall transition for 
+             this scene change. A null value means no animation should be run. 
+
+

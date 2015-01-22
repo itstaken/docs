@@ -1,0 +1,349 @@
+*android.widget.TableLayout* *TableLayout* A layout that arranges its children i
+
+public class TableLayout
+  extends    |android.widget.LinearLayout|
+
+|android.widget.TableLayout_Description|
+|android.widget.TableLayout_Fields|
+|android.widget.TableLayout_Constructors|
+|android.widget.TableLayout_Methods|
+
+================================================================================
+
+*android.widget.TableLayout_Constructors*
+|android.widget.TableLayout(Context)|Creates a new TableLayout for the given co
+|android.widget.TableLayout(Context,AttributeSet)|Creates a new TableLayout for
+
+*android.widget.TableLayout_Methods*
+|android.widget.TableLayout.addView(View)|
+|android.widget.TableLayout.addView(View,int)|
+|android.widget.TableLayout.addView(View,int,ViewGroup.LayoutParams)|
+|android.widget.TableLayout.addView(View,ViewGroup.LayoutParams)|
+|android.widget.TableLayout.checkLayoutParams(ViewGroup.LayoutParams)|
+|android.widget.TableLayout.generateDefaultLayoutParams()|Returns a set of layo
+|android.widget.TableLayout.generateLayoutParams(AttributeSet)|
+|android.widget.TableLayout.generateLayoutParams(ViewGroup.LayoutParams)|
+|android.widget.TableLayout.isColumnCollapsed(int)|Returns the collapsed state 
+|android.widget.TableLayout.isColumnShrinkable(int)|Returns whether the specifi
+|android.widget.TableLayout.isColumnStretchable(int)|Returns whether the specif
+|android.widget.TableLayout.isShrinkAllColumns()|Indicates whether all columns 
+|android.widget.TableLayout.isStretchAllColumns()|Indicates whether all columns
+|android.widget.TableLayout.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.TableLayout.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.TableLayout.onLayout(boolean,int,int,int,int)|
+|android.widget.TableLayout.onMeasure(int,int)|
+|android.widget.TableLayout.requestLayout()|
+|android.widget.TableLayout.setColumnCollapsed(int,boolean)|Collapses or restor
+|android.widget.TableLayout.setColumnShrinkable(int,boolean)|Makes the given co
+|android.widget.TableLayout.setColumnStretchable(int,boolean)|Makes the given c
+|android.widget.TableLayout.setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener)|
+|android.widget.TableLayout.setShrinkAllColumns(boolean)|Convenience method to 
+|android.widget.TableLayout.setStretchAllColumns(boolean)|Convenience method to
+
+*android.widget.TableLayout_Description*
+
+A layout that arranges its children into rows and columns. A TableLayout 
+consists of a number of (|android.widget.TableRow|) objects, each defining a 
+row (actually, you can have other children, which will be explained below). 
+TableLayout containers do not display border lines for their rows, columns, or 
+cells. Each row has zero or more cells; each cell can hold one 
+View(|android.view.View|) object. The table has as many columns as the row with 
+the most cells. A table can leave cells empty. Cells can span columns, as they 
+can in HTML. 
+
+The width of a column is defined by the row with the widest cell in that 
+column. However, a TableLayout can specify certain columns as shrinkable or 
+stretchable by calling setColumnShrinkable()(|android.widget.TableLayout|) or 
+setColumnStretchable()(|android.widget.TableLayout|) . If marked as shrinkable, 
+the column width can be shrunk to fit the table into its parent object. If 
+marked as stretchable, it can expand in width to fit any extra space. The total 
+width of the table is defined by its parent container. It is important to 
+remember that a column can be both shrinkable and stretchable. In such a 
+situation, the column will change its size to always use up the available 
+space, but never more. Finally, you can hide a column by calling 
+setColumnCollapsed()(|android.widget.TableLayout|) . 
+
+The children of a TableLayout cannot specify the layout_width attribute. Width 
+is always MATCH_PARENT. However, the layout_height attribute can be defined by 
+a child; default value is (|android.widget.TableLayout.LayoutParams|) . If the 
+child is a (|android.widget.TableRow|) , then the height is always 
+(|android.widget.TableLayout.LayoutParams|) . 
+
+Cells must be added to a row in increasing column order, both in code and XML. 
+Column numbers are zero-based. If you don't specify a column number for a child 
+cell, it will autoincrement to the next available column. If you skip a column 
+number, it will be considered an empty cell in that row. See the TableLayout 
+examples in ApiDemos for examples of creating tables in XML. 
+
+Although the typical child of a TableLayout is a TableRow, you can actually use 
+any View subclass as a direct child of TableLayout. The View will be displayed 
+as a single row that spans all the table columns. 
+
+
+
+*android.widget.TableLayout(Context)*
+
+public TableLayout(android.content.Context context)
+
+Creates a new TableLayout for the given context. 
+
+    context - the application environment 
+
+*android.widget.TableLayout(Context,AttributeSet)*
+
+public TableLayout(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Creates a new TableLayout for the given context and with the specified set 
+attributes. 
+
+    context - the application environment 
+    attrs - a collection of attributes 
+
+*android.widget.TableLayout.addView(View)*
+
+public void addView(android.view.View child)
+
+
+
+
+
+*android.widget.TableLayout.addView(View,int)*
+
+public void addView(
+  android.view.View child,
+  int index)
+
+
+
+
+
+*android.widget.TableLayout.addView(View,int,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+*android.widget.TableLayout.addView(View,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+*android.widget.TableLayout.checkLayoutParams(ViewGroup.LayoutParams)*
+
+protected boolean checkLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.widget.TableLayout.generateDefaultLayoutParams()*
+
+protected |android.widget.LinearLayout.LayoutParams| generateDefaultLayoutParams()
+
+Returns a set of layout parameters with a width of 
+(|android.view.ViewGroup.LayoutParams|) , and a height of 
+(|android.view.ViewGroup.LayoutParams|) . 
+
+
+
+*android.widget.TableLayout.generateLayoutParams(AttributeSet)*
+
+public |android.widget.TableLayout.LayoutParams| generateLayoutParams(android.util.AttributeSet attrs)
+
+
+
+
+
+*android.widget.TableLayout.generateLayoutParams(ViewGroup.LayoutParams)*
+
+protected |android.widget.LinearLayout.LayoutParams| generateLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.widget.TableLayout.isColumnCollapsed(int)*
+
+public boolean isColumnCollapsed(int columnIndex)
+
+Returns the collapsed state of the specified column. 
+
+
+    columnIndex - the index of the column 
+
+    Returns: true if the column is collapsed, false otherwise 
+
+*android.widget.TableLayout.isColumnShrinkable(int)*
+
+public boolean isColumnShrinkable(int columnIndex)
+
+Returns whether the specified column is shrinkable or not. 
+
+
+    columnIndex - the index of the column 
+
+    Returns: true if the column is shrinkable, false otherwise. Default is false. 
+
+*android.widget.TableLayout.isColumnStretchable(int)*
+
+public boolean isColumnStretchable(int columnIndex)
+
+Returns whether the specified column is stretchable or not. 
+
+
+    columnIndex - the index of the column 
+
+    Returns: true if the column is stretchable, false otherwise 
+
+*android.widget.TableLayout.isShrinkAllColumns()*
+
+public boolean isShrinkAllColumns()
+
+Indicates whether all columns are shrinkable or not. 
+
+
+
+    Returns: true if all columns are shrinkable, false otherwise 
+
+*android.widget.TableLayout.isStretchAllColumns()*
+
+public boolean isStretchAllColumns()
+
+Indicates whether all columns are stretchable or not. 
+
+
+
+    Returns: true if all columns are stretchable, false otherwise 
+
+*android.widget.TableLayout.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.TableLayout.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.TableLayout.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.widget.TableLayout.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.TableLayout.requestLayout()*
+
+public void requestLayout()
+
+
+
+
+
+*android.widget.TableLayout.setColumnCollapsed(int,boolean)*
+
+public void setColumnCollapsed(
+  int columnIndex,
+  boolean isCollapsed)
+
+Collapses or restores a given column. When collapsed, a column does not appear 
+on screen and the extra space is reclaimed by the other columns. A column is 
+collapsed/restored only when it belongs to a (|android.widget.TableRow|) . 
+
+Calling this method requests a layout operation. 
+
+
+    columnIndex - the index of the column 
+    isCollapsed - true if the column must be collapsed, false otherwise 
+
+*android.widget.TableLayout.setColumnShrinkable(int,boolean)*
+
+public void setColumnShrinkable(
+  int columnIndex,
+  boolean isShrinkable)
+
+Makes the given column shrinkable or not. When a row is too wide, the table can 
+reclaim extra space from shrinkable columns. 
+
+Calling this method requests a layout operation. 
+
+
+    columnIndex - the index of the column 
+    isShrinkable - true if the column must be shrinkable, false otherwise. Default is false. 
+
+*android.widget.TableLayout.setColumnStretchable(int,boolean)*
+
+public void setColumnStretchable(
+  int columnIndex,
+  boolean isStretchable)
+
+Makes the given column stretchable or not. When stretchable, a column takes up 
+as much as available space as possible in its row. 
+
+Calling this method requests a layout operation. 
+
+
+    columnIndex - the index of the column 
+    isStretchable - true if the column must be stretchable, false otherwise. Default is false. 
+
+*android.widget.TableLayout.setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener)*
+
+public void setOnHierarchyChangeListener(android.view.ViewGroup.OnHierarchyChangeListener listener)
+
+
+
+
+
+*android.widget.TableLayout.setShrinkAllColumns(boolean)*
+
+public void setShrinkAllColumns(boolean shrinkAllColumns)
+
+Convenience method to mark all columns as shrinkable. 
+
+
+    shrinkAllColumns - true to mark all columns shrinkable 
+
+*android.widget.TableLayout.setStretchAllColumns(boolean)*
+
+public void setStretchAllColumns(boolean stretchAllColumns)
+
+Convenience method to mark all columns as stretchable. 
+
+
+    stretchAllColumns - true to mark all columns stretchable 
+
+

@@ -1,0 +1,188 @@
+*android.net.Proxy* *Proxy* A convenience class for accessing the user and defau
+
+public final class Proxy
+  extends    |java.lang.Object|
+
+|android.net.Proxy_Description|
+|android.net.Proxy_Fields|
+|android.net.Proxy_Constructors|
+|android.net.Proxy_Methods|
+
+================================================================================
+
+*android.net.Proxy_Fields*
+|java.lang.String_android.net.Proxy.EXTRA_PROXY_INFO|
+|java.lang.String_android.net.Proxy.PROXY_CHANGE_ACTION|
+
+*android.net.Proxy_Constructors*
+|android.net.Proxy()|
+
+*android.net.Proxy_Methods*
+|android.net.Proxy.getAndroidProxySelectorRoutePlanner(Context)|
+|android.net.Proxy.getDefaultHost()|Return the default proxy host specified by 
+|android.net.Proxy.getDefaultPort()|Return the default proxy port specified by 
+|android.net.Proxy.getHost(Context)|Return the proxy host set by the user.
+|android.net.Proxy.getPort(Context)|Return the proxy port set by the user.
+|android.net.Proxy.getPreferredHttpHost(Context,String)|Returns the preferred p
+|android.net.Proxy.getProxy(Context,String)|Return the proxy object to be used 
+|android.net.Proxy.setHttpProxySystemProperty(ProxyProperties)|
+|android.net.Proxy.setHttpProxySystemProperty(String,String,String,String)|
+|android.net.Proxy.validate(String,String,String)|Validate syntax of hostname, 
+
+*android.net.Proxy_Description*
+
+A convenience class for accessing the user and default proxy settings. 
+
+
+
+*java.lang.String_android.net.Proxy.EXTRA_PROXY_INFO*
+
+
+
+
+*java.lang.String_android.net.Proxy.PROXY_CHANGE_ACTION*
+
+Used to notify an app that's caching the default connection proxy that either 
+the default connection or its proxy has changed. The intent will have the 
+following extra value: 
+
+EXTRA_PROXY_INFO - The ProxyProperties for the proxy. Non-null, though if the 
+proxy is undefined the host string will be empty. 
+
+This is a protected intent that can only be sent by the system 
+
+
+
+*android.net.Proxy()*
+
+public Proxy()
+
+
+
+
+*android.net.Proxy.getAndroidProxySelectorRoutePlanner(Context)*
+
+public static final HttpRoutePlanner getAndroidProxySelectorRoutePlanner(android.content.Context context)
+
+
+
+
+
+*android.net.Proxy.getDefaultHost()*
+
+public static final |java.lang.String| getDefaultHost()
+
+Return the default proxy host specified by the carrier. 
+
+    Deprecated: Use standard java vm proxy values to find the host, port and
+         exclusion list.  This call ignores the exclusion list and no
+         longer reports only mobile-data apn-based proxy values.
+
+
+    Returns: String containing the host name or null if there is no proxy for this carrier. 
+
+*android.net.Proxy.getDefaultPort()*
+
+public static final int getDefaultPort()
+
+Return the default proxy port specified by the carrier. 
+
+    Deprecated: Use standard java vm proxy values to find the host, port and
+         exclusion list.  This call ignores the exclusion list and no
+         longer reports only mobile-data apn-based proxy values.
+
+
+    Returns: The port number to be used with the proxy host or -1 if there is no proxy for 
+             this carrier. 
+
+*android.net.Proxy.getHost(Context)*
+
+public static final |java.lang.String| getHost(android.content.Context ctx)
+
+Return the proxy host set by the user. 
+
+    Deprecated: Use standard java vm proxy values to find the host, port
+         and exclusion list.  This call ignores the exclusion list.
+
+    ctx - A Context used to get the settings for the proxy host. 
+
+    Returns: String containing the host name. If the user did not set a host name it returns 
+             the default host. A null value means that no host is to be used. 
+
+*android.net.Proxy.getPort(Context)*
+
+public static final int getPort(android.content.Context ctx)
+
+Return the proxy port set by the user. 
+
+    Deprecated: Use standard java vm proxy values to find the host, port
+         and exclusion list.  This call ignores the exclusion list.
+
+    ctx - A Context used to get the settings for the proxy port. 
+
+    Returns: The port number to use or -1 if no proxy is to be used. 
+
+*android.net.Proxy.getPreferredHttpHost(Context,String)*
+
+public static final HttpHost getPreferredHttpHost(
+  android.content.Context context,
+  java.lang.String url)
+
+Returns the preferred proxy to be used by clients. This is a wrapper around 
+(|android.net.Proxy|) . 
+
+
+    context - the context which will be passed to {@link android.net.Proxy#getHost()} 
+    url - the target URL for the request 
+
+    Returns: The preferred proxy to be used by clients, or null if there is no proxy. 
+             {@hide} 
+
+*android.net.Proxy.getProxy(Context,String)*
+
+public static final |java.net.Proxy| getProxy(
+  android.content.Context ctx,
+  java.lang.String url)
+
+Return the proxy object to be used for the URL given as parameter. 
+
+
+    ctx - A Context used to get the settings for the proxy host. 
+    url - A URL to be accessed. Used to evaluate exclusion list. 
+
+    Returns: Proxy (java.net) object containing the host name. If the user did not set a 
+             hostname it returns the default host. A null value means that no 
+             host is to be used. {@hide} 
+
+*android.net.Proxy.setHttpProxySystemProperty(ProxyProperties)*
+
+public static final void setHttpProxySystemProperty(android.net.ProxyProperties p)
+
+
+
+
+
+*android.net.Proxy.setHttpProxySystemProperty(String,String,String,String)*
+
+public static final void setHttpProxySystemProperty(
+  java.lang.String host,
+  java.lang.String port,
+  java.lang.String exclList,
+  java.lang.String pacFileUrl)
+
+
+
+
+
+*android.net.Proxy.validate(String,String,String)*
+
+public static void validate(
+  java.lang.String hostname,
+  java.lang.String port,
+  java.lang.String exclList)
+
+Validate syntax of hostname, port and exclusion list entries 
+
+
+
+

@@ -1,0 +1,243 @@
+*android.view.InputEvent* *InputEvent* Common base class for input events.
+
+public abstract class InputEvent
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.InputEvent_Description|
+|android.view.InputEvent_Fields|
+|android.view.InputEvent_Constructors|
+|android.view.InputEvent_Methods|
+
+================================================================================
+
+*android.view.InputEvent_Fields*
+|android.os.Parcelable.Creator<android.view.InputEvent>_android.view.InputEvent.CREATOR|
+|boolean_android.view.InputEvent.mRecycled|
+|int_android.view.InputEvent.mSeq|
+|int_android.view.InputEvent.PARCEL_TOKEN_KEY_EVENT|
+|int_android.view.InputEvent.PARCEL_TOKEN_MOTION_EVENT|
+
+*android.view.InputEvent_Methods*
+|android.view.InputEvent.copy()|Copies the event.
+|android.view.InputEvent.describeContents()|
+|android.view.InputEvent.getDevice()|Gets the device that this event came from.
+|android.view.InputEvent.getDeviceId()|Gets the id for the device that this eve
+|android.view.InputEvent.getEventTime()|Retrieve the time this event occurred, 
+|android.view.InputEvent.getEventTimeNano()|Retrieve the time this event occurr
+|android.view.InputEvent.getSequenceNumber()|Gets the unique sequence number of
+|android.view.InputEvent.getSource()|Gets the source of the event.
+|android.view.InputEvent.isFromSource(int)|Determines whether the event is from
+|android.view.InputEvent.isTainted()|Gets a private flag that indicates when th
+|android.view.InputEvent.prepareForReuse()|Reinitializes the event on reuse (af
+|android.view.InputEvent.recycle()|Recycles the event.
+|android.view.InputEvent.recycleIfNeededAfterDispatch()|Conditionally recycled 
+|android.view.InputEvent.setSource(int)|Modifies the source of the event.
+|android.view.InputEvent.setTainted(boolean)|Sets a private flag that indicates
+
+*android.view.InputEvent_Description*
+
+Common base class for input events. 
+
+
+
+*android.os.Parcelable.Creator<android.view.InputEvent>_android.view.InputEvent.CREATOR*
+
+
+
+
+*boolean_android.view.InputEvent.mRecycled*
+
+
+
+
+*int_android.view.InputEvent.mSeq*
+
+
+
+
+*int_android.view.InputEvent.PARCEL_TOKEN_KEY_EVENT*
+
+
+
+
+*int_android.view.InputEvent.PARCEL_TOKEN_MOTION_EVENT*
+
+
+
+
+
+*android.view.InputEvent.copy()*
+
+public abstract |android.view.InputEvent| copy()
+
+Copies the event. 
+
+
+
+    Returns: A deep copy of the event. 
+
+*android.view.InputEvent.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.InputEvent.getDevice()*
+
+public final |android.view.InputDevice| getDevice()
+
+Gets the device that this event came from. 
+
+
+
+    Returns: The device, or null if unknown. 
+
+*android.view.InputEvent.getDeviceId()*
+
+public abstract int getDeviceId()
+
+Gets the id for the device that this event came from. An id of zero indicates 
+that the event didn't come from a physical device and maps to the default 
+keymap. The other numbers are arbitrary and you shouldn't depend on the values. 
+
+
+
+    Returns: The device id. 
+
+*android.view.InputEvent.getEventTime()*
+
+public abstract long getEventTime()
+
+Retrieve the time this event occurred, in the (|android.os.SystemClock|) time 
+base. 
+
+
+
+    Returns: Returns the time this event occurred, in the {@link 
+             android.os.SystemClock#uptimeMillis} time base. 
+
+*android.view.InputEvent.getEventTimeNano()*
+
+public abstract long getEventTimeNano()
+
+Retrieve the time this event occurred, in the (|android.os.SystemClock|) time 
+base but with nanosecond (instead of millisecond) precision. 
+
+The value is in nanosecond precision but it may not have nanosecond accuracy. 
+
+
+
+    Returns: Returns the time this event occurred, in the {@link 
+             android.os.SystemClock#uptimeMillis} time base but with nanosecond 
+             (instead of millisecond) precision. 
+
+*android.view.InputEvent.getSequenceNumber()*
+
+public int getSequenceNumber()
+
+Gets the unique sequence number of this event. Every input event that is 
+created or received by a process has a unique sequence number. Moreover, a new 
+sequence number is obtained each time an event object is recycled. 
+
+Sequence numbers are only guaranteed to be locally unique within a process. 
+Sequence numbers are not preserved when events are parceled. 
+
+
+
+    Returns: The unique sequence number of this event. 
+
+*android.view.InputEvent.getSource()*
+
+public abstract int getSource()
+
+Gets the source of the event. 
+
+
+
+    Returns: The event source or {@link InputDevice#SOURCE_UNKNOWN} if unknown. 
+
+*android.view.InputEvent.isFromSource(int)*
+
+public boolean isFromSource(int source)
+
+Determines whether the event is from the given source. 
+
+
+    source - The input source to check against. This can be a specific device type, such as 
+       {@link InputDevice#SOURCE_TOUCH_NAVIGATION}, or a more generic device 
+       class, such as {@link InputDevice#SOURCE_CLASS_POINTER}. 
+
+    Returns: Whether the event is from the given source. 
+
+*android.view.InputEvent.isTainted()*
+
+public abstract boolean isTainted()
+
+Gets a private flag that indicates when the system has detected that this input 
+event may be inconsistent with respect to the sequence of previously delivered 
+input events, such as when a key up event is sent but the key was not down or 
+when a pointer move event is sent but the pointer is not down. 
+
+
+
+    Returns: True if this event is tainted. 
+
+*android.view.InputEvent.prepareForReuse()*
+
+protected void prepareForReuse()
+
+Reinitializes the event on reuse (after recycling). 
+
+
+
+*android.view.InputEvent.recycle()*
+
+public void recycle()
+
+Recycles the event. This method should only be used by the system since 
+applications do not expect (|android.view.KeyEvent|) objects to be recycled, 
+although (|android.view.MotionEvent|) objects are fine. See 
+(|android.view.KeyEvent|) for details. 
+
+
+
+*android.view.InputEvent.recycleIfNeededAfterDispatch()*
+
+public void recycleIfNeededAfterDispatch()
+
+Conditionally recycled the event if it is appropriate to do so after 
+dispatching the event to an application. 
+
+If the event is a (|android.view.MotionEvent|) then it is recycled. 
+
+If the event is a (|android.view.KeyEvent|) then it is NOT recycled, because 
+applications expect key events to be immutable so once the event has been 
+dispatched to the application we can no longer recycle it. 
+
+
+
+*android.view.InputEvent.setSource(int)*
+
+public abstract void setSource(int source)
+
+Modifies the source of the event. 
+
+
+    source - The new source. 
+
+*android.view.InputEvent.setTainted(boolean)*
+
+public abstract void setTainted(boolean tainted)
+
+Sets a private flag that indicates when the system has detected that this input 
+event may be inconsistent with respect to the sequence of previously delivered 
+input events, such as when a key up event is sent but the key was not down or 
+when a pointer move event is sent but the pointer is not down. 
+
+
+    tainted - True if this event is tainted. 
+
+

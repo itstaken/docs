@@ -1,0 +1,157 @@
+*android.speech.tts.TtsEngines* *TtsEngines* Support class for querying the list
+
+public class TtsEngines
+  extends    |java.lang.Object|
+
+|android.speech.tts.TtsEngines_Description|
+|android.speech.tts.TtsEngines_Fields|
+|android.speech.tts.TtsEngines_Constructors|
+|android.speech.tts.TtsEngines_Methods|
+
+================================================================================
+
+*android.speech.tts.TtsEngines_Constructors*
+|android.speech.tts.TtsEngines(Context)|
+
+*android.speech.tts.TtsEngines_Methods*
+|android.speech.tts.TtsEngines.getDefaultEngine()|
+|android.speech.tts.TtsEngines.getDefaultLocale()|Return the default device loc
+|android.speech.tts.TtsEngines.getEngineInfo(String)|Returns the engine info fo
+|android.speech.tts.TtsEngines.getEngines()|Gets a list of all installed TTS en
+|android.speech.tts.TtsEngines.getHighestRankedEngineName()|
+|android.speech.tts.TtsEngines.getLocalePrefForEngine(String)|Returns the local
+|android.speech.tts.TtsEngines.getSettingsIntent(String)|
+|android.speech.tts.TtsEngines.isEngineInstalled(String)|
+|android.speech.tts.TtsEngines.parseLocalePref(String)|Parses a locale preferen
+|android.speech.tts.TtsEngines.updateLocalePrefForEngine(String,String)|
+
+*android.speech.tts.TtsEngines_Description*
+
+Support class for querying the list of available engines on the device and 
+deciding which one to use etc. 
+
+Comments in this class the use the shorthand "system engines" for engines that 
+are a part of the system image. 
+
+
+
+*android.speech.tts.TtsEngines(Context)*
+
+public TtsEngines(android.content.Context ctx)
+
+
+
+
+*android.speech.tts.TtsEngines.getDefaultEngine()*
+
+public |java.lang.String| getDefaultEngine()
+
+
+
+
+
+    Returns: the default TTS engine. If the user has set a default, and the engine is 
+             available on the device, the default is returned. Otherwise, the 
+             highest ranked engine is returned as per {@link 
+             EngineInfoComparator}. 
+
+*android.speech.tts.TtsEngines.getDefaultLocale()*
+
+public |java.lang.String| getDefaultLocale()
+
+Return the default device locale in form of 3 letter codes delimited by 
+(|android.speech.tts.TtsEngines|) : 
+
+"ISO 639-2/T language code" if locale have no country entry "ISO 639-2/T 
+language code (|android.speech.tts.TtsEngines|) ISO 3166 country code " if 
+locale have no variant entry "ISO 639-2/T language code 
+(|android.speech.tts.TtsEngines|) ISO 3166 country code 
+(|android.speech.tts.TtsEngines|) variant" if locale have variant entry 
+
+
+
+*android.speech.tts.TtsEngines.getEngineInfo(String)*
+
+public |android.speech.tts.TextToSpeech.EngineInfo| getEngineInfo(java.lang.String packageName)
+
+Returns the engine info for a given engine name. Note that engines are 
+identified by their package name. 
+
+
+
+*android.speech.tts.TtsEngines.getEngines()*
+
+public |java.util.List|<EngineInfo> getEngines()
+
+Gets a list of all installed TTS engines. 
+
+
+
+    Returns: A list of engine info objects. The list can be empty, but never {@code null}. 
+
+*android.speech.tts.TtsEngines.getHighestRankedEngineName()*
+
+public |java.lang.String| getHighestRankedEngineName()
+
+
+
+
+
+    Returns: the package name of the highest ranked system engine, {@code null} if no TTS 
+             engines were present in the system image. 
+
+*android.speech.tts.TtsEngines.getLocalePrefForEngine(String)*
+
+public |java.lang.String| getLocalePrefForEngine(java.lang.String engineName)
+
+Returns the locale string for a given TTS engine. Attempts to read the value 
+from (|Settings.Secure|) , failing which the old style value from 
+(|Settings.Secure|) is read. If both these values are empty, the default phone 
+locale is returned. 
+
+
+    engineName - the engine to return the locale for. 
+
+    Returns: the locale string preference for this engine. Will be non null and non empty. 
+
+*android.speech.tts.TtsEngines.getSettingsIntent(String)*
+
+public |android.content.Intent| getSettingsIntent(java.lang.String engine)
+
+
+
+
+
+    Returns: an intent that can launch the settings activity for a given tts engine. 
+
+*android.speech.tts.TtsEngines.isEngineInstalled(String)*
+
+public boolean isEngineInstalled(java.lang.String engine)
+
+
+
+
+
+    Returns: true if a given engine is installed on the system. 
+
+*android.speech.tts.TtsEngines.parseLocalePref(String)*
+
+public static |java.lang.String|[] parseLocalePref(java.lang.String pref)
+
+Parses a locale preference value delimited by (|android.speech.tts.TtsEngines|) 
+. Varies from (|java.lang.String|) in that it will always return an array of 
+length 3 with non null values. 
+
+
+
+*android.speech.tts.TtsEngines.updateLocalePrefForEngine(String,String)*
+
+public synchronized void updateLocalePrefForEngine(
+  java.lang.String name,
+  java.lang.String newLocale)
+
+
+
+
+
+

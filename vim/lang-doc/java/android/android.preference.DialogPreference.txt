@@ -1,0 +1,362 @@
+*android.preference.DialogPreference* *DialogPreference* A base class forPrefere
+
+public abstract class DialogPreference
+  extends    |android.preference.Preference|
+  implements |android.content.DialogInterface.OnClickListener|
+             |android.content.DialogInterface.OnDismissListener|
+             |android.preference.PreferenceManager.OnActivityDestroyListener|
+
+|android.preference.DialogPreference_Description|
+|android.preference.DialogPreference_Fields|
+|android.preference.DialogPreference_Constructors|
+|android.preference.DialogPreference_Methods|
+
+================================================================================
+
+*android.preference.DialogPreference_Constructors*
+|android.preference.DialogPreference(Context,AttributeSet)|
+|android.preference.DialogPreference(Context,AttributeSet,int)|
+
+*android.preference.DialogPreference_Methods*
+|android.preference.DialogPreference.getDialog()|Gets the dialog that is shown 
+|android.preference.DialogPreference.getDialogIcon()|Returns the icon to be sho
+|android.preference.DialogPreference.getDialogLayoutResource()|Returns the layo
+|android.preference.DialogPreference.getDialogMessage()|Returns the message to 
+|android.preference.DialogPreference.getDialogTitle()|Returns the title to be s
+|android.preference.DialogPreference.getNegativeButtonText()|Returns the text o
+|android.preference.DialogPreference.getPositiveButtonText()|Returns the text o
+|android.preference.DialogPreference.needInputMethod()|Returns whether the pref
+|android.preference.DialogPreference.onActivityDestroy()|
+|android.preference.DialogPreference.onBindDialogView(View)|Binds views in the 
+|android.preference.DialogPreference.onClick()|
+|android.preference.DialogPreference.onClick(DialogInterface,int)|
+|android.preference.DialogPreference.onCreateDialogView()|Creates the content v
+|android.preference.DialogPreference.onDialogClosed(boolean)|Called when the di
+|android.preference.DialogPreference.onDismiss(DialogInterface)|
+|android.preference.DialogPreference.onPrepareDialogBuilder(AlertDialog.Builder)|
+|android.preference.DialogPreference.onRestoreInstanceState(Parcelable)|
+|android.preference.DialogPreference.onSaveInstanceState()|
+|android.preference.DialogPreference.setDialogIcon(Drawable)|Sets the icon of t
+|android.preference.DialogPreference.setDialogLayoutResource(int)|Sets the layo
+|android.preference.DialogPreference.setDialogMessage(CharSequence)|Sets the me
+|android.preference.DialogPreference.setDialogMessage(int)|
+|android.preference.DialogPreference.setDialogTitle(CharSequence)|Sets the titl
+|android.preference.DialogPreference.setDialogTitle(int)|
+|android.preference.DialogPreference.setNegativeButtonText(CharSequence)|Sets t
+|android.preference.DialogPreference.setNegativeButtonText(int)|
+|android.preference.DialogPreference.setPositiveButtonText(CharSequence)|Sets t
+|android.preference.DialogPreference.setPositiveButtonText(int)|
+|android.preference.DialogPreference.showDialog(Bundle)|Shows the dialog associ
+
+*android.preference.DialogPreference_Description*
+
+A base class for (|android.preference.Preference|) objects that are 
+dialog-based. These preferences will, when clicked, open a dialog showing the 
+actual preference controls. 
+
+
+
+*android.preference.DialogPreference(Context,AttributeSet)*
+
+public DialogPreference(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.preference.DialogPreference(Context,AttributeSet,int)*
+
+public DialogPreference(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.preference.DialogPreference.getDialog()*
+
+public |android.app.Dialog| getDialog()
+
+Gets the dialog that is shown by this preference. 
+
+
+
+    Returns: The dialog, or null if a dialog is not being shown. 
+
+*android.preference.DialogPreference.getDialogIcon()*
+
+public Drawable getDialogIcon()
+
+Returns the icon to be shown on subsequent dialogs. 
+
+
+
+    Returns: The icon, as a {@link Drawable}. 
+
+*android.preference.DialogPreference.getDialogLayoutResource()*
+
+public int getDialogLayoutResource()
+
+Returns the layout resource that is used as the content View for subsequent 
+dialogs. 
+
+
+
+    Returns: The layout resource. 
+
+*android.preference.DialogPreference.getDialogMessage()*
+
+public |java.lang.CharSequence| getDialogMessage()
+
+Returns the message to be shown on subsequent dialogs. 
+
+
+
+    Returns: 
+
+*android.preference.DialogPreference.getDialogTitle()*
+
+public |java.lang.CharSequence| getDialogTitle()
+
+Returns the title to be shown on subsequent dialogs. 
+
+
+
+    Returns: 
+
+*android.preference.DialogPreference.getNegativeButtonText()*
+
+public |java.lang.CharSequence| getNegativeButtonText()
+
+Returns the text of the negative button to be shown on subsequent dialogs. 
+
+
+
+    Returns: The text of the negative button. 
+
+*android.preference.DialogPreference.getPositiveButtonText()*
+
+public |java.lang.CharSequence| getPositiveButtonText()
+
+Returns the text of the positive button to be shown on subsequent dialogs. 
+
+
+
+    Returns: The text of the positive button. 
+
+*android.preference.DialogPreference.needInputMethod()*
+
+protected boolean needInputMethod()
+
+Returns whether the preference needs to display a soft input method when the 
+dialog is displayed. Default is false. Subclasses should override this method 
+if they need the soft input method brought up automatically. 
+
+
+
+*android.preference.DialogPreference.onActivityDestroy()*
+
+public void onActivityDestroy()
+
+
+
+
+
+*android.preference.DialogPreference.onBindDialogView(View)*
+
+protected void onBindDialogView(android.view.View view)
+
+Binds views in the content View of the dialog to data. 
+
+Make sure to call through to the superclass implementation. 
+
+
+    view - The content View of the dialog, if it is custom. 
+
+*android.preference.DialogPreference.onClick()*
+
+protected void onClick()
+
+
+
+
+
+*android.preference.DialogPreference.onClick(DialogInterface,int)*
+
+public void onClick(
+  android.content.DialogInterface dialog,
+  int which)
+
+
+
+
+
+*android.preference.DialogPreference.onCreateDialogView()*
+
+protected |android.view.View| onCreateDialogView()
+
+Creates the content view for the dialog (if a custom content view is required). 
+By default, it inflates the dialog layout resource if it is set. 
+
+
+
+    Returns: The content View for the dialog. 
+
+*android.preference.DialogPreference.onDialogClosed(boolean)*
+
+protected void onDialogClosed(boolean positiveResult)
+
+Called when the dialog is dismissed and should be used to save data to the 
+(|android.content.SharedPreferences|) . 
+
+
+    positiveResult - Whether the positive button was clicked (true), or the negative button was 
+       clicked or the dialog was canceled (false). 
+
+*android.preference.DialogPreference.onDismiss(DialogInterface)*
+
+public void onDismiss(android.content.DialogInterface dialog)
+
+
+
+
+
+*android.preference.DialogPreference.onPrepareDialogBuilder(AlertDialog.Builder)*
+
+protected void onPrepareDialogBuilder(android.app.AlertDialog.Builder builder)
+
+Prepares the dialog builder to be shown when the preference is clicked. Use 
+this to set custom properties on the dialog. 
+
+Do not (|AlertDialog.Builder|) or (|AlertDialog.Builder|) . 
+
+
+
+*android.preference.DialogPreference.onRestoreInstanceState(Parcelable)*
+
+protected void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.preference.DialogPreference.onSaveInstanceState()*
+
+protected |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+*android.preference.DialogPreference.setDialogIcon(Drawable)*
+
+public void setDialogIcon(Drawable dialogIcon)
+
+Sets the icon of the dialog. This will be shown on subsequent dialogs. 
+
+
+    dialogIcon - The icon, as a {@link Drawable}. 
+
+*android.preference.DialogPreference.setDialogLayoutResource(int)*
+
+public void setDialogLayoutResource(int dialogLayoutResId)
+
+Sets the layout resource that is inflated as the (|android.view.View|) to be 
+shown as the content View of subsequent dialogs. 
+
+
+    dialogLayoutResId - The layout resource ID to be inflated. 
+
+*android.preference.DialogPreference.setDialogMessage(CharSequence)*
+
+public void setDialogMessage(java.lang.CharSequence dialogMessage)
+
+Sets the message of the dialog. This will be shown on subsequent dialogs. 
+
+This message forms the content View of the dialog and conflicts with list-based 
+dialogs, for example. If setting a custom View on a dialog via 
+(|android.preference.DialogPreference|) , include a text View with ID 
+(|android.R.id|) and it will be populated with this message. 
+
+
+    dialogMessage - The message. 
+
+*android.preference.DialogPreference.setDialogMessage(int)*
+
+public void setDialogMessage(int dialogMessageResId)
+
+
+
+
+    dialogMessageResId - The dialog message as a resource. 
+
+*android.preference.DialogPreference.setDialogTitle(CharSequence)*
+
+public void setDialogTitle(java.lang.CharSequence dialogTitle)
+
+Sets the title of the dialog. This will be shown on subsequent dialogs. 
+
+
+    dialogTitle - The title. 
+
+*android.preference.DialogPreference.setDialogTitle(int)*
+
+public void setDialogTitle(int dialogTitleResId)
+
+
+
+
+    dialogTitleResId - The dialog title as a resource. 
+
+*android.preference.DialogPreference.setNegativeButtonText(CharSequence)*
+
+public void setNegativeButtonText(java.lang.CharSequence negativeButtonText)
+
+Sets the text of the negative button of the dialog. This will be shown on 
+subsequent dialogs. 
+
+
+    negativeButtonText - The text of the negative button. 
+
+*android.preference.DialogPreference.setNegativeButtonText(int)*
+
+public void setNegativeButtonText(int negativeButtonTextResId)
+
+
+
+
+    negativeButtonTextResId - The negative button text as a resource. 
+
+*android.preference.DialogPreference.setPositiveButtonText(CharSequence)*
+
+public void setPositiveButtonText(java.lang.CharSequence positiveButtonText)
+
+Sets the text of the positive button of the dialog. This will be shown on 
+subsequent dialogs. 
+
+
+    positiveButtonText - The text of the positive button. 
+
+*android.preference.DialogPreference.setPositiveButtonText(int)*
+
+public void setPositiveButtonText(int positiveButtonTextResId)
+
+
+
+
+    positiveButtonTextResId - The positive button text as a resource. 
+
+*android.preference.DialogPreference.showDialog(Bundle)*
+
+protected void showDialog(android.os.Bundle state)
+
+Shows the dialog associated with this Preference. This is normally initiated 
+automatically on clicking on the preference. Call this method if you need to 
+show the dialog on some other event. 
+
+
+    state - Optional instance state to restore on the dialog 
+
+

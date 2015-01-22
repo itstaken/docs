@@ -1,0 +1,83 @@
+*android.service.textservice.SpellCheckerService* *SpellCheckerService* SpellChe
+
+public abstract class SpellCheckerService
+  extends    |android.app.Service|
+
+|android.service.textservice.SpellCheckerService_Description|
+|android.service.textservice.SpellCheckerService_Fields|
+|android.service.textservice.SpellCheckerService_Constructors|
+|android.service.textservice.SpellCheckerService_Methods|
+
+================================================================================
+
+*android.service.textservice.SpellCheckerService_Fields*
+|java.lang.String_android.service.textservice.SpellCheckerService.SERVICE_INTERFACE|
+
+*android.service.textservice.SpellCheckerService_Constructors*
+|android.service.textservice.SpellCheckerService()|
+
+*android.service.textservice.SpellCheckerService_Methods*
+|android.service.textservice.SpellCheckerService.createSession()|Factory method
+|android.service.textservice.SpellCheckerService.onBind(Intent)|Implement to re
+
+*android.service.textservice.SpellCheckerService_Description*
+
+SpellCheckerService provides an abstract base class for a spell checker. This 
+class combines a service to the system with the spell checker service interface 
+that spell checker must implement. 
+
+In addition to the normal Service lifecycle methods, this class introduces a 
+new specific callback that subclasses should override 
+(|android.service.textservice.SpellCheckerService|) to provide a spell checker 
+session that is corresponding to requested language and so on. The spell 
+checker session returned by this method should extend 
+(|android.service.textservice.SpellCheckerService.Session|) . 
+
+Returning spell check results 
+
+(|android.service.textservice.SpellCheckerService.Session|) should return spell 
+check results. It receives (|android.view.textservice.TextInfo|) and returns 
+(|android.view.textservice.SuggestionsInfo|) for the input. You may want to 
+override (|android.service.textservice.SpellCheckerService.Session|) for better 
+performance and quality. 
+
+Please note that (|android.service.textservice.SpellCheckerService.Session|) 
+does not return a valid locale before 
+(|android.service.textservice.SpellCheckerService.Session|) 
+
+
+
+*java.lang.String_android.service.textservice.SpellCheckerService.SERVICE_INTERFACE*
+
+
+
+
+
+*android.service.textservice.SpellCheckerService()*
+
+public SpellCheckerService()
+
+
+
+
+*android.service.textservice.SpellCheckerService.createSession()*
+
+public abstract |android.service.textservice.SpellCheckerService.Session| createSession()
+
+Factory method to create a spell checker session impl 
+
+
+
+    Returns: SpellCheckerSessionImpl which should be overridden by a concrete 
+             implementation. 
+
+*android.service.textservice.SpellCheckerService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+Implement to return the implementation of the internal spell checker service 
+interface. Subclasses should not override. 
+
+
+
+

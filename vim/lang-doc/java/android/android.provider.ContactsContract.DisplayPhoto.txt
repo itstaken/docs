@@ -1,0 +1,69 @@
+*android.provider.ContactsContract.DisplayPhoto* *ContactsContract.DisplayPhoto* 
+
+public static final class ContactsContract.DisplayPhoto
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.DisplayPhoto_Description|
+|android.provider.ContactsContract.DisplayPhoto_Fields|
+|android.provider.ContactsContract.DisplayPhoto_Constructors|
+|android.provider.ContactsContract.DisplayPhoto_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.DisplayPhoto_Fields*
+|android.net.Uri_android.provider.ContactsContract.DisplayPhoto.CONTENT_MAX_DIMENSIONS_URI|
+|android.net.Uri_android.provider.ContactsContract.DisplayPhoto.CONTENT_URI|
+|java.lang.String_android.provider.ContactsContract.DisplayPhoto.DISPLAY_MAX_DIM|
+|java.lang.String_android.provider.ContactsContract.DisplayPhoto.THUMBNAIL_MAX_DIM|
+
+*android.provider.ContactsContract.DisplayPhoto_Description*
+
+Helper class for accessing full-size photos by photo file ID. 
+
+Usage example: 
+
+Retrieving a full-size photo by photo file ID (see 
+(|android.provider.ContactsContract.ContactsColumns|) ) 
+
+
+
+public InputStream openDisplayPhoto(long photoFileId) { Uri displayPhotoUri = 
+ContentUris.withAppendedId(DisplayPhoto.CONTENT_URI, photoKey); try { 
+AssetFileDescriptor fd = getContentResolver().openAssetFileDescriptor( 
+displayPhotoUri, "r"); return fd.createInputStream(); } catch (IOException e) { 
+return null; } } 
+
+
+
+
+
+
+
+*android.net.Uri_android.provider.ContactsContract.DisplayPhoto.CONTENT_MAX_DIMENSIONS_URI*
+
+This URI allows the caller to query for the maximum dimensions of a display 
+photo or thumbnail. Requests to this URI can be performed on the UI thread 
+because they are always unblocking. 
+
+
+*android.net.Uri_android.provider.ContactsContract.DisplayPhoto.CONTENT_URI*
+
+The content:// style URI for this class, which allows access to full-size 
+photos, given a key. 
+
+
+*java.lang.String_android.provider.ContactsContract.DisplayPhoto.DISPLAY_MAX_DIM*
+
+Queries to (|android.provider.ContactsContract.DisplayPhoto|) will contain this 
+column, populated with the maximum height and width (in pixels) that will be 
+stored for a display photo. Larger photos will be down-sized to fit within a 
+square of this many pixels. 
+
+
+*java.lang.String_android.provider.ContactsContract.DisplayPhoto.THUMBNAIL_MAX_DIM*
+
+Queries to (|android.provider.ContactsContract.DisplayPhoto|) will contain this 
+column, populated with the height and width (in pixels) for photo thumbnails. 
+
+
+

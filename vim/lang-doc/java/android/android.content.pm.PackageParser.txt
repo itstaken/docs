@@ -1,0 +1,341 @@
+*android.content.pm.PackageParser* *PackageParser* Package archive parsing
+
+public class PackageParser
+  extends    |java.lang.Object|
+
+|android.content.pm.PackageParser_Description|
+|android.content.pm.PackageParser_Fields|
+|android.content.pm.PackageParser_Constructors|
+|android.content.pm.PackageParser_Methods|
+
+================================================================================
+
+*android.content.pm.PackageParser_Fields*
+|android.content.pm.PackageParser.NewPermissionInfo[]_android.content.pm.PackageParser.NEW_PERMISSIONS|
+|int_android.content.pm.PackageParser.PARSE_CHATTY|
+|int_android.content.pm.PackageParser.PARSE_FORWARD_LOCK|
+|int_android.content.pm.PackageParser.PARSE_IGNORE_PROCESSES|
+|int_android.content.pm.PackageParser.PARSE_IS_PRIVILEGED|
+|int_android.content.pm.PackageParser.PARSE_IS_SYSTEM|
+|int_android.content.pm.PackageParser.PARSE_IS_SYSTEM_DIR|
+|int_android.content.pm.PackageParser.PARSE_MUST_BE_APK|
+|int_android.content.pm.PackageParser.PARSE_ON_SDCARD|
+|android.content.pm.PackageParser.SplitPermissionInfo[]_android.content.pm.PackageParser.SPLIT_PERMISSIONS|
+
+*android.content.pm.PackageParser_Constructors*
+|android.content.pm.PackageParser(String)|
+
+*android.content.pm.PackageParser_Methods*
+|android.content.pm.PackageParser.collectCertificates(PackageParser.Package,int)|
+|android.content.pm.PackageParser.collectManifestDigest(PackageParser.Package)|
+|android.content.pm.PackageParser.generateActivityInfo(PackageParser.Activity,int,PackageUserState,int)|
+|android.content.pm.PackageParser.generateApplicationInfo(PackageParser.Package,int,PackageUserState)|
+|android.content.pm.PackageParser.generateApplicationInfo(PackageParser.Package,int,PackageUserState,int)|
+|android.content.pm.PackageParser.generateInstrumentationInfo(PackageParser.Instrumentation,int)|
+|android.content.pm.PackageParser.generatePackageInfo(PackageParser.Package,int[],int,long,long,HashSet<String>,PackageUserState)|
+|android.content.pm.PackageParser.generatePackageInfo(PackageParser.Package,int[],int,long,long,HashSet<String>,PackageUserState,int)|
+|android.content.pm.PackageParser.generatePermissionGroupInfo(PackageParser.PermissionGroup,int)|
+|android.content.pm.PackageParser.generatePermissionInfo(PackageParser.Permission,int)|
+|android.content.pm.PackageParser.generateProviderInfo(PackageParser.Provider,int,PackageUserState,int)|
+|android.content.pm.PackageParser.generateServiceInfo(PackageParser.Service,int,PackageUserState,int)|
+|android.content.pm.PackageParser.getParseError()|
+|android.content.pm.PackageParser.isAvailable(PackageUserState)|
+|android.content.pm.PackageParser.parsePackage(File,String,DisplayMetrics,int)|
+|android.content.pm.PackageParser.parsePackageLite(String,int)|
+|android.content.pm.PackageParser.parsePublicKey(String)|
+|android.content.pm.PackageParser.setCompatibilityModeEnabled(boolean)|
+|android.content.pm.PackageParser.setOnlyCoreApps(boolean)|
+|android.content.pm.PackageParser.setSeparateProcesses(String[])|
+|android.content.pm.PackageParser.stringToSignature(String)|Temporary.
+
+*android.content.pm.PackageParser_Description*
+
+Package archive parsing 
+
+
+
+*android.content.pm.PackageParser.NewPermissionInfo[]_android.content.pm.PackageParser.NEW_PERMISSIONS*
+
+List of new permissions that have been added since 1.0. NOTE: These must be 
+declared in SDK version order, with permissions added to older SDKs appearing 
+before those added to newer SDKs. If sdkVersion is 0, then this is not a 
+permission that we want to automatically add to older apps, but we do want to 
+allow it to be granted during a platform update. 
+
+
+*int_android.content.pm.PackageParser.PARSE_CHATTY*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_FORWARD_LOCK*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_IGNORE_PROCESSES*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_IS_PRIVILEGED*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_IS_SYSTEM*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_IS_SYSTEM_DIR*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_MUST_BE_APK*
+
+
+
+
+*int_android.content.pm.PackageParser.PARSE_ON_SDCARD*
+
+
+
+
+*android.content.pm.PackageParser.SplitPermissionInfo[]_android.content.pm.PackageParser.SPLIT_PERMISSIONS*
+
+List of permissions that have been split into more granular or dependent 
+permissions. 
+
+
+
+*android.content.pm.PackageParser(String)*
+
+public PackageParser(java.lang.String archiveSourcePath)
+
+
+
+
+*android.content.pm.PackageParser.collectCertificates(PackageParser.Package,int)*
+
+public boolean collectCertificates(
+  android.content.pm.PackageParser.Package pkg,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.collectManifestDigest(PackageParser.Package)*
+
+public boolean collectManifestDigest(android.content.pm.PackageParser.Package pkg)
+
+Gathers the (|android.content.pm.ManifestDigest|) forpkgif it exists in the 
+APK. If it successfully scanned the package and found 
+theAndroidManifest.xml,trueis returned. 
+
+
+
+*android.content.pm.PackageParser.generateActivityInfo(PackageParser.Activity,int,PackageUserState,int)*
+
+public static final |android.content.pm.ActivityInfo| generateActivityInfo(
+  android.content.pm.PackageParser.Activity a,
+  int flags,
+  android.content.pm.PackageUserState state,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageParser.generateApplicationInfo(PackageParser.Package,int,PackageUserState)*
+
+public static |android.content.pm.ApplicationInfo| generateApplicationInfo(
+  android.content.pm.PackageParser.Package p,
+  int flags,
+  android.content.pm.PackageUserState state)
+
+
+
+
+
+*android.content.pm.PackageParser.generateApplicationInfo(PackageParser.Package,int,PackageUserState,int)*
+
+public static |android.content.pm.ApplicationInfo| generateApplicationInfo(
+  android.content.pm.PackageParser.Package p,
+  int flags,
+  android.content.pm.PackageUserState state,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageParser.generateInstrumentationInfo(PackageParser.Instrumentation,int)*
+
+public static final |android.content.pm.InstrumentationInfo| generateInstrumentationInfo(
+  android.content.pm.PackageParser.Instrumentation i,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.generatePackageInfo(PackageParser.Package,int[],int,long,long,HashSet<String>,PackageUserState)*
+
+public static |android.content.pm.PackageInfo| generatePackageInfo(
+  android.content.pm.PackageParser.Package p,
+  int[] gids,
+  int flags,
+  long firstInstallTime,
+  long lastUpdateTime,
+  java.util.HashSet<java.lang.String> grantedPermissions,
+  android.content.pm.PackageUserState state)
+
+Generate and return the (|android.content.pm.PackageInfo|) for a parsed 
+package. 
+
+
+    p - the parsed package. 
+    flags - indicating which optional information is included. 
+
+*android.content.pm.PackageParser.generatePackageInfo(PackageParser.Package,int[],int,long,long,HashSet<String>,PackageUserState,int)*
+
+public static |android.content.pm.PackageInfo| generatePackageInfo(
+  android.content.pm.PackageParser.Package p,
+  int[] gids,
+  int flags,
+  long firstInstallTime,
+  long lastUpdateTime,
+  java.util.HashSet<java.lang.String> grantedPermissions,
+  android.content.pm.PackageUserState state,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageParser.generatePermissionGroupInfo(PackageParser.PermissionGroup,int)*
+
+public static final |android.content.pm.PermissionGroupInfo| generatePermissionGroupInfo(
+  android.content.pm.PackageParser.PermissionGroup pg,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.generatePermissionInfo(PackageParser.Permission,int)*
+
+public static final |android.content.pm.PermissionInfo| generatePermissionInfo(
+  android.content.pm.PackageParser.Permission p,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.generateProviderInfo(PackageParser.Provider,int,PackageUserState,int)*
+
+public static final |android.content.pm.ProviderInfo| generateProviderInfo(
+  android.content.pm.PackageParser.Provider p,
+  int flags,
+  android.content.pm.PackageUserState state,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageParser.generateServiceInfo(PackageParser.Service,int,PackageUserState,int)*
+
+public static final |android.content.pm.ServiceInfo| generateServiceInfo(
+  android.content.pm.PackageParser.Service s,
+  int flags,
+  android.content.pm.PackageUserState state,
+  int userId)
+
+
+
+
+
+*android.content.pm.PackageParser.getParseError()*
+
+public int getParseError()
+
+
+
+
+
+*android.content.pm.PackageParser.isAvailable(PackageUserState)*
+
+public static boolean isAvailable(android.content.pm.PackageUserState state)
+
+
+
+
+
+*android.content.pm.PackageParser.parsePackage(File,String,DisplayMetrics,int)*
+
+public |android.content.pm.PackageParser.Package| parsePackage(
+  java.io.File sourceFile,
+  java.lang.String destCodePath,
+  android.util.DisplayMetrics metrics,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.parsePackageLite(String,int)*
+
+public static |android.content.pm.PackageParser.PackageLite| parsePackageLite(
+  java.lang.String packageFilePath,
+  int flags)
+
+
+
+
+
+*android.content.pm.PackageParser.parsePublicKey(String)*
+
+public static final |java.security.PublicKey| parsePublicKey(java.lang.String encodedPublicKey)
+
+
+
+
+
+*android.content.pm.PackageParser.setCompatibilityModeEnabled(boolean)*
+
+public static void setCompatibilityModeEnabled(boolean compatibilityModeEnabled)
+
+
+
+
+
+*android.content.pm.PackageParser.setOnlyCoreApps(boolean)*
+
+public void setOnlyCoreApps(boolean onlyCoreApps)
+
+
+
+
+
+*android.content.pm.PackageParser.setSeparateProcesses(String[])*
+
+public void setSeparateProcesses(java.lang.String[] procs)
+
+
+
+
+
+*android.content.pm.PackageParser.stringToSignature(String)*
+
+public static |android.content.pm.Signature| stringToSignature(java.lang.String str)
+
+Temporary. 
+
+
+
+

@@ -1,0 +1,414 @@
+*android.hardware.input.InputManager* *InputManager* Provides information about 
+
+public final class InputManager
+  extends    |java.lang.Object|
+
+|android.hardware.input.InputManager_Description|
+|android.hardware.input.InputManager_Fields|
+|android.hardware.input.InputManager_Constructors|
+|android.hardware.input.InputManager_Methods|
+
+================================================================================
+
+*android.hardware.input.InputManager_Fields*
+|java.lang.String_android.hardware.input.InputManager.ACTION_QUERY_KEYBOARD_LAYOUTS|
+|int_android.hardware.input.InputManager.DEFAULT_POINTER_SPEED|
+|int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_ASYNC|
+|int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH|
+|int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT|
+|int_android.hardware.input.InputManager.MAX_POINTER_SPEED|
+|java.lang.String_android.hardware.input.InputManager.META_DATA_KEYBOARD_LAYOUTS|
+|int_android.hardware.input.InputManager.MIN_POINTER_SPEED|
+
+*android.hardware.input.InputManager_Methods*
+|android.hardware.input.InputManager.addKeyboardLayoutForInputDevice(String,String)|
+|android.hardware.input.InputManager.deviceHasKeys(int[])|Queries the framework
+|android.hardware.input.InputManager.deviceHasKeys(int,int[])|Queries the frame
+|android.hardware.input.InputManager.getCurrentKeyboardLayoutForInputDevice(String)|
+|android.hardware.input.InputManager.getInputDevice(int)|Gets information about
+|android.hardware.input.InputManager.getInputDeviceByDescriptor(String)|Gets in
+|android.hardware.input.InputManager.getInputDeviceIds()|Gets the ids of all in
+|android.hardware.input.InputManager.getInputDeviceVibrator(int)|Gets a vibrato
+|android.hardware.input.InputManager.getInstance()|Gets an instance of the inpu
+|android.hardware.input.InputManager.getKeyboardLayout(String)|Gets the keyboar
+|android.hardware.input.InputManager.getKeyboardLayouts()|Gets information abou
+|android.hardware.input.InputManager.getKeyboardLayoutsForInputDevice(String)|G
+|android.hardware.input.InputManager.getPointerSpeed(Context)|Gets the mouse po
+|android.hardware.input.InputManager.injectInputEvent(InputEvent,int)|Injects a
+|android.hardware.input.InputManager.registerInputDeviceListener(InputManager.InputDeviceListener,Handler)|
+|android.hardware.input.InputManager.removeKeyboardLayoutForInputDevice(String,String)|
+|android.hardware.input.InputManager.setCurrentKeyboardLayoutForInputDevice(String,String)|
+|android.hardware.input.InputManager.setPointerSpeed(Context,int)|Sets the mous
+|android.hardware.input.InputManager.tryPointerSpeed(int)|Changes the mouse poi
+|android.hardware.input.InputManager.unregisterInputDeviceListener(InputManager.InputDeviceListener)|
+
+*android.hardware.input.InputManager_Description*
+
+Provides information about input devices and available key layouts. 
+
+Get an instance of this class by calling 
+Context.getSystemService()(|android.content.Context|) with the argument 
+(|android.content.Context|) . 
+
+
+
+*java.lang.String_android.hardware.input.InputManager.ACTION_QUERY_KEYBOARD_LAYOUTS*
+
+Broadcast Action: Query available keyboard layouts. 
+
+The input manager service locates available keyboard layouts by querying 
+broadcast receivers that are registered for this action. An application can 
+offer additional keyboard layouts to the user by declaring a suitable broadcast 
+receiver in its manifest. 
+
+Here is an example broadcast receiver declaration that an application might 
+include in its AndroidManifest.xml to advertise keyboard layouts. The meta-data 
+specifies a resource that contains a description of each keyboard layout that 
+is provided by the application. 
+
+<receiver android:name=".InputDeviceReceiver" 
+android:label="@string/keyboard_layouts_label"> <intent-filter> <action 
+android:name="android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS" /> 
+</intent-filter> <meta-data 
+android:name="android.hardware.input.metadata.KEYBOARD_LAYOUTS" 
+android:resource="@xml/keyboard_layouts" /> </receiver> 
+
+In the above example, the @xml/keyboard_layouts resource refers to an XML 
+resource whose root element is <keyboard-layouts> that contains zero or more 
+<keyboard-layout> elements. Each <keyboard-layout> element specifies the name, 
+label, and location of a key character map for a particular keyboard layout. 
+The label on the receiver is used to name the collection of keyboard layouts 
+provided by this receiver in the keyboard layout settings. 
+
+<?xml version="1.0" encoding="utf-8"?> <keyboard-layouts 
+xmlns:android="http://schemas.android.com/apk/res/android"> <keyboard-layout 
+android:name="keyboard_layout_english_us" 
+android:label="@string/keyboard_layout_english_us_label" 
+android:keyboardLayout="@raw/keyboard_layout_english_us" /> </keyboard-layouts> 
+
+The android:name attribute specifies an identifier by which the keyboard layout 
+will be known in the package. The android:label attributes specifies a 
+human-readable descriptive label to describe the keyboard layout in the user 
+interface, such as "English (US)". The android:keyboardLayout attribute refers 
+to a 
+
+key character map resource that defines the keyboard layout. 
+
+
+*int_android.hardware.input.InputManager.DEFAULT_POINTER_SPEED*
+
+Pointer Speed: The default pointer speed (0). 
+
+
+*int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_ASYNC*
+
+Input Event Injection Synchronization Mode: None. Never blocks. Injection is 
+asynchronous and is assumed always to be successful. 
+
+
+*int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH*
+
+Input Event Injection Synchronization Mode: Wait for finish. Waits for the 
+event to be delivered to the application and handled. 
+
+
+*int_android.hardware.input.InputManager.INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT*
+
+Input Event Injection Synchronization Mode: Wait for result. Waits for previous 
+events to be dispatched so that the input dispatcher can determine whether 
+input event injection will be permitted based on the current input focus. Does 
+not wait for the input event to finish being handled by the application. 
+
+
+*int_android.hardware.input.InputManager.MAX_POINTER_SPEED*
+
+Pointer Speed: The maximum (fastest) pointer speed (7). 
+
+
+*java.lang.String_android.hardware.input.InputManager.META_DATA_KEYBOARD_LAYOUTS*
+
+Metadata Key: Keyboard layout metadata associated with 
+(|android.hardware.input.InputManager|) . 
+
+Specifies the resource id of a XML resource that describes the keyboard layouts 
+that are provided by the application. 
+
+
+*int_android.hardware.input.InputManager.MIN_POINTER_SPEED*
+
+Pointer Speed: The minimum (slowest) pointer speed (-7). 
+
+
+
+*android.hardware.input.InputManager.addKeyboardLayoutForInputDevice(String,String)*
+
+public void addKeyboardLayoutForInputDevice(
+  java.lang.String inputDeviceDescriptor,
+  java.lang.String keyboardLayoutDescriptor)
+
+Adds the keyboard layout descriptor for the specified input device. 
+
+This method may have the side-effect of causing the input device in question to 
+be reconfigured. 
+
+
+    inputDeviceDescriptor - The input device descriptor. 
+    keyboardLayoutDescriptor - The descriptor of the keyboard layout to add. 
+
+*android.hardware.input.InputManager.deviceHasKeys(int[])*
+
+public boolean[] deviceHasKeys(int[] keyCodes)
+
+Queries the framework about whether any physical keys exist on the any keyboard 
+attached to the device that are capable of producing the given array of key 
+codes. 
+
+
+    keyCodes - The array of key codes to query. 
+
+    Returns: A new array of the same size as the key codes array whose elements are set to 
+             true if at least one attached keyboard supports the corresponding 
+             key code at the same index in the key codes array. 
+
+*android.hardware.input.InputManager.deviceHasKeys(int,int[])*
+
+public boolean[] deviceHasKeys(
+  int id,
+  int[] keyCodes)
+
+Queries the framework about whether any physical keys exist on the any keyboard 
+attached to the device that are capable of producing the given array of key 
+codes. 
+
+
+    id - The id of the device to query. 
+    keyCodes - The array of key codes to query. 
+
+    Returns: A new array of the same size as the key codes array whose elements are set to 
+             true if the given device could produce the corresponding key code 
+             at the same index in the key codes array. 
+
+*android.hardware.input.InputManager.getCurrentKeyboardLayoutForInputDevice(String)*
+
+public |java.lang.String| getCurrentKeyboardLayoutForInputDevice(java.lang.String inputDeviceDescriptor)
+
+Gets the current keyboard layout descriptor for the specified input device. 
+
+
+    inputDeviceDescriptor - The input device descriptor. 
+
+    Returns: The keyboard layout descriptor, or null if no keyboard layout has been set. 
+
+*android.hardware.input.InputManager.getInputDevice(int)*
+
+public |android.view.InputDevice| getInputDevice(int id)
+
+Gets information about the input device with the specified id. 
+
+
+    id - The device id. 
+
+    Returns: The input device or null if not found. 
+
+*android.hardware.input.InputManager.getInputDeviceByDescriptor(String)*
+
+public |android.view.InputDevice| getInputDeviceByDescriptor(java.lang.String descriptor)
+
+Gets information about the input device with the specified descriptor. 
+
+
+    descriptor - The input device descriptor. 
+
+    Returns: The input device or null if not found. 
+
+*android.hardware.input.InputManager.getInputDeviceIds()*
+
+public int[] getInputDeviceIds()
+
+Gets the ids of all input devices in the system. 
+
+
+
+    Returns: The input device ids. 
+
+*android.hardware.input.InputManager.getInputDeviceVibrator(int)*
+
+public |android.os.Vibrator| getInputDeviceVibrator(int deviceId)
+
+Gets a vibrator service associated with an input device, assuming it has one. 
+
+
+
+    Returns: The vibrator, never null. 
+
+*android.hardware.input.InputManager.getInstance()*
+
+public static |android.hardware.input.InputManager| getInstance()
+
+Gets an instance of the input manager. 
+
+
+
+    Returns: The input manager instance. 
+
+*android.hardware.input.InputManager.getKeyboardLayout(String)*
+
+public |android.hardware.input.KeyboardLayout| getKeyboardLayout(java.lang.String keyboardLayoutDescriptor)
+
+Gets the keyboard layout with the specified descriptor. 
+
+
+    keyboardLayoutDescriptor - The keyboard layout descriptor, as returned by {@link 
+       KeyboardLayout#getDescriptor()}. 
+
+    Returns: The keyboard layout, or null if it could not be loaded. 
+
+*android.hardware.input.InputManager.getKeyboardLayouts()*
+
+public |android.hardware.input.KeyboardLayout|[] getKeyboardLayouts()
+
+Gets information about all supported keyboard layouts. 
+
+The input manager consults the built-in keyboard layouts as well as all 
+keyboard layouts advertised by applications using a 
+(|android.hardware.input.InputManager|) broadcast receiver. 
+
+
+
+    Returns: A list of all supported keyboard layouts. 
+
+*android.hardware.input.InputManager.getKeyboardLayoutsForInputDevice(String)*
+
+public |java.lang.String|[] getKeyboardLayoutsForInputDevice(java.lang.String inputDeviceDescriptor)
+
+Gets all keyboard layout descriptors that are enabled for the specified input 
+device. 
+
+
+    inputDeviceDescriptor - The input device descriptor. 
+
+    Returns: The keyboard layout descriptors. 
+
+*android.hardware.input.InputManager.getPointerSpeed(Context)*
+
+public int getPointerSpeed(android.content.Context context)
+
+Gets the mouse pointer speed. 
+
+Only returns the permanent mouse pointer speed. Ignores any temporary pointer 
+speed set by (|android.hardware.input.InputManager|) . 
+
+
+    context - The application context. 
+
+    Returns: The pointer speed as a value between {@link #MIN_POINTER_SPEED} and {@link 
+             #MAX_POINTER_SPEED}, or the default value {@link 
+             #DEFAULT_POINTER_SPEED}. 
+
+*android.hardware.input.InputManager.injectInputEvent(InputEvent,int)*
+
+public boolean injectInputEvent(
+  android.view.InputEvent event,
+  int mode)
+
+Injects an input event into the event system on behalf of an application. The 
+synchronization mode determines whether the method blocks while waiting for 
+input injection to proceed. 
+
+Requires (|android.Manifest.permission.INJECT_EVENTS|) to inject into windows 
+that are owned by other applications. 
+
+Make sure you correctly set the event time and input source of the event before 
+calling this method. 
+
+
+    event - The event to inject. 
+    mode - The synchronization mode. One of: {@link #INJECT_INPUT_EVENT_MODE_ASYNC}, 
+       {@link #INJECT_INPUT_EVENT_MODE_WAIT_FOR_RESULT}, or {@link 
+       #INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH}. 
+
+    Returns: True if input event injection succeeded. 
+
+*android.hardware.input.InputManager.registerInputDeviceListener(InputManager.InputDeviceListener,Handler)*
+
+public void registerInputDeviceListener(
+  android.hardware.input.InputManager.InputDeviceListener listener,
+  android.os.Handler handler)
+
+Registers an input device listener to receive notifications about when input 
+devices are added, removed or changed. 
+
+
+    listener - The listener to register. 
+    handler - The handler on which the listener should be invoked, or null if the listener 
+       should be invoked on the calling thread's looper. 
+
+*android.hardware.input.InputManager.removeKeyboardLayoutForInputDevice(String,String)*
+
+public void removeKeyboardLayoutForInputDevice(
+  java.lang.String inputDeviceDescriptor,
+  java.lang.String keyboardLayoutDescriptor)
+
+Removes the keyboard layout descriptor for the specified input device. 
+
+This method may have the side-effect of causing the input device in question to 
+be reconfigured. 
+
+
+    inputDeviceDescriptor - The input device descriptor. 
+    keyboardLayoutDescriptor - The descriptor of the keyboard layout to remove. 
+
+*android.hardware.input.InputManager.setCurrentKeyboardLayoutForInputDevice(String,String)*
+
+public void setCurrentKeyboardLayoutForInputDevice(
+  java.lang.String inputDeviceDescriptor,
+  java.lang.String keyboardLayoutDescriptor)
+
+Sets the current keyboard layout descriptor for the specified input device. 
+
+This method may have the side-effect of causing the input device in question to 
+be reconfigured. 
+
+
+    inputDeviceDescriptor - The input device descriptor. 
+    keyboardLayoutDescriptor - The keyboard layout descriptor to use, must not be null. 
+
+*android.hardware.input.InputManager.setPointerSpeed(Context,int)*
+
+public void setPointerSpeed(
+  android.content.Context context,
+  int speed)
+
+Sets the mouse pointer speed. 
+
+Requires (|android.Manifest.permissions.WRITE_SETTINGS|) . 
+
+
+    context - The application context. 
+    speed - The pointer speed as a value between {@link #MIN_POINTER_SPEED} and {@link 
+       #MAX_POINTER_SPEED}, or the default value {@link 
+       #DEFAULT_POINTER_SPEED}. 
+
+*android.hardware.input.InputManager.tryPointerSpeed(int)*
+
+public void tryPointerSpeed(int speed)
+
+Changes the mouse pointer speed temporarily, but does not save the setting. 
+
+Requires (|android.Manifest.permission.SET_POINTER_SPEED|) . 
+
+
+    speed - The pointer speed as a value between {@link #MIN_POINTER_SPEED} and {@link 
+       #MAX_POINTER_SPEED}, or the default value {@link 
+       #DEFAULT_POINTER_SPEED}. 
+
+*android.hardware.input.InputManager.unregisterInputDeviceListener(InputManager.InputDeviceListener)*
+
+public void unregisterInputDeviceListener(android.hardware.input.InputManager.InputDeviceListener listener)
+
+Unregisters an input device listener. 
+
+
+    listener - The listener to unregister. 
+
+

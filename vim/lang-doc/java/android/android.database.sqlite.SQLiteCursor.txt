@@ -1,0 +1,169 @@
+*android.database.sqlite.SQLiteCursor* *SQLiteCursor* A Cursor implementation th
+
+public class SQLiteCursor
+  extends    |android.database.AbstractWindowedCursor|
+
+|android.database.sqlite.SQLiteCursor_Description|
+|android.database.sqlite.SQLiteCursor_Fields|
+|android.database.sqlite.SQLiteCursor_Constructors|
+|android.database.sqlite.SQLiteCursor_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteCursor_Constructors*
+|android.database.sqlite.SQLiteCursor(SQLiteCursorDriver,String,SQLiteQuery)|Ex
+|android.database.sqlite.SQLiteCursor(SQLiteDatabase,SQLiteCursorDriver,String,SQLiteQuery)|
+
+*android.database.sqlite.SQLiteCursor_Methods*
+|android.database.sqlite.SQLiteCursor.close()|
+|android.database.sqlite.SQLiteCursor.deactivate()|
+|android.database.sqlite.SQLiteCursor.finalize()|Release the native resources, 
+|android.database.sqlite.SQLiteCursor.getColumnIndex(String)|
+|android.database.sqlite.SQLiteCursor.getColumnNames()|
+|android.database.sqlite.SQLiteCursor.getCount()|
+|android.database.sqlite.SQLiteCursor.getDatabase()|Get the database that this 
+|android.database.sqlite.SQLiteCursor.onMove(int,int)|
+|android.database.sqlite.SQLiteCursor.requery()|
+|android.database.sqlite.SQLiteCursor.setSelectionArguments(String[])|Changes t
+|android.database.sqlite.SQLiteCursor.setWindow(CursorWindow)|
+
+*android.database.sqlite.SQLiteCursor_Description*
+
+A Cursor implementation that exposes results from a query on a 
+(|android.database.sqlite.SQLiteDatabase|) . 
+
+SQLiteCursor is not internally synchronized so code using a SQLiteCursor from 
+multiple threads should perform its own synchronization when using the 
+SQLiteCursor. 
+
+
+
+*android.database.sqlite.SQLiteCursor(SQLiteCursorDriver,String,SQLiteQuery)*
+
+public SQLiteCursor(
+  android.database.sqlite.SQLiteCursorDriver driver,
+  java.lang.String editTable,
+  android.database.sqlite.SQLiteQuery query)
+
+Execute a query and provide access to its result set through a Cursor 
+interface. For a query such as:SELECT name, birth, phone FROM myTable WHERE ... 
+LIMIT 1,20 ORDER BY...the column names (name, birth, phone) would be in the 
+projection argument and everything fromFROMonward would be in the params 
+argument. 
+
+    editTable - the name of the table used for this query 
+    query - the {@link SQLiteQuery} object associated with this cursor object. 
+
+*android.database.sqlite.SQLiteCursor(SQLiteDatabase,SQLiteCursorDriver,String,SQLiteQuery)*
+
+public SQLiteCursor(
+  android.database.sqlite.SQLiteDatabase db,
+  android.database.sqlite.SQLiteCursorDriver driver,
+  java.lang.String editTable,
+  android.database.sqlite.SQLiteQuery query)
+
+Execute a query and provide access to its result set through a Cursor 
+interface. For a query such as:SELECT name, birth, phone FROM myTable WHERE ... 
+LIMIT 1,20 ORDER BY...the column names (name, birth, phone) would be in the 
+projection argument and everything fromFROMonward would be in the params 
+argument. 
+
+    db - a reference to a Database object that is already constructed and opened. This 
+       param is not used any longer 
+    editTable - the name of the table used for this query 
+    query - the rest of the query terms cursor is finalized 
+
+*android.database.sqlite.SQLiteCursor.close()*
+
+public void close()
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.deactivate()*
+
+public void deactivate()
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.finalize()*
+
+protected void finalize()
+
+Release the native resources, if they haven't been released yet. 
+
+
+
+*android.database.sqlite.SQLiteCursor.getColumnIndex(String)*
+
+public int getColumnIndex(java.lang.String columnName)
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.getColumnNames()*
+
+public |java.lang.String|[] getColumnNames()
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.getCount()*
+
+public int getCount()
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.getDatabase()*
+
+public |android.database.sqlite.SQLiteDatabase| getDatabase()
+
+Get the database that this cursor is associated with. 
+
+
+
+    Returns: the SQLiteDatabase that this cursor is associated with. 
+
+*android.database.sqlite.SQLiteCursor.onMove(int,int)*
+
+public boolean onMove(
+  int oldPosition,
+  int newPosition)
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.requery()*
+
+public boolean requery()
+
+
+
+
+
+*android.database.sqlite.SQLiteCursor.setSelectionArguments(String[])*
+
+public void setSelectionArguments(java.lang.String[] selectionArgs)
+
+Changes the selection arguments. The new values take effect after a call to 
+requery(). 
+
+
+
+*android.database.sqlite.SQLiteCursor.setWindow(CursorWindow)*
+
+public void setWindow(android.database.CursorWindow window)
+
+
+
+
+
+

@@ -1,0 +1,391 @@
+*android.app.AlertDialog* *AlertDialog* A subclass of Dialog that can display on
+
+public class AlertDialog
+  extends    |android.app.Dialog|
+  implements |android.content.DialogInterface|
+
+|android.app.AlertDialog_Description|
+|android.app.AlertDialog_Fields|
+|android.app.AlertDialog_Constructors|
+|android.app.AlertDialog_Methods|
+
+================================================================================
+
+*android.app.AlertDialog_Fields*
+|int_android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK|
+|int_android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT|
+|int_android.app.AlertDialog.THEME_HOLO_DARK|
+|int_android.app.AlertDialog.THEME_HOLO_LIGHT|
+|int_android.app.AlertDialog.THEME_TRADITIONAL|
+
+*android.app.AlertDialog_Constructors*
+|android.app.AlertDialog(Context)|
+|android.app.AlertDialog(Context,boolean,DialogInterface.OnCancelListener)|
+|android.app.AlertDialog(Context,int)|Construct an AlertDialog that uses an exp
+
+*android.app.AlertDialog_Methods*
+|android.app.AlertDialog.getButton(int)|Gets one of the buttons used in the dia
+|android.app.AlertDialog.getListView()|Gets the list view used in the dialog.
+|android.app.AlertDialog.onCreate(Bundle)|
+|android.app.AlertDialog.onKeyDown(int,KeyEvent)|
+|android.app.AlertDialog.onKeyUp(int,KeyEvent)|
+|android.app.AlertDialog.setButton(CharSequence,DialogInterface.OnClickListener)|
+|android.app.AlertDialog.setButton(CharSequence,Message)|
+|android.app.AlertDialog.setButton(int,CharSequence,DialogInterface.OnClickListener)|
+|android.app.AlertDialog.setButton(int,CharSequence,Message)|Set a message to b
+|android.app.AlertDialog.setButton2(CharSequence,DialogInterface.OnClickListener)|
+|android.app.AlertDialog.setButton2(CharSequence,Message)|
+|android.app.AlertDialog.setButton3(CharSequence,DialogInterface.OnClickListener)|
+|android.app.AlertDialog.setButton3(CharSequence,Message)|
+|android.app.AlertDialog.setCustomTitle(View)|
+|android.app.AlertDialog.setIcon(Drawable)|
+|android.app.AlertDialog.setIcon(int)|Set resId to 0 if you don't want an icon.
+|android.app.AlertDialog.setIconAttribute(int)|Set an icon as supplied by a the
+|android.app.AlertDialog.setInverseBackgroundForced(boolean)|
+|android.app.AlertDialog.setMessage(CharSequence)|
+|android.app.AlertDialog.setTitle(CharSequence)|
+|android.app.AlertDialog.setView(View)|Set the view to display in that dialog.
+|android.app.AlertDialog.setView(View,int,int,int,int)|Set the view to display 
+
+*android.app.AlertDialog_Description*
+
+A subclass of Dialog that can display one, two or three buttons. If you only 
+want to display a String in this dialog box, use the setMessage() method. If 
+you want to display a more complex view, look up the FrameLayout called 
+"custom" and add your view to it: 
+
+
+
+FrameLayout fl = (FrameLayout) findViewById(android.R.id.custom); 
+fl.addView(myView, new LayoutParams(MATCH_PARENT, WRAP_CONTENT)); 
+
+The AlertDialog class takes care of automatically setting 
+WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM(|WindowManager.LayoutParams|) 
+for you based on whether any views in the dialog return true from 
+View.onCheckIsTextEditor()(|android.view.View|) . Generally you want this set 
+for a Dialog without text editors, so that it will be placed on top of the 
+current input method UI. You can modify this behavior by forcing the flag to 
+your desired mode after calling (|android.app.AlertDialog|) . 
+
+Developer Guides For more information about creating dialogs, read the <a 
+href="guide/topics/ui/dialogs.html">Dialogs developer guide. 
+
+
+
+*int_android.app.AlertDialog.THEME_DEVICE_DEFAULT_DARK*
+
+Special theme constant for (|android.app.AlertDialog|) : use the device's 
+default alert theme with a dark background. 
+
+
+*int_android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT*
+
+Special theme constant for (|android.app.AlertDialog|) : use the device's 
+default alert theme with a light background. 
+
+
+*int_android.app.AlertDialog.THEME_HOLO_DARK*
+
+Special theme constant for (|android.app.AlertDialog|) : use the holographic 
+alert theme with a dark background. 
+
+
+*int_android.app.AlertDialog.THEME_HOLO_LIGHT*
+
+Special theme constant for (|android.app.AlertDialog|) : use the holographic 
+alert theme with a light background. 
+
+
+*int_android.app.AlertDialog.THEME_TRADITIONAL*
+
+Special theme constant for (|android.app.AlertDialog|) : use the traditional 
+(pre-Holo) alert dialog theme. 
+
+
+
+*android.app.AlertDialog(Context)*
+
+protected AlertDialog(android.content.Context context)
+
+
+
+
+*android.app.AlertDialog(Context,boolean,DialogInterface.OnCancelListener)*
+
+protected AlertDialog(
+  android.content.Context context,
+  boolean cancelable,
+  android.content.DialogInterface.OnCancelListener cancelListener)
+
+
+
+
+*android.app.AlertDialog(Context,int)*
+
+protected AlertDialog(
+  android.content.Context context,
+  int theme)
+
+Construct an AlertDialog that uses an explicit theme. The actual style that an 
+AlertDialog uses is a private implementation, however you can here supply 
+either the name of an attribute in the theme from which to get the dialog's 
+style (such as (|android.R.attr|) or one of the constants 
+(|android.app.AlertDialog|) , (|android.app.AlertDialog|) , or 
+(|android.app.AlertDialog|) . 
+
+
+*android.app.AlertDialog.getButton(int)*
+
+public |android.widget.Button| getButton(int whichButton)
+
+Gets one of the buttons used in the dialog. 
+
+If a button does not exist in the dialog, null will be returned. 
+
+
+    whichButton - The identifier of the button that should be returned. For example, this can be 
+       {@link DialogInterface#BUTTON_POSITIVE}. 
+
+    Returns: The button from the dialog, or null if a button does not exist. 
+
+*android.app.AlertDialog.getListView()*
+
+public |android.widget.ListView| getListView()
+
+Gets the list view used in the dialog. 
+
+
+
+    Returns: The {@link ListView} from the dialog. 
+
+*android.app.AlertDialog.onCreate(Bundle)*
+
+protected void onCreate(android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.app.AlertDialog.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.app.AlertDialog.onKeyUp(int,KeyEvent)*
+
+public boolean onKeyUp(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.app.AlertDialog.setButton(CharSequence,DialogInterface.OnClickListener)*
+
+public void setButton(
+  java.lang.CharSequence text,
+  android.content.DialogInterface.OnClickListener listener)
+
+Set a listener to be invoked when button 1 of the dialog is pressed. 
+
+    Deprecated: Use
+             {@link #setButton(int, CharSequence, android.content.DialogInterface.OnClickListener)}
+             with {@link DialogInterface#BUTTON_POSITIVE}
+
+    text - The text to display in button 1. 
+    listener - The {@link DialogInterface.OnClickListener} to use. 
+
+*android.app.AlertDialog.setButton(CharSequence,Message)*
+
+public void setButton(
+  java.lang.CharSequence text,
+  android.os.Message msg)
+
+
+
+    Deprecated: Use {@link #setButton(int, CharSequence, Message)} with
+             {@link DialogInterface#BUTTON_POSITIVE}.
+
+
+*android.app.AlertDialog.setButton(int,CharSequence,DialogInterface.OnClickListener)*
+
+public void setButton(
+  int whichButton,
+  java.lang.CharSequence text,
+  android.content.DialogInterface.OnClickListener listener)
+
+Set a listener to be invoked when the positive button of the dialog is pressed. 
+
+
+    whichButton - Which button to set the listener on, can be one of {@link 
+       DialogInterface#BUTTON_POSITIVE}, {@link 
+       DialogInterface#BUTTON_NEGATIVE}, or {@link 
+       DialogInterface#BUTTON_NEUTRAL} 
+    text - The text to display in positive button. 
+    listener - The {@link DialogInterface.OnClickListener} to use. 
+
+*android.app.AlertDialog.setButton(int,CharSequence,Message)*
+
+public void setButton(
+  int whichButton,
+  java.lang.CharSequence text,
+  android.os.Message msg)
+
+Set a message to be sent when a button is pressed. 
+
+
+    whichButton - Which button to set the message for, can be one of {@link 
+       DialogInterface#BUTTON_POSITIVE}, {@link 
+       DialogInterface#BUTTON_NEGATIVE}, or {@link 
+       DialogInterface#BUTTON_NEUTRAL} 
+    text - The text to display in positive button. 
+    msg - The {@link Message} to be sent when clicked. 
+
+*android.app.AlertDialog.setButton2(CharSequence,DialogInterface.OnClickListener)*
+
+public void setButton2(
+  java.lang.CharSequence text,
+  android.content.DialogInterface.OnClickListener listener)
+
+Set a listener to be invoked when button 2 of the dialog is pressed. 
+
+    Deprecated: Use
+             {@link #setButton(int, CharSequence, android.content.DialogInterface.OnClickListener)}
+             with {@link DialogInterface#BUTTON_NEGATIVE}
+
+    text - The text to display in button 2. 
+    listener - The {@link DialogInterface.OnClickListener} to use. 
+
+*android.app.AlertDialog.setButton2(CharSequence,Message)*
+
+public void setButton2(
+  java.lang.CharSequence text,
+  android.os.Message msg)
+
+
+
+    Deprecated: Use {@link #setButton(int, CharSequence, Message)} with
+             {@link DialogInterface#BUTTON_NEGATIVE}.
+
+
+*android.app.AlertDialog.setButton3(CharSequence,DialogInterface.OnClickListener)*
+
+public void setButton3(
+  java.lang.CharSequence text,
+  android.content.DialogInterface.OnClickListener listener)
+
+Set a listener to be invoked when button 3 of the dialog is pressed. 
+
+    Deprecated: Use
+             {@link #setButton(int, CharSequence, android.content.DialogInterface.OnClickListener)}
+             with {@link DialogInterface#BUTTON_POSITIVE}
+
+    text - The text to display in button 3. 
+    listener - The {@link DialogInterface.OnClickListener} to use. 
+
+*android.app.AlertDialog.setButton3(CharSequence,Message)*
+
+public void setButton3(
+  java.lang.CharSequence text,
+  android.os.Message msg)
+
+
+
+    Deprecated: Use {@link #setButton(int, CharSequence, Message)} with
+             {@link DialogInterface#BUTTON_NEUTRAL}.
+
+
+*android.app.AlertDialog.setCustomTitle(View)*
+
+public void setCustomTitle(android.view.View customTitleView)
+
+
+
+
+
+*android.app.AlertDialog.setIcon(Drawable)*
+
+public void setIcon(Drawable icon)
+
+
+
+
+
+*android.app.AlertDialog.setIcon(int)*
+
+public void setIcon(int resId)
+
+Set resId to 0 if you don't want an icon. 
+
+
+    resId - the resourceId of the drawable to use as the icon or 0 if you don't want an 
+       icon. 
+
+*android.app.AlertDialog.setIconAttribute(int)*
+
+public void setIconAttribute(int attrId)
+
+Set an icon as supplied by a theme attribute. e.g. 
+android.R.attr.alertDialogIcon 
+
+
+    attrId - ID of a theme attribute that points to a drawable resource. 
+
+*android.app.AlertDialog.setInverseBackgroundForced(boolean)*
+
+public void setInverseBackgroundForced(boolean forceInverseBackground)
+
+
+
+
+
+*android.app.AlertDialog.setMessage(CharSequence)*
+
+public void setMessage(java.lang.CharSequence message)
+
+
+
+
+
+*android.app.AlertDialog.setTitle(CharSequence)*
+
+public void setTitle(java.lang.CharSequence title)
+
+
+
+
+
+*android.app.AlertDialog.setView(View)*
+
+public void setView(android.view.View view)
+
+Set the view to display in that dialog. 
+
+
+
+*android.app.AlertDialog.setView(View,int,int,int,int)*
+
+public void setView(
+  android.view.View view,
+  int viewSpacingLeft,
+  int viewSpacingTop,
+  int viewSpacingRight,
+  int viewSpacingBottom)
+
+Set the view to display in that dialog, specifying the spacing to appear around 
+that view. 
+
+
+    view - The view to show in the content area of the dialog 
+    viewSpacingLeft - Extra space to appear to the left of {@code view} 
+    viewSpacingTop - Extra space to appear above {@code view} 
+    viewSpacingRight - Extra space to appear to the right of {@code view} 
+    viewSpacingBottom - Extra space to appear below {@code view} 
+
+

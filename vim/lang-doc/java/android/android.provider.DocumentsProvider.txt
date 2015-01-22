@@ -1,0 +1,459 @@
+*android.provider.DocumentsProvider* *DocumentsProvider* Base class for a docume
+
+public abstract class DocumentsProvider
+  extends    |android.content.ContentProvider|
+
+|android.provider.DocumentsProvider_Description|
+|android.provider.DocumentsProvider_Fields|
+|android.provider.DocumentsProvider_Constructors|
+|android.provider.DocumentsProvider_Methods|
+
+================================================================================
+
+*android.provider.DocumentsProvider_Constructors*
+|android.provider.DocumentsProvider()|
+
+*android.provider.DocumentsProvider_Methods*
+|android.provider.DocumentsProvider.attachInfo(Context,ProviderInfo)|Implementa
+|android.provider.DocumentsProvider.call(String,String,Bundle)|Implementation i
+|android.provider.DocumentsProvider.createDocument(String,String,String)|Create
+|android.provider.DocumentsProvider.delete(Uri,String,String[])|Implementation 
+|android.provider.DocumentsProvider.deleteDocument(String)|Delete the requested
+|android.provider.DocumentsProvider.getDocumentType(String)|Return concrete MIM
+|android.provider.DocumentsProvider.getType(Uri)|Implementation is provided by 
+|android.provider.DocumentsProvider.insert(Uri,ContentValues)|Implementation is
+|android.provider.DocumentsProvider.openDocument(String,String,CancellationSignal)|
+|android.provider.DocumentsProvider.openDocumentThumbnail(String,Point,CancellationSignal)|
+|android.provider.DocumentsProvider.openFile(Uri,String)|Implementation is prov
+|android.provider.DocumentsProvider.openFile(Uri,String,CancellationSignal)|Imp
+|android.provider.DocumentsProvider.openTypedAssetFile(Uri,String,Bundle)|Imple
+|android.provider.DocumentsProvider.openTypedAssetFile(Uri,String,Bundle,CancellationSignal)|
+|android.provider.DocumentsProvider.query(Uri,String[],String,String[],String)|
+|android.provider.DocumentsProvider.queryChildDocuments(String,String[],String)|
+|android.provider.DocumentsProvider.queryChildDocumentsForManage(String,String[],String)|
+|android.provider.DocumentsProvider.queryDocument(String,String[])|Return metad
+|android.provider.DocumentsProvider.queryRecentDocuments(String,String[])|Retur
+|android.provider.DocumentsProvider.queryRoots(String[])|Return all roots curre
+|android.provider.DocumentsProvider.querySearchDocuments(String,String,String[])|
+|android.provider.DocumentsProvider.update(Uri,ContentValues,String,String[])|I
+
+*android.provider.DocumentsProvider_Description*
+
+Base class for a document provider. A document provider offers read and write 
+access to durable files, such as files stored on a local disk, or files in a 
+cloud storage service. To create a document provider, extend this class, 
+implement the abstract methods, and add it to your manifest like this: 
+
+<manifest> ... <application> ... <provider 
+android:name="com.example.MyCloudProvider" 
+android:authorities="com.example.mycloudprovider" android:exported="true" 
+android:grantUriPermissions="true" 
+android:permission="android.permission.MANAGE_DOCUMENTS" 
+android:enabled="@bool/isAtLeastKitKat"> <intent-filter> <action 
+android:name="android.content.action.DOCUMENTS_PROVIDER" /> </intent-filter> 
+</provider> ... </application> </manifest> 
+
+When defining your provider, you must protect it with 
+(|android.Manifest.permission|) , which is a permission only the system can 
+obtain. Applications cannot use a documents provider directly; they must go 
+through (|android.content.Intent|) or (|android.content.Intent|) which requires 
+a user to actively navigate and select documents. When a user selects documents 
+through that UI, the system issues narrow URI permission grants to the 
+requesting application. 
+
+Documents 
+
+A document can be either an openable stream (with a specific MIME type), or a 
+directory containing additional documents (with the 
+(|android.provider.DocumentsContract.Document|) MIME type). Each directory 
+represents the top of a subtree containing zero or more documents, which can 
+recursively contain even more documents and directories. 
+
+Each document can have different capabilities, as described by 
+(|android.provider.DocumentsContract.Document|) . For example, if a document 
+can be represented as a thumbnail, your provider can set 
+(|android.provider.DocumentsContract.Document|) and implement 
+(|android.provider.DocumentsProvider|) to return that thumbnail. 
+
+Each document under a provider is uniquely referenced by its 
+(|android.provider.DocumentsContract.Document|) , which must not change once 
+returned. A single document can be included in multiple directories when 
+responding to (|android.provider.DocumentsProvider|) . For example, a provider 
+might surface a single photo in multiple locations: once in a directory of 
+geographic locations, and again in a directory of dates. 
+
+Roots 
+
+All documents are surfaced through one or more "roots." Each root represents 
+the top of a document tree that a user can navigate. For example, a root could 
+represent an account or a physical storage device. Similar to documents, each 
+root can have capabilities expressed through 
+(|android.provider.DocumentsContract.Root|) . 
+
+
+
+*android.provider.DocumentsProvider()*
+
+public DocumentsProvider()
+
+
+
+
+*android.provider.DocumentsProvider.attachInfo(Context,ProviderInfo)*
+
+public void attachInfo(
+  android.content.Context context,
+  android.content.pm.ProviderInfo info)
+
+Implementation is provided by the parent class. 
+
+
+
+*android.provider.DocumentsProvider.call(String,String,Bundle)*
+
+public |android.os.Bundle| call(
+  java.lang.String method,
+  java.lang.String arg,
+  android.os.Bundle extras)
+
+Implementation is provided by the parent class. Can be overridden to provide 
+additional functionality, but subclasses must always call the superclass. If 
+the superclass returnsnull, the subclass may implement custom behavior. 
+
+
+
+*android.provider.DocumentsProvider.createDocument(String,String,String)*
+
+public |java.lang.String| createDocument(
+  java.lang.String parentDocumentId,
+  java.lang.String mimeType,
+  java.lang.String displayName)
+  throws |java.io.FileNotFoundException|
+         
+Create a new document and return its newly generated 
+(|android.provider.DocumentsContract.Document|) . You must allocate a new 
+(|android.provider.DocumentsContract.Document|) to represent the document, 
+which must not change once returned. 
+
+
+    parentDocumentId - the parent directory to create the new document under. 
+    mimeType - the concrete MIME type associated with the new document. If the MIME type is 
+       not supported, the provider must throw. 
+    displayName - the display name of the new document. The provider may alter this name to meet 
+       any internal constraints, such as conflicting names. 
+
+*android.provider.DocumentsProvider.delete(Uri,String,String[])*
+
+public final int delete(
+  android.net.Uri uri,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+Implementation is provided by the parent class. Throws by default, and cannot 
+be overriden. 
+
+
+
+*android.provider.DocumentsProvider.deleteDocument(String)*
+
+public void deleteDocument(java.lang.String documentId)
+  throws |java.io.FileNotFoundException|
+         
+Delete the requested document. Upon returning, any URI permission grants for 
+the requested document will be revoked. If additional documents were deleted as 
+a side effect of this call, such as documents inside a directory, the 
+implementor is responsible for revoking those permissions. 
+
+
+    documentId - the document to delete. 
+
+*android.provider.DocumentsProvider.getDocumentType(String)*
+
+public |java.lang.String| getDocumentType(java.lang.String documentId)
+  throws |java.io.FileNotFoundException|
+         
+Return concrete MIME type of the requested document. Must match the value of 
+(|android.provider.DocumentsContract.Document|) for this document. The default 
+implementation queries (|android.provider.DocumentsProvider|) , so providers 
+may choose to override this as an optimization. 
+
+
+
+*android.provider.DocumentsProvider.getType(Uri)*
+
+public final |java.lang.String| getType(android.net.Uri uri)
+
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.insert(Uri,ContentValues)*
+
+public final |android.net.Uri| insert(
+  android.net.Uri uri,
+  android.content.ContentValues values)
+
+Implementation is provided by the parent class. Throws by default, and cannot 
+be overriden. 
+
+
+
+*android.provider.DocumentsProvider.openDocument(String,String,CancellationSignal)*
+
+public abstract |android.os.ParcelFileDescriptor| openDocument(
+  java.lang.String documentId,
+  java.lang.String mode,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         
+Open and return the requested document. 
+
+Your provider should return a reliable (|android.os.ParcelFileDescriptor|) to 
+detect when the remote caller has finished reading or writing the document. You 
+may return a pipe or socket pair if the mode is exclusively "r" or "w", but 
+complex modes like "rw" imply a normal file on disk that supports seeking. 
+
+If you block while downloading content, you should periodically check 
+(|android.os.CancellationSignal|) to abort abandoned open requests. 
+
+
+    documentId - the document to return. 
+    mode - the mode to open with, such as 'r', 'w', or 'rw'. 
+    signal - used by the caller to signal if the request should be cancelled. May be null. 
+
+*android.provider.DocumentsProvider.openDocumentThumbnail(String,Point,CancellationSignal)*
+
+public |android.content.res.AssetFileDescriptor| openDocumentThumbnail(
+  java.lang.String documentId,
+  Point sizeHint,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         
+Open and return a thumbnail of the requested document. 
+
+A provider should return a thumbnail closely matching the hinted size, 
+attempting to serve from a local cache if possible. A provider should never 
+return images more than double the hinted size. 
+
+If you perform expensive operations to download or generate a thumbnail, you 
+should periodically check (|android.os.CancellationSignal|) to abort abandoned 
+thumbnail requests. 
+
+
+    documentId - the document to return. 
+    sizeHint - hint of the optimal thumbnail dimensions. 
+    signal - used by the caller to signal if the request should be cancelled. May be null. 
+
+*android.provider.DocumentsProvider.openFile(Uri,String)*
+
+public final |android.os.ParcelFileDescriptor| openFile(
+  android.net.Uri uri,
+  java.lang.String mode)
+  throws |java.io.FileNotFoundException|
+         
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.openFile(Uri,String,CancellationSignal)*
+
+public final |android.os.ParcelFileDescriptor| openFile(
+  android.net.Uri uri,
+  java.lang.String mode,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.openTypedAssetFile(Uri,String,Bundle)*
+
+public final |android.content.res.AssetFileDescriptor| openTypedAssetFile(
+  android.net.Uri uri,
+  java.lang.String mimeTypeFilter,
+  android.os.Bundle opts)
+  throws |java.io.FileNotFoundException|
+         
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.openTypedAssetFile(Uri,String,Bundle,CancellationSignal)*
+
+public final |android.content.res.AssetFileDescriptor| openTypedAssetFile(
+  android.net.Uri uri,
+  java.lang.String mimeTypeFilter,
+  android.os.Bundle opts,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.query(Uri,String[],String,String[],String)*
+
+public final |android.database.Cursor| query(
+  android.net.Uri uri,
+  java.lang.String[] projection,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String sortOrder)
+
+Implementation is provided by the parent class. Cannot be overriden. 
+
+
+
+*android.provider.DocumentsProvider.queryChildDocuments(String,String[],String)*
+
+public abstract |android.database.Cursor| queryChildDocuments(
+  java.lang.String parentDocumentId,
+  java.lang.String[] projection,
+  java.lang.String sortOrder)
+  throws |java.io.FileNotFoundException|
+         
+Return the children documents contained in the requested directory. This must 
+only return immediate descendants, as additional queries will be issued to 
+recursively explore the tree. 
+
+If your provider is cloud-based, and you have some data cached or pinned 
+locally, you may return the local data immediately, setting 
+(|android.provider.DocumentsContract|) on the Cursor to indicate that you are 
+still fetching additional data. Then, when the network data is available, you 
+can send a change notification to trigger a requery and return the complete 
+contents. To return a Cursor with extras, you need to extend and override 
+(|android.database.Cursor|) . 
+
+To support change notifications, you must (|android.database.Cursor|) with a 
+relevant Uri, such as (|android.provider.DocumentsContract|) . Then you can 
+call (|android.content.ContentResolver|) with that Uri to send change 
+notifications. 
+
+
+    parentDocumentId - the directory to return children for. 
+    projection - list of {@link Document} columns to put into the cursor. If {@code null} all 
+       supported columns should be included. 
+    sortOrder - how to order the rows, formatted as an SQL {@code ORDER BY} clause (excluding 
+       the ORDER BY itself). Passing {@code null} will use the default sort 
+       order, which may be unordered. This ordering is a hint that can be used 
+       to prioritize how data is fetched from the network, but UI may always 
+       enforce a specific ordering. 
+
+*android.provider.DocumentsProvider.queryChildDocumentsForManage(String,String[],String)*
+
+public |android.database.Cursor| queryChildDocumentsForManage(
+  java.lang.String parentDocumentId,
+  java.lang.String[] projection,
+  java.lang.String sortOrder)
+  throws |java.io.FileNotFoundException|
+         
+
+
+
+
+*android.provider.DocumentsProvider.queryDocument(String,String[])*
+
+public abstract |android.database.Cursor| queryDocument(
+  java.lang.String documentId,
+  java.lang.String[] projection)
+  throws |java.io.FileNotFoundException|
+         
+Return metadata for the single requested document. You should avoid making 
+network requests to keep this request fast. 
+
+
+    documentId - the document to return. 
+    projection - list of {@link Document} columns to put into the cursor. If {@code null} all 
+       supported columns should be included. 
+
+*android.provider.DocumentsProvider.queryRecentDocuments(String,String[])*
+
+public |android.database.Cursor| queryRecentDocuments(
+  java.lang.String rootId,
+  java.lang.String[] projection)
+  throws |java.io.FileNotFoundException|
+         
+Return recently modified documents under the requested root. This will only be 
+called for roots that advertise (|android.provider.DocumentsContract.Root|) . 
+The returned documents should be sorted by 
+(|android.provider.DocumentsContract.Document|) in descending order, and 
+limited to only return the 64 most recently modified documents. 
+
+Recent documents do not support change notifications. 
+
+
+    projection - list of {@link Document} columns to put into the cursor. If {@code null} all 
+       supported columns should be included. 
+
+*android.provider.DocumentsProvider.queryRoots(String[])*
+
+public abstract |android.database.Cursor| queryRoots(java.lang.String[] projection)
+  throws |java.io.FileNotFoundException|
+         
+Return all roots currently provided. To display to users, you must define at 
+least one root. You should avoid making network requests to keep this request 
+fast. 
+
+Each root is defined by the metadata columns described in 
+(|android.provider.DocumentsContract.Root|) , including 
+(|android.provider.DocumentsContract.Root|) which points to a directory 
+representing a tree of documents to display under that root. 
+
+If this set of roots changes, you must call (|android.content.ContentResolver|) 
+with (|android.provider.DocumentsContract|) to notify the system. 
+
+
+    projection - list of {@link Root} columns to put into the cursor. If {@code null} all 
+       supported columns should be included. 
+
+*android.provider.DocumentsProvider.querySearchDocuments(String,String,String[])*
+
+public |android.database.Cursor| querySearchDocuments(
+  java.lang.String rootId,
+  java.lang.String query,
+  java.lang.String[] projection)
+  throws |java.io.FileNotFoundException|
+         
+Return documents that that match the given query under the requested root. The 
+returned documents should be sorted by relevance in descending order. How 
+documents are matched against the query string is an implementation detail left 
+to each provider, but it's suggested that at least 
+(|android.provider.DocumentsContract.Document|) be matched in a 
+case-insensitive fashion. 
+
+Only documents may be returned; directories are not supported in search 
+results. 
+
+If your provider is cloud-based, and you have some data cached or pinned 
+locally, you may return the local data immediately, setting 
+(|android.provider.DocumentsContract|) on the Cursor to indicate that you are 
+still fetching additional data. Then, when the network data is available, you 
+can send a change notification to trigger a requery and return the complete 
+contents. 
+
+To support change notifications, you must (|android.database.Cursor|) with a 
+relevant Uri, such as (|android.provider.DocumentsContract|) . Then you can 
+call (|android.content.ContentResolver|) with that Uri to send change 
+notifications. 
+
+
+    rootId - the root to search under. 
+    query - string to match documents against. 
+    projection - list of {@link Document} columns to put into the cursor. If {@code null} all 
+       supported columns should be included. 
+
+*android.provider.DocumentsProvider.update(Uri,ContentValues,String,String[])*
+
+public final int update(
+  android.net.Uri uri,
+  android.content.ContentValues values,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+Implementation is provided by the parent class. Throws by default, and cannot 
+be overriden. 
+
+
+
+

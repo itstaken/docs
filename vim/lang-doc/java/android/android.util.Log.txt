@@ -1,0 +1,403 @@
+*android.util.Log* *Log* API for sending log output.
+
+public final class Log
+  extends    |java.lang.Object|
+
+|android.util.Log_Description|
+|android.util.Log_Fields|
+|android.util.Log_Constructors|
+|android.util.Log_Methods|
+
+================================================================================
+
+*android.util.Log_Fields*
+|int_android.util.Log.ASSERT|
+|int_android.util.Log.DEBUG|
+|int_android.util.Log.ERROR|
+|int_android.util.Log.INFO|
+|int_android.util.Log.LOG_ID_EVENTS|
+|int_android.util.Log.LOG_ID_MAIN|
+|int_android.util.Log.LOG_ID_RADIO|
+|int_android.util.Log.LOG_ID_SYSTEM|
+|int_android.util.Log.VERBOSE|
+|int_android.util.Log.WARN|
+
+*android.util.Log_Methods*
+|android.util.Log.d(String,String)|Send a#DEBUGlog message.
+|android.util.Log.d(String,String,Throwable)|Send a#DEBUGlog message and log th
+|android.util.Log.e(String,String)|Send an#ERRORlog message.
+|android.util.Log.e(String,String,Throwable)|Send a#ERRORlog message and log th
+|android.util.Log.getStackTraceString(Throwable)|Handy function to get a loggab
+|android.util.Log.i(String,String)|Send an#INFOlog message.
+|android.util.Log.i(String,String,Throwable)|Send a#INFOlog message and log the
+|android.util.Log.isLoggable(String,int)|Checks to see whether or not a log for
+|android.util.Log.println_native(int,int,String,String)|
+|android.util.Log.println(int,String,String)|Low-level logging call.
+|android.util.Log.setWtfHandler(Log.TerribleFailureHandler)|Sets the terrible f
+|android.util.Log.v(String,String)|Send a#VERBOSElog message.
+|android.util.Log.v(String,String,Throwable)|Send a#VERBOSElog message and log 
+|android.util.Log.w(String,String)|Send a#WARNlog message.
+|android.util.Log.w(String,String,Throwable)|Send a#WARNlog message and log the
+|android.util.Log.w(String,Throwable)|
+|android.util.Log.wtf(String,String)|What a Terrible Failure: Report a conditio
+|android.util.Log.wtf(String,String,Throwable)|What a Terrible Failure: Report 
+|android.util.Log.wtf(String,Throwable)|What a Terrible Failure: Report an exce
+|android.util.Log.wtfStack(String,String)|Like#wtf(String, String), but also wr
+
+*android.util.Log_Description*
+
+API for sending log output. 
+
+Generally, use the Log.v() Log.d() Log.i() Log.w() and Log.e() methods. 
+
+The order in terms of verbosity, from least to most is ERROR, WARN, INFO, 
+DEBUG, VERBOSE. Verbose should never be compiled into an application except 
+during development. Debug logs are compiled in but stripped at runtime. Error, 
+warning and info logs are always kept. 
+
+Tip: A good convention is to declare a TAG constant in your class: 
+
+private static final String TAG = "MyActivity"; 
+
+and use that in subsequent calls to the log methods. 
+
+Tip: Don't forget that when you make a call like 
+
+Log.v(TAG, "index=" + i); 
+
+that when you're building the string to pass into Log.d, the compiler uses a 
+StringBuilder and at least three allocations occur: the StringBuilder itself, 
+the buffer, and the String object. Realistically, there is also another buffer 
+allocation and copy, and even more pressure on the gc. That means that if your 
+log message is filtered out, you might be doing significant work and incurring 
+significant overhead. 
+
+
+
+*int_android.util.Log.ASSERT*
+
+Priority constant for the println method. 
+
+
+*int_android.util.Log.DEBUG*
+
+Priority constant for the println method; use Log.d. 
+
+
+*int_android.util.Log.ERROR*
+
+Priority constant for the println method; use Log.e. 
+
+
+*int_android.util.Log.INFO*
+
+Priority constant for the println method; use Log.i. 
+
+
+*int_android.util.Log.LOG_ID_EVENTS*
+
+
+
+
+*int_android.util.Log.LOG_ID_MAIN*
+
+
+
+
+*int_android.util.Log.LOG_ID_RADIO*
+
+
+
+
+*int_android.util.Log.LOG_ID_SYSTEM*
+
+
+
+
+*int_android.util.Log.VERBOSE*
+
+Priority constant for the println method; use Log.v. 
+
+
+*int_android.util.Log.WARN*
+
+Priority constant for the println method; use Log.w. 
+
+
+
+*android.util.Log.d(String,String)*
+
+public static int d(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Send a (|android.util.Log|) log message. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+*android.util.Log.d(String,String,Throwable)*
+
+public static int d(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+Send a (|android.util.Log|) log message and log the exception. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+    tr - An exception to log 
+
+*android.util.Log.e(String,String)*
+
+public static int e(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Send an (|android.util.Log|) log message. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+*android.util.Log.e(String,String,Throwable)*
+
+public static int e(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+Send a (|android.util.Log|) log message and log the exception. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+    tr - An exception to log 
+
+*android.util.Log.getStackTraceString(Throwable)*
+
+public static |java.lang.String| getStackTraceString(java.lang.Throwable tr)
+
+Handy function to get a loggable stack trace from a Throwable 
+
+
+    tr - An exception to log 
+
+*android.util.Log.i(String,String)*
+
+public static int i(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Send an (|android.util.Log|) log message. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+*android.util.Log.i(String,String,Throwable)*
+
+public static int i(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+Send a (|android.util.Log|) log message and log the exception. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+    tr - An exception to log 
+
+*android.util.Log.isLoggable(String,int)*
+
+public static native boolean isLoggable(
+  java.lang.String tag,
+  int level)
+
+Checks to see whether or not a log for the specified tag is loggable at the 
+specified level. 
+
+The default level of any tag is set to INFO. This means that any level above 
+and including INFO will be logged. Before you make any calls to a logging 
+method you should check to see if your tag should be logged. You can change the 
+default level by setting a system property: 'setprop log.tag.<YOUR_LOG_TAG> 
+<LEVEL>' Where level is either VERBOSE, DEBUG, INFO, WARN, ERROR, ASSERT, or 
+SUPPRESS. SUPPRESS will turn off all logging for your tag. You can also create 
+a local.prop file that with the following in it: 
+'log.tag.<YOUR_LOG_TAG>=<LEVEL>' and place that in /data/local.prop. 
+
+
+    tag - The tag to check. 
+    level - The level to check. 
+
+    Returns: Whether or not that this is allowed to be logged. 
+
+*android.util.Log.println_native(int,int,String,String)*
+
+public static native int println_native(
+  int bufID,
+  int priority,
+  java.lang.String tag,
+  java.lang.String msg)
+
+
+
+
+
+*android.util.Log.println(int,String,String)*
+
+public static int println(
+  int priority,
+  java.lang.String tag,
+  java.lang.String msg)
+
+Low-level logging call. 
+
+
+    priority - The priority/type of this log message 
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+    Returns: The number of bytes written. 
+
+*android.util.Log.setWtfHandler(Log.TerribleFailureHandler)*
+
+public static |android.util.Log.TerribleFailureHandler| setWtfHandler(android.util.Log.TerribleFailureHandler handler)
+
+Sets the terrible failure handler, for testing. 
+
+
+
+    Returns: the old handler 
+
+*android.util.Log.v(String,String)*
+
+public static int v(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Send a (|android.util.Log|) log message. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+*android.util.Log.v(String,String,Throwable)*
+
+public static int v(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+Send a (|android.util.Log|) log message and log the exception. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+    tr - An exception to log 
+
+*android.util.Log.w(String,String)*
+
+public static int w(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Send a (|android.util.Log|) log message. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+
+*android.util.Log.w(String,String,Throwable)*
+
+public static int w(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+Send a (|android.util.Log|) log message and log the exception. 
+
+
+    tag - Used to identify the source of a log message. It usually identifies the class 
+       or activity where the log call occurs. 
+    msg - The message you would like logged. 
+    tr - An exception to log 
+
+*android.util.Log.w(String,Throwable)*
+
+public static int w(
+  java.lang.String tag,
+  java.lang.Throwable tr)
+
+
+
+
+
+*android.util.Log.wtf(String,String)*
+
+public static int wtf(
+  java.lang.String tag,
+  java.lang.String msg)
+
+What a Terrible Failure: Report a condition that should never happen. The error 
+will always be logged at level ASSERT with the call stack. Depending on system 
+configuration, a report may be added to the (|android.os.DropBoxManager|) 
+and/or the process may be terminated immediately with an error dialog. 
+
+
+    tag - Used to identify the source of a log message. 
+    msg - The message you would like logged. 
+
+*android.util.Log.wtf(String,String,Throwable)*
+
+public static int wtf(
+  java.lang.String tag,
+  java.lang.String msg,
+  java.lang.Throwable tr)
+
+What a Terrible Failure: Report an exception that should never happen. Similar 
+to (|android.util.Log|) , with a message as well. 
+
+
+    tag - Used to identify the source of a log message. 
+    msg - The message you would like logged. 
+    tr - An exception to log. May be null. 
+
+*android.util.Log.wtf(String,Throwable)*
+
+public static int wtf(
+  java.lang.String tag,
+  java.lang.Throwable tr)
+
+What a Terrible Failure: Report an exception that should never happen. Similar 
+to (|android.util.Log|) , with an exception to log. 
+
+
+    tag - Used to identify the source of a log message. 
+    tr - An exception to log. 
+
+*android.util.Log.wtfStack(String,String)*
+
+public static int wtfStack(
+  java.lang.String tag,
+  java.lang.String msg)
+
+Like (|android.util.Log|) , but also writes to the log the full call stack. 
+
+
+
+

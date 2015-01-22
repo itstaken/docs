@@ -1,0 +1,828 @@
+*android.view.ViewRootImpl* *ViewRootImpl* The top of a view hierarchy, implemen
+
+public final class ViewRootImpl
+  extends    |java.lang.Object|
+  implements |android.view.ViewParent|
+             |android.view.View.AttachInfo.Callbacks|
+             |android.view.HardwareRenderer.HardwareDrawCallbacks|
+
+|android.view.ViewRootImpl_Description|
+|android.view.ViewRootImpl_Fields|
+|android.view.ViewRootImpl_Constructors|
+|android.view.ViewRootImpl_Methods|
+
+================================================================================
+
+*android.view.ViewRootImpl_Fields*
+|android.view.InputEventConsistencyVerifier_android.view.ViewRootImpl.mInputEventConsistencyVerifier|
+
+*android.view.ViewRootImpl_Constructors*
+|android.view.ViewRootImpl(Context,Display)|
+
+*android.view.ViewRootImpl_Methods*
+|android.view.ViewRootImpl.addConfigCallback(ComponentCallbacks)|
+|android.view.ViewRootImpl.addFirstDrawHandler(Runnable)|
+|android.view.ViewRootImpl.attachFunctor(int)|
+|android.view.ViewRootImpl.bringChildToFront(View)|
+|android.view.ViewRootImpl.cancelInvalidate(View)|
+|android.view.ViewRootImpl.canResolveLayoutDirection()|
+|android.view.ViewRootImpl.canResolveTextAlignment()|
+|android.view.ViewRootImpl.canResolveTextDirection()|
+|android.view.ViewRootImpl.childDrawableStateChanged(View)|
+|android.view.ViewRootImpl.childHasTransientStateChanged(View,boolean)|
+|android.view.ViewRootImpl.clearChildFocus(View)|
+|android.view.ViewRootImpl.createContextMenu(ContextMenu)|
+|android.view.ViewRootImpl.debug()|
+|android.view.ViewRootImpl.detachFunctor(int)|
+|android.view.ViewRootImpl.dispatchAppVisibility(boolean)|
+|android.view.ViewRootImpl.dispatchCheckFocus()|
+|android.view.ViewRootImpl.dispatchCloseSystemDialogs(String)|
+|android.view.ViewRootImpl.dispatchDoneAnimating()|
+|android.view.ViewRootImpl.dispatchDragEvent(DragEvent)|
+|android.view.ViewRootImpl.dispatchFinishInputConnection(InputConnection)|
+|android.view.ViewRootImpl.dispatchGetNewSurface()|
+|android.view.ViewRootImpl.dispatchInputEvent(InputEvent)|
+|android.view.ViewRootImpl.dispatchInvalidateDelayed(View,long)|
+|android.view.ViewRootImpl.dispatchInvalidateOnAnimation(View)|
+|android.view.ViewRootImpl.dispatchInvalidateRectDelayed(View.AttachInfo.InvalidateInfo,long)|
+|android.view.ViewRootImpl.dispatchInvalidateRectOnAnimation(View.AttachInfo.InvalidateInfo)|
+|android.view.ViewRootImpl.dispatchKeyFromIme(KeyEvent)|
+|android.view.ViewRootImpl.dispatchMoved(int,int)|
+|android.view.ViewRootImpl.dispatchResized(Rect,Rect,Rect,Rect,boolean,Configuration)|
+|android.view.ViewRootImpl.dispatchScreenStateChange(boolean)|
+|android.view.ViewRootImpl.dispatchSystemUiVisibilityChanged(int,int,int,int)|
+|android.view.ViewRootImpl.dispatchUnhandledKey(KeyEvent)|
+|android.view.ViewRootImpl.dump(String,FileDescriptor,PrintWriter,String[])|
+|android.view.ViewRootImpl.dumpGfxInfo(int[])|
+|android.view.ViewRootImpl.enqueueDisplayList(DisplayList)|
+|android.view.ViewRootImpl.focusableViewAvailable(View)|
+|android.view.ViewRootImpl.focusSearch(View,int)|
+|android.view.ViewRootImpl.getAccessibilityFocusedHost()|
+|android.view.ViewRootImpl.getAccessibilityFocusedVirtualView()|
+|android.view.ViewRootImpl.getAccessibilityInteractionController()|
+|android.view.ViewRootImpl.getChildVisibleRect(View,Rect,android.graphics.Point)|
+|android.view.ViewRootImpl.getLastTouchPoint(Point)|
+|android.view.ViewRootImpl.getLayoutDirection()|
+|android.view.ViewRootImpl.getParent()|
+|android.view.ViewRootImpl.getParentForAccessibility()|
+|android.view.ViewRootImpl.getTextAlignment()|
+|android.view.ViewRootImpl.getTextDirection()|
+|android.view.ViewRootImpl.getView()|
+|android.view.ViewRootImpl.handleDispatchDoneAnimating()|
+|android.view.ViewRootImpl.handleDispatchSystemUiVisibilityChanged(ViewRootImpl.SystemUiVisibilityInfo)|
+|android.view.ViewRootImpl.invalidateChild(View,Rect)|
+|android.view.ViewRootImpl.invalidateChildInParent(int[],Rect)|
+|android.view.ViewRootImpl.isLayoutDirectionResolved()|
+|android.view.ViewRootImpl.isLayoutRequested()|
+|android.view.ViewRootImpl.isTextAlignmentResolved()|
+|android.view.ViewRootImpl.isTextDirectionResolved()|
+|android.view.ViewRootImpl.isViewDescendantOf(View,View)|Return true if child i
+|android.view.ViewRootImpl.loadSystemProperties()|
+|android.view.ViewRootImpl.notifySubtreeAccessibilityStateChanged(View,View,int)|
+|android.view.ViewRootImpl.onHardwarePostDraw(HardwareCanvas)|
+|android.view.ViewRootImpl.onHardwarePreDraw(HardwareCanvas)|
+|android.view.ViewRootImpl.performHapticFeedback(int,boolean)|
+|android.view.ViewRootImpl.playSoundEffect(int)|
+|android.view.ViewRootImpl.profile()|Call this to profile the next traversal ca
+|android.view.ViewRootImpl.recomputeViewAttributes(View)|
+|android.view.ViewRootImpl.requestChildFocus(View,View)|
+|android.view.ViewRootImpl.requestChildRectangleOnScreen(View,Rect,boolean)|
+|android.view.ViewRootImpl.requestDisallowInterceptTouchEvent(boolean)|
+|android.view.ViewRootImpl.requestFitSystemWindows()|
+|android.view.ViewRootImpl.requestLayout()|
+|android.view.ViewRootImpl.requestSendAccessibilityEvent(View,AccessibilityEvent)|
+|android.view.ViewRootImpl.requestTransitionStart(LayoutTransition)|Add LayoutT
+|android.view.ViewRootImpl.requestTransparentRegion(View)|
+|android.view.ViewRootImpl.requestUpdateConfiguration(Configuration)|
+|android.view.ViewRootImpl.setDragFocus(View)|
+|android.view.ViewRootImpl.setDrawDuringWindowsAnimating(boolean)|
+|android.view.ViewRootImpl.setView(View,WindowManager.LayoutParams,View)|We hav
+|android.view.ViewRootImpl.showContextMenuForChild(View)|
+|android.view.ViewRootImpl.startActionModeForChild(View,ActionMode.Callback)|
+|android.view.ViewRootImpl.windowFocusChanged(boolean,boolean)|
+
+*android.view.ViewRootImpl_Description*
+
+The top of a view hierarchy, implementing the needed protocol between View and 
+the WindowManager. This is for the most part an internal implementation detail 
+of (|android.view.WindowManagerGlobal|) . 
+
+
+
+*android.view.InputEventConsistencyVerifier_android.view.ViewRootImpl.mInputEventConsistencyVerifier*
+
+Consistency verifier for debugging purposes. 
+
+
+
+*android.view.ViewRootImpl(Context,Display)*
+
+public ViewRootImpl(
+  android.content.Context context,
+  android.view.Display display)
+
+
+
+
+*android.view.ViewRootImpl.addConfigCallback(ComponentCallbacks)*
+
+public static void addConfigCallback(android.content.ComponentCallbacks callback)
+
+
+
+
+
+*android.view.ViewRootImpl.addFirstDrawHandler(Runnable)*
+
+public static void addFirstDrawHandler(java.lang.Runnable callback)
+
+
+
+
+
+*android.view.ViewRootImpl.attachFunctor(int)*
+
+public boolean attachFunctor(int functor)
+
+
+
+
+
+*android.view.ViewRootImpl.bringChildToFront(View)*
+
+public void bringChildToFront(android.view.View child)
+
+
+
+
+
+*android.view.ViewRootImpl.cancelInvalidate(View)*
+
+public void cancelInvalidate(android.view.View view)
+
+
+
+
+
+*android.view.ViewRootImpl.canResolveLayoutDirection()*
+
+public boolean canResolveLayoutDirection()
+
+
+
+
+
+*android.view.ViewRootImpl.canResolveTextAlignment()*
+
+public boolean canResolveTextAlignment()
+
+
+
+
+
+*android.view.ViewRootImpl.canResolveTextDirection()*
+
+public boolean canResolveTextDirection()
+
+
+
+
+
+*android.view.ViewRootImpl.childDrawableStateChanged(View)*
+
+public void childDrawableStateChanged(android.view.View child)
+
+
+
+
+
+*android.view.ViewRootImpl.childHasTransientStateChanged(View,boolean)*
+
+public void childHasTransientStateChanged(
+  android.view.View child,
+  boolean hasTransientState)
+
+
+
+
+
+*android.view.ViewRootImpl.clearChildFocus(View)*
+
+public void clearChildFocus(android.view.View child)
+
+
+
+
+
+*android.view.ViewRootImpl.createContextMenu(ContextMenu)*
+
+public void createContextMenu(android.view.ContextMenu menu)
+
+
+
+
+
+*android.view.ViewRootImpl.debug()*
+
+public void debug()
+
+
+
+
+
+*android.view.ViewRootImpl.detachFunctor(int)*
+
+public void detachFunctor(int functor)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchAppVisibility(boolean)*
+
+public void dispatchAppVisibility(boolean visible)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchCheckFocus()*
+
+public void dispatchCheckFocus()
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchCloseSystemDialogs(String)*
+
+public void dispatchCloseSystemDialogs(java.lang.String reason)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchDoneAnimating()*
+
+public void dispatchDoneAnimating()
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchDragEvent(DragEvent)*
+
+public void dispatchDragEvent(android.view.DragEvent event)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchFinishInputConnection(InputConnection)*
+
+public void dispatchFinishInputConnection(android.view.inputmethod.InputConnection connection)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchGetNewSurface()*
+
+public void dispatchGetNewSurface()
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchInputEvent(InputEvent)*
+
+public void dispatchInputEvent(android.view.InputEvent event)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchInvalidateDelayed(View,long)*
+
+public void dispatchInvalidateDelayed(
+  android.view.View view,
+  long delayMilliseconds)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchInvalidateOnAnimation(View)*
+
+public void dispatchInvalidateOnAnimation(android.view.View view)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchInvalidateRectDelayed(View.AttachInfo.InvalidateInfo,long)*
+
+public void dispatchInvalidateRectDelayed(
+  android.view.View.AttachInfo.InvalidateInfo info,
+  long delayMilliseconds)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchInvalidateRectOnAnimation(View.AttachInfo.InvalidateInfo)*
+
+public void dispatchInvalidateRectOnAnimation(android.view.View.AttachInfo.InvalidateInfo info)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchKeyFromIme(KeyEvent)*
+
+public void dispatchKeyFromIme(android.view.KeyEvent event)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchMoved(int,int)*
+
+public void dispatchMoved(
+  int newX,
+  int newY)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchResized(Rect,Rect,Rect,Rect,boolean,Configuration)*
+
+public void dispatchResized(
+  Rect frame,
+  Rect overscanInsets,
+  Rect contentInsets,
+  Rect visibleInsets,
+  boolean reportDraw,
+  android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchScreenStateChange(boolean)*
+
+public void dispatchScreenStateChange(boolean on)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchSystemUiVisibilityChanged(int,int,int,int)*
+
+public void dispatchSystemUiVisibilityChanged(
+  int seq,
+  int globalVisibility,
+  int localValue,
+  int localChanges)
+
+
+
+
+
+*android.view.ViewRootImpl.dispatchUnhandledKey(KeyEvent)*
+
+public void dispatchUnhandledKey(android.view.KeyEvent event)
+
+
+
+
+
+*android.view.ViewRootImpl.dump(String,FileDescriptor,PrintWriter,String[])*
+
+public void dump(
+  java.lang.String prefix,
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+
+
+
+
+*android.view.ViewRootImpl.dumpGfxInfo(int[])*
+
+public void dumpGfxInfo(int[] info)
+
+
+
+
+
+*android.view.ViewRootImpl.enqueueDisplayList(DisplayList)*
+
+public void enqueueDisplayList(android.view.DisplayList displayList)
+
+
+
+
+
+*android.view.ViewRootImpl.focusableViewAvailable(View)*
+
+public void focusableViewAvailable(android.view.View v)
+
+
+
+
+
+*android.view.ViewRootImpl.focusSearch(View,int)*
+
+public |android.view.View| focusSearch(
+  android.view.View focused,
+  int direction)
+
+
+
+
+
+*android.view.ViewRootImpl.getAccessibilityFocusedHost()*
+
+public |android.view.View| getAccessibilityFocusedHost()
+
+
+
+
+
+*android.view.ViewRootImpl.getAccessibilityFocusedVirtualView()*
+
+public |android.view.accessibility.AccessibilityNodeInfo| getAccessibilityFocusedVirtualView()
+
+
+
+
+
+*android.view.ViewRootImpl.getAccessibilityInteractionController()*
+
+public |android.view.AccessibilityInteractionController| getAccessibilityInteractionController()
+
+
+
+
+
+*android.view.ViewRootImpl.getChildVisibleRect(View,Rect,android.graphics.Point)*
+
+public boolean getChildVisibleRect(
+  android.view.View child,
+  Rect r,
+  android.graphics.Point offset)
+
+
+
+
+
+*android.view.ViewRootImpl.getLastTouchPoint(Point)*
+
+public void getLastTouchPoint(Point outLocation)
+
+
+
+
+
+*android.view.ViewRootImpl.getLayoutDirection()*
+
+public int getLayoutDirection()
+
+
+
+
+
+*android.view.ViewRootImpl.getParent()*
+
+public |android.view.ViewParent| getParent()
+
+
+
+
+
+*android.view.ViewRootImpl.getParentForAccessibility()*
+
+public |android.view.ViewParent| getParentForAccessibility()
+
+
+
+
+
+*android.view.ViewRootImpl.getTextAlignment()*
+
+public int getTextAlignment()
+
+
+
+
+
+*android.view.ViewRootImpl.getTextDirection()*
+
+public int getTextDirection()
+
+
+
+
+
+*android.view.ViewRootImpl.getView()*
+
+public |android.view.View| getView()
+
+
+
+
+
+*android.view.ViewRootImpl.handleDispatchDoneAnimating()*
+
+public void handleDispatchDoneAnimating()
+
+
+
+
+
+*android.view.ViewRootImpl.handleDispatchSystemUiVisibilityChanged(ViewRootImpl.SystemUiVisibilityInfo)*
+
+public void handleDispatchSystemUiVisibilityChanged(android.view.ViewRootImpl.SystemUiVisibilityInfo args)
+
+
+
+
+
+*android.view.ViewRootImpl.invalidateChild(View,Rect)*
+
+public void invalidateChild(
+  android.view.View child,
+  Rect dirty)
+
+
+
+
+
+*android.view.ViewRootImpl.invalidateChildInParent(int[],Rect)*
+
+public |android.view.ViewParent| invalidateChildInParent(
+  int[] location,
+  Rect dirty)
+
+
+
+
+
+*android.view.ViewRootImpl.isLayoutDirectionResolved()*
+
+public boolean isLayoutDirectionResolved()
+
+
+
+
+
+*android.view.ViewRootImpl.isLayoutRequested()*
+
+public boolean isLayoutRequested()
+
+
+
+
+
+*android.view.ViewRootImpl.isTextAlignmentResolved()*
+
+public boolean isTextAlignmentResolved()
+
+
+
+
+
+*android.view.ViewRootImpl.isTextDirectionResolved()*
+
+public boolean isTextDirectionResolved()
+
+
+
+
+
+*android.view.ViewRootImpl.isViewDescendantOf(View,View)*
+
+public static boolean isViewDescendantOf(
+  android.view.View child,
+  android.view.View parent)
+
+Return true if child is an ancestor of parent, (or equal to the parent). 
+
+
+
+*android.view.ViewRootImpl.loadSystemProperties()*
+
+public void loadSystemProperties()
+
+
+
+
+
+*android.view.ViewRootImpl.notifySubtreeAccessibilityStateChanged(View,View,int)*
+
+public void notifySubtreeAccessibilityStateChanged(
+  android.view.View child,
+  android.view.View source,
+  int changeType)
+
+
+
+
+
+*android.view.ViewRootImpl.onHardwarePostDraw(HardwareCanvas)*
+
+public void onHardwarePostDraw(android.view.HardwareCanvas canvas)
+
+
+
+
+
+*android.view.ViewRootImpl.onHardwarePreDraw(HardwareCanvas)*
+
+public void onHardwarePreDraw(android.view.HardwareCanvas canvas)
+
+
+
+
+
+*android.view.ViewRootImpl.performHapticFeedback(int,boolean)*
+
+public boolean performHapticFeedback(
+  int effectId,
+  boolean always)
+
+
+
+
+
+*android.view.ViewRootImpl.playSoundEffect(int)*
+
+public void playSoundEffect(int effectId)
+
+
+
+
+
+*android.view.ViewRootImpl.profile()*
+
+public void profile()
+
+Call this to profile the next traversal call. FIXME for perf testing only. 
+Remove eventually 
+
+
+
+*android.view.ViewRootImpl.recomputeViewAttributes(View)*
+
+public void recomputeViewAttributes(android.view.View child)
+
+
+
+
+
+*android.view.ViewRootImpl.requestChildFocus(View,View)*
+
+public void requestChildFocus(
+  android.view.View child,
+  android.view.View focused)
+
+
+
+
+
+*android.view.ViewRootImpl.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rectangle,
+  boolean immediate)
+
+
+
+
+
+*android.view.ViewRootImpl.requestDisallowInterceptTouchEvent(boolean)*
+
+public void requestDisallowInterceptTouchEvent(boolean disallowIntercept)
+
+
+
+
+
+*android.view.ViewRootImpl.requestFitSystemWindows()*
+
+public void requestFitSystemWindows()
+
+
+
+
+
+*android.view.ViewRootImpl.requestLayout()*
+
+public void requestLayout()
+
+
+
+
+
+*android.view.ViewRootImpl.requestSendAccessibilityEvent(View,AccessibilityEvent)*
+
+public boolean requestSendAccessibilityEvent(
+  android.view.View child,
+  android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.view.ViewRootImpl.requestTransitionStart(LayoutTransition)*
+
+public void requestTransitionStart(android.animation.LayoutTransition transition)
+
+Add LayoutTransition to the list of transitions to be started in the next 
+traversal. This list will be cleared after the transitions on the list are 
+start()'ed. These transitionsa re added by LayoutTransition itself when it sets 
+up animations. The setup happens during the layout phase of traversal, which we 
+want to complete before any of the animations are started (because those 
+animations may side-effect properties that layout depends upon, like the 
+bounding rectangles of the affected views). So we add the transition to the 
+list and it is started just prior to starting the drawing phase of traversal. 
+
+
+    transition - The LayoutTransition to be started on the next traversal. 
+
+*android.view.ViewRootImpl.requestTransparentRegion(View)*
+
+public void requestTransparentRegion(android.view.View child)
+
+
+
+
+
+*android.view.ViewRootImpl.requestUpdateConfiguration(Configuration)*
+
+public void requestUpdateConfiguration(android.content.res.Configuration config)
+
+
+
+
+
+*android.view.ViewRootImpl.setDragFocus(View)*
+
+public void setDragFocus(android.view.View newDragTarget)
+
+
+
+
+
+*android.view.ViewRootImpl.setDrawDuringWindowsAnimating(boolean)*
+
+public void setDrawDuringWindowsAnimating(boolean value)
+
+
+
+
+
+*android.view.ViewRootImpl.setView(View,WindowManager.LayoutParams,View)*
+
+public void setView(
+  android.view.View view,
+  android.view.WindowManager.LayoutParams attrs,
+  android.view.View panelParentView)
+
+We have one child 
+
+
+
+*android.view.ViewRootImpl.showContextMenuForChild(View)*
+
+public boolean showContextMenuForChild(android.view.View originalView)
+
+
+
+
+
+*android.view.ViewRootImpl.startActionModeForChild(View,ActionMode.Callback)*
+
+public |android.view.ActionMode| startActionModeForChild(
+  android.view.View originalView,
+  android.view.ActionMode.Callback callback)
+
+
+
+
+
+*android.view.ViewRootImpl.windowFocusChanged(boolean,boolean)*
+
+public void windowFocusChanged(
+  boolean hasFocus,
+  boolean inTouchMode)
+
+
+
+
+
+

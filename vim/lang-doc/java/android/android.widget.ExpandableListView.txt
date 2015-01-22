@@ -1,0 +1,600 @@
+*android.widget.ExpandableListView* *ExpandableListView* A view that shows items
+
+public class ExpandableListView
+  extends    |android.widget.ListView|
+
+|android.widget.ExpandableListView_Description|
+|android.widget.ExpandableListView_Fields|
+|android.widget.ExpandableListView_Constructors|
+|android.widget.ExpandableListView_Methods|
+
+================================================================================
+
+*android.widget.ExpandableListView_Fields*
+|int_android.widget.ExpandableListView.CHILD_INDICATOR_INHERIT|
+|int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_CHILD|
+|int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_GROUP|
+|int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_NULL|
+|long_android.widget.ExpandableListView.PACKED_POSITION_VALUE_NULL|
+
+*android.widget.ExpandableListView_Constructors*
+|android.widget.ExpandableListView(Context)|
+|android.widget.ExpandableListView(Context,AttributeSet)|
+|android.widget.ExpandableListView(Context,AttributeSet,int)|
+
+*android.widget.ExpandableListView_Methods*
+|android.widget.ExpandableListView.collapseGroup(int)|Collapse a group in the g
+|android.widget.ExpandableListView.dispatchDraw(Canvas)|
+|android.widget.ExpandableListView.expandGroup(int)|Expand a group in the group
+|android.widget.ExpandableListView.expandGroup(int,boolean)|Expand a group in t
+|android.widget.ExpandableListView.getAdapter()|This method should not be used,
+|android.widget.ExpandableListView.getExpandableListAdapter()|Gets the adapter 
+|android.widget.ExpandableListView.getExpandableListPosition(int)|Converts a fl
+|android.widget.ExpandableListView.getFlatListPosition(long)|Converts a group a
+|android.widget.ExpandableListView.getPackedPositionChild(long)|Gets the child 
+|android.widget.ExpandableListView.getPackedPositionForChild(int,int)|Returns t
+|android.widget.ExpandableListView.getPackedPositionForGroup(int)|Returns the p
+|android.widget.ExpandableListView.getPackedPositionGroup(long)|Gets the group 
+|android.widget.ExpandableListView.getPackedPositionType(long)|Gets the type of
+|android.widget.ExpandableListView.getSelectedId()|Gets the ID of the currently
+|android.widget.ExpandableListView.getSelectedPosition()|Gets the position of t
+|android.widget.ExpandableListView.isGroupExpanded(int)|Whether the given group
+|android.widget.ExpandableListView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.ExpandableListView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.ExpandableListView.onRestoreInstanceState(Parcelable)|
+|android.widget.ExpandableListView.onRtlPropertiesChanged(int)|
+|android.widget.ExpandableListView.onSaveInstanceState()|
+|android.widget.ExpandableListView.performItemClick(View,int,long)|
+|android.widget.ExpandableListView.setAdapter(ExpandableListAdapter)|Sets the a
+|android.widget.ExpandableListView.setAdapter(ListAdapter)|This overloaded meth
+|android.widget.ExpandableListView.setChildDivider(Drawable)|Sets the drawable 
+|android.widget.ExpandableListView.setChildIndicator(Drawable)|Sets the indicat
+|android.widget.ExpandableListView.setChildIndicatorBounds(int,int)|Sets the dr
+|android.widget.ExpandableListView.setChildIndicatorBoundsRelative(int,int)|Set
+|android.widget.ExpandableListView.setGroupIndicator(Drawable)|Sets the indicat
+|android.widget.ExpandableListView.setIndicatorBounds(int,int)|Sets the drawing
+|android.widget.ExpandableListView.setIndicatorBoundsRelative(int,int)|Sets the
+|android.widget.ExpandableListView.setOnChildClickListener(ExpandableListView.OnChildClickListener)|
+|android.widget.ExpandableListView.setOnGroupClickListener(ExpandableListView.OnGroupClickListener)|
+|android.widget.ExpandableListView.setOnGroupCollapseListener(ExpandableListView.OnGroupCollapseListener)|
+|android.widget.ExpandableListView.setOnGroupExpandListener(ExpandableListView.OnGroupExpandListener)|
+|android.widget.ExpandableListView.setOnItemClickListener(AdapterView.OnItemClickListener)|
+|android.widget.ExpandableListView.setSelectedChild(int,int,boolean)|Sets the s
+|android.widget.ExpandableListView.setSelectedGroup(int)|Sets the selection to 
+
+*android.widget.ExpandableListView_Description*
+
+A view that shows items in a vertically scrolling two-level list. This differs 
+from the (|android.widget.ListView|) by allowing two levels: groups which can 
+individually be expanded to show its children. The items come from the 
+(|android.widget.ExpandableListAdapter|) associated with this view. 
+
+Expandable lists are able to show an indicator beside each item to display the 
+item's current state (the states are usually one of expanded group, collapsed 
+group, child, or last child). Use (|android.widget.ExpandableListView|) or 
+(|android.widget.ExpandableListView|) (or the corresponding XML attributes) to 
+set these indicators (see the docs for each method to see additional state that 
+each Drawable can have). The default style for an 
+(|android.widget.ExpandableListView|) provides indicators which will be shown 
+next to Views given to the (|android.widget.ExpandableListView|) . The layouts 
+android.R.layout.simple_expandable_list_item_1 and 
+android.R.layout.simple_expandable_list_item_2 (which should be used with 
+(|android.widget.SimpleCursorTreeAdapter|) ) contain the preferred position 
+information for indicators. 
+
+The context menu information set by an (|android.widget.ExpandableListView|) 
+will be a (|android.widget.ExpandableListView.ExpandableListContextMenuInfo|) 
+object with (|android.widget.ExpandableListView.ExpandableListContextMenuInfo|) 
+being a packed position that can be used with 
+(|android.widget.ExpandableListView|) and the other similar methods. 
+
+Note: You cannot use the value wrap_content for the android:layout_height 
+attribute of a ExpandableListView in XML if the parent's size is also not 
+strictly specified (for example, if the parent were ScrollView you could not 
+specify wrap_content since it also can be any length. However, you can use 
+wrap_content if the ExpandableListView parent has a specific size, such as 100 
+pixels. 
+
+
+
+*int_android.widget.ExpandableListView.CHILD_INDICATOR_INHERIT*
+
+Denotes when a child indicator should inherit this bound from the generic 
+indicator bounds 
+
+
+*int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_CHILD*
+
+The packed position represents a child. 
+
+
+*int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_GROUP*
+
+The packed position represents a group. 
+
+
+*int_android.widget.ExpandableListView.PACKED_POSITION_TYPE_NULL*
+
+The packed position represents a neither/null/no preference. 
+
+
+*long_android.widget.ExpandableListView.PACKED_POSITION_VALUE_NULL*
+
+The value for a packed position that represents neither/null/no preference. 
+This value is not otherwise possible since a group type (first bit 0) should 
+not have a child position filled. 
+
+
+
+*android.widget.ExpandableListView(Context)*
+
+public ExpandableListView(android.content.Context context)
+
+
+
+
+*android.widget.ExpandableListView(Context,AttributeSet)*
+
+public ExpandableListView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.ExpandableListView(Context,AttributeSet,int)*
+
+public ExpandableListView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.ExpandableListView.collapseGroup(int)*
+
+public boolean collapseGroup(int groupPos)
+
+Collapse a group in the grouped list view 
+
+
+    groupPos - position of the group to collapse 
+
+    Returns: True if the group was collapsed, false otherwise (if the group was already 
+             collapsed, this will return false) 
+
+*android.widget.ExpandableListView.dispatchDraw(Canvas)*
+
+protected void dispatchDraw(Canvas canvas)
+
+
+
+
+
+*android.widget.ExpandableListView.expandGroup(int)*
+
+public boolean expandGroup(int groupPos)
+
+Expand a group in the grouped list view 
+
+
+    groupPos - the group to be expanded 
+
+    Returns: True if the group was expanded, false otherwise (if the group was already 
+             expanded, this will return false) 
+
+*android.widget.ExpandableListView.expandGroup(int,boolean)*
+
+public boolean expandGroup(
+  int groupPos,
+  boolean animate)
+
+Expand a group in the grouped list view 
+
+
+    groupPos - the group to be expanded 
+    animate - true if the expanding group should be animated in 
+
+    Returns: True if the group was expanded, false otherwise (if the group was already 
+             expanded, this will return false) 
+
+*android.widget.ExpandableListView.getAdapter()*
+
+public |android.widget.ListAdapter| getAdapter()
+
+This method should not be used, use (|android.widget.ExpandableListView|) . 
+
+
+
+*android.widget.ExpandableListView.getExpandableListAdapter()*
+
+public |android.widget.ExpandableListAdapter| getExpandableListAdapter()
+
+Gets the adapter that provides data to this view. 
+
+
+
+    Returns: The adapter that provides data to this view. 
+
+*android.widget.ExpandableListView.getExpandableListPosition(int)*
+
+public long getExpandableListPosition(int flatListPosition)
+
+Converts a flat list position (the raw position of an item (child or group) in 
+the list) to a group and/or child position (represented in a packed position). 
+This is useful in situations where the caller needs to use the underlying 
+(|android.widget.ListView|) 's methods. Use 
+(|android.widget.ExpandableListView|) , (|android.widget.ExpandableListView|) , 
+(|android.widget.ExpandableListView|) to unpack. 
+
+
+    flatListPosition - The flat list position to be converted. 
+
+    Returns: The group and/or child position for the given flat list position in packed 
+             position representation. #PACKED_POSITION_VALUE_NULL if the 
+             position corresponds to a header or a footer item. 
+
+*android.widget.ExpandableListView.getFlatListPosition(long)*
+
+public int getFlatListPosition(long packedPosition)
+
+Converts a group and/or child position to a flat list position. This is useful 
+in situations where the caller needs to use the underlying 
+(|android.widget.ListView|) 's methods. 
+
+
+    packedPosition - The group and/or child positions to be converted in packed position 
+       representation. Use {@link #getPackedPositionForChild(int, int)} or 
+       {@link #getPackedPositionForGroup(int)}. 
+
+    Returns: The flat list position for the given child or group. 
+
+*android.widget.ExpandableListView.getPackedPositionChild(long)*
+
+public static int getPackedPositionChild(long packedPosition)
+
+Gets the child position from a packed position that is of 
+(|android.widget.ExpandableListView|) type (use 
+(|android.widget.ExpandableListView|) ). To get the group that this child 
+belongs to, use (|android.widget.ExpandableListView|) . See 
+(|android.widget.ExpandableListView|) . 
+
+
+    packedPosition - The packed position from which the child position will be returned. 
+
+    Returns: The child position portion of the packed position. If this does not contain a 
+             child, returns -1. 
+
+*android.widget.ExpandableListView.getPackedPositionForChild(int,int)*
+
+public static long getPackedPositionForChild(
+  int groupPosition,
+  int childPosition)
+
+Returns the packed position representation of a child's position. 
+
+In general, a packed position should be used in situations where the position 
+given to/returned from an (|android.widget.ExpandableListAdapter|) or 
+(|android.widget.ExpandableListView|) method can either be a child or group. 
+The two positions are packed into a single long which can be unpacked using 
+(|android.widget.ExpandableListView|) , (|android.widget.ExpandableListView|) , 
+and (|android.widget.ExpandableListView|) . 
+
+
+    groupPosition - The child's parent group's position. 
+    childPosition - The child position within the group. 
+
+    Returns: The packed position representation of the child (and parent group). 
+
+*android.widget.ExpandableListView.getPackedPositionForGroup(int)*
+
+public static long getPackedPositionForGroup(int groupPosition)
+
+Returns the packed position representation of a group's position. See 
+(|android.widget.ExpandableListView|) . 
+
+
+    groupPosition - The child's parent group's position. 
+
+    Returns: The packed position representation of the group. 
+
+*android.widget.ExpandableListView.getPackedPositionGroup(long)*
+
+public static int getPackedPositionGroup(long packedPosition)
+
+Gets the group position from a packed position. See 
+(|android.widget.ExpandableListView|) . 
+
+
+    packedPosition - The packed position from which the group position will be returned. 
+
+    Returns: The group position portion of the packed position. If this does not contain a 
+             group, returns -1. 
+
+*android.widget.ExpandableListView.getPackedPositionType(long)*
+
+public static int getPackedPositionType(long packedPosition)
+
+Gets the type of a packed position. See (|android.widget.ExpandableListView|) . 
+
+
+    packedPosition - The packed position for which to return the type. 
+
+    Returns: The type of the position contained within the packed position, either {@link 
+             #PACKED_POSITION_TYPE_CHILD}, {@link #PACKED_POSITION_TYPE_GROUP}, 
+             or {@link #PACKED_POSITION_TYPE_NULL}. 
+
+*android.widget.ExpandableListView.getSelectedId()*
+
+public long getSelectedId()
+
+Gets the ID of the currently selected group or child. Can return -1 if no 
+selection. 
+
+
+
+    Returns: The ID of the currently selected group or child. -1 if no selection. 
+
+*android.widget.ExpandableListView.getSelectedPosition()*
+
+public long getSelectedPosition()
+
+Gets the position of the currently selected group or child (along with its 
+type). Can return (|android.widget.ExpandableListView|) if no selection. 
+
+
+
+    Returns: A packed position containing the currently selected group or child's position 
+             and type. #PACKED_POSITION_VALUE_NULL if no selection or if 
+             selection is on a header or a footer item. 
+
+*android.widget.ExpandableListView.isGroupExpanded(int)*
+
+public boolean isGroupExpanded(int groupPosition)
+
+Whether the given group is currently expanded. 
+
+
+    groupPosition - The group to check. 
+
+    Returns: Whether the group is currently expanded. 
+
+*android.widget.ExpandableListView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.ExpandableListView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ExpandableListView.onRestoreInstanceState(Parcelable)*
+
+public void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.widget.ExpandableListView.onRtlPropertiesChanged(int)*
+
+public void onRtlPropertiesChanged(int layoutDirection)
+
+
+
+
+
+*android.widget.ExpandableListView.onSaveInstanceState()*
+
+public |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+*android.widget.ExpandableListView.performItemClick(View,int,long)*
+
+public boolean performItemClick(
+  android.view.View v,
+  int position,
+  long id)
+
+
+
+
+
+*android.widget.ExpandableListView.setAdapter(ExpandableListAdapter)*
+
+public void setAdapter(android.widget.ExpandableListAdapter adapter)
+
+Sets the adapter that provides data to this view. 
+
+
+    adapter - The adapter that provides data to this view. 
+
+*android.widget.ExpandableListView.setAdapter(ListAdapter)*
+
+public void setAdapter(android.widget.ListAdapter adapter)
+
+This overloaded method should not be used, instead use 
+(|android.widget.ExpandableListView|) . 
+
+
+
+*android.widget.ExpandableListView.setChildDivider(Drawable)*
+
+public void setChildDivider(Drawable childDivider)
+
+Sets the drawable that will be drawn adjacent to every child in the list. This 
+will be drawn using the same height as the normal divider ( 
+(|android.widget.ExpandableListView|) ) or if it does not have an intrinsic 
+height, the height set by (|android.widget.ExpandableListView|) . 
+
+
+    childDivider - The drawable to use. 
+
+*android.widget.ExpandableListView.setChildIndicator(Drawable)*
+
+public void setChildIndicator(Drawable childIndicator)
+
+Sets the indicator to be drawn next to a child. 
+
+
+    childIndicator - The drawable to be used as an indicator. If the child is the last child for a 
+       group, the state {@link android.R.attr#state_last} will be set. 
+
+*android.widget.ExpandableListView.setChildIndicatorBounds(int,int)*
+
+public void setChildIndicatorBounds(
+  int left,
+  int right)
+
+Sets the drawing bounds for the child indicator. For either, you can specify 
+(|android.widget.ExpandableListView|) to use inherit from the general 
+indicator's bounds. 
+
+
+    left - The left position (relative to the left bounds of this View) to start drawing 
+       the indicator. 
+    right - The right position (relative to the left bounds of this View) to end the 
+       drawing of the indicator. 
+
+*android.widget.ExpandableListView.setChildIndicatorBoundsRelative(int,int)*
+
+public void setChildIndicatorBoundsRelative(
+  int start,
+  int end)
+
+Sets the relative drawing bounds for the child indicator. For either, you can 
+specify (|android.widget.ExpandableListView|) to use inherit from the general 
+indicator's bounds. 
+
+
+    start - The start position (relative to the start bounds of this View) to start drawing 
+       the indicator. 
+    end - The end position (relative to the end bounds of this View) to end the drawing 
+       of the indicator. 
+
+*android.widget.ExpandableListView.setGroupIndicator(Drawable)*
+
+public void setGroupIndicator(Drawable groupIndicator)
+
+Sets the indicator to be drawn next to a group. 
+
+
+    groupIndicator - The drawable to be used as an indicator. If the group is empty, the state 
+       {@link android.R.attr#state_empty} will be set. If the group is 
+       expanded, the state {@link android.R.attr#state_expanded} will be set. 
+
+*android.widget.ExpandableListView.setIndicatorBounds(int,int)*
+
+public void setIndicatorBounds(
+  int left,
+  int right)
+
+Sets the drawing bounds for the indicators (at minimum, the group indicator is 
+affected by this; the child indicator is affected by this if the child 
+indicator bounds are set to inherit). 
+
+
+    left - The left position (relative to the left bounds of this View) to start drawing 
+       the indicator. 
+    right - The right position (relative to the left bounds of this View) to end the 
+       drawing of the indicator. 
+
+*android.widget.ExpandableListView.setIndicatorBoundsRelative(int,int)*
+
+public void setIndicatorBoundsRelative(
+  int start,
+  int end)
+
+Sets the relative drawing bounds for the indicators (at minimum, the group 
+indicator is affected by this; the child indicator is affected by this if the 
+child indicator bounds are set to inherit). 
+
+
+    start - The start position (relative to the start bounds of this View) to start drawing 
+       the indicator. 
+    end - The end position (relative to the end bounds of this View) to end the drawing 
+       of the indicator. 
+
+*android.widget.ExpandableListView.setOnChildClickListener(ExpandableListView.OnChildClickListener)*
+
+public void setOnChildClickListener(android.widget.ExpandableListView.OnChildClickListener onChildClickListener)
+
+
+
+
+
+*android.widget.ExpandableListView.setOnGroupClickListener(ExpandableListView.OnGroupClickListener)*
+
+public void setOnGroupClickListener(android.widget.ExpandableListView.OnGroupClickListener onGroupClickListener)
+
+
+
+
+
+*android.widget.ExpandableListView.setOnGroupCollapseListener(ExpandableListView.OnGroupCollapseListener)*
+
+public void setOnGroupCollapseListener(android.widget.ExpandableListView.OnGroupCollapseListener onGroupCollapseListener)
+
+
+
+
+
+*android.widget.ExpandableListView.setOnGroupExpandListener(ExpandableListView.OnGroupExpandListener)*
+
+public void setOnGroupExpandListener(android.widget.ExpandableListView.OnGroupExpandListener onGroupExpandListener)
+
+
+
+
+
+*android.widget.ExpandableListView.setOnItemClickListener(AdapterView.OnItemClickListener)*
+
+public void setOnItemClickListener(android.widget.AdapterView.OnItemClickListener l)
+
+Register a callback to be invoked when an item has been clicked and the caller 
+prefers to receive a ListView-style position instead of a group and/or child 
+position. In most cases, the caller should use 
+(|android.widget.ExpandableListView|) and/or 
+(|android.widget.ExpandableListView|) . 
+
+
+
+*android.widget.ExpandableListView.setSelectedChild(int,int,boolean)*
+
+public boolean setSelectedChild(
+  int groupPosition,
+  int childPosition,
+  boolean shouldExpandGroup)
+
+Sets the selection to the specified child. If the child is in a collapsed 
+group, the group will only be expanded and child subsequently selected if 
+shouldExpandGroup is set to true, otherwise the method will return false. 
+
+
+    groupPosition - The position of the group that contains the child. 
+    childPosition - The position of the child within the group. 
+    shouldExpandGroup - Whether the child's group should be expanded if it is collapsed. 
+
+    Returns: Whether the selection was successfully set on the child. 
+
+*android.widget.ExpandableListView.setSelectedGroup(int)*
+
+public void setSelectedGroup(int groupPosition)
+
+Sets the selection to the specified group. 
+
+
+    groupPosition - The position of the group that should be selected. 
+
+

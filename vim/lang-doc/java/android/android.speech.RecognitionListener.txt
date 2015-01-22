@@ -1,0 +1,131 @@
+*android.speech.RecognitionListener* *RecognitionListener* Used for receiving no
+
+public interface interface RecognitionListener
+
+
+|android.speech.RecognitionListener_Description|
+|android.speech.RecognitionListener_Fields|
+|android.speech.RecognitionListener_Constructors|
+|android.speech.RecognitionListener_Methods|
+
+================================================================================
+
+*android.speech.RecognitionListener_Methods*
+|android.speech.RecognitionListener.onBeginningOfSpeech()|The user has started 
+|android.speech.RecognitionListener.onBufferReceived(byte[])|More sound has bee
+|android.speech.RecognitionListener.onEndOfSpeech()|Called after the user stops
+|android.speech.RecognitionListener.onError(int)|A network or recognition error
+|android.speech.RecognitionListener.onEvent(int,Bundle)|Reserved for adding fut
+|android.speech.RecognitionListener.onPartialResults(Bundle)|Called when partia
+|android.speech.RecognitionListener.onReadyForSpeech(Bundle)|Called when the en
+|android.speech.RecognitionListener.onResults(Bundle)|Called when recognition r
+|android.speech.RecognitionListener.onRmsChanged(float)|The sound level in the 
+
+*android.speech.RecognitionListener_Description*
+
+Used for receiving notifications from the SpeechRecognizer when the recognition 
+related events occur. All the callbacks are executed on the Application main 
+thread. 
+
+
+
+*android.speech.RecognitionListener.onBeginningOfSpeech()*
+
+public void onBeginningOfSpeech()
+
+The user has started to speak. 
+
+
+
+*android.speech.RecognitionListener.onBufferReceived(byte[])*
+
+public void onBufferReceived(byte[] buffer)
+
+More sound has been received. The purpose of this function is to allow giving 
+feedback to the user regarding the captured audio. There is no guarantee that 
+this method will be called. 
+
+
+    buffer - a buffer containing a sequence of big-endian 16-bit integers representing a 
+       single channel audio stream. The sample rate is implementation 
+       dependent. 
+
+*android.speech.RecognitionListener.onEndOfSpeech()*
+
+public void onEndOfSpeech()
+
+Called after the user stops speaking. 
+
+
+
+*android.speech.RecognitionListener.onError(int)*
+
+public void onError(int error)
+
+A network or recognition error occurred. 
+
+
+    error - code is defined in {@link SpeechRecognizer} 
+
+*android.speech.RecognitionListener.onEvent(int,Bundle)*
+
+public void onEvent(
+  int eventType,
+  android.os.Bundle params)
+
+Reserved for adding future events. 
+
+
+    eventType - the type of the occurred event 
+    params - a Bundle containing the passed parameters 
+
+*android.speech.RecognitionListener.onPartialResults(Bundle)*
+
+public void onPartialResults(android.os.Bundle partialResults)
+
+Called when partial recognition results are available. The callback might be 
+called at any time between (|android.speech.RecognitionListener|) and 
+(|android.speech.RecognitionListener|) when partial results are ready. This 
+method may be called zero, one or multiple times for each call to 
+(|android.speech.SpeechRecognizer|) , depending on the speech recognition 
+service implementation. To request partial results, use 
+(|android.speech.RecognizerIntent|) 
+
+
+    partialResults - the returned results. To retrieve the results in ArrayList<String> format use 
+       {@link Bundle#getStringArrayList(String)} with {@link 
+       SpeechRecognizer#RESULTS_RECOGNITION} as a parameter 
+
+*android.speech.RecognitionListener.onReadyForSpeech(Bundle)*
+
+public void onReadyForSpeech(android.os.Bundle params)
+
+Called when the endpointer is ready for the user to start speaking. 
+
+
+    params - parameters set by the recognition service. Reserved for future use. 
+
+*android.speech.RecognitionListener.onResults(Bundle)*
+
+public void onResults(android.os.Bundle results)
+
+Called when recognition results are ready. 
+
+
+    results - the recognition results. To retrieve the results in {@code ArrayList<String>} 
+       format use {@link Bundle#getStringArrayList(String)} with {@link 
+       SpeechRecognizer#RESULTS_RECOGNITION} as a parameter. A float array of 
+       confidence values might also be given in {@link 
+       SpeechRecognizer#CONFIDENCE_SCORES}. 
+
+*android.speech.RecognitionListener.onRmsChanged(float)*
+
+public void onRmsChanged(float rmsdB)
+
+The sound level in the audio stream has changed. There is no guarantee that 
+this method will be called. 
+
+
+    rmsdB - the new RMS dB value 
+
+

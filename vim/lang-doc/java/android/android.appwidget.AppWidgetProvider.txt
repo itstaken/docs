@@ -1,0 +1,144 @@
+*android.appwidget.AppWidgetProvider* *AppWidgetProvider* A convenience class to
+
+public class AppWidgetProvider
+  extends    |android.content.BroadcastReceiver|
+
+|android.appwidget.AppWidgetProvider_Description|
+|android.appwidget.AppWidgetProvider_Fields|
+|android.appwidget.AppWidgetProvider_Constructors|
+|android.appwidget.AppWidgetProvider_Methods|
+
+================================================================================
+
+*android.appwidget.AppWidgetProvider_Constructors*
+|android.appwidget.AppWidgetProvider()|Constructor to initialize AppWidgetProvi
+
+*android.appwidget.AppWidgetProvider_Methods*
+|android.appwidget.AppWidgetProvider.onAppWidgetOptionsChanged(Context,AppWidgetManager,int,Bundle)|
+|android.appwidget.AppWidgetProvider.onDeleted(Context,int[])|Called in respons
+|android.appwidget.AppWidgetProvider.onDisabled(Context)|Called in response to 
+|android.appwidget.AppWidgetProvider.onEnabled(Context)|Called in response to t
+|android.appwidget.AppWidgetProvider.onReceive(Context,Intent)|ImplementsBroadc
+|android.appwidget.AppWidgetProvider.onUpdate(Context,AppWidgetManager,int[])|C
+
+*android.appwidget.AppWidgetProvider_Description*
+
+A convenience class to aid in implementing an AppWidget provider. Everything 
+you can do with AppWidgetProvider, you can do with a regular 
+(|android.content.BroadcastReceiver|) . AppWidgetProvider merely parses the 
+relevant fields out of the Intent that is received in 
+onReceive(Context,Intent)(|android.appwidget.AppWidgetProvider|) , and calls 
+hook methods with the received extras. 
+
+Extend this class and override one or more of the 
+(|android.appwidget.AppWidgetProvider|) , 
+(|android.appwidget.AppWidgetProvider|) , 
+(|android.appwidget.AppWidgetProvider|) or 
+(|android.appwidget.AppWidgetProvider|) methods to implement your own AppWidget 
+functionality. 
+
+Developer Guides For more information about how to write an app widget 
+provider, read the <a 
+href="guide/topics/appwidgets/index.html#AppWidgetProvider">App Widgets 
+developer guide. 
+
+
+
+*android.appwidget.AppWidgetProvider()*
+
+public AppWidgetProvider()
+
+Constructor to initialize AppWidgetProvider. 
+
+
+*android.appwidget.AppWidgetProvider.onAppWidgetOptionsChanged(Context,AppWidgetManager,int,Bundle)*
+
+public void onAppWidgetOptionsChanged(
+  android.content.Context context,
+  android.appwidget.AppWidgetManager appWidgetManager,
+  int appWidgetId,
+  android.os.Bundle newOptions)
+
+Called in response to the (|android.appwidget.AppWidgetManager|) broadcast when 
+this widget has been layed out at a new size. 
+
+
+    context - The {@link android.content.Context Context} in which this receiver is running. 
+    appWidgetManager - A {@link AppWidgetManager} object you can call {@link 
+       AppWidgetManager#updateAppWidget} on. 
+    appWidgetId - The appWidgetId of the widget who's size changed. 
+    newOptions - The appWidgetId of the widget who's size changed. 
+
+*android.appwidget.AppWidgetProvider.onDeleted(Context,int[])*
+
+public void onDeleted(
+  android.content.Context context,
+  int[] appWidgetIds)
+
+Called in response to the (|android.appwidget.AppWidgetManager|) broadcast when 
+one or more AppWidget instances have been deleted. Override this method to 
+implement your own AppWidget functionality. 
+
+
+    context - The {@link android.content.Context Context} in which this receiver is running. 
+    appWidgetIds - The appWidgetIds that have been deleted from their host. 
+
+*android.appwidget.AppWidgetProvider.onDisabled(Context)*
+
+public void onDisabled(android.content.Context context)
+
+Called in response to the (|android.appwidget.AppWidgetManager|) broadcast, 
+which is sent when the last AppWidget instance for this provider is deleted. 
+Override this method to implement your own AppWidget functionality. 
+
+
+    context - The {@link android.content.Context Context} in which this receiver is running. 
+
+*android.appwidget.AppWidgetProvider.onEnabled(Context)*
+
+public void onEnabled(android.content.Context context)
+
+Called in response to the (|android.appwidget.AppWidgetManager|) broadcast when 
+the a AppWidget for this provider is instantiated. Override this method to 
+implement your own AppWidget functionality.When the last AppWidget for this 
+provider is deleted, (|android.appwidget.AppWidgetManager|) is sent by the 
+AppWidget manager, and (|android.appwidget.AppWidgetProvider|) is called. If 
+after that, an AppWidget for this provider is created again, onEnabled() will 
+be called again. 
+
+
+    context - The {@link android.content.Context Context} in which this receiver is running. 
+
+*android.appwidget.AppWidgetProvider.onReceive(Context,Intent)*
+
+public void onReceive(
+  android.content.Context context,
+  android.content.Intent intent)
+
+Implements (|android.content.BroadcastReceiver|) to dispatch calls to the 
+various other methods on AppWidgetProvider. 
+
+
+    context - The Context in which the receiver is running. 
+    intent - The Intent being received. 
+
+*android.appwidget.AppWidgetProvider.onUpdate(Context,AppWidgetManager,int[])*
+
+public void onUpdate(
+  android.content.Context context,
+  android.appwidget.AppWidgetManager appWidgetManager,
+  int[] appWidgetIds)
+
+Called in response to the (|android.appwidget.AppWidgetManager|) broadcast when 
+this AppWidget provider is being asked to provide 
+RemoteViews(|android.widget.RemoteViews|) for a set of AppWidgets. Override 
+this method to implement your own AppWidget functionality. 
+
+
+    context - The {@link android.content.Context Context} in which this receiver is running. 
+    appWidgetManager - A {@link AppWidgetManager} object you can call {@link 
+       AppWidgetManager#updateAppWidget} on. 
+    appWidgetIds - The appWidgetIds for which an update is needed. Note that this may be all of 
+       the AppWidget instances for this provider, or just a subset of them. 
+
+

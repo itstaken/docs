@@ -1,0 +1,136 @@
+*android.provider.ContactsContract.ContactsColumns* *ContactsContract.ContactsColumns* 
+
+protected static interface interface ContactsContract.ContactsColumns
+
+
+|android.provider.ContactsContract.ContactsColumns_Description|
+|android.provider.ContactsContract.ContactsColumns_Fields|
+|android.provider.ContactsContract.ContactsColumns_Constructors|
+|android.provider.ContactsContract.ContactsColumns_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.ContactsColumns_Fields*
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.CONTACT_LAST_UPDATED_TIMESTAMP|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.DISPLAY_NAME|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.HAS_PHONE_NUMBER|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.IN_VISIBLE_GROUP|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.IS_USER_PROFILE|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.LOOKUP_KEY|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.NAME_RAW_CONTACT_ID|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_FILE_ID|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_ID|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_THUMBNAIL_URI|
+|java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_URI|
+
+*android.provider.ContactsContract.ContactsColumns_Description*
+
+Columns of (|android.provider.ContactsContract.Contacts|) that refer to 
+intrinsic properties of the contact, as opposed to the user-specified options 
+found in (|android.provider.ContactsContract.ContactOptionsColumns|) . 
+
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.CONTACT_LAST_UPDATED_TIMESTAMP*
+
+Timestamp (milliseconds since epoch) of when this contact was last updated. 
+This includes updates to all data associated with this contact including raw 
+contacts. Any modification (including deletes and inserts) of underlying 
+contact data are also reflected in this timestamp. 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.DISPLAY_NAME*
+
+The display name for the contact. Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.HAS_PHONE_NUMBER*
+
+An indicator of whether this contact has at least one phone number. "1" if 
+there is at least one phone number, "0" otherwise. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.IN_VISIBLE_GROUP*
+
+Flag that reflects the (|android.provider.ContactsContract.Groups|) state of 
+any (|android.provider.ContactsContract.CommonDataKinds.GroupMembership|) for 
+this contact. 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.IS_USER_PROFILE*
+
+Flag that reflects whether this contact represents the user's personal profile 
+entry. 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.LOOKUP_KEY*
+
+An opaque value that contains hints on how to find the contact if its row id 
+changed as a result of a sync or aggregation. 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.NAME_RAW_CONTACT_ID*
+
+Reference to the row in the RawContacts table holding the contact name. Type: 
+INTEGER REFERENCES raw_contacts(_id) 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_FILE_ID*
+
+Photo file ID of the full-size photo. If present, this will be used to populate 
+(|android.provider.ContactsContract.ContactsColumns|) . The ID can also be used 
+with (|android.provider.ContactsContract.DisplayPhoto|) to create a URI to the 
+photo. If this is present, 
+(|android.provider.ContactsContract.ContactsColumns|) is also guaranteed to be 
+populated. 
+
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_ID*
+
+Reference to the row in the data table holding the photo. A photo can be 
+referred to either by ID (this field) or by URI (see 
+(|android.provider.ContactsContract.ContactsColumns|) and 
+(|android.provider.ContactsContract.ContactsColumns|) ). If PHOTO_ID is null, 
+consult (|android.provider.ContactsContract.ContactsColumns|) or 
+(|android.provider.ContactsContract.ContactsColumns|) , which is a more generic 
+mechanism for referencing the contact photo, especially for contacts returned 
+by non-local directories (see (|android.provider.ContactsContract.Directory|) 
+). 
+
+Type: INTEGER REFERENCES data(_id) 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_THUMBNAIL_URI*
+
+A URI that can be used to retrieve a thumbnail of the contact's photo. A photo 
+can be referred to either by a URI (this field or 
+(|android.provider.ContactsContract.ContactsColumns|) ) or by ID (see 
+(|android.provider.ContactsContract.ContactsColumns|) ). If PHOTO_ID is not 
+null, PHOTO_URI and PHOTO_THUMBNAIL_URI shall not be null (but not necessarily 
+vice versa). If the content provider does not differentiate between full-size 
+photos and thumbnail photos, PHOTO_THUMBNAIL_URI and 
+(|android.provider.ContactsContract.ContactsColumns|) can contain the same 
+value, but either both shall be null or both not null. 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.ContactsColumns.PHOTO_URI*
+
+A URI that can be used to retrieve the contact's full-size photo. If 
+PHOTO_FILE_ID is not null, this will be populated with a URI based off 
+(|android.provider.ContactsContract.DisplayPhoto|) . Otherwise, this will be 
+populated with the same value as 
+(|android.provider.ContactsContract.ContactsColumns|) . A photo can be referred 
+to either by a URI (this field) or by ID (see 
+(|android.provider.ContactsContract.ContactsColumns|) ). If either 
+PHOTO_FILE_ID or PHOTO_ID is not null, PHOTO_URI and PHOTO_THUMBNAIL_URI shall 
+not be null (but not necessarily vice versa). Thus using PHOTO_URI is a more 
+robust method of retrieving contact photos. 
+
+Type: TEXT 
+
+
+

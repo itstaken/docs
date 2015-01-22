@@ -1,0 +1,253 @@
+*android.database.DatabaseUtils.InsertHelper* *DatabaseUtils.InsertHelper* This 
+
+public static class DatabaseUtils.InsertHelper
+  extends    |java.lang.Object|
+
+|android.database.DatabaseUtils.InsertHelper_Description|
+|android.database.DatabaseUtils.InsertHelper_Fields|
+|android.database.DatabaseUtils.InsertHelper_Constructors|
+|android.database.DatabaseUtils.InsertHelper_Methods|
+
+================================================================================
+
+*android.database.DatabaseUtils.InsertHelper_Fields*
+|int_android.database.DatabaseUtils.InsertHelper.TABLE_INFO_PRAGMA_COLUMNNAME_INDEX|
+|int_android.database.DatabaseUtils.InsertHelper.TABLE_INFO_PRAGMA_DEFAULT_INDEX|
+
+*android.database.DatabaseUtils.InsertHelper_Constructors*
+|android.database.DatabaseUtils.InsertHelper(SQLiteDatabase,String)|
+
+*android.database.DatabaseUtils.InsertHelper_Methods*
+|android.database.DatabaseUtils.InsertHelper.bind(int,boolean)|Bind the value t
+|android.database.DatabaseUtils.InsertHelper.bind(int,byte[])|Bind the value to
+|android.database.DatabaseUtils.InsertHelper.bind(int,double)|Bind the value to
+|android.database.DatabaseUtils.InsertHelper.bind(int,float)|Bind the value to 
+|android.database.DatabaseUtils.InsertHelper.bind(int,int)|Bind the value to an
+|android.database.DatabaseUtils.InsertHelper.bind(int,long)|Bind the value to a
+|android.database.DatabaseUtils.InsertHelper.bind(int,String)|Bind the value to
+|android.database.DatabaseUtils.InsertHelper.bindNull(int)|Bind null to an inde
+|android.database.DatabaseUtils.InsertHelper.close()|Close this object and rele
+|android.database.DatabaseUtils.InsertHelper.execute()|Execute the previously p
+|android.database.DatabaseUtils.InsertHelper.getColumnIndex(String)|Returns the
+|android.database.DatabaseUtils.InsertHelper.insert(ContentValues)|Performs an 
+|android.database.DatabaseUtils.InsertHelper.prepareForInsert()|Prepare the Ins
+|android.database.DatabaseUtils.InsertHelper.prepareForReplace()|Prepare the In
+|android.database.DatabaseUtils.InsertHelper.replace(ContentValues)|Performs an
+
+*android.database.DatabaseUtils.InsertHelper_Description*
+
+This class allows users to do multiple inserts into a table using the same 
+statement. 
+
+This class is not thread-safe. 
+
+
+  Deprecated: Use {@link SQLiteStatement} instead.
+
+*int_android.database.DatabaseUtils.InsertHelper.TABLE_INFO_PRAGMA_COLUMNNAME_INDEX*
+
+These are the columns returned by sqlite's "PRAGMA table_info(...)" command 
+that we depend on. 
+
+
+*int_android.database.DatabaseUtils.InsertHelper.TABLE_INFO_PRAGMA_DEFAULT_INDEX*
+
+This field was accidentally exposed in earlier versions of the platform so we 
+can hide it but we can't remove it. 
+
+
+
+*android.database.DatabaseUtils.InsertHelper(SQLiteDatabase,String)*
+
+public DatabaseUtils.InsertHelper(
+  android.database.sqlite.SQLiteDatabase db,
+  java.lang.String tableName)
+
+
+
+    db - the SQLiteDatabase to insert into 
+    tableName - the name of the table to insert into 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,boolean)*
+
+public void bind(
+  int index,
+  boolean value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,byte[])*
+
+public void bind(
+  int index,
+  byte[] value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,double)*
+
+public void bind(
+  int index,
+  double value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,float)*
+
+public void bind(
+  int index,
+  float value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,int)*
+
+public void bind(
+  int index,
+  int value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,long)*
+
+public void bind(
+  int index,
+  long value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bind(int,String)*
+
+public void bind(
+  int index,
+  java.lang.String value)
+
+Bind the value to an index. A prepareForInsert() or prepareForReplace() without 
+a matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+    value - the value to bind 
+
+*android.database.DatabaseUtils.InsertHelper.bindNull(int)*
+
+public void bindNull(int index)
+
+Bind null to an index. A prepareForInsert() or prepareForReplace() without a 
+matching execute() must have already have been called. 
+
+
+    index - the index of the slot to which to bind 
+
+*android.database.DatabaseUtils.InsertHelper.close()*
+
+public void close()
+
+Close this object and release any resources associated with it. The behavior of 
+calling insert() after calling this method is undefined. 
+
+
+
+*android.database.DatabaseUtils.InsertHelper.execute()*
+
+public long execute()
+
+Execute the previously prepared insert or replace using the bound values since 
+the last call to prepareForInsert or prepareForReplace. 
+
+Note that calling bind() and then execute() is not thread-safe. The only 
+thread-safe way to use this class is to call insert() or replace(). 
+
+
+
+    Returns: the row ID of the newly inserted row, or -1 if an error occurred 
+
+*android.database.DatabaseUtils.InsertHelper.getColumnIndex(String)*
+
+public int getColumnIndex(java.lang.String key)
+
+Returns the index of the specified column. This is index is suitagble for use 
+in calls to bind(). 
+
+
+    key - the column name 
+
+    Returns: the index of the column 
+
+*android.database.DatabaseUtils.InsertHelper.insert(ContentValues)*
+
+public long insert(android.content.ContentValues values)
+
+Performs an insert, adding a new row with the given values. If the table 
+contains conflicting rows, an error is returned. 
+
+
+    values - the set of values with which to populate the new row 
+
+    Returns: the row ID of the newly inserted row, or -1 if an error occurred 
+
+*android.database.DatabaseUtils.InsertHelper.prepareForInsert()*
+
+public void prepareForInsert()
+
+Prepare the InsertHelper for an insert. The pattern for this is: 
+
+prepareForInsert() bind(index, value); bind(index, value); ... bind(index, 
+value); execute(); 
+
+
+
+*android.database.DatabaseUtils.InsertHelper.prepareForReplace()*
+
+public void prepareForReplace()
+
+Prepare the InsertHelper for a replace. The pattern for this is: 
+
+prepareForReplace() bind(index, value); bind(index, value); ... bind(index, 
+value); execute(); 
+
+
+
+*android.database.DatabaseUtils.InsertHelper.replace(ContentValues)*
+
+public long replace(android.content.ContentValues values)
+
+Performs an insert, adding a new row with the given values. If the table 
+contains conflicting rows, they are deleted and replaced with the new row. 
+
+
+    values - the set of values with which to populate the new row 
+
+    Returns: the row ID of the newly inserted row, or -1 if an error occurred 
+
+

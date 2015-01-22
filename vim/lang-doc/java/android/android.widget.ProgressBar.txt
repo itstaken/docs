@@ -1,0 +1,503 @@
+*android.widget.ProgressBar* *ProgressBar* 
+ Visual indicator of progress in som
+
+public class ProgressBar
+  extends    |android.view.View|
+
+|android.widget.ProgressBar_Description|
+|android.widget.ProgressBar_Fields|
+|android.widget.ProgressBar_Constructors|
+|android.widget.ProgressBar_Methods|
+
+================================================================================
+
+*android.widget.ProgressBar_Constructors*
+|android.widget.ProgressBar(Context)|Create a new progress bar with range 0...1
+|android.widget.ProgressBar(Context,AttributeSet)|
+|android.widget.ProgressBar(Context,AttributeSet,int)|
+|android.widget.ProgressBar(Context,AttributeSet,int,int)|
+
+*android.widget.ProgressBar_Methods*
+|android.widget.ProgressBar.drawableStateChanged()|
+|android.widget.ProgressBar.getIndeterminateDrawable()|Get the drawable used to
+|android.widget.ProgressBar.getInterpolator()|Gets the acceleration curve type 
+|android.widget.ProgressBar.getMax()|Return the upper limit of this progress ba
+|android.widget.ProgressBar.getProgress()|Get the progress bar's current level 
+|android.widget.ProgressBar.getProgressDrawable()|Get the drawable used to draw
+|android.widget.ProgressBar.getSecondaryProgress()|Get the progress bar's curre
+|android.widget.ProgressBar.incrementProgressBy(int)|Increase the progress bar'
+|android.widget.ProgressBar.incrementSecondaryProgressBy(int)|Increase the prog
+|android.widget.ProgressBar.invalidateDrawable(Drawable)|
+|android.widget.ProgressBar.isIndeterminate()|Indicate whether this progress ba
+|android.widget.ProgressBar.jumpDrawablesToCurrentState()|
+|android.widget.ProgressBar.onAttachedToWindow()|
+|android.widget.ProgressBar.onDetachedFromWindow()|
+|android.widget.ProgressBar.onDraw(Canvas)|
+|android.widget.ProgressBar.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.ProgressBar.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.ProgressBar.onMeasure(int,int)|
+|android.widget.ProgressBar.onResolveDrawables(int)|
+|android.widget.ProgressBar.onRestoreInstanceState(Parcelable)|
+|android.widget.ProgressBar.onSaveInstanceState()|
+|android.widget.ProgressBar.onSizeChanged(int,int,int,int)|
+|android.widget.ProgressBar.onVisibilityChanged(View,int)|
+|android.widget.ProgressBar.postInvalidate()|
+|android.widget.ProgressBar.setIndeterminate(boolean)|Change the indeterminate 
+|android.widget.ProgressBar.setIndeterminateDrawable(Drawable)|Define the drawa
+|android.widget.ProgressBar.setInterpolator(Context,int)|Sets the acceleration 
+|android.widget.ProgressBar.setInterpolator(Interpolator)|Sets the acceleration
+|android.widget.ProgressBar.setMax(int)|Set the range of the progress bar to 0.
+|android.widget.ProgressBar.setProgress(int)|Set the current progress to the sp
+|android.widget.ProgressBar.setProgressDrawable(Drawable)|Define the drawable u
+|android.widget.ProgressBar.setSecondaryProgress(int)|Set the current secondary
+|android.widget.ProgressBar.setVisibility(int)|
+|android.widget.ProgressBar.verifyDrawable(Drawable)|
+
+*android.widget.ProgressBar_Description*
+
+Visual indicator of progress in some operation. Displays a bar to the user 
+representing how far the operation has progressed; the application can change 
+the amount of progress (modifying the length of the bar) as it moves forward. 
+There is also a secondary progress displayable on a progress bar which is 
+useful for displaying intermediate progress, such as the buffer level during a 
+streaming playback progress bar. 
+
+A progress bar can also be made indeterminate. In indeterminate mode, the 
+progress bar shows a cyclic animation without an indication of progress. This 
+mode is used by applications when the length of the task is unknown. The 
+indeterminate progress bar can be either a spinning wheel or a horizontal bar. 
+
+The following code example shows how a progress bar can be used from a worker 
+thread to update the user interface to notify the user of progress: 
+
+
+
+public class MyActivity extends Activity { private static final int PROGRESS = 
+0x1; 
+
+private ProgressBar mProgress; private int mProgressStatus = 0; 
+
+private Handler mHandler = new Handler(); 
+
+protected void onCreate(Bundle icicle) { super.onCreate(icicle); 
+
+setContentView(R.layout.progressbar_activity); 
+
+mProgress = (ProgressBar) findViewById(R.id.progress_bar); 
+
+// Start lengthy operation in a background thread new Thread(new Runnable() { 
+public void run() { while (mProgressStatus < 100) { mProgressStatus = doWork(); 
+
+// Update the progress bar mHandler.post(new Runnable() { public void run() { 
+mProgress.setProgress(mProgressStatus); } }); } } }).start(); } } 
+
+To add a progress bar to a layout file, you can use the<ProgressBar>element. By 
+default, the progress bar is a spinning wheel (an indeterminate indicator). To 
+change to a horizontal progress bar, apply the 
+Widget.ProgressBar.Horizontal(|android.R.style|) style, like so: 
+
+
+
+<ProgressBar style="@android:style/Widget.ProgressBar.Horizontal" ... /> 
+
+If you will use the progress bar to show real progress, you must use the 
+horizontal bar. You can then increment the progress with 
+incrementProgressBy()(|android.widget.ProgressBar|) or 
+setProgress()(|android.widget.ProgressBar|) . By default, the progress bar is 
+full when it reaches 100. If necessary, you can adjust the maximum value (the 
+value for a full bar) using the android:max(|android.R.styleable|) attribute. 
+Other attributes available are listed below. 
+
+Another common style to apply to the progress bar is 
+Widget.ProgressBar.Small(|android.R.style|) , which shows a smaller version of 
+the spinning wheeluseful when waiting for content to load. For example, you can 
+insert this kind of progress bar into your default layout for a view that will 
+be populated by some content fetched from the Internetthe spinning wheel 
+appears immediately and when your application receives the content, it replaces 
+the progress bar with the loaded content. For example: 
+
+
+
+<LinearLayout android:orientation="horizontal" ... > <ProgressBar 
+android:layout_width="wrap_content" android:layout_height="wrap_content" 
+style="@android:style/Widget.ProgressBar.Small" 
+android:layout_marginRight="5dp" /> <TextView 
+android:layout_width="wrap_content" android:layout_height="wrap_content" 
+android:text="@string/loading" /> </LinearLayout> 
+
+Other progress bar styles provided by the system include: 
+
+Widget.ProgressBar.Horizontal(|android.R.style|) 
+Widget.ProgressBar.Small(|android.R.style|) 
+Widget.ProgressBar.Large(|android.R.style|) 
+Widget.ProgressBar.Inverse(|android.R.style|) 
+Widget.ProgressBar.Small.Inverse(|android.R.style|) 
+Widget.ProgressBar.Large.Inverse(|android.R.style|) 
+
+The "inverse" styles provide an inverse color scheme for the spinner, which may 
+be necessary if your application uses a light colored theme (a white 
+background). 
+
+XML attributes 
+
+See ProgressBar Attributes(|android.R.styleable|) , View 
+Attributes(|android.R.styleable|) 
+
+
+
+*android.widget.ProgressBar(Context)*
+
+public ProgressBar(android.content.Context context)
+
+Create a new progress bar with range 0...100 and initial progress of 0. 
+
+    context - the application environment 
+
+*android.widget.ProgressBar(Context,AttributeSet)*
+
+public ProgressBar(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.ProgressBar(Context,AttributeSet,int)*
+
+public ProgressBar(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.ProgressBar(Context,AttributeSet,int,int)*
+
+public ProgressBar(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle,
+  int styleRes)
+
+
+
+
+*android.widget.ProgressBar.drawableStateChanged()*
+
+protected void drawableStateChanged()
+
+
+
+
+
+*android.widget.ProgressBar.getIndeterminateDrawable()*
+
+public Drawable getIndeterminateDrawable()
+
+Get the drawable used to draw the progress bar in indeterminate mode. 
+
+
+
+    Returns: a {@link android.graphics.drawable.Drawable} instance 
+
+*android.widget.ProgressBar.getInterpolator()*
+
+public |android.view.animation.Interpolator| getInterpolator()
+
+Gets the acceleration curve type for the indeterminate animation. 
+
+
+
+    Returns: the {@link Interpolator} associated to this animation 
+
+*android.widget.ProgressBar.getMax()*
+
+public synchronized int getMax()
+
+Return the upper limit of this progress bar's range. 
+
+
+
+    Returns: a positive integer 
+
+*android.widget.ProgressBar.getProgress()*
+
+public synchronized int getProgress()
+
+Get the progress bar's current level of progress. Return 0 when the progress 
+bar is in indeterminate mode. 
+
+
+
+    Returns: the current progress, between 0 and {@link #getMax()} 
+
+*android.widget.ProgressBar.getProgressDrawable()*
+
+public Drawable getProgressDrawable()
+
+Get the drawable used to draw the progress bar in progress mode. 
+
+
+
+    Returns: a {@link android.graphics.drawable.Drawable} instance 
+
+*android.widget.ProgressBar.getSecondaryProgress()*
+
+public synchronized int getSecondaryProgress()
+
+Get the progress bar's current level of secondary progress. Return 0 when the 
+progress bar is in indeterminate mode. 
+
+
+
+    Returns: the current secondary progress, between 0 and {@link #getMax()} 
+
+*android.widget.ProgressBar.incrementProgressBy(int)*
+
+public final synchronized void incrementProgressBy(int diff)
+
+Increase the progress bar's progress by the specified amount. 
+
+
+    diff - the amount by which the progress must be increased 
+
+*android.widget.ProgressBar.incrementSecondaryProgressBy(int)*
+
+public final synchronized void incrementSecondaryProgressBy(int diff)
+
+Increase the progress bar's secondary progress by the specified amount. 
+
+
+    diff - the amount by which the secondary progress must be increased 
+
+*android.widget.ProgressBar.invalidateDrawable(Drawable)*
+
+public void invalidateDrawable(Drawable dr)
+
+
+
+
+
+*android.widget.ProgressBar.isIndeterminate()*
+
+public synchronized boolean isIndeterminate()
+
+Indicate whether this progress bar is in indeterminate mode. 
+
+
+
+    Returns: true if the progress bar is in indeterminate mode 
+
+*android.widget.ProgressBar.jumpDrawablesToCurrentState()*
+
+public void jumpDrawablesToCurrentState()
+
+
+
+
+
+*android.widget.ProgressBar.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.widget.ProgressBar.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.widget.ProgressBar.onDraw(Canvas)*
+
+protected synchronized void onDraw(Canvas canvas)
+
+
+
+
+
+*android.widget.ProgressBar.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.ProgressBar.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ProgressBar.onMeasure(int,int)*
+
+protected synchronized void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.ProgressBar.onResolveDrawables(int)*
+
+public void onResolveDrawables(int layoutDirection)
+
+
+
+
+
+*android.widget.ProgressBar.onRestoreInstanceState(Parcelable)*
+
+public void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.widget.ProgressBar.onSaveInstanceState()*
+
+public |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+*android.widget.ProgressBar.onSizeChanged(int,int,int,int)*
+
+protected void onSizeChanged(
+  int w,
+  int h,
+  int oldw,
+  int oldh)
+
+
+
+
+
+*android.widget.ProgressBar.onVisibilityChanged(View,int)*
+
+protected void onVisibilityChanged(
+  android.view.View changedView,
+  int visibility)
+
+
+
+
+
+*android.widget.ProgressBar.postInvalidate()*
+
+public void postInvalidate()
+
+
+
+
+
+*android.widget.ProgressBar.setIndeterminate(boolean)*
+
+public synchronized void setIndeterminate(boolean indeterminate)
+
+Change the indeterminate mode for this progress bar. In indeterminate mode, the 
+progress is ignored and the progress bar shows an infinite animation instead. 
+
+If this progress bar's style only supports indeterminate mode (such as the 
+circular progress bars), then this will be ignored. 
+
+
+    indeterminate - true to enable the indeterminate mode 
+
+*android.widget.ProgressBar.setIndeterminateDrawable(Drawable)*
+
+public void setIndeterminateDrawable(Drawable d)
+
+Define the drawable used to draw the progress bar in indeterminate mode. 
+
+
+    d - the new drawable 
+
+*android.widget.ProgressBar.setInterpolator(Context,int)*
+
+public void setInterpolator(
+  android.content.Context context,
+  int resID)
+
+Sets the acceleration curve for the indeterminate animation. The interpolator 
+is loaded as a resource from the specified context. 
+
+
+    context - The application environment 
+    resID - The resource identifier of the interpolator to load 
+
+*android.widget.ProgressBar.setInterpolator(Interpolator)*
+
+public void setInterpolator(android.view.animation.Interpolator interpolator)
+
+Sets the acceleration curve for the indeterminate animation. Defaults to a 
+linear interpolation. 
+
+
+    interpolator - The interpolator which defines the acceleration curve 
+
+*android.widget.ProgressBar.setMax(int)*
+
+public synchronized void setMax(int max)
+
+Set the range of the progress bar to 0...max. 
+
+
+    max - the upper range of this progress bar 
+
+*android.widget.ProgressBar.setProgress(int)*
+
+public synchronized void setProgress(int progress)
+
+Set the current progress to the specified value. Does not do anything if the 
+progress bar is in indeterminate mode. 
+
+
+    progress - the new progress, between 0 and {@link #getMax()} 
+
+*android.widget.ProgressBar.setProgressDrawable(Drawable)*
+
+public void setProgressDrawable(Drawable d)
+
+Define the drawable used to draw the progress bar in progress mode. 
+
+
+    d - the new drawable 
+
+*android.widget.ProgressBar.setSecondaryProgress(int)*
+
+public synchronized void setSecondaryProgress(int secondaryProgress)
+
+Set the current secondary progress to the specified value. Does not do anything 
+if the progress bar is in indeterminate mode. 
+
+
+    secondaryProgress - the new secondary progress, between 0 and {@link #getMax()} 
+
+*android.widget.ProgressBar.setVisibility(int)*
+
+public void setVisibility(int v)
+
+
+
+
+
+*android.widget.ProgressBar.verifyDrawable(Drawable)*
+
+protected boolean verifyDrawable(Drawable who)
+
+
+
+
+
+

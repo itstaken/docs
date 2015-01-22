@@ -1,0 +1,499 @@
+*android.widget.OverScroller* *OverScroller* This class encapsulates scrolling w
+
+public class OverScroller
+  extends    |java.lang.Object|
+
+|android.widget.OverScroller_Description|
+|android.widget.OverScroller_Fields|
+|android.widget.OverScroller_Constructors|
+|android.widget.OverScroller_Methods|
+
+================================================================================
+
+*android.widget.OverScroller_Constructors*
+|android.widget.OverScroller(Context)|Creates an OverScroller with a viscous fl
+|android.widget.OverScroller(Context,Interpolator)|Creates an OverScroller with
+|android.widget.OverScroller(Context,Interpolator,boolean)|Creates an OverScrol
+|android.widget.OverScroller(Context,Interpolator,float,float)|Creates an OverS
+|android.widget.OverScroller(Context,Interpolator,float,float,boolean)|Creates 
+
+*android.widget.OverScroller_Methods*
+|android.widget.OverScroller.abortAnimation()|Stops the animation.
+|android.widget.OverScroller.computeScrollOffset()|Call this when you want to k
+|android.widget.OverScroller.extendDuration(int)|Extend the scroll animation.
+|android.widget.OverScroller.fling(int,int,int,int,int,int,int,int)|
+|android.widget.OverScroller.fling(int,int,int,int,int,int,int,int,int,int)|Sta
+|android.widget.OverScroller.forceFinished(boolean)|Force the finished field to
+|android.widget.OverScroller.getCurrVelocity()|Returns the absolute value of th
+|android.widget.OverScroller.getCurrX()|Returns the current X offset in the scr
+|android.widget.OverScroller.getCurrY()|Returns the current Y offset in the scr
+|android.widget.OverScroller.getDuration()|Returns how long the scroll event wi
+|android.widget.OverScroller.getFinalX()|Returns where the scroll will end.
+|android.widget.OverScroller.getFinalY()|Returns where the scroll will end.
+|android.widget.OverScroller.getStartX()|Returns the start X offset in the scro
+|android.widget.OverScroller.getStartY()|Returns the start Y offset in the scro
+|android.widget.OverScroller.isFinished()|Returns whether the scroller has fini
+|android.widget.OverScroller.isOverScrolled()|Returns whether the current Scrol
+|android.widget.OverScroller.isScrollingInDirection(float,float)|
+|android.widget.OverScroller.notifyHorizontalEdgeReached(int,int,int)|Notify th
+|android.widget.OverScroller.notifyVerticalEdgeReached(int,int,int)|Notify the 
+|android.widget.OverScroller.setFinalX(int)|Sets the final position (X) for thi
+|android.widget.OverScroller.setFinalY(int)|Sets the final position (Y) for thi
+|android.widget.OverScroller.setFriction(float)|The amount of friction applied 
+|android.widget.OverScroller.springBack(int,int,int,int,int,int)|Call this when
+|android.widget.OverScroller.startScroll(int,int,int,int)|Start scrolling by pr
+|android.widget.OverScroller.startScroll(int,int,int,int,int)|Start scrolling b
+|android.widget.OverScroller.timePassed()|Returns the time elapsed since the be
+
+*android.widget.OverScroller_Description*
+
+This class encapsulates scrolling with the ability to overshoot the bounds of a 
+scrolling operation. This class is a drop-in replacement for 
+(|android.widget.Scroller|) in most cases. 
+
+
+
+*android.widget.OverScroller(Context)*
+
+public OverScroller(android.content.Context context)
+
+Creates an OverScroller with a viscous fluid scroll interpolator and flywheel. 
+
+    context - 
+
+*android.widget.OverScroller(Context,Interpolator)*
+
+public OverScroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator)
+
+Creates an OverScroller with flywheel enabled. 
+
+    context - The context of this application. 
+    interpolator - The scroll interpolator. If null, a default (viscous) interpolator will be 
+       used. 
+
+*android.widget.OverScroller(Context,Interpolator,boolean)*
+
+public OverScroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator,
+  boolean flywheel)
+
+Creates an OverScroller. 
+
+    context - The context of this application. 
+    interpolator - The scroll interpolator. If null, a default (viscous) interpolator will be 
+       used. 
+    flywheel - If true, successive fling motions will keep on increasing scroll speed. 
+
+*android.widget.OverScroller(Context,Interpolator,float,float)*
+
+public OverScroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator,
+  float bounceCoefficientX,
+  float bounceCoefficientY)
+
+Creates an OverScroller with flywheel enabled. 
+
+    context - The context of this application. 
+    interpolator - The scroll interpolator. If null, a default (viscous) interpolator will be 
+       used. 
+    bounceCoefficientX - A value between 0 and 1 that will determine the proportion of the velocity 
+       which is preserved in the bounce when the horizontal edge is reached. A 
+       null value means no bounce. This behavior is no longer supported and 
+       this coefficient has no effect. 
+    bounceCoefficientY - Same as bounceCoefficientX but for the vertical direction. This behavior is no 
+       longer supported and this coefficient has no effect. !deprecated Use 
+       {!link #OverScroller(Context, Interpolator, boolean)} instead. 
+
+*android.widget.OverScroller(Context,Interpolator,float,float,boolean)*
+
+public OverScroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator,
+  float bounceCoefficientX,
+  float bounceCoefficientY,
+  boolean flywheel)
+
+Creates an OverScroller. 
+
+    context - The context of this application. 
+    interpolator - The scroll interpolator. If null, a default (viscous) interpolator will be 
+       used. 
+    bounceCoefficientX - A value between 0 and 1 that will determine the proportion of the velocity 
+       which is preserved in the bounce when the horizontal edge is reached. A 
+       null value means no bounce. This behavior is no longer supported and 
+       this coefficient has no effect. 
+    bounceCoefficientY - Same as bounceCoefficientX but for the vertical direction. This behavior is no 
+       longer supported and this coefficient has no effect. 
+    flywheel - If true, successive fling motions will keep on increasing scroll speed. 
+       !deprecated Use {!link OverScroller(Context, Interpolator, boolean)} 
+       instead. 
+
+*android.widget.OverScroller.abortAnimation()*
+
+public void abortAnimation()
+
+Stops the animation. Contrary to (|android.widget.OverScroller|) , aborting the 
+animating causes the scroller to move to the final x and y positions. 
+
+
+
+*android.widget.OverScroller.computeScrollOffset()*
+
+public boolean computeScrollOffset()
+
+Call this when you want to know the new location. If it returns true, the 
+animation is not yet finished. 
+
+
+
+*android.widget.OverScroller.extendDuration(int)*
+
+public void extendDuration(int extend)
+
+Extend the scroll animation. This allows a running animation to scroll further 
+and longer, when used with (|android.widget.OverScroller|) or 
+(|android.widget.OverScroller|) . 
+
+    Deprecated: OverScrollers don't necessarily have a fixed duration.
+             Instead of setting a new final position and extending
+             the duration of an existing scroll, use startScroll
+             to begin a new animation.
+
+    extend - Additional time to scroll in milliseconds. 
+
+*android.widget.OverScroller.fling(int,int,int,int,int,int,int,int)*
+
+public void fling(
+  int startX,
+  int startY,
+  int velocityX,
+  int velocityY,
+  int minX,
+  int maxX,
+  int minY,
+  int maxY)
+
+
+
+
+
+*android.widget.OverScroller.fling(int,int,int,int,int,int,int,int,int,int)*
+
+public void fling(
+  int startX,
+  int startY,
+  int velocityX,
+  int velocityY,
+  int minX,
+  int maxX,
+  int minY,
+  int maxY,
+  int overX,
+  int overY)
+
+Start scrolling based on a fling gesture. The distance traveled will depend on 
+the initial velocity of the fling. 
+
+
+    startX - Starting point of the scroll (X) 
+    startY - Starting point of the scroll (Y) 
+    velocityX - Initial velocity of the fling (X) measured in pixels per second. 
+    velocityY - Initial velocity of the fling (Y) measured in pixels per second 
+    minX - Minimum X value. The scroller will not scroll past this point unless overX > 0. 
+       If overfling is allowed, it will use minX as a springback boundary. 
+    maxX - Maximum X value. The scroller will not scroll past this point unless overX > 0. 
+       If overfling is allowed, it will use maxX as a springback boundary. 
+    minY - Minimum Y value. The scroller will not scroll past this point unless overY > 0. 
+       If overfling is allowed, it will use minY as a springback boundary. 
+    maxY - Maximum Y value. The scroller will not scroll past this point unless overY > 0. 
+       If overfling is allowed, it will use maxY as a springback boundary. 
+    overX - Overfling range. If > 0, horizontal overfling in either direction will be 
+       possible. 
+    overY - Overfling range. If > 0, vertical overfling in either direction will be 
+       possible. 
+
+*android.widget.OverScroller.forceFinished(boolean)*
+
+public final void forceFinished(boolean finished)
+
+Force the finished field to a particular value. Contrary to 
+(|android.widget.OverScroller|) , forcing the animation to finished does NOT 
+cause the scroller to move to the final x and y position. 
+
+
+    finished - The new finished value. 
+
+*android.widget.OverScroller.getCurrVelocity()*
+
+public float getCurrVelocity()
+
+Returns the absolute value of the current velocity. 
+
+
+
+    Returns: The original velocity less the deceleration, norm of the X and Y velocity 
+             vector. 
+
+*android.widget.OverScroller.getCurrX()*
+
+public final int getCurrX()
+
+Returns the current X offset in the scroll. 
+
+
+
+    Returns: The new X offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.getCurrY()*
+
+public final int getCurrY()
+
+Returns the current Y offset in the scroll. 
+
+
+
+    Returns: The new Y offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.getDuration()*
+
+public final int getDuration()
+
+Returns how long the scroll event will take, in milliseconds. 
+
+    Deprecated: OverScrollers don't necessarily have a fixed duration.
+             This function will lie to the best of its ability.
+
+
+    Returns: The duration of the scroll in milliseconds. 
+
+*android.widget.OverScroller.getFinalX()*
+
+public final int getFinalX()
+
+Returns where the scroll will end. Valid only for "fling" scrolls. 
+
+
+
+    Returns: The final X offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.getFinalY()*
+
+public final int getFinalY()
+
+Returns where the scroll will end. Valid only for "fling" scrolls. 
+
+
+
+    Returns: The final Y offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.getStartX()*
+
+public final int getStartX()
+
+Returns the start X offset in the scroll. 
+
+
+
+    Returns: The start X offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.getStartY()*
+
+public final int getStartY()
+
+Returns the start Y offset in the scroll. 
+
+
+
+    Returns: The start Y offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.isFinished()*
+
+public final boolean isFinished()
+
+Returns whether the scroller has finished scrolling. 
+
+
+
+    Returns: True if the scroller has finished scrolling, false otherwise. 
+
+*android.widget.OverScroller.isOverScrolled()*
+
+public boolean isOverScrolled()
+
+Returns whether the current Scroller is currently returning to a valid 
+position. Valid bounds were provided by the (|android.widget.OverScroller|) 
+method. 
+
+One should check this value before calling (|android.widget.OverScroller|) as 
+the interpolation currently in progress to restore a valid position will then 
+be stopped. The caller has to take into account the fact that the started 
+scroll will start from an overscrolled position. 
+
+
+
+    Returns: true when the current position is overscrolled and in the process of 
+             interpolating back to a valid value. 
+
+*android.widget.OverScroller.isScrollingInDirection(float,float)*
+
+public boolean isScrollingInDirection(
+  float xvel,
+  float yvel)
+
+
+
+
+
+*android.widget.OverScroller.notifyHorizontalEdgeReached(int,int,int)*
+
+public void notifyHorizontalEdgeReached(
+  int startX,
+  int finalX,
+  int overX)
+
+Notify the scroller that we've reached a horizontal boundary. Normally the 
+information to handle this will already be known when the animation is started, 
+such as in a call to one of the fling functions. However there are cases where 
+this cannot be known in advance. This function will transition the current 
+motion and animate from startX to finalX as appropriate. 
+
+
+    startX - Starting/current X position 
+    finalX - Desired final X position 
+    overX - Magnitude of overscroll allowed. This should be the maximum desired distance 
+       from finalX. Absolute value - must be positive. 
+
+*android.widget.OverScroller.notifyVerticalEdgeReached(int,int,int)*
+
+public void notifyVerticalEdgeReached(
+  int startY,
+  int finalY,
+  int overY)
+
+Notify the scroller that we've reached a vertical boundary. Normally the 
+information to handle this will already be known when the animation is started, 
+such as in a call to one of the fling functions. However there are cases where 
+this cannot be known in advance. This function will animate a parabolic motion 
+from startY to finalY. 
+
+
+    startY - Starting/current Y position 
+    finalY - Desired final Y position 
+    overY - Magnitude of overscroll allowed. This should be the maximum desired distance 
+       from finalY. Absolute value - must be positive. 
+
+*android.widget.OverScroller.setFinalX(int)*
+
+public void setFinalX(int newX)
+
+Sets the final position (X) for this scroller. 
+
+    Deprecated: OverScroller's final position may change during an animation.
+             Instead of setting a new final position and extending
+             the duration of an existing scroll, use startScroll
+             to begin a new animation.
+
+    newX - The new X offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.setFinalY(int)*
+
+public void setFinalY(int newY)
+
+Sets the final position (Y) for this scroller. 
+
+    Deprecated: OverScroller's final position may change during an animation.
+             Instead of setting a new final position and extending
+             the duration of an existing scroll, use startScroll
+             to begin a new animation.
+
+    newY - The new Y offset as an absolute distance from the origin. 
+
+*android.widget.OverScroller.setFriction(float)*
+
+public final void setFriction(float friction)
+
+The amount of friction applied to flings. The default value is 
+(|android.view.ViewConfiguration|) . 
+
+
+    friction - A scalar dimension-less value representing the coefficient of friction. 
+
+*android.widget.OverScroller.springBack(int,int,int,int,int,int)*
+
+public boolean springBack(
+  int startX,
+  int startY,
+  int minX,
+  int maxX,
+  int minY,
+  int maxY)
+
+Call this when you want to 'spring back' into a valid coordinate range. 
+
+
+    startX - Starting X coordinate 
+    startY - Starting Y coordinate 
+    minX - Minimum valid X value 
+    maxX - Maximum valid X value 
+    minY - Minimum valid Y value 
+    maxY - Minimum valid Y value 
+
+    Returns: true if a springback was initiated, false if startX and startY were already 
+             within the valid range. 
+
+*android.widget.OverScroller.startScroll(int,int,int,int)*
+
+public void startScroll(
+  int startX,
+  int startY,
+  int dx,
+  int dy)
+
+Start scrolling by providing a starting point and the distance to travel. The 
+scroll will use the default value of 250 milliseconds for the duration. 
+
+
+    startX - Starting horizontal scroll offset in pixels. Positive numbers will scroll the 
+       content to the left. 
+    startY - Starting vertical scroll offset in pixels. Positive numbers will scroll the 
+       content up. 
+    dx - Horizontal distance to travel. Positive numbers will scroll the content to the 
+       left. 
+    dy - Vertical distance to travel. Positive numbers will scroll the content up. 
+
+*android.widget.OverScroller.startScroll(int,int,int,int,int)*
+
+public void startScroll(
+  int startX,
+  int startY,
+  int dx,
+  int dy,
+  int duration)
+
+Start scrolling by providing a starting point and the distance to travel. 
+
+
+    startX - Starting horizontal scroll offset in pixels. Positive numbers will scroll the 
+       content to the left. 
+    startY - Starting vertical scroll offset in pixels. Positive numbers will scroll the 
+       content up. 
+    dx - Horizontal distance to travel. Positive numbers will scroll the content to the 
+       left. 
+    dy - Vertical distance to travel. Positive numbers will scroll the content up. 
+    duration - Duration of the scroll in milliseconds. 
+
+*android.widget.OverScroller.timePassed()*
+
+public int timePassed()
+
+Returns the time elapsed since the beginning of the scrolling. 
+
+
+
+    Returns: The elapsed time in milliseconds. 
+
+

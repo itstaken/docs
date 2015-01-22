@@ -1,0 +1,686 @@
+*android.view.DisplayList* *DisplayList* A display list records a series of grap
+
+public abstract class DisplayList
+  extends    |java.lang.Object|
+
+|android.view.DisplayList_Description|
+|android.view.DisplayList_Fields|
+|android.view.DisplayList_Constructors|
+|android.view.DisplayList_Methods|
+
+================================================================================
+
+*android.view.DisplayList_Fields*
+|int_android.view.DisplayList.FLAG_CLIP_CHILDREN|
+|int_android.view.DisplayList.STATUS_DONE|
+|int_android.view.DisplayList.STATUS_DRAW|
+|int_android.view.DisplayList.STATUS_DREW|
+|int_android.view.DisplayList.STATUS_INVOKE|
+
+*android.view.DisplayList_Constructors*
+|android.view.DisplayList()|
+
+*android.view.DisplayList_Methods*
+|android.view.DisplayList.clear()|Clears resources held onto by this display li
+|android.view.DisplayList.clearDirty()|Removes the dirty flag.
+|android.view.DisplayList.end()|Ends the recording for this display list.
+|android.view.DisplayList.getAlpha()|Returns the translucency level of this dis
+|android.view.DisplayList.getBottom()|Returns the bottom position for the displ
+|android.view.DisplayList.getCameraDistance()|Returns the distance in Z of the 
+|android.view.DisplayList.getLeft()|Returns the left position for the display l
+|android.view.DisplayList.getMatrix()|Returns the static matrix set on this dis
+|android.view.DisplayList.getMatrix(Matrix)|Copies this display list's static m
+|android.view.DisplayList.getPivotX()|Returns the pivot value for this display 
+|android.view.DisplayList.getPivotY()|Returns the pivot value for this display 
+|android.view.DisplayList.getRight()|Returns the right position for the display
+|android.view.DisplayList.getRotation()|Returns the rotation value for this dis
+|android.view.DisplayList.getRotationX()|Returns the rotation value for this di
+|android.view.DisplayList.getRotationY()|Returns the rotation value for this di
+|android.view.DisplayList.getScaleX()|Returns the scale value for this display 
+|android.view.DisplayList.getScaleY()|Returns the scale value for this display 
+|android.view.DisplayList.getSize()|Return the amount of memory used by this di
+|android.view.DisplayList.getTop()|Returns the top position for the display lis
+|android.view.DisplayList.getTranslationX()|Returns the translation value for t
+|android.view.DisplayList.getTranslationY()|Returns the translation value for t
+|android.view.DisplayList.hasOverlappingRendering()|Indicates whether the conte
+|android.view.DisplayList.isDirty()|Indicates whether the display list is dirty
+|android.view.DisplayList.isValid()|Returns whether the display list is current
+|android.view.DisplayList.markDirty()|Sets the dirty flag.
+|android.view.DisplayList.offsetLeftAndRight(float)|Offsets the left and right 
+|android.view.DisplayList.offsetTopAndBottom(float)|Offsets the top and bottom 
+|android.view.DisplayList.reset()|Reset native resources.
+|android.view.DisplayList.setAlpha(float)|Sets the translucency level for the d
+|android.view.DisplayList.setAnimationMatrix(Matrix)|Set the Animation matrix o
+|android.view.DisplayList.setBottom(int)|Sets the bottom position for the displ
+|android.view.DisplayList.setCaching(boolean)|Set the caching property on the d
+|android.view.DisplayList.setCameraDistance(float)|Sets the camera distance for
+|android.view.DisplayList.setClipToBounds(boolean)|Set whether the display list
+|android.view.DisplayList.setHasOverlappingRendering(boolean)|Sets whether the 
+|android.view.DisplayList.setLeft(int)|Sets the left position for the display l
+|android.view.DisplayList.setLeftTopRightBottom(int,int,int,int)|Sets the left 
+|android.view.DisplayList.setMatrix(Matrix)|Set the static matrix on the displa
+|android.view.DisplayList.setPivotX(float)|Sets the pivot value for the display
+|android.view.DisplayList.setPivotY(float)|Sets the pivot value for the display
+|android.view.DisplayList.setRight(int)|Sets the right position for the display
+|android.view.DisplayList.setRotation(float)|Sets the rotation value for the di
+|android.view.DisplayList.setRotationX(float)|Sets the rotation value for the d
+|android.view.DisplayList.setRotationY(float)|Sets the rotation value for the d
+|android.view.DisplayList.setScaleX(float)|Sets the scale value for the display
+|android.view.DisplayList.setScaleY(float)|Sets the scale value for the display
+|android.view.DisplayList.setTop(int)|Sets the top position for the display lis
+|android.view.DisplayList.setTransformationInfo(float,float,float,float,float,float,float,float)|
+|android.view.DisplayList.setTranslationX(float)|Sets the translation value for
+|android.view.DisplayList.setTranslationY(float)|Sets the translation value for
+|android.view.DisplayList.start(int,int)|Starts recording the display list.
+
+*android.view.DisplayList_Description*
+
+A display list records a series of graphics related operations and can replay 
+them later. Display lists are usually built by recording operations on a 
+(|android.view.HardwareCanvas|) . Replaying the operations from a display list 
+avoids executing application code on every frame, and is thus much more 
+efficient. 
+
+Display lists are used internally for all views by default, and are not 
+typically used directly. One reason to consider using a display is a custom 
+(|android.view.View|) implementation that needs to issue a large number of 
+drawing commands. When the view invalidates, all the drawing commands must be 
+reissued, even if large portions of the drawing command stream stay the same 
+frame to frame, which can become a performance bottleneck. To solve this issue, 
+a custom View might split its content into several display lists. A display 
+list is updated only when its content, and only its content, needs to be 
+updated. 
+
+A text editor might for instance store each paragraph into its own display 
+list. Thus when the user inserts or removes characters, only the display list 
+of the affected paragraph needs to be recorded again. 
+
+Hardware acceleration Display lists can only be replayed using a 
+(|android.view.HardwareCanvas|) . They are not supported in software. Always 
+make sure that the (|android.graphics.Canvas|) you are using to render a 
+display list is hardware accelerated using (|android.graphics.Canvas|) . 
+
+Creating a display list 
+
+HardwareRenderer renderer = myView.getHardwareRenderer(); if (renderer != null) 
+{ DisplayList displayList = renderer.createDisplayList(); HardwareCanvas canvas 
+= displayList.start(width, height); try { // Draw onto the canvas // For 
+instance: canvas.drawBitmap(...); } finally { displayList.end(); } } 
+
+Rendering a display list on a View 
+
+protected void onDraw(Canvas canvas) { if (canvas.isHardwareAccelerated()) { 
+HardwareCanvas hardwareCanvas = (HardwareCanvas) canvas; 
+hardwareCanvas.drawDisplayList(mDisplayList); } } 
+
+Releasing resources This step is not mandatory but recommended if you want to 
+release resources held by a display list as soon as possible. 
+
+// Mark this display list invalid, it cannot be used for drawing anymore, // 
+and release resources held by this display list displayList.clear(); 
+
+Properties In addition, a display list offers several properties, such as 
+(|android.view.DisplayList|) or (|android.view.DisplayList|) , that can be used 
+to affect all the drawing commands recorded within. For instance, these 
+properties can be used to move around a large number of images without 
+re-issuing all the individual drawBitmap() calls. 
+
+private void createDisplayList() { HardwareRenderer renderer = 
+getHardwareRenderer(); if (renderer != null) { mDisplayList = 
+renderer.createDisplayList(); HardwareCanvas canvas = mDisplayList.start(width, 
+height); try { for (Bitmap b : mBitmaps) { canvas.drawBitmap(b, 0.0f, 0.0f, 
+null); canvas.translate(0.0f, b.getHeight()); } } finally { displayList.end(); 
+} } } 
+
+protected void onDraw(Canvas canvas) { if (canvas.isHardwareAccelerated()) { 
+HardwareCanvas hardwareCanvas = (HardwareCanvas) canvas; 
+hardwareCanvas.drawDisplayList(mDisplayList); } } 
+
+private void moveContentBy(int x) { // This will move all the bitmaps recorded 
+inside the display list // by x pixels to the right and redraw this view. All 
+the commands // recorded in createDisplayList() won't be re-issued, only 
+onDraw() // will be invoked and will execute very quickly 
+mDisplayList.offsetLeftAndRight(x); invalidate(); } 
+
+Threading Display lists must be created on and manipulated from the UI thread 
+only. 
+
+
+
+*int_android.view.DisplayList.FLAG_CLIP_CHILDREN*
+
+Flag used when calling (|android.view.HardwareCanvas|) When this flag is set, 
+draw operations lying outside of the bounds of the display list will be culled 
+early. It is recommeneded to always set this flag. 
+
+
+*int_android.view.DisplayList.STATUS_DONE*
+
+Indicates that the display list is done drawing. 
+
+
+*int_android.view.DisplayList.STATUS_DRAW*
+
+Indicates that the display list needs another drawing pass. 
+
+
+*int_android.view.DisplayList.STATUS_DREW*
+
+Indicates that the display list performed GL drawing operations. 
+
+
+*int_android.view.DisplayList.STATUS_INVOKE*
+
+Indicates that the display list needs to re-execute its GL functors. 
+
+
+
+*android.view.DisplayList()*
+
+public DisplayList()
+
+
+
+
+*android.view.DisplayList.clear()*
+
+public abstract void clear()
+
+Clears resources held onto by this display list. After calling this method 
+(|android.view.DisplayList|) will return false. 
+
+
+
+*android.view.DisplayList.clearDirty()*
+
+protected void clearDirty()
+
+Removes the dirty flag. This method can be used to cancel a cleanup previously 
+scheduled by setting the dirty flag. 
+
+
+
+*android.view.DisplayList.end()*
+
+public abstract void end()
+
+Ends the recording for this display list. A display list cannot be replayed if 
+recording is not finished. Calling this method marks the display list valid and 
+(|android.view.DisplayList|) will return true. 
+
+
+
+*android.view.DisplayList.getAlpha()*
+
+public abstract float getAlpha()
+
+Returns the translucency level of this display list. 
+
+
+
+    Returns: A value between 0.0f and 1.0f 
+
+*android.view.DisplayList.getBottom()*
+
+public abstract float getBottom()
+
+Returns the bottom position for the display list in pixels. 
+
+
+
+*android.view.DisplayList.getCameraDistance()*
+
+public abstract float getCameraDistance()
+
+Returns the distance in Z of the camera of the display list. 
+
+
+
+*android.view.DisplayList.getLeft()*
+
+public abstract float getLeft()
+
+Returns the left position for the display list in pixels. 
+
+
+
+*android.view.DisplayList.getMatrix()*
+
+public Matrix getMatrix()
+
+Returns the static matrix set on this display list. 
+
+
+
+    Returns: A new {@link Matrix} instance populated with this display list's static matrix 
+
+*android.view.DisplayList.getMatrix(Matrix)*
+
+public abstract Matrix getMatrix(Matrix matrix)
+
+Copies this display list's static matrix into the specified matrix. 
+
+
+    matrix - The {@link Matrix} instance in which to copy this display list's static matrix. 
+       Cannot be null 
+
+    Returns: The matrix parameter, for convenience 
+
+*android.view.DisplayList.getPivotX()*
+
+public abstract float getPivotX()
+
+Returns the pivot value for this display list on the X axis, in pixels. 
+
+
+
+*android.view.DisplayList.getPivotY()*
+
+public abstract float getPivotY()
+
+Returns the pivot value for this display list on the Y axis, in pixels. 
+
+
+
+*android.view.DisplayList.getRight()*
+
+public abstract float getRight()
+
+Returns the right position for the display list in pixels. 
+
+
+
+*android.view.DisplayList.getRotation()*
+
+public abstract float getRotation()
+
+Returns the rotation value for this display list around the Z axis, in degrees. 
+
+
+
+*android.view.DisplayList.getRotationX()*
+
+public abstract float getRotationX()
+
+Returns the rotation value for this display list around the X axis, in degrees. 
+
+
+
+*android.view.DisplayList.getRotationY()*
+
+public abstract float getRotationY()
+
+Returns the rotation value for this display list around the Y axis, in degrees. 
+
+
+
+*android.view.DisplayList.getScaleX()*
+
+public abstract float getScaleX()
+
+Returns the scale value for this display list on the X axis. 
+
+
+
+*android.view.DisplayList.getScaleY()*
+
+public abstract float getScaleY()
+
+Returns the scale value for this display list on the Y axis. 
+
+
+
+*android.view.DisplayList.getSize()*
+
+public abstract int getSize()
+
+Return the amount of memory used by this display list. 
+
+
+
+    Returns: The size of this display list in bytes 
+
+*android.view.DisplayList.getTop()*
+
+public abstract float getTop()
+
+Returns the top position for the display list in pixels. 
+
+
+
+*android.view.DisplayList.getTranslationX()*
+
+public abstract float getTranslationX()
+
+Returns the translation value for this display list on the X axis, in pixels. 
+
+
+
+*android.view.DisplayList.getTranslationY()*
+
+public abstract float getTranslationY()
+
+Returns the translation value for this display list on the Y axis, in pixels. 
+
+
+
+*android.view.DisplayList.hasOverlappingRendering()*
+
+public abstract boolean hasOverlappingRendering()
+
+Indicates whether the content of this display list overlaps. 
+
+
+
+    Returns: True if this display list renders content which overlaps, false otherwise. 
+
+*android.view.DisplayList.isDirty()*
+
+public boolean isDirty()
+
+Indicates whether the display list is dirty. 
+
+
+
+*android.view.DisplayList.isValid()*
+
+public abstract boolean isValid()
+
+Returns whether the display list is currently usable. If this returns false, 
+the display list should be re-recorded prior to replaying it. 
+
+
+
+    Returns: boolean true if the display list is able to be replayed, false otherwise. 
+
+*android.view.DisplayList.markDirty()*
+
+public void markDirty()
+
+Sets the dirty flag. When a display list is dirty, (|android.view.DisplayList|) 
+should be invoked whenever possible. 
+
+
+
+*android.view.DisplayList.offsetLeftAndRight(float)*
+
+public abstract void offsetLeftAndRight(float offset)
+
+Offsets the left and right positions for the display list 
+
+
+    offset - The amount that the left and right positions of the display list are offset, in 
+       pixels 
+
+*android.view.DisplayList.offsetTopAndBottom(float)*
+
+public abstract void offsetTopAndBottom(float offset)
+
+Offsets the top and bottom values for the display list 
+
+
+    offset - The amount that the top and bottom positions of the display list are offset, in 
+       pixels 
+
+*android.view.DisplayList.reset()*
+
+public abstract void reset()
+
+Reset native resources. This is called when cleaning up the state of display 
+lists during destruction of hardware resources, to ensure that we do not hold 
+onto obsolete resources after related resources are gone. 
+
+
+
+*android.view.DisplayList.setAlpha(float)*
+
+public abstract void setAlpha(float alpha)
+
+Sets the translucency level for the display list. 
+
+
+    alpha - The translucency of the display list, must be a value between 0.0f and 1.0f 
+
+*android.view.DisplayList.setAnimationMatrix(Matrix)*
+
+public abstract void setAnimationMatrix(Matrix matrix)
+
+Set the Animation matrix on the display list. This matrix exists if an 
+Animation is currently playing on a View, and is set on the display list during 
+at draw() time. When the Animation finishes, the matrix should be cleared by 
+sending null for the matrix parameter. 
+
+
+    matrix - The matrix, null indicates that the matrix should be cleared. 
+
+*android.view.DisplayList.setBottom(int)*
+
+public abstract void setBottom(int bottom)
+
+Sets the bottom position for the display list. 
+
+
+    bottom - The bottom position, in pixels, of the display list 
+
+*android.view.DisplayList.setCaching(boolean)*
+
+public abstract void setCaching(boolean caching)
+
+Set the caching property on the display list, which indicates whether the 
+display list holds a layer. Layer display lists should avoid creating an alpha 
+layer, since alpha is handled in the drawLayer operation directly (and more 
+efficiently). 
+
+
+    caching - true if the display list represents a hardware layer, false otherwise. 
+
+*android.view.DisplayList.setCameraDistance(float)*
+
+public abstract void setCameraDistance(float distance)
+
+Sets the camera distance for the display list. Refer to (|android.view.View|) 
+for more information on how to use this property. 
+
+
+    distance - The distance in Z of the camera of the display list 
+
+*android.view.DisplayList.setClipToBounds(boolean)*
+
+public abstract void setClipToBounds(boolean clipToBounds)
+
+Set whether the display list should clip itself to its bounds. This property is 
+controlled by the view's parent. 
+
+
+    clipToBounds - true if the display list should clip to its bounds 
+
+*android.view.DisplayList.setHasOverlappingRendering(boolean)*
+
+public abstract void setHasOverlappingRendering(boolean hasOverlappingRendering)
+
+Sets whether the display list renders content which overlaps. Non-overlapping 
+rendering can use a fast path for alpha that avoids rendering to an offscreen 
+buffer. By default display lists consider they do not have overlapping content. 
+
+
+    hasOverlappingRendering - False if the content is guaranteed to be non-overlapping, true otherwise. 
+
+*android.view.DisplayList.setLeft(int)*
+
+public abstract void setLeft(int left)
+
+Sets the left position for the display list. 
+
+
+    left - The left position, in pixels, of the display list 
+
+*android.view.DisplayList.setLeftTopRightBottom(int,int,int,int)*
+
+public abstract void setLeftTopRightBottom(
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+Sets the left and top positions for the display list 
+
+
+    left - The left position of the display list, in pixels 
+    top - The top position of the display list, in pixels 
+    right - The right position of the display list, in pixels 
+    bottom - The bottom position of the display list, in pixels 
+
+*android.view.DisplayList.setMatrix(Matrix)*
+
+public abstract void setMatrix(Matrix matrix)
+
+Set the static matrix on the display list. The specified matrix is combined 
+with other transforms (such as (|android.view.DisplayList|) , 
+(|android.view.DisplayList|) , etc.) 
+
+
+    matrix - A transform matrix to apply to this display list 
+
+*android.view.DisplayList.setPivotX(float)*
+
+public abstract void setPivotX(float pivotX)
+
+Sets the pivot value for the display list on the X axis 
+
+
+    pivotX - The pivot value of the display list on the X axis, in pixels 
+
+*android.view.DisplayList.setPivotY(float)*
+
+public abstract void setPivotY(float pivotY)
+
+Sets the pivot value for the display list on the Y axis 
+
+
+    pivotY - The pivot value of the display list on the Y axis, in pixels 
+
+*android.view.DisplayList.setRight(int)*
+
+public abstract void setRight(int right)
+
+Sets the right position for the display list. 
+
+
+    right - The right position, in pixels, of the display list 
+
+*android.view.DisplayList.setRotation(float)*
+
+public abstract void setRotation(float rotation)
+
+Sets the rotation value for the display list around the Z axis 
+
+
+    rotation - The rotation value of the display list, in degrees 
+
+*android.view.DisplayList.setRotationX(float)*
+
+public abstract void setRotationX(float rotationX)
+
+Sets the rotation value for the display list around the X axis 
+
+
+    rotationX - The rotation value of the display list, in degrees 
+
+*android.view.DisplayList.setRotationY(float)*
+
+public abstract void setRotationY(float rotationY)
+
+Sets the rotation value for the display list around the Y axis 
+
+
+    rotationY - The rotation value of the display list, in degrees 
+
+*android.view.DisplayList.setScaleX(float)*
+
+public abstract void setScaleX(float scaleX)
+
+Sets the scale value for the display list on the X axis 
+
+
+    scaleX - The scale value of the display list 
+
+*android.view.DisplayList.setScaleY(float)*
+
+public abstract void setScaleY(float scaleY)
+
+Sets the scale value for the display list on the Y axis 
+
+
+    scaleY - The scale value of the display list 
+
+*android.view.DisplayList.setTop(int)*
+
+public abstract void setTop(int top)
+
+Sets the top position for the display list. 
+
+
+    top - The top position, in pixels, of the display list 
+
+*android.view.DisplayList.setTransformationInfo(float,float,float,float,float,float,float,float)*
+
+public abstract void setTransformationInfo(
+  float alpha,
+  float translationX,
+  float translationY,
+  float rotation,
+  float rotationX,
+  float rotationY,
+  float scaleX,
+  float scaleY)
+
+Sets all of the transform-related values of the display list 
+
+
+    alpha - The alpha value of the display list 
+    translationX - The translationX value of the display list 
+    translationY - The translationY value of the display list 
+    rotation - The rotation value of the display list 
+    rotationX - The rotationX value of the display list 
+    rotationY - The rotationY value of the display list 
+    scaleX - The scaleX value of the display list 
+    scaleY - The scaleY value of the display list 
+
+*android.view.DisplayList.setTranslationX(float)*
+
+public abstract void setTranslationX(float translationX)
+
+Sets the translation value for the display list on the X axis 
+
+
+    translationX - The X axis translation value of the display list, in pixels 
+
+*android.view.DisplayList.setTranslationY(float)*
+
+public abstract void setTranslationY(float translationY)
+
+Sets the translation value for the display list on the Y axis 
+
+
+    translationY - The Y axis translation value of the display list, in pixels 
+
+*android.view.DisplayList.start(int,int)*
+
+public abstract |android.view.HardwareCanvas| start(
+  int width,
+  int height)
+
+Starts recording the display list. All operations performed on the returned 
+canvas are recorded and stored in this display list. 
+
+Calling this method will mark the display list invalid until 
+(|android.view.DisplayList|) is called. Only valid display lists can be 
+replayed. 
+
+
+    width - The width of the display list's viewport 
+    height - The height of the display list's viewport 
+
+    Returns: A canvas to record drawing operations. 
+
+

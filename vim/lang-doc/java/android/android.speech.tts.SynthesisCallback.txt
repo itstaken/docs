@@ -1,0 +1,121 @@
+*android.speech.tts.SynthesisCallback* *SynthesisCallback* A callback to return 
+
+public interface interface SynthesisCallback
+
+
+|android.speech.tts.SynthesisCallback_Description|
+|android.speech.tts.SynthesisCallback_Fields|
+|android.speech.tts.SynthesisCallback_Constructors|
+|android.speech.tts.SynthesisCallback_Methods|
+
+================================================================================
+
+*android.speech.tts.SynthesisCallback_Methods*
+|android.speech.tts.SynthesisCallback.audioAvailable(byte[],int,int)|The servic
+|android.speech.tts.SynthesisCallback.done()|The service should call this metho
+|android.speech.tts.SynthesisCallback.error()|The service should call this meth
+|android.speech.tts.SynthesisCallback.getMaxBufferSize()|
+|android.speech.tts.SynthesisCallback.start(int,int,int)|The service should cal
+
+*android.speech.tts.SynthesisCallback_Description*
+
+A callback to return speech data synthesized by a text to speech engine. 
+
+The engine can provide streaming audio by calling 
+(|android.speech.tts.SynthesisCallback|) , then 
+(|android.speech.tts.SynthesisCallback|) until all audio has been provided, 
+then finally (|android.speech.tts.SynthesisCallback|) . 
+(|android.speech.tts.SynthesisCallback|) can be called at any stage in the 
+synthesis process to indicate that an error has occurred, but if the call is 
+made after a call to (|android.speech.tts.SynthesisCallback|) , it might be 
+discarded. 
+
+After (|android.speech.tts.SynthesisCallback|) been called, 
+(|android.speech.tts.SynthesisCallback|) must be called regardless of errors. 
+
+
+
+*android.speech.tts.SynthesisCallback.audioAvailable(byte[],int,int)*
+
+public int audioAvailable(
+  byte[] buffer,
+  int offset,
+  int length)
+
+The service should call this method when synthesized audio is ready for 
+consumption. 
+
+This method should only be called on the synthesis thread, while in 
+(|android.speech.tts.TextToSpeechService|) . 
+
+
+    buffer - The generated audio data. This method will not hold on to {@code buffer}, so 
+       the caller is free to modify it after this method returns. 
+    offset - The offset into {@code buffer} where the audio data starts. 
+    length - The number of bytes of audio data in {@code buffer}. This must be less than or 
+       equal to the return value of {@link #getMaxBufferSize}. 
+
+    Returns: {@link TextToSpeech#SUCCESS} or {@link TextToSpeech#ERROR}. 
+
+*android.speech.tts.SynthesisCallback.done()*
+
+public int done()
+
+The service should call this method when all the synthesized audio for a 
+request has been passed to (|android.speech.tts.SynthesisCallback|) . 
+
+This method should only be called on the synthesis thread, while in 
+(|android.speech.tts.TextToSpeechService|) . 
+
+This method has to be called if (|android.speech.tts.SynthesisCallback|) was 
+called. 
+
+
+
+    Returns: {@link TextToSpeech#SUCCESS} or {@link TextToSpeech#ERROR}. 
+
+*android.speech.tts.SynthesisCallback.error()*
+
+public void error()
+
+The service should call this method if the speech synthesis fails. 
+
+This method should only be called on the synthesis thread, while in 
+(|android.speech.tts.TextToSpeechService|) . 
+
+
+
+*android.speech.tts.SynthesisCallback.getMaxBufferSize()*
+
+public int getMaxBufferSize()
+
+
+
+
+
+    Returns: the maximum number of bytes that the TTS engine can pass in a single call of 
+             {@link #audioAvailable}. Calls to {@link #audioAvailable} with 
+             data lengths larger than this value will not succeed. 
+
+*android.speech.tts.SynthesisCallback.start(int,int,int)*
+
+public int start(
+  int sampleRateInHz,
+  int audioFormat,
+  int channelCount)
+
+The service should call this when it starts to synthesize audio for this 
+request. 
+
+This method should only be called on the synthesis thread, while in 
+(|android.speech.tts.TextToSpeechService|) . 
+
+
+    sampleRateInHz - Sample rate in HZ of the generated audio. 
+    audioFormat - Audio format of the generated audio. Must be one of the ENCODING_ constants 
+       defined in {@link android.media.AudioFormat}. 
+    channelCount - The number of channels. Must be {@code 1} or {@code 2}. 
+
+    Returns: {@link TextToSpeech#SUCCESS} or {@link TextToSpeech#ERROR}. 
+
+

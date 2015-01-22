@@ -1,0 +1,171 @@
+*android.widget.RelativeLayout.LayoutParams* *RelativeLayout.LayoutParams* Per-c
+
+public static class RelativeLayout.LayoutParams
+  extends    |android.view.ViewGroup.MarginLayoutParams|
+
+|android.widget.RelativeLayout.LayoutParams_Description|
+|android.widget.RelativeLayout.LayoutParams_Fields|
+|android.widget.RelativeLayout.LayoutParams_Constructors|
+|android.widget.RelativeLayout.LayoutParams_Methods|
+
+================================================================================
+
+*android.widget.RelativeLayout.LayoutParams_Fields*
+|boolean_android.widget.RelativeLayout.LayoutParams.alignWithParent|
+
+*android.widget.RelativeLayout.LayoutParams_Constructors*
+|android.widget.RelativeLayout.LayoutParams(Context,AttributeSet)|
+|android.widget.RelativeLayout.LayoutParams(int,int)|
+|android.widget.RelativeLayout.LayoutParams(RelativeLayout.LayoutParams)|Copy c
+|android.widget.RelativeLayout.LayoutParams(ViewGroup.LayoutParams)|
+|android.widget.RelativeLayout.LayoutParams(ViewGroup.MarginLayoutParams)|
+
+*android.widget.RelativeLayout.LayoutParams_Methods*
+|android.widget.RelativeLayout.LayoutParams.addRule(int)|Adds a layout rule to 
+|android.widget.RelativeLayout.LayoutParams.addRule(int,int)|Adds a layout rule
+|android.widget.RelativeLayout.LayoutParams.debug(String)|
+|android.widget.RelativeLayout.LayoutParams.getRules()|Retrieves a complete lis
+|android.widget.RelativeLayout.LayoutParams.getRules(int)|Retrieves a complete 
+|android.widget.RelativeLayout.LayoutParams.removeRule(int)|Removes a layout ru
+|android.widget.RelativeLayout.LayoutParams.resolveLayoutDirection(int)|
+
+*android.widget.RelativeLayout.LayoutParams_Description*
+
+Per-child layout information associated with RelativeLayout. 
+
+
+
+*boolean_android.widget.RelativeLayout.LayoutParams.alignWithParent*
+
+When true, uses the parent as the anchor if the anchor doesn't exist or if the 
+anchor's visibility is GONE. 
+
+
+
+*android.widget.RelativeLayout.LayoutParams(Context,AttributeSet)*
+
+public RelativeLayout.LayoutParams(
+  android.content.Context c,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.RelativeLayout.LayoutParams(int,int)*
+
+public RelativeLayout.LayoutParams(
+  int w,
+  int h)
+
+
+
+
+*android.widget.RelativeLayout.LayoutParams(RelativeLayout.LayoutParams)*
+
+public RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams source)
+
+Copy constructor. Clones the width, height, margin values, and rules of the 
+source. 
+
+    source - The layout params to copy from. 
+
+*android.widget.RelativeLayout.LayoutParams(ViewGroup.LayoutParams)*
+
+public RelativeLayout.LayoutParams(android.view.ViewGroup.LayoutParams source)
+
+
+
+
+*android.widget.RelativeLayout.LayoutParams(ViewGroup.MarginLayoutParams)*
+
+public RelativeLayout.LayoutParams(android.view.ViewGroup.MarginLayoutParams source)
+
+
+
+
+*android.widget.RelativeLayout.LayoutParams.addRule(int)*
+
+public void addRule(int verb)
+
+Adds a layout rule to be interpreted by the RelativeLayout. This method should 
+only be used for constraints that don't refer to another sibling (e.g., 
+CENTER_IN_PARENT) or take a boolean value ( (|android.widget.RelativeLayout|) 
+for true or 0 for false). To specify a verb that takes a subject, use 
+(|android.widget.RelativeLayout.LayoutParams|) instead. 
+
+
+    verb - One of the verbs defined by {@link android.widget.RelativeLayout 
+       RelativeLayout}, such as ALIGN_WITH_PARENT_LEFT. 
+
+*android.widget.RelativeLayout.LayoutParams.addRule(int,int)*
+
+public void addRule(
+  int verb,
+  int anchor)
+
+Adds a layout rule to be interpreted by the RelativeLayout. Use this for verbs 
+that take a target, such as a sibling (ALIGN_RIGHT) or a boolean value 
+(VISIBLE). 
+
+
+    verb - One of the verbs defined by {@link android.widget.RelativeLayout 
+       RelativeLayout}, such as ALIGN_WITH_PARENT_LEFT. 
+    anchor - The id of another view to use as an anchor, or a boolean value(represented as 
+       {@link RelativeLayout#TRUE}) for true or 0 for false). For verbs that 
+       don't refer to another sibling (for example, ALIGN_WITH_PARENT_BOTTOM) 
+       just use -1. 
+
+*android.widget.RelativeLayout.LayoutParams.debug(String)*
+
+public |java.lang.String| debug(java.lang.String output)
+
+
+
+
+
+*android.widget.RelativeLayout.LayoutParams.getRules()*
+
+public int[] getRules()
+
+Retrieves a complete list of all supported rules, where the index is the rule 
+verb, and the element value is the value specified, or "false" if it was never 
+set. There will be no resolution of relative rules done. 
+
+
+
+    Returns: the supported rules 
+
+*android.widget.RelativeLayout.LayoutParams.getRules(int)*
+
+public int[] getRules(int layoutDirection)
+
+Retrieves a complete list of all supported rules, where the index is the rule 
+verb, and the element value is the value specified, or "false" if it was never 
+set. If there are relative rules defined (*_START / *_END), they will be 
+resolved depending on the layout direction. 
+
+
+    layoutDirection - the direction of the layout. Should be either {@link View#LAYOUT_DIRECTION_LTR} 
+       or {@link View#LAYOUT_DIRECTION_RTL} 
+
+    Returns: the supported rules 
+
+*android.widget.RelativeLayout.LayoutParams.removeRule(int)*
+
+public void removeRule(int verb)
+
+Removes a layout rule to be interpreted by the RelativeLayout. 
+
+
+    verb - One of the verbs defined by {@link android.widget.RelativeLayout 
+       RelativeLayout}, such as ALIGN_WITH_PARENT_LEFT. 
+
+*android.widget.RelativeLayout.LayoutParams.resolveLayoutDirection(int)*
+
+public void resolveLayoutDirection(int layoutDirection)
+
+
+
+
+
+

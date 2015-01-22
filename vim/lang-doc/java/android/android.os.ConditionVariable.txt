@@ -1,0 +1,99 @@
+*android.os.ConditionVariable* *ConditionVariable* Class that implements the con
+
+public class ConditionVariable
+  extends    |java.lang.Object|
+
+|android.os.ConditionVariable_Description|
+|android.os.ConditionVariable_Fields|
+|android.os.ConditionVariable_Constructors|
+|android.os.ConditionVariable_Methods|
+
+================================================================================
+
+*android.os.ConditionVariable_Constructors*
+|android.os.ConditionVariable()|Create the ConditionVariable in the default clo
+|android.os.ConditionVariable(boolean)|Create the ConditionVariable with the gi
+
+*android.os.ConditionVariable_Methods*
+|android.os.ConditionVariable.block()|Block the current thread until the condit
+|android.os.ConditionVariable.block(long)|Block the current thread until the co
+|android.os.ConditionVariable.close()|Reset the condition to the closed state.
+|android.os.ConditionVariable.open()|Open the condition, and release all thread
+
+*android.os.ConditionVariable_Description*
+
+Class that implements the condition variable locking paradigm. 
+
+This differs from the built-in java.lang.Object wait() and notify() in that 
+this class contains the condition to wait on itself. That means open(), close() 
+and block() are sticky. If open() is called before block(), block() will not 
+block, and instead return immediately. 
+
+This class uses itself as the object to wait on, so if you wait() or notify() 
+on a ConditionVariable, the results are undefined. 
+
+
+
+*android.os.ConditionVariable()*
+
+public ConditionVariable()
+
+Create the ConditionVariable in the default closed state. 
+
+
+*android.os.ConditionVariable(boolean)*
+
+public ConditionVariable(boolean state)
+
+Create the ConditionVariable with the given state. 
+
+Pass true for opened and false for closed. 
+
+
+*android.os.ConditionVariable.block()*
+
+public void block()
+
+Block the current thread until the condition is opened. 
+
+If the condition is already opened, return immediately. 
+
+
+
+*android.os.ConditionVariable.block(long)*
+
+public boolean block(long timeout)
+
+Block the current thread until the condition is opened or until timeout 
+milliseconds have passed. 
+
+If the condition is already opened, return immediately. 
+
+
+    timeout - the minimum time to wait in milliseconds. 
+
+    Returns: true if the condition was opened, false if the call returns because of the 
+             timeout. 
+
+*android.os.ConditionVariable.close()*
+
+public void close()
+
+Reset the condition to the closed state. 
+
+Any threads that call block() will block until someone calls open. 
+
+
+
+*android.os.ConditionVariable.open()*
+
+public void open()
+
+Open the condition, and release all threads that are blocked. 
+
+Any threads that later approach block() will not block unless close() is 
+called. 
+
+
+
+

@@ -1,0 +1,2494 @@
+*android.view.ViewGroup* *ViewGroup* 
+ A ViewGroup is a special view that can co
+
+public abstract class ViewGroup
+  extends    |android.view.View|
+  implements |android.view.ViewParent|
+             |android.view.ViewManager|
+
+|android.view.ViewGroup_Description|
+|android.view.ViewGroup_Fields|
+|android.view.ViewGroup_Constructors|
+|android.view.ViewGroup_Methods|
+
+================================================================================
+
+*android.view.ViewGroup_Fields*
+|int_android.view.ViewGroup.CLIP_TO_PADDING_MASK|
+|boolean_android.view.ViewGroup.DEBUG_DRAW|
+|int_android.view.ViewGroup.FLAG_DISALLOW_INTERCEPT|
+|int_android.view.ViewGroup.FLAG_SUPPORT_STATIC_TRANSFORMATIONS|
+|int_android.view.ViewGroup.FLAG_USE_CHILD_DRAWING_ORDER|
+|int_android.view.ViewGroup.FOCUS_AFTER_DESCENDANTS|
+|int_android.view.ViewGroup.FOCUS_BEFORE_DESCENDANTS|
+|int_android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS|
+|int_android.view.ViewGroup.LAYOUT_MODE_CLIP_BOUNDS|
+|int_android.view.ViewGroup.LAYOUT_MODE_DEFAULT|
+|int_android.view.ViewGroup.LAYOUT_MODE_OPTICAL_BOUNDS|
+|java.util.ArrayList<android.view.View>_android.view.ViewGroup.mDisappearingChildren|
+|int_android.view.ViewGroup.mGroupFlags|
+|android.view.ViewGroup.OnHierarchyChangeListener_android.view.ViewGroup.mOnHierarchyChangeListener|
+|int_android.view.ViewGroup.mPersistentDrawingCache|
+|int_android.view.ViewGroup.PERSISTENT_ALL_CACHES|
+|int_android.view.ViewGroup.PERSISTENT_ANIMATION_CACHE|
+|int_android.view.ViewGroup.PERSISTENT_NO_CACHE|
+|int_android.view.ViewGroup.PERSISTENT_SCROLLING_CACHE|
+
+*android.view.ViewGroup_Constructors*
+|android.view.ViewGroup(Context)|
+|android.view.ViewGroup(Context,AttributeSet)|
+|android.view.ViewGroup(Context,AttributeSet,int)|
+
+*android.view.ViewGroup_Methods*
+|android.view.ViewGroup.addChildrenForAccessibility(ArrayList<View>)|
+|android.view.ViewGroup.addFocusables(ArrayList<View>,int,int)|
+|android.view.ViewGroup.addStatesFromChildren()|Returns whether this ViewGroup'
+|android.view.ViewGroup.addTouchables(ArrayList<View>)|
+|android.view.ViewGroup.addView(View)|Adds a child view.
+|android.view.ViewGroup.addView(View,int)|Adds a child view.
+|android.view.ViewGroup.addView(View,int,int)|Adds a child view with this ViewG
+|android.view.ViewGroup.addView(View,int,ViewGroup.LayoutParams)|Adds a child v
+|android.view.ViewGroup.addView(View,ViewGroup.LayoutParams)|Adds a child view 
+|android.view.ViewGroup.addViewInLayout(View,int,ViewGroup.LayoutParams)|Adds a
+|android.view.ViewGroup.addViewInLayout(View,int,ViewGroup.LayoutParams,boolean)|
+|android.view.ViewGroup.attachLayoutAnimationParameters(View,ViewGroup.LayoutParams,int,int)|
+|android.view.ViewGroup.attachViewToParent(View,int,ViewGroup.LayoutParams)|Att
+|android.view.ViewGroup.bringChildToFront(View)|
+|android.view.ViewGroup.canAnimate()|Indicates whether the view group has the a
+|android.view.ViewGroup.checkLayoutParams(ViewGroup.LayoutParams)|
+|android.view.ViewGroup.childDrawableStateChanged(View)|If#addStatesFromChildre
+|android.view.ViewGroup.childHasTransientStateChanged(View,boolean)|Called when
+|android.view.ViewGroup.cleanupLayoutState(View)|Prevents the specified child t
+|android.view.ViewGroup.clearChildFocus(View)|
+|android.view.ViewGroup.clearDisappearingChildren()|Removes any pending animati
+|android.view.ViewGroup.clearFocus()|
+|android.view.ViewGroup.debug(int)|
+|android.view.ViewGroup.detachAllViewsFromParent()|Detaches all views from the 
+|android.view.ViewGroup.detachViewFromParent(int)|Detaches a view from its pare
+|android.view.ViewGroup.detachViewFromParent(View)|Detaches a view from its par
+|android.view.ViewGroup.detachViewsFromParent(int,int)|Detaches a range of view
+|android.view.ViewGroup.dispatchConfigurationChanged(Configuration)|
+|android.view.ViewGroup.dispatchDisplayHint(int)|
+|android.view.ViewGroup.dispatchDragEvent(DragEvent)|
+|android.view.ViewGroup.dispatchDraw(Canvas)|
+|android.view.ViewGroup.dispatchFinishTemporaryDetach()|
+|android.view.ViewGroup.dispatchFreezeSelfOnly(SparseArray<Parcelable>)|Perform
+|android.view.ViewGroup.dispatchGenericFocusedEvent(MotionEvent)|
+|android.view.ViewGroup.dispatchGenericPointerEvent(MotionEvent)|
+|android.view.ViewGroup.dispatchGetDisplayList()|This method is used to cause c
+|android.view.ViewGroup.dispatchHoverEvent(MotionEvent)|
+|android.view.ViewGroup.dispatchKeyEvent(KeyEvent)|
+|android.view.ViewGroup.dispatchKeyEventPreIme(KeyEvent)|
+|android.view.ViewGroup.dispatchKeyShortcutEvent(KeyEvent)|
+|android.view.ViewGroup.dispatchRestoreInstanceState(SparseArray<Parcelable>)|
+|android.view.ViewGroup.dispatchSaveInstanceState(SparseArray<Parcelable>)|
+|android.view.ViewGroup.dispatchSetActivated(boolean)|
+|android.view.ViewGroup.dispatchSetPressed(boolean)|
+|android.view.ViewGroup.dispatchSetSelected(boolean)|
+|android.view.ViewGroup.dispatchStartTemporaryDetach()|
+|android.view.ViewGroup.dispatchSystemUiVisibilityChanged(int)|
+|android.view.ViewGroup.dispatchThawSelfOnly(SparseArray<Parcelable>)|Perform d
+|android.view.ViewGroup.dispatchTouchEvent(MotionEvent)|
+|android.view.ViewGroup.dispatchTrackballEvent(MotionEvent)|
+|android.view.ViewGroup.dispatchUnhandledMove(View,int)|
+|android.view.ViewGroup.dispatchVisibilityChanged(View,int)|
+|android.view.ViewGroup.dispatchWindowFocusChanged(boolean)|
+|android.view.ViewGroup.dispatchWindowSystemUiVisiblityChanged(int)|
+|android.view.ViewGroup.dispatchWindowVisibilityChanged(int)|
+|android.view.ViewGroup.drawableStateChanged()|
+|android.view.ViewGroup.drawChild(Canvas,View,long)|Draw one child of this View
+|android.view.ViewGroup.endViewTransition(View)|This method should always be ca
+|android.view.ViewGroup.findFocus()|
+|android.view.ViewGroup.findViewByAccessibilityIdTraversal(int)|
+|android.view.ViewGroup.findViewByPredicateTraversal(Predicate<View>,View)|
+|android.view.ViewGroup.findViewsWithText(ArrayList<View>,CharSequence,int)|
+|android.view.ViewGroup.findViewTraversal(int)|
+|android.view.ViewGroup.findViewWithTagTraversal(Object)|
+|android.view.ViewGroup.fitSystemWindows(Rect)|
+|android.view.ViewGroup.focusableViewAvailable(View)|
+|android.view.ViewGroup.focusSearch(View,int)|Find the nearest view in the spec
+|android.view.ViewGroup.gatherTransparentRegion(Region)|
+|android.view.ViewGroup.generateDefaultLayoutParams()|Returns a set of default 
+|android.view.ViewGroup.generateLayoutParams(AttributeSet)|Returns a new set of
+|android.view.ViewGroup.generateLayoutParams(ViewGroup.LayoutParams)|Returns a 
+|android.view.ViewGroup.getChildAt(int)|Returns the view at the specified posit
+|android.view.ViewGroup.getChildCount()|Returns the number of children in the g
+|android.view.ViewGroup.getChildDrawingOrder(int,int)|Returns the index of the 
+|android.view.ViewGroup.getChildMeasureSpec(int,int,int)|Does the hard part of 
+|android.view.ViewGroup.getChildStaticTransformation(View,Transformation)|Sets 
+|android.view.ViewGroup.getChildVisibleRect(View,Rect,android.graphics.Point)|
+|android.view.ViewGroup.getClipChildren()|Returns whether ths group's children 
+|android.view.ViewGroup.getDescendantFocusability()|Gets the descendant focusab
+|android.view.ViewGroup.getFocusedChild()|Returns the focused child of this vie
+|android.view.ViewGroup.getLayoutAnimation()|Returns the layout animation contr
+|android.view.ViewGroup.getLayoutAnimationListener()|Returns the animation list
+|android.view.ViewGroup.getLayoutMode()|Returns the basis of alignment during l
+|android.view.ViewGroup.getLayoutTransition()|Gets the LayoutTransition object 
+|android.view.ViewGroup.getOverlay()|Returns the ViewGroupOverlay for this view
+|android.view.ViewGroup.getPersistentDrawingCache()|Returns an integer indicati
+|android.view.ViewGroup.hasFocus()|Returns true if this view has or contains fo
+|android.view.ViewGroup.hasFocusable()|
+|android.view.ViewGroup.hasHoveredChild()|
+|android.view.ViewGroup.hasTransientState()|
+|android.view.ViewGroup.indexOfChild(View)|Returns the position in the group of
+|android.view.ViewGroup.internalSetPadding(int,int,int,int)|
+|android.view.ViewGroup.invalidateChild(View,Rect)|Don't call or override this 
+|android.view.ViewGroup.invalidateChildFast(View,Rect)|Quick invalidation metho
+|android.view.ViewGroup.invalidateChildInParent(int[],Rect)|Don't call or overr
+|android.view.ViewGroup.invalidateChildInParentFast(int,int,Rect)|Quick invalid
+|android.view.ViewGroup.isAlwaysDrawnWithCacheEnabled()|Indicates whether this 
+|android.view.ViewGroup.isAnimationCacheEnabled()|Indicates whether the childre
+|android.view.ViewGroup.isChildrenDrawingOrderEnabled()|Indicates whether the V
+|android.view.ViewGroup.isChildrenDrawnWithCacheEnabled()|Indicates whether the
+|android.view.ViewGroup.isLayoutSuppressed()|Returns whether layout calls on th
+|android.view.ViewGroup.isMotionEventSplittingEnabled()|Returns true if MotionE
+|android.view.ViewGroup.isTransformedTouchPointInView(float,float,View,PointF)|
+|android.view.ViewGroup.jumpDrawablesToCurrentState()|
+|android.view.ViewGroup.layout(int,int,int,int)|
+|android.view.ViewGroup.makeOptionalFitsSystemWindows()|
+|android.view.ViewGroup.measureChild(View,int,int)|Ask one of the children of t
+|android.view.ViewGroup.measureChildren(int,int)|Ask all of the children of thi
+|android.view.ViewGroup.measureChildWithMargins(View,int,int,int,int)|Ask one o
+|android.view.ViewGroup.notifySubtreeAccessibilityStateChanged(View,View,int)|
+|android.view.ViewGroup.offsetChildrenTopAndBottom(int)|Offset the vertical loc
+|android.view.ViewGroup.offsetDescendantRectToMyCoords(View,Rect)|Offset a rect
+|android.view.ViewGroup.offsetRectIntoDescendantCoords(View,Rect)|Offset a rect
+|android.view.ViewGroup.onAnimationEnd()|
+|android.view.ViewGroup.onAnimationStart()|
+|android.view.ViewGroup.onAttachedToWindow()|
+|android.view.ViewGroup.onChildVisibilityChanged(View,int,int)|Called when a vi
+|android.view.ViewGroup.onCreateDrawableState(int)|
+|android.view.ViewGroup.onDebugDraw(Canvas)|
+|android.view.ViewGroup.onDebugDrawMargins(Canvas,Paint)|
+|android.view.ViewGroup.onDetachedFromWindow()|
+|android.view.ViewGroup.onInterceptHoverEvent(MotionEvent)|Implement this metho
+|android.view.ViewGroup.onInterceptTouchEvent(MotionEvent)|Implement this metho
+|android.view.ViewGroup.onLayout(boolean,int,int,int,int)|
+|android.view.ViewGroup.onRequestFocusInDescendants(int,Rect)|Look for a descen
+|android.view.ViewGroup.onRequestSendAccessibilityEvent(View,AccessibilityEvent)|
+|android.view.ViewGroup.onSetLayoutParams(View,ViewGroup.LayoutParams)|
+|android.view.ViewGroup.onViewAdded(View)|
+|android.view.ViewGroup.onViewRemoved(View)|
+|android.view.ViewGroup.recomputeViewAttributes(View)|
+|android.view.ViewGroup.removeAllViews()|Call this method to remove all child v
+|android.view.ViewGroup.removeAllViewsInLayout()|Called by a ViewGroup subclass
+|android.view.ViewGroup.removeDetachedView(View,boolean)|Finishes the removal o
+|android.view.ViewGroup.removeView(View)|
+|android.view.ViewGroup.removeViewAt(int)|Removes the view at the specified pos
+|android.view.ViewGroup.removeViewInLayout(View)|Removes a view during layout.
+|android.view.ViewGroup.removeViews(int,int)|Removes the specified range of vie
+|android.view.ViewGroup.removeViewsInLayout(int,int)|Removes a range of views d
+|android.view.ViewGroup.requestChildFocus(View,View)|
+|android.view.ViewGroup.requestChildRectangleOnScreen(View,Rect,boolean)|
+|android.view.ViewGroup.requestDisallowInterceptTouchEvent(boolean)|
+|android.view.ViewGroup.requestFocus(int,Rect)|Looks for a view to give focus t
+|android.view.ViewGroup.requestSendAccessibilityEvent(View,AccessibilityEvent)|
+|android.view.ViewGroup.requestTransitionStart(LayoutTransition)|This method is
+|android.view.ViewGroup.requestTransparentRegion(View)|
+|android.view.ViewGroup.resetResolvedDrawables()|
+|android.view.ViewGroup.resetResolvedLayoutDirection()|
+|android.view.ViewGroup.resetResolvedPadding()|
+|android.view.ViewGroup.resetResolvedTextAlignment()|
+|android.view.ViewGroup.resetResolvedTextDirection()|
+|android.view.ViewGroup.resolveDrawables()|
+|android.view.ViewGroup.resolveLayoutDirection()|
+|android.view.ViewGroup.resolveLayoutParams()|
+|android.view.ViewGroup.resolvePadding()|
+|android.view.ViewGroup.resolveRtlPropertiesIfNeeded()|
+|android.view.ViewGroup.resolveTextAlignment()|
+|android.view.ViewGroup.resolveTextDirection()|
+|android.view.ViewGroup.scheduleLayoutAnimation()|Schedules the layout animatio
+|android.view.ViewGroup.setAddStatesFromChildren(boolean)|Sets whether this Vie
+|android.view.ViewGroup.setAlwaysDrawnWithCacheEnabled(boolean)|Indicates wheth
+|android.view.ViewGroup.setAnimationCacheEnabled(boolean)|Enables or disables t
+|android.view.ViewGroup.setChildrenDrawingCacheEnabled(boolean)|Enables or disa
+|android.view.ViewGroup.setChildrenDrawingOrderEnabled(boolean)|Tells the ViewG
+|android.view.ViewGroup.setChildrenDrawnWithCacheEnabled(boolean)|Tells the Vie
+|android.view.ViewGroup.setClipChildren(boolean)|By default, children are clipp
+|android.view.ViewGroup.setClipToPadding(boolean)|By default, children are clip
+|android.view.ViewGroup.setDescendantFocusability(int)|Set the descendant focus
+|android.view.ViewGroup.setLayoutAnimation(LayoutAnimationController)|Sets the 
+|android.view.ViewGroup.setLayoutAnimationListener(Animation.AnimationListener)|
+|android.view.ViewGroup.setLayoutMode(int)|Sets the basis of alignment during t
+|android.view.ViewGroup.setLayoutTransition(LayoutTransition)|Sets the LayoutTr
+|android.view.ViewGroup.setMotionEventSplittingEnabled(boolean)|Enable or disab
+|android.view.ViewGroup.setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener)|
+|android.view.ViewGroup.setPersistentDrawingCache(int)|Indicates what types of 
+|android.view.ViewGroup.setStaticTransformationsEnabled(boolean)|When this prop
+|android.view.ViewGroup.shouldDelayChildPressedState()|Return true if the press
+|android.view.ViewGroup.showContextMenuForChild(View)|
+|android.view.ViewGroup.startActionModeForChild(View,ActionMode.Callback)|
+|android.view.ViewGroup.startLayoutAnimation()|Runs the layout animation.
+|android.view.ViewGroup.startViewTransition(View)|This method tells the ViewGro
+|android.view.ViewGroup.suppressLayout(boolean)|Tells this ViewGroup to suppres
+|android.view.ViewGroup.updateViewLayout(View,ViewGroup.LayoutParams)|
+
+*android.view.ViewGroup_Description*
+
+A ViewGroup is a special view that can contain other views (called children.) 
+The view group is the base class for layouts and views containers. This class 
+also defines the (|android.view.ViewGroup.LayoutParams|) class which serves as 
+the base class for layouts parameters. 
+
+Also see (|android.view.ViewGroup.LayoutParams|) for layout attributes. 
+
+Developer Guides For more information about creating user interface layouts, 
+read the <a href="guide/topics/ui/declaring-layout.html">XML Layouts developer 
+guide. 
+
+Here is a complete implementation of a custom ViewGroup that implements a 
+simple (|android.widget.FrameLayout|) along with the ability to stack children 
+in left and right 
+gutters.development/samples/ApiDemos/src/com/example/android/apis/view/CustomLayout.java
+CompleteIf you are implementing XML layout attributes as shown in the example, 
+this is the corresponding definition for them that would go in 
+res/values/attrs.xml:development/samples/ApiDemos/res/values/attrs.xml 
+CustomLayoutFinally the layout manager can be used in an XML layout like 
+so:development/samples/ApiDemos/res/layout/custom_layout.xml Complete 
+
+
+
+*int_android.view.ViewGroup.CLIP_TO_PADDING_MASK*
+
+We clip to padding when FLAG_CLIP_TO_PADDING and FLAG_PADDING_NOT_NULL are set 
+at the same time. 
+
+
+*boolean_android.view.ViewGroup.DEBUG_DRAW*
+
+
+
+
+*int_android.view.ViewGroup.FLAG_DISALLOW_INTERCEPT*
+
+When set, this ViewGroup should not intercept touch events. 
+
+
+*int_android.view.ViewGroup.FLAG_SUPPORT_STATIC_TRANSFORMATIONS*
+
+When set, this ViewGroup supports static transformations on children; this 
+causes (|android.view.ViewGroup|) to be invoked when a child is drawn. 
+
+Any subclass overriding (|android.view.ViewGroup|) should set this flags in 
+(|android.view.ViewGroup|) . 
+
+
+*int_android.view.ViewGroup.FLAG_USE_CHILD_DRAWING_ORDER*
+
+When set, the drawing method will call (|android.view.ViewGroup|) to get the 
+index of the child to draw for that iteration. 
+
+
+*int_android.view.ViewGroup.FOCUS_AFTER_DESCENDANTS*
+
+This view will get focus only if none of its descendants want it. 
+
+
+*int_android.view.ViewGroup.FOCUS_BEFORE_DESCENDANTS*
+
+This view will get focus before any of its descendants. 
+
+
+*int_android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS*
+
+This view will block any of its descendants from getting focus, even if they 
+are focusable. 
+
+
+*int_android.view.ViewGroup.LAYOUT_MODE_CLIP_BOUNDS*
+
+This constant is a layoutMode(|android.view.ViewGroup|) . Clip bounds are the 
+raw values of left(|android.view.ViewGroup|) , top(|android.view.ViewGroup|) , 
+right(|android.view.ViewGroup|) and bottom(|android.view.ViewGroup|) . 
+
+
+*int_android.view.ViewGroup.LAYOUT_MODE_DEFAULT*
+
+
+
+
+*int_android.view.ViewGroup.LAYOUT_MODE_OPTICAL_BOUNDS*
+
+This constant is a layoutMode(|android.view.ViewGroup|) . Optical bounds 
+describe where a widget appears to be. They sit inside the clip bounds which 
+need to cover a larger area to allow other effects, such as shadows and glows, 
+to be drawn. 
+
+
+*java.util.ArrayList<android.view.View>_android.view.ViewGroup.mDisappearingChildren*
+
+Views which have been hidden or removed which need to be animated on their way 
+out. This field should be made private, so it is hidden from the SDK. 
+
+
+*int_android.view.ViewGroup.mGroupFlags*
+
+Internal flags. 
+
+This field should be made private, so it is hidden from the SDK. 
+
+
+*android.view.ViewGroup.OnHierarchyChangeListener_android.view.ViewGroup.mOnHierarchyChangeListener*
+
+Listener used to propagate events indicating when children are added and/or 
+removed from a view group. This field should be made private, so it is hidden 
+from the SDK. 
+
+
+*int_android.view.ViewGroup.mPersistentDrawingCache*
+
+Indicates which types of drawing caches are to be kept in memory. This field 
+should be made private, so it is hidden from the SDK. 
+
+
+*int_android.view.ViewGroup.PERSISTENT_ALL_CACHES*
+
+Used to indicate that all drawing caches should be kept in memory. 
+
+
+*int_android.view.ViewGroup.PERSISTENT_ANIMATION_CACHE*
+
+Used to indicate that the animation drawing cache should be kept in memory. 
+
+
+*int_android.view.ViewGroup.PERSISTENT_NO_CACHE*
+
+Used to indicate that no drawing cache should be kept in memory. 
+
+
+*int_android.view.ViewGroup.PERSISTENT_SCROLLING_CACHE*
+
+Used to indicate that the scrolling drawing cache should be kept in memory. 
+
+
+
+*android.view.ViewGroup(Context)*
+
+public ViewGroup(android.content.Context context)
+
+
+
+
+*android.view.ViewGroup(Context,AttributeSet)*
+
+public ViewGroup(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.view.ViewGroup(Context,AttributeSet,int)*
+
+public ViewGroup(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.view.ViewGroup.addChildrenForAccessibility(ArrayList<View>)*
+
+public void addChildrenForAccessibility(java.util.ArrayList<android.view.View> childrenForAccessibility)
+
+
+
+
+
+*android.view.ViewGroup.addFocusables(ArrayList<View>,int,int)*
+
+public void addFocusables(
+  java.util.ArrayList<android.view.View> views,
+  int direction,
+  int focusableMode)
+
+
+
+
+
+*android.view.ViewGroup.addStatesFromChildren()*
+
+public boolean addStatesFromChildren()
+
+Returns whether this ViewGroup's drawable states also include its children's 
+drawable states. This is used, for example, to make a group appear to be 
+focused when its child EditText or button is focused. 
+
+
+
+*android.view.ViewGroup.addTouchables(ArrayList<View>)*
+
+public void addTouchables(java.util.ArrayList<android.view.View> views)
+
+
+
+
+
+*android.view.ViewGroup.addView(View)*
+
+public void addView(android.view.View child)
+
+Adds a child view. If no layout parameters are already set on the child, the 
+default parameters for this ViewGroup are set on the child. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    child - the child view to add 
+
+*android.view.ViewGroup.addView(View,int)*
+
+public void addView(
+  android.view.View child,
+  int index)
+
+Adds a child view. If no layout parameters are already set on the child, the 
+default parameters for this ViewGroup are set on the child. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    child - the child view to add 
+    index - the position at which to add the child 
+
+*android.view.ViewGroup.addView(View,int,int)*
+
+public void addView(
+  android.view.View child,
+  int width,
+  int height)
+
+Adds a child view with this ViewGroup's default layout parameters and the 
+specified width and height. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    child - the child view to add 
+
+*android.view.ViewGroup.addView(View,int,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params)
+
+Adds a child view with the specified layout parameters. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    child - the child view to add 
+    index - the position at which to add the child 
+    params - the layout parameters to set on the child 
+
+*android.view.ViewGroup.addView(View,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  android.view.ViewGroup.LayoutParams params)
+
+Adds a child view with the specified layout parameters. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    child - the child view to add 
+    params - the layout parameters to set on the child 
+
+*android.view.ViewGroup.addViewInLayout(View,int,ViewGroup.LayoutParams)*
+
+protected boolean addViewInLayout(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params)
+
+Adds a view during layout. This is useful if in your onLayout() method, you 
+need to add more views (as does the list view for example). 
+
+If index is negative, it means put it at the end of the list. 
+
+
+    child - the view to add to the group 
+    index - the index at which the child must be added 
+    params - the layout parameters to associate with the child 
+
+    Returns: true if the child was added, false otherwise 
+
+*android.view.ViewGroup.addViewInLayout(View,int,ViewGroup.LayoutParams,boolean)*
+
+protected boolean addViewInLayout(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params,
+  boolean preventRequestLayout)
+
+Adds a view during layout. This is useful if in your onLayout() method, you 
+need to add more views (as does the list view for example). 
+
+If index is negative, it means put it at the end of the list. 
+
+
+    child - the view to add to the group 
+    index - the index at which the child must be added 
+    params - the layout parameters to associate with the child 
+    preventRequestLayout - if true, calling this method will not trigger a layout request on child 
+
+    Returns: true if the child was added, false otherwise 
+
+*android.view.ViewGroup.attachLayoutAnimationParameters(View,ViewGroup.LayoutParams,int,int)*
+
+protected void attachLayoutAnimationParameters(
+  android.view.View child,
+  android.view.ViewGroup.LayoutParams params,
+  int index,
+  int count)
+
+Subclasses should override this method to set layout animation parameters on 
+the supplied child. 
+
+
+    child - the child to associate with animation parameters 
+    params - the child's layout parameters which hold the animation parameters 
+    index - the index of the child in the view group 
+    count - the number of children in the view group 
+
+*android.view.ViewGroup.attachViewToParent(View,int,ViewGroup.LayoutParams)*
+
+protected void attachViewToParent(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params)
+
+Attaches a view to this view group. Attaching a view assigns this group as the 
+parent, sets the layout parameters and puts the view in the list of children so 
+that it can be retrieved by calling (|android.view.ViewGroup|) . 
+
+This method is intended to be lightweight and makes no assumptions about 
+whether the parent or child should be redrawn. Proper use of this method will 
+include also making any appropriate (|android.view.ViewGroup|) or 
+(|android.view.ViewGroup|) calls. For example, callers can 
+post(|android.view.ViewGroup|) a (|java.lang.Runnable|) which performs a 
+(|android.view.ViewGroup|) on the next frame, after all detach/attach calls are 
+finished, causing layout to be run prior to redrawing the view hierarchy. 
+
+This method should be called only for views which were detached from their 
+parent. 
+
+
+    child - the child to attach 
+    index - the index at which the child should be attached 
+    params - the layout parameters of the child 
+
+*android.view.ViewGroup.bringChildToFront(View)*
+
+public void bringChildToFront(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.canAnimate()*
+
+protected boolean canAnimate()
+
+Indicates whether the view group has the ability to animate its children after 
+the first layout. 
+
+
+
+    Returns: true if the children can be animated, false otherwise 
+
+*android.view.ViewGroup.checkLayoutParams(ViewGroup.LayoutParams)*
+
+protected boolean checkLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.view.ViewGroup.childDrawableStateChanged(View)*
+
+public void childDrawableStateChanged(android.view.View child)
+
+If (|android.view.ViewGroup|) is true, refreshes this group's drawable state 
+(to include the states from its children). 
+
+
+
+*android.view.ViewGroup.childHasTransientStateChanged(View,boolean)*
+
+public void childHasTransientStateChanged(
+  android.view.View child,
+  boolean childHasTransientState)
+
+Called when a child view has changed whether or not it is tracking transient 
+state. 
+
+
+
+*android.view.ViewGroup.cleanupLayoutState(View)*
+
+protected void cleanupLayoutState(android.view.View child)
+
+Prevents the specified child to be laid out during the next layout pass. 
+
+
+    child - the child on which to perform the cleanup 
+
+*android.view.ViewGroup.clearChildFocus(View)*
+
+public void clearChildFocus(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.clearDisappearingChildren()*
+
+public void clearDisappearingChildren()
+
+Removes any pending animations for views that have been removed. Call this if 
+you don't want animations for exiting views to stack up. 
+
+
+
+*android.view.ViewGroup.clearFocus()*
+
+public void clearFocus()
+
+
+
+
+
+*android.view.ViewGroup.debug(int)*
+
+protected void debug(int depth)
+
+
+
+
+
+*android.view.ViewGroup.detachAllViewsFromParent()*
+
+protected void detachAllViewsFromParent()
+
+Detaches all views from the parent. Detaching a view should be followed either 
+by a call to (|android.view.ViewGroup|) or a call to (|android.view.ViewGroup|) 
+. Detachment should only be temporary; reattachment or removal should happen 
+within the same drawing cycle as detachment. When a view is detached, its 
+parent is null and cannot be retrieved by a call to (|android.view.ViewGroup|) 
+. 
+
+
+
+*android.view.ViewGroup.detachViewFromParent(int)*
+
+protected void detachViewFromParent(int index)
+
+Detaches a view from its parent. Detaching a view should be followed either by 
+a call to (|android.view.ViewGroup|) or a call to (|android.view.ViewGroup|) . 
+Detachment should only be temporary; reattachment or removal should happen 
+within the same drawing cycle as detachment. When a view is detached, its 
+parent is null and cannot be retrieved by a call to (|android.view.ViewGroup|) 
+. 
+
+
+    index - the index of the child to detach 
+
+*android.view.ViewGroup.detachViewFromParent(View)*
+
+protected void detachViewFromParent(android.view.View child)
+
+Detaches a view from its parent. Detaching a view should be followed either by 
+a call to (|android.view.ViewGroup|) or a call to (|android.view.ViewGroup|) . 
+Detachment should only be temporary; reattachment or removal should happen 
+within the same drawing cycle as detachment. When a view is detached, its 
+parent is null and cannot be retrieved by a call to (|android.view.ViewGroup|) 
+. 
+
+
+    child - the child to detach 
+
+*android.view.ViewGroup.detachViewsFromParent(int,int)*
+
+protected void detachViewsFromParent(
+  int start,
+  int count)
+
+Detaches a range of views from their parents. Detaching a view should be 
+followed either by a call to (|android.view.ViewGroup|) or a call to 
+(|android.view.ViewGroup|) . Detachment should only be temporary; reattachment 
+or removal should happen within the same drawing cycle as detachment. When a 
+view is detached, its parent is null and cannot be retrieved by a call to 
+(|android.view.ViewGroup|) . 
+
+
+    start - the first index of the childrend range to detach 
+    count - the number of children to detach 
+
+*android.view.ViewGroup.dispatchConfigurationChanged(Configuration)*
+
+public void dispatchConfigurationChanged(android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.view.ViewGroup.dispatchDisplayHint(int)*
+
+public void dispatchDisplayHint(int hint)
+
+
+
+
+
+*android.view.ViewGroup.dispatchDragEvent(DragEvent)*
+
+public boolean dispatchDragEvent(android.view.DragEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchDraw(Canvas)*
+
+protected void dispatchDraw(Canvas canvas)
+
+
+
+
+
+*android.view.ViewGroup.dispatchFinishTemporaryDetach()*
+
+public void dispatchFinishTemporaryDetach()
+
+
+
+
+
+*android.view.ViewGroup.dispatchFreezeSelfOnly(SparseArray<Parcelable>)*
+
+protected void dispatchFreezeSelfOnly(android.util.SparseArray<android.os.Parcelable> container)
+
+Perform dispatching of a (|android.view.ViewGroup|) freeze()} to only this 
+view, not to its children. For use when overriding (|android.view.ViewGroup|) 
+dispatchFreeze()} to allow subclasses to freeze their own state but not the 
+state of their children. 
+
+
+    container - the container 
+
+*android.view.ViewGroup.dispatchGenericFocusedEvent(MotionEvent)*
+
+protected boolean dispatchGenericFocusedEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchGenericPointerEvent(MotionEvent)*
+
+protected boolean dispatchGenericPointerEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchGetDisplayList()*
+
+protected void dispatchGetDisplayList()
+
+This method is used to cause children of this ViewGroup to restore or recreate 
+their display lists. It is called by getDisplayList() when the parent ViewGroup 
+does not need to recreate its own display list, which would happen if it went 
+through the normal draw/dispatchDraw mechanisms. 
+
+
+
+*android.view.ViewGroup.dispatchHoverEvent(MotionEvent)*
+
+protected boolean dispatchHoverEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchKeyEventPreIme(KeyEvent)*
+
+public boolean dispatchKeyEventPreIme(android.view.KeyEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchKeyShortcutEvent(KeyEvent)*
+
+public boolean dispatchKeyShortcutEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchRestoreInstanceState(SparseArray<Parcelable>)*
+
+protected void dispatchRestoreInstanceState(android.util.SparseArray<android.os.Parcelable> container)
+
+
+
+
+
+*android.view.ViewGroup.dispatchSaveInstanceState(SparseArray<Parcelable>)*
+
+protected void dispatchSaveInstanceState(android.util.SparseArray<android.os.Parcelable> container)
+
+
+
+
+
+*android.view.ViewGroup.dispatchSetActivated(boolean)*
+
+public void dispatchSetActivated(boolean activated)
+
+
+
+
+
+*android.view.ViewGroup.dispatchSetPressed(boolean)*
+
+protected void dispatchSetPressed(boolean pressed)
+
+
+
+
+
+*android.view.ViewGroup.dispatchSetSelected(boolean)*
+
+public void dispatchSetSelected(boolean selected)
+
+
+
+
+
+*android.view.ViewGroup.dispatchStartTemporaryDetach()*
+
+public void dispatchStartTemporaryDetach()
+
+
+
+
+
+*android.view.ViewGroup.dispatchSystemUiVisibilityChanged(int)*
+
+public void dispatchSystemUiVisibilityChanged(int visible)
+
+
+
+
+
+*android.view.ViewGroup.dispatchThawSelfOnly(SparseArray<Parcelable>)*
+
+protected void dispatchThawSelfOnly(android.util.SparseArray<android.os.Parcelable> container)
+
+Perform dispatching of a (|android.view.ViewGroup|) to only this view, not to 
+its children. For use when overriding (|android.view.ViewGroup|) to allow 
+subclasses to thaw their own state but not the state of their children. 
+
+
+    container - the container 
+
+*android.view.ViewGroup.dispatchTouchEvent(MotionEvent)*
+
+public boolean dispatchTouchEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.view.ViewGroup.dispatchTrackballEvent(MotionEvent)*
+
+public boolean dispatchTrackballEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.view.ViewGroup.dispatchUnhandledMove(View,int)*
+
+public boolean dispatchUnhandledMove(
+  android.view.View focused,
+  int direction)
+
+
+
+
+
+*android.view.ViewGroup.dispatchVisibilityChanged(View,int)*
+
+protected void dispatchVisibilityChanged(
+  android.view.View changedView,
+  int visibility)
+
+
+
+
+
+*android.view.ViewGroup.dispatchWindowFocusChanged(boolean)*
+
+public void dispatchWindowFocusChanged(boolean hasFocus)
+
+
+
+
+
+*android.view.ViewGroup.dispatchWindowSystemUiVisiblityChanged(int)*
+
+public void dispatchWindowSystemUiVisiblityChanged(int visible)
+
+
+
+
+
+*android.view.ViewGroup.dispatchWindowVisibilityChanged(int)*
+
+public void dispatchWindowVisibilityChanged(int visibility)
+
+
+
+
+
+*android.view.ViewGroup.drawableStateChanged()*
+
+protected void drawableStateChanged()
+
+
+
+
+
+*android.view.ViewGroup.drawChild(Canvas,View,long)*
+
+protected boolean drawChild(
+  Canvas canvas,
+  android.view.View child,
+  long drawingTime)
+
+Draw one child of this View Group. This method is responsible for getting the 
+canvas in the right state. This includes clipping, translating so that the 
+child's scrolled origin is at 0, 0, and applying any animation transformations. 
+
+
+    canvas - The canvas on which to draw the child 
+    child - Who to draw 
+    drawingTime - The time at which draw is occurring 
+
+    Returns: True if an invalidate() was issued 
+
+*android.view.ViewGroup.endViewTransition(View)*
+
+public void endViewTransition(android.view.View view)
+
+This method should always be called following an earlier call to 
+(|android.view.ViewGroup|) . The given View is finally removed from its parent 
+and will no longer be displayed. Note that this method does not perform the 
+functionality of removing a view from its parent; it just discontinues the 
+display of a View that has previously been removed. 
+
+
+
+    Returns: view The View object that has been removed but is being kept around in the 
+             visible hierarchy by an earlier call to {@link 
+             #startViewTransition(View)}. 
+
+*android.view.ViewGroup.findFocus()*
+
+public |android.view.View| findFocus()
+
+
+
+
+
+*android.view.ViewGroup.findViewByAccessibilityIdTraversal(int)*
+
+public |android.view.View| findViewByAccessibilityIdTraversal(int accessibilityId)
+
+
+
+
+
+*android.view.ViewGroup.findViewByPredicateTraversal(Predicate<View>,View)*
+
+protected |android.view.View| findViewByPredicateTraversal(
+  com.android.internal.util.Predicate<android.view.View> predicate,
+  android.view.View childToSkip)
+
+
+
+
+
+*android.view.ViewGroup.findViewsWithText(ArrayList<View>,CharSequence,int)*
+
+public void findViewsWithText(
+  java.util.ArrayList<android.view.View> outViews,
+  java.lang.CharSequence text,
+  int flags)
+
+
+
+
+
+*android.view.ViewGroup.findViewTraversal(int)*
+
+protected |android.view.View| findViewTraversal(int id)
+
+
+
+
+
+*android.view.ViewGroup.findViewWithTagTraversal(Object)*
+
+protected |android.view.View| findViewWithTagTraversal(java.lang.Object tag)
+
+
+
+
+
+*android.view.ViewGroup.fitSystemWindows(Rect)*
+
+protected boolean fitSystemWindows(Rect insets)
+
+
+
+
+
+*android.view.ViewGroup.focusableViewAvailable(View)*
+
+public void focusableViewAvailable(android.view.View v)
+
+
+
+
+
+*android.view.ViewGroup.focusSearch(View,int)*
+
+public |android.view.View| focusSearch(
+  android.view.View focused,
+  int direction)
+
+Find the nearest view in the specified direction that wants to take focus. 
+
+
+    focused - The view that currently has focus 
+    direction - One of FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT, or 0 for not 
+       applicable. 
+
+*android.view.ViewGroup.gatherTransparentRegion(Region)*
+
+public boolean gatherTransparentRegion(Region region)
+
+
+
+
+
+*android.view.ViewGroup.generateDefaultLayoutParams()*
+
+protected |android.view.ViewGroup.LayoutParams| generateDefaultLayoutParams()
+
+Returns a set of default layout parameters. These parameters are requested when 
+the View passed to (|android.view.ViewGroup|) has no layout parameters already 
+set. If null is returned, an exception is thrown from addView. 
+
+
+
+    Returns: a set of default layout parameters or null 
+
+*android.view.ViewGroup.generateLayoutParams(AttributeSet)*
+
+public |android.view.ViewGroup.LayoutParams| generateLayoutParams(android.util.AttributeSet attrs)
+
+Returns a new set of layout parameters based on the supplied attributes set. 
+
+
+    attrs - the attributes to build the layout parameters from 
+
+    Returns: an instance of {@link android.view.ViewGroup.LayoutParams} or one of its 
+             descendants 
+
+*android.view.ViewGroup.generateLayoutParams(ViewGroup.LayoutParams)*
+
+protected |android.view.ViewGroup.LayoutParams| generateLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+Returns a safe set of layout parameters based on the supplied layout params. 
+When a ViewGroup is passed a View whose layout params do not pass the test of 
+(|android.view.ViewGroup|) , this method is invoked. This method should return 
+a new set of layout params suitable for this ViewGroup, possibly by copying the 
+appropriate attributes from the specified set of layout params. 
+
+
+    p - The layout parameters to convert into a suitable set of layout parameters for 
+       this ViewGroup. 
+
+    Returns: an instance of {@link android.view.ViewGroup.LayoutParams} or one of its 
+             descendants 
+
+*android.view.ViewGroup.getChildAt(int)*
+
+public |android.view.View| getChildAt(int index)
+
+Returns the view at the specified position in the group. 
+
+
+    index - the position at which to get the view from 
+
+    Returns: the view at the specified position or null if the position does not exist 
+             within the group 
+
+*android.view.ViewGroup.getChildCount()*
+
+public int getChildCount()
+
+Returns the number of children in the group. 
+
+
+
+    Returns: a positive integer representing the number of children in the group 
+
+*android.view.ViewGroup.getChildDrawingOrder(int,int)*
+
+protected int getChildDrawingOrder(
+  int childCount,
+  int i)
+
+Returns the index of the child to draw for this iteration. Override this if you 
+want to change the drawing order of children. By default, it returns i. 
+
+NOTE: In order for this method to be called, you must enable child ordering 
+first by calling (|android.view.ViewGroup|) . 
+
+
+    i - The current iteration. 
+
+    Returns: The index of the child to draw this iteration. 
+
+*android.view.ViewGroup.getChildMeasureSpec(int,int,int)*
+
+public static int getChildMeasureSpec(
+  int spec,
+  int padding,
+  int childDimension)
+
+Does the hard part of measureChildren: figuring out the MeasureSpec to pass to 
+a particular child. This method figures out the right MeasureSpec for one 
+dimension (height or width) of one child view. 
+
+The goal is to combine information from our MeasureSpec with the LayoutParams 
+of the child to get the best possible results. For example, if the this view 
+knows its size (because its MeasureSpec has a mode of EXACTLY), and the child 
+has indicated in its LayoutParams that it wants to be the same size as the 
+parent, the parent should ask the child to layout given an exact size. 
+
+
+    spec - The requirements for this view 
+    padding - The padding of this view for the current dimension and margins, if applicable 
+    childDimension - How big the child wants to be in the current dimension 
+
+    Returns: a MeasureSpec integer for the child 
+
+*android.view.ViewGroup.getChildStaticTransformation(View,Transformation)*
+
+protected boolean getChildStaticTransformation(
+  android.view.View child,
+  android.view.animation.Transformation t)
+
+Sets t to be the static transformation of the child, if set, returning a 
+boolean to indicate whether a static transform was set. The default 
+implementation simply returns false; subclasses may override this method for 
+different behavior. (|android.view.ViewGroup|) must be set to true for this 
+method to be called. 
+
+
+    child - The child view whose static transform is being requested 
+    t - The Transformation which will hold the result 
+
+    Returns: true if the transformation was set, false otherwise 
+
+*android.view.ViewGroup.getChildVisibleRect(View,Rect,android.graphics.Point)*
+
+public boolean getChildVisibleRect(
+  android.view.View child,
+  Rect r,
+  android.graphics.Point offset)
+
+
+
+
+
+*android.view.ViewGroup.getClipChildren()*
+
+public boolean getClipChildren()
+
+Returns whether ths group's children are clipped to their bounds before 
+drawing. The default value is true. 
+
+
+
+    Returns: True if the group's children will be clipped to their bounds, false otherwise. 
+
+*android.view.ViewGroup.getDescendantFocusability()*
+
+public int getDescendantFocusability()
+
+Gets the descendant focusability of this view group. The descendant 
+focusability defines the relationship between this view group and its 
+descendants when looking for a view to take focus in (|android.view.ViewGroup|) 
+. 
+
+
+
+    Returns: one of {@link #FOCUS_BEFORE_DESCENDANTS}, {@link #FOCUS_AFTER_DESCENDANTS}, 
+             {@link #FOCUS_BLOCK_DESCENDANTS}. 
+
+*android.view.ViewGroup.getFocusedChild()*
+
+public |android.view.View| getFocusedChild()
+
+Returns the focused child of this view, if any. The child may have focus or 
+contain focus. 
+
+
+
+    Returns: the focused child or null. 
+
+*android.view.ViewGroup.getLayoutAnimation()*
+
+public |android.view.animation.LayoutAnimationController| getLayoutAnimation()
+
+Returns the layout animation controller used to animate the group's children. 
+
+
+
+    Returns: the current animation controller 
+
+*android.view.ViewGroup.getLayoutAnimationListener()*
+
+public |android.view.animation.Animation.AnimationListener| getLayoutAnimationListener()
+
+Returns the animation listener to which layout animation events are sent. 
+
+
+
+    Returns: an {@link android.view.animation.Animation.AnimationListener} 
+
+*android.view.ViewGroup.getLayoutMode()*
+
+public int getLayoutMode()
+
+Returns the basis of alignment during layout operations on this ViewGroup: 
+either (|android.view.ViewGroup|) or (|android.view.ViewGroup|) . 
+
+If no layoutMode was explicitly set, either programmatically or in an XML 
+resource, the method returns the layoutMode of the view's parent ViewGroup if 
+such a parent exists, otherwise the method returns a default value of 
+(|android.view.ViewGroup|) . 
+
+
+
+    Returns: the layout mode to use during layout operations 
+
+*android.view.ViewGroup.getLayoutTransition()*
+
+public |android.animation.LayoutTransition| getLayoutTransition()
+
+Gets the LayoutTransition object for this ViewGroup. If the LayoutTransition 
+object is not null, changes in layout which occur because of children being 
+added to or removed from the ViewGroup will be animated according to the 
+animations defined in that LayoutTransition object. By default, the transition 
+object is null (so layout changes are not animated). 
+
+
+
+    Returns: LayoutTranstion The LayoutTransition object that will animated changes in 
+             layout. A value of null means no transition will run on layout 
+             changes. 
+
+*android.view.ViewGroup.getOverlay()*
+
+public |android.view.ViewGroupOverlay| getOverlay()
+
+Returns the ViewGroupOverlay for this view group, creating it if it does not 
+yet exist. In addition to (|android.view.ViewOverlay|) 's support for 
+drawables, (|android.view.ViewGroupOverlay|) allows views to be added to the 
+overlay. These views, like overlay drawables, are visual-only; they do not 
+receive input events and should not be used as anything other than a temporary 
+representation of a view in a parent container, such as might be used by an 
+animation effect. 
+
+Note: Overlays do not currently work correctly with 
+(|android.view.SurfaceView|) or (|android.view.TextureView|) ; contents in 
+overlays for these types of views may not display correctly. 
+
+
+
+    Returns: The ViewGroupOverlay object for this view. 
+
+*android.view.ViewGroup.getPersistentDrawingCache()*
+
+public int getPersistentDrawingCache()
+
+Returns an integer indicating what types of drawing caches are kept in memory. 
+
+
+
+    Returns: one or a combination of {@link #PERSISTENT_NO_CACHE}, {@link 
+             #PERSISTENT_ANIMATION_CACHE}, {@link #PERSISTENT_SCROLLING_CACHE} 
+             and {@link #PERSISTENT_ALL_CACHES} 
+
+*android.view.ViewGroup.hasFocus()*
+
+public boolean hasFocus()
+
+Returns true if this view has or contains focus 
+
+
+
+    Returns: true if this view has or contains focus 
+
+*android.view.ViewGroup.hasFocusable()*
+
+public boolean hasFocusable()
+
+
+
+
+
+*android.view.ViewGroup.hasHoveredChild()*
+
+protected boolean hasHoveredChild()
+
+
+
+
+
+*android.view.ViewGroup.hasTransientState()*
+
+public boolean hasTransientState()
+
+
+
+
+
+*android.view.ViewGroup.indexOfChild(View)*
+
+public int indexOfChild(android.view.View child)
+
+Returns the position in the group of the specified child view. 
+
+
+    child - the view for which to get the position 
+
+    Returns: a positive integer representing the position of the view in the group, or -1 if 
+             the view does not exist in the group 
+
+*android.view.ViewGroup.internalSetPadding(int,int,int,int)*
+
+protected void internalSetPadding(
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.view.ViewGroup.invalidateChild(View,Rect)*
+
+public final void invalidateChild(
+  android.view.View child,
+  Rect dirty)
+
+Don't call or override this method. It is used for the implementation of the 
+view hierarchy. 
+
+
+
+*android.view.ViewGroup.invalidateChildFast(View,Rect)*
+
+public void invalidateChildFast(
+  android.view.View child,
+  Rect dirty)
+
+Quick invalidation method called by View.invalidateViewProperty. This doesn't 
+set the DRAWN flags and doesn't handle the Animation logic that the default 
+invalidation methods do; all we want to do here is schedule a traversal with 
+the appropriate dirty rect. 
+
+
+
+*android.view.ViewGroup.invalidateChildInParent(int[],Rect)*
+
+public |android.view.ViewParent| invalidateChildInParent(
+  int[] location,
+  Rect dirty)
+
+Don't call or override this method. It is used for the implementation of the 
+view hierarchy. 
+
+This implementation returns null if this ViewGroup does not have a parent, if 
+this ViewGroup is already fully invalidated or if the dirty rectangle does not 
+intersect with this ViewGroup's bounds. 
+
+
+
+*android.view.ViewGroup.invalidateChildInParentFast(int,int,Rect)*
+
+protected |android.view.ViewParent| invalidateChildInParentFast(
+  int left,
+  int top,
+  Rect dirty)
+
+Quick invalidation method that simply transforms the dirty rect into the 
+parent's coordinate system, pruning the invalidation if the parent has already 
+been invalidated. 
+
+
+
+*android.view.ViewGroup.isAlwaysDrawnWithCacheEnabled()*
+
+public boolean isAlwaysDrawnWithCacheEnabled()
+
+Indicates whether this ViewGroup will always try to draw its children using 
+their drawing cache. By default this property is enabled. 
+
+
+
+    Returns: true if the animation cache is enabled, false otherwise 
+
+*android.view.ViewGroup.isAnimationCacheEnabled()*
+
+public boolean isAnimationCacheEnabled()
+
+Indicates whether the children's drawing cache is used during a layout 
+animation. By default, the drawing cache is enabled but this will prevent 
+nested layout animations from working. To nest animations, you must disable the 
+cache. 
+
+
+
+    Returns: true if the animation cache is enabled, false otherwise 
+
+*android.view.ViewGroup.isChildrenDrawingOrderEnabled()*
+
+protected boolean isChildrenDrawingOrderEnabled()
+
+Indicates whether the ViewGroup is drawing its children in the order defined by 
+(|android.view.ViewGroup|) . 
+
+
+
+    Returns: true if children drawing order is defined by {@link #getChildDrawingOrder(int, 
+             int)}, false otherwise 
+
+*android.view.ViewGroup.isChildrenDrawnWithCacheEnabled()*
+
+protected boolean isChildrenDrawnWithCacheEnabled()
+
+Indicates whether the ViewGroup is currently drawing its children using their 
+drawing cache. 
+
+
+
+    Returns: true if children should be drawn with their cache, false otherwise 
+
+*android.view.ViewGroup.isLayoutSuppressed()*
+
+public boolean isLayoutSuppressed()
+
+Returns whether layout calls on this container are currently being suppressed, 
+due to an earlier call to (|android.view.ViewGroup|) . 
+
+
+
+    Returns: true if layout calls are currently suppressed, false otherwise. 
+
+*android.view.ViewGroup.isMotionEventSplittingEnabled()*
+
+public boolean isMotionEventSplittingEnabled()
+
+Returns true if MotionEvents dispatched to this ViewGroup can be split to 
+multiple children. 
+
+
+
+    Returns: true if MotionEvents dispatched to this ViewGroup can be split to multiple 
+             children. 
+
+*android.view.ViewGroup.isTransformedTouchPointInView(float,float,View,PointF)*
+
+protected boolean isTransformedTouchPointInView(
+  float x,
+  float y,
+  android.view.View child,
+  PointF outLocalPoint)
+
+Returns true if a child view contains the specified point when transformed into 
+its coordinate space. Child must not be null. 
+
+
+
+*android.view.ViewGroup.jumpDrawablesToCurrentState()*
+
+public void jumpDrawablesToCurrentState()
+
+
+
+
+
+*android.view.ViewGroup.layout(int,int,int,int)*
+
+public final void layout(
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.view.ViewGroup.makeOptionalFitsSystemWindows()*
+
+public void makeOptionalFitsSystemWindows()
+
+
+
+
+
+*android.view.ViewGroup.measureChild(View,int,int)*
+
+protected void measureChild(
+  android.view.View child,
+  int parentWidthMeasureSpec,
+  int parentHeightMeasureSpec)
+
+Ask one of the children of this view to measure itself, taking into account 
+both the MeasureSpec requirements for this view and its padding. The heavy 
+lifting is done in getChildMeasureSpec. 
+
+
+    child - The child to measure 
+    parentWidthMeasureSpec - The width requirements for this view 
+    parentHeightMeasureSpec - The height requirements for this view 
+
+*android.view.ViewGroup.measureChildren(int,int)*
+
+protected void measureChildren(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+Ask all of the children of this view to measure themselves, taking into account 
+both the MeasureSpec requirements for this view and its padding. We skip 
+children that are in the GONE state The heavy lifting is done in 
+getChildMeasureSpec. 
+
+
+    widthMeasureSpec - The width requirements for this view 
+    heightMeasureSpec - The height requirements for this view 
+
+*android.view.ViewGroup.measureChildWithMargins(View,int,int,int,int)*
+
+protected void measureChildWithMargins(
+  android.view.View child,
+  int parentWidthMeasureSpec,
+  int widthUsed,
+  int parentHeightMeasureSpec,
+  int heightUsed)
+
+Ask one of the children of this view to measure itself, taking into account 
+both the MeasureSpec requirements for this view and its padding and margins. 
+The child must have MarginLayoutParams The heavy lifting is done in 
+getChildMeasureSpec. 
+
+
+    child - The child to measure 
+    parentWidthMeasureSpec - The width requirements for this view 
+    widthUsed - Extra space that has been used up by the parent horizontally (possibly by other 
+       children of the parent) 
+    parentHeightMeasureSpec - The height requirements for this view 
+    heightUsed - Extra space that has been used up by the parent vertically (possibly by other 
+       children of the parent) 
+
+*android.view.ViewGroup.notifySubtreeAccessibilityStateChanged(View,View,int)*
+
+public void notifySubtreeAccessibilityStateChanged(
+  android.view.View child,
+  android.view.View source,
+  int changeType)
+
+
+
+
+
+*android.view.ViewGroup.offsetChildrenTopAndBottom(int)*
+
+public void offsetChildrenTopAndBottom(int offset)
+
+Offset the vertical location of all children of this view by the specified 
+number of pixels. 
+
+
+    offset - the number of pixels to offset 
+
+*android.view.ViewGroup.offsetDescendantRectToMyCoords(View,Rect)*
+
+public final void offsetDescendantRectToMyCoords(
+  android.view.View descendant,
+  Rect rect)
+
+Offset a rectangle that is in a descendant's coordinate space into our 
+coordinate space. 
+
+
+    descendant - A descendant of this view 
+    rect - A rectangle defined in descendant's coordinate space. 
+
+*android.view.ViewGroup.offsetRectIntoDescendantCoords(View,Rect)*
+
+public final void offsetRectIntoDescendantCoords(
+  android.view.View descendant,
+  Rect rect)
+
+Offset a rectangle that is in our coordinate space into an ancestor's 
+coordinate space. 
+
+
+    descendant - A descendant of this view 
+    rect - A rectangle defined in descendant's coordinate space. 
+
+*android.view.ViewGroup.onAnimationEnd()*
+
+protected void onAnimationEnd()
+
+
+
+
+
+*android.view.ViewGroup.onAnimationStart()*
+
+protected void onAnimationStart()
+
+
+
+
+
+*android.view.ViewGroup.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.view.ViewGroup.onChildVisibilityChanged(View,int,int)*
+
+protected void onChildVisibilityChanged(
+  android.view.View child,
+  int oldVisibility,
+  int newVisibility)
+
+Called when a view's visibility has changed. Notify the parent to take any 
+appropriate action. 
+
+
+    child - The view whose visibility has changed 
+    oldVisibility - The previous visibility value (GONE, INVISIBLE, or VISIBLE). 
+    newVisibility - The new visibility value (GONE, INVISIBLE, or VISIBLE). 
+
+*android.view.ViewGroup.onCreateDrawableState(int)*
+
+protected int[] onCreateDrawableState(int extraSpace)
+
+
+
+
+
+*android.view.ViewGroup.onDebugDraw(Canvas)*
+
+protected void onDebugDraw(Canvas canvas)
+
+
+
+
+
+*android.view.ViewGroup.onDebugDrawMargins(Canvas,Paint)*
+
+protected void onDebugDrawMargins(
+  Canvas canvas,
+  Paint paint)
+
+
+
+
+
+*android.view.ViewGroup.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.view.ViewGroup.onInterceptHoverEvent(MotionEvent)*
+
+public boolean onInterceptHoverEvent(android.view.MotionEvent event)
+
+Implement this method to intercept hover events before they are handled by 
+child views. 
+
+This method is called before dispatching a hover event to a child of the view 
+group or to the view group's own (|android.view.ViewGroup|) to allow the view 
+group a chance to intercept the hover event. This method can also be used to 
+watch all pointer motions that occur within the bounds of the view group even 
+when the pointer is hovering over a child of the view group rather than over 
+the view group itself. 
+
+The view group can prevent its children from receiving hover events by 
+implementing this method and returning true to indicate that it would like to 
+intercept hover events. The view group must continuously return true from 
+(|android.view.ViewGroup|) for as long as it wishes to continue intercepting 
+hover events from its children. 
+
+Interception preserves the invariant that at most one view can be hovered at a 
+time by transferring hover focus from the currently hovered child to the view 
+group or vice-versa as needed. 
+
+If this method returns true and a child is already hovered, then the child view 
+will first receive a hover exit event and then the view group itself will 
+receive a hover enter event in (|android.view.ViewGroup|) . Likewise, if this 
+method had previously returned true to intercept hover events and instead 
+returns false while the pointer is hovering within the bounds of one of a 
+child, then the view group will first receive a hover exit event in 
+(|android.view.ViewGroup|) and then the hovered child will receive a hover 
+enter event. 
+
+The default implementation always returns false. 
+
+
+    event - The motion event that describes the hover. 
+
+    Returns: True if the view group would like to intercept the hover event and prevent its 
+             children from receiving it. 
+
+*android.view.ViewGroup.onInterceptTouchEvent(MotionEvent)*
+
+public boolean onInterceptTouchEvent(android.view.MotionEvent ev)
+
+Implement this method to intercept all touch screen motion events. This allows 
+you to watch events as they are dispatched to your children, and take ownership 
+of the current gesture at any point. 
+
+Using this function takes some care, as it has a fairly complicated interaction 
+with View.onTouchEvent(MotionEvent)(|android.view.View|) , and using it 
+requires implementing that method as well as this one in the correct way. 
+Events will be received in the following order: 
+
+You will receive the down event here. The down event will be handled either by 
+a child of this view group, or given to your own onTouchEvent() method to 
+handle; this means you should implement onTouchEvent() to return true, so you 
+will continue to see the rest of the gesture (instead of looking for a parent 
+view to handle it). Also, by returning true from onTouchEvent(), you will not 
+receive any following events in onInterceptTouchEvent() and all touch 
+processing must happen in onTouchEvent() like normal. For as long as you return 
+false from this function, each following event (up to and including the final 
+up) will be delivered first here and then to the target's onTouchEvent(). If 
+you return true from here, you will not receive any following events: the 
+target view will receive the same event but with the action 
+(|android.view.MotionEvent|) , and all further events will be delivered to your 
+onTouchEvent() method and no longer appear here. 
+
+
+    ev - The motion event being dispatched down the hierarchy. 
+
+    Returns: Return true to steal motion events from the children and have them dispatched 
+             to this ViewGroup through onTouchEvent(). The current target will 
+             receive an ACTION_CANCEL event, and no further messages will be 
+             delivered here. 
+
+*android.view.ViewGroup.onLayout(boolean,int,int,int,int)*
+
+protected abstract void onLayout(
+  boolean changed,
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.view.ViewGroup.onRequestFocusInDescendants(int,Rect)*
+
+protected boolean onRequestFocusInDescendants(
+  int direction,
+  Rect previouslyFocusedRect)
+
+Look for a descendant to call (|android.view.View|) on. Called by 
+(|android.view.ViewGroup|) when it wants to request focus within its children. 
+Override this to customize how your (|android.view.ViewGroup|) requests focus 
+within its children. 
+
+
+    direction - One of FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, and FOCUS_RIGHT 
+    previouslyFocusedRect - The rectangle (in this View's coordinate system) to give a finer grained hint 
+       about where focus is coming from. May be null if there is no hint. 
+
+    Returns: Whether focus was taken. 
+
+*android.view.ViewGroup.onRequestSendAccessibilityEvent(View,AccessibilityEvent)*
+
+public boolean onRequestSendAccessibilityEvent(
+  android.view.View child,
+  android.view.accessibility.AccessibilityEvent event)
+
+Called when a child has requested sending an 
+(|android.view.accessibility.AccessibilityEvent|) and gives an opportunity to 
+its parent to augment the event. 
+
+If an (|android.view.View.AccessibilityDelegate|) has been specified via 
+calling (|android.view.View|) its (|android.view.View.AccessibilityDelegate|) 
+is responsible for handling this call. 
+
+
+    child - The child which requests sending the event. 
+    event - The event to be sent. 
+
+    Returns: True if the event should be sent. 
+
+*android.view.ViewGroup.onSetLayoutParams(View,ViewGroup.LayoutParams)*
+
+protected void onSetLayoutParams(
+  android.view.View child,
+  android.view.ViewGroup.LayoutParams layoutParams)
+
+
+
+
+
+*android.view.ViewGroup.onViewAdded(View)*
+
+protected void onViewAdded(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.onViewRemoved(View)*
+
+protected void onViewRemoved(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.recomputeViewAttributes(View)*
+
+public void recomputeViewAttributes(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.removeAllViews()*
+
+public void removeAllViews()
+
+Call this method to remove all child views from the ViewGroup. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+
+*android.view.ViewGroup.removeAllViewsInLayout()*
+
+public void removeAllViewsInLayout()
+
+Called by a ViewGroup subclass to remove child views from itself, when it must 
+first know its size on screen before it can calculate how many child views it 
+will render. An example is a Gallery or a ListView, which may "have" 50 
+children, but actually only render the number of children that can currently 
+fit inside the object on screen. Do not call this method unless you are 
+extending ViewGroup and understand the view measuring and layout pipeline. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+
+*android.view.ViewGroup.removeDetachedView(View,boolean)*
+
+protected void removeDetachedView(
+  android.view.View child,
+  boolean animate)
+
+Finishes the removal of a detached view. This method will dispatch the detached 
+from window event and notify the hierarchy change listener. 
+
+This method is intended to be lightweight and makes no assumptions about 
+whether the parent or child should be redrawn. Proper use of this method will 
+include also making any appropriate (|android.view.ViewGroup|) or 
+(|android.view.ViewGroup|) calls. For example, callers can 
+post(|android.view.ViewGroup|) a (|java.lang.Runnable|) which performs a 
+(|android.view.ViewGroup|) on the next frame, after all detach/remove calls are 
+finished, causing layout to be run prior to redrawing the view hierarchy. 
+
+
+    child - the child to be definitely removed from the view hierarchy 
+    animate - if true and the view has an animation, the view is placed in the disappearing 
+       views list, otherwise, it is detached from the window 
+
+*android.view.ViewGroup.removeView(View)*
+
+public void removeView(android.view.View view)
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+
+*android.view.ViewGroup.removeViewAt(int)*
+
+public void removeViewAt(int index)
+
+Removes the view at the specified position in the group. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    index - the position in the group of the view to remove 
+
+*android.view.ViewGroup.removeViewInLayout(View)*
+
+public void removeViewInLayout(android.view.View view)
+
+Removes a view during layout. This is useful if in your onLayout() method, you 
+need to remove more views. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    view - the view to remove from the group 
+
+*android.view.ViewGroup.removeViews(int,int)*
+
+public void removeViews(
+  int start,
+  int count)
+
+Removes the specified range of views from the group. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    start - the first position in the group of the range of views to remove 
+    count - the number of views to remove 
+
+*android.view.ViewGroup.removeViewsInLayout(int,int)*
+
+public void removeViewsInLayout(
+  int start,
+  int count)
+
+Removes a range of views during layout. This is useful if in your onLayout() 
+method, you need to remove more views. 
+
+Note: do not invoke this method from (|android.view.ViewGroup|) , 
+(|android.view.ViewGroup|) , (|android.view.ViewGroup|) or any related method. 
+
+
+    start - the index of the first view to remove from the group 
+    count - the number of views to remove from the group 
+
+*android.view.ViewGroup.requestChildFocus(View,View)*
+
+public void requestChildFocus(
+  android.view.View child,
+  android.view.View focused)
+
+
+
+
+
+*android.view.ViewGroup.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rectangle,
+  boolean immediate)
+
+
+
+
+
+*android.view.ViewGroup.requestDisallowInterceptTouchEvent(boolean)*
+
+public void requestDisallowInterceptTouchEvent(boolean disallowIntercept)
+
+
+
+
+
+*android.view.ViewGroup.requestFocus(int,Rect)*
+
+public boolean requestFocus(
+  int direction,
+  Rect previouslyFocusedRect)
+
+Looks for a view to give focus to respecting the setting specified by 
+(|android.view.ViewGroup|) . 
+
+Uses (|android.view.ViewGroup|) to find focus within the children of this group 
+when appropriate. 
+
+
+
+*android.view.ViewGroup.requestSendAccessibilityEvent(View,AccessibilityEvent)*
+
+public boolean requestSendAccessibilityEvent(
+  android.view.View child,
+  android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.view.ViewGroup.requestTransitionStart(LayoutTransition)*
+
+public void requestTransitionStart(android.animation.LayoutTransition transition)
+
+This method is called by LayoutTransition when there are 'changing' animations 
+that need to start after the layout/setup phase. The request is forwarded to 
+the ViewAncestor, who starts all pending transitions prior to the drawing phase 
+in the current traversal. 
+
+
+    transition - The LayoutTransition to be started on the next traversal. 
+
+*android.view.ViewGroup.requestTransparentRegion(View)*
+
+public void requestTransparentRegion(android.view.View child)
+
+
+
+
+
+*android.view.ViewGroup.resetResolvedDrawables()*
+
+protected void resetResolvedDrawables()
+
+
+
+
+
+*android.view.ViewGroup.resetResolvedLayoutDirection()*
+
+public void resetResolvedLayoutDirection()
+
+
+
+
+
+*android.view.ViewGroup.resetResolvedPadding()*
+
+public void resetResolvedPadding()
+
+
+
+
+
+*android.view.ViewGroup.resetResolvedTextAlignment()*
+
+public void resetResolvedTextAlignment()
+
+
+
+
+
+*android.view.ViewGroup.resetResolvedTextDirection()*
+
+public void resetResolvedTextDirection()
+
+
+
+
+
+*android.view.ViewGroup.resolveDrawables()*
+
+protected void resolveDrawables()
+
+
+
+
+
+*android.view.ViewGroup.resolveLayoutDirection()*
+
+public boolean resolveLayoutDirection()
+
+
+
+
+
+*android.view.ViewGroup.resolveLayoutParams()*
+
+public void resolveLayoutParams()
+
+
+
+
+
+*android.view.ViewGroup.resolvePadding()*
+
+public void resolvePadding()
+
+
+
+
+
+*android.view.ViewGroup.resolveRtlPropertiesIfNeeded()*
+
+public boolean resolveRtlPropertiesIfNeeded()
+
+
+
+
+
+*android.view.ViewGroup.resolveTextAlignment()*
+
+public boolean resolveTextAlignment()
+
+
+
+
+
+*android.view.ViewGroup.resolveTextDirection()*
+
+public boolean resolveTextDirection()
+
+
+
+
+
+*android.view.ViewGroup.scheduleLayoutAnimation()*
+
+public void scheduleLayoutAnimation()
+
+Schedules the layout animation to be played after the next layout pass of this 
+view group. This can be used to restart the layout animation when the content 
+of the view group changes or when the activity is paused and resumed. 
+
+
+
+*android.view.ViewGroup.setAddStatesFromChildren(boolean)*
+
+public void setAddStatesFromChildren(boolean addsStates)
+
+Sets whether this ViewGroup's drawable states also include its children's 
+drawable states. This is used, for example, to make a group appear to be 
+focused when its child EditText or button is focused. 
+
+
+
+*android.view.ViewGroup.setAlwaysDrawnWithCacheEnabled(boolean)*
+
+public void setAlwaysDrawnWithCacheEnabled(boolean always)
+
+Indicates whether this ViewGroup will always try to draw its children using 
+their drawing cache. This property can be set to true when the cache rendering 
+is slightly different from the children's normal rendering. Renderings can be 
+different, for instance, when the cache's quality is set to low. 
+
+When this property is disabled, the ViewGroup will use the drawing cache of its 
+children only when asked to. It's usually the task of subclasses to tell 
+ViewGroup when to start using the drawing cache and when to stop using it. 
+
+
+    always - true to always draw with the drawing cache, false otherwise 
+
+*android.view.ViewGroup.setAnimationCacheEnabled(boolean)*
+
+public void setAnimationCacheEnabled(boolean enabled)
+
+Enables or disables the children's drawing cache during a layout animation. By 
+default, the drawing cache is enabled but this will prevent nested layout 
+animations from working. To nest animations, you must disable the cache. 
+
+
+    enabled - true to enable the animation cache, false otherwise 
+
+*android.view.ViewGroup.setChildrenDrawingCacheEnabled(boolean)*
+
+protected void setChildrenDrawingCacheEnabled(boolean enabled)
+
+Enables or disables the drawing cache for each child of this view group. 
+
+
+    enabled - true to enable the cache, false to dispose of it 
+
+*android.view.ViewGroup.setChildrenDrawingOrderEnabled(boolean)*
+
+protected void setChildrenDrawingOrderEnabled(boolean enabled)
+
+Tells the ViewGroup whether to draw its children in the order defined by the 
+method (|android.view.ViewGroup|) . 
+
+
+    enabled - true if the order of the children when drawing is determined by {@link 
+       #getChildDrawingOrder(int, int)}, false otherwise 
+
+*android.view.ViewGroup.setChildrenDrawnWithCacheEnabled(boolean)*
+
+protected void setChildrenDrawnWithCacheEnabled(boolean enabled)
+
+Tells the ViewGroup to draw its children using their drawing cache. This 
+property is ignored when (|android.view.ViewGroup|) is true. A child's drawing 
+cache will be used only if it has been enabled. 
+
+Subclasses should call this method to start and stop using the drawing cache 
+when they perform performance sensitive operations, like scrolling or 
+animating. 
+
+
+    enabled - true if children should be drawn with their cache, false otherwise 
+
+*android.view.ViewGroup.setClipChildren(boolean)*
+
+public void setClipChildren(boolean clipChildren)
+
+By default, children are clipped to their bounds before drawing. This allows 
+view groups to override this behavior for animations, etc. 
+
+
+    clipChildren - true to clip children to their bounds, false otherwise 
+
+*android.view.ViewGroup.setClipToPadding(boolean)*
+
+public void setClipToPadding(boolean clipToPadding)
+
+By default, children are clipped to the padding of the ViewGroup. This allows 
+view groups to override this behavior 
+
+
+    clipToPadding - true to clip children to the padding of the group, false otherwise 
+
+*android.view.ViewGroup.setDescendantFocusability(int)*
+
+public void setDescendantFocusability(int focusability)
+
+Set the descendant focusability of this view group. This defines the 
+relationship between this view group and its descendants when looking for a 
+view to take focus in (|android.view.ViewGroup|) . 
+
+
+    focusability - one of {@link #FOCUS_BEFORE_DESCENDANTS}, {@link #FOCUS_AFTER_DESCENDANTS}, 
+       {@link #FOCUS_BLOCK_DESCENDANTS}. 
+
+*android.view.ViewGroup.setLayoutAnimation(LayoutAnimationController)*
+
+public void setLayoutAnimation(android.view.animation.LayoutAnimationController controller)
+
+Sets the layout animation controller used to animate the group's children after 
+the first layout. 
+
+
+    controller - the animation controller 
+
+*android.view.ViewGroup.setLayoutAnimationListener(Animation.AnimationListener)*
+
+public void setLayoutAnimationListener(android.view.animation.Animation.AnimationListener animationListener)
+
+Specifies the animation listener to which layout animation events must be sent. 
+Only (|android.view.animation.Animation.AnimationListener|) and 
+(|android.view.animation.Animation.AnimationListener|) are invoked. 
+
+
+    animationListener - the layout animation listener 
+
+*android.view.ViewGroup.setLayoutMode(int)*
+
+public void setLayoutMode(int layoutMode)
+
+Sets the basis of alignment during the layout of this ViewGroup. Valid values 
+are either (|android.view.ViewGroup|) or (|android.view.ViewGroup|) . 
+
+
+    layoutMode - the layout mode to use during layout operations 
+
+*android.view.ViewGroup.setLayoutTransition(LayoutTransition)*
+
+public void setLayoutTransition(android.animation.LayoutTransition transition)
+
+Sets the LayoutTransition object for this ViewGroup. If the LayoutTransition 
+object is not null, changes in layout which occur because of children being 
+added to or removed from the ViewGroup will be animated according to the 
+animations defined in that LayoutTransition object. By default, the transition 
+object is null (so layout changes are not animated). 
+
+Replacing a non-null transition will cause that previous transition to be 
+canceled, if it is currently running, to restore this container to its correct 
+post-transition state. 
+
+
+    transition - The LayoutTransition object that will animated changes in layout. A value of 
+       null means no transition will run on layout changes. 
+
+*android.view.ViewGroup.setMotionEventSplittingEnabled(boolean)*
+
+public void setMotionEventSplittingEnabled(boolean split)
+
+Enable or disable the splitting of MotionEvents to multiple children during 
+touch event dispatch. This behavior is enabled by default for applications that 
+target an SDK version of (|Build.VERSION_CODES|) or newer. 
+
+When this option is enabled MotionEvents may be split and dispatched to 
+different child views depending on where each pointer initially went down. This 
+allows for user interactions such as scrolling two panes of content 
+independently, chording of buttons, and performing independent gestures on 
+different pieces of content. 
+
+
+    split - true to allow MotionEvents to be split and dispatched to multiple child views. 
+       false to only allow one child view to be the target of any MotionEvent 
+       received by this ViewGroup. 
+
+*android.view.ViewGroup.setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener)*
+
+public void setOnHierarchyChangeListener(android.view.ViewGroup.OnHierarchyChangeListener listener)
+
+Register a callback to be invoked when a child is added to or removed from this 
+view. 
+
+
+    listener - the callback to invoke on hierarchy change 
+
+*android.view.ViewGroup.setPersistentDrawingCache(int)*
+
+public void setPersistentDrawingCache(int drawingCacheToKeep)
+
+Indicates what types of drawing caches should be kept in memory after they have 
+been created. 
+
+
+    drawingCacheToKeep - one or a combination of {@link #PERSISTENT_NO_CACHE}, {@link 
+       #PERSISTENT_ANIMATION_CACHE}, {@link #PERSISTENT_SCROLLING_CACHE} and 
+       {@link #PERSISTENT_ALL_CACHES} 
+
+*android.view.ViewGroup.setStaticTransformationsEnabled(boolean)*
+
+protected void setStaticTransformationsEnabled(boolean enabled)
+
+When this property is set to true, this ViewGroup supports static 
+transformations on children; this causes (|android.view.ViewGroup|) to be 
+invoked when a child is drawn. 
+
+Any subclass overriding (|android.view.ViewGroup|) should set this property to 
+true. 
+
+
+    enabled - True to enable static transformations on children, false otherwise. 
+
+*android.view.ViewGroup.shouldDelayChildPressedState()*
+
+public boolean shouldDelayChildPressedState()
+
+Return true if the pressed state should be delayed for children or descendants 
+of this ViewGroup. Generally, this should be done for containers that can 
+scroll, such as a List. This prevents the pressed state from appearing when the 
+user is actually trying to scroll the content. 
+
+The default implementation returns true for compatibility reasons. Subclasses 
+that do not scroll should generally override this method and return false. 
+
+
+
+*android.view.ViewGroup.showContextMenuForChild(View)*
+
+public boolean showContextMenuForChild(android.view.View originalView)
+
+
+
+
+
+*android.view.ViewGroup.startActionModeForChild(View,ActionMode.Callback)*
+
+public |android.view.ActionMode| startActionModeForChild(
+  android.view.View originalView,
+  android.view.ActionMode.Callback callback)
+
+
+
+
+
+*android.view.ViewGroup.startLayoutAnimation()*
+
+public void startLayoutAnimation()
+
+Runs the layout animation. Calling this method triggers a relayout of this view 
+group. 
+
+
+
+*android.view.ViewGroup.startViewTransition(View)*
+
+public void startViewTransition(android.view.View view)
+
+This method tells the ViewGroup that the given View object, which should have 
+this ViewGroup as its parent, should be kept around (re-displayed when the 
+ViewGroup draws its children) even if it is removed from its parent. This 
+allows animations, such as those used by (|android.app.Fragment|) and 
+(|android.animation.LayoutTransition|) to animate the removal of views. A call 
+to this method should always be accompanied by a later call to 
+(|android.view.ViewGroup|) , such as after an animation on the View has 
+finished, so that the View finally gets removed. 
+
+
+    view - The View object to be kept visible even if it gets removed from its parent. 
+
+*android.view.ViewGroup.suppressLayout(boolean)*
+
+public void suppressLayout(boolean suppress)
+
+Tells this ViewGroup to suppress all layout() calls until layout suppression is 
+disabled with a later call to suppressLayout(false). When layout suppression is 
+disabled, a requestLayout() call is sent if layout() was attempted while layout 
+was being suppressed. 
+
+
+
+*android.view.ViewGroup.updateViewLayout(View,ViewGroup.LayoutParams)*
+
+public void updateViewLayout(
+  android.view.View view,
+  android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+

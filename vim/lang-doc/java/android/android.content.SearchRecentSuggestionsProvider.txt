@@ -1,0 +1,179 @@
+*android.content.SearchRecentSuggestionsProvider* *SearchRecentSuggestionsProvider* 
+
+public class SearchRecentSuggestionsProvider
+  extends    |android.content.ContentProvider|
+
+|android.content.SearchRecentSuggestionsProvider_Description|
+|android.content.SearchRecentSuggestionsProvider_Fields|
+|android.content.SearchRecentSuggestionsProvider_Constructors|
+|android.content.SearchRecentSuggestionsProvider_Methods|
+
+================================================================================
+
+*android.content.SearchRecentSuggestionsProvider_Fields*
+|int_android.content.SearchRecentSuggestionsProvider.DATABASE_MODE_2LINES|
+|int_android.content.SearchRecentSuggestionsProvider.DATABASE_MODE_QUERIES|
+
+*android.content.SearchRecentSuggestionsProvider_Constructors*
+|android.content.SearchRecentSuggestionsProvider()|
+
+*android.content.SearchRecentSuggestionsProvider_Methods*
+|android.content.SearchRecentSuggestionsProvider.delete(Uri,String,String[])|Th
+|android.content.SearchRecentSuggestionsProvider.getType(Uri)|This method is pr
+|android.content.SearchRecentSuggestionsProvider.insert(Uri,ContentValues)|This
+|android.content.SearchRecentSuggestionsProvider.onCreate()|This method is prov
+|android.content.SearchRecentSuggestionsProvider.query(Uri,String[],String,String[],String)|
+|android.content.SearchRecentSuggestionsProvider.setupSuggestions(String,int)|I
+|android.content.SearchRecentSuggestionsProvider.update(Uri,ContentValues,String,String[])|
+
+*android.content.SearchRecentSuggestionsProvider_Description*
+
+This superclass can be used to create a simple search suggestions provider for 
+your application. It creates suggestions (as the user types) based on recent 
+queries and/or recent views. 
+
+In order to use this class, you must do the following. 
+
+Implement and test query search, as described in (|android.app.SearchManager|) 
+. (This provider will send any suggested queries via the standard 
+ACTION_SEARCH(|android.content.Intent|) Intent, which you'll already support 
+once you have implemented and tested basic searchability.) Create a Content 
+Provider within your application by extending 
+(|android.content.SearchRecentSuggestionsProvider|) . The class you create will 
+be very simple - typically, it will have only a constructor. But the 
+constructor has a very important responsibility: When it calls 
+(|android.content.SearchRecentSuggestionsProvider|) , it configures the 
+provider to match the requirements of your searchable activity. Create a 
+manifest entry describing your provider. Typically this would be as simple as 
+adding the following lines: 
+
+<!-- Content provider for search suggestions --> <provider 
+android:name="YourSuggestionProviderClass" 
+android:authorities="your.suggestion.authority" /> 
+
+Please note that you do not instantiate this content provider directly from 
+within your code. This is done automatically by the system Content Resolver, 
+when the search dialog looks for suggestions. In order for the Content Resolver 
+to do this, you must update your searchable activity's XML configuration file 
+with information about your content provider. The following additions are 
+usually sufficient: 
+
+android:searchSuggestAuthority="your.suggestion.authority" 
+android:searchSuggestSelection=" ? " 
+
+In your searchable activities, capture any user-generated queries and record 
+them for future searches by calling 
+SearchRecentSuggestions.saveRecentQuery()(|android.provider.SearchRecentSuggestions|)
+. 
+
+Developer Guides For information about using search suggestions in your 
+application, read the <a href="guide/topics/search/index.html">Search developer 
+guide. 
+
+
+
+*int_android.content.SearchRecentSuggestionsProvider.DATABASE_MODE_2LINES*
+
+This mode bit configures the database to include a 2nd annotation line with 
+each entry. optional 
+
+
+*int_android.content.SearchRecentSuggestionsProvider.DATABASE_MODE_QUERIES*
+
+This mode bit configures the database to record recent queries. required 
+
+
+
+*android.content.SearchRecentSuggestionsProvider()*
+
+public SearchRecentSuggestionsProvider()
+
+
+
+
+*android.content.SearchRecentSuggestionsProvider.delete(Uri,String,String[])*
+
+public int delete(
+  android.net.Uri uri,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+*android.content.SearchRecentSuggestionsProvider.getType(Uri)*
+
+public |java.lang.String| getType(android.net.Uri uri)
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+*android.content.SearchRecentSuggestionsProvider.insert(Uri,ContentValues)*
+
+public |android.net.Uri| insert(
+  android.net.Uri uri,
+  android.content.ContentValues values)
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+*android.content.SearchRecentSuggestionsProvider.onCreate()*
+
+public boolean onCreate()
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+*android.content.SearchRecentSuggestionsProvider.query(Uri,String[],String,String[],String)*
+
+public |android.database.Cursor| query(
+  android.net.Uri uri,
+  java.lang.String[] projection,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String sortOrder)
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+*android.content.SearchRecentSuggestionsProvider.setupSuggestions(String,int)*
+
+protected void setupSuggestions(
+  java.lang.String authority,
+  int mode)
+
+In order to use this class, you must extend it, and call this setup function 
+from your constructor. In your application or activities, you must provide the 
+same values when you create the (|android.provider.SearchRecentSuggestions|) 
+helper. 
+
+
+    authority - This must match the authority that you've declared in your manifest. 
+    mode - You can use mode flags here to determine certain functional aspects of your 
+       database. Note, this value should not change from run to run, because 
+       when it does change, your suggestions database may be wiped. 
+
+*android.content.SearchRecentSuggestionsProvider.update(Uri,ContentValues,String,String[])*
+
+public int update(
+  android.net.Uri uri,
+  android.content.ContentValues values,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+This method is provided for use by the ContentResolver. Do not override, or 
+directly call from your own code. 
+
+
+
+

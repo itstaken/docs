@@ -1,0 +1,89 @@
+*android.os.Parcelable* *Parcelable* Interface for classes whose instances can b
+
+public interface interface Parcelable
+
+
+|android.os.Parcelable_Description|
+|android.os.Parcelable_Fields|
+|android.os.Parcelable_Constructors|
+|android.os.Parcelable_Methods|
+
+================================================================================
+
+*android.os.Parcelable_Fields*
+|int_android.os.Parcelable.CONTENTS_FILE_DESCRIPTOR|
+|int_android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE|
+
+*android.os.Parcelable_Methods*
+|android.os.Parcelable.describeContents()|Describe the kinds of special objects
+|android.os.Parcelable.writeToParcel(Parcel,int)|Flatten this object in to a Pa
+
+*android.os.Parcelable_Description*
+
+Interface for classes whose instances can be written to and restored from a 
+(|android.os.Parcel|) . Classes implementing the Parcelable interface must also 
+have a static field called CREATOR, which is an object implementing the 
+Parcelable.Creator(|android.os.Parcelable.Creator|) interface. 
+
+A typical implementation of Parcelable is: 
+
+
+
+public class MyParcelable implements Parcelable { private int mData; 
+
+public int describeContents() { return 0; } 
+
+public void writeToParcel(Parcel out, int flags) { out.writeInt(mData); } 
+
+public static final Parcelable.Creator<MyParcelable> CREATOR = new 
+Parcelable.Creator<MyParcelable>() { public MyParcelable 
+createFromParcel(Parcel in) { return new MyParcelable(in); } 
+
+public MyParcelable[] newArray(int size) { return new MyParcelable[size]; } }; 
+
+private MyParcelable(Parcel in) { mData = in.readInt(); } } 
+
+
+
+*int_android.os.Parcelable.CONTENTS_FILE_DESCRIPTOR*
+
+Bit masks for use with (|android.os.Parcelable|) : each bit represents a kind 
+of object considered to have potential special significance when marshalled. 
+
+
+*int_android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE*
+
+Flag for use with (|android.os.Parcelable|) : the object being written is a 
+return value, that is the result of a function such as "Parcelable 
+someFunction()", "void someFunction(out Parcelable)", or "void 
+someFunction(inout Parcelable)". Some implementations may want to release 
+resources at this point. 
+
+
+
+*android.os.Parcelable.describeContents()*
+
+public int describeContents()
+
+Describe the kinds of special objects contained in this Parcelable's marshalled 
+representation. 
+
+
+
+    Returns: a bitmask indicating the set of special object types marshalled by the 
+             Parcelable. 
+
+*android.os.Parcelable.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Flatten this object in to a Parcel. 
+
+
+    dest - The Parcel in which the object should be written. 
+    flags - Additional flags about how the object should be written. May be 0 or {@link 
+       #PARCELABLE_WRITE_RETURN_VALUE}. 
+
+

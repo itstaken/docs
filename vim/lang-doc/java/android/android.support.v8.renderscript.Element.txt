@@ -1,0 +1,727 @@
+*android.support.v8.renderscript.Element* *Element* An Element represents one it
+
+public class Element
+  extends    |android.support.v8.renderscript.BaseObj|
+
+|android.support.v8.renderscript.Element_Description|
+|android.support.v8.renderscript.Element_Fields|
+|android.support.v8.renderscript.Element_Constructors|
+|android.support.v8.renderscript.Element_Methods|
+
+================================================================================
+
+*android.support.v8.renderscript.Element_Methods*
+|android.support.v8.renderscript.Element.A_8(RenderScript)|
+|android.support.v8.renderscript.Element.ALLOCATION(RenderScript)|
+|android.support.v8.renderscript.Element.BOOLEAN(RenderScript)|Utility function
+|android.support.v8.renderscript.Element.createPixel(RenderScript,Element.DataType,Element.DataKind)|
+|android.support.v8.renderscript.Element.createVector(RenderScript,Element.DataType,int)|
+|android.support.v8.renderscript.Element.ELEMENT(RenderScript)|
+|android.support.v8.renderscript.Element.F32_2(RenderScript)|
+|android.support.v8.renderscript.Element.F32_3(RenderScript)|
+|android.support.v8.renderscript.Element.F32_4(RenderScript)|
+|android.support.v8.renderscript.Element.F32(RenderScript)|
+|android.support.v8.renderscript.Element.F64_2(RenderScript)|
+|android.support.v8.renderscript.Element.F64_3(RenderScript)|
+|android.support.v8.renderscript.Element.F64_4(RenderScript)|
+|android.support.v8.renderscript.Element.F64(RenderScript)|
+|android.support.v8.renderscript.Element.getBytesSize()|
+|android.support.v8.renderscript.Element.getDataKind()|
+|android.support.v8.renderscript.Element.getDataType()|
+|android.support.v8.renderscript.Element.getSubElement(int)|For complex element
+|android.support.v8.renderscript.Element.getSubElementArraySize(int)|For comple
+|android.support.v8.renderscript.Element.getSubElementCount()|Elements could be
+|android.support.v8.renderscript.Element.getSubElementName(int)|For complex ele
+|android.support.v8.renderscript.Element.getSubElementOffsetBytes(int)|This fun
+|android.support.v8.renderscript.Element.getVectorSize()|Returns the number of 
+|android.support.v8.renderscript.Element.I16_2(RenderScript)|
+|android.support.v8.renderscript.Element.I16_3(RenderScript)|
+|android.support.v8.renderscript.Element.I16_4(RenderScript)|
+|android.support.v8.renderscript.Element.I16(RenderScript)|
+|android.support.v8.renderscript.Element.I32_2(RenderScript)|
+|android.support.v8.renderscript.Element.I32_3(RenderScript)|
+|android.support.v8.renderscript.Element.I32_4(RenderScript)|
+|android.support.v8.renderscript.Element.I32(RenderScript)|
+|android.support.v8.renderscript.Element.I64_2(RenderScript)|
+|android.support.v8.renderscript.Element.I64_3(RenderScript)|
+|android.support.v8.renderscript.Element.I64_4(RenderScript)|
+|android.support.v8.renderscript.Element.I64(RenderScript)|
+|android.support.v8.renderscript.Element.I8_2(RenderScript)|
+|android.support.v8.renderscript.Element.I8_3(RenderScript)|
+|android.support.v8.renderscript.Element.I8_4(RenderScript)|
+|android.support.v8.renderscript.Element.I8(RenderScript)|Utility function for 
+|android.support.v8.renderscript.Element.isCompatible(Element)|Check if the cur
+|android.support.v8.renderscript.Element.isComplex()|Return if a element is too
+|android.support.v8.renderscript.Element.MATRIX_2X2(RenderScript)|
+|android.support.v8.renderscript.Element.MATRIX_3X3(RenderScript)|
+|android.support.v8.renderscript.Element.MATRIX_4X4(RenderScript)|
+|android.support.v8.renderscript.Element.RGB_565(RenderScript)|
+|android.support.v8.renderscript.Element.RGB_888(RenderScript)|
+|android.support.v8.renderscript.Element.RGBA_4444(RenderScript)|
+|android.support.v8.renderscript.Element.RGBA_5551(RenderScript)|
+|android.support.v8.renderscript.Element.RGBA_8888(RenderScript)|
+|android.support.v8.renderscript.Element.SAMPLER(RenderScript)|
+|android.support.v8.renderscript.Element.SCRIPT(RenderScript)|
+|android.support.v8.renderscript.Element.TYPE(RenderScript)|
+|android.support.v8.renderscript.Element.U16_2(RenderScript)|
+|android.support.v8.renderscript.Element.U16_3(RenderScript)|
+|android.support.v8.renderscript.Element.U16_4(RenderScript)|
+|android.support.v8.renderscript.Element.U16(RenderScript)|
+|android.support.v8.renderscript.Element.U32_2(RenderScript)|
+|android.support.v8.renderscript.Element.U32_3(RenderScript)|
+|android.support.v8.renderscript.Element.U32_4(RenderScript)|
+|android.support.v8.renderscript.Element.U32(RenderScript)|
+|android.support.v8.renderscript.Element.U64_2(RenderScript)|
+|android.support.v8.renderscript.Element.U64_3(RenderScript)|
+|android.support.v8.renderscript.Element.U64_4(RenderScript)|
+|android.support.v8.renderscript.Element.U64(RenderScript)|
+|android.support.v8.renderscript.Element.U8_2(RenderScript)|
+|android.support.v8.renderscript.Element.U8_3(RenderScript)|
+|android.support.v8.renderscript.Element.U8_4(RenderScript)|
+|android.support.v8.renderscript.Element.U8(RenderScript)|Utility function for 
+
+*android.support.v8.renderscript.Element_Description*
+
+An Element represents one item within an 
+(|android.support.v8.renderscript.Allocation|) . An Element is roughly 
+equivalent to a C type in a RenderScript kernel. Elements may be basic or 
+complex. Some basic elements are A single float value (equivalent to a float in 
+a kernel) A four-element float vector (equivalent to a float4 in a kernel) An 
+unsigned 32-bit integer (equivalent to an unsigned int in a kernel) A single 
+signed 8-bit integer (equivalent to a char in a kernel) A complex element is 
+roughly equivalent to a C struct and contains a number of basic or complex 
+Elements. From Java code, a complex element contains a list of sub-elements and 
+names that represents a particular data structure. Structs used in RS scripts 
+are available to Java code by using theScriptField_structnameclass that is 
+reflected from a particular script. 
+
+Basic Elements are comprised of a 
+(|android.support.v8.renderscript.Element.DataType|) and a 
+(|android.support.v8.renderscript.Element.DataKind|) . The DataType encodes C 
+type information of an Element, while the DataKind encodes how that Element 
+should be interpreted by a (|android.support.v8.renderscript.Sampler|) . Note 
+that (|android.support.v8.renderscript.Allocation|) objects with DataKind 
+(|android.support.v8.renderscript.Element.DataKind|) cannot be used as input 
+for a (|android.support.v8.renderscript.Sampler|) . In general, 
+(|android.support.v8.renderscript.Allocation|) objects that are intended for 
+use with a (|android.support.v8.renderscript.Sampler|) should use 
+bitmap-derived Elements such as (|android.support.v8.renderscript.Element|) or 
+(|android.support.v8.renderscript|) . 
+
+Developer Guides For more information about creating an application that uses 
+RenderScript, read the <a 
+href="guide/topics/renderscript/index.html">RenderScript developer guide. 
+
+
+
+*android.support.v8.renderscript.Element.A_8(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| A_8(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.ALLOCATION(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| ALLOCATION(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.BOOLEAN(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| BOOLEAN(android.support.v8.renderscript.RenderScript rs)
+
+Utility function for returning an Element containing a single Boolean. 
+
+
+    rs - Context to which the element will belong. 
+
+    Returns: 
+
+*android.support.v8.renderscript.Element.createPixel(RenderScript,Element.DataType,Element.DataKind)*
+
+public static |android.support.v8.renderscript.Element| createPixel(
+  android.support.v8.renderscript.RenderScript rs,
+  android.support.v8.renderscript.Element.DataType dt,
+  android.support.v8.renderscript.Element.DataKind dk)
+
+Create a new pixel Element type. A matching DataType and DataKind must be 
+provided. The DataType and DataKind must contain the same number of components. 
+Vector size will be set to 1. 
+
+
+    rs - The context associated with the new Element. 
+    dt - The DataType for the new element. 
+    dk - The DataKind to specify the mapping of each component in the DataType. 
+
+    Returns: 
+
+*android.support.v8.renderscript.Element.createVector(RenderScript,Element.DataType,int)*
+
+public static |android.support.v8.renderscript.Element| createVector(
+  android.support.v8.renderscript.RenderScript rs,
+  android.support.v8.renderscript.Element.DataType dt,
+  int size)
+
+Create a custom vector element of the specified DataType and vector size. 
+DataKind will be set to USER. Only primitive types (FLOAT_32, FLOAT_64, 
+SIGNED_8, SIGNED_16, SIGNED_32, SIGNED_64, UNSIGNED_8, UNSIGNED_16, 
+UNSIGNED_32, UNSIGNED_64, BOOLEAN) are supported. 
+
+
+    rs - The context associated with the new Element. 
+    dt - The DataType for the new Element. 
+    size - Vector size for the new Element. Range 2-4 inclusive supported. 
+
+    Returns: 
+
+*android.support.v8.renderscript.Element.ELEMENT(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| ELEMENT(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F32_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F32_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F32_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F32_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F32_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F32_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F32(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F32(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F64_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F64_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F64_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F64_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F64_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F64_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.F64(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| F64(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.getBytesSize()*
+
+public int getBytesSize()
+
+
+
+
+
+    Returns: element size in bytes 
+
+*android.support.v8.renderscript.Element.getDataKind()*
+
+public |android.support.v8.renderscript.Element.DataKind| getDataKind()
+
+
+
+
+
+    Returns: element data kind 
+
+*android.support.v8.renderscript.Element.getDataType()*
+
+public |android.support.v8.renderscript.Element.DataType| getDataType()
+
+
+
+
+
+    Returns: element data type 
+
+*android.support.v8.renderscript.Element.getSubElement(int)*
+
+public |android.support.v8.renderscript.Element| getSubElement(int index)
+
+For complex elements, this function will return the sub-element at index 
+
+
+    index - index of the sub-element to return 
+
+    Returns: sub-element in this element at given index 
+
+*android.support.v8.renderscript.Element.getSubElementArraySize(int)*
+
+public int getSubElementArraySize(int index)
+
+For complex elements, some sub-elements could be statically sized arrays. This 
+function will return the array size for sub-element at index 
+
+
+    index - index of the sub-element 
+
+    Returns: array size of sub-element in this element at given index 
+
+*android.support.v8.renderscript.Element.getSubElementCount()*
+
+public int getSubElementCount()
+
+Elements could be simple, such as an int or a float, or a structure with 
+multiple sub elements, such as a collection of floats, float2, float4. This 
+function returns zero for simple elements or the number of sub-elements 
+otherwise. 
+
+
+
+    Returns: number of sub-elements in this element 
+
+*android.support.v8.renderscript.Element.getSubElementName(int)*
+
+public |java.lang.String| getSubElementName(int index)
+
+For complex elements, this function will return the sub-element name at index 
+
+
+    index - index of the sub-element 
+
+    Returns: sub-element in this element at given index 
+
+*android.support.v8.renderscript.Element.getSubElementOffsetBytes(int)*
+
+public int getSubElementOffsetBytes(int index)
+
+This function specifies the location of a sub-element within the element 
+
+
+    index - index of the sub-element 
+
+    Returns: offset in bytes of sub-element in this element at given index 
+
+*android.support.v8.renderscript.Element.getVectorSize()*
+
+public int getVectorSize()
+
+Returns the number of vector components. 2 for float2, 4 for float4, etc. 
+
+
+
+    Returns: element vector size 
+
+*android.support.v8.renderscript.Element.I16_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I16_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I16_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I16_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I16_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I16_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I16(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I16(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I32_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I32_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I32_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I32_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I32_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I32_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I32(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I32(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I64_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I64_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I64_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I64_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I64_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I64_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I64(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I64(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I8_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I8_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I8_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I8_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I8_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I8_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.I8(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| I8(android.support.v8.renderscript.RenderScript rs)
+
+Utility function for returning an Element containing a single SIGNED_8. 
+
+
+    rs - Context to which the element will belong. 
+
+    Returns: 
+
+*android.support.v8.renderscript.Element.isCompatible(Element)*
+
+public boolean isCompatible(android.support.v8.renderscript.Element e)
+
+Check if the current Element is compatible with another Element. Primitive 
+Elements are compatible if they share the same underlying size and type (i.e. 
+U8 is compatible with A_8). User-defined Elements must be equal in order to be 
+compatible. This requires strict name equivalence for all sub-Elements (in 
+addition to structural equivalence). 
+
+
+    e - The Element to check compatibility with. 
+
+    Returns: boolean true if the Elements are compatible, otherwise false. 
+
+*android.support.v8.renderscript.Element.isComplex()*
+
+public boolean isComplex()
+
+Return if a element is too complex for use as a data source for a Mesh or a 
+Program. 
+
+
+
+    Returns: 
+
+*android.support.v8.renderscript.Element.MATRIX_2X2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| MATRIX_2X2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.MATRIX_3X3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| MATRIX_3X3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.MATRIX_4X4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| MATRIX_4X4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.RGB_565(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| RGB_565(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.RGB_888(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| RGB_888(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.RGBA_4444(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| RGBA_4444(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.RGBA_5551(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| RGBA_5551(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.RGBA_8888(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| RGBA_8888(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.SAMPLER(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| SAMPLER(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.SCRIPT(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| SCRIPT(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.TYPE(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| TYPE(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U16_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U16_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U16_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U16_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U16_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U16_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U16(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U16(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U32_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U32_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U32_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U32_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U32_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U32_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U32(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U32(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U64_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U64_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U64_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U64_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U64_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U64_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U64(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U64(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U8_2(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U8_2(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U8_3(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U8_3(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U8_4(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U8_4(android.support.v8.renderscript.RenderScript rs)
+
+
+
+
+
+*android.support.v8.renderscript.Element.U8(RenderScript)*
+
+public static |android.support.v8.renderscript.Element| U8(android.support.v8.renderscript.RenderScript rs)
+
+Utility function for returning an Element containing a single UNSIGNED_8. 
+
+
+    rs - Context to which the element will belong. 
+
+    Returns: 
+
+

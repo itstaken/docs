@@ -1,0 +1,106 @@
+*android.nfc.tech.NdefFormatable* *NdefFormatable* Provide access to NDEF format
+
+public final class NdefFormatable
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NdefFormatable_Description|
+|android.nfc.tech.NdefFormatable_Fields|
+|android.nfc.tech.NdefFormatable_Constructors|
+|android.nfc.tech.NdefFormatable_Methods|
+
+================================================================================
+
+*android.nfc.tech.NdefFormatable_Constructors*
+|android.nfc.tech.NdefFormatable(Tag)|Internal constructor, to be used by NfcAd
+
+*android.nfc.tech.NdefFormatable_Methods*
+|android.nfc.tech.NdefFormatable.format(NdefMessage)|Format a tag as NDEF, and 
+|android.nfc.tech.NdefFormatable.formatReadOnly(NdefMessage)|Formats a tag as N
+|android.nfc.tech.NdefFormatable.get(Tag)|Get an instance ofNdefFormatablefor t
+
+*android.nfc.tech.NdefFormatable_Description*
+
+Provide access to NDEF format operations on a (|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.NdefFormatable|) object using 
+(|android.nfc.tech.NdefFormatable|) . 
+
+Android devices with NFC must only enumerate and implement this class for tags 
+for which it can format to NDEF. 
+
+Unfortunately the procedures to convert unformated tags to NDEF formatted tags 
+are not specified by NFC Forum, and are not generally well-known. So there is 
+no mandatory set of tags for which all Android devices with NFC must support 
+(|android.nfc.tech.NdefFormatable|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*android.nfc.tech.NdefFormatable(Tag)*
+
+public NdefFormatable(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+Internal constructor, to be used by NfcAdapter 
+
+
+*android.nfc.tech.NdefFormatable.format(NdefMessage)*
+
+public void format(android.nfc.NdefMessage firstMessage)
+  throws |android.nfc.FormatException|
+         |java.io.IOException|
+         
+Format a tag as NDEF, and write a (|android.nfc.NdefMessage|) . 
+
+This is a multi-step process, an IOException is thrown if any one step fails. 
+The card is left in a read-write state after this operation. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NdefFormatable|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    firstMessage - the NDEF message to write after formatting, can be null 
+
+*android.nfc.tech.NdefFormatable.formatReadOnly(NdefMessage)*
+
+public void formatReadOnly(android.nfc.NdefMessage firstMessage)
+  throws |android.nfc.FormatException|
+         |java.io.IOException|
+         
+Formats a tag as NDEF, write a (|android.nfc.NdefMessage|) , and make 
+read-only. 
+
+This is a multi-step process, an IOException is thrown if any one step fails. 
+The card is left in a read-only state if this method returns successfully. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NdefFormatable|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    firstMessage - the NDEF message to write after formatting 
+
+*android.nfc.tech.NdefFormatable.get(Tag)*
+
+public static |android.nfc.tech.NdefFormatable| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NdefFormatable|) for the given tag. Does 
+not cause any RF activity and does not block. Returns null if 
+(|android.nfc.tech.NdefFormatable|) was not enumerated in (|android.nfc.Tag|) . 
+This indicates the tag is not NDEF formatable by this Android device. 
+
+
+    tag - an NDEF formatable tag 
+
+    Returns: NDEF formatable object 
+
+

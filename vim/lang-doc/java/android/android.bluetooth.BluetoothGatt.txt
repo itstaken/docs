@@ -1,0 +1,412 @@
+*android.bluetooth.BluetoothGatt* *BluetoothGatt* Public API for the Bluetooth G
+
+public final class BluetoothGatt
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothGatt_Description|
+|android.bluetooth.BluetoothGatt_Fields|
+|android.bluetooth.BluetoothGatt_Constructors|
+|android.bluetooth.BluetoothGatt_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothGatt_Fields*
+|int_android.bluetooth.BluetoothGatt.GATT_FAILURE|
+|int_android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION|
+|int_android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION|
+|int_android.bluetooth.BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH|
+|int_android.bluetooth.BluetoothGatt.GATT_INVALID_OFFSET|
+|int_android.bluetooth.BluetoothGatt.GATT_READ_NOT_PERMITTED|
+|int_android.bluetooth.BluetoothGatt.GATT_REQUEST_NOT_SUPPORTED|
+|int_android.bluetooth.BluetoothGatt.GATT_SUCCESS|
+|int_android.bluetooth.BluetoothGatt.GATT_WRITE_NOT_PERMITTED|
+
+*android.bluetooth.BluetoothGatt_Methods*
+|android.bluetooth.BluetoothGatt.abortReliableWrite()|Cancels a reliable write 
+|android.bluetooth.BluetoothGatt.abortReliableWrite(BluetoothDevice)|
+|android.bluetooth.BluetoothGatt.beginReliableWrite()|Initiates a reliable writ
+|android.bluetooth.BluetoothGatt.close()|Close this Bluetooth GATT client.
+|android.bluetooth.BluetoothGatt.connect()|Connect back to remote device.
+|android.bluetooth.BluetoothGatt.disconnect()|Disconnects an established connec
+|android.bluetooth.BluetoothGatt.discoverServices()|Discovers services offered 
+|android.bluetooth.BluetoothGatt.executeReliableWrite()|Executes a reliable wri
+|android.bluetooth.BluetoothGatt.getConnectedDevices()|Not supported - please u
+|android.bluetooth.BluetoothGatt.getConnectionState(BluetoothDevice)|Not suppor
+|android.bluetooth.BluetoothGatt.getDevice()|Return the remote bluetooth device
+|android.bluetooth.BluetoothGatt.getDevicesMatchingConnectionStates(int[])|Not 
+|android.bluetooth.BluetoothGatt.getService(UUID)|Returns aBluetoothGattService
+|android.bluetooth.BluetoothGatt.getServices()|Returns a list of GATT services 
+|android.bluetooth.BluetoothGatt.readCharacteristic(BluetoothGattCharacteristic)|
+|android.bluetooth.BluetoothGatt.readDescriptor(BluetoothGattDescriptor)|Reads 
+|android.bluetooth.BluetoothGatt.readRemoteRssi()|Read the RSSI for a connected
+|android.bluetooth.BluetoothGatt.refresh()|Clears the internal cache and forces
+|android.bluetooth.BluetoothGatt.setCharacteristicNotification(BluetoothGattCharacteristic,boolean)|
+|android.bluetooth.BluetoothGatt.writeCharacteristic(BluetoothGattCharacteristic)|
+|android.bluetooth.BluetoothGatt.writeDescriptor(BluetoothGattDescriptor)|Write
+
+*android.bluetooth.BluetoothGatt_Description*
+
+Public API for the Bluetooth GATT Profile. 
+
+This class provides Bluetooth GATT functionality to enable communication with 
+Bluetooth Smart or Smart Ready devices. 
+
+To connect to a remote peripheral device, create a 
+(|android.bluetooth.BluetoothGattCallback|) and call 
+(|android.bluetooth.BluetoothDevice|) to get a instance of this class. GATT 
+capable devices can be discovered using the Bluetooth device discovery or BLE 
+scan process. 
+
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_FAILURE*
+
+A GATT operation failed, errors other than the above 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION*
+
+Insufficient authentication for a given operation 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION*
+
+Insufficient encryption for a given operation 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH*
+
+A write operation exceeds the maximum length of the attribute 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_INVALID_OFFSET*
+
+A read or write operation was requested with an invalid offset 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_READ_NOT_PERMITTED*
+
+GATT read operation is not permitted 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_REQUEST_NOT_SUPPORTED*
+
+The given request is not supported 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_SUCCESS*
+
+A GATT operation completed successfully 
+
+
+*int_android.bluetooth.BluetoothGatt.GATT_WRITE_NOT_PERMITTED*
+
+GATT write operation is not permitted 
+
+
+
+*android.bluetooth.BluetoothGatt.abortReliableWrite()*
+
+public void abortReliableWrite()
+
+Cancels a reliable write transaction for a given device. 
+
+Calling this function will discard all queued characteristic write operations 
+for a given remote device. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+*android.bluetooth.BluetoothGatt.abortReliableWrite(BluetoothDevice)*
+
+public void abortReliableWrite(android.bluetooth.BluetoothDevice mDevice)
+
+
+
+    Deprecated: Use {@link #abortReliableWrite()}
+
+
+*android.bluetooth.BluetoothGatt.beginReliableWrite()*
+
+public boolean beginReliableWrite()
+
+Initiates a reliable write transaction for a given remote device. 
+
+Once a reliable write transaction has been initiated, all calls to 
+(|android.bluetooth.BluetoothGatt|) are sent to the remote device for 
+verification and queued up for atomic execution. The application will receive 
+an (|android.bluetooth.BluetoothGattCallback|) callback in response to every 
+(|android.bluetooth.BluetoothGatt|) call and is responsible for verifying if 
+the value has been transmitted accurately. 
+
+After all characteristics have been queued up and verified, 
+(|android.bluetooth.BluetoothGatt|) will execute all writes. If a 
+characteristic was not written correctly, calling 
+(|android.bluetooth.BluetoothGatt|) will cancel the current transaction without 
+commiting any values on the remote device. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true, if the reliable write transaction has been initiated 
+
+*android.bluetooth.BluetoothGatt.close()*
+
+public void close()
+
+Close this Bluetooth GATT client. 
+
+Application should call this method as early as possible after it is done with 
+this GATT client. 
+
+
+
+*android.bluetooth.BluetoothGatt.connect()*
+
+public boolean connect()
+
+Connect back to remote device. 
+
+This method is used to re-connect to a remote device after the connection has 
+been dropped. If the device is not in range, the re-connection will be 
+triggered once the device is back in range. 
+
+
+
+    Returns: true, if the connection attempt was initiated successfully 
+
+*android.bluetooth.BluetoothGatt.disconnect()*
+
+public void disconnect()
+
+Disconnects an established connection, or cancels a connection attempt 
+currently in progress. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+*android.bluetooth.BluetoothGatt.discoverServices()*
+
+public boolean discoverServices()
+
+Discovers services offered by a remote device as well as their characteristics 
+and descriptors. 
+
+This is an asynchronous operation. Once service discovery is completed, the 
+(|android.bluetooth.BluetoothGattCallback|) callback is triggered. If the 
+discovery was successful, the remote services can be retrieved using the 
+(|android.bluetooth.BluetoothGatt|) function. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true, if the remote service discovery has been started 
+
+*android.bluetooth.BluetoothGatt.executeReliableWrite()*
+
+public boolean executeReliableWrite()
+
+Executes a reliable write transaction for a given remote device. 
+
+This function will commit all queued up characteristic write operations for a 
+given remote device. 
+
+A (|android.bluetooth.BluetoothGattCallback|) callback is invoked to indicate 
+whether the transaction has been executed correctly. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true, if the request to execute the transaction has been sent 
+
+*android.bluetooth.BluetoothGatt.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as argument 
+
+
+
+*android.bluetooth.BluetoothGatt.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as argument 
+
+
+
+*android.bluetooth.BluetoothGatt.getDevice()*
+
+public |android.bluetooth.BluetoothDevice| getDevice()
+
+Return the remote bluetooth device this GATT client targets to 
+
+
+
+    Returns: remote bluetooth device 
+
+*android.bluetooth.BluetoothGatt.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+Not supported - please use (|android.bluetooth.BluetoothManager|) with 
+(|android.bluetooth.BluetoothProfile|) as first argument 
+
+
+
+*android.bluetooth.BluetoothGatt.getService(UUID)*
+
+public |android.bluetooth.BluetoothGattService| getService(java.util.UUID uuid)
+
+Returns a (|android.bluetooth.BluetoothGattService|) , if the requested UUID is 
+supported by the remote device. 
+
+This function requires that service discovery has been completed for the given 
+device. 
+
+If multiple instances of the same service (as identified by UUID) exist, the 
+first instance of the service is returned. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    uuid - UUID of the requested service 
+
+    Returns: BluetoothGattService if supported, or null if the requested service is not 
+             offered by the remote device. 
+
+*android.bluetooth.BluetoothGatt.getServices()*
+
+public |java.util.List|<BluetoothGattService> getServices()
+
+Returns a list of GATT services offered by the remote device. 
+
+This function requires that service discovery has been completed for the given 
+device. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: List of services on the remote device. Returns an empty list if service 
+             discovery has not yet been performed. 
+
+*android.bluetooth.BluetoothGatt.readCharacteristic(BluetoothGattCharacteristic)*
+
+public boolean readCharacteristic(android.bluetooth.BluetoothGattCharacteristic characteristic)
+
+Reads the requested characteristic from the associated remote device. 
+
+This is an asynchronous operation. The result of the read operation is reported 
+by the (|android.bluetooth.BluetoothGattCallback|) callback. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    characteristic - Characteristic to read from the remote device 
+
+    Returns: true, if the read operation was initiated successfully 
+
+*android.bluetooth.BluetoothGatt.readDescriptor(BluetoothGattDescriptor)*
+
+public boolean readDescriptor(android.bluetooth.BluetoothGattDescriptor descriptor)
+
+Reads the value for a given descriptor from the associated remote device. 
+
+Once the read operation has been completed, the 
+(|android.bluetooth.BluetoothGattCallback|) callback is triggered, signaling 
+the result of the operation. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    descriptor - Descriptor value to read from the remote device 
+
+    Returns: true, if the read operation was initiated successfully 
+
+*android.bluetooth.BluetoothGatt.readRemoteRssi()*
+
+public boolean readRemoteRssi()
+
+Read the RSSI for a connected remote device. 
+
+The (|android.bluetooth.BluetoothGattCallback|) callback will be invoked when 
+the RSSI value has been read. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true, if the RSSI value has been requested successfully 
+
+*android.bluetooth.BluetoothGatt.refresh()*
+
+public boolean refresh()
+
+Clears the internal cache and forces a refresh of the services from the remote 
+device. 
+
+
+
+*android.bluetooth.BluetoothGatt.setCharacteristicNotification(BluetoothGattCharacteristic,boolean)*
+
+public boolean setCharacteristicNotification(
+  android.bluetooth.BluetoothGattCharacteristic characteristic,
+  boolean enable)
+
+Enable or disable notifications/indications for a given characteristic. 
+
+Once notifications are enabled for a characteristic, a 
+(|android.bluetooth.BluetoothGattCallback|) callback will be triggered if the 
+remote device indicates that the given characteristic has changed. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    characteristic - The characteristic for which to enable notifications 
+    enable - Set to true to enable notifications/indications 
+
+    Returns: true, if the requested notification status was set successfully 
+
+*android.bluetooth.BluetoothGatt.writeCharacteristic(BluetoothGattCharacteristic)*
+
+public boolean writeCharacteristic(android.bluetooth.BluetoothGattCharacteristic characteristic)
+
+Writes a given characteristic and its values to the associated remote device. 
+
+Once the write operation has been completed, the 
+(|android.bluetooth.BluetoothGattCallback|) callback is invoked, reporting the 
+result of the operation. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    characteristic - Characteristic to write on the remote device 
+
+    Returns: true, if the write operation was initiated successfully 
+
+*android.bluetooth.BluetoothGatt.writeDescriptor(BluetoothGattDescriptor)*
+
+public boolean writeDescriptor(android.bluetooth.BluetoothGattDescriptor descriptor)
+
+Write the value of a given descriptor to the associated remote device. 
+
+A (|android.bluetooth.BluetoothGattCallback|) callback is triggered to report 
+the result of the write operation. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    descriptor - Descriptor to write to the associated remote device 
+
+    Returns: true, if the write operation was initiated successfully 
+
+

@@ -1,0 +1,291 @@
+*android.net.http.AndroidHttpClient* *AndroidHttpClient* Implementation of the A
+
+public final class AndroidHttpClient
+  extends    |java.lang.Object|
+
+|android.net.http.AndroidHttpClient_Description|
+|android.net.http.AndroidHttpClient_Fields|
+|android.net.http.AndroidHttpClient_Constructors|
+|android.net.http.AndroidHttpClient_Methods|
+
+================================================================================
+
+*android.net.http.AndroidHttpClient_Fields*
+|long_android.net.http.AndroidHttpClient.DEFAULT_SYNC_MIN_GZIP_BYTES|
+
+*android.net.http.AndroidHttpClient_Methods*
+|android.net.http.AndroidHttpClient.close()|Release resources associated with t
+|android.net.http.AndroidHttpClient.disableCurlLogging()|Disables cURL logging 
+|android.net.http.AndroidHttpClient.enableCurlLogging(String,int)|Enables cURL 
+|android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest)|
+|android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,<any>)|
+|android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,<any>,HttpContext)|
+|android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,HttpContext)|
+|android.net.http.AndroidHttpClient.execute(HttpUriRequest)|
+|android.net.http.AndroidHttpClient.execute(HttpUriRequest,<any>)|
+|android.net.http.AndroidHttpClient.execute(HttpUriRequest,<any>,HttpContext)|
+|android.net.http.AndroidHttpClient.execute(HttpUriRequest,HttpContext)|
+|android.net.http.AndroidHttpClient.finalize()|
+|android.net.http.AndroidHttpClient.getCompressedEntity(byte[],ContentResolver)|
+|android.net.http.AndroidHttpClient.getConnectionManager()|
+|android.net.http.AndroidHttpClient.getMinGzipSize(ContentResolver)|Retrieves t
+|android.net.http.AndroidHttpClient.getParams()|
+|android.net.http.AndroidHttpClient.getUngzippedContent(HttpEntity)|Gets the in
+|android.net.http.AndroidHttpClient.modifyRequestToAcceptGzipResponse(HttpRequest)|
+|android.net.http.AndroidHttpClient.newInstance(String)|Create a new HttpClient
+|android.net.http.AndroidHttpClient.newInstance(String,Context)|Create a new Ht
+|android.net.http.AndroidHttpClient.parseDate(String)|Returns the date of the g
+
+*android.net.http.AndroidHttpClient_Description*
+
+Implementation of the Apache (|DefaultHttpClient|) that is configured with 
+reasonable default settings and registered schemes for Android. Don't create 
+this directly, use the (|android.net.http.AndroidHttpClient|) factory method. 
+
+This client processes cookies but does not retain them by default. To retain 
+cookies, simply add a cookie store to the HttpContext: 
+
+context.setAttribute(ClientContext.COOKIE_STORE, cookieStore); 
+
+
+
+*long_android.net.http.AndroidHttpClient.DEFAULT_SYNC_MIN_GZIP_BYTES*
+
+
+
+
+
+*android.net.http.AndroidHttpClient.close()*
+
+public void close()
+
+Release resources associated with this client. You must call this, or 
+significant resources (sockets and memory) may be leaked. 
+
+
+
+*android.net.http.AndroidHttpClient.disableCurlLogging()*
+
+public void disableCurlLogging()
+
+Disables cURL logging for this client. 
+
+
+
+*android.net.http.AndroidHttpClient.enableCurlLogging(String,int)*
+
+public void enableCurlLogging(
+  java.lang.String name,
+  int level)
+
+Enables cURL request logging for this client. 
+
+
+    name - to log messages with 
+    level - at which to log messages (see {@link android.util.Log}) 
+
+*android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest)*
+
+public HttpResponse execute(
+  HttpHost target,
+  HttpRequest request)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,<any>)*
+
+public |T| execute(
+  HttpHost target,
+  HttpRequest request,
+  <any> responseHandler)
+  throws |ClientProtocolException|
+         |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,<any>,HttpContext)*
+
+public |T| execute(
+  HttpHost target,
+  HttpRequest request,
+  <any> responseHandler,
+  HttpContext context)
+  throws |ClientProtocolException|
+         |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpHost,HttpRequest,HttpContext)*
+
+public HttpResponse execute(
+  HttpHost target,
+  HttpRequest request,
+  HttpContext context)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpUriRequest)*
+
+public HttpResponse execute(HttpUriRequest request)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpUriRequest,<any>)*
+
+public |T| execute(
+  HttpUriRequest request,
+  <any> responseHandler)
+  throws |ClientProtocolException|
+         |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpUriRequest,<any>,HttpContext)*
+
+public |T| execute(
+  HttpUriRequest request,
+  <any> responseHandler,
+  HttpContext context)
+  throws |ClientProtocolException|
+         |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.execute(HttpUriRequest,HttpContext)*
+
+public HttpResponse execute(
+  HttpUriRequest request,
+  HttpContext context)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.net.http.AndroidHttpClient.getCompressedEntity(byte[],ContentResolver)*
+
+public static AbstractHttpEntity getCompressedEntity(
+  byte[] data,
+  android.content.ContentResolver resolver)
+  throws |java.io.IOException|
+         
+Compress data to send to server. Creates a Http Entity holding the gzipped 
+data. The data will not be compressed if it is too short. 
+
+
+    data - The bytes to compress 
+
+    Returns: Entity holding the data 
+
+*android.net.http.AndroidHttpClient.getConnectionManager()*
+
+public ClientConnectionManager getConnectionManager()
+
+
+
+
+
+*android.net.http.AndroidHttpClient.getMinGzipSize(ContentResolver)*
+
+public static long getMinGzipSize(android.content.ContentResolver resolver)
+
+Retrieves the minimum size for compressing data. Shorter data will not be 
+compressed. 
+
+
+
+*android.net.http.AndroidHttpClient.getParams()*
+
+public HttpParams getParams()
+
+
+
+
+
+*android.net.http.AndroidHttpClient.getUngzippedContent(HttpEntity)*
+
+public static |java.io.InputStream| getUngzippedContent(HttpEntity entity)
+  throws |java.io.IOException|
+         
+Gets the input stream from a response entity. If the entity is gzipped then 
+this will get a stream over the uncompressed data. 
+
+
+    entity - the entity whose content should be read 
+
+    Returns: the input stream to read from 
+
+*android.net.http.AndroidHttpClient.modifyRequestToAcceptGzipResponse(HttpRequest)*
+
+public static void modifyRequestToAcceptGzipResponse(HttpRequest request)
+
+Modifies a request to indicate to the server that we would like a gzipped 
+response. (Uses the "Accept-Encoding" HTTP header.) 
+
+
+    request - the request to modify 
+
+*android.net.http.AndroidHttpClient.newInstance(String)*
+
+public static |android.net.http.AndroidHttpClient| newInstance(java.lang.String userAgent)
+
+Create a new HttpClient with reasonable defaults (which you can update). 
+
+
+    userAgent - to report in your HTTP requests. 
+
+    Returns: AndroidHttpClient for you to use for all your requests. 
+
+*android.net.http.AndroidHttpClient.newInstance(String,Context)*
+
+public static |android.net.http.AndroidHttpClient| newInstance(
+  java.lang.String userAgent,
+  android.content.Context context)
+
+Create a new HttpClient with reasonable defaults (which you can update). 
+
+
+    userAgent - to report in your HTTP requests 
+    context - to use for caching SSL sessions (may be null for no caching) 
+
+    Returns: AndroidHttpClient for you to use for all your requests. 
+
+*android.net.http.AndroidHttpClient.parseDate(String)*
+
+public static long parseDate(java.lang.String dateString)
+
+Returns the date of the given HTTP date string. This method can identify and 
+parse the date formats emitted by common HTTP servers, such as RFC 822, RFC 
+850, RFC 1036, RFC 1123 and ANSI C's asctime(). 
+
+
+
+    Returns: the number of milliseconds since Jan. 1, 1970, midnight GMT. 
+
+

@@ -1,0 +1,513 @@
+*android.hardware.camera2.CameraDevice* *CameraDevice* The CameraDevice class is
+
+public interface interface CameraDevice
+
+  implements |java.lang.AutoCloseable|
+
+|android.hardware.camera2.CameraDevice_Description|
+|android.hardware.camera2.CameraDevice_Fields|
+|android.hardware.camera2.CameraDevice_Constructors|
+|android.hardware.camera2.CameraDevice_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CameraDevice_Fields*
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_MANUAL|
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW|
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_RECORD|
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE|
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_VIDEO_SNAPSHOT|
+|int_android.hardware.camera2.CameraDevice.TEMPLATE_ZERO_SHUTTER_LAG|
+
+*android.hardware.camera2.CameraDevice_Methods*
+|android.hardware.camera2.CameraDevice.capture(CaptureRequest,CameraDevice.CaptureListener,Handler)|
+|android.hardware.camera2.CameraDevice.captureBurst(List<CaptureRequest>,CameraDevice.CaptureListener,Handler)|
+|android.hardware.camera2.CameraDevice.close()|Close the connection to this cam
+|android.hardware.camera2.CameraDevice.configureOutputs(List<Surface>)|Set up a
+|android.hardware.camera2.CameraDevice.createCaptureRequest(int)|Create aCaptur
+|android.hardware.camera2.CameraDevice.flush()|Flush all captures currently pen
+|android.hardware.camera2.CameraDevice.getId()|Get the ID of this camera device
+|android.hardware.camera2.CameraDevice.setRepeatingBurst(List<CaptureRequest>,CameraDevice.CaptureListener,Handler)|
+|android.hardware.camera2.CameraDevice.setRepeatingRequest(CaptureRequest,CameraDevice.CaptureListener,Handler)|
+|android.hardware.camera2.CameraDevice.stopRepeating()|Cancel any ongoing repea
+|android.hardware.camera2.CameraDevice.waitUntilIdle()|Wait until all the submi
+
+*android.hardware.camera2.CameraDevice_Description*
+
+The CameraDevice class is an interface to a single camera connected to an 
+Android device, allowing for fine-grain control of image capture and 
+post-processing at high frame rates. 
+
+Your application must declare the Camera(|android.Manifest.permission|) 
+permission in its manifest in order to access camera devices. 
+
+A given camera device may provide support at one of two levels: limited or 
+full. If a device only supports the limited level, then Camera2 exposes a 
+feature set that is roughly equivalent to the older 
+Camera(|android.hardware.Camera|) API, although with a cleaner and more 
+efficient interface. Devices that implement the full level of support provide 
+substantially improved capabilities over the older camera API. Applications 
+that target the limited level devices will run unchanged on the full-level 
+devices; if your application requires a full-level device for proper operation, 
+declare the "android.hardware.camera2.full" feature in your manifest. 
+
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_MANUAL*
+
+A basic template for direct application control of capture parameters. All 
+automatic control is disabled (auto-exposure, auto-white balance, auto-focus), 
+and post-processing parameters are set to preview quality. The manual capture 
+parameters (exposure, sensitivity, and so on) are set to reasonable defaults, 
+but should be overriden by the application depending on the intended use case. 
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_PREVIEW*
+
+Create a request suitable for a camera preview window. Specifically, this means 
+that high frame rate is given priority over the highest-quality 
+post-processing. These requests would normally be used with the 
+(|android.hardware.camera2.CameraDevice|) method. 
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_RECORD*
+
+Create a request suitable for video recording. Specifically, this means that a 
+stable frame rate is used, and post-processing is set for recording quality. 
+These requests would commonly be used with the 
+(|android.hardware.camera2.CameraDevice|) method. 
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_STILL_CAPTURE*
+
+Create a request suitable for still image capture. Specifically, this means 
+prioritizing image quality over frame rate. These requests would commonly be 
+used with the (|android.hardware.camera2.CameraDevice|) method. 
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_VIDEO_SNAPSHOT*
+
+Create a request suitable for still image capture while recording video. 
+Specifically, this means maximizing image quality without disrupting the 
+ongoing recording. These requests would commonly be used with the 
+(|android.hardware.camera2.CameraDevice|) method while a request based on 
+(|android.hardware.camera2.CameraDevice|) is is in use with 
+(|android.hardware.camera2.CameraDevice|) . 
+
+
+*int_android.hardware.camera2.CameraDevice.TEMPLATE_ZERO_SHUTTER_LAG*
+
+Create a request suitable for zero shutter lag still capture. This means means 
+maximizing image quality without compromising preview frame rate. AE/AWB/AF 
+should be on auto mode. 
+
+
+
+*android.hardware.camera2.CameraDevice.capture(CaptureRequest,CameraDevice.CaptureListener,Handler)*
+
+public int capture(
+  android.hardware.camera2.CaptureRequest request,
+  android.hardware.camera2.CameraDevice.CaptureListener listener,
+  android.os.Handler handler)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Submit a request for an image to be captured by this CameraDevice. 
+
+The request defines all the parameters for capturing the single image, 
+including sensor, lens, flash, and post-processing settings. 
+
+Each request will produce one (|android.hardware.camera2.CaptureResult|) and 
+produce new frames for one or more target Surfaces, set with the CaptureRequest 
+builder's (|android.hardware.camera2.CaptureRequest.Builder|) method. The 
+target surfaces must be configured as active outputs with 
+(|android.hardware.camera2.CameraDevice|) before calling this method. 
+
+Multiple requests can be in progress at once. They are processed in first-in, 
+first-out order, with minimal delays between each capture. Requests submitted 
+through this method have higher priority than those submitted through 
+(|android.hardware.camera2.CameraDevice|) or 
+(|android.hardware.camera2.CameraDevice|) , and will be processed as soon as 
+the current repeat/repeatBurst processing completes. 
+
+
+    request - the settings for this capture 
+    listener - The callback object to notify once this request has been processed. If null, no 
+       metadata will be produced for this capture, although image data will 
+       still be produced. 
+    handler - the handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+    Returns: int A unique capture sequence ID used by {@link 
+             CaptureListener#onCaptureSequenceCompleted}. 
+
+*android.hardware.camera2.CameraDevice.captureBurst(List<CaptureRequest>,CameraDevice.CaptureListener,Handler)*
+
+public int captureBurst(
+  java.util.List<android.hardware.camera2.CaptureRequest> requests,
+  android.hardware.camera2.CameraDevice.CaptureListener listener,
+  android.os.Handler handler)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Submit a list of requests to be captured in sequence as a burst. The burst will 
+be captured in the minimum amount of time possible, and will not be interleaved 
+with requests submitted by other capture or repeat calls. 
+
+The requests will be captured in order, each capture producing one 
+(|android.hardware.camera2.CaptureResult|) and image buffers for one or more 
+target surfaces(|android.view.Surface|) . The target surfaces for each request 
+(set with (|android.hardware.camera2.CaptureRequest.Builder|) ) must be 
+configured as active outputs with (|android.hardware.camera2.CameraDevice|) 
+before calling this method. 
+
+The main difference between this method and simply calling 
+(|android.hardware.camera2.CameraDevice|) repeatedly is that this method 
+guarantees that no other requests will be interspersed with the burst. 
+
+
+    requests - the list of settings for this burst capture 
+    listener - The callback object to notify each time one of the requests in the burst has 
+       been processed. If null, no metadata will be produced for any requests 
+       in this burst, although image data will still be produced. 
+    handler - the handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+    Returns: int A unique capture sequence ID used by {@link 
+             CaptureListener#onCaptureSequenceCompleted}. 
+
+*android.hardware.camera2.CameraDevice.close()*
+
+public void close()
+
+Close the connection to this camera device. 
+
+After this call, all calls to the camera device interface will throw a 
+(|java.lang.IllegalStateException|) , except for calls to close(). Once the 
+device has fully shut down, the 
+(|android.hardware.camera2.CameraDevice.StateListener|) callback will be 
+called, and the camera is free to be re-opened. 
+
+After this call, besides the final 
+(|android.hardware.camera2.CameraDevice.StateListener|) call, no calls to the 
+device's (|android.hardware.camera2.CameraDevice.StateListener|) will occur, 
+and any remaining submitted capture requests will not fire their 
+(|android.hardware.camera2.CameraDevice.CaptureListener|) callbacks. 
+
+To shut down as fast as possible, call the 
+(|android.hardware.camera2.CameraDevice|) method and then 
+(|android.hardware.camera2.CameraDevice|) once the flush completes. This will 
+discard some capture requests, but results in faster shutdown. 
+
+
+
+*android.hardware.camera2.CameraDevice.configureOutputs(List<Surface>)*
+
+public void configureOutputs(java.util.List<android.view.Surface> outputs)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Set up a new output set of Surfaces for the camera device. 
+
+The configuration determines the set of potential output Surfaces for the 
+camera device for each capture request. A given request may use all or a only 
+some of the outputs. This method must be called before requests can be 
+submitted to the camera with capture(|android.hardware.camera2.CameraDevice|) , 
+captureBurst(|android.hardware.camera2.CameraDevice|) , 
+setRepeatingRequest(|android.hardware.camera2.CameraDevice|) , or 
+setRepeatingBurst(|android.hardware.camera2.CameraDevice|) . 
+
+Surfaces suitable for inclusion as a camera output can be created for various 
+use cases and targets: 
+
+
+
+For drawing to a SurfaceView(|android.view.SurfaceView|) : Set the size of the 
+Surface with (|android.view.SurfaceHolder|) to be one of the supported 
+processed sizes(|android.hardware.camera2.CameraCharacteristics|) before 
+calling (|android.view.SurfaceHolder|) . 
+
+For accessing through an OpenGL texture via a 
+SurfaceTexture(|android.graphics.SurfaceTexture|) : Set the size of the 
+SurfaceTexture with (|android.graphics.SurfaceTexture|) to be one of the 
+supported processed sizes(|android.hardware.camera2.CameraCharacteristics|) 
+before creating a Surface from the SurfaceTexture with (|android.view.Surface|) 
+. 
+
+For recording with (|android.media.MediaCodec|) : Call 
+(|android.media.MediaCodec|) after configuring the media codec to use one of 
+the processed sizes(|android.hardware.camera2.CameraCharacteristics|) 
+
+For recording with (|android.media.MediaRecorder|) : TODO 
+
+For efficient YUV processing with (|android.renderscript|) : Create a 
+RenderScript Allocation(|android.renderscript.Allocation|) with a supported YUV 
+type, the IO_INPUT flag, and one of the supported processed 
+sizes(|android.hardware.camera2.CameraCharacteristics|) . Then obtain the 
+Surface with (|android.renderscript.Allocation|) . 
+
+For access to uncompressed or JPEG data in the application: Create a 
+(|android.media.ImageReader|) object with the desired image 
+format(|android.hardware.camera2.CameraCharacteristics|) , and a size from the 
+matching processed(|android.hardware.camera2.CameraCharacteristics|) , 
+jpeg(|android.hardware.camera2.CameraCharacteristics|) . Then obtain a Surface 
+from it. 
+
+
+
+
+
+This function can take several hundred milliseconds to execute, since camera 
+hardware may need to be powered on or reconfigured. 
+
+The camera device will query each Surface's size and formats upon this call, so 
+they must be set to a valid setting at this time (in particular: if the format 
+is user-visible, it must be one of android.scaler.availableFormats; and the 
+size must be one of android.scaler.available[Processed|Jpeg]Sizes). 
+
+When this method is called with valid Surfaces, the device will transition to 
+the busy state(|android.hardware.camera2.CameraDevice.StateListener|) . Once 
+configuration is complete, the device will transition into the idle 
+state(|android.hardware.camera2.CameraDevice.StateListener|) . Capture requests 
+using the newly-configured Surfaces may then be submitted with 
+(|android.hardware.camera2.CameraDevice|) , 
+(|android.hardware.camera2.CameraDevice|) , 
+(|android.hardware.camera2.CameraDevice|) , or 
+(|android.hardware.camera2.CameraDevice|) . 
+
+If this method is called while the camera device is still actively processing 
+previously submitted captures, then the following sequence of events occurs: 
+The device transitions to the busy state and calls the 
+(|android.hardware.camera2.CameraDevice.StateListener|) callback. Second, if a 
+repeating request is set it is cleared. Third, the device finishes up all 
+in-flight and pending requests. Finally, once the device is idle, it then 
+reconfigures its outputs, and calls the 
+(|android.hardware.camera2.CameraDevice.StateListener|) method once it is again 
+ready to accept capture requests. Therefore, no submitted work is discarded. To 
+idle as fast as possible, use (|android.hardware.camera2.CameraDevice|) and 
+wait for the idle callback before calling configureOutputs. This will discard 
+work, but reaches the new configuration sooner. 
+
+Using larger resolution outputs, or more outputs, can result in slower output 
+rate from the device. 
+
+Configuring the outputs with an empty or null list will transition the camera 
+into an unconfigured 
+state(|android.hardware.camera2.CameraDevice.StateListener|) instead of the 
+idle state(|android.hardware.camera2.CameraDevice.StateListener|) . 
+
+Calling configureOutputs with the same arguments as the last call to 
+configureOutputs has no effect, and the 
+busy(|android.hardware.camera2.CameraDevice.StateListener|) and 
+idle(|android.hardware.camera2.CameraDevice.StateListener|) state transitions 
+will happen immediately. 
+
+
+    outputs - The new set of Surfaces that should be made available as targets for captured 
+       image data. 
+
+*android.hardware.camera2.CameraDevice.createCaptureRequest(int)*
+
+public |android.hardware.camera2.CaptureRequest.Builder| createCaptureRequest(int templateType)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Create a (|android.hardware.camera2.CaptureRequest.Builder|) for new capture 
+requests, initialized with template for a target use case. The settings are 
+chosen to be the best options for the specific camera device, so it is not 
+recommended to reuse the same request for a different camera device; create a 
+builder specific for that device and template and override the settings as 
+desired, instead. 
+
+
+    templateType - An enumeration selecting the use case for this request; one of the 
+       CameraDevice.TEMPLATE_ values. 
+
+    Returns: a builder for a capture request, initialized with default settings for that 
+             template, and no output streams 
+
+*android.hardware.camera2.CameraDevice.flush()*
+
+public void flush()
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Flush all captures currently pending and in-progress as fast as possible. 
+
+The camera device will discard all of its current work as fast as possible. 
+Some in-flight captures may complete successfully and call 
+(|android.hardware.camera2.CameraDevice.CaptureListener|) , while others will 
+trigger their (|android.hardware.camera2.CameraDevice.CaptureListener|) 
+callbacks. If a repeating request or a repeating burst is set, it will be 
+cleared by the flush. 
+
+This method is the fastest way to idle the camera device for reconfiguration 
+with (|android.hardware.camera2.CameraDevice|) , at the cost of discarding 
+in-progress work. Once the flush is complete, the idle callback will be called. 
+
+Flushing will introduce at least a brief pause in the stream of data from the 
+camera device, since once the flush is complete, the first new request has to 
+make it through the entire camera pipeline before new output buffers are 
+produced. 
+
+This means that usingflush()to simply remove pending requests is not 
+recommended; it's best used for quickly switching output configurations, or for 
+cancelling long in-progress requests (such as a multi-second capture). 
+
+
+
+*android.hardware.camera2.CameraDevice.getId()*
+
+public |java.lang.String| getId()
+
+Get the ID of this camera device. 
+
+This matches the ID given to (|android.hardware.camera2.CameraManager|) to 
+instantiate this this camera device. 
+
+This ID can be used to query the camera device's fixed 
+properties(|android.hardware.camera2.CameraCharacteristics|) with 
+(|android.hardware.camera2.CameraManager|) . 
+
+This method can be called even if the device has been closed or has encountered 
+a serious error. 
+
+
+
+    Returns: the ID for this camera device 
+
+*android.hardware.camera2.CameraDevice.setRepeatingBurst(List<CaptureRequest>,CameraDevice.CaptureListener,Handler)*
+
+public int setRepeatingBurst(
+  java.util.List<android.hardware.camera2.CaptureRequest> requests,
+  android.hardware.camera2.CameraDevice.CaptureListener listener,
+  android.os.Handler handler)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Request endlessly repeating capture of a sequence of images by this 
+CameraDevice. 
+
+With this method, the CameraDevice will continually capture images, cycling 
+through the settings in the provided list of 
+CaptureRequests(|android.hardware.camera2.CaptureRequest|) , at the maximum 
+rate possible. 
+
+If a request is submitted through (|android.hardware.camera2.CameraDevice|) or 
+(|android.hardware.camera2.CameraDevice|) , the current repetition of the 
+request list will be completed before the higher-priority request is handled. 
+This guarantees that the application always receives a complete repeat burst 
+captured in minimal time, instead of bursts interleaved with higher-priority 
+captures, or incomplete captures. 
+
+Repeating burst requests are a simple way for an application to maintain a 
+preview or other continuous stream of frames where each request is different in 
+a predicatable way, without having to continually submit requests through 
+(|android.hardware.camera2.CameraDevice|) . 
+
+To stop the repeating capture, call (|android.hardware.camera2.CameraDevice|) . 
+Any ongoing burst will still be completed, however. Calling 
+(|android.hardware.camera2.CameraDevice|) will also clear the request. 
+
+Calling this method will replace a previously-set repeating request or burst 
+set up by this method or (|android.hardware.camera2.CameraDevice|) , although 
+any in-progress burst will be completed before the new repeat burst will be 
+used. 
+
+
+    requests - the list of requests to cycle through indefinitely 
+    listener - The callback object to notify each time one of the requests in the repeating 
+       bursts has finished processing. If null, no metadata will be produced 
+       for this stream of requests, although image data will still be produced. 
+    handler - the handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+    Returns: int A unique capture sequence ID used by {@link 
+             CaptureListener#onCaptureSequenceCompleted}. 
+
+*android.hardware.camera2.CameraDevice.setRepeatingRequest(CaptureRequest,CameraDevice.CaptureListener,Handler)*
+
+public int setRepeatingRequest(
+  android.hardware.camera2.CaptureRequest request,
+  android.hardware.camera2.CameraDevice.CaptureListener listener,
+  android.os.Handler handler)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Request endlessly repeating capture of images by this CameraDevice. 
+
+With this method, the CameraDevice will continually capture images using the 
+settings in the provided (|android.hardware.camera2.CaptureRequest|) , at the 
+maximum rate possible. 
+
+Repeating requests are a simple way for an application to maintain a preview or 
+other continuous stream of frames, without having to continually submit 
+identical requests through (|android.hardware.camera2.CameraDevice|) . 
+
+Repeat requests have lower priority than those submitted through 
+(|android.hardware.camera2.CameraDevice|) or 
+(|android.hardware.camera2.CameraDevice|) , so if 
+(|android.hardware.camera2.CameraDevice|) is called when a repeating request is 
+active, the capture request will be processed before any further repeating 
+requests are processed. 
+
+Repeating requests are a simple way for an application to maintain a preview or 
+other continuous stream of frames, without having to submit requests through 
+(|android.hardware.camera2.CameraDevice|) at video rates. 
+
+To stop the repeating capture, call (|android.hardware.camera2.CameraDevice|) . 
+Calling (|android.hardware.camera2.CameraDevice|) will also clear the request. 
+
+Calling this method will replace any earlier repeating request or burst set up 
+by this method or (|android.hardware.camera2.CameraDevice|) , although any 
+in-progress burst will be completed before the new repeat request will be used. 
+
+
+    request - the request to repeat indefinitely 
+    listener - The callback object to notify every time the request finishes processing. If 
+       null, no metadata will be produced for this stream of requests, although 
+       image data will still be produced. 
+    handler - the handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+    Returns: int A unique capture sequence ID used by {@link 
+             CaptureListener#onCaptureSequenceCompleted}. 
+
+*android.hardware.camera2.CameraDevice.stopRepeating()*
+
+public void stopRepeating()
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Cancel any ongoing repeating capture set by either 
+setRepeatingRequest(|android.hardware.camera2.CameraDevice|) or 
+(|android.hardware.camera2.CameraDevice|) . Has no effect on requests submitted 
+through capture(|android.hardware.camera2.CameraDevice|) or 
+captureBurst(|android.hardware.camera2.CameraDevice|) . 
+
+Any currently in-flight captures will still complete, as will any burst that is 
+mid-capture. To ensure that the device has finished processing all of its 
+capture requests and is in idle state, wait for the 
+(|android.hardware.camera2.CameraDevice.StateListener|) callback after calling 
+this method.. 
+
+
+
+*android.hardware.camera2.CameraDevice.waitUntilIdle()*
+
+public void waitUntilIdle()
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Wait until all the submitted requests have finished processing 
+
+This method blocks until all the requests that have been submitted to the 
+camera device, either through capture(|android.hardware.camera2.CameraDevice|) 
+, captureBurst(|android.hardware.camera2.CameraDevice|) , 
+setRepeatingRequest(|android.hardware.camera2.CameraDevice|) , or 
+setRepeatingBurst(|android.hardware.camera2.CameraDevice|) , have completed 
+their processing. 
+
+Once this call returns successfully, the device is in an idle state, and can be 
+reconfigured with configureOutputs(|android.hardware.camera2.CameraDevice|) . 
+
+This method cannot be used if there is an active repeating request or burst, 
+set with setRepeatingRequest(|android.hardware.camera2.CameraDevice|) or 
+setRepeatingBurst(|android.hardware.camera2.CameraDevice|) . Call 
+stopRepeating(|android.hardware.camera2.CameraDevice|) before calling this 
+method. 
+
+
+
+

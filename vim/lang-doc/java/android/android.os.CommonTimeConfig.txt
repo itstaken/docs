@@ -1,0 +1,377 @@
+*android.os.CommonTimeConfig* *CommonTimeConfig* Used for configuring and contro
+
+public class CommonTimeConfig
+  extends    |java.lang.Object|
+
+|android.os.CommonTimeConfig_Description|
+|android.os.CommonTimeConfig_Fields|
+|android.os.CommonTimeConfig_Constructors|
+|android.os.CommonTimeConfig_Methods|
+
+================================================================================
+
+*android.os.CommonTimeConfig_Fields*
+|int_android.os.CommonTimeConfig.ERROR|
+|int_android.os.CommonTimeConfig.ERROR_BAD_VALUE|
+|int_android.os.CommonTimeConfig.ERROR_DEAD_OBJECT|
+|long_android.os.CommonTimeConfig.INVALID_GROUP_ID|
+|java.lang.String_android.os.CommonTimeConfig.SERVICE_NAME|
+|int_android.os.CommonTimeConfig.SUCCESS|
+
+*android.os.CommonTimeConfig_Constructors*
+|android.os.CommonTimeConfig()|Class constructor.
+
+*android.os.CommonTimeConfig_Methods*
+|android.os.CommonTimeConfig.create()|Handy class factory method.
+|android.os.CommonTimeConfig.finalize()|
+|android.os.CommonTimeConfig.forceNetworklessMasterMode()|At startup, the time 
+|android.os.CommonTimeConfig.getAutoDisable()|Gets the current state of the com
+|android.os.CommonTimeConfig.getClientSyncInterval()|Gets the amount of time th
+|android.os.CommonTimeConfig.getInterfaceBinding()|Gets the name of the network
+|android.os.CommonTimeConfig.getMasterAnnounceInterval()|Gets the amount of tim
+|android.os.CommonTimeConfig.getMasterElectionEndpoint()|Gets the IP endpoint u
+|android.os.CommonTimeConfig.getMasterElectionGroupId()|Gets the current group 
+|android.os.CommonTimeConfig.getMasterElectionPriority()|Gets the current prior
+|android.os.CommonTimeConfig.getPanicThreshold()|Gets the panic threshold for t
+|android.os.CommonTimeConfig.release()|Release all native resources held by thi
+|android.os.CommonTimeConfig.setAutoDisable(boolean)|Sets the current state of 
+|android.os.CommonTimeConfig.setClientSyncInterval(int)|Sets the amount of time
+|android.os.CommonTimeConfig.setMasterAnnounceInterval(int)|Sets the amount of 
+|android.os.CommonTimeConfig.setMasterElectionEndpoint(InetSocketAddress)|Sets 
+|android.os.CommonTimeConfig.setMasterElectionGroupId(long)|Sets the current gr
+|android.os.CommonTimeConfig.setMasterElectionPriority(byte)|Sets the current p
+|android.os.CommonTimeConfig.setNetworkBinding(String)|Sets the name of the net
+|android.os.CommonTimeConfig.setPanicThreshold(int)|Sets the panic threshold fo
+|android.os.CommonTimeConfig.setServerDiedListener(CommonTimeConfig.OnServerDiedListener)|
+
+*android.os.CommonTimeConfig_Description*
+
+Used for configuring and controlling the status of the android common time 
+service. 
+
+
+
+*int_android.os.CommonTimeConfig.ERROR*
+
+Unspecified error. 
+
+
+*int_android.os.CommonTimeConfig.ERROR_BAD_VALUE*
+
+Operation failed due to bad parameter value. 
+
+
+*int_android.os.CommonTimeConfig.ERROR_DEAD_OBJECT*
+
+Operation failed due to dead remote object. 
+
+
+*long_android.os.CommonTimeConfig.INVALID_GROUP_ID*
+
+Sentinel value returned by (|android.os.CommonTimeConfig|) when an error occurs 
+trying to fetch the master election group. 
+
+
+*java.lang.String_android.os.CommonTimeConfig.SERVICE_NAME*
+
+Name of the underlying native binder service 
+
+
+*int_android.os.CommonTimeConfig.SUCCESS*
+
+Successful operation. 
+
+
+
+*android.os.CommonTimeConfig()*
+
+public CommonTimeConfig()
+  throws |android.os.RemoteException|
+         
+Class constructor. 
+
+
+*android.os.CommonTimeConfig.create()*
+
+public static |android.os.CommonTimeConfig| create()
+
+Handy class factory method. 
+
+
+
+*android.os.CommonTimeConfig.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.CommonTimeConfig.forceNetworklessMasterMode()*
+
+public int forceNetworklessMasterMode()
+
+At startup, the time service enters the initial state and remains there until 
+it is given a network interface to bind to. Common time will be unavailable to 
+clients of the common time service until the service joins a network (even an 
+empty network). Devices may use the (|android.os.CommonTimeConfig|) method to 
+force a time service in the INITIAL state with no network configuration to 
+assume MASTER status for a brand new timeline in order to allow clients of the 
+common time service to operate, even though the device is isolated and not on 
+any network. When a networkless master does join a network, it will defer to 
+any masters already on the network, or continue to maintain the timeline it 
+made up during its networkless state if no other masters are detected. 
+Attempting to force a client into master mode while it is actively bound to a 
+network will fail with the status code (|android.os.CommonTimeConfig|) 
+
+
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR} or {@link 
+             #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.getAutoDisable()*
+
+public boolean getAutoDisable()
+  throws |android.os.RemoteException|
+         
+Gets the current state of the common time service's auto disable flag. 
+
+
+
+    Returns: The current state of the common time service's auto disable flag. 
+
+*android.os.CommonTimeConfig.getClientSyncInterval()*
+
+public int getClientSyncInterval()
+  throws |android.os.RemoteException|
+         
+Gets the amount of time the common time service will wait between time 
+synchronization requests when it is the client of another common time service 
+on the network. 
+
+
+
+    Returns: The time (in milliseconds) between time sync requests. 
+
+*android.os.CommonTimeConfig.getInterfaceBinding()*
+
+public |java.lang.String| getInterfaceBinding()
+  throws |android.os.RemoteException|
+         
+Gets the name of the network interface which the common time service attempts 
+to bind to. 
+
+
+
+    Returns: a string with the network interface name which the common time service is bound 
+             to, or null if the service is currently unbound. Examples of 
+             interface names are things like "eth0", or "wlan0". 
+
+*android.os.CommonTimeConfig.getMasterAnnounceInterval()*
+
+public int getMasterAnnounceInterval()
+  throws |android.os.RemoteException|
+         
+Gets the amount of time the common time service will wait between master 
+announcements when it is the timeline master. 
+
+
+
+    Returns: The time (in milliseconds) between master announcements. 
+
+*android.os.CommonTimeConfig.getMasterElectionEndpoint()*
+
+public |java.net.InetSocketAddress| getMasterElectionEndpoint()
+  throws |android.os.RemoteException|
+         
+Gets the IP endpoint used by the time service to participate in the master 
+election protocol. 
+
+
+
+    Returns: an InetSocketAddress containing the IP address and UDP port being used by the 
+             system's common time service to participate in the master election 
+             protocol. 
+
+*android.os.CommonTimeConfig.getMasterElectionGroupId()*
+
+public long getMasterElectionGroupId()
+  throws |android.os.RemoteException|
+         
+Gets the current group ID used by the common time service in the master 
+election protocol. 
+
+
+
+    Returns: The 64-bit group ID of the common time service. 
+
+*android.os.CommonTimeConfig.getMasterElectionPriority()*
+
+public byte getMasterElectionPriority()
+  throws |android.os.RemoteException|
+         
+Gets the current priority of the common time service used in the master 
+election protocol. 
+
+
+
+    Returns: an 8 bit value indicating the priority of this common time service relative to 
+             other common time services operating in the same domain. 
+
+*android.os.CommonTimeConfig.getPanicThreshold()*
+
+public int getPanicThreshold()
+  throws |android.os.RemoteException|
+         
+Gets the panic threshold for the estimated error level of the common time 
+service. When the common time service's estimated error rises above this level, 
+the service will panic and reset, causing a discontinuity in the currently 
+synchronized timeline. 
+
+
+
+    Returns: The threshold (in microseconds) past which the common time service will panic. 
+
+*android.os.CommonTimeConfig.release()*
+
+public void release()
+
+Release all native resources held by this (|android.os.CommonTimeConfig|) 
+instance. Once resources have been released, the 
+(|android.os.CommonTimeConfig|) instance is disconnected from the native 
+service and will throw a (|android.os.RemoteException|) if any of its methods 
+are called. Clients should always call release on their client instances before 
+releasing their last Java reference to the instance. Failure to do this will 
+cause non-deterministic native resource reclamation and may cause the common 
+time service to remain active on the network for longer than it should. 
+
+
+
+*android.os.CommonTimeConfig.setAutoDisable(boolean)*
+
+public int setAutoDisable(boolean autoDisable)
+
+Sets the current state of the common time service's auto disable flag. When the 
+time service's auto disable flag is set, it will automatically cease all 
+network activity when it has no active local clients, resuming activity the 
+next time the service has interested local clients. When the auto disabled flag 
+is cleared, the common time service will continue to participate the time 
+synchronization group even when it has no active local clients. 
+
+
+    autoDisable - The desired state of the common time service's auto disable flag. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR} or {@link 
+             #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setClientSyncInterval(int)*
+
+public int setClientSyncInterval(int interval)
+
+Sets the amount of time the common time service will wait between time 
+synchronization requests when it is the client of another common time service 
+on the network. 
+
+
+    interval - The time (in milliseconds) between time sync requests. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setMasterAnnounceInterval(int)*
+
+public int setMasterAnnounceInterval(int interval)
+
+Sets the amount of time the common time service will wait between master 
+announcements when it is the timeline master. 
+
+
+    interval - The time (in milliseconds) between master announcements. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setMasterElectionEndpoint(InetSocketAddress)*
+
+public int setMasterElectionEndpoint(java.net.InetSocketAddress ep)
+
+Sets the IP endpoint used by the common time service to participate in the 
+master election protocol. 
+
+
+    ep - The IP address and UDP port to be used by the common time service to 
+       participate in the master election protocol. The supplied IP address 
+       must be either the broadcast or multicast address, unicast addresses are 
+       considered to be illegal values. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setMasterElectionGroupId(long)*
+
+public int setMasterElectionGroupId(long id)
+
+Sets the current group ID used by the common time service in the master 
+election protocol. 
+
+
+    id - The 64-bit group ID of the common time service. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setMasterElectionPriority(byte)*
+
+public int setMasterElectionPriority(byte priority)
+
+Sets the current priority of the common time service used in the master 
+election protocol. 
+
+
+    priority - priority of the common time service used in the master election protocol. Lower 
+       numbers are lower priority. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR} or {@link 
+             #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setNetworkBinding(String)*
+
+public int setNetworkBinding(java.lang.String ifaceName)
+
+Sets the name of the network interface which the common time service should 
+attempt to bind to. 
+
+
+    ifaceName - The name of the network interface ("eth0", "wlan0", etc...) wich the common 
+       time service should attempt to bind to, or null to force the common time 
+       service to unbind from the network and run in networkless mode. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setPanicThreshold(int)*
+
+public int setPanicThreshold(int threshold)
+
+Sets the panic threshold for the estimated error level of the common time 
+service. When the common time service's estimated error rises above this level, 
+the service will panic and reset, causing a discontinuity in the currently 
+synchronized timeline. 
+
+
+    threshold - The threshold (in microseconds) past which the common time service will panic. 
+
+    Returns: {@link #SUCCESS} in case of success, {@link #ERROR}, {@link #ERROR_BAD_VALUE} 
+             or {@link #ERROR_DEAD_OBJECT} in case of failure. 
+
+*android.os.CommonTimeConfig.setServerDiedListener(CommonTimeConfig.OnServerDiedListener)*
+
+public void setServerDiedListener(android.os.CommonTimeConfig.OnServerDiedListener listener)
+
+Registers an OnServerDiedListener interface. Call this method with a null 
+listener to stop receiving server death notifications. 
+
+
+
+

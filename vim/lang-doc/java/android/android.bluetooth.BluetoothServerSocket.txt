@@ -1,0 +1,112 @@
+*android.bluetooth.BluetoothServerSocket* *BluetoothServerSocket* A listening Bl
+
+public final class BluetoothServerSocket
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|android.bluetooth.BluetoothServerSocket_Description|
+|android.bluetooth.BluetoothServerSocket_Fields|
+|android.bluetooth.BluetoothServerSocket_Constructors|
+|android.bluetooth.BluetoothServerSocket_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothServerSocket_Methods*
+|android.bluetooth.BluetoothServerSocket.accept()|Block until a connection is e
+|android.bluetooth.BluetoothServerSocket.accept(int)|Block until a connection i
+|android.bluetooth.BluetoothServerSocket.close()|Immediately close this socket,
+|android.bluetooth.BluetoothServerSocket.getChannel()|Returns the channel on wh
+
+*android.bluetooth.BluetoothServerSocket_Description*
+
+A listening Bluetooth socket. 
+
+The interface for Bluetooth Sockets is similar to that of TCP sockets: 
+(|java.net.Socket|) and (|java.net.ServerSocket|) . On the server side, use a 
+(|android.bluetooth.BluetoothServerSocket|) to create a listening server 
+socket. When a connection is accepted by the 
+(|android.bluetooth.BluetoothServerSocket|) , it will return a new 
+(|android.bluetooth.BluetoothSocket|) to manage the connection. On the client 
+side, use a single (|android.bluetooth.BluetoothSocket|) to both initiate an 
+outgoing connection and to manage the connection. 
+
+The most common type of Bluetooth socket is RFCOMM, which is the type supported 
+by the Android APIs. RFCOMM is a connection-oriented, streaming transport over 
+Bluetooth. It is also known as the Serial Port Profile (SPP). 
+
+To create a listening (|android.bluetooth.BluetoothServerSocket|) that's ready 
+for incoming connections, use 
+BluetoothAdapter.listenUsingRfcommWithServiceRecord()(|android.bluetooth.BluetoothAdapter|)
+. Then call (|android.bluetooth.BluetoothServerSocket|) to listen for incoming 
+connection requests. This call will block until a connection is established, at 
+which point, it will return a (|android.bluetooth.BluetoothSocket|) to manage 
+the connection. Once the (|android.bluetooth.BluetoothSocket|) is acquired, 
+it's a good idea to call (|android.bluetooth.BluetoothServerSocket|) on the 
+(|android.bluetooth.BluetoothServerSocket|) when it's no longer needed for 
+accepting connections. Closing the (|android.bluetooth.BluetoothServerSocket|) 
+will not close the returned (|android.bluetooth.BluetoothSocket|) . 
+
+(|android.bluetooth.BluetoothServerSocket|) is thread safe. In particular, 
+(|android.bluetooth.BluetoothServerSocket|) will always immediately abort 
+ongoing operations and close the server socket. 
+
+Note: Requires the (|android.Manifest.permission|) permission. 
+
+Developer Guides For more information about using Bluetooth, read the <a 
+href="guide/topics/wireless/bluetooth.html">Bluetooth developer guide. 
+(|android.bluetooth.BluetoothSocket|) 
+
+
+
+*android.bluetooth.BluetoothServerSocket.accept()*
+
+public |android.bluetooth.BluetoothSocket| accept()
+  throws |java.io.IOException|
+         
+Block until a connection is established. Returns a connected 
+(|android.bluetooth.BluetoothSocket|) on successful connection. Once this call 
+returns, it can be called again to accept subsequent incoming connections. 
+(|android.bluetooth.BluetoothServerSocket|) can be used to abort this call from 
+another thread. 
+
+
+
+    Returns: a connected {@link BluetoothSocket} 
+
+*android.bluetooth.BluetoothServerSocket.accept(int)*
+
+public |android.bluetooth.BluetoothSocket| accept(int timeout)
+  throws |java.io.IOException|
+         
+Block until a connection is established, with timeout. Returns a connected 
+(|android.bluetooth.BluetoothSocket|) on successful connection. Once this call 
+returns, it can be called again to accept subsequent incoming connections. 
+(|android.bluetooth.BluetoothServerSocket|) can be used to abort this call from 
+another thread. 
+
+
+
+    Returns: a connected {@link BluetoothSocket} 
+
+*android.bluetooth.BluetoothServerSocket.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Immediately close this socket, and release all associated resources. Causes 
+blocked calls on this socket in other threads to immediately throw an 
+IOException. Closing the (|android.bluetooth.BluetoothServerSocket|) will not 
+close any (|android.bluetooth.BluetoothSocket|) received from 
+(|android.bluetooth.BluetoothServerSocket|) . 
+
+
+
+*android.bluetooth.BluetoothServerSocket.getChannel()*
+
+public int getChannel()
+
+Returns the channel on which this socket is bound. 
+
+
+
+

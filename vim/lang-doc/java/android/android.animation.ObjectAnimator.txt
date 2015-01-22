@@ -1,0 +1,398 @@
+*android.animation.ObjectAnimator* *ObjectAnimator* This subclass ofValueAnimato
+
+public final class ObjectAnimator
+  extends    |android.animation.ValueAnimator|
+
+|android.animation.ObjectAnimator_Description|
+|android.animation.ObjectAnimator_Fields|
+|android.animation.ObjectAnimator_Constructors|
+|android.animation.ObjectAnimator_Methods|
+
+================================================================================
+
+*android.animation.ObjectAnimator_Constructors*
+|android.animation.ObjectAnimator()|Creates a new ObjectAnimator object.
+
+*android.animation.ObjectAnimator_Methods*
+|android.animation.ObjectAnimator.clone()|
+|android.animation.ObjectAnimator.getPropertyName()|Gets the name of the proper
+|android.animation.ObjectAnimator.getTarget()|The target object whose property 
+|android.animation.ObjectAnimator.ofFloat(Object,String,float...)|Constructs an
+|android.animation.ObjectAnimator.ofFloat(T,Property<T,Float>,float...)|Constru
+|android.animation.ObjectAnimator.ofInt(Object,String,int...)|Constructs and re
+|android.animation.ObjectAnimator.ofInt(T,Property<T,Integer>,int...)|Construct
+|android.animation.ObjectAnimator.ofObject(Object,String,TypeEvaluator,Object...)|
+|android.animation.ObjectAnimator.ofObject(T,Property<T,V>,TypeEvaluator<V>,V...)|
+|android.animation.ObjectAnimator.ofPropertyValuesHolder(Object,PropertyValuesHolder...)|
+|android.animation.ObjectAnimator.setAutoCancel(boolean)|autoCancel controls wh
+|android.animation.ObjectAnimator.setDuration(long)|Sets the length of the anim
+|android.animation.ObjectAnimator.setFloatValues(float...)|
+|android.animation.ObjectAnimator.setIntValues(int...)|
+|android.animation.ObjectAnimator.setObjectValues(Object...)|
+|android.animation.ObjectAnimator.setProperty(Property)|Sets the property that 
+|android.animation.ObjectAnimator.setPropertyName(String)|Sets the name of the 
+|android.animation.ObjectAnimator.setTarget(Object)|Sets the target object whos
+|android.animation.ObjectAnimator.setupEndValues()|
+|android.animation.ObjectAnimator.setupStartValues()|
+|android.animation.ObjectAnimator.start()|
+|android.animation.ObjectAnimator.toString()|
+
+*android.animation.ObjectAnimator_Description*
+
+This subclass of (|android.animation.ValueAnimator|) provides support for 
+animating properties on target objects. The constructors of this class take 
+parameters to define the target object that will be animated as well as the 
+name of the property that will be animated. Appropriate set/get functions are 
+then determined internally and the animation will call these functions as 
+necessary to animate the property. 
+
+Developer Guides For more information about animating withObjectAnimator, read 
+the <a 
+href="guide/topics/graphics/prop-animation.html#object-animator">Property 
+Animation developer guide. 
+
+
+
+*android.animation.ObjectAnimator()*
+
+public ObjectAnimator()
+
+Creates a new ObjectAnimator object. This default constructor is primarily for 
+use internally; the other constructors which take parameters are more generally 
+useful. 
+
+
+*android.animation.ObjectAnimator.clone()*
+
+public |android.animation.ObjectAnimator| clone()
+
+
+
+
+
+*android.animation.ObjectAnimator.getPropertyName()*
+
+public |java.lang.String| getPropertyName()
+
+Gets the name of the property that will be animated. This name will be used to 
+derive a setter function that will be called to set animated values. For 
+example, a property name of foo will result in a call to the function setFoo() 
+on the target object. If either valueFrom or valueTo is null, then a getter 
+function will also be derived and called. 
+
+If this animator was created with a (|android.util.Property|) object instead of 
+the string name of a property, then this method will return the 
+name(|android.util.Property|) of that Property object instead. If this animator 
+was created with one or more (|android.animation.PropertyValuesHolder|) 
+objects, then this method will return the 
+name(|android.animation.PropertyValuesHolder|) of that object (if there was 
+just one) or a comma-separated list of all of the names (if there are more than 
+one). 
+
+
+
+*android.animation.ObjectAnimator.getTarget()*
+
+public |java.lang.Object| getTarget()
+
+The target object whose property will be animated by this animation 
+
+
+
+    Returns: The object being animated 
+
+*android.animation.ObjectAnimator.ofFloat(Object,String,float...)*
+
+public static |android.animation.ObjectAnimator| ofFloat(
+  java.lang.Object target,
+  java.lang.String propertyName,
+  float[] values)
+
+Constructs and returns an ObjectAnimator that animates between float values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. This object should have a public 
+       method on it called setName(), where name is the value of the 
+       propertyName parameter. 
+    propertyName - The name of the property being animated. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofFloat(T,Property<T,Float>,float...)*
+
+public static |android.animation.ObjectAnimator| ofFloat(
+  T target,
+  android.util.Property<T, java.lang.Float> property,
+  float[] values)
+
+Constructs and returns an ObjectAnimator that animates between float values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. 
+    property - The property being animated. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofInt(Object,String,int...)*
+
+public static |android.animation.ObjectAnimator| ofInt(
+  java.lang.Object target,
+  java.lang.String propertyName,
+  int[] values)
+
+Constructs and returns an ObjectAnimator that animates between int values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. This object should have a public 
+       method on it called setName(), where name is the value of the 
+       propertyName parameter. 
+    propertyName - The name of the property being animated. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofInt(T,Property<T,Integer>,int...)*
+
+public static |android.animation.ObjectAnimator| ofInt(
+  T target,
+  android.util.Property<T, java.lang.Integer> property,
+  int[] values)
+
+Constructs and returns an ObjectAnimator that animates between int values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. 
+    property - The property being animated. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofObject(Object,String,TypeEvaluator,Object...)*
+
+public static |android.animation.ObjectAnimator| ofObject(
+  java.lang.Object target,
+  java.lang.String propertyName,
+  android.animation.TypeEvaluator evaluator,
+  java.lang.Object[] values)
+
+Constructs and returns an ObjectAnimator that animates between Object values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. This object should have a public 
+       method on it called setName(), where name is the value of the 
+       propertyName parameter. 
+    propertyName - The name of the property being animated. 
+    evaluator - A TypeEvaluator that will be called on each animation frame to provide the 
+       necessary interpolation between the Object values to derive the animated 
+       value. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofObject(T,Property<T,V>,TypeEvaluator<V>,V...)*
+
+public static |android.animation.ObjectAnimator| ofObject(
+  T target,
+  android.util.Property<T, V> property,
+  android.animation.TypeEvaluator<V> evaluator,
+  V[] values)
+
+Constructs and returns an ObjectAnimator that animates between Object values. A 
+single value implies that that value is the one being animated to. Two values 
+imply a starting and ending values. More than two values imply a starting 
+value, values to animate through along the way, and an ending value (these 
+values will be distributed evenly across the duration of the animation). 
+
+
+    target - The object whose property is to be animated. 
+    property - The property being animated. 
+    evaluator - A TypeEvaluator that will be called on each animation frame to provide the 
+       necessary interpolation between the Object values to derive the animated 
+       value. 
+    values - A set of values that the animation will animate between over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.ofPropertyValuesHolder(Object,PropertyValuesHolder...)*
+
+public static |android.animation.ObjectAnimator| ofPropertyValuesHolder(
+  java.lang.Object target,
+  android.animation.PropertyValuesHolder[] values)
+
+Constructs and returns an ObjectAnimator that animates between the sets of 
+values specified in PropertyValueHolder objects. This variant should be used 
+when animating several properties at once with the same ObjectAnimator, since 
+PropertyValuesHolder allows you to associate a set of animation values with a 
+property name. 
+
+
+    target - The object whose property is to be animated. Depending on how the 
+       PropertyValuesObjects were constructed, the target object should either 
+       have the {@link android.util.Property} objects used to construct the 
+       PropertyValuesHolder objects or (if the PropertyValuesHOlder objects 
+       were created with property names) the target object should have public 
+       methods on it called setName(), where name is the name of the property 
+       passed in as the propertyName parameter for each of the 
+       PropertyValuesHolder objects. 
+    values - A set of PropertyValuesHolder objects whose values will be animated between 
+       over time. 
+
+    Returns: An ObjectAnimator object that is set up to animate between the given values. 
+
+*android.animation.ObjectAnimator.setAutoCancel(boolean)*
+
+public void setAutoCancel(boolean cancel)
+
+autoCancel controls whether an ObjectAnimator will be canceled automatically 
+when any other ObjectAnimator with the same target and properties is started. 
+Setting this flag may make it easier to run different animators on the same 
+target object without having to keep track of whether there are conflicting 
+animators that need to be manually canceled. Canceling animators must have the 
+same exact set of target properties, in the same order. 
+
+
+    cancel - Whether future ObjectAnimators with the same target and properties as this 
+       ObjectAnimator will cause this ObjectAnimator to be canceled. 
+
+*android.animation.ObjectAnimator.setDuration(long)*
+
+public |android.animation.ObjectAnimator| setDuration(long duration)
+
+Sets the length of the animation. The default duration is 300 milliseconds. 
+
+
+    duration - The length of the animation, in milliseconds. 
+
+    Returns: ObjectAnimator The object called with setDuration(). This return value makes it 
+             easier to compose statements together that construct and then set 
+             the duration, as in ObjectAnimator.ofInt(target, propertyName, 0, 
+             10).setDuration(500).start(). 
+
+*android.animation.ObjectAnimator.setFloatValues(float...)*
+
+public void setFloatValues(float[] values)
+
+
+
+
+
+*android.animation.ObjectAnimator.setIntValues(int...)*
+
+public void setIntValues(int[] values)
+
+
+
+
+
+*android.animation.ObjectAnimator.setObjectValues(Object...)*
+
+public void setObjectValues(java.lang.Object[] values)
+
+
+
+
+
+*android.animation.ObjectAnimator.setProperty(Property)*
+
+public void setProperty(android.util.Property property)
+
+Sets the property that will be animated. Property objects will take precedence 
+over properties specified by the (|android.animation.ObjectAnimator|) method. 
+Animations should be set up to use one or the other, not both. 
+
+
+    property - The property being animated. Should not be null. 
+
+*android.animation.ObjectAnimator.setPropertyName(String)*
+
+public void setPropertyName(java.lang.String propertyName)
+
+Sets the name of the property that will be animated. This name is used to 
+derive a setter function that will be called to set animated values. For 
+example, a property name of foo will result in a call to the function setFoo() 
+on the target object. If either valueFrom or valueTo is null, then a getter 
+function will also be derived and called. 
+
+For best performance of the mechanism that calls the setter function determined 
+by the name of the property being animated, use float or int typed values, and 
+make the setter function for those properties have a void return value. This 
+will cause the code to take an optimized path for these constrained 
+circumstances. Other property types and return types will work, but will have 
+more overhead in processing the requests due to normal reflection mechanisms. 
+
+Note that the setter function derived from this property name must take the 
+same parameter type as the valueFrom and valueTo properties, otherwise the call 
+to the setter function will fail. 
+
+If this ObjectAnimator has been set up to animate several properties together, 
+using more than one PropertyValuesHolder objects, then setting the propertyName 
+simply sets the propertyName in the first of those PropertyValuesHolder 
+objects. 
+
+
+    propertyName - The name of the property being animated. Should not be null. 
+
+*android.animation.ObjectAnimator.setTarget(Object)*
+
+public void setTarget(java.lang.Object target)
+
+Sets the target object whose property will be animated by this animation 
+
+
+    target - The object being animated 
+
+*android.animation.ObjectAnimator.setupEndValues()*
+
+public void setupEndValues()
+
+
+
+
+
+*android.animation.ObjectAnimator.setupStartValues()*
+
+public void setupStartValues()
+
+
+
+
+
+*android.animation.ObjectAnimator.start()*
+
+public void start()
+
+
+
+
+
+*android.animation.ObjectAnimator.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

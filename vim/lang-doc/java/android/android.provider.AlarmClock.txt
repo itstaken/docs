@@ -1,0 +1,212 @@
+*android.provider.AlarmClock* *AlarmClock* The AlarmClock provider contains an I
+
+public final class AlarmClock
+  extends    |java.lang.Object|
+
+|android.provider.AlarmClock_Description|
+|android.provider.AlarmClock_Fields|
+|android.provider.AlarmClock_Constructors|
+|android.provider.AlarmClock_Methods|
+
+================================================================================
+
+*android.provider.AlarmClock_Fields*
+|java.lang.String_android.provider.AlarmClock.ACTION_SET_ALARM|
+|java.lang.String_android.provider.AlarmClock.ACTION_SET_TIMER|
+|java.lang.String_android.provider.AlarmClock.ACTION_SHOW_ALARMS|
+|java.lang.String_android.provider.AlarmClock.EXTRA_DAYS|
+|java.lang.String_android.provider.AlarmClock.EXTRA_HOUR|
+|java.lang.String_android.provider.AlarmClock.EXTRA_LENGTH|
+|java.lang.String_android.provider.AlarmClock.EXTRA_MESSAGE|
+|java.lang.String_android.provider.AlarmClock.EXTRA_MINUTES|
+|java.lang.String_android.provider.AlarmClock.EXTRA_RINGTONE|
+|java.lang.String_android.provider.AlarmClock.EXTRA_SKIP_UI|
+|java.lang.String_android.provider.AlarmClock.EXTRA_VIBRATE|
+|java.lang.String_android.provider.AlarmClock.VALUE_RINGTONE_SILENT|
+
+*android.provider.AlarmClock_Constructors*
+|android.provider.AlarmClock()|
+
+*android.provider.AlarmClock_Description*
+
+The AlarmClock provider contains an Intent action and extras that can be used 
+to start an Activity to set a new alarm or timer in an alarm clock application. 
+
+Applications that wish to receive the ACTION_SET_ALARM and ACTION_SET_TIMER 
+Intents should create an activity to handle the Intent that requires the 
+permission com.android.alarm.permission.SET_ALARM. Applications that wish to 
+create a new alarm or timer should use 
+Context.startActivity()(|android.content.Context|) so that the user has the 
+option of choosing which alarm clock application to use. 
+
+
+
+*java.lang.String_android.provider.AlarmClock.ACTION_SET_ALARM*
+
+Activity Action: Set an alarm. 
+
+Activates an existing alarm or creates a new one. 
+
+This action requests an alarm to be set for a given time of day. If no time of 
+day is specified, an implementation should start an activity that is capable of 
+setting an alarm ( (|android.provider.AlarmClock|) is ignored in this case). If 
+a time of day is specified, and (|android.provider.AlarmClock|) istrue, and the 
+alarm is not repeating, the implementation should remove this alarm after it 
+has been dismissed. If an identical alarm exists matching all parameters, the 
+implementation may re-use it instead of creating a new one (in this case, the 
+alarm should not be removed after dismissal). 
+
+This action always enables the alarm. 
+
+Request parameters 
+
+(|android.provider.AlarmClock|) (optional): The hour of the alarm being set. 
+(|android.provider.AlarmClock|) (optional): The minutes of the alarm being set. 
+(|android.provider.AlarmClock|) (optional): Weekdays for repeating alarm. 
+(|android.provider.AlarmClock|) (optional): A custom message for the alarm. 
+(|android.provider.AlarmClock|) (optional): A ringtone to play with this alarm. 
+(|android.provider.AlarmClock|) (optional): Whether or not to activate the 
+device vibrator for this alarm. (|android.provider.AlarmClock|) (optional): 
+Whether or not to display an activity for setting this alarm. 
+
+
+*java.lang.String_android.provider.AlarmClock.ACTION_SET_TIMER*
+
+Activity Action: Set a timer. 
+
+Activates an existing timer or creates a new one. 
+
+This action requests a timer to be started for a specific 
+length(|android.provider.AlarmClock|) of time. If no 
+length(|android.provider.AlarmClock|) is specified, the implementation should 
+start an activity that is capable of setting a timer ( 
+(|android.provider.AlarmClock|) is ignored in this case). If a 
+length(|android.provider.AlarmClock|) is specified, and 
+(|android.provider.AlarmClock|) istrue, the implementation should remove this 
+timer after it has been dismissed. If an identical, unused timer exists 
+matching both parameters, an implementation may re-use it instead of creating a 
+new one (in this case, the timer should not be removed after dismissal). 
+
+This action always starts the timer. 
+
+Request parameters 
+
+(|android.provider.AlarmClock|) (optional): The length of the timer being set. 
+(|android.provider.AlarmClock|) (optional): A custom message for the timer. 
+(|android.provider.AlarmClock|) (optional): Whether or not to display an 
+activity for setting this timer. 
+
+
+*java.lang.String_android.provider.AlarmClock.ACTION_SHOW_ALARMS*
+
+Activity Action: Show the alarms. 
+
+This action opens the alarms page. 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_DAYS*
+
+Bundle extra: Weekdays for repeating alarm. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+The value is anArrayList. Each item can be: 
+
+(|java.util.Calendar|) , (|java.util.Calendar|) , (|java.util.Calendar|) , 
+(|java.util.Calendar|) , (|java.util.Calendar|) , (|java.util.Calendar|) , 
+(|java.util.Calendar|) 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_HOUR*
+
+Bundle extra: The hour of the alarm. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+This extra is optional. If not provided, an implementation should open an 
+activity that allows a user to set an alarm with user provided time. 
+
+The value is an (|java.lang.Integer|) and ranges from 0 to 23. 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_LENGTH*
+
+Bundle extra: The length of the timer in seconds. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+This extra is optional. If not provided, an implementation should open an 
+activity that allows a user to set a timer with user provided length. 
+
+The value is an (|java.lang.Integer|) and ranges from 1 to 86400 (24 hours). 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_MESSAGE*
+
+Bundle extra: A custom message for the alarm or timer. 
+
+Used by (|android.provider.AlarmClock|) and (|android.provider.AlarmClock|) . 
+
+The value is a (|java.lang.String|) . 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_MINUTES*
+
+Bundle extra: The minutes of the alarm. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+The value is an (|java.lang.Integer|) and ranges from 0 to 59. If not provided, 
+it defaults to 0. 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_RINGTONE*
+
+Bundle extra: A ringtone to be played with this alarm. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+This value is a (|java.lang.String|) and can either be set to 
+(|android.provider.AlarmClock|) or to a content URI of the media to be played. 
+If not specified or the URI doesn't 
+exist,"content://settings/system/alarm_alertwill be used. 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_SKIP_UI*
+
+Bundle extra: Whether or not to display an activity after performing the 
+action. 
+
+Used by (|android.provider.AlarmClock|) and (|android.provider.AlarmClock|) . 
+
+If true, the application is asked to bypass any intermediate UI. If false, the 
+application may display intermediate UI like a confirmation dialog or settings. 
+
+The value is a (|java.lang.Boolean|) . The default isfalse. 
+
+
+*java.lang.String_android.provider.AlarmClock.EXTRA_VIBRATE*
+
+Bundle extra: Whether or not to activate the device vibrator. 
+
+Used by (|android.provider.AlarmClock|) . 
+
+The value is a (|java.lang.Boolean|) . The default istrue. 
+
+
+*java.lang.String_android.provider.AlarmClock.VALUE_RINGTONE_SILENT*
+
+Bundle extra value: Indicates no ringtone should be played. 
+
+Used by (|android.provider.AlarmClock|) , passed in through 
+(|android.provider.AlarmClock|) . 
+
+
+
+*android.provider.AlarmClock()*
+
+public AlarmClock()
+
+
+
+

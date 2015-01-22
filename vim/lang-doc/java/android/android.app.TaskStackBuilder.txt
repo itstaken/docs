@@ -1,0 +1,263 @@
+*android.app.TaskStackBuilder* *TaskStackBuilder* Utility class for constructing
+
+public class TaskStackBuilder
+  extends    |java.lang.Object|
+
+|android.app.TaskStackBuilder_Description|
+|android.app.TaskStackBuilder_Fields|
+|android.app.TaskStackBuilder_Constructors|
+|android.app.TaskStackBuilder_Methods|
+
+================================================================================
+
+*android.app.TaskStackBuilder_Methods*
+|android.app.TaskStackBuilder.addNextIntent(Intent)|Add a new Intent to the tas
+|android.app.TaskStackBuilder.addNextIntentWithParentStack(Intent)|Add a new In
+|android.app.TaskStackBuilder.addParentStack(Activity)|Add the activity parent 
+|android.app.TaskStackBuilder.addParentStack(Class<?>)|Add the activity parent 
+|android.app.TaskStackBuilder.addParentStack(ComponentName)|Add the activity pa
+|android.app.TaskStackBuilder.create(Context)|Return a new TaskStackBuilder for
+|android.app.TaskStackBuilder.editIntentAt(int)|Return the intent at the specif
+|android.app.TaskStackBuilder.getIntentCount()|
+|android.app.TaskStackBuilder.getIntents()|Return an array containing the inten
+|android.app.TaskStackBuilder.getPendingIntent(int,int)|Obtain aPendingIntentfo
+|android.app.TaskStackBuilder.getPendingIntent(int,int,Bundle)|Obtain aPendingI
+|android.app.TaskStackBuilder.getPendingIntent(int,int,Bundle,UserHandle)|
+|android.app.TaskStackBuilder.startActivities()|Start the task stack constructe
+|android.app.TaskStackBuilder.startActivities(Bundle)|Start the task stack cons
+|android.app.TaskStackBuilder.startActivities(Bundle,UserHandle)|Start the task
+
+*android.app.TaskStackBuilder_Description*
+
+Utility class for constructing synthetic back stacks for cross-task navigation 
+on Android 3.0 and newer. 
+
+In API level 11 (Android 3.0/Honeycomb) the recommended conventions for app 
+navigation using the back key changed. The back key's behavior is local to the 
+current task and does not capture navigation across different tasks. Navigating 
+across tasks and easily reaching the previous task is accomplished through the 
+"recents" UI, accessible through the software-provided Recents key on the 
+navigation or system bar. On devices with the older hardware button 
+configuration the recents UI can be accessed with a long press on the Home key. 
+
+When crossing from one task stack to another post-Android 3.0, the application 
+should synthesize a back stack/history for the new task so that the user may 
+navigate out of the new task and back to the Launcher by repeated presses of 
+the back key. Back key presses should not navigate across task stacks. 
+
+TaskStackBuilder provides a way to obey the correct conventions around 
+cross-task navigation. 
+
+About Navigation For more detailed information about tasks, the back stack, and 
+navigation design guidelines, please read <a 
+href="guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and Back Stack 
+from the developer guide and <a 
+href="design/patterns/navigation.html">Navigation from the design guide. 
+
+
+
+*android.app.TaskStackBuilder.addNextIntent(Intent)*
+
+public |android.app.TaskStackBuilder| addNextIntent(android.content.Intent nextIntent)
+
+Add a new Intent to the task stack. The most recently added Intent will invoke 
+the Activity at the top of the final task stack. 
+
+
+    nextIntent - Intent for the next Activity in the synthesized task stack 
+
+    Returns: This TaskStackBuilder for method chaining 
+
+*android.app.TaskStackBuilder.addNextIntentWithParentStack(Intent)*
+
+public |android.app.TaskStackBuilder| addNextIntentWithParentStack(android.content.Intent nextIntent)
+
+Add a new Intent with the resolved chain of parents for the target activity to 
+the task stack. 
+
+This is equivalent to calling addParentStack(|android.app.TaskStackBuilder|) 
+with the resolved ComponentName of nextIntent (if it can be resolved), followed 
+by addNextIntent(|android.app.TaskStackBuilder|) with nextIntent. 
+
+
+    nextIntent - Intent for the topmost Activity in the synthesized task stack. Its chain of 
+       parents as specified in the manifest will be added. 
+
+    Returns: This TaskStackBuilder for method chaining. 
+
+*android.app.TaskStackBuilder.addParentStack(Activity)*
+
+public |android.app.TaskStackBuilder| addParentStack(android.app.Activity sourceActivity)
+
+Add the activity parent chain as specified by the 
+getParentActivityIntent()(|android.app.Activity|) method of the activity 
+specified and the parentActivityName(|android.R.attr|) attributes of each 
+successive activity (or activity-alias) element in the application's manifest 
+to the task stack builder. 
+
+
+    sourceActivity - All parents of this activity will be added 
+
+    Returns: This TaskStackBuilder for method chaining 
+
+*android.app.TaskStackBuilder.addParentStack(Class<?>)*
+
+public |android.app.TaskStackBuilder| addParentStack(java.lang.Class<?> sourceActivityClass)
+
+Add the activity parent chain as specified by the 
+parentActivityName(|android.R.attr|) attribute of the activity (or 
+activity-alias) element in the application's manifest to the task stack 
+builder. 
+
+
+    sourceActivityClass - All parents of this activity will be added 
+
+    Returns: This TaskStackBuilder for method chaining 
+
+*android.app.TaskStackBuilder.addParentStack(ComponentName)*
+
+public |android.app.TaskStackBuilder| addParentStack(android.content.ComponentName sourceActivityName)
+
+Add the activity parent chain as specified by the 
+parentActivityName(|android.R.attr|) attribute of the activity (or 
+activity-alias) element in the application's manifest to the task stack 
+builder. 
+
+
+    sourceActivityName - Must specify an Activity component. All parents of this activity will be added 
+
+    Returns: This TaskStackBuilder for method chaining 
+
+*android.app.TaskStackBuilder.create(Context)*
+
+public static |android.app.TaskStackBuilder| create(android.content.Context context)
+
+Return a new TaskStackBuilder for launching a fresh task stack consisting of a 
+series of activities. 
+
+
+    context - The context that will launch the new task stack or generate a PendingIntent 
+
+    Returns: A new TaskStackBuilder 
+
+*android.app.TaskStackBuilder.editIntentAt(int)*
+
+public |android.content.Intent| editIntentAt(int index)
+
+Return the intent at the specified index for modification. Useful if you need 
+to modify the flags or extras of an intent that was previously added, for 
+example with (|android.app.TaskStackBuilder|) . 
+
+
+    index - Index from 0-getIntentCount() 
+
+    Returns: the intent at position index 
+
+*android.app.TaskStackBuilder.getIntentCount()*
+
+public int getIntentCount()
+
+
+
+
+
+    Returns: the number of intents added so far. 
+
+*android.app.TaskStackBuilder.getIntents()*
+
+public |android.content.Intent|[] getIntents()
+
+Return an array containing the intents added to this builder. The intent at the 
+root of the task stack will appear as the first item in the array and the 
+intent at the top of the stack will appear as the last item. 
+
+
+
+    Returns: An array containing the intents added to this builder. 
+
+*android.app.TaskStackBuilder.getPendingIntent(int,int)*
+
+public |android.app.PendingIntent| getPendingIntent(
+  int requestCode,
+  int flags)
+
+Obtain a (|android.app.PendingIntent|) for launching the task constructed by 
+this builder so far. 
+
+
+    requestCode - Private request code for the sender 
+    flags - May be {@link PendingIntent#FLAG_ONE_SHOT}, {@link 
+       PendingIntent#FLAG_NO_CREATE}, {@link 
+       PendingIntent#FLAG_CANCEL_CURRENT}, {@link 
+       PendingIntent#FLAG_UPDATE_CURRENT}, or any of the flags supported by 
+       {@link Intent#fillIn(Intent, int)} to control which unspecified parts of 
+       the intent that can be supplied when the actual send happens. 
+
+    Returns: The obtained PendingIntent 
+
+*android.app.TaskStackBuilder.getPendingIntent(int,int,Bundle)*
+
+public |android.app.PendingIntent| getPendingIntent(
+  int requestCode,
+  int flags,
+  android.os.Bundle options)
+
+Obtain a (|android.app.PendingIntent|) for launching the task constructed by 
+this builder so far. 
+
+
+    requestCode - Private request code for the sender 
+    flags - May be {@link PendingIntent#FLAG_ONE_SHOT}, {@link 
+       PendingIntent#FLAG_NO_CREATE}, {@link 
+       PendingIntent#FLAG_CANCEL_CURRENT}, {@link 
+       PendingIntent#FLAG_UPDATE_CURRENT}, or any of the flags supported by 
+       {@link Intent#fillIn(Intent, int)} to control which unspecified parts of 
+       the intent that can be supplied when the actual send happens. 
+    options - Additional options for how the Activity should be started. See {@link 
+       android.content.Context#startActivity(Intent, Bundle) 
+       Context.startActivity(Intent, Bundle)} for more details. 
+
+    Returns: The obtained PendingIntent 
+
+*android.app.TaskStackBuilder.getPendingIntent(int,int,Bundle,UserHandle)*
+
+public |android.app.PendingIntent| getPendingIntent(
+  int requestCode,
+  int flags,
+  android.os.Bundle options,
+  android.os.UserHandle user)
+
+
+
+
+
+*android.app.TaskStackBuilder.startActivities()*
+
+public void startActivities()
+
+Start the task stack constructed by this builder. 
+
+
+
+*android.app.TaskStackBuilder.startActivities(Bundle)*
+
+public void startActivities(android.os.Bundle options)
+
+Start the task stack constructed by this builder. 
+
+
+    options - Additional options for how the Activity should be started. See {@link 
+       android.content.Context#startActivity(Intent, Bundle) 
+       Context.startActivity(Intent, Bundle)} for more details. 
+
+*android.app.TaskStackBuilder.startActivities(Bundle,UserHandle)*
+
+public void startActivities(
+  android.os.Bundle options,
+  android.os.UserHandle userHandle)
+
+Start the task stack constructed by this builder. 
+
+
+
+

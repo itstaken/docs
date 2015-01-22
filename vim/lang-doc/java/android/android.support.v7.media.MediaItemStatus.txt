@@ -1,0 +1,286 @@
+*android.support.v7.media.MediaItemStatus* *MediaItemStatus* Describes the playb
+
+public final class MediaItemStatus
+  extends    |java.lang.Object|
+
+|android.support.v7.media.MediaItemStatus_Description|
+|android.support.v7.media.MediaItemStatus_Fields|
+|android.support.v7.media.MediaItemStatus_Constructors|
+|android.support.v7.media.MediaItemStatus_Methods|
+
+================================================================================
+
+*android.support.v7.media.MediaItemStatus_Fields*
+|java.lang.String_android.support.v7.media.MediaItemStatus.EXTRA_HTTP_RESPONSE_HEADERS|
+|java.lang.String_android.support.v7.media.MediaItemStatus.EXTRA_HTTP_STATUS_CODE|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_BUFFERING|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_CANCELED|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_ERROR|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_FINISHED|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_INVALIDATED|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PAUSED|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PENDING|
+|int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PLAYING|
+
+*android.support.v7.media.MediaItemStatus_Methods*
+|android.support.v7.media.MediaItemStatus.asBundle()|Converts this object to a 
+|android.support.v7.media.MediaItemStatus.fromBundle(Bundle)|Creates an instanc
+|android.support.v7.media.MediaItemStatus.getContentDuration()|Gets the total d
+|android.support.v7.media.MediaItemStatus.getContentPosition()|Gets the content
+|android.support.v7.media.MediaItemStatus.getExtras()|Gets a bundle of extras f
+|android.support.v7.media.MediaItemStatus.getPlaybackState()|Gets the playback 
+|android.support.v7.media.MediaItemStatus.getTimestamp()|Gets the timestamp ass
+|android.support.v7.media.MediaItemStatus.toString()|
+
+*android.support.v7.media.MediaItemStatus_Description*
+
+Describes the playback status of a media item. 
+
+This class is part of the remote playback protocol described by the 
+MediaControlIntent(|android.support.v7.media.MediaControlIntent|) class. 
+
+As a media item is played, it transitions through a sequence of states 
+including: pending(|android.support.v7.media.MediaItemStatus|) , 
+buffering(|android.support.v7.media.MediaItemStatus|) , 
+playing(|android.support.v7.media.MediaItemStatus|) , 
+paused(|android.support.v7.media.MediaItemStatus|) , 
+finished(|android.support.v7.media.MediaItemStatus|) , 
+canceled(|android.support.v7.media.MediaItemStatus|) , 
+invalidated(|android.support.v7.media.MediaItemStatus|) , and 
+error(|android.support.v7.media.MediaItemStatus|) . Refer to the documentation 
+of each state for an explanation of its meaning. 
+
+While the item is playing, the playback status may also include progress 
+information about the content 
+position(|android.support.v7.media.MediaItemStatus|) and content 
+duration(|android.support.v7.media.MediaItemStatus|) although not all route 
+destinations will report it. 
+
+To monitor playback status, the application should supply a (|PendingIntent|) 
+to use as the item status update 
+receiver(|android.support.v7.media.MediaControlIntent|) for a given playback 
+request(|android.support.v7.media.MediaControlIntent|) . Note that the status 
+update receiver will only be invoked for major status changes such as a 
+transition from playing to finished. 
+
+The status update receiver will not be invoked for minor progress updates such 
+as changes to playback position or duration. If the application wants to 
+monitor playback progress, then it must use the get status 
+request(|android.support.v7.media.MediaControlIntent|) to poll for changes 
+periodically and estimate the playback position while playing. Note that there 
+may be a significant power impact to polling so the application is advised only 
+to poll when the screen is on and never more than about once every 5 seconds or 
+so. 
+
+This object is immutable once created using a 
+(|android.support.v7.media.MediaItemStatus.Builder|) instance. 
+
+
+
+*java.lang.String_android.support.v7.media.MediaItemStatus.EXTRA_HTTP_RESPONSE_HEADERS*
+
+Bundle extra: HTTP response headers. 
+
+Specifies the HTTP response headers that were returned when the content was 
+requested from the network. The headers may include additional information 
+about the content or any errors conditions that were encountered while trying 
+to fetch the content. 
+
+The value is a (|android.os.Bundle|) of string based key-value pairs that 
+describe the HTTP response headers. 
+
+
+*java.lang.String_android.support.v7.media.MediaItemStatus.EXTRA_HTTP_STATUS_CODE*
+
+Integer extra: HTTP status code. 
+
+Specifies the HTTP status code that was encountered when the content was 
+requested after all redirects were followed. This key only needs to specified 
+when the content uri uses the HTTP or HTTPS scheme and an error occurred. This 
+key may be omitted if the content was able to be played successfully; there is 
+no need to report a 200 (OK) status code. 
+
+The value is an integer HTTP status code, such as 401 (Unauthorized), 404 (Not 
+Found), or 500 (Server Error), or 0 if none. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_BUFFERING*
+
+Playback state: Buffering or seeking to a new position. 
+
+Indicates that the media item has been temporarily interrupted to fetch more 
+content. Playback will continue automatically when enough content has been 
+buffered. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_CANCELED*
+
+Playback state: Canceled. 
+
+Indicates that the media item was explicitly removed from the queue by the 
+application. Items may be canceled and removed from the queue using the 
+remove(|android.support.v7.media.MediaControlIntent|) or 
+stop(|android.support.v7.media.MediaControlIntent|) action or by issuing 
+another play(|android.support.v7.media.MediaControlIntent|) action that has the 
+side-effect of clearing the queue. 
+
+A canceled media item cannot be resumed. To play the content again, the 
+application must send a new play(|android.support.v7.media.MediaControlIntent|) 
+or enqueue(|android.support.v7.media.MediaControlIntent|) action. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_ERROR*
+
+Playback state: Playback halted or aborted due to an error. 
+
+Examples of errors are no network connectivity when attempting to retrieve 
+content from a server, or expired user credentials when trying to play 
+subscription-based content. 
+
+A media item in the error state cannot be resumed. To play the content again, 
+the application must send a new 
+play(|android.support.v7.media.MediaControlIntent|) or 
+enqueue(|android.support.v7.media.MediaControlIntent|) action. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_FINISHED*
+
+Playback state: Finished. 
+
+Indicates that the media item played to the end of the content and finished 
+normally. 
+
+A finished media item cannot be resumed. To play the content again, the 
+application must send a new play(|android.support.v7.media.MediaControlIntent|) 
+or enqueue(|android.support.v7.media.MediaControlIntent|) action. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_INVALIDATED*
+
+Playback state: Invalidated. 
+
+Indicates that the media item was invalidated permanently and involuntarily. 
+This state is used to indicate that the media item was invalidated and removed 
+from the queue because the session to which it belongs was invalidated 
+(typically by another application taking control of the route). 
+
+When invalidation occurs, the application should generally wait for the user to 
+perform an explicit action, such as clicking on a play button in the UI, before 
+creating a new media session to avoid unnecessarily interrupting another 
+application that may have just started using the route. 
+
+An invalidated media item cannot be resumed. To play the content again, the 
+application must send a new play(|android.support.v7.media.MediaControlIntent|) 
+or enqueue(|android.support.v7.media.MediaControlIntent|) action. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PAUSED*
+
+Playback state: Paused. 
+
+Indicates that playback of the media item has been paused. Playback can be 
+resumed using the resume(|android.support.v7.media.MediaControlIntent|) action. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PENDING*
+
+Playback state: Pending. 
+
+Indicates that the media item has not yet started playback but will be played 
+eventually. 
+
+
+*int_android.support.v7.media.MediaItemStatus.PLAYBACK_STATE_PLAYING*
+
+Playback state: Playing. 
+
+Indicates that the media item is currently playing. 
+
+
+
+*android.support.v7.media.MediaItemStatus.asBundle()*
+
+public Bundle asBundle()
+
+Converts this object to a bundle for serialization. 
+
+
+
+    Returns: The contents of the object represented as a bundle. 
+
+*android.support.v7.media.MediaItemStatus.fromBundle(Bundle)*
+
+public static |android.support.v7.media.MediaItemStatus| fromBundle(Bundle bundle)
+
+Creates an instance from a bundle. 
+
+
+    bundle - The bundle, or null if none. 
+
+    Returns: The new instance, or null if the bundle was null. 
+
+*android.support.v7.media.MediaItemStatus.getContentDuration()*
+
+public long getContentDuration()
+
+Gets the total duration of the content to be played as a long integer number of 
+milliseconds. 
+
+
+
+    Returns: The content duration in milliseconds, or -1 if unknown. 
+
+*android.support.v7.media.MediaItemStatus.getContentPosition()*
+
+public long getContentPosition()
+
+Gets the content playback position as a long integer number of milliseconds 
+from the beginning of the content. 
+
+
+
+    Returns: The content playback position in milliseconds, or -1 if unknown. 
+
+*android.support.v7.media.MediaItemStatus.getExtras()*
+
+public Bundle getExtras()
+
+Gets a bundle of extras for this status object. The extras will be ignored by 
+the media router but they may be used by applications. 
+
+
+
+*android.support.v7.media.MediaItemStatus.getPlaybackState()*
+
+public int getPlaybackState()
+
+Gets the playback state of the media item. 
+
+
+
+    Returns: The playback state. One of {@link #PLAYBACK_STATE_PENDING}, {@link 
+             #PLAYBACK_STATE_PLAYING}, {@link #PLAYBACK_STATE_PAUSED}, {@link 
+             #PLAYBACK_STATE_BUFFERING}, {@link #PLAYBACK_STATE_FINISHED}, 
+             {@link #PLAYBACK_STATE_CANCELED}, {@link 
+             #PLAYBACK_STATE_INVALIDATED}, or {@link #PLAYBACK_STATE_ERROR}. 
+
+*android.support.v7.media.MediaItemStatus.getTimestamp()*
+
+public long getTimestamp()
+
+Gets the timestamp associated with the status information in milliseconds since 
+boot in the (|SystemClock|) time base. 
+
+
+
+    Returns: The status timestamp in the {@link SystemClock#elapsedRealtime()} time base. 
+
+*android.support.v7.media.MediaItemStatus.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

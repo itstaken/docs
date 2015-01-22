@@ -1,0 +1,404 @@
+*android.widget.RelativeLayout* *RelativeLayout* A Layout where the positions of
+
+public class RelativeLayout
+  extends    |android.view.ViewGroup|
+
+|android.widget.RelativeLayout_Description|
+|android.widget.RelativeLayout_Fields|
+|android.widget.RelativeLayout_Constructors|
+|android.widget.RelativeLayout_Methods|
+
+================================================================================
+
+*android.widget.RelativeLayout_Fields*
+|int_android.widget.RelativeLayout.ABOVE|
+|int_android.widget.RelativeLayout.ALIGN_BASELINE|
+|int_android.widget.RelativeLayout.ALIGN_BOTTOM|
+|int_android.widget.RelativeLayout.ALIGN_END|
+|int_android.widget.RelativeLayout.ALIGN_LEFT|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_END|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_LEFT|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_RIGHT|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_START|
+|int_android.widget.RelativeLayout.ALIGN_PARENT_TOP|
+|int_android.widget.RelativeLayout.ALIGN_RIGHT|
+|int_android.widget.RelativeLayout.ALIGN_START|
+|int_android.widget.RelativeLayout.ALIGN_TOP|
+|int_android.widget.RelativeLayout.BELOW|
+|int_android.widget.RelativeLayout.CENTER_HORIZONTAL|
+|int_android.widget.RelativeLayout.CENTER_IN_PARENT|
+|int_android.widget.RelativeLayout.CENTER_VERTICAL|
+|int_android.widget.RelativeLayout.END_OF|
+|int_android.widget.RelativeLayout.LEFT_OF|
+|int_android.widget.RelativeLayout.RIGHT_OF|
+|int_android.widget.RelativeLayout.START_OF|
+|int_android.widget.RelativeLayout.TRUE|
+
+*android.widget.RelativeLayout_Constructors*
+|android.widget.RelativeLayout(Context)|
+|android.widget.RelativeLayout(Context,AttributeSet)|
+|android.widget.RelativeLayout(Context,AttributeSet,int)|
+
+*android.widget.RelativeLayout_Methods*
+|android.widget.RelativeLayout.checkLayoutParams(ViewGroup.LayoutParams)|
+|android.widget.RelativeLayout.dispatchPopulateAccessibilityEvent(AccessibilityEvent)|
+|android.widget.RelativeLayout.generateDefaultLayoutParams()|Returns a set of l
+|android.widget.RelativeLayout.generateLayoutParams(AttributeSet)|
+|android.widget.RelativeLayout.generateLayoutParams(ViewGroup.LayoutParams)|
+|android.widget.RelativeLayout.getBaseline()|
+|android.widget.RelativeLayout.getGravity()|Describes how the child views are p
+|android.widget.RelativeLayout.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.RelativeLayout.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.RelativeLayout.onLayout(boolean,int,int,int,int)|
+|android.widget.RelativeLayout.onMeasure(int,int)|
+|android.widget.RelativeLayout.requestLayout()|
+|android.widget.RelativeLayout.setGravity(int)|Describes how the child views ar
+|android.widget.RelativeLayout.setHorizontalGravity(int)|
+|android.widget.RelativeLayout.setIgnoreGravity(int)|Defines which View is igno
+|android.widget.RelativeLayout.setVerticalGravity(int)|
+|android.widget.RelativeLayout.shouldDelayChildPressedState()|
+
+*android.widget.RelativeLayout_Description*
+
+A Layout where the positions of the children can be described in relation to 
+each other or to the parent. 
+
+Note that you cannot have a circular dependency between the size of the 
+RelativeLayout and the position of its children. For example, you cannot have a 
+RelativeLayout whose height is set to 
+WRAP_CONTENT(|android.view.ViewGroup.LayoutParams|) and a child set to 
+(|android.widget.RelativeLayout|) . 
+
+Note: In platform version 17 and lower, RelativeLayout was affected by a 
+measurement bug that could cause child views to be measured with incorrect 
+MeasureSpec(|android.view.View.MeasureSpec|) values. (See 
+MeasureSpec.makeMeasureSpec(|android.view.View.MeasureSpec|) for more details.) 
+This was triggered when a RelativeLayout container was placed in a scrolling 
+container, such as a ScrollView or HorizontalScrollView. If a custom view not 
+equipped to properly measure with the MeasureSpec mode 
+UNSPECIFIED(|android.view.View.MeasureSpec|) was placed in a RelativeLayout, 
+this would silently work anyway as RelativeLayout would pass a very large 
+AT_MOST(|android.view.View.MeasureSpec|) MeasureSpec instead. 
+
+This behavior has been preserved for apps that set 
+android:targetSdkVersion="17" or older in their manifest's uses-sdk tag for 
+compatibility. Apps targeting SDK version 18 or newer will receive the correct 
+behavior 
+
+See the <a href="guide/topics/ui/layout/relative.html">Relative Layout guide. 
+
+Also see 
+RelativeLayout.LayoutParams(|android.widget.RelativeLayout.LayoutParams|) for 
+layout attributes 
+
+
+
+*int_android.widget.RelativeLayout.ABOVE*
+
+Rule that aligns a child's bottom edge with another child's top edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_BASELINE*
+
+Rule that aligns a child's baseline with another child's baseline. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_BOTTOM*
+
+Rule that aligns a child's bottom edge with another child's bottom edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_END*
+
+Rule that aligns a child's end edge with another child's end edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_LEFT*
+
+Rule that aligns a child's left edge with another child's left edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM*
+
+Rule that aligns the child's bottom edge with its RelativeLayout parent's 
+bottom edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_END*
+
+Rule that aligns the child's end edge with its RelativeLayout parent's end 
+edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_LEFT*
+
+Rule that aligns the child's left edge with its RelativeLayout parent's left 
+edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_RIGHT*
+
+Rule that aligns the child's right edge with its RelativeLayout parent's right 
+edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_START*
+
+Rule that aligns the child's start edge with its RelativeLayout parent's start 
+edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_PARENT_TOP*
+
+Rule that aligns the child's top edge with its RelativeLayout parent's top 
+edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_RIGHT*
+
+Rule that aligns a child's right edge with another child's right edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_START*
+
+Rule that aligns a child's start edge with another child's start edge. 
+
+
+*int_android.widget.RelativeLayout.ALIGN_TOP*
+
+Rule that aligns a child's top edge with another child's top edge. 
+
+
+*int_android.widget.RelativeLayout.BELOW*
+
+Rule that aligns a child's top edge with another child's bottom edge. 
+
+
+*int_android.widget.RelativeLayout.CENTER_HORIZONTAL*
+
+Rule that centers the child horizontally with respect to the bounds of its 
+RelativeLayout parent. 
+
+
+*int_android.widget.RelativeLayout.CENTER_IN_PARENT*
+
+Rule that centers the child with respect to the bounds of its RelativeLayout 
+parent. 
+
+
+*int_android.widget.RelativeLayout.CENTER_VERTICAL*
+
+Rule that centers the child vertically with respect to the bounds of its 
+RelativeLayout parent. 
+
+
+*int_android.widget.RelativeLayout.END_OF*
+
+Rule that aligns a child's start edge with another child's end edge. 
+
+
+*int_android.widget.RelativeLayout.LEFT_OF*
+
+Rule that aligns a child's right edge with another child's left edge. 
+
+
+*int_android.widget.RelativeLayout.RIGHT_OF*
+
+Rule that aligns a child's left edge with another child's right edge. 
+
+
+*int_android.widget.RelativeLayout.START_OF*
+
+Rule that aligns a child's end edge with another child's start edge. 
+
+
+*int_android.widget.RelativeLayout.TRUE*
+
+
+
+
+
+*android.widget.RelativeLayout(Context)*
+
+public RelativeLayout(android.content.Context context)
+
+
+
+
+*android.widget.RelativeLayout(Context,AttributeSet)*
+
+public RelativeLayout(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.RelativeLayout(Context,AttributeSet,int)*
+
+public RelativeLayout(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.RelativeLayout.checkLayoutParams(ViewGroup.LayoutParams)*
+
+protected boolean checkLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.widget.RelativeLayout.dispatchPopulateAccessibilityEvent(AccessibilityEvent)*
+
+public boolean dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.RelativeLayout.generateDefaultLayoutParams()*
+
+protected |android.view.ViewGroup.LayoutParams| generateDefaultLayoutParams()
+
+Returns a set of layout parameters with a width of 
+(|android.view.ViewGroup.LayoutParams|) , a height of 
+(|android.view.ViewGroup.LayoutParams|) and no spanning. 
+
+
+
+*android.widget.RelativeLayout.generateLayoutParams(AttributeSet)*
+
+public |android.widget.RelativeLayout.LayoutParams| generateLayoutParams(android.util.AttributeSet attrs)
+
+
+
+
+
+*android.widget.RelativeLayout.generateLayoutParams(ViewGroup.LayoutParams)*
+
+protected |android.view.ViewGroup.LayoutParams| generateLayoutParams(android.view.ViewGroup.LayoutParams p)
+
+
+
+
+
+*android.widget.RelativeLayout.getBaseline()*
+
+public int getBaseline()
+
+
+
+
+
+*android.widget.RelativeLayout.getGravity()*
+
+public int getGravity()
+
+Describes how the child views are positioned. 
+
+
+
+    Returns: 
+
+*android.widget.RelativeLayout.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.RelativeLayout.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.RelativeLayout.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.widget.RelativeLayout.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.RelativeLayout.requestLayout()*
+
+public void requestLayout()
+
+
+
+
+
+*android.widget.RelativeLayout.setGravity(int)*
+
+public void setGravity(int gravity)
+
+Describes how the child views are positioned. Defaults to Gravity.START | 
+Gravity.TOP. 
+
+Note that since RelativeLayout considers the positioning of each child relative 
+to one another to be significant, setting gravity will affect the positioning 
+of all children as a single unit within the parent. This happens after children 
+have been relatively positioned. 
+
+
+    gravity - See {@link android.view.Gravity} 
+
+*android.widget.RelativeLayout.setHorizontalGravity(int)*
+
+public void setHorizontalGravity(int horizontalGravity)
+
+
+
+
+
+*android.widget.RelativeLayout.setIgnoreGravity(int)*
+
+public void setIgnoreGravity(int viewId)
+
+Defines which View is ignored when the gravity is applied. This setting has no 
+effect if the gravity is Gravity.START | Gravity.TOP. 
+
+
+    viewId - The id of the View to be ignored by gravity, or 0 if no View should be ignored. 
+
+*android.widget.RelativeLayout.setVerticalGravity(int)*
+
+public void setVerticalGravity(int verticalGravity)
+
+
+
+
+
+*android.widget.RelativeLayout.shouldDelayChildPressedState()*
+
+public boolean shouldDelayChildPressedState()
+
+
+
+
+
+

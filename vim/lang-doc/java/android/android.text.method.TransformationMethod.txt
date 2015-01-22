@@ -1,0 +1,53 @@
+*android.text.method.TransformationMethod* *TransformationMethod* TextView uses 
+
+public interface interface TransformationMethod
+
+
+|android.text.method.TransformationMethod_Description|
+|android.text.method.TransformationMethod_Fields|
+|android.text.method.TransformationMethod_Constructors|
+|android.text.method.TransformationMethod_Methods|
+
+================================================================================
+
+*android.text.method.TransformationMethod_Methods*
+|android.text.method.TransformationMethod.getTransformation(CharSequence,View)|
+|android.text.method.TransformationMethod.onFocusChanged(View,CharSequence,boolean,int,Rect)|
+
+*android.text.method.TransformationMethod_Description*
+
+TextView uses TransformationMethods to do things like replacing the characters 
+of passwords with dots, or keeping the newline characters from causing line 
+breaks in single-line text fields. 
+
+
+
+*android.text.method.TransformationMethod.getTransformation(CharSequence,View)*
+
+public |java.lang.CharSequence| getTransformation(
+  java.lang.CharSequence source,
+  android.view.View view)
+
+Returns a CharSequence that is a transformation of the source text -- for 
+example, replacing each character with a dot in a password field. Beware that 
+the returned text must be exactly the same length as the source text, and that 
+if the source text is Editable, the returned text must mirror it dynamically 
+instead of doing a one-time copy. 
+
+
+
+*android.text.method.TransformationMethod.onFocusChanged(View,CharSequence,boolean,int,Rect)*
+
+public void onFocusChanged(
+  android.view.View view,
+  java.lang.CharSequence sourceText,
+  boolean focused,
+  int direction,
+  Rect previouslyFocusedRect)
+
+This method is called when the TextView that uses this TransformationMethod 
+gains or loses focus. 
+
+
+
+

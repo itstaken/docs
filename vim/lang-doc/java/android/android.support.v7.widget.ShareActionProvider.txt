@@ -1,0 +1,168 @@
+*android.support.v7.widget.ShareActionProvider* *ShareActionProvider* This is a 
+
+public class ShareActionProvider
+  extends    |ActionProvider|
+
+|android.support.v7.widget.ShareActionProvider_Description|
+|android.support.v7.widget.ShareActionProvider_Fields|
+|android.support.v7.widget.ShareActionProvider_Constructors|
+|android.support.v7.widget.ShareActionProvider_Methods|
+
+================================================================================
+
+*android.support.v7.widget.ShareActionProvider_Fields*
+|java.lang.String_android.support.v7.widget.ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME|
+
+*android.support.v7.widget.ShareActionProvider_Constructors*
+|android.support.v7.widget.ShareActionProvider(Context)|Creates a new instance.
+
+*android.support.v7.widget.ShareActionProvider_Methods*
+|android.support.v7.widget.ShareActionProvider.hasSubMenu()|
+|android.support.v7.widget.ShareActionProvider.onCreateActionView()|
+|android.support.v7.widget.ShareActionProvider.onPrepareSubMenu(SubMenu)|
+|android.support.v7.widget.ShareActionProvider.setOnShareTargetSelectedListener(ShareActionProvider.OnShareTargetSelectedListener)|
+|android.support.v7.widget.ShareActionProvider.setShareHistoryFileName(String)|
+|android.support.v7.widget.ShareActionProvider.setShareIntent(Intent)|Sets an i
+
+*android.support.v7.widget.ShareActionProvider_Description*
+
+This is a provider for a share action. It is responsible for creating views 
+that enable data sharing and also to show a sub menu with sharing activities if 
+the hosting item is placed on the overflow menu. 
+
+Note: This class is included in the <a 
+href="tools/extras/support-library.html">support library for compatibility with 
+API level 7 and higher. If you're developing your app for API level 14 and 
+higher only, you should instead use the framework 
+(|android.widget.ShareActionProvider|) class. 
+
+Here is how to use the action provider with custom backing file in a 
+(|MenuItem|) : 
+
+
+
+// In Activity.onCreateOptionsMenu()(|android.app.Activity|) public boolean 
+onCreateOptionsMenu(Menu menu) { // Get the menu item. MenuItem menuItem = 
+menu.findItem(R.id.my_menu_item); // Get the provider and hold onto it to 
+set/change the share intent. mShareActionProvider = (ShareActionProvider) 
+MenuItemCompat.getActionProvider(menuItem); // Set history different from the 
+default before getting the action // view since a call to 
+MenuItemCompat.getActionView()(|android.support.v4.view.MenuItemCompat|) calls 
+// (|ActionProvider|) which uses the backing file name. Omit this // line if 
+using the default share history file is desired. 
+mShareActionProvider.setShareHistoryFileName("custom_share_history.xml"); . . . 
+} 
+
+// Somewhere in the application. public void doShare(Intent shareIntent) { // 
+When you want to share set the share intent. 
+mShareActionProvider.setShareIntent(shareIntent); } 
+
+Note: While the sample snippet demonstrates how to use this provider in the 
+context of a menu item, the use of the provider is not limited to menu items. 
+
+Developer Guides 
+
+For information about how to use 
+(|android.support.v7.widget.ShareActionProvider|) , see the <a 
+href="guide/topics/ui/actionbar.html#ActionProvider">Action Bar API guide. 
+
+
+
+*java.lang.String_android.support.v7.widget.ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME*
+
+The default name for storing share history. 
+
+
+
+*android.support.v7.widget.ShareActionProvider(Context)*
+
+public ShareActionProvider(Context context)
+
+Creates a new instance. 
+
+    context - Context for accessing resources. 
+
+*android.support.v7.widget.ShareActionProvider.hasSubMenu()*
+
+public boolean hasSubMenu()
+
+
+
+
+
+*android.support.v7.widget.ShareActionProvider.onCreateActionView()*
+
+public View onCreateActionView()
+
+
+
+
+
+*android.support.v7.widget.ShareActionProvider.onPrepareSubMenu(SubMenu)*
+
+public void onPrepareSubMenu(SubMenu subMenu)
+
+
+
+
+
+*android.support.v7.widget.ShareActionProvider.setOnShareTargetSelectedListener(ShareActionProvider.OnShareTargetSelectedListener)*
+
+public void setOnShareTargetSelectedListener(android.support.v7.widget.ShareActionProvider.OnShareTargetSelectedListener listener)
+
+Sets a listener to be notified when a share target has been selected. The 
+listener can optionally decide to handle the selection and not rely on the 
+default behavior which is to launch the activity. 
+
+Note: If you choose the backing share history file you will still be notified 
+in this callback. 
+
+
+    listener - The listener. 
+
+*android.support.v7.widget.ShareActionProvider.setShareHistoryFileName(String)*
+
+public void setShareHistoryFileName(java.lang.String shareHistoryFile)
+
+Sets the file name of a file for persisting the share history which history 
+will be used for ordering share targets. This file will be used for all view 
+created by (|android.support.v7.widget.ShareActionProvider|) . Defaults to 
+(|android.support.v7.widget.ShareActionProvider|) . Set to null if share 
+history should not be persisted between sessions. 
+
+Note: The history file name can be set any time, however only the action views 
+created by (|android.support.v7.widget.ShareActionProvider|) after setting the 
+file name will be backed by the provided file. Therefore, if you want to use 
+different history files for sharing specific types of content, every time you 
+change the history file (|android.support.v7.widget.ShareActionProvider|) you 
+must call (|android.app.Activity|) to recreate the action view. You should not 
+call (|android.app.Activity|) from (|android.app.Activity|) ." 
+
+private void doShare(Intent intent) { if (IMAGE.equals(intent.getMimeType())) { 
+mShareActionProvider.setHistoryFileName(SHARE_IMAGE_HISTORY_FILE_NAME); } else 
+if (TEXT.equals(intent.getMimeType())) { 
+mShareActionProvider.setHistoryFileName(SHARE_TEXT_HISTORY_FILE_NAME); } 
+mShareActionProvider.setIntent(intent); invalidateOptionsMenu(); } 
+
+
+    shareHistoryFile - The share history file name. 
+
+*android.support.v7.widget.ShareActionProvider.setShareIntent(Intent)*
+
+public void setShareIntent(Intent shareIntent)
+
+Sets an intent with information about the share action. Here is a sample for 
+constructing a share intent: 
+
+
+
+Intent shareIntent = new Intent(Intent.ACTION_SEND); 
+shareIntent.setType("image/*"); Uri uri = Uri.fromFile(new File(getFilesDir(), 
+"foo.jpg")); shareIntent.putExtra(Intent.EXTRA_STREAM, uri.toString()); 
+
+
+
+
+    shareIntent - The share intent. 
+
+

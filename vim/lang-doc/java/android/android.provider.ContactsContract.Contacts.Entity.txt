@@ -1,0 +1,73 @@
+*android.provider.ContactsContract.Contacts.Entity* *ContactsContract.Contacts.Entity* 
+
+public static final class ContactsContract.Contacts.Entity
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.ContactsContract.ContactsColumns|
+             |android.provider.ContactsContract.ContactNameColumns|
+             |android.provider.ContactsContract.RawContactsColumns|
+             |android.provider.ContactsContract.BaseSyncColumns|
+             |android.provider.ContactsContract.SyncColumns|
+             |android.provider.ContactsContract.DataColumns|
+             |android.provider.ContactsContract.StatusColumns|
+             |android.provider.ContactsContract.ContactOptionsColumns|
+             |android.provider.ContactsContract.ContactStatusColumns|
+
+|android.provider.ContactsContract.Contacts.Entity_Description|
+|android.provider.ContactsContract.Contacts.Entity_Fields|
+|android.provider.ContactsContract.Contacts.Entity_Constructors|
+|android.provider.ContactsContract.Contacts.Entity_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Contacts.Entity_Fields*
+|java.lang.String_android.provider.ContactsContract.Contacts.Entity.CONTENT_DIRECTORY|
+|java.lang.String_android.provider.ContactsContract.Contacts.Entity.DATA_ID|
+|java.lang.String_android.provider.ContactsContract.Contacts.Entity.RAW_CONTACT_ID|
+
+*android.provider.ContactsContract.Contacts.Entity_Description*
+
+A sub-directory of a contact that contains all of its 
+(|android.provider.ContactsContract.RawContacts|) as well as 
+(|android.provider.ContactsContract.Data|) rows. To access this directory 
+append (|android.provider.ContactsContract.Contacts.Entity|) to the contact 
+URI. 
+
+Entity has three ID fields: 
+(|android.provider.ContactsContract.Contacts.Entity|) for the contact, 
+(|android.provider.ContactsContract.Contacts.Entity|) for the raw contact and 
+(|android.provider.ContactsContract.Contacts.Entity|) for the data rows. Entity 
+always contains at least one row per constituent raw contact, even if there are 
+no actual data rows. In this case the 
+(|android.provider.ContactsContract.Contacts.Entity|) field will be null. 
+
+Entity reads all data for the entire contact in one transaction, to guarantee 
+consistency. There is significant data duplication in the Entity (each row 
+repeats all Contact columns and all RawContact columns), so the benefits of 
+transactional consistency should be weighed against the cost of transferring 
+large amounts of denormalized data from the Provider. 
+
+To reduce the amount of data duplication the contacts provider and directory 
+providers implementing this protocol are allowed to provide common Contacts and 
+RawContacts fields in the first row returned for each raw contact only and 
+leave them as null in subsequent rows. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Entity.CONTENT_DIRECTORY*
+
+The directory twig for this sub-table 
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Entity.DATA_ID*
+
+The ID of the data row. The value will be null if this raw contact has no data 
+rows. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Entity.RAW_CONTACT_ID*
+
+The ID of the raw contact row. Type: INTEGER 
+
+
+

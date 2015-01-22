@@ -1,0 +1,323 @@
+*android.util.JsonReader* *JsonReader* Reads a JSON (RFC 4627)
+ encoded value as
+
+public final class JsonReader
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|android.util.JsonReader_Description|
+|android.util.JsonReader_Fields|
+|android.util.JsonReader_Constructors|
+|android.util.JsonReader_Methods|
+
+================================================================================
+
+*android.util.JsonReader_Constructors*
+|android.util.JsonReader(Reader)|Creates a new instance that reads a JSON-encod
+
+*android.util.JsonReader_Methods*
+|android.util.JsonReader.beginArray()|Consumes the next token from the JSON str
+|android.util.JsonReader.beginObject()|Consumes the next token from the JSON st
+|android.util.JsonReader.close()|Closes this JSON reader and the underlyingRead
+|android.util.JsonReader.endArray()|Consumes the next token from the JSON strea
+|android.util.JsonReader.endObject()|Consumes the next token from the JSON stre
+|android.util.JsonReader.hasNext()|Returns true if the current array or object 
+|android.util.JsonReader.isLenient()|Returns true if this parser is liberal in 
+|android.util.JsonReader.nextBoolean()|Returns theJsonToken#BOOLEAN booleanvalu
+|android.util.JsonReader.nextDouble()|Returns theJsonToken#NUMBER doublevalue o
+|android.util.JsonReader.nextInt()|Returns theJsonToken#NUMBER intvalue of the 
+|android.util.JsonReader.nextLong()|Returns theJsonToken#NUMBER longvalue of th
+|android.util.JsonReader.nextName()|Returns the next token, aJsonToken#NAME pro
+|android.util.JsonReader.nextNull()|Consumes the next token from the JSON strea
+|android.util.JsonReader.nextString()|Returns theJsonToken#STRING stringvalue o
+|android.util.JsonReader.peek()|Returns the type of the next token without cons
+|android.util.JsonReader.setLenient(boolean)|Configure this parser to be  be li
+|android.util.JsonReader.skipValue()|Skips the next value recursively.
+|android.util.JsonReader.toString()|
+
+*android.util.JsonReader_Description*
+
+Reads a JSON (RFC 4627) encoded value as a stream of tokens. This stream 
+includes both literal values (strings, numbers, booleans, and nulls) as well as 
+the begin and end delimiters of objects and arrays. The tokens are traversed in 
+depth-first order, the same order that they appear in the JSON document. Within 
+JSON objects, name/value pairs are represented by a single token. 
+
+Parsing JSON To create a recursive descent parser for your own JSON streams, 
+first create an entry point method that creates aJsonReader. 
+
+Next, create handler methods for each structure in your JSON text. You'll need 
+a method for each object type and for each array type. 
+
+Within array handling methods, first call (|android.util.JsonReader|) to 
+consume the array's opening bracket. Then create a while loop that accumulates 
+values, terminating when (|android.util.JsonReader|) is false. Finally, read 
+the array's closing bracket by calling (|android.util.JsonReader|) . Within 
+object handling methods, first call (|android.util.JsonReader|) to consume the 
+object's opening brace. Then create a while loop that assigns values to local 
+variables based on their name. This loop should terminate when 
+(|android.util.JsonReader|) is false. Finally, read the object's closing brace 
+by calling (|android.util.JsonReader|) . 
+
+When a nested object or array is encountered, delegate to the corresponding 
+handler method. 
+
+When an unknown name is encountered, strict parsers should fail with an 
+exception. Lenient parsers should call (|android.util.JsonReader|) to 
+recursively skip the value's nested tokens, which may otherwise conflict. 
+
+If a value may be null, you should first check using 
+(|android.util.JsonReader|) . Null literals can be consumed using either 
+(|android.util.JsonReader|) or (|android.util.JsonReader|) . 
+
+Example Suppose we'd like to parse a stream of messages such as the following: 
+[ { "id": 912345678901, "text": "How do I read JSON on Android?", "geo": null, 
+"user": { "name": "android_newb", "followers_count": 41 } }, { "id": 
+912345678902, "text": "@android_newb just use android.util.JsonReader!", "geo": 
+[50.454722, -104.606667], "user": { "name": "jesse", "followers_count": 2 } } ] 
+
+This code implements the parser for the above structure: public List 
+readJsonStream(InputStream in) throws IOException { JsonReader reader = new 
+JsonReader(new InputStreamReader(in, "UTF-8")); try { return 
+readMessagesArray(reader); } finally { reader.close(); } } 
+
+public List readMessagesArray(JsonReader reader) throws IOException { List 
+messages = new ArrayList(); 
+
+reader.beginArray(); while (reader.hasNext()) { 
+messages.add(readMessage(reader)); } reader.endArray(); return messages; } 
+
+public Message readMessage(JsonReader reader) throws IOException { long id = 
+-1; String text = null; User user = null; List geo = null; 
+
+reader.beginObject(); while (reader.hasNext()) { String name = 
+reader.nextName(); if (name.equals("id")) { id = reader.nextLong(); } else if 
+(name.equals("text")) { text = reader.nextString(); } else if 
+(name.equals("geo") reader.peek() != JsonToken.NULL) { geo = 
+readDoublesArray(reader); } else if (name.equals("user")) { user = 
+readUser(reader); } else { reader.skipValue(); } } reader.endObject(); return 
+new Message(id, text, user, geo); } 
+
+public List readDoublesArray(JsonReader reader) throws IOException { List 
+doubles = new ArrayList(); 
+
+reader.beginArray(); while (reader.hasNext()) { 
+doubles.add(reader.nextDouble()); } reader.endArray(); return doubles; } 
+
+public User readUser(JsonReader reader) throws IOException { String username = 
+null; int followersCount = -1; 
+
+reader.beginObject(); while (reader.hasNext()) { String name = 
+reader.nextName(); if (name.equals("name")) { username = reader.nextString(); } 
+else if (name.equals("followers_count")) { followersCount = reader.nextInt(); } 
+else { reader.skipValue(); } } reader.endObject(); return new User(username, 
+followersCount); } 
+
+Number Handling This reader permits numeric values to be read as strings and 
+string values to be read as numbers. For example, both elements of the JSON 
+array[1, "1"]may be read using either (|android.util.JsonReader|) or 
+(|android.util.JsonReader|) . This behavior is intended to prevent lossy 
+numeric conversions: double is JavaScript's only numeric type and very large 
+values like9007199254740993cannot be represented exactly on that platform. To 
+minimize precision loss, extremely large values should be written and read as 
+strings in JSON. 
+
+EachJsonReadermay be used to read a single JSON stream. Instances of this class 
+are not thread safe. 
+
+
+
+*android.util.JsonReader(Reader)*
+
+public JsonReader(java.io.Reader in)
+
+Creates a new instance that reads a JSON-encoded stream fromin. 
+
+
+*android.util.JsonReader.beginArray()*
+
+public void beginArray()
+  throws |java.io.IOException|
+         
+Consumes the next token from the JSON stream and asserts that it is the 
+beginning of a new array. 
+
+
+
+*android.util.JsonReader.beginObject()*
+
+public void beginObject()
+  throws |java.io.IOException|
+         
+Consumes the next token from the JSON stream and asserts that it is the 
+beginning of a new object. 
+
+
+
+*android.util.JsonReader.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Closes this JSON reader and the underlying (|java.io.Reader|) . 
+
+
+
+*android.util.JsonReader.endArray()*
+
+public void endArray()
+  throws |java.io.IOException|
+         
+Consumes the next token from the JSON stream and asserts that it is the end of 
+the current array. 
+
+
+
+*android.util.JsonReader.endObject()*
+
+public void endObject()
+  throws |java.io.IOException|
+         
+Consumes the next token from the JSON stream and asserts that it is the end of 
+the current array. 
+
+
+
+*android.util.JsonReader.hasNext()*
+
+public boolean hasNext()
+  throws |java.io.IOException|
+         
+Returns true if the current array or object has another element. 
+
+
+
+*android.util.JsonReader.isLenient()*
+
+public boolean isLenient()
+
+Returns true if this parser is liberal in what it accepts. 
+
+
+
+*android.util.JsonReader.nextBoolean()*
+
+public boolean nextBoolean()
+  throws |java.io.IOException|
+         
+Returns the boolean(|android.util.JsonToken|) value of the next token, 
+consuming it. 
+
+
+
+*android.util.JsonReader.nextDouble()*
+
+public double nextDouble()
+  throws |java.io.IOException|
+         
+Returns the double(|android.util.JsonToken|) value of the next token, consuming 
+it. If the next token is a string, this method will attempt to parse it as a 
+double using (|java.lang.Double|) . 
+
+
+
+*android.util.JsonReader.nextInt()*
+
+public int nextInt()
+  throws |java.io.IOException|
+         
+Returns the int(|android.util.JsonToken|) value of the next token, consuming 
+it. If the next token is a string, this method will attempt to parse it as an 
+int. If the next token's numeric value cannot be exactly represented by a 
+Javaint, this method throws. 
+
+
+
+*android.util.JsonReader.nextLong()*
+
+public long nextLong()
+  throws |java.io.IOException|
+         
+Returns the long(|android.util.JsonToken|) value of the next token, consuming 
+it. If the next token is a string, this method will attempt to parse it as a 
+long. If the next token's numeric value cannot be exactly represented by a 
+Javalong, this method throws. 
+
+
+
+*android.util.JsonReader.nextName()*
+
+public |java.lang.String| nextName()
+  throws |java.io.IOException|
+         
+Returns the next token, a property name(|android.util.JsonToken|) , and 
+consumes it. 
+
+
+
+*android.util.JsonReader.nextNull()*
+
+public void nextNull()
+  throws |java.io.IOException|
+         
+Consumes the next token from the JSON stream and asserts that it is a literal 
+null. 
+
+
+
+*android.util.JsonReader.nextString()*
+
+public |java.lang.String| nextString()
+  throws |java.io.IOException|
+         
+Returns the string(|android.util.JsonToken|) value of the next token, consuming 
+it. If the next token is a number, this method will return its string form. 
+
+
+
+*android.util.JsonReader.peek()*
+
+public |android.util.JsonToken| peek()
+  throws |java.io.IOException|
+         
+Returns the type of the next token without consuming it. 
+
+
+
+*android.util.JsonReader.setLenient(boolean)*
+
+public void setLenient(boolean lenient)
+
+Configure this parser to be be liberal in what it accepts. By default, this 
+parser is strict and only accepts JSON as specified by RFC 4627. Setting the 
+parser to lenient causes it to ignore the following syntax errors: 
+
+End of line comments starting with//or#and ending with a newline character. 
+C-style comments starting with/*and ending with*/. Such comments may not be 
+nested. Names that are unquoted or'single quoted'. Strings that are unquoted 
+or'single quoted'. Array elements separated by;instead of,. Unnecessary array 
+separators. These are interpreted as if null was the omitted value. Names and 
+values separated by=or=>instead of:. Name/value pairs separated by;instead of,. 
+
+
+
+*android.util.JsonReader.skipValue()*
+
+public void skipValue()
+  throws |java.io.IOException|
+         
+Skips the next value recursively. If it is an object or array, all nested 
+elements are skipped. This method is intended for use when the JSON token 
+stream contains unrecognized or unhandled values. 
+
+
+
+*android.util.JsonReader.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

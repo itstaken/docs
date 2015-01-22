@@ -1,0 +1,154 @@
+*android.service.textservice.SpellCheckerService.Session* *SpellCheckerService.Session* 
+
+public abstract static class SpellCheckerService.Session
+  extends    |java.lang.Object|
+
+|android.service.textservice.SpellCheckerService.Session_Description|
+|android.service.textservice.SpellCheckerService.Session_Fields|
+|android.service.textservice.SpellCheckerService.Session_Constructors|
+|android.service.textservice.SpellCheckerService.Session_Methods|
+
+================================================================================
+
+*android.service.textservice.SpellCheckerService.Session_Constructors*
+|android.service.textservice.SpellCheckerService.Session()|
+
+*android.service.textservice.SpellCheckerService.Session_Methods*
+|android.service.textservice.SpellCheckerService.Session.getBundle()|
+|android.service.textservice.SpellCheckerService.Session.getLocale()|
+|android.service.textservice.SpellCheckerService.Session.onCancel()|Request to 
+|android.service.textservice.SpellCheckerService.Session.onClose()|Request to c
+|android.service.textservice.SpellCheckerService.Session.onCreate()|This is cal
+|android.service.textservice.SpellCheckerService.Session.onGetSentenceSuggestionsMultiple(TextInfo[],int)|
+|android.service.textservice.SpellCheckerService.Session.onGetSuggestions(TextInfo,int)|
+|android.service.textservice.SpellCheckerService.Session.onGetSuggestionsMultiple(TextInfo[],int,boolean)|
+|android.service.textservice.SpellCheckerService.Session.setInternalISpellCheckerSession(SpellCheckerService.InternalISpellCheckerSession)|
+
+*android.service.textservice.SpellCheckerService.Session_Description*
+
+This abstract class should be overridden by a concrete implementation of a 
+spell checker. 
+
+
+
+*android.service.textservice.SpellCheckerService.Session()*
+
+public SpellCheckerService.Session()
+
+
+
+
+*android.service.textservice.SpellCheckerService.Session.getBundle()*
+
+public |android.os.Bundle| getBundle()
+
+
+
+
+
+    Returns: Bundle for this session 
+
+*android.service.textservice.SpellCheckerService.Session.getLocale()*
+
+public |java.lang.String| getLocale()
+
+
+
+
+
+    Returns: Locale for this session 
+
+*android.service.textservice.SpellCheckerService.Session.onCancel()*
+
+public void onCancel()
+
+Request to abort all tasks executed in SpellChecker. This function will run on 
+the incoming IPC thread. So, this is not called on the main thread, but will be 
+called in series on another thread. 
+
+
+
+*android.service.textservice.SpellCheckerService.Session.onClose()*
+
+public void onClose()
+
+Request to close this session. This function will run on the incoming IPC 
+thread. So, this is not called on the main thread, but will be called in series 
+on another thread. 
+
+
+
+*android.service.textservice.SpellCheckerService.Session.onCreate()*
+
+public abstract void onCreate()
+
+This is called after the class is initialized, at which point it knows it can 
+call getLocale() etc... 
+
+
+
+*android.service.textservice.SpellCheckerService.Session.onGetSentenceSuggestionsMultiple(TextInfo[],int)*
+
+public |android.view.textservice.SentenceSuggestionsInfo|[] onGetSentenceSuggestionsMultiple(
+  android.view.textservice.TextInfo[] textInfos,
+  int suggestionsLimit)
+
+Get sentence suggestions for specified texts in an array of TextInfo. The 
+default implementation splits the input text to words and returns 
+(|android.view.textservice.SentenceSuggestionsInfo|) which contains suggestions 
+for each word. This function will run on the incoming IPC thread. So, this is 
+not called on the main thread, but will be called in series on another thread. 
+When you override this method, make sure that suggestionsLimit is applied to 
+suggestions that share the same start position and length. 
+
+
+    textInfos - an array of the text metadata 
+    suggestionsLimit - the maximum number of suggestions to be returned 
+
+    Returns: an array of {@link SentenceSuggestionsInfo} returned by {@link 
+             SpellCheckerService.Session#onGetSuggestions(TextInfo, int)} 
+
+*android.service.textservice.SpellCheckerService.Session.onGetSuggestions(TextInfo,int)*
+
+public abstract |android.view.textservice.SuggestionsInfo| onGetSuggestions(
+  android.view.textservice.TextInfo textInfo,
+  int suggestionsLimit)
+
+Get suggestions for specified text in TextInfo. This function will run on the 
+incoming IPC thread. So, this is not called on the main thread, but will be 
+called in series on another thread. 
+
+
+    textInfo - the text metadata 
+    suggestionsLimit - the maximum number of suggestions to be returned 
+
+    Returns: SuggestionsInfo which contains suggestions for textInfo 
+
+*android.service.textservice.SpellCheckerService.Session.onGetSuggestionsMultiple(TextInfo[],int,boolean)*
+
+public |android.view.textservice.SuggestionsInfo|[] onGetSuggestionsMultiple(
+  android.view.textservice.TextInfo[] textInfos,
+  int suggestionsLimit,
+  boolean sequentialWords)
+
+A batch process of onGetSuggestions. This function will run on the incoming IPC 
+thread. So, this is not called on the main thread, but will be called in series 
+on another thread. 
+
+
+    textInfos - an array of the text metadata 
+    suggestionsLimit - the maximum number of suggestions to be returned 
+    sequentialWords - true if textInfos can be treated as sequential words. 
+
+    Returns: an array of {@link SentenceSuggestionsInfo} returned by {@link 
+             SpellCheckerService.Session#onGetSuggestions(TextInfo, int)} 
+
+*android.service.textservice.SpellCheckerService.Session.setInternalISpellCheckerSession(SpellCheckerService.InternalISpellCheckerSession)*
+
+public final void setInternalISpellCheckerSession(android.service.textservice.SpellCheckerService.InternalISpellCheckerSession session)
+
+
+
+
+
+

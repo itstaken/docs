@@ -1,0 +1,208 @@
+*android.content.DefaultDataHandler* *DefaultDataHandler* Inserts default data f
+
+public class DefaultDataHandler
+  extends    |java.lang.Object|
+  implements |android.content.ContentInsertHandler|
+
+|android.content.DefaultDataHandler_Description|
+|android.content.DefaultDataHandler_Fields|
+|android.content.DefaultDataHandler_Constructors|
+|android.content.DefaultDataHandler_Methods|
+
+================================================================================
+
+*android.content.DefaultDataHandler_Constructors*
+|android.content.DefaultDataHandler()|
+
+*android.content.DefaultDataHandler_Methods*
+|android.content.DefaultDataHandler.characters(char[],int,int)|
+|android.content.DefaultDataHandler.endDocument()|
+|android.content.DefaultDataHandler.endElement(String,String,String)|
+|android.content.DefaultDataHandler.endPrefixMapping(String)|
+|android.content.DefaultDataHandler.ignorableWhitespace(char[],int,int)|
+|android.content.DefaultDataHandler.insert(ContentResolver,InputStream)|
+|android.content.DefaultDataHandler.insert(ContentResolver,String)|
+|android.content.DefaultDataHandler.processingInstruction(String,String)|
+|android.content.DefaultDataHandler.setDocumentLocator(Locator)|
+|android.content.DefaultDataHandler.skippedEntity(String)|
+|android.content.DefaultDataHandler.startDocument()|
+|android.content.DefaultDataHandler.startElement(String,String,String,Attributes)|
+|android.content.DefaultDataHandler.startPrefixMapping(String,String)|
+
+*android.content.DefaultDataHandler_Description*
+
+Inserts default data from InputStream, should be in XML format. If the provider 
+syncs data to the server, the imported data will be synced to the server. 
+Samples: 
+
+Insert one row: 
+
+<row uri="content://contacts/people"> <Col column = "name" value = "foo feebe 
+"/> <Col column = "addr" value = "Tx"/> </row> 
+
+Delete, it must be in order of uri, select, and arg: 
+
+<del uri="content://contacts/people" select="name=? and addr=?" arg1 = "foo 
+feebe" arg2 ="Tx"/> 
+
+Use first row's uri to insert into another table, 
+content://contacts/people/1/phones: 
+
+<row uri="content://contacts/people"> <col column = "name" value = "foo 
+feebe"/> <col column = "addr" value = "Tx"/> <row postfix="phones"> <col 
+column="number" value="512-514-6535"/> </row> <row postfix="phones"> <col 
+column="cell" value="512-514-6535"/> </row> </row> 
+
+Insert multiple rows in to same table and same attributes: 
+
+<row uri="content://contacts/people" > <row> <col column= "name" value = "foo 
+feebe"/> <col column= "addr" value = "Tx"/> </row> <row> </row> </row> 
+
+
+
+*android.content.DefaultDataHandler()*
+
+public DefaultDataHandler()
+
+
+
+
+*android.content.DefaultDataHandler.characters(char[],int,int)*
+
+public void characters(
+  char[] ch,
+  int start,
+  int length)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.endDocument()*
+
+public void endDocument()
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.endElement(String,String,String)*
+
+public void endElement(
+  java.lang.String uri,
+  java.lang.String localName,
+  java.lang.String name)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.endPrefixMapping(String)*
+
+public void endPrefixMapping(java.lang.String prefix)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.ignorableWhitespace(char[],int,int)*
+
+public void ignorableWhitespace(
+  char[] ch,
+  int start,
+  int length)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.insert(ContentResolver,InputStream)*
+
+public void insert(
+  android.content.ContentResolver contentResolver,
+  java.io.InputStream in)
+  throws |java.io.IOException|
+         |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.insert(ContentResolver,String)*
+
+public void insert(
+  android.content.ContentResolver contentResolver,
+  java.lang.String in)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.processingInstruction(String,String)*
+
+public void processingInstruction(
+  java.lang.String target,
+  java.lang.String data)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.setDocumentLocator(Locator)*
+
+public void setDocumentLocator(org.xml.sax.Locator locator)
+
+
+
+
+
+*android.content.DefaultDataHandler.skippedEntity(String)*
+
+public void skippedEntity(java.lang.String name)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.startDocument()*
+
+public void startDocument()
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.startElement(String,String,String,Attributes)*
+
+public void startElement(
+  java.lang.String uri,
+  java.lang.String localName,
+  java.lang.String name,
+  org.xml.sax.Attributes atts)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+*android.content.DefaultDataHandler.startPrefixMapping(String,String)*
+
+public void startPrefixMapping(
+  java.lang.String prefix,
+  java.lang.String uri)
+  throws |org.xml.sax.SAXException|
+         
+
+
+
+
+

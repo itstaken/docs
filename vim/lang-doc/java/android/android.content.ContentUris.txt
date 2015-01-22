@@ -1,0 +1,108 @@
+*android.content.ContentUris* *ContentUris* Utility methods useful for working w
+
+public class ContentUris
+  extends    |java.lang.Object|
+
+|android.content.ContentUris_Description|
+|android.content.ContentUris_Fields|
+|android.content.ContentUris_Constructors|
+|android.content.ContentUris_Methods|
+
+================================================================================
+
+*android.content.ContentUris_Constructors*
+|android.content.ContentUris()|
+
+*android.content.ContentUris_Methods*
+|android.content.ContentUris.appendId(Uri.Builder,long)|Appends the given ID to
+|android.content.ContentUris.parseId(Uri)|Converts the last path segment to a l
+|android.content.ContentUris.withAppendedId(Uri,long)|Appends the given ID to t
+
+*android.content.ContentUris_Description*
+
+Utility methods useful for working with (|android.net.Uri|) objects that use 
+the content (content://) scheme. 
+
+Content URIs have the syntax 
+
+content://authority/path/id 
+
+content: 
+
+The scheme portion of the URI. This is always set to 
+ContentResolver.SCHEME_CONTENT(|android.content.ContentResolver|) (value 
+content://). 
+
+authority 
+
+A string that identifies the entire content provider. All the content URIs for 
+the provider start with this string. To guarantee a unique authority, providers 
+should consider using an authority that is the same as the provider class' 
+package identifier. 
+
+path 
+
+Zero or more segments, separated by a forward slash (/), that identify some 
+subset of the provider's data. Most providers use the path part to identify 
+individual tables. Individual segments in the path are often called directories 
+although they do not refer to file directories. The right-most segment in a 
+path is often called a twig 
+
+id 
+
+A unique numeric identifier for a single row in the subset of data identified 
+by the preceding path part. Most providers recognize content URIs that contain 
+an id part and give them special handling. A table that contains a column named 
+_ID often expects the id part to be a particular value for that column. 
+
+
+
+*android.content.ContentUris()*
+
+public ContentUris()
+
+
+
+
+*android.content.ContentUris.appendId(Uri.Builder,long)*
+
+public static |android.net.Uri.Builder| appendId(
+  android.net.Uri.Builder builder,
+  long id)
+
+Appends the given ID to the end of the path. 
+
+
+    builder - to append the ID to 
+    id - to append 
+
+    Returns: the given builder 
+
+*android.content.ContentUris.parseId(Uri)*
+
+public static long parseId(android.net.Uri contentUri)
+
+Converts the last path segment to a long. 
+
+This supports a common convention for content URIs where an ID is stored in the 
+last segment. 
+
+
+
+    Returns: the long conversion of the last segment or -1 if the path is empty 
+
+*android.content.ContentUris.withAppendedId(Uri,long)*
+
+public static |android.net.Uri| withAppendedId(
+  android.net.Uri contentUri,
+  long id)
+
+Appends the given ID to the end of the path. 
+
+
+    contentUri - to start with 
+    id - to append 
+
+    Returns: a new URI with the given ID appended to the end of the path 
+
+

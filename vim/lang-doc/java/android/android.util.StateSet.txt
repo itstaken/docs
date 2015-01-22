@@ -1,0 +1,116 @@
+*android.util.StateSet* *StateSet* State sets are arrays of positive ints where 
+
+public class StateSet
+  extends    |java.lang.Object|
+
+|android.util.StateSet_Description|
+|android.util.StateSet_Fields|
+|android.util.StateSet_Constructors|
+|android.util.StateSet_Methods|
+
+================================================================================
+
+*android.util.StateSet_Fields*
+|int[]_android.util.StateSet.NOTHING|
+|int[]_android.util.StateSet.WILD_CARD|
+
+*android.util.StateSet_Constructors*
+|android.util.StateSet()|
+
+*android.util.StateSet_Methods*
+|android.util.StateSet.dump(int[])|
+|android.util.StateSet.isWildCard(int[])|Return whether the stateSetOrSpec is m
+|android.util.StateSet.stateSetMatches(int[],int)|Return whether the state matc
+|android.util.StateSet.stateSetMatches(int[],int[])|Return whether the stateSet
+|android.util.StateSet.trimStateSet(int[],int)|
+
+*android.util.StateSet_Description*
+
+State sets are arrays of positive ints where each element represents the state 
+of a (|android.view.View|) (e.g. focused, selected, visible, etc.). A 
+(|android.view.View|) may be in one or more of those states. 
+
+A state spec is an array of signed ints where each element represents a 
+required (if positive) or an undesired (if negative) (|android.view.View|) 
+state. 
+
+Utils dealing with state sets. 
+
+In theory we could encapsulate the state set and state spec arrays and not have 
+static methods here but there is some concern about performance since these 
+methods are called during view drawing. 
+
+
+
+*int[]_android.util.StateSet.NOTHING*
+
+
+
+
+*int[]_android.util.StateSet.WILD_CARD*
+
+
+
+
+
+*android.util.StateSet()*
+
+public StateSet()
+
+
+
+
+*android.util.StateSet.dump(int[])*
+
+public static |java.lang.String| dump(int[] states)
+
+
+
+
+
+*android.util.StateSet.isWildCard(int[])*
+
+public static boolean isWildCard(int[] stateSetOrSpec)
+
+Return whether the stateSetOrSpec is matched by all StateSets. 
+
+
+    stateSetOrSpec - a state set or state spec. 
+
+*android.util.StateSet.stateSetMatches(int[],int)*
+
+public static boolean stateSetMatches(
+  int[] stateSpec,
+  int state)
+
+Return whether the state matches the desired stateSpec. 
+
+
+    stateSpec - an array of required (if positive) or prohibited (if negative) {@link 
+       android.view.View} states. 
+    state - a {@link android.view.View} state 
+
+*android.util.StateSet.stateSetMatches(int[],int[])*
+
+public static boolean stateSetMatches(
+  int[] stateSpec,
+  int[] stateSet)
+
+Return whether the stateSet matches the desired stateSpec. 
+
+
+    stateSpec - an array of required (if positive) or prohibited (if negative) {@link 
+       android.view.View} states. 
+    stateSet - an array of {@link android.view.View} states 
+
+*android.util.StateSet.trimStateSet(int[],int)*
+
+public static int[] trimStateSet(
+  int[] states,
+  int newSize)
+
+
+
+
+
+

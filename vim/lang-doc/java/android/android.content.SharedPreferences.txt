@@ -1,0 +1,206 @@
+*android.content.SharedPreferences* *SharedPreferences* Interface for accessing 
+
+public interface interface SharedPreferences
+
+
+|android.content.SharedPreferences_Description|
+|android.content.SharedPreferences_Fields|
+|android.content.SharedPreferences_Constructors|
+|android.content.SharedPreferences_Methods|
+
+================================================================================
+
+*android.content.SharedPreferences_Methods*
+|android.content.SharedPreferences.contains(String)|Checks whether the preferen
+|android.content.SharedPreferences.edit()|Create a new Editor for these prefere
+|android.content.SharedPreferences.getAll()|Retrieve all values from the prefer
+|android.content.SharedPreferences.getBoolean(String,boolean)|Retrieve a boolea
+|android.content.SharedPreferences.getFloat(String,float)|Retrieve a float valu
+|android.content.SharedPreferences.getInt(String,int)|Retrieve an int value fro
+|android.content.SharedPreferences.getLong(String,long)|Retrieve a long value f
+|android.content.SharedPreferences.getString(String,String)|Retrieve a String v
+|android.content.SharedPreferences.getStringSet(String,Set<String>)|Retrieve a 
+|android.content.SharedPreferences.registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)|
+|android.content.SharedPreferences.unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)|
+
+*android.content.SharedPreferences_Description*
+
+Interface for accessing and modifying preference data returned by 
+(|android.content.Context|) . For any particular set of preferences, there is a 
+single instance of this class that all clients share. Modifications to the 
+preferences must go through an (|android.content.SharedPreferences.Editor|) 
+object to ensure the preference values remain in a consistent state and control 
+when they are committed to storage. Objects that are returned from the various 
+get methods must be treated as immutable by the application. 
+
+Note: currently this class does not support use across multiple processes. This 
+will be added later. 
+
+Developer Guides For more information about using SharedPreferences, read the 
+<a href="guide/topics/data/data-storage.html#pref">Data Storage developer 
+guide. 
+
+
+
+*android.content.SharedPreferences.contains(String)*
+
+public boolean contains(java.lang.String key)
+
+Checks whether the preferences contains a preference. 
+
+
+    key - The name of the preference to check. 
+
+    Returns: Returns true if the preference exists in the preferences, otherwise false. 
+
+*android.content.SharedPreferences.edit()*
+
+public |android.content.SharedPreferences.Editor| edit()
+
+Create a new Editor for these preferences, through which you can make 
+modifications to the data in the preferences and atomically commit those 
+changes back to the SharedPreferences object. 
+
+Note that you must call (|android.content.SharedPreferences.Editor|) to have 
+any changes you perform in the Editor actually show up in the 
+SharedPreferences. 
+
+
+
+    Returns: Returns a new instance of the {@link Editor} interface, allowing you to modify 
+             the values in this SharedPreferences object. 
+
+*android.content.SharedPreferences.getAll()*
+
+public |java.util.Map|<String,?> getAll()
+
+Retrieve all values from the preferences. 
+
+Note that you must not modify the collection returned by this method, or alter 
+any of its contents. The consistency of your stored data is not guaranteed if 
+you do. 
+
+
+
+    Returns: Returns a map containing a list of pairs key/value representing the 
+             preferences. 
+
+*android.content.SharedPreferences.getBoolean(String,boolean)*
+
+public boolean getBoolean(
+  java.lang.String key,
+  boolean defValue)
+
+Retrieve a boolean value from the preferences. 
+
+
+    key - The name of the preference to retrieve. 
+    defValue - Value to return if this preference does not exist. 
+
+    Returns: Returns the preference value if it exists, or defValue. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not a boolean. 
+
+*android.content.SharedPreferences.getFloat(String,float)*
+
+public float getFloat(
+  java.lang.String key,
+  float defValue)
+
+Retrieve a float value from the preferences. 
+
+
+    key - The name of the preference to retrieve. 
+    defValue - Value to return if this preference does not exist. 
+
+    Returns: Returns the preference value if it exists, or defValue. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not a float. 
+
+*android.content.SharedPreferences.getInt(String,int)*
+
+public int getInt(
+  java.lang.String key,
+  int defValue)
+
+Retrieve an int value from the preferences. 
+
+
+    key - The name of the preference to retrieve. 
+    defValue - Value to return if this preference does not exist. 
+
+    Returns: Returns the preference value if it exists, or defValue. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not an int. 
+
+*android.content.SharedPreferences.getLong(String,long)*
+
+public long getLong(
+  java.lang.String key,
+  long defValue)
+
+Retrieve a long value from the preferences. 
+
+
+    key - The name of the preference to retrieve. 
+    defValue - Value to return if this preference does not exist. 
+
+    Returns: Returns the preference value if it exists, or defValue. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not a long. 
+
+*android.content.SharedPreferences.getString(String,String)*
+
+public |java.lang.String| getString(
+  java.lang.String key,
+  java.lang.String defValue)
+
+Retrieve a String value from the preferences. 
+
+
+    key - The name of the preference to retrieve. 
+    defValue - Value to return if this preference does not exist. 
+
+    Returns: Returns the preference value if it exists, or defValue. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not a String. 
+
+*android.content.SharedPreferences.getStringSet(String,Set<String>)*
+
+public |java.util.Set|<String> getStringSet(
+  java.lang.String key,
+  java.util.Set<java.lang.String> defValues)
+
+Retrieve a set of String values from the preferences. 
+
+Note that you must not modify the set instance returned by this call. The 
+consistency of the stored data is not guaranteed if you do, nor is your ability 
+to modify the instance at all. 
+
+
+    key - The name of the preference to retrieve. 
+    defValues - Values to return if this preference does not exist. 
+
+    Returns: Returns the preference values if they exist, or defValues. Throws 
+             ClassCastException if there is a preference with this name that is 
+             not a Set. 
+
+*android.content.SharedPreferences.registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)*
+
+public void registerOnSharedPreferenceChangeListener(android.content.SharedPreferences.OnSharedPreferenceChangeListener listener)
+
+Registers a callback to be invoked when a change happens to a preference. 
+
+
+    listener - The callback that will run. 
+
+*android.content.SharedPreferences.unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)*
+
+public void unregisterOnSharedPreferenceChangeListener(android.content.SharedPreferences.OnSharedPreferenceChangeListener listener)
+
+Unregisters a previous callback. 
+
+
+    listener - The callback that should be unregistered. 
+
+

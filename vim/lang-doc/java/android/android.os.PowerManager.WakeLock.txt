@@ -1,0 +1,153 @@
+*android.os.PowerManager.WakeLock* *PowerManager.WakeLock* A wake lock is a mech
+
+public final class PowerManager.WakeLock
+  extends    |java.lang.Object|
+
+|android.os.PowerManager.WakeLock_Description|
+|android.os.PowerManager.WakeLock_Fields|
+|android.os.PowerManager.WakeLock_Constructors|
+|android.os.PowerManager.WakeLock_Methods|
+
+================================================================================
+
+*android.os.PowerManager.WakeLock_Methods*
+|android.os.PowerManager.WakeLock.acquire()|Acquires the wake lock.
+|android.os.PowerManager.WakeLock.acquire(long)|Acquires the wake lock with a t
+|android.os.PowerManager.WakeLock.finalize()|
+|android.os.PowerManager.WakeLock.isHeld()|Returns true if the wake lock has be
+|android.os.PowerManager.WakeLock.release()|Releases the wake lock.
+|android.os.PowerManager.WakeLock.release(int)|Releases the wake lock with flag
+|android.os.PowerManager.WakeLock.setReferenceCounted(boolean)|Sets whether thi
+|android.os.PowerManager.WakeLock.setWorkSource(WorkSource)|Sets the work sourc
+|android.os.PowerManager.WakeLock.toString()|
+
+*android.os.PowerManager.WakeLock_Description*
+
+A wake lock is a mechanism to indicate that your application needs to have the 
+device stay on. 
+
+Any application using a WakeLock must request 
+theandroid.permission.WAKE_LOCKpermission in an<uses-permission>element of the 
+application's manifest. Obtain a wake lock by calling 
+(|android.os.PowerManager|) . 
+
+Call (|android.os.PowerManager.WakeLock|) to acquire the wake lock and force 
+the device to stay on at the level that was requested when the wake lock was 
+created. 
+
+Call (|android.os.PowerManager.WakeLock|) when you are done and don't need the 
+lock anymore. It is very important to do this as soon as possible to avoid 
+running down the device's battery excessively. 
+
+
+
+*android.os.PowerManager.WakeLock.acquire()*
+
+public void acquire()
+
+Acquires the wake lock. 
+
+Ensures that the device is on at the level requested when the wake lock was 
+created. 
+
+
+
+*android.os.PowerManager.WakeLock.acquire(long)*
+
+public void acquire(long timeout)
+
+Acquires the wake lock with a timeout. 
+
+Ensures that the device is on at the level requested when the wake lock was 
+created. The lock will be released after the given timeout expires. 
+
+
+    timeout - The timeout after which to release the wake lock, in milliseconds. 
+
+*android.os.PowerManager.WakeLock.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.PowerManager.WakeLock.isHeld()*
+
+public boolean isHeld()
+
+Returns true if the wake lock has been acquired but not yet released. 
+
+
+
+    Returns: True if the wake lock is held. 
+
+*android.os.PowerManager.WakeLock.release()*
+
+public void release()
+
+Releases the wake lock. 
+
+This method releases your claim to the CPU or screen being on. The screen may 
+turn off shortly after you release the wake lock, or it may not if there are 
+other wake locks still held. 
+
+
+
+*android.os.PowerManager.WakeLock.release(int)*
+
+public void release(int flags)
+
+Releases the wake lock with flags to modify the release behavior. 
+
+This method releases your claim to the CPU or screen being on. The screen may 
+turn off shortly after you release the wake lock, or it may not if there are 
+other wake locks still held. 
+
+
+    flags - Combination of flag values to modify the release behavior. Currently only 
+       {@link #WAIT_FOR_PROXIMITY_NEGATIVE} is supported. 
+
+{@hide} 
+
+*android.os.PowerManager.WakeLock.setReferenceCounted(boolean)*
+
+public void setReferenceCounted(boolean value)
+
+Sets whether this WakeLock is reference counted. 
+
+Wake locks are reference counted by default. If a wake lock is reference 
+counted, then each call to (|android.os.PowerManager.WakeLock|) must be 
+balanced by an equal number of calls to (|android.os.PowerManager.WakeLock|) . 
+If a wake lock is not reference counted, then one call to 
+(|android.os.PowerManager.WakeLock|) is sufficient to undo the effect of all 
+previous calls to (|android.os.PowerManager.WakeLock|) . 
+
+
+    value - True to make the wake lock reference counted, false to make the wake lock 
+       non-reference counted. 
+
+*android.os.PowerManager.WakeLock.setWorkSource(WorkSource)*
+
+public void setWorkSource(android.os.WorkSource ws)
+
+Sets the work source associated with the wake lock. 
+
+The work source is used to determine on behalf of which application the wake 
+lock is being held. This is useful in the case where a service is performing 
+work on behalf of an application so that the cost of that work can be accounted 
+to the application. 
+
+
+    ws - The work source, or null if none. 
+
+*android.os.PowerManager.WakeLock.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

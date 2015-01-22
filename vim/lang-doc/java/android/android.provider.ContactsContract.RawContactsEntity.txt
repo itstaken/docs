@@ -1,0 +1,144 @@
+*android.provider.ContactsContract.RawContactsEntity* *ContactsContract.RawContactsEntity* 
+
+public static final class ContactsContract.RawContactsEntity
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.ContactsContract.DataColumns|
+             |android.provider.ContactsContract.RawContactsColumns|
+
+|android.provider.ContactsContract.RawContactsEntity_Description|
+|android.provider.ContactsContract.RawContactsEntity_Fields|
+|android.provider.ContactsContract.RawContactsEntity_Constructors|
+|android.provider.ContactsContract.RawContactsEntity_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.RawContactsEntity_Fields*
+|java.lang.String_android.provider.ContactsContract.RawContactsEntity.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.RawContactsEntity.CONTENT_URI|
+|java.lang.String_android.provider.ContactsContract.RawContactsEntity.DATA_ID|
+|java.lang.String_android.provider.ContactsContract.RawContactsEntity.FOR_EXPORT_ONLY|
+|android.net.Uri_android.provider.ContactsContract.RawContactsEntity.PROFILE_CONTENT_URI|
+
+*android.provider.ContactsContract.RawContactsEntity_Description*
+
+Constants for the raw contacts entities table, which can be thought of as an 
+outer join of the raw_contacts table with the data table. It is a strictly 
+read-only table. 
+
+If a raw contact has data rows, the RawContactsEntity cursor will contain a one 
+row for each data row. If the raw contact has no data rows, the cursor will 
+still contain one row with the raw contact-level information and nulls for data 
+columns. 
+
+
+
+Uri entityUri = ContentUris.withAppendedId(RawContactsEntity.CONTENT_URI, 
+rawContactId); Cursor c = getContentResolver().query(entityUri, new String[]{ 
+RawContactsEntity.SOURCE_ID, RawContactsEntity.DATA_ID, 
+RawContactsEntity.MIMETYPE, RawContactsEntity.DATA1 }, null, null, null); try { 
+while (c.moveToNext()) { String sourceId = c.getString(0); if (!c.isNull(1)) { 
+String mimeType = c.getString(2); String data = c.getString(3); ... } } } 
+finally { c.close(); } 
+
+Columns RawContactsEntity has a combination of RawContact and Data columns. 
+
+
+
+RawContacts 
+
+long (|android.provider.ContactsContract.RawContactsEntity|) read-only Raw 
+contact row ID. See (|android.provider.ContactsContract.RawContacts|) . 
+
+long (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+int (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+int (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+
+
+
+
+Data 
+
+long (|android.provider.ContactsContract.RawContactsEntity|) read-only Data row 
+ID. It will be null if the raw contact has no data rows. 
+
+String (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+int (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+int (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+int (|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+Any type (|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+Any type (|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) 
+(|android.provider.ContactsContract.RawContactsEntity|) read-only See 
+(|android.provider.ContactsContract.Data|) . 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsEntity.CONTENT_TYPE*
+
+The MIME type of (|android.provider.ContactsContract.RawContactsEntity|) 
+providing a directory of raw contact entities. 
+
+
+*android.net.Uri_android.provider.ContactsContract.RawContactsEntity.CONTENT_URI*
+
+The content:// style URI for this table 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsEntity.DATA_ID*
+
+The ID of the data column. The value will be null if this raw contact has no 
+data rows. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContactsEntity.FOR_EXPORT_ONLY*
+
+If (|android.provider.ContactsContract.RawContactsEntity|) is explicitly set to 
+"1", returned Cursor toward Data.CONTENT_URI contains only exportable data. 
+
+This flag is useful (currently) only for vCard exporter in Contacts app, which 
+needs to exclude "un-exportable" data from available data to export, while 
+Contacts app itself has priviledge to access all data including "un-expotable" 
+ones and providers return all of them regardless of the callers' intention. 
+Type: INTEGER 
+
+
+*android.net.Uri_android.provider.ContactsContract.RawContactsEntity.PROFILE_CONTENT_URI*
+
+The content:// style URI for this table, specific to the user's profile. 
+
+
+

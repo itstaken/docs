@@ -1,0 +1,213 @@
+*android.bluetooth.BluetoothMap* *BluetoothMap* This class provides the APIs to 
+
+public final class BluetoothMap
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothMap_Description|
+|android.bluetooth.BluetoothMap_Fields|
+|android.bluetooth.BluetoothMap_Constructors|
+|android.bluetooth.BluetoothMap_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothMap_Fields*
+|java.lang.String_android.bluetooth.BluetoothMap.ACTION_CONNECTION_STATE_CHANGED|
+|int_android.bluetooth.BluetoothMap.RESULT_CANCELED|
+|int_android.bluetooth.BluetoothMap.RESULT_FAILURE|
+|int_android.bluetooth.BluetoothMap.RESULT_SUCCESS|
+|int_android.bluetooth.BluetoothMap.STATE_ERROR|
+
+*android.bluetooth.BluetoothMap_Methods*
+|android.bluetooth.BluetoothMap.close()|Close the connection to the backing ser
+|android.bluetooth.BluetoothMap.connect(BluetoothDevice)|Initiate connection.
+|android.bluetooth.BluetoothMap.disconnect(BluetoothDevice)|Initiate disconnect
+|android.bluetooth.BluetoothMap.doesClassMatchSink(BluetoothClass)|Check class 
+|android.bluetooth.BluetoothMap.finalize()|
+|android.bluetooth.BluetoothMap.getClient()|Get the currently connected remote 
+|android.bluetooth.BluetoothMap.getConnectedDevices()|Get the list of connected
+|android.bluetooth.BluetoothMap.getConnectionState(BluetoothDevice)|Get connect
+|android.bluetooth.BluetoothMap.getDevicesMatchingConnectionStates(int[])|Get t
+|android.bluetooth.BluetoothMap.getPriority(BluetoothDevice)|Get the priority o
+|android.bluetooth.BluetoothMap.getState()|Get the current state of the Bluetoo
+|android.bluetooth.BluetoothMap.isConnected(BluetoothDevice)|Returns true if th
+|android.bluetooth.BluetoothMap.setPriority(BluetoothDevice,int)|Set priority o
+
+*android.bluetooth.BluetoothMap_Description*
+
+This class provides the APIs to control the Bluetooth MAP Profile. 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothMap.ACTION_CONNECTION_STATE_CHANGED*
+
+
+
+
+*int_android.bluetooth.BluetoothMap.RESULT_CANCELED*
+
+Connection canceled before completion. 
+
+
+*int_android.bluetooth.BluetoothMap.RESULT_FAILURE*
+
+
+
+
+*int_android.bluetooth.BluetoothMap.RESULT_SUCCESS*
+
+
+
+
+*int_android.bluetooth.BluetoothMap.STATE_ERROR*
+
+There was an error trying to obtain the state 
+
+
+
+*android.bluetooth.BluetoothMap.close()*
+
+public synchronized void close()
+
+Close the connection to the backing service. Other public functions of 
+BluetoothMap will return default error results once close() has been called. 
+Multiple invocations of close() are ok. 
+
+
+
+*android.bluetooth.BluetoothMap.connect(BluetoothDevice)*
+
+public boolean connect(android.bluetooth.BluetoothDevice device)
+
+Initiate connection. Initiation of outgoing connections is not supported for 
+MAP server. 
+
+
+
+*android.bluetooth.BluetoothMap.disconnect(BluetoothDevice)*
+
+public boolean disconnect(android.bluetooth.BluetoothDevice device)
+
+Initiate disconnect. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on error, true otherwise 
+
+*android.bluetooth.BluetoothMap.doesClassMatchSink(BluetoothClass)*
+
+public static boolean doesClassMatchSink(android.bluetooth.BluetoothClass btClass)
+
+Check class bits for possible Map support. This is a simple heuristic that 
+tries to guess if a device with the given class bits might support Map. It is 
+not accurate for all devices. It tries to err on the side of false positives. 
+
+
+
+    Returns: True if this device might support Map. 
+
+*android.bluetooth.BluetoothMap.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.bluetooth.BluetoothMap.getClient()*
+
+public |android.bluetooth.BluetoothDevice| getClient()
+
+Get the currently connected remote Bluetooth device (PCE). 
+
+
+
+    Returns: The remote Bluetooth device, or null if not in connected or connecting state, 
+             or if this proxy object is not connected to the Map service. 
+
+*android.bluetooth.BluetoothMap.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+Get the list of connected devices. Currently at most one. 
+
+
+
+    Returns: list of connected devices 
+
+*android.bluetooth.BluetoothMap.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+Get connection state of device 
+
+
+
+    Returns: device connection state 
+
+*android.bluetooth.BluetoothMap.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+Get the list of devices matching specified states. Currently at most one. 
+
+
+
+    Returns: list of matching devices 
+
+*android.bluetooth.BluetoothMap.getPriority(BluetoothDevice)*
+
+public int getPriority(android.bluetooth.BluetoothDevice device)
+
+Get the priority of the profile. 
+
+The priority can be any of: (|android.bluetooth.BluetoothMap|) , 
+(|android.bluetooth.BluetoothMap|) , (|android.bluetooth.BluetoothMap|) , 
+(|android.bluetooth.BluetoothMap|) 
+
+
+    device - Bluetooth device 
+
+    Returns: priority of the device 
+
+*android.bluetooth.BluetoothMap.getState()*
+
+public int getState()
+
+Get the current state of the BluetoothMap service. 
+
+
+
+    Returns: One of the STATE_ return codes, or STATE_ERROR if this proxy object is 
+             currently not connected to the Map service. 
+
+*android.bluetooth.BluetoothMap.isConnected(BluetoothDevice)*
+
+public boolean isConnected(android.bluetooth.BluetoothDevice device)
+
+Returns true if the specified Bluetooth device is connected. Returns false if 
+not connected, or if this proxy object is not currently connected to the Map 
+service. 
+
+
+
+*android.bluetooth.BluetoothMap.setPriority(BluetoothDevice,int)*
+
+public boolean setPriority(
+  android.bluetooth.BluetoothDevice device,
+  int priority)
+
+Set priority of the profile 
+
+The device should already be paired. Priority can be one of 
+(|android.bluetooth.BluetoothMap|) or (|android.bluetooth.BluetoothMap|) , 
+
+
+    device - Paired bluetooth device 
+    priority - 
+
+    Returns: true if priority is set, false on error 
+
+

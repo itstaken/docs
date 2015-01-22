@@ -1,0 +1,457 @@
+*android.view.TextureView* *TextureView* A TextureView can be used to display a 
+
+public class TextureView
+  extends    |android.view.View|
+
+|android.view.TextureView_Description|
+|android.view.TextureView_Fields|
+|android.view.TextureView_Constructors|
+|android.view.TextureView_Methods|
+
+================================================================================
+
+*android.view.TextureView_Constructors*
+|android.view.TextureView(Context)|Creates a new TextureView.
+|android.view.TextureView(Context,AttributeSet)|Creates a new TextureView.
+|android.view.TextureView(Context,AttributeSet,int)|Creates a new TextureView.
+
+*android.view.TextureView_Methods*
+|android.view.TextureView.buildLayer()|Calling this method has no effect.
+|android.view.TextureView.destroyHardwareResources()|
+|android.view.TextureView.draw(Canvas)|Subclasses of TextureView cannot do thei
+|android.view.TextureView.getBitmap()|Returns aandroid.graphics.Bitmaprepresent
+|android.view.TextureView.getBitmap(Bitmap)|Copies the content of this view's s
+|android.view.TextureView.getBitmap(int,int)|Returns aandroid.graphics.Bitmapre
+|android.view.TextureView.getLayerType()|Always returns#LAYER_TYPE_HARDWARE.
+|android.view.TextureView.getSurfaceTexture()|Returns theSurfaceTextureused by 
+|android.view.TextureView.getSurfaceTextureListener()|Returns theSurfaceTexture
+|android.view.TextureView.getTransform(Matrix)|Returns the transform associated
+|android.view.TextureView.isAvailable()|Returns true if theSurfaceTextureassoci
+|android.view.TextureView.isOpaque()|
+|android.view.TextureView.lockCanvas()|Start editing the pixels in the surface.
+|android.view.TextureView.lockCanvas(Rect)|Just like#lockCanvas()but allows spe
+|android.view.TextureView.onAttachedToWindow()|
+|android.view.TextureView.onDetachedFromWindow()|
+|android.view.TextureView.onDraw(Canvas)|Subclasses of TextureView cannot do th
+|android.view.TextureView.onSizeChanged(int,int,int,int)|
+|android.view.TextureView.onVisibilityChanged(View,int)|
+|android.view.TextureView.setLayerType(int,Paint)|The layer type of a TextureVi
+|android.view.TextureView.setOpaque(boolean)|Indicates whether the content of t
+|android.view.TextureView.setSurfaceTexture(SurfaceTexture)|Set theSurfaceTextu
+|android.view.TextureView.setSurfaceTextureListener(TextureView.SurfaceTextureListener)|
+|android.view.TextureView.setTransform(Matrix)|Sets the transform to associate 
+|android.view.TextureView.unlockCanvasAndPost(Canvas)|Finish editing pixels in 
+
+*android.view.TextureView_Description*
+
+A TextureView can be used to display a content stream. Such a content stream 
+can for instance be a video or an OpenGL scene. The content stream can come 
+from the application's process as well as a remote process. 
+
+TextureView can only be used in a hardware accelerated window. When rendered in 
+software, TextureView will draw nothing. 
+
+Unlike (|android.view.SurfaceView|) , TextureView does not create a separate 
+window but behaves as a regular View. This key difference allows a TextureView 
+to be moved, transformed, animated, etc. For instance, you can make a 
+TextureView semi-translucent by calling myView.setAlpha(0.5f). 
+
+Using a TextureView is simple: all you need to do is get its (|SurfaceTexture|) 
+. The (|SurfaceTexture|) can then be used to render content. The following 
+example demonstrates how to render the camera preview into a TextureView: 
+
+
+
+public class LiveCameraActivity extends Activity implements 
+TextureView.SurfaceTextureListener { private Camera mCamera; private 
+TextureView mTextureView; 
+
+protected void onCreate(Bundle savedInstanceState) { 
+super.onCreate(savedInstanceState); 
+
+mTextureView = new TextureView(this); 
+mTextureView.setSurfaceTextureListener(this); 
+
+setContentView(mTextureView); } 
+
+public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int 
+height) { mCamera = Camera.open(); 
+
+try { mCamera.setPreviewTexture(surface); mCamera.startPreview(); } catch 
+(IOException ioe) { // Something bad happened } } 
+
+public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int 
+height) { // Ignored, Camera does all the work for us } 
+
+public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) { 
+mCamera.stopPreview(); mCamera.release(); return true; } 
+
+public void onSurfaceTextureUpdated(SurfaceTexture surface) { // Invoked every 
+time there's a new Camera preview frame } } 
+
+A TextureView's SurfaceTexture can be obtained either by invoking 
+(|android.view.TextureView|) or by using a 
+(|android.view.TextureView.SurfaceTextureListener|) . It is important to know 
+that a SurfaceTexture is available only after the TextureView is attached to a 
+window (and (|android.view.TextureView|) has been invoked.) It is therefore 
+highly recommended you use a listener to be notified when the SurfaceTexture 
+becomes available. 
+
+It is important to note that only one producer can use the TextureView. For 
+instance, if you use a TextureView to display the camera preview, you cannot 
+use (|android.view.TextureView|) to draw onto the TextureView at the same time. 
+
+
+
+*android.view.TextureView(Context)*
+
+public TextureView(android.content.Context context)
+
+Creates a new TextureView. 
+
+    context - The context to associate this view with. 
+
+*android.view.TextureView(Context,AttributeSet)*
+
+public TextureView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Creates a new TextureView. 
+
+    context - The context to associate this view with. 
+    attrs - The attributes of the XML tag that is inflating the view. 
+
+*android.view.TextureView(Context,AttributeSet,int)*
+
+public TextureView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+Creates a new TextureView. 
+
+    context - The context to associate this view with. 
+    attrs - The attributes of the XML tag that is inflating the view. 
+    defStyle - The default style to apply to this view. If 0, no style will be applied (beyond 
+       what is included in the theme). This may either be an attribute 
+       resource, whose value will be retrieved from the current theme, or an 
+       explicit style resource. 
+
+*android.view.TextureView.buildLayer()*
+
+public void buildLayer()
+
+Calling this method has no effect. 
+
+
+
+*android.view.TextureView.destroyHardwareResources()*
+
+protected void destroyHardwareResources()
+
+
+
+
+
+*android.view.TextureView.draw(Canvas)*
+
+public final void draw(Canvas canvas)
+
+Subclasses of TextureView cannot do their own rendering with the (|Canvas|) 
+object. 
+
+
+    canvas - The Canvas to which the View is rendered. 
+
+*android.view.TextureView.getBitmap()*
+
+public Bitmap getBitmap()
+
+Returns a (|android.graphics.Bitmap|) representation of the content of the 
+associated surface texture. If the surface texture is not available, this 
+method returns null. 
+
+The bitmap returned by this method uses the (|Bitmap.Config|) pixel format and 
+its dimensions are the same as this view's. 
+
+Do not invoke this method from a drawing method ( (|android.view.TextureView|) 
+for instance). 
+
+If an error occurs during the copy, an empty bitmap will be returned. 
+
+
+
+    Returns: A valid {@link Bitmap.Config#ARGB_8888} bitmap, or null if the surface texture 
+             is not available or the width <= 0 or the height <= 0 
+
+*android.view.TextureView.getBitmap(Bitmap)*
+
+public Bitmap getBitmap(Bitmap bitmap)
+
+Copies the content of this view's surface texture into the specified bitmap. If 
+the surface texture is not available, the copy is not executed. The content of 
+the surface texture will be scaled to fit exactly inside the specified bitmap. 
+
+Do not invoke this method from a drawing method ( (|android.view.TextureView|) 
+for instance). 
+
+If an error occurs, the bitmap is left unchanged. 
+
+
+    bitmap - The bitmap to copy the content of the surface texture into, cannot be null, all 
+       configurations are supported 
+
+    Returns: The bitmap specified as a parameter 
+
+*android.view.TextureView.getBitmap(int,int)*
+
+public Bitmap getBitmap(
+  int width,
+  int height)
+
+Returns a (|android.graphics.Bitmap|) representation of the content of the 
+associated surface texture. If the surface texture is not available, this 
+method returns null. 
+
+The bitmap returned by this method uses the (|Bitmap.Config|) pixel format. 
+
+Do not invoke this method from a drawing method ( (|android.view.TextureView|) 
+for instance). 
+
+If an error occurs during the copy, an empty bitmap will be returned. 
+
+
+    width - The width of the bitmap to create 
+    height - The height of the bitmap to create 
+
+    Returns: A valid {@link Bitmap.Config#ARGB_8888} bitmap, or null if the surface texture 
+             is not available or width is <= 0 or height is <= 0 
+
+*android.view.TextureView.getLayerType()*
+
+public int getLayerType()
+
+Always returns (|android.view.TextureView|) . 
+
+
+
+*android.view.TextureView.getSurfaceTexture()*
+
+public SurfaceTexture getSurfaceTexture()
+
+Returns the (|SurfaceTexture|) used by this view. This method may return null 
+if the view is not attached to a window or if the surface texture has not been 
+initialized yet. 
+
+
+
+*android.view.TextureView.getSurfaceTextureListener()*
+
+public |android.view.TextureView.SurfaceTextureListener| getSurfaceTextureListener()
+
+Returns the (|android.view.TextureView.SurfaceTextureListener|) currently 
+associated with this texture view. 
+
+
+
+*android.view.TextureView.getTransform(Matrix)*
+
+public Matrix getTransform(Matrix transform)
+
+Returns the transform associated with this texture view. 
+
+
+    transform - The {@link Matrix} in which to copy the current transform. Can be null. 
+
+    Returns: The specified matrix if not null or a new {@link Matrix} instance otherwise. 
+
+*android.view.TextureView.isAvailable()*
+
+public boolean isAvailable()
+
+Returns true if the (|SurfaceTexture|) associated with this TextureView is 
+available for rendering. When this method returns true, 
+(|android.view.TextureView|) returns a valid surface texture. 
+
+
+
+*android.view.TextureView.isOpaque()*
+
+public boolean isOpaque()
+
+
+
+
+
+*android.view.TextureView.lockCanvas()*
+
+public Canvas lockCanvas()
+
+Start editing the pixels in the surface. The returned Canvas can be used to 
+draw into the surface's bitmap. A null is returned if the surface has not been 
+created or otherwise cannot be edited. You will usually need to implement 
+(|android.view.TextureView.SurfaceTextureListener|) to find out when the 
+Surface is available for use. 
+
+The content of the Surface is never preserved between unlockCanvas() and 
+lockCanvas(), for this reason, every pixel within the Surface area must be 
+written. The only exception to this rule is when a dirty rectangle is 
+specified, in which case, non-dirty pixels will be preserved. 
+
+This method can only be used if the underlying surface is not already owned by 
+another producer. For instance, if the TextureView is being used to render the 
+camera's preview you cannot invoke this method. 
+
+
+
+    Returns: A Canvas used to draw into the surface. 
+
+*android.view.TextureView.lockCanvas(Rect)*
+
+public Canvas lockCanvas(Rect dirty)
+
+Just like (|android.view.TextureView|) but allows specification of a dirty 
+rectangle. Every pixel within that rectangle must be written; however pixels 
+outside the dirty rectangle will be preserved by the next call to lockCanvas(). 
+
+This method can return null if the underlying surface texture is not available 
+(see (|android.view.TextureView|) or if the surface texture is already 
+connected to an image producer (for instance: the camera, OpenGL, a media 
+player, etc.) 
+
+
+    dirty - Area of the surface that will be modified. 
+
+    Returns: A Canvas used to draw into the surface. 
+
+*android.view.TextureView.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.view.TextureView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.view.TextureView.onDraw(Canvas)*
+
+protected final void onDraw(Canvas canvas)
+
+Subclasses of TextureView cannot do their own rendering with the (|Canvas|) 
+object. 
+
+
+    canvas - The Canvas to which the View is rendered. 
+
+*android.view.TextureView.onSizeChanged(int,int,int,int)*
+
+protected void onSizeChanged(
+  int w,
+  int h,
+  int oldw,
+  int oldh)
+
+
+
+
+
+*android.view.TextureView.onVisibilityChanged(View,int)*
+
+protected void onVisibilityChanged(
+  android.view.View changedView,
+  int visibility)
+
+
+
+
+
+*android.view.TextureView.setLayerType(int,Paint)*
+
+public void setLayerType(
+  int layerType,
+  Paint paint)
+
+The layer type of a TextureView is ignored since a TextureView is always 
+considered to act as a hardware layer. The optional paint supplied to this 
+method will however be taken into account when rendering the content of this 
+TextureView. 
+
+
+    layerType - The ype of layer to use with this view, must be one of {@link 
+       #LAYER_TYPE_NONE}, {@link #LAYER_TYPE_SOFTWARE} or {@link 
+       #LAYER_TYPE_HARDWARE} 
+    paint - The paint used to compose the layer. This argument is optional and can be null. 
+       It is ignored when the layer type is {@link #LAYER_TYPE_NONE} 
+
+*android.view.TextureView.setOpaque(boolean)*
+
+public void setOpaque(boolean opaque)
+
+Indicates whether the content of this TextureView is opaque. The content is 
+assumed to be opaque by default. 
+
+
+    opaque - True if the content of this TextureView is opaque, false otherwise 
+
+*android.view.TextureView.setSurfaceTexture(SurfaceTexture)*
+
+public void setSurfaceTexture(SurfaceTexture surfaceTexture)
+
+Set the (|SurfaceTexture|) for this view to use. If a (|SurfaceTexture|) is 
+already being used by this view, it is immediately released and not be usable 
+any more. The (|android.view.TextureView.SurfaceTextureListener|) callback is 
+not called for the previous (|SurfaceTexture|) . Similarly, the 
+(|android.view.TextureView.SurfaceTextureListener|) callback is not called for 
+the (|SurfaceTexture|) passed to setSurfaceTexture. 
+
+The (|SurfaceTexture|) object must be detached from all OpenGL ES contexts 
+prior to calling this method. 
+
+
+    surfaceTexture - The {@link SurfaceTexture} that the view should use. 
+
+*android.view.TextureView.setSurfaceTextureListener(TextureView.SurfaceTextureListener)*
+
+public void setSurfaceTextureListener(android.view.TextureView.SurfaceTextureListener listener)
+
+Sets the (|android.view.TextureView.SurfaceTextureListener|) used to listen to 
+surface texture events. 
+
+
+
+*android.view.TextureView.setTransform(Matrix)*
+
+public void setTransform(Matrix transform)
+
+Sets the transform to associate with this texture view. The specified transform 
+applies to the underlying surface texture and does not affect the size or 
+position of the view itself, only of its content. 
+
+Some transforms might prevent the content from drawing all the pixels contained 
+within this view's bounds. In such situations, make sure this texture view is 
+not marked opaque. 
+
+
+    transform - The transform to apply to the content of this view. 
+
+*android.view.TextureView.unlockCanvasAndPost(Canvas)*
+
+public void unlockCanvasAndPost(Canvas canvas)
+
+Finish editing pixels in the surface. After this call, the surface's current 
+pixels will be shown on the screen, but its content is lost, in particular 
+there is no guarantee that the content of the Surface will remain unchanged 
+when lockCanvas() is called again. 
+
+
+    canvas - The Canvas previously returned by lockCanvas() 
+
+

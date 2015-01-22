@@ -1,0 +1,200 @@
+*android.bluetooth.BluetoothProfile* *BluetoothProfile* Public APIs for the Blue
+
+public interface interface BluetoothProfile
+
+
+|android.bluetooth.BluetoothProfile_Description|
+|android.bluetooth.BluetoothProfile_Fields|
+|android.bluetooth.BluetoothProfile_Constructors|
+|android.bluetooth.BluetoothProfile_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothProfile_Fields*
+|int_android.bluetooth.BluetoothProfile.A2DP|
+|java.lang.String_android.bluetooth.BluetoothProfile.EXTRA_PREVIOUS_STATE|
+|java.lang.String_android.bluetooth.BluetoothProfile.EXTRA_STATE|
+|int_android.bluetooth.BluetoothProfile.GATT|
+|int_android.bluetooth.BluetoothProfile.GATT_SERVER|
+|int_android.bluetooth.BluetoothProfile.HEADSET|
+|int_android.bluetooth.BluetoothProfile.HEALTH|
+|int_android.bluetooth.BluetoothProfile.INPUT_DEVICE|
+|int_android.bluetooth.BluetoothProfile.MAP|
+|int_android.bluetooth.BluetoothProfile.PAN|
+|int_android.bluetooth.BluetoothProfile.PBAP|
+|int_android.bluetooth.BluetoothProfile.PRIORITY_AUTO_CONNECT|
+|int_android.bluetooth.BluetoothProfile.PRIORITY_OFF|
+|int_android.bluetooth.BluetoothProfile.PRIORITY_ON|
+|int_android.bluetooth.BluetoothProfile.PRIORITY_UNDEFINED|
+|int_android.bluetooth.BluetoothProfile.STATE_CONNECTED|
+|int_android.bluetooth.BluetoothProfile.STATE_CONNECTING|
+|int_android.bluetooth.BluetoothProfile.STATE_DISCONNECTED|
+|int_android.bluetooth.BluetoothProfile.STATE_DISCONNECTING|
+
+*android.bluetooth.BluetoothProfile_Methods*
+|android.bluetooth.BluetoothProfile.getConnectedDevices()|Get connected devices
+|android.bluetooth.BluetoothProfile.getConnectionState(BluetoothDevice)|Get the
+|android.bluetooth.BluetoothProfile.getDevicesMatchingConnectionStates(int[])|G
+
+*android.bluetooth.BluetoothProfile_Description*
+
+Public APIs for the Bluetooth Profiles. 
+
+Clients should call (|android.bluetooth.BluetoothAdapter|) , to get the Profile 
+Proxy. Each public profile implements this interface. 
+
+
+
+*int_android.bluetooth.BluetoothProfile.A2DP*
+
+A2DP profile. 
+
+
+*java.lang.String_android.bluetooth.BluetoothProfile.EXTRA_PREVIOUS_STATE*
+
+Extra for the connection state intents of the individual profiles. 
+
+This extra represents the previous connection state of the profile of the 
+Bluetooth device. 
+
+
+*java.lang.String_android.bluetooth.BluetoothProfile.EXTRA_STATE*
+
+Extra for the connection state intents of the individual profiles. 
+
+This extra represents the current connection state of the profile of the 
+Bluetooth device. 
+
+
+*int_android.bluetooth.BluetoothProfile.GATT*
+
+GATT 
+
+
+*int_android.bluetooth.BluetoothProfile.GATT_SERVER*
+
+GATT_SERVER 
+
+
+*int_android.bluetooth.BluetoothProfile.HEADSET*
+
+Headset and Handsfree profile 
+
+
+*int_android.bluetooth.BluetoothProfile.HEALTH*
+
+Health Profile 
+
+
+*int_android.bluetooth.BluetoothProfile.INPUT_DEVICE*
+
+Input Device Profile 
+
+
+*int_android.bluetooth.BluetoothProfile.MAP*
+
+MAP Profile 
+
+
+*int_android.bluetooth.BluetoothProfile.PAN*
+
+PAN Profile 
+
+
+*int_android.bluetooth.BluetoothProfile.PBAP*
+
+PBAP 
+
+
+*int_android.bluetooth.BluetoothProfile.PRIORITY_AUTO_CONNECT*
+
+Default priority for devices that we try to auto-connect to and and allow 
+incoming connections for the profile 
+
+
+*int_android.bluetooth.BluetoothProfile.PRIORITY_OFF*
+
+Default priority for devices that does not allow incoming connections and 
+outgoing connections for the profile. 
+
+
+*int_android.bluetooth.BluetoothProfile.PRIORITY_ON*
+
+Default priority for devices that allow incoming and outgoing connections for 
+the profile 
+
+
+*int_android.bluetooth.BluetoothProfile.PRIORITY_UNDEFINED*
+
+Default priority when not set or when the device is unpaired 
+
+
+*int_android.bluetooth.BluetoothProfile.STATE_CONNECTED*
+
+The profile is in connected state 
+
+
+*int_android.bluetooth.BluetoothProfile.STATE_CONNECTING*
+
+The profile is in connecting state 
+
+
+*int_android.bluetooth.BluetoothProfile.STATE_DISCONNECTED*
+
+The profile is in disconnected state 
+
+
+*int_android.bluetooth.BluetoothProfile.STATE_DISCONNECTING*
+
+The profile is in disconnecting state 
+
+
+
+*android.bluetooth.BluetoothProfile.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+Get connected devices for this specific profile. 
+
+Return the set of devices which are in state 
+(|android.bluetooth.BluetoothProfile|) Requires (|android.Manifest.permission|) 
+permission. 
+
+
+
+    Returns: List of devices. The list will be empty on error. 
+
+*android.bluetooth.BluetoothProfile.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+Get the current connection state of the profile 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote bluetooth device. 
+
+    Returns: State of the profile connection. One of {@link #STATE_CONNECTED}, {@link 
+             #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link 
+             #STATE_DISCONNECTING} 
+
+*android.bluetooth.BluetoothProfile.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+Get a list of devices that match any of the given connection states. 
+
+If none of the devices match any of the given states, an empty list will be 
+returned. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    states - Array of states. States can be one of {@link #STATE_CONNECTED}, {@link 
+       #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link 
+       #STATE_DISCONNECTING}, 
+
+    Returns: List of devices. The list will be empty on error. 
+
+

@@ -1,0 +1,115 @@
+*android.animation.AnimatorSet.Builder* *AnimatorSet.Builder* The Builder object
+
+public class AnimatorSet.Builder
+  extends    |java.lang.Object|
+
+|android.animation.AnimatorSet.Builder_Description|
+|android.animation.AnimatorSet.Builder_Fields|
+|android.animation.AnimatorSet.Builder_Constructors|
+|android.animation.AnimatorSet.Builder_Methods|
+
+================================================================================
+
+*android.animation.AnimatorSet.Builder_Methods*
+|android.animation.AnimatorSet.Builder.after(Animator)|Sets up the given animat
+|android.animation.AnimatorSet.Builder.after(long)|Sets up the animation suppli
+|android.animation.AnimatorSet.Builder.before(Animator)|Sets up the given anima
+|android.animation.AnimatorSet.Builder.with(Animator)|Sets up the given animati
+
+*android.animation.AnimatorSet.Builder_Description*
+
+The Builder object is a utility class to facilitate adding animations to a 
+AnimatorSet along with the relationships between the various animations. The 
+intention of the Builder methods, along with the 
+play()(|android.animation.AnimatorSet|) method of AnimatorSet is to make it 
+possible to express the dependency relationships of animations in a natural 
+way. Developers can also use the 
+playTogether()(|android.animation.AnimatorSet|) and 
+playSequentially()(|android.animation.AnimatorSet|) methods if these suit the 
+need, but it might be easier in some situations to express the AnimatorSet of 
+animations in pairs. 
+
+The Builder object cannot be constructed directly, but is rather constructed 
+internally via a call to (|android.animation.AnimatorSet|) . 
+
+For example, this sets up a AnimatorSet to play anim1 and anim2 at the same 
+time, anim3 to play when anim2 finishes, and anim4 to play when anim3 finishes: 
+
+AnimatorSet s = new AnimatorSet(); s.play(anim1).with(anim2); 
+s.play(anim2).before(anim3); s.play(anim4).after(anim3); 
+
+Note in the example that both (|android.animation.AnimatorSet.Builder|) and 
+(|android.animation.AnimatorSet.Builder|) are used. These are just different 
+ways of expressing the same relationship and are provided to make it easier to 
+say things in a way that is more natural, depending on the situation. 
+
+It is possible to make several calls into the same Builder object to express 
+multiple relationships. However, note that it is only the animation passed into 
+the initial (|android.animation.AnimatorSet|) method that is the dependency in 
+any of the successive calls to the Builder object. For example, the following 
+code starts both anim2 and anim3 when anim1 ends; there is no direct dependency 
+relationship between anim2 and anim3: 
+
+AnimatorSet s = new AnimatorSet(); s.play(anim1).before(anim2).before(anim3); 
+
+If the desired result is to play anim1 then anim2 then anim3, this code 
+expresses the relationship correctly: 
+
+AnimatorSet s = new AnimatorSet(); s.play(anim1).before(anim2); 
+s.play(anim2).before(anim3); 
+
+Note that it is possible to express relationships that cannot be resolved and 
+will not result in sensible results. For example, play(anim1).after(anim1) 
+makes no sense. In general, circular dependencies like this one (or more 
+indirect ones where a depends on b, which depends on c, which depends on a) 
+should be avoided. Only create AnimatorSets that can boil down to a simple, 
+one-way relationship of animations starting with, before, and after other, 
+different, animations. 
+
+
+
+*android.animation.AnimatorSet.Builder.after(Animator)*
+
+public |android.animation.AnimatorSet.Builder| after(android.animation.Animator anim)
+
+Sets up the given animation to play when the animation supplied in the 
+(|android.animation.AnimatorSet|) call that created this Builder object to 
+start when the animation supplied in this method call ends. 
+
+
+    anim - The animation whose end will cause the animation supplied to the {@link 
+       AnimatorSet#play(Animator)} method to play. 
+
+*android.animation.AnimatorSet.Builder.after(long)*
+
+public |android.animation.AnimatorSet.Builder| after(long delay)
+
+Sets up the animation supplied in the (|android.animation.AnimatorSet|) call 
+that created this Builder object to play when the given amount of time elapses. 
+
+
+    delay - The number of milliseconds that should elapse before the animation starts. 
+
+*android.animation.AnimatorSet.Builder.before(Animator)*
+
+public |android.animation.AnimatorSet.Builder| before(android.animation.Animator anim)
+
+Sets up the given animation to play when the animation supplied in the 
+(|android.animation.AnimatorSet|) call that created this Builder object ends. 
+
+
+    anim - The animation that will play when the animation supplied to the {@link 
+       AnimatorSet#play(Animator)} method ends. 
+
+*android.animation.AnimatorSet.Builder.with(Animator)*
+
+public |android.animation.AnimatorSet.Builder| with(android.animation.Animator anim)
+
+Sets up the given animation to play at the same time as the animation supplied 
+in the (|android.animation.AnimatorSet|) call that created this Builder object. 
+
+
+    anim - The animation that will play when the animation supplied to the {@link 
+       AnimatorSet#play(Animator)} method starts. 
+
+

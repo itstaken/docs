@@ -1,0 +1,74 @@
+*android.text.style.LeadingMarginSpan* *LeadingMarginSpan* A paragraph style aff
+
+public interface interface LeadingMarginSpan
+
+  implements |android.text.style.ParagraphStyle|
+
+|android.text.style.LeadingMarginSpan_Description|
+|android.text.style.LeadingMarginSpan_Fields|
+|android.text.style.LeadingMarginSpan_Constructors|
+|android.text.style.LeadingMarginSpan_Methods|
+
+================================================================================
+
+*android.text.style.LeadingMarginSpan_Methods*
+|android.text.style.LeadingMarginSpan.drawLeadingMargin(Canvas,Paint,int,int,int,int,int,CharSequence,int,int,boolean,Layout)|
+|android.text.style.LeadingMarginSpan.getLeadingMargin(boolean)|Returns the amo
+
+*android.text.style.LeadingMarginSpan_Description*
+
+A paragraph style affecting the leading margin. There can be multiple leading 
+margin spans on a single paragraph; they will be rendered in order, each adding 
+its margin to the ones before it. The leading margin is on the right for lines 
+in a right-to-left paragraph. 
+
+
+
+*android.text.style.LeadingMarginSpan.drawLeadingMargin(Canvas,Paint,int,int,int,int,int,CharSequence,int,int,boolean,Layout)*
+
+public void drawLeadingMargin(
+  Canvas c,
+  Paint p,
+  int x,
+  int dir,
+  int top,
+  int baseline,
+  int bottom,
+  java.lang.CharSequence text,
+  int start,
+  int end,
+  boolean first,
+  android.text.Layout layout)
+
+Renders the leading margin. This is called before the margin has been adjusted 
+by the value returned by (|android.text.style.LeadingMarginSpan|) . 
+
+
+    c - the canvas 
+    p - the paint. The this should be left unchanged on exit. 
+    x - the current position of the margin 
+    dir - the base direction of the paragraph; if negative, the margin is to the right of 
+       the text, otherwise it is to the left. 
+    top - the top of the line 
+    baseline - the baseline of the line 
+    bottom - the bottom of the line 
+    text - the text 
+    start - the start of the line 
+    end - the end of the line 
+    first - true if this is the first line of its paragraph 
+    layout - the layout containing this line 
+
+*android.text.style.LeadingMarginSpan.getLeadingMargin(boolean)*
+
+public int getLeadingMargin(boolean first)
+
+Returns the amount by which to adjust the leading margin. Positive values move 
+away from the leading edge of the paragraph, negative values move towards it. 
+
+
+    first - true if the request is for the first line of a paragraph, false for subsequent 
+       lines 
+
+    Returns: the offset for the margin. 
+
+

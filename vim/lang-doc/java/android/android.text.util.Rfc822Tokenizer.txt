@@ -1,0 +1,97 @@
+*android.text.util.Rfc822Tokenizer* *Rfc822Tokenizer* This class works as a Toke
+
+public class Rfc822Tokenizer
+  extends    |java.lang.Object|
+  implements |android.widget.MultiAutoCompleteTextView.Tokenizer|
+
+|android.text.util.Rfc822Tokenizer_Description|
+|android.text.util.Rfc822Tokenizer_Fields|
+|android.text.util.Rfc822Tokenizer_Constructors|
+|android.text.util.Rfc822Tokenizer_Methods|
+
+================================================================================
+
+*android.text.util.Rfc822Tokenizer_Constructors*
+|android.text.util.Rfc822Tokenizer()|
+
+*android.text.util.Rfc822Tokenizer_Methods*
+|android.text.util.Rfc822Tokenizer.findTokenEnd(CharSequence,int)|
+|android.text.util.Rfc822Tokenizer.findTokenStart(CharSequence,int)|
+|android.text.util.Rfc822Tokenizer.terminateToken(CharSequence)|Terminates the 
+|android.text.util.Rfc822Tokenizer.tokenize(CharSequence)|This method will try 
+|android.text.util.Rfc822Tokenizer.tokenize(CharSequence,Collection<Rfc822Token>)|
+
+*android.text.util.Rfc822Tokenizer_Description*
+
+This class works as a Tokenizer for MultiAutoCompleteTextView for address list 
+fields, and also provides a method for converting a string of addresses (such 
+as might be typed into such a field) into a series of Rfc822Tokens. 
+
+
+
+*android.text.util.Rfc822Tokenizer()*
+
+public Rfc822Tokenizer()
+
+
+
+
+*android.text.util.Rfc822Tokenizer.findTokenEnd(CharSequence,int)*
+
+public int findTokenEnd(
+  java.lang.CharSequence text,
+  int cursor)
+
+
+
+
+
+*android.text.util.Rfc822Tokenizer.findTokenStart(CharSequence,int)*
+
+public int findTokenStart(
+  java.lang.CharSequence text,
+  int cursor)
+
+
+
+
+
+*android.text.util.Rfc822Tokenizer.terminateToken(CharSequence)*
+
+public |java.lang.CharSequence| terminateToken(java.lang.CharSequence text)
+
+Terminates the specified address with a comma and space. This assumes that the 
+specified text already has valid syntax. The Adapter subclass's 
+convertToString() method must make that guarantee. 
+
+
+
+*android.text.util.Rfc822Tokenizer.tokenize(CharSequence)*
+
+public static |android.text.util.Rfc822Token|[] tokenize(java.lang.CharSequence text)
+
+This method will try to take a string like "Foo Bar (something) 
+<foo\@google.com>, blah\@google.com (something)" and convert it into one or 
+more Rfc822Tokens. It does *not* decode MIME encoded-words; charset conversion 
+must already have taken place if necessary. It will try to be tolerant of 
+broken syntax instead of returning an error. 
+
+
+
+*android.text.util.Rfc822Tokenizer.tokenize(CharSequence,Collection<Rfc822Token>)*
+
+public static void tokenize(
+  java.lang.CharSequence text,
+  java.util.Collection<android.text.util.Rfc822Token> out)
+
+This constructor will try to take a string like "Foo Bar (something) 
+<foo\@google.com>, blah\@google.com (something)" and convert it into one or 
+more Rfc822Tokens, output into the supplied collection. 
+
+It does *not* decode MIME encoded-words; charset conversion must already have 
+taken place if necessary. It will try to be tolerant of broken syntax instead 
+of returning an error. 
+
+
+
+

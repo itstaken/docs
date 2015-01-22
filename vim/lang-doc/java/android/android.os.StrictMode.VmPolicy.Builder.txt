@@ -1,0 +1,173 @@
+*android.os.StrictMode.VmPolicy.Builder* *StrictMode.VmPolicy.Builder* CreatesVm
+
+public static final class StrictMode.VmPolicy.Builder
+  extends    |java.lang.Object|
+
+|android.os.StrictMode.VmPolicy.Builder_Description|
+|android.os.StrictMode.VmPolicy.Builder_Fields|
+|android.os.StrictMode.VmPolicy.Builder_Constructors|
+|android.os.StrictMode.VmPolicy.Builder_Methods|
+
+================================================================================
+
+*android.os.StrictMode.VmPolicy.Builder_Constructors*
+|android.os.StrictMode.VmPolicy.Builder()|
+|android.os.StrictMode.VmPolicy.Builder(StrictMode.VmPolicy)|Build upon an exis
+
+*android.os.StrictMode.VmPolicy.Builder_Methods*
+|android.os.StrictMode.VmPolicy.Builder.build()|Construct the VmPolicy instance
+|android.os.StrictMode.VmPolicy.Builder.detectActivityLeaks()|Detect leaks ofan
+|android.os.StrictMode.VmPolicy.Builder.detectAll()|Detect everything that's po
+|android.os.StrictMode.VmPolicy.Builder.detectFileUriExposure()|Detect when afi
+|android.os.StrictMode.VmPolicy.Builder.detectLeakedClosableObjects()|Detect wh
+|android.os.StrictMode.VmPolicy.Builder.detectLeakedRegistrationObjects()|Detec
+|android.os.StrictMode.VmPolicy.Builder.detectLeakedSqlLiteObjects()|Detect whe
+|android.os.StrictMode.VmPolicy.Builder.penaltyDeath()|Crashes the whole proces
+|android.os.StrictMode.VmPolicy.Builder.penaltyDropBox()|Enable detected violat
+|android.os.StrictMode.VmPolicy.Builder.penaltyLog()|Log detected violations to
+|android.os.StrictMode.VmPolicy.Builder.setClassInstanceLimit(Class,int)|Set an
+
+*android.os.StrictMode.VmPolicy.Builder_Description*
+
+Creates (|android.os.StrictMode.VmPolicy|) instances. Methods whose names start 
+withdetectspecify what problems we should look for. Methods whose names start 
+withpenaltyspecify what we should do when we detect a problem. 
+
+You can call as manydetectandpenaltymethods as you like. Currently order is 
+insignificant: all penalties apply to all detected problems. 
+
+For example, detect everything and log anything that's found: 
+
+StrictMode.VmPolicy policy = new StrictMode.VmPolicy.Builder() .detectAll() 
+.penaltyLog() .build(); StrictMode.setVmPolicy(policy); 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder()*
+
+public StrictMode.VmPolicy.Builder()
+
+
+
+
+*android.os.StrictMode.VmPolicy.Builder(StrictMode.VmPolicy)*
+
+public StrictMode.VmPolicy.Builder(android.os.StrictMode.VmPolicy base)
+
+Build upon an existing VmPolicy. 
+
+
+*android.os.StrictMode.VmPolicy.Builder.build()*
+
+public |android.os.StrictMode.VmPolicy| build()
+
+Construct the VmPolicy instance. 
+
+Note: if no penalties are enabled before calling build, 
+(|android.os.StrictMode.VmPolicy.Builder|) is implicitly set. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectActivityLeaks()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectActivityLeaks()
+
+Detect leaks of (|android.app.Activity|) subclasses. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectAll()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectAll()
+
+Detect everything that's potentially suspect. 
+
+In the Honeycomb release this includes leaks of SQLite cursors, Activities, and 
+other closable objects but will likely expand in future releases. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectFileUriExposure()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectFileUriExposure()
+
+Detect when afile:// (|android.net.Uri|) is exposed beyond this app. The 
+receiving app may not have access to the sent path. Instead, when sharing files 
+between apps,content://should be used with permission grants. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectLeakedClosableObjects()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectLeakedClosableObjects()
+
+Detect when an (|java.io.Closeable|) or other object with a explict termination 
+method is finalized without having been closed. 
+
+You always want to explicitly close such objects to avoid unnecessary resources 
+leaks. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectLeakedRegistrationObjects()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectLeakedRegistrationObjects()
+
+Detect when a (|android.content.BroadcastReceiver|) or 
+(|android.content.ServiceConnection|) is leaked during 
+(|android.content.Context|) teardown. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.detectLeakedSqlLiteObjects()*
+
+public |android.os.StrictMode.VmPolicy.Builder| detectLeakedSqlLiteObjects()
+
+Detect when an (|android.database.sqlite.SQLiteCursor|) or other SQLite object 
+is finalized without having been closed. 
+
+You always want to explicitly close your SQLite cursors to avoid unnecessary 
+database contention and temporary memory leaks. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.penaltyDeath()*
+
+public |android.os.StrictMode.VmPolicy.Builder| penaltyDeath()
+
+Crashes the whole process on violation. This penalty runs at the end of all 
+enabled penalties so yo you'll still get your logging or other violations 
+before the process dies. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.penaltyDropBox()*
+
+public |android.os.StrictMode.VmPolicy.Builder| penaltyDropBox()
+
+Enable detected violations log a stacktrace and timing data to the 
+DropBox(|android.os.DropBoxManager|) on policy violation. Intended mostly for 
+platform integrators doing beta user field data collection. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.penaltyLog()*
+
+public |android.os.StrictMode.VmPolicy.Builder| penaltyLog()
+
+Log detected violations to the system log. 
+
+
+
+*android.os.StrictMode.VmPolicy.Builder.setClassInstanceLimit(Class,int)*
+
+public |android.os.StrictMode.VmPolicy.Builder| setClassInstanceLimit(
+  java.lang.Class klass,
+  int instanceLimit)
+
+Set an upper bound on how many instances of a class can be in memory at once. 
+Helps to prevent object leaks. 
+
+
+
+

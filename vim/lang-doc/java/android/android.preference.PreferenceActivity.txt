@@ -1,0 +1,669 @@
+*android.preference.PreferenceActivity* *PreferenceActivity* This is the base cl
+
+public abstract class PreferenceActivity
+  extends    |android.app.ListActivity|
+  implements |android.preference.PreferenceManager.OnPreferenceTreeClickListener|
+             |android.preference.PreferenceFragment.OnPreferenceStartFragmentCallback|
+
+|android.preference.PreferenceActivity_Description|
+|android.preference.PreferenceActivity_Fields|
+|android.preference.PreferenceActivity_Constructors|
+|android.preference.PreferenceActivity_Methods|
+
+================================================================================
+
+*android.preference.PreferenceActivity_Fields*
+|java.lang.String_android.preference.PreferenceActivity.EXTRA_NO_HEADERS|
+|java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT|
+|java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS|
+|java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_SHORT_TITLE|
+|java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_TITLE|
+|long_android.preference.PreferenceActivity.HEADER_ID_UNDEFINED|
+
+*android.preference.PreferenceActivity_Constructors*
+|android.preference.PreferenceActivity()|
+
+*android.preference.PreferenceActivity_Methods*
+|android.preference.PreferenceActivity.addPreferencesFromIntent(Intent)|Adds pr
+|android.preference.PreferenceActivity.addPreferencesFromResource(int)|Inflates
+|android.preference.PreferenceActivity.findPreference(CharSequence)|Finds aPref
+|android.preference.PreferenceActivity.finishPreferencePanel(Fragment,int,Intent)|
+|android.preference.PreferenceActivity.getHeaders()|Returns the Header list
+|android.preference.PreferenceActivity.getNextButton()|
+|android.preference.PreferenceActivity.getPreferenceManager()|Returns thePrefer
+|android.preference.PreferenceActivity.getPreferenceScreen()|Gets the root of t
+|android.preference.PreferenceActivity.hasHeaders()|Returns true if this activi
+|android.preference.PreferenceActivity.hasNextButton()|
+|android.preference.PreferenceActivity.invalidateHeaders()|Call when you need t
+|android.preference.PreferenceActivity.isMultiPane()|Returns true if this activ
+|android.preference.PreferenceActivity.isValidFragment(String)|Subclasses shoul
+|android.preference.PreferenceActivity.loadHeadersFromResource(int,List<PreferenceActivity.Header>)|
+|android.preference.PreferenceActivity.onActivityResult(int,int,Intent)|
+|android.preference.PreferenceActivity.onBuildHeaders(List<PreferenceActivity.Header>)|
+|android.preference.PreferenceActivity.onBuildStartFragmentIntent(String,Bundle,int,int)|
+|android.preference.PreferenceActivity.onContentChanged()|
+|android.preference.PreferenceActivity.onCreate(Bundle)|
+|android.preference.PreferenceActivity.onDestroy()|
+|android.preference.PreferenceActivity.onGetInitialHeader()|Called to determine
+|android.preference.PreferenceActivity.onGetNewHeader()|Called after the header
+|android.preference.PreferenceActivity.onHeaderClick(PreferenceActivity.Header,int)|
+|android.preference.PreferenceActivity.onIsHidingHeaders()|Called to determine 
+|android.preference.PreferenceActivity.onIsMultiPane()|Called to determine if t
+|android.preference.PreferenceActivity.onListItemClick(ListView,View,int,long)|
+|android.preference.PreferenceActivity.onNewIntent(Intent)|
+|android.preference.PreferenceActivity.onPreferenceStartFragment(PreferenceFragment,Preference)|
+|android.preference.PreferenceActivity.onPreferenceTreeClick(PreferenceScreen,Preference)|
+|android.preference.PreferenceActivity.onRestoreInstanceState(Bundle)|
+|android.preference.PreferenceActivity.onSaveInstanceState(Bundle)|
+|android.preference.PreferenceActivity.onStop()|
+|android.preference.PreferenceActivity.setListFooter(View)|Set a footer that sh
+|android.preference.PreferenceActivity.setParentTitle(CharSequence,CharSequence,View.OnClickListener)|
+|android.preference.PreferenceActivity.setPreferenceScreen(PreferenceScreen)|Se
+|android.preference.PreferenceActivity.showBreadCrumbs(CharSequence,CharSequence)|
+|android.preference.PreferenceActivity.startPreferenceFragment(Fragment,boolean)|
+|android.preference.PreferenceActivity.startPreferencePanel(String,Bundle,int,CharSequence,Fragment,int)|
+|android.preference.PreferenceActivity.startWithFragment(String,Bundle,Fragment,int)|
+|android.preference.PreferenceActivity.startWithFragment(String,Bundle,Fragment,int,int,int)|
+|android.preference.PreferenceActivity.switchToHeader(PreferenceActivity.Header)|
+|android.preference.PreferenceActivity.switchToHeader(String,Bundle)|When in tw
+
+*android.preference.PreferenceActivity_Description*
+
+This is the base class for an activity to show a hierarchy of preferences to 
+the user. Prior to (|android.os.Build.VERSION_CODES|) this class only allowed 
+the display of a single set of preference; this functionality should now be 
+found in the new (|android.preference.PreferenceFragment|) class. If you are 
+using PreferenceActivity in its old mode, the documentation there applies to 
+the deprecated APIs here. 
+
+This activity shows one or more headers of preferences, each of which is 
+associated with a (|android.preference.PreferenceFragment|) to display the 
+preferences of that header. The actual layout and display of these associations 
+can however vary; currently there are two major approaches it may take: 
+
+On a small screen it may display only the headers as a single list when first 
+launched. Selecting one of the header items will re-launch the activity with it 
+only showing the PreferenceFragment of that header. On a large screen in may 
+display both the headers and current PreferenceFragment together as panes. 
+Selecting a header item switches to showing the correct PreferenceFragment for 
+that item. 
+
+Subclasses of PreferenceActivity should implement 
+(|android.preference.PreferenceActivity|) to populate the header list with the 
+desired items. Doing this implicitly switches the class into its new "headers + 
+fragments" mode rather than the old style of just showing a single preferences 
+list. 
+
+Developer Guides For information about usingPreferenceActivity, read the <a 
+href="guide/topics/ui/settings.html">Settings guide. 
+
+Sample Code 
+
+The following sample code shows a simple preference activity that has two 
+different sets of preferences. The implementation, consisting of the activity 
+itself as well as its two preference fragments 
+is:development/samples/ApiDemos/src/com/example/android/apis/preference/PreferenceWithHeaders.java
+activityThe preference_headers resource describes the headers to be displayed 
+and the fragments associated with them. It 
+is:development/samples/ApiDemos/res/xml/preference_headers.xml headersThe first 
+header is shown by Prefs1Fragment, which populates itself from the following 
+XML resource:development/samples/ApiDemos/res/xml/fragmented_preferences.xml 
+preferencesNote that this XML resource contains a preference screen holding 
+another fragment, the Prefs1FragmentInner implemented here. This allows the 
+user to traverse down a hierarchy of preferences; pressing back will pop each 
+fragment off the stack to return to the previous preferences. 
+
+See (|android.preference.PreferenceFragment|) for information on implementing 
+the fragments themselves. 
+
+
+
+*java.lang.String_android.preference.PreferenceActivity.EXTRA_NO_HEADERS*
+
+When starting this activity, the invoking Intent can contain this extra boolean 
+that the header list should not be displayed. This is most often used in 
+conjunction with (|android.preference.PreferenceActivity|) to launch the 
+activity to display a specific fragment that the user has navigated to. 
+
+
+*java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT*
+
+When starting this activity, the invoking Intent can contain this extra string 
+to specify which fragment should be initially displayed. Starting from Key Lime 
+Pie, when this argument is passed in, the PreferenceActivity will call 
+isValidFragment() to confirm that the fragment class name is valid for this 
+activity. 
+
+
+*java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS*
+
+When starting this activity and using (|android.preference.PreferenceActivity|) 
+, this extra can also be specified to supply a Bundle of arguments to pass to 
+that fragment when it is instantiated during the initial creation of 
+PreferenceActivity. 
+
+
+*java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_SHORT_TITLE*
+
+When starting this activity and using (|android.preference.PreferenceActivity|) 
+, this extra can also be specify to supply the short title to be shown for that 
+fragment. 
+
+
+*java.lang.String_android.preference.PreferenceActivity.EXTRA_SHOW_FRAGMENT_TITLE*
+
+When starting this activity and using (|android.preference.PreferenceActivity|) 
+, this extra can also be specify to supply the title to be shown for that 
+fragment. 
+
+
+*long_android.preference.PreferenceActivity.HEADER_ID_UNDEFINED*
+
+Default value for Header.id(|android.preference.PreferenceActivity.Header|) 
+indicating that no identifier value is set. All other values (including those 
+below -1) are valid. 
+
+
+
+*android.preference.PreferenceActivity()*
+
+public PreferenceActivity()
+
+
+
+
+*android.preference.PreferenceActivity.addPreferencesFromIntent(Intent)*
+
+public void addPreferencesFromIntent(android.content.Intent intent)
+
+Adds preferences from activities that match the given 
+(|android.content.Intent|) . 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+    intent - The {@link Intent} to query activities. 
+
+*android.preference.PreferenceActivity.addPreferencesFromResource(int)*
+
+public void addPreferencesFromResource(int preferencesResId)
+
+Inflates the given XML resource and adds the preference hierarchy to the 
+current preference hierarchy. 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+    preferencesResId - The XML resource ID to inflate. 
+
+*android.preference.PreferenceActivity.findPreference(CharSequence)*
+
+public |android.preference.Preference| findPreference(java.lang.CharSequence key)
+
+Finds a (|android.preference.Preference|) based on its key. 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+    key - The key of the preference to retrieve. 
+
+    Returns: The {@link Preference} with the key, or null. 
+
+*android.preference.PreferenceActivity.finishPreferencePanel(Fragment,int,Intent)*
+
+public void finishPreferencePanel(
+  android.app.Fragment caller,
+  int resultCode,
+  android.content.Intent resultData)
+
+Called by a preference panel fragment to finish itself. 
+
+
+    caller - The fragment that is asking to be finished. 
+    resultCode - Optional result code to send back to the original launching fragment. 
+    resultData - Optional result data to send back to the original launching fragment. 
+
+*android.preference.PreferenceActivity.getHeaders()*
+
+public |java.util.List|<Header> getHeaders()
+
+Returns the Header list 
+
+
+
+*android.preference.PreferenceActivity.getNextButton()*
+
+protected |android.widget.Button| getNextButton()
+
+
+
+
+
+*android.preference.PreferenceActivity.getPreferenceManager()*
+
+public |android.preference.PreferenceManager| getPreferenceManager()
+
+Returns the (|android.preference.PreferenceManager|) used by this activity. 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+
+    Returns: The {@link PreferenceManager}. 
+
+*android.preference.PreferenceActivity.getPreferenceScreen()*
+
+public |android.preference.PreferenceScreen| getPreferenceScreen()
+
+Gets the root of the preference hierarchy that this activity is showing. 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+
+    Returns: The {@link PreferenceScreen} that is the root of the preference hierarchy. 
+
+*android.preference.PreferenceActivity.hasHeaders()*
+
+public boolean hasHeaders()
+
+Returns true if this activity is currently showing the header list. 
+
+
+
+*android.preference.PreferenceActivity.hasNextButton()*
+
+protected boolean hasNextButton()
+
+
+
+
+
+*android.preference.PreferenceActivity.invalidateHeaders()*
+
+public void invalidateHeaders()
+
+Call when you need to change the headers being displayed. Will result in 
+onBuildHeaders() later being called to retrieve the new list. 
+
+
+
+*android.preference.PreferenceActivity.isMultiPane()*
+
+public boolean isMultiPane()
+
+Returns true if this activity is showing multiple panes -- the headers and a 
+preference fragment. 
+
+
+
+*android.preference.PreferenceActivity.isValidFragment(String)*
+
+protected boolean isValidFragment(java.lang.String fragmentName)
+
+Subclasses should override this method and verify that the given fragment is a 
+valid type to be attached to this activity. The default implementation returns 
+true for apps built for android:targetSdkVersion older than 
+(|android.os.Build.VERSION_CODES|) . For later versions, it will throw an 
+exception. 
+
+
+    fragmentName - the class name of the Fragment about to be attached to this activity. 
+
+    Returns: true if the fragment class name is valid for this Activity and false otherwise. 
+
+*android.preference.PreferenceActivity.loadHeadersFromResource(int,List<PreferenceActivity.Header>)*
+
+public void loadHeadersFromResource(
+  int resid,
+  java.util.List<android.preference.PreferenceActivity.Header> target)
+
+Parse the given XML file as a header description, adding each parsed Header 
+into the target list. 
+
+
+    resid - The XML resource to load and parse. 
+    target - The list in which the parsed headers should be placed. 
+
+*android.preference.PreferenceActivity.onActivityResult(int,int,Intent)*
+
+protected void onActivityResult(
+  int requestCode,
+  int resultCode,
+  android.content.Intent data)
+
+
+
+
+
+*android.preference.PreferenceActivity.onBuildHeaders(List<PreferenceActivity.Header>)*
+
+public void onBuildHeaders(java.util.List<android.preference.PreferenceActivity.Header> target)
+
+Called when the activity needs its list of headers build. By implementing this 
+and adding at least one item to the list, you will cause the activity to run in 
+its modern fragment mode. Note that this function may not always be called; for 
+example, if the activity has been asked to display a particular fragment 
+without the header list, there is no need to build the headers. 
+
+Typical implementations will use (|android.preference.PreferenceActivity|) to 
+fill in the list from a resource. 
+
+
+    target - The list in which to place the headers. 
+
+*android.preference.PreferenceActivity.onBuildStartFragmentIntent(String,Bundle,int,int)*
+
+public |android.content.Intent| onBuildStartFragmentIntent(
+  java.lang.String fragmentName,
+  android.os.Bundle args,
+  int titleRes,
+  int shortTitleRes)
+
+Called by (|android.preference.PreferenceActivity|) when in single-pane mode, 
+to build an Intent to launch a new activity showing the selected fragment. The 
+default implementation constructs an Intent that re-launches the current 
+activity with the appropriate arguments to display the fragment. 
+
+
+    fragmentName - The name of the fragment to display. 
+    args - Optional arguments to supply to the fragment. 
+    titleRes - Optional resource ID of title to show for this item. 
+    shortTitleRes - Optional resource ID of short title to show for this item. 
+
+    Returns: Returns an Intent that can be launched to display the given fragment. 
+
+*android.preference.PreferenceActivity.onContentChanged()*
+
+public void onContentChanged()
+
+
+
+
+
+*android.preference.PreferenceActivity.onCreate(Bundle)*
+
+protected void onCreate(android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.preference.PreferenceActivity.onDestroy()*
+
+protected void onDestroy()
+
+
+
+
+
+*android.preference.PreferenceActivity.onGetInitialHeader()*
+
+public |android.preference.PreferenceActivity.Header| onGetInitialHeader()
+
+Called to determine the initial header to be shown. The default implementation 
+simply returns the fragment of the first header. Note that the returned Header 
+object does not actually need to exist in your header list -- whatever its 
+fragment is will simply be used to show for the initial UI. 
+
+
+
+*android.preference.PreferenceActivity.onGetNewHeader()*
+
+public |android.preference.PreferenceActivity.Header| onGetNewHeader()
+
+Called after the header list has been updated ( 
+(|android.preference.PreferenceActivity|) has been called and returned due to 
+(|android.preference.PreferenceActivity|) ) to specify the header that should 
+now be selected. The default implementation returns null to keep whatever 
+header is currently selected. 
+
+
+
+*android.preference.PreferenceActivity.onHeaderClick(PreferenceActivity.Header,int)*
+
+public void onHeaderClick(
+  android.preference.PreferenceActivity.Header header,
+  int position)
+
+Called when the user selects an item in the header list. The default 
+implementation will call either (|android.preference.PreferenceActivity|) or 
+(|android.preference.PreferenceActivity|) as appropriate. 
+
+
+    header - The header that was selected. 
+    position - The header's position in the list. 
+
+*android.preference.PreferenceActivity.onIsHidingHeaders()*
+
+public boolean onIsHidingHeaders()
+
+Called to determine whether the header list should be hidden. The default 
+implementation returns the value given in 
+(|android.preference.PreferenceActivity|) or false if it is not supplied. This 
+is set to false, for example, when the activity is being re-launched to show a 
+particular preference activity. 
+
+
+
+*android.preference.PreferenceActivity.onIsMultiPane()*
+
+public boolean onIsMultiPane()
+
+Called to determine if the activity should run in multi-pane mode. The default 
+implementation returns true if the screen is large enough. 
+
+
+
+*android.preference.PreferenceActivity.onListItemClick(ListView,View,int,long)*
+
+protected void onListItemClick(
+  android.widget.ListView l,
+  android.view.View v,
+  int position,
+  long id)
+
+
+
+
+
+*android.preference.PreferenceActivity.onNewIntent(Intent)*
+
+protected void onNewIntent(android.content.Intent intent)
+
+
+
+
+
+*android.preference.PreferenceActivity.onPreferenceStartFragment(PreferenceFragment,Preference)*
+
+public boolean onPreferenceStartFragment(
+  android.preference.PreferenceFragment caller,
+  android.preference.Preference pref)
+
+
+
+
+
+*android.preference.PreferenceActivity.onPreferenceTreeClick(PreferenceScreen,Preference)*
+
+public boolean onPreferenceTreeClick(
+  android.preference.PreferenceScreen preferenceScreen,
+  android.preference.Preference preference)
+
+
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+
+*android.preference.PreferenceActivity.onRestoreInstanceState(Bundle)*
+
+protected void onRestoreInstanceState(android.os.Bundle state)
+
+
+
+
+
+*android.preference.PreferenceActivity.onSaveInstanceState(Bundle)*
+
+protected void onSaveInstanceState(android.os.Bundle outState)
+
+
+
+
+
+*android.preference.PreferenceActivity.onStop()*
+
+protected void onStop()
+
+
+
+
+
+*android.preference.PreferenceActivity.setListFooter(View)*
+
+public void setListFooter(android.view.View view)
+
+Set a footer that should be shown at the bottom of the header list. 
+
+
+
+*android.preference.PreferenceActivity.setParentTitle(CharSequence,CharSequence,View.OnClickListener)*
+
+public void setParentTitle(
+  java.lang.CharSequence title,
+  java.lang.CharSequence shortTitle,
+  android.view.View.OnClickListener listener)
+
+Should be called after onCreate to ensure that the breadcrumbs, if any, were 
+created. This prepends a title to the fragment breadcrumbs and attaches a 
+listener to any clicks on the parent entry. 
+
+
+    title - the title for the breadcrumb 
+    shortTitle - the short title for the breadcrumb 
+
+*android.preference.PreferenceActivity.setPreferenceScreen(PreferenceScreen)*
+
+public void setPreferenceScreen(android.preference.PreferenceScreen preferenceScreen)
+
+Sets the root of the preference hierarchy that this activity is showing. 
+
+    Deprecated: This function is not relevant for a modern fragment-based
+ PreferenceActivity.
+
+    preferenceScreen - The root {@link PreferenceScreen} of the preference hierarchy. 
+
+*android.preference.PreferenceActivity.showBreadCrumbs(CharSequence,CharSequence)*
+
+public void showBreadCrumbs(
+  java.lang.CharSequence title,
+  java.lang.CharSequence shortTitle)
+
+Change the base title of the bread crumbs for the current preferences. This 
+will normally be called for you. See (|android.app.FragmentBreadCrumbs|) for 
+more information. 
+
+
+
+*android.preference.PreferenceActivity.startPreferenceFragment(Fragment,boolean)*
+
+public void startPreferenceFragment(
+  android.app.Fragment fragment,
+  boolean push)
+
+Start a new fragment. 
+
+
+    fragment - The fragment to start 
+    push - If true, the current fragment will be pushed onto the back stack. If false, the 
+       current fragment will be replaced. 
+
+*android.preference.PreferenceActivity.startPreferencePanel(String,Bundle,int,CharSequence,Fragment,int)*
+
+public void startPreferencePanel(
+  java.lang.String fragmentClass,
+  android.os.Bundle args,
+  int titleRes,
+  java.lang.CharSequence titleText,
+  android.app.Fragment resultTo,
+  int resultRequestCode)
+
+Start a new fragment containing a preference panel. If the preferences are 
+being displayed in multi-pane mode, the given fragment class will be 
+instantiated and placed in the appropriate pane. If running in single-pane 
+mode, a new activity will be launched in which to show the fragment. 
+
+
+    fragmentClass - Full name of the class implementing the fragment. 
+    args - Any desired arguments to supply to the fragment. 
+    titleRes - Optional resource identifier of the title of this fragment. 
+    titleText - Optional text of the title of this fragment. 
+    resultTo - Optional fragment that result data should be sent to. If non-null, 
+       resultTo.onActivityResult() will be called when this preference panel is 
+       done. The launched panel must use {@link 
+       #finishPreferencePanel(Fragment, int, Intent)} when done. 
+    resultRequestCode - If resultTo is non-null, this is the caller's request code to be received with 
+       the resut. 
+
+*android.preference.PreferenceActivity.startWithFragment(String,Bundle,Fragment,int)*
+
+public void startWithFragment(
+  java.lang.String fragmentName,
+  android.os.Bundle args,
+  android.app.Fragment resultTo,
+  int resultRequestCode)
+
+Like (|android.preference.PreferenceActivity|) but uses a 0 titleRes. 
+
+
+
+*android.preference.PreferenceActivity.startWithFragment(String,Bundle,Fragment,int,int,int)*
+
+public void startWithFragment(
+  java.lang.String fragmentName,
+  android.os.Bundle args,
+  android.app.Fragment resultTo,
+  int resultRequestCode,
+  int titleRes,
+  int shortTitleRes)
+
+Start a new instance of this activity, showing only the given preference 
+fragment. When launched in this mode, the header list will be hidden and the 
+given preference fragment will be instantiated and fill the entire activity. 
+
+
+    fragmentName - The name of the fragment to display. 
+    args - Optional arguments to supply to the fragment. 
+    resultTo - Option fragment that should receive the result of the activity launch. 
+    resultRequestCode - If resultTo is non-null, this is the request code in which to report the 
+       result. 
+    titleRes - Resource ID of string to display for the title of this set of preferences. 
+    shortTitleRes - Resource ID of string to display for the short title of this set of 
+       preferences. 
+
+*android.preference.PreferenceActivity.switchToHeader(PreferenceActivity.Header)*
+
+public void switchToHeader(android.preference.PreferenceActivity.Header header)
+
+When in two-pane mode, switch to the fragment pane to show the given preference 
+fragment. 
+
+
+    header - The new header to display. 
+
+*android.preference.PreferenceActivity.switchToHeader(String,Bundle)*
+
+public void switchToHeader(
+  java.lang.String fragmentName,
+  android.os.Bundle args)
+
+When in two-pane mode, switch the fragment pane to show the given preference 
+fragment. 
+
+
+    fragmentName - The name of the fragment to display. 
+    args - Optional arguments to supply to the fragment. 
+
+

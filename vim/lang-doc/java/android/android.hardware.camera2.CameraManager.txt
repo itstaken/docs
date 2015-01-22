@@ -1,0 +1,139 @@
+*android.hardware.camera2.CameraManager* *CameraManager* An interface for iterat
+
+public final class CameraManager
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CameraManager_Description|
+|android.hardware.camera2.CameraManager_Fields|
+|android.hardware.camera2.CameraManager_Constructors|
+|android.hardware.camera2.CameraManager_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CameraManager_Constructors*
+|android.hardware.camera2.CameraManager(Context)|
+
+*android.hardware.camera2.CameraManager_Methods*
+|android.hardware.camera2.CameraManager.addAvailabilityListener(CameraManager.AvailabilityListener,Handler)|
+|android.hardware.camera2.CameraManager.getCameraCharacteristics(String)|Query 
+|android.hardware.camera2.CameraManager.getCameraIdList()|Return the list of cu
+|android.hardware.camera2.CameraManager.openCamera(String,CameraDevice.StateListener,Handler)|
+|android.hardware.camera2.CameraManager.removeAvailabilityListener(CameraManager.AvailabilityListener)|
+
+*android.hardware.camera2.CameraManager_Description*
+
+An interface for iterating, listing, and connecting to 
+CameraDevices(|android.hardware.camera2.CameraDevice|) . 
+
+You can get an instance of this class by calling 
+Context.getSystemService()(|android.content.Context|) . 
+
+CameraManager manager = (CameraManager) 
+getSystemService(Context.CAMERA_SERVICE); 
+
+For more details about communicating with camera devices, read the Camera 
+developer guide or the camera2(|android.hardware.camera2|) package 
+documentation. 
+
+
+
+*android.hardware.camera2.CameraManager(Context)*
+
+public CameraManager(android.content.Context context)
+
+
+
+
+*android.hardware.camera2.CameraManager.addAvailabilityListener(CameraManager.AvailabilityListener,Handler)*
+
+public void addAvailabilityListener(
+  android.hardware.camera2.CameraManager.AvailabilityListener listener,
+  android.os.Handler handler)
+
+Register a listener to be notified about camera device availability. 
+
+Registering the same listener again will replace the handler with the new one 
+provided. 
+
+
+    listener - The new listener to send camera availability notices to 
+    handler - The handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+*android.hardware.camera2.CameraManager.getCameraCharacteristics(String)*
+
+public |android.hardware.camera2.CameraCharacteristics| getCameraCharacteristics(java.lang.String cameraId)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Query the capabilities of a camera device. These capabilities are immutable for 
+a given camera. 
+
+
+    cameraId - The id of the camera device to query 
+
+    Returns: The properties of the given camera 
+
+*android.hardware.camera2.CameraManager.getCameraIdList()*
+
+public |java.lang.String|[] getCameraIdList()
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Return the list of currently connected camera devices by identifier. 
+
+Non-removable cameras use integers starting at 0 for their identifiers, while 
+removable cameras have a unique identifier for each individual device, even if 
+they are the same model. 
+
+
+
+    Returns: The list of currently connected camera devices. 
+
+*android.hardware.camera2.CameraManager.openCamera(String,CameraDevice.StateListener,Handler)*
+
+public void openCamera(
+  java.lang.String cameraId,
+  android.hardware.camera2.CameraDevice.StateListener listener,
+  android.os.Handler handler)
+  throws |android.hardware.camera2.CameraAccessException|
+         
+Open a connection to a camera with the given ID. 
+
+Use (|android.hardware.camera2.CameraManager|) to get the list of available 
+camera devices. Note that even if an id is listed, open may fail if the device 
+is disconnected between the calls to (|android.hardware.camera2.CameraManager|) 
+and (|android.hardware.camera2.CameraManager|) . 
+
+If the camera successfully opens after this function call returns, 
+(|android.hardware.camera2.CameraDevice.StateListener|) will be invoked with 
+the newly opened (|android.hardware.camera2.CameraDevice|) in the unconfigured 
+state. 
+
+If the camera becomes disconnected during initialization after this function 
+call returns, (|android.hardware.camera2.CameraDevice.StateListener|) with a 
+(|android.hardware.camera2.CameraDevice|) in the disconnected state (and 
+(|android.hardware.camera2.CameraDevice.StateListener|) will be skipped). 
+
+If the camera fails to initialize after this function call returns, 
+(|android.hardware.camera2.CameraDevice.StateListener|) will be invoked with a 
+(|android.hardware.camera2.CameraDevice|) in the error state (and 
+(|android.hardware.camera2.CameraDevice.StateListener|) will be skipped). 
+
+
+    cameraId - The unique identifier of the camera device to open 
+    listener - The listener which is invoked once the camera is opened 
+    handler - The handler on which the listener should be invoked, or {@code null} to use the 
+       current thread's {@link android.os.Looper looper}. 
+
+*android.hardware.camera2.CameraManager.removeAvailabilityListener(CameraManager.AvailabilityListener)*
+
+public void removeAvailabilityListener(android.hardware.camera2.CameraManager.AvailabilityListener listener)
+
+Remove a previously-added listener; the listener will no longer receive 
+connection and disconnection callbacks. 
+
+Removing a listener that isn't registered has no effect. 
+
+
+    listener - The listener to remove from the notification list 
+
+

@@ -1,0 +1,559 @@
+*android.bluetooth.BluetoothHeadset* *BluetoothHeadset* Public API for controlli
+
+public final class BluetoothHeadset
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothHeadset_Description|
+|android.bluetooth.BluetoothHeadset_Fields|
+|android.bluetooth.BluetoothHeadset_Constructors|
+|android.bluetooth.BluetoothHeadset_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothHeadset_Fields*
+|java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_AUDIO_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_VENDOR_SPECIFIC_HEADSET_EVENT|
+|int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_ACTION|
+|int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_BASIC|
+|int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_READ|
+|int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_SET|
+|int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_TEST|
+|java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_ARGS|
+|java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD|
+|java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD_TYPE|
+|int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_CONNECTED|
+|int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_CONNECTING|
+|int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_DISCONNECTED|
+|java.lang.String_android.bluetooth.BluetoothHeadset.VENDOR_RESULT_CODE_COMMAND_ANDROID|
+|java.lang.String_android.bluetooth.BluetoothHeadset.VENDOR_SPECIFIC_HEADSET_EVENT_COMPANY_ID_CATEGORY|
+
+*android.bluetooth.BluetoothHeadset_Methods*
+|android.bluetooth.BluetoothHeadset.acceptIncomingConnect(BluetoothDevice)|Acce
+|android.bluetooth.BluetoothHeadset.clccResponse(int,int,int,int,boolean,String,int)|
+|android.bluetooth.BluetoothHeadset.connect(BluetoothDevice)|Initiate connectio
+|android.bluetooth.BluetoothHeadset.connectAudio()|Initiates a connection of he
+|android.bluetooth.BluetoothHeadset.disconnect(BluetoothDevice)|Initiate discon
+|android.bluetooth.BluetoothHeadset.disconnectAudio()|Initiates a disconnection
+|android.bluetooth.BluetoothHeadset.getAudioState(BluetoothDevice)|Get the curr
+|android.bluetooth.BluetoothHeadset.getBatteryUsageHint(BluetoothDevice)|Get ba
+|android.bluetooth.BluetoothHeadset.getConnectedDevices()|
+|android.bluetooth.BluetoothHeadset.getConnectionState(BluetoothDevice)|
+|android.bluetooth.BluetoothHeadset.getDevicesMatchingConnectionStates(int[])|
+|android.bluetooth.BluetoothHeadset.getPriority(BluetoothDevice)|Get the priori
+|android.bluetooth.BluetoothHeadset.isAudioConnected(BluetoothDevice)|Check if 
+|android.bluetooth.BluetoothHeadset.isAudioOn()|Check if Bluetooth SCO audio is
+|android.bluetooth.BluetoothHeadset.isBluetoothVoiceDialingEnabled(Context)|Ind
+|android.bluetooth.BluetoothHeadset.phoneStateChanged(int,int,int,String,int)|N
+|android.bluetooth.BluetoothHeadset.rejectIncomingConnect(BluetoothDevice)|Reje
+|android.bluetooth.BluetoothHeadset.sendVendorSpecificResultCode(BluetoothDevice,String,String)|
+|android.bluetooth.BluetoothHeadset.setPriority(BluetoothDevice,int)|Set priori
+|android.bluetooth.BluetoothHeadset.startScoUsingVirtualVoiceCall(BluetoothDevice)|
+|android.bluetooth.BluetoothHeadset.startVoiceRecognition(BluetoothDevice)|Star
+|android.bluetooth.BluetoothHeadset.stopScoUsingVirtualVoiceCall(BluetoothDevice)|
+|android.bluetooth.BluetoothHeadset.stopVoiceRecognition(BluetoothDevice)|Stop 
+
+*android.bluetooth.BluetoothHeadset_Description*
+
+Public API for controlling the Bluetooth Headset Service. This includes both 
+Bluetooth Headset and Handsfree (v1.5) profiles. 
+
+BluetoothHeadset is a proxy object for controlling the Bluetooth Headset 
+Service via IPC. 
+
+Use (|android.bluetooth.BluetoothAdapter|) to get the BluetoothHeadset proxy 
+object. Use (|android.bluetooth.BluetoothAdapter|) to close the service 
+connection. 
+
+Android only supports one connected Bluetooth Headset at a time. Each method is 
+protected with its appropriate permission. 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_AUDIO_STATE_CHANGED*
+
+Intent used to broadcast the change in the Audio Connection state of the A2DP 
+profile. 
+
+This intent will have 3 extras: 
+
+(|android.bluetooth.BluetoothHeadset|) - The current state of the profile. 
+(|android.bluetooth.BluetoothHeadset|) - The previous state of the profile. 
+(|android.bluetooth.BluetoothDevice|) - The remote device. 
+
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) can be any of 
+(|android.bluetooth.BluetoothHeadset|) , (|android.bluetooth.BluetoothHeadset|) 
+, 
+
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED*
+
+Intent used to broadcast the change in connection state of the Headset profile. 
+
+This intent will have 3 extras: 
+
+(|android.bluetooth.BluetoothHeadset|) - The current state of the profile. 
+(|android.bluetooth.BluetoothHeadset|) - The previous state of the profile. 
+(|android.bluetooth.BluetoothDevice|) - The remote device. 
+
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) can be any of 
+(|android.bluetooth.BluetoothHeadset|) , (|android.bluetooth.BluetoothHeadset|) 
+, (|android.bluetooth.BluetoothHeadset|) , 
+(|android.bluetooth.BluetoothHeadset|) . 
+
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.ACTION_VENDOR_SPECIFIC_HEADSET_EVENT*
+
+Intent used to broadcast that the headset has posted a vendor-specific event. 
+
+This intent will have 4 extras and 1 category. 
+
+(|android.bluetooth.BluetoothDevice|) - The remote Bluetooth Device 
+
+(|android.bluetooth.BluetoothHeadset|) - The vendor specific command 
+(|android.bluetooth.BluetoothHeadset|) - The AT command type which can be one 
+of (|android.bluetooth.BluetoothHeadset|) , 
+(|android.bluetooth.BluetoothHeadset|) , or 
+(|android.bluetooth.BluetoothHeadset|) , (|android.bluetooth.BluetoothHeadset|) 
+, (|android.bluetooth.BluetoothHeadset|) . 
+(|android.bluetooth.BluetoothHeadset|) - Command arguments. 
+
+The category is the Company ID of the vendor defining the vendor-specific 
+command. (|android.bluetooth.BluetoothAssignedNumbers|) For example, for 
+Plantronics specific events Category will be 
+(|android.bluetooth.BluetoothHeadset|) .55 
+
+For example, an AT+XEVENT=foo,3 will get translated into 
+
+EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD = +XEVENT 
+EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD_TYPE = AT_CMD_TYPE_SET 
+EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_ARGS = foo, 3 
+
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_ACTION*
+
+AT command type ACTION used with (|android.bluetooth.BluetoothHeadset|) For 
+example, AT+CHUP. There are no arguments for action commands. 
+
+
+*int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_BASIC*
+
+AT command type BASIC used with (|android.bluetooth.BluetoothHeadset|) For 
+example, ATD. Single character commands and everything following the character 
+are arguments. 
+
+
+*int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_READ*
+
+AT command type READ used with (|android.bluetooth.BluetoothHeadset|) For 
+example, AT+VGM?. There are no arguments for this command type. 
+
+
+*int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_SET*
+
+AT command type SET used with (|android.bluetooth.BluetoothHeadset|) For 
+example, AT+VGM=. 
+
+
+*int_android.bluetooth.BluetoothHeadset.AT_CMD_TYPE_TEST*
+
+AT command type TEST used with (|android.bluetooth.BluetoothHeadset|) For 
+example, AT+VGM=?. There are no arguments for this command type. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_ARGS*
+
+A Parcelable String array extra field in (|android.bluetooth.BluetoothHeadset|) 
+intents that contains the arguments to the vendor-specific command. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD*
+
+A String extra field in (|android.bluetooth.BluetoothHeadset|) intents that 
+contains the name of the vendor-specific command. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD_TYPE*
+
+An int extra field in (|android.bluetooth.BluetoothHeadset|) intents that 
+contains the AT command type of the vendor-specific command. 
+
+
+*int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_CONNECTED*
+
+Headset state when SCO audio is connected. This state can be one of 
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) of 
+(|android.bluetooth.BluetoothHeadset|) intent. 
+
+
+*int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_CONNECTING*
+
+Headset state when SCO audio is connecting. This state can be one of 
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) of 
+(|android.bluetooth.BluetoothHeadset|) intent. 
+
+
+*int_android.bluetooth.BluetoothHeadset.STATE_AUDIO_DISCONNECTED*
+
+Headset state when SCO audio is not connected. This state can be one of 
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) of 
+(|android.bluetooth.BluetoothHeadset|) intent. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.VENDOR_RESULT_CODE_COMMAND_ANDROID*
+
+A vendor-specific command for unsolicited result code. 
+
+
+*java.lang.String_android.bluetooth.BluetoothHeadset.VENDOR_SPECIFIC_HEADSET_EVENT_COMPANY_ID_CATEGORY*
+
+The intent category to be used with (|android.bluetooth.BluetoothHeadset|) for 
+the companyId 
+
+
+
+*android.bluetooth.BluetoothHeadset.acceptIncomingConnect(BluetoothDevice)*
+
+public boolean acceptIncomingConnect(android.bluetooth.BluetoothDevice device)
+
+Accept the incoming connection. Note: This is an internal function and 
+shouldn't be exposed 
+
+
+
+*android.bluetooth.BluetoothHeadset.clccResponse(int,int,int,int,boolean,String,int)*
+
+public void clccResponse(
+  int index,
+  int direction,
+  int status,
+  int mode,
+  boolean mpty,
+  java.lang.String number,
+  int type)
+
+Send Headset of CLCC response 
+
+
+
+*android.bluetooth.BluetoothHeadset.connect(BluetoothDevice)*
+
+public boolean connect(android.bluetooth.BluetoothDevice device)
+
+Initiate connection to a profile of the remote bluetooth device. 
+
+Currently, the system supports only 1 connection to the headset/handsfree 
+profile. The API will automatically disconnect connected devices before 
+connecting. 
+
+This API returns false in scenarios like the profile on the device is already 
+connected or Bluetooth is not turned on. When this API returns true, it is 
+guaranteed that connection state intent for the profile will be broadcasted 
+with the state. Users can get the connection state of the profile from this 
+intent. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothHeadset.connectAudio()*
+
+public boolean connectAudio()
+
+Initiates a connection of headset audio. It setup SCO channel with remote 
+connected headset device. 
+
+
+
+    Returns: true if successful false if there was some error such as there is no connected 
+             headset 
+
+*android.bluetooth.BluetoothHeadset.disconnect(BluetoothDevice)*
+
+public boolean disconnect(android.bluetooth.BluetoothDevice device)
+
+Initiate disconnection from a profile 
+
+This API will return false in scenarios like the profile on the Bluetooth 
+device is not in connected state etc. When this API returns, true, it is 
+guaranteed that the connection state change intent will be broadcasted with the 
+state. Users can get the disconnection state of the profile from this intent. 
+
+If the disconnection is initiated by a remote device, the state will transition 
+from (|android.bluetooth.BluetoothHeadset|) to 
+(|android.bluetooth.BluetoothHeadset|) . If the disconnect is initiated by the 
+host (local) device the state will transition from 
+(|android.bluetooth.BluetoothHeadset|) to state 
+(|android.bluetooth.BluetoothHeadset|) to state 
+(|android.bluetooth.BluetoothHeadset|) . The transition to 
+(|android.bluetooth.BluetoothHeadset|) can be used to distinguish between the 
+two scenarios. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothHeadset.disconnectAudio()*
+
+public boolean disconnectAudio()
+
+Initiates a disconnection of headset audio. It tears down the SCO channel from 
+remote headset device. 
+
+
+
+    Returns: true if successful false if there was some error such as there is no connected 
+             SCO channel 
+
+*android.bluetooth.BluetoothHeadset.getAudioState(BluetoothDevice)*
+
+public int getAudioState(android.bluetooth.BluetoothDevice device)
+
+Get the current audio state of the Headset. Note: This is an internal function 
+and shouldn't be exposed 
+
+
+
+*android.bluetooth.BluetoothHeadset.getBatteryUsageHint(BluetoothDevice)*
+
+public int getBatteryUsageHint(android.bluetooth.BluetoothDevice device)
+
+Get battery usage hint for Bluetooth Headset service. This is a monotonically 
+increasing integer. Wraps to 0 at Integer.MAX_INT, and at boot. Current 
+implementation returns the number of AT commands handled since boot. This is a 
+good indicator for spammy headset/handsfree units that can keep the device 
+awake by polling for cellular status updates. As a rule of thumb, each AT 
+command prevents the CPU from sleeping for 500 ms 
+
+
+    device - the bluetooth headset. 
+
+    Returns: monotonically increasing battery usage hint, or a negative error code on error 
+
+*android.bluetooth.BluetoothHeadset.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+
+
+
+
+*android.bluetooth.BluetoothHeadset.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+
+
+
+
+*android.bluetooth.BluetoothHeadset.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+
+
+
+
+*android.bluetooth.BluetoothHeadset.getPriority(BluetoothDevice)*
+
+public int getPriority(android.bluetooth.BluetoothDevice device)
+
+Get the priority of the profile. 
+
+The priority can be any of: (|android.bluetooth.BluetoothHeadset|) , 
+(|android.bluetooth.BluetoothHeadset|) , (|android.bluetooth.BluetoothHeadset|) 
+, (|android.bluetooth.BluetoothHeadset|) Requires 
+(|android.Manifest.permission|) permission. 
+
+
+    device - Bluetooth device 
+
+    Returns: priority of the device 
+
+*android.bluetooth.BluetoothHeadset.isAudioConnected(BluetoothDevice)*
+
+public boolean isAudioConnected(android.bluetooth.BluetoothDevice device)
+
+Check if Bluetooth SCO audio is connected. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Bluetooth headset 
+
+    Returns: true if SCO is connected, false otherwise or on error 
+
+*android.bluetooth.BluetoothHeadset.isAudioOn()*
+
+public boolean isAudioOn()
+
+Check if Bluetooth SCO audio is connected. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: true if SCO is connected, false otherwise or on error 
+
+*android.bluetooth.BluetoothHeadset.isBluetoothVoiceDialingEnabled(Context)*
+
+public static boolean isBluetoothVoiceDialingEnabled(android.content.Context context)
+
+Indicates if current platform supports voice dialing over bluetooth SCO. 
+
+
+
+    Returns: true if voice dialing over bluetooth is supported, false otherwise. 
+
+*android.bluetooth.BluetoothHeadset.phoneStateChanged(int,int,int,String,int)*
+
+public void phoneStateChanged(
+  int numActive,
+  int numHeld,
+  int callState,
+  java.lang.String number,
+  int type)
+
+Notify Headset of phone state change. This is a backdoor for phone app to call 
+BluetoothHeadset since there is currently not a good way to get precise call 
+state change outside of phone app. 
+
+
+
+*android.bluetooth.BluetoothHeadset.rejectIncomingConnect(BluetoothDevice)*
+
+public boolean rejectIncomingConnect(android.bluetooth.BluetoothDevice device)
+
+Reject the incoming connection. 
+
+
+
+*android.bluetooth.BluetoothHeadset.sendVendorSpecificResultCode(BluetoothDevice,String,String)*
+
+public boolean sendVendorSpecificResultCode(
+  android.bluetooth.BluetoothDevice device,
+  java.lang.String command,
+  java.lang.String arg)
+
+Sends a vendor-specific unsolicited result code to the headset. 
+
+The actual string to be sent is command + ": " + arg. For example, ifcommandis 
+(|android.bluetooth.BluetoothHeadset|) andargis"0", the string "+ANDROID: 0" 
+will be sent. 
+
+Currently only (|android.bluetooth.BluetoothHeadset|) is allowed ascommand. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Bluetooth headset. 
+    command - A vendor-specific command. 
+    arg - The argument that will be attached to the command. 
+
+    Returns: {@code false} if there is no headset connected, or if the command is not an 
+             allowed vendor-specific unsolicited result code, or on error. 
+             {@code true} otherwise. 
+
+*android.bluetooth.BluetoothHeadset.setPriority(BluetoothDevice,int)*
+
+public boolean setPriority(
+  android.bluetooth.BluetoothDevice device,
+  int priority)
+
+Set priority of the profile 
+
+The device should already be paired. Priority can be one of 
+(|android.bluetooth.BluetoothHeadset|) or 
+(|android.bluetooth.BluetoothHeadset|) , 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Paired bluetooth device 
+    priority - 
+
+    Returns: true if priority is set, false on error 
+
+*android.bluetooth.BluetoothHeadset.startScoUsingVirtualVoiceCall(BluetoothDevice)*
+
+public boolean startScoUsingVirtualVoiceCall(android.bluetooth.BluetoothDevice device)
+
+Initiates a SCO channel connection with the headset (if connected). Also 
+initiates a virtual voice call for Handsfree devices as many devices do not 
+accept SCO audio without a call. This API allows the handsfree device to be 
+used for routing non-cellular call audio. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: true if successful, false if there was some error. 
+
+*android.bluetooth.BluetoothHeadset.startVoiceRecognition(BluetoothDevice)*
+
+public boolean startVoiceRecognition(android.bluetooth.BluetoothDevice device)
+
+Start Bluetooth voice recognition. This methods sends the voice recognition AT 
+command to the headset and establishes the audio connection. 
+
+Users can listen to (|android.bluetooth.BluetoothHeadset|) . If this function 
+returns true, this intent will be broadcasted with 
+(|android.bluetooth.BluetoothHeadset|) set to 
+(|android.bluetooth.BluetoothHeadset|) . 
+
+(|android.bluetooth.BluetoothHeadset|) will transition from 
+(|android.bluetooth.BluetoothHeadset|) to 
+(|android.bluetooth.BluetoothHeadset|) when audio connection is established and 
+to (|android.bluetooth.BluetoothHeadset|) in case of failure to establish the 
+audio connection. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Bluetooth headset 
+
+    Returns: false if there is no headset connected of if the connected headset doesn't 
+             support voice recognition or on error, true otherwise 
+
+*android.bluetooth.BluetoothHeadset.stopScoUsingVirtualVoiceCall(BluetoothDevice)*
+
+public boolean stopScoUsingVirtualVoiceCall(android.bluetooth.BluetoothDevice device)
+
+Terminates an ongoing SCO connection and the associated virtual call. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: true if successful, false if there was some error. 
+
+*android.bluetooth.BluetoothHeadset.stopVoiceRecognition(BluetoothDevice)*
+
+public boolean stopVoiceRecognition(android.bluetooth.BluetoothDevice device)
+
+Stop Bluetooth Voice Recognition mode, and shut down the Bluetooth audio path. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Bluetooth headset 
+
+    Returns: false if there is no headset connected or on error, true otherwise 
+
+

@@ -1,0 +1,115 @@
+*android.widget.ImageButton* *ImageButton* 
+ Displays a button with an image (in
+
+public class ImageButton
+  extends    |android.widget.ImageView|
+
+|android.widget.ImageButton_Description|
+|android.widget.ImageButton_Fields|
+|android.widget.ImageButton_Constructors|
+|android.widget.ImageButton_Methods|
+
+================================================================================
+
+*android.widget.ImageButton_Constructors*
+|android.widget.ImageButton(Context)|
+|android.widget.ImageButton(Context,AttributeSet)|
+|android.widget.ImageButton(Context,AttributeSet,int)|
+
+*android.widget.ImageButton_Methods*
+|android.widget.ImageButton.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.ImageButton.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.ImageButton.onSetAlpha(int)|
+
+*android.widget.ImageButton_Description*
+
+Displays a button with an image (instead of text) that can be pressed or 
+clicked by the user. By default, an ImageButton looks like a regular 
+(|android.widget.Button|) , with the standard button background that changes 
+color during different button states. The image on the surface of the button is 
+defined either by theandroid:srcattribute in theXML element or by the 
+(|android.widget.ImageButton|) method. 
+
+To remove the standard button background image, define your own background 
+image or set the background color to be transparent. To indicate the different 
+button states (focused, selected, etc.), you can define a different image for 
+each state. E.g., a blue image by default, an orange one for when focused, and 
+a yellow one for when pressed. An easy way to do this is with an XML drawable 
+"selector." For example: 
+
+<?xml version="1.0" encoding="utf-8"?> <selector 
+xmlns:android="http://schemas.android.com/apk/res/android"> <item 
+android:state_pressed="true" android:drawable="@drawable/button_pressed" /> 
+<!-- pressed --> <item android:state_focused="true" 
+android:drawable="@drawable/button_focused" /> <!-- focused --> <item 
+android:drawable="@drawable/button_normal" /> <!-- default --> </selector> 
+
+Save the XML file in your projectres/drawable/folder and then reference it as a 
+drawable for the source of your ImageButton (in theandroid:srcattribute). 
+Android will automatically change the image based on the state of the button 
+and the corresponding images defined in the XML. 
+
+The order of theelements is important because they are evaluated in order. This 
+is why the "normal" button image comes last, because it will only be applied 
+afterandroid:state_pressedandandroid:state_focusedhave both evaluated false. 
+
+See the <a href="guide/topics/ui/controls/button.html">Buttons guide. 
+
+XML attributes 
+
+See Button Attributes(|android.R.styleable|) , View 
+Attributes(|android.R.styleable|) 
+
+
+
+*android.widget.ImageButton(Context)*
+
+public ImageButton(android.content.Context context)
+
+
+
+
+*android.widget.ImageButton(Context,AttributeSet)*
+
+public ImageButton(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.ImageButton(Context,AttributeSet,int)*
+
+public ImageButton(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.ImageButton.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.ImageButton.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ImageButton.onSetAlpha(int)*
+
+protected boolean onSetAlpha(int alpha)
+
+
+
+
+
+

@@ -1,0 +1,107 @@
+*android.app.backup.BackupAgentHelper* *BackupAgentHelper* A convenientBackupAge
+
+public class BackupAgentHelper
+  extends    |android.app.backup.BackupAgent|
+
+|android.app.backup.BackupAgentHelper_Description|
+|android.app.backup.BackupAgentHelper_Fields|
+|android.app.backup.BackupAgentHelper_Constructors|
+|android.app.backup.BackupAgentHelper_Methods|
+
+================================================================================
+
+*android.app.backup.BackupAgentHelper_Constructors*
+|android.app.backup.BackupAgentHelper()|
+
+*android.app.backup.BackupAgentHelper_Methods*
+|android.app.backup.BackupAgentHelper.addHelper(String,BackupHelper)|Add a help
+|android.app.backup.BackupAgentHelper.getDispatcher()|
+|android.app.backup.BackupAgentHelper.onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.BackupAgentHelper.onRestore(BackupDataInput,int,ParcelFileDescriptor)|
+
+*android.app.backup.BackupAgentHelper_Description*
+
+A convenient (|android.app.backup.BackupAgent|) wrapper class that 
+automatically manages heterogeneous data sets within the backup data, each 
+identified by a unique key prefix. When processing a backup or restore 
+operation, the BackupAgentHelper dispatches to one or more installed 
+(|android.app.backup.BackupHelper|) objects, each of which is responsible for a 
+defined subset of the data being processed. 
+
+An application will typically extend this class in its own backup agent. Then, 
+within the agent's onCreate()(|android.app.backup.BackupAgent|) method, it will 
+call addHelper()(|android.app.backup.BackupAgentHelper|) one or more times to 
+install the handlers for each kind of data it wishes to manage within its 
+backups. 
+
+The Android framework currently provides two predefined 
+(|android.app.backup.BackupHelper|) classes: 
+(|android.app.backup.FileBackupHelper|) - Manages the backup and restore of 
+entire files within an application's data directory hierarchy. 
+(|android.app.backup.SharedPreferencesBackupHelper|) - Manages the backup and 
+restore of an application's (|android.content.SharedPreferences|) data. 
+
+An application can also implement its own helper classes to work within the 
+(|android.app.backup.BackupAgentHelper|) framework. See the 
+(|android.app.backup.BackupHelper|) interface documentation for details. 
+
+Developer Guides For more information about using BackupAgentHelper, read the 
+<a href="guide/topics/data/backup.html">Data Backup developer guide. 
+
+
+
+*android.app.backup.BackupAgentHelper()*
+
+public BackupAgentHelper()
+
+
+
+
+*android.app.backup.BackupAgentHelper.addHelper(String,BackupHelper)*
+
+public void addHelper(
+  java.lang.String keyPrefix,
+  android.app.backup.BackupHelper helper)
+
+Add a helper for a given data subset to the agent's configuration. Each helper 
+must have a prefix string that is unique within this backup agent's set of 
+helpers. 
+
+
+    keyPrefix - A string used to disambiguate the various helpers within this agent 
+    helper - A backup/restore helper object to be invoked during backup and restore 
+       operations. 
+
+*android.app.backup.BackupAgentHelper.getDispatcher()*
+
+public |android.app.backup.BackupHelperDispatcher| getDispatcher()
+
+
+
+
+
+*android.app.backup.BackupAgentHelper.onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public void onBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+  throws |java.io.IOException|
+         
+Run the backup process on each of the configured handlers. 
+
+
+
+*android.app.backup.BackupAgentHelper.onRestore(BackupDataInput,int,ParcelFileDescriptor)*
+
+public void onRestore(
+  android.app.backup.BackupDataInput data,
+  int appVersionCode,
+  android.os.ParcelFileDescriptor newState)
+  throws |java.io.IOException|
+         
+Run the restore process on each of the configured handlers. 
+
+
+
+

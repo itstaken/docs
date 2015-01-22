@@ -1,0 +1,303 @@
+*android.hardware.camera2.CameraDevice.StateListener* *CameraDevice.StateListener* 
+
+public abstract static class CameraDevice.StateListener
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CameraDevice.StateListener_Description|
+|android.hardware.camera2.CameraDevice.StateListener_Fields|
+|android.hardware.camera2.CameraDevice.StateListener_Constructors|
+|android.hardware.camera2.CameraDevice.StateListener_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CameraDevice.StateListener_Fields*
+|int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_DEVICE|
+|int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_DISABLED|
+|int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_IN_USE|
+|int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_SERVICE|
+|int_android.hardware.camera2.CameraDevice.StateListener.ERROR_MAX_CAMERAS_IN_USE|
+
+*android.hardware.camera2.CameraDevice.StateListener_Constructors*
+|android.hardware.camera2.CameraDevice.StateListener()|
+
+*android.hardware.camera2.CameraDevice.StateListener_Methods*
+|android.hardware.camera2.CameraDevice.StateListener.onActive(CameraDevice)|The
+|android.hardware.camera2.CameraDevice.StateListener.onBusy(CameraDevice)|The m
+|android.hardware.camera2.CameraDevice.StateListener.onClosed(CameraDevice)|The
+|android.hardware.camera2.CameraDevice.StateListener.onDisconnected(CameraDevice)|
+|android.hardware.camera2.CameraDevice.StateListener.onError(CameraDevice,int)|
+|android.hardware.camera2.CameraDevice.StateListener.onIdle(CameraDevice)|The m
+|android.hardware.camera2.CameraDevice.StateListener.onOpened(CameraDevice)|The
+|android.hardware.camera2.CameraDevice.StateListener.onUnconfigured(CameraDevice)|
+
+*android.hardware.camera2.CameraDevice.StateListener_Description*
+
+A listener for notifications about the state of a camera device. 
+
+A listener must be provided to the (|android.hardware.camera2.CameraManager|) 
+method to open a camera device. 
+
+These events include notifications about the device becoming idle ( allowing 
+for (|android.hardware.camera2.CameraDevice.StateListener|) to be called), 
+about device disconnection, and about unexpected device errors. 
+
+Events about the progress of specific 
+CaptureRequests(|android.hardware.camera2.CaptureRequest|) are provided through 
+a (|android.hardware.camera2.CameraDevice.CaptureListener|) given to the 
+(|android.hardware.camera2.CameraDevice.StateListener|) , 
+(|android.hardware.camera2.CameraDevice.StateListener|) , 
+(|android.hardware.camera2.CameraDevice.StateListener|) , or 
+(|android.hardware.camera2.CameraDevice.StateListener|) methods. 
+
+
+
+*int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_DEVICE*
+
+An error code that can be reported by 
+(|android.hardware.camera2.CameraDevice.StateListener|) indicating that the 
+camera device has encountered a fatal error. 
+
+The camera device needs to be re-opened to be used again. 
+
+
+*int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_DISABLED*
+
+An error code that can be reported by 
+(|android.hardware.camera2.CameraDevice.StateListener|) indicating that the 
+camera device could not be opened due to a device policy. 
+
+
+*int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_IN_USE*
+
+An error code that can be reported by 
+(|android.hardware.camera2.CameraDevice.StateListener|) indicating that the 
+camera device is in use already. 
+
+This error can be produced when opening the camera fails. 
+
+
+*int_android.hardware.camera2.CameraDevice.StateListener.ERROR_CAMERA_SERVICE*
+
+An error code that can be reported by 
+(|android.hardware.camera2.CameraDevice.StateListener|) indicating that the 
+camera service has encountered a fatal error. 
+
+The Android device may need to be shut down and restarted to restore camera 
+function, or there may be a persistent hardware problem. 
+
+An attempt at recovery may be possible by closing the CameraDevice and the 
+CameraManager, and trying to acquire all resources again from scratch. 
+
+
+*int_android.hardware.camera2.CameraDevice.StateListener.ERROR_MAX_CAMERAS_IN_USE*
+
+An error code that can be reported by 
+(|android.hardware.camera2.CameraDevice.StateListener|) indicating that the 
+camera device could not be opened because there are too many other open camera 
+devices. 
+
+The system-wide limit for number of open cameras has been reached, and more 
+camera devices cannot be opened until previous instances are closed. 
+
+This error can be produced when opening the camera fails. 
+
+
+
+*android.hardware.camera2.CameraDevice.StateListener()*
+
+public CameraDevice.StateListener()
+
+
+
+
+*android.hardware.camera2.CameraDevice.StateListener.onActive(CameraDevice)*
+
+public void onActive(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device begins processing capture 
+requests(|android.hardware.camera2.CaptureRequest|) . 
+
+A camera may not be re-configured while in this state. The camera will 
+transition to the idle state once all pending captures have completed. If a 
+repeating request is set, the camera will remain active until it is cleared and 
+the remaining requests finish processing. To transition to the idle state as 
+quickly as possible, call 
+(|android.hardware.camera2.CameraDevice.StateListener|) , which will idle the 
+camera device as quickly as possible, likely canceling most in-progress 
+captures. 
+
+All calls except for (|android.hardware.camera2.CameraDevice|) are legal while 
+in this state. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - the camera device that has become active 
+
+*android.hardware.camera2.CameraDevice.StateListener.onBusy(CameraDevice)*
+
+public void onBusy(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device is busy. 
+
+A camera becomes busy while it's outputs are being configured (after a call to 
+(|android.hardware.camera2.CameraDevice|) or while it's being flushed (after a 
+call to (|android.hardware.camera2.CameraDevice|) . 
+
+Once the on-going operations are complete, the camera will automatically 
+transition into (|android.hardware.camera2.CameraDevice.StateListener|) if 
+there is at least one configured output, or 
+(|android.hardware.camera2.CameraDevice.StateListener|) otherwise. 
+
+Any attempts to manipulate the camera while its is busy will result in an 
+(|java.lang.IllegalStateException|) being thrown. 
+
+Only the following methods are valid to call while in this state: 
+
+(|android.hardware.camera2.CameraDevice|) 
+(|android.hardware.camera2.CameraDevice|) 
+(|android.hardware.camera2.CameraDevice|) 
+
+
+
+The default implementation of this method does nothing. 
+
+
+    camera - the camera device that has become busy 
+
+*android.hardware.camera2.CameraDevice.StateListener.onClosed(CameraDevice)*
+
+public void onClosed(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device has been closed with 
+(|android.hardware.camera2.CameraDevice|) . 
+
+Any attempt to call methods on this CameraDevice in the future will throw a 
+(|java.lang.IllegalStateException|) . 
+
+The default implementation of this method does nothing. 
+
+
+    camera - the camera device that has become closed 
+
+*android.hardware.camera2.CameraDevice.StateListener.onDisconnected(CameraDevice)*
+
+public abstract void onDisconnected(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device is no longer available for use. 
+
+This callback may be called instead of 
+(|android.hardware.camera2.CameraDevice.StateListener|) if opening the camera 
+fails. 
+
+Any attempt to call methods on this CameraDevice will throw a 
+(|android.hardware.camera2.CameraAccessException|) . The disconnection could be 
+due to a change in security policy or permissions; the physical disconnection 
+of a removable camera device; or the camera being needed for a higher-priority 
+use case. 
+
+There may still be capture listener callbacks that are called after this method 
+is called, or new image buffers that are delivered to active outputs. 
+
+The default implementation logs a notice to the system log about the 
+disconnection. 
+
+You should clean up the camera with (|android.hardware.camera2.CameraDevice|) 
+after this happens, as it is not recoverable until opening the camera again 
+after it becomes 
+available(|android.hardware.camera2.CameraManager.AvailabilityListener|) . 
+
+
+    camera - the device that has been disconnected 
+
+*android.hardware.camera2.CameraDevice.StateListener.onError(CameraDevice,int)*
+
+public abstract void onError(
+  android.hardware.camera2.CameraDevice camera,
+  int error)
+
+The method called when a camera device has encountered a serious error. 
+
+This callback may be called instead of 
+(|android.hardware.camera2.CameraDevice.StateListener|) if opening the camera 
+fails. 
+
+This indicates a failure of the camera device or camera service in some way. 
+Any attempt to call methods on this CameraDevice in the future will throw a 
+(|android.hardware.camera2.CameraAccessException|) with the 
+CAMERA_ERROR(|android.hardware.camera2.CameraAccessException|) reason. 
+
+There may still be capture completion or camera stream listeners that will be 
+called after this error is received. 
+
+You should clean up the camera with (|android.hardware.camera2.CameraDevice|) 
+after this happens. Further attempts at recovery are error-code specific. 
+
+
+    camera - The device reporting the error 
+    error - The error code, one of the {@code CameraDeviceListener.ERROR_*} values. 
+
+*android.hardware.camera2.CameraDevice.StateListener.onIdle(CameraDevice)*
+
+public void onIdle(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device has finished processing all submitted 
+capture requests and has reached an idle state. 
+
+An idle camera device can have its outputs changed by calling 
+(|android.hardware.camera2.CameraDevice|) , which will transition it into the 
+busy state. 
+
+To idle and reconfigure outputs without canceling any submitted capture 
+requests, the application needs to clear its repeating request/burst, if set, 
+with (|android.hardware.camera2.CameraDevice|) , and then wait for this 
+callback to be called before calling (|android.hardware.camera2.CameraDevice|) 
+. 
+
+To idle and reconfigure a camera device as fast as possible, the 
+(|android.hardware.camera2.CameraDevice|) method can be used, which will 
+discard all pending and in-progress capture requests. Once the 
+(|android.hardware.camera2.CameraDevice|) method is called, the application 
+must wait for this callback to fire before calling 
+(|android.hardware.camera2.CameraDevice|) . 
+
+The default implementation of this method does nothing. 
+
+
+    camera - the camera device that has become idle 
+
+*android.hardware.camera2.CameraDevice.StateListener.onOpened(CameraDevice)*
+
+public abstract void onOpened(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device has finished opening. 
+
+An opened camera will immediately afterwards transition into 
+(|android.hardware.camera2.CameraDevice.StateListener|) . 
+
+
+    camera - the camera device that has become opened 
+
+*android.hardware.camera2.CameraDevice.StateListener.onUnconfigured(CameraDevice)*
+
+public void onUnconfigured(android.hardware.camera2.CameraDevice camera)
+
+The method called when a camera device has no outputs configured. 
+
+An unconfigured camera device needs to be configured with 
+(|android.hardware.camera2.CameraDevice|) before being able to submit any 
+capture request. 
+
+This state may be entered by a newly opened camera or by calling 
+(|android.hardware.camera2.CameraDevice|) with a null/empty list of Surfaces 
+when idle. 
+
+Any attempts to submit a capture request while in this state will result in an 
+(|java.lang.IllegalStateException|) being thrown. 
+
+The default implementation of this method does nothing. 
+
+
+    camera - the camera device has that become unconfigured 
+
+

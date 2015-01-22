@@ -1,0 +1,104 @@
+*android.hardware.camera2.impl.MetadataMarshalClass* *MetadataMarshalClass* 
+
+public interface interface MetadataMarshalClass<T>
+
+
+|android.hardware.camera2.impl.MetadataMarshalClass_Description|
+|android.hardware.camera2.impl.MetadataMarshalClass_Fields|
+|android.hardware.camera2.impl.MetadataMarshalClass_Constructors|
+|android.hardware.camera2.impl.MetadataMarshalClass_Methods|
+
+================================================================================
+
+*android.hardware.camera2.impl.MetadataMarshalClass_Fields*
+|int_android.hardware.camera2.impl.MetadataMarshalClass.NATIVE_SIZE_DYNAMIC|
+
+*android.hardware.camera2.impl.MetadataMarshalClass_Methods*
+|android.hardware.camera2.impl.MetadataMarshalClass.getMarshalingClass()|
+|android.hardware.camera2.impl.MetadataMarshalClass.getNativeSize(int)|How many
+|android.hardware.camera2.impl.MetadataMarshalClass.isNativeTypeSupported(int)|
+|android.hardware.camera2.impl.MetadataMarshalClass.marshal(T,ByteBuffer,int,boolean)|
+|android.hardware.camera2.impl.MetadataMarshalClass.unmarshal(ByteBuffer,int)|U
+
+*android.hardware.camera2.impl.MetadataMarshalClass_Description*
+
+
+
+
+
+*int_android.hardware.camera2.impl.MetadataMarshalClass.NATIVE_SIZE_DYNAMIC*
+
+
+
+
+
+*android.hardware.camera2.impl.MetadataMarshalClass.getMarshalingClass()*
+
+public |java.lang.Class|<T> getMarshalingClass()
+
+
+
+
+
+*android.hardware.camera2.impl.MetadataMarshalClass.getNativeSize(int)*
+
+public int getNativeSize(int nativeType)
+
+How many bytes T will take up if marshalled to/from nativeType 
+
+
+    nativeType - the native type, e.g. {@link 
+       android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE} 
+
+    Returns: a size in bytes, or NATIVE_SIZE_DYNAMIC if the size is dynamic 
+
+*android.hardware.camera2.impl.MetadataMarshalClass.isNativeTypeSupported(int)*
+
+public boolean isNativeTypeSupported(int nativeType)
+
+Determines whether or not this marshaller supports this native type. Most 
+marshallers will are likely to only support one type. 
+
+
+    nativeType - the native type, e.g. {@link 
+       android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE} 
+
+    Returns: true if it supports, false otherwise 
+
+*android.hardware.camera2.impl.MetadataMarshalClass.marshal(T,ByteBuffer,int,boolean)*
+
+public int marshal(
+  T value,
+  java.nio.ByteBuffer buffer,
+  int nativeType,
+  boolean sizeOnly)
+
+Marshal the specified object instance (value) into a byte buffer. 
+
+
+    value - the value of type T that we wish to write into the byte buffer 
+    buffer - the byte buffer into which the marshalled object will be written 
+    nativeType - the native type, e.g. {@link 
+       android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE}. 
+       Guaranteed to be one for which isNativeTypeSupported returns true. 
+    sizeOnly - if this is true, don't write to the byte buffer. calculate the size only. 
+
+    Returns: the size that needs to be written to the byte buffer 
+
+*android.hardware.camera2.impl.MetadataMarshalClass.unmarshal(ByteBuffer,int)*
+
+public |T| unmarshal(
+  java.nio.ByteBuffer buffer,
+  int nativeType)
+
+Unmarshal a new object instance from the byte buffer. 
+
+
+    buffer - the byte buffer, from which we will read the object 
+    nativeType - the native type, e.g. {@link 
+       android.hardware.camera2.impl.CameraMetadataNative#TYPE_BYTE TYPE_BYTE}. 
+       Guaranteed to be one for which isNativeTypeSupported returns true. 
+
+    Returns: a new instance of type T read from the byte buffer 
+
+

@@ -1,0 +1,342 @@
+*android.provider.MediaStore* *MediaStore* The Media provider contains meta data
+
+public final class MediaStore
+  extends    |java.lang.Object|
+
+|android.provider.MediaStore_Description|
+|android.provider.MediaStore_Fields|
+|android.provider.MediaStore_Constructors|
+|android.provider.MediaStore_Methods|
+
+================================================================================
+
+*android.provider.MediaStore_Fields*
+|java.lang.String_android.provider.MediaStore.ACTION_IMAGE_CAPTURE|
+|java.lang.String_android.provider.MediaStore.ACTION_IMAGE_CAPTURE_SECURE|
+|java.lang.String_android.provider.MediaStore.ACTION_MTP_SESSION_END|
+|java.lang.String_android.provider.MediaStore.ACTION_VIDEO_CAPTURE|
+|java.lang.String_android.provider.MediaStore.AUTHORITY|
+|java.lang.String_android.provider.MediaStore.EXTRA_DURATION_LIMIT|
+|java.lang.String_android.provider.MediaStore.EXTRA_FINISH_ON_COMPLETION|
+|java.lang.String_android.provider.MediaStore.EXTRA_FULL_SCREEN|
+|java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_ALBUM|
+|java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_ARTIST|
+|java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_FOCUS|
+|java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_TITLE|
+|java.lang.String_android.provider.MediaStore.EXTRA_OUTPUT|
+|java.lang.String_android.provider.MediaStore.EXTRA_SCREEN_ORIENTATION|
+|java.lang.String_android.provider.MediaStore.EXTRA_SHOW_ACTION_ICONS|
+|java.lang.String_android.provider.MediaStore.EXTRA_SIZE_LIMIT|
+|java.lang.String_android.provider.MediaStore.EXTRA_VIDEO_QUALITY|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_MEDIA_SEARCH|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_MUSIC_PLAYER|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_TEXT_OPEN_FROM_SEARCH|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_VIDEO_CAMERA|
+|java.lang.String_android.provider.MediaStore.INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH|
+|java.lang.String_android.provider.MediaStore.MEDIA_IGNORE_FILENAME|
+|java.lang.String_android.provider.MediaStore.MEDIA_SCANNER_VOLUME|
+|java.lang.String_android.provider.MediaStore.PARAM_DELETE_DATA|
+|java.lang.String_android.provider.MediaStore.UNHIDE_CALL|
+|java.lang.String_android.provider.MediaStore.UNKNOWN_STRING|
+
+*android.provider.MediaStore_Constructors*
+|android.provider.MediaStore()|
+
+*android.provider.MediaStore_Methods*
+|android.provider.MediaStore.getMediaScannerUri()|Uri for querying the state of
+|android.provider.MediaStore.getVersion(Context)|Get the media provider's versi
+
+*android.provider.MediaStore_Description*
+
+The Media provider contains meta data for all available media on both internal 
+and external storage devices. 
+
+
+
+*java.lang.String_android.provider.MediaStore.ACTION_IMAGE_CAPTURE*
+
+Standard Intent action that can be sent to have the camera application capture 
+an image and return it. 
+
+The caller may pass an extra EXTRA_OUTPUT to control where this image will be 
+written. If the EXTRA_OUTPUT is not present, then a small sized image is 
+returned as a Bitmap object in the extra field. This is useful for applications 
+that only need a small image. If the EXTRA_OUTPUT is present, then the 
+full-sized image will be written to the Uri value of EXTRA_OUTPUT. 
+
+
+*java.lang.String_android.provider.MediaStore.ACTION_IMAGE_CAPTURE_SECURE*
+
+Intent action that can be sent to have the camera application capture an image 
+and return it when the device is secured (e.g. with a pin, password, pattern, 
+or face unlock). Applications responding to this intent must not expose any 
+personal content like existing photos or videos on the device. The applications 
+should be careful not to share any photo or video with other applications or 
+internet. The activity should use (|android.view.WindowManager.LayoutParams|) 
+to display on top of the lock screen while secured. There is no activity stack 
+when this flag is used, so launching more than one activity is strongly 
+discouraged. 
+
+The caller may pass an extra EXTRA_OUTPUT to control where this image will be 
+written. If the EXTRA_OUTPUT is not present, then a small sized image is 
+returned as a Bitmap object in the extra field. This is useful for applications 
+that only need a small image. If the EXTRA_OUTPUT is present, then the 
+full-sized image will be written to the Uri value of EXTRA_OUTPUT. 
+
+
+*java.lang.String_android.provider.MediaStore.ACTION_MTP_SESSION_END*
+
+Broadcast Action: A broadcast to indicate the end of an MTP session with the 
+host. This broadcast is only sent if MTP activity has modified the media 
+database during the most recent MTP session. 
+
+
+*java.lang.String_android.provider.MediaStore.ACTION_VIDEO_CAPTURE*
+
+Standard Intent action that can be sent to have the camera application capture 
+a video and return it. 
+
+The caller may pass in an extra EXTRA_VIDEO_QUALITY to control the video 
+quality. 
+
+The caller may pass in an extra EXTRA_OUTPUT to control where the video is 
+written. If EXTRA_OUTPUT is not present the video will be written to the 
+standard location for videos, and the Uri of that location will be returned in 
+the data field of the Uri. 
+
+
+*java.lang.String_android.provider.MediaStore.AUTHORITY*
+
+
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_DURATION_LIMIT*
+
+Specify the maximum allowed recording duration in seconds. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_FINISH_ON_COMPLETION*
+
+The name of the Intent-extra used to control the onCompletion behavior of a 
+MovieView. This is a boolean property that specifies whether or not to finish 
+the MovieView activity when the movie completes playing. The default value is 
+true, which means to automatically exit the movie player activity when the 
+movie completes playing. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_FULL_SCREEN*
+
+The name of an Intent-extra used to control the UI of a ViewImage. This is a 
+boolean property that overrides the activity's default fullscreen state. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_ALBUM*
+
+The name of the Intent-extra used to define the album 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_ARTIST*
+
+The name of the Intent-extra used to define the artist 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_FOCUS*
+
+The name of the Intent-extra used to define the search focus. The search focus 
+indicates whether the search should be for things related to the artist, album 
+or song that is identified by the other extras. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_MEDIA_TITLE*
+
+The name of the Intent-extra used to define the song title 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_OUTPUT*
+
+The name of the Intent-extra used to indicate a content resolver Uri to be used 
+to store the requested image or video. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_SCREEN_ORIENTATION*
+
+The name of the Intent-extra used to control the orientation of a ViewImage or 
+a MovieView. This is an int property that overrides the activity's 
+requestedOrientation. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_SHOW_ACTION_ICONS*
+
+The name of an Intent-extra used to control the UI of a ViewImage. This is a 
+boolean property that specifies whether or not to show action icons. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_SIZE_LIMIT*
+
+Specify the maximum allowed size. 
+
+
+*java.lang.String_android.provider.MediaStore.EXTRA_VIDEO_QUALITY*
+
+The name of the Intent-extra used to control the quality of a recorded video. 
+This is an integer property. Currently value 0 means low quality, suitable for 
+MMS messages, and value 1 means high quality. In the future other quality 
+levels may be added. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH*
+
+An intent to perform a search for music media and automatically play content 
+from the result when possible. This can be fired, for example, by the result of 
+a voice recognition command to listen to music. 
+
+Contains the (|android.app.SearchManager|) extra, which is a string that can 
+contain any type of unstructured music search, like the name of an artist, an 
+album, a song, a genre, or any combination of these. 
+
+Because this intent includes an open-ended unstructured search string, it makes 
+the most sense for apps that can support large-scale search of music, such as 
+services connected to an online database of music which can be streamed and 
+played on the device. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_MEDIA_SEARCH*
+
+Activity Action: Perform a search for media. Contains at least the 
+(|android.app.SearchManager|) extra. May also contain any combination of the 
+following extras: EXTRA_MEDIA_ARTIST, EXTRA_MEDIA_ALBUM, EXTRA_MEDIA_TITLE, 
+EXTRA_MEDIA_FOCUS 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_MUSIC_PLAYER*
+
+Activity Action: Launch a music player. The activity should be able to play, 
+browse, or manipulate music files stored on the device. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA*
+
+The name of the Intent action used to launch a camera in still image mode. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE*
+
+The name of the Intent action used to launch a camera in still image mode for 
+use when the device is secured (e.g. with a pin, password, pattern, or face 
+unlock). Applications responding to this intent must not expose any personal 
+content like existing photos or videos on the device. The applications should 
+be careful not to share any photo or video with other applications or internet. 
+The activity should use (|android.view.WindowManager.LayoutParams|) to display 
+on top of the lock screen while secured. There is no activity stack when this 
+flag is used, so launching more than one activity is strongly discouraged. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_TEXT_OPEN_FROM_SEARCH*
+
+An intent to perform a search for readable media and automatically play content 
+from the result when possible. This can be fired, for example, by the result of 
+a voice recognition command to read a book or magazine. 
+
+Contains the (|android.app.SearchManager|) extra, which is a string that can 
+contain any type of unstructured text search, like the name of a book or 
+magazine, an author a genre, a publisher, or any combination of these. 
+
+Because this intent includes an open-ended unstructured search string, it makes 
+the most sense for apps that can support large-scale search of text media, such 
+as services connected to an online database of books and/or magazines which can 
+be read on the device. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_VIDEO_CAMERA*
+
+The name of the Intent action used to launch a camera in video mode. 
+
+
+*java.lang.String_android.provider.MediaStore.INTENT_ACTION_VIDEO_PLAY_FROM_SEARCH*
+
+An intent to perform a search for video media and automatically play content 
+from the result when possible. This can be fired, for example, by the result of 
+a voice recognition command to play movies. 
+
+Contains the (|android.app.SearchManager|) extra, which is a string that can 
+contain any type of unstructured video search, like the name of a movie, one or 
+more actors, a genre, or any combination of these. 
+
+Because this intent includes an open-ended unstructured search string, it makes 
+the most sense for apps that can support large-scale search of video, such as 
+services connected to an online database of videos which can be streamed and 
+played on the device. 
+
+
+*java.lang.String_android.provider.MediaStore.MEDIA_IGNORE_FILENAME*
+
+Name of the file signaling the media scanner to ignore media in the containing 
+directory and its subdirectories. Developers should use this to avoid 
+application graphics showing up in the Gallery and likewise prevent application 
+sounds and music from showing up in the Music app. 
+
+
+*java.lang.String_android.provider.MediaStore.MEDIA_SCANNER_VOLUME*
+
+Name of current volume being scanned by the media scanner. 
+
+
+*java.lang.String_android.provider.MediaStore.PARAM_DELETE_DATA*
+
+This is for internal use by the media scanner only. Name of the (optional) Uri 
+parameter that determines whether to skip deleting the file pointed to by the 
+_data column, when deleting the database entry. The only appropriate value for 
+this parameter is "false", in which case the delete will be skipped. Note 
+especially that setting this to true, or omitting the parameter altogether, 
+will perform the default action, which is different for different types of 
+media. 
+
+
+*java.lang.String_android.provider.MediaStore.UNHIDE_CALL*
+
+The method name used by the media scanner and mtp to tell the media provider to 
+rescan and reclassify that have become unhidden because of renaming folders or 
+removing nomedia files 
+
+
+*java.lang.String_android.provider.MediaStore.UNKNOWN_STRING*
+
+The string that is used when a media attribute is not known. For example, if an 
+audio file does not have any meta data, the artist and album columns will be 
+set to this value. 
+
+
+
+*android.provider.MediaStore()*
+
+public MediaStore()
+
+
+
+
+*android.provider.MediaStore.getMediaScannerUri()*
+
+public static |android.net.Uri| getMediaScannerUri()
+
+Uri for querying the state of the media scanner. 
+
+
+
+*android.provider.MediaStore.getVersion(Context)*
+
+public static |java.lang.String| getVersion(android.content.Context context)
+
+Get the media provider's version. Applications that import data from the media 
+provider into their own caches can use this to detect that the media provider 
+changed, and reimport data as needed. No other assumptions should be made about 
+the meaning of the version. 
+
+
+    context - Context to use for performing the query. 
+
+    Returns: A version string, or null if the version could not be determined. 
+
+

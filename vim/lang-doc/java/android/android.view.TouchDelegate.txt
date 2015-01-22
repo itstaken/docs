@@ -1,0 +1,83 @@
+*android.view.TouchDelegate* *TouchDelegate* Helper class to handle situations w
+
+public class TouchDelegate
+  extends    |java.lang.Object|
+
+|android.view.TouchDelegate_Description|
+|android.view.TouchDelegate_Fields|
+|android.view.TouchDelegate_Constructors|
+|android.view.TouchDelegate_Methods|
+
+================================================================================
+
+*android.view.TouchDelegate_Fields*
+|int_android.view.TouchDelegate.ABOVE|
+|int_android.view.TouchDelegate.BELOW|
+|int_android.view.TouchDelegate.TO_LEFT|
+|int_android.view.TouchDelegate.TO_RIGHT|
+
+*android.view.TouchDelegate_Constructors*
+|android.view.TouchDelegate(Rect,View)|Constructor
+
+*android.view.TouchDelegate_Methods*
+|android.view.TouchDelegate.onTouchEvent(MotionEvent)|Will forward touch events
+
+*android.view.TouchDelegate_Description*
+
+Helper class to handle situations where you want a view to have a larger touch 
+area than its actual view bounds. The view whose touch area is changed is 
+called the delegate view. This class should be used by an ancestor of the 
+delegate. To use a TouchDelegate, first create an instance that specifies the 
+bounds that should be mapped to the delegate and the delegate view itself. 
+
+The ancestor should then forward all of its touch events received in its 
+(|android.view.View|) to (|android.view.TouchDelegate|) . 
+
+
+
+*int_android.view.TouchDelegate.ABOVE*
+
+The touchable region of the View extends above its actual extent. 
+
+
+*int_android.view.TouchDelegate.BELOW*
+
+The touchable region of the View extends below its actual extent. 
+
+
+*int_android.view.TouchDelegate.TO_LEFT*
+
+The touchable region of the View extends to the left of its actual extent. 
+
+
+*int_android.view.TouchDelegate.TO_RIGHT*
+
+The touchable region of the View extends to the right of its actual extent. 
+
+
+
+*android.view.TouchDelegate(Rect,View)*
+
+public TouchDelegate(
+  Rect bounds,
+  android.view.View delegateView)
+
+Constructor 
+
+    bounds - Bounds in local coordinates of the containing view that should be mapped to the 
+       delegate view 
+    delegateView - The view that should receive motion events 
+
+*android.view.TouchDelegate.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent event)
+
+Will forward touch events to the delegate view if the event is within the 
+bounds specified in the constructor. 
+
+
+    event - The touch event to forward 
+
+    Returns: True if the event was forwarded to the delegate, false otherwise. 
+
+

@@ -1,0 +1,139 @@
+*android.util.EventLog* *EventLog* Access to the system diagnostic event record.
+
+public class EventLog
+  extends    |java.lang.Object|
+
+|android.util.EventLog_Description|
+|android.util.EventLog_Fields|
+|android.util.EventLog_Constructors|
+|android.util.EventLog_Methods|
+
+================================================================================
+
+*android.util.EventLog_Constructors*
+|android.util.EventLog()|
+
+*android.util.EventLog_Methods*
+|android.util.EventLog.getTagCode(String)|Get the event type tag code associate
+|android.util.EventLog.getTagName(int)|Get the name associated with an event ty
+|android.util.EventLog.readEvents(int[],Collection<EventLog.Event>)|Read events
+|android.util.EventLog.writeEvent(int,int)|Record an event log message.
+|android.util.EventLog.writeEvent(int,long)|Record an event log message.
+|android.util.EventLog.writeEvent(int,Object...)|Record an event log message.
+|android.util.EventLog.writeEvent(int,String)|Record an event log message.
+
+*android.util.EventLog_Description*
+
+Access to the system diagnostic event record. System diagnostic events are used 
+to record certain system-level events (such as garbage collection, activity 
+manager state, system watchdogs, and other low level activity), which may be 
+automatically collected and analyzed during system development. 
+
+This is not the main "logcat" debugging log ( (|android.util.Log|) )! These 
+diagnostic events are for system integrators, not application authors. 
+
+Events use integer tag codes corresponding to /system/etc/event-log-tags. They 
+carry a payload of one or more int, long, or String values. The event-log-tags 
+file defines the payload contents for each type code. 
+
+
+
+*android.util.EventLog()*
+
+public EventLog()
+
+
+
+
+*android.util.EventLog.getTagCode(String)*
+
+public static int getTagCode(java.lang.String name)
+
+Get the event type tag code associated with an event name. 
+
+
+    name - of event to look up 
+
+    Returns: the tag code, or -1 if no tag has that name 
+
+*android.util.EventLog.getTagName(int)*
+
+public static |java.lang.String| getTagName(int tag)
+
+Get the name associated with an event type tag code. 
+
+
+    tag - code to look up 
+
+    Returns: the name of the tag, or null if no tag has that number 
+
+*android.util.EventLog.readEvents(int[],Collection<EventLog.Event>)*
+
+public static native void readEvents(
+  int[] tags,
+  java.util.Collection<android.util.EventLog.Event> output)
+  throws |java.io.IOException|
+         
+Read events from the log, filtered by type. 
+
+
+    tags - to search for 
+    output - container to add events into 
+
+*android.util.EventLog.writeEvent(int,int)*
+
+public static native int writeEvent(
+  int tag,
+  int value)
+
+Record an event log message. 
+
+
+    tag - The event type tag code 
+    value - A value to log 
+
+    Returns: The number of bytes written 
+
+*android.util.EventLog.writeEvent(int,long)*
+
+public static native int writeEvent(
+  int tag,
+  long value)
+
+Record an event log message. 
+
+
+    tag - The event type tag code 
+    value - A value to log 
+
+    Returns: The number of bytes written 
+
+*android.util.EventLog.writeEvent(int,Object...)*
+
+public static native int writeEvent(
+  int tag,
+  java.lang.Object[] list)
+
+Record an event log message. 
+
+
+    tag - The event type tag code 
+    list - A list of values to log 
+
+    Returns: The number of bytes written 
+
+*android.util.EventLog.writeEvent(int,String)*
+
+public static native int writeEvent(
+  int tag,
+  java.lang.String str)
+
+Record an event log message. 
+
+
+    tag - The event type tag code 
+    str - A value to log 
+
+    Returns: The number of bytes written 
+
+

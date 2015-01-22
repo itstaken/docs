@@ -1,0 +1,199 @@
+*android.emoji.EmojiFactory* *EmojiFactory* A class for the factories which prod
+
+public final class EmojiFactory
+  extends    |java.lang.Object|
+
+|android.emoji.EmojiFactory_Description|
+|android.emoji.EmojiFactory_Fields|
+|android.emoji.EmojiFactory_Constructors|
+|android.emoji.EmojiFactory_Methods|
+
+================================================================================
+
+*android.emoji.EmojiFactory_Methods*
+|android.emoji.EmojiFactory.finalize()|
+|android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificPua(int)|Returns Uni
+|android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificPua(String)|
+|android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificSjis(char)|Returns U
+|android.emoji.EmojiFactory.getBitmapFromAndroidPua(int)|Returns Bitmap object 
+|android.emoji.EmojiFactory.getBitmapFromVendorSpecificPua(int)|Returns Bitmap 
+|android.emoji.EmojiFactory.getBitmapFromVendorSpecificSjis(char)|Returns Bitma
+|android.emoji.EmojiFactory.getMaximumAndroidPua()|Returns the highest code poi
+|android.emoji.EmojiFactory.getMinimumAndroidPua()|Returns the lowest code poin
+|android.emoji.EmojiFactory.getVendorSpecificPuaFromAndroidPua(int)|Returns ven
+|android.emoji.EmojiFactory.getVendorSpecificPuaFromAndroidPua(String)|
+|android.emoji.EmojiFactory.getVendorSpecificSjisFromAndroidPua(int)|Returns ve
+|android.emoji.EmojiFactory.name()|
+|android.emoji.EmojiFactory.newAvailableInstance()|Constructs an instance of av
+|android.emoji.EmojiFactory.newInstance(String)|Constructs an instance of Emoji
+
+*android.emoji.EmojiFactory_Description*
+
+A class for the factories which produce Emoji (pictgram) images. This is 
+intended to be used by IME, Email app, etc. There's no plan to make this public 
+for now. 
+
+
+
+*android.emoji.EmojiFactory.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificPua(int)*
+
+public int getAndroidPuaFromVendorSpecificPua(int vsp)
+
+Returns Unicode PUA for Android corresponding to the vendor specific Unicode. 
+
+
+    vsp - vendor specific PUA. 
+
+    Returns: Unicode PUA for Android, or -1 if there's no map for the Unicode. 
+
+*android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificPua(String)*
+
+public |java.lang.String| getAndroidPuaFromVendorSpecificPua(java.lang.String vspString)
+
+
+
+
+
+*android.emoji.EmojiFactory.getAndroidPuaFromVendorSpecificSjis(char)*
+
+public int getAndroidPuaFromVendorSpecificSjis(char sjis)
+
+Returns Unicode PUA for Android corresponding to the vendor specific sjis. 
+
+
+    sjis - vendor specific sjis 
+
+    Returns: Unicode PUA for Android, or -1 if there's no map for the sjis. 
+
+*android.emoji.EmojiFactory.getBitmapFromAndroidPua(int)*
+
+public synchronized Bitmap getBitmapFromAndroidPua(int pua)
+
+Returns Bitmap object corresponding to the AndroidPua. 
+
+Note that each Bitmap is cached by this class, which means that, if you modify 
+a Bitmap object (using setPos() method), all same emoji Bitmap will be 
+modified. If it is unacceptable, please copy the object before modifying it. 
+
+
+    pua - A unicode codepoint. 
+
+    Returns: Bitmap object when this factory knows the Bitmap relevant to the codepoint. 
+             Otherwise null is returned. 
+
+*android.emoji.EmojiFactory.getBitmapFromVendorSpecificPua(int)*
+
+public synchronized Bitmap getBitmapFromVendorSpecificPua(int vsp)
+
+Returns Bitmap object corresponding to the vendor specific Unicode. 
+
+See comments in getBitmapFromAndroidPua(). 
+
+
+    vsp - vendor specific PUA. 
+
+    Returns: Bitmap object when this factory knows the Bitmap relevant to the code. 
+             Otherwise null is returned. 
+
+*android.emoji.EmojiFactory.getBitmapFromVendorSpecificSjis(char)*
+
+public synchronized Bitmap getBitmapFromVendorSpecificSjis(char sjis)
+
+Returns Bitmap object corresponding to the vendor specified sjis. 
+
+See comments in getBitmapFromAndroidPua(). 
+
+
+    sjis - sjis code specific to each career(vendor) 
+
+    Returns: Bitmap object when this factory knows the Bitmap relevant to the code. 
+             Otherwise null is returned. 
+
+*android.emoji.EmojiFactory.getMaximumAndroidPua()*
+
+public int getMaximumAndroidPua()
+
+Returns the highest code point corresponding to an Android emoji character. 
+
+
+
+*android.emoji.EmojiFactory.getMinimumAndroidPua()*
+
+public int getMinimumAndroidPua()
+
+Returns the lowest code point corresponding to an Android emoji character. 
+
+
+
+*android.emoji.EmojiFactory.getVendorSpecificPuaFromAndroidPua(int)*
+
+public int getVendorSpecificPuaFromAndroidPua(int pua)
+
+Returns vendor specific Unicode corresponding to the Unicode AndroidPua. 
+
+
+    pua - Unicode PUA for Android, 
+
+    Returns: vendor specific sjis, or -1 if there's no map for the AndroidPua. 
+
+*android.emoji.EmojiFactory.getVendorSpecificPuaFromAndroidPua(String)*
+
+public |java.lang.String| getVendorSpecificPuaFromAndroidPua(java.lang.String puaString)
+
+
+
+
+
+*android.emoji.EmojiFactory.getVendorSpecificSjisFromAndroidPua(int)*
+
+public int getVendorSpecificSjisFromAndroidPua(int pua)
+
+Returns vendor specific sjis corresponding to the Unicode AndroidPua. 
+
+
+    pua - Unicode PUA for Android, 
+
+    Returns: vendor specific sjis, or -1 if there's no map for the AndroidPua. 
+
+*android.emoji.EmojiFactory.name()*
+
+public |java.lang.String| name()
+
+
+
+
+
+*android.emoji.EmojiFactory.newAvailableInstance()*
+
+public static native |android.emoji.EmojiFactory| newAvailableInstance()
+
+Constructs an instance of available EmojiFactory. 
+
+
+
+    Returns: A concrete EmojiFactory instance. If there are several available EmojiFactory 
+             class, preferred one is chosen by the system. If there isn't, null 
+             is returned. 
+
+*android.emoji.EmojiFactory.newInstance(String)*
+
+public static native |android.emoji.EmojiFactory| newInstance(java.lang.String class_name)
+
+Constructs an instance of EmojiFactory corresponding to the name. 
+
+
+    class_name - Name of the factory. This must include complete package name. 
+
+    Returns: A concrete EmojiFactory instance corresponding to factory_name. If factory_name 
+             is invalid, null is returned. 
+
+

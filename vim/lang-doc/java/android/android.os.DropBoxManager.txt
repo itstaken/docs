@@ -1,0 +1,176 @@
+*android.os.DropBoxManager* *DropBoxManager* Enqueues chunks of data (from vario
+
+public class DropBoxManager
+  extends    |java.lang.Object|
+
+|android.os.DropBoxManager_Description|
+|android.os.DropBoxManager_Fields|
+|android.os.DropBoxManager_Constructors|
+|android.os.DropBoxManager_Methods|
+
+================================================================================
+
+*android.os.DropBoxManager_Fields*
+|java.lang.String_android.os.DropBoxManager.ACTION_DROPBOX_ENTRY_ADDED|
+|java.lang.String_android.os.DropBoxManager.EXTRA_TAG|
+|java.lang.String_android.os.DropBoxManager.EXTRA_TIME|
+|int_android.os.DropBoxManager.IS_EMPTY|
+|int_android.os.DropBoxManager.IS_GZIPPED|
+|int_android.os.DropBoxManager.IS_TEXT|
+
+*android.os.DropBoxManager_Constructors*
+|android.os.DropBoxManager()|Create a dummy instance for testing.
+|android.os.DropBoxManager(IDropBoxManagerService)|
+
+*android.os.DropBoxManager_Methods*
+|android.os.DropBoxManager.addData(String,byte[],int)|Stores binary data, which
+|android.os.DropBoxManager.addFile(String,File,int)|Stores the contents of a fi
+|android.os.DropBoxManager.addText(String,String)|Stores human-readable text.
+|android.os.DropBoxManager.getNextEntry(String,long)|Gets the next entry from t
+|android.os.DropBoxManager.isTagEnabled(String)|Checks any blacklists (set in s
+
+*android.os.DropBoxManager_Description*
+
+Enqueues chunks of data (from various sources -- application crashes, kernel 
+log records, etc.). The queue is size bounded and will drop old data if the 
+enqueued data exceeds the maximum size. You can think of this as a persistent, 
+system-wide, blob-oriented "logcat". 
+
+You can obtain an instance of this class by calling (|android.content.Context|) 
+with (|android.content.Context|) . 
+
+DropBoxManager entries are not sent anywhere directly, but other system 
+services and debugging tools may scan and upload entries for processing. 
+
+
+
+*java.lang.String_android.os.DropBoxManager.ACTION_DROPBOX_ENTRY_ADDED*
+
+Broadcast Action: This is broadcast when a new entry is added in the dropbox. 
+You must hold the (|android.Manifest.permission|) permission in order to 
+receive this broadcast. 
+
+This is a protected intent that can only be sent by the system. 
+
+
+*java.lang.String_android.os.DropBoxManager.EXTRA_TAG*
+
+Extra for (|android.os.DropBoxManager|) : string containing the dropbox tag. 
+
+
+*java.lang.String_android.os.DropBoxManager.EXTRA_TIME*
+
+Extra for (|android.os.DropBoxManager|) : long integer value containing time 
+(in milliseconds since January 1, 1970 00:00:00 UTC) when the entry was 
+created. 
+
+
+*int_android.os.DropBoxManager.IS_EMPTY*
+
+Flag value: Entry's content was deleted to save space. 
+
+
+*int_android.os.DropBoxManager.IS_GZIPPED*
+
+Flag value: Content can be decompressed with (|java.util.zip.GZIPOutputStream|) 
+. 
+
+
+*int_android.os.DropBoxManager.IS_TEXT*
+
+Flag value: Content is human-readable UTF-8 text (can be combined with 
+IS_GZIPPED). 
+
+
+
+*android.os.DropBoxManager()*
+
+protected DropBoxManager()
+
+Create a dummy instance for testing. All methods will fail unless overridden 
+with an appropriate mock implementation. To obtain a functional instance, use 
+(|android.content.Context|) . 
+
+
+*android.os.DropBoxManager(IDropBoxManagerService)*
+
+public DropBoxManager(IDropBoxManagerService service)
+
+
+
+
+*android.os.DropBoxManager.addData(String,byte[],int)*
+
+public void addData(
+  java.lang.String tag,
+  byte[] data,
+  int flags)
+
+Stores binary data, which may be ignored or discarded as with 
+(|android.os.DropBoxManager|) . 
+
+
+    tag - describing the type of entry being stored 
+    data - value to store 
+    flags - describing the data 
+
+*android.os.DropBoxManager.addFile(String,File,int)*
+
+public void addFile(
+  java.lang.String tag,
+  java.io.File file,
+  int flags)
+  throws |java.io.IOException|
+         
+Stores the contents of a file, which may be ignored or discarded as with 
+(|android.os.DropBoxManager|) . 
+
+
+    tag - describing the type of entry being stored 
+    file - to read from 
+    flags - describing the data 
+
+*android.os.DropBoxManager.addText(String,String)*
+
+public void addText(
+  java.lang.String tag,
+  java.lang.String data)
+
+Stores human-readable text. The data may be discarded eventually (or even 
+immediately) if space is limited, or ignored entirely if the tag has been 
+blocked (see (|android.os.DropBoxManager|) ). 
+
+
+    tag - describing the type of entry being stored 
+    data - value to store 
+
+*android.os.DropBoxManager.getNextEntry(String,long)*
+
+public |android.os.DropBoxManager.Entry| getNextEntry(
+  java.lang.String tag,
+  long msec)
+
+Gets the next entry from the drop box after the specified time. Requires 
+android.permission.READ_LOGS. You must always call 
+(|android.os.DropBoxManager.Entry|) on the return value! 
+
+
+    tag - of entry to look for, null for all tags 
+    msec - time of the last entry seen 
+
+    Returns: the next entry, or null if there are no more entries 
+
+*android.os.DropBoxManager.isTagEnabled(String)*
+
+public boolean isTagEnabled(java.lang.String tag)
+
+Checks any blacklists (set in system settings) to see whether a certain tag is 
+allowed. Entries with disabled tags will be dropped immediately, so you can 
+save the work of actually constructing and sending the data. 
+
+
+    tag - that would be used in {@link #addText} or {@link #addFile} 
+
+    Returns: whether events with that tag would be accepted 
+
+

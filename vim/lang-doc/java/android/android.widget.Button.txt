@@ -1,0 +1,130 @@
+*android.widget.Button* *Button* Represents a push-button widget.
+
+public class Button
+  extends    |android.widget.TextView|
+
+|android.widget.Button_Description|
+|android.widget.Button_Fields|
+|android.widget.Button_Constructors|
+|android.widget.Button_Methods|
+
+================================================================================
+
+*android.widget.Button_Constructors*
+|android.widget.Button(Context)|
+|android.widget.Button(Context,AttributeSet)|
+|android.widget.Button(Context,AttributeSet,int)|
+
+*android.widget.Button_Methods*
+|android.widget.Button.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.Button.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+
+*android.widget.Button_Description*
+
+Represents a push-button widget. Push-buttons can be pressed, or clicked, by 
+the user to perform an action. 
+
+A typical use of a push-button in an activity would be the following: 
+
+
+
+public class MyActivity extends Activity { protected void onCreate(Bundle 
+icicle) { super.onCreate(icicle); 
+
+setContentView(R.layout.content_layout_id); 
+
+final Button button = (Button) findViewById(R.id.button_id); 
+button.setOnClickListener(new View.OnClickListener() { public void onClick(View 
+v) { // Perform action on click } }); } } 
+
+However, instead of applying an 
+OnClickListener(|android.view.View.OnClickListener|) to the button in your 
+activity, you can assign a method to your button in the XML layout, using the 
+android:onClick(|android.R.attr|) attribute. For example: 
+
+
+
+<Button android:layout_height="wrap_content" 
+android:layout_width="wrap_content" android:text="@string/self_destruct" 
+android:onClick="selfDestruct" /> 
+
+Now, when a user clicks the button, the Android system calls the 
+activity'sselfDestruct(View)method. In order for this to work, the method must 
+be public and accept a (|android.view.View|) as its only parameter. For 
+example: 
+
+
+
+public void selfDestruct(View view) { // Kabloey } 
+
+The (|android.view.View|) passed into the method is a reference to the widget 
+that was clicked. 
+
+Button style 
+
+Every Button is styled using the system's default button background, which is 
+often different from one device to another and from one version of the platform 
+to another. If you're not satisfied with the default button style and want to 
+customize it to match the design of your application, then you can replace the 
+button's background image with a <a 
+href="guide/topics/resources/drawable-resource.html#StateList">state list 
+drawable. A state list drawable is a drawable resource defined in XML that 
+changes its image based on the current state of the button. Once you've defined 
+a state list drawable in XML, you can apply it to your Button with the 
+android:background(|android.R.attr|) attribute. For more information and an 
+example, see <a 
+href="guide/topics/resources/drawable-resource.html#StateList">State List 
+Drawable. 
+
+See the <a href="guide/topics/ui/controls/button.html">Buttons guide. 
+
+XML attributes 
+
+See Button Attributes(|android.R.styleable|) , TextView 
+Attributes(|android.R.styleable|) , View Attributes(|android.R.styleable|) 
+
+
+
+*android.widget.Button(Context)*
+
+public Button(android.content.Context context)
+
+
+
+
+*android.widget.Button(Context,AttributeSet)*
+
+public Button(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.Button(Context,AttributeSet,int)*
+
+public Button(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.Button.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.Button.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+

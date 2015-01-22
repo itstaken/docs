@@ -1,0 +1,109 @@
+*android.service.wallpaper.WallpaperService* *WallpaperService* A wallpaper serv
+
+public abstract class WallpaperService
+  extends    |android.app.Service|
+
+|android.service.wallpaper.WallpaperService_Description|
+|android.service.wallpaper.WallpaperService_Fields|
+|android.service.wallpaper.WallpaperService_Constructors|
+|android.service.wallpaper.WallpaperService_Methods|
+
+================================================================================
+
+*android.service.wallpaper.WallpaperService_Fields*
+|java.lang.String_android.service.wallpaper.WallpaperService.SERVICE_INTERFACE|
+|java.lang.String_android.service.wallpaper.WallpaperService.SERVICE_META_DATA|
+
+*android.service.wallpaper.WallpaperService_Constructors*
+|android.service.wallpaper.WallpaperService()|
+
+*android.service.wallpaper.WallpaperService_Methods*
+|android.service.wallpaper.WallpaperService.dump(FileDescriptor,PrintWriter,String[])|
+|android.service.wallpaper.WallpaperService.onBind(Intent)|Implement to return 
+|android.service.wallpaper.WallpaperService.onCreate()|
+|android.service.wallpaper.WallpaperService.onCreateEngine()|Must be implemente
+|android.service.wallpaper.WallpaperService.onDestroy()|
+
+*android.service.wallpaper.WallpaperService_Description*
+
+A wallpaper service is responsible for showing a live wallpaper behind 
+applications that would like to sit on top of it. This service object itself 
+does very little -- its only purpose is to generate instances of 
+(|android.service.wallpaper.WallpaperService.Engine|) as needed. Implementing a 
+wallpaper thus involves subclassing from this, subclassing an Engine 
+implementation, and implementing (|android.service.wallpaper.WallpaperService|) 
+to return a new instance of your engine. 
+
+
+
+*java.lang.String_android.service.wallpaper.WallpaperService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) that must be declared as handled by the service. 
+To be supported, the service must also require the 
+(|android.Manifest.permission|) permission so that other applications can not 
+abuse it. 
+
+
+*java.lang.String_android.service.wallpaper.WallpaperService.SERVICE_META_DATA*
+
+Name under which a WallpaperService component publishes information about 
+itself. This meta-data must reference an XML resource containing a < 
+wallpaper(|android.R.styleable|) > tag. 
+
+
+
+*android.service.wallpaper.WallpaperService()*
+
+public WallpaperService()
+
+
+
+
+*android.service.wallpaper.WallpaperService.dump(FileDescriptor,PrintWriter,String[])*
+
+protected void dump(
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter out,
+  java.lang.String[] args)
+
+
+
+
+
+*android.service.wallpaper.WallpaperService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+Implement to return the implementation of the internal accessibility service 
+interface. Subclasses should not override. 
+
+
+
+*android.service.wallpaper.WallpaperService.onCreate()*
+
+public void onCreate()
+
+
+
+
+
+*android.service.wallpaper.WallpaperService.onCreateEngine()*
+
+public abstract |android.service.wallpaper.WallpaperService.Engine| onCreateEngine()
+
+Must be implemented to return a new instance of the wallpaper's engine. Note 
+that multiple instances may be active at the same time, such as when the 
+wallpaper is currently set as the active wallpaper and the user is in the 
+wallpaper picker viewing a preview of it as well. 
+
+
+
+*android.service.wallpaper.WallpaperService.onDestroy()*
+
+public void onDestroy()
+
+
+
+
+
+

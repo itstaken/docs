@@ -1,0 +1,127 @@
+*android.speech.RecognitionService.Callback* *RecognitionService.Callback* This 
+
+public class RecognitionService.Callback
+  extends    |java.lang.Object|
+
+|android.speech.RecognitionService.Callback_Description|
+|android.speech.RecognitionService.Callback_Fields|
+|android.speech.RecognitionService.Callback_Constructors|
+|android.speech.RecognitionService.Callback_Methods|
+
+================================================================================
+
+*android.speech.RecognitionService.Callback_Methods*
+|android.speech.RecognitionService.Callback.beginningOfSpeech()|The service sho
+|android.speech.RecognitionService.Callback.bufferReceived(byte[])|The service 
+|android.speech.RecognitionService.Callback.endOfSpeech()|The service should ca
+|android.speech.RecognitionService.Callback.error(int)|The service should call 
+|android.speech.RecognitionService.Callback.partialResults(Bundle)|The service 
+|android.speech.RecognitionService.Callback.readyForSpeech(Bundle)|The service 
+|android.speech.RecognitionService.Callback.results(Bundle)|The service should 
+|android.speech.RecognitionService.Callback.rmsChanged(float)|The service shoul
+
+*android.speech.RecognitionService.Callback_Description*
+
+This class receives callbacks from the speech recognition service and forwards 
+them to the user. An instance of this class is passed to the 
+(|android.speech.RecognitionService|) method. Recognizers may call these 
+methods on any thread. 
+
+
+
+*android.speech.RecognitionService.Callback.beginningOfSpeech()*
+
+public void beginningOfSpeech()
+  throws |android.os.RemoteException|
+         
+The service should call this method when the user has started to speak. 
+
+
+
+*android.speech.RecognitionService.Callback.bufferReceived(byte[])*
+
+public void bufferReceived(byte[] buffer)
+  throws |android.os.RemoteException|
+         
+The service should call this method when sound has been received. The purpose 
+of this function is to allow giving feedback to the user regarding the captured 
+audio. 
+
+
+    buffer - a buffer containing a sequence of big-endian 16-bit integers representing a 
+       single channel audio stream. The sample rate is implementation 
+       dependent. 
+
+*android.speech.RecognitionService.Callback.endOfSpeech()*
+
+public void endOfSpeech()
+  throws |android.os.RemoteException|
+         
+The service should call this method after the user stops speaking. 
+
+
+
+*android.speech.RecognitionService.Callback.error(int)*
+
+public void error(int error)
+  throws |android.os.RemoteException|
+         
+The service should call this method when a network or recognition error 
+occurred. 
+
+
+    error - code is defined in {@link SpeechRecognizer} 
+
+*android.speech.RecognitionService.Callback.partialResults(Bundle)*
+
+public void partialResults(android.os.Bundle partialResults)
+  throws |android.os.RemoteException|
+         
+The service should call this method when partial recognition results are 
+available. This method can be called at any time between 
+(|android.speech.RecognitionService.Callback|) and 
+(|android.speech.RecognitionService.Callback|) when partial results are ready. 
+This method may be called zero, one or multiple times for each call to 
+(|android.speech.SpeechRecognizer|) , depending on the speech recognition 
+service implementation. 
+
+
+    partialResults - the returned results. To retrieve the results in ArrayList<String> format use 
+       {@link Bundle#getStringArrayList(String)} with {@link 
+       SpeechRecognizer#RESULTS_RECOGNITION} as a parameter 
+
+*android.speech.RecognitionService.Callback.readyForSpeech(Bundle)*
+
+public void readyForSpeech(android.os.Bundle params)
+  throws |android.os.RemoteException|
+         
+The service should call this method when the endpointer is ready for the user 
+to start speaking. 
+
+
+    params - parameters set by the recognition service. Reserved for future use. 
+
+*android.speech.RecognitionService.Callback.results(Bundle)*
+
+public void results(android.os.Bundle results)
+  throws |android.os.RemoteException|
+         
+The service should call this method when recognition results are ready. 
+
+
+    results - the recognition results. To retrieve the results in {@code ArrayList<String>} 
+       format use {@link Bundle#getStringArrayList(String)} with {@link 
+       SpeechRecognizer#RESULTS_RECOGNITION} as a parameter 
+
+*android.speech.RecognitionService.Callback.rmsChanged(float)*
+
+public void rmsChanged(float rmsdB)
+  throws |android.os.RemoteException|
+         
+The service should call this method when the sound level in the audio stream 
+has changed. There is no guarantee that this method will be called. 
+
+
+    rmsdB - the new RMS dB value 
+
+

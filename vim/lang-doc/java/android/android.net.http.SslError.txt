@@ -1,0 +1,207 @@
+*android.net.http.SslError* *SslError* This class represents a set of one or mor
+
+public class SslError
+  extends    |java.lang.Object|
+
+|android.net.http.SslError_Description|
+|android.net.http.SslError_Fields|
+|android.net.http.SslError_Constructors|
+|android.net.http.SslError_Methods|
+
+================================================================================
+
+*android.net.http.SslError_Fields*
+|int_android.net.http.SslError.SSL_DATE_INVALID|
+|int_android.net.http.SslError.SSL_EXPIRED|
+|int_android.net.http.SslError.SSL_IDMISMATCH|
+|int_android.net.http.SslError.SSL_INVALID|
+|int_android.net.http.SslError.SSL_MAX_ERROR|
+|int_android.net.http.SslError.SSL_NOTYETVALID|
+|int_android.net.http.SslError.SSL_UNTRUSTED|
+
+*android.net.http.SslError_Constructors*
+|android.net.http.SslError(int,SslCertificate)|Creates a new SslError object us
+|android.net.http.SslError(int,SslCertificate,String)|Creates a new SslError ob
+|android.net.http.SslError(int,X509Certificate)|Creates a new SslError object u
+|android.net.http.SslError(int,X509Certificate,String)|Creates a new SslError o
+
+*android.net.http.SslError_Methods*
+|android.net.http.SslError.addError(int)|Adds the supplied SSL error to the set
+|android.net.http.SslError.getCertificate()|Gets the SSL certificate associated
+|android.net.http.SslError.getPrimaryError()|Gets the most severe SSL error in 
+|android.net.http.SslError.getUrl()|Gets the URL associated with this object.
+|android.net.http.SslError.hasError(int)|Determines whether this object include
+|android.net.http.SslError.SslErrorFromChromiumErrorCode(int,SslCertificate,String)|
+|android.net.http.SslError.toString()|Returns a string representation of this o
+
+*android.net.http.SslError_Description*
+
+This class represents a set of one or more SSL errors and the associated SSL 
+certificate. 
+
+
+
+*int_android.net.http.SslError.SSL_DATE_INVALID*
+
+The date of the certificate is invalid 
+
+
+*int_android.net.http.SslError.SSL_EXPIRED*
+
+The certificate has expired 
+
+
+*int_android.net.http.SslError.SSL_IDMISMATCH*
+
+Hostname mismatch 
+
+
+*int_android.net.http.SslError.SSL_INVALID*
+
+A generic error occurred 
+
+
+*int_android.net.http.SslError.SSL_MAX_ERROR*
+
+The number of different SSL errors. 
+
+
+*int_android.net.http.SslError.SSL_NOTYETVALID*
+
+The certificate is not yet valid 
+
+
+*int_android.net.http.SslError.SSL_UNTRUSTED*
+
+The certificate authority is not trusted 
+
+
+
+*android.net.http.SslError(int,SslCertificate)*
+
+public SslError(
+  int error,
+  android.net.http.SslCertificate certificate)
+
+Creates a new SslError object using the supplied error and certificate. The URL 
+will be set to the empty string. 
+
+    error - The SSL error 
+    certificate - The associated SSL certificate 
+
+*android.net.http.SslError(int,SslCertificate,String)*
+
+public SslError(
+  int error,
+  android.net.http.SslCertificate certificate,
+  java.lang.String url)
+
+Creates a new SslError object using the supplied error, certificate and URL. 
+
+    error - The SSL error 
+    certificate - The associated SSL certificate 
+    url - The associated URL 
+
+*android.net.http.SslError(int,X509Certificate)*
+
+public SslError(
+  int error,
+  java.security.cert.X509Certificate certificate)
+
+Creates a new SslError object using the supplied error and certificate. The URL 
+will be set to the empty string. 
+
+    error - The SSL error 
+    certificate - The associated SSL certificate 
+
+*android.net.http.SslError(int,X509Certificate,String)*
+
+public SslError(
+  int error,
+  java.security.cert.X509Certificate certificate,
+  java.lang.String url)
+
+Creates a new SslError object using the supplied error, certificate and URL. 
+
+    error - The SSL error 
+    certificate - The associated SSL certificate 
+    url - The associated URL 
+
+*android.net.http.SslError.addError(int)*
+
+public boolean addError(int error)
+
+Adds the supplied SSL error to the set. 
+
+
+    error - The SSL error to add 
+
+    Returns: True if the error being added is a known SSL error, otherwise false. 
+
+*android.net.http.SslError.getCertificate()*
+
+public |android.net.http.SslCertificate| getCertificate()
+
+Gets the SSL certificate associated with this object. 
+
+
+
+    Returns: The SSL certificate, non-null. 
+
+*android.net.http.SslError.getPrimaryError()*
+
+public int getPrimaryError()
+
+Gets the most severe SSL error in this object's set of errors. Returns -1 if 
+the set is empty. 
+
+
+
+    Returns: The most severe SSL error, or -1 if the set is empty. 
+
+*android.net.http.SslError.getUrl()*
+
+public |java.lang.String| getUrl()
+
+Gets the URL associated with this object. 
+
+
+
+    Returns: The URL, non-null. 
+
+*android.net.http.SslError.hasError(int)*
+
+public boolean hasError(int error)
+
+Determines whether this object includes the supplied error. 
+
+
+    error - The SSL error to check for 
+
+    Returns: True if this object includes the error, otherwise false. 
+
+*android.net.http.SslError.SslErrorFromChromiumErrorCode(int,SslCertificate,String)*
+
+public static |android.net.http.SslError| SslErrorFromChromiumErrorCode(
+  int error,
+  android.net.http.SslCertificate cert,
+  java.lang.String url)
+
+Creates an SslError object from a chromium error code. 
+
+
+    error - The chromium error code 
+    certificate - The associated SSL certificate 
+    url - The associated URL. 
+
+*android.net.http.SslError.toString()*
+
+public |java.lang.String| toString()
+
+Returns a string representation of this object. 
+
+
+
+    Returns: A String representation of this object. 
+
+

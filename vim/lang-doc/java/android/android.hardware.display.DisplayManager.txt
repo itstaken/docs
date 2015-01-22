@@ -1,0 +1,370 @@
+*android.hardware.display.DisplayManager* *DisplayManager* Manages the propertie
+
+public final class DisplayManager
+  extends    |java.lang.Object|
+
+|android.hardware.display.DisplayManager_Description|
+|android.hardware.display.DisplayManager_Fields|
+|android.hardware.display.DisplayManager_Constructors|
+|android.hardware.display.DisplayManager_Methods|
+
+================================================================================
+
+*android.hardware.display.DisplayManager_Fields*
+|java.lang.String_android.hardware.display.DisplayManager.ACTION_WIFI_DISPLAY_STATUS_CHANGED|
+|java.lang.String_android.hardware.display.DisplayManager.DISPLAY_CATEGORY_PRESENTATION|
+|java.lang.String_android.hardware.display.DisplayManager.EXTRA_WIFI_DISPLAY_STATUS|
+|int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION|
+|int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC|
+|int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_SECURE|
+
+*android.hardware.display.DisplayManager_Constructors*
+|android.hardware.display.DisplayManager(Context)|
+
+*android.hardware.display.DisplayManager_Methods*
+|android.hardware.display.DisplayManager.connectWifiDisplay(String)|Connects to
+|android.hardware.display.DisplayManager.createVirtualDisplay(String,int,int,int,Surface,int)|
+|android.hardware.display.DisplayManager.disconnectWifiDisplay()|Disconnects fr
+|android.hardware.display.DisplayManager.forgetWifiDisplay(String)|Forgets a pr
+|android.hardware.display.DisplayManager.getDisplay(int)|Gets information about
+|android.hardware.display.DisplayManager.getDisplays()|Gets all currently valid
+|android.hardware.display.DisplayManager.getDisplays(String)|Gets all currently
+|android.hardware.display.DisplayManager.getWifiDisplayStatus()|Gets the curren
+|android.hardware.display.DisplayManager.pauseWifiDisplay()|
+|android.hardware.display.DisplayManager.registerDisplayListener(DisplayManager.DisplayListener,Handler)|
+|android.hardware.display.DisplayManager.renameWifiDisplay(String,String)|Renam
+|android.hardware.display.DisplayManager.resumeWifiDisplay()|
+|android.hardware.display.DisplayManager.startWifiDisplayScan()|Starts scanning
+|android.hardware.display.DisplayManager.stopWifiDisplayScan()|Stops scanning f
+|android.hardware.display.DisplayManager.unregisterDisplayListener(DisplayManager.DisplayListener)|
+
+*android.hardware.display.DisplayManager_Description*
+
+Manages the properties of attached displays. 
+
+Get an instance of this class by calling 
+Context.getSystemService()(|android.content.Context|) with the argument 
+(|android.content.Context|) . 
+
+
+
+*java.lang.String_android.hardware.display.DisplayManager.ACTION_WIFI_DISPLAY_STATUS_CHANGED*
+
+Broadcast receiver that indicates when the Wifi display status changes. 
+
+The status is provided as a (|android.hardware.display.WifiDisplayStatus|) 
+object in the (|android.hardware.display.DisplayManager|) extra. 
+
+This broadcast is only sent to registered receivers and can only be sent by the 
+system. 
+
+
+*java.lang.String_android.hardware.display.DisplayManager.DISPLAY_CATEGORY_PRESENTATION*
+
+Display category: Presentation displays. 
+
+This category can be used to identify secondary displays that are suitable for 
+use as presentation displays such as HDMI or Wireless displays. Applications 
+may automatically project their content to presentation displays to provide 
+richer second screen experiences. 
+
+
+*java.lang.String_android.hardware.display.DisplayManager.EXTRA_WIFI_DISPLAY_STATUS*
+
+Contains a (|android.hardware.display.WifiDisplayStatus|) object. 
+
+
+*int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION*
+
+Virtual display flag: Create a presentation display. 
+
+Presentation virtual displays 
+
+When this flag is set, the virtual display is registered as a presentation 
+display in the presentation display 
+category(|android.hardware.display.DisplayManager|) . Applications may 
+automatically project their content to presentation displays to provide richer 
+second screen experiences. 
+
+Non-presentation virtual displays 
+
+When this flag is not set, the virtual display is not registered as a 
+presentation display. Applications can still project their content on the 
+display but they will typically not do so automatically. This option is 
+appropriate for more special-purpose displays. 
+
+
+*int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC*
+
+Virtual display flag: Create a public display. 
+
+Public virtual displays 
+
+When this flag is set, the virtual display is public. 
+
+A public virtual display behaves just like most any other display that is 
+connected to the system such as an HDMI or Wireless display. Applications can 
+open windows on the display and the system may mirror the contents of other 
+displays onto it. 
+
+Creating a public virtual display requires the (|android.Manifest.permission|) 
+or (|android.Manifest.permission|) permission. These permissions are reserved 
+for use by system components and are not available to third-party applications. 
+
+Private virtual displays 
+
+When this flag is not set, the virtual display is private as defined by the 
+(|android.view.Display|) display flag. 
+
+A private virtual display belongs to the application that created it. Only the 
+a owner of a private virtual display is allowed to place windows upon it. The 
+private virtual display also does not participate in display mirroring: it will 
+neither receive mirrored content from another display nor allow its own content 
+to be mirrored elsewhere. More precisely, the only processes that are allowed 
+to enumerate or interact with the private display are those that have the same 
+UID as the application that originally created the private virtual display. 
+
+
+*int_android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_SECURE*
+
+Virtual display flag: Create a secure display. 
+
+Secure virtual displays 
+
+When this flag is set, the virtual display is considered secure as defined by 
+the (|android.view.Display|) display flag. The caller promises to take 
+reasonable measures, such as over-the-air encryption, to prevent the contents 
+of the display from being intercepted or recorded on a persistent medium. 
+
+Creating a secure virtual display requires the (|android.Manifest.permission|) 
+permission. This permission is reserved for use by system components and is not 
+available to third-party applications. 
+
+Non-secure virtual displays 
+
+When this flag is not set, the virtual display is considered unsecure. The 
+content of secure windows will be blanked if shown on this display. 
+
+
+
+*android.hardware.display.DisplayManager(Context)*
+
+public DisplayManager(android.content.Context context)
+
+
+
+
+*android.hardware.display.DisplayManager.connectWifiDisplay(String)*
+
+public void connectWifiDisplay(java.lang.String deviceAddress)
+
+Connects to a Wifi display. The results are sent as a 
+(|android.hardware.display.DisplayManager|) broadcast. 
+
+Automatically remembers the display after a successful connection, if not 
+already remembered. 
+
+Requires (|android.Manifest.permission|) . 
+
+
+    deviceAddress - The MAC address of the device to which we should connect. 
+
+*android.hardware.display.DisplayManager.createVirtualDisplay(String,int,int,int,Surface,int)*
+
+public |android.hardware.display.VirtualDisplay| createVirtualDisplay(
+  java.lang.String name,
+  int width,
+  int height,
+  int densityDpi,
+  android.view.Surface surface,
+  int flags)
+
+Creates a virtual display. 
+
+The content of a virtual display is rendered to a (|android.view.Surface|) 
+provided by the application. 
+
+The virtual display should be 
+released(|android.hardware.display.VirtualDisplay|) when no longer needed. 
+Because a virtual display renders to a surface provided by the application, it 
+will be released automatically when the process terminates and all remaining 
+windows on it will be forcibly removed. 
+
+The behavior of the virtual display depends on the flags that are provided to 
+this method. By default, virtual displays are created to be private, 
+non-presentation and unsecure. Permissions may be required to use certain 
+flags. 
+
+
+    name - The name of the virtual display, must be non-empty. 
+    width - The width of the virtual display in pixels, must be greater than 0. 
+    height - The height of the virtual display in pixels, must be greater than 0. 
+    densityDpi - The density of the virtual display in dpi, must be greater than 0. 
+    surface - The surface to which the content of the virtual display should be rendered, 
+       must be non-null. 
+    flags - A combination of virtual display flags: {@link #VIRTUAL_DISPLAY_FLAG_PUBLIC}, 
+       {@link #VIRTUAL_DISPLAY_FLAG_PRESENTATION} or {@link 
+       #VIRTUAL_DISPLAY_FLAG_SECURE}. 
+
+    Returns: The newly created virtual display, or null if the application could not create 
+             the virtual display. 
+
+*android.hardware.display.DisplayManager.disconnectWifiDisplay()*
+
+public void disconnectWifiDisplay()
+
+Disconnects from the current Wifi display. The results are sent as a 
+(|android.hardware.display.DisplayManager|) broadcast. 
+
+
+
+*android.hardware.display.DisplayManager.forgetWifiDisplay(String)*
+
+public void forgetWifiDisplay(java.lang.String deviceAddress)
+
+Forgets a previously remembered Wifi display. 
+
+Automatically disconnects from the display if currently connected to it. 
+
+Requires (|android.Manifest.permission|) . 
+
+
+    deviceAddress - The MAC address of the device to forget. 
+
+*android.hardware.display.DisplayManager.getDisplay(int)*
+
+public |android.view.Display| getDisplay(int displayId)
+
+Gets information about a logical display. 
+
+The display metrics may be adjusted to provide compatibility for legacy 
+applications. 
+
+
+    displayId - The logical display id. 
+
+    Returns: The display object, or null if there is no valid display with the given id. 
+
+*android.hardware.display.DisplayManager.getDisplays()*
+
+public |android.view.Display|[] getDisplays()
+
+Gets all currently valid logical displays. 
+
+
+
+    Returns: An array containing all displays. 
+
+*android.hardware.display.DisplayManager.getDisplays(String)*
+
+public |android.view.Display|[] getDisplays(java.lang.String category)
+
+Gets all currently valid logical displays of the specified category. 
+
+When there are multiple displays in a category the returned displays are sorted 
+of preference. For example, if the requested category is 
+(|android.hardware.display.DisplayManager|) and there are multiple presentation 
+displays then the displays are sorted so that the first display in the returned 
+array is the most preferred presentation display. The application may simply 
+use the first display or allow the user to choose. 
+
+
+    category - The requested display category or null to return all displays. 
+
+    Returns: An array containing all displays sorted by order of preference. 
+
+*android.hardware.display.DisplayManager.getWifiDisplayStatus()*
+
+public |android.hardware.display.WifiDisplayStatus| getWifiDisplayStatus()
+
+Gets the current Wifi display status. Watch for changes in the status by 
+registering a broadcast receiver for 
+(|android.hardware.display.DisplayManager|) . 
+
+
+
+    Returns: The current Wifi display status. 
+
+*android.hardware.display.DisplayManager.pauseWifiDisplay()*
+
+public void pauseWifiDisplay()
+
+
+
+
+
+*android.hardware.display.DisplayManager.registerDisplayListener(DisplayManager.DisplayListener,Handler)*
+
+public void registerDisplayListener(
+  android.hardware.display.DisplayManager.DisplayListener listener,
+  android.os.Handler handler)
+
+Registers an display listener to receive notifications about when displays are 
+added, removed or changed. 
+
+
+    listener - The listener to register. 
+    handler - The handler on which the listener should be invoked, or null if the listener 
+       should be invoked on the calling thread's looper. 
+
+*android.hardware.display.DisplayManager.renameWifiDisplay(String,String)*
+
+public void renameWifiDisplay(
+  java.lang.String deviceAddress,
+  java.lang.String alias)
+
+Renames a Wifi display. 
+
+The display must already be remembered for this call to succeed. In other 
+words, we must already have successfully connected to the display at least once 
+and then not forgotten it. 
+
+Requires (|android.Manifest.permission|) . 
+
+
+    deviceAddress - The MAC address of the device to rename. 
+    alias - The alias name by which to remember the device, or null or empty if no alias 
+       should be used. 
+
+*android.hardware.display.DisplayManager.resumeWifiDisplay()*
+
+public void resumeWifiDisplay()
+
+
+
+
+
+*android.hardware.display.DisplayManager.startWifiDisplayScan()*
+
+public void startWifiDisplayScan()
+
+Starts scanning for available Wifi displays. The results are sent as a 
+(|android.hardware.display.DisplayManager|) broadcast. 
+
+Calls to this method nest and must be matched by an equal number of calls to 
+(|android.hardware.display.DisplayManager|) . 
+
+Requires (|android.Manifest.permission|) . 
+
+
+
+*android.hardware.display.DisplayManager.stopWifiDisplayScan()*
+
+public void stopWifiDisplayScan()
+
+Stops scanning for available Wifi displays. 
+
+Requires (|android.Manifest.permission|) . 
+
+
+
+*android.hardware.display.DisplayManager.unregisterDisplayListener(DisplayManager.DisplayListener)*
+
+public void unregisterDisplayListener(android.hardware.display.DisplayManager.DisplayListener listener)
+
+Unregisters an input device listener. 
+
+
+    listener - The listener to unregister. 
+
+

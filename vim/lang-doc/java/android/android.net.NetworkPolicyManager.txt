@@ -1,0 +1,230 @@
+*android.net.NetworkPolicyManager* *NetworkPolicyManager* Manager for creating a
+
+public class NetworkPolicyManager
+  extends    |java.lang.Object|
+
+|android.net.NetworkPolicyManager_Description|
+|android.net.NetworkPolicyManager_Fields|
+|android.net.NetworkPolicyManager_Constructors|
+|android.net.NetworkPolicyManager_Methods|
+
+================================================================================
+
+*android.net.NetworkPolicyManager_Fields*
+|java.lang.String_android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE|
+|int_android.net.NetworkPolicyManager.POLICY_NONE|
+|int_android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND|
+|int_android.net.NetworkPolicyManager.RULE_ALLOW_ALL|
+|int_android.net.NetworkPolicyManager.RULE_REJECT_METERED|
+
+*android.net.NetworkPolicyManager_Constructors*
+|android.net.NetworkPolicyManager(INetworkPolicyManager)|
+
+*android.net.NetworkPolicyManager_Methods*
+|android.net.NetworkPolicyManager.computeLastCycleBoundary(long,NetworkPolicy)|
+|android.net.NetworkPolicyManager.computeNextCycleBoundary(long,NetworkPolicy)|
+|android.net.NetworkPolicyManager.dumpPolicy(PrintWriter,int)|
+|android.net.NetworkPolicyManager.dumpRules(PrintWriter,int)|
+|android.net.NetworkPolicyManager.from(Context)|
+|android.net.NetworkPolicyManager.getNetworkPolicies()|
+|android.net.NetworkPolicyManager.getRestrictBackground()|
+|android.net.NetworkPolicyManager.getUidPolicy(int)|
+|android.net.NetworkPolicyManager.getUidsWithPolicy(int)|
+|android.net.NetworkPolicyManager.isUidValidForPolicy(Context,int)|Check if giv
+|android.net.NetworkPolicyManager.registerListener(INetworkPolicyListener)|
+|android.net.NetworkPolicyManager.setNetworkPolicies(NetworkPolicy[])|
+|android.net.NetworkPolicyManager.setRestrictBackground(boolean)|
+|android.net.NetworkPolicyManager.setUidPolicy(int,int)|Set policy flags for sp
+|android.net.NetworkPolicyManager.snapToCycleDay(Time,int)|Snap to the cycle da
+|android.net.NetworkPolicyManager.unregisterListener(INetworkPolicyListener)|
+
+*android.net.NetworkPolicyManager_Description*
+
+Manager for creating and modifying network policy rules. 
+
+
+
+*java.lang.String_android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE*
+
+(|android.content.Intent|) extra that indicates which 
+(|android.net.NetworkTemplate|) rule it applies to. 
+
+
+*int_android.net.NetworkPolicyManager.POLICY_NONE*
+
+No specific network policy, use system default. 
+
+
+*int_android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND*
+
+Reject network usage on metered networks when application in background. 
+
+
+*int_android.net.NetworkPolicyManager.RULE_ALLOW_ALL*
+
+All network traffic should be allowed. 
+
+
+*int_android.net.NetworkPolicyManager.RULE_REJECT_METERED*
+
+Reject traffic on metered networks. 
+
+
+
+*android.net.NetworkPolicyManager(INetworkPolicyManager)*
+
+public NetworkPolicyManager(INetworkPolicyManager service)
+
+
+
+
+*android.net.NetworkPolicyManager.computeLastCycleBoundary(long,NetworkPolicy)*
+
+public static long computeLastCycleBoundary(
+  long currentTime,
+  android.net.NetworkPolicy policy)
+
+Compute the last cycle boundary for the given (|android.net.NetworkPolicy|) . 
+For example, if cycle day is 20th, and today is June 15th, it will return May 
+20th. When cycle day doesn't exist in current month, it snaps to the 1st of 
+following month. 
+
+
+
+*android.net.NetworkPolicyManager.computeNextCycleBoundary(long,NetworkPolicy)*
+
+public static long computeNextCycleBoundary(
+  long currentTime,
+  android.net.NetworkPolicy policy)
+
+
+
+
+
+*android.net.NetworkPolicyManager.dumpPolicy(PrintWriter,int)*
+
+public static void dumpPolicy(
+  java.io.PrintWriter fout,
+  int policy)
+
+
+
+
+
+*android.net.NetworkPolicyManager.dumpRules(PrintWriter,int)*
+
+public static void dumpRules(
+  java.io.PrintWriter fout,
+  int rules)
+
+
+
+
+
+*android.net.NetworkPolicyManager.from(Context)*
+
+public static |android.net.NetworkPolicyManager| from(android.content.Context context)
+
+
+
+
+
+*android.net.NetworkPolicyManager.getNetworkPolicies()*
+
+public |android.net.NetworkPolicy|[] getNetworkPolicies()
+
+
+
+
+
+*android.net.NetworkPolicyManager.getRestrictBackground()*
+
+public boolean getRestrictBackground()
+
+
+
+
+
+*android.net.NetworkPolicyManager.getUidPolicy(int)*
+
+public int getUidPolicy(int uid)
+
+
+
+
+
+*android.net.NetworkPolicyManager.getUidsWithPolicy(int)*
+
+public int[] getUidsWithPolicy(int policy)
+
+
+
+
+
+*android.net.NetworkPolicyManager.isUidValidForPolicy(Context,int)*
+
+public static boolean isUidValidForPolicy(
+  android.content.Context context,
+  int uid)
+
+Check if given UID can have a (|android.net.NetworkPolicyManager|) defined, 
+usually to protect critical system services. 
+
+
+
+*android.net.NetworkPolicyManager.registerListener(INetworkPolicyListener)*
+
+public void registerListener(INetworkPolicyListener listener)
+
+
+
+
+
+*android.net.NetworkPolicyManager.setNetworkPolicies(NetworkPolicy[])*
+
+public void setNetworkPolicies(android.net.NetworkPolicy[] policies)
+
+
+
+
+
+*android.net.NetworkPolicyManager.setRestrictBackground(boolean)*
+
+public void setRestrictBackground(boolean restrictBackground)
+
+
+
+
+
+*android.net.NetworkPolicyManager.setUidPolicy(int,int)*
+
+public void setUidPolicy(
+  int uid,
+  int policy)
+
+Set policy flags for specific UID. 
+
+
+    policy - {@link #POLICY_NONE} or combination of flags like {@link 
+       #POLICY_REJECT_METERED_BACKGROUND}. 
+
+*android.net.NetworkPolicyManager.snapToCycleDay(Time,int)*
+
+public static void snapToCycleDay(
+  android.text.format.Time time,
+  int cycleDay)
+
+Snap to the cycle day for the current month given; when cycle day doesn't 
+exist, it snaps to last second of current month. 
+
+
+
+*android.net.NetworkPolicyManager.unregisterListener(INetworkPolicyListener)*
+
+public void unregisterListener(INetworkPolicyListener listener)
+
+
+
+
+
+

@@ -1,0 +1,701 @@
+*android.app.SearchManager* *SearchManager* This class provides access to the sy
+
+public class SearchManager
+  extends    |java.lang.Object|
+  implements |android.content.DialogInterface.OnDismissListener|
+             |android.content.DialogInterface.OnCancelListener|
+
+|android.app.SearchManager_Description|
+|android.app.SearchManager_Fields|
+|android.app.SearchManager_Constructors|
+|android.app.SearchManager_Methods|
+
+================================================================================
+
+*android.app.SearchManager_Fields*
+|java.lang.String_android.app.SearchManager.ACTION_KEY|
+|java.lang.String_android.app.SearchManager.ACTION_MSG|
+|java.lang.String_android.app.SearchManager.APP_DATA|
+|java.lang.String_android.app.SearchManager.CONTEXT_IS_VOICE|
+|java.lang.String_android.app.SearchManager.CURSOR_EXTRA_KEY_IN_PROGRESS|
+|java.lang.String_android.app.SearchManager.DISABLE_VOICE_SEARCH|
+|java.lang.String_android.app.SearchManager.EXTRA_DATA_KEY|
+|java.lang.String_android.app.SearchManager.EXTRA_NEW_SEARCH|
+|java.lang.String_android.app.SearchManager.EXTRA_SELECT_QUERY|
+|java.lang.String_android.app.SearchManager.EXTRA_WEB_SEARCH_PENDINGINTENT|
+|int_android.app.SearchManager.FLAG_QUERY_REFINEMENT|
+|java.lang.String_android.app.SearchManager.INTENT_ACTION_GLOBAL_SEARCH|
+|java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS|
+|java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS_CHANGED|
+|java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED|
+|java.lang.String_android.app.SearchManager.INTENT_ACTION_WEB_SEARCH_SETTINGS|
+|java.lang.String_android.app.SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED|
+|char_android.app.SearchManager.MENU_KEY|
+|int_android.app.SearchManager.MENU_KEYCODE|
+|java.lang.String_android.app.SearchManager.QUERY|
+|java.lang.String_android.app.SearchManager.SEARCH_MODE|
+|java.lang.String_android.app.SearchManager.SHORTCUT_MIME_TYPE|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_FLAGS|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_FORMAT|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_ICON_1|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_ICON_2|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_ACTION|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_DATA|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_EXTRA_DATA|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_LAST_ACCESS_HINT|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_QUERY|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_SHORTCUT_ID|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_1|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_2|
+|java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_2_URL|
+|java.lang.String_android.app.SearchManager.SUGGEST_MIME_TYPE|
+|java.lang.String_android.app.SearchManager.SUGGEST_NEVER_MAKE_SHORTCUT|
+|java.lang.String_android.app.SearchManager.SUGGEST_PARAMETER_LIMIT|
+|java.lang.String_android.app.SearchManager.SUGGEST_URI_PATH_QUERY|
+|java.lang.String_android.app.SearchManager.SUGGEST_URI_PATH_SHORTCUT|
+|java.lang.String_android.app.SearchManager.USER_QUERY|
+
+*android.app.SearchManager_Methods*
+|android.app.SearchManager.getAssistIntent(Context,boolean)|Gets an intent for 
+|android.app.SearchManager.getAssistIntent(Context,boolean,int)|Gets an intent 
+|android.app.SearchManager.getGlobalSearchActivities()|Returns a list of instal
+|android.app.SearchManager.getGlobalSearchActivity()|Gets the name of the globa
+|android.app.SearchManager.getSearchableInfo(ComponentName)|Gets information ab
+|android.app.SearchManager.getSearchablesInGlobalSearch()|Returns a list of the
+|android.app.SearchManager.getSuggestions(SearchableInfo,String)|Gets a cursor 
+|android.app.SearchManager.getSuggestions(SearchableInfo,String,int)|Gets a cur
+|android.app.SearchManager.getWebSearchActivity()|Gets the name of the web sear
+|android.app.SearchManager.isVisible()|Determine if the Search UI is currently 
+|android.app.SearchManager.onCancel(DialogInterface)|
+|android.app.SearchManager.onDismiss(DialogInterface)|
+|android.app.SearchManager.setOnCancelListener(SearchManager.OnCancelListener)|
+|android.app.SearchManager.setOnDismissListener(SearchManager.OnDismissListener)|
+|android.app.SearchManager.startSearch(String,boolean,ComponentName,Bundle,boolean)|
+|android.app.SearchManager.startSearch(String,boolean,ComponentName,Bundle,boolean,Rect)|
+|android.app.SearchManager.stopSearch()|Terminate search UI.
+|android.app.SearchManager.triggerSearch(String,ComponentName,Bundle)|Similar t
+
+*android.app.SearchManager_Description*
+
+This class provides access to the system search services. 
+
+In practice, you won't interact with this class directly, as search services 
+are provided through methods in Activity(|android.app.Activity|) and the 
+ACTION_SEARCH(|android.content.Intent|) Intent(|android.content.Intent|) . If 
+you do require direct access to the SearchManager, do not instantiate this 
+class directly. Instead, retrieve it through 
+context.getSystemService(Context.SEARCH_SERVICE)(|android.content.Context|) . 
+
+Developer Guides For more information about using the search dialog and adding 
+search suggestions in your application, read the <a 
+href="guide/topics/search/index.html">Search developer guide. 
+
+
+
+*java.lang.String_android.app.SearchManager.ACTION_KEY*
+
+Intent extra data key: Use this key with Intent.ACTION_SEARCH and 
+content.Intent.getIntExtra()(|android.content.Intent|) to obtain the keycode 
+that the user used to trigger this query. It will be zero if the user simply 
+pressed the "GO" button on the search UI. This is primarily used in conjunction 
+with the keycode attribute in the actionkey element of your searchable.xml 
+configuration file. 
+
+
+*java.lang.String_android.app.SearchManager.ACTION_MSG*
+
+Intent extra data key: Use this key with Intent.ACTION_SEARCH and 
+content.Intent.getStringExtra()(|android.content.Intent|) to obtain the action 
+message that was defined for a particular search action key and/or suggestion. 
+It will be null if the search was launched by typing "enter", touched the the 
+"GO" button, or other means not involving any action key. 
+
+
+*java.lang.String_android.app.SearchManager.APP_DATA*
+
+Intent extra data key: Use this key with Intent.ACTION_SEARCH and 
+content.Intent.getBundleExtra()(|android.content.Intent|) to obtain any 
+additional app-specific data that was inserted by the activity that launched 
+the search. 
+
+
+*java.lang.String_android.app.SearchManager.CONTEXT_IS_VOICE*
+
+This means that context is voice, and therefore the SearchDialog should 
+continue showing the microphone until the user indicates that he/she does not 
+want to re-speak (e.g. by typing). 
+
+
+*java.lang.String_android.app.SearchManager.CURSOR_EXTRA_KEY_IN_PROGRESS*
+
+Boolean extra data key for a suggestion provider to return in 
+(|android.database.Cursor|) to indicate that the search is not complete yet. 
+This can be used by the search UI to indicate that a search is in progress. The 
+suggestion provider can return partial results this way and send a change 
+notification on the cursor when more results are available. 
+
+
+*java.lang.String_android.app.SearchManager.DISABLE_VOICE_SEARCH*
+
+This means that the voice icon should not be shown at all, because the current 
+search engine does not support voice search. 
+
+
+*java.lang.String_android.app.SearchManager.EXTRA_DATA_KEY*
+
+Intent extra data key: This key will be used for the extra populated by the 
+(|android.app.SearchManager|) column. 
+
+
+*java.lang.String_android.app.SearchManager.EXTRA_NEW_SEARCH*
+
+Boolean extra data key for (|android.content.Intent|) intents. Iftrue, this 
+search should open a new browser window, rather than using an existing one. 
+
+
+*java.lang.String_android.app.SearchManager.EXTRA_SELECT_QUERY*
+
+Boolean extra data key for (|android.app.SearchManager|) intents. Iftrue, the 
+initial query should be selected when the global search activity is started, so 
+that the user can easily replace it with another query. 
+
+
+*java.lang.String_android.app.SearchManager.EXTRA_WEB_SEARCH_PENDINGINTENT*
+
+Extra data key for (|android.content.Intent|) . If set, the value must be a 
+(|android.app.PendingIntent|) . The search activity handling the 
+(|android.content.Intent|) intent will fill in and launch the pending intent. 
+The data URI will be filled in with an http or https URI, and 
+(|android.provider.Browser|) may be filled in. 
+
+
+*int_android.app.SearchManager.FLAG_QUERY_REFINEMENT*
+
+Flag to specify that the entry can be used for query refinement, i.e., the 
+query text in the search field can be replaced with the text in this entry, 
+when a query refinement icon is clicked. The suggestion list should show such a 
+clickable icon beside the entry. Use this flag as a bit-field for 
+(|android.app.SearchManager|) . 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_ACTION_GLOBAL_SEARCH*
+
+Intent action for starting the global search activity. The global search 
+provider should handle this intent. 
+
+Supported extra data keys: (|android.app.SearchManager|) , 
+(|android.app.SearchManager|) , (|android.app.SearchManager|) . 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS*
+
+Intent action for starting the global search settings activity. The global 
+search provider should handle this intent. 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS_CHANGED*
+
+Intent action broadcasted to inform that the search settings have changed in 
+some way. Either searchables have been enabled or disabled, or a different web 
+search provider has been chosen. 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_ACTION_SEARCHABLES_CHANGED*
+
+Intent action broadcasted to inform that the searchables list or default have 
+changed. Components should handle this intent if they cache any searchable data 
+and wish to stay up to date on changes. 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_ACTION_WEB_SEARCH_SETTINGS*
+
+Intent action for starting a web search provider's settings activity. Web 
+search providers should handle this intent if they have provider-specific 
+settings to implement. 
+
+
+*java.lang.String_android.app.SearchManager.INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED*
+
+Intent action to be broadcast to inform that the global search provider has 
+changed. 
+
+
+*char_android.app.SearchManager.MENU_KEY*
+
+This is a shortcut definition for the default menu key to use for invoking 
+search. 
+
+See Menu.Item.setAlphabeticShortcut() for more information. 
+
+
+*int_android.app.SearchManager.MENU_KEYCODE*
+
+This is a shortcut definition for the default menu key to use for invoking 
+search. 
+
+See Menu.Item.setAlphabeticShortcut() for more information. 
+
+
+*java.lang.String_android.app.SearchManager.QUERY*
+
+Intent extra data key: Use this key with 
+content.Intent.getStringExtra()(|android.content.Intent|) to obtain the query 
+string from Intent.ACTION_SEARCH. 
+
+
+*java.lang.String_android.app.SearchManager.SEARCH_MODE*
+
+Intent extra data key: Use 
+content.Intent.getBundleExtra(SEARCH_MODE)(|android.content.Intent|) to get the 
+search mode used to launch the intent. The only current value for this is 
+(|android.app.SearchManager|) . 
+
+
+*java.lang.String_android.app.SearchManager.SHORTCUT_MIME_TYPE*
+
+MIME type for shortcut validation. You'll use this in your suggestions content 
+provider in the getType() function. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_FLAGS*
+
+Column name for suggestions cursor. Optional. This column is used to specify 
+additional flags per item. Multiple flags can be specified. 
+
+Must be one of (|android.app.SearchManager|) or 0 to indicate no flags. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_FORMAT*
+
+Column name for suggestions cursor. Unused - can be null or column can be 
+omitted. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_ICON_1*
+
+Column name for suggestions cursor. Optional. If your cursor includes this 
+column, then all suggestions will be provided in a format that includes space 
+for two small icons, one at the left and one at the right of each suggestion. 
+The data in the column must be a resource ID of a drawable, or a URI in one of 
+the following formats: 
+
+content ( (|android.content.ContentResolver|) ) android.resource ( 
+(|android.content.ContentResolver|) ) file ( 
+(|android.content.ContentResolver|) ) 
+
+See (|android.content.ContentResolver|) for more information on these schemes. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_ICON_2*
+
+Column name for suggestions cursor. Optional. If your cursor includes this 
+column, then all suggestions will be provided in a format that includes space 
+for two small icons, one at the left and one at the right of each suggestion. 
+The data in the column must be a resource ID of a drawable, or a URI in one of 
+the following formats: 
+
+content ( (|android.content.ContentResolver|) ) android.resource ( 
+(|android.content.ContentResolver|) ) file ( 
+(|android.content.ContentResolver|) ) 
+
+See (|android.content.ContentResolver|) for more information on these schemes. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_ACTION*
+
+Column name for suggestions cursor. Optional. If this column exists and this 
+element exists at the given row, this is the action that will be used when 
+forming the suggestion's intent. If the element is not provided, the action 
+will be taken from the android:searchSuggestIntentAction field in your XML 
+metadata. At least one of these must be present for the suggestion to generate 
+an intent. Note: If your action is the same for all suggestions, it is more 
+efficient to specify it using XML metadata and omit it from the cursor. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_DATA*
+
+Column name for suggestions cursor. Optional. If this column exists and this 
+element exists at the given row, this is the data that will be used when 
+forming the suggestion's intent. If the element is not provided, the data will 
+be taken from the android:searchSuggestIntentData field in your XML metadata. 
+If neither source is provided, the Intent's data field will be null. Note: If 
+your data is the same for all suggestions, or can be described using a constant 
+part and a specific ID, it is more efficient to specify it using XML metadata 
+and omit it from the cursor. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID*
+
+Column name for suggestions cursor. Optional. If this column exists and this 
+element exists at the given row, then "/" and this value will be appended to 
+the data field in the Intent. This should only be used if the data field has 
+already been set to an appropriate base string. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_INTENT_EXTRA_DATA*
+
+Column name for suggestions cursor. Optional. If this column exists and this 
+element exists at the given row, this is the data that will be used when 
+forming the suggestion's intent. If not provided, the Intent's extra data field 
+will be null. This column allows suggestions to provide additional arbitrary 
+data which will be included as an extra under the key 
+(|android.app.SearchManager|) . 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_LAST_ACCESS_HINT*
+
+Column name for suggestions cursor. Optional. This column may be used to 
+specify the time in System.currentTImeMillis()(|java.lang.System|) (wall time 
+in UTC) when an item was last accessed within the results-providing 
+application. If set, this may be used to show more-recently-used items first. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_QUERY*
+
+Column name for suggestions cursor. Required if action is 
+ACTION_SEARCH(|android.content.Intent|) , optional otherwise. If this column 
+exists and this element exists at the given row, this is the data that will be 
+used when forming the suggestion's query. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_SHORTCUT_ID*
+
+Column name for suggestions cursor. Optional. This column is used to indicate 
+whether a search suggestion should be stored as a shortcut, and whether it 
+should be refreshed. If missing, the result will be stored as a shortcut and 
+never validated. If set to (|android.app.SearchManager|) , the result will not 
+be stored as a shortcut. Otherwise, the shortcut id will be used to check back 
+for an up to date suggestion using (|android.app.SearchManager|) . 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING*
+
+Column name for suggestions cursor. Optional. This column is used to specify 
+that a spinner should be shown in lieu of an icon2 while the shortcut of this 
+suggestion is being refreshed. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_1*
+
+Column name for suggestions cursor. Required. This is the primary line of text 
+that will be presented to the user as the suggestion. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_2*
+
+Column name for suggestions cursor. Optional. If your cursor includes this 
+column, then all suggestions will be provided in a two-line format. The second 
+line of text is in a much smaller appearance. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_COLUMN_TEXT_2_URL*
+
+Column name for suggestions cursor. Optional. This is a URL that will be shown 
+as the second line of text instead of (|android.app.SearchManager|) . This is a 
+separate column so that the search UI knows to display the text as a URL, e.g. 
+by using a different color. If this column is absent, or has the valuenull, 
+(|android.app.SearchManager|) will be used instead. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_MIME_TYPE*
+
+MIME type for suggestions data. You'll use this in your suggestions content 
+provider in the getType() function. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_NEVER_MAKE_SHORTCUT*
+
+Column value for suggestion column (|android.app.SearchManager|) when a 
+suggestion should not be stored as a shortcut in global search. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_PARAMETER_LIMIT*
+
+Query parameter added to suggestion queries to limit the number of suggestions 
+returned. This limit is only advisory and suggestion providers may chose to 
+ignore it. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_URI_PATH_QUERY*
+
+Uri path for queried suggestions data. This is the path that the search manager 
+will use when querying your content provider for suggestions data based on user 
+input (e.g. looking for partial matches). Typically you'll use this with a URI 
+matcher. 
+
+
+*java.lang.String_android.app.SearchManager.SUGGEST_URI_PATH_SHORTCUT*
+
+Uri path for shortcut validation. This is the path that the search manager will 
+use when querying your content provider to refresh a shortcutted suggestion 
+result and to check if it is still valid. When asked, a source may return an up 
+to date result, or no result. No result indicates the shortcut refers to a no 
+longer valid sugggestion. 
+
+
+*java.lang.String_android.app.SearchManager.USER_QUERY*
+
+Intent extra data key: Use this key with 
+content.Intent.getStringExtra()(|android.content.Intent|) to obtain the query 
+string typed in by the user. This may be different from the value of 
+(|android.app.SearchManager|) if the intent is the result of selecting a 
+suggestion. In that case, (|android.app.SearchManager|) will contain the value 
+of (|android.app.SearchManager|) for the suggestion, and 
+(|android.app.SearchManager|) will contain the string typed by the user. 
+
+
+
+*android.app.SearchManager.getAssistIntent(Context,boolean)*
+
+public |android.content.Intent| getAssistIntent(
+  android.content.Context context,
+  boolean inclContext)
+
+Gets an intent for launching installed assistant activity, or null if not 
+available. 
+
+
+
+    Returns: The assist intent. 
+
+*android.app.SearchManager.getAssistIntent(Context,boolean,int)*
+
+public |android.content.Intent| getAssistIntent(
+  android.content.Context context,
+  boolean inclContext,
+  int userHandle)
+
+Gets an intent for launching installed assistant activity, or null if not 
+available. 
+
+
+
+    Returns: The assist intent. 
+
+*android.app.SearchManager.getGlobalSearchActivities()*
+
+public |java.util.List|<ResolveInfo> getGlobalSearchActivities()
+
+Returns a list of installed apps that handle the global search intent. 
+
+
+
+*android.app.SearchManager.getGlobalSearchActivity()*
+
+public |android.content.ComponentName| getGlobalSearchActivity()
+
+Gets the name of the global search activity. 
+
+
+
+*android.app.SearchManager.getSearchableInfo(ComponentName)*
+
+public |android.app.SearchableInfo| getSearchableInfo(android.content.ComponentName componentName)
+
+Gets information about a searchable activity. 
+
+
+    componentName - The activity to get searchable information for. 
+
+    Returns: Searchable information, or null if the activity does not exist, or is not 
+             searchable. 
+
+*android.app.SearchManager.getSearchablesInGlobalSearch()*
+
+public |java.util.List|<SearchableInfo> getSearchablesInGlobalSearch()
+
+Returns a list of the searchable activities that can be included in global 
+search. 
+
+
+
+    Returns: a list containing searchable information for all searchable activities that 
+             have the android:includeInGlobalSearch attribute set in their 
+             searchable meta-data. 
+
+*android.app.SearchManager.getSuggestions(SearchableInfo,String)*
+
+public |android.database.Cursor| getSuggestions(
+  android.app.SearchableInfo searchable,
+  java.lang.String query)
+
+Gets a cursor with search suggestions. 
+
+
+    searchable - Information about how to get the suggestions. 
+    query - The search text entered (so far). 
+
+    Returns: a cursor with suggestions, or null the suggestion query failed. 
+
+*android.app.SearchManager.getSuggestions(SearchableInfo,String,int)*
+
+public |android.database.Cursor| getSuggestions(
+  android.app.SearchableInfo searchable,
+  java.lang.String query,
+  int limit)
+
+Gets a cursor with search suggestions. 
+
+
+    searchable - Information about how to get the suggestions. 
+    query - The search text entered (so far). 
+    limit - The query limit to pass to the suggestion provider. This is advisory, the 
+       returned cursor may contain more rows. Pass {@code -1} for no limit. 
+
+    Returns: a cursor with suggestions, or null the suggestion query failed. 
+
+*android.app.SearchManager.getWebSearchActivity()*
+
+public |android.content.ComponentName| getWebSearchActivity()
+
+Gets the name of the web search activity. 
+
+
+
+    Returns: The name of the default activity for web searches. This activity can be used to 
+             get web search suggestions. Returns {@code null} if there is no 
+             default web search activity. 
+
+*android.app.SearchManager.isVisible()*
+
+public boolean isVisible()
+
+Determine if the Search UI is currently displayed. 
+
+This is provided primarily for application test purposes. 
+
+
+
+    Returns: Returns true if the search UI is currently displayed. 
+
+*android.app.SearchManager.onCancel(DialogInterface)*
+
+public void onCancel(android.content.DialogInterface dialog)
+
+
+
+    Deprecated: This method is an obsolete internal implementation detail. Do not use.
+
+
+*android.app.SearchManager.onDismiss(DialogInterface)*
+
+public void onDismiss(android.content.DialogInterface dialog)
+
+
+
+    Deprecated: This method is an obsolete internal implementation detail. Do not use.
+
+
+*android.app.SearchManager.setOnCancelListener(SearchManager.OnCancelListener)*
+
+public void setOnCancelListener(android.app.SearchManager.OnCancelListener listener)
+
+Set or clear the callback that will be invoked whenever the search UI is 
+canceled. 
+
+
+    listener - The {@link OnCancelListener} to use, or null. 
+
+*android.app.SearchManager.setOnDismissListener(SearchManager.OnDismissListener)*
+
+public void setOnDismissListener(android.app.SearchManager.OnDismissListener listener)
+
+Set or clear the callback that will be invoked whenever the search UI is 
+dismissed. 
+
+
+    listener - The {@link OnDismissListener} to use, or null. 
+
+*android.app.SearchManager.startSearch(String,boolean,ComponentName,Bundle,boolean)*
+
+public void startSearch(
+  java.lang.String initialQuery,
+  boolean selectInitialQuery,
+  android.content.ComponentName launchActivity,
+  android.os.Bundle appSearchData,
+  boolean globalSearch)
+
+Launch search UI. 
+
+The search manager will open a search widget in an overlapping window, and the 
+underlying activity may be obscured. The search entry state will remain in 
+effect until one of the following events: 
+
+The user completes the search. In most cases this will launch a search intent. 
+The user uses the back, home, or other keys to exit the search. The application 
+calls the (|android.app.SearchManager|) method, which will hide the search 
+window and return focus to the activity from which it was launched. 
+
+Most applications will not use this interface to invoke search. The primary 
+method for invoking search is to call 
+Activity.onSearchRequested()(|android.app.Activity|) or 
+Activity.startSearch()(|android.app.Activity|) . 
+
+
+    initialQuery - A search string can be pre-entered here, but this is typically null or empty. 
+    selectInitialQuery - If true, the intial query will be preselected, which means that any further 
+       typing will replace it. This is useful for cases where an entire 
+       pre-formed query is being inserted. If false, the selection point will 
+       be placed at the end of the inserted query. This is useful when the 
+       inserted query is text that the user entered, and the user would expect 
+       to be able to keep typing. This parameter is only meaningful if 
+       initialQuery is a non-empty string. 
+    launchActivity - The ComponentName of the activity that has launched this search. 
+    appSearchData - An application can insert application-specific context here, in order to 
+       improve quality or specificity of its own searches. This data will be 
+       returned with SEARCH intent(s). Null if no extra data is required. 
+    globalSearch - If false, this will only launch the search that has been specifically defined 
+       by the application (which is usually defined as a local search). If no 
+       default search is defined in the current application or activity, global 
+       search will be launched. If true, this will always launch a 
+       platform-global (e.g. web-based) search instead. 
+
+*android.app.SearchManager.startSearch(String,boolean,ComponentName,Bundle,boolean,Rect)*
+
+public void startSearch(
+  java.lang.String initialQuery,
+  boolean selectInitialQuery,
+  android.content.ComponentName launchActivity,
+  android.os.Bundle appSearchData,
+  boolean globalSearch,
+  Rect sourceBounds)
+
+As (|android.app.SearchManager|) but including source bounds for the global 
+search intent. 
+
+
+
+*android.app.SearchManager.stopSearch()*
+
+public void stopSearch()
+
+Terminate search UI. 
+
+Typically the user will terminate the search UI by launching a search or by 
+canceling. This function allows the underlying application or activity to 
+cancel the search prematurely (for any reason). 
+
+This function can be safely called at any time (even if no search is active.) 
+
+
+
+*android.app.SearchManager.triggerSearch(String,ComponentName,Bundle)*
+
+public void triggerSearch(
+  java.lang.String query,
+  android.content.ComponentName launchActivity,
+  android.os.Bundle appSearchData)
+
+Similar to (|android.app.SearchManager|) but actually fires off the search 
+query after invoking the search dialog. Made available for testing purposes. 
+
+
+    query - The query to trigger. If empty, request will be ignored. 
+    launchActivity - The ComponentName of the activity that has launched this search. 
+    appSearchData - An application can insert application-specific context here, in order to 
+       improve quality or specificity of its own searches. This data will be 
+       returned with SEARCH intent(s). Null if no extra data is required. 
+
+

@@ -1,0 +1,316 @@
+*android.app.backup.BackupAgent* *BackupAgent* Provides the central interface be
+
+public abstract class BackupAgent
+  extends    |android.content.ContextWrapper|
+
+|android.app.backup.BackupAgent_Description|
+|android.app.backup.BackupAgent_Fields|
+|android.app.backup.BackupAgent_Constructors|
+|android.app.backup.BackupAgent_Methods|
+
+================================================================================
+
+*android.app.backup.BackupAgent_Fields*
+|int_android.app.backup.BackupAgent.TYPE_DIRECTORY|
+|int_android.app.backup.BackupAgent.TYPE_EOF|
+|int_android.app.backup.BackupAgent.TYPE_FILE|
+|int_android.app.backup.BackupAgent.TYPE_SYMLINK|
+
+*android.app.backup.BackupAgent_Constructors*
+|android.app.backup.BackupAgent()|
+
+*android.app.backup.BackupAgent_Methods*
+|android.app.backup.BackupAgent.attach(Context)|
+|android.app.backup.BackupAgent.fullBackupFile(File,FullBackupDataOutput)|Write
+|android.app.backup.BackupAgent.fullBackupFileTree(String,String,String,HashSet<String>,FullBackupDataOutput)|
+|android.app.backup.BackupAgent.onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)|
+|android.app.backup.BackupAgent.onBind()|
+|android.app.backup.BackupAgent.onCreate()|Provided as a convenience for agent 
+|android.app.backup.BackupAgent.onDestroy()|Provided as a convenience for agent
+|android.app.backup.BackupAgent.onFullBackup(FullBackupDataOutput)|The default 
+|android.app.backup.BackupAgent.onRestore(BackupDataInput,int,ParcelFileDescriptor)|
+|android.app.backup.BackupAgent.onRestoreFile(ParcelFileDescriptor,long,File,int,long,long)|
+|android.app.backup.BackupAgent.onRestoreFile(ParcelFileDescriptor,long,int,String,String,long,long)|
+
+*android.app.backup.BackupAgent_Description*
+
+Provides the central interface between an application and Android's data backup 
+infrastructure. An application that wishes to participate in the backup and 
+restore mechanism will declare a subclass of (|android.app.backup.BackupAgent|) 
+, implement the onBackup()(|android.app.backup.BackupAgent|) and 
+onRestore()(|android.app.backup.BackupAgent|) methods, and provide the name of 
+its backup agent class in itsAndroidManifest.xmlfile via the <a 
+href="guide/topics/manifest/application-element.html"><application> 
+tag'sandroid:backupAgentattribute. 
+
+Developer Guides For more information about using BackupAgent, read the <a 
+href="guide/topics/data/backup.html">Data Backup developer guide. 
+
+Basic Operation 
+
+When the application makes changes to data that it wishes to keep backed up, it 
+should call the BackupManager.dataChanged()(|android.app.backup.BackupManager|) 
+method. This notifies the Android Backup Manager that the application needs an 
+opportunity to update its backup image. The Backup Manager, in turn, schedules 
+a backup pass to be performed at an opportune time. 
+
+Restore operations are typically performed only when applications are first 
+installed on a device. At that time, the operating system checks to see whether 
+there is a previously-saved data set available for the application being 
+installed, and if so, begins an immediate restore pass to deliver the backup 
+data as part of the installation process. 
+
+When a backup or restore pass is run, the application's process is launched (if 
+not already running), the manifest-declared backup agent class (in 
+theandroid:backupAgentattribute) is instantiated within that process, and the 
+agent's (|android.app.backup.BackupAgent|) method is invoked. This prepares the 
+agent instance to run the actual backup or restore logic. At this point the 
+agent's onBackup()(|android.app.backup.BackupAgent|) or 
+onRestore()(|android.app.backup.BackupAgent|) method will be invoked as 
+appropriate for the operation being performed. 
+
+A backup data set consists of one or more "entities," flattened binary data 
+records that are each identified with a key string unique within the data set. 
+Adding a record to the active data set or updating an existing record is done 
+by simply writing new entity data under the desired key. Deleting an entity 
+from the data set is done by writing an entity under that key with header 
+specifying a negative data size, and no actual entity data. 
+
+Helper Classes 
+
+An extensible agent based on convenient helper classes is available in 
+(|android.app.backup.BackupAgentHelper|) . That class is particularly suited to 
+handling of simple file or (|android.content.SharedPreferences|) backup and 
+restore. 
+
+
+
+*int_android.app.backup.BackupAgent.TYPE_DIRECTORY*
+
+During a full restore, indicates that the file system object being restored is 
+a directory. 
+
+
+*int_android.app.backup.BackupAgent.TYPE_EOF*
+
+
+
+
+*int_android.app.backup.BackupAgent.TYPE_FILE*
+
+During a full restore, indicates that the file system object being restored is 
+an ordinary file. 
+
+
+*int_android.app.backup.BackupAgent.TYPE_SYMLINK*
+
+
+
+
+
+*android.app.backup.BackupAgent()*
+
+public BackupAgent()
+
+
+
+
+*android.app.backup.BackupAgent.attach(Context)*
+
+public void attach(android.content.Context context)
+
+
+
+
+
+*android.app.backup.BackupAgent.fullBackupFile(File,FullBackupDataOutput)*
+
+public final void fullBackupFile(
+  java.io.File file,
+  android.app.backup.FullBackupDataOutput output)
+
+Write an entire file as part of a full-backup operation. The file's contents 
+will be delivered to the backup destination along with the metadata necessary 
+to place it with the proper location and permissions on the device where the 
+data is restored. 
+
+
+    file - The file to be backed up. The file must exist and be readable by the caller. 
+    output - The destination to which the backed-up file data will be sent. 
+
+*android.app.backup.BackupAgent.fullBackupFileTree(String,String,String,HashSet<String>,FullBackupDataOutput)*
+
+protected final void fullBackupFileTree(
+  java.lang.String packageName,
+  java.lang.String domain,
+  java.lang.String rootPath,
+  java.util.HashSet<java.lang.String> excludes,
+  android.app.backup.FullBackupDataOutput output)
+
+Scan the dir tree (if it actually exists) and process each entry we find. If 
+the 'excludes' parameter is non-null, it is consulted each time a new file 
+system entity is visited to see whether that entity (and its subtree, if 
+appropriate) should be omitted from the backup process. 
+
+
+
+*android.app.backup.BackupAgent.onBackup(ParcelFileDescriptor,BackupDataOutput,ParcelFileDescriptor)*
+
+public abstract void onBackup(
+  android.os.ParcelFileDescriptor oldState,
+  android.app.backup.BackupDataOutput data,
+  android.os.ParcelFileDescriptor newState)
+  throws |java.io.IOException|
+         
+The application is being asked to write any data changed since the last time it 
+performed a backup operation. The state data recorded during the last backup 
+pass is provided in the oldState file descriptor. If oldState is null, no old 
+state is available and the application should perform a full backup. In both 
+cases, a representation of the final backup state after this pass should be 
+written to the file pointed to by the file descriptor wrapped in newState. 
+
+Each entity written to the (|android.app.backup.BackupDataOutput|) data stream 
+will be transmitted over the current backup transport and stored in the remote 
+data set under the key supplied as part of the entity. Writing an entity with a 
+negative data size instructs the transport to delete whatever entity currently 
+exists under that key from the remote data set. 
+
+
+    oldState - An open, read-only ParcelFileDescriptor pointing to the last backup state 
+       provided by the application. May be null, in which case no prior state 
+       is being provided and the application should perform a full backup. 
+    data - A structured wrapper around an open, read/write file descriptor pointing to the 
+       backup data destination. Typically the application will use backup 
+       helper classes to write to this file. 
+    newState - An open, read/write ParcelFileDescriptor pointing to an empty file. The 
+       application should record the final backup state here after writing the 
+       requested data to the data output stream. 
+
+*android.app.backup.BackupAgent.onBind()*
+
+public final |android.os.IBinder| onBind()
+
+
+
+
+
+*android.app.backup.BackupAgent.onCreate()*
+
+public void onCreate()
+
+Provided as a convenience for agent implementations that need an opportunity to 
+do one-time initialization before the actual backup or restore operation is 
+begun. 
+
+Agents do not need to override this method. 
+
+
+
+*android.app.backup.BackupAgent.onDestroy()*
+
+public void onDestroy()
+
+Provided as a convenience for agent implementations that need to do some sort 
+of shutdown process after backup or restore is completed. 
+
+Agents do not need to override this method. 
+
+
+
+*android.app.backup.BackupAgent.onFullBackup(FullBackupDataOutput)*
+
+public void onFullBackup(android.app.backup.FullBackupDataOutput data)
+  throws |java.io.IOException|
+         
+The default implementation backs up the entirety of the application's "owned" 
+file system trees to the output. 
+
+
+
+*android.app.backup.BackupAgent.onRestore(BackupDataInput,int,ParcelFileDescriptor)*
+
+public abstract void onRestore(
+  android.app.backup.BackupDataInput data,
+  int appVersionCode,
+  android.os.ParcelFileDescriptor newState)
+  throws |java.io.IOException|
+         
+The application is being restored from backup and should replace any existing 
+data with the contents of the backup. The backup data is provided through the 
+data parameter. Once the restore is finished, the application should write a 
+representation of the final state to the newState file descriptor. 
+
+The application is responsible for properly erasing its old data and replacing 
+it with the data supplied to this method. No "clear user data" operation will 
+be performed automatically by the operating system. The exception to this is in 
+the case of a failed restore attempt: if onRestore() throws an exception, the 
+OS will assume that the application's data may now be in an incoherent state, 
+and will clear it before proceeding. 
+
+
+    data - A structured wrapper around an open, read-only file descriptor pointing to a 
+       full snapshot of the application's data. The application should consume 
+       every entity represented in this data stream. 
+    appVersionCode - The value of the {@code android:versionCode} manifest attribute, from the 
+       application that backed up this particular data set. This makes it 
+       possible for an application's agent to distinguish among any possible 
+       older data versions when asked to perform the restore operation. 
+    newState - An open, read/write ParcelFileDescriptor pointing to an empty file. The 
+       application should record the final backup state here after restoring 
+       its data from the data stream. When a full-backup dataset is being 
+       restored, this will be null. 
+
+*android.app.backup.BackupAgent.onRestoreFile(ParcelFileDescriptor,long,File,int,long,long)*
+
+public void onRestoreFile(
+  android.os.ParcelFileDescriptor data,
+  long size,
+  java.io.File destination,
+  int type,
+  long mode,
+  long mtime)
+  throws |java.io.IOException|
+         
+Handle the data delivered via the given file descriptor during a full restore 
+operation. The agent is given the path to the file's original location as well 
+as its size and metadata. 
+
+The file descriptor can only be read forsizebytes; attempting to read more data 
+has undefined behavior. 
+
+The default implementation creates the destination file/directory and populates 
+it with the data from the file descriptor, then sets the file's access mode and 
+modification time to match the restore arguments. 
+
+
+    data - A read-only file descriptor from which the agent can read {@code size} bytes of 
+       file data. 
+    size - The number of bytes of file content to be restored to the given destination. If 
+       the file system object being restored is a directory, {@code size} will 
+       be zero. 
+    destination - The File on disk to be restored with the given data. 
+    type - The kind of file system object being restored. This will be either {@link 
+       BackupAgent#TYPE_FILE} or {@link BackupAgent#TYPE_DIRECTORY}. 
+    mode - The access mode to be assigned to the destination after its data is written. 
+       This is in the standard format used by {@code chmod()}. 
+    mtime - The modification time of the file when it was backed up, suitable to be 
+       assigned to the file after its data is written. 
+
+*android.app.backup.BackupAgent.onRestoreFile(ParcelFileDescriptor,long,int,String,String,long,long)*
+
+protected void onRestoreFile(
+  android.os.ParcelFileDescriptor data,
+  long size,
+  int type,
+  java.lang.String domain,
+  java.lang.String path,
+  long mode,
+  long mtime)
+  throws |java.io.IOException|
+         
+Only specialized platform agents should overload this entry point to support 
+restores to crazy non-app locations. 
+
+
+
+

@@ -1,0 +1,167 @@
+*android.nfc.tech.NfcA* *NfcA* Provides access to NFC-A (ISO 14443-3A) propertie
+
+public final class NfcA
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NfcA_Description|
+|android.nfc.tech.NfcA_Fields|
+|android.nfc.tech.NfcA_Constructors|
+|android.nfc.tech.NfcA_Methods|
+
+================================================================================
+
+*android.nfc.tech.NfcA_Fields*
+|java.lang.String_android.nfc.tech.NfcA.EXTRA_ATQA|
+|java.lang.String_android.nfc.tech.NfcA.EXTRA_SAK|
+
+*android.nfc.tech.NfcA_Constructors*
+|android.nfc.tech.NfcA(Tag)|
+
+*android.nfc.tech.NfcA_Methods*
+|android.nfc.tech.NfcA.get(Tag)|Get an instance ofNfcAfor the given tag.
+|android.nfc.tech.NfcA.getAtqa()|Return the ATQA/SENS_RES bytes from tag discov
+|android.nfc.tech.NfcA.getMaxTransceiveLength()|Return the maximum number of by
+|android.nfc.tech.NfcA.getSak()|Return the SAK/SEL_RES bytes from tag discovery
+|android.nfc.tech.NfcA.getTimeout()|Get the current#transceivetimeout in millis
+|android.nfc.tech.NfcA.setTimeout(int)|Set the#transceivetimeout in millisecond
+|android.nfc.tech.NfcA.transceive(byte[])|Send raw NFC-A commands to the tag an
+
+*android.nfc.tech.NfcA_Description*
+
+Provides access to NFC-A (ISO 14443-3A) properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.NfcA|) object using (|android.nfc.tech.NfcA|) . 
+The primary NFC-A I/O operation is (|android.nfc.tech.NfcA|) . Applications 
+must implement their own protocol stack on top of (|android.nfc.tech.NfcA|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.NfcA.EXTRA_ATQA*
+
+
+
+
+*java.lang.String_android.nfc.tech.NfcA.EXTRA_SAK*
+
+
+
+
+
+*android.nfc.tech.NfcA(Tag)*
+
+public NfcA(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.NfcA.get(Tag)*
+
+public static |android.nfc.tech.NfcA| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NfcA|) for the given tag. Returns null if 
+(|android.nfc.tech.NfcA|) was not enumerated in (|android.nfc.Tag|) . This 
+indicates the tag does not support NFC-A. Does not cause any RF activity and 
+does not block. 
+
+
+    tag - an NFC-A compatible tag 
+
+    Returns: 
+
+*android.nfc.tech.NfcA.getAtqa()*
+
+public byte[] getAtqa()
+
+Return the ATQA/SENS_RES bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: ATQA/SENS_RES bytes 
+
+*android.nfc.tech.NfcA.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.NfcA|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.NfcA.getSak()*
+
+public short getSak()
+
+Return the SAK/SEL_RES bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: 
+
+*android.nfc.tech.NfcA.getTimeout()*
+
+public int getTimeout()
+
+Get the current (|android.nfc.tech.NfcA|) timeout in milliseconds. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: timeout value in milliseconds 
+
+*android.nfc.tech.NfcA.setTimeout(int)*
+
+public void setTimeout(int timeout)
+
+Set the (|android.nfc.tech.NfcA|) timeout in milliseconds. 
+
+The timeout only applies to (|android.nfc.tech.NfcA|) on this object, and is 
+reset to a default value when (|android.nfc.tech.NfcA|) is called. 
+
+Setting a longer timeout may be useful when performing transactions that 
+require a long processing time on the tag such as key generation. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    timeout - timeout value in milliseconds 
+
+*android.nfc.tech.NfcA.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NFC-A commands to the tag and receive the response. 
+
+Applications must not append the EoD (CRC) to the payload, it will be 
+automatically calculated. Applications must only send commands that are 
+complete bytes, for example a SENS_REQ is not possible (these are used to 
+manage tag polling and initialization). 
+
+Use (|android.nfc.tech.NfcA|) to retrieve the maximum number of bytes that can 
+be sent with (|android.nfc.tech.NfcA|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NfcA|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    data - bytes to send 
+
+    Returns: bytes received in response 
+
+

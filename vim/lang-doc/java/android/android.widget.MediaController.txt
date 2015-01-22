@@ -1,0 +1,217 @@
+*android.widget.MediaController* *MediaController* A view containing controls fo
+
+public class MediaController
+  extends    |android.widget.FrameLayout|
+
+|android.widget.MediaController_Description|
+|android.widget.MediaController_Fields|
+|android.widget.MediaController_Constructors|
+|android.widget.MediaController_Methods|
+
+================================================================================
+
+*android.widget.MediaController_Constructors*
+|android.widget.MediaController(Context)|
+|android.widget.MediaController(Context,AttributeSet)|
+|android.widget.MediaController(Context,boolean)|
+
+*android.widget.MediaController_Methods*
+|android.widget.MediaController.dispatchKeyEvent(KeyEvent)|
+|android.widget.MediaController.hide()|Remove the controller from the screen.
+|android.widget.MediaController.isShowing()|
+|android.widget.MediaController.makeControllerView()|Create the view that holds
+|android.widget.MediaController.onFinishInflate()|
+|android.widget.MediaController.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.MediaController.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.MediaController.onTouchEvent(MotionEvent)|
+|android.widget.MediaController.onTrackballEvent(MotionEvent)|
+|android.widget.MediaController.setAnchorView(View)|Set the view that acts as t
+|android.widget.MediaController.setEnabled(boolean)|
+|android.widget.MediaController.setMediaPlayer(MediaController.MediaPlayerControl)|
+|android.widget.MediaController.setPrevNextListeners(View.OnClickListener,View.OnClickListener)|
+|android.widget.MediaController.show()|Show the controller on screen.
+|android.widget.MediaController.show(int)|Show the controller on screen.
+
+*android.widget.MediaController_Description*
+
+A view containing controls for a MediaPlayer. Typically contains the buttons 
+like "Play/Pause", "Rewind", "Fast Forward" and a progress slider. It takes 
+care of synchronizing the controls with the state of the MediaPlayer. 
+
+The way to use this class is to instantiate it programatically. The 
+MediaController will create a default set of controls and put them in a window 
+floating above your application. Specifically, the controls will float above 
+the view specified with setAnchorView(). The window will disappear if left idle 
+for three seconds and reappear when the user touches the anchor view. 
+
+Functions like show() and hide() have no effect when MediaController is created 
+in an xml layout. 
+
+MediaController will hide and show the buttons according to these rules: 
+
+The "previous" and "next" buttons are hidden until setPrevNextListeners() has 
+been called The "previous" and "next" buttons are visible but disabled if 
+setPrevNextListeners() was called with null listeners The "rewind" and 
+"fastforward" buttons are shown unless requested otherwise by using the 
+MediaController(Context, boolean) constructor with the boolean set to false 
+
+
+
+*android.widget.MediaController(Context)*
+
+public MediaController(android.content.Context context)
+
+
+
+
+*android.widget.MediaController(Context,AttributeSet)*
+
+public MediaController(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.MediaController(Context,boolean)*
+
+public MediaController(
+  android.content.Context context,
+  boolean useFastForward)
+
+
+
+
+*android.widget.MediaController.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.MediaController.hide()*
+
+public void hide()
+
+Remove the controller from the screen. 
+
+
+
+*android.widget.MediaController.isShowing()*
+
+public boolean isShowing()
+
+
+
+
+
+*android.widget.MediaController.makeControllerView()*
+
+protected |android.view.View| makeControllerView()
+
+Create the view that holds the widgets that control playback. Derived classes 
+can override this to create their own. 
+
+
+
+    Returns: The controller view. 
+
+*android.widget.MediaController.onFinishInflate()*
+
+public void onFinishInflate()
+
+
+
+
+
+*android.widget.MediaController.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.MediaController.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.MediaController.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.widget.MediaController.onTrackballEvent(MotionEvent)*
+
+public boolean onTrackballEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.MediaController.setAnchorView(View)*
+
+public void setAnchorView(android.view.View view)
+
+Set the view that acts as the anchor for the control view. This can for example 
+be a VideoView, or your Activity's main view. When VideoView calls this method, 
+it will use the VideoView's parent as the anchor. 
+
+
+    view - The view to which to anchor the controller when it is visible. 
+
+*android.widget.MediaController.setEnabled(boolean)*
+
+public void setEnabled(boolean enabled)
+
+
+
+
+
+*android.widget.MediaController.setMediaPlayer(MediaController.MediaPlayerControl)*
+
+public void setMediaPlayer(android.widget.MediaController.MediaPlayerControl player)
+
+
+
+
+
+*android.widget.MediaController.setPrevNextListeners(View.OnClickListener,View.OnClickListener)*
+
+public void setPrevNextListeners(
+  android.view.View.OnClickListener next,
+  android.view.View.OnClickListener prev)
+
+
+
+
+
+*android.widget.MediaController.show()*
+
+public void show()
+
+Show the controller on screen. It will go away automatically after 3 seconds of 
+inactivity. 
+
+
+
+*android.widget.MediaController.show(int)*
+
+public void show(int timeout)
+
+Show the controller on screen. It will go away automatically after 'timeout' 
+milliseconds of inactivity. 
+
+
+    timeout - The timeout in milliseconds. Use 0 to show the controller until hide() is 
+       called. 
+
+

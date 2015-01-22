@@ -1,0 +1,143 @@
+*android.app.backup.BackupDataInput* *BackupDataInput* Provides the structured i
+
+public class BackupDataInput
+  extends    |java.lang.Object|
+
+|android.app.backup.BackupDataInput_Description|
+|android.app.backup.BackupDataInput_Fields|
+|android.app.backup.BackupDataInput_Constructors|
+|android.app.backup.BackupDataInput_Methods|
+
+================================================================================
+
+*android.app.backup.BackupDataInput_Constructors*
+|android.app.backup.BackupDataInput(FileDescriptor)|
+
+*android.app.backup.BackupDataInput_Methods*
+|android.app.backup.BackupDataInput.finalize()|
+|android.app.backup.BackupDataInput.getDataSize()|Report the size in bytes of t
+|android.app.backup.BackupDataInput.getKey()|Report the key associated with the
+|android.app.backup.BackupDataInput.readEntityData(byte[],int,int)|Read a recor
+|android.app.backup.BackupDataInput.readNextHeader()|Extract the next entity he
+|android.app.backup.BackupDataInput.skipEntityData()|Consume the current entity
+
+*android.app.backup.BackupDataInput_Description*
+
+Provides the structured interface through which a 
+(|android.app.backup.BackupAgent|) reads information from the backup data set, 
+via its onRestore()(|android.app.backup.BackupAgent|) method. The data is 
+presented as a set of "entities," each representing one named record as 
+previously stored by the agent's onBackup()(|android.app.backup.BackupAgent|) 
+implementation. An entity is composed of a descriptive header plus a byte array 
+that holds the raw data saved in the remote backup. 
+
+The agent must consume every entity in the data stream, otherwise the restored 
+state of the application will be incomplete. Example 
+
+A typical onRestore()(|android.app.backup.BackupAgent|) implementation might be 
+structured something like this: 
+
+public void onRestore(BackupDataInput data, int appVersionCode, 
+ParcelFileDescriptor newState) { while (data.readNextHeader()) { String key = 
+data.getKey(); int dataSize = data.getDataSize(); 
+
+if (key.equals(MY_BACKUP_KEY_ONE)) { // process this kind of record here byte[] 
+buffer = new byte[dataSize]; data.readEntityData(buffer, 0, dataSize); // reads 
+the entire entity at once 
+
+// now 'buffer' holds the raw data and can be processed however // the agent 
+wishes processBackupKeyOne(buffer); } else if 
+(key.equals(MY_BACKUP_KEY_TO_IGNORE) { // a key we recognize but wish to 
+discard data.skipEntityData(); } // ... etc. } } 
+
+
+
+*android.app.backup.BackupDataInput(FileDescriptor)*
+
+public BackupDataInput(java.io.FileDescriptor fd)
+
+
+
+
+*android.app.backup.BackupDataInput.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.app.backup.BackupDataInput.getDataSize()*
+
+public int getDataSize()
+
+Report the size in bytes of the data associated with the current entity in the 
+restore stream. 
+
+
+
+    Returns: The size of the record's raw data, in bytes 
+
+*android.app.backup.BackupDataInput.getKey()*
+
+public |java.lang.String| getKey()
+
+Report the key associated with the current entity in the restore stream 
+
+
+
+    Returns: the current entity's key string 
+
+*android.app.backup.BackupDataInput.readEntityData(byte[],int,int)*
+
+public int readEntityData(
+  byte[] data,
+  int offset,
+  int size)
+  throws |java.io.IOException|
+         
+Read a record's raw data from the restore stream. The record's header must 
+first have been processed by the (|android.app.backup.BackupDataInput|) method. 
+Multiple calls to this method may be made in order to process the data in 
+chunks; not all of it must be read in a single call. Once all of the raw data 
+for the current entity has been read, further calls to this method will simply 
+return zero. 
+
+
+    data - An allocated byte array of at least 'size' bytes 
+    offset - Offset within the 'data' array at which the data will be placed when read from 
+       the stream 
+    size - The number of bytes to read in this pass 
+
+    Returns: The number of bytes of data read. Once all of the data for this entity has been 
+             read, further calls to this method will return zero. 
+
+*android.app.backup.BackupDataInput.readNextHeader()*
+
+public boolean readNextHeader()
+  throws |java.io.IOException|
+         
+Extract the next entity header from the restore stream. After this method 
+return success, the (|android.app.backup.BackupDataInput|) and 
+(|android.app.backup.BackupDataInput|) methods can be used to inspect the 
+entity that is now available for processing. 
+
+
+
+    Returns: true when there is an entity ready for consumption from the restore stream, 
+             false if the restore stream has been fully consumed. 
+
+*android.app.backup.BackupDataInput.skipEntityData()*
+
+public void skipEntityData()
+  throws |java.io.IOException|
+         
+Consume the current entity's data without extracting it into a buffer for 
+further processing. This allows a (|android.app.backup.BackupAgent|) to 
+efficiently discard obsolete or otherwise uninteresting records during the 
+restore operation. 
+
+
+
+

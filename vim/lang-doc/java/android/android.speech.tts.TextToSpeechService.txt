@@ -1,0 +1,197 @@
+*android.speech.tts.TextToSpeechService* *TextToSpeechService* Abstract base cla
+
+public abstract class TextToSpeechService
+  extends    |android.app.Service|
+
+|android.speech.tts.TextToSpeechService_Description|
+|android.speech.tts.TextToSpeechService_Fields|
+|android.speech.tts.TextToSpeechService_Constructors|
+|android.speech.tts.TextToSpeechService_Methods|
+
+================================================================================
+
+*android.speech.tts.TextToSpeechService_Constructors*
+|android.speech.tts.TextToSpeechService()|
+
+*android.speech.tts.TextToSpeechService_Methods*
+|android.speech.tts.TextToSpeechService.onBind(Intent)|
+|android.speech.tts.TextToSpeechService.onCreate()|
+|android.speech.tts.TextToSpeechService.onDestroy()|
+|android.speech.tts.TextToSpeechService.onGetFeaturesForLanguage(String,String,String)|
+|android.speech.tts.TextToSpeechService.onGetLanguage()|Returns the language, c
+|android.speech.tts.TextToSpeechService.onIsLanguageAvailable(String,String,String)|
+|android.speech.tts.TextToSpeechService.onLoadLanguage(String,String,String)|No
+|android.speech.tts.TextToSpeechService.onStop()|Notifies the service that it s
+|android.speech.tts.TextToSpeechService.onSynthesizeText(SynthesisRequest,SynthesisCallback)|
+
+*android.speech.tts.TextToSpeechService_Description*
+
+Abstract base class for TTS engine implementations. The following methods need 
+to be implemented. 
+
+(|android.speech.tts.TextToSpeechService|) 
+(|android.speech.tts.TextToSpeechService|) 
+(|android.speech.tts.TextToSpeechService|) 
+(|android.speech.tts.TextToSpeechService|) 
+(|android.speech.tts.TextToSpeechService|) 
+
+The first three deal primarily with language management, and are used to query 
+the engine for it's support for a given language and indicate to it that 
+requests in a given language are imminent. 
+(|android.speech.tts.TextToSpeechService|) is central to the engine 
+implementation. The implementation should synthesize text as per the request 
+parameters and return synthesized data via the supplied callback. This class 
+and its helpers will then consume that data, which might mean queueing it for 
+playback or writing it to a file or similar. All calls to this method will be 
+on a single thread, which will be different from the main thread of the 
+service. Synthesis must be synchronous which means the engine must NOT hold on 
+the callback or call any methods on it after the method returns 
+(|android.speech.tts.TextToSpeechService|) tells the engine that it should stop 
+all ongoing synthesis, if any. Any pending data from the current synthesis will 
+be discarded. 
+
+
+
+*android.speech.tts.TextToSpeechService()*
+
+public TextToSpeechService()
+
+
+
+
+*android.speech.tts.TextToSpeechService.onBind(Intent)*
+
+public |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.speech.tts.TextToSpeechService.onCreate()*
+
+public void onCreate()
+
+
+
+
+
+*android.speech.tts.TextToSpeechService.onDestroy()*
+
+public void onDestroy()
+
+
+
+
+
+*android.speech.tts.TextToSpeechService.onGetFeaturesForLanguage(String,String,String)*
+
+protected |java.util.Set|<String> onGetFeaturesForLanguage(
+  java.lang.String lang,
+  java.lang.String country,
+  java.lang.String variant)
+
+Queries the service for a set of features supported for a given language. 
+
+
+    lang - ISO-3 language code. 
+    country - ISO-3 country code. May be empty or null. 
+    variant - Language variant. May be empty or null. 
+
+    Returns: A list of features supported for the given language. 
+
+*android.speech.tts.TextToSpeechService.onGetLanguage()*
+
+protected abstract |java.lang.String|[] onGetLanguage()
+
+Returns the language, country and variant currently being used by the TTS 
+engine. 
+
+Can be called on multiple threads. 
+
+
+
+    Returns: A 3-element array, containing language (ISO 3-letter code), country (ISO 
+             3-letter code) and variant used by the engine. The country and 
+             variant may be {@code ""}. If country is empty, then variant must 
+             be empty too. 
+
+*android.speech.tts.TextToSpeechService.onIsLanguageAvailable(String,String,String)*
+
+protected abstract int onIsLanguageAvailable(
+  java.lang.String lang,
+  java.lang.String country,
+  java.lang.String variant)
+
+Checks whether the engine supports a given language. 
+
+Can be called on multiple threads. 
+
+Its return values HAVE to be consistent with onLoadLanguage. 
+
+
+    lang - ISO-3 language code. 
+    country - ISO-3 country code. May be empty or null. 
+    variant - Language variant. May be empty or null. 
+
+    Returns: Code indicating the support status for the locale. One of {@link 
+             TextToSpeech#LANG_AVAILABLE}, {@link 
+             TextToSpeech#LANG_COUNTRY_AVAILABLE}, {@link 
+             TextToSpeech#LANG_COUNTRY_VAR_AVAILABLE}, {@link 
+             TextToSpeech#LANG_MISSING_DATA} {@link 
+             TextToSpeech#LANG_NOT_SUPPORTED}. 
+
+*android.speech.tts.TextToSpeechService.onLoadLanguage(String,String,String)*
+
+protected abstract int onLoadLanguage(
+  java.lang.String lang,
+  java.lang.String country,
+  java.lang.String variant)
+
+Notifies the engine that it should load a speech synthesis language. There is 
+no guarantee that this method is always called before the language is used for 
+synthesis. It is merely a hint to the engine that it will probably get some 
+synthesis requests for this language at some point in the future. 
+
+Can be called on multiple threads. In Android 4.2 (> API 17) can be called on 
+main and synthesis threads. 
+
+
+    lang - ISO-3 language code. 
+    country - ISO-3 country code. May be empty or null. 
+    variant - Language variant. May be empty or null. 
+
+    Returns: Code indicating the support status for the locale. One of {@link 
+             TextToSpeech#LANG_AVAILABLE}, {@link 
+             TextToSpeech#LANG_COUNTRY_AVAILABLE}, {@link 
+             TextToSpeech#LANG_COUNTRY_VAR_AVAILABLE}, {@link 
+             TextToSpeech#LANG_MISSING_DATA} {@link 
+             TextToSpeech#LANG_NOT_SUPPORTED}. 
+
+*android.speech.tts.TextToSpeechService.onStop()*
+
+protected abstract void onStop()
+
+Notifies the service that it should stop any in-progress speech synthesis. This 
+method can be called even if no speech synthesis is currently in progress. 
+
+Can be called on multiple threads, but not on the synthesis thread. 
+
+
+
+*android.speech.tts.TextToSpeechService.onSynthesizeText(SynthesisRequest,SynthesisCallback)*
+
+protected abstract void onSynthesizeText(
+  android.speech.tts.SynthesisRequest request,
+  android.speech.tts.SynthesisCallback callback)
+
+Tells the service to synthesize speech from the given text. This method should 
+block until the synthesis is finished. 
+
+Called on the synthesis thread. 
+
+
+    request - The synthesis request. 
+    callback - The callback the the engine must use to make data available for playback or for 
+       writing to a file. 
+
+

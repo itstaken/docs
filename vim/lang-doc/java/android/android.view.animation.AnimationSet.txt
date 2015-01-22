@@ -1,0 +1,275 @@
+*android.view.animation.AnimationSet* *AnimationSet* Represents a group of Anima
+
+public class AnimationSet
+  extends    |android.view.animation.Animation|
+
+|android.view.animation.AnimationSet_Description|
+|android.view.animation.AnimationSet_Fields|
+|android.view.animation.AnimationSet_Constructors|
+|android.view.animation.AnimationSet_Methods|
+
+================================================================================
+
+*android.view.animation.AnimationSet_Constructors*
+|android.view.animation.AnimationSet(boolean)|Constructor to use when building 
+|android.view.animation.AnimationSet(Context,AttributeSet)|Constructor used whe
+
+*android.view.animation.AnimationSet_Methods*
+|android.view.animation.AnimationSet.addAnimation(Animation)|Add a child animat
+|android.view.animation.AnimationSet.clone()|
+|android.view.animation.AnimationSet.computeDurationHint()|The duration hint of
+|android.view.animation.AnimationSet.getAnimations()|
+|android.view.animation.AnimationSet.getDuration()|The duration of an Animation
+|android.view.animation.AnimationSet.getStartTime()|
+|android.view.animation.AnimationSet.getTransformation(long,Transformation)|The
+|android.view.animation.AnimationSet.hasAlpha()|
+|android.view.animation.AnimationSet.initialize(int,int,int,int)|
+|android.view.animation.AnimationSet.initializeInvalidateRegion(int,int,int,int)|
+|android.view.animation.AnimationSet.reset()|
+|android.view.animation.AnimationSet.restrictDuration(long)|
+|android.view.animation.AnimationSet.scaleCurrentDuration(float)|
+|android.view.animation.AnimationSet.setDuration(long)|Sets the duration of eve
+|android.view.animation.AnimationSet.setFillAfter(boolean)|
+|android.view.animation.AnimationSet.setFillBefore(boolean)|
+|android.view.animation.AnimationSet.setRepeatMode(int)|
+|android.view.animation.AnimationSet.setStartOffset(long)|
+|android.view.animation.AnimationSet.setStartTime(long)|Sets the start time of 
+|android.view.animation.AnimationSet.willChangeBounds()|
+|android.view.animation.AnimationSet.willChangeTransformationMatrix()|
+
+*android.view.animation.AnimationSet_Description*
+
+Represents a group of Animations that should be played together. The 
+transformation of each individual animation are composed together into a single 
+transform. If AnimationSet sets any properties that its children also set (for 
+example, duration or fillBefore), the values of AnimationSet override the child 
+values. 
+
+The way that AnimationSet inherits behavior from Animation is important to 
+understand. Some of the Animation attributes applied to AnimationSet affect the 
+AnimationSet itself, some are pushed down to the children, and some are 
+ignored, as follows: 
+
+duration, repeatMode, fillBefore, fillAfter: These properties, when set on an 
+AnimationSet object, will be pushed down to all child animations. repeatCount, 
+fillEnabled: These properties are ignored for AnimationSet. startOffset, 
+shareInterpolator: These properties apply to the AnimationSet itself. 
+
+Starting with (|android.os.Build.VERSION_CODES|) , the behavior of these 
+properties is the same in XML resources and at runtime (prior to that release, 
+the values set in XML were ignored for AnimationSet). That is, calling 
+setDuration(500) on an AnimationSet has the same effect as declaring 
+android:duration="500" in an XML resource for an AnimationSet object. 
+
+
+
+*android.view.animation.AnimationSet(boolean)*
+
+public AnimationSet(boolean shareInterpolator)
+
+Constructor to use when building an AnimationSet from code 
+
+    shareInterpolator - Pass true if all of the animations in this set should use the interpolator 
+       associated with this AnimationSet. Pass false if each animation should 
+       use its own interpolator. 
+
+*android.view.animation.AnimationSet(Context,AttributeSet)*
+
+public AnimationSet(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Constructor used when an AnimationSet is loaded from a resource. 
+
+    context - Application context to use 
+    attrs - Attribute set from which to read values 
+
+*android.view.animation.AnimationSet.addAnimation(Animation)*
+
+public void addAnimation(android.view.animation.Animation a)
+
+Add a child animation to this animation set. The transforms of the child 
+animations are applied in the order that they were added 
+
+
+    a - Animation to add. 
+
+*android.view.animation.AnimationSet.clone()*
+
+protected |android.view.animation.AnimationSet| clone()
+  throws |java.lang.CloneNotSupportedException|
+         
+
+
+
+
+*android.view.animation.AnimationSet.computeDurationHint()*
+
+public long computeDurationHint()
+
+The duration hint of an animation set is the maximum of the duration hints of 
+all of its component animations. 
+
+
+
+*android.view.animation.AnimationSet.getAnimations()*
+
+public |java.util.List|<Animation> getAnimations()
+
+
+
+
+
+    Returns: All the child animations in this AnimationSet. Note that this may include other 
+             AnimationSets, which are not expanded. 
+
+*android.view.animation.AnimationSet.getDuration()*
+
+public long getDuration()
+
+The duration of an AnimationSet is defined to be the duration of the longest 
+child animation. 
+
+
+
+*android.view.animation.AnimationSet.getStartTime()*
+
+public long getStartTime()
+
+
+
+
+
+*android.view.animation.AnimationSet.getTransformation(long,Transformation)*
+
+public boolean getTransformation(
+  long currentTime,
+  android.view.animation.Transformation t)
+
+The transformation of an animation set is the concatenation of all of its 
+component animations. 
+
+
+
+*android.view.animation.AnimationSet.hasAlpha()*
+
+public boolean hasAlpha()
+
+
+
+
+
+*android.view.animation.AnimationSet.initialize(int,int,int,int)*
+
+public void initialize(
+  int width,
+  int height,
+  int parentWidth,
+  int parentHeight)
+
+
+
+
+
+*android.view.animation.AnimationSet.initializeInvalidateRegion(int,int,int,int)*
+
+public void initializeInvalidateRegion(
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.view.animation.AnimationSet.reset()*
+
+public void reset()
+
+
+
+
+
+*android.view.animation.AnimationSet.restrictDuration(long)*
+
+public void restrictDuration(long durationMillis)
+
+
+
+
+
+*android.view.animation.AnimationSet.scaleCurrentDuration(float)*
+
+public void scaleCurrentDuration(float scale)
+
+
+
+
+
+*android.view.animation.AnimationSet.setDuration(long)*
+
+public void setDuration(long durationMillis)
+
+Sets the duration of every child animation. 
+
+
+    durationMillis - the duration of the animation, in milliseconds, for every child in this set 
+
+*android.view.animation.AnimationSet.setFillAfter(boolean)*
+
+public void setFillAfter(boolean fillAfter)
+
+
+
+
+
+*android.view.animation.AnimationSet.setFillBefore(boolean)*
+
+public void setFillBefore(boolean fillBefore)
+
+
+
+
+
+*android.view.animation.AnimationSet.setRepeatMode(int)*
+
+public void setRepeatMode(int repeatMode)
+
+
+
+
+
+*android.view.animation.AnimationSet.setStartOffset(long)*
+
+public void setStartOffset(long startOffset)
+
+
+
+
+
+*android.view.animation.AnimationSet.setStartTime(long)*
+
+public void setStartTime(long startTimeMillis)
+
+Sets the start time of this animation and all child animations 
+
+
+
+*android.view.animation.AnimationSet.willChangeBounds()*
+
+public boolean willChangeBounds()
+
+
+
+
+
+*android.view.animation.AnimationSet.willChangeTransformationMatrix()*
+
+public boolean willChangeTransformationMatrix()
+
+
+
+
+
+

@@ -1,0 +1,232 @@
+*android.preference.PreferenceGroup* *PreferenceGroup* A container for multipleP
+
+public abstract class PreferenceGroup
+  extends    |android.preference.Preference|
+  implements |android.preference.GenericInflater.Parent|
+
+|android.preference.PreferenceGroup_Description|
+|android.preference.PreferenceGroup_Fields|
+|android.preference.PreferenceGroup_Constructors|
+|android.preference.PreferenceGroup_Methods|
+
+================================================================================
+
+*android.preference.PreferenceGroup_Constructors*
+|android.preference.PreferenceGroup(Context,AttributeSet)|
+|android.preference.PreferenceGroup(Context,AttributeSet,int)|
+
+*android.preference.PreferenceGroup_Methods*
+|android.preference.PreferenceGroup.addItemFromInflater(Preference)|Called by t
+|android.preference.PreferenceGroup.addPreference(Preference)|Adds aPreferencea
+|android.preference.PreferenceGroup.dispatchRestoreInstanceState(Bundle)|
+|android.preference.PreferenceGroup.dispatchSaveInstanceState(Bundle)|
+|android.preference.PreferenceGroup.findPreference(CharSequence)|Finds aPrefere
+|android.preference.PreferenceGroup.getPreference(int)|Returns thePreferenceat 
+|android.preference.PreferenceGroup.getPreferenceCount()|Returns the number of 
+|android.preference.PreferenceGroup.isOnSameScreenAsChildren()|Whether this pre
+|android.preference.PreferenceGroup.isOrderingAsAdded()|Whether this group is o
+|android.preference.PreferenceGroup.notifyDependencyChange(boolean)|
+|android.preference.PreferenceGroup.onAttachedToActivity()|
+|android.preference.PreferenceGroup.onPrepareAddPreference(Preference)|Prepares
+|android.preference.PreferenceGroup.onPrepareForRemoval()|
+|android.preference.PreferenceGroup.removeAll()|Removes allPreference Preferenc
+|android.preference.PreferenceGroup.removePreference(Preference)|Removes aPrefe
+|android.preference.PreferenceGroup.setOrderingAsAdded(boolean)|Whether to orde
+
+*android.preference.PreferenceGroup_Description*
+
+A container for multiple (|android.preference.Preference|) objects. It is a 
+base class for Preference objects that are parents, such as 
+(|android.preference.PreferenceCategory|) and 
+(|android.preference.PreferenceScreen|) . 
+
+Developer Guides For information about building a settings UI with Preferences, 
+read the <a href="guide/topics/ui/settings.html">Settings guide. 
+
+
+
+*android.preference.PreferenceGroup(Context,AttributeSet)*
+
+public PreferenceGroup(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.preference.PreferenceGroup(Context,AttributeSet,int)*
+
+public PreferenceGroup(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.preference.PreferenceGroup.addItemFromInflater(Preference)*
+
+public void addItemFromInflater(android.preference.Preference preference)
+
+Called by the inflater to add an item to this group. 
+
+
+
+*android.preference.PreferenceGroup.addPreference(Preference)*
+
+public boolean addPreference(android.preference.Preference preference)
+
+Adds a (|android.preference.Preference|) at the correct position based on the 
+preference's order. 
+
+
+    preference - The preference to add. 
+
+    Returns: Whether the preference is now in this group. 
+
+*android.preference.PreferenceGroup.dispatchRestoreInstanceState(Bundle)*
+
+protected void dispatchRestoreInstanceState(android.os.Bundle container)
+
+
+
+
+
+*android.preference.PreferenceGroup.dispatchSaveInstanceState(Bundle)*
+
+protected void dispatchSaveInstanceState(android.os.Bundle container)
+
+
+
+
+
+*android.preference.PreferenceGroup.findPreference(CharSequence)*
+
+public |android.preference.Preference| findPreference(java.lang.CharSequence key)
+
+Finds a (|android.preference.Preference|) based on its key. If two 
+(|android.preference.Preference|) share the same key (not recommended), the 
+first to appear will be returned (to retrieve the other preference with the 
+same key, call this method on the first preference). If this preference has the 
+key, it will not be returned. 
+
+This will recursively search for the preference into children that are also 
+PreferenceGroups(|android.preference.PreferenceGroup|) . 
+
+
+    key - The key of the preference to retrieve. 
+
+    Returns: The {@link Preference} with the key, or null. 
+
+*android.preference.PreferenceGroup.getPreference(int)*
+
+public |android.preference.Preference| getPreference(int index)
+
+Returns the (|android.preference.Preference|) at a particular index. 
+
+
+    index - The index of the {@link Preference} to retrieve. 
+
+    Returns: The {@link Preference}. 
+
+*android.preference.PreferenceGroup.getPreferenceCount()*
+
+public int getPreferenceCount()
+
+Returns the number of children (|android.preference.Preference|) s. 
+
+
+
+    Returns: The number of preference children in this group. 
+
+*android.preference.PreferenceGroup.isOnSameScreenAsChildren()*
+
+protected boolean isOnSameScreenAsChildren()
+
+Whether this preference group should be shown on the same screen as its 
+contained preferences. 
+
+
+
+    Returns: True if the contained preferences should be shown on the same screen as this 
+             preference. 
+
+*android.preference.PreferenceGroup.isOrderingAsAdded()*
+
+public boolean isOrderingAsAdded()
+
+Whether this group is ordering preferences in the order they are added. 
+
+
+
+    Returns: Whether this group orders based on the order the children are added. 
+
+*android.preference.PreferenceGroup.notifyDependencyChange(boolean)*
+
+public void notifyDependencyChange(boolean disableDependents)
+
+
+
+
+
+*android.preference.PreferenceGroup.onAttachedToActivity()*
+
+protected void onAttachedToActivity()
+
+
+
+
+
+*android.preference.PreferenceGroup.onPrepareAddPreference(Preference)*
+
+protected boolean onPrepareAddPreference(android.preference.Preference preference)
+
+Prepares a (|android.preference.Preference|) to be added to the group. 
+
+
+    preference - The preference to add. 
+
+    Returns: Whether to allow adding the preference (true), or not (false). 
+
+*android.preference.PreferenceGroup.onPrepareForRemoval()*
+
+protected void onPrepareForRemoval()
+
+
+
+
+
+*android.preference.PreferenceGroup.removeAll()*
+
+public void removeAll()
+
+Removes all Preferences(|android.preference.Preference|) from this group. 
+
+
+
+*android.preference.PreferenceGroup.removePreference(Preference)*
+
+public boolean removePreference(android.preference.Preference preference)
+
+Removes a (|android.preference.Preference|) from this group. 
+
+
+    preference - The preference to remove. 
+
+    Returns: Whether the preference was found and removed. 
+
+*android.preference.PreferenceGroup.setOrderingAsAdded(boolean)*
+
+public void setOrderingAsAdded(boolean orderingAsAdded)
+
+Whether to order the (|android.preference.Preference|) children of this group 
+as they are added. If this is false, the ordering will follow each Preference 
+order and default to alphabetic for those without an order. 
+
+If this is called after preferences are added, they will not be re-ordered in 
+the order they were added, hence call this method early on. 
+
+
+    orderingAsAdded - Whether to order according to the order added. 
+
+

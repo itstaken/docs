@@ -1,0 +1,92 @@
+*android.provider.ContactsContract.Contacts.Photo* *ContactsContract.Contacts.Photo* 
+
+public static final class ContactsContract.Contacts.Photo
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.ContactsContract.DataColumnsWithJoins|
+
+|android.provider.ContactsContract.Contacts.Photo_Description|
+|android.provider.ContactsContract.Contacts.Photo_Fields|
+|android.provider.ContactsContract.Contacts.Photo_Constructors|
+|android.provider.ContactsContract.Contacts.Photo_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Contacts.Photo_Fields*
+|java.lang.String_android.provider.ContactsContract.Contacts.Photo.CONTENT_DIRECTORY|
+|java.lang.String_android.provider.ContactsContract.Contacts.Photo.DISPLAY_PHOTO|
+|java.lang.String_android.provider.ContactsContract.Contacts.Photo.PHOTO|
+|java.lang.String_android.provider.ContactsContract.Contacts.Photo.PHOTO_FILE_ID|
+
+*android.provider.ContactsContract.Contacts.Photo_Description*
+
+A read-only sub-directory of a single contact that contains the contact's 
+primary photo. The photo may be stored in up to two ways - the default "photo" 
+is a thumbnail-sized image stored directly in the data row, while the "display 
+photo", if present, is a larger version stored as a file. 
+
+Usage example: 
+
+Retrieving the thumbnail-sized photo 
+
+
+
+public InputStream openPhoto(long contactId) { Uri contactUri = 
+ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId); Uri photoUri = 
+Uri.withAppendedPath(contactUri, Contacts.Photo.CONTENT_DIRECTORY); Cursor 
+cursor = getContentResolver().query(photoUri, new String[] 
+{Contacts.Photo.PHOTO}, null, null, null); if (cursor == null) { return null; } 
+try { if (cursor.moveToFirst()) { byte[] data = cursor.getBlob(0); if (data != 
+null) { return new ByteArrayInputStream(data); } } } finally { cursor.close(); 
+} return null; } 
+
+Retrieving the larger photo version 
+
+
+
+public InputStream openDisplayPhoto(long contactId) { Uri contactUri = 
+ContentUris.withAppendedId(Contacts.CONTENT_URI, contactId); Uri 
+displayPhotoUri = Uri.withAppendedPath(contactUri, 
+Contacts.Photo.DISPLAY_PHOTO); try { AssetFileDescriptor fd = 
+getContentResolver().openAssetFileDescriptor(displayPhotoUri, "r"); return 
+fd.createInputStream(); } catch (IOException e) { return null; } } 
+
+
+
+You may also consider using the convenience method 
+(|android.provider.ContactsContract.Contacts|) to retrieve the raw photo 
+contents of either the thumbnail-sized or the full-sized photo. 
+
+This directory can be used either with a 
+(|android.provider.ContactsContract.Contacts.Photo|) or 
+(|android.provider.ContactsContract.Contacts.Photo|) . 
+
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Photo.CONTENT_DIRECTORY*
+
+The directory twig for this sub-table 
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Photo.DISPLAY_PHOTO*
+
+The directory twig for retrieving the full-size display photo. 
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Photo.PHOTO*
+
+Thumbnail photo of the raw contact. This is the raw bytes of an image that 
+could be inflated using (|android.graphics.BitmapFactory|) . 
+
+Type: BLOB 
+
+
+*java.lang.String_android.provider.ContactsContract.Contacts.Photo.PHOTO_FILE_ID*
+
+Full-size photo file ID of the raw contact. See 
+(|android.provider.ContactsContract.DisplayPhoto|) . 
+
+Type: NUMBER 
+
+
+

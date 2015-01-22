@@ -1,0 +1,104 @@
+*android.util.TimingLogger* *TimingLogger* A utility class to help log timings s
+
+public class TimingLogger
+  extends    |java.lang.Object|
+
+|android.util.TimingLogger_Description|
+|android.util.TimingLogger_Fields|
+|android.util.TimingLogger_Constructors|
+|android.util.TimingLogger_Methods|
+
+================================================================================
+
+*android.util.TimingLogger_Constructors*
+|android.util.TimingLogger(String,String)|Create and initialize a TimingLogger 
+
+*android.util.TimingLogger_Methods*
+|android.util.TimingLogger.addSplit(String)|Add a split for the current time, l
+|android.util.TimingLogger.dumpToLog()|Dumps the timings to the log using Log.d
+|android.util.TimingLogger.reset()|Clear and initialize a TimingLogger object t
+|android.util.TimingLogger.reset(String,String)|Clear and initialize a TimingLo
+
+*android.util.TimingLogger_Description*
+
+A utility class to help log timings splits throughout a method call. Typical 
+usage is: 
+
+
+
+TimingLogger timings = new TimingLogger(TAG, "methodA"); // ... do some work A 
+... timings.addSplit("work A"); // ... do some work B ... 
+timings.addSplit("work B"); // ... do some work C ... timings.addSplit("work 
+C"); timings.dumpToLog(); 
+
+The dumpToLog call would add the following to the log: 
+
+
+
+D/TAG ( 3459): methodA: begin D/TAG ( 3459): methodA: 9 ms, work A D/TAG ( 
+3459): methodA: 1 ms, work B D/TAG ( 3459): methodA: 6 ms, work C D/TAG ( 
+3459): methodA: end, 16 ms 
+
+
+
+*android.util.TimingLogger(String,String)*
+
+public TimingLogger(
+  java.lang.String tag,
+  java.lang.String label)
+
+Create and initialize a TimingLogger object that will log using the specific 
+tag. If the Log.isLoggable is not enabled to at least the Log.VERBOSE level for 
+that tag at creation time then the addSplit and dumpToLog call will do nothing. 
+
+    tag - the log tag to use while logging the timings 
+    label - a string to be displayed with each log 
+
+*android.util.TimingLogger.addSplit(String)*
+
+public void addSplit(java.lang.String splitLabel)
+
+Add a split for the current time, labeled with splitLabel. If Log.isLoggable 
+was not enabled to at least the Log.VERBOSE for the specified tag at 
+construction or reset() time then this call does nothing. 
+
+
+    splitLabel - a label to associate with this split. 
+
+*android.util.TimingLogger.dumpToLog()*
+
+public void dumpToLog()
+
+Dumps the timings to the log using Log.d(). If Log.isLoggable was not enabled 
+to at least the Log.VERBOSE for the specified tag at construction or reset() 
+time then this call does nothing. 
+
+
+
+*android.util.TimingLogger.reset()*
+
+public void reset()
+
+Clear and initialize a TimingLogger object that will log using the tag and 
+label that was specified previously, either via the constructor or a call to 
+reset(tag, label). If the Log.isLoggable is not enabled to at least the 
+Log.VERBOSE level for that tag at creation time then the addSplit and dumpToLog 
+call will do nothing. 
+
+
+
+*android.util.TimingLogger.reset(String,String)*
+
+public void reset(
+  java.lang.String tag,
+  java.lang.String label)
+
+Clear and initialize a TimingLogger object that will log using the specific 
+tag. If the Log.isLoggable is not enabled to at least the Log.VERBOSE level for 
+that tag at creation time then the addSplit and dumpToLog call will do nothing. 
+
+
+    tag - the log tag to use while logging the timings 
+    label - a string to be displayed with each log 
+
+

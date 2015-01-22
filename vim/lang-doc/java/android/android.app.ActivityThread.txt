@@ -1,0 +1,493 @@
+*android.app.ActivityThread* *ActivityThread* This manages the execution of the 
+
+public final class ActivityThread
+  extends    |java.lang.Object|
+
+|android.app.ActivityThread_Description|
+|android.app.ActivityThread_Fields|
+|android.app.ActivityThread_Constructors|
+|android.app.ActivityThread_Methods|
+
+================================================================================
+
+*android.app.ActivityThread_Fields*
+|boolean_android.app.ActivityThread.DEBUG_BROADCAST|
+|boolean_android.app.ActivityThread.DEBUG_CONFIGURATION|
+|java.lang.String_android.app.ActivityThread.TAG|
+
+*android.app.ActivityThread_Methods*
+|android.app.ActivityThread.acquireExistingProvider(Context,String,int,boolean)|
+|android.app.ActivityThread.acquireProvider(Context,String,int,boolean)|
+|android.app.ActivityThread.applyConfigurationToResources(Configuration)|
+|android.app.ActivityThread.currentActivityThread()|
+|android.app.ActivityThread.currentApplication()|
+|android.app.ActivityThread.currentPackageName()|
+|android.app.ActivityThread.currentProcessName()|
+|android.app.ActivityThread.dumpMemInfoTable(PrintWriter,Debug.MemoryInfo,boolean,boolean,boolean,int,String,long,long,long,long,long,long)|
+|android.app.ActivityThread.getActivity(IBinder)|
+|android.app.ActivityThread.getApplication()|
+|android.app.ActivityThread.getApplicationThread()|
+|android.app.ActivityThread.getInstrumentation()|
+|android.app.ActivityThread.getIntCoreSetting(String,int)|
+|android.app.ActivityThread.getIntentBeingBroadcast()|Return the Intent that's 
+|android.app.ActivityThread.getLooper()|
+|android.app.ActivityThread.getPackageInfo(ApplicationInfo,CompatibilityInfo,int)|
+|android.app.ActivityThread.getPackageInfo(String,CompatibilityInfo,int)|
+|android.app.ActivityThread.getPackageInfo(String,CompatibilityInfo,int,int)|
+|android.app.ActivityThread.getPackageInfoNoCheck(ApplicationInfo,CompatibilityInfo)|
+|android.app.ActivityThread.getPackageManager()|
+|android.app.ActivityThread.getProcessName()|
+|android.app.ActivityThread.getProfileFilePath()|
+|android.app.ActivityThread.getSystemContext()|
+|android.app.ActivityThread.handleInstallProvider(ProviderInfo)|
+|android.app.ActivityThread.handleRequestAssistContextExtras(ActivityThread.RequestAssistContextExtras)|
+|android.app.ActivityThread.handleTranslucentConversionComplete(IBinder,boolean)|
+|android.app.ActivityThread.installSystemApplicationInfo(ApplicationInfo)|
+|android.app.ActivityThread.installSystemProviders(List<ProviderInfo>)|
+|android.app.ActivityThread.isProfiling()|
+|android.app.ActivityThread.main(String[])|
+|android.app.ActivityThread.peekPackageInfo(String,boolean)|
+|android.app.ActivityThread.performDestroyActivity(IBinder,boolean)|
+|android.app.ActivityThread.performNewIntents(IBinder,List<Intent>)|
+|android.app.ActivityThread.performResumeActivity(IBinder,boolean)|
+|android.app.ActivityThread.registerOnActivityPausedListener(Activity,OnActivityPausedListener)|
+|android.app.ActivityThread.releaseProvider(IContentProvider,boolean)|
+|android.app.ActivityThread.requestRelaunchActivity(IBinder,List<ResultInfo>,List<Intent>,int,boolean,Configuration,boolean)|
+|android.app.ActivityThread.resolveActivityInfo(Intent)|
+|android.app.ActivityThread.sendActivityResult(IBinder,String,int,int,Intent)|
+|android.app.ActivityThread.startActivityNow(Activity,String,Intent,ActivityInfo,IBinder,Bundle,Activity.NonConfigurationInstances)|
+|android.app.ActivityThread.systemMain()|
+|android.app.ActivityThread.unregisterOnActivityPausedListener(Activity,OnActivityPausedListener)|
+
+*android.app.ActivityThread_Description*
+
+This manages the execution of the main thread in an application process, 
+scheduling and executing activities, broadcasts, and other operations on it as 
+the activity manager requests. 
+
+
+
+*boolean_android.app.ActivityThread.DEBUG_BROADCAST*
+
+
+
+
+*boolean_android.app.ActivityThread.DEBUG_CONFIGURATION*
+
+
+
+
+*java.lang.String_android.app.ActivityThread.TAG*
+
+
+
+
+
+*android.app.ActivityThread.acquireExistingProvider(Context,String,int,boolean)*
+
+public final |android.content.IContentProvider| acquireExistingProvider(
+  android.content.Context c,
+  java.lang.String auth,
+  int userId,
+  boolean stable)
+
+
+
+
+
+*android.app.ActivityThread.acquireProvider(Context,String,int,boolean)*
+
+public final |android.content.IContentProvider| acquireProvider(
+  android.content.Context c,
+  java.lang.String auth,
+  int userId,
+  boolean stable)
+
+
+
+
+
+*android.app.ActivityThread.applyConfigurationToResources(Configuration)*
+
+public final void applyConfigurationToResources(android.content.res.Configuration config)
+
+
+
+
+
+*android.app.ActivityThread.currentActivityThread()*
+
+public static |android.app.ActivityThread| currentActivityThread()
+
+
+
+
+
+*android.app.ActivityThread.currentApplication()*
+
+public static |android.app.Application| currentApplication()
+
+
+
+
+
+*android.app.ActivityThread.currentPackageName()*
+
+public static |java.lang.String| currentPackageName()
+
+
+
+
+
+*android.app.ActivityThread.currentProcessName()*
+
+public static |java.lang.String| currentProcessName()
+
+
+
+
+
+*android.app.ActivityThread.dumpMemInfoTable(PrintWriter,Debug.MemoryInfo,boolean,boolean,boolean,int,String,long,long,long,long,long,long)*
+
+public static void dumpMemInfoTable(
+  java.io.PrintWriter pw,
+  android.os.Debug.MemoryInfo memInfo,
+  boolean checkin,
+  boolean dumpFullInfo,
+  boolean dumpDalvik,
+  int pid,
+  java.lang.String processName,
+  long nativeMax,
+  long nativeAllocated,
+  long nativeFree,
+  long dalvikMax,
+  long dalvikAllocated,
+  long dalvikFree)
+
+
+
+
+
+*android.app.ActivityThread.getActivity(IBinder)*
+
+public final |android.app.Activity| getActivity(android.os.IBinder token)
+
+
+
+
+
+*android.app.ActivityThread.getApplication()*
+
+public |android.app.Application| getApplication()
+
+
+
+
+
+*android.app.ActivityThread.getApplicationThread()*
+
+public |android.app.ActivityThread.ApplicationThread| getApplicationThread()
+
+
+
+
+
+*android.app.ActivityThread.getInstrumentation()*
+
+public |android.app.Instrumentation| getInstrumentation()
+
+
+
+
+
+*android.app.ActivityThread.getIntCoreSetting(String,int)*
+
+public int getIntCoreSetting(
+  java.lang.String key,
+  int defaultValue)
+
+
+
+
+
+*android.app.ActivityThread.getIntentBeingBroadcast()*
+
+public static |android.content.Intent| getIntentBeingBroadcast()
+
+Return the Intent that's currently being handled by a BroadcastReceiver on this 
+thread, or null if none. 
+
+
+
+*android.app.ActivityThread.getLooper()*
+
+public |android.os.Looper| getLooper()
+
+
+
+
+
+*android.app.ActivityThread.getPackageInfo(ApplicationInfo,CompatibilityInfo,int)*
+
+public final |android.app.LoadedApk| getPackageInfo(
+  android.content.pm.ApplicationInfo ai,
+  android.content.res.CompatibilityInfo compatInfo,
+  int flags)
+
+
+
+
+
+*android.app.ActivityThread.getPackageInfo(String,CompatibilityInfo,int)*
+
+public final |android.app.LoadedApk| getPackageInfo(
+  java.lang.String packageName,
+  android.content.res.CompatibilityInfo compatInfo,
+  int flags)
+
+
+
+
+
+*android.app.ActivityThread.getPackageInfo(String,CompatibilityInfo,int,int)*
+
+public final |android.app.LoadedApk| getPackageInfo(
+  java.lang.String packageName,
+  android.content.res.CompatibilityInfo compatInfo,
+  int flags,
+  int userId)
+
+
+
+
+
+*android.app.ActivityThread.getPackageInfoNoCheck(ApplicationInfo,CompatibilityInfo)*
+
+public final |android.app.LoadedApk| getPackageInfoNoCheck(
+  android.content.pm.ApplicationInfo ai,
+  android.content.res.CompatibilityInfo compatInfo)
+
+
+
+
+
+*android.app.ActivityThread.getPackageManager()*
+
+public static IPackageManager getPackageManager()
+
+
+
+
+
+*android.app.ActivityThread.getProcessName()*
+
+public |java.lang.String| getProcessName()
+
+
+
+
+
+*android.app.ActivityThread.getProfileFilePath()*
+
+public |java.lang.String| getProfileFilePath()
+
+
+
+
+
+*android.app.ActivityThread.getSystemContext()*
+
+public |android.app.ContextImpl| getSystemContext()
+
+
+
+
+
+*android.app.ActivityThread.handleInstallProvider(ProviderInfo)*
+
+public void handleInstallProvider(android.content.pm.ProviderInfo info)
+
+
+
+
+
+*android.app.ActivityThread.handleRequestAssistContextExtras(ActivityThread.RequestAssistContextExtras)*
+
+public void handleRequestAssistContextExtras(android.app.ActivityThread.RequestAssistContextExtras cmd)
+
+
+
+
+
+*android.app.ActivityThread.handleTranslucentConversionComplete(IBinder,boolean)*
+
+public void handleTranslucentConversionComplete(
+  android.os.IBinder token,
+  boolean drawComplete)
+
+
+
+
+
+*android.app.ActivityThread.installSystemApplicationInfo(ApplicationInfo)*
+
+public void installSystemApplicationInfo(android.content.pm.ApplicationInfo info)
+
+
+
+
+
+*android.app.ActivityThread.installSystemProviders(List<ProviderInfo>)*
+
+public final void installSystemProviders(java.util.List<android.content.pm.ProviderInfo> providers)
+
+
+
+
+
+*android.app.ActivityThread.isProfiling()*
+
+public boolean isProfiling()
+
+
+
+
+
+*android.app.ActivityThread.main(String[])*
+
+public static void main(java.lang.String[] args)
+
+
+
+
+
+*android.app.ActivityThread.peekPackageInfo(String,boolean)*
+
+public final |android.app.LoadedApk| peekPackageInfo(
+  java.lang.String packageName,
+  boolean includeCode)
+
+
+
+
+
+*android.app.ActivityThread.performDestroyActivity(IBinder,boolean)*
+
+public final |android.app.ActivityThread.ActivityClientRecord| performDestroyActivity(
+  android.os.IBinder token,
+  boolean finishing)
+
+
+
+
+
+*android.app.ActivityThread.performNewIntents(IBinder,List<Intent>)*
+
+public final void performNewIntents(
+  android.os.IBinder token,
+  java.util.List<android.content.Intent> intents)
+
+
+
+
+
+*android.app.ActivityThread.performResumeActivity(IBinder,boolean)*
+
+public final |android.app.ActivityThread.ActivityClientRecord| performResumeActivity(
+  android.os.IBinder token,
+  boolean clearHide)
+
+
+
+
+
+*android.app.ActivityThread.registerOnActivityPausedListener(Activity,OnActivityPausedListener)*
+
+public void registerOnActivityPausedListener(
+  android.app.Activity activity,
+  android.app.OnActivityPausedListener listener)
+
+
+
+
+
+*android.app.ActivityThread.releaseProvider(IContentProvider,boolean)*
+
+public final boolean releaseProvider(
+  android.content.IContentProvider provider,
+  boolean stable)
+
+
+
+
+
+*android.app.ActivityThread.requestRelaunchActivity(IBinder,List<ResultInfo>,List<Intent>,int,boolean,Configuration,boolean)*
+
+public final void requestRelaunchActivity(
+  android.os.IBinder token,
+  java.util.List<android.app.ResultInfo> pendingResults,
+  java.util.List<android.content.Intent> pendingNewIntents,
+  int configChanges,
+  boolean notResumed,
+  android.content.res.Configuration config,
+  boolean fromServer)
+
+
+
+
+
+*android.app.ActivityThread.resolveActivityInfo(Intent)*
+
+public final |android.content.pm.ActivityInfo| resolveActivityInfo(android.content.Intent intent)
+
+
+
+
+
+*android.app.ActivityThread.sendActivityResult(IBinder,String,int,int,Intent)*
+
+public final void sendActivityResult(
+  android.os.IBinder token,
+  java.lang.String id,
+  int requestCode,
+  int resultCode,
+  android.content.Intent data)
+
+
+
+
+
+*android.app.ActivityThread.startActivityNow(Activity,String,Intent,ActivityInfo,IBinder,Bundle,Activity.NonConfigurationInstances)*
+
+public final |android.app.Activity| startActivityNow(
+  android.app.Activity parent,
+  java.lang.String id,
+  android.content.Intent intent,
+  android.content.pm.ActivityInfo activityInfo,
+  android.os.IBinder token,
+  android.os.Bundle state,
+  android.app.Activity.NonConfigurationInstances lastNonConfigurationInstances)
+
+
+
+
+
+*android.app.ActivityThread.systemMain()*
+
+public static |android.app.ActivityThread| systemMain()
+
+
+
+
+
+*android.app.ActivityThread.unregisterOnActivityPausedListener(Activity,OnActivityPausedListener)*
+
+public void unregisterOnActivityPausedListener(
+  android.app.Activity activity,
+  android.app.OnActivityPausedListener listener)
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+*android.transition.Transition.TransitionListener* *Transition.TransitionListener* 
+
+public static interface interface Transition.TransitionListener
+
+
+|android.transition.Transition.TransitionListener_Description|
+|android.transition.Transition.TransitionListener_Fields|
+|android.transition.Transition.TransitionListener_Constructors|
+|android.transition.Transition.TransitionListener_Methods|
+
+================================================================================
+
+*android.transition.Transition.TransitionListener_Methods*
+|android.transition.Transition.TransitionListener.onTransitionCancel(Transition)|
+|android.transition.Transition.TransitionListener.onTransitionEnd(Transition)|N
+|android.transition.Transition.TransitionListener.onTransitionPause(Transition)|
+|android.transition.Transition.TransitionListener.onTransitionResume(Transition)|
+|android.transition.Transition.TransitionListener.onTransitionStart(Transition)|
+
+*android.transition.Transition.TransitionListener_Description*
+
+A transition listener receives notifications from a transition. Notifications 
+indicate transition lifecycle events. 
+
+
+
+*android.transition.Transition.TransitionListener.onTransitionCancel(Transition)*
+
+public void onTransitionCancel(android.transition.Transition transition)
+
+Notification about the cancellation of the transition. Note that cancel may be 
+called by a parent (|android.transition.TransitionSet|) on a child transition 
+which has not yet started. This allows the child transition to restore state on 
+target objects which was set at 
+createAnimator()(|android.transition.Transition.TransitionListener|) time. 
+
+
+    transition - The transition which was canceled. 
+
+*android.transition.Transition.TransitionListener.onTransitionEnd(Transition)*
+
+public void onTransitionEnd(android.transition.Transition transition)
+
+Notification about the end of the transition. Canceled transitions will always 
+notify listeners of both the cancellation and end events. That is, 
+(|android.transition.Transition.TransitionListener|) is always called, 
+regardless of whether the transition was canceled or played through to 
+completion. 
+
+
+    transition - The transition which reached its end. 
+
+*android.transition.Transition.TransitionListener.onTransitionPause(Transition)*
+
+public void onTransitionPause(android.transition.Transition transition)
+
+Notification when a transition is paused. Note that createAnimator() may be 
+called by a parent (|android.transition.TransitionSet|) on a child transition 
+which has not yet started. This allows the child transition to restore state on 
+target objects which was set at 
+createAnimator()(|android.transition.Transition.TransitionListener|) time. 
+
+
+    transition - The transition which was paused. 
+
+*android.transition.Transition.TransitionListener.onTransitionResume(Transition)*
+
+public void onTransitionResume(android.transition.Transition transition)
+
+Notification when a transition is resumed. Note that resume() may be called by 
+a parent (|android.transition.TransitionSet|) on a child transition which has 
+not yet started. This allows the child transition to restore state which may 
+have changed in an earlier call to 
+(|android.transition.Transition.TransitionListener|) . 
+
+
+    transition - The transition which was resumed. 
+
+*android.transition.Transition.TransitionListener.onTransitionStart(Transition)*
+
+public void onTransitionStart(android.transition.Transition transition)
+
+Notification about the start of the transition. 
+
+
+    transition - The started transition. 
+
+

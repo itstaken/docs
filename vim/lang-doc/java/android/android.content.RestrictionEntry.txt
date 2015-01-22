@@ -1,0 +1,412 @@
+*android.content.RestrictionEntry* *RestrictionEntry* Applications can expose re
+
+public class RestrictionEntry
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.RestrictionEntry_Description|
+|android.content.RestrictionEntry_Fields|
+|android.content.RestrictionEntry_Constructors|
+|android.content.RestrictionEntry_Methods|
+
+================================================================================
+
+*android.content.RestrictionEntry_Fields*
+|android.os.Parcelable.Creator<android.content.RestrictionEntry>_android.content.RestrictionEntry.CREATOR|
+|int_android.content.RestrictionEntry.TYPE_BOOLEAN|
+|int_android.content.RestrictionEntry.TYPE_CHOICE|
+|int_android.content.RestrictionEntry.TYPE_CHOICE_LEVEL|
+|int_android.content.RestrictionEntry.TYPE_MULTI_SELECT|
+|int_android.content.RestrictionEntry.TYPE_NULL|
+
+*android.content.RestrictionEntry_Constructors*
+|android.content.RestrictionEntry(Parcel)|
+|android.content.RestrictionEntry(String,boolean)|Constructor for#TYPE_BOOLEANt
+|android.content.RestrictionEntry(String,String)|Constructor for#TYPE_CHOICEtyp
+|android.content.RestrictionEntry(String,String[])|Constructor for#TYPE_MULTI_S
+
+*android.content.RestrictionEntry_Methods*
+|android.content.RestrictionEntry.describeContents()|
+|android.content.RestrictionEntry.equals(Object)|
+|android.content.RestrictionEntry.getAllSelectedStrings()|Returns the list of c
+|android.content.RestrictionEntry.getChoiceEntries()|Returns the list of string
+|android.content.RestrictionEntry.getChoiceValues()|Returns the list of possibl
+|android.content.RestrictionEntry.getDescription()|Returns the provided user-vi
+|android.content.RestrictionEntry.getKey()|This is the unique key for the restr
+|android.content.RestrictionEntry.getSelectedState()|Returns the current select
+|android.content.RestrictionEntry.getSelectedString()|Returns the currently sel
+|android.content.RestrictionEntry.getTitle()|Returns the user-visible title for
+|android.content.RestrictionEntry.getType()|Returns the type for this restricti
+|android.content.RestrictionEntry.hashCode()|
+|android.content.RestrictionEntry.setAllSelectedStrings(String[])|Sets the curr
+|android.content.RestrictionEntry.setChoiceEntries(Context,int)|Sets a list of 
+|android.content.RestrictionEntry.setChoiceEntries(String[])|Sets a list of str
+|android.content.RestrictionEntry.setChoiceValues(Context,int)|Sets a list of s
+|android.content.RestrictionEntry.setChoiceValues(String[])|Sets a list of stri
+|android.content.RestrictionEntry.setDescription(String)|Sets the user-visible 
+|android.content.RestrictionEntry.setSelectedState(boolean)|Sets the current se
+|android.content.RestrictionEntry.setSelectedString(String)|Sets the string val
+|android.content.RestrictionEntry.setTitle(String)|Sets the user-visible title 
+|android.content.RestrictionEntry.setType(int)|Sets the type for this restricti
+|android.content.RestrictionEntry.toString()|
+|android.content.RestrictionEntry.writeToParcel(Parcel,int)|
+
+*android.content.RestrictionEntry_Description*
+
+Applications can expose restrictions for a restricted user on a multiuser 
+device. The administrator can configure these restrictions that will then be 
+applied to the restricted user. Each RestrictionsEntry is one configurable 
+restriction. 
+
+Any application that chooses to expose such restrictions does so by 
+implementing a receiver that handles the (|android.content.Intent|) action. The 
+receiver then returns a result bundle that contains an entry called 
+"restrictions", whose value is an ArrayList. 
+
+
+
+*android.os.Parcelable.Creator<android.content.RestrictionEntry>_android.content.RestrictionEntry.CREATOR*
+
+
+
+
+*int_android.content.RestrictionEntry.TYPE_BOOLEAN*
+
+A type of restriction. Use this for storing a boolean value, typically 
+presented as a checkbox in the UI. 
+
+
+*int_android.content.RestrictionEntry.TYPE_CHOICE*
+
+A type of restriction. Use this for storing a string value, typically presented 
+as a single-select list. Call (|android.content.RestrictionEntry|) and 
+(|android.content.RestrictionEntry|) to set the localized list entries to 
+present to the user and the corresponding values, respectively. 
+
+
+*int_android.content.RestrictionEntry.TYPE_CHOICE_LEVEL*
+
+A type of restriction. Use this for storing a string value, typically presented 
+as a single-select list. Call (|android.content.RestrictionEntry|) and 
+(|android.content.RestrictionEntry|) to set the localized list entries to 
+present to the user and the corresponding values, respectively. The 
+presentation could imply that values in lower array indices are included when a 
+particular value is chosen. 
+
+
+*int_android.content.RestrictionEntry.TYPE_MULTI_SELECT*
+
+A type of restriction. Use this for presenting a multi-select list where more 
+than one entry can be selected, such as for choosing specific titles to 
+white-list. Call (|android.content.RestrictionEntry|) and 
+(|android.content.RestrictionEntry|) to set the localized list entries to 
+present to the user and the corresponding values, respectively. Use 
+(|android.content.RestrictionEntry|) and (|android.content.RestrictionEntry|) 
+to manipulate the selections. 
+
+
+*int_android.content.RestrictionEntry.TYPE_NULL*
+
+A type of restriction. Use this type for information that needs to be 
+transferred across but shouldn't be presented to the user in the UI. Stores a 
+single String value. 
+
+
+
+*android.content.RestrictionEntry(Parcel)*
+
+public RestrictionEntry(android.os.Parcel in)
+
+
+
+
+*android.content.RestrictionEntry(String,boolean)*
+
+public RestrictionEntry(
+  java.lang.String key,
+  boolean selectedState)
+
+Constructor for (|android.content.RestrictionEntry|) type. 
+
+    key - the unique key for this restriction 
+    selectedState - whether this restriction is selected or not 
+
+*android.content.RestrictionEntry(String,String)*
+
+public RestrictionEntry(
+  java.lang.String key,
+  java.lang.String selectedString)
+
+Constructor for (|android.content.RestrictionEntry|) type. 
+
+    key - the unique key for this restriction 
+    selectedString - the current value 
+
+*android.content.RestrictionEntry(String,String[])*
+
+public RestrictionEntry(
+  java.lang.String key,
+  java.lang.String[] selectedStrings)
+
+Constructor for (|android.content.RestrictionEntry|) type. 
+
+    key - the unique key for this restriction 
+    selectedStrings - the list of values that are currently selected 
+
+*android.content.RestrictionEntry.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.RestrictionEntry.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.content.RestrictionEntry.getAllSelectedStrings()*
+
+public |java.lang.String|[] getAllSelectedStrings()
+
+Returns the list of currently selected values. 
+
+
+
+    Returns: the list of current selections, if type is {@link #TYPE_MULTI_SELECT}, null 
+             otherwise. 
+
+*android.content.RestrictionEntry.getChoiceEntries()*
+
+public |java.lang.String|[] getChoiceEntries()
+
+Returns the list of strings, set earlier, that will be presented as choices to 
+the user. 
+
+
+
+    Returns: the list of choices presented to the user. 
+
+*android.content.RestrictionEntry.getChoiceValues()*
+
+public |java.lang.String|[] getChoiceValues()
+
+Returns the list of possible string values set earlier. 
+
+
+
+    Returns: the list of possible values. 
+
+*android.content.RestrictionEntry.getDescription()*
+
+public |java.lang.String| getDescription()
+
+Returns the provided user-visible description of the entry, if any. 
+
+
+
+    Returns: the user-visible description, null if none was set earlier. 
+
+*android.content.RestrictionEntry.getKey()*
+
+public |java.lang.String| getKey()
+
+This is the unique key for the restriction entry. 
+
+
+
+    Returns: the key for the restriction. 
+
+*android.content.RestrictionEntry.getSelectedState()*
+
+public boolean getSelectedState()
+
+Returns the current selected state for an entry of type 
+(|android.content.RestrictionEntry|) . 
+
+
+
+    Returns: the current selected state of the entry. 
+
+*android.content.RestrictionEntry.getSelectedString()*
+
+public |java.lang.String| getSelectedString()
+
+Returns the currently selected string value. 
+
+
+
+    Returns: the currently selected value, which can be null for types that aren't for 
+             holding single string values. 
+
+*android.content.RestrictionEntry.getTitle()*
+
+public |java.lang.String| getTitle()
+
+Returns the user-visible title for the entry, if any. 
+
+
+
+    Returns: the user-visible title for the entry, null if none was set earlier. 
+
+*android.content.RestrictionEntry.getType()*
+
+public int getType()
+
+Returns the type for this restriction. 
+
+
+
+    Returns: the type for this restriction 
+
+*android.content.RestrictionEntry.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.content.RestrictionEntry.setAllSelectedStrings(String[])*
+
+public void setAllSelectedStrings(java.lang.String[] allSelectedStrings)
+
+Sets the current list of selected values for an entry of type 
+(|android.content.RestrictionEntry|) . These values will be persisted by the 
+system for later use by the application. 
+
+
+    allSelectedStrings - the current list of selected values. 
+
+*android.content.RestrictionEntry.setChoiceEntries(Context,int)*
+
+public void setChoiceEntries(
+  android.content.Context context,
+  int stringArrayResId)
+
+Sets a list of strings that will be presented as choices to the user. This is 
+similar to (|android.content.RestrictionEntry|) . 
+
+
+    context - the application context, used for retrieving the resources. 
+    stringArrayResId - the resource id of a string array containing the possible entries. 
+
+*android.content.RestrictionEntry.setChoiceEntries(String[])*
+
+public void setChoiceEntries(java.lang.String[] choiceEntries)
+
+Sets a list of strings that will be presented as choices to the user. When the 
+user selects one or more of these choices, the corresponding value from the 
+possible values are stored as the selected strings. The size of this array must 
+match the size of the array set in (|android.content.RestrictionEntry|) . This 
+method is not relevant for types other than 
+(|android.content.RestrictionEntry|) , and (|android.content.RestrictionEntry|) 
+. 
+
+
+    choiceEntries - the list of user-visible choices. 
+
+*android.content.RestrictionEntry.setChoiceValues(Context,int)*
+
+public void setChoiceValues(
+  android.content.Context context,
+  int stringArrayResId)
+
+Sets a list of string values that can be selected by the user, similar to 
+(|android.content.RestrictionEntry|) . 
+
+
+    context - the application context for retrieving the resources. 
+    stringArrayResId - the resource id for a string array containing the possible values. 
+
+*android.content.RestrictionEntry.setChoiceValues(String[])*
+
+public void setChoiceValues(java.lang.String[] choiceValues)
+
+Sets a list of string values that can be selected by the user. If no 
+user-visible entries are set by a call to (|android.content.RestrictionEntry|) 
+, these values will be the ones shown to the user. Values will be chosen from 
+this list as the user's selection and the selected values can be retrieved by a 
+call to (|android.content.RestrictionEntry|) , or 
+(|android.content.RestrictionEntry|) , depending on whether it is a 
+multi-select type or choice type. This method is not relevant for types other 
+than (|android.content.RestrictionEntry|) , and 
+(|android.content.RestrictionEntry|) . 
+
+
+    choiceValues - an array of Strings which will be the selected values for the user's 
+       selections. 
+
+*android.content.RestrictionEntry.setDescription(String)*
+
+public void setDescription(java.lang.String description)
+
+Sets the user-visible description of the entry, as a possible sub-text for the 
+title. You can use this to describe the entry in more detail or to display the 
+current state of the restriction. 
+
+
+    description - the user-visible description string. 
+
+*android.content.RestrictionEntry.setSelectedState(boolean)*
+
+public void setSelectedState(boolean state)
+
+Sets the current selected state for an entry of type 
+(|android.content.RestrictionEntry|) . This value will be persisted by the 
+system for later use by the application. 
+
+
+    state - the current selected state 
+
+*android.content.RestrictionEntry.setSelectedString(String)*
+
+public void setSelectedString(java.lang.String selectedString)
+
+Sets the string value to use as the selected value for this restriction. This 
+value will be persisted by the system for later use by the application. 
+
+
+    selectedString - the string value to select. 
+
+*android.content.RestrictionEntry.setTitle(String)*
+
+public void setTitle(java.lang.String title)
+
+Sets the user-visible title for the entry. 
+
+
+    title - the user-visible title for the entry. 
+
+*android.content.RestrictionEntry.setType(int)*
+
+public void setType(int type)
+
+Sets the type for this restriction. 
+
+
+    type - the type for this restriction. 
+
+*android.content.RestrictionEntry.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.RestrictionEntry.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,261 @@
+*android.view.Surface* *Surface* Handle onto a raw buffer that is being managed 
+
+public class Surface
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.Surface_Description|
+|android.view.Surface_Fields|
+|android.view.Surface_Constructors|
+|android.view.Surface_Methods|
+
+================================================================================
+
+*android.view.Surface_Fields*
+|android.os.Parcelable.Creator<android.view.Surface>_android.view.Surface.CREATOR|
+|int_android.view.Surface.ROTATION_0|
+|int_android.view.Surface.ROTATION_180|
+|int_android.view.Surface.ROTATION_270|
+|int_android.view.Surface.ROTATION_90|
+
+*android.view.Surface_Constructors*
+|android.view.Surface()|Create an empty surface, which will later be filled in 
+|android.view.Surface(SurfaceTexture)|Create Surface from aSurfaceTexture.
+
+*android.view.Surface_Methods*
+|android.view.Surface.copyFrom(SurfaceControl)|Copy another surface to this one
+|android.view.Surface.describeContents()|
+|android.view.Surface.destroy()|Free all server-side state associated with this
+|android.view.Surface.finalize()|
+|android.view.Surface.getGenerationId()|Gets the generation number of this surf
+|android.view.Surface.isConsumerRunningBehind()|Returns true if the consumer of
+|android.view.Surface.isValid()|Returns true if this object holds a valid surfa
+|android.view.Surface.lockCanvas(Rect)|Gets aCanvasfor drawing into this surfac
+|android.view.Surface.readFromParcel(Parcel)|
+|android.view.Surface.release()|Release the local reference to the server-side 
+|android.view.Surface.rotationToString(int)|Returns a human readable representa
+|android.view.Surface.toString()|
+|android.view.Surface.transferFrom(Surface)|This is intended to be used bySurfa
+|android.view.Surface.unlockCanvas(Canvas)|
+|android.view.Surface.unlockCanvasAndPost(Canvas)|Posts the new contents of the
+|android.view.Surface.writeToParcel(Parcel,int)|
+
+*android.view.Surface_Description*
+
+Handle onto a raw buffer that is being managed by the screen compositor. 
+
+
+
+*android.os.Parcelable.Creator<android.view.Surface>_android.view.Surface.CREATOR*
+
+
+
+
+*int_android.view.Surface.ROTATION_0*
+
+Rotation constant: 0 degree rotation (natural orientation) 
+
+
+*int_android.view.Surface.ROTATION_180*
+
+Rotation constant: 180 degree rotation. 
+
+
+*int_android.view.Surface.ROTATION_270*
+
+Rotation constant: 270 degree rotation. 
+
+
+*int_android.view.Surface.ROTATION_90*
+
+Rotation constant: 90 degree rotation. 
+
+
+
+*android.view.Surface()*
+
+public Surface()
+
+Create an empty surface, which will later be filled in by readFromParcel(). 
+
+
+*android.view.Surface(SurfaceTexture)*
+
+public Surface(SurfaceTexture surfaceTexture)
+
+Create Surface from a (|SurfaceTexture|) . 
+
+Images drawn to the Surface will be made available to the (|SurfaceTexture|) , 
+which can attach them to an OpenGL ES texture via (|SurfaceTexture|) . 
+
+    surfaceTexture - The {@link SurfaceTexture} that is updated by this Surface. 
+
+*android.view.Surface.copyFrom(SurfaceControl)*
+
+public void copyFrom(android.view.SurfaceControl other)
+
+Copy another surface to this one. This surface now holds a reference to the 
+same data as the original surface, and is -not- the owner. This is for use by 
+the window manager when returning a window surface back from a client, 
+converting it from the representation being managed by the window manager to 
+the representation the client uses to draw in to it. 
+
+
+
+*android.view.Surface.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.Surface.destroy()*
+
+public void destroy()
+
+Free all server-side state associated with this surface and release this 
+object's reference. This method can only be called from the process that 
+created the service. 
+
+
+
+*android.view.Surface.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.Surface.getGenerationId()*
+
+public int getGenerationId()
+
+Gets the generation number of this surface, incremented each time the native 
+surface contained within this object changes. 
+
+
+
+    Returns: The current generation number. 
+
+*android.view.Surface.isConsumerRunningBehind()*
+
+public boolean isConsumerRunningBehind()
+
+Returns true if the consumer of this Surface is running behind the producer. 
+
+
+
+    Returns: True if the consumer is more than one buffer ahead of the producer. 
+
+*android.view.Surface.isValid()*
+
+public boolean isValid()
+
+Returns true if this object holds a valid surface. 
+
+
+
+    Returns: True if it holds a physical surface, so lockCanvas() will succeed. Otherwise 
+             returns false. 
+
+*android.view.Surface.lockCanvas(Rect)*
+
+public Canvas lockCanvas(Rect inOutDirty)
+  throws |java.lang.IllegalArgumentException|
+         |android.view.Surface.OutOfResourcesException|
+         
+Gets a (|Canvas|) for drawing into this surface. 
+
+After drawing into the provided (|Canvas|) , the caller must invoke 
+(|android.view.Surface|) to post the new contents to the surface. 
+
+
+    inOutDirty - A rectangle that represents the dirty region that the caller wants to redraw. 
+       This function may choose to expand the dirty rectangle if for example 
+       the surface has been resized or if the previous contents of the surface 
+       were not available. The caller must redraw the entire dirty region as 
+       represented by the contents of the inOutDirty rectangle upon return from 
+       this function. The caller may also pass null instead, in the case where 
+       the entire surface should be redrawn. 
+
+    Returns: A canvas for drawing into the surface. 
+
+*android.view.Surface.readFromParcel(Parcel)*
+
+public void readFromParcel(android.os.Parcel source)
+
+
+
+
+
+*android.view.Surface.release()*
+
+public void release()
+
+Release the local reference to the server-side surface. Always call release() 
+when you're done with a Surface. This will make the surface invalid. 
+
+
+
+*android.view.Surface.rotationToString(int)*
+
+public static |java.lang.String| rotationToString(int rotation)
+
+Returns a human readable representation of a rotation. 
+
+
+    rotation - The rotation. 
+
+    Returns: The rotation symbolic name. 
+
+*android.view.Surface.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.view.Surface.transferFrom(Surface)*
+
+public void transferFrom(android.view.Surface other)
+
+This is intended to be used by (|android.view.SurfaceView|) only. 
+
+    Deprecated
+
+    other - access is not thread safe 
+
+*android.view.Surface.unlockCanvas(Canvas)*
+
+public void unlockCanvas(Canvas canvas)
+
+
+
+    Deprecated: This API has been removed and is not supported.  Do not use.
+
+
+*android.view.Surface.unlockCanvasAndPost(Canvas)*
+
+public void unlockCanvasAndPost(Canvas canvas)
+
+Posts the new contents of the (|Canvas|) to the surface and releases the 
+(|Canvas|) . 
+
+
+    canvas - The canvas previously obtained from {@link #lockCanvas}. 
+
+*android.view.Surface.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

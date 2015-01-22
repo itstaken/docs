@@ -1,0 +1,112 @@
+*android.widget.HeterogeneousExpandableList* *HeterogeneousExpandableList* Addit
+
+public interface interface HeterogeneousExpandableList
+
+
+|android.widget.HeterogeneousExpandableList_Description|
+|android.widget.HeterogeneousExpandableList_Fields|
+|android.widget.HeterogeneousExpandableList_Constructors|
+|android.widget.HeterogeneousExpandableList_Methods|
+
+================================================================================
+
+*android.widget.HeterogeneousExpandableList_Methods*
+|android.widget.HeterogeneousExpandableList.getChildType(int,int)|Get the type 
+|android.widget.HeterogeneousExpandableList.getChildTypeCount()|Returns the num
+|android.widget.HeterogeneousExpandableList.getGroupType(int)|Get the type of g
+|android.widget.HeterogeneousExpandableList.getGroupTypeCount()|Returns the num
+
+*android.widget.HeterogeneousExpandableList_Description*
+
+Additional methods that when implemented make an 
+(|android.widget.ExpandableListAdapter|) take advantage of the 
+(|android.widget.Adapter|) view type mechanism. 
+
+An (|android.widget.ExpandableListAdapter|) declares it has one view type for 
+its group items and one view type for its child items. Although adapted for 
+most (|android.widget.ExpandableListView|) s, these values should be tuned for 
+heterogeneous (|android.widget.ExpandableListView|) s. 
+
+Lists that contain different types of group and/or child item views, should use 
+an adapter that implements this interface. This way, the recycled views that 
+will be provided to (|android.widget.ExpandableListAdapter|) and 
+(|android.widget.ExpandableListAdapter|) will be of the appropriate group or 
+child type, resulting in a more efficient reuse of the previously created 
+views. 
+
+
+
+*android.widget.HeterogeneousExpandableList.getChildType(int,int)*
+
+public int getChildType(
+  int groupPosition,
+  int childPosition)
+
+Get the type of child View that will be created by 
+(|android.widget.ExpandableListAdapter|) for the specified child item. 
+
+
+    groupPosition - the position of the group that the child resides in 
+    childPosition - the position of the child with respect to other children in the group 
+
+    Returns: An integer representing the type of child View. Two child views should share 
+             the same type if one can be converted to the other in {@link 
+             android.widget.ExpandableListAdapter#getChildView(int, int, 
+             boolean, View, ViewGroup)} Note: Integers must be in the range 0 
+             to {@link #getChildTypeCount} - 1. {@link 
+             android.widget.Adapter#IGNORE_ITEM_VIEW_TYPE} can also be 
+             returned. 
+
+*android.widget.HeterogeneousExpandableList.getChildTypeCount()*
+
+public int getChildTypeCount()
+
+Returns the number of types of child Views that will be created by 
+(|android.widget.ExpandableListAdapter|) . Each type represents a set of views 
+that can be converted in (|android.widget.ExpandableListAdapter|) , for any 
+group. If the adapter always returns the same type of View for all child items, 
+this method should return 1. 
+
+This method will only be called when the adapter is set on the 
+(|android.widget.AdapterView|) . 
+
+
+
+    Returns: The total number of types of child Views that will be created by this adapter. 
+
+*android.widget.HeterogeneousExpandableList.getGroupType(int)*
+
+public int getGroupType(int groupPosition)
+
+Get the type of group View that will be created by 
+(|android.widget.ExpandableListAdapter|) . for the specified group item. 
+
+
+    groupPosition - the position of the group for which the type should be returned. 
+
+    Returns: An integer representing the type of group View. Two group views should share 
+             the same type if one can be converted to the other in {@link 
+             android.widget.ExpandableListAdapter#getGroupView(int, boolean, 
+             View, ViewGroup)} . Note: Integers must be in the range 0 to 
+             {@link #getGroupTypeCount} - 1. {@link 
+             android.widget.Adapter#IGNORE_ITEM_VIEW_TYPE} can also be 
+             returned. 
+
+*android.widget.HeterogeneousExpandableList.getGroupTypeCount()*
+
+public int getGroupTypeCount()
+
+Returns the number of types of group Views that will be created by 
+(|android.widget.ExpandableListAdapter|) . Each type represents a set of views 
+that can be converted in (|android.widget.ExpandableListAdapter|) . If the 
+adapter always returns the same type of View for all group items, this method 
+should return 1. 
+
+This method will only be called when the adapter is set on the 
+(|android.widget.AdapterView|) . 
+
+
+
+    Returns: The number of types of group Views that will be created by this adapter. 
+
+

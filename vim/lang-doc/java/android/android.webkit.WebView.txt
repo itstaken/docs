@@ -1,0 +1,2034 @@
+*android.webkit.WebView* *WebView* A View that displays web pages.
+
+public class WebView
+  extends    |android.widget.AbsoluteLayout|
+  implements |android.view.ViewTreeObserver.OnGlobalFocusChangeListener|
+             |android.view.ViewGroup.OnHierarchyChangeListener|
+             |android.view.ViewDebug.HierarchyHandler|
+
+|android.webkit.WebView_Description|
+|android.webkit.WebView_Fields|
+|android.webkit.WebView_Constructors|
+|android.webkit.WebView_Methods|
+
+================================================================================
+
+*android.webkit.WebView_Fields*
+|java.lang.String_android.webkit.WebView.SCHEME_GEO|
+|java.lang.String_android.webkit.WebView.SCHEME_MAILTO|
+|java.lang.String_android.webkit.WebView.SCHEME_TEL|
+
+*android.webkit.WebView_Constructors*
+|android.webkit.WebView(Context)|Constructs a new WebView with a Context object
+|android.webkit.WebView(Context,AttributeSet)|Constructs a new WebView with lay
+|android.webkit.WebView(Context,AttributeSet,int)|Constructs a new WebView with
+|android.webkit.WebView(Context,AttributeSet,int,boolean)|Constructs a new WebV
+|android.webkit.WebView(Context,AttributeSet,int,Map<String,Object>,boolean)|Co
+
+*android.webkit.WebView_Methods*
+|android.webkit.WebView.addJavascriptInterface(Object,String)|Injects the suppl
+|android.webkit.WebView.canGoBack()|Gets whether this WebView has a back histor
+|android.webkit.WebView.canGoBackOrForward(int)|Gets whether the page can go ba
+|android.webkit.WebView.canGoForward()|Gets whether this WebView has a forward 
+|android.webkit.WebView.canZoomIn()|Gets whether this WebView can be zoomed in.
+|android.webkit.WebView.canZoomOut()|Gets whether this WebView can be zoomed ou
+|android.webkit.WebView.capturePicture()|Gets a new picture that captures the c
+|android.webkit.WebView.clearCache(boolean)|Clears the resource cache.
+|android.webkit.WebView.clearFormData()|Removes the autocomplete popup from the
+|android.webkit.WebView.clearHistory()|Tells this WebView to clear its internal
+|android.webkit.WebView.clearMatches()|Clears the highlighting surrounding text
+|android.webkit.WebView.clearSslPreferences()|Clears the SSL preferences table 
+|android.webkit.WebView.clearView()|Clears this WebView so that onDraw() will d
+|android.webkit.WebView.computeHorizontalScrollOffset()|
+|android.webkit.WebView.computeHorizontalScrollRange()|
+|android.webkit.WebView.computeScroll()|
+|android.webkit.WebView.computeVerticalScrollExtent()|
+|android.webkit.WebView.computeVerticalScrollOffset()|
+|android.webkit.WebView.computeVerticalScrollRange()|
+|android.webkit.WebView.copyBackForwardList()|Gets the WebBackForwardList for t
+|android.webkit.WebView.createPrintDocumentAdapter()|Creates a PrintDocumentAda
+|android.webkit.WebView.debugDump()|
+|android.webkit.WebView.destroy()|Destroys the internal state of this WebView.
+|android.webkit.WebView.disablePlatformNotifications()|Disables platform notifi
+|android.webkit.WebView.dispatchDraw(Canvas)|
+|android.webkit.WebView.dispatchKeyEvent(KeyEvent)|
+|android.webkit.WebView.documentHasImages(Message)|Queries the document to see 
+|android.webkit.WebView.dumpViewHierarchyWithProperties(BufferedWriter,int)|See
+|android.webkit.WebView.emulateShiftHeld()|Puts this WebView into text selectio
+|android.webkit.WebView.enablePlatformNotifications()|Enables platform notifica
+|android.webkit.WebView.evaluateJavascript(String,ValueCallback<String>)|Asynch
+|android.webkit.WebView.findAddress(String)|Gets the first substring consisting
+|android.webkit.WebView.findAll(String)|Finds all instances of find on the page
+|android.webkit.WebView.findAllAsync(String)|Finds all instances of find on the
+|android.webkit.WebView.findHierarchyView(String,int)|SeeViewDebug.HierarchyHan
+|android.webkit.WebView.findNext(boolean)|Highlights and scrolls to the next ma
+|android.webkit.WebView.flingScroll(int,int)|
+|android.webkit.WebView.freeMemory()|Informs this WebView that memory is low so
+|android.webkit.WebView.getAccessibilityNodeProvider()|
+|android.webkit.WebView.getCertificate()|Gets the SSL certificate for the main 
+|android.webkit.WebView.getContentHeight()|Gets the height of the HTML content.
+|android.webkit.WebView.getContentWidth()|Gets the width of the HTML content.
+|android.webkit.WebView.getFavicon()|Gets the favicon for the current page.
+|android.webkit.WebView.getHitTestResult()|Gets a HitTestResult based on the cu
+|android.webkit.WebView.getHttpAuthUsernamePassword(String,String)|Retrieves HT
+|android.webkit.WebView.getOriginalUrl()|Gets the original URL for the current 
+|android.webkit.WebView.getPluginList()|Gets the list of currently loaded plugi
+|android.webkit.WebView.getProgress()|Gets the progress for the current page.
+|android.webkit.WebView.getScale()|Gets the current scale of this WebView.
+|android.webkit.WebView.getSettings()|Gets the WebSettings object used to contr
+|android.webkit.WebView.getTitle()|Gets the title for the current page.
+|android.webkit.WebView.getTouchIconUrl()|Gets the touch icon URL for the apple
+|android.webkit.WebView.getUrl()|Gets the URL for the current page.
+|android.webkit.WebView.getVisibleTitleHeight()|Gets the visible height (in pix
+|android.webkit.WebView.getWebViewProvider()|Gets the WebViewProvider.
+|android.webkit.WebView.getZoomControls()|Gets the zoom controls for this WebVi
+|android.webkit.WebView.goBack()|Goes back in the history of this WebView.
+|android.webkit.WebView.goBackOrForward(int)|Goes to the history item that is t
+|android.webkit.WebView.goForward()|Goes forward in the history of this WebView
+|android.webkit.WebView.invokeZoomPicker()|Invokes the graphical zoom picker wi
+|android.webkit.WebView.isPaused()|Gets whether this WebView is paused, meaning
+|android.webkit.WebView.isPrivateBrowsingEnabled()|Gets whether private browsin
+|android.webkit.WebView.loadData(String,String,String)|Loads the given data int
+|android.webkit.WebView.loadDataWithBaseURL(String,String,String,String,String)|
+|android.webkit.WebView.loadUrl(String)|Loads the given URL.
+|android.webkit.WebView.loadUrl(String,Map<String,String>)|Loads the given URL 
+|android.webkit.WebView.onAttachedToWindow()|
+|android.webkit.WebView.onChildViewAdded(View,View)|
+|android.webkit.WebView.onChildViewRemoved(View,View)|
+|android.webkit.WebView.onConfigurationChanged(Configuration)|
+|android.webkit.WebView.onCreateInputConnection(EditorInfo)|
+|android.webkit.WebView.onDetachedFromWindow()|
+|android.webkit.WebView.onDraw(Canvas)|
+|android.webkit.WebView.onDrawVerticalScrollBar(Canvas,Drawable,int,int,int,int)|
+|android.webkit.WebView.onFocusChanged(boolean,int,Rect)|
+|android.webkit.WebView.onGenericMotionEvent(MotionEvent)|
+|android.webkit.WebView.onGlobalFocusChanged(View,View)|
+|android.webkit.WebView.onHoverEvent(MotionEvent)|
+|android.webkit.WebView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.webkit.WebView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.webkit.WebView.onKeyDown(int,KeyEvent)|
+|android.webkit.WebView.onKeyMultiple(int,int,KeyEvent)|
+|android.webkit.WebView.onKeyUp(int,KeyEvent)|
+|android.webkit.WebView.onMeasure(int,int)|
+|android.webkit.WebView.onOverScrolled(int,int,boolean,boolean)|
+|android.webkit.WebView.onPause()|Pauses any extra processing associated with t
+|android.webkit.WebView.onResume()|Resumes a WebView after a previous call to o
+|android.webkit.WebView.onScrollChanged(int,int,int,int)|
+|android.webkit.WebView.onSizeChanged(int,int,int,int)|
+|android.webkit.WebView.onTouchEvent(MotionEvent)|
+|android.webkit.WebView.onTrackballEvent(MotionEvent)|
+|android.webkit.WebView.onVisibilityChanged(View,int)|
+|android.webkit.WebView.onWindowFocusChanged(boolean)|
+|android.webkit.WebView.onWindowVisibilityChanged(int)|
+|android.webkit.WebView.overlayHorizontalScrollbar()|Gets whether horizontal sc
+|android.webkit.WebView.overlayVerticalScrollbar()|Gets whether vertical scroll
+|android.webkit.WebView.pageDown(boolean)|Scrolls the contents of this WebView 
+|android.webkit.WebView.pageUp(boolean)|Scrolls the contents of this WebView up
+|android.webkit.WebView.pauseTimers()|Pauses all layout, parsing, and JavaScrip
+|android.webkit.WebView.performAccessibilityAction(int,Bundle)|
+|android.webkit.WebView.performLongClick()|
+|android.webkit.WebView.postUrl(String,byte[])|Loads the URL with postData usin
+|android.webkit.WebView.refreshPlugins(boolean)|
+|android.webkit.WebView.reload()|Reloads the current URL.
+|android.webkit.WebView.removeJavascriptInterface(String)|Removes a previously 
+|android.webkit.WebView.requestChildRectangleOnScreen(View,Rect,boolean)|
+|android.webkit.WebView.requestFocus(int,Rect)|
+|android.webkit.WebView.requestFocusNodeHref(Message)|Requests the anchor or im
+|android.webkit.WebView.requestImageRef(Message)|Requests the URL of the image 
+|android.webkit.WebView.restorePicture(Bundle,File)|Restores the display data t
+|android.webkit.WebView.restoreState(Bundle)|Restores the state of this WebView
+|android.webkit.WebView.resumeTimers()|Resumes all layout, parsing, and JavaScr
+|android.webkit.WebView.savePassword(String,String,String)|Sets a username and 
+|android.webkit.WebView.savePicture(Bundle,File)|Saves the current display data
+|android.webkit.WebView.saveState(Bundle)|Saves the state of this WebView used 
+|android.webkit.WebView.saveWebArchive(String)|Saves the current view as a web 
+|android.webkit.WebView.saveWebArchive(String,boolean,ValueCallback<String>)|Sa
+|android.webkit.WebView.setBackgroundColor(int)|
+|android.webkit.WebView.setCertificate(SslCertificate)|Sets the SSL certificate
+|android.webkit.WebView.setDownloadListener(DownloadListener)|Registers the int
+|android.webkit.WebView.setFindListener(WebView.FindListener)|Registers the lis
+|android.webkit.WebView.setFrame(int,int,int,int)|
+|android.webkit.WebView.setHorizontalScrollbarOverlay(boolean)|Specifies whethe
+|android.webkit.WebView.setHttpAuthUsernamePassword(String,String,String,String)|
+|android.webkit.WebView.setInitialScale(int)|Sets the initial scale for this We
+|android.webkit.WebView.setLayerType(int,Paint)|
+|android.webkit.WebView.setLayoutParams(ViewGroup.LayoutParams)|
+|android.webkit.WebView.setMapTrackballToArrowKeys(boolean)|
+|android.webkit.WebView.setNetworkAvailable(boolean)|Informs WebView of the net
+|android.webkit.WebView.setOverScrollMode(int)|
+|android.webkit.WebView.setPictureListener(WebView.PictureListener)|Sets the Pi
+|android.webkit.WebView.setScrollBarStyle(int)|
+|android.webkit.WebView.setVerticalScrollbarOverlay(boolean)|Specifies whether 
+|android.webkit.WebView.setWebChromeClient(WebChromeClient)|Sets the chrome han
+|android.webkit.WebView.setWebContentsDebuggingEnabled(boolean)|Enables debuggi
+|android.webkit.WebView.setWebViewClient(WebViewClient)|Sets the WebViewClient 
+|android.webkit.WebView.shouldDelayChildPressedState()|
+|android.webkit.WebView.showFindDialog(String,boolean)|Starts an ActionMode for
+|android.webkit.WebView.stopLoading()|Stops the current load.
+|android.webkit.WebView.zoomIn()|Performs zoom in in this WebView.
+|android.webkit.WebView.zoomOut()|Performs zoom out in this WebView.
+
+*android.webkit.WebView_Description*
+
+A View that displays web pages. This class is the basis upon which you can roll 
+your own web browser or simply display some online content within your 
+Activity. It uses the WebKit rendering engine to display web pages and includes 
+methods to navigate forward and backward through a history, zoom in and out, 
+perform text searches and more. Note that, in order for your Activity to access 
+the Internet and load web pages in a WebView, you must add 
+theINTERNETpermissions to your Android Manifest file: 
+
+<uses-permission android:name="android.permission.INTERNET" /> 
+
+This must be a child of the <a 
+href="guide/topics/manifest/manifest-element.html"> element. 
+
+For more information, read <a href="guide/webapps/webview.html">Building Web 
+Apps in WebView. 
+
+Basic usage 
+
+By default, a WebView provides no browser-like widgets, does not enable 
+JavaScript and web page errors are ignored. If your goal is only to display 
+some HTML as a part of your UI, this is probably fine; the user won't need to 
+interact with the web page beyond reading it, and the web page won't need to 
+interact with the user. If you actually want a full-blown web browser, then you 
+probably want to invoke the Browser application with a URL Intent rather than 
+show it with a WebView. For example: 
+
+Uri uri = Uri.parse("http://www.example.com"); Intent intent = new 
+Intent(Intent.ACTION_VIEW, uri); startActivity(intent); 
+
+See (|android.content.Intent|) for more information. 
+
+To provide a WebView in your own Activity, include ain your layout, or set the 
+entire Activity window as a WebView during onCreate()(|android.app.Activity|) : 
+
+WebView webview = new WebView(this); setContentView(webview); 
+
+Then load the desired web page: 
+
+// Simplest usage: note that an exception will NOT be thrown // if there is an 
+error loading this page (see below). webview.loadUrl("http://slashdot.org/"); 
+
+// OR, you can also load from an HTML string: String summary = "<html><body>You 
+scored <b>192</b> points.</body></html>"; webview.loadData(summary, 
+"text/html", null); // ... although note that there are restrictions on what 
+this HTML can do. // See the JavaDocs for loadData()(|android.webkit.WebView|) 
+and loadDataWithBaseURL()(|android.webkit.WebView|) for more info. 
+
+A WebView has several customization points where you can add your own behavior. 
+These are: 
+
+Creating and setting a (|android.webkit.WebChromeClient|) subclass. This class 
+is called when something that might impact a browser UI happens, for instance, 
+progress updates and JavaScript alerts are sent here (see <a 
+href="guide/developing/debug-tasks.html#DebuggingWebPages">Debugging Tasks). 
+
+Creating and setting a (|android.webkit.WebViewClient|) subclass. It will be 
+called when things happen that impact the rendering of the content, eg, errors 
+or form submissions. You can also intercept URL loading here (via 
+shouldOverrideUrlLoading()(|android.webkit.WebViewClient|) ). Modifying the 
+(|android.webkit.WebSettings|) , such as enabling JavaScript with 
+setJavaScriptEnabled()(|android.webkit.WebSettings|) . Injecting Java objects 
+into the WebView using the (|android.webkit.WebView|) method. This method 
+allows you to inject Java objects into a page's JavaScript context, so that 
+they can be accessed by JavaScript in the page. 
+
+Here's a more complicated example, showing error handling, settings, and 
+progress notification: 
+
+// Let's display the progress in the activity title bar, like the // browser 
+app does. getWindow().requestFeature(Window.FEATURE_PROGRESS); 
+
+webview.getSettings().setJavaScriptEnabled(true); 
+
+final Activity activity = this; webview.setWebChromeClient(new 
+WebChromeClient() { public void onProgressChanged(WebView view, int progress) { 
+// Activities and WebViews measure progress with different scales. // The 
+progress meter will automatically disappear when we reach 100% 
+activity.setProgress(progress * 1000); } }); webview.setWebViewClient(new 
+WebViewClient() { public void onReceivedError(WebView view, int errorCode, 
+String description, String failingUrl) { Toast.makeText(activity, "Oh no! " + 
+description, Toast.LENGTH_SHORT).show(); } }); 
+
+webview.loadUrl("http://developer.android.com/"); 
+
+Zoom 
+
+To enable the built-in zoom, set WebSettings(|android.webkit.WebView|) . 
+(|android.webkit.WebSettings|) (introduced in API level 
+(|android.os.Build.VERSION_CODES|) ). NOTE: Using zoom if either the height or 
+width is set to (|android.view.ViewGroup.LayoutParams|) may lead to undefined 
+behavior and should be avoided. 
+
+Cookie and window management 
+
+For obvious security reasons, your application has its own cache, cookie store 
+etc.it does not share the Browser application's data. 
+
+By default, requests by the HTML to open new windows are ignored. This is true 
+whether they be opened by JavaScript or by the target attribute on a link. You 
+can customize your (|android.webkit.WebChromeClient|) to provide your own 
+behaviour for opening multiple windows, and render them in whatever manner you 
+want. 
+
+The standard behavior for an Activity is to be destroyed and recreated when the 
+device orientation or any other configuration changes. This will cause the 
+WebView to reload the current page. If you don't want that, you can set your 
+Activity to handle theorientationandkeyboardHiddenchanges, and then just leave 
+the WebView alone. It'll automatically re-orient itself as appropriate. Read <a 
+href="guide/topics/resources/runtime-changes.html">Handling Runtime Changes for 
+more information about how to handle configuration changes during runtime. 
+
+Building web pages to support different screen densities 
+
+The screen density of a device is based on the screen resolution. A screen with 
+low density has fewer available pixels per inch, where a screen with high 
+density has more sometimes significantly more pixels per inch. The density of a 
+screen is important because, other things being equal, a UI element (such as a 
+button) whose height and width are defined in terms of screen pixels will 
+appear larger on the lower density screen and smaller on the higher density 
+screen. For simplicity, Android collapses all actual screen densities into 
+three generalized densities: high, medium, and low. By default, WebView scales 
+a web page so that it is drawn at a size that matches the default appearance on 
+a medium density screen. So, it applies 1.5x scaling on a high density screen 
+(because its pixels are smaller) and 0.75x scaling on a low density screen 
+(because its pixels are bigger). Starting with API level 
+(|android.os.Build.VERSION_CODES|) , WebView supports DOM, CSS, and meta tag 
+features to help you (as a web developer) target screens with different screen 
+densities. Here's a summary of the features you can use to handle different 
+screen densities: 
+
+Thewindow.devicePixelRatioDOM property. The value of this property specifies 
+the default scaling factor used for the current device. For example, if the 
+value ofwindow.devicePixelRatiois "1.0", then the device is considered a medium 
+density (mdpi) device and default scaling is not applied to the web page; if 
+the value is "1.5", then the device is considered a high density device (hdpi) 
+and the page content is scaled 1.5x; if the value is "0.75", then the device is 
+considered a low density device (ldpi) and the content is scaled 0.75x. 
+The-webkit-device-pixel-ratioCSS media query. Use this to specify the screen 
+densities for which this style sheet is to be used. The corresponding value 
+should be either "0.75", "1", or "1.5", to indicate that the styles are for 
+devices with low density, medium density, or high density screens, 
+respectively. For example: 
+
+<link rel="stylesheet" media="screen and (-webkit-device-pixel-ratio:1.5)" 
+href="hdpi.css" /> 
+
+Thehdpi.cssstylesheet is only used for devices with a screen pixel ration of 
+1.5, which is the high density pixel ratio. 
+
+
+
+HTML5 Video support 
+
+In order to support inline HTML5 video in your application, you need to have 
+hardware acceleration turned on, and set a (|android.webkit.WebChromeClient|) . 
+For full screen support, implementations of (|android.webkit.WebChromeClient|) 
+and (|android.webkit.WebChromeClient|) are required, 
+(|android.webkit.WebChromeClient|) is optional. 
+
+
+
+*java.lang.String_android.webkit.WebView.SCHEME_GEO*
+
+URI scheme for map address. 
+
+
+*java.lang.String_android.webkit.WebView.SCHEME_MAILTO*
+
+URI scheme for email address. 
+
+
+*java.lang.String_android.webkit.WebView.SCHEME_TEL*
+
+URI scheme for telephone number. 
+
+
+
+*android.webkit.WebView(Context)*
+
+public WebView(android.content.Context context)
+
+Constructs a new WebView with a Context object. 
+
+    context - a Context object used to access application assets 
+
+*android.webkit.WebView(Context,AttributeSet)*
+
+public WebView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Constructs a new WebView with layout parameters. 
+
+    context - a Context object used to access application assets 
+    attrs - an AttributeSet passed to our parent 
+
+*android.webkit.WebView(Context,AttributeSet,int)*
+
+public WebView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+Constructs a new WebView with layout parameters and a default style. 
+
+    context - a Context object used to access application assets 
+    attrs - an AttributeSet passed to our parent 
+    defStyle - the default style resource ID 
+
+*android.webkit.WebView(Context,AttributeSet,int,boolean)*
+
+public WebView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle,
+  boolean privateBrowsing)
+
+Constructs a new WebView with layout parameters and a default style. 
+
+    context - a Context object used to access application assets 
+    attrs - an AttributeSet passed to our parent 
+    defStyle - the default style resource ID 
+    privateBrowsing - whether this WebView will be initialized in private mode 
+
+*android.webkit.WebView(Context,AttributeSet,int,Map<String,Object>,boolean)*
+
+protected WebView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle,
+  java.util.Map<java.lang.String, java.lang.Object> javaScriptInterfaces,
+  boolean privateBrowsing)
+
+Constructs a new WebView with layout parameters, a default style and a set of 
+custom Javscript interfaces to be added to this WebView at initialization time. 
+This guarantees that these interfaces will be available when the JS context is 
+initialized. 
+
+    context - a Context object used to access application assets 
+    attrs - an AttributeSet passed to our parent 
+    defStyle - the default style resource ID 
+    javaScriptInterfaces - a Map of interface names, as keys, and object implementing those interfaces, as 
+       values 
+    privateBrowsing - whether this WebView will be initialized in private mode 
+
+*android.webkit.WebView.addJavascriptInterface(Object,String)*
+
+public void addJavascriptInterface(
+  java.lang.Object object,
+  java.lang.String name)
+
+Injects the supplied Java object into this WebView. The object is injected into 
+the JavaScript context of the main frame, using the supplied name. This allows 
+the Java object's methods to be accessed from JavaScript. For applications 
+targeted to API level (|android.os.Build.VERSION_CODES|) and above, only public 
+methods that are annotated with (|android.webkit.JavascriptInterface|) can be 
+accessed from JavaScript. For applications targeted to API level 
+(|android.os.Build.VERSION_CODES|) or below, all public methods (including the 
+inherited ones) can be accessed, see the important security note below for 
+implications. Note that injected objects will not appear in JavaScript until 
+the page is next (re)loaded. For example: 
+
+class JsObject {@JavascriptInterface public String toString() { return 
+"injectedObject"; } } webView.addJavascriptInterface(new JsObject(), 
+"injectedObject"); webView.loadData("", "text/html", null); 
+webView.loadUrl("javascript:alert(injectedObject.toString())"); 
+
+IMPORTANT: 
+
+This method can be used to allow JavaScript to control the host application. 
+This is a powerful feature, but also presents a security risk for applications 
+targeted to API level (|android.os.Build.VERSION_CODES|) or below, because 
+JavaScript could use reflection to access an injected object's public fields. 
+Use of this method in a WebView containing untrusted content could allow an 
+attacker to manipulate the host application in unintended ways, executing Java 
+code with the permissions of the host application. Use extreme care when using 
+this method in a WebView which could contain untrusted content. JavaScript 
+interacts with Java object on a private, background thread of this WebView. 
+Care is therefore required to maintain thread safety. The Java object's fields 
+are not accessible. 
+
+
+    object - the Java object to inject into this WebView's JavaScript context. Null values 
+       are ignored. 
+    name - the name used to expose the object in JavaScript 
+
+*android.webkit.WebView.canGoBack()*
+
+public boolean canGoBack()
+
+Gets whether this WebView has a back history item. 
+
+
+
+    Returns: true iff this WebView has a back history item 
+
+*android.webkit.WebView.canGoBackOrForward(int)*
+
+public boolean canGoBackOrForward(int steps)
+
+Gets whether the page can go back or forward the given number of steps. 
+
+
+    steps - the negative or positive number of steps to move the history 
+
+*android.webkit.WebView.canGoForward()*
+
+public boolean canGoForward()
+
+Gets whether this WebView has a forward history item. 
+
+
+
+    Returns: true iff this Webview has a forward history item 
+
+*android.webkit.WebView.canZoomIn()*
+
+public boolean canZoomIn()
+
+Gets whether this WebView can be zoomed in. 
+
+    Deprecated: This method is prone to inaccuracy due to race conditions
+ between the web rendering and UI threads; prefer
+ {@link WebViewClient#onScaleChanged}.
+
+
+    Returns: true if this WebView can be zoomed in 
+
+*android.webkit.WebView.canZoomOut()*
+
+public boolean canZoomOut()
+
+Gets whether this WebView can be zoomed out. 
+
+    Deprecated: This method is prone to inaccuracy due to race conditions
+ between the web rendering and UI threads; prefer
+ {@link WebViewClient#onScaleChanged}.
+
+
+    Returns: true if this WebView can be zoomed out 
+
+*android.webkit.WebView.capturePicture()*
+
+public Picture capturePicture()
+
+Gets a new picture that captures the current contents of this WebView. The 
+picture is of the entire document being displayed, and is not limited to the 
+area currently displayed by this WebView. Also, the picture is a static copy 
+and is unaffected by later changes to the content being displayed. 
+
+Note that due to internal changes, for API levels between 
+(|android.os.Build.VERSION_CODES|) and (|android.os.Build.VERSION_CODES|) 
+inclusive, the picture does not include fixed position elements or scrollable 
+divs. 
+
+Note that from (|android.os.Build.VERSION_CODES|) the returned picture should 
+only be drawn into bitmap-backed Canvas - using any other type of Canvas will 
+involve additional conversion at a cost in memory and performance. Also the 
+(|android.graphics.Picture|) and (|android.graphics.Picture|) methods are not 
+supported on the returned object. 
+
+    Deprecated: Use {@link #onDraw} to obtain a bitmap snapshot of the WebView, or
+ {@link #saveWebArchive} to save the content to a file.
+
+
+    Returns: a picture that captures the current contents of this WebView 
+
+*android.webkit.WebView.clearCache(boolean)*
+
+public void clearCache(boolean includeDiskFiles)
+
+Clears the resource cache. Note that the cache is per-application, so this will 
+clear the cache for all WebViews used. 
+
+
+    includeDiskFiles - if false, only the RAM cache is cleared 
+
+*android.webkit.WebView.clearFormData()*
+
+public void clearFormData()
+
+Removes the autocomplete popup from the currently focused form field, if 
+present. Note this only affects the display of the autocomplete popup, it does 
+not remove any saved form data from this WebView's store. To do that, use 
+(|android.webkit.WebViewDatabase|) . 
+
+
+
+*android.webkit.WebView.clearHistory()*
+
+public void clearHistory()
+
+Tells this WebView to clear its internal back/forward list. 
+
+
+
+*android.webkit.WebView.clearMatches()*
+
+public void clearMatches()
+
+Clears the highlighting surrounding text matches created by 
+(|android.webkit.WebView|) . 
+
+
+
+*android.webkit.WebView.clearSslPreferences()*
+
+public void clearSslPreferences()
+
+Clears the SSL preferences table stored in response to proceeding with SSL 
+certificate errors. 
+
+
+
+*android.webkit.WebView.clearView()*
+
+public void clearView()
+
+Clears this WebView so that onDraw() will draw nothing but white background, 
+and onMeasure() will return 0 if MeasureSpec is not MeasureSpec.EXACTLY. 
+
+    Deprecated: Use WebView.loadUrl("about:blank") to reliably reset the view state
+             and release page resources (including any running JavaScript).
+
+
+*android.webkit.WebView.computeHorizontalScrollOffset()*
+
+protected int computeHorizontalScrollOffset()
+
+
+
+
+
+*android.webkit.WebView.computeHorizontalScrollRange()*
+
+protected int computeHorizontalScrollRange()
+
+
+
+
+
+*android.webkit.WebView.computeScroll()*
+
+public void computeScroll()
+
+
+
+
+
+*android.webkit.WebView.computeVerticalScrollExtent()*
+
+protected int computeVerticalScrollExtent()
+
+
+
+
+
+*android.webkit.WebView.computeVerticalScrollOffset()*
+
+protected int computeVerticalScrollOffset()
+
+
+
+
+
+*android.webkit.WebView.computeVerticalScrollRange()*
+
+protected int computeVerticalScrollRange()
+
+
+
+
+
+*android.webkit.WebView.copyBackForwardList()*
+
+public |android.webkit.WebBackForwardList| copyBackForwardList()
+
+Gets the WebBackForwardList for this WebView. This contains the back/forward 
+list for use in querying each item in the history stack. This is a copy of the 
+private WebBackForwardList so it contains only a snapshot of the current state. 
+Multiple calls to this method may return different objects. The object returned 
+from this method will not be updated to reflect any new state. 
+
+
+
+*android.webkit.WebView.createPrintDocumentAdapter()*
+
+public |android.print.PrintDocumentAdapter| createPrintDocumentAdapter()
+
+Creates a PrintDocumentAdapter that provides the content of this Webview for 
+printing. Only supported for API levels (|android.os.Build.VERSION_CODES|) and 
+above. 
+
+The adapter works by converting the Webview contents to a PDF stream. The 
+Webview cannot be drawn during the conversion process - any such draws are 
+undefined. It is recommended to use a dedicated off screen Webview for the 
+printing. If necessary, an application may temporarily hide a visible WebView 
+by using a custom PrintDocumentAdapter instance wrapped around the object 
+returned and observing the onStart and onFinish methods. See 
+(|android.print.PrintDocumentAdapter|) for more information. 
+
+
+
+*android.webkit.WebView.debugDump()*
+
+public void debugDump()
+
+
+
+    Deprecated: This method is now obsolete.
+
+
+*android.webkit.WebView.destroy()*
+
+public void destroy()
+
+Destroys the internal state of this WebView. This method should be called after 
+this WebView has been removed from the view system. No other methods may be 
+called on this WebView after destroy. 
+
+
+
+*android.webkit.WebView.disablePlatformNotifications()*
+
+public static void disablePlatformNotifications()
+
+Disables platform notifications of data state and proxy changes. Notifications 
+are enabled by default. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.webkit.WebView.dispatchDraw(Canvas)*
+
+protected void dispatchDraw(Canvas canvas)
+
+
+
+
+
+*android.webkit.WebView.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.webkit.WebView.documentHasImages(Message)*
+
+public void documentHasImages(android.os.Message response)
+
+Queries the document to see if it contains any image references. The message 
+object will be dispatched with arg1 being set to 1 if images were found and 0 
+if the document does not reference any images. 
+
+
+    response - the message that will be dispatched with the result 
+
+*android.webkit.WebView.dumpViewHierarchyWithProperties(BufferedWriter,int)*
+
+public void dumpViewHierarchyWithProperties(
+  java.io.BufferedWriter out,
+  int level)
+
+See (|ViewDebug.HierarchyHandler|) 
+
+
+
+*android.webkit.WebView.emulateShiftHeld()*
+
+public void emulateShiftHeld()
+
+Puts this WebView into text selection mode. Do not rely on this functionality; 
+it will be deprecated in the future. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.webkit.WebView.enablePlatformNotifications()*
+
+public static void enablePlatformNotifications()
+
+Enables platform notifications of data state and proxy changes. Notifications 
+are enabled by default. 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.webkit.WebView.evaluateJavascript(String,ValueCallback<String>)*
+
+public void evaluateJavascript(
+  java.lang.String script,
+  android.webkit.ValueCallback<java.lang.String> resultCallback)
+
+Asynchronously evaluates JavaScript in the context of the currently displayed 
+page. If non-null, |resultCallback| will be invoked with any result returned 
+from that execution. This method must be called on the UI thread and the 
+callback will be made on the UI thread. 
+
+
+    script - the JavaScript to execute. 
+    resultCallback - A callback to be invoked when the script execution completes with the result of 
+       the execution (if any). May be null if no notificaion of the result is 
+       required. 
+
+*android.webkit.WebView.findAddress(String)*
+
+public static |java.lang.String| findAddress(java.lang.String addr)
+
+Gets the first substring consisting of the address of a physical location. 
+Currently, only addresses in the United States are detected, and consist of: 
+
+a house number a street name a street type (Road, Circle, etc), either spelled 
+out or abbreviated a city name a state or territory, either spelled out or 
+two-letter abbr an optional 5 digit or 9 digit zip code 
+
+All names must be correctly capitalized, and the zip code, if present, must be 
+valid for the state. The street type must be a standard USPS spelling or 
+abbreviation. The state or territory must also be spelled or abbreviated using 
+USPS standards. The house number may not exceed five digits. 
+
+
+    addr - the string to search for addresses 
+
+    Returns: the address, or if no address is found, null 
+
+*android.webkit.WebView.findAll(String)*
+
+public int findAll(java.lang.String find)
+
+Finds all instances of find on the page and highlights them. Notifies any 
+registered (|android.webkit.WebView.FindListener|) . 
+
+    Deprecated: {@link #findAllAsync} is preferred.
+
+    find - the string to find 
+
+    Returns: the number of occurances of the String "find" that were found 
+
+*android.webkit.WebView.findAllAsync(String)*
+
+public void findAllAsync(java.lang.String find)
+
+Finds all instances of find on the page and highlights them, asynchronously. 
+Notifies any registered (|android.webkit.WebView.FindListener|) . Successive 
+calls to this will cancel any pending searches. 
+
+
+    find - the string to find. 
+
+*android.webkit.WebView.findHierarchyView(String,int)*
+
+public |android.view.View| findHierarchyView(
+  java.lang.String className,
+  int hashCode)
+
+See (|ViewDebug.HierarchyHandler|) 
+
+
+
+*android.webkit.WebView.findNext(boolean)*
+
+public void findNext(boolean forward)
+
+Highlights and scrolls to the next match found by (|android.webkit.WebView|) , 
+wrapping around page boundaries as necessary. Notifies any registered 
+(|android.webkit.WebView.FindListener|) . If (|android.webkit.WebView|) has not 
+been called yet, or if (|android.webkit.WebView|) has been called since the 
+last find operation, this function does nothing. 
+
+
+    forward - the direction to search 
+
+*android.webkit.WebView.flingScroll(int,int)*
+
+public void flingScroll(
+  int vx,
+  int vy)
+
+
+
+
+
+*android.webkit.WebView.freeMemory()*
+
+public void freeMemory()
+
+Informs this WebView that memory is low so that it can free any available 
+memory. 
+
+    Deprecated: Memory caches are automatically dropped when no longer needed, and in response
+             to system memory pressure.
+
+
+*android.webkit.WebView.getAccessibilityNodeProvider()*
+
+public |android.view.accessibility.AccessibilityNodeProvider| getAccessibilityNodeProvider()
+
+
+
+
+
+*android.webkit.WebView.getCertificate()*
+
+public |android.net.http.SslCertificate| getCertificate()
+
+Gets the SSL certificate for the main top-level page or null if there is no 
+certificate (the site is not secure). 
+
+
+
+    Returns: the SSL certificate for the main top-level page 
+
+*android.webkit.WebView.getContentHeight()*
+
+public int getContentHeight()
+
+Gets the height of the HTML content. 
+
+
+
+    Returns: the height of the HTML content 
+
+*android.webkit.WebView.getContentWidth()*
+
+public int getContentWidth()
+
+Gets the width of the HTML content. 
+
+
+
+    Returns: the width of the HTML content 
+
+*android.webkit.WebView.getFavicon()*
+
+public Bitmap getFavicon()
+
+Gets the favicon for the current page. This is the favicon of the current page 
+until WebViewClient.onReceivedIcon is called. 
+
+
+
+    Returns: the favicon for the current page 
+
+*android.webkit.WebView.getHitTestResult()*
+
+public |android.webkit.WebView.HitTestResult| getHitTestResult()
+
+Gets a HitTestResult based on the current cursor node. If a HTML::a tag is 
+found and the anchor has a non-JavaScript URL, the HitTestResult type is set to 
+SRC_ANCHOR_TYPE and the URL is set in the "extra" field. If the anchor does not 
+have a URL or if it is a JavaScript URL, the type will be UNKNOWN_TYPE and the 
+URL has to be retrieved through (|android.webkit.WebView|) asynchronously. If a 
+HTML::img tag is found, the HitTestResult type is set to IMAGE_TYPE and the URL 
+is set in the "extra" field. A type of SRC_IMAGE_ANCHOR_TYPE indicates an 
+anchor with a URL that has an image as a child node. If a phone number is 
+found, the HitTestResult type is set to PHONE_TYPE and the phone number is set 
+in the "extra" field of HitTestResult. If a map address is found, the 
+HitTestResult type is set to GEO_TYPE and the address is set in the "extra" 
+field of HitTestResult. If an email address is found, the HitTestResult type is 
+set to EMAIL_TYPE and the email is set in the "extra" field of HitTestResult. 
+Otherwise, HitTestResult type is set to UNKNOWN_TYPE. 
+
+
+
+*android.webkit.WebView.getHttpAuthUsernamePassword(String,String)*
+
+public |java.lang.String|[] getHttpAuthUsernamePassword(
+  java.lang.String host,
+  java.lang.String realm)
+
+Retrieves HTTP authentication credentials for a given host and realm. This 
+method is intended to be used with (|android.webkit.WebViewClient|) . 
+
+
+    host - the host to which the credentials apply 
+    realm - the realm to which the credentials apply 
+
+    Returns: the credentials as a String array, if found. The first element is the username 
+             and the second element is the password. Null if no credentials are 
+             found. 
+
+*android.webkit.WebView.getOriginalUrl()*
+
+public |java.lang.String| getOriginalUrl()
+
+Gets the original URL for the current page. This is not always the same as the 
+URL passed to WebViewClient.onPageStarted because although the load for that 
+URL has begun, the current page may not have changed. Also, there may have been 
+redirects resulting in a different URL to that originally requested. 
+
+
+
+    Returns: the URL that was originally requested for the current page 
+
+*android.webkit.WebView.getPluginList()*
+
+public static synchronized |android.webkit.PluginList| getPluginList()
+
+Gets the list of currently loaded plugins. 
+
+    Deprecated: This was used for Gears, which has been deprecated.
+
+
+    Returns: the list of currently loaded plugins 
+
+*android.webkit.WebView.getProgress()*
+
+public int getProgress()
+
+Gets the progress for the current page. 
+
+
+
+    Returns: the progress for the current page between 0 and 100 
+
+*android.webkit.WebView.getScale()*
+
+public float getScale()
+
+Gets the current scale of this WebView. 
+
+    Deprecated: This method is prone to inaccuracy due to race conditions
+ between the web rendering and UI threads; prefer
+ {@link WebViewClient#onScaleChanged}.
+
+
+    Returns: the current scale 
+
+*android.webkit.WebView.getSettings()*
+
+public |android.webkit.WebSettings| getSettings()
+
+Gets the WebSettings object used to control the settings for this WebView. 
+
+
+
+    Returns: a WebSettings object that can be used to control this WebView's settings 
+
+*android.webkit.WebView.getTitle()*
+
+public |java.lang.String| getTitle()
+
+Gets the title for the current page. This is the title of the current page 
+until WebViewClient.onReceivedTitle is called. 
+
+
+
+    Returns: the title for the current page 
+
+*android.webkit.WebView.getTouchIconUrl()*
+
+public |java.lang.String| getTouchIconUrl()
+
+Gets the touch icon URL for the apple-touch-icon element, or a URL on this 
+site's server pointing to the standard location of a touch icon. 
+
+
+
+*android.webkit.WebView.getUrl()*
+
+public |java.lang.String| getUrl()
+
+Gets the URL for the current page. This is not always the same as the URL 
+passed to WebViewClient.onPageStarted because although the load for that URL 
+has begun, the current page may not have changed. 
+
+
+
+    Returns: the URL for the current page 
+
+*android.webkit.WebView.getVisibleTitleHeight()*
+
+public int getVisibleTitleHeight()
+
+Gets the visible height (in pixels) of the embedded title bar (if any). 
+
+    Deprecated: This method is now obsolete.
+
+
+*android.webkit.WebView.getWebViewProvider()*
+
+public |android.webkit.WebViewProvider| getWebViewProvider()
+
+Gets the WebViewProvider. Used by providers to obtain the underlying 
+implementation, e.g. when the appliction responds to 
+WebViewClient.onCreateWindow() request. 
+
+
+
+*android.webkit.WebView.getZoomControls()*
+
+public |android.view.View| getZoomControls()
+
+Gets the zoom controls for this WebView, as a separate View. The caller is 
+responsible for inserting this View into the layout hierarchy. 
+
+API level (|android.os.Build.VERSION_CODES|) introduced built-in zoom 
+mechanisms for the WebView, as opposed to these separate zoom controls. The 
+built-in mechanisms are preferred and can be enabled using 
+(|android.webkit.WebSettings|) . 
+
+    Deprecated: the built-in zoom mechanisms are preferred
+
+
+*android.webkit.WebView.goBack()*
+
+public void goBack()
+
+Goes back in the history of this WebView. 
+
+
+
+*android.webkit.WebView.goBackOrForward(int)*
+
+public void goBackOrForward(int steps)
+
+Goes to the history item that is the number of steps away from the current 
+item. Steps is negative if backward and positive if forward. 
+
+
+    steps - the number of steps to take back or forward in the back forward list 
+
+*android.webkit.WebView.goForward()*
+
+public void goForward()
+
+Goes forward in the history of this WebView. 
+
+
+
+*android.webkit.WebView.invokeZoomPicker()*
+
+public void invokeZoomPicker()
+
+Invokes the graphical zoom picker widget for this WebView. This will result in 
+the zoom widget appearing on the screen to control the zoom level of this 
+WebView. 
+
+
+
+*android.webkit.WebView.isPaused()*
+
+public boolean isPaused()
+
+Gets whether this WebView is paused, meaning onPause() was called. Calling 
+onResume() sets the paused state back to false. 
+
+
+
+*android.webkit.WebView.isPrivateBrowsingEnabled()*
+
+public boolean isPrivateBrowsingEnabled()
+
+Gets whether private browsing is enabled in this WebView. 
+
+
+
+*android.webkit.WebView.loadData(String,String,String)*
+
+public void loadData(
+  java.lang.String data,
+  java.lang.String mimeType,
+  java.lang.String encoding)
+
+Loads the given data into this WebView using a 'data' scheme URL. 
+
+Note that JavaScript's same origin policy means that script running in a page 
+loaded using this method will be unable to access content loaded using any 
+scheme other than 'data', including 'http(s)'. To avoid this restriction, use 
+loadDataWithBaseURL()(|android.webkit.WebView|) with an appropriate base URL. 
+
+The encoding parameter specifies whether the data is base64 or URL encoded. If 
+the data is base64 encoded, the value of the encoding parameter must be 
+'base64'. For all other values of the parameter, including null, it is assumed 
+that the data uses ASCII encoding for octets inside the range of safe URL 
+characters and use the standard %xx hex encoding of URLs for octets outside 
+that range. For example, '#', '%', '\', '?' should be replaced by %23, %25, 
+%27, %3f respectively. 
+
+The 'data' scheme URL formed by this method uses the default US-ASCII charset. 
+If you need need to set a different charset, you should form a 'data' scheme 
+URL which explicitly specifies a charset parameter in the mediatype portion of 
+the URL and call (|android.webkit.WebView|) instead. Note that the charset 
+obtained from the mediatype portion of a data URL always overrides that 
+specified in the HTML or XML document itself. 
+
+
+    data - a String of data in the given encoding 
+    mimeType - the MIME type of the data, e.g. 'text/html' 
+    encoding - the encoding of the data 
+
+*android.webkit.WebView.loadDataWithBaseURL(String,String,String,String,String)*
+
+public void loadDataWithBaseURL(
+  java.lang.String baseUrl,
+  java.lang.String data,
+  java.lang.String mimeType,
+  java.lang.String encoding,
+  java.lang.String historyUrl)
+
+Loads the given data into this WebView, using baseUrl as the base URL for the 
+content. The base URL is used both to resolve relative URLs and when applying 
+JavaScript's same origin policy. The historyUrl is used for the history entry. 
+
+Note that content specified in this way can access local device files (via 
+'file' scheme URLs) only if baseUrl specifies a scheme other than 'http', 
+'https', 'ftp', 'ftps', 'about' or 'javascript'. 
+
+If the base URL uses the data scheme, this method is equivalent to calling 
+loadData()(|android.webkit.WebView|) and the historyUrl is ignored, and the 
+data will be treated as part of a data: URL. If the base URL uses any other 
+scheme, then the data will be loaded into the WebView as a plain string (i.e. 
+not part of a data URL) and any URL-encoded entities in the string will not be 
+decoded. 
+
+
+    baseUrl - the URL to use as the page's base URL. If null defaults to 'about:blank'. 
+    data - a String of data in the given encoding 
+    mimeType - the MIMEType of the data, e.g. 'text/html'. If null, defaults to 'text/html'. 
+    encoding - the encoding of the data 
+    historyUrl - the URL to use as the history entry. If null defaults to 'about:blank'. If 
+       non-null, this must be a valid URL. 
+
+*android.webkit.WebView.loadUrl(String)*
+
+public void loadUrl(java.lang.String url)
+
+Loads the given URL. 
+
+
+    url - the URL of the resource to load 
+
+*android.webkit.WebView.loadUrl(String,Map<String,String>)*
+
+public void loadUrl(
+  java.lang.String url,
+  java.util.Map<java.lang.String, java.lang.String> additionalHttpHeaders)
+
+Loads the given URL with the specified additional HTTP headers. 
+
+
+    url - the URL of the resource to load 
+    additionalHttpHeaders - the additional headers to be used in the HTTP request for this URL, specified 
+       as a map from name to value. Note that if this map contains any of the 
+       headers that are set by default by this WebView, such as those 
+       controlling caching, accept types or the User-Agent, their values may be 
+       overriden by this WebView's defaults. 
+
+*android.webkit.WebView.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.webkit.WebView.onChildViewAdded(View,View)*
+
+public void onChildViewAdded(
+  android.view.View parent,
+  android.view.View child)
+
+
+
+    Deprecated: WebView no longer needs to implement
+ ViewGroup.OnHierarchyChangeListener.  This method does nothing now.
+
+
+*android.webkit.WebView.onChildViewRemoved(View,View)*
+
+public void onChildViewRemoved(
+  android.view.View p,
+  android.view.View child)
+
+
+
+    Deprecated: WebView no longer needs to implement
+ ViewGroup.OnHierarchyChangeListener.  This method does nothing now.
+
+
+*android.webkit.WebView.onConfigurationChanged(Configuration)*
+
+protected void onConfigurationChanged(android.content.res.Configuration newConfig)
+
+
+
+
+
+*android.webkit.WebView.onCreateInputConnection(EditorInfo)*
+
+public |android.view.inputmethod.InputConnection| onCreateInputConnection(android.view.inputmethod.EditorInfo outAttrs)
+
+
+
+
+
+*android.webkit.WebView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.webkit.WebView.onDraw(Canvas)*
+
+protected void onDraw(Canvas canvas)
+
+
+
+
+
+*android.webkit.WebView.onDrawVerticalScrollBar(Canvas,Drawable,int,int,int,int)*
+
+protected void onDrawVerticalScrollBar(
+  Canvas canvas,
+  Drawable scrollBar,
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.webkit.WebView.onFocusChanged(boolean,int,Rect)*
+
+protected void onFocusChanged(
+  boolean focused,
+  int direction,
+  Rect previouslyFocusedRect)
+
+
+
+
+
+*android.webkit.WebView.onGenericMotionEvent(MotionEvent)*
+
+public boolean onGenericMotionEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.webkit.WebView.onGlobalFocusChanged(View,View)*
+
+public void onGlobalFocusChanged(
+  android.view.View oldFocus,
+  android.view.View newFocus)
+
+
+
+    Deprecated: WebView should not have implemented
+ ViewTreeObserver.OnGlobalFocusChangeListener. This method does nothing now.
+
+
+*android.webkit.WebView.onHoverEvent(MotionEvent)*
+
+public boolean onHoverEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.webkit.WebView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.webkit.WebView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.webkit.WebView.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.webkit.WebView.onKeyMultiple(int,int,KeyEvent)*
+
+public boolean onKeyMultiple(
+  int keyCode,
+  int repeatCount,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.webkit.WebView.onKeyUp(int,KeyEvent)*
+
+public boolean onKeyUp(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.webkit.WebView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.webkit.WebView.onOverScrolled(int,int,boolean,boolean)*
+
+protected void onOverScrolled(
+  int scrollX,
+  int scrollY,
+  boolean clampedX,
+  boolean clampedY)
+
+
+
+
+
+*android.webkit.WebView.onPause()*
+
+public void onPause()
+
+Pauses any extra processing associated with this WebView and its associated 
+DOM, plugins, JavaScript etc. For example, if this WebView is taken offscreen, 
+this could be called to reduce unnecessary CPU or network traffic. When this 
+WebView is again "active", call onResume(). Note that this differs from 
+pauseTimers(), which affects all WebViews. 
+
+
+
+*android.webkit.WebView.onResume()*
+
+public void onResume()
+
+Resumes a WebView after a previous call to onPause(). 
+
+
+
+*android.webkit.WebView.onScrollChanged(int,int,int,int)*
+
+protected void onScrollChanged(
+  int l,
+  int t,
+  int oldl,
+  int oldt)
+
+
+
+
+
+*android.webkit.WebView.onSizeChanged(int,int,int,int)*
+
+protected void onSizeChanged(
+  int w,
+  int h,
+  int ow,
+  int oh)
+
+
+
+
+
+*android.webkit.WebView.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.webkit.WebView.onTrackballEvent(MotionEvent)*
+
+public boolean onTrackballEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.webkit.WebView.onVisibilityChanged(View,int)*
+
+protected void onVisibilityChanged(
+  android.view.View changedView,
+  int visibility)
+
+
+
+
+
+*android.webkit.WebView.onWindowFocusChanged(boolean)*
+
+public void onWindowFocusChanged(boolean hasWindowFocus)
+
+
+
+
+
+*android.webkit.WebView.onWindowVisibilityChanged(int)*
+
+protected void onWindowVisibilityChanged(int visibility)
+
+
+
+
+
+*android.webkit.WebView.overlayHorizontalScrollbar()*
+
+public boolean overlayHorizontalScrollbar()
+
+Gets whether horizontal scrollbar has overlay style. 
+
+
+
+    Returns: true if horizontal scrollbar has overlay style 
+
+*android.webkit.WebView.overlayVerticalScrollbar()*
+
+public boolean overlayVerticalScrollbar()
+
+Gets whether vertical scrollbar has overlay style. 
+
+
+
+    Returns: true if vertical scrollbar has overlay style 
+
+*android.webkit.WebView.pageDown(boolean)*
+
+public boolean pageDown(boolean bottom)
+
+Scrolls the contents of this WebView down by half the page size. 
+
+
+    bottom - true to jump to bottom of page 
+
+    Returns: true if the page was scrolled 
+
+*android.webkit.WebView.pageUp(boolean)*
+
+public boolean pageUp(boolean top)
+
+Scrolls the contents of this WebView up by half the view size. 
+
+
+    top - true to jump to the top of the page 
+
+    Returns: true if the page was scrolled 
+
+*android.webkit.WebView.pauseTimers()*
+
+public void pauseTimers()
+
+Pauses all layout, parsing, and JavaScript timers for all WebViews. This is a 
+global requests, not restricted to just this WebView. This can be useful if the 
+application has been paused. 
+
+
+
+*android.webkit.WebView.performAccessibilityAction(int,Bundle)*
+
+public boolean performAccessibilityAction(
+  int action,
+  android.os.Bundle arguments)
+
+
+
+
+
+*android.webkit.WebView.performLongClick()*
+
+public boolean performLongClick()
+
+
+
+
+
+*android.webkit.WebView.postUrl(String,byte[])*
+
+public void postUrl(
+  java.lang.String url,
+  byte[] postData)
+
+Loads the URL with postData using "POST" method into this WebView. If url is 
+not a network URL, it will be loaded with {link (|android.webkit.WebView|) 
+instead. 
+
+
+    url - the URL of the resource to load 
+    postData - the data will be passed to "POST" request, which must be be 
+       "application/x-www-form-urlencoded" encoded. 
+
+*android.webkit.WebView.refreshPlugins(boolean)*
+
+public void refreshPlugins(boolean reloadOpenPages)
+
+
+
+    Deprecated: This was used for Gears, which has been deprecated.
+
+
+*android.webkit.WebView.reload()*
+
+public void reload()
+
+Reloads the current URL. 
+
+
+
+*android.webkit.WebView.removeJavascriptInterface(String)*
+
+public void removeJavascriptInterface(java.lang.String name)
+
+Removes a previously injected Java object from this WebView. Note that the 
+removal will not be reflected in JavaScript until the page is next (re)loaded. 
+See (|android.webkit.WebView|) . 
+
+
+    name - the name used to expose the object in JavaScript 
+
+*android.webkit.WebView.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rect,
+  boolean immediate)
+
+
+
+
+
+*android.webkit.WebView.requestFocus(int,Rect)*
+
+public boolean requestFocus(
+  int direction,
+  Rect previouslyFocusedRect)
+
+
+
+
+
+*android.webkit.WebView.requestFocusNodeHref(Message)*
+
+public void requestFocusNodeHref(android.os.Message hrefMsg)
+
+Requests the anchor or image element URL at the last tapped point. If hrefMsg 
+is null, this method returns immediately and does not dispatch hrefMsg to its 
+target. If the tapped point hits an image, an anchor, or an image in an anchor, 
+the message associates strings in named keys in its data. The value paired with 
+the key may be an empty string. 
+
+
+    hrefMsg - the message to be dispatched with the result of the request. The message data 
+       contains three keys. "url" returns the anchor's href attribute. "title" 
+       returns the anchor's text. "src" returns the image's src attribute. 
+
+*android.webkit.WebView.requestImageRef(Message)*
+
+public void requestImageRef(android.os.Message msg)
+
+Requests the URL of the image last touched by the user. msg will be sent to its 
+target with a String representing the URL as its object. 
+
+
+    msg - the message to be dispatched with the result of the request as the data member 
+       with "url" as key. The result can be null. 
+
+*android.webkit.WebView.restorePicture(Bundle,File)*
+
+public boolean restorePicture(
+  android.os.Bundle b,
+  java.io.File src)
+
+Restores the display data that was saved in (|android.webkit.WebView|) . Used 
+in conjunction with (|android.webkit.WebView|) . Note that this will not work 
+if this WebView is hardware accelerated. 
+
+    Deprecated: This method is now obsolete.
+
+    b - a Bundle containing the saved display data 
+    src - the file where the picture data was stored 
+
+    Returns: true if the picture was successfully restored 
+
+*android.webkit.WebView.restoreState(Bundle)*
+
+public |android.webkit.WebBackForwardList| restoreState(android.os.Bundle inState)
+
+Restores the state of this WebView from the given Bundle. This method is 
+intended for use in (|android.app.Activity|) and should be called to restore 
+the state of this WebView. If it is called after this WebView has had a chance 
+to build state (load pages, create a back/forward list, etc.) there may be 
+undesirable side-effects. Please note that this method no longer restores the 
+display data for this WebView. 
+
+
+    inState - the incoming Bundle of state 
+
+    Returns: the restored back/forward list or null if restoreState failed 
+
+*android.webkit.WebView.resumeTimers()*
+
+public void resumeTimers()
+
+Resumes all layout, parsing, and JavaScript timers for all WebViews. This will 
+resume dispatching all timers. 
+
+
+
+*android.webkit.WebView.savePassword(String,String,String)*
+
+public void savePassword(
+  java.lang.String host,
+  java.lang.String username,
+  java.lang.String password)
+
+Sets a username and password pair for the specified host. This data is used by 
+the Webview to autocomplete username and password fields in web forms. Note 
+that this is unrelated to the credentials used for HTTP authentication. 
+
+    Deprecated: Saving passwords in WebView will not be supported in future versions.
+
+    host - the host that required the credentials 
+    username - the username for the given host 
+    password - the password for the given host 
+
+*android.webkit.WebView.savePicture(Bundle,File)*
+
+public boolean savePicture(
+  android.os.Bundle b,
+  java.io.File dest)
+
+Saves the current display data to the Bundle given. Used in conjunction with 
+(|android.webkit.WebView|) . 
+
+    Deprecated: This method is now obsolete.
+
+    b - a Bundle to store the display data 
+    dest - the file to store the serialized picture data. Will be overwritten with this 
+       WebView's picture data. 
+
+    Returns: true if the picture was successfully saved 
+
+*android.webkit.WebView.saveState(Bundle)*
+
+public |android.webkit.WebBackForwardList| saveState(android.os.Bundle outState)
+
+Saves the state of this WebView used in (|android.app.Activity|) . Please note 
+that this method no longer stores the display data for this WebView. The 
+previous behavior could potentially leak files if (|android.webkit.WebView|) 
+was never called. 
+
+
+    outState - the Bundle to store this WebView's state 
+
+    Returns: the same copy of the back/forward list used to save the state. If saveState 
+             fails, the returned list will be null. 
+
+*android.webkit.WebView.saveWebArchive(String)*
+
+public void saveWebArchive(java.lang.String filename)
+
+Saves the current view as a web archive. 
+
+
+    filename - the filename where the archive should be placed 
+
+*android.webkit.WebView.saveWebArchive(String,boolean,ValueCallback<String>)*
+
+public void saveWebArchive(
+  java.lang.String basename,
+  boolean autoname,
+  android.webkit.ValueCallback<java.lang.String> callback)
+
+Saves the current view as a web archive. 
+
+
+    basename - the filename where the archive should be placed 
+    autoname - if false, takes basename to be a file. If true, basename is assumed to be a 
+       directory in which a filename will be chosen according to the URL of the 
+       current page. 
+    callback - called after the web archive has been saved. The parameter for onReceiveValue 
+       will either be the filename under which the file was saved, or null if 
+       saving the file failed. 
+
+*android.webkit.WebView.setBackgroundColor(int)*
+
+public void setBackgroundColor(int color)
+
+
+
+
+
+*android.webkit.WebView.setCertificate(SslCertificate)*
+
+public void setCertificate(android.net.http.SslCertificate certificate)
+
+Sets the SSL certificate for the main top-level page. 
+
+    Deprecated: Calling this function has no useful effect, and will be
+ ignored in future releases.
+
+
+*android.webkit.WebView.setDownloadListener(DownloadListener)*
+
+public void setDownloadListener(android.webkit.DownloadListener listener)
+
+Registers the interface to be used when content can not be handled by the 
+rendering engine, and should be downloaded instead. This will replace the 
+current handler. 
+
+
+    listener - an implementation of DownloadListener 
+
+*android.webkit.WebView.setFindListener(WebView.FindListener)*
+
+public void setFindListener(android.webkit.WebView.FindListener listener)
+
+Registers the listener to be notified as find-on-page operations progress. This 
+will replace the current listener. 
+
+
+    listener - an implementation of {@link FindListener} 
+
+*android.webkit.WebView.setFrame(int,int,int,int)*
+
+protected boolean setFrame(
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.webkit.WebView.setHorizontalScrollbarOverlay(boolean)*
+
+public void setHorizontalScrollbarOverlay(boolean overlay)
+
+Specifies whether the horizontal scrollbar has overlay style. 
+
+
+    overlay - true if horizontal scrollbar should have overlay style 
+
+*android.webkit.WebView.setHttpAuthUsernamePassword(String,String,String,String)*
+
+public void setHttpAuthUsernamePassword(
+  java.lang.String host,
+  java.lang.String realm,
+  java.lang.String username,
+  java.lang.String password)
+
+Stores HTTP authentication credentials for a given host and realm. This method 
+is intended to be used with (|android.webkit.WebViewClient|) . 
+
+
+    host - the host to which the credentials apply 
+    realm - the realm to which the credentials apply 
+    username - the username 
+    password - the password 
+
+*android.webkit.WebView.setInitialScale(int)*
+
+public void setInitialScale(int scaleInPercent)
+
+Sets the initial scale for this WebView. 0 means default. The behavior for the 
+default scale depends on the state of (|android.webkit.WebSettings|) and 
+(|android.webkit.WebSettings|) . If the content fits into the WebView control 
+by width, then the zoom is set to 100%. For wide content, the behavor depends 
+on the state of (|android.webkit.WebSettings|) . If its value is true, the 
+content will be zoomed out to be fit by width into the WebView control, 
+otherwise not. 
+
+If initial scale is greater than 0, WebView starts with this value as initial 
+scale. Please note that unlike the scale properties in the viewport meta tag, 
+this method doesn't take the screen density into account. 
+
+
+    scaleInPercent - the initial scale in percent 
+
+*android.webkit.WebView.setLayerType(int,Paint)*
+
+public void setLayerType(
+  int layerType,
+  Paint paint)
+
+
+
+
+
+*android.webkit.WebView.setLayoutParams(ViewGroup.LayoutParams)*
+
+public void setLayoutParams(android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+*android.webkit.WebView.setMapTrackballToArrowKeys(boolean)*
+
+public void setMapTrackballToArrowKeys(boolean setMap)
+
+
+
+    Deprecated: Only the default case, true, will be supported in a future version.
+
+
+*android.webkit.WebView.setNetworkAvailable(boolean)*
+
+public void setNetworkAvailable(boolean networkUp)
+
+Informs WebView of the network state. This is used to set the JavaScript 
+property window.navigator.isOnline and generates the online/offline event as 
+specified in HTML5, sec. 5.7.7 
+
+
+    networkUp - a boolean indicating if network is available 
+
+*android.webkit.WebView.setOverScrollMode(int)*
+
+public void setOverScrollMode(int mode)
+
+
+
+
+
+*android.webkit.WebView.setPictureListener(WebView.PictureListener)*
+
+public void setPictureListener(android.webkit.WebView.PictureListener listener)
+
+Sets the Picture listener. This is an interface used to receive notifications 
+of a new Picture. 
+
+    Deprecated: This method is now obsolete.
+
+    listener - an implementation of WebView.PictureListener 
+
+*android.webkit.WebView.setScrollBarStyle(int)*
+
+public void setScrollBarStyle(int style)
+
+
+
+
+
+*android.webkit.WebView.setVerticalScrollbarOverlay(boolean)*
+
+public void setVerticalScrollbarOverlay(boolean overlay)
+
+Specifies whether the vertical scrollbar has overlay style. 
+
+
+    overlay - true if vertical scrollbar should have overlay style 
+
+*android.webkit.WebView.setWebChromeClient(WebChromeClient)*
+
+public void setWebChromeClient(android.webkit.WebChromeClient client)
+
+Sets the chrome handler. This is an implementation of WebChromeClient for use 
+in handling JavaScript dialogs, favicons, titles, and the progress. This will 
+replace the current handler. 
+
+
+    client - an implementation of WebChromeClient 
+
+*android.webkit.WebView.setWebContentsDebuggingEnabled(boolean)*
+
+public static void setWebContentsDebuggingEnabled(boolean enabled)
+
+Enables debugging of web contents (HTML / CSS / JavaScript) loaded into any 
+WebViews of this application. This flag can be enabled in order to facilitate 
+debugging of web layouts and JavaScript code running inside WebViews. Please 
+refer to WebView documentation for the debugging guide. 
+
+The default is false. 
+
+
+    enabled - whether to enable web contents debugging 
+
+*android.webkit.WebView.setWebViewClient(WebViewClient)*
+
+public void setWebViewClient(android.webkit.WebViewClient client)
+
+Sets the WebViewClient that will receive various notifications and requests. 
+This will replace the current handler. 
+
+
+    client - an implementation of WebViewClient 
+
+*android.webkit.WebView.shouldDelayChildPressedState()*
+
+public boolean shouldDelayChildPressedState()
+
+
+
+
+
+*android.webkit.WebView.showFindDialog(String,boolean)*
+
+public boolean showFindDialog(
+  java.lang.String text,
+  boolean showIme)
+
+Starts an ActionMode for finding text in this WebView. Only works if this 
+WebView is attached to the view system. 
+
+    Deprecated: This method does not work reliably on all Android versions;
+             implementing a custom find dialog using WebView.findAllAsync()
+             provides a more robust solution.
+
+    text - if non-null, will be the initial text to search for. Otherwise, the last String 
+       searched for in this WebView will be used to start. 
+    showIme - if true, show the IME, assuming the user will begin typing. If false and text 
+       is non-null, perform a find all. 
+
+    Returns: true if the find dialog is shown, false otherwise 
+
+*android.webkit.WebView.stopLoading()*
+
+public void stopLoading()
+
+Stops the current load. 
+
+
+
+*android.webkit.WebView.zoomIn()*
+
+public boolean zoomIn()
+
+Performs zoom in in this WebView. 
+
+
+
+    Returns: true if zoom in succeeds, false if no zoom changes 
+
+*android.webkit.WebView.zoomOut()*
+
+public boolean zoomOut()
+
+Performs zoom out in this WebView. 
+
+
+
+    Returns: true if zoom out succeeds, false if no zoom changes 
+
+

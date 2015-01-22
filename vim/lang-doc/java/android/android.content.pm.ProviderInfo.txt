@@ -1,0 +1,171 @@
+*android.content.pm.ProviderInfo* *ProviderInfo* Holds information about a speci
+
+public final class ProviderInfo
+  extends    |android.content.pm.ComponentInfo|
+  implements |android.os.Parcelable|
+
+|android.content.pm.ProviderInfo_Description|
+|android.content.pm.ProviderInfo_Fields|
+|android.content.pm.ProviderInfo_Constructors|
+|android.content.pm.ProviderInfo_Methods|
+
+================================================================================
+
+*android.content.pm.ProviderInfo_Fields*
+|java.lang.String_android.content.pm.ProviderInfo.authority|
+|android.os.Parcelable.Creator<android.content.pm.ProviderInfo>_android.content.pm.ProviderInfo.CREATOR|
+|int_android.content.pm.ProviderInfo.FLAG_SINGLE_USER|
+|int_android.content.pm.ProviderInfo.flags|
+|boolean_android.content.pm.ProviderInfo.grantUriPermissions|
+|int_android.content.pm.ProviderInfo.initOrder|
+|boolean_android.content.pm.ProviderInfo.isSyncable|
+|boolean_android.content.pm.ProviderInfo.multiprocess|
+|android.content.pm.PathPermission[]_android.content.pm.ProviderInfo.pathPermissions|
+|java.lang.String_android.content.pm.ProviderInfo.readPermission|
+|android.os.PatternMatcher[]_android.content.pm.ProviderInfo.uriPermissionPatterns|
+|java.lang.String_android.content.pm.ProviderInfo.writePermission|
+
+*android.content.pm.ProviderInfo_Constructors*
+|android.content.pm.ProviderInfo()|
+|android.content.pm.ProviderInfo(ProviderInfo)|
+
+*android.content.pm.ProviderInfo_Methods*
+|android.content.pm.ProviderInfo.describeContents()|
+|android.content.pm.ProviderInfo.dump(Printer,String)|
+|android.content.pm.ProviderInfo.toString()|
+|android.content.pm.ProviderInfo.writeToParcel(Parcel,int)|
+
+*android.content.pm.ProviderInfo_Description*
+
+Holds information about a specific content 
+provider(|android.content.ContentProvider|) . This is returned by 
+PackageManager.resolveContentProvider()(|android.content.pm.PackageManager|) . 
+
+
+
+*java.lang.String_android.content.pm.ProviderInfo.authority*
+
+The name provider is published under content:// 
+
+
+*android.os.Parcelable.Creator<android.content.pm.ProviderInfo>_android.content.pm.ProviderInfo.CREATOR*
+
+
+
+
+*int_android.content.pm.ProviderInfo.FLAG_SINGLE_USER*
+
+Bit in (|android.content.pm.ProviderInfo|) : If set, a single instance of the 
+provider will run for all users on the device. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ProviderInfo.flags*
+
+Options that have been set in the provider declaration in the manifest. These 
+include: (|android.content.pm.ProviderInfo|) . 
+
+
+*boolean_android.content.pm.ProviderInfo.grantUriPermissions*
+
+If true, additional permissions to specific Uris in this content provider can 
+be granted, as per the grantUriPermissions(|android.R.styleable|) attribute. 
+
+
+*int_android.content.pm.ProviderInfo.initOrder*
+
+Used to control initialization order of single-process providers running in the 
+same process. Higher goes first. 
+
+
+*boolean_android.content.pm.ProviderInfo.isSyncable*
+
+Whether or not this provider is syncable. 
+
+
+*boolean_android.content.pm.ProviderInfo.multiprocess*
+
+If true, this content provider allows multiple instances of itself to run in 
+different process. If false, a single instances is always run in 
+(|android.content.pm.ProviderInfo|) . 
+
+
+*android.content.pm.PathPermission[]_android.content.pm.ProviderInfo.pathPermissions*
+
+If non-null, these are path-specific permissions that are allowed for accessing 
+the provider. Any permissions listed here will allow a holding client to access 
+the provider, and the provider will check the URI it provides when making calls 
+against the patterns here. 
+
+
+*java.lang.String_android.content.pm.ProviderInfo.readPermission*
+
+Optional permission required for read-only access this content provider. 
+
+
+*android.os.PatternMatcher[]_android.content.pm.ProviderInfo.uriPermissionPatterns*
+
+If non-null, these are the patterns that are allowed for granting URI 
+permissions. Any URI that does not match one of these patterns will not allowed 
+to be granted. If null, all URIs are allowed. The 
+PackageManager.GET_URI_PERMISSION_PATTERNS(|android.content.pm.PackageManager|) 
+flag must be specified for this field to be filled in. 
+
+
+*java.lang.String_android.content.pm.ProviderInfo.writePermission*
+
+Optional permission required for read/write access this content provider. 
+
+
+
+*android.content.pm.ProviderInfo()*
+
+public ProviderInfo()
+
+
+
+
+*android.content.pm.ProviderInfo(ProviderInfo)*
+
+public ProviderInfo(android.content.pm.ProviderInfo orig)
+
+
+
+
+*android.content.pm.ProviderInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.pm.ProviderInfo.dump(Printer,String)*
+
+public void dump(
+  android.util.Printer pw,
+  java.lang.String prefix)
+
+
+
+
+
+*android.content.pm.ProviderInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.pm.ProviderInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int parcelableFlags)
+
+
+
+
+
+

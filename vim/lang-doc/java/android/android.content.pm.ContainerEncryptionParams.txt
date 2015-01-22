@@ -1,0 +1,218 @@
+*android.content.pm.ContainerEncryptionParams* *ContainerEncryptionParams* Repre
+
+public class ContainerEncryptionParams
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.pm.ContainerEncryptionParams_Description|
+|android.content.pm.ContainerEncryptionParams_Fields|
+|android.content.pm.ContainerEncryptionParams_Constructors|
+|android.content.pm.ContainerEncryptionParams_Methods|
+
+================================================================================
+
+*android.content.pm.ContainerEncryptionParams_Fields*
+|android.os.Parcelable.Creator<android.content.pm.ContainerEncryptionParams>_android.content.pm.ContainerEncryptionParams.CREATOR|
+|java.lang.String_android.content.pm.ContainerEncryptionParams.TAG|
+
+*android.content.pm.ContainerEncryptionParams_Constructors*
+|android.content.pm.ContainerEncryptionParams(String,AlgorithmParameterSpec,SecretKey)|
+|android.content.pm.ContainerEncryptionParams(String,AlgorithmParameterSpec,SecretKey,String,AlgorithmParameterSpec,SecretKey,byte[],long,long,long)|
+
+*android.content.pm.ContainerEncryptionParams_Methods*
+|android.content.pm.ContainerEncryptionParams.describeContents()|
+|android.content.pm.ContainerEncryptionParams.equals(Object)|
+|android.content.pm.ContainerEncryptionParams.getAuthenticatedDataStart()|
+|android.content.pm.ContainerEncryptionParams.getDataEnd()|
+|android.content.pm.ContainerEncryptionParams.getEncryptedDataStart()|
+|android.content.pm.ContainerEncryptionParams.getEncryptionAlgorithm()|
+|android.content.pm.ContainerEncryptionParams.getEncryptionKey()|
+|android.content.pm.ContainerEncryptionParams.getEncryptionSpec()|
+|android.content.pm.ContainerEncryptionParams.getMacAlgorithm()|
+|android.content.pm.ContainerEncryptionParams.getMacKey()|
+|android.content.pm.ContainerEncryptionParams.getMacSpec()|
+|android.content.pm.ContainerEncryptionParams.getMacTag()|
+|android.content.pm.ContainerEncryptionParams.hashCode()|
+|android.content.pm.ContainerEncryptionParams.toString()|
+|android.content.pm.ContainerEncryptionParams.writeToParcel(Parcel,int)|
+
+*android.content.pm.ContainerEncryptionParams_Description*
+
+Represents encryption parameters used to read a container. 
+
+
+
+*android.os.Parcelable.Creator<android.content.pm.ContainerEncryptionParams>_android.content.pm.ContainerEncryptionParams.CREATOR*
+
+
+
+
+*java.lang.String_android.content.pm.ContainerEncryptionParams.TAG*
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams(String,AlgorithmParameterSpec,SecretKey)*
+
+public ContainerEncryptionParams(
+  java.lang.String encryptionAlgorithm,
+  java.security.spec.AlgorithmParameterSpec encryptionSpec,
+  javax.crypto.SecretKey encryptionKey)
+  throws |java.security.InvalidAlgorithmParameterException|
+         
+
+
+
+*android.content.pm.ContainerEncryptionParams(String,AlgorithmParameterSpec,SecretKey,String,AlgorithmParameterSpec,SecretKey,byte[],long,long,long)*
+
+public ContainerEncryptionParams(
+  java.lang.String encryptionAlgorithm,
+  java.security.spec.AlgorithmParameterSpec encryptionSpec,
+  javax.crypto.SecretKey encryptionKey,
+  java.lang.String macAlgorithm,
+  java.security.spec.AlgorithmParameterSpec macSpec,
+  javax.crypto.SecretKey macKey,
+  byte[] macTag,
+  long authenticatedDataStart,
+  long encryptedDataStart,
+  long dataEnd)
+  throws |java.security.InvalidAlgorithmParameterException|
+         
+Creates container encryption specifications for installing from encrypted 
+containers. 
+
+    encryptionAlgorithm - encryption algorithm to use; format matches JCE 
+    encryptionSpec - algorithm parameter specification 
+    encryptionKey - key used for decryption 
+    macAlgorithm - MAC algorithm to use; format matches JCE 
+    macSpec - algorithm parameters specification, may be {@code null} 
+    macKey - key used for authentication (i.e., for the MAC tag) 
+    macTag - message authentication code (MAC) tag for the authenticated data 
+    authenticatedDataStart - offset of start of authenticated data in stream 
+    encryptedDataStart - offset of start of encrypted data in stream 
+    dataEnd - offset of the end of both the authenticated and encrypted data 
+
+*android.content.pm.ContainerEncryptionParams.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getAuthenticatedDataStart()*
+
+public long getAuthenticatedDataStart()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getDataEnd()*
+
+public long getDataEnd()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getEncryptedDataStart()*
+
+public long getEncryptedDataStart()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getEncryptionAlgorithm()*
+
+public |java.lang.String| getEncryptionAlgorithm()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getEncryptionKey()*
+
+public |javax.crypto.SecretKey| getEncryptionKey()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getEncryptionSpec()*
+
+public |java.security.spec.AlgorithmParameterSpec| getEncryptionSpec()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getMacAlgorithm()*
+
+public |java.lang.String| getMacAlgorithm()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getMacKey()*
+
+public |javax.crypto.SecretKey| getMacKey()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getMacSpec()*
+
+public |java.security.spec.AlgorithmParameterSpec| getMacSpec()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.getMacTag()*
+
+public byte[] getMacTag()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.pm.ContainerEncryptionParams.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

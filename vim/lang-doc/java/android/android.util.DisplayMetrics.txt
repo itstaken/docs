@@ -1,0 +1,305 @@
+*android.util.DisplayMetrics* *DisplayMetrics* A structure describing general in
+
+public class DisplayMetrics
+  extends    |java.lang.Object|
+
+|android.util.DisplayMetrics_Description|
+|android.util.DisplayMetrics_Fields|
+|android.util.DisplayMetrics_Constructors|
+|android.util.DisplayMetrics_Methods|
+
+================================================================================
+
+*android.util.DisplayMetrics_Fields*
+|float_android.util.DisplayMetrics.density|
+|int_android.util.DisplayMetrics.DENSITY_400|
+|int_android.util.DisplayMetrics.DENSITY_DEFAULT|
+|float_android.util.DisplayMetrics.DENSITY_DEFAULT_SCALE|
+|int_android.util.DisplayMetrics.DENSITY_DEVICE|
+|int_android.util.DisplayMetrics.DENSITY_HIGH|
+|int_android.util.DisplayMetrics.DENSITY_LOW|
+|int_android.util.DisplayMetrics.DENSITY_MEDIUM|
+|int_android.util.DisplayMetrics.DENSITY_TV|
+|int_android.util.DisplayMetrics.DENSITY_XHIGH|
+|int_android.util.DisplayMetrics.DENSITY_XXHIGH|
+|int_android.util.DisplayMetrics.DENSITY_XXXHIGH|
+|int_android.util.DisplayMetrics.densityDpi|
+|int_android.util.DisplayMetrics.heightPixels|
+|float_android.util.DisplayMetrics.noncompatDensity|
+|int_android.util.DisplayMetrics.noncompatDensityDpi|
+|int_android.util.DisplayMetrics.noncompatHeightPixels|
+|float_android.util.DisplayMetrics.noncompatScaledDensity|
+|int_android.util.DisplayMetrics.noncompatWidthPixels|
+|float_android.util.DisplayMetrics.noncompatXdpi|
+|float_android.util.DisplayMetrics.noncompatYdpi|
+|float_android.util.DisplayMetrics.scaledDensity|
+|int_android.util.DisplayMetrics.widthPixels|
+|float_android.util.DisplayMetrics.xdpi|
+|float_android.util.DisplayMetrics.ydpi|
+
+*android.util.DisplayMetrics_Constructors*
+|android.util.DisplayMetrics()|
+
+*android.util.DisplayMetrics_Methods*
+|android.util.DisplayMetrics.equals(DisplayMetrics)|Returns true if these displ
+|android.util.DisplayMetrics.equals(Object)|
+|android.util.DisplayMetrics.equalsPhysical(DisplayMetrics)|Returns true if the
+|android.util.DisplayMetrics.hashCode()|
+|android.util.DisplayMetrics.setTo(DisplayMetrics)|
+|android.util.DisplayMetrics.setToDefaults()|
+|android.util.DisplayMetrics.toString()|
+
+*android.util.DisplayMetrics_Description*
+
+A structure describing general information about a display, such as its size, 
+density, and font scaling. To access the DisplayMetrics members, initialize an 
+object like this: 
+
+DisplayMetrics metrics = new DisplayMetrics(); 
+getWindowManager().getDefaultDisplay().getMetrics(metrics); 
+
+
+
+*float_android.util.DisplayMetrics.density*
+
+The logical density of the display. This is a scaling factor for the Density 
+Independent Pixel unit, where one DIP is one pixel on an approximately 160 dpi 
+screen (for example a 240x320, 1.5"x2" screen), providing the baseline of the 
+system's display. Thus on a 160dpi screen this density value will be 1; on a 
+120 dpi screen it would be .75; etc. 
+
+This value does not exactly follow the real screen size (as given by 
+(|android.util.DisplayMetrics|) and (|android.util.DisplayMetrics|) , but 
+rather is used to scale the size of the overall UI in steps based on gross 
+changes in the display dpi. For example, a 240x320 screen will have a density 
+of 1 even if its width is 1.8", 1.3", etc. However, if the screen resolution is 
+increased to 320x480 but the screen size remained 1.5"x2" then the density 
+would be increased (probably to 1.5). 
+
+
+*int_android.util.DisplayMetrics.DENSITY_400*
+
+Intermediate density for screens that sit somewhere between 
+(|android.util.DisplayMetrics|) (320dpi) and (|android.util.DisplayMetrics|) 
+(480 dpi). This is not a density that applications should target, instead 
+relying on the system to scale their (|android.util.DisplayMetrics|) assets for 
+them. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_DEFAULT*
+
+The reference density used throughout the system. 
+
+
+*float_android.util.DisplayMetrics.DENSITY_DEFAULT_SCALE*
+
+Scaling factor to convert a density in DPI units to the density scale. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_DEVICE*
+
+The device's density. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_HIGH*
+
+Standard quantized DPI for high-density screens. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_LOW*
+
+Standard quantized DPI for low-density screens. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_MEDIUM*
+
+Standard quantized DPI for medium-density screens. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_TV*
+
+This is a secondary density, added for some common screen configurations. It is 
+recommended that applications not generally target this as a first class 
+density -- that is, don't supply specific graphics for this density, instead 
+allow the platform to scale from other densities (typically 
+(|android.util.DisplayMetrics|) ) as appropriate. In most cases (such as using 
+bitmaps in (|android.graphics.drawable.Drawable|) ) the platform can perform 
+this scaling at load time, so the only cost is some slight startup runtime 
+overhead. 
+
+This density was original introduced to correspond with a 720p TV screen: the 
+density for 1080p televisions is (|android.util.DisplayMetrics|) , and the 
+value here provides the same UI size for a TV running at 720p. It has also 
+found use in 7" tablets, when these devices have 1280x720 displays. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_XHIGH*
+
+Standard quantized DPI for extra-high-density screens. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_XXHIGH*
+
+Standard quantized DPI for extra-extra-high-density screens. Applications 
+should not generally worry about this density; relying on XHIGH graphics being 
+scaled up to it should be sufficient for almost all cases. 
+
+
+*int_android.util.DisplayMetrics.DENSITY_XXXHIGH*
+
+Standard quantized DPI for extra-extra-extra-high-density screens. Applications 
+should not generally worry about this density; relying on XHIGH graphics being 
+scaled up to it should be sufficient for almost all cases. A typical use of 
+this density would be 4K television screens -- 3840x2160, which is 2x a 
+traditional HD 1920x1080 screen which runs at DENSITY_XHIGH. 
+
+
+*int_android.util.DisplayMetrics.densityDpi*
+
+The screen density expressed as dots-per-inch. May be either 
+(|android.util.DisplayMetrics|) , (|android.util.DisplayMetrics|) , or 
+(|android.util.DisplayMetrics|) . 
+
+
+*int_android.util.DisplayMetrics.heightPixels*
+
+The absolute height of the display in pixels. 
+
+
+*float_android.util.DisplayMetrics.noncompatDensity*
+
+The reported display density prior to any compatibility mode scaling being 
+applied. 
+
+
+*int_android.util.DisplayMetrics.noncompatDensityDpi*
+
+The reported display density prior to any compatibility mode scaling being 
+applied. 
+
+
+*int_android.util.DisplayMetrics.noncompatHeightPixels*
+
+The reported display height prior to any compatibility mode scaling being 
+applied. 
+
+
+*float_android.util.DisplayMetrics.noncompatScaledDensity*
+
+The reported scaled density prior to any compatibility mode scaling being 
+applied. 
+
+
+*int_android.util.DisplayMetrics.noncompatWidthPixels*
+
+The reported display width prior to any compatibility mode scaling being 
+applied. 
+
+
+*float_android.util.DisplayMetrics.noncompatXdpi*
+
+The reported display xdpi prior to any compatibility mode scaling being 
+applied. 
+
+
+*float_android.util.DisplayMetrics.noncompatYdpi*
+
+The reported display ydpi prior to any compatibility mode scaling being 
+applied. 
+
+
+*float_android.util.DisplayMetrics.scaledDensity*
+
+A scaling factor for fonts displayed on the display. This is the same as 
+(|android.util.DisplayMetrics|) , except that it may be adjusted in smaller 
+increments at runtime based on a user preference for the font size. 
+
+
+*int_android.util.DisplayMetrics.widthPixels*
+
+The absolute width of the display in pixels. 
+
+
+*float_android.util.DisplayMetrics.xdpi*
+
+The exact physical pixels per inch of the screen in the X dimension. 
+
+
+*float_android.util.DisplayMetrics.ydpi*
+
+The exact physical pixels per inch of the screen in the Y dimension. 
+
+
+
+*android.util.DisplayMetrics()*
+
+public DisplayMetrics()
+
+
+
+
+*android.util.DisplayMetrics.equals(DisplayMetrics)*
+
+public boolean equals(android.util.DisplayMetrics other)
+
+Returns true if these display metrics equal the other display metrics. 
+
+
+    other - The display metrics with which to compare. 
+
+    Returns: True if the display metrics are equal. 
+
+*android.util.DisplayMetrics.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.util.DisplayMetrics.equalsPhysical(DisplayMetrics)*
+
+public boolean equalsPhysical(android.util.DisplayMetrics other)
+
+Returns true if the physical aspects of the two display metrics are equal. This 
+ignores the scaled density, which is a logical attribute based on the current 
+desired font size. 
+
+
+    other - The display metrics with which to compare. 
+
+    Returns: True if the display metrics are equal. 
+
+*android.util.DisplayMetrics.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.util.DisplayMetrics.setTo(DisplayMetrics)*
+
+public void setTo(android.util.DisplayMetrics o)
+
+
+
+
+
+*android.util.DisplayMetrics.setToDefaults()*
+
+public void setToDefaults()
+
+
+
+
+
+*android.util.DisplayMetrics.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

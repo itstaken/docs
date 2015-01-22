@@ -1,0 +1,166 @@
+*android.content.res.ColorStateList* *ColorStateList* Lets you mapandroid.view.V
+
+public class ColorStateList
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.res.ColorStateList_Description|
+|android.content.res.ColorStateList_Fields|
+|android.content.res.ColorStateList_Constructors|
+|android.content.res.ColorStateList_Methods|
+
+================================================================================
+
+*android.content.res.ColorStateList_Fields*
+|android.os.Parcelable.Creator<android.content.res.ColorStateList>_android.content.res.ColorStateList.CREATOR|
+
+*android.content.res.ColorStateList_Constructors*
+|android.content.res.ColorStateList(int[][],int[])|Creates a ColorStateList tha
+
+*android.content.res.ColorStateList_Methods*
+|android.content.res.ColorStateList.createFromXml(Resources,XmlPullParser)|Crea
+|android.content.res.ColorStateList.describeContents()|
+|android.content.res.ColorStateList.getColorForState(int[],int)|Return the colo
+|android.content.res.ColorStateList.getDefaultColor()|Return the default color 
+|android.content.res.ColorStateList.isStateful()|
+|android.content.res.ColorStateList.toString()|
+|android.content.res.ColorStateList.valueOf(int)|Creates or retrieves a ColorSt
+|android.content.res.ColorStateList.withAlpha(int)|Creates a new ColorStateList
+|android.content.res.ColorStateList.writeToParcel(Parcel,int)|
+
+*android.content.res.ColorStateList_Description*
+
+Lets you map (|android.view.View|) state sets to colors. 
+(|android.content.res.ColorStateList|) s are created from XML resource files 
+defined in the "color" subdirectory directory of an application's resource 
+directory. The XML file contains a single "selector" element with a number of 
+"item" elements inside. For example: 
+
+
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android"> <item 
+android:state_focused="true" android:color="@color/testcolor1"/> <item 
+android:state_pressed="true" android:state_enabled="false" 
+android:color="@color/testcolor2" /> <item android:state_enabled="false" 
+android:color="@color/testcolor3" /> <item android:color="@color/testcolor5"/> 
+</selector> 
+
+This defines a set of state spec / color pairs where each state spec specifies 
+a set of states that a view must either be in or not be in and the color 
+specifies the color associated with that spec. The list of state specs will be 
+processed in order of the items in the XML file. An item with no state spec is 
+considered to match any set of states and is generally useful as a final item 
+to be used as a default. Note that if you have such an item before any other 
+items in the list then any subsequent items will end up being ignored. For more 
+information, see the guide to <a 
+href="guide/topics/resources/color-list-resource.html">Color State List 
+Resource. 
+
+
+
+*android.os.Parcelable.Creator<android.content.res.ColorStateList>_android.content.res.ColorStateList.CREATOR*
+
+
+
+
+
+*android.content.res.ColorStateList(int[][],int[])*
+
+public ColorStateList(
+  int[][] states,
+  int[] colors)
+
+Creates a ColorStateList that returns the specified mapping from states to 
+colors. 
+
+
+*android.content.res.ColorStateList.createFromXml(Resources,XmlPullParser)*
+
+public static |android.content.res.ColorStateList| createFromXml(
+  android.content.res.Resources r,
+  XmlPullParser parser)
+  throws |java.io.IOException|
+         |XmlPullParserException|
+         
+Create a ColorStateList from an XML document, given a set of 
+(|android.content.res.Resources|) . 
+
+
+
+*android.content.res.ColorStateList.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.res.ColorStateList.getColorForState(int[],int)*
+
+public int getColorForState(
+  int[] stateSet,
+  int defaultColor)
+
+Return the color associated with the given set of (|android.view.View|) states. 
+
+
+    stateSet - an array of {@link android.view.View} states 
+    defaultColor - the color to return if there's not state spec in this {@link ColorStateList} 
+       that matches the stateSet. 
+
+    Returns: the color associated with that set of states in this {@link ColorStateList}. 
+
+*android.content.res.ColorStateList.getDefaultColor()*
+
+public int getDefaultColor()
+
+Return the default color in this (|android.content.res.ColorStateList|) . 
+
+
+
+    Returns: the default color in this {@link ColorStateList}. 
+
+*android.content.res.ColorStateList.isStateful()*
+
+public boolean isStateful()
+
+
+
+
+
+*android.content.res.ColorStateList.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.res.ColorStateList.valueOf(int)*
+
+public static |android.content.res.ColorStateList| valueOf(int color)
+
+Creates or retrieves a ColorStateList that always returns a single color. 
+
+
+
+*android.content.res.ColorStateList.withAlpha(int)*
+
+public |android.content.res.ColorStateList| withAlpha(int alpha)
+
+Creates a new ColorStateList that has the same states and colors as this one 
+but where each color has the specified alpha value (0-255). 
+
+
+
+*android.content.res.ColorStateList.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

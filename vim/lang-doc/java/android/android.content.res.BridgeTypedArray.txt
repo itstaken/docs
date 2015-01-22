@@ -1,0 +1,424 @@
+*android.content.res.BridgeTypedArray* *BridgeTypedArray* Custom implementation 
+
+public final class BridgeTypedArray
+  extends    |TypedArray|
+
+|android.content.res.BridgeTypedArray_Description|
+|android.content.res.BridgeTypedArray_Fields|
+|android.content.res.BridgeTypedArray_Constructors|
+|android.content.res.BridgeTypedArray_Methods|
+
+================================================================================
+
+*android.content.res.BridgeTypedArray_Constructors*
+|android.content.res.BridgeTypedArray(BridgeResources,BridgeContext,int,boolean)|
+
+*android.content.res.BridgeTypedArray_Methods*
+|android.content.res.BridgeTypedArray.bridgeSetValue(int,String,boolean,ResourceValue)|
+|android.content.res.BridgeTypedArray.getBoolean(int,boolean)|Retrieve the bool
+|android.content.res.BridgeTypedArray.getColor(int,int)|Retrieve the color valu
+|android.content.res.BridgeTypedArray.getColorStateList(int)|Retrieve the Color
+|android.content.res.BridgeTypedArray.getDimension(int,float)|Retrieve a dimens
+|android.content.res.BridgeTypedArray.getDimensionPixelOffset(int,int)|Retrieve
+|android.content.res.BridgeTypedArray.getDimensionPixelSize(int,int)|Retrieve a
+|android.content.res.BridgeTypedArray.getDrawable(int)|Retrieve the Drawable fo
+|android.content.res.BridgeTypedArray.getFloat(int,float)|Retrieve the float va
+|android.content.res.BridgeTypedArray.getFraction(int,int,int,float)|Retrieve a
+|android.content.res.BridgeTypedArray.getInt(int,int)|Retrieve the integer valu
+|android.content.res.BridgeTypedArray.getInteger(int,int)|Retrieve the integer 
+|android.content.res.BridgeTypedArray.getLayoutDimension(int,int)|
+|android.content.res.BridgeTypedArray.getLayoutDimension(int,String)|Special ve
+|android.content.res.BridgeTypedArray.getPositionDescription()|Returns a messag
+|android.content.res.BridgeTypedArray.getResourceId(int,int)|Retrieve the resou
+|android.content.res.BridgeTypedArray.getResources()|Return the Resources objec
+|android.content.res.BridgeTypedArray.getString(int)|Retrieve the string value 
+|android.content.res.BridgeTypedArray.getText(int)|Retrieve the styled string v
+|android.content.res.BridgeTypedArray.getTextArray(int)|Retrieve the CharSequen
+|android.content.res.BridgeTypedArray.getValue(int,TypedValue)|Retrieve the raw
+|android.content.res.BridgeTypedArray.hasValue(int)|Determines whether there is
+|android.content.res.BridgeTypedArray.length()|Return the number of values in t
+|android.content.res.BridgeTypedArray.peekValue(int)|Retrieve the raw TypedValu
+|android.content.res.BridgeTypedArray.recycle()|Give back a previously retrieve
+|android.content.res.BridgeTypedArray.sealArray()|Seals the array after all cal
+|android.content.res.BridgeTypedArray.toString()|
+
+*android.content.res.BridgeTypedArray_Description*
+
+Custom implementation of TypedArray to handle non compiled resources. 
+
+
+
+*android.content.res.BridgeTypedArray(BridgeResources,BridgeContext,int,boolean)*
+
+public BridgeTypedArray(
+  android.content.res.BridgeResources resources,
+  com.android.layoutlib.bridge.android.BridgeContext context,
+  int len,
+  boolean platformFile)
+
+
+
+
+*android.content.res.BridgeTypedArray.bridgeSetValue(int,String,boolean,ResourceValue)*
+
+public void bridgeSetValue(
+  int index,
+  java.lang.String name,
+  boolean isFramework,
+  ResourceValue value)
+
+A bridge-specific method that sets a value in the type array 
+
+
+    index - the index of the value in the TypedArray 
+    name - the name of the attribute 
+    isFramework - whether the attribute is in the android namespace. 
+    value - the value of the attribute 
+
+*android.content.res.BridgeTypedArray.getBoolean(int,boolean)*
+
+public boolean getBoolean(
+  int index,
+  boolean defValue)
+
+Retrieve the boolean value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined. 
+
+    Returns: Attribute boolean value, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getColor(int,int)*
+
+public int getColor(
+  int index,
+  int defValue)
+
+Retrieve the color value for the attribute at index. If the attribute 
+references a color resource holding a complex 
+(|android.content.res.ColorStateList|) , then the default color from the set is 
+returned. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute color value, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getColorStateList(int)*
+
+public ColorStateList getColorStateList(int index)
+
+Retrieve the ColorStateList for the attribute at index. The value may be either 
+a single solid color or a reference to a color or complex 
+(|android.content.res.ColorStateList|) description. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: ColorStateList for the attribute, or null if not defined. 
+
+*android.content.res.BridgeTypedArray.getDimension(int,float)*
+
+public float getDimension(
+  int index,
+  float defValue)
+
+Retrieve a dimensional unit attribute at index. Unit conversions are based on 
+the current (|DisplayMetrics|) associated with the resources this 
+(|TypedArray|) object came from. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute dimension value multiplied by the appropriate metric, or defValue if 
+             not defined. 
+
+*android.content.res.BridgeTypedArray.getDimensionPixelOffset(int,int)*
+
+public int getDimensionPixelOffset(
+  int index,
+  int defValue)
+
+Retrieve a dimensional unit attribute at index for use as an offset in raw 
+pixels. This is the same as (|android.content.res.BridgeTypedArray|) , except 
+the returned value is converted to integer pixels for you. An offset conversion 
+involves simply truncating the base value to an integer. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute dimension value multiplied by the appropriate metric and truncated to 
+             integer pixels, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getDimensionPixelSize(int,int)*
+
+public int getDimensionPixelSize(
+  int index,
+  int defValue)
+
+Retrieve a dimensional unit attribute at index for use as a size in raw pixels. 
+This is the same as (|android.content.res.BridgeTypedArray|) , except the 
+returned value is converted to integer pixels for use as a size. A size 
+conversion involves rounding the base value, and ensuring that a non-zero base 
+value is at least one pixel in size. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute dimension value multiplied by the appropriate metric and truncated to 
+             integer pixels, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getDrawable(int)*
+
+public Drawable getDrawable(int index)
+
+Retrieve the Drawable for the attribute at index. This gets the resource ID of 
+the selected attribute, and uses Resources.getDrawable(|Resources|) of the 
+owning Resources object to retrieve its Drawable. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: Drawable for the attribute, or null if not defined. 
+
+*android.content.res.BridgeTypedArray.getFloat(int,float)*
+
+public float getFloat(
+  int index,
+  float defValue)
+
+Retrieve the float value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: Attribute float value, or defValue if not defined.. 
+
+*android.content.res.BridgeTypedArray.getFraction(int,int,int,float)*
+
+public float getFraction(
+  int index,
+  int base,
+  int pbase,
+  float defValue)
+
+Retrieve a fractional unit attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+    base - The base value of this fraction. In other words, a standard fraction is 
+       multiplied by this value. 
+    pbase - The parent base value of this fraction. In other words, a parent fraction 
+       (nn%p) is multiplied by this value. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute fractional value multiplied by the appropriate base value, or 
+             defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getInt(int,int)*
+
+public int getInt(
+  int index,
+  int defValue)
+
+Retrieve the integer value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined. 
+
+    Returns: Attribute int value, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getInteger(int,int)*
+
+public int getInteger(
+  int index,
+  int defValue)
+
+Retrieve the integer value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute integer value, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getLayoutDimension(int,int)*
+
+public int getLayoutDimension(
+  int index,
+  int defValue)
+
+
+
+
+
+*android.content.res.BridgeTypedArray.getLayoutDimension(int,String)*
+
+public int getLayoutDimension(
+  int index,
+  java.lang.String name)
+
+Special version of (|android.content.res.BridgeTypedArray|) for retrieving 
+(|android.view.ViewGroup|) 's layout_width and layout_height attributes. This 
+is only here for performance reasons; applications should use 
+(|android.content.res.BridgeTypedArray|) . 
+
+
+    index - Index of the attribute to retrieve. 
+    name - Textual name of attribute for error reporting. 
+
+    Returns: Attribute dimension value multiplied by the appropriate metric and truncated to 
+             integer pixels. 
+
+*android.content.res.BridgeTypedArray.getPositionDescription()*
+
+public |java.lang.String| getPositionDescription()
+
+Returns a message about the parser state suitable for printing error messages. 
+
+
+
+*android.content.res.BridgeTypedArray.getResourceId(int,int)*
+
+public int getResourceId(
+  int index,
+  int defValue)
+
+Retrieve the resource identifier for the attribute at index. Note that 
+attribute resource as resolved when the overall (|TypedArray|) object is 
+retrieved. As a result, this function will return the resource identifier of 
+the final resource value that was found, not necessarily the original resource 
+that was specified by the attribute. 
+
+
+    index - Index of attribute to retrieve. 
+    defValue - Value to return if the attribute is not defined or not a resource. 
+
+    Returns: Attribute resource identifier, or defValue if not defined. 
+
+*android.content.res.BridgeTypedArray.getResources()*
+
+public Resources getResources()
+
+Return the Resources object this array was loaded from. 
+
+
+
+*android.content.res.BridgeTypedArray.getString(int)*
+
+public |java.lang.String| getString(int index)
+
+Retrieve the string value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: String holding string data. Any styling information is removed. Returns null if 
+             the attribute is not defined. 
+
+*android.content.res.BridgeTypedArray.getText(int)*
+
+public |java.lang.CharSequence| getText(int index)
+
+Retrieve the styled string value for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: CharSequence holding string data. May be styled. Returns null if the attribute 
+             is not defined. 
+
+*android.content.res.BridgeTypedArray.getTextArray(int)*
+
+public |java.lang.CharSequence|[] getTextArray(int index)
+
+Retrieve the CharSequence[] for the attribute at index. This gets the resource 
+ID of the selected attribute, and uses Resources.getTextArray(|Resources|) of 
+the owning Resources object to retrieve its String[]. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: CharSequence[] for the attribute, or null if not defined. 
+
+*android.content.res.BridgeTypedArray.getValue(int,TypedValue)*
+
+public boolean getValue(
+  int index,
+  TypedValue outValue)
+
+Retrieve the raw TypedValue for the attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+    outValue - TypedValue object in which to place the attribute's data. 
+
+    Returns: Returns true if the value was retrieved, else false. 
+
+*android.content.res.BridgeTypedArray.hasValue(int)*
+
+public boolean hasValue(int index)
+
+Determines whether there is an attribute at index. 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: True if the attribute has a value, false otherwise. 
+
+*android.content.res.BridgeTypedArray.length()*
+
+public int length()
+
+Return the number of values in this array. 
+
+
+
+*android.content.res.BridgeTypedArray.peekValue(int)*
+
+public TypedValue peekValue(int index)
+
+Retrieve the raw TypedValue for the attribute at index and return a temporary 
+object holding its data. This object is only valid until the next call on to 
+(|TypedArray|) . 
+
+
+    index - Index of attribute to retrieve. 
+
+    Returns: Returns a TypedValue object if the attribute is defined, containing its data; 
+             otherwise returns null. (You will not receive a TypedValue whose 
+             type is TYPE_NULL.) 
+
+*android.content.res.BridgeTypedArray.recycle()*
+
+public void recycle()
+
+Give back a previously retrieved TypedArray, for later re-use. 
+
+
+
+*android.content.res.BridgeTypedArray.sealArray()*
+
+public void sealArray()
+
+Seals the array after all calls to (|android.content.res.BridgeTypedArray|) 
+have been done. This allows to compute the list of non default values, 
+permitting (|android.content.res.BridgeTypedArray|) to return the proper value. 
+
+
+
+*android.content.res.BridgeTypedArray.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

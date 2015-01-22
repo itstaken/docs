@@ -1,0 +1,72 @@
+*android.text.Html* *Html* This class processes HTML strings into displayable st
+
+public class Html
+  extends    |java.lang.Object|
+
+|android.text.Html_Description|
+|android.text.Html_Fields|
+|android.text.Html_Constructors|
+|android.text.Html_Methods|
+
+================================================================================
+
+*android.text.Html_Methods*
+|android.text.Html.escapeHtml(CharSequence)|Returns an HTML escaped representat
+|android.text.Html.fromHtml(String)|Returns displayable styled text from the pr
+|android.text.Html.fromHtml(String,Html.ImageGetter,Html.TagHandler)|Returns di
+|android.text.Html.toHtml(Spanned)|Returns an HTML representation of the provid
+
+*android.text.Html_Description*
+
+This class processes HTML strings into displayable styled text. Not all HTML 
+tags are supported. 
+
+
+
+*android.text.Html.escapeHtml(CharSequence)*
+
+public static |java.lang.String| escapeHtml(java.lang.CharSequence text)
+
+Returns an HTML escaped representation of the given plain text. 
+
+
+
+*android.text.Html.fromHtml(String)*
+
+public static |android.text.Spanned| fromHtml(java.lang.String source)
+
+Returns displayable styled text from the provided HTML string. Any <img> tags 
+in the HTML will display as a generic replacement image which your program can 
+then go through and replace with real images. 
+
+This uses TagSoup to handle real HTML, including all of the brokenness found in 
+the wild. 
+
+
+
+*android.text.Html.fromHtml(String,Html.ImageGetter,Html.TagHandler)*
+
+public static |android.text.Spanned| fromHtml(
+  java.lang.String source,
+  android.text.Html.ImageGetter imageGetter,
+  android.text.Html.TagHandler tagHandler)
+
+Returns displayable styled text from the provided HTML string. Any <img> tags 
+in the HTML will use the specified ImageGetter to request a representation of 
+the image (use null if you don't want this) and the specified TagHandler to 
+handle unknown tags (specify null if you don't want this). 
+
+This uses TagSoup to handle real HTML, including all of the brokenness found in 
+the wild. 
+
+
+
+*android.text.Html.toHtml(Spanned)*
+
+public static |java.lang.String| toHtml(android.text.Spanned text)
+
+Returns an HTML representation of the provided Spanned text. 
+
+
+
+

@@ -1,0 +1,339 @@
+*android.content.ContentProviderClient* *ContentProviderClient* The public inter
+
+public class ContentProviderClient
+  extends    |java.lang.Object|
+
+|android.content.ContentProviderClient_Description|
+|android.content.ContentProviderClient_Fields|
+|android.content.ContentProviderClient_Constructors|
+|android.content.ContentProviderClient_Methods|
+
+================================================================================
+
+*android.content.ContentProviderClient_Methods*
+|android.content.ContentProviderClient.applyBatch(ArrayList<ContentProviderOperation>)|
+|android.content.ContentProviderClient.bulkInsert(Uri,ContentValues[])|SeeConte
+|android.content.ContentProviderClient.call(String,String,Bundle)|SeeContentPro
+|android.content.ContentProviderClient.canonicalize(Uri)|SeeContentProvider#can
+|android.content.ContentProviderClient.delete(Uri,String,String[])|SeeContentPr
+|android.content.ContentProviderClient.finalize()|
+|android.content.ContentProviderClient.getLocalContentProvider()|Get a referenc
+|android.content.ContentProviderClient.getStreamTypes(Uri,String)|SeeContentPro
+|android.content.ContentProviderClient.getType(Uri)|SeeContentProvider#getType 
+|android.content.ContentProviderClient.insert(Uri,ContentValues)|SeeContentProv
+|android.content.ContentProviderClient.openAssetFile(Uri,String)|SeeContentProv
+|android.content.ContentProviderClient.openAssetFile(Uri,String,CancellationSignal)|
+|android.content.ContentProviderClient.openFile(Uri,String)|SeeContentProvider#
+|android.content.ContentProviderClient.openFile(Uri,String,CancellationSignal)|
+|android.content.ContentProviderClient.openTypedAssetFileDescriptor(Uri,String,Bundle)|
+|android.content.ContentProviderClient.openTypedAssetFileDescriptor(Uri,String,Bundle,CancellationSignal)|
+|android.content.ContentProviderClient.query(Uri,String[],String,String[],String)|
+|android.content.ContentProviderClient.query(Uri,String[],String,String[],String,CancellationSignal)|
+|android.content.ContentProviderClient.release()|Call this to indicate to the s
+|android.content.ContentProviderClient.releaseQuietly(ContentProviderClient)|
+|android.content.ContentProviderClient.setDetectNotResponding(long)|
+|android.content.ContentProviderClient.uncanonicalize(Uri)|SeeContentProvider#u
+|android.content.ContentProviderClient.update(Uri,ContentValues,String,String[])|
+
+*android.content.ContentProviderClient_Description*
+
+The public interface object used to interact with a 
+(|android.content.ContentProvider|) . This is obtained by calling 
+(|android.content.ContentResolver|) . This object must be released using 
+(|android.content.ContentProviderClient|) in order to indicate to the system 
+that the (|android.content.ContentProvider|) is no longer needed and can be 
+killed to free up resources. 
+
+Note that you should generally create a new ContentProviderClient instance for 
+each thread that will be performing operations. Unlike 
+(|android.content.ContentResolver|) , the methods here such as 
+(|android.content.ContentProviderClient|) and 
+(|android.content.ContentProviderClient|) are not thread safe -- you must not 
+call (|android.content.ContentProviderClient|) on the ContentProviderClient 
+those calls are made from until you are finished with the data they have 
+returned. 
+
+
+
+*android.content.ContentProviderClient.applyBatch(ArrayList<ContentProviderOperation>)*
+
+public |android.content.ContentProviderResult|[] applyBatch(java.util.ArrayList<android.content.ContentProviderOperation> operations)
+  throws |android.content.OperationApplicationException|
+         |android.os.RemoteException|
+         
+See ContentProvider.applyBatch(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.bulkInsert(Uri,ContentValues[])*
+
+public int bulkInsert(
+  android.net.Uri url,
+  android.content.ContentValues[] initialValues)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.bulkInsert(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.call(String,String,Bundle)*
+
+public |android.os.Bundle| call(
+  java.lang.String method,
+  java.lang.String arg,
+  android.os.Bundle extras)
+  throws |android.os.RemoteException|
+         
+See (|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.canonicalize(Uri)*
+
+public final |android.net.Uri| canonicalize(android.net.Uri url)
+  throws |android.os.RemoteException|
+         
+See (|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.delete(Uri,String,String[])*
+
+public int delete(
+  android.net.Uri url,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.delete(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.content.ContentProviderClient.getLocalContentProvider()*
+
+public |android.content.ContentProvider| getLocalContentProvider()
+
+Get a reference to the (|android.content.ContentProvider|) that is associated 
+with this client. If the (|android.content.ContentProvider|) is running in a 
+different process then null will be returned. This can be used if you know you 
+are running in the same process as a provider, and want to get direct access to 
+its implementation details. 
+
+
+
+    Returns: If the associated {@link ContentProvider} is local, returns it. Otherwise 
+             returns null. 
+
+*android.content.ContentProviderClient.getStreamTypes(Uri,String)*
+
+public |java.lang.String|[] getStreamTypes(
+  android.net.Uri url,
+  java.lang.String mimeTypeFilter)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.getStreamTypes(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.getType(Uri)*
+
+public |java.lang.String| getType(android.net.Uri url)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.getType(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.insert(Uri,ContentValues)*
+
+public |android.net.Uri| insert(
+  android.net.Uri url,
+  android.content.ContentValues initialValues)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.insert(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.openAssetFile(Uri,String)*
+
+public |android.content.res.AssetFileDescriptor| openAssetFile(
+  android.net.Uri url,
+  java.lang.String mode)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openAssetFile(|android.content.ContentProvider|) . Note 
+that this does not take care of non-content: URIs such as file:. It is strongly 
+recommended you use the 
+ContentResolver.openAssetFileDescriptor(|android.content.ContentResolver|) API 
+instead. 
+
+
+
+*android.content.ContentProviderClient.openAssetFile(Uri,String,CancellationSignal)*
+
+public |android.content.res.AssetFileDescriptor| openAssetFile(
+  android.net.Uri url,
+  java.lang.String mode,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openAssetFile(|android.content.ContentProvider|) . Note 
+that this does not take care of non-content: URIs such as file:. It is strongly 
+recommended you use the 
+ContentResolver.openAssetFileDescriptor(|android.content.ContentResolver|) API 
+instead. 
+
+
+
+*android.content.ContentProviderClient.openFile(Uri,String)*
+
+public |android.os.ParcelFileDescriptor| openFile(
+  android.net.Uri url,
+  java.lang.String mode)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openFile(|android.content.ContentProvider|) . Note that 
+this does not take care of non-content: URIs such as file:. It is strongly 
+recommended you use the 
+ContentResolver.openFileDescriptor(|android.content.ContentResolver|) API 
+instead. 
+
+
+
+*android.content.ContentProviderClient.openFile(Uri,String,CancellationSignal)*
+
+public |android.os.ParcelFileDescriptor| openFile(
+  android.net.Uri url,
+  java.lang.String mode,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openFile(|android.content.ContentProvider|) . Note that 
+this does not take care of non-content: URIs such as file:. It is strongly 
+recommended you use the 
+ContentResolver.openFileDescriptor(|android.content.ContentResolver|) API 
+instead. 
+
+
+
+*android.content.ContentProviderClient.openTypedAssetFileDescriptor(Uri,String,Bundle)*
+
+public final |android.content.res.AssetFileDescriptor| openTypedAssetFileDescriptor(
+  android.net.Uri uri,
+  java.lang.String mimeType,
+  android.os.Bundle opts)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openTypedAssetFile(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.openTypedAssetFileDescriptor(Uri,String,Bundle,CancellationSignal)*
+
+public final |android.content.res.AssetFileDescriptor| openTypedAssetFileDescriptor(
+  android.net.Uri uri,
+  java.lang.String mimeType,
+  android.os.Bundle opts,
+  android.os.CancellationSignal signal)
+  throws |java.io.FileNotFoundException|
+         |android.os.RemoteException|
+         
+See ContentProvider.openTypedAssetFile(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.query(Uri,String[],String,String[],String)*
+
+public |android.database.Cursor| query(
+  android.net.Uri url,
+  java.lang.String[] projection,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String sortOrder)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.query(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.query(Uri,String[],String,String[],String,CancellationSignal)*
+
+public |android.database.Cursor| query(
+  android.net.Uri url,
+  java.lang.String[] projection,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs,
+  java.lang.String sortOrder,
+  android.os.CancellationSignal cancellationSignal)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.query(|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.release()*
+
+public boolean release()
+
+Call this to indicate to the system that the associated 
+(|android.content.ContentProvider|) is no longer needed by this 
+(|android.content.ContentProviderClient|) . 
+
+
+
+    Returns: true if this was release, false if it was already released 
+
+*android.content.ContentProviderClient.releaseQuietly(ContentProviderClient)*
+
+public static void releaseQuietly(android.content.ContentProviderClient client)
+
+
+
+
+
+*android.content.ContentProviderClient.setDetectNotResponding(long)*
+
+public void setDetectNotResponding(long timeoutMillis)
+
+
+
+
+
+*android.content.ContentProviderClient.uncanonicalize(Uri)*
+
+public final |android.net.Uri| uncanonicalize(android.net.Uri url)
+  throws |android.os.RemoteException|
+         
+See (|android.content.ContentProvider|) 
+
+
+
+*android.content.ContentProviderClient.update(Uri,ContentValues,String,String[])*
+
+public int update(
+  android.net.Uri url,
+  android.content.ContentValues values,
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+  throws |android.os.RemoteException|
+         
+See ContentProvider.update(|android.content.ContentProvider|) 
+
+
+
+

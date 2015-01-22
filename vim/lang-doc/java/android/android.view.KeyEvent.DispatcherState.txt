@@ -1,0 +1,101 @@
+*android.view.KeyEvent.DispatcherState* *KeyEvent.DispatcherState* Use withKeyEv
+
+public static class KeyEvent.DispatcherState
+  extends    |java.lang.Object|
+
+|android.view.KeyEvent.DispatcherState_Description|
+|android.view.KeyEvent.DispatcherState_Fields|
+|android.view.KeyEvent.DispatcherState_Constructors|
+|android.view.KeyEvent.DispatcherState_Methods|
+
+================================================================================
+
+*android.view.KeyEvent.DispatcherState_Constructors*
+|android.view.KeyEvent.DispatcherState()|
+
+*android.view.KeyEvent.DispatcherState_Methods*
+|android.view.KeyEvent.DispatcherState.handleUpEvent(KeyEvent)|Handle key up ev
+|android.view.KeyEvent.DispatcherState.isTracking(KeyEvent)|Return true if the 
+|android.view.KeyEvent.DispatcherState.performedLongPress(KeyEvent)|Keep track 
+|android.view.KeyEvent.DispatcherState.reset()|Reset back to initial state.
+|android.view.KeyEvent.DispatcherState.reset(Object)|Stop any tracking associat
+|android.view.KeyEvent.DispatcherState.startTracking(KeyEvent,Object)|Start tra
+
+*android.view.KeyEvent.DispatcherState_Description*
+
+Use with (|android.view.KeyEvent|) for more advanced key dispatching, such as 
+long presses. 
+
+
+
+*android.view.KeyEvent.DispatcherState()*
+
+public KeyEvent.DispatcherState()
+
+
+
+
+*android.view.KeyEvent.DispatcherState.handleUpEvent(KeyEvent)*
+
+public void handleUpEvent(android.view.KeyEvent event)
+
+Handle key up event to stop tracking. This resets the dispatcher state, and 
+updates the key event state based on it. This is only needed if you are 
+directly dispatching events, rather than handling them in 
+(|android.view.KeyEvent.Callback|) . 
+
+
+
+*android.view.KeyEvent.DispatcherState.isTracking(KeyEvent)*
+
+public boolean isTracking(android.view.KeyEvent event)
+
+Return true if the key event is for a key code that is currently being tracked 
+by the dispatcher. 
+
+
+
+*android.view.KeyEvent.DispatcherState.performedLongPress(KeyEvent)*
+
+public void performedLongPress(android.view.KeyEvent event)
+
+Keep track of the given event's key code as having performed an action with a 
+long press, so no action should occur on the up. This is only needed if you are 
+directly dispatching events, rather than handling them in 
+(|android.view.KeyEvent.Callback|) . 
+
+
+
+*android.view.KeyEvent.DispatcherState.reset()*
+
+public void reset()
+
+Reset back to initial state. 
+
+
+
+*android.view.KeyEvent.DispatcherState.reset(Object)*
+
+public void reset(java.lang.Object target)
+
+Stop any tracking associated with this target. 
+
+
+
+*android.view.KeyEvent.DispatcherState.startTracking(KeyEvent,Object)*
+
+public void startTracking(
+  android.view.KeyEvent event,
+  java.lang.Object target)
+
+Start tracking the key code associated with the given event. This can only be 
+called on a key down. It will allow you to see any long press associated with 
+the key, and will result in (|android.view.KeyEvent|) return true on the long 
+press and up events. 
+
+This is only needed if you are directly dispatching events, rather than 
+handling them in (|android.view.KeyEvent.Callback|) . 
+
+
+
+

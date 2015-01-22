@@ -1,0 +1,234 @@
+*android.hardware.usb.UsbDeviceConnection* *UsbDeviceConnection* This class is u
+
+public class UsbDeviceConnection
+  extends    |java.lang.Object|
+
+|android.hardware.usb.UsbDeviceConnection_Description|
+|android.hardware.usb.UsbDeviceConnection_Fields|
+|android.hardware.usb.UsbDeviceConnection_Constructors|
+|android.hardware.usb.UsbDeviceConnection_Methods|
+
+================================================================================
+
+*android.hardware.usb.UsbDeviceConnection_Constructors*
+|android.hardware.usb.UsbDeviceConnection(UsbDevice)|UsbDevice should only be i
+
+*android.hardware.usb.UsbDeviceConnection_Methods*
+|android.hardware.usb.UsbDeviceConnection.bulkTransfer(UsbEndpoint,byte[],int,int)|
+|android.hardware.usb.UsbDeviceConnection.bulkTransfer(UsbEndpoint,byte[],int,int,int)|
+|android.hardware.usb.UsbDeviceConnection.claimInterface(UsbInterface,boolean)|
+|android.hardware.usb.UsbDeviceConnection.close()|Releases all system resources
+|android.hardware.usb.UsbDeviceConnection.controlTransfer(int,int,int,int,byte[],int,int)|
+|android.hardware.usb.UsbDeviceConnection.controlTransfer(int,int,int,int,byte[],int,int,int)|
+|android.hardware.usb.UsbDeviceConnection.getFileDescriptor()|Returns the nativ
+|android.hardware.usb.UsbDeviceConnection.getRawDescriptors()|Returns the raw U
+|android.hardware.usb.UsbDeviceConnection.getSerial()|Returns the serial number
+|android.hardware.usb.UsbDeviceConnection.releaseInterface(UsbInterface)|Releas
+|android.hardware.usb.UsbDeviceConnection.requestWait()|Waits for the result of
+
+*android.hardware.usb.UsbDeviceConnection_Description*
+
+This class is used for sending and receiving data and control messages to a USB 
+device. Instances of this class are created by 
+(|android.hardware.usb.UsbManager|) . 
+
+
+
+*android.hardware.usb.UsbDeviceConnection(UsbDevice)*
+
+public UsbDeviceConnection(android.hardware.usb.UsbDevice device)
+
+UsbDevice should only be instantiated by UsbService implementation 
+
+
+*android.hardware.usb.UsbDeviceConnection.bulkTransfer(UsbEndpoint,byte[],int,int)*
+
+public int bulkTransfer(
+  android.hardware.usb.UsbEndpoint endpoint,
+  byte[] buffer,
+  int length,
+  int timeout)
+
+Performs a bulk transaction on the given endpoint. The direction of the 
+transfer is determined by the direction of the endpoint. 
+
+This method transfers data starting from index 0 in the buffer. To specify a 
+different offset, use (|android.hardware.usb.UsbDeviceConnection|) . 
+
+
+    endpoint - the endpoint for this transaction 
+    buffer - buffer for data to send or receive 
+    length - the length of the data to send or receive 
+    timeout - in milliseconds 
+
+    Returns: length of data transferred (or zero) for success, or negative value for failure 
+
+*android.hardware.usb.UsbDeviceConnection.bulkTransfer(UsbEndpoint,byte[],int,int,int)*
+
+public int bulkTransfer(
+  android.hardware.usb.UsbEndpoint endpoint,
+  byte[] buffer,
+  int offset,
+  int length,
+  int timeout)
+
+Performs a bulk transaction on the given endpoint. The direction of the 
+transfer is determined by the direction of the endpoint. 
+
+
+    endpoint - the endpoint for this transaction 
+    buffer - buffer for data to send or receive 
+    offset - the index of the first byte in the buffer to send or receive 
+    length - the length of the data to send or receive 
+    timeout - in milliseconds 
+
+    Returns: length of data transferred (or zero) for success, or negative value for failure 
+
+*android.hardware.usb.UsbDeviceConnection.claimInterface(UsbInterface,boolean)*
+
+public boolean claimInterface(
+  android.hardware.usb.UsbInterface intf,
+  boolean force)
+
+Claims exclusive access to a (|android.hardware.usb.UsbInterface|) . This must 
+be done before sending or receiving data on any 
+(|android.hardware.usb.UsbEndpoint|) s belonging to the interface. 
+
+
+    intf - the interface to claim 
+    force - true to disconnect kernel driver if necessary 
+
+    Returns: true if the interface was successfully claimed 
+
+*android.hardware.usb.UsbDeviceConnection.close()*
+
+public void close()
+
+Releases all system resources related to the device. Once the object is closed 
+it cannot be used again. The client must call 
+(|android.hardware.usb.UsbManager|) again to retrieve a new instance to 
+reestablish communication with the device. 
+
+
+
+*android.hardware.usb.UsbDeviceConnection.controlTransfer(int,int,int,int,byte[],int,int)*
+
+public int controlTransfer(
+  int requestType,
+  int request,
+  int value,
+  int index,
+  byte[] buffer,
+  int length,
+  int timeout)
+
+Performs a control transaction on endpoint zero for this device. The direction 
+of the transfer is determined by the request type. If requestType & 
+(|android.hardware.usb.UsbConstants|) is (|android.hardware.usb.UsbConstants|) 
+, then the transfer is a write, and if it is 
+(|android.hardware.usb.UsbConstants|) , then the transfer is a read. 
+
+This method transfers data starting from index 0 in the buffer. To specify a 
+different offset, use (|android.hardware.usb.UsbDeviceConnection|) . 
+
+
+    requestType - request type for this transaction 
+    request - request ID for this transaction 
+    value - value field for this transaction 
+    index - index field for this transaction 
+    buffer - buffer for data portion of transaction, or null if no data needs to be sent or 
+       received 
+    length - the length of the data to send or receive 
+    timeout - in milliseconds 
+
+    Returns: length of data transferred (or zero) for success, or negative value for failure 
+
+*android.hardware.usb.UsbDeviceConnection.controlTransfer(int,int,int,int,byte[],int,int,int)*
+
+public int controlTransfer(
+  int requestType,
+  int request,
+  int value,
+  int index,
+  byte[] buffer,
+  int offset,
+  int length,
+  int timeout)
+
+Performs a control transaction on endpoint zero for this device. The direction 
+of the transfer is determined by the request type. If requestType & 
+(|android.hardware.usb.UsbConstants|) is (|android.hardware.usb.UsbConstants|) 
+, then the transfer is a write, and if it is 
+(|android.hardware.usb.UsbConstants|) , then the transfer is a read. 
+
+
+    requestType - request type for this transaction 
+    request - request ID for this transaction 
+    value - value field for this transaction 
+    index - index field for this transaction 
+    buffer - buffer for data portion of transaction, or null if no data needs to be sent or 
+       received 
+    offset - the index of the first byte in the buffer to send or receive 
+    length - the length of the data to send or receive 
+    timeout - in milliseconds 
+
+    Returns: length of data transferred (or zero) for success, or negative value for failure 
+
+*android.hardware.usb.UsbDeviceConnection.getFileDescriptor()*
+
+public int getFileDescriptor()
+
+Returns the native file descriptor for the device, or -1 if the device is not 
+opened. This is intended for passing to native code to access the device. 
+
+
+
+    Returns: the native file descriptor 
+
+*android.hardware.usb.UsbDeviceConnection.getRawDescriptors()*
+
+public byte[] getRawDescriptors()
+
+Returns the raw USB descriptors for the device. This can be used to access 
+descriptors not supported directly via the higher level APIs. 
+
+
+
+    Returns: raw USB descriptors 
+
+*android.hardware.usb.UsbDeviceConnection.getSerial()*
+
+public |java.lang.String| getSerial()
+
+Returns the serial number for the device. This will return null if the device 
+has not been opened. 
+
+
+
+    Returns: the device serial number 
+
+*android.hardware.usb.UsbDeviceConnection.releaseInterface(UsbInterface)*
+
+public boolean releaseInterface(android.hardware.usb.UsbInterface intf)
+
+Releases exclusive access to a (|android.hardware.usb.UsbInterface|) . 
+
+
+
+    Returns: true if the interface was successfully released 
+
+*android.hardware.usb.UsbDeviceConnection.requestWait()*
+
+public |android.hardware.usb.UsbRequest| requestWait()
+
+Waits for the result of a (|android.hardware.usb.UsbRequest|) operation Note 
+that this may return requests queued on multiple 
+(|android.hardware.usb.UsbEndpoint|) s. When multiple endpoints are in use, 
+(|android.hardware.usb.UsbRequest|) and (|android.hardware.usb.UsbRequest|) can 
+be useful in determining how to process the result of this function. 
+
+
+
+    Returns: a completed USB request, or null if an error occurred 
+
+

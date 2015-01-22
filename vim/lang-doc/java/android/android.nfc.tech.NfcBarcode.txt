@@ -1,0 +1,118 @@
+*android.nfc.tech.NfcBarcode* *NfcBarcode* Provides access to tags containing ju
+
+public final class NfcBarcode
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NfcBarcode_Description|
+|android.nfc.tech.NfcBarcode_Fields|
+|android.nfc.tech.NfcBarcode_Constructors|
+|android.nfc.tech.NfcBarcode_Methods|
+
+================================================================================
+
+*android.nfc.tech.NfcBarcode_Fields*
+|java.lang.String_android.nfc.tech.NfcBarcode.EXTRA_BARCODE_TYPE|
+|int_android.nfc.tech.NfcBarcode.TYPE_KOVIO|
+|int_android.nfc.tech.NfcBarcode.TYPE_UNKNOWN|
+
+*android.nfc.tech.NfcBarcode_Constructors*
+|android.nfc.tech.NfcBarcode(Tag)|Internal constructor, to be used by NfcAdapte
+
+*android.nfc.tech.NfcBarcode_Methods*
+|android.nfc.tech.NfcBarcode.get(Tag)|Get an instance ofNfcBarcodefor the given
+|android.nfc.tech.NfcBarcode.getBarcode()|Returns the barcode of an NfcBarcode 
+|android.nfc.tech.NfcBarcode.getType()|Returns the NFC Barcode tag type.
+
+*android.nfc.tech.NfcBarcode_Description*
+
+Provides access to tags containing just a barcode. 
+
+Acquire an (|android.nfc.tech.NfcBarcode|) object using 
+(|android.nfc.tech.NfcBarcode|) . 
+
+
+
+*java.lang.String_android.nfc.tech.NfcBarcode.EXTRA_BARCODE_TYPE*
+
+
+
+
+*int_android.nfc.tech.NfcBarcode.TYPE_KOVIO*
+
+Kovio Tags 
+
+
+*int_android.nfc.tech.NfcBarcode.TYPE_UNKNOWN*
+
+
+
+
+
+*android.nfc.tech.NfcBarcode(Tag)*
+
+public NfcBarcode(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+Internal constructor, to be used by NfcAdapter 
+
+
+*android.nfc.tech.NfcBarcode.get(Tag)*
+
+public static |android.nfc.tech.NfcBarcode| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NfcBarcode|) for the given tag. 
+
+Returns null if (|android.nfc.tech.NfcBarcode|) was not enumerated in 
+(|android.nfc.Tag|) . 
+
+Does not cause any RF activity and does not block. 
+
+
+    tag - an NfcBarcode compatible tag 
+
+    Returns: NfcBarcode object 
+
+*android.nfc.tech.NfcBarcode.getBarcode()*
+
+public byte[] getBarcode()
+
+Returns the barcode of an NfcBarcode tag. 
+
+Tags of (|android.nfc.tech.NfcBarcode|) return 16 bytes: 
+
+The first byte is 0x80 ORd with a manufacturer ID, corresponding to ISO/IEC 
+7816-6. The second byte describes the payload data format. Defined data format 
+types include the following: 0x00: Reserved for manufacturer assignment 0x01: 
+96-bit URL with "http://www." prefix 0x02: 96-bit URL with "https://www." 
+prefix 0x03: 96-bit URL with "http://" prefix 0x04: 96-bit URL with "https://" 
+prefix 0x05: 96-bit GS1 EPC 0x06-0xFF: reserved 
+
+The following 12 bytes are payload: In case of a URL payload, the payload is 
+encoded in US-ASCII, following the limitations defined in RFC3987. (|null|) In 
+case of GS1 EPC data, see GS1 Electronic Product Code (EPC) Tag Data Standard 
+(TDS) for more details. 
+
+The last 2 bytes comprise the CRC. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: a byte array containing the barcode 
+
+*android.nfc.tech.NfcBarcode.getType()*
+
+public int getType()
+
+Returns the NFC Barcode tag type. 
+
+Currently only one of (|android.nfc.tech.NfcBarcode|) or 
+(|android.nfc.tech.NfcBarcode|) . 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: the NFC Barcode tag type 
+
+

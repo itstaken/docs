@@ -1,0 +1,271 @@
+*android.widget.ActivityChooserModel* *ActivityChooserModel* 
+ This class repres
+
+public class ActivityChooserModel
+  extends    |android.database.DataSetObservable|
+
+|android.widget.ActivityChooserModel_Description|
+|android.widget.ActivityChooserModel_Fields|
+|android.widget.ActivityChooserModel_Constructors|
+|android.widget.ActivityChooserModel_Methods|
+
+================================================================================
+
+*android.widget.ActivityChooserModel_Fields*
+|java.lang.String_android.widget.ActivityChooserModel.DEFAULT_HISTORY_FILE_NAME|
+|int_android.widget.ActivityChooserModel.DEFAULT_HISTORY_MAX_LENGTH|
+
+*android.widget.ActivityChooserModel_Methods*
+|android.widget.ActivityChooserModel.chooseActivity(int)|Chooses a activity to 
+|android.widget.ActivityChooserModel.finalize()|
+|android.widget.ActivityChooserModel.get(Context,String)|Gets the data model ba
+|android.widget.ActivityChooserModel.getActivity(int)|Gets an activity at a giv
+|android.widget.ActivityChooserModel.getActivityCount()|Gets the number of acti
+|android.widget.ActivityChooserModel.getActivityIndex(ResolveInfo)|Gets the ind
+|android.widget.ActivityChooserModel.getDefaultActivity()|Gets the default acti
+|android.widget.ActivityChooserModel.getHistoryMaxSize()|Gets the history max s
+|android.widget.ActivityChooserModel.getHistorySize()|Gets the history size.
+|android.widget.ActivityChooserModel.getIntent()|Gets the intent for which a ac
+|android.widget.ActivityChooserModel.setActivitySorter(ActivityChooserModel.ActivitySorter)|
+|android.widget.ActivityChooserModel.setDefaultActivity(int)|Sets the default a
+|android.widget.ActivityChooserModel.setHistoryMaxSize(int)|Sets the maximal si
+|android.widget.ActivityChooserModel.setIntent(Intent)|Sets an intent for which
+|android.widget.ActivityChooserModel.setOnChooseActivityListener(ActivityChooserModel.OnChooseActivityListener)|
+
+*android.widget.ActivityChooserModel_Description*
+
+This class represents a data model for choosing a component for handing a given 
+(|android.content.Intent|) . The model is responsible for querying the system 
+for activities that can handle the given intent and order found activities 
+based on historical data of previous choices. The historical data is stored in 
+an application private file. If a client does not want to have persistent 
+choice history the file can be omitted, thus the activities will be ordered 
+based on historical usage for the current session. 
+
+For each backing history file there is a singleton instance of this class. 
+Thus, several clients that specify the same history file will share the same 
+model. Note that if multiple clients are sharing the same model they should 
+implement semantically equivalent functionality since setting the model intent 
+will change the found activities and they may be inconsistent with the 
+functionality of some of the clients. For example, choosing a share activity 
+can be implemented by a single backing model and two different views for 
+performing the selection. If however, one of the views is used for sharing but 
+the other for importing, for example, then each view should be backed by a 
+separate model. 
+
+The way clients interact with this class is as follows: 
+
+
+
+// Get a model and set it to a couple of clients with semantically similar 
+function. ActivityChooserModel dataModel = ActivityChooserModel.get(context, 
+"task_specific_history_file_name.xml"); 
+
+ActivityChooserModelClient modelClient1 = getActivityChooserModelClient1(); 
+modelClient1.setActivityChooserModel(dataModel); 
+
+ActivityChooserModelClient modelClient2 = getActivityChooserModelClient2(); 
+modelClient2.setActivityChooserModel(dataModel); 
+
+// Set an intent to choose a an activity for. dataModel.setIntent(intent); 
+
+
+
+Note: This class is thread safe. 
+
+
+
+*java.lang.String_android.widget.ActivityChooserModel.DEFAULT_HISTORY_FILE_NAME*
+
+The default name of the choice history file. 
+
+
+*int_android.widget.ActivityChooserModel.DEFAULT_HISTORY_MAX_LENGTH*
+
+The default maximal length of the choice history. 
+
+
+
+*android.widget.ActivityChooserModel.chooseActivity(int)*
+
+public |android.content.Intent| chooseActivity(int index)
+
+Chooses a activity to handle the current intent. This will result in adding a 
+historical record for that action and construct intent with its component name 
+set such that it can be immediately started by the client. 
+
+Note: By calling this method the client guarantees that the returned intent 
+will be started. This intent is returned to the client solely to let additional 
+customization before the start. 
+
+
+
+    Returns: An {@link Intent} for launching the activity or null if the policy has consumed 
+             the intent or there is not current intent set via {@link 
+             #setIntent(Intent)}. 
+
+*android.widget.ActivityChooserModel.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.widget.ActivityChooserModel.get(Context,String)*
+
+public static |android.widget.ActivityChooserModel| get(
+  android.content.Context context,
+  java.lang.String historyFileName)
+
+Gets the data model backed by the contents of the provided file with historical 
+data. Note that only one data model is backed by a given file, thus multiple 
+calls with the same file name will return the same model instance. If no such 
+instance is present it is created. 
+
+Note: To use the default historical data file clients should explicitly pass as 
+file name (|android.widget.ActivityChooserModel|) . If no persistence of the 
+choice history is desired clients should pass null for the file name. In such 
+case a new model is returned for each invocation. 
+
+Always use difference historical data files for semantically different actions. 
+For example, sharing is different from importing. 
+
+
+    context - Context for loading resources. 
+    historyFileName - File name with choice history, null if the model should not be backed by a 
+       file. In this case the activities will be ordered only by data from the 
+       current session. 
+
+    Returns: 
+
+*android.widget.ActivityChooserModel.getActivity(int)*
+
+public |android.content.pm.ResolveInfo| getActivity(int index)
+
+Gets an activity at a given index. 
+
+
+
+    Returns: The activity. 
+
+*android.widget.ActivityChooserModel.getActivityCount()*
+
+public int getActivityCount()
+
+Gets the number of activities that can handle the intent. 
+
+
+
+    Returns: The activity count. 
+
+*android.widget.ActivityChooserModel.getActivityIndex(ResolveInfo)*
+
+public int getActivityIndex(android.content.pm.ResolveInfo activity)
+
+Gets the index of a the given activity. 
+
+
+    activity - The activity index. 
+
+    Returns: The index if found, -1 otherwise. 
+
+*android.widget.ActivityChooserModel.getDefaultActivity()*
+
+public |android.content.pm.ResolveInfo| getDefaultActivity()
+
+Gets the default activity, The default activity is defined as the one with 
+highest rank i.e. the first one in the list of activities that can handle the 
+intent. 
+
+
+
+    Returns: The default activity, null id not activities. 
+
+*android.widget.ActivityChooserModel.getHistoryMaxSize()*
+
+public int getHistoryMaxSize()
+
+Gets the history max size. 
+
+
+
+    Returns: The history max size. 
+
+*android.widget.ActivityChooserModel.getHistorySize()*
+
+public int getHistorySize()
+
+Gets the history size. 
+
+
+
+    Returns: The history size. 
+
+*android.widget.ActivityChooserModel.getIntent()*
+
+public |android.content.Intent| getIntent()
+
+Gets the intent for which a activity is being chosen. 
+
+
+
+    Returns: 
+
+*android.widget.ActivityChooserModel.setActivitySorter(ActivityChooserModel.ActivitySorter)*
+
+public void setActivitySorter(android.widget.ActivityChooserModel.ActivitySorter activitySorter)
+
+Sets the sorter for ordering activities based on historical data and an intent. 
+
+
+    activitySorter - The sorter. 
+
+*android.widget.ActivityChooserModel.setDefaultActivity(int)*
+
+public void setDefaultActivity(int index)
+
+Sets the default activity. The default activity is set by adding a historical 
+record with weight high enough that this activity will become the highest 
+ranked. Such a strategy guarantees that the default will eventually change if 
+not used. Also the weight of the record for setting a default is inflated with 
+a constant amount to guarantee that it will stay as default for awhile. 
+
+
+    index - The index of the activity to set as default. 
+
+*android.widget.ActivityChooserModel.setHistoryMaxSize(int)*
+
+public void setHistoryMaxSize(int historyMaxSize)
+
+Sets the maximal size of the historical data. Defaults to 
+(|android.widget.ActivityChooserModel|) Note: Setting this property will 
+immediately enforce the specified max history size by dropping enough old 
+historical records to enforce the desired size. Thus, any records that exceed 
+the history size will be discarded and irreversibly lost. 
+
+
+    historyMaxSize - The max history size. 
+
+*android.widget.ActivityChooserModel.setIntent(Intent)*
+
+public void setIntent(android.content.Intent intent)
+
+Sets an intent for which to choose a activity. 
+
+Note: Clients must set only semantically similar intents for each data model. 
+
+
+    intent - The intent. 
+
+*android.widget.ActivityChooserModel.setOnChooseActivityListener(ActivityChooserModel.OnChooseActivityListener)*
+
+public void setOnChooseActivityListener(android.widget.ActivityChooserModel.OnChooseActivityListener listener)
+
+Sets the listener for choosing an activity. 
+
+
+    listener - The listener. 
+
+

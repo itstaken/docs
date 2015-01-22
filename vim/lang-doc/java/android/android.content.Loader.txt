@@ -1,0 +1,479 @@
+*android.content.Loader* *Loader* An abstract class that performs asynchronous l
+
+public class Loader<D>
+  extends    |java.lang.Object|
+
+|android.content.Loader_Description|
+|android.content.Loader_Fields|
+|android.content.Loader_Constructors|
+|android.content.Loader_Methods|
+
+================================================================================
+
+*android.content.Loader_Constructors*
+|android.content.Loader(Context)|Stores away the application context associated
+
+*android.content.Loader_Methods*
+|android.content.Loader.abandon()|This function will normally be called for you
+|android.content.Loader.cancelLoad()|Attempt to cancel the current load task.
+|android.content.Loader.commitContentChanged()|Commit that you have actually fu
+|android.content.Loader.dataToString(D)|For debugging, converts an instance of 
+|android.content.Loader.deliverCancellation()|Informs the registeredOnLoadCance
+|android.content.Loader.deliverResult(D)|Sends the result of the load to the re
+|android.content.Loader.dump(String,FileDescriptor,PrintWriter,String[])|Print 
+|android.content.Loader.forceLoad()|Force an asynchronous load.
+|android.content.Loader.getContext()|
+|android.content.Loader.getId()|
+|android.content.Loader.isAbandoned()|Return whether this loader has been aband
+|android.content.Loader.isReset()|Return whether this load has been reset.
+|android.content.Loader.isStarted()|Return whether this load has been started.
+|android.content.Loader.onAbandon()|Subclasses implement this to take care of b
+|android.content.Loader.onCancelLoad()|Subclasses must implement this to take c
+|android.content.Loader.onContentChanged()|Called whenForceLoadContentObserverd
+|android.content.Loader.onForceLoad()|Subclasses must implement this to take ca
+|android.content.Loader.onReset()|Subclasses must implement this to take care o
+|android.content.Loader.onStartLoading()|Subclasses must implement this to take
+|android.content.Loader.onStopLoading()|Subclasses must implement this to take 
+|android.content.Loader.registerListener(int,Loader.OnLoadCompleteListener<D>)|
+|android.content.Loader.registerOnLoadCanceledListener(Loader.OnLoadCanceledListener<D>)|
+|android.content.Loader.reset()|This function will normally be called for you a
+|android.content.Loader.rollbackContentChanged()|Report that you have abandoned
+|android.content.Loader.startLoading()|This function will normally be called fo
+|android.content.Loader.stopLoading()|This function will normally be called for
+|android.content.Loader.takeContentChanged()|Take the current flag indicating w
+|android.content.Loader.toString()|
+|android.content.Loader.unregisterListener(Loader.OnLoadCompleteListener<D>)|Re
+|android.content.Loader.unregisterOnLoadCanceledListener(Loader.OnLoadCanceledListener<D>)|
+
+*android.content.Loader_Description*
+
+An abstract class that performs asynchronous loading of data. While Loaders are 
+active they should monitor the source of their data and deliver new results 
+when the contents change. See (|android.app.LoaderManager|) for more detail. 
+
+Note on threading: Clients of loaders should as a rule perform any calls on to 
+a Loader from the main thread of their process (that is, the thread the 
+Activity callbacks and other things occur on). Subclasses of Loader (such as 
+(|android.content.AsyncTaskLoader|) ) will often perform their work in a 
+separate thread, but when delivering their results this too should be done on 
+the main thread. 
+
+Subclasses generally must implement at least (|android.content.Loader|) , 
+(|android.content.Loader|) , (|android.content.Loader|) , and 
+(|android.content.Loader|) . 
+
+Most implementations should not derive directly from this class, but instead 
+inherit from (|android.content.AsyncTaskLoader|) . 
+
+Developer Guides For more information about using loaders, read the <a 
+href="guide/topics/fundamentals/loaders.html">Loaders developer guide. 
+
+
+
+*android.content.Loader(Context)*
+
+public Loader(android.content.Context context)
+
+Stores away the application context associated with context. Since Loaders can 
+be used across multiple activities it's dangerous to store the context 
+directly; always use (|android.content.Loader|) to retrieve the Loader's 
+Context, don't use the constructor argument directly. The Context returned by 
+(|android.content.Loader|) is safe to use across Activity instances. 
+
+    context - used to retrieve the application context. 
+
+*android.content.Loader.abandon()*
+
+public void abandon()
+
+This function will normally be called for you automatically by 
+(|android.app.LoaderManager|) when restarting a Loader. When using a Loader 
+with (|android.app.LoaderManager|) , you must not call this method yourself, or 
+you will conflict with its management of the Loader. 
+
+Tell the Loader that it is being abandoned. This is called prior to 
+(|android.content.Loader|) to have it retain its current data but not report 
+any new data. 
+
+
+
+*android.content.Loader.cancelLoad()*
+
+public boolean cancelLoad()
+
+Attempt to cancel the current load task. Must be called on the main thread of 
+the process. 
+
+Cancellation is not an immediate operation, since the load is performed in a 
+background thread. If there is currently a load in progress, this method 
+requests that the load be canceled, and notes this is the case; once the 
+background thread has completed its work its remaining state will be cleared. 
+If another load request comes in during this time, it will be held until the 
+canceled load is complete. 
+
+
+
+    Returns: Returns false if the task could not be canceled, typically because it has 
+             already completed normally, or because {@link #startLoading()} 
+             hasn't been called; returns true otherwise. When true is returned, 
+             the task is still running and the {@link OnLoadCanceledListener} 
+             will be called when the task completes. 
+
+*android.content.Loader.commitContentChanged()*
+
+public void commitContentChanged()
+
+Commit that you have actually fully processed a content change that was 
+returned by (|android.content.Loader|) . This is for use with 
+(|android.content.Loader|) to handle situations where a load is cancelled. Call 
+this when you have completely processed a load without it being cancelled. 
+
+
+
+*android.content.Loader.dataToString(D)*
+
+public |java.lang.String| dataToString(D data)
+
+For debugging, converts an instance of the Loader's data class to a string that 
+can be printed. Must handle a null data. 
+
+
+
+*android.content.Loader.deliverCancellation()*
+
+public void deliverCancellation()
+
+Informs the registered (|android.content.Loader.OnLoadCanceledListener|) that 
+the load has been canceled. Should only be called by subclasses. 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.deliverResult(D)*
+
+public void deliverResult(D data)
+
+Sends the result of the load to the registered listener. Should only be called 
+by subclasses. 
+
+Must be called from the process's main thread. 
+
+
+    data - the result of the load 
+
+*android.content.Loader.dump(String,FileDescriptor,PrintWriter,String[])*
+
+public void dump(
+  java.lang.String prefix,
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+Print the Loader's state into the given stream. 
+
+
+    prefix - Text to print at the front of each line. 
+    fd - The raw file descriptor that the dump is being sent to. 
+    writer - A PrintWriter to which the dump is to be set. 
+    args - Additional arguments to the dump request. 
+
+*android.content.Loader.forceLoad()*
+
+public void forceLoad()
+
+Force an asynchronous load. Unlike (|android.content.Loader|) this will ignore 
+a previously loaded data set and load a new one. This simply calls through to 
+the implementation's (|android.content.Loader|) . You generally should only 
+call this when the loader is started -- that is, (|android.content.Loader|) 
+returns true. 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.getContext()*
+
+public |android.content.Context| getContext()
+
+
+
+
+
+    Returns: an application context retrieved from the Context passed to the constructor. 
+
+*android.content.Loader.getId()*
+
+public int getId()
+
+
+
+
+
+    Returns: the ID of this loader 
+
+*android.content.Loader.isAbandoned()*
+
+public boolean isAbandoned()
+
+Return whether this loader has been abandoned. In this state, the loader must 
+not report any new data, and must keep its last reported data valid until it is 
+finally reset. 
+
+
+
+*android.content.Loader.isReset()*
+
+public boolean isReset()
+
+Return whether this load has been reset. That is, either the loader has not yet 
+been started for the first time, or its (|android.content.Loader|) has been 
+called. 
+
+
+
+*android.content.Loader.isStarted()*
+
+public boolean isStarted()
+
+Return whether this load has been started. That is, its 
+(|android.content.Loader|) has been called and no calls to 
+(|android.content.Loader|) or (|android.content.Loader|) have yet been made. 
+
+
+
+*android.content.Loader.onAbandon()*
+
+protected void onAbandon()
+
+Subclasses implement this to take care of being abandoned. This is an optional 
+intermediate state prior to (|android.content.Loader|) -- it means that the 
+client is no longer interested in any new data from the loader, so the loader 
+must not report any further updates. However, the loader must keep its last 
+reported data valid until the final (|android.content.Loader|) happens. You can 
+retrieve the current abandoned state with (|android.content.Loader|) . 
+
+
+
+*android.content.Loader.onCancelLoad()*
+
+protected boolean onCancelLoad()
+
+Subclasses must implement this to take care of requests to 
+(|android.content.Loader|) . This will always be called from the process's main 
+thread. 
+
+
+
+    Returns: Returns false if the task could not be canceled, typically because it has 
+             already completed normally, or because {@link #startLoading()} 
+             hasn't been called; returns true otherwise. When true is returned, 
+             the task is still running and the {@link OnLoadCanceledListener} 
+             will be called when the task completes. 
+
+*android.content.Loader.onContentChanged()*
+
+public void onContentChanged()
+
+Called when (|android.content.Loader.ForceLoadContentObserver|) detects a 
+change. The default implementation checks to see if the loader is currently 
+started; if so, it simply calls (|android.content.Loader|) ; otherwise, it sets 
+a flag so that (|android.content.Loader|) returns true. 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.onForceLoad()*
+
+protected void onForceLoad()
+
+Subclasses must implement this to take care of requests to 
+(|android.content.Loader|) . This will always be called from the process's main 
+thread. 
+
+
+
+*android.content.Loader.onReset()*
+
+protected void onReset()
+
+Subclasses must implement this to take care of resetting their loader, as per 
+(|android.content.Loader|) . This is not called by clients directly, but as a 
+result of a call to (|android.content.Loader|) . This will always be called 
+from the process's main thread. 
+
+
+
+*android.content.Loader.onStartLoading()*
+
+protected void onStartLoading()
+
+Subclasses must implement this to take care of loading their data, as per 
+(|android.content.Loader|) . This is not called by clients directly, but as a 
+result of a call to (|android.content.Loader|) . 
+
+
+
+*android.content.Loader.onStopLoading()*
+
+protected void onStopLoading()
+
+Subclasses must implement this to take care of stopping their loader, as per 
+(|android.content.Loader|) . This is not called by clients directly, but as a 
+result of a call to (|android.content.Loader|) . This will always be called 
+from the process's main thread. 
+
+
+
+*android.content.Loader.registerListener(int,Loader.OnLoadCompleteListener<D>)*
+
+public void registerListener(
+  int id,
+  android.content.Loader.OnLoadCompleteListener<D> listener)
+
+Registers a class that will receive callbacks when a load is complete. The 
+callback will be called on the process's main thread so it's safe to pass the 
+results to widgets. 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.registerOnLoadCanceledListener(Loader.OnLoadCanceledListener<D>)*
+
+public void registerOnLoadCanceledListener(android.content.Loader.OnLoadCanceledListener<D> listener)
+
+Registers a listener that will receive callbacks when a load is canceled. The 
+callback will be called on the process's main thread so it's safe to pass the 
+results to widgets. 
+
+Must be called from the process's main thread. 
+
+
+    listener - The listener to register. 
+
+*android.content.Loader.reset()*
+
+public void reset()
+
+This function will normally be called for you automatically by 
+(|android.app.LoaderManager|) when destroying a Loader. When using a Loader 
+with (|android.app.LoaderManager|) , you must not call this method yourself, or 
+you will conflict with its management of the Loader. 
+
+Resets the state of the Loader. The Loader should at this point free all of its 
+resources, since it may never be called again; however, its 
+(|android.content.Loader|) may later be called at which point it must be able 
+to start running again. 
+
+This updates the Loader's internal state so that (|android.content.Loader|) and 
+(|android.content.Loader|) will return the correct values, and then calls the 
+implementation's (|android.content.Loader|) . 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.rollbackContentChanged()*
+
+public void rollbackContentChanged()
+
+Report that you have abandoned the processing of a content change that was 
+returned by (|android.content.Loader|) and would like to rollback to the state 
+where there is again a pending content change. This is to handle the case where 
+a data load due to a content change has been canceled before its data was 
+delivered back to the loader. 
+
+
+
+*android.content.Loader.startLoading()*
+
+public final void startLoading()
+
+This function will normally be called for you automatically by 
+(|android.app.LoaderManager|) when the associated fragment/activity is being 
+started. When using a Loader with (|android.app.LoaderManager|) , you must not 
+call this method yourself, or you will conflict with its management of the 
+Loader. 
+
+Starts an asynchronous load of the Loader's data. When the result is ready the 
+callbacks will be called on the process's main thread. If a previous load has 
+been completed and is still valid the result may be passed to the callbacks 
+immediately. The loader will monitor the source of the data set and may deliver 
+future callbacks if the source changes. Calling (|android.content.Loader|) will 
+stop the delivery of callbacks. 
+
+This updates the Loader's internal state so that (|android.content.Loader|) and 
+(|android.content.Loader|) will return the correct values, and then calls the 
+implementation's (|android.content.Loader|) . 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.stopLoading()*
+
+public void stopLoading()
+
+This function will normally be called for you automatically by 
+(|android.app.LoaderManager|) when the associated fragment/activity is being 
+stopped. When using a Loader with (|android.app.LoaderManager|) , you must not 
+call this method yourself, or you will conflict with its management of the 
+Loader. 
+
+Stops delivery of updates until the next time (|android.content.Loader|) is 
+called. Implementations should not invalidate their data at this point -- 
+clients are still free to use the last data the loader reported. They will, 
+however, typically stop reporting new data if the data changes; they can still 
+monitor for changes, but must not report them to the client until and if 
+(|android.content.Loader|) is later called. 
+
+This updates the Loader's internal state so that (|android.content.Loader|) 
+will return the correct value, and then calls the implementation's 
+(|android.content.Loader|) . 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.takeContentChanged()*
+
+public boolean takeContentChanged()
+
+Take the current flag indicating whether the loader's content had changed while 
+it was stopped. If it had, true is returned and the flag is cleared. 
+
+
+
+*android.content.Loader.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.Loader.unregisterListener(Loader.OnLoadCompleteListener<D>)*
+
+public void unregisterListener(android.content.Loader.OnLoadCompleteListener<D> listener)
+
+Remove a listener that was previously added with (|android.content.Loader|) . 
+
+Must be called from the process's main thread. 
+
+
+
+*android.content.Loader.unregisterOnLoadCanceledListener(Loader.OnLoadCanceledListener<D>)*
+
+public void unregisterOnLoadCanceledListener(android.content.Loader.OnLoadCanceledListener<D> listener)
+
+Unregisters a listener that was previously added with 
+(|android.content.Loader|) . 
+
+Must be called from the process's main thread. 
+
+
+    listener - The listener to unregister. 
+
+

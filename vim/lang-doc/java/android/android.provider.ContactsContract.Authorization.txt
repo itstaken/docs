@@ -1,0 +1,73 @@
+*android.provider.ContactsContract.Authorization* *ContactsContract.Authorization* 
+
+public static final class ContactsContract.Authorization
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.Authorization_Description|
+|android.provider.ContactsContract.Authorization_Fields|
+|android.provider.ContactsContract.Authorization_Constructors|
+|android.provider.ContactsContract.Authorization_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Authorization_Fields*
+|java.lang.String_android.provider.ContactsContract.Authorization.AUTHORIZATION_METHOD|
+|java.lang.String_android.provider.ContactsContract.Authorization.KEY_AUTHORIZED_URI|
+|java.lang.String_android.provider.ContactsContract.Authorization.KEY_URI_TO_AUTHORIZE|
+
+*android.provider.ContactsContract.Authorization_Constructors*
+|android.provider.ContactsContract.Authorization()|
+
+*android.provider.ContactsContract.Authorization_Description*
+
+API for obtaining a pre-authorized version of a URI that normally requires 
+special permission (beyond READ_CONTACTS) to read. The caller obtaining the 
+pre-authorized URI must already have the necessary permissions to access the 
+URI; otherwise a (|java.lang.SecurityException|) will be thrown. 
+
+The authorized URI returned in the bundle contains an expiring token that 
+allows the caller to execute the query without having the special permissions 
+that would normally be required. 
+
+This API does not access disk, and should be safe to invoke from the UI thread. 
+
+Example usage: 
+
+Uri profileUri = ContactsContract.Profile.CONTENT_VCARD_URI; Bundle uriBundle = 
+new Bundle(); 
+uriBundle.putParcelable(ContactsContract.Authorization.KEY_URI_TO_AUTHORIZE, 
+uri); Bundle authResponse = getContext().getContentResolver().call( 
+ContactsContract.AUTHORITY_URI, 
+ContactsContract.Authorization.AUTHORIZATION_METHOD, null, // String arg, not 
+used. uriBundle); if (authResponse != null) { Uri preauthorizedProfileUri = 
+(Uri) authResponse.getParcelable( 
+ContactsContract.Authorization.KEY_AUTHORIZED_URI); // This pre-authorized URI 
+can be queried by a caller without READ_PROFILE // permission. } 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.Authorization.AUTHORIZATION_METHOD*
+
+The method to invoke to create a pre-authorized URI out of the input argument. 
+
+
+*java.lang.String_android.provider.ContactsContract.Authorization.KEY_AUTHORIZED_URI*
+
+The key to retrieve from the returned Bundle to obtain the pre-authorized URI. 
+
+
+*java.lang.String_android.provider.ContactsContract.Authorization.KEY_URI_TO_AUTHORIZE*
+
+The key to set in the outbound Bundle with the URI that should be authorized. 
+
+
+
+*android.provider.ContactsContract.Authorization()*
+
+public ContactsContract.Authorization()
+
+
+
+

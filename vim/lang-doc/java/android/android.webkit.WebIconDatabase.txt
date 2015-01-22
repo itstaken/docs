@@ -1,0 +1,125 @@
+*android.webkit.WebIconDatabase* *WebIconDatabase* Functions for manipulating th
+
+public class WebIconDatabase
+  extends    |java.lang.Object|
+
+|android.webkit.WebIconDatabase_Description|
+|android.webkit.WebIconDatabase_Fields|
+|android.webkit.WebIconDatabase_Constructors|
+|android.webkit.WebIconDatabase_Methods|
+
+================================================================================
+
+*android.webkit.WebIconDatabase_Constructors*
+|android.webkit.WebIconDatabase()|
+
+*android.webkit.WebIconDatabase_Methods*
+|android.webkit.WebIconDatabase.bulkRequestIconForPageUrl(ContentResolver,String,WebIconDatabase.IconListener)|
+|android.webkit.WebIconDatabase.close()|Close the shared instance of the icon d
+|android.webkit.WebIconDatabase.getInstance()|Get the global instance of WebIco
+|android.webkit.WebIconDatabase.open(String)|Open a the icon database and store
+|android.webkit.WebIconDatabase.releaseIconForPageUrl(String)|Release the icon 
+|android.webkit.WebIconDatabase.removeAllIcons()|Removes all the icons in the d
+|android.webkit.WebIconDatabase.requestIconForPageUrl(String,WebIconDatabase.IconListener)|
+|android.webkit.WebIconDatabase.retainIconForPageUrl(String)|Retain the icon fo
+
+*android.webkit.WebIconDatabase_Description*
+
+Functions for manipulating the icon database used by WebView. These functions 
+require that a WebView be constructed before being invoked and 
+WebView.getIconDatabase() will return a WebIconDatabase object. This 
+WebIconDatabase object is a single instance and all methods operate on that 
+single object. The main use-case for this class is calling 
+(|android.webkit.WebIconDatabase|) to enable favicon functionality on all 
+WebView instances in this process. 
+
+
+  Deprecated: This class is only required when running on devices
+             up to {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2}
+
+*android.webkit.WebIconDatabase()*
+
+protected WebIconDatabase()
+
+
+
+
+*android.webkit.WebIconDatabase.bulkRequestIconForPageUrl(ContentResolver,String,WebIconDatabase.IconListener)*
+
+public void bulkRequestIconForPageUrl(
+  android.content.ContentResolver cr,
+  java.lang.String where,
+  android.webkit.WebIconDatabase.IconListener listener)
+
+
+
+
+
+*android.webkit.WebIconDatabase.close()*
+
+public void close()
+
+Close the shared instance of the icon database. 
+
+
+
+*android.webkit.WebIconDatabase.getInstance()*
+
+public static |android.webkit.WebIconDatabase| getInstance()
+
+Get the global instance of WebIconDatabase. 
+
+
+
+    Returns: A single instance of WebIconDatabase. It will be the same instance for the 
+             current process each time this method is called. 
+
+*android.webkit.WebIconDatabase.open(String)*
+
+public void open(java.lang.String path)
+
+Open a the icon database and store the icons in the given path. 
+
+
+    path - The directory path where the icon database will be stored. 
+
+*android.webkit.WebIconDatabase.releaseIconForPageUrl(String)*
+
+public void releaseIconForPageUrl(java.lang.String url)
+
+Release the icon for the given page url. 
+
+
+    url - The page's url. 
+
+*android.webkit.WebIconDatabase.removeAllIcons()*
+
+public void removeAllIcons()
+
+Removes all the icons in the database. 
+
+
+
+*android.webkit.WebIconDatabase.requestIconForPageUrl(String,WebIconDatabase.IconListener)*
+
+public void requestIconForPageUrl(
+  java.lang.String url,
+  android.webkit.WebIconDatabase.IconListener listener)
+
+Request the Bitmap representing the icon for the given page url. If the icon 
+exists, the listener will be called with the result. 
+
+
+    url - The page's url. 
+    listener - An implementation on IconListener to receive the result. 
+
+*android.webkit.WebIconDatabase.retainIconForPageUrl(String)*
+
+public void retainIconForPageUrl(java.lang.String url)
+
+Retain the icon for the given page url. 
+
+
+    url - The page's url. 
+
+

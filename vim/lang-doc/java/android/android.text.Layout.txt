@@ -1,0 +1,690 @@
+*android.text.Layout* *Layout* A base class that manages text layout in visual e
+
+public abstract class Layout
+  extends    |java.lang.Object|
+
+|android.text.Layout_Description|
+|android.text.Layout_Fields|
+|android.text.Layout_Constructors|
+|android.text.Layout_Methods|
+
+================================================================================
+
+*android.text.Layout_Fields*
+|int_android.text.Layout.DIR_LEFT_TO_RIGHT|
+|int_android.text.Layout.DIR_RIGHT_TO_LEFT|
+
+*android.text.Layout_Constructors*
+|android.text.Layout(CharSequence,TextPaint,int,Layout.Alignment,float,float)|S
+|android.text.Layout(CharSequence,TextPaint,int,Layout.Alignment,TextDirectionHeuristic,float,float)|
+
+*android.text.Layout_Methods*
+|android.text.Layout.draw(Canvas)|Draw this Layout on the specified Canvas.
+|android.text.Layout.draw(Canvas,Path,Paint,int)|Draw this Layout on the specif
+|android.text.Layout.drawBackground(Canvas,Path,Paint,int,int,int)|
+|android.text.Layout.drawText(Canvas,int,int)|
+|android.text.Layout.getAlignment()|Return the base alignment of this layout.
+|android.text.Layout.getBottomPadding()|Returns the number of extra pixels of d
+|android.text.Layout.getCursorPath(int,Path,CharSequence)|Fills in the specifie
+|android.text.Layout.getDesiredWidth(CharSequence,int,int,TextPaint)|Return how
+|android.text.Layout.getDesiredWidth(CharSequence,TextPaint)|Return how wide a 
+|android.text.Layout.getEllipsisCount(int)|Returns the number of characters to 
+|android.text.Layout.getEllipsisStart(int)|Return the offset of the first chara
+|android.text.Layout.getEllipsizedWidth()|Return the width to which this Layout
+|android.text.Layout.getHeight()|Return the total height of this layout.
+|android.text.Layout.getLineAscent(int)|Get the ascent of the text on the speci
+|android.text.Layout.getLineBaseline(int)|Return the vertical position of the b
+|android.text.Layout.getLineBottom(int)|Return the vertical position of the bot
+|android.text.Layout.getLineBounds(int,Rect)|Return the baseline for the specif
+|android.text.Layout.getLineContainsTab(int)|Returns whether the specified line
+|android.text.Layout.getLineCount()|Return the number of lines of text in this 
+|android.text.Layout.getLineDescent(int)|Return the descent of the specified li
+|android.text.Layout.getLineDirections(int)|Returns the directional run informa
+|android.text.Layout.getLineEnd(int)|Return the text offset after the last char
+|android.text.Layout.getLineForOffset(int)|Get the line number on which the spe
+|android.text.Layout.getLineForVertical(int)|Get the line number corresponding 
+|android.text.Layout.getLineLeft(int)|Get the leftmost position that should be 
+|android.text.Layout.getLineMax(int)|Gets the unsigned horizontal extent of the
+|android.text.Layout.getLineRangeForDraw(Canvas)|
+|android.text.Layout.getLineRight(int)|Get the rightmost position that should b
+|android.text.Layout.getLineStart(int)|Return the text offset of the beginning 
+|android.text.Layout.getLineTop(int)|Return the vertical position of the top of
+|android.text.Layout.getLineVisibleEnd(int)|Return the text offset after the la
+|android.text.Layout.getLineWidth(int)|Gets the unsigned horizontal extent of t
+|android.text.Layout.getOffsetForHorizontal(int,float)|Get the character offset
+|android.text.Layout.getOffsetToLeftOf(int)|
+|android.text.Layout.getOffsetToRightOf(int)|
+|android.text.Layout.getPaint()|Return the base Paint properties for this layou
+|android.text.Layout.getParagraphAlignment(int)|Get the alignment of the specif
+|android.text.Layout.getParagraphDirection(int)|Returns the primary directional
+|android.text.Layout.getParagraphLeft(int)|Get the left edge of the specified p
+|android.text.Layout.getParagraphRight(int)|Get the right edge of the specified
+|android.text.Layout.getPrimaryHorizontal(int)|Get the primary horizontal posit
+|android.text.Layout.getPrimaryHorizontal(int,boolean)|Get the primary horizont
+|android.text.Layout.getSecondaryHorizontal(int)|Get the secondary horizontal p
+|android.text.Layout.getSecondaryHorizontal(int,boolean)|Get the secondary hori
+|android.text.Layout.getSelectionPath(int,int,Path)|Fills in the specified Path
+|android.text.Layout.getSpacingAdd()|Return the number of units of leading that
+|android.text.Layout.getSpacingMultiplier()|Return what the text height is mult
+|android.text.Layout.getText()|Return the text that is displayed by this Layout
+|android.text.Layout.getTextDirectionHeuristic()|Return the heuristic used to d
+|android.text.Layout.getTopPadding()|Returns the (negative) number of extra pix
+|android.text.Layout.getWidth()|Return the width of this layout.
+|android.text.Layout.increaseWidthTo(int)|Increase the width of this layout to 
+|android.text.Layout.isLevelBoundary(int)|Returns true if the character at offs
+|android.text.Layout.isRtlCharAt(int)|Returns true if the character at offset i
+|android.text.Layout.isSpanned()|
+|android.text.Layout.shouldClampCursor(int)|Determine whether we should clamp c
+
+*android.text.Layout_Description*
+
+A base class that manages text layout in visual elements on the screen. For 
+text that will be edited, use a (|android.text.DynamicLayout|) , which will be 
+updated as the text changes. For text that will not change, use a 
+(|android.text.StaticLayout|) . 
+
+
+
+*int_android.text.Layout.DIR_LEFT_TO_RIGHT*
+
+
+
+
+*int_android.text.Layout.DIR_RIGHT_TO_LEFT*
+
+
+
+
+
+*android.text.Layout(CharSequence,TextPaint,int,Layout.Alignment,float,float)*
+
+protected Layout(
+  java.lang.CharSequence text,
+  android.text.TextPaint paint,
+  int width,
+  android.text.Layout.Alignment align,
+  float spacingMult,
+  float spacingAdd)
+
+Subclasses of Layout use this constructor to set the display text, width, and 
+other standard properties. 
+
+    text - the text to render 
+    paint - the default paint for the layout. Styles can override various attributes of the 
+       paint. 
+    width - the wrapping width for the text. 
+    align - whether to left, right, or center the text. Styles can override the alignment. 
+    spacingMult - factor by which to scale the font size to get the default line spacing 
+    spacingAdd - amount to add to the default line spacing 
+
+*android.text.Layout(CharSequence,TextPaint,int,Layout.Alignment,TextDirectionHeuristic,float,float)*
+
+protected Layout(
+  java.lang.CharSequence text,
+  android.text.TextPaint paint,
+  int width,
+  android.text.Layout.Alignment align,
+  android.text.TextDirectionHeuristic textDir,
+  float spacingMult,
+  float spacingAdd)
+
+Subclasses of Layout use this constructor to set the display text, width, and 
+other standard properties. 
+
+    text - the text to render 
+    paint - the default paint for the layout. Styles can override various attributes of the 
+       paint. 
+    width - the wrapping width for the text. 
+    align - whether to left, right, or center the text. Styles can override the alignment. 
+    spacingMult - factor by which to scale the font size to get the default line spacing 
+    spacingAdd - amount to add to the default line spacing 
+
+*android.text.Layout.draw(Canvas)*
+
+public void draw(Canvas c)
+
+Draw this Layout on the specified Canvas. 
+
+
+
+*android.text.Layout.draw(Canvas,Path,Paint,int)*
+
+public void draw(
+  Canvas canvas,
+  Path highlight,
+  Paint highlightPaint,
+  int cursorOffsetVertical)
+
+Draw this Layout on the specified canvas, with the highlight path drawn between 
+the background and the text. 
+
+
+    canvas - the canvas 
+    highlight - the path of the highlight or cursor; can be null 
+    highlightPaint - the paint for the highlight 
+    cursorOffsetVertical - the amount to temporarily translate the canvas while rendering the highlight 
+
+*android.text.Layout.drawBackground(Canvas,Path,Paint,int,int,int)*
+
+public void drawBackground(
+  Canvas canvas,
+  Path highlight,
+  Paint highlightPaint,
+  int cursorOffsetVertical,
+  int firstLine,
+  int lastLine)
+
+
+
+
+
+*android.text.Layout.drawText(Canvas,int,int)*
+
+public void drawText(
+  Canvas canvas,
+  int firstLine,
+  int lastLine)
+
+
+
+
+
+*android.text.Layout.getAlignment()*
+
+public final |android.text.Layout.Alignment| getAlignment()
+
+Return the base alignment of this layout. 
+
+
+
+*android.text.Layout.getBottomPadding()*
+
+public abstract int getBottomPadding()
+
+Returns the number of extra pixels of descent padding in the bottom line of the 
+Layout. 
+
+
+
+*android.text.Layout.getCursorPath(int,Path,CharSequence)*
+
+public void getCursorPath(
+  int point,
+  Path dest,
+  java.lang.CharSequence editingBuffer)
+
+Fills in the specified Path with a representation of a cursor at the specified 
+offset. This will often be a vertical line but can be multiple discontinuous 
+lines in text with multiple directionalities. 
+
+
+
+*android.text.Layout.getDesiredWidth(CharSequence,int,int,TextPaint)*
+
+public static float getDesiredWidth(
+  java.lang.CharSequence source,
+  int start,
+  int end,
+  android.text.TextPaint paint)
+
+Return how wide a layout must be in order to display the specified text slice 
+with one line per paragraph. 
+
+
+
+*android.text.Layout.getDesiredWidth(CharSequence,TextPaint)*
+
+public static float getDesiredWidth(
+  java.lang.CharSequence source,
+  android.text.TextPaint paint)
+
+Return how wide a layout must be in order to display the specified text with 
+one line per paragraph. 
+
+
+
+*android.text.Layout.getEllipsisCount(int)*
+
+public abstract int getEllipsisCount(int line)
+
+Returns the number of characters to be ellipsized away, or 0 if no ellipsis is 
+to take place. 
+
+
+
+*android.text.Layout.getEllipsisStart(int)*
+
+public abstract int getEllipsisStart(int line)
+
+Return the offset of the first character to be ellipsized away, relative to the 
+start of the line. (So 0 if the beginning of the line is ellipsized, not 
+getLineStart().) 
+
+
+
+*android.text.Layout.getEllipsizedWidth()*
+
+public int getEllipsizedWidth()
+
+Return the width to which this Layout is ellipsizing, or 
+(|android.text.Layout|) if it is not doing anything special. 
+
+
+
+*android.text.Layout.getHeight()*
+
+public int getHeight()
+
+Return the total height of this layout. 
+
+
+
+*android.text.Layout.getLineAscent(int)*
+
+public final int getLineAscent(int line)
+
+Get the ascent of the text on the specified line. The return value is negative 
+to match the Paint.ascent() convention. 
+
+
+
+*android.text.Layout.getLineBaseline(int)*
+
+public final int getLineBaseline(int line)
+
+Return the vertical position of the baseline of the specified line. 
+
+
+
+*android.text.Layout.getLineBottom(int)*
+
+public final int getLineBottom(int line)
+
+Return the vertical position of the bottom of the specified line. 
+
+
+
+*android.text.Layout.getLineBounds(int,Rect)*
+
+public int getLineBounds(
+  int line,
+  Rect bounds)
+
+Return the baseline for the specified line (0getLineCount() - 1) If bounds is 
+not null, return the top, left, right, bottom extents of the specified line in 
+it. 
+
+
+    line - which line to examine (0..getLineCount() - 1) 
+    bounds - Optional. If not null, it returns the extent of the line 
+
+    Returns: the Y-coordinate of the baseline 
+
+*android.text.Layout.getLineContainsTab(int)*
+
+public abstract boolean getLineContainsTab(int line)
+
+Returns whether the specified line contains one or more characters that need to 
+be handled specially, like tabs or emoji. 
+
+
+
+*android.text.Layout.getLineCount()*
+
+public abstract int getLineCount()
+
+Return the number of lines of text in this layout. 
+
+
+
+*android.text.Layout.getLineDescent(int)*
+
+public abstract int getLineDescent(int line)
+
+Return the descent of the specified line(0getLineCount() - 1). 
+
+
+
+*android.text.Layout.getLineDirections(int)*
+
+public abstract |android.text.Layout.Directions| getLineDirections(int line)
+
+Returns the directional run information for the specified line. The array 
+alternates counts of characters in left-to-right and right-to-left segments of 
+the line. 
+
+NOTE: this is inadequate to support bidirectional text, and will change. 
+
+
+
+*android.text.Layout.getLineEnd(int)*
+
+public final int getLineEnd(int line)
+
+Return the text offset after the last character on the specified line. 
+
+
+
+*android.text.Layout.getLineForOffset(int)*
+
+public int getLineForOffset(int offset)
+
+Get the line number on which the specified text offset appears. If you ask for 
+a position before 0, you get 0; if you ask for a position beyond the end of the 
+text, you get the last line. 
+
+
+
+*android.text.Layout.getLineForVertical(int)*
+
+public int getLineForVertical(int vertical)
+
+Get the line number corresponding to the specified vertical position. If you 
+ask for a position above 0, you get 0; if you ask for a position below the 
+bottom of the text, you get the last line. 
+
+
+
+*android.text.Layout.getLineLeft(int)*
+
+public float getLineLeft(int line)
+
+Get the leftmost position that should be exposed for horizontal scrolling on 
+the specified line. 
+
+
+
+*android.text.Layout.getLineMax(int)*
+
+public float getLineMax(int line)
+
+Gets the unsigned horizontal extent of the specified line, including leading 
+margin indent, but excluding trailing whitespace. 
+
+
+
+*android.text.Layout.getLineRangeForDraw(Canvas)*
+
+public long getLineRangeForDraw(Canvas canvas)
+
+
+
+
+    canvas - 
+
+    Returns: The range of lines that need to be drawn, possibly empty. 
+
+*android.text.Layout.getLineRight(int)*
+
+public float getLineRight(int line)
+
+Get the rightmost position that should be exposed for horizontal scrolling on 
+the specified line. 
+
+
+
+*android.text.Layout.getLineStart(int)*
+
+public abstract int getLineStart(int line)
+
+Return the text offset of the beginning of the specified line ( 
+0getLineCount()). If the specified line is equal to the line count, returns the 
+length of the text. 
+
+
+
+*android.text.Layout.getLineTop(int)*
+
+public abstract int getLineTop(int line)
+
+Return the vertical position of the top of the specified line 
+(0getLineCount()). If the specified line is equal to the line count, returns 
+the bottom of the last line. 
+
+
+
+*android.text.Layout.getLineVisibleEnd(int)*
+
+public int getLineVisibleEnd(int line)
+
+Return the text offset after the last visible character (so whitespace is not 
+counted) on the specified line. 
+
+
+
+*android.text.Layout.getLineWidth(int)*
+
+public float getLineWidth(int line)
+
+Gets the unsigned horizontal extent of the specified line, including leading 
+margin indent and trailing whitespace. 
+
+
+
+*android.text.Layout.getOffsetForHorizontal(int,float)*
+
+public int getOffsetForHorizontal(
+  int line,
+  float horiz)
+
+Get the character offset on the specified line whose position is closest to the 
+specified horizontal position. 
+
+
+
+*android.text.Layout.getOffsetToLeftOf(int)*
+
+public int getOffsetToLeftOf(int offset)
+
+
+
+
+
+*android.text.Layout.getOffsetToRightOf(int)*
+
+public int getOffsetToRightOf(int offset)
+
+
+
+
+
+*android.text.Layout.getPaint()*
+
+public final |android.text.TextPaint| getPaint()
+
+Return the base Paint properties for this layout. Do NOT change the paint, 
+which may result in funny drawing for this layout. 
+
+
+
+*android.text.Layout.getParagraphAlignment(int)*
+
+public final |android.text.Layout.Alignment| getParagraphAlignment(int line)
+
+Get the alignment of the specified paragraph, taking into account markup 
+attached to it. 
+
+
+
+*android.text.Layout.getParagraphDirection(int)*
+
+public abstract int getParagraphDirection(int line)
+
+Returns the primary directionality of the paragraph containing the specified 
+line, either 1 for left-to-right lines, or -1 for right-to-left lines (see 
+(|android.text.Layout|) , (|android.text.Layout|) ). 
+
+
+
+*android.text.Layout.getParagraphLeft(int)*
+
+public final int getParagraphLeft(int line)
+
+Get the left edge of the specified paragraph, inset by left margins. 
+
+
+
+*android.text.Layout.getParagraphRight(int)*
+
+public final int getParagraphRight(int line)
+
+Get the right edge of the specified paragraph, inset by right margins. 
+
+
+
+*android.text.Layout.getPrimaryHorizontal(int)*
+
+public float getPrimaryHorizontal(int offset)
+
+Get the primary horizontal position for the specified text offset. This is the 
+location where a new character would be inserted in the paragraph's primary 
+direction. 
+
+
+
+*android.text.Layout.getPrimaryHorizontal(int,boolean)*
+
+public float getPrimaryHorizontal(
+  int offset,
+  boolean clamped)
+
+Get the primary horizontal position for the specified text offset, but 
+optionally clamp it so that it doesn't exceed the width of the layout. 
+
+
+
+*android.text.Layout.getSecondaryHorizontal(int)*
+
+public float getSecondaryHorizontal(int offset)
+
+Get the secondary horizontal position for the specified text offset. This is 
+the location where a new character would be inserted in the direction other 
+than the paragraph's primary direction. 
+
+
+
+*android.text.Layout.getSecondaryHorizontal(int,boolean)*
+
+public float getSecondaryHorizontal(
+  int offset,
+  boolean clamped)
+
+Get the secondary horizontal position for the specified text offset, but 
+optionally clamp it so that it doesn't exceed the width of the layout. 
+
+
+
+*android.text.Layout.getSelectionPath(int,int,Path)*
+
+public void getSelectionPath(
+  int start,
+  int end,
+  Path dest)
+
+Fills in the specified Path with a representation of a highlight between the 
+specified offsets. This will often be a rectangle or a potentially 
+discontinuous set of rectangles. If the start and end are the same, the 
+returned path is empty. 
+
+
+
+*android.text.Layout.getSpacingAdd()*
+
+public final float getSpacingAdd()
+
+Return the number of units of leading that are added to each line. 
+
+
+
+*android.text.Layout.getSpacingMultiplier()*
+
+public final float getSpacingMultiplier()
+
+Return what the text height is multiplied by to get the line height. 
+
+
+
+*android.text.Layout.getText()*
+
+public final |java.lang.CharSequence| getText()
+
+Return the text that is displayed by this Layout. 
+
+
+
+*android.text.Layout.getTextDirectionHeuristic()*
+
+public final |android.text.TextDirectionHeuristic| getTextDirectionHeuristic()
+
+Return the heuristic used to determine paragraph text direction. 
+
+
+
+*android.text.Layout.getTopPadding()*
+
+public abstract int getTopPadding()
+
+Returns the (negative) number of extra pixels of ascent padding in the top line 
+of the Layout. 
+
+
+
+*android.text.Layout.getWidth()*
+
+public final int getWidth()
+
+Return the width of this layout. 
+
+
+
+*android.text.Layout.increaseWidthTo(int)*
+
+public final void increaseWidthTo(int wid)
+
+Increase the width of this layout to the specified width. Be careful to use 
+this only when you know it is appropriate it does not cause the text to reflow 
+to use the full new width. 
+
+
+
+*android.text.Layout.isLevelBoundary(int)*
+
+public boolean isLevelBoundary(int offset)
+
+Returns true if the character at offset and the preceding character are at 
+different run levels (and thus there's a split caret). 
+
+
+    offset - the offset 
+
+    Returns: true if at a level boundary 
+
+*android.text.Layout.isRtlCharAt(int)*
+
+public boolean isRtlCharAt(int offset)
+
+Returns true if the character at offset is right to left (RTL). 
+
+
+    offset - the offset 
+
+    Returns: true if the character is RTL, false if it is LTR 
+
+*android.text.Layout.isSpanned()*
+
+protected final boolean isSpanned()
+
+
+
+
+
+*android.text.Layout.shouldClampCursor(int)*
+
+public boolean shouldClampCursor(int line)
+
+Determine whether we should clamp cursor position. Currently it's only robust 
+for left-aligned displays. 
+
+
+
+

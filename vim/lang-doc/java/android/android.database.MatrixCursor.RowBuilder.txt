@@ -1,0 +1,57 @@
+*android.database.MatrixCursor.RowBuilder* *MatrixCursor.RowBuilder* Builds a ro
+
+public class MatrixCursor.RowBuilder
+  extends    |java.lang.Object|
+
+|android.database.MatrixCursor.RowBuilder_Description|
+|android.database.MatrixCursor.RowBuilder_Fields|
+|android.database.MatrixCursor.RowBuilder_Constructors|
+|android.database.MatrixCursor.RowBuilder_Methods|
+
+================================================================================
+
+*android.database.MatrixCursor.RowBuilder_Methods*
+|android.database.MatrixCursor.RowBuilder.add(Object)|Sets the next column valu
+|android.database.MatrixCursor.RowBuilder.add(String,Object)|Offer value for po
+
+*android.database.MatrixCursor.RowBuilder_Description*
+
+Builds a row of values using either of these approaches: 
+
+Values can be added with explicit column ordering using 
+(|android.database.MatrixCursor.RowBuilder|) , which starts from the left-most 
+column and adds one column value at a time. This follows the same ordering as 
+the column names specified at cursor construction time. Column and value pairs 
+can be offered for possible inclusion using 
+(|android.database.MatrixCursor.RowBuilder|) . If the cursor includes the given 
+column, the value will be set for that column, otherwise the value is ignored. 
+This approach is useful when matching data to a custom projection. 
+
+Undefined values are left asnull. 
+
+
+
+*android.database.MatrixCursor.RowBuilder.add(Object)*
+
+public |android.database.MatrixCursor.RowBuilder| add(java.lang.Object columnValue)
+
+Sets the next column value in this row. 
+
+
+
+    Returns: this builder to support chaining 
+
+*android.database.MatrixCursor.RowBuilder.add(String,Object)*
+
+public |android.database.MatrixCursor.RowBuilder| add(
+  java.lang.String columnName,
+  java.lang.Object value)
+
+Offer value for possible inclusion if this cursor defines the given column. 
+Columns not defined by the cursor are silently ignored. 
+
+
+
+    Returns: this builder to support chaining 
+
+

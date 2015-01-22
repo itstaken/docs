@@ -1,0 +1,146 @@
+*android.hardware.camera2.CaptureFailure* *CaptureFailure* A report of failed ca
+
+public class CaptureFailure
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CaptureFailure_Description|
+|android.hardware.camera2.CaptureFailure_Fields|
+|android.hardware.camera2.CaptureFailure_Constructors|
+|android.hardware.camera2.CaptureFailure_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CaptureFailure_Fields*
+|int_android.hardware.camera2.CaptureFailure.REASON_ERROR|
+|int_android.hardware.camera2.CaptureFailure.REASON_FLUSHED|
+
+*android.hardware.camera2.CaptureFailure_Constructors*
+|android.hardware.camera2.CaptureFailure(CaptureRequest,int,boolean,int,int)|
+
+*android.hardware.camera2.CaptureFailure_Methods*
+|android.hardware.camera2.CaptureFailure.getFrameNumber()|Get the frame number 
+|android.hardware.camera2.CaptureFailure.getReason()|Determine why the request 
+|android.hardware.camera2.CaptureFailure.getRequest()|Get the request associate
+|android.hardware.camera2.CaptureFailure.getSequenceId()|The sequence ID for th
+|android.hardware.camera2.CaptureFailure.wasImageCaptured()|Determine if the im
+
+*android.hardware.camera2.CaptureFailure_Description*
+
+A report of failed capture for a single image capture from the image sensor. 
+
+CaptureFailures are produced by a (|android.hardware.camera2.CameraDevice|) if 
+processing a (|android.hardware.camera2.CaptureRequest|) fails, either 
+partially or fully. Use (|android.hardware.camera2.CaptureFailure|) to 
+determine the specific nature of the failed capture. 
+
+Receiving a CaptureFailure means that the metadata associated with that frame 
+number has been dropped -- no (|android.hardware.camera2.CaptureResult|) with 
+the same frame number will be produced. 
+
+
+
+*int_android.hardware.camera2.CaptureFailure.REASON_ERROR*
+
+The (|android.hardware.camera2.CaptureResult|) has been dropped this frame only 
+due to an error in the framework. 
+
+
+*int_android.hardware.camera2.CaptureFailure.REASON_FLUSHED*
+
+The capture has failed due to a (|android.hardware.camera2.CameraDevice|) call 
+from the application. 
+
+
+
+*android.hardware.camera2.CaptureFailure(CaptureRequest,int,boolean,int,int)*
+
+public CaptureFailure(
+  android.hardware.camera2.CaptureRequest request,
+  int reason,
+  boolean dropped,
+  int sequenceId,
+  int frameNumber)
+
+
+
+
+*android.hardware.camera2.CaptureFailure.getFrameNumber()*
+
+public int getFrameNumber()
+
+Get the frame number associated with this failed capture. 
+
+Whenever a request has been processed, regardless of failed capture or success, 
+it gets a unique frame number assigned to its future result/failed capture. 
+
+This value monotonically increments, starting with 0, for every new result or 
+failure; and the scope is the lifetime of the 
+(|android.hardware.camera2.CameraDevice|) . 
+
+
+
+    Returns: int frame number 
+
+*android.hardware.camera2.CaptureFailure.getReason()*
+
+public int getReason()
+
+Determine why the request was dropped, whether due to an error or to a user 
+action. 
+
+
+
+    Returns: int One of {@code REASON_*} integer constants. 
+
+*android.hardware.camera2.CaptureFailure.getRequest()*
+
+public |android.hardware.camera2.CaptureRequest| getRequest()
+
+Get the request associated with this failed capture. 
+
+Whenever a request is unsuccessfully captured, with 
+(|android.hardware.camera2.CameraDevice.CaptureListener|) , thefailed 
+capture'sgetRequest()will return thatrequest. 
+
+In particular, 
+
+cameraDevice.capture(someRequest, new CaptureListener() {@Override void 
+onCaptureFailed(CaptureRequest myRequest, CaptureFailure myFailure) { 
+assert(myFailure.getRequest.equals(myRequest) == true); } }; 
+
+
+
+
+
+    Returns: The request associated with this failed capture. Never {@code null}. 
+
+*android.hardware.camera2.CaptureFailure.getSequenceId()*
+
+public int getSequenceId()
+
+The sequence ID for this failed capture that was returned by the 
+(|android.hardware.camera2.CameraDevice|) family of functions. 
+
+The sequence ID is a unique monotonically increasing value starting from 0, 
+incremented every time a new group of requests is submitted to the 
+CameraDevice. 
+
+
+
+    Returns: int The ID for the sequence of requests that this capture failure is the result 
+             of 
+
+*android.hardware.camera2.CaptureFailure.wasImageCaptured()*
+
+public boolean wasImageCaptured()
+
+Determine if the image was captured from the camera. 
+
+If the image was not captured, no image buffers will be available. If the image 
+was captured, then image buffers may be available. 
+
+
+
+    Returns: boolean True if the image was captured, false otherwise. 
+
+

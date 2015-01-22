@@ -1,0 +1,940 @@
+*android.view.inputmethod.InputMethodManager* *InputMethodManager* Central syste
+
+public final class InputMethodManager
+  extends    |java.lang.Object|
+
+|android.view.inputmethod.InputMethodManager_Description|
+|android.view.inputmethod.InputMethodManager_Fields|
+|android.view.inputmethod.InputMethodManager_Constructors|
+|android.view.inputmethod.InputMethodManager_Methods|
+
+================================================================================
+
+*android.view.inputmethod.InputMethodManager_Fields*
+|int_android.view.inputmethod.InputMethodManager.CONTROL_START_INITIAL|
+|int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_FIRST|
+|int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_IS_TEXT_EDITOR|
+|int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_VIEW_HAS_FOCUS|
+|int_android.view.inputmethod.InputMethodManager.DISPATCH_HANDLED|
+|int_android.view.inputmethod.InputMethodManager.DISPATCH_IN_PROGRESS|
+|int_android.view.inputmethod.InputMethodManager.DISPATCH_NOT_HANDLED|
+|int_android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY|
+|int_android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS|
+|int_android.view.inputmethod.InputMethodManager.RESULT_HIDDEN|
+|int_android.view.inputmethod.InputMethodManager.RESULT_SHOWN|
+|int_android.view.inputmethod.InputMethodManager.RESULT_UNCHANGED_HIDDEN|
+|int_android.view.inputmethod.InputMethodManager.RESULT_UNCHANGED_SHOWN|
+|int_android.view.inputmethod.InputMethodManager.SHOW_FORCED|
+|int_android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT|
+
+*android.view.inputmethod.InputMethodManager_Methods*
+|android.view.inputmethod.InputMethodManager.checkFocus()|
+|android.view.inputmethod.InputMethodManager.dispatchInputEvent(InputEvent,Object,InputMethodManager.FinishedInputEventCallback,Handler)|
+|android.view.inputmethod.InputMethodManager.displayCompletions(View,CompletionInfo[])|
+|android.view.inputmethod.InputMethodManager.focusIn(View)|Call this when a vie
+|android.view.inputmethod.InputMethodManager.focusOut(View)|Call this when a vi
+|android.view.inputmethod.InputMethodManager.getClient()|
+|android.view.inputmethod.InputMethodManager.getCurrentInputMethodSubtype()|Ret
+|android.view.inputmethod.InputMethodManager.getEnabledInputMethodList()|
+|android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList(InputMethodInfo,boolean)|
+|android.view.inputmethod.InputMethodManager.getInputContext()|
+|android.view.inputmethod.InputMethodManager.getInputMethodList()|
+|android.view.inputmethod.InputMethodManager.getInstance()|Retrieve the global 
+|android.view.inputmethod.InputMethodManager.getLastInputMethodSubtype()|
+|android.view.inputmethod.InputMethodManager.getShortcutInputMethodsAndSubtypes()|
+|android.view.inputmethod.InputMethodManager.hideSoftInputFromInputMethod(IBinder,int)|
+|android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow(IBinder,int)|
+|android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow(IBinder,int,ResultReceiver)|
+|android.view.inputmethod.InputMethodManager.hideStatusIcon(IBinder)|
+|android.view.inputmethod.InputMethodManager.isAcceptingText()|Return true if t
+|android.view.inputmethod.InputMethodManager.isActive()|Return true if any view
+|android.view.inputmethod.InputMethodManager.isActive(View)|Return true if the 
+|android.view.inputmethod.InputMethodManager.isFullscreenMode()|Allows you to d
+|android.view.inputmethod.InputMethodManager.isWatchingCursor(View)|Returns tru
+|android.view.inputmethod.InputMethodManager.notifySuggestionPicked(SuggestionSpan,String,int)|
+|android.view.inputmethod.InputMethodManager.onWindowFocus(View,View,int,boolean,int)|
+|android.view.inputmethod.InputMethodManager.peekInstance()|Private optimizatio
+|android.view.inputmethod.InputMethodManager.registerSuggestionSpansForNotification(SuggestionSpan[])|
+|android.view.inputmethod.InputMethodManager.reportFinishInputConnection(InputConnection)|
+|android.view.inputmethod.InputMethodManager.restartInput(View)|If the input me
+|android.view.inputmethod.InputMethodManager.sendAppPrivateCommand(View,String,Bundle)|
+|android.view.inputmethod.InputMethodManager.setAdditionalInputMethodSubtypes(String,InputMethodSubtype[])|
+|android.view.inputmethod.InputMethodManager.setCurrentInputMethodSubtype(InputMethodSubtype)|
+|android.view.inputmethod.InputMethodManager.setFullscreenMode(boolean)|
+|android.view.inputmethod.InputMethodManager.setImeWindowStatus(IBinder,int,int)|
+|android.view.inputmethod.InputMethodManager.setInputMethod(IBinder,String)|For
+|android.view.inputmethod.InputMethodManager.setInputMethodAndSubtype(IBinder,String,InputMethodSubtype)|
+|android.view.inputmethod.InputMethodManager.shouldOfferSwitchingToNextInputMethod(IBinder)|
+|android.view.inputmethod.InputMethodManager.showInputMethodAndSubtypeEnabler(String)|
+|android.view.inputmethod.InputMethodManager.showInputMethodPicker()|
+|android.view.inputmethod.InputMethodManager.showSoftInput(View,int)|Synonym fo
+|android.view.inputmethod.InputMethodManager.showSoftInput(View,int,ResultReceiver)|
+|android.view.inputmethod.InputMethodManager.showSoftInputFromInputMethod(IBinder,int)|
+|android.view.inputmethod.InputMethodManager.showSoftInputUnchecked(int,ResultReceiver)|
+|android.view.inputmethod.InputMethodManager.showStatusIcon(IBinder,String,int)|
+|android.view.inputmethod.InputMethodManager.startGettingWindowFocus(View)|
+|android.view.inputmethod.InputMethodManager.switchToLastInputMethod(IBinder)|F
+|android.view.inputmethod.InputMethodManager.switchToNextInputMethod(IBinder,boolean)|
+|android.view.inputmethod.InputMethodManager.toggleSoftInput(int,int)|
+|android.view.inputmethod.InputMethodManager.toggleSoftInputFromWindow(IBinder,int,int)|
+|android.view.inputmethod.InputMethodManager.updateCursor(View,int,int,int,int)|
+|android.view.inputmethod.InputMethodManager.updateExtractedText(View,int,ExtractedText)|
+|android.view.inputmethod.InputMethodManager.updateSelection(View,int,int,int,int)|
+|android.view.inputmethod.InputMethodManager.viewClicked(View)|Notify the event
+|android.view.inputmethod.InputMethodManager.windowDismissed(IBinder)|When the 
+
+*android.view.inputmethod.InputMethodManager_Description*
+
+Central system API to the overall input method framework (IMF) architecture, 
+which arbitrates interaction between applications and the current input method. 
+You can retrieve an instance of this interface with 
+Context.getSystemService()(|android.content.Context|) . 
+
+Topics covered here: 
+
+Architecture Overview Applications Input Methods Security 
+
+
+
+Architecture Overview 
+
+There are three primary parties involved in the input method framework (IMF) 
+architecture: 
+
+The input method manager as expressed by this class is the central point of the 
+system that manages interaction between all other parts. It is expressed as the 
+client-side API here which exists in each application context and communicates 
+with a global system service that manages the interaction across all processes. 
+An input method (IME) implements a particular interaction model allowing the 
+user to generate text. The system binds to the current input method that is 
+use, causing it to be created and run, and tells it when to hide and show its 
+UI. Only one IME is running at a time. Multiple client applications arbitrate 
+with the input method manager for input focus and control over the state of the 
+IME. Only one such client is ever active (working with the IME) at a time. 
+
+
+
+Applications 
+
+In most cases, applications that are using the standard 
+(|android.widget.TextView|) or its subclasses will have little they need to do 
+to work well with soft input methods. The main things you need to be aware of 
+are: 
+
+Properly set the (|android.R.attr|) in your editable text views, so that the 
+input method will have enough context to help the user in entering text into 
+them. Deal well with losing screen space when the input method is displayed. 
+Ideally an application should handle its window being resized smaller, but it 
+can rely on the system performing panning of the window if needed. You should 
+set the (|android.R.attr|) attribute on your activity or the corresponding 
+values on windows you create to help the system determine whether to pan or 
+resize (it will try to determine this automatically but may get it wrong). You 
+can also control the preferred soft input state (open, closed, etc) for your 
+window using the same (|android.R.attr|) attribute. 
+
+More finer-grained control is available through the APIs here to directly 
+interact with the IMF and its IME -- either showing or hiding the input area, 
+letting the user pick an input method, etc. 
+
+For the rare people amongst us writing their own text editors, you will need to 
+implement (|android.view.View|) to return a new instance of your own 
+(|android.view.inputmethod.InputConnection|) interface allowing the IME to 
+interact with your editor. 
+
+
+
+Input Methods 
+
+An input method (IME) is implemented as a (|android.app.Service|) , typically 
+deriving from (|android.inputmethodservice.InputMethodService|) . It must 
+provide the core (|android.view.inputmethod.InputMethod|) interface, though 
+this is normally handled by (|android.inputmethodservice.InputMethodService|) 
+and implementors will only need to deal with the higher-level API there. 
+
+See the (|android.inputmethodservice.InputMethodService|) class for more 
+information on implementing IMEs. 
+
+
+
+Security 
+
+There are a lot of security issues associated with input methods, since they 
+essentially have freedom to completely drive the UI and monitor everything the 
+user enters. The Android input method framework also allows arbitrary third 
+party IMEs, so care must be taken to restrict their selection and interactions. 
+
+Here are some key points about the security architecture behind the IMF: 
+
+Only the system is allowed to directly access an IME's 
+(|android.view.inputmethod.InputMethod|) interface, via the 
+(|android.Manifest.permission|) permission. This is enforced in the system by 
+not binding to an input method service that does not require this permission, 
+so the system can guarantee no other untrusted clients are accessing the 
+current input method outside of its control. 
+
+There may be many client processes of the IMF, but only one may be active at a 
+time. The inactive clients can not interact with key parts of the IMF through 
+the mechanisms described below. 
+
+Clients of an input method are only given access to its 
+(|android.view.inputmethod.InputMethodSession|) interface. One instance of this 
+interface is created for each client, and only calls from the session 
+associated with the active client will be processed by the current IME. This is 
+enforced by (|android.inputmethodservice.AbstractInputMethodService|) for 
+normal IMEs, but must be explicitly handled by an IME that is customizing the 
+raw (|android.view.inputmethod.InputMethodSession|) implementation. 
+
+Only the active client's (|android.view.inputmethod.InputConnection|) will 
+accept operations. The IMF tells each client process whether it is active, and 
+the framework enforces that in inactive processes calls on to the current 
+InputConnection will be ignored. This ensures that the current IME can only 
+deliver events and text edits to the UI that the user sees as being in focus. 
+
+An IME can never interact with an (|android.view.inputmethod.InputConnection|) 
+while the screen is off. This is enforced by making all clients inactive while 
+the screen is off, and prevents bad IMEs from driving the UI when the user can 
+not be aware of its behavior. 
+
+A client application can ask that the system let the user pick a new IME, but 
+can not programmatically switch to one itself. This avoids malicious 
+applications from switching the user to their own IME, which remains running 
+when the user navigates away to another application. An IME, on the other hand, 
+is allowed to programmatically switch the system to another IME, since it 
+already has full control of user input. 
+
+The user must explicitly enable a new IME in settings before they can switch to 
+it, to confirm with the system that they know about it and want to make it 
+available for use. 
+
+
+
+*int_android.view.inputmethod.InputMethodManager.CONTROL_START_INITIAL*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_FIRST*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_IS_TEXT_EDITOR*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.CONTROL_WINDOW_VIEW_HAS_FOCUS*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.DISPATCH_HANDLED*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.DISPATCH_IN_PROGRESS*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.DISPATCH_NOT_HANDLED*
+
+
+
+
+*int_android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY*
+
+Flag for (|android.view.inputmethod.InputMethodManager|) to indicate that the 
+soft input window should only be hidden if it was not explicitly shown by the 
+user. 
+
+
+*int_android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS*
+
+Flag for (|android.view.inputmethod.InputMethodManager|) to indicate that the 
+soft input window should normally be hidden, unless it was originally shown 
+with (|android.view.inputmethod.InputMethodManager|) . 
+
+
+*int_android.view.inputmethod.InputMethodManager.RESULT_HIDDEN*
+
+Flag for the (|android.os.ResultReceiver|) result code from 
+(|android.view.inputmethod.InputMethodManager|) and 
+(|android.view.inputmethod.InputMethodManager|) : the state of the soft input 
+window changed from shown to hidden. 
+
+
+*int_android.view.inputmethod.InputMethodManager.RESULT_SHOWN*
+
+Flag for the (|android.os.ResultReceiver|) result code from 
+(|android.view.inputmethod.InputMethodManager|) and 
+(|android.view.inputmethod.InputMethodManager|) : the state of the soft input 
+window changed from hidden to shown. 
+
+
+*int_android.view.inputmethod.InputMethodManager.RESULT_UNCHANGED_HIDDEN*
+
+Flag for the (|android.os.ResultReceiver|) result code from 
+(|android.view.inputmethod.InputMethodManager|) and 
+(|android.view.inputmethod.InputMethodManager|) : the state of the soft input 
+window was unchanged and remains hidden. 
+
+
+*int_android.view.inputmethod.InputMethodManager.RESULT_UNCHANGED_SHOWN*
+
+Flag for the (|android.os.ResultReceiver|) result code from 
+(|android.view.inputmethod.InputMethodManager|) and 
+(|android.view.inputmethod.InputMethodManager|) : the state of the soft input 
+window was unchanged and remains shown. 
+
+
+*int_android.view.inputmethod.InputMethodManager.SHOW_FORCED*
+
+Flag for (|android.view.inputmethod.InputMethodManager|) to indicate that the 
+user has forced the input method open (such as by long-pressing menu) so it 
+should not be closed until they explicitly do so. 
+
+
+*int_android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT*
+
+Flag for (|android.view.inputmethod.InputMethodManager|) to indicate that this 
+is an implicit request to show the input window, not as the result of a direct 
+request by the user. The window may not be shown in this case. 
+
+
+
+*android.view.inputmethod.InputMethodManager.checkFocus()*
+
+public void checkFocus()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.dispatchInputEvent(InputEvent,Object,InputMethodManager.FinishedInputEventCallback,Handler)*
+
+public int dispatchInputEvent(
+  android.view.InputEvent event,
+  java.lang.Object token,
+  android.view.inputmethod.InputMethodManager.FinishedInputEventCallback callback,
+  android.os.Handler handler)
+
+Dispatches an input event to the IME. 
+
+Returns (|android.view.inputmethod.InputMethodManager|) if the event was 
+handled. Returns (|android.view.inputmethod.InputMethodManager|) if the event 
+was not handled. Returns (|android.view.inputmethod.InputMethodManager|) if the 
+event is in progress and the callback will be invoked later. 
+
+
+
+*android.view.inputmethod.InputMethodManager.displayCompletions(View,CompletionInfo[])*
+
+public void displayCompletions(
+  android.view.View view,
+  android.view.inputmethod.CompletionInfo[] completions)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.focusIn(View)*
+
+public void focusIn(android.view.View view)
+
+Call this when a view receives focus. 
+
+
+
+*android.view.inputmethod.InputMethodManager.focusOut(View)*
+
+public void focusOut(android.view.View view)
+
+Call this when a view loses focus. 
+
+
+
+*android.view.inputmethod.InputMethodManager.getClient()*
+
+public IInputMethodClient getClient()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.getCurrentInputMethodSubtype()*
+
+public |android.view.inputmethod.InputMethodSubtype| getCurrentInputMethodSubtype()
+
+Returns the current input method subtype. This subtype is one of the subtypes 
+in the current input method. This method returns null when the current input 
+method doesn't have any input method subtype. 
+
+
+
+*android.view.inputmethod.InputMethodManager.getEnabledInputMethodList()*
+
+public |java.util.List|<InputMethodInfo> getEnabledInputMethodList()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList(InputMethodInfo,boolean)*
+
+public |java.util.List|<InputMethodSubtype> getEnabledInputMethodSubtypeList(
+  android.view.inputmethod.InputMethodInfo imi,
+  boolean allowsImplicitlySelectedSubtypes)
+
+Returns a list of enabled input method subtypes for the specified input method 
+info. 
+
+
+    imi - An input method info whose subtypes list will be returned. 
+    allowsImplicitlySelectedSubtypes - A boolean flag to allow to return the implicitly selected subtypes. If an input 
+       method info doesn't have enabled subtypes, the framework will implicitly 
+       enable subtypes according to the current system language. 
+
+*android.view.inputmethod.InputMethodManager.getInputContext()*
+
+public IInputContext getInputContext()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.getInputMethodList()*
+
+public |java.util.List|<InputMethodInfo> getInputMethodList()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.getInstance()*
+
+public static |android.view.inputmethod.InputMethodManager| getInstance()
+
+Retrieve the global InputMethodManager instance, creating it if it doesn't 
+already exist. 
+
+
+
+*android.view.inputmethod.InputMethodManager.getLastInputMethodSubtype()*
+
+public |android.view.inputmethod.InputMethodSubtype| getLastInputMethodSubtype()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.getShortcutInputMethodsAndSubtypes()*
+
+public |java.util.Map|<InputMethodInfo,List<InputMethodSubtype>> getShortcutInputMethodsAndSubtypes()
+
+Returns a map of all shortcut input method info and their subtypes. 
+
+
+
+*android.view.inputmethod.InputMethodManager.hideSoftInputFromInputMethod(IBinder,int)*
+
+public void hideSoftInputFromInputMethod(
+  android.os.IBinder token,
+  int flags)
+
+Close/hide the input method's soft input area, so the user no longer sees it or 
+can interact with it. This can only be called from the currently active input 
+method, as validated by the given token. 
+
+
+    token - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #HIDE_IMPLICIT_ONLY}, {@link #HIDE_NOT_ALWAYS} bit set. 
+
+*android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow(IBinder,int)*
+
+public boolean hideSoftInputFromWindow(
+  android.os.IBinder windowToken,
+  int flags)
+
+Synonym for (|android.view.inputmethod.InputMethodManager|) without a result: 
+request to hide the soft input window from the context of the window that is 
+currently accepting input. 
+
+
+    windowToken - The token of the window that is making the request, as returned by {@link 
+       View#getWindowToken() View.getWindowToken()}. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #HIDE_IMPLICIT_ONLY} bit set. 
+
+*android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow(IBinder,int,ResultReceiver)*
+
+public boolean hideSoftInputFromWindow(
+  android.os.IBinder windowToken,
+  int flags,
+  android.os.ResultReceiver resultReceiver)
+
+Request to hide the soft input window from the context of the window that is 
+currently accepting input. This should be called as a result of the user doing 
+some actually than fairly explicitly requests to have the input window hidden. 
+
+
+    windowToken - The token of the window that is making the request, as returned by {@link 
+       View#getWindowToken() View.getWindowToken()}. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #HIDE_IMPLICIT_ONLY} bit set. 
+    resultReceiver - If non-null, this will be called by the IME when it has processed your request 
+       to tell you what it has done. The result code you receive may be either 
+       {@link #RESULT_UNCHANGED_SHOWN}, {@link #RESULT_UNCHANGED_HIDDEN}, 
+       {@link #RESULT_SHOWN}, or {@link #RESULT_HIDDEN}. 
+
+*android.view.inputmethod.InputMethodManager.hideStatusIcon(IBinder)*
+
+public void hideStatusIcon(android.os.IBinder imeToken)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.isAcceptingText()*
+
+public boolean isAcceptingText()
+
+Return true if the currently served view is accepting full text edits. If 
+false, it has no input connection, so can only handle raw key events. 
+
+
+
+*android.view.inputmethod.InputMethodManager.isActive()*
+
+public boolean isActive()
+
+Return true if any view is currently active in the input method. 
+
+
+
+*android.view.inputmethod.InputMethodManager.isActive(View)*
+
+public boolean isActive(android.view.View view)
+
+Return true if the given view is the currently active view for the input 
+method. 
+
+
+
+*android.view.inputmethod.InputMethodManager.isFullscreenMode()*
+
+public boolean isFullscreenMode()
+
+Allows you to discover whether the attached input method is running in 
+fullscreen mode. Return true if it is fullscreen, entirely covering your UI, 
+else returns false. 
+
+
+
+*android.view.inputmethod.InputMethodManager.isWatchingCursor(View)*
+
+public boolean isWatchingCursor(android.view.View view)
+
+Returns true if the current input method wants to watch the location of the 
+input editor's cursor in its window. 
+
+
+
+*android.view.inputmethod.InputMethodManager.notifySuggestionPicked(SuggestionSpan,String,int)*
+
+public void notifySuggestionPicked(
+  android.text.style.SuggestionSpan span,
+  java.lang.String originalString,
+  int index)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.onWindowFocus(View,View,int,boolean,int)*
+
+public void onWindowFocus(
+  android.view.View rootView,
+  android.view.View focusedView,
+  int softInputMode,
+  boolean first,
+  int windowFlags)
+
+Called by ViewAncestor when its window gets input focus. 
+
+
+
+*android.view.inputmethod.InputMethodManager.peekInstance()*
+
+public static |android.view.inputmethod.InputMethodManager| peekInstance()
+
+Private optimization: retrieve the global InputMethodManager instance, if it 
+exists. 
+
+
+
+*android.view.inputmethod.InputMethodManager.registerSuggestionSpansForNotification(SuggestionSpan[])*
+
+public void registerSuggestionSpansForNotification(android.text.style.SuggestionSpan[] spans)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.reportFinishInputConnection(InputConnection)*
+
+public void reportFinishInputConnection(android.view.inputmethod.InputConnection ic)
+
+Called from the FINISH_INPUT_CONNECTION message above. 
+
+
+
+*android.view.inputmethod.InputMethodManager.restartInput(View)*
+
+public void restartInput(android.view.View view)
+
+If the input method is currently connected to the given view, restart it with 
+its new contents. You should call this when the text within your view changes 
+outside of the normal input method or key input flow, such as when an 
+application calls TextView.setText(). 
+
+
+    view - The view whose text has changed. 
+
+*android.view.inputmethod.InputMethodManager.sendAppPrivateCommand(View,String,Bundle)*
+
+public void sendAppPrivateCommand(
+  android.view.View view,
+  java.lang.String action,
+  android.os.Bundle data)
+
+Call 
+InputMethodSession.appPrivateCommand()(|android.view.inputmethod.InputMethodSession|)
+on the current Input Method. 
+
+
+    view - Optional View that is sending the command, or null if you want to send the 
+       command regardless of the view that is attached to the input method. 
+    action - Name of the command to be performed. This must be a scoped name, i.e. prefixed 
+       with a package name you own, so that different developers will not 
+       create conflicting commands. 
+    data - Any data to include with the command. 
+
+*android.view.inputmethod.InputMethodManager.setAdditionalInputMethodSubtypes(String,InputMethodSubtype[])*
+
+public void setAdditionalInputMethodSubtypes(
+  java.lang.String imiId,
+  android.view.inputmethod.InputMethodSubtype[] subtypes)
+
+Set additional input method subtypes. Only a process which shares the same uid 
+with the IME can add additional input method subtypes to the IME. Please note 
+that a subtype's status is stored in the system. For example, enabled subtypes 
+are remembered by the framework even after they are removed by using this 
+method. If you re-add the same subtypes again, they will just get enabled. If 
+you want to avoid such conflicts, for instance, you may want to create a 
+"different" new subtype even with the same locale and mode, by changing its 
+extra value. The different subtype won't get affected by the stored past 
+status. (You may want to take a look at 
+(|android.view.inputmethod.InputMethodSubtype|) to refer to the current 
+implementation.) 
+
+
+    imiId - Id of InputMethodInfo which additional input method subtypes will be added to. 
+    subtypes - subtypes will be added as additional subtypes of the current input method. 
+
+*android.view.inputmethod.InputMethodManager.setCurrentInputMethodSubtype(InputMethodSubtype)*
+
+public boolean setCurrentInputMethodSubtype(android.view.inputmethod.InputMethodSubtype subtype)
+
+Switch to a new input method subtype of the current input method. 
+
+
+    subtype - A new input method subtype to switch. 
+
+    Returns: true if the current subtype was successfully switched. When the specified 
+             subtype is null, this method returns false. 
+
+*android.view.inputmethod.InputMethodManager.setFullscreenMode(boolean)*
+
+public void setFullscreenMode(boolean fullScreen)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.setImeWindowStatus(IBinder,int,int)*
+
+public void setImeWindowStatus(
+  android.os.IBinder imeToken,
+  int vis,
+  int backDisposition)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.setInputMethod(IBinder,String)*
+
+public void setInputMethod(
+  android.os.IBinder token,
+  java.lang.String id)
+
+Force switch to a new input method component. This can only be called from an 
+application or a service which has a token of the currently active input 
+method. 
+
+
+    token - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+    id - The unique identifier for the new input method to be switched to. 
+
+*android.view.inputmethod.InputMethodManager.setInputMethodAndSubtype(IBinder,String,InputMethodSubtype)*
+
+public void setInputMethodAndSubtype(
+  android.os.IBinder token,
+  java.lang.String id,
+  android.view.inputmethod.InputMethodSubtype subtype)
+
+Force switch to a new input method and subtype. This can only be called from an 
+application or a service which has a token of the currently active input 
+method. 
+
+
+    token - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+    id - The unique identifier for the new input method to be switched to. 
+    subtype - The new subtype of the new input method to be switched to. 
+
+*android.view.inputmethod.InputMethodManager.shouldOfferSwitchingToNextInputMethod(IBinder)*
+
+public boolean shouldOfferSwitchingToNextInputMethod(android.os.IBinder imeToken)
+
+Returns true if the current IME needs to offer the users ways to switch to a 
+next input method (e.g. a globe key.). When an IME sets 
+supportsSwitchingToNextInputMethod and this method returns true, the IME has to 
+offer ways to to invoke (|android.view.inputmethod.InputMethodManager|) 
+accordingly. Note that the system determines the most appropriate next input 
+method and subtype in order to provide the consistent user experience in 
+switching between IMEs and subtypes. 
+
+
+    imeToken - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+
+*android.view.inputmethod.InputMethodManager.showInputMethodAndSubtypeEnabler(String)*
+
+public void showInputMethodAndSubtypeEnabler(java.lang.String imiId)
+
+Show the settings for enabling subtypes of the specified input method. 
+
+
+    imiId - An input method, whose subtypes settings will be shown. If imiId is null, 
+       subtypes of all input methods will be shown. 
+
+*android.view.inputmethod.InputMethodManager.showInputMethodPicker()*
+
+public void showInputMethodPicker()
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.showSoftInput(View,int)*
+
+public boolean showSoftInput(
+  android.view.View view,
+  int flags)
+
+Synonym for (|android.view.inputmethod.InputMethodManager|) without a result 
+receiver: explicitly request that the current input method's soft input area be 
+shown to the user, if needed. 
+
+
+    view - The currently focused view, which would like to receive soft keyboard input. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #SHOW_IMPLICIT} bit set. 
+
+*android.view.inputmethod.InputMethodManager.showSoftInput(View,int,ResultReceiver)*
+
+public boolean showSoftInput(
+  android.view.View view,
+  int flags,
+  android.os.ResultReceiver resultReceiver)
+
+Explicitly request that the current input method's soft input area be shown to 
+the user, if needed. Call this if the user interacts with your view in such a 
+way that they have expressed they would like to start performing input into it. 
+
+
+    view - The currently focused view, which would like to receive soft keyboard input. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #SHOW_IMPLICIT} bit set. 
+    resultReceiver - If non-null, this will be called by the IME when it has processed your request 
+       to tell you what it has done. The result code you receive may be either 
+       {@link #RESULT_UNCHANGED_SHOWN}, {@link #RESULT_UNCHANGED_HIDDEN}, 
+       {@link #RESULT_SHOWN}, or {@link #RESULT_HIDDEN}. 
+
+*android.view.inputmethod.InputMethodManager.showSoftInputFromInputMethod(IBinder,int)*
+
+public void showSoftInputFromInputMethod(
+  android.os.IBinder token,
+  int flags)
+
+Show the input method's soft input area, so the user sees the input method 
+window and can interact with it. This can only be called from the currently 
+active input method, as validated by the given token. 
+
+
+    token - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+    flags - Provides additional operating flags. Currently may be 0 or have the {@link 
+       #SHOW_IMPLICIT} or {@link #SHOW_FORCED} bit set. 
+
+*android.view.inputmethod.InputMethodManager.showSoftInputUnchecked(int,ResultReceiver)*
+
+public void showSoftInputUnchecked(
+  int flags,
+  android.os.ResultReceiver resultReceiver)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.showStatusIcon(IBinder,String,int)*
+
+public void showStatusIcon(
+  android.os.IBinder imeToken,
+  java.lang.String packageName,
+  int iconId)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.startGettingWindowFocus(View)*
+
+public void startGettingWindowFocus(android.view.View rootView)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.switchToLastInputMethod(IBinder)*
+
+public boolean switchToLastInputMethod(android.os.IBinder imeToken)
+
+Force switch to the last used input method and subtype. If the last input 
+method didn't have any subtypes, the framework will simply switch to the last 
+input method with no subtype specified. 
+
+
+    imeToken - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+
+    Returns: true if the current input method and subtype was successfully switched to the 
+             last used input method and subtype. 
+
+*android.view.inputmethod.InputMethodManager.switchToNextInputMethod(IBinder,boolean)*
+
+public boolean switchToNextInputMethod(
+  android.os.IBinder imeToken,
+  boolean onlyCurrentIme)
+
+Force switch to the next input method and subtype. If there is no IME enabled 
+except current IME and subtype, do nothing. 
+
+
+    imeToken - Supplies the identifying token given to an input method when it was started, 
+       which allows it to perform this operation on itself. 
+    onlyCurrentIme - if true, the framework will find the next subtype which belongs to the current 
+       IME 
+
+    Returns: true if the current input method and subtype was successfully switched to the 
+             next input method and subtype. 
+
+*android.view.inputmethod.InputMethodManager.toggleSoftInput(int,int)*
+
+public void toggleSoftInput(
+  int showFlags,
+  int hideFlags)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.toggleSoftInputFromWindow(IBinder,int,int)*
+
+public void toggleSoftInputFromWindow(
+  android.os.IBinder windowToken,
+  int showFlags,
+  int hideFlags)
+
+This method toggles the input method window display. If the input window is 
+already displayed, it gets hidden. If not the input window will be displayed. 
+
+
+    windowToken - The token of the window that is making the request, as returned by {@link 
+       View#getWindowToken() View.getWindowToken()}. 
+    showFlags - Provides additional operating flags. May be 0 or have the {@link 
+       #SHOW_IMPLICIT}, {@link #SHOW_FORCED} bit set. 
+    hideFlags - Provides additional operating flags. May be 0 or have the {@link 
+       #HIDE_IMPLICIT_ONLY}, {@link #HIDE_NOT_ALWAYS} bit set. 
+
+*android.view.inputmethod.InputMethodManager.updateCursor(View,int,int,int,int)*
+
+public void updateCursor(
+  android.view.View view,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+Report the current cursor location in its window. 
+
+
+
+*android.view.inputmethod.InputMethodManager.updateExtractedText(View,int,ExtractedText)*
+
+public void updateExtractedText(
+  android.view.View view,
+  int token,
+  android.view.inputmethod.ExtractedText text)
+
+
+
+
+
+*android.view.inputmethod.InputMethodManager.updateSelection(View,int,int,int,int)*
+
+public void updateSelection(
+  android.view.View view,
+  int selStart,
+  int selEnd,
+  int candidatesStart,
+  int candidatesEnd)
+
+Report the current selection range. 
+
+
+
+*android.view.inputmethod.InputMethodManager.viewClicked(View)*
+
+public void viewClicked(android.view.View view)
+
+Notify the event when the user tapped or clicked the text view. 
+
+
+
+*android.view.inputmethod.InputMethodManager.windowDismissed(IBinder)*
+
+public void windowDismissed(android.os.IBinder appWindowToken)
+
+When the focused window is dismissed, this method is called to finish the input 
+method started before. 
+
+
+
+

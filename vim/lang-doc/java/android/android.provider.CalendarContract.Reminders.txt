@@ -1,0 +1,60 @@
+*android.provider.CalendarContract.Reminders* *CalendarContract.Reminders* Field
+
+public static final class CalendarContract.Reminders
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.CalendarContract.RemindersColumns|
+             |android.provider.CalendarContract.EventsColumns|
+
+|android.provider.CalendarContract.Reminders_Description|
+|android.provider.CalendarContract.Reminders_Fields|
+|android.provider.CalendarContract.Reminders_Constructors|
+|android.provider.CalendarContract.Reminders_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.Reminders_Fields*
+|android.net.Uri_android.provider.CalendarContract.Reminders.CONTENT_URI|
+
+*android.provider.CalendarContract.Reminders_Methods*
+|android.provider.CalendarContract.Reminders.query(ContentResolver,long,String[])|
+
+*android.provider.CalendarContract.Reminders_Description*
+
+Fields and helpers for accessing reminders for an event. Each row of this table 
+represents a single reminder for an event. Calling 
+(|android.provider.CalendarContract.Reminders|) will return a list of reminders 
+for the event with the given eventId. Both apps and sync adapters may write to 
+this table. There are three writable fields and all of them must be included 
+when inserting a new reminder. They are: 
+
+(|android.provider.CalendarContract.Reminders|) 
+(|android.provider.CalendarContract.Reminders|) 
+(|android.provider.CalendarContract.Reminders|) 
+
+
+
+*android.net.Uri_android.provider.CalendarContract.Reminders.CONTENT_URI*
+
+
+
+
+
+*android.provider.CalendarContract.Reminders.query(ContentResolver,long,String[])*
+
+public static final |android.database.Cursor| query(
+  android.content.ContentResolver cr,
+  long eventId,
+  java.lang.String[] projection)
+
+Queries all reminders associated with the given event. This is a blocking call 
+and should not be done on the UI thread. 
+
+
+    cr - The content resolver to use for the query 
+    eventId - The id of the event to retrieve reminders for 
+    projection - the columns to return in the cursor 
+
+    Returns: A Cursor containing all reminders for the event 
+
+

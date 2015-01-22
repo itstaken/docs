@@ -1,0 +1,881 @@
+*android.view.IWindowManagerImpl* *IWindowManagerImpl* Basic implementation ofIW
+
+public class IWindowManagerImpl
+  extends    |java.lang.Object|
+
+|android.view.IWindowManagerImpl_Description|
+|android.view.IWindowManagerImpl_Fields|
+|android.view.IWindowManagerImpl_Constructors|
+|android.view.IWindowManagerImpl_Methods|
+
+================================================================================
+
+*android.view.IWindowManagerImpl_Constructors*
+|android.view.IWindowManagerImpl(Configuration,DisplayMetrics,int,boolean)|
+
+*android.view.IWindowManagerImpl_Methods*
+|android.view.IWindowManagerImpl.addAppToken(int,IApplicationToken,int,int,int,boolean,boolean,int,int)|
+|android.view.IWindowManagerImpl.addWindowToken(IBinder,int)|
+|android.view.IWindowManagerImpl.asBinder()|
+|android.view.IWindowManagerImpl.clearForcedDisplayDensity(int)|
+|android.view.IWindowManagerImpl.clearForcedDisplaySize(int)|
+|android.view.IWindowManagerImpl.closeSystemDialogs(String)|
+|android.view.IWindowManagerImpl.disableKeyguard(IBinder,String)|
+|android.view.IWindowManagerImpl.dismissKeyguard()|
+|android.view.IWindowManagerImpl.executeAppTransition()|
+|android.view.IWindowManagerImpl.exitKeyguardSecurely(IOnKeyguardExitResult)|
+|android.view.IWindowManagerImpl.freezeRotation(int)|
+|android.view.IWindowManagerImpl.getAnimationScale(int)|
+|android.view.IWindowManagerImpl.getAnimationScales()|
+|android.view.IWindowManagerImpl.getAppOrientation(IApplicationToken)|
+|android.view.IWindowManagerImpl.getBaseDisplayDensity(int)|
+|android.view.IWindowManagerImpl.getBaseDisplaySize(int,Point)|
+|android.view.IWindowManagerImpl.getCompatibleMagnificationSpecForWindow(IBinder)|
+|android.view.IWindowManagerImpl.getFocusedWindowToken()|
+|android.view.IWindowManagerImpl.getInitialDisplayDensity(int)|
+|android.view.IWindowManagerImpl.getInitialDisplaySize(int,Point)|
+|android.view.IWindowManagerImpl.getMetrics()|
+|android.view.IWindowManagerImpl.getPendingAppTransition()|
+|android.view.IWindowManagerImpl.getPreferredOptionsPanelGravity()|
+|android.view.IWindowManagerImpl.getRotation()|
+|android.view.IWindowManagerImpl.getWindowFrame(IBinder,Rect)|
+|android.view.IWindowManagerImpl.hasNavigationBar()|
+|android.view.IWindowManagerImpl.inKeyguardRestrictedInputMode()|
+|android.view.IWindowManagerImpl.inputMethodClientHasFocus(IInputMethodClient)|
+|android.view.IWindowManagerImpl.isKeyguardLocked()|
+|android.view.IWindowManagerImpl.isKeyguardSecure()|
+|android.view.IWindowManagerImpl.isRotationFrozen()|
+|android.view.IWindowManagerImpl.isSafeModeEnabled()|
+|android.view.IWindowManagerImpl.isViewServerRunning()|
+|android.view.IWindowManagerImpl.lockNow(Bundle)|
+|android.view.IWindowManagerImpl.openSession(IInputMethodClient,IInputContext)|
+|android.view.IWindowManagerImpl.overridePendingAppTransition(String,int,int,IRemoteCallback)|
+|android.view.IWindowManagerImpl.overridePendingAppTransitionScaleUp(int,int,int,int)|
+|android.view.IWindowManagerImpl.overridePendingAppTransitionThumb(Bitmap,int,int,IRemoteCallback,boolean)|
+|android.view.IWindowManagerImpl.pauseKeyDispatching(IBinder)|
+|android.view.IWindowManagerImpl.prepareAppTransition(int,boolean)|
+|android.view.IWindowManagerImpl.reenableKeyguard(IBinder)|
+|android.view.IWindowManagerImpl.removeAppToken(IBinder)|
+|android.view.IWindowManagerImpl.removeRotationWatcher(IRotationWatcher)|
+|android.view.IWindowManagerImpl.removeWindowToken(IBinder)|
+|android.view.IWindowManagerImpl.resumeKeyDispatching(IBinder)|
+|android.view.IWindowManagerImpl.screenshotApplications(IBinder,int,int,int,boolean)|
+|android.view.IWindowManagerImpl.setAnimationScale(int,float)|
+|android.view.IWindowManagerImpl.setAnimationScales(float[])|
+|android.view.IWindowManagerImpl.setAppGroupId(IBinder,int)|
+|android.view.IWindowManagerImpl.setAppOrientation(IApplicationToken,int)|
+|android.view.IWindowManagerImpl.setAppStartingWindow(IBinder,String,int,CompatibilityInfo,CharSequence,int,int,int,int,IBinder,boolean)|
+|android.view.IWindowManagerImpl.setAppVisibility(IBinder,boolean)|
+|android.view.IWindowManagerImpl.setAppWillBeHidden(IBinder)|
+|android.view.IWindowManagerImpl.setEventDispatching(boolean)|
+|android.view.IWindowManagerImpl.setFocusedApp(IBinder,boolean)|
+|android.view.IWindowManagerImpl.setForcedDisplayDensity(int,int)|
+|android.view.IWindowManagerImpl.setForcedDisplaySize(int,int,int)|
+|android.view.IWindowManagerImpl.setInputFilter(IInputFilter)|
+|android.view.IWindowManagerImpl.setInTouchMode(boolean)|
+|android.view.IWindowManagerImpl.setMagnificationCallbacks(IMagnificationCallbacks)|
+|android.view.IWindowManagerImpl.setMagnificationSpec(MagnificationSpec)|
+|android.view.IWindowManagerImpl.setNewConfiguration(Configuration)|
+|android.view.IWindowManagerImpl.setOverscan(int,int,int,int,int)|
+|android.view.IWindowManagerImpl.setStrictModeVisualIndicatorPreference(String)|
+|android.view.IWindowManagerImpl.setTouchExplorationEnabled(boolean)|
+|android.view.IWindowManagerImpl.showStrictModeViolation(boolean)|
+|android.view.IWindowManagerImpl.startAppFreezingScreen(IBinder,int)|
+|android.view.IWindowManagerImpl.startFreezingScreen(int,int)|
+|android.view.IWindowManagerImpl.startViewServer(int)|
+|android.view.IWindowManagerImpl.statusBarVisibilityChanged(int)|
+|android.view.IWindowManagerImpl.stopAppFreezingScreen(IBinder,boolean)|
+|android.view.IWindowManagerImpl.stopFreezingScreen()|
+|android.view.IWindowManagerImpl.stopViewServer()|
+|android.view.IWindowManagerImpl.thawRotation()|
+|android.view.IWindowManagerImpl.updateOrientationFromAppTokens(Configuration,IBinder)|
+|android.view.IWindowManagerImpl.updateRotation(boolean,boolean)|
+|android.view.IWindowManagerImpl.waitForWindowDrawn(IBinder,IRemoteCallback)|
+|android.view.IWindowManagerImpl.watchRotation(IRotationWatcher)|
+
+*android.view.IWindowManagerImpl_Description*
+
+Basic implementation of (|IWindowManager|) so that (|Display|) (and 
+(|android.view.Display_Delegate|) ) can return a valid instance. 
+
+
+
+*android.view.IWindowManagerImpl(Configuration,DisplayMetrics,int,boolean)*
+
+public IWindowManagerImpl(
+  Configuration config,
+  DisplayMetrics metrics,
+  int rotation,
+  boolean hasNavigationBar)
+
+
+
+
+*android.view.IWindowManagerImpl.addAppToken(int,IApplicationToken,int,int,int,boolean,boolean,int,int)*
+
+public void addAppToken(
+  int arg0,
+  IApplicationToken arg1,
+  int arg2,
+  int arg3,
+  int arg4,
+  boolean arg5,
+  boolean arg6,
+  int arg7,
+  int arg8)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.addWindowToken(IBinder,int)*
+
+public void addWindowToken(
+  IBinder arg0,
+  int arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.asBinder()*
+
+public IBinder asBinder()
+
+
+
+
+
+*android.view.IWindowManagerImpl.clearForcedDisplayDensity(int)*
+
+public void clearForcedDisplayDensity(int displayId)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.clearForcedDisplaySize(int)*
+
+public void clearForcedDisplaySize(int displayId)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.closeSystemDialogs(String)*
+
+public void closeSystemDialogs(java.lang.String arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.disableKeyguard(IBinder,String)*
+
+public void disableKeyguard(
+  IBinder arg0,
+  java.lang.String arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.dismissKeyguard()*
+
+public void dismissKeyguard()
+
+
+
+
+
+*android.view.IWindowManagerImpl.executeAppTransition()*
+
+public void executeAppTransition()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.exitKeyguardSecurely(IOnKeyguardExitResult)*
+
+public void exitKeyguardSecurely(IOnKeyguardExitResult arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.freezeRotation(int)*
+
+public void freezeRotation(int arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getAnimationScale(int)*
+
+public float getAnimationScale(int arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getAnimationScales()*
+
+public float[] getAnimationScales()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getAppOrientation(IApplicationToken)*
+
+public int getAppOrientation(IApplicationToken arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getBaseDisplayDensity(int)*
+
+public int getBaseDisplayDensity(int displayId)
+
+
+
+
+
+*android.view.IWindowManagerImpl.getBaseDisplaySize(int,Point)*
+
+public void getBaseDisplaySize(
+  int displayId,
+  Point size)
+
+
+
+
+
+*android.view.IWindowManagerImpl.getCompatibleMagnificationSpecForWindow(IBinder)*
+
+public MagnificationSpec getCompatibleMagnificationSpecForWindow(IBinder windowToken)
+
+
+
+
+
+*android.view.IWindowManagerImpl.getFocusedWindowToken()*
+
+public IBinder getFocusedWindowToken()
+
+
+
+
+
+*android.view.IWindowManagerImpl.getInitialDisplayDensity(int)*
+
+public int getInitialDisplayDensity(int displayId)
+
+
+
+
+
+*android.view.IWindowManagerImpl.getInitialDisplaySize(int,Point)*
+
+public void getInitialDisplaySize(
+  int displayId,
+  Point size)
+
+
+
+
+
+*android.view.IWindowManagerImpl.getMetrics()*
+
+public DisplayMetrics getMetrics()
+
+
+
+
+
+*android.view.IWindowManagerImpl.getPendingAppTransition()*
+
+public int getPendingAppTransition()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getPreferredOptionsPanelGravity()*
+
+public int getPreferredOptionsPanelGravity()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getRotation()*
+
+public int getRotation()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.getWindowFrame(IBinder,Rect)*
+
+public void getWindowFrame(
+  IBinder token,
+  Rect outFrame)
+
+
+
+
+
+*android.view.IWindowManagerImpl.hasNavigationBar()*
+
+public boolean hasNavigationBar()
+
+
+
+
+
+*android.view.IWindowManagerImpl.inKeyguardRestrictedInputMode()*
+
+public boolean inKeyguardRestrictedInputMode()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.inputMethodClientHasFocus(IInputMethodClient)*
+
+public boolean inputMethodClientHasFocus(IInputMethodClient arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.isKeyguardLocked()*
+
+public boolean isKeyguardLocked()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.isKeyguardSecure()*
+
+public boolean isKeyguardSecure()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.isRotationFrozen()*
+
+public boolean isRotationFrozen()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.isSafeModeEnabled()*
+
+public boolean isSafeModeEnabled()
+
+
+
+
+
+*android.view.IWindowManagerImpl.isViewServerRunning()*
+
+public boolean isViewServerRunning()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.lockNow(Bundle)*
+
+public void lockNow(Bundle options)
+
+
+
+
+
+*android.view.IWindowManagerImpl.openSession(IInputMethodClient,IInputContext)*
+
+public IWindowSession openSession(
+  IInputMethodClient arg0,
+  IInputContext arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.overridePendingAppTransition(String,int,int,IRemoteCallback)*
+
+public void overridePendingAppTransition(
+  java.lang.String arg0,
+  int arg1,
+  int arg2,
+  IRemoteCallback startedCallback)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.overridePendingAppTransitionScaleUp(int,int,int,int)*
+
+public void overridePendingAppTransitionScaleUp(
+  int startX,
+  int startY,
+  int startWidth,
+  int startHeight)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.overridePendingAppTransitionThumb(Bitmap,int,int,IRemoteCallback,boolean)*
+
+public void overridePendingAppTransitionThumb(
+  Bitmap srcThumb,
+  int startX,
+  int startY,
+  IRemoteCallback startedCallback,
+  boolean scaleUp)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.pauseKeyDispatching(IBinder)*
+
+public void pauseKeyDispatching(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.prepareAppTransition(int,boolean)*
+
+public void prepareAppTransition(
+  int arg0,
+  boolean arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.reenableKeyguard(IBinder)*
+
+public void reenableKeyguard(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.removeAppToken(IBinder)*
+
+public void removeAppToken(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.removeRotationWatcher(IRotationWatcher)*
+
+public void removeRotationWatcher(IRotationWatcher arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.removeWindowToken(IBinder)*
+
+public void removeWindowToken(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.resumeKeyDispatching(IBinder)*
+
+public void resumeKeyDispatching(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.screenshotApplications(IBinder,int,int,int,boolean)*
+
+public Bitmap screenshotApplications(
+  IBinder arg0,
+  int displayId,
+  int arg1,
+  int arg2,
+  boolean arg3)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAnimationScale(int,float)*
+
+public void setAnimationScale(
+  int arg0,
+  float arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAnimationScales(float[])*
+
+public void setAnimationScales(float[] arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAppGroupId(IBinder,int)*
+
+public void setAppGroupId(
+  IBinder arg0,
+  int arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAppOrientation(IApplicationToken,int)*
+
+public void setAppOrientation(
+  IApplicationToken arg0,
+  int arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAppStartingWindow(IBinder,String,int,CompatibilityInfo,CharSequence,int,int,int,int,IBinder,boolean)*
+
+public void setAppStartingWindow(
+  IBinder arg0,
+  java.lang.String arg1,
+  int arg2,
+  CompatibilityInfo arg3,
+  java.lang.CharSequence arg4,
+  int arg5,
+  int arg6,
+  int arg7,
+  int arg8,
+  IBinder arg9,
+  boolean arg10)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAppVisibility(IBinder,boolean)*
+
+public void setAppVisibility(
+  IBinder arg0,
+  boolean arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setAppWillBeHidden(IBinder)*
+
+public void setAppWillBeHidden(IBinder arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setEventDispatching(boolean)*
+
+public void setEventDispatching(boolean arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setFocusedApp(IBinder,boolean)*
+
+public void setFocusedApp(
+  IBinder arg0,
+  boolean arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setForcedDisplayDensity(int,int)*
+
+public void setForcedDisplayDensity(
+  int displayId,
+  int density)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setForcedDisplaySize(int,int,int)*
+
+public void setForcedDisplaySize(
+  int displayId,
+  int arg0,
+  int arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setInputFilter(IInputFilter)*
+
+public void setInputFilter(IInputFilter filter)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setInTouchMode(boolean)*
+
+public void setInTouchMode(boolean arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setMagnificationCallbacks(IMagnificationCallbacks)*
+
+public void setMagnificationCallbacks(IMagnificationCallbacks callbacks)
+
+
+
+
+
+*android.view.IWindowManagerImpl.setMagnificationSpec(MagnificationSpec)*
+
+public void setMagnificationSpec(MagnificationSpec spec)
+
+
+
+
+
+*android.view.IWindowManagerImpl.setNewConfiguration(Configuration)*
+
+public void setNewConfiguration(Configuration arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setOverscan(int,int,int,int,int)*
+
+public void setOverscan(
+  int displayId,
+  int left,
+  int top,
+  int right,
+  int bottom)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setStrictModeVisualIndicatorPreference(String)*
+
+public void setStrictModeVisualIndicatorPreference(java.lang.String arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.setTouchExplorationEnabled(boolean)*
+
+public void setTouchExplorationEnabled(boolean enabled)
+
+
+
+
+
+*android.view.IWindowManagerImpl.showStrictModeViolation(boolean)*
+
+public void showStrictModeViolation(boolean arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.startAppFreezingScreen(IBinder,int)*
+
+public void startAppFreezingScreen(
+  IBinder arg0,
+  int arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.startFreezingScreen(int,int)*
+
+public void startFreezingScreen(
+  int exitAnim,
+  int enterAnim)
+
+
+
+
+
+*android.view.IWindowManagerImpl.startViewServer(int)*
+
+public boolean startViewServer(int arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.statusBarVisibilityChanged(int)*
+
+public void statusBarVisibilityChanged(int arg0)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.stopAppFreezingScreen(IBinder,boolean)*
+
+public void stopAppFreezingScreen(
+  IBinder arg0,
+  boolean arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.stopFreezingScreen()*
+
+public void stopFreezingScreen()
+
+
+
+
+
+*android.view.IWindowManagerImpl.stopViewServer()*
+
+public boolean stopViewServer()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.thawRotation()*
+
+public void thawRotation()
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.updateOrientationFromAppTokens(Configuration,IBinder)*
+
+public Configuration updateOrientationFromAppTokens(
+  Configuration arg0,
+  IBinder arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.updateRotation(boolean,boolean)*
+
+public void updateRotation(
+  boolean arg0,
+  boolean arg1)
+  throws |RemoteException|
+         
+
+
+
+
+*android.view.IWindowManagerImpl.waitForWindowDrawn(IBinder,IRemoteCallback)*
+
+public boolean waitForWindowDrawn(
+  IBinder token,
+  IRemoteCallback callback)
+
+
+
+
+
+*android.view.IWindowManagerImpl.watchRotation(IRotationWatcher)*
+
+public int watchRotation(IRotationWatcher arg0)
+  throws |RemoteException|
+         
+
+
+
+
+

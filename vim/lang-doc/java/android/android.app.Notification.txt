@@ -1,0 +1,744 @@
+*android.app.Notification* *Notification* A class that represents how a persiste
+
+public class Notification
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.app.Notification_Description|
+|android.app.Notification_Fields|
+|android.app.Notification_Constructors|
+|android.app.Notification_Methods|
+
+================================================================================
+
+*android.app.Notification_Fields*
+|android.app.Notification.Action[]_android.app.Notification.actions|
+|int_android.app.Notification.audioStreamType|
+|android.widget.RemoteViews_android.app.Notification.bigContentView|
+|android.app.PendingIntent_android.app.Notification.contentIntent|
+|android.widget.RemoteViews_android.app.Notification.contentView|
+|android.os.Parcelable.Creator<android.app.Notification>_android.app.Notification.CREATOR|
+|int_android.app.Notification.DEFAULT_ALL|
+|int_android.app.Notification.DEFAULT_LIGHTS|
+|int_android.app.Notification.DEFAULT_SOUND|
+|int_android.app.Notification.DEFAULT_VIBRATE|
+|int_android.app.Notification.defaults|
+|android.app.PendingIntent_android.app.Notification.deleteIntent|
+|java.lang.String_android.app.Notification.EXTRA_AS_HEADS_UP|
+|java.lang.String_android.app.Notification.EXTRA_INFO_TEXT|
+|java.lang.String_android.app.Notification.EXTRA_LARGE_ICON|
+|java.lang.String_android.app.Notification.EXTRA_LARGE_ICON_BIG|
+|java.lang.String_android.app.Notification.EXTRA_PEOPLE|
+|java.lang.String_android.app.Notification.EXTRA_PICTURE|
+|java.lang.String_android.app.Notification.EXTRA_PROGRESS|
+|java.lang.String_android.app.Notification.EXTRA_PROGRESS_INDETERMINATE|
+|java.lang.String_android.app.Notification.EXTRA_PROGRESS_MAX|
+|java.lang.String_android.app.Notification.EXTRA_SCORE_MODIFIED|
+|java.lang.String_android.app.Notification.EXTRA_SHOW_CHRONOMETER|
+|java.lang.String_android.app.Notification.EXTRA_SHOW_WHEN|
+|java.lang.String_android.app.Notification.EXTRA_SMALL_ICON|
+|java.lang.String_android.app.Notification.EXTRA_SUB_TEXT|
+|java.lang.String_android.app.Notification.EXTRA_SUMMARY_TEXT|
+|java.lang.String_android.app.Notification.EXTRA_TEXT|
+|java.lang.String_android.app.Notification.EXTRA_TEXT_LINES|
+|java.lang.String_android.app.Notification.EXTRA_TITLE|
+|java.lang.String_android.app.Notification.EXTRA_TITLE_BIG|
+|android.os.Bundle_android.app.Notification.extras|
+|int_android.app.Notification.FLAG_AUTO_CANCEL|
+|int_android.app.Notification.FLAG_FOREGROUND_SERVICE|
+|int_android.app.Notification.FLAG_HIGH_PRIORITY|
+|int_android.app.Notification.FLAG_INSISTENT|
+|int_android.app.Notification.FLAG_NO_CLEAR|
+|int_android.app.Notification.FLAG_ONGOING_EVENT|
+|int_android.app.Notification.FLAG_ONLY_ALERT_ONCE|
+|int_android.app.Notification.FLAG_SHOW_LIGHTS|
+|int_android.app.Notification.flags|
+|android.app.PendingIntent_android.app.Notification.fullScreenIntent|
+|int_android.app.Notification.HEADS_UP_ALLOWED|
+|int_android.app.Notification.HEADS_UP_NEVER|
+|int_android.app.Notification.HEADS_UP_REQUESTED|
+|int_android.app.Notification.icon|
+|int_android.app.Notification.iconLevel|
+|java.lang.String[]_android.app.Notification.kind|
+|java.lang.String_android.app.Notification.KIND_CALL|
+|java.lang.String_android.app.Notification.KIND_EMAIL|
+|java.lang.String_android.app.Notification.KIND_EVENT|
+|java.lang.String_android.app.Notification.KIND_MESSAGE|
+|java.lang.String_android.app.Notification.KIND_PROMO|
+|Bitmap_android.app.Notification.largeIcon|
+|int_android.app.Notification.ledARGB|
+|int_android.app.Notification.ledOffMS|
+|int_android.app.Notification.ledOnMS|
+|int_android.app.Notification.number|
+|int_android.app.Notification.priority|
+|int_android.app.Notification.PRIORITY_DEFAULT|
+|int_android.app.Notification.PRIORITY_HIGH|
+|int_android.app.Notification.PRIORITY_LOW|
+|int_android.app.Notification.PRIORITY_MAX|
+|int_android.app.Notification.PRIORITY_MIN|
+|android.net.Uri_android.app.Notification.sound|
+|int_android.app.Notification.STREAM_DEFAULT|
+|java.lang.CharSequence_android.app.Notification.tickerText|
+|android.widget.RemoteViews_android.app.Notification.tickerView|
+|long[]_android.app.Notification.vibrate|
+|long_android.app.Notification.when|
+
+*android.app.Notification_Constructors*
+|android.app.Notification()|Constructs a Notification object with default value
+|android.app.Notification(Context,int,CharSequence,long,CharSequence,CharSequence,Intent)|
+|android.app.Notification(int,CharSequence,long)|Constructs a Notification obje
+|android.app.Notification(Parcel)|Unflatten the notification from a parcel.
+
+*android.app.Notification_Methods*
+|android.app.Notification.clone()|
+|android.app.Notification.cloneInto(Notification,boolean)|Copy all (or if heavy
+|android.app.Notification.describeContents()|
+|android.app.Notification.lightenPayload()|Removes heavyweight parts of the Not
+|android.app.Notification.safeCharSequence(CharSequence)|Make sure this CharSeq
+|android.app.Notification.setLatestEventInfo(Context,CharSequence,CharSequence,PendingIntent)|
+|android.app.Notification.setUser(UserHandle)|
+|android.app.Notification.toString()|
+|android.app.Notification.writeToParcel(Parcel,int)|Flatten this notification f
+
+*android.app.Notification_Description*
+
+A class that represents how a persistent notification is to be presented to the 
+user using the (|android.app.NotificationManager|) . 
+
+The Notification.Builder(|android.app.Notification.Builder|) has been added to 
+make it easier to construct Notifications. 
+
+Developer Guides For a guide to creating notifications, read the <a 
+href="guide/topics/ui/notifiers/notifications.html">Status Bar Notifications 
+developer guide. 
+
+
+
+*android.app.Notification.Action[]_android.app.Notification.actions*
+
+Array of all (|android.app.Notification.Action|) structures attached to this 
+notification by (|android.app.Notification.Builder|) . Mostly useful for 
+instances of (|android.service.notification.NotificationListenerService|) that 
+provide an alternative interface for invoking actions. 
+
+
+*int_android.app.Notification.audioStreamType*
+
+The audio stream type to use when playing the sound. Should be one of the 
+STREAM_ constants from (|android.media.AudioManager|) . 
+
+
+*android.widget.RemoteViews_android.app.Notification.bigContentView*
+
+A large-format version of (|android.app.Notification|) , giving the 
+Notification an opportunity to show more detail. The system UI may choose to 
+show this instead of the normal content view at its discretion. 
+
+
+*android.app.PendingIntent_android.app.Notification.contentIntent*
+
+The intent to execute when the expanded status entry is clicked. If this is an 
+activity, it must include the (|android.content.Intent|) flag, which requires 
+that you take care of task management as described in the <a 
+href="guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and Back Stack 
+document. In particular, make sure to read the notification section <a 
+href="guide/topics/ui/notifiers/notifications.html#HandlingNotifications">Handling
+Notifications for the correct ways to launch an application from a 
+notification. 
+
+
+*android.widget.RemoteViews_android.app.Notification.contentView*
+
+The view that will represent this notification in the expanded status bar. 
+
+
+*android.os.Parcelable.Creator<android.app.Notification>_android.app.Notification.CREATOR*
+
+Parcelable.Creator that instantiates Notification objects 
+
+
+*int_android.app.Notification.DEFAULT_ALL*
+
+Use all default values (where applicable). 
+
+
+*int_android.app.Notification.DEFAULT_LIGHTS*
+
+Use the default notification lights. This will ignore the 
+(|android.app.Notification|) bit, and (|android.app.Notification|) , 
+(|android.app.Notification|) , or (|android.app.Notification|) . 
+
+
+*int_android.app.Notification.DEFAULT_SOUND*
+
+Use the default notification sound. This will ignore any given 
+(|android.app.Notification|) . 
+
+
+*int_android.app.Notification.DEFAULT_VIBRATE*
+
+Use the default notification vibrate. This will ignore any given 
+(|android.app.Notification|) . Using phone vibration requires the 
+VIBRATE(|android.Manifest.permission|) permission. 
+
+
+*int_android.app.Notification.defaults*
+
+Specifies which values should be taken from the defaults. 
+
+To set, OR the desired from (|android.app.Notification|) , 
+(|android.app.Notification|) , (|android.app.Notification|) . For all default 
+values, use (|android.app.Notification|) . 
+
+
+*android.app.PendingIntent_android.app.Notification.deleteIntent*
+
+The intent to execute when the notification is explicitly dismissed by the 
+user, either with the "Clear All" button or by swiping it away individually. 
+
+This probably shouldn't be launching an activity since several of those will be 
+sent at the same time. 
+
+
+*java.lang.String_android.app.Notification.EXTRA_AS_HEADS_UP*
+
+Not used. 
+
+
+*java.lang.String_android.app.Notification.EXTRA_INFO_TEXT*
+
+(|android.app.Notification|) key: this is a small piece of additional text as 
+supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_LARGE_ICON*
+
+(|android.app.Notification|) key: this is a bitmap to be used instead of the 
+small icon when showing the notification payload, as supplied to 
+(|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_LARGE_ICON_BIG*
+
+(|android.app.Notification|) key: this is a bitmap to be used instead of the 
+one from (|android.app.Notification.Builder|) when the notification is shown in 
+its expanded form, as supplied to (|android.app.Notification.BigPictureStyle|) 
+. 
+
+
+*java.lang.String_android.app.Notification.EXTRA_PEOPLE*
+
+(|android.app.Notification|) key: An array of people that this notification 
+relates to, specified by contacts provider contact URI. 
+
+
+*java.lang.String_android.app.Notification.EXTRA_PICTURE*
+
+(|android.app.Notification|) key: this is a bitmap to be shown in 
+(|android.app.Notification.BigPictureStyle|) expanded notifications, supplied 
+to (|android.app.Notification.BigPictureStyle|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_PROGRESS*
+
+(|android.app.Notification|) key: this is the progress value supplied to 
+(|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_PROGRESS_INDETERMINATE*
+
+(|android.app.Notification|) key: whether the progress bar is indeterminate, 
+supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_PROGRESS_MAX*
+
+(|android.app.Notification|) key: this is the maximum value supplied to 
+(|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_SCORE_MODIFIED*
+
+
+
+
+*java.lang.String_android.app.Notification.EXTRA_SHOW_CHRONOMETER*
+
+(|android.app.Notification|) key: whether (|android.app.Notification|) should 
+be shown as a count-up timer (specifically a (|android.widget.Chronometer|) ) 
+instead of a timestamp, as supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_SHOW_WHEN*
+
+(|android.app.Notification|) key: whether (|android.app.Notification|) should 
+be shown, as supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_SMALL_ICON*
+
+(|android.app.Notification|) key: this is the resource ID of the notification's 
+main small icon, as supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_SUB_TEXT*
+
+(|android.app.Notification|) key: this is a third line of text, as supplied to 
+(|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_SUMMARY_TEXT*
+
+(|android.app.Notification|) key: this is a line of summary information 
+intended to be shown alongside expanded notifications, as supplied to (e.g.) 
+(|android.app.Notification.BigTextStyle|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_TEXT*
+
+(|android.app.Notification|) key: this is the main text payload, as supplied to 
+(|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_TEXT_LINES*
+
+(|android.app.Notification|) key: An array of CharSequences to show in 
+(|android.app.Notification.InboxStyle|) expanded notifications, each of which 
+was supplied to (|android.app.Notification.InboxStyle|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_TITLE*
+
+(|android.app.Notification|) key: this is the title of the notification, as 
+supplied to (|android.app.Notification.Builder|) . 
+
+
+*java.lang.String_android.app.Notification.EXTRA_TITLE_BIG*
+
+(|android.app.Notification|) key: this is the title of the notification when 
+shown in expanded form, e.g. as supplied to 
+(|android.app.Notification.BigTextStyle|) . 
+
+
+*android.os.Bundle_android.app.Notification.extras*
+
+Additional semantic data to be carried around with this Notification. 
+
+The extras keys defined here are intended to capture the original inputs to 
+(|android.app.Notification.Builder|) APIs, and are intended to be used by 
+(|android.service.notification.NotificationListenerService|) implementations to 
+extract detailed information from notification objects. 
+
+
+*int_android.app.Notification.FLAG_AUTO_CANCEL*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if the notification should be canceled when it is clicked by the user. 
+
+
+*int_android.app.Notification.FLAG_FOREGROUND_SERVICE*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if this notification represents a currently running service. This will 
+normally be set for you by (|android.app.Service|) . 
+
+
+*int_android.app.Notification.FLAG_HIGH_PRIORITY*
+
+Obsolete flag indicating high-priority notifications; use the priority field 
+instead. 
+
+
+*int_android.app.Notification.FLAG_INSISTENT*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that if set, 
+the audio will be repeated until the notification is cancelled or the 
+notification window is opened. 
+
+
+*int_android.app.Notification.FLAG_NO_CLEAR*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if the notification should not be canceled when the user clicks the 
+Clear all button. 
+
+
+*int_android.app.Notification.FLAG_ONGOING_EVENT*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if this notification is in reference to something that is ongoing, like 
+a phone call. It should not be set if this notification is in reference to 
+something that happened at a particular point in time, like a missed phone 
+call. 
+
+
+*int_android.app.Notification.FLAG_ONLY_ALERT_ONCE*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if you want the sound and/or vibration play each time the notification 
+is sent, even if it has not been canceled before that. 
+
+
+*int_android.app.Notification.FLAG_SHOW_LIGHTS*
+
+Bit to be bitwise-ored into the (|android.app.Notification|) field that should 
+be set if you want the LED on for this notification. 
+
+To turn the LED off, pass 0 in the alpha channel for colorARGB or 0 for both 
+ledOnMS and ledOffMS. To turn the LED on, pass 1 for ledOnMS and 0 for 
+ledOffMS. To flash the LED, pass the number of milliseconds that it should be 
+on and off to ledOnMS and ledOffMS. 
+
+Since hardware varies, you are not guaranteed that any of the values you pass 
+are honored exactly. Use the system defaults (TODO) if possible because they 
+will be set to values that work on any given hardware. 
+
+The alpha channel must be set for forward compatibility. 
+
+
+*int_android.app.Notification.flags*
+
+
+
+
+*android.app.PendingIntent_android.app.Notification.fullScreenIntent*
+
+An intent to launch instead of posting the notification to the status bar. 
+
+
+*int_android.app.Notification.HEADS_UP_ALLOWED*
+
+Default value for (|android.app.Notification|) . 
+
+
+*int_android.app.Notification.HEADS_UP_NEVER*
+
+Value for (|android.app.Notification|) . 
+
+
+*int_android.app.Notification.HEADS_UP_REQUESTED*
+
+Value for (|android.app.Notification|) . 
+
+
+*int_android.app.Notification.icon*
+
+The resource id of a drawable to use as the icon in the status bar. This is 
+required; notifications with an invalid icon resource will not be shown. 
+
+
+*int_android.app.Notification.iconLevel*
+
+If the icon in the status bar is to have more than one level, you can set this. 
+Otherwise, leave it at its default value of 0. 
+
+
+*java.lang.String[]_android.app.Notification.kind*
+
+
+
+
+*java.lang.String_android.app.Notification.KIND_CALL*
+
+
+
+
+*java.lang.String_android.app.Notification.KIND_EMAIL*
+
+
+
+
+*java.lang.String_android.app.Notification.KIND_EVENT*
+
+
+
+
+*java.lang.String_android.app.Notification.KIND_MESSAGE*
+
+
+
+
+*java.lang.String_android.app.Notification.KIND_PROMO*
+
+
+
+
+*Bitmap_android.app.Notification.largeIcon*
+
+The bitmap that may escape the bounds of the panel and bar. 
+
+
+*int_android.app.Notification.ledARGB*
+
+The color of the led. The hardware will do its best approximation. 
+
+
+*int_android.app.Notification.ledOffMS*
+
+The number of milliseconds for the LED to be off while it's flashing. The 
+hardware will do its best approximation. 
+
+
+*int_android.app.Notification.ledOnMS*
+
+The number of milliseconds for the LED to be on while it's flashing. The 
+hardware will do its best approximation. 
+
+
+*int_android.app.Notification.number*
+
+The number of events that this notification represents. For example, in a new 
+mail notification, this could be the number of unread messages. 
+
+The system may or may not use this field to modify the appearance of the 
+notification. For example, before (|android.os.Build.VERSION_CODES|) , this 
+number was superimposed over the icon in the status bar. Starting with 
+(|android.os.Build.VERSION_CODES|) , the template used by 
+(|android.app.Notification.Builder|) has displayed the number in the expanded 
+notification view. 
+
+If the number is 0 or negative, it is never shown. 
+
+
+*int_android.app.Notification.priority*
+
+Relative priority for this notification. 
+
+Priority is an indication of how much of the user's valuable attention should 
+be consumed by this notification. Low-priority notifications may be hidden from 
+the user in certain situations, while the user might be interrupted for a 
+higher-priority notification. The system will make a determination about how to 
+interpret this priority when presenting the notification. 
+
+
+*int_android.app.Notification.PRIORITY_DEFAULT*
+
+Default notification (|android.app.Notification|) . If your application does 
+not prioritize its own notifications, use this value for all notifications. 
+
+
+*int_android.app.Notification.PRIORITY_HIGH*
+
+Higher (|android.app.Notification|) , for more important notifications or 
+alerts. The UI may choose to show these items larger, or at a different 
+position in notification lists, compared with your app's 
+(|android.app.Notification|) items. 
+
+
+*int_android.app.Notification.PRIORITY_LOW*
+
+Lower (|android.app.Notification|) , for items that are less important. The UI 
+may choose to show these items smaller, or at a different position in the list, 
+compared with your app's (|android.app.Notification|) items. 
+
+
+*int_android.app.Notification.PRIORITY_MAX*
+
+Highest (|android.app.Notification|) , for your application's most important 
+items that require the user's prompt attention or input. 
+
+
+*int_android.app.Notification.PRIORITY_MIN*
+
+Lowest (|android.app.Notification|) ; these items might not be shown to the 
+user except under special circumstances, such as detailed notification logs. 
+
+
+*android.net.Uri_android.app.Notification.sound*
+
+The sound to play. 
+
+To play the default notification sound, see (|android.app.Notification|) . 
+
+
+*int_android.app.Notification.STREAM_DEFAULT*
+
+Use this constant as the value for audioStreamType to request that the default 
+stream type for notifications be used. Currently the default stream type is 
+(|AudioManager|) . 
+
+
+*java.lang.CharSequence_android.app.Notification.tickerText*
+
+Text to scroll across the screen when this item is added to the status bar on 
+large and smaller devices. 
+
+
+*android.widget.RemoteViews_android.app.Notification.tickerView*
+
+The view to show as the ticker in the status bar when the notification is 
+posted. 
+
+
+*long[]_android.app.Notification.vibrate*
+
+The pattern with which to vibrate. 
+
+To vibrate the default pattern, see (|android.app.Notification|) . 
+
+
+*long_android.app.Notification.when*
+
+A timestamp related to this notification, in milliseconds since the epoch. 
+
+Default value: Now(|java.lang.System|) . 
+
+Choose a timestamp that will be most relevant to the user. For most finite 
+events, this corresponds to the time the event happened (or will happen, in the 
+case of events that have yet to occur but about which the user is being 
+informed). Indefinite events should be timestamped according to when the 
+activity began. 
+
+Some examples: 
+
+Notification of a new chat message should be stamped when the message was 
+received. Notification of an ongoing file download (with a progress bar, for 
+example) should be stamped when the download started. Notification of a 
+completed file download should be stamped when the download finished. 
+Notification of an upcoming meeting should be stamped with the time the meeting 
+will begin (that is, in the future). Notification of an ongoing stopwatch 
+(increasing timer) should be stamped with the watch's start time. Notification 
+of an ongoing countdown timer should be stamped with the timer's end time. 
+
+
+
+*android.app.Notification()*
+
+public Notification()
+
+Constructs a Notification object with default values. You might want to 
+consider using (|android.app.Notification.Builder|) instead. 
+
+
+*android.app.Notification(Context,int,CharSequence,long,CharSequence,CharSequence,Intent)*
+
+public Notification(
+  android.content.Context context,
+  int icon,
+  java.lang.CharSequence tickerText,
+  long when,
+  java.lang.CharSequence contentTitle,
+  java.lang.CharSequence contentText,
+  android.content.Intent contentIntent)
+
+
+
+
+*android.app.Notification(int,CharSequence,long)*
+
+public Notification(
+  int icon,
+  java.lang.CharSequence tickerText,
+  long when)
+
+Constructs a Notification object with the information needed to have a status 
+bar icon without the standard expanded view. 
+
+    icon - The resource id of the icon to put in the status bar. 
+    tickerText - The text that flows by in the status bar when the notification first activates. 
+    when - The time to show in the time field. In the System.currentTimeMillis timebase. 
+
+*android.app.Notification(Parcel)*
+
+public Notification(android.os.Parcel parcel)
+
+Unflatten the notification from a parcel. 
+
+
+*android.app.Notification.clone()*
+
+public |android.app.Notification| clone()
+
+
+
+
+
+*android.app.Notification.cloneInto(Notification,boolean)*
+
+public void cloneInto(
+  android.app.Notification that,
+  boolean heavy)
+
+Copy all (or if heavy is false, all except Bitmaps and RemoteViews) members of 
+this into that. 
+
+
+
+*android.app.Notification.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.app.Notification.lightenPayload()*
+
+public final void lightenPayload()
+
+Removes heavyweight parts of the Notification object for archival or for 
+sending to listeners when the full contents are not necessary. 
+
+
+
+*android.app.Notification.safeCharSequence(CharSequence)*
+
+public static |java.lang.CharSequence| safeCharSequence(java.lang.CharSequence cs)
+
+Make sure this CharSequence is safe to put into a bundle, which basically means 
+it had better not be some custom Parcelable implementation. 
+
+
+
+*android.app.Notification.setLatestEventInfo(Context,CharSequence,CharSequence,PendingIntent)*
+
+public void setLatestEventInfo(
+  android.content.Context context,
+  java.lang.CharSequence contentTitle,
+  java.lang.CharSequence contentText,
+  android.app.PendingIntent contentIntent)
+
+Sets the (|android.app.Notification|) field to be a view with the standard 
+"Latest Event" layout. 
+
+Uses the (|android.app.Notification|) and (|android.app.Notification|) fields 
+to set the icon and time fields in the view. 
+
+    Deprecated: Use {@link Builder} instead.
+
+    context - The context for your application / activity. 
+    contentTitle - The title that goes in the expanded entry. 
+    contentText - The text that goes in the expanded entry. 
+    contentIntent - The intent to launch when the user clicks the expanded notification. If this is 
+       an activity, it must include the {@link 
+       android.content.Intent#FLAG_ACTIVITY_NEW_TASK} flag, which requires that 
+       you take care of task management as described in the Tasks and Back 
+       Stack document. 
+
+*android.app.Notification.setUser(UserHandle)*
+
+public void setUser(android.os.UserHandle user)
+
+
+
+
+
+*android.app.Notification.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.app.Notification.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+Flatten this notification from a parcel. 
+
+
+
+

@@ -1,0 +1,225 @@
+*android.net.http.RequestHandle* *RequestHandle* RequestHandle: handles a reques
+
+public class RequestHandle
+  extends    |java.lang.Object|
+
+|android.net.http.RequestHandle_Description|
+|android.net.http.RequestHandle_Fields|
+|android.net.http.RequestHandle_Constructors|
+|android.net.http.RequestHandle_Methods|
+
+================================================================================
+
+*android.net.http.RequestHandle_Fields*
+|int_android.net.http.RequestHandle.MAX_REDIRECT_COUNT|
+
+*android.net.http.RequestHandle_Constructors*
+|android.net.http.RequestHandle(RequestQueue,String,WebAddress,String,Map<String,String>,InputStream,int,Request)|
+|android.net.http.RequestHandle(RequestQueue,String,WebAddress,String,Map<String,String>,InputStream,int,Request,Connection)|
+
+*android.net.http.RequestHandle_Methods*
+|android.net.http.RequestHandle.authorizationHeader(boolean)|
+|android.net.http.RequestHandle.cancel()|Cancels this request
+|android.net.http.RequestHandle.computeBasicAuthResponse(String,String)|
+|android.net.http.RequestHandle.getMethod()|
+|android.net.http.RequestHandle.getRedirectCount()|
+|android.net.http.RequestHandle.handleSslErrorResponse(boolean)|Handles SSL err
+|android.net.http.RequestHandle.isRedirectMax()|
+|android.net.http.RequestHandle.pauseRequest(boolean)|Pauses the loading of thi
+|android.net.http.RequestHandle.processRequest()|
+|android.net.http.RequestHandle.setRedirectCount(int)|
+|android.net.http.RequestHandle.setupBasicAuthResponse(boolean,String,String)|C
+|android.net.http.RequestHandle.setupDigestAuthResponse(boolean,String,String,String,String,String,String,String)|
+|android.net.http.RequestHandle.setupRedirect(String,int,Map<String,String>)|Cr
+|android.net.http.RequestHandle.waitUntilComplete()|
+
+*android.net.http.RequestHandle_Description*
+
+RequestHandle: handles a request session that may include multiple redirects, 
+HTTP authentication requests, etc. 
+
+
+
+*int_android.net.http.RequestHandle.MAX_REDIRECT_COUNT*
+
+
+
+
+
+*android.net.http.RequestHandle(RequestQueue,String,WebAddress,String,Map<String,String>,InputStream,int,Request)*
+
+public RequestHandle(
+  android.net.http.RequestQueue requestQueue,
+  java.lang.String url,
+  android.net.WebAddress uri,
+  java.lang.String method,
+  java.util.Map<java.lang.String, java.lang.String> headers,
+  java.io.InputStream bodyProvider,
+  int bodyLength,
+  android.net.http.Request request)
+
+Creates a new request session. 
+
+
+*android.net.http.RequestHandle(RequestQueue,String,WebAddress,String,Map<String,String>,InputStream,int,Request,Connection)*
+
+public RequestHandle(
+  android.net.http.RequestQueue requestQueue,
+  java.lang.String url,
+  android.net.WebAddress uri,
+  java.lang.String method,
+  java.util.Map<java.lang.String, java.lang.String> headers,
+  java.io.InputStream bodyProvider,
+  int bodyLength,
+  android.net.http.Request request,
+  android.net.http.Connection conn)
+
+Creates a new request session with a given Connection. This connection is used 
+during a synchronous load to handle this request. 
+
+
+*android.net.http.RequestHandle.authorizationHeader(boolean)*
+
+public static |java.lang.String| authorizationHeader(boolean isProxy)
+
+
+
+
+
+    Returns: The right authorization header (dependeing on whether it is a proxy or not). 
+
+*android.net.http.RequestHandle.cancel()*
+
+public void cancel()
+
+Cancels this request 
+
+
+
+*android.net.http.RequestHandle.computeBasicAuthResponse(String,String)*
+
+public static |java.lang.String| computeBasicAuthResponse(
+  java.lang.String username,
+  java.lang.String password)
+
+
+
+
+
+    Returns: Basic-scheme authentication response: BASE64(username:password). 
+
+*android.net.http.RequestHandle.getMethod()*
+
+public |java.lang.String| getMethod()
+
+
+
+
+
+    Returns: HTTP request method (GET, PUT, etc). 
+
+*android.net.http.RequestHandle.getRedirectCount()*
+
+public int getRedirectCount()
+
+
+
+
+
+*android.net.http.RequestHandle.handleSslErrorResponse(boolean)*
+
+public void handleSslErrorResponse(boolean proceed)
+
+Handles SSL error(s) on the way down from the user (the user has already 
+provided their feedback). 
+
+
+
+*android.net.http.RequestHandle.isRedirectMax()*
+
+public boolean isRedirectMax()
+
+
+
+
+
+    Returns: true if we've hit the max redirect count 
+
+*android.net.http.RequestHandle.pauseRequest(boolean)*
+
+public void pauseRequest(boolean pause)
+
+Pauses the loading of this request. For example, called from the WebCore thread 
+when the plugin can take no more data. 
+
+
+
+*android.net.http.RequestHandle.processRequest()*
+
+public void processRequest()
+
+
+
+
+
+*android.net.http.RequestHandle.setRedirectCount(int)*
+
+public void setRedirectCount(int count)
+
+
+
+
+
+*android.net.http.RequestHandle.setupBasicAuthResponse(boolean,String,String)*
+
+public void setupBasicAuthResponse(
+  boolean isProxy,
+  java.lang.String username,
+  java.lang.String password)
+
+Create and queue an HTTP authentication-response (basic) request. 
+
+
+
+*android.net.http.RequestHandle.setupDigestAuthResponse(boolean,String,String,String,String,String,String,String)*
+
+public void setupDigestAuthResponse(
+  boolean isProxy,
+  java.lang.String username,
+  java.lang.String password,
+  java.lang.String realm,
+  java.lang.String nonce,
+  java.lang.String QOP,
+  java.lang.String algorithm,
+  java.lang.String opaque)
+
+Create and queue an HTTP authentication-response (digest) request. 
+
+
+
+*android.net.http.RequestHandle.setupRedirect(String,int,Map<String,String>)*
+
+public boolean setupRedirect(
+  java.lang.String redirectTo,
+  int statusCode,
+  java.util.Map<java.lang.String, java.lang.String> cacheHeaders)
+
+Create and queue a redirect request. 
+
+
+    redirectTo - URL to redirect to 
+    statusCode - HTTP status code returned from original request 
+    cacheHeaders - Cache header for redirect URL 
+
+    Returns: true if setup succeeds, false otherwise (redirect loop count exceeded, body 
+             provider unable to rewind on 307 redirect) 
+
+*android.net.http.RequestHandle.waitUntilComplete()*
+
+public void waitUntilComplete()
+
+
+
+
+
+

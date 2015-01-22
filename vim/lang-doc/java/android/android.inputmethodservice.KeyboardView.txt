@@ -1,0 +1,350 @@
+*android.inputmethodservice.KeyboardView* *KeyboardView* A view that renders a v
+
+public class KeyboardView
+  extends    |android.view.View|
+  implements |android.view.View.OnClickListener|
+
+|android.inputmethodservice.KeyboardView_Description|
+|android.inputmethodservice.KeyboardView_Fields|
+|android.inputmethodservice.KeyboardView_Constructors|
+|android.inputmethodservice.KeyboardView_Methods|
+
+================================================================================
+
+*android.inputmethodservice.KeyboardView_Constructors*
+|android.inputmethodservice.KeyboardView(Context,AttributeSet)|
+|android.inputmethodservice.KeyboardView(Context,AttributeSet,int)|
+
+*android.inputmethodservice.KeyboardView_Methods*
+|android.inputmethodservice.KeyboardView.closing()|
+|android.inputmethodservice.KeyboardView.getKeyboard()|Returns the current keyb
+|android.inputmethodservice.KeyboardView.getOnKeyboardActionListener()|Returns 
+|android.inputmethodservice.KeyboardView.handleBack()|
+|android.inputmethodservice.KeyboardView.invalidateAllKeys()|Requests a redraw 
+|android.inputmethodservice.KeyboardView.invalidateKey(int)|Invalidates a key s
+|android.inputmethodservice.KeyboardView.isPreviewEnabled()|Returns the enabled
+|android.inputmethodservice.KeyboardView.isProximityCorrectionEnabled()|Returns
+|android.inputmethodservice.KeyboardView.isShifted()|Returns the state of the s
+|android.inputmethodservice.KeyboardView.onClick(View)|Popup keyboard close but
+|android.inputmethodservice.KeyboardView.onDetachedFromWindow()|
+|android.inputmethodservice.KeyboardView.onDraw(Canvas)|
+|android.inputmethodservice.KeyboardView.onHoverEvent(MotionEvent)|
+|android.inputmethodservice.KeyboardView.onLongPress(Keyboard.Key)|Called when 
+|android.inputmethodservice.KeyboardView.onMeasure(int,int)|
+|android.inputmethodservice.KeyboardView.onSizeChanged(int,int,int,int)|
+|android.inputmethodservice.KeyboardView.onTouchEvent(MotionEvent)|
+|android.inputmethodservice.KeyboardView.setKeyboard(Keyboard)|Attaches a keybo
+|android.inputmethodservice.KeyboardView.setOnKeyboardActionListener(KeyboardView.OnKeyboardActionListener)|
+|android.inputmethodservice.KeyboardView.setPopupOffset(int,int)|
+|android.inputmethodservice.KeyboardView.setPopupParent(View)|
+|android.inputmethodservice.KeyboardView.setPreviewEnabled(boolean)|Enables or 
+|android.inputmethodservice.KeyboardView.setProximityCorrectionEnabled(boolean)|
+|android.inputmethodservice.KeyboardView.setShifted(boolean)|Sets the state of 
+|android.inputmethodservice.KeyboardView.setVerticalCorrection(int)|
+|android.inputmethodservice.KeyboardView.swipeDown()|
+|android.inputmethodservice.KeyboardView.swipeLeft()|
+|android.inputmethodservice.KeyboardView.swipeRight()|
+|android.inputmethodservice.KeyboardView.swipeUp()|
+
+*android.inputmethodservice.KeyboardView_Description*
+
+A view that renders a virtual (|android.inputmethodservice.Keyboard|) . It 
+handles rendering of keys and detecting key presses and touch movements. 
+
+
+
+*android.inputmethodservice.KeyboardView(Context,AttributeSet)*
+
+public KeyboardView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.inputmethodservice.KeyboardView(Context,AttributeSet,int)*
+
+public KeyboardView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.inputmethodservice.KeyboardView.closing()*
+
+public void closing()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.getKeyboard()*
+
+public |android.inputmethodservice.Keyboard| getKeyboard()
+
+Returns the current keyboard being displayed by this view. 
+
+
+
+    Returns: the currently attached keyboard 
+
+*android.inputmethodservice.KeyboardView.getOnKeyboardActionListener()*
+
+protected |android.inputmethodservice.KeyboardView.OnKeyboardActionListener| getOnKeyboardActionListener()
+
+Returns the 
+(|android.inputmethodservice.KeyboardView.OnKeyboardActionListener|) object. 
+
+
+
+    Returns: the listener attached to this keyboard 
+
+*android.inputmethodservice.KeyboardView.handleBack()*
+
+public boolean handleBack()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.invalidateAllKeys()*
+
+public void invalidateAllKeys()
+
+Requests a redraw of the entire keyboard. Calling 
+(|android.inputmethodservice.KeyboardView|) is not sufficient because the 
+keyboard renders the keys to an off-screen buffer and an invalidate() only 
+draws the cached buffer. 
+
+
+
+*android.inputmethodservice.KeyboardView.invalidateKey(int)*
+
+public void invalidateKey(int keyIndex)
+
+Invalidates a key so that it will be redrawn on the next repaint. Use this 
+method if only one key is changing it's content. Any changes that affect the 
+position or size of the key may not be honored. 
+
+
+    keyIndex - the index of the key in the attached {@link Keyboard}. 
+
+*android.inputmethodservice.KeyboardView.isPreviewEnabled()*
+
+public boolean isPreviewEnabled()
+
+Returns the enabled state of the key feedback popup. 
+
+
+
+    Returns: whether or not the key feedback popup is enabled 
+
+*android.inputmethodservice.KeyboardView.isProximityCorrectionEnabled()*
+
+public boolean isProximityCorrectionEnabled()
+
+Returns true if proximity correction is enabled. 
+
+
+
+*android.inputmethodservice.KeyboardView.isShifted()*
+
+public boolean isShifted()
+
+Returns the state of the shift key of the keyboard, if any. 
+
+
+
+    Returns: true if the shift is in a pressed state, false otherwise. If there is no shift 
+             key on the keyboard or there is no keyboard attached, it returns 
+             false. 
+
+*android.inputmethodservice.KeyboardView.onClick(View)*
+
+public void onClick(android.view.View v)
+
+Popup keyboard close button clicked. 
+
+
+
+*android.inputmethodservice.KeyboardView.onDetachedFromWindow()*
+
+public void onDetachedFromWindow()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.onDraw(Canvas)*
+
+public void onDraw(Canvas canvas)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.onHoverEvent(MotionEvent)*
+
+public boolean onHoverEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.onLongPress(Keyboard.Key)*
+
+protected boolean onLongPress(android.inputmethodservice.Keyboard.Key popupKey)
+
+Called when a key is long pressed. By default this will open any popup keyboard 
+associated with this key through the attributes popupLayout and 
+popupCharacters. 
+
+
+    popupKey - the key that was long pressed 
+
+    Returns: true if the long press is handled, false otherwise. Subclasses should call the 
+             method on the base class if the subclass doesn't wish to handle 
+             the call. 
+
+*android.inputmethodservice.KeyboardView.onMeasure(int,int)*
+
+public void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.onSizeChanged(int,int,int,int)*
+
+public void onSizeChanged(
+  int w,
+  int h,
+  int oldw,
+  int oldh)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent me)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.setKeyboard(Keyboard)*
+
+public void setKeyboard(android.inputmethodservice.Keyboard keyboard)
+
+Attaches a keyboard to this view. The keyboard can be switched at any time and 
+the view will re-layout itself to accommodate the keyboard. 
+
+
+    keyboard - the keyboard to display in this view 
+
+*android.inputmethodservice.KeyboardView.setOnKeyboardActionListener(KeyboardView.OnKeyboardActionListener)*
+
+public void setOnKeyboardActionListener(android.inputmethodservice.KeyboardView.OnKeyboardActionListener listener)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.setPopupOffset(int,int)*
+
+public void setPopupOffset(
+  int x,
+  int y)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.setPopupParent(View)*
+
+public void setPopupParent(android.view.View v)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.setPreviewEnabled(boolean)*
+
+public void setPreviewEnabled(boolean previewEnabled)
+
+Enables or disables the key feedback popup. This is a popup that shows a 
+magnified version of the depressed key. By default the preview is enabled. 
+
+
+    previewEnabled - whether or not to enable the key feedback popup 
+
+*android.inputmethodservice.KeyboardView.setProximityCorrectionEnabled(boolean)*
+
+public void setProximityCorrectionEnabled(boolean enabled)
+
+When enabled, calls to 
+(|android.inputmethodservice.KeyboardView.OnKeyboardActionListener|) will 
+include key codes for adjacent keys. When disabled, only the primary key code 
+will be reported. 
+
+
+    enabled - whether or not the proximity correction is enabled 
+
+*android.inputmethodservice.KeyboardView.setShifted(boolean)*
+
+public boolean setShifted(boolean shifted)
+
+Sets the state of the shift key of the keyboard, if any. 
+
+
+    shifted - whether or not to enable the state of the shift key 
+
+    Returns: true if the shift key state changed, false if there was no change 
+
+*android.inputmethodservice.KeyboardView.setVerticalCorrection(int)*
+
+public void setVerticalCorrection(int verticalOffset)
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.swipeDown()*
+
+protected void swipeDown()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.swipeLeft()*
+
+protected void swipeLeft()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.swipeRight()*
+
+protected void swipeRight()
+
+
+
+
+
+*android.inputmethodservice.KeyboardView.swipeUp()*
+
+protected void swipeUp()
+
+
+
+
+
+

@@ -1,0 +1,152 @@
+*android.provider.UserDictionary.Words* *UserDictionary.Words* Contains the user
+
+public static class UserDictionary.Words
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+
+|android.provider.UserDictionary.Words_Description|
+|android.provider.UserDictionary.Words_Fields|
+|android.provider.UserDictionary.Words_Constructors|
+|android.provider.UserDictionary.Words_Methods|
+
+================================================================================
+
+*android.provider.UserDictionary.Words_Fields*
+|java.lang.String_android.provider.UserDictionary.Words._ID|
+|java.lang.String_android.provider.UserDictionary.Words.APP_ID|
+|java.lang.String_android.provider.UserDictionary.Words.CONTENT_ITEM_TYPE|
+|java.lang.String_android.provider.UserDictionary.Words.CONTENT_TYPE|
+|android.net.Uri_android.provider.UserDictionary.Words.CONTENT_URI|
+|java.lang.String_android.provider.UserDictionary.Words.DEFAULT_SORT_ORDER|
+|java.lang.String_android.provider.UserDictionary.Words.FREQUENCY|
+|java.lang.String_android.provider.UserDictionary.Words.LOCALE|
+|int_android.provider.UserDictionary.Words.LOCALE_TYPE_ALL|
+|int_android.provider.UserDictionary.Words.LOCALE_TYPE_CURRENT|
+|java.lang.String_android.provider.UserDictionary.Words.SHORTCUT|
+|java.lang.String_android.provider.UserDictionary.Words.WORD|
+
+*android.provider.UserDictionary.Words_Constructors*
+|android.provider.UserDictionary.Words()|
+
+*android.provider.UserDictionary.Words_Methods*
+|android.provider.UserDictionary.Words.addWord(Context,String,int,int)|Adds a w
+|android.provider.UserDictionary.Words.addWord(Context,String,int,String,Locale)|
+
+*android.provider.UserDictionary.Words_Description*
+
+Contains the user defined words. 
+
+
+
+*java.lang.String_android.provider.UserDictionary.Words._ID*
+
+
+
+
+*java.lang.String_android.provider.UserDictionary.Words.APP_ID*
+
+The uid of the application that inserted the word. TYPE: INTEGER 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.CONTENT_ITEM_TYPE*
+
+The MIME type of a (|android.provider.UserDictionary.Words|) sub-directory of a 
+single word. 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.CONTENT_TYPE*
+
+The MIME type of (|android.provider.UserDictionary.Words|) providing a 
+directory of words. 
+
+
+*android.net.Uri_android.provider.UserDictionary.Words.CONTENT_URI*
+
+The content:// style URL for this table 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.DEFAULT_SORT_ORDER*
+
+Sort by descending order of frequency. 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.FREQUENCY*
+
+The frequency column. A value between 1 and 255. Higher values imply higher 
+frequency. TYPE: INTEGER 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.LOCALE*
+
+The locale that this word belongs to. Null if it pertains to all locales. 
+Locale is as defined by the string returned by Locale.toString(). TYPE: TEXT 
+
+
+*int_android.provider.UserDictionary.Words.LOCALE_TYPE_ALL*
+
+
+
+
+*int_android.provider.UserDictionary.Words.LOCALE_TYPE_CURRENT*
+
+
+
+
+*java.lang.String_android.provider.UserDictionary.Words.SHORTCUT*
+
+An optional shortcut for this word. When the shortcut is typed, supporting IMEs 
+should suggest the word in this row as an alternate spelling too. 
+
+
+*java.lang.String_android.provider.UserDictionary.Words.WORD*
+
+The word column. TYPE: TEXT 
+
+
+
+*android.provider.UserDictionary.Words()*
+
+public UserDictionary.Words()
+
+
+
+
+*android.provider.UserDictionary.Words.addWord(Context,String,int,int)*
+
+public static void addWord(
+  android.content.Context context,
+  java.lang.String word,
+  int frequency,
+  int localeType)
+
+Adds a word to the dictionary, with the given frequency and the specified 
+specified locale type. 
+
+    Deprecated: Please use
+  {@link #addWord(Context, String, int, String, Locale)} instead.
+
+    context - the current application context 
+    word - the word to add to the dictionary. This should not be null or empty. 
+    localeType - the locale type for this word. It should be one of {@link #LOCALE_TYPE_ALL} or 
+       {@link #LOCALE_TYPE_CURRENT}. 
+
+*android.provider.UserDictionary.Words.addWord(Context,String,int,String,Locale)*
+
+public static void addWord(
+  android.content.Context context,
+  java.lang.String word,
+  int frequency,
+  java.lang.String shortcut,
+  java.util.Locale locale)
+
+Adds a word to the dictionary, with the given frequency and the specified 
+locale type. 
+
+
+    context - the current application context 
+    word - the word to add to the dictionary. This should not be null or empty. 
+    shortcut - optional shortcut spelling for this word. When the shortcut is typed, the word 
+       may be suggested by applications that support it. May be null. 
+    locale - the locale to insert the word for, or null to insert the word for all locales. 
+
+

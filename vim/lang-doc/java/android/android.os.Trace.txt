@@ -1,0 +1,274 @@
+*android.os.Trace* *Trace* Writes trace events to the system trace buffer.
+
+public final class Trace
+  extends    |java.lang.Object|
+
+|android.os.Trace_Description|
+|android.os.Trace_Fields|
+|android.os.Trace_Constructors|
+|android.os.Trace_Methods|
+
+================================================================================
+
+*android.os.Trace_Fields*
+|long_android.os.Trace.TRACE_TAG_ACTIVITY_MANAGER|
+|long_android.os.Trace.TRACE_TAG_ALWAYS|
+|long_android.os.Trace.TRACE_TAG_APP|
+|long_android.os.Trace.TRACE_TAG_AUDIO|
+|long_android.os.Trace.TRACE_TAG_CAMERA|
+|long_android.os.Trace.TRACE_TAG_DALVIK|
+|long_android.os.Trace.TRACE_TAG_GRAPHICS|
+|long_android.os.Trace.TRACE_TAG_HAL|
+|long_android.os.Trace.TRACE_TAG_INPUT|
+|long_android.os.Trace.TRACE_TAG_NEVER|
+|long_android.os.Trace.TRACE_TAG_RESOURCES|
+|long_android.os.Trace.TRACE_TAG_RS|
+|long_android.os.Trace.TRACE_TAG_SYNC_MANAGER|
+|long_android.os.Trace.TRACE_TAG_VIDEO|
+|long_android.os.Trace.TRACE_TAG_VIEW|
+|long_android.os.Trace.TRACE_TAG_WEBVIEW|
+|long_android.os.Trace.TRACE_TAG_WINDOW_MANAGER|
+
+*android.os.Trace_Methods*
+|android.os.Trace.asyncTraceBegin(long,String,int)|Writes a trace message to in
+|android.os.Trace.asyncTraceEnd(long,String,int)|Writes a trace message to indi
+|android.os.Trace.beginSection(String)|Writes a trace message to indicate that 
+|android.os.Trace.endSection()|Writes a trace message to indicate that a given 
+|android.os.Trace.isTagEnabled(long)|Returns true if a trace tag is enabled.
+|android.os.Trace.setAppTracingAllowed(boolean)|Set whether application tracing
+|android.os.Trace.setTracingEnabled(boolean)|Set whether tracing is enabled in 
+|android.os.Trace.traceBegin(long,String)|Writes a trace message to indicate th
+|android.os.Trace.traceCounter(long,String,int)|Writes trace message to indicat
+|android.os.Trace.traceEnd(long)|Writes a trace message to indicate that the cu
+
+*android.os.Trace_Description*
+
+Writes trace events to the system trace buffer. These trace events can be 
+collected and visualized using the Systrace tool. 
+
+This tracing mechanism is independent of the method tracing mechanism offered 
+by (|android.os.Debug|) . In particular, it enables tracing of events that 
+occur across multiple processes. 
+
+
+
+*long_android.os.Trace.TRACE_TAG_ACTIVITY_MANAGER*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_ALWAYS*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_APP*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_AUDIO*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_CAMERA*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_DALVIK*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_GRAPHICS*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_HAL*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_INPUT*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_NEVER*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_RESOURCES*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_RS*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_SYNC_MANAGER*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_VIDEO*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_VIEW*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_WEBVIEW*
+
+
+
+
+*long_android.os.Trace.TRACE_TAG_WINDOW_MANAGER*
+
+
+
+
+
+*android.os.Trace.asyncTraceBegin(long,String,int)*
+
+public static void asyncTraceBegin(
+  long traceTag,
+  java.lang.String methodName,
+  int cookie)
+
+Writes a trace message to indicate that a given section of code has begun. Must 
+be followed by a call to (|android.os.Trace|) using the same tag. Unlike 
+(|android.os.Trace|) and (|android.os.Trace|) , asynchronous events do not need 
+to be nested. The name and cookie used to begin an event must be used to end 
+it. 
+
+
+    traceTag - The trace tag. 
+    methodName - The method name to appear in the trace. 
+    cookie - Unique identifier for distinguishing simultaneous events 
+
+*android.os.Trace.asyncTraceEnd(long,String,int)*
+
+public static void asyncTraceEnd(
+  long traceTag,
+  java.lang.String methodName,
+  int cookie)
+
+Writes a trace message to indicate that the current method has ended. Must be 
+called exactly once for each call to (|android.os.Trace|) using the same tag, 
+name and cookie. 
+
+
+    traceTag - The trace tag. 
+    methodName - The method name to appear in the trace. 
+    cookie - Unique identifier for distinguishing simultaneous events 
+
+*android.os.Trace.beginSection(String)*
+
+public static void beginSection(java.lang.String sectionName)
+
+Writes a trace message to indicate that a given section of code has begun. This 
+call must be followed by a corresponding call to (|android.os.Trace|) on the 
+same thread. 
+
+At this time the vertical bar character '|', newline character '\n', and null 
+character '\0' are used internally by the tracing mechanism. If sectionName 
+contains these characters they will be replaced with a space character in the 
+trace. 
+
+
+    sectionName - The name of the code section to appear in the trace. This may be at most 127 
+       Unicode code units long. 
+
+*android.os.Trace.endSection()*
+
+public static void endSection()
+
+Writes a trace message to indicate that a given section of code has ended. This 
+call must be preceeded by a corresponding call to (|android.os.Trace|) . 
+Calling this method will mark the end of the most recently begun section of 
+code, so care must be taken to ensure that beginSection / endSection pairs are 
+properly nested and called from the same thread. 
+
+
+
+*android.os.Trace.isTagEnabled(long)*
+
+public static boolean isTagEnabled(long traceTag)
+
+Returns true if a trace tag is enabled. 
+
+
+    traceTag - The trace tag to check. 
+
+    Returns: True if the trace tag is valid. 
+
+*android.os.Trace.setAppTracingAllowed(boolean)*
+
+public static void setAppTracingAllowed(boolean allowed)
+
+Set whether application tracing is allowed for this process. This is intended 
+to be set once at application start-up time based on whether the application is 
+debuggable. 
+
+
+
+*android.os.Trace.setTracingEnabled(boolean)*
+
+public static void setTracingEnabled(boolean enabled)
+
+Set whether tracing is enabled in this process. Tracing is disabled shortly 
+after Zygote initializes and re-enabled after processes fork from Zygote. This 
+is done because Zygote has no way to be notified about changes to the tracing 
+tags, and if Zygote ever reads and caches the tracing tags, forked processes 
+will inherit those stale tags. 
+
+
+
+*android.os.Trace.traceBegin(long,String)*
+
+public static void traceBegin(
+  long traceTag,
+  java.lang.String methodName)
+
+Writes a trace message to indicate that a given section of code has begun. Must 
+be followed by a call to (|android.os.Trace|) using the same tag. 
+
+
+    traceTag - The trace tag. 
+    methodName - The method name to appear in the trace. 
+
+*android.os.Trace.traceCounter(long,String,int)*
+
+public static void traceCounter(
+  long traceTag,
+  java.lang.String counterName,
+  int counterValue)
+
+Writes trace message to indicate the value of a given counter. 
+
+
+    traceTag - The trace tag. 
+    counterName - The counter name to appear in the trace. 
+    counterValue - The counter value. 
+
+*android.os.Trace.traceEnd(long)*
+
+public static void traceEnd(long traceTag)
+
+Writes a trace message to indicate that the current method has ended. Must be 
+called exactly once for each call to (|android.os.Trace|) using the same tag. 
+
+
+    traceTag - The trace tag. 
+
+

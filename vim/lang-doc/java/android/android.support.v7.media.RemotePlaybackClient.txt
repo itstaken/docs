@@ -1,0 +1,425 @@
+*android.support.v7.media.RemotePlaybackClient* *RemotePlaybackClient* A helper 
+
+public class RemotePlaybackClient
+  extends    |java.lang.Object|
+
+|android.support.v7.media.RemotePlaybackClient_Description|
+|android.support.v7.media.RemotePlaybackClient_Fields|
+|android.support.v7.media.RemotePlaybackClient_Constructors|
+|android.support.v7.media.RemotePlaybackClient_Methods|
+
+================================================================================
+
+*android.support.v7.media.RemotePlaybackClient_Constructors*
+|android.support.v7.media.RemotePlaybackClient(Context,MediaRouter.RouteInfo)|C
+
+*android.support.v7.media.RemotePlaybackClient_Methods*
+|android.support.v7.media.RemotePlaybackClient.endSession(Bundle,RemotePlaybackClient.SessionActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.enqueue(Uri,String,Bundle,long,Bundle,RemotePlaybackClient.ItemActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.getSessionId()|Gets the current 
+|android.support.v7.media.RemotePlaybackClient.getSessionStatus(Bundle,RemotePlaybackClient.SessionActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.getStatus(String,Bundle,RemotePlaybackClient.ItemActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.hasSession()|Returns true if the
+|android.support.v7.media.RemotePlaybackClient.isQueuingSupported()|Returns tru
+|android.support.v7.media.RemotePlaybackClient.isRemotePlaybackSupported()|Retu
+|android.support.v7.media.RemotePlaybackClient.isSessionManagementSupported()|R
+|android.support.v7.media.RemotePlaybackClient.pause(Bundle,RemotePlaybackClient.SessionActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.play(Uri,String,Bundle,long,Bundle,RemotePlaybackClient.ItemActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.release()|Releases resources own
+|android.support.v7.media.RemotePlaybackClient.remove(String,Bundle,RemotePlaybackClient.ItemActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.resume(Bundle,RemotePlaybackClient.SessionActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.seek(String,long,Bundle,RemotePlaybackClient.ItemActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.setSessionId(String)|Sets the cu
+|android.support.v7.media.RemotePlaybackClient.setStatusCallback(RemotePlaybackClient.StatusCallback)|
+|android.support.v7.media.RemotePlaybackClient.startSession(Bundle,RemotePlaybackClient.SessionActionCallback)|
+|android.support.v7.media.RemotePlaybackClient.stop(Bundle,RemotePlaybackClient.SessionActionCallback)|
+
+*android.support.v7.media.RemotePlaybackClient_Description*
+
+A helper class for playing media on remote routes using the remote playback 
+protocol defined by (|android.support.v7.media.MediaControlIntent|) . 
+
+The client maintains session state and offers a simplified interface for 
+issuing remote playback media control intents to a single route. 
+
+
+
+*android.support.v7.media.RemotePlaybackClient(Context,MediaRouter.RouteInfo)*
+
+public RemotePlaybackClient(
+  Context context,
+  android.support.v7.media.MediaRouter.RouteInfo route)
+
+Creates a remote playback client for a route. 
+
+    route - The media route. 
+
+*android.support.v7.media.RemotePlaybackClient.endSession(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void endSession(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to end the media playback session. 
+
+The request is issued in the current session. If this request is successful, 
+the session id property(|android.support.v7.media.RemotePlaybackClient|) will 
+be set to null after the callback is invoked. 
+
+Please refer to 
+ACTION_END_SESSION(|android.support.v7.media.MediaControlIntent|) for more 
+information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_END_SESSION} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.enqueue(Uri,String,Bundle,long,Bundle,RemotePlaybackClient.ItemActionCallback)*
+
+public void enqueue(
+  Uri contentUri,
+  java.lang.String mimeType,
+  Bundle metadata,
+  long positionMillis,
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.ItemActionCallback callback)
+
+Sends a request to enqueue a media item. 
+
+Enqueues a new item to play. If the queue was previously paused, then will 
+remain paused. 
+
+The request is issued in the current session. If no session is available, then 
+one is created implicitly. 
+
+Please refer to ACTION_ENQUEUE(|android.support.v7.media.MediaControlIntent|) 
+for more information about the semantics of this request. 
+
+
+    contentUri - The content Uri to enqueue. 
+    mimeType - The mime type of the content, or null if unknown. 
+    positionMillis - The initial content position for the item in milliseconds, or 0 to start at the 
+       beginning. 
+    metadata - The media item metadata bundle, or null if none. 
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_ENQUEUE} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.getSessionId()*
+
+public |java.lang.String| getSessionId()
+
+Gets the current session id if there is one. 
+
+
+
+    Returns: The current session id, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.getSessionStatus(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void getSessionStatus(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to get the status of the media playback session. 
+
+The request is issued in the current session. 
+
+Please refer to 
+ACTION_GET_SESSION_STATUS(|android.support.v7.media.MediaControlIntent|) for 
+more information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_GET_SESSION_STATUS} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.getStatus(String,Bundle,RemotePlaybackClient.ItemActionCallback)*
+
+public void getStatus(
+  java.lang.String itemId,
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.ItemActionCallback callback)
+
+Sends a request to get the status of a media item. 
+
+The request is issued in the current session. 
+
+Please refer to 
+ACTION_GET_STATUS(|android.support.v7.media.MediaControlIntent|) for more 
+information about the semantics of this request. 
+
+
+    itemId - The item id. 
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_GET_STATUS} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.hasSession()*
+
+public boolean hasSession()
+
+Returns true if the client currently has a session. 
+
+Equivalent to checking whether 
+(|android.support.v7.media.RemotePlaybackClient|) returns a non-null result. 
+
+
+
+    Returns: True if there is a current session. 
+
+*android.support.v7.media.RemotePlaybackClient.isQueuingSupported()*
+
+public boolean isQueuingSupported()
+
+Returns true if the route supports queuing features. 
+
+If the route does not support queuing, then at most one media item can be 
+played at a time and the (|android.support.v7.media.RemotePlaybackClient|) 
+method will not be available. 
+
+This method returns true if the route supports all of the basic remote playback 
+actions and all of the following actions: 
+enqueue(|android.support.v7.media.MediaControlIntent|) , 
+remove(|android.support.v7.media.MediaControlIntent|) . 
+
+
+
+    Returns: True if queuing is supported. Implies {@link #isRemotePlaybackSupported} is 
+             also true. 
+
+*android.support.v7.media.RemotePlaybackClient.isRemotePlaybackSupported()*
+
+public boolean isRemotePlaybackSupported()
+
+Returns true if the route supports remote playback. 
+
+If the route does not support remote playback, then none of the functionality 
+offered by the client will be available. 
+
+This method returns true if the route supports all of the following actions: 
+play(|android.support.v7.media.MediaControlIntent|) , 
+seek(|android.support.v7.media.MediaControlIntent|) , get 
+status(|android.support.v7.media.MediaControlIntent|) , 
+pause(|android.support.v7.media.MediaControlIntent|) , 
+resume(|android.support.v7.media.MediaControlIntent|) , 
+stop(|android.support.v7.media.MediaControlIntent|) . 
+
+
+
+    Returns: True if remote playback is supported. 
+
+*android.support.v7.media.RemotePlaybackClient.isSessionManagementSupported()*
+
+public boolean isSessionManagementSupported()
+
+Returns true if the route supports session management features. 
+
+If the route does not support session management, then the session will not be 
+created until the first media item is played. 
+
+This method returns true if the route supports all of the basic remote playback 
+actions and all of the following actions: start 
+session(|android.support.v7.media.MediaControlIntent|) , get session 
+status(|android.support.v7.media.MediaControlIntent|) , end 
+session(|android.support.v7.media.MediaControlIntent|) . 
+
+
+
+    Returns: True if session management is supported. Implies {@link 
+             #isRemotePlaybackSupported} is also true. 
+
+*android.support.v7.media.RemotePlaybackClient.pause(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void pause(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to pause media playback. 
+
+The request is issued in the current session. If playback is already paused 
+then the request has no effect. 
+
+Please refer to ACTION_PAUSE(|android.support.v7.media.MediaControlIntent|) for 
+more information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_PAUSE} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.play(Uri,String,Bundle,long,Bundle,RemotePlaybackClient.ItemActionCallback)*
+
+public void play(
+  Uri contentUri,
+  java.lang.String mimeType,
+  Bundle metadata,
+  long positionMillis,
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.ItemActionCallback callback)
+
+Sends a request to play a media item. 
+
+Clears the queue and starts playing the new item immediately. If the queue was 
+previously paused, then it is resumed as a side-effect of this request. 
+
+The request is issued in the current session. If no session is available, then 
+one is created implicitly. 
+
+Please refer to ACTION_PLAY(|android.support.v7.media.MediaControlIntent|) for 
+more information about the semantics of this request. 
+
+
+    contentUri - The content Uri to play. 
+    mimeType - The mime type of the content, or null if unknown. 
+    positionMillis - The initial content position for the item in milliseconds, or 0 to start at the 
+       beginning. 
+    metadata - The media item metadata bundle, or null if none. 
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_PLAY} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.release()*
+
+public void release()
+
+Releases resources owned by the client. 
+
+
+
+*android.support.v7.media.RemotePlaybackClient.remove(String,Bundle,RemotePlaybackClient.ItemActionCallback)*
+
+public void remove(
+  java.lang.String itemId,
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.ItemActionCallback callback)
+
+Sends a request to remove a media item from the queue. 
+
+The request is issued in the current session. 
+
+Please refer to ACTION_REMOVE(|android.support.v7.media.MediaControlIntent|) 
+for more information about the semantics of this request. 
+
+
+    itemId - The item id. 
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_REMOVE} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.resume(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void resume(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to resume (unpause) media playback. 
+
+The request is issued in the current session. If playback is not paused then 
+the request has no effect. 
+
+Please refer to ACTION_RESUME(|android.support.v7.media.MediaControlIntent|) 
+for more information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_RESUME} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.seek(String,long,Bundle,RemotePlaybackClient.ItemActionCallback)*
+
+public void seek(
+  java.lang.String itemId,
+  long positionMillis,
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.ItemActionCallback callback)
+
+Sends a request to seek to a new position in a media item. 
+
+Seeks to a new position. If the queue was previously paused then it remains 
+paused but the item's new position is still remembered. 
+
+The request is issued in the current session. 
+
+Please refer to ACTION_SEEK(|android.support.v7.media.MediaControlIntent|) for 
+more information about the semantics of this request. 
+
+
+    itemId - The item id. 
+    positionMillis - The new content position for the item in milliseconds, or 0 to start at the 
+       beginning. 
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_SEEK} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.setSessionId(String)*
+
+public void setSessionId(java.lang.String sessionId)
+
+Sets the current session id. 
+
+It is usually not necessary to set the session id explicitly since it is 
+created as a side-effect of other requests such as 
+(|android.support.v7.media.RemotePlaybackClient|) , 
+(|android.support.v7.media.RemotePlaybackClient|) , and 
+(|android.support.v7.media.RemotePlaybackClient|) . 
+
+
+    sessionId - The new session id, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.setStatusCallback(RemotePlaybackClient.StatusCallback)*
+
+public void setStatusCallback(android.support.v7.media.RemotePlaybackClient.StatusCallback callback)
+
+Sets a callback that should receive status updates when the state of media 
+sessions or media items created by this instance of the remote playback client 
+changes. 
+
+The callback should be set before the session is created or any play commands 
+are issued. 
+
+
+    callback - The callback to set. May be null to remove the previous callback. 
+
+*android.support.v7.media.RemotePlaybackClient.startSession(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void startSession(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to start a new media playback session. 
+
+The application must wait for the callback to indicate that this request is 
+complete before issuing other requests that affect the session. If this request 
+is successful then the previous session will be invalidated. 
+
+Please refer to 
+ACTION_START_SESSION(|android.support.v7.media.MediaControlIntent|) for more 
+information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_START_SESSION} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+*android.support.v7.media.RemotePlaybackClient.stop(Bundle,RemotePlaybackClient.SessionActionCallback)*
+
+public void stop(
+  Bundle extras,
+  android.support.v7.media.RemotePlaybackClient.SessionActionCallback callback)
+
+Sends a request to stop media playback and clear the media playback queue. 
+
+The request is issued in the current session. If the queue is already empty 
+then the request has no effect. 
+
+Please refer to ACTION_STOP(|android.support.v7.media.MediaControlIntent|) for 
+more information about the semantics of this request. 
+
+
+    extras - A bundle of extra arguments to be added to the {@link 
+       MediaControlIntent#ACTION_STOP} intent, or null if none. 
+    callback - A callback to invoke when the request has been processed, or null if none. 
+
+

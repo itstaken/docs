@@ -1,0 +1,204 @@
+*android.view.ViewGroup.LayoutParams* *ViewGroup.LayoutParams* LayoutParams are 
+
+public static class ViewGroup.LayoutParams
+  extends    |java.lang.Object|
+
+|android.view.ViewGroup.LayoutParams_Description|
+|android.view.ViewGroup.LayoutParams_Fields|
+|android.view.ViewGroup.LayoutParams_Constructors|
+|android.view.ViewGroup.LayoutParams_Methods|
+
+================================================================================
+
+*android.view.ViewGroup.LayoutParams_Fields*
+|int_android.view.ViewGroup.LayoutParams.FILL_PARENT|
+|int_android.view.ViewGroup.LayoutParams.height|
+|android.view.animation.LayoutAnimationController.AnimationParameters_android.view.ViewGroup.LayoutParams.layoutAnimationParameters|
+|int_android.view.ViewGroup.LayoutParams.MATCH_PARENT|
+|int_android.view.ViewGroup.LayoutParams.width|
+|int_android.view.ViewGroup.LayoutParams.WRAP_CONTENT|
+
+*android.view.ViewGroup.LayoutParams_Constructors*
+|android.view.ViewGroup.LayoutParams(Context,AttributeSet)|Creates a new set of
+|android.view.ViewGroup.LayoutParams(int,int)|Creates a new set of layout param
+|android.view.ViewGroup.LayoutParams(ViewGroup.LayoutParams)|Copy constructor.
+
+*android.view.ViewGroup.LayoutParams_Methods*
+|android.view.ViewGroup.LayoutParams.debug(String)|Returns a String representat
+|android.view.ViewGroup.LayoutParams.onDebugDraw(View,Canvas,Paint)|Usecanvasto
+|android.view.ViewGroup.LayoutParams.resolveLayoutDirection(int)|Resolve layout
+|android.view.ViewGroup.LayoutParams.setBaseAttributes(TypedArray,int,int)|Extr
+|android.view.ViewGroup.LayoutParams.sizeToString(int)|Converts the specified s
+
+*android.view.ViewGroup.LayoutParams_Description*
+
+LayoutParams are used by views to tell their parents how they want to be laid 
+out. See ViewGroup Layout Attributes(|android.R.styleable|) for a list of all 
+child view attributes that this class supports. 
+
+The base LayoutParams class just describes how big the view wants to be for 
+both width and height. For each dimension, it can specify one of: 
+
+FILL_PARENT (renamed MATCH_PARENT in API Level 8 and higher), which means that 
+the view wants to be as big as its parent (minus padding) WRAP_CONTENT, which 
+means that the view wants to be just big enough to enclose its content (plus 
+padding) an exact number 
+
+There are subclasses of LayoutParams for different subclasses of ViewGroup. For 
+example, AbsoluteLayout has its own subclass of LayoutParams which adds an X 
+and Y value. 
+
+Developer Guides For more information about creating user interface layouts, 
+read the <a href="guide/topics/ui/declaring-layout.html">XML Layouts developer 
+guide. 
+
+
+
+*int_android.view.ViewGroup.LayoutParams.FILL_PARENT*
+
+Special value for the height or width requested by a View. FILL_PARENT means 
+that the view wants to be as big as its parent, minus the parent's padding, if 
+any. This value is deprecated starting in API Level 8 and replaced by 
+(|android.view.ViewGroup.LayoutParams|) . 
+
+
+*int_android.view.ViewGroup.LayoutParams.height*
+
+Information about how tall the view wants to be. Can be one of the constants 
+FILL_PARENT (replaced by MATCH_PARENT , in API Level 8) or WRAP_CONTENT. or an 
+exact size. 
+
+
+*android.view.animation.LayoutAnimationController.AnimationParameters_android.view.ViewGroup.LayoutParams.layoutAnimationParameters*
+
+Used to animate layouts. 
+
+
+*int_android.view.ViewGroup.LayoutParams.MATCH_PARENT*
+
+Special value for the height or width requested by a View. MATCH_PARENT means 
+that the view wants to be as big as its parent, minus the parent's padding, if 
+any. Introduced in API Level 8. 
+
+
+*int_android.view.ViewGroup.LayoutParams.width*
+
+Information about how wide the view wants to be. Can be one of the constants 
+FILL_PARENT (replaced by MATCH_PARENT , in API Level 8) or WRAP_CONTENT. or an 
+exact size. 
+
+
+*int_android.view.ViewGroup.LayoutParams.WRAP_CONTENT*
+
+Special value for the height or width requested by a View. WRAP_CONTENT means 
+that the view wants to be just large enough to fit its own internal content, 
+taking its own padding into account. 
+
+
+
+*android.view.ViewGroup.LayoutParams(Context,AttributeSet)*
+
+public ViewGroup.LayoutParams(
+  android.content.Context c,
+  android.util.AttributeSet attrs)
+
+Creates a new set of layout parameters. The values are extracted from the 
+supplied attributes set and context. The XML attributes mapped to this set of 
+layout parameters are: 
+
+layout_width: the width, either an exact value, 
+(|android.view.ViewGroup.LayoutParams|) , or 
+(|android.view.ViewGroup.LayoutParams|) (replaced by 
+(|android.view.ViewGroup.LayoutParams|) in API Level 8) layout_height: the 
+height, either an exact value, (|android.view.ViewGroup.LayoutParams|) , or 
+(|android.view.ViewGroup.LayoutParams|) (replaced by 
+(|android.view.ViewGroup.LayoutParams|) in API Level 8) 
+
+    c - the application environment 
+    attrs - the set of attributes from which to extract the layout parameters' values 
+
+*android.view.ViewGroup.LayoutParams(int,int)*
+
+public ViewGroup.LayoutParams(
+  int width,
+  int height)
+
+Creates a new set of layout parameters with the specified width and height. 
+
+    width - the width, either {@link #WRAP_CONTENT}, {@link #FILL_PARENT} (replaced by 
+       {@link #MATCH_PARENT} in API Level 8), or a fixed size in pixels 
+    height - the height, either {@link #WRAP_CONTENT}, {@link #FILL_PARENT} (replaced by 
+       {@link #MATCH_PARENT} in API Level 8), or a fixed size in pixels 
+
+*android.view.ViewGroup.LayoutParams(ViewGroup.LayoutParams)*
+
+public ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams source)
+
+Copy constructor. Clones the width and height values of the source. 
+
+    source - The layout params to copy from. 
+
+*android.view.ViewGroup.LayoutParams.debug(String)*
+
+public |java.lang.String| debug(java.lang.String output)
+
+Returns a String representation of this set of layout parameters. 
+
+
+    output - the String to prepend to the internal representation 
+
+    Returns: a String with the following format: output + "ViewGroup.LayoutParams={ 
+             width=WIDTH, height=HEIGHT }" 
+
+*android.view.ViewGroup.LayoutParams.onDebugDraw(View,Canvas,Paint)*
+
+public void onDebugDraw(
+  android.view.View view,
+  Canvas canvas,
+  Paint paint)
+
+Usecanvasto draw suitable debugging annotations for these LayoutParameters. 
+
+
+    view - the view that contains these layout parameters 
+    canvas - the canvas on which to draw 
+
+*android.view.ViewGroup.LayoutParams.resolveLayoutDirection(int)*
+
+public void resolveLayoutDirection(int layoutDirection)
+
+Resolve layout parameters depending on the layout direction. Subclasses that 
+care about layoutDirection changes should override this method. The default 
+implementation does nothing. 
+
+
+    layoutDirection - the direction of the layout 
+
+{@link View#LAYOUT_DIRECTION_LTR} {@link View#LAYOUT_DIRECTION_RTL} 
+
+*android.view.ViewGroup.LayoutParams.setBaseAttributes(TypedArray,int,int)*
+
+protected void setBaseAttributes(
+  android.content.res.TypedArray a,
+  int widthAttr,
+  int heightAttr)
+
+Extracts the layout parameters from the supplied attributes. 
+
+
+    a - the style attributes to extract the parameters from 
+    widthAttr - the identifier of the width attribute 
+    heightAttr - the identifier of the height attribute 
+
+*android.view.ViewGroup.LayoutParams.sizeToString(int)*
+
+protected static |java.lang.String| sizeToString(int size)
+
+Converts the specified size to a readable String. 
+
+
+    size - the size to convert 
+
+    Returns: a String instance representing the supplied size 
+
+

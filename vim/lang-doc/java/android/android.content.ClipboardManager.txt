@@ -1,0 +1,136 @@
+*android.content.ClipboardManager* *ClipboardManager* Interface to the clipboard
+
+public class ClipboardManager
+  extends    |android.text.ClipboardManager|
+
+|android.content.ClipboardManager_Description|
+|android.content.ClipboardManager_Fields|
+|android.content.ClipboardManager_Constructors|
+|android.content.ClipboardManager_Methods|
+
+================================================================================
+
+*android.content.ClipboardManager_Constructors*
+|android.content.ClipboardManager(Context,Handler)|
+
+*android.content.ClipboardManager_Methods*
+|android.content.ClipboardManager.addPrimaryClipChangedListener(ClipboardManager.OnPrimaryClipChangedListener)|
+|android.content.ClipboardManager.getPrimaryClip()|Returns the current primary 
+|android.content.ClipboardManager.getPrimaryClipDescription()|Returns a descrip
+|android.content.ClipboardManager.getText()|
+|android.content.ClipboardManager.hasPrimaryClip()|Returns true if there is cur
+|android.content.ClipboardManager.hasText()|
+|android.content.ClipboardManager.removePrimaryClipChangedListener(ClipboardManager.OnPrimaryClipChangedListener)|
+|android.content.ClipboardManager.setPrimaryClip(ClipData)|Sets the current pri
+|android.content.ClipboardManager.setText(CharSequence)|
+
+*android.content.ClipboardManager_Description*
+
+Interface to the clipboard service, for placing and retrieving text in the 
+global clipboard. 
+
+You do not instantiate this class directly; instead, retrieve it through 
+(|android.content.Context|) . 
+
+The ClipboardManager API itself is very simple: it consists of methods to 
+atomically get and set the current primary clipboard data. That data is 
+expressed as a (|android.content.ClipData|) object, which defines the protocol 
+for data exchange between applications. 
+
+Developer Guides For more information about using the clipboard framework, read 
+the <a href="guide/topics/clipboard/copy-paste.html">Copy and Paste developer 
+guide. 
+
+
+
+*android.content.ClipboardManager(Context,Handler)*
+
+public ClipboardManager(
+  android.content.Context context,
+  android.os.Handler handler)
+
+
+
+
+*android.content.ClipboardManager.addPrimaryClipChangedListener(ClipboardManager.OnPrimaryClipChangedListener)*
+
+public void addPrimaryClipChangedListener(android.content.ClipboardManager.OnPrimaryClipChangedListener what)
+
+
+
+
+
+*android.content.ClipboardManager.getPrimaryClip()*
+
+public |android.content.ClipData| getPrimaryClip()
+
+Returns the current primary clip on the clipboard. 
+
+
+
+*android.content.ClipboardManager.getPrimaryClipDescription()*
+
+public |android.content.ClipDescription| getPrimaryClipDescription()
+
+Returns a description of the current primary clip on the clipboard but not a 
+copy of its data. 
+
+
+
+*android.content.ClipboardManager.getText()*
+
+public |java.lang.CharSequence| getText()
+
+
+
+    Deprecated: Use {@link #getPrimaryClip()} instead.  This retrieves
+ the primary clip and tries to coerce it to a string.
+
+
+*android.content.ClipboardManager.hasPrimaryClip()*
+
+public boolean hasPrimaryClip()
+
+Returns true if there is currently a primary clip on the clipboard. 
+
+
+
+*android.content.ClipboardManager.hasText()*
+
+public boolean hasText()
+
+
+
+    Deprecated: Use {@link #hasPrimaryClip()} instead.
+
+
+*android.content.ClipboardManager.removePrimaryClipChangedListener(ClipboardManager.OnPrimaryClipChangedListener)*
+
+public void removePrimaryClipChangedListener(android.content.ClipboardManager.OnPrimaryClipChangedListener what)
+
+
+
+
+
+*android.content.ClipboardManager.setPrimaryClip(ClipData)*
+
+public void setPrimaryClip(android.content.ClipData clip)
+
+Sets the current primary clip on the clipboard. This is the clip that is 
+involved in normal cut and paste operations. 
+
+
+    clip - The clipped data item to set. 
+
+*android.content.ClipboardManager.setText(CharSequence)*
+
+public void setText(java.lang.CharSequence text)
+
+
+
+    Deprecated: Use {@link #setPrimaryClip(ClipData)} instead.  This
+ creates a ClippedItem holding the given text and sets it as the
+ primary clip.  It has no label or icon.
+
+
+

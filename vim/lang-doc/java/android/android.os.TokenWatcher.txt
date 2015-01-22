@@ -1,0 +1,118 @@
+*android.os.TokenWatcher* *TokenWatcher* Helper class that helps you use IBinder
+
+public abstract class TokenWatcher
+  extends    |java.lang.Object|
+
+|android.os.TokenWatcher_Description|
+|android.os.TokenWatcher_Fields|
+|android.os.TokenWatcher_Constructors|
+|android.os.TokenWatcher_Methods|
+
+================================================================================
+
+*android.os.TokenWatcher_Constructors*
+|android.os.TokenWatcher(Handler,String)|Construct the TokenWatcher
+
+*android.os.TokenWatcher_Methods*
+|android.os.TokenWatcher.acquire(IBinder,String)|Record that this token has bee
+|android.os.TokenWatcher.acquired()|Called when the number of active tokens goe
+|android.os.TokenWatcher.cleanup(IBinder,boolean)|
+|android.os.TokenWatcher.dump()|
+|android.os.TokenWatcher.dump(PrintWriter)|
+|android.os.TokenWatcher.isAcquired()|
+|android.os.TokenWatcher.release(IBinder)|
+|android.os.TokenWatcher.released()|Called when the number of active tokens goe
+
+*android.os.TokenWatcher_Description*
+
+Helper class that helps you use IBinder objects as reference counted tokens. 
+IBinders make good tokens because we find out when they are removed 
+
+
+
+*android.os.TokenWatcher(Handler,String)*
+
+public TokenWatcher(
+  android.os.Handler h,
+  java.lang.String tag)
+
+Construct the TokenWatcher 
+
+    h - A handler to call {@link #acquired} and {@link #released} on. If you don't 
+       care, just call it like this, although your thread will have to be a 
+       Looper thread. new TokenWatcher(new Handler()) 
+    tag - A debugging tag for this TokenWatcher 
+
+*android.os.TokenWatcher.acquire(IBinder,String)*
+
+public void acquire(
+  android.os.IBinder token,
+  java.lang.String tag)
+
+Record that this token has been acquired. When acquire is called, and the 
+current count is 0, the acquired method is called on the given handler. 
+
+
+    token - An IBinder object. If this token has already been acquired, no action is taken. 
+    tag - A string used by the {@link #dump} method for debugging, to see who has 
+       references. 
+
+*android.os.TokenWatcher.acquired()*
+
+public abstract void acquired()
+
+Called when the number of active tokens goes from 0 to 1. 
+
+
+
+*android.os.TokenWatcher.cleanup(IBinder,boolean)*
+
+public void cleanup(
+  android.os.IBinder token,
+  boolean unlink)
+
+
+
+
+
+*android.os.TokenWatcher.dump()*
+
+public void dump()
+
+
+
+
+
+*android.os.TokenWatcher.dump(PrintWriter)*
+
+public void dump(java.io.PrintWriter pw)
+
+
+
+
+
+*android.os.TokenWatcher.isAcquired()*
+
+public boolean isAcquired()
+
+
+
+
+
+*android.os.TokenWatcher.release(IBinder)*
+
+public void release(android.os.IBinder token)
+
+
+
+
+
+*android.os.TokenWatcher.released()*
+
+public abstract void released()
+
+Called when the number of active tokens goes from 1 to 0. 
+
+
+
+

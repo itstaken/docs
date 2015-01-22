@@ -1,0 +1,893 @@
+*android.webkit.WebViewProvider* *WebViewProvider* WebView backend provider inte
+
+public interface interface WebViewProvider
+
+
+|android.webkit.WebViewProvider_Description|
+|android.webkit.WebViewProvider_Fields|
+|android.webkit.WebViewProvider_Constructors|
+|android.webkit.WebViewProvider_Methods|
+
+================================================================================
+
+*android.webkit.WebViewProvider_Methods*
+|android.webkit.WebViewProvider.addJavascriptInterface(Object,String)|
+|android.webkit.WebViewProvider.canGoBack()|
+|android.webkit.WebViewProvider.canGoBackOrForward(int)|
+|android.webkit.WebViewProvider.canGoForward()|
+|android.webkit.WebViewProvider.canZoomIn()|
+|android.webkit.WebViewProvider.canZoomOut()|
+|android.webkit.WebViewProvider.capturePicture()|
+|android.webkit.WebViewProvider.clearCache(boolean)|
+|android.webkit.WebViewProvider.clearFormData()|
+|android.webkit.WebViewProvider.clearHistory()|
+|android.webkit.WebViewProvider.clearMatches()|
+|android.webkit.WebViewProvider.clearSslPreferences()|
+|android.webkit.WebViewProvider.clearView()|
+|android.webkit.WebViewProvider.copyBackForwardList()|
+|android.webkit.WebViewProvider.createPrintDocumentAdapter()|
+|android.webkit.WebViewProvider.destroy()|SeeWebView#destroy().
+|android.webkit.WebViewProvider.documentHasImages(Message)|
+|android.webkit.WebViewProvider.dumpViewHierarchyWithProperties(BufferedWriter,int)|
+|android.webkit.WebViewProvider.evaluateJavaScript(String,ValueCallback<String>)|
+|android.webkit.WebViewProvider.findAll(String)|
+|android.webkit.WebViewProvider.findAllAsync(String)|
+|android.webkit.WebViewProvider.findHierarchyView(String,int)|
+|android.webkit.WebViewProvider.findNext(boolean)|
+|android.webkit.WebViewProvider.flingScroll(int,int)|
+|android.webkit.WebViewProvider.freeMemory()|
+|android.webkit.WebViewProvider.getCertificate()|
+|android.webkit.WebViewProvider.getContentHeight()|
+|android.webkit.WebViewProvider.getContentWidth()|
+|android.webkit.WebViewProvider.getFavicon()|
+|android.webkit.WebViewProvider.getHitTestResult()|
+|android.webkit.WebViewProvider.getHttpAuthUsernamePassword(String,String)|
+|android.webkit.WebViewProvider.getOriginalUrl()|
+|android.webkit.WebViewProvider.getProgress()|
+|android.webkit.WebViewProvider.getScale()|
+|android.webkit.WebViewProvider.getScrollDelegate()|
+|android.webkit.WebViewProvider.getSettings()|
+|android.webkit.WebViewProvider.getTitle()|
+|android.webkit.WebViewProvider.getTouchIconUrl()|
+|android.webkit.WebViewProvider.getUrl()|
+|android.webkit.WebViewProvider.getViewDelegate()|
+|android.webkit.WebViewProvider.getVisibleTitleHeight()|
+|android.webkit.WebViewProvider.getZoomControls()|
+|android.webkit.WebViewProvider.goBack()|
+|android.webkit.WebViewProvider.goBackOrForward(int)|
+|android.webkit.WebViewProvider.goForward()|
+|android.webkit.WebViewProvider.init(Map<String,Object>,boolean)|Initialize thi
+|android.webkit.WebViewProvider.invokeZoomPicker()|
+|android.webkit.WebViewProvider.isPaused()|
+|android.webkit.WebViewProvider.isPrivateBrowsingEnabled()|
+|android.webkit.WebViewProvider.loadData(String,String,String)|
+|android.webkit.WebViewProvider.loadDataWithBaseURL(String,String,String,String,String)|
+|android.webkit.WebViewProvider.loadUrl(String)|
+|android.webkit.WebViewProvider.loadUrl(String,Map<String,String>)|
+|android.webkit.WebViewProvider.notifyFindDialogDismissed()|Only used by FindAc
+|android.webkit.WebViewProvider.onPause()|
+|android.webkit.WebViewProvider.onResume()|
+|android.webkit.WebViewProvider.overlayHorizontalScrollbar()|
+|android.webkit.WebViewProvider.overlayVerticalScrollbar()|
+|android.webkit.WebViewProvider.pageDown(boolean)|
+|android.webkit.WebViewProvider.pageUp(boolean)|
+|android.webkit.WebViewProvider.pauseTimers()|
+|android.webkit.WebViewProvider.postUrl(String,byte[])|
+|android.webkit.WebViewProvider.reload()|
+|android.webkit.WebViewProvider.removeJavascriptInterface(String)|
+|android.webkit.WebViewProvider.requestFocusNodeHref(Message)|
+|android.webkit.WebViewProvider.requestImageRef(Message)|
+|android.webkit.WebViewProvider.restorePicture(Bundle,File)|
+|android.webkit.WebViewProvider.restoreState(Bundle)|
+|android.webkit.WebViewProvider.resumeTimers()|
+|android.webkit.WebViewProvider.savePassword(String,String,String)|
+|android.webkit.WebViewProvider.savePicture(Bundle,File)|
+|android.webkit.WebViewProvider.saveState(Bundle)|
+|android.webkit.WebViewProvider.saveWebArchive(String)|
+|android.webkit.WebViewProvider.saveWebArchive(String,boolean,ValueCallback<String>)|
+|android.webkit.WebViewProvider.setCertificate(SslCertificate)|
+|android.webkit.WebViewProvider.setDownloadListener(DownloadListener)|
+|android.webkit.WebViewProvider.setFindListener(WebView.FindListener)|
+|android.webkit.WebViewProvider.setHorizontalScrollbarOverlay(boolean)|
+|android.webkit.WebViewProvider.setHttpAuthUsernamePassword(String,String,String,String)|
+|android.webkit.WebViewProvider.setInitialScale(int)|
+|android.webkit.WebViewProvider.setMapTrackballToArrowKeys(boolean)|
+|android.webkit.WebViewProvider.setNetworkAvailable(boolean)|
+|android.webkit.WebViewProvider.setPictureListener(WebView.PictureListener)|
+|android.webkit.WebViewProvider.setVerticalScrollbarOverlay(boolean)|
+|android.webkit.WebViewProvider.setWebChromeClient(WebChromeClient)|
+|android.webkit.WebViewProvider.setWebViewClient(WebViewClient)|
+|android.webkit.WebViewProvider.showFindDialog(String,boolean)|
+|android.webkit.WebViewProvider.stopLoading()|
+|android.webkit.WebViewProvider.zoomIn()|
+|android.webkit.WebViewProvider.zoomOut()|
+
+*android.webkit.WebViewProvider_Description*
+
+WebView backend provider interface: this interface is the abstract backend to a 
+WebView instance; each WebView object is bound to exactly one WebViewProvider 
+object which implements the runtime behavior of that WebView. 
+
+All methods must behave as per their namesake in (|android.webkit.WebView|) , 
+unless otherwise noted. 
+
+
+
+*android.webkit.WebViewProvider.addJavascriptInterface(Object,String)*
+
+public void addJavascriptInterface(
+  java.lang.Object obj,
+  java.lang.String interfaceName)
+
+
+
+
+
+*android.webkit.WebViewProvider.canGoBack()*
+
+public boolean canGoBack()
+
+
+
+
+
+*android.webkit.WebViewProvider.canGoBackOrForward(int)*
+
+public boolean canGoBackOrForward(int steps)
+
+
+
+
+
+*android.webkit.WebViewProvider.canGoForward()*
+
+public boolean canGoForward()
+
+
+
+
+
+*android.webkit.WebViewProvider.canZoomIn()*
+
+public boolean canZoomIn()
+
+
+
+
+
+*android.webkit.WebViewProvider.canZoomOut()*
+
+public boolean canZoomOut()
+
+
+
+
+
+*android.webkit.WebViewProvider.capturePicture()*
+
+public Picture capturePicture()
+
+
+
+
+
+*android.webkit.WebViewProvider.clearCache(boolean)*
+
+public void clearCache(boolean includeDiskFiles)
+
+
+
+
+
+*android.webkit.WebViewProvider.clearFormData()*
+
+public void clearFormData()
+
+
+
+
+
+*android.webkit.WebViewProvider.clearHistory()*
+
+public void clearHistory()
+
+
+
+
+
+*android.webkit.WebViewProvider.clearMatches()*
+
+public void clearMatches()
+
+
+
+
+
+*android.webkit.WebViewProvider.clearSslPreferences()*
+
+public void clearSslPreferences()
+
+
+
+
+
+*android.webkit.WebViewProvider.clearView()*
+
+public void clearView()
+
+
+
+
+
+*android.webkit.WebViewProvider.copyBackForwardList()*
+
+public |android.webkit.WebBackForwardList| copyBackForwardList()
+
+
+
+
+
+*android.webkit.WebViewProvider.createPrintDocumentAdapter()*
+
+public |android.print.PrintDocumentAdapter| createPrintDocumentAdapter()
+
+
+
+
+
+*android.webkit.WebViewProvider.destroy()*
+
+public void destroy()
+
+See (|android.webkit.WebView|) . As well as releasing the internal state and 
+resources held by the implementation, the provider should null all references 
+it holds on the WebView proxy class, and ensure no further method calls are 
+made to it. 
+
+
+
+*android.webkit.WebViewProvider.documentHasImages(Message)*
+
+public void documentHasImages(android.os.Message response)
+
+
+
+
+
+*android.webkit.WebViewProvider.dumpViewHierarchyWithProperties(BufferedWriter,int)*
+
+public void dumpViewHierarchyWithProperties(
+  java.io.BufferedWriter out,
+  int level)
+
+
+
+
+
+*android.webkit.WebViewProvider.evaluateJavaScript(String,ValueCallback<String>)*
+
+public void evaluateJavaScript(
+  java.lang.String script,
+  android.webkit.ValueCallback<java.lang.String> resultCallback)
+
+
+
+
+
+*android.webkit.WebViewProvider.findAll(String)*
+
+public int findAll(java.lang.String find)
+
+
+
+
+
+*android.webkit.WebViewProvider.findAllAsync(String)*
+
+public void findAllAsync(java.lang.String find)
+
+
+
+
+
+*android.webkit.WebViewProvider.findHierarchyView(String,int)*
+
+public |android.view.View| findHierarchyView(
+  java.lang.String className,
+  int hashCode)
+
+
+
+
+
+*android.webkit.WebViewProvider.findNext(boolean)*
+
+public void findNext(boolean forward)
+
+
+
+
+
+*android.webkit.WebViewProvider.flingScroll(int,int)*
+
+public void flingScroll(
+  int vx,
+  int vy)
+
+
+
+
+
+*android.webkit.WebViewProvider.freeMemory()*
+
+public void freeMemory()
+
+
+
+
+
+*android.webkit.WebViewProvider.getCertificate()*
+
+public |android.net.http.SslCertificate| getCertificate()
+
+
+
+
+
+*android.webkit.WebViewProvider.getContentHeight()*
+
+public int getContentHeight()
+
+
+
+
+
+*android.webkit.WebViewProvider.getContentWidth()*
+
+public int getContentWidth()
+
+
+
+
+
+*android.webkit.WebViewProvider.getFavicon()*
+
+public Bitmap getFavicon()
+
+
+
+
+
+*android.webkit.WebViewProvider.getHitTestResult()*
+
+public |android.webkit.WebView.HitTestResult| getHitTestResult()
+
+
+
+
+
+*android.webkit.WebViewProvider.getHttpAuthUsernamePassword(String,String)*
+
+public |java.lang.String|[] getHttpAuthUsernamePassword(
+  java.lang.String host,
+  java.lang.String realm)
+
+
+
+
+
+*android.webkit.WebViewProvider.getOriginalUrl()*
+
+public |java.lang.String| getOriginalUrl()
+
+
+
+
+
+*android.webkit.WebViewProvider.getProgress()*
+
+public int getProgress()
+
+
+
+
+
+*android.webkit.WebViewProvider.getScale()*
+
+public float getScale()
+
+
+
+
+
+*android.webkit.WebViewProvider.getScrollDelegate()*
+
+public |android.webkit.WebViewProvider.ScrollDelegate| getScrollDelegate()
+
+
+
+
+
+    Returns: a ScrollDelegate implementation. Normally this would be same object as is 
+             returned by getViewDelegate(). 
+
+*android.webkit.WebViewProvider.getSettings()*
+
+public |android.webkit.WebSettings| getSettings()
+
+
+
+
+
+*android.webkit.WebViewProvider.getTitle()*
+
+public |java.lang.String| getTitle()
+
+
+
+
+
+*android.webkit.WebViewProvider.getTouchIconUrl()*
+
+public |java.lang.String| getTouchIconUrl()
+
+
+
+
+
+*android.webkit.WebViewProvider.getUrl()*
+
+public |java.lang.String| getUrl()
+
+
+
+
+
+*android.webkit.WebViewProvider.getViewDelegate()*
+
+public |android.webkit.WebViewProvider.ViewDelegate| getViewDelegate()
+
+
+
+
+
+    Returns: the ViewDelegate implementation. This provides the functionality to back all of 
+             the name-sake functions from the View and ViewGroup base classes 
+             of WebView. 
+
+*android.webkit.WebViewProvider.getVisibleTitleHeight()*
+
+public int getVisibleTitleHeight()
+
+
+
+
+
+*android.webkit.WebViewProvider.getZoomControls()*
+
+public |android.view.View| getZoomControls()
+
+
+
+
+
+*android.webkit.WebViewProvider.goBack()*
+
+public void goBack()
+
+
+
+
+
+*android.webkit.WebViewProvider.goBackOrForward(int)*
+
+public void goBackOrForward(int steps)
+
+
+
+
+
+*android.webkit.WebViewProvider.goForward()*
+
+public void goForward()
+
+
+
+
+
+*android.webkit.WebViewProvider.init(Map<String,Object>,boolean)*
+
+public void init(
+  java.util.Map<java.lang.String, java.lang.Object> javaScriptInterfaces,
+  boolean privateBrowsing)
+
+Initialize this WebViewProvider instance. Called after the WebView has fully 
+constructed. 
+
+
+    javaScriptInterfaces - is a Map of interface names, as keys, and object implementing those interfaces, 
+       as values. 
+    privateBrowsing - If true the web view will be initialized in private / incognito mode. 
+
+*android.webkit.WebViewProvider.invokeZoomPicker()*
+
+public void invokeZoomPicker()
+
+
+
+
+
+*android.webkit.WebViewProvider.isPaused()*
+
+public boolean isPaused()
+
+
+
+
+
+*android.webkit.WebViewProvider.isPrivateBrowsingEnabled()*
+
+public boolean isPrivateBrowsingEnabled()
+
+
+
+
+
+*android.webkit.WebViewProvider.loadData(String,String,String)*
+
+public void loadData(
+  java.lang.String data,
+  java.lang.String mimeType,
+  java.lang.String encoding)
+
+
+
+
+
+*android.webkit.WebViewProvider.loadDataWithBaseURL(String,String,String,String,String)*
+
+public void loadDataWithBaseURL(
+  java.lang.String baseUrl,
+  java.lang.String data,
+  java.lang.String mimeType,
+  java.lang.String encoding,
+  java.lang.String historyUrl)
+
+
+
+
+
+*android.webkit.WebViewProvider.loadUrl(String)*
+
+public void loadUrl(java.lang.String url)
+
+
+
+
+
+*android.webkit.WebViewProvider.loadUrl(String,Map<String,String>)*
+
+public void loadUrl(
+  java.lang.String url,
+  java.util.Map<java.lang.String, java.lang.String> additionalHttpHeaders)
+
+
+
+
+
+*android.webkit.WebViewProvider.notifyFindDialogDismissed()*
+
+public void notifyFindDialogDismissed()
+
+Only used by FindActionModeCallback to inform providers that the find dialog 
+has been dismissed. 
+
+
+
+*android.webkit.WebViewProvider.onPause()*
+
+public void onPause()
+
+
+
+
+
+*android.webkit.WebViewProvider.onResume()*
+
+public void onResume()
+
+
+
+
+
+*android.webkit.WebViewProvider.overlayHorizontalScrollbar()*
+
+public boolean overlayHorizontalScrollbar()
+
+
+
+
+
+*android.webkit.WebViewProvider.overlayVerticalScrollbar()*
+
+public boolean overlayVerticalScrollbar()
+
+
+
+
+
+*android.webkit.WebViewProvider.pageDown(boolean)*
+
+public boolean pageDown(boolean bottom)
+
+
+
+
+
+*android.webkit.WebViewProvider.pageUp(boolean)*
+
+public boolean pageUp(boolean top)
+
+
+
+
+
+*android.webkit.WebViewProvider.pauseTimers()*
+
+public void pauseTimers()
+
+
+
+
+
+*android.webkit.WebViewProvider.postUrl(String,byte[])*
+
+public void postUrl(
+  java.lang.String url,
+  byte[] postData)
+
+
+
+
+
+*android.webkit.WebViewProvider.reload()*
+
+public void reload()
+
+
+
+
+
+*android.webkit.WebViewProvider.removeJavascriptInterface(String)*
+
+public void removeJavascriptInterface(java.lang.String interfaceName)
+
+
+
+
+
+*android.webkit.WebViewProvider.requestFocusNodeHref(Message)*
+
+public void requestFocusNodeHref(android.os.Message hrefMsg)
+
+
+
+
+
+*android.webkit.WebViewProvider.requestImageRef(Message)*
+
+public void requestImageRef(android.os.Message msg)
+
+
+
+
+
+*android.webkit.WebViewProvider.restorePicture(Bundle,File)*
+
+public boolean restorePicture(
+  android.os.Bundle b,
+  java.io.File src)
+
+
+
+
+
+*android.webkit.WebViewProvider.restoreState(Bundle)*
+
+public |android.webkit.WebBackForwardList| restoreState(android.os.Bundle inState)
+
+
+
+
+
+*android.webkit.WebViewProvider.resumeTimers()*
+
+public void resumeTimers()
+
+
+
+
+
+*android.webkit.WebViewProvider.savePassword(String,String,String)*
+
+public void savePassword(
+  java.lang.String host,
+  java.lang.String username,
+  java.lang.String password)
+
+
+
+
+
+*android.webkit.WebViewProvider.savePicture(Bundle,File)*
+
+public boolean savePicture(
+  android.os.Bundle b,
+  java.io.File dest)
+
+
+
+
+
+*android.webkit.WebViewProvider.saveState(Bundle)*
+
+public |android.webkit.WebBackForwardList| saveState(android.os.Bundle outState)
+
+
+
+
+
+*android.webkit.WebViewProvider.saveWebArchive(String)*
+
+public void saveWebArchive(java.lang.String filename)
+
+
+
+
+
+*android.webkit.WebViewProvider.saveWebArchive(String,boolean,ValueCallback<String>)*
+
+public void saveWebArchive(
+  java.lang.String basename,
+  boolean autoname,
+  android.webkit.ValueCallback<java.lang.String> callback)
+
+
+
+
+
+*android.webkit.WebViewProvider.setCertificate(SslCertificate)*
+
+public void setCertificate(android.net.http.SslCertificate certificate)
+
+
+
+
+
+*android.webkit.WebViewProvider.setDownloadListener(DownloadListener)*
+
+public void setDownloadListener(android.webkit.DownloadListener listener)
+
+
+
+
+
+*android.webkit.WebViewProvider.setFindListener(WebView.FindListener)*
+
+public void setFindListener(android.webkit.WebView.FindListener listener)
+
+
+
+
+
+*android.webkit.WebViewProvider.setHorizontalScrollbarOverlay(boolean)*
+
+public void setHorizontalScrollbarOverlay(boolean overlay)
+
+
+
+
+
+*android.webkit.WebViewProvider.setHttpAuthUsernamePassword(String,String,String,String)*
+
+public void setHttpAuthUsernamePassword(
+  java.lang.String host,
+  java.lang.String realm,
+  java.lang.String username,
+  java.lang.String password)
+
+
+
+
+
+*android.webkit.WebViewProvider.setInitialScale(int)*
+
+public void setInitialScale(int scaleInPercent)
+
+
+
+
+
+*android.webkit.WebViewProvider.setMapTrackballToArrowKeys(boolean)*
+
+public void setMapTrackballToArrowKeys(boolean setMap)
+
+
+
+
+
+*android.webkit.WebViewProvider.setNetworkAvailable(boolean)*
+
+public void setNetworkAvailable(boolean networkUp)
+
+
+
+
+
+*android.webkit.WebViewProvider.setPictureListener(WebView.PictureListener)*
+
+public void setPictureListener(android.webkit.WebView.PictureListener listener)
+
+
+
+
+
+*android.webkit.WebViewProvider.setVerticalScrollbarOverlay(boolean)*
+
+public void setVerticalScrollbarOverlay(boolean overlay)
+
+
+
+
+
+*android.webkit.WebViewProvider.setWebChromeClient(WebChromeClient)*
+
+public void setWebChromeClient(android.webkit.WebChromeClient client)
+
+
+
+
+
+*android.webkit.WebViewProvider.setWebViewClient(WebViewClient)*
+
+public void setWebViewClient(android.webkit.WebViewClient client)
+
+
+
+
+
+*android.webkit.WebViewProvider.showFindDialog(String,boolean)*
+
+public boolean showFindDialog(
+  java.lang.String text,
+  boolean showIme)
+
+
+
+
+
+*android.webkit.WebViewProvider.stopLoading()*
+
+public void stopLoading()
+
+
+
+
+
+*android.webkit.WebViewProvider.zoomIn()*
+
+public boolean zoomIn()
+
+
+
+
+
+*android.webkit.WebViewProvider.zoomOut()*
+
+public boolean zoomOut()
+
+
+
+
+
+

@@ -1,0 +1,401 @@
+*android.app.FragmentTransaction* *FragmentTransaction* API for performing a set
+
+public abstract class FragmentTransaction
+  extends    |java.lang.Object|
+
+|android.app.FragmentTransaction_Description|
+|android.app.FragmentTransaction_Fields|
+|android.app.FragmentTransaction_Constructors|
+|android.app.FragmentTransaction_Methods|
+
+================================================================================
+
+*android.app.FragmentTransaction_Fields*
+|int_android.app.FragmentTransaction.TRANSIT_ENTER_MASK|
+|int_android.app.FragmentTransaction.TRANSIT_EXIT_MASK|
+|int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE|
+|int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE|
+|int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN|
+|int_android.app.FragmentTransaction.TRANSIT_NONE|
+|int_android.app.FragmentTransaction.TRANSIT_UNSET|
+
+*android.app.FragmentTransaction_Constructors*
+|android.app.FragmentTransaction()|
+
+*android.app.FragmentTransaction_Methods*
+|android.app.FragmentTransaction.add(Fragment,String)|Calls#add(int, Fragment, 
+|android.app.FragmentTransaction.add(int,Fragment)|Calls#add(int, Fragment, Str
+|android.app.FragmentTransaction.add(int,Fragment,String)|Add a fragment to the
+|android.app.FragmentTransaction.addToBackStack(String)|Add this transaction to
+|android.app.FragmentTransaction.attach(Fragment)|Re-attach a fragment after it
+|android.app.FragmentTransaction.commit()|Schedules a commit of this transactio
+|android.app.FragmentTransaction.commitAllowingStateLoss()|Like#commitbut allow
+|android.app.FragmentTransaction.detach(Fragment)|Detach the given fragment fro
+|android.app.FragmentTransaction.disallowAddToBackStack()|Disallow calls to#add
+|android.app.FragmentTransaction.hide(Fragment)|Hides an existing fragment.
+|android.app.FragmentTransaction.isAddToBackStackAllowed()|Returns true if this
+|android.app.FragmentTransaction.isEmpty()|
+|android.app.FragmentTransaction.remove(Fragment)|Remove an existing fragment.
+|android.app.FragmentTransaction.replace(int,Fragment)|Calls#replace(int, Fragm
+|android.app.FragmentTransaction.replace(int,Fragment,String)|Replace an existi
+|android.app.FragmentTransaction.setBreadCrumbShortTitle(CharSequence)|Like#set
+|android.app.FragmentTransaction.setBreadCrumbShortTitle(int)|Set the short tit
+|android.app.FragmentTransaction.setBreadCrumbTitle(CharSequence)|Like#setBread
+|android.app.FragmentTransaction.setBreadCrumbTitle(int)|Set the full title to 
+|android.app.FragmentTransaction.setCustomAnimations(int,int)|Set specific anim
+|android.app.FragmentTransaction.setCustomAnimations(int,int,int,int)|Set speci
+|android.app.FragmentTransaction.setTransition(int)|Select a standard transitio
+|android.app.FragmentTransaction.setTransitionStyle(int)|Set a custom style res
+|android.app.FragmentTransaction.show(Fragment)|Shows a previously hidden fragm
+
+*android.app.FragmentTransaction_Description*
+
+API for performing a set of Fragment operations. 
+
+Developer Guides For more information about using fragments, read the <a 
+href="guide/topics/fundamentals/fragments.html">Fragments developer guide. 
+
+
+
+*int_android.app.FragmentTransaction.TRANSIT_ENTER_MASK*
+
+Bit mask that is set for all enter transitions. 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_EXIT_MASK*
+
+Bit mask that is set for all exit transitions. 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE*
+
+Fragment is being removed from the stack 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE*
+
+Fragment should simply fade in or out; that is, no strong navigation associated 
+with it except that it is appearing or disappearing for some reason. 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN*
+
+Fragment is being added onto the stack 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_NONE*
+
+No animation for transition. 
+
+
+*int_android.app.FragmentTransaction.TRANSIT_UNSET*
+
+Not set up for a transition. 
+
+
+
+*android.app.FragmentTransaction()*
+
+public FragmentTransaction()
+
+
+
+
+*android.app.FragmentTransaction.add(Fragment,String)*
+
+public abstract |android.app.FragmentTransaction| add(
+  android.app.Fragment fragment,
+  java.lang.String tag)
+
+Calls (|android.app.FragmentTransaction|) with a 0 containerViewId. 
+
+
+
+*android.app.FragmentTransaction.add(int,Fragment)*
+
+public abstract |android.app.FragmentTransaction| add(
+  int containerViewId,
+  android.app.Fragment fragment)
+
+Calls (|android.app.FragmentTransaction|) with a null tag. 
+
+
+
+*android.app.FragmentTransaction.add(int,Fragment,String)*
+
+public abstract |android.app.FragmentTransaction| add(
+  int containerViewId,
+  android.app.Fragment fragment,
+  java.lang.String tag)
+
+Add a fragment to the activity state. This fragment may optionally also have 
+its view (if Fragment.onCreateView(|android.app.Fragment|) returns non-null) 
+into a container view of the activity. 
+
+
+    containerViewId - Optional identifier of the container this fragment is to be placed in. If 0, it 
+       will not be placed in a container. 
+    fragment - The fragment to be added. This fragment must not already be added to the 
+       activity. 
+    tag - Optional tag name for the fragment, to later retrieve the fragment with {@link 
+       FragmentManager#findFragmentByTag(String) 
+       FragmentManager.findFragmentByTag(String)}. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.addToBackStack(String)*
+
+public abstract |android.app.FragmentTransaction| addToBackStack(java.lang.String name)
+
+Add this transaction to the back stack. This means that the transaction will be 
+remembered after it is committed, and will reverse its operation when later 
+popped off the stack. 
+
+
+    name - An optional name for this back stack state, or null. 
+
+*android.app.FragmentTransaction.attach(Fragment)*
+
+public abstract |android.app.FragmentTransaction| attach(android.app.Fragment fragment)
+
+Re-attach a fragment after it had previously been deatched from the UI with 
+(|android.app.FragmentTransaction|) . This causes its view hierarchy to be 
+re-created, attached to the UI, and displayed. 
+
+
+    fragment - The fragment to be attached. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.commit()*
+
+public abstract int commit()
+
+Schedules a commit of this transaction. The commit does not happen immediately; 
+it will be scheduled as work on the main thread to be done the next time that 
+thread is ready. 
+
+A transaction can only be committed with this method prior to its containing 
+activity saving its state. If the commit is attempted after that point, an 
+exception will be thrown. This is because the state after the commit can be 
+lost if the activity needs to be restored from its state. See 
+(|android.app.FragmentTransaction|) for situations where it may be okay to lose 
+the commit. 
+
+
+
+    Returns: Returns the identifier of this transaction's back stack entry, if {@link 
+             #addToBackStack(String)} had been called. Otherwise, returns a 
+             negative number. 
+
+*android.app.FragmentTransaction.commitAllowingStateLoss()*
+
+public abstract int commitAllowingStateLoss()
+
+Like (|android.app.FragmentTransaction|) but allows the commit to be executed 
+after an activity's state is saved. This is dangerous because the commit can be 
+lost if the activity needs to later be restored from its state, so this should 
+only be used for cases where it is okay for the UI state to change unexpectedly 
+on the user. 
+
+
+
+*android.app.FragmentTransaction.detach(Fragment)*
+
+public abstract |android.app.FragmentTransaction| detach(android.app.Fragment fragment)
+
+Detach the given fragment from the UI. This is the same state as when it is put 
+on the back stack: the fragment is removed from the UI, however its state is 
+still being actively managed by the fragment manager. When going into this 
+state its view hierarchy is destroyed. 
+
+
+    fragment - The fragment to be detached. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.disallowAddToBackStack()*
+
+public abstract |android.app.FragmentTransaction| disallowAddToBackStack()
+
+Disallow calls to (|android.app.FragmentTransaction|) . Any future calls to 
+addToBackStack will throw (|java.lang.IllegalStateException|) . If 
+addToBackStack has already been called, this method will throw 
+IllegalStateException. 
+
+
+
+*android.app.FragmentTransaction.hide(Fragment)*
+
+public abstract |android.app.FragmentTransaction| hide(android.app.Fragment fragment)
+
+Hides an existing fragment. This is only relevant for fragments whose views 
+have been added to a container, as this will cause the view to be hidden. 
+
+
+    fragment - The fragment to be hidden. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.isAddToBackStackAllowed()*
+
+public abstract boolean isAddToBackStackAllowed()
+
+Returns true if this FragmentTransaction is allowed to be added to the back 
+stack. If this method would return false, (|android.app.FragmentTransaction|) 
+will throw (|java.lang.IllegalStateException|) . 
+
+
+
+    Returns: True if {@link #addToBackStack(String)} is permitted on this transaction. 
+
+*android.app.FragmentTransaction.isEmpty()*
+
+public abstract boolean isEmpty()
+
+
+
+
+
+    Returns: true if this transaction contains no operations, false otherwise. 
+
+*android.app.FragmentTransaction.remove(Fragment)*
+
+public abstract |android.app.FragmentTransaction| remove(android.app.Fragment fragment)
+
+Remove an existing fragment. If it was added to a container, its view is also 
+removed from that container. 
+
+
+    fragment - The fragment to be removed. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.replace(int,Fragment)*
+
+public abstract |android.app.FragmentTransaction| replace(
+  int containerViewId,
+  android.app.Fragment fragment)
+
+Calls (|android.app.FragmentTransaction|) with a null tag. 
+
+
+
+*android.app.FragmentTransaction.replace(int,Fragment,String)*
+
+public abstract |android.app.FragmentTransaction| replace(
+  int containerViewId,
+  android.app.Fragment fragment,
+  java.lang.String tag)
+
+Replace an existing fragment that was added to a container. This is essentially 
+the same as calling (|android.app.FragmentTransaction|) for all currently added 
+fragments that were added with the same containerViewId and then 
+(|android.app.FragmentTransaction|) with the same arguments given here. 
+
+
+    containerViewId - Identifier of the container whose fragment(s) are to be replaced. 
+    fragment - The new fragment to place in the container. 
+    tag - Optional tag name for the fragment, to later retrieve the fragment with {@link 
+       FragmentManager#findFragmentByTag(String) 
+       FragmentManager.findFragmentByTag(String)}. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+*android.app.FragmentTransaction.setBreadCrumbShortTitle(CharSequence)*
+
+public abstract |android.app.FragmentTransaction| setBreadCrumbShortTitle(java.lang.CharSequence text)
+
+Like (|android.app.FragmentTransaction|) but taking a raw string; this method 
+is not recommended, as the string can not be changed later if the locale 
+changes. 
+
+
+
+*android.app.FragmentTransaction.setBreadCrumbShortTitle(int)*
+
+public abstract |android.app.FragmentTransaction| setBreadCrumbShortTitle(int res)
+
+Set the short title to show as a bread crumb when this transaction is on the 
+back stack, as used by (|android.app.FragmentBreadCrumbs|) . 
+
+
+    res - A string resource containing the title. 
+
+*android.app.FragmentTransaction.setBreadCrumbTitle(CharSequence)*
+
+public abstract |android.app.FragmentTransaction| setBreadCrumbTitle(java.lang.CharSequence text)
+
+Like (|android.app.FragmentTransaction|) but taking a raw string; this method 
+is not recommended, as the string can not be changed later if the locale 
+changes. 
+
+
+
+*android.app.FragmentTransaction.setBreadCrumbTitle(int)*
+
+public abstract |android.app.FragmentTransaction| setBreadCrumbTitle(int res)
+
+Set the full title to show as a bread crumb when this transaction is on the 
+back stack, as used by (|android.app.FragmentBreadCrumbs|) . 
+
+
+    res - A string resource containing the title. 
+
+*android.app.FragmentTransaction.setCustomAnimations(int,int)*
+
+public abstract |android.app.FragmentTransaction| setCustomAnimations(
+  int enter,
+  int exit)
+
+Set specific animation resources to run for the fragments that are entering and 
+exiting in this transaction. These animations will not be played when popping 
+the back stack. 
+
+
+
+*android.app.FragmentTransaction.setCustomAnimations(int,int,int,int)*
+
+public abstract |android.app.FragmentTransaction| setCustomAnimations(
+  int enter,
+  int exit,
+  int popEnter,
+  int popExit)
+
+Set specific animation resources to run for the fragments that are entering and 
+exiting in this transaction. The popEnter and popExit animations will be played 
+for enter/exit operations specifically when popping the back stack. 
+
+
+
+*android.app.FragmentTransaction.setTransition(int)*
+
+public abstract |android.app.FragmentTransaction| setTransition(int transit)
+
+Select a standard transition animation for this transaction. May be one of 
+(|android.app.FragmentTransaction|) , (|android.app.FragmentTransaction|) , or 
+(|android.app.FragmentTransaction|) 
+
+
+
+*android.app.FragmentTransaction.setTransitionStyle(int)*
+
+public abstract |android.app.FragmentTransaction| setTransitionStyle(int styleRes)
+
+Set a custom style resource that will be used for resolving transit animations. 
+
+
+
+*android.app.FragmentTransaction.show(Fragment)*
+
+public abstract |android.app.FragmentTransaction| show(android.app.Fragment fragment)
+
+Shows a previously hidden fragment. This is only relevant for fragments whose 
+views have been added to a container, as this will cause the view to be shown. 
+
+
+    fragment - The fragment to be shown. 
+
+    Returns: Returns the same FragmentTransaction instance. 
+
+

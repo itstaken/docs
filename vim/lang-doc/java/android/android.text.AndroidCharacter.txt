@@ -1,0 +1,151 @@
+*android.text.AndroidCharacter* *AndroidCharacter* AndroidCharacter exposes some
+
+public class AndroidCharacter
+  extends    |java.lang.Object|
+
+|android.text.AndroidCharacter_Description|
+|android.text.AndroidCharacter_Fields|
+|android.text.AndroidCharacter_Constructors|
+|android.text.AndroidCharacter_Methods|
+
+================================================================================
+
+*android.text.AndroidCharacter_Fields*
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_AMBIGUOUS|
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_FULL_WIDTH|
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_HALF_WIDTH|
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_NARROW|
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_NEUTRAL|
+|int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_WIDE|
+
+*android.text.AndroidCharacter_Constructors*
+|android.text.AndroidCharacter()|
+
+*android.text.AndroidCharacter_Methods*
+|android.text.AndroidCharacter.getDirectionalities(char[],byte[],int)|Fill in t
+|android.text.AndroidCharacter.getEastAsianWidth(char)|Calculate the East Asian
+|android.text.AndroidCharacter.getEastAsianWidths(char[],int,int,byte[])|Fill t
+|android.text.AndroidCharacter.getMirror(char)|Return the right-to-left mirror 
+|android.text.AndroidCharacter.mirror(char[],int,int)|Replace the specified sli
+
+*android.text.AndroidCharacter_Description*
+
+AndroidCharacter exposes some character properties that are not easily accessed 
+from java.lang.Character. 
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_AMBIGUOUS*
+
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_FULL_WIDTH*
+
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_HALF_WIDTH*
+
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_NARROW*
+
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_NEUTRAL*
+
+
+
+
+*int_android.text.AndroidCharacter.EAST_ASIAN_WIDTH_WIDE*
+
+
+
+
+
+*android.text.AndroidCharacter()*
+
+public AndroidCharacter()
+
+
+
+
+*android.text.AndroidCharacter.getDirectionalities(char[],byte[],int)*
+
+public static native void getDirectionalities(
+  char[] src,
+  byte[] dest,
+  int count)
+
+Fill in the first count bytes of dest with the directionalities from the first 
+count chars of src. This is just like Character.getDirectionality() except it 
+is a batch operation. 
+
+
+
+*android.text.AndroidCharacter.getEastAsianWidth(char)*
+
+public static native int getEastAsianWidth(char input)
+
+Calculate the East Asian Width of a character according to Unicode TR#11. The 
+return will be one of (|android.text.AndroidCharacter|) , 
+(|android.text.AndroidCharacter|) , (|android.text.AndroidCharacter|) , 
+(|android.text.AndroidCharacter|) , (|android.text.AndroidCharacter|) , or 
+(|android.text.AndroidCharacter|) . 
+
+
+    input - the character to measure 
+
+    Returns: the East Asian Width for input 
+
+*android.text.AndroidCharacter.getEastAsianWidths(char[],int,int,byte[])*
+
+public static native void getEastAsianWidths(
+  char[] src,
+  int start,
+  int count,
+  byte[] dest)
+
+Fill the first count bytes of dest with the East Asian Width from count chars 
+of src starting at start. East Asian Width is calculated based on Unicode 
+TR#11. Each entry in dest will be one of (|android.text.AndroidCharacter|) , 
+(|android.text.AndroidCharacter|) , (|android.text.AndroidCharacter|) , 
+(|android.text.AndroidCharacter|) , (|android.text.AndroidCharacter|) , or 
+(|android.text.AndroidCharacter|) . 
+
+
+    src - character array of input to measure 
+    start - first character in array to measure 
+    count - maximum number of characters to measure 
+    dest - byte array of results for each character in src 
+
+*android.text.AndroidCharacter.getMirror(char)*
+
+public static native char getMirror(char ch)
+
+Return the right-to-left mirror (or the original char if none) of the specified 
+char. 
+
+
+
+*android.text.AndroidCharacter.mirror(char[],int,int)*
+
+public static native boolean mirror(
+  char[] text,
+  int start,
+  int count)
+
+Replace the specified slice of text with the chars' right-to-left mirrors (if 
+any), returning true if any replacements were made. 
+
+
+    text - array of characters to apply mirror operation 
+    start - first character in array to mirror 
+    count - maximum number of characters to mirror 
+
+    Returns: true if replacements were made 
+
+

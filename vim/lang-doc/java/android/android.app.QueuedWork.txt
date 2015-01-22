@@ -1,0 +1,95 @@
+*android.app.QueuedWork* *QueuedWork* Internal utility class to keep track of pr
+
+public class QueuedWork
+  extends    |java.lang.Object|
+
+|android.app.QueuedWork_Description|
+|android.app.QueuedWork_Fields|
+|android.app.QueuedWork_Constructors|
+|android.app.QueuedWork_Methods|
+
+================================================================================
+
+*android.app.QueuedWork_Constructors*
+|android.app.QueuedWork()|
+
+*android.app.QueuedWork_Methods*
+|android.app.QueuedWork.add(Runnable)|Add a runnable to finish (or wait for) a 
+|android.app.QueuedWork.hasPendingWork()|Returns true if there is pending work 
+|android.app.QueuedWork.remove(Runnable)|
+|android.app.QueuedWork.singleThreadExecutor()|Returns a single-thread Executor
+|android.app.QueuedWork.waitToFinish()|Finishes or waits for async operations t
+
+*android.app.QueuedWork_Description*
+
+Internal utility class to keep track of process-global work that's outstanding 
+and hasn't been finished yet. 
+
+This was created for writing SharedPreference edits out asynchronously so we'd 
+have a mechanism to wait for the writes in Activity.onPause and similar places, 
+but we may use this mechanism for other things in the future. 
+
+
+
+*android.app.QueuedWork()*
+
+public QueuedWork()
+
+
+
+
+*android.app.QueuedWork.add(Runnable)*
+
+public static void add(java.lang.Runnable finisher)
+
+Add a runnable to finish (or wait for) a deferred operation started in this 
+context earlier. Typically finished by e.g. an Activity#onPause. Used by 
+SharedPreferences$Editor#startCommit(). 
+
+Note that this doesn't actually start it running. This is just a scratch set 
+for callers doing async work to keep updated with what's in-flight. In the 
+common case, caller code (e.g. SharedPreferences) will pretty quickly call 
+remove() after an add(). The only time these Runnables are run is from 
+waitToFinish(), below. 
+
+
+
+*android.app.QueuedWork.hasPendingWork()*
+
+public static boolean hasPendingWork()
+
+Returns true if there is pending work to be done. Note that the result is out 
+of data as soon as you receive it, so be careful how you use it. 
+
+
+
+*android.app.QueuedWork.remove(Runnable)*
+
+public static void remove(java.lang.Runnable finisher)
+
+
+
+
+
+*android.app.QueuedWork.singleThreadExecutor()*
+
+public static |java.util.concurrent.ExecutorService| singleThreadExecutor()
+
+Returns a single-thread Executor shared by the entire process, creating it if 
+necessary. 
+
+
+
+*android.app.QueuedWork.waitToFinish()*
+
+public static void waitToFinish()
+
+Finishes or waits for async operations to complete. (e.g. 
+SharedPreferences$Editor#startCommit writes) 
+
+Is called from the Activity base class's onPause(), after BroadcastReceiver's 
+onReceive, after Service command handling, etc. (so async work is never lost) 
+
+
+
+

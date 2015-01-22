@@ -1,0 +1,102 @@
+*android.content.CursorEntityIterator* *CursorEntityIterator* Abstract implement
+
+public abstract class CursorEntityIterator
+  extends    |java.lang.Object|
+  implements |android.content.EntityIterator|
+
+|android.content.CursorEntityIterator_Description|
+|android.content.CursorEntityIterator_Fields|
+|android.content.CursorEntityIterator_Constructors|
+|android.content.CursorEntityIterator_Methods|
+
+================================================================================
+
+*android.content.CursorEntityIterator_Constructors*
+|android.content.CursorEntityIterator(Cursor)|Constructor that makes initialize
+
+*android.content.CursorEntityIterator_Methods*
+|android.content.CursorEntityIterator.close()|Indicates that this iterator is n
+|android.content.CursorEntityIterator.getEntityAndIncrementCursor(Cursor)|Retur
+|android.content.CursorEntityIterator.hasNext()|Returns whether there are more 
+|android.content.CursorEntityIterator.next()|Returns the next object in the ite
+|android.content.CursorEntityIterator.remove()|
+|android.content.CursorEntityIterator.reset()|
+
+*android.content.CursorEntityIterator_Description*
+
+Abstract implementation of EntityIterator that makes it easy to wrap a cursor 
+that can contain several consecutive rows for an entity. 
+
+
+
+*android.content.CursorEntityIterator(Cursor)*
+
+public CursorEntityIterator(android.database.Cursor cursor)
+
+Constructor that makes initializes the cursor such that the iterator points to 
+the first Entity, if there are any. 
+
+    cursor - the cursor that contains the rows that make up the entities 
+
+*android.content.CursorEntityIterator.close()*
+
+public final void close()
+
+Indicates that this iterator is no longer needed and that any associated 
+resources may be released (such as a SQLite cursor). 
+
+
+
+*android.content.CursorEntityIterator.getEntityAndIncrementCursor(Cursor)*
+
+public abstract |android.content.Entity| getEntityAndIncrementCursor(android.database.Cursor cursor)
+  throws |android.os.RemoteException|
+         
+Returns the entity that the cursor is currently pointing to. This must take 
+care to advance the cursor past this entity. This will never be called if the 
+cursor is at the end. 
+
+
+    cursor - the cursor that contains the entity rows 
+
+    Returns: the entity that the cursor is currently pointing to 
+
+*android.content.CursorEntityIterator.hasNext()*
+
+public final boolean hasNext()
+
+Returns whether there are more elements to iterate, i.e. whether the iterator 
+is positioned in front of an element. 
+
+
+
+    Returns: {@code true} if there are more elements, {@code false} otherwise. 
+
+*android.content.CursorEntityIterator.next()*
+
+public |android.content.Entity| next()
+
+Returns the next object in the iteration, i.e. returns the element in front of 
+the iterator and advances the iterator by one position. 
+
+
+
+    Returns: the next object. 
+
+*android.content.CursorEntityIterator.remove()*
+
+public void remove()
+
+
+
+
+
+*android.content.CursorEntityIterator.reset()*
+
+public final void reset()
+
+
+
+
+
+

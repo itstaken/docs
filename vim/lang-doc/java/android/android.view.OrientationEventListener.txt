@@ -1,0 +1,101 @@
+*android.view.OrientationEventListener* *OrientationEventListener* Helper class 
+
+public abstract class OrientationEventListener
+  extends    |java.lang.Object|
+
+|android.view.OrientationEventListener_Description|
+|android.view.OrientationEventListener_Fields|
+|android.view.OrientationEventListener_Constructors|
+|android.view.OrientationEventListener_Methods|
+
+================================================================================
+
+*android.view.OrientationEventListener_Fields*
+|int_android.view.OrientationEventListener.ORIENTATION_UNKNOWN|
+
+*android.view.OrientationEventListener_Constructors*
+|android.view.OrientationEventListener(Context)|Creates a new OrientationEventL
+|android.view.OrientationEventListener(Context,int)|Creates a new OrientationEv
+
+*android.view.OrientationEventListener_Methods*
+|android.view.OrientationEventListener.canDetectOrientation()|
+|android.view.OrientationEventListener.disable()|Disables the OrientationEventL
+|android.view.OrientationEventListener.enable()|Enables the OrientationEventLis
+|android.view.OrientationEventListener.onOrientationChanged(int)|Called when th
+
+*android.view.OrientationEventListener_Description*
+
+Helper class for receiving notifications from the SensorManager when the 
+orientation of the device has changed. 
+
+
+
+*int_android.view.OrientationEventListener.ORIENTATION_UNKNOWN*
+
+Returned from onOrientationChanged when the device orientation cannot be 
+determined (typically when the device is in a close to flat position). 
+
+
+
+*android.view.OrientationEventListener(Context)*
+
+public OrientationEventListener(android.content.Context context)
+
+Creates a new OrientationEventListener. 
+
+    context - for the OrientationEventListener. 
+
+*android.view.OrientationEventListener(Context,int)*
+
+public OrientationEventListener(
+  android.content.Context context,
+  int rate)
+
+Creates a new OrientationEventListener. 
+
+    context - for the OrientationEventListener. 
+    rate - at which sensor events are processed (see also {@link 
+       android.hardware.SensorManager SensorManager}). Use the default value of 
+       {@link android.hardware.SensorManager#SENSOR_DELAY_NORMAL 
+       SENSOR_DELAY_NORMAL} for simple screen orientation change detection. 
+
+*android.view.OrientationEventListener.canDetectOrientation()*
+
+public boolean canDetectOrientation()
+
+
+
+
+
+*android.view.OrientationEventListener.disable()*
+
+public void disable()
+
+Disables the OrientationEventListener. 
+
+
+
+*android.view.OrientationEventListener.enable()*
+
+public void enable()
+
+Enables the OrientationEventListener so it will monitor the sensor and call 
+(|android.view.OrientationEventListener|) when the device orientation changes. 
+
+
+
+*android.view.OrientationEventListener.onOrientationChanged(int)*
+
+public abstract void onOrientationChanged(int orientation)
+
+Called when the orientation of the device has changed. orientation parameter is 
+in degrees, ranging from 0 to 359. orientation is 0 degrees when the device is 
+oriented in its natural position, 90 degrees when its left side is at the top, 
+180 degrees when it is upside down, and 270 degrees when its right side is to 
+the top. (|android.view.OrientationEventListener|) is returned when the device 
+is close to flat and the orientation cannot be determined. 
+
+
+    orientation - The new orientation of the device. 
+
+

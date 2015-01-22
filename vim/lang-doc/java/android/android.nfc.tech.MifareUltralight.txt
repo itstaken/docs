@@ -1,0 +1,248 @@
+*android.nfc.tech.MifareUltralight* *MifareUltralight* Provides access to MIFARE
+
+public final class MifareUltralight
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.MifareUltralight_Description|
+|android.nfc.tech.MifareUltralight_Fields|
+|android.nfc.tech.MifareUltralight_Constructors|
+|android.nfc.tech.MifareUltralight_Methods|
+
+================================================================================
+
+*android.nfc.tech.MifareUltralight_Fields*
+|java.lang.String_android.nfc.tech.MifareUltralight.EXTRA_IS_UL_C|
+|int_android.nfc.tech.MifareUltralight.PAGE_SIZE|
+|int_android.nfc.tech.MifareUltralight.TYPE_ULTRALIGHT|
+|int_android.nfc.tech.MifareUltralight.TYPE_ULTRALIGHT_C|
+|int_android.nfc.tech.MifareUltralight.TYPE_UNKNOWN|
+
+*android.nfc.tech.MifareUltralight_Constructors*
+|android.nfc.tech.MifareUltralight(Tag)|
+
+*android.nfc.tech.MifareUltralight_Methods*
+|android.nfc.tech.MifareUltralight.get(Tag)|Get an instance ofMifareUltralightf
+|android.nfc.tech.MifareUltralight.getMaxTransceiveLength()|Return the maximum 
+|android.nfc.tech.MifareUltralight.getTimeout()|Get the current#transceivetimeo
+|android.nfc.tech.MifareUltralight.getType()|Return the MIFARE Ultralight type 
+|android.nfc.tech.MifareUltralight.readPages(int)|Read 4 pages (16 bytes).
+|android.nfc.tech.MifareUltralight.setTimeout(int)|Set the#transceivetimeout in
+|android.nfc.tech.MifareUltralight.transceive(byte[])|Send raw NfcA data to a t
+|android.nfc.tech.MifareUltralight.writePage(int,byte[])|Write 1 page (4 bytes)
+
+*android.nfc.tech.MifareUltralight_Description*
+
+Provides access to MIFARE Ultralight properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.MifareUltralight|) object using 
+(|android.nfc.tech.MifareUltralight|) . 
+
+MIFARE Ultralight compatible tags have 4 byte pages 
+(|android.nfc.tech.MifareUltralight|) . The primary operations on an Ultralight 
+tag are (|android.nfc.tech.MifareUltralight|) and 
+(|android.nfc.tech.MifareUltralight|) . 
+
+The original MIFARE Ultralight consists of a 64 byte EEPROM. The first 4 pages 
+are for the OTP area, manufacturer data, and locking bits. They are readable 
+and some bits are writable. The final 12 pages are the user read/write area. 
+For more information see the NXP data sheet MF0ICU1. 
+
+The MIFARE Ultralight C consists of a 192 byte EEPROM. The first 4 pages are 
+for OTP, manufacturer data, and locking bits. The next 36 pages are the user 
+read/write area. The next 4 pages are additional locking bits, counters and 
+authentication configuration and are readable. The final 4 pages are for the 
+authentication key and are not readable. For more information see the NXP data 
+sheet MF0ICU2. 
+
+Implementation of this class on a Android NFC device is optional. If it is not 
+implemented, then (|android.nfc.tech.MifareUltralight|) will never be 
+enumerated in (|android.nfc.Tag|) . If it is enumerated, then all 
+(|android.nfc.tech.MifareUltralight|) I/O operations will be supported. In 
+either case, (|android.nfc.tech.NfcA|) will also be enumerated on the tag, 
+because all MIFARE Ultralight tags are also (|android.nfc.tech.NfcA|) tags. 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.MifareUltralight.EXTRA_IS_UL_C*
+
+
+
+
+*int_android.nfc.tech.MifareUltralight.PAGE_SIZE*
+
+Size of a MIFARE Ultralight page in bytes 
+
+
+*int_android.nfc.tech.MifareUltralight.TYPE_ULTRALIGHT*
+
+A MIFARE Ultralight tag 
+
+
+*int_android.nfc.tech.MifareUltralight.TYPE_ULTRALIGHT_C*
+
+A MIFARE Ultralight C tag 
+
+
+*int_android.nfc.tech.MifareUltralight.TYPE_UNKNOWN*
+
+A MIFARE Ultralight compatible tag of unknown type 
+
+
+
+*android.nfc.tech.MifareUltralight(Tag)*
+
+public MifareUltralight(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.MifareUltralight.get(Tag)*
+
+public static |android.nfc.tech.MifareUltralight| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.MifareUltralight|) for the given tag. 
+Returns null if (|android.nfc.tech.MifareUltralight|) was not enumerated in 
+(|android.nfc.Tag|) - this indicates the tag is not MIFARE Ultralight 
+compatible, or that this Android device does not implement MIFARE Ultralight. 
+Does not cause any RF activity and does not block. 
+
+
+    tag - an MIFARE Ultralight compatible tag 
+
+    Returns: MIFARE Ultralight object 
+
+*android.nfc.tech.MifareUltralight.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.MifareUltralight|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.MifareUltralight.getTimeout()*
+
+public int getTimeout()
+
+Get the current (|android.nfc.tech.MifareUltralight|) timeout in milliseconds. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: timeout value in milliseconds 
+
+*android.nfc.tech.MifareUltralight.getType()*
+
+public int getType()
+
+Return the MIFARE Ultralight type of the tag. One of 
+(|android.nfc.tech.MifareUltralight|) or (|android.nfc.tech.MifareUltralight|) 
+or (|android.nfc.tech.MifareUltralight|) . Depending on how the tag has been 
+formatted, it can be impossible to accurately classify between original MIFARE 
+Ultralight and Ultralight C. So treat this method as a hint. Does not cause any 
+RF activity and does not block. 
+
+
+
+    Returns: 
+
+*android.nfc.tech.MifareUltralight.readPages(int)*
+
+public byte[] readPages(int pageOffset)
+  throws |java.io.IOException|
+         
+Read 4 pages (16 bytes). 
+
+The MIFARE Ultralight protocol always reads 4 pages at a time, to reduce the 
+number of commands required to read an entire tag. If a read spans past the 
+last readable block, then the tag will return pages that have been wrapped back 
+to the first blocks. MIFARE Ultralight tags have readable blocks 0x00 through 
+0x0F. So a read to block offset 0x0E would return blocks 0x0E, 0x0F, 0x00, 
+0x01. MIFARE Ultralight C tags have readable blocks 0x00 through 0x2B. So a 
+read to block 0x2A would return blocks 0x2A, 0x2B, 0x00, 0x01. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareUltralight|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    pageOffset - index of first page to read, starting from 0 
+
+    Returns: 4 pages (16 bytes) 
+
+*android.nfc.tech.MifareUltralight.setTimeout(int)*
+
+public void setTimeout(int timeout)
+
+Set the (|android.nfc.tech.MifareUltralight|) timeout in milliseconds. 
+
+The timeout only applies to (|android.nfc.tech.MifareUltralight|) on this 
+object, and is reset to a default value when 
+(|android.nfc.tech.MifareUltralight|) is called. 
+
+Setting a longer timeout may be useful when performing transactions that 
+require a long processing time on the tag such as key generation. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    timeout - timeout value in milliseconds 
+
+*android.nfc.tech.MifareUltralight.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NfcA data to a tag and receive the response. 
+
+This is equivalent to connecting to this tag via (|android.nfc.tech.NfcA|) and 
+calling (|android.nfc.tech.NfcA|) . Note that all MIFARE Classic tags are based 
+on (|android.nfc.tech.NfcA|) technology. 
+
+Use (|android.nfc.tech.MifareUltralight|) to retrieve the maximum number of 
+bytes that can be sent with (|android.nfc.tech.MifareUltralight|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareUltralight|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+*android.nfc.tech.MifareUltralight.writePage(int,byte[])*
+
+public void writePage(
+  int pageOffset,
+  byte[] data)
+  throws |java.io.IOException|
+         
+Write 1 page (4 bytes). 
+
+The MIFARE Ultralight protocol always writes 1 page at a time, to minimize 
+EEPROM write cycles. 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.MifareUltralight|) is called from 
+another thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    pageOffset - index of page to write, starting from 0 
+    data - 4 bytes to write 
+
+

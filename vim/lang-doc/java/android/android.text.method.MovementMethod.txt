@@ -1,0 +1,140 @@
+*android.text.method.MovementMethod* *MovementMethod* Provides cursor positionin
+
+public interface interface MovementMethod
+
+
+|android.text.method.MovementMethod_Description|
+|android.text.method.MovementMethod_Fields|
+|android.text.method.MovementMethod_Constructors|
+|android.text.method.MovementMethod_Methods|
+
+================================================================================
+
+*android.text.method.MovementMethod_Methods*
+|android.text.method.MovementMethod.canSelectArbitrarily()|Returns true if this
+|android.text.method.MovementMethod.initialize(TextView,Spannable)|
+|android.text.method.MovementMethod.onGenericMotionEvent(TextView,Spannable,MotionEvent)|
+|android.text.method.MovementMethod.onKeyDown(TextView,Spannable,int,KeyEvent)|
+|android.text.method.MovementMethod.onKeyOther(TextView,Spannable,KeyEvent)|If 
+|android.text.method.MovementMethod.onKeyUp(TextView,Spannable,int,KeyEvent)|
+|android.text.method.MovementMethod.onTakeFocus(TextView,Spannable,int)|
+|android.text.method.MovementMethod.onTouchEvent(TextView,Spannable,MotionEvent)|
+|android.text.method.MovementMethod.onTrackballEvent(TextView,Spannable,MotionEvent)|
+
+*android.text.method.MovementMethod_Description*
+
+Provides cursor positioning, scrolling and text selection functionality in a 
+(|android.widget.TextView|) . 
+
+The (|android.widget.TextView|) delegates handling of key events, trackball 
+motions and touches to the movement method for purposes of content navigation. 
+The framework automatically selects an appropriate movement method based on the 
+content of the (|android.widget.TextView|) . 
+
+This interface is intended for use by the framework; it should not be 
+implemented directly by applications. 
+
+
+
+*android.text.method.MovementMethod.canSelectArbitrarily()*
+
+public boolean canSelectArbitrarily()
+
+Returns true if this movement method allows arbitrary selection of any text; 
+false if it has no selection (like a movement method that only scrolls) or a 
+constrained selection (for example limited to links. The "Select All" menu item 
+is disabled if arbitrary selection is not allowed. 
+
+
+
+*android.text.method.MovementMethod.initialize(TextView,Spannable)*
+
+public void initialize(
+  android.widget.TextView widget,
+  android.text.Spannable text)
+
+
+
+
+
+*android.text.method.MovementMethod.onGenericMotionEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onGenericMotionEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.text.method.MovementMethod.onKeyDown(TextView,Spannable,int,KeyEvent)*
+
+public boolean onKeyDown(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.text.method.MovementMethod.onKeyOther(TextView,Spannable,KeyEvent)*
+
+public boolean onKeyOther(
+  android.widget.TextView view,
+  android.text.Spannable text,
+  android.view.KeyEvent event)
+
+If the key listener wants to other kinds of key events, return true, otherwise 
+return false and the caller (i.e. the widget host) will handle the key. 
+
+
+
+*android.text.method.MovementMethod.onKeyUp(TextView,Spannable,int,KeyEvent)*
+
+public boolean onKeyUp(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.text.method.MovementMethod.onTakeFocus(TextView,Spannable,int)*
+
+public void onTakeFocus(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  int direction)
+
+
+
+
+
+*android.text.method.MovementMethod.onTouchEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onTouchEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+*android.text.method.MovementMethod.onTrackballEvent(TextView,Spannable,MotionEvent)*
+
+public boolean onTrackballEvent(
+  android.widget.TextView widget,
+  android.text.Spannable text,
+  android.view.MotionEvent event)
+
+
+
+
+
+

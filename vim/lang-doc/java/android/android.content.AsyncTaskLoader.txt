@@ -1,0 +1,191 @@
+*android.content.AsyncTaskLoader* *AsyncTaskLoader* Abstract Loader that provide
+
+public abstract class AsyncTaskLoader<D>
+  extends    |android.content.Loader|
+
+|android.content.AsyncTaskLoader_Description|
+|android.content.AsyncTaskLoader_Fields|
+|android.content.AsyncTaskLoader_Constructors|
+|android.content.AsyncTaskLoader_Methods|
+
+================================================================================
+
+*android.content.AsyncTaskLoader_Constructors*
+|android.content.AsyncTaskLoader(Context)|
+|android.content.AsyncTaskLoader(Context,Executor)|
+
+*android.content.AsyncTaskLoader_Methods*
+|android.content.AsyncTaskLoader.cancelLoadInBackground()|Called on the main th
+|android.content.AsyncTaskLoader.dump(String,FileDescriptor,PrintWriter,String[])|
+|android.content.AsyncTaskLoader.isLoadInBackgroundCanceled()|Returns true if t
+|android.content.AsyncTaskLoader.loadInBackground()|Called on a worker thread t
+|android.content.AsyncTaskLoader.onCanceled(D)|Called if the task was canceled 
+|android.content.AsyncTaskLoader.onCancelLoad()|
+|android.content.AsyncTaskLoader.onForceLoad()|
+|android.content.AsyncTaskLoader.onLoadInBackground()|Calls#loadInBackground().
+|android.content.AsyncTaskLoader.setUpdateThrottle(long)|Set amount to throttle
+|android.content.AsyncTaskLoader.waitForLoader()|Locks the current thread until
+
+*android.content.AsyncTaskLoader_Description*
+
+Abstract Loader that provides an (|android.os.AsyncTask|) to do the work. See 
+(|android.content.Loader|) and (|android.app.LoaderManager|) for more details. 
+
+Here is an example implementation of an AsyncTaskLoader subclass that loads the 
+currently installed applications from the package manager. This implementation 
+takes care of retrieving the application labels and sorting its result set from 
+them, monitoring for changes to the installed applications, and rebuilding the 
+list when a change in configuration requires this (such as a locale 
+change).development/samples/ApiDemos/src/com/example/android/apis/app/LoaderCustom.java
+loaderAn example implementation of a fragment that uses the above loader to 
+show the currently installed applications in a list is 
+below.development/samples/ApiDemos/src/com/example/android/apis/app/LoaderCustom.java
+fragment 
+
+
+
+*android.content.AsyncTaskLoader(Context)*
+
+public AsyncTaskLoader(android.content.Context context)
+
+
+
+
+*android.content.AsyncTaskLoader(Context,Executor)*
+
+public AsyncTaskLoader(
+  android.content.Context context,
+  java.util.concurrent.Executor executor)
+
+
+
+
+*android.content.AsyncTaskLoader.cancelLoadInBackground()*
+
+public void cancelLoadInBackground()
+
+Called on the main thread to abort a load in progress. 
+
+Override this method to abort the current invocation of 
+(|android.content.AsyncTaskLoader|) that is running in the background on a 
+worker thread. 
+
+This method should do nothing if (|android.content.AsyncTaskLoader|) has not 
+started running or if it has already finished. 
+
+
+
+*android.content.AsyncTaskLoader.dump(String,FileDescriptor,PrintWriter,String[])*
+
+public void dump(
+  java.lang.String prefix,
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter writer,
+  java.lang.String[] args)
+
+
+
+
+
+*android.content.AsyncTaskLoader.isLoadInBackgroundCanceled()*
+
+public boolean isLoadInBackgroundCanceled()
+
+Returns true if the current invocation of (|android.content.AsyncTaskLoader|) 
+is being canceled. 
+
+
+
+    Returns: True if the current invocation of {@link #loadInBackground} is being canceled. 
+
+*android.content.AsyncTaskLoader.loadInBackground()*
+
+public abstract |D| loadInBackground()
+
+Called on a worker thread to perform the actual load and to return the result 
+of the load operation. 
+
+Implementations should not deliver the result directly, but should return them 
+from this method, which will eventually end up calling 
+(|android.content.AsyncTaskLoader|) on the UI thread. If implementations need 
+to process the results on the UI thread they may override 
+(|android.content.AsyncTaskLoader|) and do so there. 
+
+To support cancellation, this method should periodically check the value of 
+(|android.content.AsyncTaskLoader|) and terminate when it returns true. 
+Subclasses may also override (|android.content.AsyncTaskLoader|) to interrupt 
+the load directly instead of polling (|android.content.AsyncTaskLoader|) . 
+
+When the load is canceled, this method may either return normally or throw 
+(|android.os.OperationCanceledException|) . In either case, the 
+(|android.content.Loader|) will call (|android.content.AsyncTaskLoader|) to 
+perform post-cancellation cleanup and to dispose of the result object, if any. 
+
+
+
+    Returns: The result of the load operation. 
+
+*android.content.AsyncTaskLoader.onCanceled(D)*
+
+public void onCanceled(D data)
+
+Called if the task was canceled before it was completed. Gives the class a 
+chance to clean up post-cancellation and to properly dispose of the result. 
+
+
+    data - The value that was returned by {@link #loadInBackground}, or null if the task 
+       threw {@link OperationCanceledException}. 
+
+*android.content.AsyncTaskLoader.onCancelLoad()*
+
+protected boolean onCancelLoad()
+
+
+
+
+
+*android.content.AsyncTaskLoader.onForceLoad()*
+
+protected void onForceLoad()
+
+
+
+
+
+*android.content.AsyncTaskLoader.onLoadInBackground()*
+
+protected |D| onLoadInBackground()
+
+Calls (|android.content.AsyncTaskLoader|) . 
+
+This method is reserved for use by the loader framework. Subclasses should 
+override (|android.content.AsyncTaskLoader|) instead of this method. 
+
+
+
+    Returns: The result of the load operation. 
+
+*android.content.AsyncTaskLoader.setUpdateThrottle(long)*
+
+public void setUpdateThrottle(long delayMS)
+
+Set amount to throttle updates by. This is the minimum time from when the last 
+(|android.content.AsyncTaskLoader|) call has completed until a new load is 
+scheduled. 
+
+
+    delayMS - Amount of delay, in milliseconds. 
+
+*android.content.AsyncTaskLoader.waitForLoader()*
+
+public void waitForLoader()
+
+Locks the current thread until the loader completes the current load operation. 
+Returns immediately if there is no load operation running. Should not be called 
+from the UI thread: calling it from the UI thread would cause a deadlock. 
+
+Use for testing only. Never call this from a UI thread. 
+
+
+
+

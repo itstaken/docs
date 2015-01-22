@@ -1,0 +1,185 @@
+*android.widget.Adapter* *Adapter* An Adapter object acts as a bridge between an
+
+public interface interface Adapter
+
+
+|android.widget.Adapter_Description|
+|android.widget.Adapter_Fields|
+|android.widget.Adapter_Constructors|
+|android.widget.Adapter_Methods|
+
+================================================================================
+
+*android.widget.Adapter_Fields*
+|int_android.widget.Adapter.IGNORE_ITEM_VIEW_TYPE|
+|int_android.widget.Adapter.NO_SELECTION|
+
+*android.widget.Adapter_Methods*
+|android.widget.Adapter.getCount()|How many items are in the data set represent
+|android.widget.Adapter.getItem(int)|Get the data item associated with the spec
+|android.widget.Adapter.getItemId(int)|Get the row id associated with the speci
+|android.widget.Adapter.getItemViewType(int)|Get the type of View that will be 
+|android.widget.Adapter.getView(int,View,ViewGroup)|Get a View that displays th
+|android.widget.Adapter.getViewTypeCount()|Returns the number of types of Views
+|android.widget.Adapter.hasStableIds()|Indicates whether the item ids are stabl
+|android.widget.Adapter.isEmpty()|
+|android.widget.Adapter.registerDataSetObserver(DataSetObserver)|Register an ob
+|android.widget.Adapter.unregisterDataSetObserver(DataSetObserver)|Unregister a
+
+*android.widget.Adapter_Description*
+
+An Adapter object acts as a bridge between an (|android.widget.AdapterView|) 
+and the underlying data for that view. The Adapter provides access to the data 
+items. The Adapter is also responsible for making a (|android.view.View|) for 
+each item in the data set. 
+
+
+
+*int_android.widget.Adapter.IGNORE_ITEM_VIEW_TYPE*
+
+An item view type that causes the (|android.widget.AdapterView|) to ignore the 
+item view. For example, this can be used if the client does not want a 
+particular view to be given for conversion in (|android.widget.Adapter|) . 
+
+
+*int_android.widget.Adapter.NO_SELECTION*
+
+
+
+
+
+*android.widget.Adapter.getCount()*
+
+public int getCount()
+
+How many items are in the data set represented by this Adapter. 
+
+
+
+    Returns: Count of items. 
+
+*android.widget.Adapter.getItem(int)*
+
+public |java.lang.Object| getItem(int position)
+
+Get the data item associated with the specified position in the data set. 
+
+
+    position - Position of the item whose data we want within the adapter's data set. 
+
+    Returns: The data at the specified position. 
+
+*android.widget.Adapter.getItemId(int)*
+
+public long getItemId(int position)
+
+Get the row id associated with the specified position in the list. 
+
+
+    position - The position of the item within the adapter's data set whose row id we want. 
+
+    Returns: The id of the item at the specified position. 
+
+*android.widget.Adapter.getItemViewType(int)*
+
+public int getItemViewType(int position)
+
+Get the type of View that will be created by (|android.widget.Adapter|) for the 
+specified item. 
+
+
+    position - The position of the item within the adapter's data set whose view type we want. 
+
+    Returns: An integer representing the type of View. Two views should share the same type 
+             if one can be converted to the other in {@link #getView}. Note: 
+             Integers must be in the range 0 to {@link #getViewTypeCount} - 1. 
+             {@link #IGNORE_ITEM_VIEW_TYPE} can also be returned. 
+
+*android.widget.Adapter.getView(int,View,ViewGroup)*
+
+public |android.view.View| getView(
+  int position,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+Get a View that displays the data at the specified position in the data set. 
+You can either create a View manually or inflate it from an XML layout file. 
+When the View is inflated, the parent View (GridView, ListView...) will apply 
+default layout parameters unless you use (|android.view.LayoutInflater|) to 
+specify a root view and to prevent attachment to the root. 
+
+
+    position - The position of the item within the adapter's data set of the item whose view 
+       we want. 
+    convertView - The old view to reuse, if possible. Note: You should check that this view is 
+       non-null and of an appropriate type before using. If it is not possible 
+       to convert this view to display the correct data, this method can create 
+       a new view. Heterogeneous lists can specify their number of view types, 
+       so that this View is always of the right type (see {@link 
+       #getViewTypeCount()} and {@link #getItemViewType(int)}). 
+    parent - The parent that this view will eventually be attached to 
+
+    Returns: A View corresponding to the data at the specified position. 
+
+*android.widget.Adapter.getViewTypeCount()*
+
+public int getViewTypeCount()
+
+Returns the number of types of Views that will be created by 
+(|android.widget.Adapter|) . Each type represents a set of views that can be 
+converted in (|android.widget.Adapter|) . If the adapter always returns the 
+same type of View for all items, this method should return 1. 
+
+This method will only be called when when the adapter is set on the the 
+(|android.widget.AdapterView|) . 
+
+
+
+    Returns: The number of types of Views that will be created by this adapter 
+
+*android.widget.Adapter.hasStableIds()*
+
+public boolean hasStableIds()
+
+Indicates whether the item ids are stable across changes to the underlying 
+data. 
+
+
+
+    Returns: True if the same id always refers to the same object. 
+
+*android.widget.Adapter.isEmpty()*
+
+public boolean isEmpty()
+
+
+
+
+
+    Returns: true if this adapter doesn't contain any data. This is used to determine 
+             whether the empty view should be displayed. A typical 
+             implementation will return getCount() == 0 but since getCount() 
+             includes the headers and footers, specialized adapters might want 
+             a different behavior. 
+
+*android.widget.Adapter.registerDataSetObserver(DataSetObserver)*
+
+public void registerDataSetObserver(android.database.DataSetObserver observer)
+
+Register an observer that is called when changes happen to the data used by 
+this adapter. 
+
+
+    observer - the object that gets notified when the data set changes. 
+
+*android.widget.Adapter.unregisterDataSetObserver(DataSetObserver)*
+
+public void unregisterDataSetObserver(android.database.DataSetObserver observer)
+
+Unregister an observer that has previously been registered with this adapter 
+via (|android.widget.Adapter|) . 
+
+
+    observer - the object to unregister. 
+
+

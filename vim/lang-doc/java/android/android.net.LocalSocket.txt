@@ -1,0 +1,349 @@
+*android.net.LocalSocket* *LocalSocket* Creates a (non-server) socket in the UNI
+
+public class LocalSocket
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|android.net.LocalSocket_Description|
+|android.net.LocalSocket_Fields|
+|android.net.LocalSocket_Constructors|
+|android.net.LocalSocket_Methods|
+
+================================================================================
+
+*android.net.LocalSocket_Fields*
+|int_android.net.LocalSocket.SOCKET_DGRAM|
+|int_android.net.LocalSocket.SOCKET_SEQPACKET|
+|int_android.net.LocalSocket.SOCKET_STREAM|
+
+*android.net.LocalSocket_Constructors*
+|android.net.LocalSocket()|Creates a AF_LOCAL/UNIX domain stream socket.
+|android.net.LocalSocket(FileDescriptor)|Creates a AF_LOCAL/UNIX domain stream 
+|android.net.LocalSocket(int)|Creates a AF_LOCAL/UNIX domain stream socket with
+
+*android.net.LocalSocket_Methods*
+|android.net.LocalSocket.bind(LocalSocketAddress)|Binds this socket to an endpo
+|android.net.LocalSocket.close()|Closes the socket.
+|android.net.LocalSocket.connect(LocalSocketAddress)|Connects this socket to an
+|android.net.LocalSocket.connect(LocalSocketAddress,int)|
+|android.net.LocalSocket.getAncillaryFileDescriptors()|Retrieves a set of file 
+|android.net.LocalSocket.getFileDescriptor()|Returns file descriptor or null if
+|android.net.LocalSocket.getInputStream()|Retrieves the input stream for this i
+|android.net.LocalSocket.getLocalSocketAddress()|Retrieves the name that this s
+|android.net.LocalSocket.getOutputStream()|Retrieves the output stream for this
+|android.net.LocalSocket.getPeerCredentials()|Retrieves the credentials of this
+|android.net.LocalSocket.getReceiveBufferSize()|
+|android.net.LocalSocket.getRemoteSocketAddress()|
+|android.net.LocalSocket.getSendBufferSize()|
+|android.net.LocalSocket.getSoTimeout()|
+|android.net.LocalSocket.isBound()|
+|android.net.LocalSocket.isClosed()|
+|android.net.LocalSocket.isConnected()|
+|android.net.LocalSocket.isInputShutdown()|
+|android.net.LocalSocket.isOutputShutdown()|
+|android.net.LocalSocket.setFileDescriptorsForSend(FileDescriptor[])|Enqueues a
+|android.net.LocalSocket.setReceiveBufferSize(int)|
+|android.net.LocalSocket.setSendBufferSize(int)|
+|android.net.LocalSocket.setSoTimeout(int)|
+|android.net.LocalSocket.shutdownInput()|Shuts down the input side of the socke
+|android.net.LocalSocket.shutdownOutput()|Shuts down the output side of the soc
+|android.net.LocalSocket.toString()|
+
+*android.net.LocalSocket_Description*
+
+Creates a (non-server) socket in the UNIX-domain namespace. The interface here 
+is not entirely unlike that of java.net.Socket 
+
+
+
+*int_android.net.LocalSocket.SOCKET_DGRAM*
+
+Datagram socket type 
+
+
+*int_android.net.LocalSocket.SOCKET_SEQPACKET*
+
+Sequential packet socket type 
+
+
+*int_android.net.LocalSocket.SOCKET_STREAM*
+
+Stream socket type 
+
+
+
+*android.net.LocalSocket()*
+
+public LocalSocket()
+
+Creates a AF_LOCAL/UNIX domain stream socket. 
+
+
+*android.net.LocalSocket(FileDescriptor)*
+
+public LocalSocket(java.io.FileDescriptor fd)
+  throws |java.io.IOException|
+         
+Creates a AF_LOCAL/UNIX domain stream socket with FileDescriptor. 
+
+
+*android.net.LocalSocket(int)*
+
+public LocalSocket(int sockType)
+
+Creates a AF_LOCAL/UNIX domain stream socket with given socket type 
+
+    sockType - either {@link #SOCKET_DGRAM}, {@link #SOCKET_STREAM} or {@link 
+       #SOCKET_SEQPACKET} 
+
+*android.net.LocalSocket.bind(LocalSocketAddress)*
+
+public void bind(android.net.LocalSocketAddress bindpoint)
+  throws |java.io.IOException|
+         
+Binds this socket to an endpoint name. May only be called on an instance that 
+has not yet been bound. 
+
+
+    bindpoint - endpoint address 
+
+*android.net.LocalSocket.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Closes the socket. 
+
+
+
+*android.net.LocalSocket.connect(LocalSocketAddress)*
+
+public void connect(android.net.LocalSocketAddress endpoint)
+  throws |java.io.IOException|
+         
+Connects this socket to an endpoint. May only be called on an instance that has 
+not yet been connected. 
+
+
+    endpoint - endpoint address 
+
+*android.net.LocalSocket.connect(LocalSocketAddress,int)*
+
+public void connect(
+  android.net.LocalSocketAddress endpoint,
+  int timeout)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.getAncillaryFileDescriptors()*
+
+public |java.io.FileDescriptor|[] getAncillaryFileDescriptors()
+  throws |java.io.IOException|
+         
+Retrieves a set of file descriptors that a peer has sent through an ancillary 
+message. This method retrieves the most recent set sent, and then returns null 
+until a new set arrives. File descriptors may only be passed along with regular 
+data, so this method can only return a non-null after a read operation. 
+
+
+
+    Returns: null or file descriptor array 
+
+*android.net.LocalSocket.getFileDescriptor()*
+
+public |java.io.FileDescriptor| getFileDescriptor()
+
+Returns file descriptor or null if not yet open/already closed 
+
+
+
+    Returns: 
+
+*android.net.LocalSocket.getInputStream()*
+
+public |java.io.InputStream| getInputStream()
+  throws |java.io.IOException|
+         
+Retrieves the input stream for this instance. 
+
+
+
+    Returns: 
+
+*android.net.LocalSocket.getLocalSocketAddress()*
+
+public |android.net.LocalSocketAddress| getLocalSocketAddress()
+
+Retrieves the name that this socket is bound to, if any. 
+
+
+
+    Returns: Local address or null if anonymous 
+
+*android.net.LocalSocket.getOutputStream()*
+
+public |java.io.OutputStream| getOutputStream()
+  throws |java.io.IOException|
+         
+Retrieves the output stream for this instance. 
+
+
+
+    Returns: output stream 
+
+*android.net.LocalSocket.getPeerCredentials()*
+
+public |android.net.Credentials| getPeerCredentials()
+  throws |java.io.IOException|
+         
+Retrieves the credentials of this socket's peer. Only valid on connected 
+sockets. 
+
+
+
+    Returns: non-null; peer credentials 
+
+*android.net.LocalSocket.getReceiveBufferSize()*
+
+public int getReceiveBufferSize()
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.getRemoteSocketAddress()*
+
+public |android.net.LocalSocketAddress| getRemoteSocketAddress()
+
+
+
+
+
+*android.net.LocalSocket.getSendBufferSize()*
+
+public int getSendBufferSize()
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.getSoTimeout()*
+
+public int getSoTimeout()
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.isBound()*
+
+public synchronized boolean isBound()
+
+
+
+
+
+*android.net.LocalSocket.isClosed()*
+
+public boolean isClosed()
+
+
+
+
+
+*android.net.LocalSocket.isConnected()*
+
+public synchronized boolean isConnected()
+
+
+
+
+
+*android.net.LocalSocket.isInputShutdown()*
+
+public boolean isInputShutdown()
+
+
+
+
+
+*android.net.LocalSocket.isOutputShutdown()*
+
+public boolean isOutputShutdown()
+
+
+
+
+
+*android.net.LocalSocket.setFileDescriptorsForSend(FileDescriptor[])*
+
+public void setFileDescriptorsForSend(java.io.FileDescriptor[] fds)
+
+Enqueues a set of file descriptors to send to the peer. The queue is one deep. 
+The file descriptors will be sent with the next write of normal data, and will 
+be delivered in a single ancillary message. See "man 7 unix" SCM_RIGHTS on a 
+desktop Linux machine. 
+
+
+    fds - non-null; file descriptors to send. 
+
+*android.net.LocalSocket.setReceiveBufferSize(int)*
+
+public void setReceiveBufferSize(int size)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.setSendBufferSize(int)*
+
+public void setSendBufferSize(int n)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.setSoTimeout(int)*
+
+public void setSoTimeout(int n)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.net.LocalSocket.shutdownInput()*
+
+public void shutdownInput()
+  throws |java.io.IOException|
+         
+Shuts down the input side of the socket. 
+
+
+
+*android.net.LocalSocket.shutdownOutput()*
+
+public void shutdownOutput()
+  throws |java.io.IOException|
+         
+Shuts down the output side of the socket. 
+
+
+
+*android.net.LocalSocket.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

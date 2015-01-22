@@ -1,0 +1,359 @@
+*android.view.WindowManagerPolicy.WindowState* *WindowManagerPolicy.WindowState* 
+
+public static interface interface WindowManagerPolicy.WindowState
+
+
+|android.view.WindowManagerPolicy.WindowState_Description|
+|android.view.WindowManagerPolicy.WindowState_Fields|
+|android.view.WindowManagerPolicy.WindowState_Constructors|
+|android.view.WindowManagerPolicy.WindowState_Methods|
+
+================================================================================
+
+*android.view.WindowManagerPolicy.WindowState_Methods*
+|android.view.WindowManagerPolicy.WindowState.computeFrameLw(Rect,Rect,Rect,Rect,Rect,Rect)|
+|android.view.WindowManagerPolicy.WindowState.getAppToken()|Return the token fo
+|android.view.WindowManagerPolicy.WindowState.getAttrs()|Retrieve the current L
+|android.view.WindowManagerPolicy.WindowState.getContentFrameLw()|Retrieve the 
+|android.view.WindowManagerPolicy.WindowState.getDisplayFrameLw()|Retrieve the 
+|android.view.WindowManagerPolicy.WindowState.getFrameLw()|Retrieve the current
+|android.view.WindowManagerPolicy.WindowState.getGivenContentInsetsLw()|Retriev
+|android.view.WindowManagerPolicy.WindowState.getGivenInsetsPendingLw()|Returns
+|android.view.WindowManagerPolicy.WindowState.getGivenVisibleInsetsLw()|Retriev
+|android.view.WindowManagerPolicy.WindowState.getNeedsMenuLw(WindowManagerPolicy.WindowState)|
+|android.view.WindowManagerPolicy.WindowState.getOverscanFrameLw()|Retrieve the
+|android.view.WindowManagerPolicy.WindowState.getOwningPackage()|Return the pac
+|android.view.WindowManagerPolicy.WindowState.getOwningUid()|Return the uid of 
+|android.view.WindowManagerPolicy.WindowState.getShownFrameLw()|Retrieve the cu
+|android.view.WindowManagerPolicy.WindowState.getSurfaceLayer()|Get the layer a
+|android.view.WindowManagerPolicy.WindowState.getSystemUiVisibility()|Retrieve 
+|android.view.WindowManagerPolicy.WindowState.getVisibleFrameLw()|Retrieve the 
+|android.view.WindowManagerPolicy.WindowState.hasAppShownWindows()|Return true 
+|android.view.WindowManagerPolicy.WindowState.hasDrawnLw()|Returns true if this
+|android.view.WindowManagerPolicy.WindowState.hideLw(boolean)|Can be called by 
+|android.view.WindowManagerPolicy.WindowState.isAlive()|Check whether the proce
+|android.view.WindowManagerPolicy.WindowState.isAnimatingLw()|Return true if th
+|android.view.WindowManagerPolicy.WindowState.isDefaultDisplay()|Check if windo
+|android.view.WindowManagerPolicy.WindowState.isDisplayedLw()|Is this window cu
+|android.view.WindowManagerPolicy.WindowState.isGoneForLayoutLw()|Is this windo
+|android.view.WindowManagerPolicy.WindowState.isVisibleLw()|Is this window visi
+|android.view.WindowManagerPolicy.WindowState.isVisibleOrBehindKeyguardLw()|Lik
+|android.view.WindowManagerPolicy.WindowState.showLw(boolean)|Can be called to 
+
+*android.view.WindowManagerPolicy.WindowState_Description*
+
+Interface to the Window Manager state associated with a particular window. You 
+can hold on to an instance of this interface from the call to 
+prepareAddWindow() until removeWindow(). 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.computeFrameLw(Rect,Rect,Rect,Rect,Rect,Rect)*
+
+public void computeFrameLw(
+  Rect parentFrame,
+  Rect displayFrame,
+  Rect overlayFrame,
+  Rect contentFrame,
+  Rect visibleFrame,
+  Rect decorFrame)
+
+Perform standard frame computation. The result can be obtained with getFrame() 
+if so desired. Must be called with the window manager lock held. 
+
+
+    parentFrame - The frame of the parent container this window is in, used for computing its 
+       basic position. 
+    displayFrame - The frame of the overall display in which this window can appear, used for 
+       constraining the overall dimensions of the window. 
+    overlayFrame - The frame within the display that is inside of the overlay region. 
+    contentFrame - The frame within the display in which we would like active content to appear. 
+       This will cause windows behind to be resized to match the given content 
+       frame. 
+    visibleFrame - The frame within the display that the window is actually visible, used for 
+       computing its visible insets to be given to windows behind. This can be 
+       used as a hint for scrolling (avoiding resizing) the window to make 
+       certain that parts of its content are visible. 
+    decorFrame - The decor frame specified by policy specific to this window, to use for proper 
+       cropping during animation. 
+
+*android.view.WindowManagerPolicy.WindowState.getAppToken()*
+
+public IApplicationToken getAppToken()
+
+Return the token for the application (actually activity) that owns this window. 
+May return null for system windows. 
+
+
+
+    Returns: An IApplicationToken identifying the owning activity. 
+
+*android.view.WindowManagerPolicy.WindowState.getAttrs()*
+
+public |android.view.WindowManager.LayoutParams| getAttrs()
+
+Retrieve the current LayoutParams of the window. 
+
+
+
+    Returns: WindowManager.LayoutParams The window's internal LayoutParams instance. 
+
+*android.view.WindowManagerPolicy.WindowState.getContentFrameLw()*
+
+public Rect getContentFrameLw()
+
+Retrieve the frame of the content area that this window was last laid out in. 
+This is the area in which the content of the window should be placed. It will 
+be smaller than the display frame to account for screen decorations such as a 
+status bar or soft keyboard. Must be called with the window manager lock held. 
+
+
+
+    Returns: Rect The rectangle holding the content frame. 
+
+*android.view.WindowManagerPolicy.WindowState.getDisplayFrameLw()*
+
+public Rect getDisplayFrameLw()
+
+Retrieve the frame of the display that this window was last laid out in. Must 
+be called with the window manager lock held. 
+
+
+
+    Returns: Rect The rectangle holding the display frame. 
+
+*android.view.WindowManagerPolicy.WindowState.getFrameLw()*
+
+public Rect getFrameLw()
+
+Retrieve the current frame of the window that has been assigned by the window 
+manager. Must be called with the window manager lock held. 
+
+
+
+    Returns: Rect The rectangle holding the window frame. 
+
+*android.view.WindowManagerPolicy.WindowState.getGivenContentInsetsLw()*
+
+public Rect getGivenContentInsetsLw()
+
+Retrieve the insets given by this window's client for the content area of 
+windows behind it. Must be called with the window manager lock held. 
+
+
+
+    Returns: Rect The left, top, right, and bottom insets, relative to the window's frame, 
+             of the actual contents. 
+
+*android.view.WindowManagerPolicy.WindowState.getGivenInsetsPendingLw()*
+
+public boolean getGivenInsetsPendingLw()
+
+Returns true if this window is waiting to receive its given internal insets 
+from the client app, and so should not impact the layout of other windows. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.getGivenVisibleInsetsLw()*
+
+public Rect getGivenVisibleInsetsLw()
+
+Retrieve the insets given by this window's client for the visible area of 
+windows behind it. Must be called with the window manager lock held. 
+
+
+
+    Returns: Rect The left, top, right, and bottom insets, relative to the window's frame, 
+             of the actual visible area. 
+
+*android.view.WindowManagerPolicy.WindowState.getNeedsMenuLw(WindowManagerPolicy.WindowState)*
+
+public boolean getNeedsMenuLw(android.view.WindowManagerPolicy.WindowState bottom)
+
+Return whether this window needs the menu key shown. Must be called with window 
+lock held, because it may need to traverse down through window list to 
+determine the result. 
+
+
+    bottom - The bottom-most window to consider when determining this. 
+
+*android.view.WindowManagerPolicy.WindowState.getOverscanFrameLw()*
+
+public Rect getOverscanFrameLw()
+
+Retrieve the frame of the area inside the overscan region of the display that 
+this window was last laid out in. Must be called with the window manager lock 
+held. 
+
+
+
+    Returns: Rect The rectangle holding the display overscan frame. 
+
+*android.view.WindowManagerPolicy.WindowState.getOwningPackage()*
+
+public |java.lang.String| getOwningPackage()
+
+Return the package name of the app that owns this window. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.getOwningUid()*
+
+public int getOwningUid()
+
+Return the uid of the app that owns this window. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.getShownFrameLw()*
+
+public RectF getShownFrameLw()
+
+Retrieve the current frame of the window that is actually shown. Must be called 
+with the window manager lock held. 
+
+
+
+    Returns: Rect The rectangle holding the shown window frame. 
+
+*android.view.WindowManagerPolicy.WindowState.getSurfaceLayer()*
+
+public int getSurfaceLayer()
+
+Get the layer at which this window's surface will be Z-ordered. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.getSystemUiVisibility()*
+
+public int getSystemUiVisibility()
+
+Retrieve the current system UI visibility flags associated with this window. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.getVisibleFrameLw()*
+
+public Rect getVisibleFrameLw()
+
+Retrieve the frame of the visible area that this window was last laid out in. 
+This is the area of the screen in which the window will actually be fully 
+visible. It will be smaller than the content frame to account for transient UI 
+elements blocking it such as an input method's candidates UI. Must be called 
+with the window manager lock held. 
+
+
+
+    Returns: Rect The rectangle holding the visible frame. 
+
+*android.view.WindowManagerPolicy.WindowState.hasAppShownWindows()*
+
+public boolean hasAppShownWindows()
+
+Return true if, at any point, the application token associated with this window 
+has actually displayed any windows. This is most useful with the "starting up" 
+window to determine if any windows were displayed when it is closed. 
+
+
+
+    Returns: Returns true if one or more windows have been displayed, else false. 
+
+*android.view.WindowManagerPolicy.WindowState.hasDrawnLw()*
+
+public boolean hasDrawnLw()
+
+Returns true if this window has been shown on screen at some time in the past. 
+Must be called with the window manager lock held. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.hideLw(boolean)*
+
+public boolean hideLw(boolean doAnimation)
+
+Can be called by the policy to force a window to be hidden, regardless of 
+whether the client or window manager would like it shown. Must be called with 
+the window manager lock held. Returns true if 
+(|android.view.WindowManagerPolicy.WindowState|) was last called for the 
+window. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isAlive()*
+
+public boolean isAlive()
+
+Check whether the process hosting this window is currently alive. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isAnimatingLw()*
+
+public boolean isAnimatingLw()
+
+Return true if this window (or a window it is attached to, but not considering 
+its app token) is currently animating. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isDefaultDisplay()*
+
+public boolean isDefaultDisplay()
+
+Check if window is on (|android.view.Display|) . 
+
+
+
+    Returns: true if window is on default display. 
+
+*android.view.WindowManagerPolicy.WindowState.isDisplayedLw()*
+
+public boolean isDisplayedLw()
+
+Is this window currently visible to the user on-screen? It is displayed either 
+if it is visible or it is currently running an animation before no longer being 
+visible. Must be called with the window manager lock held. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isGoneForLayoutLw()*
+
+public boolean isGoneForLayoutLw()
+
+Is this window considered to be gone for purposes of layout? 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isVisibleLw()*
+
+public boolean isVisibleLw()
+
+Is this window visible? It is not visible if there is no surface, or we are in 
+the process of running an exit animation that will remove the surface. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.isVisibleOrBehindKeyguardLw()*
+
+public boolean isVisibleOrBehindKeyguardLw()
+
+Like (|android.view.WindowManagerPolicy.WindowState|) , but also counts a 
+window that is currently "hidden" behind the keyguard as visible. This allows 
+us to apply things like window flags that impact the keyguard. 
+
+
+
+*android.view.WindowManagerPolicy.WindowState.showLw(boolean)*
+
+public boolean showLw(boolean doAnimation)
+
+Can be called to undo the effect of 
+(|android.view.WindowManagerPolicy.WindowState|) , allowing a window to be 
+shown as long as the window manager and client would also like it to be shown. 
+Must be called with the window manager lock held. Returns true if 
+(|android.view.WindowManagerPolicy.WindowState|) was last called for the 
+window. 
+
+
+
+

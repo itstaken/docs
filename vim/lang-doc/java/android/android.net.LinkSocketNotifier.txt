@@ -1,0 +1,99 @@
+*android.net.LinkSocketNotifier* *LinkSocketNotifier* Interface used to get feed
+
+public interface interface LinkSocketNotifier
+
+
+|android.net.LinkSocketNotifier_Description|
+|android.net.LinkSocketNotifier_Fields|
+|android.net.LinkSocketNotifier_Constructors|
+|android.net.LinkSocketNotifier_Methods|
+
+================================================================================
+
+*android.net.LinkSocketNotifier_Methods*
+|android.net.LinkSocketNotifier.onBetterLinkAvailable(LinkSocket,LinkSocket)|Th
+|android.net.LinkSocketNotifier.onCapabilitiesChanged(LinkSocket,LinkCapabilities)|
+|android.net.LinkSocketNotifier.onLinkLost(LinkSocket)|This callback function w
+|android.net.LinkSocketNotifier.onNewLinkUnavailable(LinkSocket)|This callback 
+
+*android.net.LinkSocketNotifier_Description*
+
+Interface used to get feedback about a (|android.net.LinkSocket|) . Instance is 
+optionally passed when a LinkSocket is constructed. Multiple LinkSockets may 
+use the same notifier. 
+
+
+
+*android.net.LinkSocketNotifier.onBetterLinkAvailable(LinkSocket,LinkSocket)*
+
+public boolean onBetterLinkAvailable(
+  android.net.LinkSocket original,
+  android.net.LinkSocket duplicate)
+
+This callback function will be called if a better link becomes available. TODO 
+- this shouldn't be checked for all cases - what's the conditional flag? If the 
+duplicate socket is accepted, the original will be marked invalid and 
+additional use will throw exceptions. 
+
+
+    original - the original LinkSocket 
+    duplicate - the new LinkSocket that better meets the application requirements 
+
+    Returns: {@code true} if the application intends to use this link 
+
+REM TODO - how agressive should we be? At a minimum CS tracks which LS have 
+             this turned on and tracks the requirements When a new link becomes 
+             available, automatically check if any of the LinkSockets will 
+             care. If found, grab a refcount on the link so it doesn't go away 
+             and send notification Optionally, periodically setup connection on 
+             available networks to check for better links Maybe pass this info 
+             into the LinkFactories so condition changes can be acted on more 
+             quickly 
+
+*android.net.LinkSocketNotifier.onCapabilitiesChanged(LinkSocket,LinkCapabilities)*
+
+public void onCapabilitiesChanged(
+  android.net.LinkSocket socket,
+  android.net.LinkCapabilities changedCapabilities)
+
+This callback function will be called when any of the notification-marked 
+capabilities of the LinkSocket (e.g. upstream bandwidth) have changed. 
+
+
+    socket - the linkSocet for which capabilities have changed 
+    changedCapabilities - the set of capabilities that the application is interested in and have changed 
+       (with new values) 
+
+REM Maybe pass the interesting capabilities into the Links. Get notified of 
+       every capability change check for LinkSockets on that Link that are 
+       interested in that Capability - call them 
+
+*android.net.LinkSocketNotifier.onLinkLost(LinkSocket)*
+
+public void onLinkLost(android.net.LinkSocket socket)
+
+This callback function will be called when a LinkSocket no longer has an active 
+link. 
+
+
+    socket - the LinkSocket that lost its link 
+
+REM NetworkStateTracker tells us it is disconnected CS checks the table for LS 
+       on that link CS calls each callback (need to work out p2p cross process 
+       callback) 
+
+*android.net.LinkSocketNotifier.onNewLinkUnavailable(LinkSocket)*
+
+public void onNewLinkUnavailable(android.net.LinkSocket socket)
+
+This callback function will be called when an application calls requestNewLink 
+on a LinkSocket but the LinkSocket is unable to find a suitable new link. 
+
+
+    socket - the LinkSocket for which a new link was not found TODO - why the diff between 
+       initial request (sync) and requestNewLink? 
+
+REM CS process of trying to find a new link must track the LS that started it 
+       on failure, call callback 
+
+

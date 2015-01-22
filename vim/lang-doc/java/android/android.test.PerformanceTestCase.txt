@@ -1,0 +1,56 @@
+*android.test.PerformanceTestCase* *PerformanceTestCase* More complex interface 
+
+public interface interface PerformanceTestCase
+
+
+|android.test.PerformanceTestCase_Description|
+|android.test.PerformanceTestCase_Fields|
+|android.test.PerformanceTestCase_Constructors|
+|android.test.PerformanceTestCase_Methods|
+
+================================================================================
+
+*android.test.PerformanceTestCase_Methods*
+|android.test.PerformanceTestCase.isPerformanceOnly()|This method is used to de
+|android.test.PerformanceTestCase.startPerformance(PerformanceTestCase.Intermediates)|
+
+*android.test.PerformanceTestCase_Description*
+
+More complex interface performance for test cases. 
+
+If you want your test to be used as a performance test, you must implement this 
+interface. 
+
+
+
+*android.test.PerformanceTestCase.isPerformanceOnly()*
+
+public boolean isPerformanceOnly()
+
+This method is used to determine what modes this test case can run in. 
+
+
+
+    Returns: true if this test case can only be run in performance mode. 
+
+*android.test.PerformanceTestCase.startPerformance(PerformanceTestCase.Intermediates)*
+
+public int startPerformance(android.test.PerformanceTestCase.Intermediates intermediates)
+
+Set up to begin performance tests. The 'intermediates' is a communication 
+channel to send back intermediate performance numbers -- if you use it, you 
+will probably want to ensure your test is only executed once by returning 1. 
+Otherwise, return 0 to allow the test harness to decide the number of 
+iterations. 
+
+If you return a non-zero iteration count, you should call 
+intermediates.startTiming(|android.test.PerformanceTestCase.Intermediates|) and 
+intermediates.endTiming(|android.test.PerformanceTestCase.Intermediates|) to 
+report the duration of the test whose performance should actually be measured. 
+
+
+    intermediates - Callback for sending intermediate results. 
+
+    Returns: int Maximum number of iterations to run, or 0 to let the caller decide. 
+
+

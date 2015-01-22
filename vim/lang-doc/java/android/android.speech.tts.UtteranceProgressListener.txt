@@ -1,0 +1,80 @@
+*android.speech.tts.UtteranceProgressListener* *UtteranceProgressListener* Liste
+
+public abstract class UtteranceProgressListener
+  extends    |java.lang.Object|
+
+|android.speech.tts.UtteranceProgressListener_Description|
+|android.speech.tts.UtteranceProgressListener_Fields|
+|android.speech.tts.UtteranceProgressListener_Constructors|
+|android.speech.tts.UtteranceProgressListener_Methods|
+
+================================================================================
+
+*android.speech.tts.UtteranceProgressListener_Constructors*
+|android.speech.tts.UtteranceProgressListener()|
+
+*android.speech.tts.UtteranceProgressListener_Methods*
+|android.speech.tts.UtteranceProgressListener.onDone(String)|Called when an utt
+|android.speech.tts.UtteranceProgressListener.onError(String)|Called when an er
+|android.speech.tts.UtteranceProgressListener.onStart(String)|Called when an ut
+
+*android.speech.tts.UtteranceProgressListener_Description*
+
+Listener for events relating to the progress of an utterance through the 
+synthesis queue. Each utterance is associated with a call to 
+(|android.speech.tts.TextToSpeech|) or (|android.speech.tts.TextToSpeech|) with 
+an associated utterance identifier, as per 
+(|android.speech.tts.TextToSpeech.Engine|) . 
+
+The callbacks specified in this method can be called from multiple threads. 
+
+
+
+*android.speech.tts.UtteranceProgressListener()*
+
+public UtteranceProgressListener()
+
+
+
+
+*android.speech.tts.UtteranceProgressListener.onDone(String)*
+
+public abstract void onDone(java.lang.String utteranceId)
+
+Called when an utterance has successfully completed processing. All audio will 
+have been played back by this point for audible output, and all output will 
+have been written to disk for file synthesis requests. 
+
+This request is guaranteed to be called after 
+(|android.speech.tts.UtteranceProgressListener|) . 
+
+
+    utteranceId - the utterance ID of the utterance. 
+
+*android.speech.tts.UtteranceProgressListener.onError(String)*
+
+public abstract void onError(java.lang.String utteranceId)
+
+Called when an error has occurred during processing. This can be called at any 
+point in the synthesis process. Note that there might be calls to 
+(|android.speech.tts.UtteranceProgressListener|) for specified utteranceId but 
+there will never be a call to both 
+(|android.speech.tts.UtteranceProgressListener|) and 
+(|android.speech.tts.UtteranceProgressListener|) for the same utterance. 
+
+
+    utteranceId - the utterance ID of the utterance. 
+
+*android.speech.tts.UtteranceProgressListener.onStart(String)*
+
+public abstract void onStart(java.lang.String utteranceId)
+
+Called when an utterance "starts" as perceived by the caller. This will be soon 
+before audio is played back in the case of a 
+(|android.speech.tts.TextToSpeech|) or before the first bytes of a file are 
+written to storage in the case of (|android.speech.tts.TextToSpeech|) . 
+
+
+    utteranceId - the utterance ID of the utterance. 
+
+

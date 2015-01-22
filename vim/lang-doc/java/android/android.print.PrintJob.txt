@@ -1,0 +1,164 @@
+*android.print.PrintJob* *PrintJob* This class represents a print job from the p
+
+public final class PrintJob
+  extends    |java.lang.Object|
+
+|android.print.PrintJob_Description|
+|android.print.PrintJob_Fields|
+|android.print.PrintJob_Constructors|
+|android.print.PrintJob_Methods|
+
+================================================================================
+
+*android.print.PrintJob_Methods*
+|android.print.PrintJob.cancel()|Cancels this print job.
+|android.print.PrintJob.equals(Object)|
+|android.print.PrintJob.getId()|Gets the unique print job id.
+|android.print.PrintJob.getInfo()|Gets thePrintJobInfothat describes this job.
+|android.print.PrintJob.hashCode()|
+|android.print.PrintJob.isBlocked()|Gets whether this print job is blocked.
+|android.print.PrintJob.isCancelled()|Gets whether this print job is cancelled.
+|android.print.PrintJob.isCompleted()|Gets whether this print job is completed.
+|android.print.PrintJob.isFailed()|Gets whether this print job is failed.
+|android.print.PrintJob.isQueued()|Gets whether this print job is queued.
+|android.print.PrintJob.isStarted()|Gets whether this print job is started.
+|android.print.PrintJob.restart()|Restarts this print job.
+
+*android.print.PrintJob_Description*
+
+This class represents a print job from the perspective of an application. It 
+contains behavior methods for performing operations on it as well as methods 
+for querying its state. A snapshot of the print job state is represented by the 
+(|android.print.PrintJobInfo|) class. The state of a print job may change over 
+time. An application receives instances of this class when creating a print job 
+or querying for its print jobs. 
+
+
+
+*android.print.PrintJob.cancel()*
+
+public void cancel()
+
+Cancels this print job. You can request cancellation of a queued, started, 
+blocked, or failed print job. 
+
+
+
+*android.print.PrintJob.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.print.PrintJob.getId()*
+
+public |android.print.PrintJobId| getId()
+
+Gets the unique print job id. 
+
+
+
+    Returns: 
+
+*android.print.PrintJob.getInfo()*
+
+public |android.print.PrintJobInfo| getInfo()
+
+Gets the (|android.print.PrintJobInfo|) that describes this job. 
+
+Node:The returned info object is a snapshot of the current print job state. 
+Every call to this method returns a fresh info object that reflects the current 
+print job state. 
+
+
+
+    Returns: The print job info. 
+
+*android.print.PrintJob.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.print.PrintJob.isBlocked()*
+
+public boolean isBlocked()
+
+Gets whether this print job is blocked. Such a print job is halted due to an 
+abnormal condition. You can request a cancellation via 
+(|android.print.PrintJob|) . 
+
+
+
+    Returns: Whether the print job is blocked. 
+
+*android.print.PrintJob.isCancelled()*
+
+public boolean isCancelled()
+
+Gets whether this print job is cancelled. Such a print job was cancelled as a 
+result of a user request. This is a final state. You cannot restart such a 
+print job. 
+
+
+
+    Returns: Whether the print job is cancelled. 
+
+*android.print.PrintJob.isCompleted()*
+
+public boolean isCompleted()
+
+Gets whether this print job is completed. Such a print job is successfully 
+printed. You can neither cancel nor restart such a print job. 
+
+
+
+    Returns: Whether the print job is completed. 
+
+*android.print.PrintJob.isFailed()*
+
+public boolean isFailed()
+
+Gets whether this print job is failed. Such a print job is not successfully 
+printed due to an error. You can request a restart via 
+(|android.print.PrintJob|) or cancel via (|android.print.PrintJob|) . 
+
+
+
+    Returns: Whether the print job is failed. 
+
+*android.print.PrintJob.isQueued()*
+
+public boolean isQueued()
+
+Gets whether this print job is queued. Such a print job is ready to be printed. 
+You can request a cancellation via (|android.print.PrintJob|) . 
+
+
+
+    Returns: Whether the print job is queued. 
+
+*android.print.PrintJob.isStarted()*
+
+public boolean isStarted()
+
+Gets whether this print job is started. Such a print job is being printed. You 
+can request a cancellation via (|android.print.PrintJob|) . 
+
+
+
+    Returns: Whether the print job is started. 
+
+*android.print.PrintJob.restart()*
+
+public void restart()
+
+Restarts this print job. You can request restart of a failed print job. 
+
+
+
+

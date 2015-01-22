@@ -1,0 +1,113 @@
+*android.hardware.Camera.Face* *Camera.Face* Information about a face identified
+
+public static class Camera.Face
+  extends    |java.lang.Object|
+
+|android.hardware.Camera.Face_Description|
+|android.hardware.Camera.Face_Fields|
+|android.hardware.Camera.Face_Constructors|
+|android.hardware.Camera.Face_Methods|
+
+================================================================================
+
+*android.hardware.Camera.Face_Fields*
+|int_android.hardware.Camera.Face.id|
+|Point_android.hardware.Camera.Face.leftEye|
+|Point_android.hardware.Camera.Face.mouth|
+|Rect_android.hardware.Camera.Face.rect|
+|Point_android.hardware.Camera.Face.rightEye|
+|int_android.hardware.Camera.Face.score|
+
+*android.hardware.Camera.Face_Constructors*
+|android.hardware.Camera.Face()|Create an empty face.
+
+*android.hardware.Camera.Face_Description*
+
+Information about a face identified through camera face detection. 
+
+When face detection is used with a camera, the 
+(|android.hardware.Camera.FaceDetectionListener|) returns a list of face 
+objects for use in focusing and metering. 
+
+
+
+*int_android.hardware.Camera.Face.id*
+
+An unique id per face while the face is visible to the tracker. If the face 
+leaves the field-of-view and comes back, it will get a new id. This is an 
+optional field, may not be supported on all devices. If not supported, id will 
+always be set to -1. The optional fields are supported as a set. Either they 
+are all valid, or none of them are. 
+
+
+*Point_android.hardware.Camera.Face.leftEye*
+
+The coordinates of the center of the left eye. The coordinates are in the same 
+space as the ones for (|android.hardware.Camera.Face|) . This is an optional 
+field, may not be supported on all devices. If not supported, the value will 
+always be set to null. The optional fields are supported as a set. Either they 
+are all valid, or none of them are. 
+
+
+*Point_android.hardware.Camera.Face.mouth*
+
+The coordinates of the center of the mouth. The coordinates are in the same 
+space as the ones for (|android.hardware.Camera.Face|) . This is an optional 
+field, may not be supported on all devices. If not supported, the value will 
+always be set to null. The optional fields are supported as a set. Either they 
+are all valid, or none of them are. 
+
+
+*Rect_android.hardware.Camera.Face.rect*
+
+Bounds of the face. (-1000, -1000) represents the top-left of the camera field 
+of view, and (1000, 1000) represents the bottom-right of the field of view. For 
+example, suppose the size of the viewfinder UI is 800x480. The rect passed from 
+the driver is (-1000, -1000, 0, 0). The corresponding viewfinder rect should be 
+(0, 0, 400, 240). It is guaranteed left The direction is relative to the sensor 
+orientation, that is, what the sensor sees. The direction is not affected by 
+the rotation or mirroring of (|android.hardware.Camera.Face|) . The face 
+bounding rectangle does not provide any information about face orientation. 
+
+Here is the matrix to convert driver coordinates to View coordinates in pixels. 
+
+Matrix matrix = new Matrix(); CameraInfo info = 
+CameraHolder.instance().getCameraInfo()[cameraId]; // Need mirror for front 
+camera. boolean mirror = (info.facing == CameraInfo.CAMERA_FACING_FRONT); 
+matrix.setScale(mirror ? -1 : 1, 1); // This is the value for 
+android.hardware.Camera.setDisplayOrientation. 
+matrix.postRotate(displayOrientation); // Camera driver coordinates range from 
+(-1000, -1000) to (1000, 1000). // UI coordinates range from (0, 0) to (width, 
+height). matrix.postScale(view.getWidth() / 2000f, view.getHeight() / 2000f); 
+matrix.postTranslate(view.getWidth() / 2f, view.getHeight() / 2f); 
+
+
+*Point_android.hardware.Camera.Face.rightEye*
+
+The coordinates of the center of the right eye. The coordinates are in the same 
+space as the ones for (|android.hardware.Camera.Face|) .This is an optional 
+field, may not be supported on all devices. If not supported, the value will 
+always be set to null. The optional fields are supported as a set. Either they 
+are all valid, or none of them are. 
+
+
+*int_android.hardware.Camera.Face.score*
+
+The confidence level for the detection of the face. The range is 1 to 100. 100 
+is the highest confidence. 
+
+Depending on the device, even very low-confidence faces may be listed, so 
+applications should filter out faces with low confidence, depending on the use 
+case. For a typical point-and-shoot camera application that wishes to display 
+rectangles around detected faces, filtering out faces with confidence less than 
+50 is recommended. 
+
+
+
+*android.hardware.Camera.Face()*
+
+public Camera.Face()
+
+Create an empty face. 
+
+

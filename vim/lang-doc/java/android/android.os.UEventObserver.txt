@@ -1,0 +1,92 @@
+*android.os.UEventObserver* *UEventObserver* UEventObserver is an abstract class
+
+public abstract class UEventObserver
+  extends    |java.lang.Object|
+
+|android.os.UEventObserver_Description|
+|android.os.UEventObserver_Fields|
+|android.os.UEventObserver_Constructors|
+|android.os.UEventObserver_Methods|
+
+================================================================================
+
+*android.os.UEventObserver_Constructors*
+|android.os.UEventObserver()|
+
+*android.os.UEventObserver_Methods*
+|android.os.UEventObserver.finalize()|
+|android.os.UEventObserver.onUEvent(UEventObserver.UEvent)|Subclasses of UEvent
+|android.os.UEventObserver.startObserving(String)|Begin observation of UEvent's
+|android.os.UEventObserver.stopObserving()|End observation of UEvent's.
+
+*android.os.UEventObserver_Description*
+
+UEventObserver is an abstract class that receives UEvent's from the kernel. 
+
+Subclass UEventObserver, implementing onUEvent(UEvent event), then call 
+startObserving() with a match string. The UEvent thread will then call your 
+onUEvent() method when a UEvent occurs that contains your match string. 
+
+Call stopObserving() to stop receiving UEvent's. 
+
+There is only one UEvent thread per process, even if that process has multiple 
+UEventObserver subclass instances. The UEvent thread starts when the 
+startObserving() is called for the first time in that process. Once started the 
+UEvent thread will not stop (although it can stop notifying UEventObserver's 
+via stopObserving()). 
+
+
+
+*android.os.UEventObserver()*
+
+public UEventObserver()
+
+
+
+
+*android.os.UEventObserver.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.UEventObserver.onUEvent(UEventObserver.UEvent)*
+
+public abstract void onUEvent(android.os.UEventObserver.UEvent event)
+
+Subclasses of UEventObserver should override this method to handle UEvents. 
+
+
+
+*android.os.UEventObserver.startObserving(String)*
+
+public final void startObserving(java.lang.String match)
+
+Begin observation of UEvent's. This method will cause the UEvent thread to 
+start if this is the first invocation of startObserving in this process. Once 
+called, the UEvent thread will call onUEvent() when an incoming UEvent matches 
+the specified string. This method can be called multiple times to register 
+multiple matches. Only one call to stopObserving is required even with multiple 
+registered matches. 
+
+
+    match - A substring of the UEvent to match. Try to be as specific as possible to avoid 
+       incurring unintended additional cost from processing irrelevant 
+       messages. Netlink messages can be moderately high bandwidth and are 
+       expensive to parse. For example, some devices may send one netlink 
+       message for each vsync period. 
+
+*android.os.UEventObserver.stopObserving()*
+
+public final void stopObserving()
+
+End observation of UEvent's. This process's UEvent thread will never call 
+onUEvent() on this UEventObserver after this call. Repeated calls have no 
+effect. 
+
+
+
+

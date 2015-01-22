@@ -1,0 +1,79 @@
+*android.text.LoginFilter* *LoginFilter* Abstract class for filtering login-rela
+
+public abstract class LoginFilter
+  extends    |java.lang.Object|
+  implements |android.text.InputFilter|
+
+|android.text.LoginFilter_Description|
+|android.text.LoginFilter_Fields|
+|android.text.LoginFilter_Constructors|
+|android.text.LoginFilter_Methods|
+
+================================================================================
+
+*android.text.LoginFilter_Methods*
+|android.text.LoginFilter.filter(CharSequence,int,int,Spanned,int,int)|This met
+|android.text.LoginFilter.isAllowed(char)|Returns whether or not we allow chara
+|android.text.LoginFilter.onInvalidCharacter(char)|Called whenever we encounter
+|android.text.LoginFilter.onStart()|Called when we start processing filter.
+|android.text.LoginFilter.onStop()|Called when we're done processing filter
+
+*android.text.LoginFilter_Description*
+
+Abstract class for filtering login-related text (user names and passwords) 
+
+
+
+*android.text.LoginFilter.filter(CharSequence,int,int,Spanned,int,int)*
+
+public |java.lang.CharSequence| filter(
+  java.lang.CharSequence source,
+  int start,
+  int end,
+  android.text.Spanned dest,
+  int dstart,
+  int dend)
+
+This method is called when the buffer is going to replace the range dstart dend 
+of dest with the new text from the range start end of source. Returns the 
+CharSequence that we want placed there instead, including an empty string if 
+appropriate, or null to accept the original replacement. Be careful to not to 
+reject 0-length replacements, as this is what happens when you delete text. 
+
+
+
+*android.text.LoginFilter.isAllowed(char)*
+
+public abstract boolean isAllowed(char c)
+
+Returns whether or not we allow character c. Subclasses must override this 
+method. 
+
+
+
+*android.text.LoginFilter.onInvalidCharacter(char)*
+
+public void onInvalidCharacter(char c)
+
+Called whenever we encounter an invalid character. 
+
+
+    c - the invalid character 
+
+*android.text.LoginFilter.onStart()*
+
+public void onStart()
+
+Called when we start processing filter. 
+
+
+
+*android.text.LoginFilter.onStop()*
+
+public void onStop()
+
+Called when we're done processing filter 
+
+
+
+

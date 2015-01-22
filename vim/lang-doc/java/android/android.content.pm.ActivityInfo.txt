@@ -1,0 +1,612 @@
+*android.content.pm.ActivityInfo* *ActivityInfo* Information you can retrieve ab
+
+public class ActivityInfo
+  extends    |android.content.pm.ComponentInfo|
+  implements |android.os.Parcelable|
+
+|android.content.pm.ActivityInfo_Description|
+|android.content.pm.ActivityInfo_Fields|
+|android.content.pm.ActivityInfo_Constructors|
+|android.content.pm.ActivityInfo_Methods|
+
+================================================================================
+
+*android.content.pm.ActivityInfo_Fields*
+|int_android.content.pm.ActivityInfo.CONFIG_DENSITY|
+|int_android.content.pm.ActivityInfo.CONFIG_FONT_SCALE|
+|int_android.content.pm.ActivityInfo.CONFIG_KEYBOARD|
+|int_android.content.pm.ActivityInfo.CONFIG_KEYBOARD_HIDDEN|
+|int_android.content.pm.ActivityInfo.CONFIG_LAYOUT_DIRECTION|
+|int_android.content.pm.ActivityInfo.CONFIG_LOCALE|
+|int_android.content.pm.ActivityInfo.CONFIG_MCC|
+|int_android.content.pm.ActivityInfo.CONFIG_MNC|
+|int[]_android.content.pm.ActivityInfo.CONFIG_NATIVE_BITS|
+|int_android.content.pm.ActivityInfo.CONFIG_NAVIGATION|
+|int_android.content.pm.ActivityInfo.CONFIG_ORIENTATION|
+|int_android.content.pm.ActivityInfo.CONFIG_SCREEN_LAYOUT|
+|int_android.content.pm.ActivityInfo.CONFIG_SCREEN_SIZE|
+|int_android.content.pm.ActivityInfo.CONFIG_SMALLEST_SCREEN_SIZE|
+|int_android.content.pm.ActivityInfo.CONFIG_TOUCHSCREEN|
+|int_android.content.pm.ActivityInfo.CONFIG_UI_MODE|
+|int_android.content.pm.ActivityInfo.configChanges|
+|android.os.Parcelable.Creator<android.content.pm.ActivityInfo>_android.content.pm.ActivityInfo.CREATOR|
+|int_android.content.pm.ActivityInfo.FLAG_ALLOW_TASK_REPARENTING|
+|int_android.content.pm.ActivityInfo.FLAG_ALWAYS_RETAIN_TASK_STATE|
+|int_android.content.pm.ActivityInfo.FLAG_CLEAR_TASK_ON_LAUNCH|
+|int_android.content.pm.ActivityInfo.FLAG_EXCLUDE_FROM_RECENTS|
+|int_android.content.pm.ActivityInfo.FLAG_FINISH_ON_CLOSE_SYSTEM_DIALOGS|
+|int_android.content.pm.ActivityInfo.FLAG_FINISH_ON_TASK_LAUNCH|
+|int_android.content.pm.ActivityInfo.FLAG_HARDWARE_ACCELERATED|
+|int_android.content.pm.ActivityInfo.FLAG_IMMERSIVE|
+|int_android.content.pm.ActivityInfo.FLAG_MULTIPROCESS|
+|int_android.content.pm.ActivityInfo.FLAG_NO_HISTORY|
+|int_android.content.pm.ActivityInfo.FLAG_PRIMARY_USER_ONLY|
+|int_android.content.pm.ActivityInfo.FLAG_SHOW_ON_LOCK_SCREEN|
+|int_android.content.pm.ActivityInfo.FLAG_SINGLE_USER|
+|int_android.content.pm.ActivityInfo.FLAG_STATE_NOT_NEEDED|
+|int_android.content.pm.ActivityInfo.flags|
+|int_android.content.pm.ActivityInfo.LAUNCH_MULTIPLE|
+|int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_INSTANCE|
+|int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_TASK|
+|int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_TOP|
+|int_android.content.pm.ActivityInfo.launchMode|
+|java.lang.String_android.content.pm.ActivityInfo.parentActivityName|
+|java.lang.String_android.content.pm.ActivityInfo.permission|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_BEHIND|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_USER|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LOCKED|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_NOSENSOR|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE|
+|int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT|
+|int_android.content.pm.ActivityInfo.screenOrientation|
+|int_android.content.pm.ActivityInfo.softInputMode|
+|java.lang.String_android.content.pm.ActivityInfo.targetActivity|
+|java.lang.String_android.content.pm.ActivityInfo.taskAffinity|
+|int_android.content.pm.ActivityInfo.theme|
+|int_android.content.pm.ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW|
+|int_android.content.pm.ActivityInfo.uiOptions|
+
+*android.content.pm.ActivityInfo_Constructors*
+|android.content.pm.ActivityInfo()|
+|android.content.pm.ActivityInfo(ActivityInfo)|
+
+*android.content.pm.ActivityInfo_Methods*
+|android.content.pm.ActivityInfo.activityInfoConfigToNative(int)|
+|android.content.pm.ActivityInfo.describeContents()|
+|android.content.pm.ActivityInfo.dump(Printer,String)|
+|android.content.pm.ActivityInfo.getRealConfigChanged()|
+|android.content.pm.ActivityInfo.getThemeResource()|Return the theme resource i
+|android.content.pm.ActivityInfo.toString()|
+|android.content.pm.ActivityInfo.writeToParcel(Parcel,int)|
+
+*android.content.pm.ActivityInfo_Description*
+
+Information you can retrieve about a particular application activity or 
+receiver. This corresponds to information collected from the 
+AndroidManifest.xml's <activity> and <receiver> tags. 
+
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_DENSITY*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle density changes. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_FONT_SCALE*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the font scaling factor. Set from the 
+(|android.R.attr|) attribute. This is not a core resource configuration, but a 
+higher-level value, so its constant starts at the high bits. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_KEYBOARD*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the keyboard type. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_KEYBOARD_HIDDEN*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the keyboard or navigation being hidden/exposed. Note 
+that inspite of the name, this applies to the changes to any hidden states: 
+keyboard or navigation. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_LAYOUT_DIRECTION*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle the change to layout direction. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_LOCALE*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the locale. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_MCC*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the IMSI MCC. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_MNC*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the IMSI MNC. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int[]_android.content.pm.ActivityInfo.CONFIG_NATIVE_BITS*
+
+
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_NAVIGATION*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the navigation type. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_ORIENTATION*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the screen orientation. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_SCREEN_LAYOUT*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the screen layout. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_SCREEN_SIZE*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle the screen size. Set from the (|android.R.attr|) attribute. This 
+will be set by default for applications that target an earlier version than 
+(|android.os.Build.VERSION_CODES|) ... however, you will not see the bit set 
+here becomes some applications incorrectly compare 
+(|android.content.pm.ActivityInfo|) against an absolute value rather than 
+correctly masking out the bits they are interested in. Please don't do that, 
+thanks. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_SMALLEST_SCREEN_SIZE*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle the smallest screen size. Set from the (|android.R.attr|) 
+attribute. This will be set by default for applications that target an earlier 
+version than (|android.os.Build.VERSION_CODES|) ... however, you will not see 
+the bit set here becomes some applications incorrectly compare 
+(|android.content.pm.ActivityInfo|) against an absolute value rather than 
+correctly masking out the bits they are interested in. Please don't do that, 
+thanks. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_TOUCHSCREEN*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle changes to the touchscreen type. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.CONFIG_UI_MODE*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+itself handle the ui mode. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.configChanges*
+
+Bit mask of kinds of configuration changes that this activity can handle itself 
+(without being restarted by the system). Contains any combination of 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) and (|android.content.pm.ActivityInfo|) . 
+Set from the (|android.R.attr|) attribute. 
+
+
+*android.os.Parcelable.Creator<android.content.pm.ActivityInfo>_android.content.pm.ActivityInfo.CREATOR*
+
+
+
+
+*int_android.content.pm.ActivityInfo.FLAG_ALLOW_TASK_REPARENTING*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity can 
+be moved between tasks based on its task affinity. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_ALWAYS_RETAIN_TASK_STATE*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that, when the activity 
+is the root of a task, that task's stack should never be cleared when it is 
+relaunched from home. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_CLEAR_TASK_ON_LAUNCH*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that, when the activity 
+is the root of a task, that task's stack should be cleared each time the user 
+re-launches it from home. As a result, the user will always return to the 
+original activity at the top of the task. This flag only applies to activities 
+that are used to start the root of a new task. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_EXCLUDE_FROM_RECENTS*
+
+Bit in (|android.content.pm.ActivityInfo|) that indicates that the activity 
+should not appear in the list of recently launched activities. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_FINISH_ON_CLOSE_SYSTEM_DIALOGS*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that, when a request to 
+close system windows happens, this activity is finished. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_FINISH_ON_TASK_LAUNCH*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that, when the activity's 
+task is relaunched from home, this activity should be finished. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_HARDWARE_ACCELERATED*
+
+Value for (|android.content.pm.ActivityInfo|) : true when the application's 
+rendering should be hardware accelerated. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_IMMERSIVE*
+
+Bit in (|android.content.pm.ActivityInfo|) corresponding to an immersive 
+activity that wishes not to be interrupted by notifications. Applications that 
+hide the system notification bar with 
+(|android.view.WindowManager.LayoutParams|) may still be interrupted by 
+high-priority notifications; for example, an incoming phone call may use 
+fullScreenIntent(|android.app.Notification|) to present a full-screen in-call 
+activity to the user, pausing the current activity as a side-effect. An 
+activity with (|android.content.pm.ActivityInfo|) set, however, will not be 
+interrupted; the notification may be shown in some other way (such as a small 
+floating "toast" window). 
+
+Note that this flag will always reflect the Activity's android:immersive 
+manifest definition, even if the Activity's immersive state is changed at 
+runtime via (|android.app.Activity|) . 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_MULTIPROCESS*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating whether this activity is 
+able to run in multiple processes. If true, the system may instantiate it in 
+the some process as the process starting it in order to conserve resources. If 
+false, the default, it always runs in (|android.content.pm.ActivityInfo|) . Set 
+from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_NO_HISTORY*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that, when the user 
+navigates away from an activity, it should be finished. Set from the 
+(|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_PRIMARY_USER_ONLY*
+
+
+
+
+*int_android.content.pm.ActivityInfo.FLAG_SHOW_ON_LOCK_SCREEN*
+
+Value for (|android.content.pm.ActivityInfo|) : true when the application can 
+be displayed over the lockscreen and consequently over all users' windows. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_SINGLE_USER*
+
+Bit in (|android.content.pm.ActivityInfo|) : If set, a single instance of the 
+receiver will run for all users on the device. Set from the (|android.R.attr|) 
+attribute. Note that this flag is only relevant for ActivityInfo structures 
+that are describing receiver components; it is not applied to activities. 
+
+
+*int_android.content.pm.ActivityInfo.FLAG_STATE_NOT_NEEDED*
+
+Bit in (|android.content.pm.ActivityInfo|) indicating that the activity's state 
+is not required to be saved, so that if there is a failure the activity will 
+not be removed from the activity stack. Set from the (|android.R.attr|) 
+attribute. 
+
+
+*int_android.content.pm.ActivityInfo.flags*
+
+Options that have been set in the activity declaration in the manifest. These 
+include: (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) . 
+
+
+*int_android.content.pm.ActivityInfo.LAUNCH_MULTIPLE*
+
+Constant corresponding to standard in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_INSTANCE*
+
+Constant corresponding to singleInstance in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_TASK*
+
+Constant corresponding to singleTask in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.LAUNCH_SINGLE_TOP*
+
+Constant corresponding to singleTop in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.launchMode*
+
+The launch mode style requested by the activity. From the (|android.R.attr|) 
+attribute, one of (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , or 
+(|android.content.pm.ActivityInfo|) . 
+
+
+*java.lang.String_android.content.pm.ActivityInfo.parentActivityName*
+
+If defined, the activity named here is the logical parent of this activity. 
+
+
+*java.lang.String_android.content.pm.ActivityInfo.permission*
+
+Optional name of a permission required to be able to access this Activity. From 
+the "permission" attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_BEHIND*
+
+Constant corresponding to behind in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR*
+
+Constant corresponding to fullSensor in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_FULL_USER*
+
+Constant corresponding to fullUser in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE*
+
+Constant corresponding to landscape in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LOCKED*
+
+Constant corresponding to locked in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_NOSENSOR*
+
+Constant corresponding to nosensor in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT*
+
+Constant corresponding to portrait in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE*
+
+Constant corresponding to reverseLandscape in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT*
+
+Constant corresponding to reversePortrait in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR*
+
+Constant corresponding to sensor in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE*
+
+Constant corresponding to sensorLandscape in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT*
+
+Constant corresponding to sensorPortrait in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED*
+
+Constant corresponding to unspecified in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER*
+
+Constant corresponding to user in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE*
+
+Constant corresponding to userLandscape in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT*
+
+Constant corresponding to userPortrait in the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.screenOrientation*
+
+The preferred screen orientation this activity would like to run in. From the 
+(|android.R.attr|) attribute, one of (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , (|android.content.pm.ActivityInfo|) , 
+(|android.content.pm.ActivityInfo|) , 
+
+
+*int_android.content.pm.ActivityInfo.softInputMode*
+
+The desired soft input mode for this activity's main window. Set from the 
+(|android.R.attr|) attribute in the activity's manifest. May be any of the same 
+values allowed for 
+WindowManager.LayoutParams.softInputMode(|android.view.WindowManager.LayoutParams|)
+. If 0 (unspecified), the mode from the theme will be used. 
+
+
+*java.lang.String_android.content.pm.ActivityInfo.targetActivity*
+
+If this is an activity alias, this is the real activity class to run for it. 
+Otherwise, this is null. 
+
+
+*java.lang.String_android.content.pm.ActivityInfo.taskAffinity*
+
+The affinity this activity has for another task in the system. The string here 
+is the name of the task, often the package name of the overall package. If 
+null, the activity has no affinity. Set from the (|android.R.attr|) attribute. 
+
+
+*int_android.content.pm.ActivityInfo.theme*
+
+A style resource identifier (in the package's resources) of this activity's 
+theme. From the "theme" attribute or, if not set, 0. 
+
+
+*int_android.content.pm.ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW*
+
+Flag for use with (|android.content.pm.ActivityInfo|) . Indicates that the 
+action bar should put all action items in a separate bar when the screen is 
+narrow. This value corresponds to "splitActionBarWhenNarrow" for the 
+(|android.content.pm.ActivityInfo|) XML attribute. 
+
+
+*int_android.content.pm.ActivityInfo.uiOptions*
+
+The desired extra UI options for this activity and its main window. Set from 
+the (|android.R.attr|) attribute in the activity's manifest. 
+
+
+
+*android.content.pm.ActivityInfo()*
+
+public ActivityInfo()
+
+
+
+
+*android.content.pm.ActivityInfo(ActivityInfo)*
+
+public ActivityInfo(android.content.pm.ActivityInfo orig)
+
+
+
+
+*android.content.pm.ActivityInfo.activityInfoConfigToNative(int)*
+
+public static int activityInfoConfigToNative(int input)
+
+
+
+
+
+*android.content.pm.ActivityInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.pm.ActivityInfo.dump(Printer,String)*
+
+public void dump(
+  android.util.Printer pw,
+  java.lang.String prefix)
+
+
+
+
+
+*android.content.pm.ActivityInfo.getRealConfigChanged()*
+
+public int getRealConfigChanged()
+
+
+
+
+
+*android.content.pm.ActivityInfo.getThemeResource()*
+
+public final int getThemeResource()
+
+Return the theme resource identifier to use for this activity. If the activity 
+defines a theme, that is used; else, the application theme is used. 
+
+
+
+    Returns: The theme associated with this activity. 
+
+*android.content.pm.ActivityInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.pm.ActivityInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int parcelableFlags)
+
+
+
+
+
+

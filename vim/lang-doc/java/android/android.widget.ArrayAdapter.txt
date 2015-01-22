@@ -1,0 +1,340 @@
+*android.widget.ArrayAdapter* *ArrayAdapter* A concrete BaseAdapter that is back
+
+public class ArrayAdapter<T>
+  extends    |android.widget.BaseAdapter|
+  implements |android.widget.Filterable|
+
+|android.widget.ArrayAdapter_Description|
+|android.widget.ArrayAdapter_Fields|
+|android.widget.ArrayAdapter_Constructors|
+|android.widget.ArrayAdapter_Methods|
+
+================================================================================
+
+*android.widget.ArrayAdapter_Constructors*
+|android.widget.ArrayAdapter(Context,int)|Constructor
+|android.widget.ArrayAdapter(Context,int,int)|Constructor
+|android.widget.ArrayAdapter(Context,int,int,List<T>)|Constructor
+|android.widget.ArrayAdapter(Context,int,int,T[])|Constructor
+|android.widget.ArrayAdapter(Context,int,List<T>)|Constructor
+|android.widget.ArrayAdapter(Context,int,T[])|Constructor
+
+*android.widget.ArrayAdapter_Methods*
+|android.widget.ArrayAdapter.add(T)|Adds the specified object at the end of the
+|android.widget.ArrayAdapter.addAll(Collection<?extendsT>)|Adds the specified C
+|android.widget.ArrayAdapter.addAll(T...)|Adds the specified items at the end o
+|android.widget.ArrayAdapter.clear()|Remove all elements from the list.
+|android.widget.ArrayAdapter.createFromResource(Context,int,int)|Creates a new 
+|android.widget.ArrayAdapter.getContext()|Returns the context associated with t
+|android.widget.ArrayAdapter.getCount()|
+|android.widget.ArrayAdapter.getDropDownView(int,View,ViewGroup)|
+|android.widget.ArrayAdapter.getFilter()|
+|android.widget.ArrayAdapter.getItem(int)|
+|android.widget.ArrayAdapter.getItemId(int)|
+|android.widget.ArrayAdapter.getPosition(T)|Returns the position of the specifi
+|android.widget.ArrayAdapter.getView(int,View,ViewGroup)|
+|android.widget.ArrayAdapter.insert(T,int)|Inserts the specified object at the 
+|android.widget.ArrayAdapter.notifyDataSetChanged()|
+|android.widget.ArrayAdapter.remove(T)|Removes the specified object from the ar
+|android.widget.ArrayAdapter.setDropDownViewResource(int)|Sets the layout resou
+|android.widget.ArrayAdapter.setNotifyOnChange(boolean)|Control whether methods
+|android.widget.ArrayAdapter.sort(Comparator<?superT>)|Sorts the content of thi
+
+*android.widget.ArrayAdapter_Description*
+
+A concrete BaseAdapter that is backed by an array of arbitrary objects. By 
+default this class expects that the provided resource id references a single 
+TextView. If you want to use a more complex layout, use the constructors that 
+also takes a field id. That field id should reference a TextView in the larger 
+layout resource. 
+
+However the TextView is referenced, it will be filled with the toString() of 
+each object in the array. You can add lists or arrays of custom objects. 
+Override the toString() method of your objects to determine what text will be 
+displayed for the item in the list. 
+
+To use something other than TextViews for the array display, for instance, 
+ImageViews, or to have some of data besides toString() results fill the views, 
+override (|android.widget.ArrayAdapter|) to return the type of view you want. 
+
+
+
+*android.widget.ArrayAdapter(Context,int)*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a TextView to use when 
+       instantiating views. 
+
+*android.widget.ArrayAdapter(Context,int,int)*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource,
+  int textViewResourceId)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a layout to use when instantiating 
+       views. 
+    textViewResourceId - The id of the TextView within the layout resource to be populated 
+
+*android.widget.ArrayAdapter(Context,int,int,List<T>)*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource,
+  int textViewResourceId,
+  java.util.List<T> objects)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a layout to use when instantiating 
+       views. 
+    textViewResourceId - The id of the TextView within the layout resource to be populated 
+    objects - The objects to represent in the ListView. 
+
+*android.widget.ArrayAdapter(Context,int,int,T[])*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource,
+  int textViewResourceId,
+  T[] objects)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a layout to use when instantiating 
+       views. 
+    textViewResourceId - The id of the TextView within the layout resource to be populated 
+    objects - The objects to represent in the ListView. 
+
+*android.widget.ArrayAdapter(Context,int,List<T>)*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource,
+  java.util.List<T> objects)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a TextView to use when 
+       instantiating views. 
+    objects - The objects to represent in the ListView. 
+
+*android.widget.ArrayAdapter(Context,int,T[])*
+
+public ArrayAdapter(
+  android.content.Context context,
+  int resource,
+  T[] objects)
+
+Constructor 
+
+    context - The current context. 
+    resource - The resource ID for a layout file containing a TextView to use when 
+       instantiating views. 
+    objects - The objects to represent in the ListView. 
+
+*android.widget.ArrayAdapter.add(T)*
+
+public void add(T object)
+
+Adds the specified object at the end of the array. 
+
+
+    object - The object to add at the end of the array. 
+
+*android.widget.ArrayAdapter.addAll(Collection<?extendsT>)*
+
+public void addAll(java.util.Collection<? extends T> collection)
+
+Adds the specified Collection at the end of the array. 
+
+
+    collection - The Collection to add at the end of the array. 
+
+*android.widget.ArrayAdapter.addAll(T...)*
+
+public void addAll(T[] items)
+
+Adds the specified items at the end of the array. 
+
+
+    items - The items to add at the end of the array. 
+
+*android.widget.ArrayAdapter.clear()*
+
+public void clear()
+
+Remove all elements from the list. 
+
+
+
+*android.widget.ArrayAdapter.createFromResource(Context,int,int)*
+
+public static |android.widget.ArrayAdapter|<CharSequence> createFromResource(
+  android.content.Context context,
+  int textArrayResId,
+  int textViewResId)
+
+Creates a new ArrayAdapter from external resources. The content of the array is 
+obtained through (|android.content.res.Resources|) . 
+
+
+    context - The application's environment. 
+    textArrayResId - The identifier of the array to use as the data source. 
+    textViewResId - The identifier of the layout used to create views. 
+
+    Returns: An ArrayAdapter. 
+
+*android.widget.ArrayAdapter.getContext()*
+
+public |android.content.Context| getContext()
+
+Returns the context associated with this array adapter. The context is used to 
+create views from the resource passed to the constructor. 
+
+
+
+    Returns: The Context associated with this adapter. 
+
+*android.widget.ArrayAdapter.getCount()*
+
+public int getCount()
+
+
+
+
+
+*android.widget.ArrayAdapter.getDropDownView(int,View,ViewGroup)*
+
+public |android.view.View| getDropDownView(
+  int position,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.ArrayAdapter.getFilter()*
+
+public |android.widget.Filter| getFilter()
+
+
+
+
+
+*android.widget.ArrayAdapter.getItem(int)*
+
+public |T| getItem(int position)
+
+
+
+
+
+*android.widget.ArrayAdapter.getItemId(int)*
+
+public long getItemId(int position)
+
+
+
+
+
+*android.widget.ArrayAdapter.getPosition(T)*
+
+public int getPosition(T item)
+
+Returns the position of the specified item in the array. 
+
+
+    item - The item to retrieve the position of. 
+
+    Returns: The position of the specified item. 
+
+*android.widget.ArrayAdapter.getView(int,View,ViewGroup)*
+
+public |android.view.View| getView(
+  int position,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.ArrayAdapter.insert(T,int)*
+
+public void insert(
+  T object,
+  int index)
+
+Inserts the specified object at the specified index in the array. 
+
+
+    object - The object to insert into the array. 
+    index - The index at which the object must be inserted. 
+
+*android.widget.ArrayAdapter.notifyDataSetChanged()*
+
+public void notifyDataSetChanged()
+
+
+
+
+
+*android.widget.ArrayAdapter.remove(T)*
+
+public void remove(T object)
+
+Removes the specified object from the array. 
+
+
+    object - The object to remove. 
+
+*android.widget.ArrayAdapter.setDropDownViewResource(int)*
+
+public void setDropDownViewResource(int resource)
+
+Sets the layout resource to create the drop down views. 
+
+
+    resource - the layout resource defining the drop down views 
+
+*android.widget.ArrayAdapter.setNotifyOnChange(boolean)*
+
+public void setNotifyOnChange(boolean notifyOnChange)
+
+Control whether methods that change the list ( (|android.widget.ArrayAdapter|) 
+, (|android.widget.ArrayAdapter|) , (|android.widget.ArrayAdapter|) , 
+(|android.widget.ArrayAdapter|) ) automatically call 
+(|android.widget.ArrayAdapter|) . If set to false, caller must manually call 
+notifyDataSetChanged() to have the changes reflected in the attached view. 
+
+The default is true, and calling notifyDataSetChanged() resets the flag to 
+true. 
+
+
+    notifyOnChange - if true, modifications to the list will automatically call {@link 
+       #notifyDataSetChanged} 
+
+*android.widget.ArrayAdapter.sort(Comparator<?superT>)*
+
+public void sort(java.util.Comparator<? super T> comparator)
+
+Sorts the content of this adapter using the specified comparator. 
+
+
+    comparator - The comparator used to sort the objects contained in this adapter. 
+
+

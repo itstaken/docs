@@ -1,0 +1,390 @@
+*android.net.SSLCertificateSocketFactory* *SSLCertificateSocketFactory* SSLSocke
+
+public class SSLCertificateSocketFactory
+  extends    |javax.net.ssl.SSLSocketFactory|
+
+|android.net.SSLCertificateSocketFactory_Description|
+|android.net.SSLCertificateSocketFactory_Fields|
+|android.net.SSLCertificateSocketFactory_Constructors|
+|android.net.SSLCertificateSocketFactory_Methods|
+
+================================================================================
+
+*android.net.SSLCertificateSocketFactory_Constructors*
+|android.net.SSLCertificateSocketFactory(int)|
+
+*android.net.SSLCertificateSocketFactory_Methods*
+|android.net.SSLCertificateSocketFactory.createSocket()|Creates a new socket wh
+|android.net.SSLCertificateSocketFactory.createSocket(InetAddress,int)|Warning:
+|android.net.SSLCertificateSocketFactory.createSocket(InetAddress,int,InetAddress,int)|
+|android.net.SSLCertificateSocketFactory.createSocket(Socket,String,int,boolean)|
+|android.net.SSLCertificateSocketFactory.createSocket(String,int)|
+|android.net.SSLCertificateSocketFactory.createSocket(String,int,InetAddress,int)|
+|android.net.SSLCertificateSocketFactory.getAlpnSelectedProtocol(Socket)|Return
+|android.net.SSLCertificateSocketFactory.getDefault(int)|Returns a new socket f
+|android.net.SSLCertificateSocketFactory.getDefault(int,SSLSessionCache)|Return
+|android.net.SSLCertificateSocketFactory.getDefaultCipherSuites()|
+|android.net.SSLCertificateSocketFactory.getHttpSocketFactory(int,SSLSessionCache)|
+|android.net.SSLCertificateSocketFactory.getInsecure(int,SSLSessionCache)|Retur
+|android.net.SSLCertificateSocketFactory.getNpnSelectedProtocol(Socket)|Returns
+|android.net.SSLCertificateSocketFactory.getSupportedCipherSuites()|
+|android.net.SSLCertificateSocketFactory.setAlpnProtocols(byte[][])|Sets the   
+|android.net.SSLCertificateSocketFactory.setChannelIdPrivateKey(PrivateKey)|Set
+|android.net.SSLCertificateSocketFactory.setHostname(Socket,String)|Turns on Se
+|android.net.SSLCertificateSocketFactory.setKeyManagers(KeyManager[])|Sets theK
+|android.net.SSLCertificateSocketFactory.setNpnProtocols(byte[][])|Sets the Nex
+|android.net.SSLCertificateSocketFactory.setSoWriteTimeout(Socket,int)|Sets thi
+|android.net.SSLCertificateSocketFactory.setTrustManagers(TrustManager[])|Sets 
+|android.net.SSLCertificateSocketFactory.setUseSessionTickets(Socket,boolean)|E
+|android.net.SSLCertificateSocketFactory.verifyHostname(Socket,String)|Verify t
+
+*android.net.SSLCertificateSocketFactory_Description*
+
+SSLSocketFactory implementation with several extra features: 
+
+Timeout specification for SSL handshake operations Hostname verification in 
+most cases (see WARNINGs below) Optional SSL session caching with 
+(|android.net.SSLSessionCache|) Optionally bypass all SSL certificate checks 
+
+The handshake timeout does not apply to actual TCP socket connection. If you 
+want a connection timeout as well, use 
+(|android.net.SSLCertificateSocketFactory|) and (|java.net.Socket|) , after 
+which you must verify the identity of the server you are connected to. 
+
+Most (|javax.net.ssl.SSLSocketFactory|) implementations do not verify the 
+server's identity, allowing man-in-the-middle attacks. This implementation does 
+check the server's certificate hostname, but only for createSocket variants 
+that specify a hostname. When using methods that use (|java.net.InetAddress|) 
+or which return an unconnected socket, you MUST verify the server's identity 
+yourself to ensure a secure connection. 
+
+One way to verify the server's identity is to use 
+(|javax.net.ssl.HttpsURLConnection|) to get a 
+(|javax.net.ssl.HostnameVerifier|) to verify the certificate hostname. 
+
+On development devices, "setprop socket.relaxsslcheck yes" bypasses all SSL 
+certificate and hostname checks for testing purposes. This setting requires 
+root access. 
+
+
+
+*android.net.SSLCertificateSocketFactory(int)*
+
+public SSLCertificateSocketFactory(int handshakeTimeoutMillis)
+
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket()*
+
+public |java.net.Socket| createSocket()
+  throws |java.io.IOException|
+         
+Creates a new socket which is not connected to any remote host. You must use 
+(|java.net.Socket|) to connect the socket. 
+
+Warning: Hostname verification is not performed with this method. You MUST 
+verify the server's identity after connecting the socket to avoid 
+man-in-the-middle attacks. 
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket(InetAddress,int)*
+
+public |java.net.Socket| createSocket(
+  java.net.InetAddress addr,
+  int port)
+  throws |java.io.IOException|
+         
+Warning: Hostname verification is not performed with this method. You MUST 
+verify the server's identity after connecting the socket to avoid 
+man-in-the-middle attacks. 
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket(InetAddress,int,InetAddress,int)*
+
+public |java.net.Socket| createSocket(
+  java.net.InetAddress addr,
+  int port,
+  java.net.InetAddress localAddr,
+  int localPort)
+  throws |java.io.IOException|
+         
+Warning: Hostname verification is not performed with this method. You MUST 
+verify the server's identity after connecting the socket to avoid 
+man-in-the-middle attacks. 
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket(Socket,String,int,boolean)*
+
+public |java.net.Socket| createSocket(
+  java.net.Socket k,
+  java.lang.String host,
+  int port,
+  boolean close)
+  throws |java.io.IOException|
+         
+This method verifies the peer's certificate hostname after connecting (unless 
+created with (|android.net.SSLCertificateSocketFactory|) ). 
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket(String,int)*
+
+public |java.net.Socket| createSocket(
+  java.lang.String host,
+  int port)
+  throws |java.io.IOException|
+         
+This method verifies the peer's certificate hostname after connecting (unless 
+created with (|android.net.SSLCertificateSocketFactory|) ). 
+
+
+
+*android.net.SSLCertificateSocketFactory.createSocket(String,int,InetAddress,int)*
+
+public |java.net.Socket| createSocket(
+  java.lang.String host,
+  int port,
+  java.net.InetAddress localAddr,
+  int localPort)
+  throws |java.io.IOException|
+         
+This method verifies the peer's certificate hostname after connecting (unless 
+created with (|android.net.SSLCertificateSocketFactory|) ). 
+
+
+
+*android.net.SSLCertificateSocketFactory.getAlpnSelectedProtocol(Socket)*
+
+public byte[] getAlpnSelectedProtocol(java.net.Socket socket)
+
+Returns the Application Layer Protocol Negotiation (ALPN) protocol selected by 
+client and server, or null if no protocol was negotiated. 
+
+
+    socket - a socket created by this factory. 
+
+*android.net.SSLCertificateSocketFactory.getDefault(int)*
+
+public static |javax.net.SocketFactory| getDefault(int handshakeTimeoutMillis)
+
+Returns a new socket factory instance with an optional handshake timeout. 
+
+
+    handshakeTimeoutMillis - to use for SSL connection handshake, or 0 for none. The socket timeout is reset 
+       to 0 after the handshake. 
+
+    Returns: a new SSLSocketFactory with the specified parameters 
+
+*android.net.SSLCertificateSocketFactory.getDefault(int,SSLSessionCache)*
+
+public static |javax.net.ssl.SSLSocketFactory| getDefault(
+  int handshakeTimeoutMillis,
+  android.net.SSLSessionCache cache)
+
+Returns a new socket factory instance with an optional handshake timeout and 
+SSL session cache. 
+
+
+    handshakeTimeoutMillis - to use for SSL connection handshake, or 0 for none. The socket timeout is reset 
+       to 0 after the handshake. 
+    cache - The {@link SSLSessionCache} to use, or null for no cache. 
+
+    Returns: a new SSLSocketFactory with the specified parameters 
+
+*android.net.SSLCertificateSocketFactory.getDefaultCipherSuites()*
+
+public |java.lang.String|[] getDefaultCipherSuites()
+
+
+
+
+
+*android.net.SSLCertificateSocketFactory.getHttpSocketFactory(int,SSLSessionCache)*
+
+public static org.apache.http.conn.ssl.SSLSocketFactory getHttpSocketFactory(
+  int handshakeTimeoutMillis,
+  android.net.SSLSessionCache cache)
+
+Returns a socket factory (also named SSLSocketFactory, but in a different 
+namespace) for use with the Apache HTTP stack. 
+
+
+    handshakeTimeoutMillis - to use for SSL connection handshake, or 0 for none. The socket timeout is reset 
+       to 0 after the handshake. 
+    cache - The {@link SSLSessionCache} to use, or null for no cache. 
+
+    Returns: a new SocketFactory with the specified parameters 
+
+*android.net.SSLCertificateSocketFactory.getInsecure(int,SSLSessionCache)*
+
+public static |javax.net.ssl.SSLSocketFactory| getInsecure(
+  int handshakeTimeoutMillis,
+  android.net.SSLSessionCache cache)
+
+Returns a new instance of a socket factory with all SSL security checks 
+disabled, using an optional handshake timeout and SSL session cache. 
+
+Warning: Sockets created using this factory are vulnerable to man-in-the-middle 
+attacks! 
+
+
+    handshakeTimeoutMillis - to use for SSL connection handshake, or 0 for none. The socket timeout is reset 
+       to 0 after the handshake. 
+    cache - The {@link SSLSessionCache} to use, or null for no cache. 
+
+    Returns: an insecure SSLSocketFactory with the specified parameters 
+
+*android.net.SSLCertificateSocketFactory.getNpnSelectedProtocol(Socket)*
+
+public byte[] getNpnSelectedProtocol(java.net.Socket socket)
+
+Returns the Next Protocol Negotiation (NPN) protocol selected by client and 
+server, or null if no protocol was negotiated. 
+
+
+    socket - a socket created by this factory. 
+
+*android.net.SSLCertificateSocketFactory.getSupportedCipherSuites()*
+
+public |java.lang.String|[] getSupportedCipherSuites()
+
+
+
+
+
+*android.net.SSLCertificateSocketFactory.setAlpnProtocols(byte[][])*
+
+public void setAlpnProtocols(byte[][] protocols)
+
+Sets the 
+
+Application Layer Protocol Negotiation (ALPN) protocols that this peer is 
+interested in. 
+
+For servers this is the sequence of protocols to advertise as supported, in 
+order of preference. This list is sent unencrypted to all clients that support 
+ALPN. 
+
+For clients this is a list of supported protocols to match against the server's 
+list. If there is no protocol supported by both client and server then the 
+first protocol in the client's list will be selected. The order of the client's 
+protocols is otherwise insignificant. 
+
+
+    protocols - a non-empty list of protocol byte arrays. All arrays must be non-empty and of 
+       length less than 256. 
+
+*android.net.SSLCertificateSocketFactory.setChannelIdPrivateKey(PrivateKey)*
+
+public void setChannelIdPrivateKey(java.security.PrivateKey privateKey)
+
+Sets the private key to be used for TLS Channel ID by connections made by this 
+factory. 
+
+
+    privateKey - private key (enables TLS Channel ID) or {@code null} for no key (disables TLS 
+       Channel ID). The private key has to be an Elliptic Curve (EC) key based 
+       on the NIST P-256 curve (aka SECG secp256r1 or ANSI X9.62 prime256v1). 
+
+*android.net.SSLCertificateSocketFactory.setHostname(Socket,String)*
+
+public void setHostname(
+  java.net.Socket socket,
+  java.lang.String hostName)
+
+Turns on Server Name Indication (SNI) on a given socket. 
+
+
+    socket - a socket created by this factory. 
+    hostName - the desired SNI hostname, null to disable. 
+
+*android.net.SSLCertificateSocketFactory.setKeyManagers(KeyManager[])*
+
+public void setKeyManagers(javax.net.ssl.KeyManager[] keyManagers)
+
+Sets the (|javax.net.ssl.KeyManager|) s to be used for connections made by this 
+factory. 
+
+
+
+*android.net.SSLCertificateSocketFactory.setNpnProtocols(byte[][])*
+
+public void setNpnProtocols(byte[][] npnProtocols)
+
+Sets the Next Protocol Negotiation (NPN) protocols that this peer is interested 
+in. 
+
+For servers this is the sequence of protocols to advertise as supported, in 
+order of preference. This list is sent unencrypted to all clients that support 
+NPN. 
+
+For clients this is a list of supported protocols to match against the server's 
+list. If there is no protocol supported by both client and server then the 
+first protocol in the client's list will be selected. The order of the client's 
+protocols is otherwise insignificant. 
+
+
+    npnProtocols - a non-empty list of protocol byte arrays. All arrays must be non-empty and of 
+       length less than 256. 
+
+*android.net.SSLCertificateSocketFactory.setSoWriteTimeout(Socket,int)*
+
+public void setSoWriteTimeout(
+  java.net.Socket socket,
+  int writeTimeoutMilliseconds)
+  throws |java.net.SocketException|
+         
+Sets this socket's SO_SNDTIMEO write timeout in milliseconds. Use 0 for no 
+timeout. To take effect, this option must be set before the blocking method was 
+called. 
+
+
+    socket - a socket created by this factory. 
+    timeout - the desired write timeout in milliseconds. 
+
+*android.net.SSLCertificateSocketFactory.setTrustManagers(TrustManager[])*
+
+public void setTrustManagers(javax.net.ssl.TrustManager[] trustManager)
+
+Sets the (|javax.net.ssl.TrustManager|) s to be used for connections made by 
+this factory. 
+
+
+
+*android.net.SSLCertificateSocketFactory.setUseSessionTickets(Socket,boolean)*
+
+public void setUseSessionTickets(
+  java.net.Socket socket,
+  boolean useSessionTickets)
+
+Enables session ticket support on the given socket. 
+
+
+    socket - a socket created by this factory 
+    useSessionTickets - {@code true} to enable session ticket support on this socket. 
+
+*android.net.SSLCertificateSocketFactory.verifyHostname(Socket,String)*
+
+public static void verifyHostname(
+  java.net.Socket socket,
+  java.lang.String hostname)
+  throws |java.io.IOException|
+         
+Verify the hostname of the certificate used by the other end of a connected 
+socket. You MUST call this if you did not supply a hostname to 
+(|android.net.SSLCertificateSocketFactory|) . It is harmless to call this 
+method redundantly if the hostname has already been verified. 
+
+Wildcard certificates are allowed to verify any matching hostname, so 
+"foo.bar.example.com" is verified if the peer has a certificate for 
+"*.example.com". 
+
+
+    socket - An SSL socket which has been connected to a server 
+    hostname - The expected hostname of the remote server 
+
+

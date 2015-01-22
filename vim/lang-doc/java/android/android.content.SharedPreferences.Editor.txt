@@ -1,0 +1,233 @@
+*android.content.SharedPreferences.Editor* *SharedPreferences.Editor* Interface 
+
+public static interface interface SharedPreferences.Editor
+
+
+|android.content.SharedPreferences.Editor_Description|
+|android.content.SharedPreferences.Editor_Fields|
+|android.content.SharedPreferences.Editor_Constructors|
+|android.content.SharedPreferences.Editor_Methods|
+
+================================================================================
+
+*android.content.SharedPreferences.Editor_Methods*
+|android.content.SharedPreferences.Editor.apply()|Commit your preferences chang
+|android.content.SharedPreferences.Editor.clear()|Mark in the editor to remove 
+|android.content.SharedPreferences.Editor.commit()|Commit your preferences chan
+|android.content.SharedPreferences.Editor.putBoolean(String,boolean)|Set a bool
+|android.content.SharedPreferences.Editor.putFloat(String,float)|Set a float va
+|android.content.SharedPreferences.Editor.putInt(String,int)|Set an int value i
+|android.content.SharedPreferences.Editor.putLong(String,long)|Set a long value
+|android.content.SharedPreferences.Editor.putString(String,String)|Set a String
+|android.content.SharedPreferences.Editor.putStringSet(String,Set<String>)|Set 
+|android.content.SharedPreferences.Editor.remove(String)|Mark in the editor tha
+
+*android.content.SharedPreferences.Editor_Description*
+
+Interface used for modifying values in a (|android.content.SharedPreferences|) 
+object. All changes you make in an editor are batched, and not copied back to 
+the original (|android.content.SharedPreferences|) until you call 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) 
+
+
+
+*android.content.SharedPreferences.Editor.apply()*
+
+public void apply()
+
+Commit your preferences changes back from this Editor to the 
+(|android.content.SharedPreferences|) object it is editing. This atomically 
+performs the requested modifications, replacing whatever is currently in the 
+SharedPreferences. 
+
+Note that when two editors are modifying preferences at the same time, the last 
+one to call apply wins. 
+
+Unlike (|android.content.SharedPreferences.Editor|) , which writes its 
+preferences out to persistent storage synchronously, 
+(|android.content.SharedPreferences.Editor|) commits its changes to the 
+in-memory (|android.content.SharedPreferences|) immediately but starts an 
+asynchronous commit to disk and you won't be notified of any failures. If 
+another editor on this (|android.content.SharedPreferences|) does a regular 
+(|android.content.SharedPreferences.Editor|) while a 
+(|android.content.SharedPreferences.Editor|) is still outstanding, the 
+(|android.content.SharedPreferences.Editor|) will block until all async commits 
+are completed as well as the commit itself. 
+
+As (|android.content.SharedPreferences|) instances are singletons within a 
+process, it's safe to replace any instance of 
+(|android.content.SharedPreferences.Editor|) with 
+(|android.content.SharedPreferences.Editor|) if you were already ignoring the 
+return value. 
+
+You don't need to worry about Android component lifecycles and their 
+interaction with apply() writing to disk. The framework makes sure in-flight 
+disk writes from apply() complete before switching states. 
+
+The SharedPreferences.Editor interface isn't expected to be implemented 
+directly. However, if you previously did implement it and are now getting 
+errors about missing apply(), you can simply call 
+(|android.content.SharedPreferences.Editor|) from apply(). 
+
+
+
+*android.content.SharedPreferences.Editor.clear()*
+
+public |android.content.SharedPreferences.Editor| clear()
+
+Mark in the editor to remove all values from the preferences. Once commit is 
+called, the only remaining preferences will be any that you have defined in 
+this editor. 
+
+Note that when committing back to the preferences, the clear is done first, 
+regardless of whether you called clear before or after put methods on this 
+editor. 
+
+
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.commit()*
+
+public boolean commit()
+
+Commit your preferences changes back from this Editor to the 
+(|android.content.SharedPreferences|) object it is editing. This atomically 
+performs the requested modifications, replacing whatever is currently in the 
+SharedPreferences. 
+
+Note that when two editors are modifying preferences at the same time, the last 
+one to call commit wins. 
+
+If you don't care about the return value and you're using this from your 
+application's main thread, consider using 
+(|android.content.SharedPreferences.Editor|) instead. 
+
+
+
+    Returns: Returns true if the new values were successfully written to persistent storage. 
+
+*android.content.SharedPreferences.Editor.putBoolean(String,boolean)*
+
+public |android.content.SharedPreferences.Editor| putBoolean(
+  java.lang.String key,
+  boolean value)
+
+Set a boolean value in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) are called. 
+
+
+    key - The name of the preference to modify. 
+    value - The new value for the preference. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.putFloat(String,float)*
+
+public |android.content.SharedPreferences.Editor| putFloat(
+  java.lang.String key,
+  float value)
+
+Set a float value in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) are called. 
+
+
+    key - The name of the preference to modify. 
+    value - The new value for the preference. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.putInt(String,int)*
+
+public |android.content.SharedPreferences.Editor| putInt(
+  java.lang.String key,
+  int value)
+
+Set an int value in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) are called. 
+
+
+    key - The name of the preference to modify. 
+    value - The new value for the preference. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.putLong(String,long)*
+
+public |android.content.SharedPreferences.Editor| putLong(
+  java.lang.String key,
+  long value)
+
+Set a long value in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) are called. 
+
+
+    key - The name of the preference to modify. 
+    value - The new value for the preference. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.putString(String,String)*
+
+public |android.content.SharedPreferences.Editor| putString(
+  java.lang.String key,
+  java.lang.String value)
+
+Set a String value in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) or 
+(|android.content.SharedPreferences.Editor|) are called. 
+
+
+    key - The name of the preference to modify. 
+    value - The new value for the preference. Supplying {@code null} as the value is 
+       equivalent to calling {@link #remove(String)} with this key. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.putStringSet(String,Set<String>)*
+
+public |android.content.SharedPreferences.Editor| putStringSet(
+  java.lang.String key,
+  java.util.Set<java.lang.String> values)
+
+Set a set of String values in the preferences editor, to be written back once 
+(|android.content.SharedPreferences.Editor|) is called. 
+
+
+    key - The name of the preference to modify. 
+    values - The set of new values for the preference. Passing {@code null} for this 
+       argument is equivalent to calling {@link #remove(String)} with this key. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+*android.content.SharedPreferences.Editor.remove(String)*
+
+public |android.content.SharedPreferences.Editor| remove(java.lang.String key)
+
+Mark in the editor that a preference value should be removed, which will be 
+done in the actual preferences once 
+(|android.content.SharedPreferences.Editor|) is called. 
+
+Note that when committing back to the preferences, all removals are done first, 
+regardless of whether you called remove before or after put methods on this 
+editor. 
+
+
+    key - The name of the preference to remove. 
+
+    Returns: Returns a reference to the same Editor object, so you can chain put calls 
+             together. 
+
+

@@ -1,0 +1,257 @@
+*android.provider.Contacts.People* *Contacts.People* This table contains people.
+
+public static final class Contacts.People
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.SyncConstValue|
+             |android.provider.Contacts.PeopleColumns|
+             |android.provider.Contacts.PhonesColumns|
+             |android.provider.Contacts.PresenceColumns|
+
+|android.provider.Contacts.People_Description|
+|android.provider.Contacts.People_Fields|
+|android.provider.Contacts.People_Constructors|
+|android.provider.Contacts.People_Methods|
+
+================================================================================
+
+*android.provider.Contacts.People_Fields*
+|android.net.Uri_android.provider.Contacts.People.CONTENT_FILTER_URI|
+|java.lang.String_android.provider.Contacts.People.CONTENT_ITEM_TYPE|
+|java.lang.String_android.provider.Contacts.People.CONTENT_TYPE|
+|android.net.Uri_android.provider.Contacts.People.CONTENT_URI|
+|java.lang.String_android.provider.Contacts.People.DEFAULT_SORT_ORDER|
+|android.net.Uri_android.provider.Contacts.People.DELETED_CONTENT_URI|
+|java.lang.String_android.provider.Contacts.People.PRIMARY_EMAIL_ID|
+|java.lang.String_android.provider.Contacts.People.PRIMARY_ORGANIZATION_ID|
+|java.lang.String_android.provider.Contacts.People.PRIMARY_PHONE_ID|
+|android.net.Uri_android.provider.Contacts.People.WITH_EMAIL_OR_IM_FILTER_URI|
+
+*android.provider.Contacts.People_Methods*
+|android.provider.Contacts.People.addToGroup(ContentResolver,long,long)|Adds a 
+|android.provider.Contacts.People.addToGroup(ContentResolver,long,String)|Adds 
+|android.provider.Contacts.People.addToMyContactsGroup(ContentResolver,long)|Ad
+|android.provider.Contacts.People.createPersonInMyContactsGroup(ContentResolver,ContentValues)|
+|android.provider.Contacts.People.loadContactPhoto(Context,Uri,int,BitmapFactory.Options)|
+|android.provider.Contacts.People.markAsContacted(ContentResolver,long)|Mark a 
+|android.provider.Contacts.People.openContactPhotoInputStream(ContentResolver,Uri)|
+|android.provider.Contacts.People.queryGroups(ContentResolver,long)|
+|android.provider.Contacts.People.setPhotoData(ContentResolver,Uri,byte[])|Set 
+|android.provider.Contacts.People.tryGetMyContactsGroupId(ContentResolver)|
+
+*android.provider.Contacts.People_Description*
+
+This table contains people. 
+
+
+  Deprecated: see {@link android.provider.ContactsContract}
+
+*android.net.Uri_android.provider.Contacts.People.CONTENT_FILTER_URI*
+
+The content:// style URL for filtering people by name. The filter argument 
+should be passed as an additional path segment after this URI. 
+
+
+*java.lang.String_android.provider.Contacts.People.CONTENT_ITEM_TYPE*
+
+The MIME type of a (|android.provider.Contacts.People|) subdirectory of a 
+single person. 
+
+
+*java.lang.String_android.provider.Contacts.People.CONTENT_TYPE*
+
+The MIME type of (|android.provider.Contacts.People|) providing a directory of 
+people. 
+
+
+*android.net.Uri_android.provider.Contacts.People.CONTENT_URI*
+
+The content:// style URL for this table 
+
+
+*java.lang.String_android.provider.Contacts.People.DEFAULT_SORT_ORDER*
+
+The default sort order for this table 
+
+
+*android.net.Uri_android.provider.Contacts.People.DELETED_CONTENT_URI*
+
+The content:// style URL for the table that holds the deleted contacts. 
+
+
+*java.lang.String_android.provider.Contacts.People.PRIMARY_EMAIL_ID*
+
+The ID of the persons preferred email. Type: INTEGER (foreign key to 
+contact_methods table on the _ID field) 
+
+
+*java.lang.String_android.provider.Contacts.People.PRIMARY_ORGANIZATION_ID*
+
+The ID of the persons preferred organization. Type: INTEGER (foreign key to 
+organizations table on the _ID field) 
+
+
+*java.lang.String_android.provider.Contacts.People.PRIMARY_PHONE_ID*
+
+The ID of the persons preferred phone number. Type: INTEGER (foreign key to 
+phones table on the _ID field) 
+
+
+*android.net.Uri_android.provider.Contacts.People.WITH_EMAIL_OR_IM_FILTER_URI*
+
+The content:// style URL for filtering people that have a specific E-mail or IM 
+address. The filter argument should be passed as an additional path segment 
+after this URI. This matches any people with at least one E-mail or IM 
+(|android.provider.Contacts.People.ContactMethods|) that match the filter. 
+
+Not exposed because we expect significant changes in the contacts schema and do 
+not want to have to support this. 
+
+
+
+*android.provider.Contacts.People.addToGroup(ContentResolver,long,long)*
+
+public static |android.net.Uri| addToGroup(
+  android.content.ContentResolver resolver,
+  long personId,
+  long groupId)
+
+Adds a person to a group. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    resolver - the resolver to use 
+    personId - the person to add to the group 
+    groupId - the group to add the person to 
+
+    Returns: the URI of the group membership row 
+
+*android.provider.Contacts.People.addToGroup(ContentResolver,long,String)*
+
+public static |android.net.Uri| addToGroup(
+  android.content.ContentResolver resolver,
+  long personId,
+  java.lang.String groupName)
+
+Adds a person to a group referred to by name. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    resolver - the resolver to use 
+    personId - the person to add to the group 
+    groupName - the name of the group to add the contact to 
+
+    Returns: the URI of the group membership row 
+
+*android.provider.Contacts.People.addToMyContactsGroup(ContentResolver,long)*
+
+public static |android.net.Uri| addToMyContactsGroup(
+  android.content.ContentResolver resolver,
+  long personId)
+
+Adds a person to the My Contacts group. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    resolver - the resolver to use 
+    personId - the person to add to the group 
+
+    Returns: the URI of the group membership row 
+
+*android.provider.Contacts.People.createPersonInMyContactsGroup(ContentResolver,ContentValues)*
+
+public static |android.net.Uri| createPersonInMyContactsGroup(
+  android.content.ContentResolver resolver,
+  android.content.ContentValues values)
+
+Creates a new contacts and adds it to the "My Contacts" group. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    resolver - the ContentResolver to use 
+    values - the values to use when creating the contact 
+
+    Returns: the URI of the contact, or null if the operation fails 
+
+*android.provider.Contacts.People.loadContactPhoto(Context,Uri,int,BitmapFactory.Options)*
+
+public static Bitmap loadContactPhoto(
+  android.content.Context context,
+  android.net.Uri person,
+  int placeholderImageResource,
+  BitmapFactory.Options options)
+
+Opens an InputStream for the person's photo and returns the photo as a Bitmap. 
+If the person's photo isn't present returns the placeholderImageResource 
+instead. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    context - the Context 
+    person - the person whose photo should be used 
+    placeholderImageResource - the image resource to use if the person doesn't have a photo 
+    options - the decoding options, can be set to null 
+
+*android.provider.Contacts.People.markAsContacted(ContentResolver,long)*
+
+public static void markAsContacted(
+  android.content.ContentResolver resolver,
+  long personId)
+
+Mark a person as having been contacted. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    resolver - the ContentResolver to use 
+    personId - the person who was contacted 
+
+*android.provider.Contacts.People.openContactPhotoInputStream(ContentResolver,Uri)*
+
+public static |java.io.InputStream| openContactPhotoInputStream(
+  android.content.ContentResolver cr,
+  android.net.Uri person)
+
+Opens an InputStream for the person's photo and returns the photo as a Bitmap. 
+If the person's photo isn't present returns the placeholderImageResource 
+instead. 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    person - the person whose photo should be used 
+
+*android.provider.Contacts.People.queryGroups(ContentResolver,long)*
+
+public static |android.database.Cursor| queryGroups(
+  android.content.ContentResolver resolver,
+  long person)
+
+
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+
+*android.provider.Contacts.People.setPhotoData(ContentResolver,Uri,byte[])*
+
+public static void setPhotoData(
+  android.content.ContentResolver cr,
+  android.net.Uri person,
+  byte[] data)
+
+Set the photo for this person. data may be null 
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+    cr - the ContentResolver to use 
+    person - the Uri of the person whose photo is to be updated 
+    data - the byte[] that represents the photo 
+
+*android.provider.Contacts.People.tryGetMyContactsGroupId(ContentResolver)*
+
+public static long tryGetMyContactsGroupId(android.content.ContentResolver resolver)
+
+
+
+    Deprecated: see {@link android.provider.ContactsContract}
+
+
+

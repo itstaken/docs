@@ -1,0 +1,197 @@
+*android.support.v7.media.MediaRouteProvider* *MediaRouteProvider* Media route p
+
+public abstract class MediaRouteProvider
+  extends    |java.lang.Object|
+
+|android.support.v7.media.MediaRouteProvider_Description|
+|android.support.v7.media.MediaRouteProvider_Fields|
+|android.support.v7.media.MediaRouteProvider_Constructors|
+|android.support.v7.media.MediaRouteProvider_Methods|
+
+================================================================================
+
+*android.support.v7.media.MediaRouteProvider_Constructors*
+|android.support.v7.media.MediaRouteProvider(Context)|Creates a media route pro
+
+*android.support.v7.media.MediaRouteProvider_Methods*
+|android.support.v7.media.MediaRouteProvider.getContext()|Gets the context of t
+|android.support.v7.media.MediaRouteProvider.getDescriptor()|Gets the provider'
+|android.support.v7.media.MediaRouteProvider.getDiscoveryRequest()|Gets the cur
+|android.support.v7.media.MediaRouteProvider.getHandler()|Gets the provider's h
+|android.support.v7.media.MediaRouteProvider.getMetadata()|Gets some metadata a
+|android.support.v7.media.MediaRouteProvider.onCreateRouteController(String)|Ca
+|android.support.v7.media.MediaRouteProvider.onDiscoveryRequestChanged(MediaRouteDiscoveryRequest)|
+|android.support.v7.media.MediaRouteProvider.setCallback(MediaRouteProvider.Callback)|
+|android.support.v7.media.MediaRouteProvider.setDescriptor(MediaRouteProviderDescriptor)|
+|android.support.v7.media.MediaRouteProvider.setDiscoveryRequest(MediaRouteDiscoveryRequest)|
+
+*android.support.v7.media.MediaRouteProvider_Description*
+
+Media route providers are used to publish additional media routes for use 
+within an application. Media route providers may also be declared as a service 
+to publish additional media routes to all applications in the system. 
+
+The purpose of a media route provider is to discover media routes that satisfy 
+the criteria specified by the current 
+(|android.support.v7.media.MediaRouteDiscoveryRequest|) and publish a 
+(|android.support.v7.media.MediaRouteProviderDescriptor|) with information 
+about each route by calling (|android.support.v7.media.MediaRouteProvider|) to 
+notify the currently registered 
+(|android.support.v7.media.MediaRouteProvider.Callback|) . 
+
+The provider should watch for changes to the discovery request by implementing 
+(|android.support.v7.media.MediaRouteProvider|) and updating the set of routes 
+that it is attempting to discover. It should also handle route control requests 
+such as volume changes or media control 
+intents(|android.support.v7.media.MediaControlIntent|) by implementing 
+(|android.support.v7.media.MediaRouteProvider|) to return a 
+(|android.support.v7.media.MediaRouteProvider.RouteController|) for a 
+particular route. 
+
+A media route provider may be used privately within the scope of a single 
+application process by calling 
+MediaRouter.addProvider(|android.support.v7.media.MediaRouter|) to add it to 
+the local (|android.support.v7.media.MediaRouter|) . A media route provider may 
+also be made available globally to all applications by registering a 
+(|android.support.v7.media.MediaRouteProviderService|) in the provider's 
+manifest. When the media route provider is registered as a service, all 
+applications that use the media router API will be able to discover and used 
+the provider's routes without having to install anything else. 
+
+This object must only be accessed on the main thread. 
+
+
+
+*android.support.v7.media.MediaRouteProvider(Context)*
+
+public MediaRouteProvider(Context context)
+
+Creates a media route provider. 
+
+    context - The context. 
+
+*android.support.v7.media.MediaRouteProvider.getContext()*
+
+public final Context getContext()
+
+Gets the context of the media route provider. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.getDescriptor()*
+
+public final |android.support.v7.media.MediaRouteProviderDescriptor| getDescriptor()
+
+Gets the provider's descriptor. 
+
+The descriptor describes the state of the media route provider and the routes 
+that it publishes. Watch for changes to the descriptor by registering a 
+callback(|android.support.v7.media.MediaRouteProvider.Callback|) with 
+(|android.support.v7.media.MediaRouteProvider|) . 
+
+
+
+    Returns: The media route provider descriptor, or null if none. 
+
+*android.support.v7.media.MediaRouteProvider.getDiscoveryRequest()*
+
+public final |android.support.v7.media.MediaRouteDiscoveryRequest| getDiscoveryRequest()
+
+Gets the current discovery request which informs the provider about the kinds 
+of routes to discover and whether to perform active scanning. 
+
+
+
+    Returns: The current discovery request, or null if no discovery is needed at this time. 
+
+*android.support.v7.media.MediaRouteProvider.getHandler()*
+
+public final Handler getHandler()
+
+Gets the provider's handler which is associated with the main thread. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.getMetadata()*
+
+public final |android.support.v7.media.MediaRouteProvider.ProviderMetadata| getMetadata()
+
+Gets some metadata about the provider's implementation. 
+
+
+
+*android.support.v7.media.MediaRouteProvider.onCreateRouteController(String)*
+
+public |android.support.v7.media.MediaRouteProvider.RouteController| onCreateRouteController(java.lang.String routeId)
+
+Called by the media router to obtain a route controller for a particular route. 
+
+The media router will invoke the 
+(|android.support.v7.media.MediaRouteProvider.RouteController|) method of the 
+route controller when it is no longer needed to allow it to free its resources. 
+
+
+    routeId - The unique id of the route. 
+
+    Returns: The route controller. Returns null if there is no such route or if the route 
+             cannot be controlled using the route controller interface. 
+
+*android.support.v7.media.MediaRouteProvider.onDiscoveryRequestChanged(MediaRouteDiscoveryRequest)*
+
+public void onDiscoveryRequestChanged(android.support.v7.media.MediaRouteDiscoveryRequest request)
+
+Called by the media router when the discovery 
+request(|android.support.v7.media.MediaRouteDiscoveryRequest|) has changed. 
+
+Whenever an applications calls (|android.support.v7.media.MediaRouter|) to 
+register a callback, it also provides a selector to specify the kinds of routes 
+that it is interested in. The media router combines all of these selectors 
+together to generate a (|android.support.v7.media.MediaRouteDiscoveryRequest|) 
+and notifies each provider when a change occurs by calling 
+(|android.support.v7.media.MediaRouteProvider|) which posts a message to invoke 
+this method asynchronously. 
+
+The provider should examine the media control 
+categories(|android.support.v7.media.MediaControlIntent|) in the discovery 
+request's selector(|android.support.v7.media.MediaRouteSelector|) to determine 
+what kinds of routes it should try to discover and whether it should perform 
+active or passive scans. In many cases, the provider may be able to save power 
+by determining that the selector does not contain any categories that it 
+supports and it can therefore avoid performing any scans at all. 
+
+
+    request - The new discovery request, or null if no discovery is needed at this time. 
+
+*android.support.v7.media.MediaRouteProvider.setCallback(MediaRouteProvider.Callback)*
+
+public final void setCallback(android.support.v7.media.MediaRouteProvider.Callback callback)
+
+Sets a callback to invoke when the provider's descriptor changes. 
+
+
+    callback - The callback to use, or null if none. 
+
+*android.support.v7.media.MediaRouteProvider.setDescriptor(MediaRouteProviderDescriptor)*
+
+public final void setDescriptor(android.support.v7.media.MediaRouteProviderDescriptor descriptor)
+
+Sets the provider's descriptor. 
+
+The provider must call this method to notify the currently registered 
+callback(|android.support.v7.media.MediaRouteProvider.Callback|) about the 
+change to the provider's descriptor. 
+
+
+    descriptor - The updated route provider descriptor, or null if none. 
+
+*android.support.v7.media.MediaRouteProvider.setDiscoveryRequest(MediaRouteDiscoveryRequest)*
+
+public final void setDiscoveryRequest(android.support.v7.media.MediaRouteDiscoveryRequest request)
+
+Sets a discovery request to inform the provider about the kinds of routes that 
+its clients would like to discover and whether to perform active scanning. 
+
+
+    request - The discovery request, or null if no discovery is needed at this time. 
+
+

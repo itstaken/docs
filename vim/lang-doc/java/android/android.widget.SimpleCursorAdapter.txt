@@ -1,0 +1,274 @@
+*android.widget.SimpleCursorAdapter* *SimpleCursorAdapter* An easy adapter to ma
+
+public class SimpleCursorAdapter
+  extends    |android.widget.ResourceCursorAdapter|
+
+|android.widget.SimpleCursorAdapter_Description|
+|android.widget.SimpleCursorAdapter_Fields|
+|android.widget.SimpleCursorAdapter_Constructors|
+|android.widget.SimpleCursorAdapter_Methods|
+
+================================================================================
+
+*android.widget.SimpleCursorAdapter_Fields*
+|int[]_android.widget.SimpleCursorAdapter.mFrom|
+|int[]_android.widget.SimpleCursorAdapter.mTo|
+
+*android.widget.SimpleCursorAdapter_Constructors*
+|android.widget.SimpleCursorAdapter(Context,int,Cursor,String[],int[])|Construc
+|android.widget.SimpleCursorAdapter(Context,int,Cursor,String[],int[],int)|Stan
+
+*android.widget.SimpleCursorAdapter_Methods*
+|android.widget.SimpleCursorAdapter.bindView(View,Context,Cursor)|Binds all of 
+|android.widget.SimpleCursorAdapter.changeCursorAndColumns(Cursor,String[],int[])|
+|android.widget.SimpleCursorAdapter.convertToString(Cursor)|Returns a CharSeque
+|android.widget.SimpleCursorAdapter.getCursorToStringConverter()|Returns the co
+|android.widget.SimpleCursorAdapter.getStringConversionColumn()|Return the inde
+|android.widget.SimpleCursorAdapter.getViewBinder()|Returns theViewBinderused t
+|android.widget.SimpleCursorAdapter.setCursorToStringConverter(SimpleCursorAdapter.CursorToStringConverter)|
+|android.widget.SimpleCursorAdapter.setStringConversionColumn(int)|Defines the 
+|android.widget.SimpleCursorAdapter.setViewBinder(SimpleCursorAdapter.ViewBinder)|
+|android.widget.SimpleCursorAdapter.setViewImage(ImageView,String)|Called by bi
+|android.widget.SimpleCursorAdapter.setViewText(TextView,String)|Called by bind
+|android.widget.SimpleCursorAdapter.swapCursor(Cursor)|
+
+*android.widget.SimpleCursorAdapter_Description*
+
+An easy adapter to map columns from a cursor to TextViews or ImageViews defined 
+in an XML file. You can specify which columns you want, which views you want to 
+display the columns, and the XML file that defines the appearance of these 
+views. 
+
+Binding occurs in two phases. First, if a 
+(|android.widget.SimpleCursorAdapter.ViewBinder|) is available, 
+(|android.widget.SimpleCursorAdapter.ViewBinder|) is invoked. If the returned 
+value is true, binding has occured. If the returned value is false and the view 
+to bind is a TextView, (|android.widget.SimpleCursorAdapter|) is invoked. If 
+the returned value is false and the view to bind is an ImageView, 
+(|android.widget.SimpleCursorAdapter|) is invoked. If no appropriate binding 
+can be found, an (|java.lang.IllegalStateException|) is thrown. 
+
+If this adapter is used with filtering, for instance in an 
+(|android.widget.AutoCompleteTextView|) , you can use the 
+(|android.widget.SimpleCursorAdapter.CursorToStringConverter|) and the 
+(|android.widget.FilterQueryProvider|) interfaces to get control over the 
+filtering process. You can refer to (|android.widget.SimpleCursorAdapter|) and 
+(|android.widget.SimpleCursorAdapter|) for more information. 
+
+
+
+*int[]_android.widget.SimpleCursorAdapter.mFrom*
+
+A list of columns containing the data to bind to the UI. This field should be 
+made private, so it is hidden from the SDK. 
+
+
+*int[]_android.widget.SimpleCursorAdapter.mTo*
+
+A list of View ids representing the views to which the data must be bound. This 
+field should be made private, so it is hidden from the SDK. 
+
+
+
+*android.widget.SimpleCursorAdapter(Context,int,Cursor,String[],int[])*
+
+public SimpleCursorAdapter(
+  android.content.Context context,
+  int layout,
+  android.database.Cursor c,
+  java.lang.String[] from,
+  int[] to)
+
+Constructor the enables auto-requery. 
+
+
+*android.widget.SimpleCursorAdapter(Context,int,Cursor,String[],int[],int)*
+
+public SimpleCursorAdapter(
+  android.content.Context context,
+  int layout,
+  android.database.Cursor c,
+  java.lang.String[] from,
+  int[] to,
+  int flags)
+
+Standard constructor. 
+
+    context - The context where the ListView associated with this SimpleListItemFactory is 
+       running 
+    layout - resource identifier of a layout file that defines the views for this list item. 
+       The layout file should include at least those named views defined in 
+       "to" 
+    c - The database cursor. Can be null if the cursor is not available yet. 
+    from - A list of column names representing the data to bind to the UI. Can be null if 
+       the cursor is not available yet. 
+    to - The views that should display column in the "from" parameter. These should all 
+       be TextViews. The first N views in this list are given the values of the 
+       first N columns in the from parameter. Can be null if the cursor is not 
+       available yet. 
+    flags - Flags used to determine the behavior of the adapter, as per {@link 
+       CursorAdapter#CursorAdapter(Context, Cursor, int)}. 
+
+*android.widget.SimpleCursorAdapter.bindView(View,Context,Cursor)*
+
+public void bindView(
+  android.view.View view,
+  android.content.Context context,
+  android.database.Cursor cursor)
+
+Binds all of the field names passed into the "to" parameter of the constructor 
+with their corresponding cursor columns as specified in the "from" parameter. 
+
+Binding occurs in two phases. First, if a 
+(|android.widget.SimpleCursorAdapter.ViewBinder|) is available, 
+(|android.widget.SimpleCursorAdapter.ViewBinder|) is invoked. If the returned 
+value is true, binding has occured. If the returned value is false and the view 
+to bind is a TextView, (|android.widget.SimpleCursorAdapter|) is invoked. If 
+the returned value is false and the view to bind is an ImageView, 
+(|android.widget.SimpleCursorAdapter|) is invoked. If no appropriate binding 
+can be found, an (|java.lang.IllegalStateException|) is thrown. 
+
+
+
+*android.widget.SimpleCursorAdapter.changeCursorAndColumns(Cursor,String[],int[])*
+
+public void changeCursorAndColumns(
+  android.database.Cursor c,
+  java.lang.String[] from,
+  int[] to)
+
+Change the cursor and change the column-to-view mappings at the same time. 
+
+
+    c - The database cursor. Can be null if the cursor is not available yet. 
+    from - A list of column names representing the data to bind to the UI. Can be null if 
+       the cursor is not available yet. 
+    to - The views that should display column in the "from" parameter. These should all 
+       be TextViews. The first N views in this list are given the values of the 
+       first N columns in the from parameter. Can be null if the cursor is not 
+       available yet. 
+
+*android.widget.SimpleCursorAdapter.convertToString(Cursor)*
+
+public |java.lang.CharSequence| convertToString(android.database.Cursor cursor)
+
+Returns a CharSequence representation of the specified Cursor as defined by the 
+current CursorToStringConverter. If no CursorToStringConverter has been set, 
+the String conversion column is used instead. If the conversion column is -1, 
+the returned String is empty if the cursor is null or Cursor.toString(). 
+
+
+    cursor - the Cursor to convert to a CharSequence 
+
+    Returns: a non-null CharSequence representing the cursor 
+
+*android.widget.SimpleCursorAdapter.getCursorToStringConverter()*
+
+public |android.widget.SimpleCursorAdapter.CursorToStringConverter| getCursorToStringConverter()
+
+Returns the converter used to convert the filtering Cursor into a String. 
+
+
+
+    Returns: null if the converter does not exist or an instance of {@link 
+             android.widget.SimpleCursorAdapter.CursorToStringConverter} 
+
+*android.widget.SimpleCursorAdapter.getStringConversionColumn()*
+
+public int getStringConversionColumn()
+
+Return the index of the column used to get a String representation of the 
+Cursor. 
+
+
+
+    Returns: a valid index in the current Cursor or -1 
+
+*android.widget.SimpleCursorAdapter.getViewBinder()*
+
+public |android.widget.SimpleCursorAdapter.ViewBinder| getViewBinder()
+
+Returns the (|android.widget.SimpleCursorAdapter.ViewBinder|) used to bind data 
+to views. 
+
+
+
+    Returns: a ViewBinder or null if the binder does not exist 
+
+*android.widget.SimpleCursorAdapter.setCursorToStringConverter(SimpleCursorAdapter.CursorToStringConverter)*
+
+public void setCursorToStringConverter(android.widget.SimpleCursorAdapter.CursorToStringConverter cursorToStringConverter)
+
+Sets the converter used to convert the filtering Cursor into a String. 
+
+
+    cursorToStringConverter - the Cursor to String converter, or null to remove the converter 
+
+*android.widget.SimpleCursorAdapter.setStringConversionColumn(int)*
+
+public void setStringConversionColumn(int stringConversionColumn)
+
+Defines the index of the column in the Cursor used to get a String 
+representation of that Cursor. The column is used to convert the Cursor to a 
+String only when the current CursorToStringConverter is null. 
+
+
+    stringConversionColumn - a valid index in the current Cursor or -1 to use the default conversion 
+       mechanism 
+
+*android.widget.SimpleCursorAdapter.setViewBinder(SimpleCursorAdapter.ViewBinder)*
+
+public void setViewBinder(android.widget.SimpleCursorAdapter.ViewBinder viewBinder)
+
+Sets the binder used to bind data to views. 
+
+
+    viewBinder - the binder used to bind data to views, can be null to remove the existing 
+       binder 
+
+*android.widget.SimpleCursorAdapter.setViewImage(ImageView,String)*
+
+public void setViewImage(
+  android.widget.ImageView v,
+  java.lang.String value)
+
+Called by bindView() to set the image for an ImageView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to an 
+ImageView. 
+
+By default, the value will be treated as an image resource. If the value cannot 
+be used as an image resource, the value is used as an image Uri. 
+
+Intended to be overridden by Adapters that need to filter strings retrieved 
+from the database. 
+
+
+    v - ImageView to receive an image 
+    value - the value retrieved from the cursor 
+
+*android.widget.SimpleCursorAdapter.setViewText(TextView,String)*
+
+public void setViewText(
+  android.widget.TextView v,
+  java.lang.String text)
+
+Called by bindView() to set the text for a TextView but only if there is no 
+existing ViewBinder or if the existing ViewBinder cannot handle binding to a 
+TextView. 
+
+Intended to be overridden by Adapters that need to filter strings retrieved 
+from the database. 
+
+
+    v - TextView to receive text 
+    text - the text to be set for the TextView 
+
+*android.widget.SimpleCursorAdapter.swapCursor(Cursor)*
+
+public |android.database.Cursor| swapCursor(android.database.Cursor c)
+
+
+
+
+
+

@@ -1,0 +1,191 @@
+*android.view.textservice.SuggestionsInfo* *SuggestionsInfo* This class contains
+
+public final class SuggestionsInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.textservice.SuggestionsInfo_Description|
+|android.view.textservice.SuggestionsInfo_Fields|
+|android.view.textservice.SuggestionsInfo_Constructors|
+|android.view.textservice.SuggestionsInfo_Methods|
+
+================================================================================
+
+*android.view.textservice.SuggestionsInfo_Fields*
+|android.os.Parcelable.Creator<android.view.textservice.SuggestionsInfo>_android.view.textservice.SuggestionsInfo.CREATOR|
+|int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS|
+|int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_IN_THE_DICTIONARY|
+|int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO|
+
+*android.view.textservice.SuggestionsInfo_Constructors*
+|android.view.textservice.SuggestionsInfo(int,String[])|Constructor.
+|android.view.textservice.SuggestionsInfo(int,String[],int,int)|Constructor.
+|android.view.textservice.SuggestionsInfo(Parcel)|
+
+*android.view.textservice.SuggestionsInfo_Methods*
+|android.view.textservice.SuggestionsInfo.describeContents()|Used to make this 
+|android.view.textservice.SuggestionsInfo.getCookie()|
+|android.view.textservice.SuggestionsInfo.getSequence()|
+|android.view.textservice.SuggestionsInfo.getSuggestionAt(int)|
+|android.view.textservice.SuggestionsInfo.getSuggestionsAttributes()|
+|android.view.textservice.SuggestionsInfo.getSuggestionsCount()|
+|android.view.textservice.SuggestionsInfo.setCookieAndSequence(int,int)|Set the
+|android.view.textservice.SuggestionsInfo.writeToParcel(Parcel,int)|Used to pac
+
+*android.view.textservice.SuggestionsInfo_Description*
+
+This class contains a metadata of suggestions from the text service 
+
+
+
+*android.os.Parcelable.Creator<android.view.textservice.SuggestionsInfo>_android.view.textservice.SuggestionsInfo.CREATOR*
+
+Used to make this class parcelable. 
+
+
+*int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS*
+
+Flag of the attributes of the suggestions that can be obtained by 
+(|android.view.textservice.SuggestionsInfo|) : this tells that the text service 
+thinks the result suggestions include highly recommended ones. 
+
+
+*int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_IN_THE_DICTIONARY*
+
+Flag of the attributes of the suggestions that can be obtained by 
+(|android.view.textservice.SuggestionsInfo|) : this tells that the requested 
+word was found in the dictionary in the text service. 
+
+
+*int_android.view.textservice.SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO*
+
+Flag of the attributes of the suggestions that can be obtained by 
+(|android.view.textservice.SuggestionsInfo|) : this tells that the text service 
+thinks the requested word looks like a typo. 
+
+
+
+*android.view.textservice.SuggestionsInfo(int,String[])*
+
+public SuggestionsInfo(
+  int suggestionsAttributes,
+  java.lang.String[] suggestions)
+
+Constructor. 
+
+    suggestionsAttributes - from the text service 
+    suggestions - from the text service 
+
+*android.view.textservice.SuggestionsInfo(int,String[],int,int)*
+
+public SuggestionsInfo(
+  int suggestionsAttributes,
+  java.lang.String[] suggestions,
+  int cookie,
+  int sequence)
+
+Constructor. 
+
+    suggestionsAttributes - from the text service 
+    suggestions - from the text service 
+    cookie - the cookie of the input TextInfo 
+    sequence - the cookie of the input TextInfo 
+
+*android.view.textservice.SuggestionsInfo(Parcel)*
+
+public SuggestionsInfo(android.os.Parcel source)
+
+
+
+
+*android.view.textservice.SuggestionsInfo.describeContents()*
+
+public int describeContents()
+
+Used to make this class parcelable. 
+
+
+
+*android.view.textservice.SuggestionsInfo.getCookie()*
+
+public int getCookie()
+
+
+
+
+
+    Returns: the cookie which may be set by a client application 
+
+*android.view.textservice.SuggestionsInfo.getSequence()*
+
+public int getSequence()
+
+
+
+
+
+    Returns: the sequence which may be set by a client application 
+
+*android.view.textservice.SuggestionsInfo.getSuggestionAt(int)*
+
+public |java.lang.String| getSuggestionAt(int i)
+
+
+
+
+    i - the id of suggestions 
+
+    Returns: the suggestion at the specified id 
+
+*android.view.textservice.SuggestionsInfo.getSuggestionsAttributes()*
+
+public int getSuggestionsAttributes()
+
+
+
+
+
+    Returns: the attributes of suggestions. This includes whether the spell checker has the 
+             word in its dictionary or not and whether the spell checker has 
+             confident suggestions for the word or not. 
+
+*android.view.textservice.SuggestionsInfo.getSuggestionsCount()*
+
+public int getSuggestionsCount()
+
+
+
+
+
+    Returns: the count of the suggestions. If there's no suggestions at all, this method 
+             returns -1. Even if this method returns 0, it doesn't necessarily 
+             mean that there are no suggestions for the requested word. For 
+             instance, the caller could have been asked to limit the maximum 
+             number of suggestions returned. 
+
+*android.view.textservice.SuggestionsInfo.setCookieAndSequence(int,int)*
+
+public void setCookieAndSequence(
+  int cookie,
+  int sequence)
+
+Set the cookie and the sequence of SuggestionsInfo which are set to TextInfo 
+from a client application 
+
+
+    cookie - the cookie of an input TextInfo 
+    sequence - the cookie of an input TextInfo 
+
+*android.view.textservice.SuggestionsInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Used to package this object into a (|android.os.Parcel|) . 
+
+
+    dest - The {@link Parcel} to be written. 
+    flags - The flags used for parceling. 
+
+

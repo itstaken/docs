@@ -1,0 +1,180 @@
+*android.os.MemoryFile* *MemoryFile* MemoryFile is a wrapper for the Linux ashme
+
+public class MemoryFile
+  extends    |java.lang.Object|
+
+|android.os.MemoryFile_Description|
+|android.os.MemoryFile_Fields|
+|android.os.MemoryFile_Constructors|
+|android.os.MemoryFile_Methods|
+
+================================================================================
+
+*android.os.MemoryFile_Constructors*
+|android.os.MemoryFile(String,int)|Allocates a new ashmem region.
+
+*android.os.MemoryFile_Methods*
+|android.os.MemoryFile.allowPurging(boolean)|Enables or disables purging of the
+|android.os.MemoryFile.close()|Closes the memory file.
+|android.os.MemoryFile.finalize()|
+|android.os.MemoryFile.getFileDescriptor()|Gets a FileDescriptor for the memory
+|android.os.MemoryFile.getInputStream()|Creates a new InputStream for reading f
+|android.os.MemoryFile.getOutputStream()|Creates a new OutputStream for writing
+|android.os.MemoryFile.getSize(FileDescriptor)|Returns the size of the memory f
+|android.os.MemoryFile.isPurgingAllowed()|Is memory file purging enabled?
+|android.os.MemoryFile.length()|Returns the length of the memory file.
+|android.os.MemoryFile.readBytes(byte[],int,int,int)|Reads bytes from the memor
+|android.os.MemoryFile.writeBytes(byte[],int,int,int)|Write bytes to the memory
+
+*android.os.MemoryFile_Description*
+
+MemoryFile is a wrapper for the Linux ashmem driver. MemoryFiles are backed by 
+shared memory, which can be optionally set to be purgeable. Purgeable files may 
+have their contents reclaimed by the kernel in low memory conditions (only if 
+allowPurging is set to true). After a file is purged, attempts to read or write 
+the file will cause an IOException to be thrown. 
+
+
+
+*android.os.MemoryFile(String,int)*
+
+public MemoryFile(
+  java.lang.String name,
+  int length)
+  throws |java.io.IOException|
+         
+Allocates a new ashmem region. The region is initially not purgable. 
+
+    name - optional name for the file (can be null). 
+    length - of the memory file in bytes. 
+
+*android.os.MemoryFile.allowPurging(boolean)*
+
+public synchronized boolean allowPurging(boolean allowPurging)
+  throws |java.io.IOException|
+         
+Enables or disables purging of the memory file. 
+
+
+    allowPurging - true if the operating system can purge the contents of the file in low memory 
+       situations 
+
+    Returns: previous value of allowPurging 
+
+*android.os.MemoryFile.close()*
+
+public void close()
+
+Closes the memory file. If there are no other open references to the memory 
+file, it will be deleted. 
+
+
+
+*android.os.MemoryFile.finalize()*
+
+protected void finalize()
+
+
+
+
+
+*android.os.MemoryFile.getFileDescriptor()*
+
+public |java.io.FileDescriptor| getFileDescriptor()
+  throws |java.io.IOException|
+         
+Gets a FileDescriptor for the memory file. 
+
+The returned file descriptor is not duplicated. 
+
+
+
+*android.os.MemoryFile.getInputStream()*
+
+public |java.io.InputStream| getInputStream()
+
+Creates a new InputStream for reading from the memory file. 
+
+
+
+    Returns: 
+
+*android.os.MemoryFile.getOutputStream()*
+
+public |java.io.OutputStream| getOutputStream()
+
+Creates a new OutputStream for writing to the memory file. 
+
+
+
+    Returns: 
+
+*android.os.MemoryFile.getSize(FileDescriptor)*
+
+public static int getSize(java.io.FileDescriptor fd)
+  throws |java.io.IOException|
+         
+Returns the size of the memory file that the file descriptor refers to, or -1 
+if the file descriptor does not refer to a memory file. 
+
+
+
+*android.os.MemoryFile.isPurgingAllowed()*
+
+public boolean isPurgingAllowed()
+
+Is memory file purging enabled? 
+
+
+
+    Returns: true if the file may be purged. 
+
+*android.os.MemoryFile.length()*
+
+public int length()
+
+Returns the length of the memory file. 
+
+
+
+    Returns: 
+
+*android.os.MemoryFile.readBytes(byte[],int,int,int)*
+
+public int readBytes(
+  byte[] buffer,
+  int srcOffset,
+  int destOffset,
+  int count)
+  throws |java.io.IOException|
+         
+Reads bytes from the memory file. Will throw an IOException if the file has 
+been purged. 
+
+
+    buffer - byte array to read bytes into. 
+    srcOffset - offset into the memory file to read from. 
+    destOffset - offset into the byte array buffer to read into. 
+    count - number of bytes to read. 
+
+    Returns: number of bytes read. 
+
+*android.os.MemoryFile.writeBytes(byte[],int,int,int)*
+
+public void writeBytes(
+  byte[] buffer,
+  int srcOffset,
+  int destOffset,
+  int count)
+  throws |java.io.IOException|
+         
+Write bytes to the memory file. Will throw an IOException if the file has been 
+purged. 
+
+
+    buffer - byte array to write bytes from. 
+    srcOffset - offset into the byte array buffer to write from. 
+    destOffset - offset into the memory file to write to. 
+    count - number of bytes to write. 
+
+

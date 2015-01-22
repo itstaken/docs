@@ -1,0 +1,306 @@
+*android.widget.SimpleExpandableListAdapter* *SimpleExpandableListAdapter* An ea
+
+public class SimpleExpandableListAdapter
+  extends    |android.widget.BaseExpandableListAdapter|
+
+|android.widget.SimpleExpandableListAdapter_Description|
+|android.widget.SimpleExpandableListAdapter_Fields|
+|android.widget.SimpleExpandableListAdapter_Constructors|
+|android.widget.SimpleExpandableListAdapter_Methods|
+
+================================================================================
+
+*android.widget.SimpleExpandableListAdapter_Constructors*
+|android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,int,String[],int[])|
+|android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,String[],int[])|
+|android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,String[],int[])|
+
+*android.widget.SimpleExpandableListAdapter_Methods*
+|android.widget.SimpleExpandableListAdapter.getChild(int,int)|
+|android.widget.SimpleExpandableListAdapter.getChildId(int,int)|
+|android.widget.SimpleExpandableListAdapter.getChildrenCount(int)|
+|android.widget.SimpleExpandableListAdapter.getChildView(int,int,boolean,View,ViewGroup)|
+|android.widget.SimpleExpandableListAdapter.getGroup(int)|
+|android.widget.SimpleExpandableListAdapter.getGroupCount()|
+|android.widget.SimpleExpandableListAdapter.getGroupId(int)|
+|android.widget.SimpleExpandableListAdapter.getGroupView(int,boolean,View,ViewGroup)|
+|android.widget.SimpleExpandableListAdapter.hasStableIds()|
+|android.widget.SimpleExpandableListAdapter.isChildSelectable(int,int)|
+|android.widget.SimpleExpandableListAdapter.newChildView(boolean,ViewGroup)|Ins
+|android.widget.SimpleExpandableListAdapter.newGroupView(boolean,ViewGroup)|Ins
+
+*android.widget.SimpleExpandableListAdapter_Description*
+
+An easy adapter to map static data to group and child views defined in an XML 
+file. You can separately specify the data backing the group as a List of Maps. 
+Each entry in the ArrayList corresponds to one group in the expandable list. 
+The Maps contain the data for each row. You also specify an XML file that 
+defines the views used to display a group, and a mapping from keys in the Map 
+to specific views. This process is similar for a child, except it is one-level 
+deeper so the data backing is specified as a List>, where the first List 
+corresponds to the group of the child, the second List corresponds to the 
+position of the child within the group, and finally the Map holds the data for 
+that particular child. 
+
+
+
+*android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,int,String[],int[])*
+
+public SimpleExpandableListAdapter(
+  android.content.Context context,
+  java.util.List<? extends java.util.Map<java.lang.String, ?>> groupData,
+  int expandedGroupLayout,
+  int collapsedGroupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  java.util.List<? extends java.util.List<? extends java.util.Map<java.lang.String, ?>>> childData,
+  int childLayout,
+  int lastChildLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleExpandableListAdapter} is running 
+    groupData - A List of Maps. Each entry in the List corresponds to one group in the list. 
+       The Maps contain the data for each group, and should include all the 
+       entries specified in "groupFrom" 
+    groupFrom - A list of keys that will be fetched from the Map associated with each group. 
+    groupTo - The group views that should display column in the "groupFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the groupFrom parameter. 
+    expandedGroupLayout - resource identifier of a view layout that defines the views for an expanded 
+       group. The layout file should include at least those named views defined 
+       in "groupTo" 
+    collapsedGroupLayout - resource identifier of a view layout that defines the views for a collapsed 
+       group. The layout file should include at least those named views defined 
+       in "groupTo" 
+    childData - A List of List of Maps. Each entry in the outer List corresponds to a group 
+       (index by group position), each entry in the inner List corresponds to a 
+       child within the group (index by child position), and the Map 
+       corresponds to the data for a child (index by values in the childFrom 
+       array). The Map contains the data for each child, and should include all 
+       the entries specified in "childFrom" 
+    childFrom - A list of keys that will be fetched from the Map associated with each child. 
+    childTo - The child views that should display column in the "childFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the childFrom parameter. 
+    childLayout - resource identifier of a view layout that defines the views for a child (unless 
+       it is the last child within a group, in which case the lastChildLayout 
+       is used). The layout file should include at least those named views 
+       defined in "childTo" 
+    lastChildLayout - resource identifier of a view layout that defines the views for the last child 
+       within each group. The layout file should include at least those named 
+       views defined in "childTo" 
+
+*android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,String[],int[])*
+
+public SimpleExpandableListAdapter(
+  android.content.Context context,
+  java.util.List<? extends java.util.Map<java.lang.String, ?>> groupData,
+  int expandedGroupLayout,
+  int collapsedGroupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  java.util.List<? extends java.util.List<? extends java.util.Map<java.lang.String, ?>>> childData,
+  int childLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleExpandableListAdapter} is running 
+    groupData - A List of Maps. Each entry in the List corresponds to one group in the list. 
+       The Maps contain the data for each group, and should include all the 
+       entries specified in "groupFrom" 
+    groupFrom - A list of keys that will be fetched from the Map associated with each group. 
+    groupTo - The group views that should display column in the "groupFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the groupFrom parameter. 
+    expandedGroupLayout - resource identifier of a view layout that defines the views for an expanded 
+       group. The layout file should include at least those named views defined 
+       in "groupTo" 
+    collapsedGroupLayout - resource identifier of a view layout that defines the views for a collapsed 
+       group. The layout file should include at least those named views defined 
+       in "groupTo" 
+    childData - A List of List of Maps. Each entry in the outer List corresponds to a group 
+       (index by group position), each entry in the inner List corresponds to a 
+       child within the group (index by child position), and the Map 
+       corresponds to the data for a child (index by values in the childFrom 
+       array). The Map contains the data for each child, and should include all 
+       the entries specified in "childFrom" 
+    childFrom - A list of keys that will be fetched from the Map associated with each child. 
+    childTo - The child views that should display column in the "childFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the childFrom parameter. 
+    childLayout - resource identifier of a view layout that defines the views for a child. The 
+       layout file should include at least those named views defined in 
+       "childTo" 
+
+*android.widget.SimpleExpandableListAdapter(Context,List<?extendsMap<String,?>>,int,String[],int[],List<?extendsList<?extendsMap<String,?>>>,int,String[],int[])*
+
+public SimpleExpandableListAdapter(
+  android.content.Context context,
+  java.util.List<? extends java.util.Map<java.lang.String, ?>> groupData,
+  int groupLayout,
+  java.lang.String[] groupFrom,
+  int[] groupTo,
+  java.util.List<? extends java.util.List<? extends java.util.Map<java.lang.String, ?>>> childData,
+  int childLayout,
+  java.lang.String[] childFrom,
+  int[] childTo)
+
+Constructor 
+
+    context - The context where the {@link ExpandableListView} associated with this {@link 
+       SimpleExpandableListAdapter} is running 
+    groupData - A List of Maps. Each entry in the List corresponds to one group in the list. 
+       The Maps contain the data for each group, and should include all the 
+       entries specified in "groupFrom" 
+    groupFrom - A list of keys that will be fetched from the Map associated with each group. 
+    groupTo - The group views that should display column in the "groupFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the groupFrom parameter. 
+    groupLayout - resource identifier of a view layout that defines the views for a group. The 
+       layout file should include at least those named views defined in 
+       "groupTo" 
+    childData - A List of List of Maps. Each entry in the outer List corresponds to a group 
+       (index by group position), each entry in the inner List corresponds to a 
+       child within the group (index by child position), and the Map 
+       corresponds to the data for a child (index by values in the childFrom 
+       array). The Map contains the data for each child, and should include all 
+       the entries specified in "childFrom" 
+    childFrom - A list of keys that will be fetched from the Map associated with each child. 
+    childTo - The child views that should display column in the "childFrom" parameter. These 
+       should all be TextViews. The first N views in this list are given the 
+       values of the first N columns in the childFrom parameter. 
+    childLayout - resource identifier of a view layout that defines the views for a child. The 
+       layout file should include at least those named views defined in 
+       "childTo" 
+
+*android.widget.SimpleExpandableListAdapter.getChild(int,int)*
+
+public |java.lang.Object| getChild(
+  int groupPosition,
+  int childPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getChildId(int,int)*
+
+public long getChildId(
+  int groupPosition,
+  int childPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getChildrenCount(int)*
+
+public int getChildrenCount(int groupPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getChildView(int,int,boolean,View,ViewGroup)*
+
+public |android.view.View| getChildView(
+  int groupPosition,
+  int childPosition,
+  boolean isLastChild,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getGroup(int)*
+
+public |java.lang.Object| getGroup(int groupPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getGroupCount()*
+
+public int getGroupCount()
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getGroupId(int)*
+
+public long getGroupId(int groupPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.getGroupView(int,boolean,View,ViewGroup)*
+
+public |android.view.View| getGroupView(
+  int groupPosition,
+  boolean isExpanded,
+  android.view.View convertView,
+  android.view.ViewGroup parent)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.hasStableIds()*
+
+public boolean hasStableIds()
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.isChildSelectable(int,int)*
+
+public boolean isChildSelectable(
+  int groupPosition,
+  int childPosition)
+
+
+
+
+
+*android.widget.SimpleExpandableListAdapter.newChildView(boolean,ViewGroup)*
+
+public |android.view.View| newChildView(
+  boolean isLastChild,
+  android.view.ViewGroup parent)
+
+Instantiates a new View for a child. 
+
+
+    isLastChild - Whether the child is the last child within its group. 
+    parent - The eventual parent of this new View. 
+
+    Returns: A new child View 
+
+*android.widget.SimpleExpandableListAdapter.newGroupView(boolean,ViewGroup)*
+
+public |android.view.View| newGroupView(
+  boolean isExpanded,
+  android.view.ViewGroup parent)
+
+Instantiates a new View for a group. 
+
+
+    isExpanded - Whether the group is currently expanded. 
+    parent - The eventual parent of this new View. 
+
+    Returns: A new group View 
+
+

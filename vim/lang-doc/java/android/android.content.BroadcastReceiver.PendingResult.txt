@@ -1,0 +1,222 @@
+*android.content.BroadcastReceiver.PendingResult* *BroadcastReceiver.PendingResult* 
+
+public static class BroadcastReceiver.PendingResult
+  extends    |java.lang.Object|
+
+|android.content.BroadcastReceiver.PendingResult_Description|
+|android.content.BroadcastReceiver.PendingResult_Fields|
+|android.content.BroadcastReceiver.PendingResult_Constructors|
+|android.content.BroadcastReceiver.PendingResult_Methods|
+
+================================================================================
+
+*android.content.BroadcastReceiver.PendingResult_Fields*
+|int_android.content.BroadcastReceiver.PendingResult.TYPE_COMPONENT|
+|int_android.content.BroadcastReceiver.PendingResult.TYPE_REGISTERED|
+|int_android.content.BroadcastReceiver.PendingResult.TYPE_UNREGISTERED|
+
+*android.content.BroadcastReceiver.PendingResult_Constructors*
+|android.content.BroadcastReceiver.PendingResult(int,String,Bundle,int,boolean,boolean,IBinder,int)|
+
+*android.content.BroadcastReceiver.PendingResult_Methods*
+|android.content.BroadcastReceiver.PendingResult.abortBroadcast()|Version ofBro
+|android.content.BroadcastReceiver.PendingResult.clearAbortBroadcast()|Version 
+|android.content.BroadcastReceiver.PendingResult.finish()|Finish the broadcast.
+|android.content.BroadcastReceiver.PendingResult.getAbortBroadcast()|Version of
+|android.content.BroadcastReceiver.PendingResult.getResultCode()|Version ofBroa
+|android.content.BroadcastReceiver.PendingResult.getResultData()|Version ofBroa
+|android.content.BroadcastReceiver.PendingResult.getResultExtras(boolean)|Versi
+|android.content.BroadcastReceiver.PendingResult.getSendingUserId()|
+|android.content.BroadcastReceiver.PendingResult.sendFinished(IActivityManager)|
+|android.content.BroadcastReceiver.PendingResult.setExtrasClassLoader(ClassLoader)|
+|android.content.BroadcastReceiver.PendingResult.setResult(int,String,Bundle)|V
+|android.content.BroadcastReceiver.PendingResult.setResultCode(int)|Version ofB
+|android.content.BroadcastReceiver.PendingResult.setResultData(String)|Version 
+|android.content.BroadcastReceiver.PendingResult.setResultExtras(Bundle)|Versio
+
+*android.content.BroadcastReceiver.PendingResult_Description*
+
+State for a result that is pending for a broadcast receiver. Returned by 
+goAsync()(|android.content.BroadcastReceiver|) while in 
+BroadcastReceiver.onReceive()(|android.content.BroadcastReceiver|) . This 
+allows you to return from onReceive() without having the broadcast terminate; 
+you must call (|android.content.BroadcastReceiver.PendingResult|) once you are 
+done with the broadcast. This allows you to process the broadcast off of the 
+main thread of your app. 
+
+Note on threading: the state inside of this class is not itself thread-safe, 
+however you can use it from any thread if you properly sure that you do not 
+have races. Typically this means you will hand the entire object to another 
+thread, which will be solely responsible for setting any results and finally 
+calling (|android.content.BroadcastReceiver.PendingResult|) . 
+
+
+
+*int_android.content.BroadcastReceiver.PendingResult.TYPE_COMPONENT*
+
+
+
+
+*int_android.content.BroadcastReceiver.PendingResult.TYPE_REGISTERED*
+
+
+
+
+*int_android.content.BroadcastReceiver.PendingResult.TYPE_UNREGISTERED*
+
+
+
+
+
+*android.content.BroadcastReceiver.PendingResult(int,String,Bundle,int,boolean,boolean,IBinder,int)*
+
+public BroadcastReceiver.PendingResult(
+  int resultCode,
+  java.lang.String resultData,
+  android.os.Bundle resultExtras,
+  int type,
+  boolean ordered,
+  boolean sticky,
+  android.os.IBinder token,
+  int userId)
+
+
+
+
+*android.content.BroadcastReceiver.PendingResult.abortBroadcast()*
+
+public final void abortBroadcast()
+
+Version of 
+BroadcastReceiver.abortBroadcast()(|android.content.BroadcastReceiver|) for 
+asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.clearAbortBroadcast()*
+
+public final void clearAbortBroadcast()
+
+Version of 
+BroadcastReceiver.clearAbortBroadcast()(|android.content.BroadcastReceiver|) 
+for asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.finish()*
+
+public final void finish()
+
+Finish the broadcast. The current result will be sent and the next broadcast 
+will proceed. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.getAbortBroadcast()*
+
+public final boolean getAbortBroadcast()
+
+Version of 
+BroadcastReceiver.getAbortBroadcast()(|android.content.BroadcastReceiver|) for 
+asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.getResultCode()*
+
+public final int getResultCode()
+
+Version of 
+BroadcastReceiver.getResultCode()(|android.content.BroadcastReceiver|) for 
+asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.getResultData()*
+
+public final |java.lang.String| getResultData()
+
+Version of 
+BroadcastReceiver.getResultData()(|android.content.BroadcastReceiver|) for 
+asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.getResultExtras(boolean)*
+
+public final |android.os.Bundle| getResultExtras(boolean makeMap)
+
+Version of 
+BroadcastReceiver.getResultExtras(boolean)(|android.content.BroadcastReceiver|) 
+for asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.getSendingUserId()*
+
+public int getSendingUserId()
+
+
+
+
+
+*android.content.BroadcastReceiver.PendingResult.sendFinished(IActivityManager)*
+
+public void sendFinished(android.app.IActivityManager am)
+
+
+
+
+
+*android.content.BroadcastReceiver.PendingResult.setExtrasClassLoader(ClassLoader)*
+
+public void setExtrasClassLoader(java.lang.ClassLoader cl)
+
+
+
+
+
+*android.content.BroadcastReceiver.PendingResult.setResult(int,String,Bundle)*
+
+public final void setResult(
+  int code,
+  java.lang.String data,
+  android.os.Bundle extras)
+
+Version of BroadcastReceiver.setResult(int, String, 
+Bundle)(|android.content.BroadcastReceiver|) for asynchronous broadcast 
+handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.setResultCode(int)*
+
+public final void setResultCode(int code)
+
+Version of 
+BroadcastReceiver.setResultCode(int)(|android.content.BroadcastReceiver|) for 
+asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.setResultData(String)*
+
+public final void setResultData(java.lang.String data)
+
+Version of 
+BroadcastReceiver.setResultData(String)(|android.content.BroadcastReceiver|) 
+for asynchronous broadcast handling. 
+
+
+
+*android.content.BroadcastReceiver.PendingResult.setResultExtras(Bundle)*
+
+public final void setResultExtras(android.os.Bundle extras)
+
+Version of 
+BroadcastReceiver.setResultExtras(Bundle)(|android.content.BroadcastReceiver|) 
+for asynchronous broadcast handling. 
+
+
+
+

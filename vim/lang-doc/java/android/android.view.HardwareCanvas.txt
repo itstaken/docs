@@ -1,0 +1,153 @@
+*android.view.HardwareCanvas* *HardwareCanvas* Hardware accelerated canvas.
+
+public abstract class HardwareCanvas
+  extends    |Canvas|
+
+|android.view.HardwareCanvas_Description|
+|android.view.HardwareCanvas_Fields|
+|android.view.HardwareCanvas_Constructors|
+|android.view.HardwareCanvas_Methods|
+
+================================================================================
+
+*android.view.HardwareCanvas_Constructors*
+|android.view.HardwareCanvas()|
+
+*android.view.HardwareCanvas_Methods*
+|android.view.HardwareCanvas.callDrawGLFunction(int)|Calls the function specifi
+|android.view.HardwareCanvas.drawDisplayList(DisplayList)|Draws the specified d
+|android.view.HardwareCanvas.drawDisplayList(DisplayList,Rect,int)|Draws the sp
+|android.view.HardwareCanvas.getName()|Returns the name of this canvas.
+|android.view.HardwareCanvas.invokeFunctors(Rect)|Invoke all the functors who r
+|android.view.HardwareCanvas.isHardwareAccelerated()|
+|android.view.HardwareCanvas.onPostDraw()|Invoked after all drawing operation h
+|android.view.HardwareCanvas.onPreDraw(Rect)|Invoked before any drawing operati
+|android.view.HardwareCanvas.setBitmap(Bitmap)|
+|android.view.HardwareCanvas.setName(String)|Specifies the name of this canvas.
+
+*android.view.HardwareCanvas_Description*
+
+Hardware accelerated canvas. 
+
+
+
+*android.view.HardwareCanvas()*
+
+public HardwareCanvas()
+
+
+
+
+*android.view.HardwareCanvas.callDrawGLFunction(int)*
+
+public int callDrawGLFunction(int drawGLFunction)
+
+Calls the function specified with the drawGLFunction function pointer. This is 
+functionality used by webkit for calling into their renderer from our display 
+lists. This function may return true if an invalidation is needed after the 
+call. 
+
+
+    drawGLFunction - A native function pointer 
+
+    Returns: One of {@link DisplayList#STATUS_DONE}, {@link DisplayList#STATUS_DRAW} or 
+             {@link DisplayList#STATUS_INVOKE} 
+
+*android.view.HardwareCanvas.drawDisplayList(DisplayList)*
+
+public void drawDisplayList(android.view.DisplayList displayList)
+
+Draws the specified display list onto this canvas. The display list can only be 
+drawn if (|android.view.DisplayList|) returns true. 
+
+
+    displayList - The display list to replay. 
+
+*android.view.HardwareCanvas.drawDisplayList(DisplayList,Rect,int)*
+
+public abstract int drawDisplayList(
+  android.view.DisplayList displayList,
+  Rect dirty,
+  int flags)
+
+Draws the specified display list onto this canvas. 
+
+
+    displayList - The display list to replay. 
+    dirty - The dirty region to redraw in the next pass, matters only if this method 
+       returns {@link DisplayList#STATUS_DRAW}, can be null. 
+    flags - Optional flags about drawing, see {@link DisplayList} for the possible flags. 
+
+    Returns: One of {@link DisplayList#STATUS_DONE}, {@link DisplayList#STATUS_DRAW}, or 
+             {@link DisplayList#STATUS_INVOKE}, or'd with {@link 
+             DisplayList#STATUS_DREW} if anything was drawn. 
+
+*android.view.HardwareCanvas.getName()*
+
+public |java.lang.String| getName()
+
+Returns the name of this canvas. 
+
+
+
+    Returns: The name of the canvas or null 
+
+*android.view.HardwareCanvas.invokeFunctors(Rect)*
+
+public int invokeFunctors(Rect dirty)
+
+Invoke all the functors who requested to be invoked during the previous frame. 
+
+
+    dirty - The region to redraw when the functors return {@link DisplayList#STATUS_DRAW} 
+
+    Returns: One of {@link DisplayList#STATUS_DONE}, {@link DisplayList#STATUS_DRAW} or 
+             {@link DisplayList#STATUS_INVOKE} 
+
+*android.view.HardwareCanvas.isHardwareAccelerated()*
+
+public boolean isHardwareAccelerated()
+
+
+
+
+
+*android.view.HardwareCanvas.onPostDraw()*
+
+public abstract void onPostDraw()
+
+Invoked after all drawing operation have been performed. 
+
+
+
+*android.view.HardwareCanvas.onPreDraw(Rect)*
+
+public abstract int onPreDraw(Rect dirty)
+
+Invoked before any drawing operation is performed in this canvas. 
+
+
+    dirty - The dirty rectangle to update, can be null. 
+
+    Returns: {@link DisplayList#STATUS_DREW} if anything was drawn (such as a call to clear 
+             the canvas). 
+
+*android.view.HardwareCanvas.setBitmap(Bitmap)*
+
+public void setBitmap(Bitmap bitmap)
+
+
+
+
+
+*android.view.HardwareCanvas.setName(String)*
+
+public void setName(java.lang.String name)
+
+Specifies the name of this canvas. Naming the canvas is entirely optional but 
+can be useful for debugging purposes. 
+
+
+    name - The name of the canvas, can be null 
+
+

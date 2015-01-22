@@ -1,0 +1,488 @@
+*android.os.ParcelFileDescriptor* *ParcelFileDescriptor* The FileDescriptor retu
+
+public class ParcelFileDescriptor
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+             |java.io.Closeable|
+
+|android.os.ParcelFileDescriptor_Description|
+|android.os.ParcelFileDescriptor_Fields|
+|android.os.ParcelFileDescriptor_Constructors|
+|android.os.ParcelFileDescriptor_Methods|
+
+================================================================================
+
+*android.os.ParcelFileDescriptor_Fields*
+|android.os.Parcelable.Creator<android.os.ParcelFileDescriptor>_android.os.ParcelFileDescriptor.CREATOR|
+|int_android.os.ParcelFileDescriptor.MODE_APPEND|
+|int_android.os.ParcelFileDescriptor.MODE_CREATE|
+|int_android.os.ParcelFileDescriptor.MODE_READ_ONLY|
+|int_android.os.ParcelFileDescriptor.MODE_READ_WRITE|
+|int_android.os.ParcelFileDescriptor.MODE_TRUNCATE|
+|int_android.os.ParcelFileDescriptor.MODE_WORLD_READABLE|
+|int_android.os.ParcelFileDescriptor.MODE_WORLD_WRITEABLE|
+|int_android.os.ParcelFileDescriptor.MODE_WRITE_ONLY|
+
+*android.os.ParcelFileDescriptor_Constructors*
+|android.os.ParcelFileDescriptor(FileDescriptor)|
+|android.os.ParcelFileDescriptor(FileDescriptor,FileDescriptor)|
+|android.os.ParcelFileDescriptor(ParcelFileDescriptor)|Create a new ParcelFileD
+
+*android.os.ParcelFileDescriptor_Methods*
+|android.os.ParcelFileDescriptor.adoptFd(int)|Take ownership of a raw native fd
+|android.os.ParcelFileDescriptor.canDetectErrors()|Indicates if this ParcelFile
+|android.os.ParcelFileDescriptor.checkError()|Detect and throw if the other end
+|android.os.ParcelFileDescriptor.close()|Close the ParcelFileDescriptor.
+|android.os.ParcelFileDescriptor.closeWithError(String)|Close the ParcelFileDes
+|android.os.ParcelFileDescriptor.createPipe()|Create two ParcelFileDescriptors 
+|android.os.ParcelFileDescriptor.createReliablePipe()|Create two ParcelFileDesc
+|android.os.ParcelFileDescriptor.createReliableSocketPair()|Create two ParcelFi
+|android.os.ParcelFileDescriptor.createSocketPair()|Create two ParcelFileDescri
+|android.os.ParcelFileDescriptor.describeContents()|
+|android.os.ParcelFileDescriptor.detachFd()|Return the native fd int for this P
+|android.os.ParcelFileDescriptor.dup()|Create a new ParcelFileDescriptor that i
+|android.os.ParcelFileDescriptor.dup(FileDescriptor)|Create a new ParcelFileDes
+|android.os.ParcelFileDescriptor.finalize()|
+|android.os.ParcelFileDescriptor.fromData(byte[],String)|
+|android.os.ParcelFileDescriptor.fromDatagramSocket(DatagramSocket)|Create a ne
+|android.os.ParcelFileDescriptor.fromFd(int)|Create a new ParcelFileDescriptor 
+|android.os.ParcelFileDescriptor.fromSocket(Socket)|Create a new ParcelFileDesc
+|android.os.ParcelFileDescriptor.getFd()|Return the native fd int for this Parc
+|android.os.ParcelFileDescriptor.getFileDescriptor()|Retrieve the actual FileDe
+|android.os.ParcelFileDescriptor.getStatSize()|Return the total size of the fil
+|android.os.ParcelFileDescriptor.open(File,int)|Create a new ParcelFileDescript
+|android.os.ParcelFileDescriptor.open(File,int,Handler,ParcelFileDescriptor.OnCloseListener)|
+|android.os.ParcelFileDescriptor.parseMode(String)|Converts a string representi
+|android.os.ParcelFileDescriptor.releaseResources()|Called when the fd is being
+|android.os.ParcelFileDescriptor.seekTo(long)|This is needed for implementing A
+|android.os.ParcelFileDescriptor.toString()|
+|android.os.ParcelFileDescriptor.writeToParcel(Parcel,int)|IfParcelable#PARCELA
+
+*android.os.ParcelFileDescriptor_Description*
+
+The FileDescriptor returned by (|android.os.Parcel|) , allowing you to close it 
+when done with it. 
+
+
+
+*android.os.Parcelable.Creator<android.os.ParcelFileDescriptor>_android.os.ParcelFileDescriptor.CREATOR*
+
+
+
+
+*int_android.os.ParcelFileDescriptor.MODE_APPEND*
+
+For use with (|android.os.ParcelFileDescriptor|) : append to end of file while 
+writing. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_CREATE*
+
+For use with (|android.os.ParcelFileDescriptor|) : create the file if it 
+doesn't already exist. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_READ_ONLY*
+
+For use with (|android.os.ParcelFileDescriptor|) : open the file with read-only 
+access. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_READ_WRITE*
+
+For use with (|android.os.ParcelFileDescriptor|) : open the file with read and 
+write access. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_TRUNCATE*
+
+For use with (|android.os.ParcelFileDescriptor|) : erase contents of file when 
+opening. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_WORLD_READABLE*
+
+For use with (|android.os.ParcelFileDescriptor|) : if 
+(|android.os.ParcelFileDescriptor|) has been supplied and this file doesn't 
+already exist, then create the file with permissions such that any application 
+can read it. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_WORLD_WRITEABLE*
+
+For use with (|android.os.ParcelFileDescriptor|) : if 
+(|android.os.ParcelFileDescriptor|) has been supplied and this file doesn't 
+already exist, then create the file with permissions such that any application 
+can write it. 
+
+
+*int_android.os.ParcelFileDescriptor.MODE_WRITE_ONLY*
+
+For use with (|android.os.ParcelFileDescriptor|) : open the file with 
+write-only access. 
+
+
+
+*android.os.ParcelFileDescriptor(FileDescriptor)*
+
+public ParcelFileDescriptor(java.io.FileDescriptor fd)
+
+
+
+
+*android.os.ParcelFileDescriptor(FileDescriptor,FileDescriptor)*
+
+public ParcelFileDescriptor(
+  java.io.FileDescriptor fd,
+  java.io.FileDescriptor commChannel)
+
+
+
+
+*android.os.ParcelFileDescriptor(ParcelFileDescriptor)*
+
+public ParcelFileDescriptor(android.os.ParcelFileDescriptor wrapped)
+
+Create a new ParcelFileDescriptor wrapped around another descriptor. By default 
+all method calls are delegated to the wrapped descriptor. 
+
+
+*android.os.ParcelFileDescriptor.adoptFd(int)*
+
+public static |android.os.ParcelFileDescriptor| adoptFd(int fd)
+
+Take ownership of a raw native fd in to a new ParcelFileDescriptor. The 
+returned ParcelFileDescriptor now owns the given fd, and will be responsible 
+for closing it. You must not close the fd yourself. 
+
+
+    fd - The native fd that the ParcelFileDescriptor should adopt. 
+
+    Returns: Returns a new ParcelFileDescriptor holding a FileDescriptor for the given fd. 
+
+*android.os.ParcelFileDescriptor.canDetectErrors()*
+
+public boolean canDetectErrors()
+
+Indicates if this ParcelFileDescriptor can communicate and detect remote 
+errors/crashes. 
+
+
+
+*android.os.ParcelFileDescriptor.checkError()*
+
+public void checkError()
+  throws |java.io.IOException|
+         
+Detect and throw if the other end of a pipe or socket pair encountered an error 
+or crashed. This allows a reader to distinguish between a valid EOF and an 
+error/crash. 
+
+If this ParcelFileDescriptor is unable to detect remote errors, it will return 
+silently. 
+
+
+
+*android.os.ParcelFileDescriptor.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Close the ParcelFileDescriptor. This implementation closes the underlying OS 
+resources allocated to represent this stream. 
+
+
+
+*android.os.ParcelFileDescriptor.closeWithError(String)*
+
+public void closeWithError(java.lang.String msg)
+  throws |java.io.IOException|
+         
+Close the ParcelFileDescriptor, informing any peer that an error occurred while 
+processing. If the creator of this descriptor is not observing errors, it will 
+close normally. 
+
+
+    msg - describing the error; must not be null. 
+
+*android.os.ParcelFileDescriptor.createPipe()*
+
+public static |android.os.ParcelFileDescriptor|[] createPipe()
+  throws |java.io.IOException|
+         
+Create two ParcelFileDescriptors structured as a data pipe. The first 
+ParcelFileDescriptor in the returned array is the read side; the second is the 
+write side. 
+
+
+
+*android.os.ParcelFileDescriptor.createReliablePipe()*
+
+public static |android.os.ParcelFileDescriptor|[] createReliablePipe()
+  throws |java.io.IOException|
+         
+Create two ParcelFileDescriptors structured as a data pipe. The first 
+ParcelFileDescriptor in the returned array is the read side; the second is the 
+write side. 
+
+The write end has the ability to deliver an error message through 
+(|android.os.ParcelFileDescriptor|) which can be handled by the read end 
+calling (|android.os.ParcelFileDescriptor|) , usually after detecting an EOF. 
+This can also be used to detect remote crashes. 
+
+
+
+*android.os.ParcelFileDescriptor.createReliableSocketPair()*
+
+public static |android.os.ParcelFileDescriptor|[] createReliableSocketPair()
+  throws |java.io.IOException|
+         
+Create two ParcelFileDescriptors structured as a pair of sockets connected to 
+each other. The two sockets are indistinguishable. 
+
+Both ends have the ability to deliver an error message through 
+(|android.os.ParcelFileDescriptor|) which can be detected by the other end 
+calling (|android.os.ParcelFileDescriptor|) , usually after detecting an EOF. 
+This can also be used to detect remote crashes. 
+
+
+
+*android.os.ParcelFileDescriptor.createSocketPair()*
+
+public static |android.os.ParcelFileDescriptor|[] createSocketPair()
+  throws |java.io.IOException|
+         
+Create two ParcelFileDescriptors structured as a pair of sockets connected to 
+each other. The two sockets are indistinguishable. 
+
+
+
+*android.os.ParcelFileDescriptor.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.ParcelFileDescriptor.detachFd()*
+
+public int detachFd()
+
+Return the native fd int for this ParcelFileDescriptor and detach it from the 
+object here. You are now responsible for closing the fd in native code. 
+
+You should not detach when the original creator of the descriptor is expecting 
+a reliable signal through (|android.os.ParcelFileDescriptor|) or 
+(|android.os.ParcelFileDescriptor|) . 
+
+
+
+*android.os.ParcelFileDescriptor.dup()*
+
+public |android.os.ParcelFileDescriptor| dup()
+  throws |java.io.IOException|
+         
+Create a new ParcelFileDescriptor that is a dup of the existing FileDescriptor. 
+This obeys standard POSIX semantics, where the new file descriptor shared state 
+such as file position with the original file descriptor. 
+
+
+
+*android.os.ParcelFileDescriptor.dup(FileDescriptor)*
+
+public static |android.os.ParcelFileDescriptor| dup(java.io.FileDescriptor orig)
+  throws |java.io.IOException|
+         
+Create a new ParcelFileDescriptor that is a dup of an existing FileDescriptor. 
+This obeys standard POSIX semantics, where the new file descriptor shared state 
+such as file position with the original file descriptor. 
+
+
+
+*android.os.ParcelFileDescriptor.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.os.ParcelFileDescriptor.fromData(byte[],String)*
+
+public static |android.os.ParcelFileDescriptor| fromData(
+  byte[] data,
+  java.lang.String name)
+  throws |java.io.IOException|
+         
+
+
+
+    data - Data to copy. 
+    name - Name for the shared memory area that may back the file descriptor. This is 
+       purely informative and may be {@code null}. 
+
+    Returns: A ParcelFileDescriptor. 
+
+*android.os.ParcelFileDescriptor.fromDatagramSocket(DatagramSocket)*
+
+public static |android.os.ParcelFileDescriptor| fromDatagramSocket(java.net.DatagramSocket datagramSocket)
+
+Create a new ParcelFileDescriptor from the specified DatagramSocket. 
+
+
+    datagramSocket - The DatagramSocket whose FileDescriptor is used to create a new 
+       ParcelFileDescriptor. 
+
+    Returns: A new ParcelFileDescriptor with the FileDescriptor of the specified 
+             DatagramSocket. 
+
+*android.os.ParcelFileDescriptor.fromFd(int)*
+
+public static |android.os.ParcelFileDescriptor| fromFd(int fd)
+  throws |java.io.IOException|
+         
+Create a new ParcelFileDescriptor from a raw native fd. The new 
+ParcelFileDescriptor holds a dup of the original fd passed in here, so you must 
+still close that fd as well as the new ParcelFileDescriptor. 
+
+
+    fd - The native fd that the ParcelFileDescriptor should dup. 
+
+    Returns: Returns a new ParcelFileDescriptor holding a FileDescriptor for a dup of the 
+             given fd. 
+
+*android.os.ParcelFileDescriptor.fromSocket(Socket)*
+
+public static |android.os.ParcelFileDescriptor| fromSocket(java.net.Socket socket)
+
+Create a new ParcelFileDescriptor from the specified Socket. The new 
+ParcelFileDescriptor holds a dup of the original FileDescriptor in the Socket, 
+so you must still close the Socket as well as the new ParcelFileDescriptor. 
+
+
+    socket - The Socket whose FileDescriptor is used to create a new ParcelFileDescriptor. 
+
+    Returns: A new ParcelFileDescriptor with the FileDescriptor of the specified Socket. 
+
+*android.os.ParcelFileDescriptor.getFd()*
+
+public int getFd()
+
+Return the native fd int for this ParcelFileDescriptor. The 
+ParcelFileDescriptor still owns the fd, and it still must be closed through 
+this API. 
+
+
+
+*android.os.ParcelFileDescriptor.getFileDescriptor()*
+
+public |java.io.FileDescriptor| getFileDescriptor()
+
+Retrieve the actual FileDescriptor associated with this object. 
+
+
+
+    Returns: Returns the FileDescriptor associated with this object. 
+
+*android.os.ParcelFileDescriptor.getStatSize()*
+
+public long getStatSize()
+
+Return the total size of the file representing this fd, as determined bystat(). 
+Returns -1 if the fd is not a file. 
+
+
+
+*android.os.ParcelFileDescriptor.open(File,int)*
+
+public static |android.os.ParcelFileDescriptor| open(
+  java.io.File file,
+  int mode)
+  throws |java.io.FileNotFoundException|
+         
+Create a new ParcelFileDescriptor accessing a given file. 
+
+
+    file - The file to be opened. 
+    mode - The desired access mode, must be one of {@link #MODE_READ_ONLY}, {@link 
+       #MODE_WRITE_ONLY}, or {@link #MODE_READ_WRITE}; may also be any 
+       combination of {@link #MODE_CREATE}, {@link #MODE_TRUNCATE}, {@link 
+       #MODE_WORLD_READABLE}, and {@link #MODE_WORLD_WRITEABLE}. 
+
+    Returns: a new ParcelFileDescriptor pointing to the given file. 
+
+*android.os.ParcelFileDescriptor.open(File,int,Handler,ParcelFileDescriptor.OnCloseListener)*
+
+public static |android.os.ParcelFileDescriptor| open(
+  java.io.File file,
+  int mode,
+  android.os.Handler handler,
+  android.os.ParcelFileDescriptor.OnCloseListener listener)
+  throws |java.io.IOException|
+         
+Create a new ParcelFileDescriptor accessing a given file. 
+
+
+    file - The file to be opened. 
+    mode - The desired access mode, must be one of {@link #MODE_READ_ONLY}, {@link 
+       #MODE_WRITE_ONLY}, or {@link #MODE_READ_WRITE}; may also be any 
+       combination of {@link #MODE_CREATE}, {@link #MODE_TRUNCATE}, {@link 
+       #MODE_WORLD_READABLE}, and {@link #MODE_WORLD_WRITEABLE}. 
+    handler - to call listener from; must not be null. 
+    listener - to be invoked when the returned descriptor has been closed; must not be null. 
+
+    Returns: a new ParcelFileDescriptor pointing to the given file. 
+
+*android.os.ParcelFileDescriptor.parseMode(String)*
+
+public static int parseMode(java.lang.String mode)
+
+Converts a string representing a file mode, such as "rw", into a bitmask 
+suitable for use with (|android.os.ParcelFileDescriptor|) . 
+
+
+    mode - The string representation of the file mode. 
+
+    Returns: A bitmask representing the given file mode. 
+
+*android.os.ParcelFileDescriptor.releaseResources()*
+
+public void releaseResources()
+
+Called when the fd is being closed, for subclasses to release any other 
+resources associated with it, such as acquired providers. 
+
+
+
+*android.os.ParcelFileDescriptor.seekTo(long)*
+
+public long seekTo(long pos)
+  throws |java.io.IOException|
+         
+This is needed for implementing AssetFileDescriptor.AutoCloseOutputStream, and 
+I really don't think we want it to be public. 
+
+
+
+*android.os.ParcelFileDescriptor.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.os.ParcelFileDescriptor.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+If (|android.os.Parcelable|) is set in flags, the file descriptor will be 
+closed after a copy is written to the Parcel. 
+
+
+
+

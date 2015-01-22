@@ -1,0 +1,203 @@
+*android.print.PrintDocumentInfo* *PrintDocumentInfo* This class encapsulates in
+
+public final class PrintDocumentInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.print.PrintDocumentInfo_Description|
+|android.print.PrintDocumentInfo_Fields|
+|android.print.PrintDocumentInfo_Constructors|
+|android.print.PrintDocumentInfo_Methods|
+
+================================================================================
+
+*android.print.PrintDocumentInfo_Fields*
+|int_android.print.PrintDocumentInfo.CONTENT_TYPE_DOCUMENT|
+|int_android.print.PrintDocumentInfo.CONTENT_TYPE_PHOTO|
+|int_android.print.PrintDocumentInfo.CONTENT_TYPE_UNKNOWN|
+|android.os.Parcelable.Creator<android.print.PrintDocumentInfo>_android.print.PrintDocumentInfo.CREATOR|
+|int_android.print.PrintDocumentInfo.PAGE_COUNT_UNKNOWN|
+
+*android.print.PrintDocumentInfo_Methods*
+|android.print.PrintDocumentInfo.describeContents()|
+|android.print.PrintDocumentInfo.equals(Object)|
+|android.print.PrintDocumentInfo.getContentType()|Gets the content type.
+|android.print.PrintDocumentInfo.getDataSize()|Gets the document data size in b
+|android.print.PrintDocumentInfo.getName()|Gets the document name.
+|android.print.PrintDocumentInfo.getPageCount()|Gets the total number of pages.
+|android.print.PrintDocumentInfo.hashCode()|
+|android.print.PrintDocumentInfo.setDataSize(long)|Sets the document data size 
+|android.print.PrintDocumentInfo.toString()|
+|android.print.PrintDocumentInfo.writeToParcel(Parcel,int)|
+
+*android.print.PrintDocumentInfo_Description*
+
+This class encapsulates information about a document for printing purposes. 
+This meta-data is used by the platform and print services, components that 
+interact with printers. For example, this class contains the number of pages 
+contained in the document it describes and this number of pages is shown to the 
+user allowing him/her to select the range to print. Also a print service may 
+optimize the printing process based on the content type, such as document or 
+photo. 
+
+Instances of this class are created by the printing application and passed to 
+the PrintDocumentAdapter.LayoutResultCallback.onLayoutFinished( 
+PrintDocumentInfo, 
+boolean)(|android.print.PrintDocumentAdapter.LayoutResultCallback|) callback 
+after successfully laying out the content which is performed in 
+PrintDocumentAdapter.onLayout(PrintAttributes, PrintAttributes, 
+android.os.CancellationSignal, PrintDocumentAdapter.LayoutResultCallback, 
+android.os.Bundle)(|android.print.PrintDocumentAdapter|) . 
+
+An example usage looks like this: 
+
+. . . 
+
+public void onLayout(PrintAttributes oldAttributes, PrintAttributes 
+newAttributes, CancellationSignal cancellationSignal, LayoutResultCallback 
+callback, Bundle metadata) { 
+
+// Assume the app defined a LayoutResult class which contains // the layout 
+result data and that the content is a document. LayoutResult result = 
+doSomeLayoutWork(); 
+
+PrintDocumentInfo info = new PrintDocumentInfo .Builder("printed_file.pdf") 
+.setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT) 
+.setPageCount(result.getPageCount()) .build(); 
+
+callback.onLayoutFinished(info, result.getContentChanged()); } 
+
+. . . 
+
+
+
+
+
+
+
+*int_android.print.PrintDocumentInfo.CONTENT_TYPE_DOCUMENT*
+
+Content type: document. 
+
+A print service may use normal paper to print the content instead of dedicated 
+photo paper. Also it may use a lower quality printing process as the content is 
+not as sensitive to print quality variation as a photo is. 
+
+
+*int_android.print.PrintDocumentInfo.CONTENT_TYPE_PHOTO*
+
+Content type: photo. 
+
+A print service may use dedicated photo paper to print the content instead of 
+normal paper. Also it may use a higher quality printing process as the content 
+is more sensitive to print quality variation than a document. 
+
+
+*int_android.print.PrintDocumentInfo.CONTENT_TYPE_UNKNOWN*
+
+Content type: unknown. 
+
+
+*android.os.Parcelable.Creator<android.print.PrintDocumentInfo>_android.print.PrintDocumentInfo.CREATOR*
+
+
+
+
+*int_android.print.PrintDocumentInfo.PAGE_COUNT_UNKNOWN*
+
+Constant for unknown page count. 
+
+
+
+*android.print.PrintDocumentInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.print.PrintDocumentInfo.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.print.PrintDocumentInfo.getContentType()*
+
+public int getContentType()
+
+Gets the content type. 
+
+
+
+    Returns: The content type. 
+
+*android.print.PrintDocumentInfo.getDataSize()*
+
+public long getDataSize()
+
+Gets the document data size in bytes. 
+
+
+
+    Returns: The data size. 
+
+*android.print.PrintDocumentInfo.getName()*
+
+public |java.lang.String| getName()
+
+Gets the document name. This name may be shown to the user. 
+
+
+
+    Returns: The document name. 
+
+*android.print.PrintDocumentInfo.getPageCount()*
+
+public int getPageCount()
+
+Gets the total number of pages. 
+
+
+
+    Returns: The number of pages. 
+
+*android.print.PrintDocumentInfo.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.print.PrintDocumentInfo.setDataSize(long)*
+
+public void setDataSize(long dataSize)
+
+Sets the document data size in bytes. 
+
+
+    dataSize - The data size. 
+
+*android.print.PrintDocumentInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.print.PrintDocumentInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+
+
+
+
+

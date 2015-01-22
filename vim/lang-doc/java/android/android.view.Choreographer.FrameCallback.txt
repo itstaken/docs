@@ -1,0 +1,49 @@
+*android.view.Choreographer.FrameCallback* *Choreographer.FrameCallback* Impleme
+
+public static interface interface Choreographer.FrameCallback
+
+
+|android.view.Choreographer.FrameCallback_Description|
+|android.view.Choreographer.FrameCallback_Fields|
+|android.view.Choreographer.FrameCallback_Constructors|
+|android.view.Choreographer.FrameCallback_Methods|
+
+================================================================================
+
+*android.view.Choreographer.FrameCallback_Methods*
+|android.view.Choreographer.FrameCallback.doFrame(long)|Called when a new displ
+
+*android.view.Choreographer.FrameCallback_Description*
+
+Implement this interface to receive a callback when a new display frame is 
+being rendered. The callback is invoked on the (|android.os.Looper|) thread to 
+which the (|android.view.Choreographer|) is attached. 
+
+
+
+*android.view.Choreographer.FrameCallback.doFrame(long)*
+
+public void doFrame(long frameTimeNanos)
+
+Called when a new display frame is being rendered. 
+
+This method provides the time in nanoseconds when the frame started being 
+rendered. The frame time provides a stable time base for synchronizing 
+animations and drawing. It should be used instead of (|android.os.SystemClock|) 
+or (|java.lang.System|) for animations and drawing in the UI. Using the frame 
+time helps to reduce inter-frame jitter because the frame time is fixed at the 
+time the frame was scheduled to start, regardless of when the animations or 
+drawing callback actually runs. All callbacks that run as part of rendering a 
+frame will observe the same frame time so using the frame time also helps to 
+synchronize effects that are performed by different callbacks. 
+
+Please note that the framework already takes care to process animations and 
+drawing using the frame time as a stable time base. Most applications should 
+not need to use the frame time information directly. 
+
+
+    frameTimeNanos - The time in nanoseconds when the frame started being rendered, in the {@link 
+       System#nanoTime()} timebase. Divide this value by {@code 1000000} to 
+       convert it to the {@link SystemClock#uptimeMillis()} time base. 
+
+

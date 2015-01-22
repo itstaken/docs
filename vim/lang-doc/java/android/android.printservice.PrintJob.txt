@@ -1,0 +1,282 @@
+*android.printservice.PrintJob* *PrintJob* This class represents a print job fro
+
+public final class PrintJob
+  extends    |java.lang.Object|
+
+|android.printservice.PrintJob_Description|
+|android.printservice.PrintJob_Fields|
+|android.printservice.PrintJob_Constructors|
+|android.printservice.PrintJob_Methods|
+
+================================================================================
+
+*android.printservice.PrintJob_Methods*
+|android.printservice.PrintJob.block(String)|Blocks the print job.
+|android.printservice.PrintJob.cancel()|Cancels the print job.
+|android.printservice.PrintJob.complete()|Completes the print job.
+|android.printservice.PrintJob.equals(Object)|
+|android.printservice.PrintJob.fail(String)|Fails the print job.
+|android.printservice.PrintJob.getAdvancedIntOption(String)|Gets the value of a
+|android.printservice.PrintJob.getAdvancedStringOption(String)|Gets the value o
+|android.printservice.PrintJob.getDocument()|Gets the printed document.
+|android.printservice.PrintJob.getId()|Gets the unique print job id.
+|android.printservice.PrintJob.getInfo()|Gets thePrintJobInfothat describes thi
+|android.printservice.PrintJob.getTag()|Gets the print job tag.
+|android.printservice.PrintJob.hasAdvancedOption(String)|Gets whether this job 
+|android.printservice.PrintJob.hashCode()|
+|android.printservice.PrintJob.isBlocked()|Gets whether this print job is block
+|android.printservice.PrintJob.isCancelled()|Gets whether this print job is can
+|android.printservice.PrintJob.isCompleted()|Gets whether this print job is com
+|android.printservice.PrintJob.isFailed()|Gets whether this print job is failed
+|android.printservice.PrintJob.isQueued()|Gets whether this print job is queued
+|android.printservice.PrintJob.isStarted()|Gets whether this print job is start
+|android.printservice.PrintJob.setTag(String)|Sets a tag that is valid in the c
+|android.printservice.PrintJob.start()|Starts the print job.
+
+*android.printservice.PrintJob_Description*
+
+This class represents a print job from the perspective of a print service. It 
+provides APIs for observing the print job state and performing operations on 
+the print job. 
+
+Note: All methods of this class must be invoked on the main application thread. 
+
+
+
+*android.printservice.PrintJob.block(String)*
+
+public boolean block(java.lang.String reason)
+
+Blocks the print job. You should call this method if 
+(|android.printservice.PrintJob|) or (|android.printservice.PrintJob|) returns 
+true and you need to block the print job. For example, the user has to add some 
+paper to continue printing. To resume the print job call 
+(|android.printservice.PrintJob|) . 
+
+
+
+    Returns: Whether the job was blocked. 
+
+*android.printservice.PrintJob.cancel()*
+
+public boolean cancel()
+
+Cancels the print job. You should call this method if 
+(|android.printservice.PrintJob|) or or 
+#isBlocked()(|android.printservice.PrintJob|) returns true and you canceled the 
+print job as a response to a call to (|android.printservice.PrintService|) . 
+
+
+
+    Returns: Whether the job is canceled. 
+
+*android.printservice.PrintJob.complete()*
+
+public boolean complete()
+
+Completes the print job. You should call this method if 
+(|android.printservice.PrintJob|) returns true and you are done printing. 
+
+
+
+    Returns: Whether the job as completed. 
+
+*android.printservice.PrintJob.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.printservice.PrintJob.fail(String)*
+
+public boolean fail(java.lang.String error)
+
+Fails the print job. You should call this method if 
+(|android.printservice.PrintJob|) or (|android.printservice.PrintJob|) or 
+(|android.printservice.PrintJob|) returns true you failed while printing. 
+
+
+    error - The human readable, short, and translated reason for the failure. 
+
+    Returns: Whether the job was failed. 
+
+*android.printservice.PrintJob.getAdvancedIntOption(String)*
+
+public int getAdvancedIntOption(java.lang.String key)
+
+Gets the value of an advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: The option value. 
+
+*android.printservice.PrintJob.getAdvancedStringOption(String)*
+
+public |java.lang.String| getAdvancedStringOption(java.lang.String key)
+
+Gets the value of an advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: The option value. 
+
+*android.printservice.PrintJob.getDocument()*
+
+public |android.printservice.PrintDocument| getDocument()
+
+Gets the printed document. 
+
+
+
+    Returns: The document. 
+
+*android.printservice.PrintJob.getId()*
+
+public |android.print.PrintJobId| getId()
+
+Gets the unique print job id. 
+
+
+
+    Returns: 
+
+*android.printservice.PrintJob.getInfo()*
+
+public |android.print.PrintJobInfo| getInfo()
+
+Gets the (|android.print.PrintJobInfo|) that describes this job. 
+
+Node:The returned info object is a snapshot of the current print job state. 
+Every call to this method returns a fresh info object that reflects the current 
+print job state. 
+
+
+
+    Returns: The print job info. 
+
+*android.printservice.PrintJob.getTag()*
+
+public |java.lang.String| getTag()
+
+Gets the print job tag. 
+
+
+
+    Returns: The tag or null. 
+
+*android.printservice.PrintJob.hasAdvancedOption(String)*
+
+public boolean hasAdvancedOption(java.lang.String key)
+
+Gets whether this job has a given advanced (printer specific) print option. 
+
+
+    key - The option key. 
+
+    Returns: Whether the option is present. 
+
+*android.printservice.PrintJob.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.printservice.PrintJob.isBlocked()*
+
+public boolean isBlocked()
+
+Gets whether this print job is blocked. Such a print job is halted due to an 
+abnormal condition and can be started or canceled or failed. 
+
+
+
+    Returns: Whether the print job is blocked. 
+
+*android.printservice.PrintJob.isCancelled()*
+
+public boolean isCancelled()
+
+Gets whether this print job is cancelled. Such a print job was cancelled as a 
+result of a user request. This is a final state. 
+
+
+
+    Returns: Whether the print job is cancelled. 
+
+*android.printservice.PrintJob.isCompleted()*
+
+public boolean isCompleted()
+
+Gets whether this print job is completed. Such a print job is successfully 
+printed. This is a final state. 
+
+
+
+    Returns: Whether the print job is completed. 
+
+*android.printservice.PrintJob.isFailed()*
+
+public boolean isFailed()
+
+Gets whether this print job is failed. Such a print job is not successfully 
+printed due to an error. This is a final state. 
+
+
+
+    Returns: Whether the print job is failed. 
+
+*android.printservice.PrintJob.isQueued()*
+
+public boolean isQueued()
+
+Gets whether this print job is queued. Such a print job is ready to be printed 
+and can be started or cancelled. 
+
+
+
+    Returns: Whether the print job is queued. 
+
+*android.printservice.PrintJob.isStarted()*
+
+public boolean isStarted()
+
+Gets whether this print job is started. Such a print job is being printed and 
+can be completed or canceled or failed. 
+
+
+
+    Returns: Whether the print job is started. 
+
+*android.printservice.PrintJob.setTag(String)*
+
+public boolean setTag(java.lang.String tag)
+
+Sets a tag that is valid in the context of a 
+(|android.printservice.PrintService|) and is not interpreted by the system. For 
+example, a print service may set as a tag the key of the print job returned by 
+a remote print server, if the printing is off handed to a cloud based service. 
+
+
+    tag - The tag. 
+
+    Returns: True if the tag was set, false otherwise. 
+
+*android.printservice.PrintJob.start()*
+
+public boolean start()
+
+Starts the print job. You should call this method if 
+(|android.printservice.PrintJob|) or (|android.printservice.PrintJob|) returns 
+true and you started resumed printing. 
+
+
+
+    Returns: Whether the job was started. 
+
+

@@ -1,0 +1,261 @@
+*android.content.IntentSender* *IntentSender* A description of an Intent and tar
+
+public class IntentSender
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.IntentSender_Description|
+|android.content.IntentSender_Fields|
+|android.content.IntentSender_Constructors|
+|android.content.IntentSender_Methods|
+
+================================================================================
+
+*android.content.IntentSender_Fields*
+|android.os.Parcelable.Creator<android.content.IntentSender>_android.content.IntentSender.CREATOR|
+
+*android.content.IntentSender_Constructors*
+|android.content.IntentSender(IIntentSender)|
+
+*android.content.IntentSender_Methods*
+|android.content.IntentSender.describeContents()|
+|android.content.IntentSender.equals(Object)|Comparison operator on two IntentS
+|android.content.IntentSender.getCreatorPackage()|Return the package name of th
+|android.content.IntentSender.getCreatorUid()|Return the uid of the application
+|android.content.IntentSender.getCreatorUserHandle()|Return the user handle of 
+|android.content.IntentSender.getTarget()|
+|android.content.IntentSender.getTargetPackage()|
+|android.content.IntentSender.hashCode()|
+|android.content.IntentSender.readIntentSenderOrNullFromParcel(Parcel)|Convenie
+|android.content.IntentSender.sendIntent(Context,int,Intent,IntentSender.OnFinished,Handler)|
+|android.content.IntentSender.sendIntent(Context,int,Intent,IntentSender.OnFinished,Handler,String)|
+|android.content.IntentSender.toString()|
+|android.content.IntentSender.writeIntentSenderOrNullToParcel(IntentSender,Parcel)|
+|android.content.IntentSender.writeToParcel(Parcel,int)|
+
+*android.content.IntentSender_Description*
+
+A description of an Intent and target action to perform with it. The returned 
+object can be handed to other applications so that they can perform the action 
+you described on your behalf at a later time. 
+
+By giving a IntentSender to another application, you are granting it the right 
+to perform the operation you have specified as if the other application was 
+yourself (with the same permissions and identity). As such, you should be 
+careful about how you build the IntentSender: often, for example, the base 
+Intent you supply will have the component name explicitly set to one of your 
+own components, to ensure it is ultimately sent there and nowhere else. 
+
+A IntentSender itself is simply a reference to a token maintained by the system 
+describing the original data used to retrieve it. This means that, even if its 
+owning application's process is killed, the IntentSender itself will remain 
+usable from other processes that have been given it. If the creating 
+application later re-retrieves the same kind of IntentSender (same operation, 
+same Intent action, data, categories, and components, and same flags), it will 
+receive a IntentSender representing the same token if that is still valid. 
+
+Instances of this class can not be made directly, but rather must be created 
+from an existing (|android.app.PendingIntent|) with 
+PendingIntent.getIntentSender()(|android.app.PendingIntent|) . 
+
+
+
+*android.os.Parcelable.Creator<android.content.IntentSender>_android.content.IntentSender.CREATOR*
+
+
+
+
+
+*android.content.IntentSender(IIntentSender)*
+
+public IntentSender(IIntentSender target)
+
+
+
+
+*android.content.IntentSender.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.IntentSender.equals(Object)*
+
+public boolean equals(java.lang.Object otherObj)
+
+Comparison operator on two IntentSender objects, such that true is returned 
+then they both represent the same operation from the same package. 
+
+
+
+*android.content.IntentSender.getCreatorPackage()*
+
+public |java.lang.String| getCreatorPackage()
+
+Return the package name of the application that created this IntentSender, that 
+is the identity under which you will actually be sending the Intent. The 
+returned string is supplied by the system, so that an application can not spoof 
+its package. 
+
+
+
+    Returns: The package name of the PendingIntent, or null if there is none associated with 
+             it. 
+
+*android.content.IntentSender.getCreatorUid()*
+
+public int getCreatorUid()
+
+Return the uid of the application that created this PendingIntent, that is the 
+identity under which you will actually be sending the Intent. The returned 
+integer is supplied by the system, so that an application can not spoof its 
+uid. 
+
+
+
+    Returns: The uid of the PendingIntent, or -1 if there is none associated with it. 
+
+*android.content.IntentSender.getCreatorUserHandle()*
+
+public |android.os.UserHandle| getCreatorUserHandle()
+
+Return the user handle of the application that created this PendingIntent, that 
+is the user under which you will actually be sending the Intent. The returned 
+UserHandle is supplied by the system, so that an application can not spoof its 
+user. See Process.myUserHandle()(|android.os.Process|) for more explanation of 
+user handles. 
+
+
+
+    Returns: The user handle of the PendingIntent, or null if there is none associated with 
+             it. 
+
+*android.content.IntentSender.getTarget()*
+
+public IIntentSender getTarget()
+
+
+
+
+
+*android.content.IntentSender.getTargetPackage()*
+
+public |java.lang.String| getTargetPackage()
+
+
+
+    Deprecated: Renamed to {@link #getCreatorPackage()}.
+
+
+*android.content.IntentSender.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.content.IntentSender.readIntentSenderOrNullFromParcel(Parcel)*
+
+public static |android.content.IntentSender| readIntentSenderOrNullFromParcel(android.os.Parcel in)
+
+Convenience function for reading either a Messenger or null pointer from a 
+Parcel. You must have previously written the Messenger with 
+(|android.content.IntentSender|) . 
+
+
+    in - The Parcel containing the written Messenger. 
+
+    Returns: Returns the Messenger read from the Parcel, or null if null had been written. 
+
+*android.content.IntentSender.sendIntent(Context,int,Intent,IntentSender.OnFinished,Handler)*
+
+public void sendIntent(
+  android.content.Context context,
+  int code,
+  android.content.Intent intent,
+  android.content.IntentSender.OnFinished onFinished,
+  android.os.Handler handler)
+  throws |android.content.IntentSender.SendIntentException|
+         
+Perform the operation associated with this IntentSender, allowing the caller to 
+specify information about the Intent to use and be notified when the send has 
+completed. 
+
+
+    context - The Context of the caller. This may be null if intent is also null. 
+    code - Result code to supply back to the IntentSender's target. 
+    intent - Additional Intent data. See {@link Intent#fillIn Intent.fillIn()} for 
+       information on how this is applied to the original Intent. Use null to 
+       not modify the original Intent. 
+    onFinished - The object to call back on when the send has completed, or null for no 
+       callback. 
+    handler - Handler identifying the thread on which the callback should happen. If null, 
+       the callback will happen from the thread pool of the process. 
+
+*android.content.IntentSender.sendIntent(Context,int,Intent,IntentSender.OnFinished,Handler,String)*
+
+public void sendIntent(
+  android.content.Context context,
+  int code,
+  android.content.Intent intent,
+  android.content.IntentSender.OnFinished onFinished,
+  android.os.Handler handler,
+  java.lang.String requiredPermission)
+  throws |android.content.IntentSender.SendIntentException|
+         
+Perform the operation associated with this IntentSender, allowing the caller to 
+specify information about the Intent to use and be notified when the send has 
+completed. 
+
+
+    context - The Context of the caller. This may be null if intent is also null. 
+    code - Result code to supply back to the IntentSender's target. 
+    intent - Additional Intent data. See {@link Intent#fillIn Intent.fillIn()} for 
+       information on how this is applied to the original Intent. Use null to 
+       not modify the original Intent. 
+    onFinished - The object to call back on when the send has completed, or null for no 
+       callback. 
+    handler - Handler identifying the thread on which the callback should happen. If null, 
+       the callback will happen from the thread pool of the process. 
+    requiredPermission - Name of permission that a recipient of the PendingIntent is required to hold. 
+       This is only valid for broadcast intents, and corresponds to the 
+       permission argument in {@link Context#sendBroadcast(Intent, String) 
+       Context.sendOrderedBroadcast(Intent, String)}. If null, no permission is 
+       required. 
+
+*android.content.IntentSender.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.IntentSender.writeIntentSenderOrNullToParcel(IntentSender,Parcel)*
+
+public static void writeIntentSenderOrNullToParcel(
+  android.content.IntentSender sender,
+  android.os.Parcel out)
+
+Convenience function for writing either a IntentSender or null pointer to a 
+Parcel. You must use this with (|android.content.IntentSender|) for later 
+reading it. 
+
+
+    sender - The IntentSender to write, or null. 
+    out - Where to write the IntentSender. 
+
+*android.content.IntentSender.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

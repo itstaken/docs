@@ -1,0 +1,1065 @@
+*android.bluetooth.BluetoothAdapter* *BluetoothAdapter* Represents the local dev
+
+public final class BluetoothAdapter
+  extends    |java.lang.Object|
+
+|android.bluetooth.BluetoothAdapter_Description|
+|android.bluetooth.BluetoothAdapter_Fields|
+|android.bluetooth.BluetoothAdapter_Constructors|
+|android.bluetooth.BluetoothAdapter_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothAdapter_Fields*
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_DISCOVERY_FINISHED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_DISCOVERY_STARTED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_SCAN_MODE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothAdapter.BLUETOOTH_MANAGER_SERVICE|
+|int_android.bluetooth.BluetoothAdapter.ERROR|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_CONNECTION_STATE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_LOCAL_NAME|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_CONNECTION_STATE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_SCAN_MODE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_STATE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_SCAN_MODE|
+|java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_STATE|
+|int_android.bluetooth.BluetoothAdapter.SCAN_MODE_CONNECTABLE|
+|int_android.bluetooth.BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE|
+|int_android.bluetooth.BluetoothAdapter.SCAN_MODE_NONE|
+|int_android.bluetooth.BluetoothAdapter.STATE_CONNECTED|
+|int_android.bluetooth.BluetoothAdapter.STATE_CONNECTING|
+|int_android.bluetooth.BluetoothAdapter.STATE_DISCONNECTED|
+|int_android.bluetooth.BluetoothAdapter.STATE_DISCONNECTING|
+|int_android.bluetooth.BluetoothAdapter.STATE_OFF|
+|int_android.bluetooth.BluetoothAdapter.STATE_ON|
+|int_android.bluetooth.BluetoothAdapter.STATE_TURNING_OFF|
+|int_android.bluetooth.BluetoothAdapter.STATE_TURNING_ON|
+
+*android.bluetooth.BluetoothAdapter_Methods*
+|android.bluetooth.BluetoothAdapter.cancelDiscovery()|Cancel the current device
+|android.bluetooth.BluetoothAdapter.changeApplicationBluetoothState(boolean,BluetoothAdapter.BluetoothStateChangeCallback)|
+|android.bluetooth.BluetoothAdapter.checkBluetoothAddress(String)|Validate a St
+|android.bluetooth.BluetoothAdapter.closeProfileProxy(int,BluetoothProfile)|Clo
+|android.bluetooth.BluetoothAdapter.configHciSnoopLog(boolean)|enable or disabl
+|android.bluetooth.BluetoothAdapter.disable()|Turn off the local Bluetooth adap
+|android.bluetooth.BluetoothAdapter.disable(boolean)|Turn off the local Bluetoo
+|android.bluetooth.BluetoothAdapter.enable()|Turn on the local Bluetooth adapte
+|android.bluetooth.BluetoothAdapter.enableNoAutoConnect()|Enable the Bluetooth 
+|android.bluetooth.BluetoothAdapter.finalize()|
+|android.bluetooth.BluetoothAdapter.getAddress()|Returns the hardware address o
+|android.bluetooth.BluetoothAdapter.getBondedDevices()|Return the set ofBluetoo
+|android.bluetooth.BluetoothAdapter.getConnectionState()|Get the current connec
+|android.bluetooth.BluetoothAdapter.getDefaultAdapter()|Get a handle to the def
+|android.bluetooth.BluetoothAdapter.getDiscoverableTimeout()|
+|android.bluetooth.BluetoothAdapter.getName()|Get the friendly Bluetooth name o
+|android.bluetooth.BluetoothAdapter.getProfileConnectionState(int)|Get the curr
+|android.bluetooth.BluetoothAdapter.getProfileProxy(Context,BluetoothProfile.ServiceListener,int)|
+|android.bluetooth.BluetoothAdapter.getRemoteDevice(byte[])|Get aBluetoothDevic
+|android.bluetooth.BluetoothAdapter.getRemoteDevice(String)|Get aBluetoothDevic
+|android.bluetooth.BluetoothAdapter.getScanMode()|Get the current Bluetooth sca
+|android.bluetooth.BluetoothAdapter.getState()|Get the current state of the loc
+|android.bluetooth.BluetoothAdapter.getUuids()|Get the UUIDs supported by the l
+|android.bluetooth.BluetoothAdapter.isDiscovering()|Return true if the local Bl
+|android.bluetooth.BluetoothAdapter.isEnabled()|Return true if Bluetooth is cur
+|android.bluetooth.BluetoothAdapter.listenUsingEncryptedRfcommOn(int)|Construct
+|android.bluetooth.BluetoothAdapter.listenUsingEncryptedRfcommWithServiceRecord(String,UUID)|
+|android.bluetooth.BluetoothAdapter.listenUsingInsecureRfcommOn(int)|Construct 
+|android.bluetooth.BluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(String,UUID)|
+|android.bluetooth.BluetoothAdapter.listenUsingRfcommOn(int)|Create a listening
+|android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord(String,UUID)|
+|android.bluetooth.BluetoothAdapter.listenUsingScoOn()|Construct a SCO server s
+|android.bluetooth.BluetoothAdapter.readOutOfBandData()|Read the local Out of B
+|android.bluetooth.BluetoothAdapter.setDiscoverableTimeout(int)|
+|android.bluetooth.BluetoothAdapter.setName(String)|Set the friendly Bluetooth 
+|android.bluetooth.BluetoothAdapter.setScanMode(int)|
+|android.bluetooth.BluetoothAdapter.setScanMode(int,int)|Set the Bluetooth scan
+|android.bluetooth.BluetoothAdapter.startDiscovery()|Start the remote device di
+|android.bluetooth.BluetoothAdapter.startLeScan(BluetoothAdapter.LeScanCallback)|
+|android.bluetooth.BluetoothAdapter.startLeScan(UUID[],BluetoothAdapter.LeScanCallback)|
+|android.bluetooth.BluetoothAdapter.stopLeScan(BluetoothAdapter.LeScanCallback)|
+
+*android.bluetooth.BluetoothAdapter_Description*
+
+Represents the local device Bluetooth adapter. The 
+(|android.bluetooth.BluetoothAdapter|) lets you perform fundamental Bluetooth 
+tasks, such as initiate device discovery, query a list of bonded (paired) 
+devices, instantiate a (|android.bluetooth.BluetoothDevice|) using a known MAC 
+address, and create a (|android.bluetooth.BluetoothServerSocket|) to listen for 
+connection requests from other devices, and start a scan for Bluetooth LE 
+devices. 
+
+To get a (|android.bluetooth.BluetoothAdapter|) representing the local 
+Bluetooth adapter, when running on JELLY_BEAN_MR1 and below, call the static 
+(|android.bluetooth.BluetoothAdapter|) method; when running on JELLY_BEAN_MR2 
+and higher, retrieve it through (|android.content.Context|) with 
+(|android.content.Context|) . Fundamentally, this is your starting point for 
+all Bluetooth actions. Once you have the local adapter, you can get a set of 
+(|android.bluetooth.BluetoothDevice|) objects representing all paired devices 
+with (|android.bluetooth.BluetoothAdapter|) ; start device discovery with 
+(|android.bluetooth.BluetoothAdapter|) ; or create a 
+(|android.bluetooth.BluetoothServerSocket|) to listen for incoming connection 
+requests with (|android.bluetooth.BluetoothAdapter|) ; or start a scan for 
+Bluetooth LE devices with (|android.bluetooth.BluetoothAdapter|) . 
+
+Note: Most methods require the (|android.Manifest.permission|) permission and 
+some also require the (|android.Manifest.permission|) permission. 
+
+Developer Guides For more information about using Bluetooth, read the <a 
+href="guide/topics/wireless/bluetooth.html">Bluetooth developer guide. 
+(|android.bluetooth.BluetoothDevice|) 
+(|android.bluetooth.BluetoothServerSocket|) 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED*
+
+Intent used to broadcast the change in connection state of the local Bluetooth 
+adapter to a profile of the remote device. When the adapter is not connected to 
+any profiles of any remote devices and it attempts a connection to a profile 
+this intent will sent. Once connected, this intent will not be sent for any 
+more connection attempts to any profiles of any remote device. When the adapter 
+disconnects from the last profile its connected to of any remote device, this 
+intent will be sent. 
+
+This intent is useful for applications that are only concerned about whether 
+the local adapter is connected to any profile of any device and are not really 
+concerned about which profile. For example, an application which displays an 
+icon to display whether Bluetooth is connected or not can use this intent. 
+
+This intent will have 3 extras: (|android.bluetooth.BluetoothAdapter|) - The 
+current connection state. (|android.bluetooth.BluetoothAdapter|) - The previous 
+connection state. (|android.bluetooth.BluetoothDevice|) - The remote device. 
+(|android.bluetooth.BluetoothAdapter|) or 
+(|android.bluetooth.BluetoothAdapter|) can be any of 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) , 
+(|android.bluetooth.BluetoothAdapter|) . 
+
+Requires (|android.Manifest.permission|) to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_DISCOVERY_FINISHED*
+
+Broadcast Action: The local Bluetooth adapter has finished the device discovery 
+process. Requires (|android.Manifest.permission|) to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_DISCOVERY_STARTED*
+
+Broadcast Action: The local Bluetooth adapter has started the remote device 
+discovery process. This usually involves an inquiry scan of about 12 seconds, 
+followed by a page scan of each new device to retrieve its Bluetooth name. 
+Register for (|android.bluetooth.BluetoothDevice|) to be notified as remote 
+Bluetooth devices are found. Device discovery is a heavyweight procedure. New 
+connections to remote Bluetooth devices should not be attempted while discovery 
+is in progress, and existing connections will experience limited bandwidth and 
+high latency. Use (|android.bluetooth.BluetoothAdapter|) to cancel an ongoing 
+discovery. Requires (|android.Manifest.permission|) to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED*
+
+Broadcast Action: The local Bluetooth adapter has changed its friendly 
+Bluetooth name. This name is visible to remote Bluetooth devices. Always 
+contains the extra field (|android.bluetooth.BluetoothAdapter|) containing the 
+name. Requires (|android.Manifest.permission|) to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE*
+
+Activity Action: Show a system activity that requests discoverable mode. This 
+activity will also request the user to turn on Bluetooth if it is not currently 
+enabled. Discoverable mode is equivalent to 
+(|android.bluetooth.BluetoothAdapter|) . It allows remote devices to see this 
+Bluetooth adapter when they perform a discovery. For privacy, Android is not 
+discoverable by default. The sender of this Intent can optionally use extra 
+field (|android.bluetooth.BluetoothAdapter|) to request the duration of 
+discoverability. Currently the default duration is 120 seconds, and maximum 
+duration is capped at 300 seconds for each request. Notification of the result 
+of this activity is posted using the (|android.app.Activity|) callback. The 
+resultCode will be the duration (in seconds) of discoverability or 
+(|android.app.Activity|) if the user rejected discoverability or an error has 
+occurred. Applications can also listen for 
+(|android.bluetooth.BluetoothAdapter|) for global notification whenever the 
+scan mode changes. For example, an application can be notified when the device 
+has ended discoverability. Requires (|android.Manifest.permission|) 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE*
+
+Activity Action: Show a system activity that allows the user to turn on 
+Bluetooth. This system activity will return once Bluetooth has completed 
+turning on, or the user has decided not to turn Bluetooth on. Notification of 
+the result of this activity is posted using the (|android.app.Activity|) 
+callback. The resultCode will be (|android.app.Activity|) if Bluetooth has been 
+turned on or (|android.app.Activity|) if the user has rejected the request or 
+an error has occurred. Applications can also listen for 
+(|android.bluetooth.BluetoothAdapter|) for global notification whenever 
+Bluetooth is turned on or off. Requires (|android.Manifest.permission|) 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_SCAN_MODE_CHANGED*
+
+Broadcast Action: Indicates the Bluetooth scan mode of the local Adapter has 
+changed. Always contains the extra fields 
+(|android.bluetooth.BluetoothAdapter|) and 
+(|android.bluetooth.BluetoothAdapter|) containing the new and old scan modes 
+respectively. Requires (|android.Manifest.permission|) 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED*
+
+Broadcast Action: The state of the local Bluetooth adapter has been changed. 
+For example, Bluetooth has been turned on or off. Always contains the extra 
+fields (|android.bluetooth.BluetoothAdapter|) and 
+(|android.bluetooth.BluetoothAdapter|) containing the new and old states 
+respectively. Requires (|android.Manifest.permission|) to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.BLUETOOTH_MANAGER_SERVICE*
+
+
+
+
+*int_android.bluetooth.BluetoothAdapter.ERROR*
+
+Sentinel error value for this class. Guaranteed to not equal any other integer 
+constant in this class. Provided as a convenience for functions that require a 
+sentinel error value, for example: 
+Intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR) 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_CONNECTION_STATE*
+
+Extra used by (|android.bluetooth.BluetoothAdapter|) This extra represents the 
+current connection state. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION*
+
+Used as an optional int extra field in (|android.bluetooth.BluetoothAdapter|) 
+intents to request a specific duration for discoverability in seconds. The 
+current default is 120 seconds, and requests over 300 seconds will be capped. 
+These values could change. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_LOCAL_NAME*
+
+Used as a String extra field in (|android.bluetooth.BluetoothAdapter|) intents 
+to request the local Bluetooth name. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_CONNECTION_STATE*
+
+Extra used by (|android.bluetooth.BluetoothAdapter|) This extra represents the 
+previous connection state. 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_SCAN_MODE*
+
+Used as an int extra field in (|android.bluetooth.BluetoothAdapter|) intents to 
+request the previous scan mode. Possible values are: 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) , 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_PREVIOUS_STATE*
+
+Used as an int extra field in (|android.bluetooth.BluetoothAdapter|) intents to 
+request the previous power state. Possible values are: 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) , 
+(|android.bluetooth.BluetoothAdapter|) , 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_SCAN_MODE*
+
+Used as an int extra field in (|android.bluetooth.BluetoothAdapter|) intents to 
+request the current scan mode. Possible values are: 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) , 
+
+
+*java.lang.String_android.bluetooth.BluetoothAdapter.EXTRA_STATE*
+
+Used as an int extra field in (|android.bluetooth.BluetoothAdapter|) intents to 
+request the current power state. Possible values are: 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) , 
+(|android.bluetooth.BluetoothAdapter|) , 
+
+
+*int_android.bluetooth.BluetoothAdapter.SCAN_MODE_CONNECTABLE*
+
+Indicates that inquiry scan is disabled, but page scan is enabled on the local 
+Bluetooth adapter. Therefore this device is not discoverable from remote 
+Bluetooth devices, but is connectable from remote devices that have previously 
+discovered this device. 
+
+
+*int_android.bluetooth.BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE*
+
+Indicates that both inquiry scan and page scan are enabled on the local 
+Bluetooth adapter. Therefore this device is both discoverable and connectable 
+from remote Bluetooth devices. 
+
+
+*int_android.bluetooth.BluetoothAdapter.SCAN_MODE_NONE*
+
+Indicates that both inquiry scan and page scan are disabled on the local 
+Bluetooth adapter. Therefore this device is neither discoverable nor 
+connectable from remote Bluetooth devices. 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_CONNECTED*
+
+The profile is in connected state 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_CONNECTING*
+
+The profile is in connecting state 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_DISCONNECTED*
+
+The profile is in disconnected state 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_DISCONNECTING*
+
+The profile is in disconnecting state 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_OFF*
+
+Indicates the local Bluetooth adapter is off. 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_ON*
+
+Indicates the local Bluetooth adapter is on, and ready for use. 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_TURNING_OFF*
+
+Indicates the local Bluetooth adapter is turning off. Local clients should 
+immediately attempt graceful disconnection of any remote links. 
+
+
+*int_android.bluetooth.BluetoothAdapter.STATE_TURNING_ON*
+
+Indicates the local Bluetooth adapter is turning on. However local clients 
+should wait for (|android.bluetooth.BluetoothAdapter|) before attempting to use 
+the adapter. 
+
+
+
+*android.bluetooth.BluetoothAdapter.cancelDiscovery()*
+
+public boolean cancelDiscovery()
+
+Cancel the current device discovery process. Requires 
+(|android.Manifest.permission|) . Because discovery is a heavyweight procedure 
+for the Bluetooth adapter, this method should always be called before 
+attempting to connect to a remote device with 
+(|android.bluetooth.BluetoothSocket|) . Discovery is not managed by the 
+Activity, but is run as a system service, so an application should always call 
+cancel discovery even if it did not directly request a discovery, just to be 
+sure. If Bluetooth state is not (|android.bluetooth.BluetoothAdapter|) , this 
+API will return false. After turning on Bluetooth, wait for 
+(|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. 
+
+
+
+    Returns: true on success, false on error 
+
+*android.bluetooth.BluetoothAdapter.changeApplicationBluetoothState(boolean,BluetoothAdapter.BluetoothStateChangeCallback)*
+
+public boolean changeApplicationBluetoothState(
+  boolean on,
+  android.bluetooth.BluetoothAdapter.BluetoothStateChangeCallback callback)
+
+Enable control of the Bluetooth Adapter for a single application. 
+
+Some applications need to use Bluetooth for short periods of time to transfer 
+data but don't want all the associated implications like automatic connection 
+to headsets etc. 
+
+Multiple applications can call this. This is reference counted and Bluetooth 
+disabled only when no one else is using it. There will be no UI shown to the 
+user while bluetooth is being enabled. Any user action will override this call. 
+For example, if user wants Bluetooth on and the last user of this API wanted to 
+disable Bluetooth, Bluetooth will not be turned off. 
+
+This API is only meant to be used by internal applications. Third party 
+applications but use (|android.bluetooth.BluetoothAdapter|) and 
+(|android.bluetooth.BluetoothAdapter|) APIs. 
+
+If this API returns true, it means the callback will be called. The callback 
+will be called with the current state of Bluetooth. If the state is not what 
+was requested, an internal error would be the reason. If Bluetooth is already 
+on and if this function is called to turn it on, the api will return true and a 
+callback will be called. 
+
+Requires (|android.Manifest.permission|) 
+
+
+    on - True for on, false for off. 
+    callback - The callback to notify changes to the state. 
+
+*android.bluetooth.BluetoothAdapter.checkBluetoothAddress(String)*
+
+public static boolean checkBluetoothAddress(java.lang.String address)
+
+Validate a String Bluetooth address, such as "00:43:A8:23:10:F0" Alphabetic 
+characters must be uppercase to be valid. 
+
+
+    address - Bluetooth address as string 
+
+    Returns: true if the address is valid, false otherwise 
+
+*android.bluetooth.BluetoothAdapter.closeProfileProxy(int,BluetoothProfile)*
+
+public void closeProfileProxy(
+  int profile,
+  android.bluetooth.BluetoothProfile proxy)
+
+Close the connection of the profile proxy to the Service. 
+
+Clients should call this when they are no longer using the proxy obtained from 
+(|android.bluetooth.BluetoothAdapter|) . Profile can be one of 
+(|android.bluetooth.BluetoothProfile|) , (|android.bluetooth.BluetoothProfile|) 
+or (|android.bluetooth.BluetoothProfile|) 
+
+
+    profile - 
+    proxy - Profile proxy object 
+
+*android.bluetooth.BluetoothAdapter.configHciSnoopLog(boolean)*
+
+public boolean configHciSnoopLog(boolean enable)
+
+enable or disable Bluetooth HCI snoop log. 
+
+Requires the (|android.Manifest.permission|) permission 
+
+
+
+    Returns: true to indicate configure HCI log successfully, or false on immediate error 
+
+*android.bluetooth.BluetoothAdapter.disable()*
+
+public boolean disable()
+
+Turn off the local Bluetooth adapterdo not use without explicit user action to 
+turn off Bluetooth. This gracefully shuts down all Bluetooth connections, stops 
+Bluetooth system services, and powers down the underlying Bluetooth hardware. 
+Bluetooth should never be disabled without direct user consent. The 
+(|android.bluetooth.BluetoothAdapter|) method is provided only for applications 
+that include a user interface for changing system settings, such as a "power 
+manager" app. This is an asynchronous call: it will return immediately, and 
+clients should listen for (|android.bluetooth.BluetoothAdapter|) to be notified 
+of subsequent adapter state changes. If this call returns true, then the 
+adapter state will immediately transition from 
+(|android.bluetooth.BluetoothAdapter|) to 
+(|android.bluetooth.BluetoothAdapter|) , and some time later transition to 
+either (|android.bluetooth.BluetoothAdapter|) or 
+(|android.bluetooth.BluetoothAdapter|) . If this call returns false then there 
+was an immediate problem that will prevent the adapter from being turned off - 
+such as the adapter already being turned off. Requires the 
+(|android.Manifest.permission|) permission 
+
+
+
+    Returns: true to indicate adapter shutdown has begun, or false on immediate error 
+
+*android.bluetooth.BluetoothAdapter.disable(boolean)*
+
+public boolean disable(boolean persist)
+
+Turn off the local Bluetooth adapter and don't persist the setting. 
+
+Requires the (|android.Manifest.permission|) permission 
+
+
+
+    Returns: true to indicate adapter shutdown has begun, or false on immediate error 
+
+*android.bluetooth.BluetoothAdapter.enable()*
+
+public boolean enable()
+
+Turn on the local Bluetooth adapterdo not use without explicit user action to 
+turn on Bluetooth. This powers on the underlying Bluetooth hardware, and starts 
+all Bluetooth system services. Bluetooth should never be enabled without direct 
+user consent. If you want to turn on Bluetooth in order to create a wireless 
+connection, you should use the (|android.bluetooth.BluetoothAdapter|) Intent, 
+which will raise a dialog that requests user permission to turn on Bluetooth. 
+The (|android.bluetooth.BluetoothAdapter|) method is provided only for 
+applications that include a user interface for changing system settings, such 
+as a "power manager" app. This is an asynchronous call: it will return 
+immediately, and clients should listen for 
+(|android.bluetooth.BluetoothAdapter|) to be notified of subsequent adapter 
+state changes. If this call returns true, then the adapter state will 
+immediately transition from (|android.bluetooth.BluetoothAdapter|) to 
+(|android.bluetooth.BluetoothAdapter|) , and some time later transition to 
+either (|android.bluetooth.BluetoothAdapter|) or 
+(|android.bluetooth.BluetoothAdapter|) . If this call returns false then there 
+was an immediate problem that will prevent the adapter from being turned on - 
+such as Airplane mode, or the adapter is already turned on. Requires the 
+(|android.Manifest.permission|) permission 
+
+
+
+    Returns: true to indicate adapter startup has begun, or false on immediate error 
+
+*android.bluetooth.BluetoothAdapter.enableNoAutoConnect()*
+
+public boolean enableNoAutoConnect()
+
+Enable the Bluetooth Adapter, but don't auto-connect devices and don't persist 
+state. Only for use by system applications. 
+
+
+
+*android.bluetooth.BluetoothAdapter.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.bluetooth.BluetoothAdapter.getAddress()*
+
+public |java.lang.String| getAddress()
+
+Returns the hardware address of the local Bluetooth adapter. For example, 
+"00:11:22:AA:BB:CC". Requires (|android.Manifest.permission|) 
+
+
+
+    Returns: Bluetooth hardware address as string 
+
+*android.bluetooth.BluetoothAdapter.getBondedDevices()*
+
+public |java.util.Set|<BluetoothDevice> getBondedDevices()
+
+Return the set of (|android.bluetooth.BluetoothDevice|) objects that are bonded 
+(paired) to the local adapter. If Bluetooth state is not 
+(|android.bluetooth.BluetoothAdapter|) , this API will return an empty set. 
+After turning on Bluetooth, wait for (|android.bluetooth.BluetoothAdapter|) 
+with (|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) . 
+
+
+
+    Returns: unmodifiable set of {@link BluetoothDevice}, or null on error 
+
+*android.bluetooth.BluetoothAdapter.getConnectionState()*
+
+public int getConnectionState()
+
+Get the current connection state of the local Bluetooth adapter. This can be 
+used to check whether the local Bluetooth adapter is connected to any profile 
+of any other remote Bluetooth Device. 
+
+Use this function along with (|android.bluetooth.BluetoothAdapter|) intent to 
+get the connection state of the adapter. 
+
+
+
+    Returns: One of {@link #STATE_CONNECTED}, {@link #STATE_DISCONNECTED}, {@link 
+             #STATE_CONNECTING} or {@link #STATE_DISCONNECTED} 
+
+*android.bluetooth.BluetoothAdapter.getDefaultAdapter()*
+
+public static synchronized |android.bluetooth.BluetoothAdapter| getDefaultAdapter()
+
+Get a handle to the default local Bluetooth adapter. Currently Android only 
+supports one Bluetooth adapter, but the API could be extended to support more. 
+This will always return the default adapter. 
+
+
+
+    Returns: the default local adapter, or null if Bluetooth is not supported on this 
+             hardware platform 
+
+*android.bluetooth.BluetoothAdapter.getDiscoverableTimeout()*
+
+public int getDiscoverableTimeout()
+
+
+
+
+
+*android.bluetooth.BluetoothAdapter.getName()*
+
+public |java.lang.String| getName()
+
+Get the friendly Bluetooth name of the local Bluetooth adapter. This name is 
+visible to remote Bluetooth devices. Requires (|android.Manifest.permission|) 
+
+
+
+    Returns: the Bluetooth name, or null on error 
+
+*android.bluetooth.BluetoothAdapter.getProfileConnectionState(int)*
+
+public int getProfileConnectionState(int profile)
+
+Get the current connection state of a profile. This function can be used to 
+check whether the local Bluetooth adapter is connected to any remote device for 
+a specific profile. Profile can be one of 
+(|android.bluetooth.BluetoothProfile|) , (|android.bluetooth.BluetoothProfile|) 
+, (|android.bluetooth.BluetoothProfile|) . 
+
+Requires (|android.Manifest.permission|) . 
+
+Return value can be one of (|android.bluetooth.BluetoothProfile|) , 
+(|android.bluetooth.BluetoothProfile|) , (|android.bluetooth.BluetoothProfile|) 
+, (|android.bluetooth.BluetoothProfile|) 
+
+
+
+*android.bluetooth.BluetoothAdapter.getProfileProxy(Context,BluetoothProfile.ServiceListener,int)*
+
+public boolean getProfileProxy(
+  android.content.Context context,
+  android.bluetooth.BluetoothProfile.ServiceListener listener,
+  int profile)
+
+Get the profile proxy object associated with the profile. 
+
+Profile can be one of (|android.bluetooth.BluetoothProfile|) , 
+(|android.bluetooth.BluetoothProfile|) , (|android.bluetooth.BluetoothProfile|) 
+, (|android.bluetooth.BluetoothProfile|) , or 
+(|android.bluetooth.BluetoothProfile|) . Clients must implement 
+(|android.bluetooth.BluetoothProfile.ServiceListener|) to get notified of the 
+connection status and to get the proxy object. 
+
+
+    context - Context of the application 
+    listener - The service Listener for connection callbacks. 
+    profile - The Bluetooth profile; either {@link BluetoothProfile#HEALTH}, {@link 
+       BluetoothProfile#HEADSET} or {@link BluetoothProfile#A2DP}. 
+
+    Returns: true on success, false on error 
+
+*android.bluetooth.BluetoothAdapter.getRemoteDevice(byte[])*
+
+public |android.bluetooth.BluetoothDevice| getRemoteDevice(byte[] address)
+
+Get a (|android.bluetooth.BluetoothDevice|) object for the given Bluetooth 
+hardware address. Valid Bluetooth hardware addresses must be 6 bytes. This 
+method expects the address in network byte order (MSB first). A 
+(|android.bluetooth.BluetoothDevice|) will always be returned for a valid 
+hardware address, even if this adapter has never seen that device. 
+
+
+    address - Bluetooth MAC address (6 bytes) 
+
+*android.bluetooth.BluetoothAdapter.getRemoteDevice(String)*
+
+public |android.bluetooth.BluetoothDevice| getRemoteDevice(java.lang.String address)
+
+Get a (|android.bluetooth.BluetoothDevice|) object for the given Bluetooth 
+hardware address. Valid Bluetooth hardware addresses must be upper case, in a 
+format such as "00:11:22:33:AA:BB". The helper 
+(|android.bluetooth.BluetoothAdapter|) is available to validate a Bluetooth 
+address. A (|android.bluetooth.BluetoothDevice|) will always be returned for a 
+valid hardware address, even if this adapter has never seen that device. 
+
+
+    address - valid Bluetooth MAC address 
+
+*android.bluetooth.BluetoothAdapter.getScanMode()*
+
+public int getScanMode()
+
+Get the current Bluetooth scan mode of the local Bluetooth adapter. The 
+Bluetooth scan mode determines if the local adapter is connectable and/or 
+discoverable from remote Bluetooth devices. Possible values are: 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) . If Bluetooth state is not 
+(|android.bluetooth.BluetoothAdapter|) , this API will return 
+(|android.bluetooth.BluetoothAdapter|) . After turning on Bluetooth, wait for 
+(|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) 
+
+
+
+    Returns: 
+
+*android.bluetooth.BluetoothAdapter.getState()*
+
+public int getState()
+
+Get the current state of the local Bluetooth adapter. Possible return values 
+are (|android.bluetooth.BluetoothAdapter|) , 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+, (|android.bluetooth.BluetoothAdapter|) . Requires 
+(|android.Manifest.permission|) 
+
+
+
+    Returns: current state of Bluetooth adapter 
+
+*android.bluetooth.BluetoothAdapter.getUuids()*
+
+public |android.os.ParcelUuid|[] getUuids()
+
+Get the UUIDs supported by the local Bluetooth adapter. 
+
+Requires (|android.Manifest.permission|) 
+
+
+
+    Returns: the UUIDs supported by the local Bluetooth Adapter. 
+
+*android.bluetooth.BluetoothAdapter.isDiscovering()*
+
+public boolean isDiscovering()
+
+Return true if the local Bluetooth adapter is currently in the device discovery 
+process. Device discovery is a heavyweight procedure. New connections to remote 
+Bluetooth devices should not be attempted while discovery is in progress, and 
+existing connections will experience limited bandwidth and high latency. Use 
+(|android.bluetooth.BluetoothAdapter|) to cancel an ongoing discovery. 
+Applications can also register for (|android.bluetooth.BluetoothAdapter|) or 
+(|android.bluetooth.BluetoothAdapter|) to be notified when discovery starts or 
+completes. If Bluetooth state is not (|android.bluetooth.BluetoothAdapter|) , 
+this API will return false. After turning on Bluetooth, wait for 
+(|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) . 
+
+
+
+    Returns: true if discovering 
+
+*android.bluetooth.BluetoothAdapter.isEnabled()*
+
+public boolean isEnabled()
+
+Return true if Bluetooth is currently enabled and ready for use. Equivalent to: 
+getBluetoothState() == STATE_ON Requires (|android.Manifest.permission|) 
+
+
+
+    Returns: true if the local adapter is turned on 
+
+*android.bluetooth.BluetoothAdapter.listenUsingEncryptedRfcommOn(int)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingEncryptedRfcommOn(int port)
+  throws |java.io.IOException|
+         
+Construct an encrypted, RFCOMM server socket. Call #accept to retrieve 
+connections to this socket. 
+
+
+
+    Returns: An RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingEncryptedRfcommWithServiceRecord(String,UUID)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingEncryptedRfcommWithServiceRecord(
+  java.lang.String name,
+  java.util.UUID uuid)
+  throws |java.io.IOException|
+         
+Create a listening, encrypted, RFCOMM Bluetooth socket with Service Record. The 
+link will be encrypted, but the link key is not required to be authenticated 
+i.e the communication is vulnerable to Man In the Middle attacks. Use 
+(|android.bluetooth.BluetoothAdapter|) , to ensure an authenticated link key. 
+Use this socket if authentication of link key is not possible. For example, for 
+Bluetooth 2.1 devices, if any of the devices does not have an input and output 
+capability or just has the ability to display a numeric key, a secure socket 
+connection is not possible and this socket can be used. Use 
+(|android.bluetooth.BluetoothAdapter|) , if encryption is not required. For 
+Bluetooth 2.1 devices, the link will be encrypted, as encryption is mandartory. 
+For more details, refer to the Security Model section 5.2 (vol 3) of Bluetooth 
+Core Specification version 2.1 + EDR. Use 
+(|android.bluetooth.BluetoothServerSocket|) to retrieve incoming connections 
+from a listening (|android.bluetooth.BluetoothServerSocket|) . The system will 
+assign an unused RFCOMM channel to listen on. The system will also register a 
+Service Discovery Protocol (SDP) record with the local SDP server containing 
+the specified UUID, service name, and auto-assigned channel. Remote Bluetooth 
+devices can use the same UUID to query our SDP server and discover which 
+channel to connect to. This SDP record will be removed when this socket is 
+closed, or if this application closes unexpectedly. Use 
+(|android.bluetooth.BluetoothDevice|) to connect to this socket from another 
+device using the same (|java.util.UUID|) . Requires 
+(|android.Manifest.permission|) 
+
+
+    name - service name for SDP record 
+    uuid - uuid for SDP record 
+
+    Returns: a listening RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingInsecureRfcommOn(int)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingInsecureRfcommOn(int port)
+  throws |java.io.IOException|
+         
+Construct an unencrypted, unauthenticated, RFCOMM server socket. Call #accept 
+to retrieve connections to this socket. 
+
+
+
+    Returns: An RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(String,UUID)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingInsecureRfcommWithServiceRecord(
+  java.lang.String name,
+  java.util.UUID uuid)
+  throws |java.io.IOException|
+         
+Create a listening, insecure RFCOMM Bluetooth socket with Service Record. The 
+link key is not required to be authenticated, i.e the communication may be 
+vulnerable to Man In the Middle attacks. For Bluetooth 2.1 devices, the link 
+will be encrypted, as encryption is mandartory. For legacy devices (pre 
+Bluetooth 2.1 devices) the link will not be encrypted. Use 
+(|android.bluetooth.BluetoothAdapter|) , if an encrypted and authenticated 
+communication channel is desired. Use 
+(|android.bluetooth.BluetoothServerSocket|) to retrieve incoming connections 
+from a listening (|android.bluetooth.BluetoothServerSocket|) . The system will 
+assign an unused RFCOMM channel to listen on. The system will also register a 
+Service Discovery Protocol (SDP) record with the local SDP server containing 
+the specified UUID, service name, and auto-assigned channel. Remote Bluetooth 
+devices can use the same UUID to query our SDP server and discover which 
+channel to connect to. This SDP record will be removed when this socket is 
+closed, or if this application closes unexpectedly. Use 
+(|android.bluetooth.BluetoothDevice|) to connect to this socket from another 
+device using the same (|java.util.UUID|) . Requires 
+(|android.Manifest.permission|) 
+
+
+    name - service name for SDP record 
+    uuid - uuid for SDP record 
+
+    Returns: a listening RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingRfcommOn(int)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingRfcommOn(int channel)
+  throws |java.io.IOException|
+         
+Create a listening, secure RFCOMM Bluetooth socket. A remote device connecting 
+to this socket will be authenticated and communication on this socket will be 
+encrypted. Use (|android.bluetooth.BluetoothServerSocket|) to retrieve incoming 
+connections from a listening (|android.bluetooth.BluetoothServerSocket|) . 
+Valid RFCOMM channels are in range 1 to 30. Requires 
+(|android.Manifest.permission|) 
+
+
+    channel - RFCOMM channel to listen on 
+
+    Returns: a listening RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord(String,UUID)*
+
+public |android.bluetooth.BluetoothServerSocket| listenUsingRfcommWithServiceRecord(
+  java.lang.String name,
+  java.util.UUID uuid)
+  throws |java.io.IOException|
+         
+Create a listening, secure RFCOMM Bluetooth socket with Service Record. A 
+remote device connecting to this socket will be authenticated and communication 
+on this socket will be encrypted. Use 
+(|android.bluetooth.BluetoothServerSocket|) to retrieve incoming connections 
+from a listening (|android.bluetooth.BluetoothServerSocket|) . The system will 
+assign an unused RFCOMM channel to listen on. The system will also register a 
+Service Discovery Protocol (SDP) record with the local SDP server containing 
+the specified UUID, service name, and auto-assigned channel. Remote Bluetooth 
+devices can use the same UUID to query our SDP server and discover which 
+channel to connect to. This SDP record will be removed when this socket is 
+closed, or if this application closes unexpectedly. Use 
+(|android.bluetooth.BluetoothDevice|) to connect to this socket from another 
+device using the same (|java.util.UUID|) . Requires 
+(|android.Manifest.permission|) 
+
+
+    name - service name for SDP record 
+    uuid - uuid for SDP record 
+
+    Returns: a listening RFCOMM BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.listenUsingScoOn()*
+
+public static |android.bluetooth.BluetoothServerSocket| listenUsingScoOn()
+  throws |java.io.IOException|
+         
+Construct a SCO server socket. Call #accept to retrieve connections to this 
+socket. 
+
+
+
+    Returns: A SCO BluetoothServerSocket 
+
+*android.bluetooth.BluetoothAdapter.readOutOfBandData()*
+
+public |android.util.Pair|<byte[],byte[]> readOutOfBandData()
+
+Read the local Out of Band Pairing Data Requires 
+(|android.Manifest.permission|) 
+
+
+
+    Returns: Pair of Hash and Randomizer 
+
+*android.bluetooth.BluetoothAdapter.setDiscoverableTimeout(int)*
+
+public void setDiscoverableTimeout(int timeout)
+
+
+
+
+
+*android.bluetooth.BluetoothAdapter.setName(String)*
+
+public boolean setName(java.lang.String name)
+
+Set the friendly Bluetooth name of the local Bluetooth adapter. This name is 
+visible to remote Bluetooth devices. Valid Bluetooth names are a maximum of 248 
+bytes using UTF-8 encoding, although many remote devices can only display the 
+first 40 characters, and some may be limited to just 20. If Bluetooth state is 
+not (|android.bluetooth.BluetoothAdapter|) , this API will return false. After 
+turning on Bluetooth, wait for (|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) 
+
+
+    name - a valid Bluetooth name 
+
+    Returns: true if the name was set, false otherwise 
+
+*android.bluetooth.BluetoothAdapter.setScanMode(int)*
+
+public boolean setScanMode(int mode)
+
+
+
+
+
+*android.bluetooth.BluetoothAdapter.setScanMode(int,int)*
+
+public boolean setScanMode(
+  int mode,
+  int duration)
+
+Set the Bluetooth scan mode of the local Bluetooth adapter. The Bluetooth scan 
+mode determines if the local adapter is connectable and/or discoverable from 
+remote Bluetooth devices. For privacy reasons, discoverable mode is 
+automatically turned off after duration seconds. For example, 120 seconds 
+should be enough for a remote device to initiate and complete its discovery 
+process. Valid scan mode values are: (|android.bluetooth.BluetoothAdapter|) , 
+(|android.bluetooth.BluetoothAdapter|) , (|android.bluetooth.BluetoothAdapter|) 
+. If Bluetooth state is not (|android.bluetooth.BluetoothAdapter|) , this API 
+will return false. After turning on Bluetooth, wait for 
+(|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) Applications cannot set the scan mode. They 
+should use startActivityForResult( 
+BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE}) instead. 
+
+
+    mode - valid scan mode 
+    duration - time in seconds to apply scan mode, only used for {@link 
+       #SCAN_MODE_CONNECTABLE_DISCOVERABLE} 
+
+    Returns: true if the scan mode was set, false otherwise 
+
+*android.bluetooth.BluetoothAdapter.startDiscovery()*
+
+public boolean startDiscovery()
+
+Start the remote device discovery process. The discovery process usually 
+involves an inquiry scan of about 12 seconds, followed by a page scan of each 
+new device to retrieve its Bluetooth name. This is an asynchronous call, it 
+will return immediately. Register for (|android.bluetooth.BluetoothAdapter|) 
+and (|android.bluetooth.BluetoothAdapter|) intents to determine exactly when 
+the discovery starts and completes. Register for 
+(|android.bluetooth.BluetoothDevice|) to be notified as remote Bluetooth 
+devices are found. Device discovery is a heavyweight procedure. New connections 
+to remote Bluetooth devices should not be attempted while discovery is in 
+progress, and existing connections will experience limited bandwidth and high 
+latency. Use (|android.bluetooth.BluetoothAdapter|) to cancel an ongoing 
+discovery. Discovery is not managed by the Activity, but is run as a system 
+service, so an application should always call 
+(|android.bluetooth.BluetoothAdapter|) even if it did not directly request a 
+discovery, just to be sure. Device discovery will only find remote devices that 
+are currently discoverable (inquiry scan enabled). Many Bluetooth devices are 
+not discoverable by default, and need to be entered into a special mode. If 
+Bluetooth state is not (|android.bluetooth.BluetoothAdapter|) , this API will 
+return false. After turning on Bluetooth, wait for 
+(|android.bluetooth.BluetoothAdapter|) with 
+(|android.bluetooth.BluetoothAdapter|) to get the updated value. Requires 
+(|android.Manifest.permission|) . 
+
+
+
+    Returns: true on success, false on error 
+
+*android.bluetooth.BluetoothAdapter.startLeScan(BluetoothAdapter.LeScanCallback)*
+
+public boolean startLeScan(android.bluetooth.BluetoothAdapter.LeScanCallback callback)
+
+Starts a scan for Bluetooth LE devices. 
+
+Results of the scan are reported using the 
+(|android.bluetooth.BluetoothAdapter.LeScanCallback|) callback. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    callback - the callback LE scan results are delivered 
+
+    Returns: true, if the scan was started successfully 
+
+*android.bluetooth.BluetoothAdapter.startLeScan(UUID[],BluetoothAdapter.LeScanCallback)*
+
+public boolean startLeScan(
+  java.util.UUID[] serviceUuids,
+  android.bluetooth.BluetoothAdapter.LeScanCallback callback)
+
+Starts a scan for Bluetooth LE devices, looking for devices that advertise 
+given services. 
+
+Devices which advertise all specified services are reported using the 
+(|android.bluetooth.BluetoothAdapter.LeScanCallback|) callback. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    serviceUuids - Array of services to look for 
+    callback - the callback LE scan results are delivered 
+
+    Returns: true, if the scan was started successfully 
+
+*android.bluetooth.BluetoothAdapter.stopLeScan(BluetoothAdapter.LeScanCallback)*
+
+public void stopLeScan(android.bluetooth.BluetoothAdapter.LeScanCallback callback)
+
+Stops an ongoing Bluetooth LE device scan. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    callback - used to identify which scan to stop must be the same handle used to start the 
+       scan 
+
+

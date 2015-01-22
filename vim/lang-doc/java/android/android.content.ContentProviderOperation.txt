@@ -1,0 +1,250 @@
+*android.content.ContentProviderOperation* *ContentProviderOperation* 
+
+public class ContentProviderOperation
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.content.ContentProviderOperation_Description|
+|android.content.ContentProviderOperation_Fields|
+|android.content.ContentProviderOperation_Constructors|
+|android.content.ContentProviderOperation_Methods|
+
+================================================================================
+
+*android.content.ContentProviderOperation_Fields*
+|android.os.Parcelable.Creator<android.content.ContentProviderOperation>_android.content.ContentProviderOperation.CREATOR|
+|int_android.content.ContentProviderOperation.TYPE_ASSERT|
+|int_android.content.ContentProviderOperation.TYPE_DELETE|
+|int_android.content.ContentProviderOperation.TYPE_INSERT|
+|int_android.content.ContentProviderOperation.TYPE_UPDATE|
+
+*android.content.ContentProviderOperation_Methods*
+|android.content.ContentProviderOperation.apply(ContentProvider,ContentProviderResult[],int)|
+|android.content.ContentProviderOperation.describeContents()|
+|android.content.ContentProviderOperation.getType()|
+|android.content.ContentProviderOperation.getUri()|
+|android.content.ContentProviderOperation.isReadOperation()|
+|android.content.ContentProviderOperation.isWriteOperation()|
+|android.content.ContentProviderOperation.isYieldAllowed()|
+|android.content.ContentProviderOperation.newAssertQuery(Uri)|Create aBuildersu
+|android.content.ContentProviderOperation.newDelete(Uri)|Create aBuildersuitabl
+|android.content.ContentProviderOperation.newInsert(Uri)|Create aBuildersuitabl
+|android.content.ContentProviderOperation.newUpdate(Uri)|Create aBuildersuitabl
+|android.content.ContentProviderOperation.resolveSelectionArgsBackReferences(ContentProviderResult[],int)|
+|android.content.ContentProviderOperation.resolveValueBackReferences(ContentProviderResult[],int)|
+|android.content.ContentProviderOperation.toString()|
+|android.content.ContentProviderOperation.writeToParcel(Parcel,int)|
+
+*android.content.ContentProviderOperation_Description*
+
+
+
+
+
+*android.os.Parcelable.Creator<android.content.ContentProviderOperation>_android.content.ContentProviderOperation.CREATOR*
+
+
+
+
+*int_android.content.ContentProviderOperation.TYPE_ASSERT*
+
+
+
+
+*int_android.content.ContentProviderOperation.TYPE_DELETE*
+
+
+
+
+*int_android.content.ContentProviderOperation.TYPE_INSERT*
+
+
+
+
+*int_android.content.ContentProviderOperation.TYPE_UPDATE*
+
+
+
+
+
+*android.content.ContentProviderOperation.apply(ContentProvider,ContentProviderResult[],int)*
+
+public |android.content.ContentProviderResult| apply(
+  android.content.ContentProvider provider,
+  android.content.ContentProviderResult[] backRefs,
+  int numBackRefs)
+  throws |android.content.OperationApplicationException|
+         
+Applies this operation using the given provider. The backRefs array is used to 
+resolve any back references that were requested using 
+(|android.content.ContentProviderOperation.Builder|) and 
+(|android.content.ContentProviderOperation.Builder|) . 
+
+
+    provider - the {@link ContentProvider} on which this batch is applied 
+    backRefs - a {@link ContentProviderResult} array that will be consulted to resolve any 
+       requested back references. 
+    numBackRefs - the number of valid results on the backRefs array. 
+
+    Returns: a {@link ContentProviderResult} that contains either the {@link Uri} of the 
+             inserted row if this was an insert otherwise the number of rows 
+             affected. 
+
+*android.content.ContentProviderOperation.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.ContentProviderOperation.getType()*
+
+public int getType()
+
+
+
+
+
+*android.content.ContentProviderOperation.getUri()*
+
+public |android.net.Uri| getUri()
+
+
+
+
+
+*android.content.ContentProviderOperation.isReadOperation()*
+
+public boolean isReadOperation()
+
+
+
+
+
+*android.content.ContentProviderOperation.isWriteOperation()*
+
+public boolean isWriteOperation()
+
+
+
+
+
+*android.content.ContentProviderOperation.isYieldAllowed()*
+
+public boolean isYieldAllowed()
+
+
+
+
+
+*android.content.ContentProviderOperation.newAssertQuery(Uri)*
+
+public static |android.content.ContentProviderOperation.Builder| newAssertQuery(android.net.Uri uri)
+
+Create a (|android.content.ContentProviderOperation.Builder|) suitable for 
+building a (|android.content.ContentProviderOperation|) to assert a set of 
+values as provided through (|android.content.ContentProviderOperation.Builder|) 
+. 
+
+
+
+*android.content.ContentProviderOperation.newDelete(Uri)*
+
+public static |android.content.ContentProviderOperation.Builder| newDelete(android.net.Uri uri)
+
+Create a (|android.content.ContentProviderOperation.Builder|) suitable for 
+building a delete (|android.content.ContentProviderOperation|) . 
+
+
+    uri - The {@link Uri} that is the target of the delete. 
+
+    Returns: a {@link Builder} 
+
+*android.content.ContentProviderOperation.newInsert(Uri)*
+
+public static |android.content.ContentProviderOperation.Builder| newInsert(android.net.Uri uri)
+
+Create a (|android.content.ContentProviderOperation.Builder|) suitable for 
+building an insert (|android.content.ContentProviderOperation|) . 
+
+
+    uri - The {@link Uri} that is the target of the insert. 
+
+    Returns: a {@link Builder} 
+
+*android.content.ContentProviderOperation.newUpdate(Uri)*
+
+public static |android.content.ContentProviderOperation.Builder| newUpdate(android.net.Uri uri)
+
+Create a (|android.content.ContentProviderOperation.Builder|) suitable for 
+building an update (|android.content.ContentProviderOperation|) . 
+
+
+    uri - The {@link Uri} that is the target of the update. 
+
+    Returns: a {@link Builder} 
+
+*android.content.ContentProviderOperation.resolveSelectionArgsBackReferences(ContentProviderResult[],int)*
+
+public |java.lang.String|[] resolveSelectionArgsBackReferences(
+  android.content.ContentProviderResult[] backRefs,
+  int numBackRefs)
+
+The Selection Arguments back references are represented as a Map of 
+Integer->Integer where the key is an index into the selection argument array 
+(see (|android.content.ContentProviderOperation.Builder|) ) and the value is 
+the index of the previous result that should be used for that selection 
+argument array slot. 
+
+This is intended to be a private method but it is exposed for unit testing 
+purposes 
+
+
+    backRefs - an array of previous results 
+    numBackRefs - the number of valid previous results in backRefs 
+
+    Returns: the ContentValues that should be used in this operation application after 
+             expansion of back references. This can be called if either mValues 
+             or mValuesBackReferences is null 
+
+*android.content.ContentProviderOperation.resolveValueBackReferences(ContentProviderResult[],int)*
+
+public |android.content.ContentValues| resolveValueBackReferences(
+  android.content.ContentProviderResult[] backRefs,
+  int numBackRefs)
+
+The ContentValues back references are represented as a ContentValues object 
+where the key refers to a column and the value is an index of the back 
+reference whose valued should be associated with the column. 
+
+This is intended to be a private method but it is exposed for unit testing 
+purposes 
+
+
+    backRefs - an array of previous results 
+    numBackRefs - the number of valid previous results in backRefs 
+
+    Returns: the ContentValues that should be used in this operation application after 
+             expansion of back references. This can be called if either mValues 
+             or mValuesBackReferences is null 
+
+*android.content.ContentProviderOperation.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.ContentProviderOperation.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

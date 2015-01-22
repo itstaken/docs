@@ -1,0 +1,82 @@
+*android.webkit.HttpAuthHandler* *HttpAuthHandler* Represents a request for HTTP
+
+public class HttpAuthHandler
+  extends    |android.os.Handler|
+
+|android.webkit.HttpAuthHandler_Description|
+|android.webkit.HttpAuthHandler_Fields|
+|android.webkit.HttpAuthHandler_Constructors|
+|android.webkit.HttpAuthHandler_Methods|
+
+================================================================================
+
+*android.webkit.HttpAuthHandler_Constructors*
+|android.webkit.HttpAuthHandler()|
+
+*android.webkit.HttpAuthHandler_Methods*
+|android.webkit.HttpAuthHandler.cancel()|Instructs the WebView to cancel the au
+|android.webkit.HttpAuthHandler.proceed(String,String)|Instructs the WebView to
+|android.webkit.HttpAuthHandler.suppressDialog()|Gets whether the prompt dialog
+|android.webkit.HttpAuthHandler.useHttpAuthUsernamePassword()|Gets whether the 
+
+*android.webkit.HttpAuthHandler_Description*
+
+Represents a request for HTTP authentication. Instances of this class are 
+created by the WebView and passed to (|android.webkit.WebViewClient|) . The 
+host application must call either (|android.webkit.HttpAuthHandler|) or 
+(|android.webkit.HttpAuthHandler|) to set the WebView's response to the 
+request. 
+
+
+
+*android.webkit.HttpAuthHandler()*
+
+public HttpAuthHandler()
+
+
+
+
+*android.webkit.HttpAuthHandler.cancel()*
+
+public void cancel()
+
+Instructs the WebView to cancel the authentication request. 
+
+
+
+*android.webkit.HttpAuthHandler.proceed(String,String)*
+
+public void proceed(
+  java.lang.String username,
+  java.lang.String password)
+
+Instructs the WebView to proceed with the authentication with the given 
+credentials. Credentials for use with this method can be retrieved from the 
+WebView's store using (|android.webkit.WebView|) . 
+
+
+
+*android.webkit.HttpAuthHandler.suppressDialog()*
+
+public boolean suppressDialog()
+
+Gets whether the prompt dialog should be suppressed. 
+
+
+
+    Returns: whether the prompt dialog should be suppressed 
+
+*android.webkit.HttpAuthHandler.useHttpAuthUsernamePassword()*
+
+public boolean useHttpAuthUsernamePassword()
+
+Gets whether the credentials stored for the current host (i.e. the host for 
+which (|android.webkit.WebViewClient|) was called) are suitable for use. 
+Credentials are not suitable if they have previously been rejected by the 
+server for the current request. 
+
+
+
+    Returns: whether the credentials are suitable for use 
+
+

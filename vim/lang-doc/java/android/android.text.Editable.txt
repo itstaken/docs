@@ -1,0 +1,173 @@
+*android.text.Editable* *Editable* This is the interface for text whose content 
+
+public interface interface Editable
+
+  implements |java.lang.CharSequence|
+             |android.text.GetChars|
+             |android.text.Spannable|
+             |java.lang.Appendable|
+
+|android.text.Editable_Description|
+|android.text.Editable_Fields|
+|android.text.Editable_Constructors|
+|android.text.Editable_Methods|
+
+================================================================================
+
+*android.text.Editable_Methods*
+|android.text.Editable.append(char)|Convenience for append(String.valueOf(text)
+|android.text.Editable.append(CharSequence)|Convenience for replace(length(), l
+|android.text.Editable.append(CharSequence,int,int)|Convenience for replace(len
+|android.text.Editable.clear()|Convenience for replace(0, length(), "", 0, 0)
+|android.text.Editable.clearSpans()|Removes all spans from the Editable, as if 
+|android.text.Editable.delete(int,int)|Convenience for replace(st, en, "", 0, 0
+|android.text.Editable.getFilters()|Returns the array of input filters that are
+|android.text.Editable.insert(int,CharSequence)|Convenience for replace(where, 
+|android.text.Editable.insert(int,CharSequence,int,int)|Convenience for replace
+|android.text.Editable.replace(int,int,CharSequence)|Convenience for replace(st
+|android.text.Editable.replace(int,int,CharSequence,int,int)|Replaces the speci
+|android.text.Editable.setFilters(InputFilter[])|Sets the series of filters tha
+
+*android.text.Editable_Description*
+
+This is the interface for text whose content and markup can be changed (as 
+opposed to immutable text like Strings). If you make a 
+(|android.text.DynamicLayout|) of an Editable, the layout will be reflowed as 
+the text is changed. 
+
+
+
+*android.text.Editable.append(char)*
+
+public |android.text.Editable| append(char text)
+
+Convenience for append(String.valueOf(text)). 
+
+
+
+*android.text.Editable.append(CharSequence)*
+
+public |android.text.Editable| append(java.lang.CharSequence text)
+
+Convenience for replace(length(), length(), text, 0, text.length()) 
+
+
+
+*android.text.Editable.append(CharSequence,int,int)*
+
+public |android.text.Editable| append(
+  java.lang.CharSequence text,
+  int start,
+  int end)
+
+Convenience for replace(length(), length(), text, start, end) 
+
+
+
+*android.text.Editable.clear()*
+
+public void clear()
+
+Convenience for replace(0, length(), "", 0, 0) 
+
+
+
+*android.text.Editable.clearSpans()*
+
+public void clearSpans()
+
+Removes all spans from the Editable, as if by calling (|android.text.Editable|) 
+on each of them. 
+
+
+
+*android.text.Editable.delete(int,int)*
+
+public |android.text.Editable| delete(
+  int st,
+  int en)
+
+Convenience for replace(st, en, "", 0, 0) 
+
+
+
+*android.text.Editable.getFilters()*
+
+public |android.text.InputFilter|[] getFilters()
+
+Returns the array of input filters that are currently applied to changes to 
+this Editable. 
+
+
+
+*android.text.Editable.insert(int,CharSequence)*
+
+public |android.text.Editable| insert(
+  int where,
+  java.lang.CharSequence text)
+
+Convenience for replace(where, where, text, 0, text.length()); 
+
+
+
+*android.text.Editable.insert(int,CharSequence,int,int)*
+
+public |android.text.Editable| insert(
+  int where,
+  java.lang.CharSequence text,
+  int start,
+  int end)
+
+Convenience for replace(where, where, text, start, end) 
+
+
+
+*android.text.Editable.replace(int,int,CharSequence)*
+
+public |android.text.Editable| replace(
+  int st,
+  int en,
+  java.lang.CharSequence text)
+
+Convenience for replace(st, en, text, 0, text.length()) 
+
+
+
+*android.text.Editable.replace(int,int,CharSequence,int,int)*
+
+public |android.text.Editable| replace(
+  int st,
+  int en,
+  java.lang.CharSequence source,
+  int start,
+  int end)
+
+Replaces the specified range (sten) of text in this Editable with a copy of the 
+slice startend from source. The destination slice may be empty, in which case 
+the operation is an insertion, or the source slice may be empty, in which case 
+the operation is a deletion. 
+
+Before the change is committed, each filter that was set with 
+(|android.text.Editable|) is given the opportunity to modify the source text. 
+
+If source is Spanned, the spans from it are preserved into the Editable. 
+Existing spans within the Editable that entirely cover the replaced range are 
+retained, but any that were strictly within the range that was replaced are 
+removed. As a special case, the cursor position is preserved even when the 
+entire range where it is located is replaced. 
+
+
+
+    Returns: a reference to this object. 
+
+*android.text.Editable.setFilters(InputFilter[])*
+
+public void setFilters(android.text.InputFilter[] filters)
+
+Sets the series of filters that will be called in succession whenever the text 
+of this Editable is changed, each of which has the opportunity to limit or 
+transform the text that is being inserted. 
+
+
+
+

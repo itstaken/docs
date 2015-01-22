@@ -1,0 +1,106 @@
+*android.database.sqlite.SQLiteStatement* *SQLiteStatement* Represents a stateme
+
+public final class SQLiteStatement
+  extends    |android.database.sqlite.SQLiteProgram|
+
+|android.database.sqlite.SQLiteStatement_Description|
+|android.database.sqlite.SQLiteStatement_Fields|
+|android.database.sqlite.SQLiteStatement_Constructors|
+|android.database.sqlite.SQLiteStatement_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteStatement_Methods*
+|android.database.sqlite.SQLiteStatement.execute()|Execute this SQL statement, 
+|android.database.sqlite.SQLiteStatement.executeInsert()|Execute this SQL state
+|android.database.sqlite.SQLiteStatement.executeUpdateDelete()|Execute this SQL
+|android.database.sqlite.SQLiteStatement.simpleQueryForBlobFileDescriptor()|Exe
+|android.database.sqlite.SQLiteStatement.simpleQueryForLong()|Execute a stateme
+|android.database.sqlite.SQLiteStatement.simpleQueryForString()|Execute a state
+|android.database.sqlite.SQLiteStatement.toString()|
+
+*android.database.sqlite.SQLiteStatement_Description*
+
+Represents a statement that can be executed against a database. The statement 
+cannot return multiple rows or columns, but single value (1 x 1) result sets 
+are supported. 
+
+This class is not thread-safe. 
+
+
+
+*android.database.sqlite.SQLiteStatement.execute()*
+
+public void execute()
+
+Execute this SQL statement, if it is not a SELECT / INSERT / DELETE / UPDATE, 
+for example CREATE / DROP table, view, trigger, index etc. 
+
+
+
+*android.database.sqlite.SQLiteStatement.executeInsert()*
+
+public long executeInsert()
+
+Execute this SQL statement and return the ID of the row inserted due to this 
+call. The SQL statement should be an INSERT for this to be a useful call. 
+
+
+
+    Returns: the row ID of the last row inserted, if this insert is successful. -1 
+             otherwise. 
+
+*android.database.sqlite.SQLiteStatement.executeUpdateDelete()*
+
+public int executeUpdateDelete()
+
+Execute this SQL statement, if the the number of rows affected by execution of 
+this SQL statement is of any importance to the caller - for example, UPDATE / 
+DELETE SQL statements. 
+
+
+
+    Returns: the number of rows affected by this SQL statement execution. 
+
+*android.database.sqlite.SQLiteStatement.simpleQueryForBlobFileDescriptor()*
+
+public |android.os.ParcelFileDescriptor| simpleQueryForBlobFileDescriptor()
+
+Executes a statement that returns a 1 by 1 table with a blob value. 
+
+
+
+    Returns: A read-only file descriptor for a copy of the blob value, or {@code null} if 
+             the value is null or could not be read for some reason. 
+
+*android.database.sqlite.SQLiteStatement.simpleQueryForLong()*
+
+public long simpleQueryForLong()
+
+Execute a statement that returns a 1 by 1 table with a numeric value. For 
+example, SELECT COUNT(*) FROM table; 
+
+
+
+    Returns: The result of the query. 
+
+*android.database.sqlite.SQLiteStatement.simpleQueryForString()*
+
+public |java.lang.String| simpleQueryForString()
+
+Execute a statement that returns a 1 by 1 table with a text value. For example, 
+SELECT COUNT(*) FROM table; 
+
+
+
+    Returns: The result of the query. 
+
+*android.database.sqlite.SQLiteStatement.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

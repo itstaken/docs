@@ -1,0 +1,172 @@
+*android.widget.MultiAutoCompleteTextView* *MultiAutoCompleteTextView* An editab
+
+public class MultiAutoCompleteTextView
+  extends    |android.widget.AutoCompleteTextView|
+
+|android.widget.MultiAutoCompleteTextView_Description|
+|android.widget.MultiAutoCompleteTextView_Fields|
+|android.widget.MultiAutoCompleteTextView_Constructors|
+|android.widget.MultiAutoCompleteTextView_Methods|
+
+================================================================================
+
+*android.widget.MultiAutoCompleteTextView_Constructors*
+|android.widget.MultiAutoCompleteTextView(Context)|
+|android.widget.MultiAutoCompleteTextView(Context,AttributeSet)|
+|android.widget.MultiAutoCompleteTextView(Context,AttributeSet,int)|
+
+*android.widget.MultiAutoCompleteTextView_Methods*
+|android.widget.MultiAutoCompleteTextView.enoughToFilter()|Instead of filtering
+|android.widget.MultiAutoCompleteTextView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.MultiAutoCompleteTextView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.MultiAutoCompleteTextView.performFiltering(CharSequence,int)|In
+|android.widget.MultiAutoCompleteTextView.performFiltering(CharSequence,int,int,int)|
+|android.widget.MultiAutoCompleteTextView.performValidation()|Instead of valida
+|android.widget.MultiAutoCompleteTextView.replaceText(CharSequence)|Performs th
+|android.widget.MultiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.Tokenizer)|
+
+*android.widget.MultiAutoCompleteTextView_Description*
+
+An editable text view, extending (|android.widget.AutoCompleteTextView|) , that 
+can show completion suggestions for the substring of the text where the user is 
+typing instead of necessarily for the entire thing. 
+
+You must provide a (|android.widget.MultiAutoCompleteTextView.Tokenizer|) to 
+distinguish the various substrings. 
+
+The following code snippet shows how to create a text view which suggests 
+various countries names while the user is typing: 
+
+public class CountriesActivity extends Activity { protected void 
+onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); 
+setContentView(R.layout.autocomplete_7); 
+
+ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+android.R.layout.simple_dropdown_item_1line, COUNTRIES); 
+MultiAutoCompleteTextView textView = (MultiAutoCompleteTextView) 
+findViewById(R.id.edit); textView.setAdapter(adapter); 
+textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer()); } 
+
+private static final String[] COUNTRIES = new String[] { "Belgium", "France", 
+"Italy", "Germany", "Spain" }; } 
+
+
+
+*android.widget.MultiAutoCompleteTextView(Context)*
+
+public MultiAutoCompleteTextView(android.content.Context context)
+
+
+
+
+*android.widget.MultiAutoCompleteTextView(Context,AttributeSet)*
+
+public MultiAutoCompleteTextView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.MultiAutoCompleteTextView(Context,AttributeSet,int)*
+
+public MultiAutoCompleteTextView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.MultiAutoCompleteTextView.enoughToFilter()*
+
+public boolean enoughToFilter()
+
+Instead of filtering whenever the total length of the text exceeds the 
+threshhold, this subclass filters only when the length of the range from 
+(|android.widget.MultiAutoCompleteTextView.Tokenizer|) to 
+(|android.widget.MultiAutoCompleteTextView|) meets or exceeds 
+(|android.widget.MultiAutoCompleteTextView|) . 
+
+
+
+*android.widget.MultiAutoCompleteTextView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.MultiAutoCompleteTextView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.MultiAutoCompleteTextView.performFiltering(CharSequence,int)*
+
+protected void performFiltering(
+  java.lang.CharSequence text,
+  int keyCode)
+
+Instead of filtering on the entire contents of the edit box, this subclass 
+method filters on the range from 
+(|android.widget.MultiAutoCompleteTextView.Tokenizer|) to 
+(|android.widget.MultiAutoCompleteTextView|) if the length of that range meets 
+or exceeds (|android.widget.MultiAutoCompleteTextView|) . 
+
+
+
+*android.widget.MultiAutoCompleteTextView.performFiltering(CharSequence,int,int,int)*
+
+protected void performFiltering(
+  java.lang.CharSequence text,
+  int start,
+  int end,
+  int keyCode)
+
+Starts filtering the content of the drop down list. The filtering pattern is 
+the specified range of text from the edit box. Subclasses may override this 
+method to filter with a different pattern, for instance a smaller substring of 
+text. 
+
+
+
+*android.widget.MultiAutoCompleteTextView.performValidation()*
+
+public void performValidation()
+
+Instead of validating the entire text, this subclass method validates each 
+token of the text individually. Empty tokens are removed. 
+
+
+
+*android.widget.MultiAutoCompleteTextView.replaceText(CharSequence)*
+
+protected void replaceText(java.lang.CharSequence text)
+
+Performs the text completion by replacing the range from 
+(|android.widget.MultiAutoCompleteTextView.Tokenizer|) to 
+(|android.widget.MultiAutoCompleteTextView|) by the the result of passing text 
+through (|android.widget.MultiAutoCompleteTextView.Tokenizer|) . In addition, 
+the replaced region will be marked as an AutoText substition so that if the 
+user immediately presses DEL, the completion will be undone. Subclasses may 
+override this method to do some different insertion of the content into the 
+edit box. 
+
+
+    text - the selected suggestion in the drop down list 
+
+*android.widget.MultiAutoCompleteTextView.setTokenizer(MultiAutoCompleteTextView.Tokenizer)*
+
+public void setTokenizer(android.widget.MultiAutoCompleteTextView.Tokenizer t)
+
+Sets the Tokenizer that will be used to determine the relevant range of the 
+text where the user is typing. 
+
+
+
+

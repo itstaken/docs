@@ -1,0 +1,207 @@
+*android.provider.CalendarContract.CalendarColumns* *CalendarContract.CalendarColumns* 
+
+protected static interface interface CalendarContract.CalendarColumns
+
+
+|android.provider.CalendarContract.CalendarColumns_Description|
+|android.provider.CalendarContract.CalendarColumns_Fields|
+|android.provider.CalendarContract.CalendarColumns_Constructors|
+|android.provider.CalendarContract.CalendarColumns_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.CalendarColumns_Fields*
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_ATTENDEE_TYPES|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_AVAILABILITY|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_REMINDERS|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_CONTRIBUTOR|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_EDITOR|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_FREEBUSY|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_NONE|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_OVERRIDE|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_OWNER|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_READ|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_RESPOND|
+|int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_ROOT|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_ACCESS_LEVEL|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_COLOR|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_COLOR_KEY|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_DISPLAY_NAME|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_TIME_ZONE|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CAN_MODIFY_TIME_ZONE|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.CAN_ORGANIZER_RESPOND|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.IS_PRIMARY|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.MAX_REMINDERS|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.OWNER_ACCOUNT|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.SYNC_EVENTS|
+|java.lang.String_android.provider.CalendarContract.CalendarColumns.VISIBLE|
+
+*android.provider.CalendarContract.CalendarColumns_Description*
+
+Columns specific to the Calendars Uri that other Uris can query. 
+
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_ATTENDEE_TYPES*
+
+A comma separated list of attendee types supported for this calendar in the 
+format "#,#,#". Valid types are (|android.provider.CalendarContract.Attendees|) 
+, (|android.provider.CalendarContract.Attendees|) , 
+(|android.provider.CalendarContract.Attendees|) , 
+(|android.provider.CalendarContract.Attendees|) . Setting this field to only 
+(|android.provider.CalendarContract.Attendees|) should be used to indicate that 
+changing the attendee type is not supported. 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_AVAILABILITY*
+
+A comma separated list of availability types supported for this calendar in the 
+format "#,#,#". Valid types are (|android.provider.CalendarContract.Events|) , 
+(|android.provider.CalendarContract.Events|) , 
+(|android.provider.CalendarContract.Events|) . Setting this field to only 
+(|android.provider.CalendarContract.Events|) should be used to indicate that 
+changing the availability is not supported. 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.ALLOWED_REMINDERS*
+
+A comma separated list of reminder methods supported for this calendar in the 
+format "#,#,#". Valid types are (|android.provider.CalendarContract.Reminders|) 
+, (|android.provider.CalendarContract.Reminders|) , 
+(|android.provider.CalendarContract.Reminders|) , 
+(|android.provider.CalendarContract.Reminders|) , 
+(|android.provider.CalendarContract.Reminders|) . Column name. Type: TEXT 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_CONTRIBUTOR*
+
+Full access to modify the calendar, but not the access control settings 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_EDITOR*
+
+Full access to modify the calendar, but not the access control settings 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_FREEBUSY*
+
+Can only see free/busy information about the calendar 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_NONE*
+
+Cannot access the calendar 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_OVERRIDE*
+
+not used 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_OWNER*
+
+Full access to the calendar 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_READ*
+
+Can read all event details 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_RESPOND*
+
+Can reply yes/no/maybe to an event 
+
+
+*int_android.provider.CalendarContract.CalendarColumns.CAL_ACCESS_ROOT*
+
+Domain admin 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_ACCESS_LEVEL*
+
+The level of access that the user has for the calendar Type: INTEGER (one of 
+the values below) 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_COLOR*
+
+The color of the calendar. This should only be updated by the sync adapter, not 
+other apps, as changing a calendar's color can adversely affect its display. 
+Type: INTEGER (color value) 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_COLOR_KEY*
+
+A key for looking up a color from the 
+(|android.provider.CalendarContract.Colors|) table. NULL or an empty string are 
+reserved for indicating that the calendar does not use a key for looking up the 
+color. The provider will update 
+(|android.provider.CalendarContract.CalendarColumns|) automatically when a 
+valid key is written to this column. The key must reference an existing row of 
+the (|android.provider.CalendarContract.Colors|) table. @see Colors 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_DISPLAY_NAME*
+
+The display name of the calendar. Column name. 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CALENDAR_TIME_ZONE*
+
+The time zone the calendar is associated with. Type: TEXT 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CAN_MODIFY_TIME_ZONE*
+
+Can the organizer modify the time zone of the event? Column name. Type: INTEGER 
+(boolean) 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.CAN_ORGANIZER_RESPOND*
+
+Can the organizer respond to the event? If no, the status of the organizer 
+should not be shown by the UI. Defaults to 1. Column name. Type: INTEGER 
+(boolean) 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.IS_PRIMARY*
+
+Is this the primary calendar for this account. If this column is not explicitly 
+set, the provider will return 1 if 
+(|android.provider.CalendarContract.Calendars|) is equal to 
+(|android.provider.CalendarContract.Calendars|) . 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.MAX_REMINDERS*
+
+The maximum number of reminders allowed for an event. Column name. Type: 
+INTEGER 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.OWNER_ACCOUNT*
+
+The owner account for this calendar, based on the calendar feed. This will be 
+different from the _SYNC_ACCOUNT for delegated calendars. Column name. Type: 
+String 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.SYNC_EVENTS*
+
+Is this calendar synced and are its events stored on the device? 0 - Do not 
+sync this calendar or store events for this calendar. 1 - Sync down events for 
+this calendar. Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarColumns.VISIBLE*
+
+Is the calendar selected to be displayed? 0 - do not show events associated 
+with this calendar. 1 - show events associated with this calendar Type: INTEGER 
+(boolean) 
+
+
+

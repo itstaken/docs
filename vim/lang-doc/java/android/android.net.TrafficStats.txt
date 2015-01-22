@@ -1,0 +1,567 @@
+*android.net.TrafficStats* *TrafficStats* Class that provides network traffic st
+
+public class TrafficStats
+  extends    |java.lang.Object|
+
+|android.net.TrafficStats_Description|
+|android.net.TrafficStats_Fields|
+|android.net.TrafficStats_Constructors|
+|android.net.TrafficStats_Methods|
+
+================================================================================
+
+*android.net.TrafficStats_Fields*
+|long_android.net.TrafficStats.GB_IN_BYTES|
+|long_android.net.TrafficStats.KB_IN_BYTES|
+|long_android.net.TrafficStats.MB_IN_BYTES|
+|int_android.net.TrafficStats.TAG_SYSTEM_BACKUP|
+|int_android.net.TrafficStats.TAG_SYSTEM_DOWNLOAD|
+|int_android.net.TrafficStats.TAG_SYSTEM_MEDIA|
+|int_android.net.TrafficStats.UID_REMOVED|
+|int_android.net.TrafficStats.UID_TETHERING|
+|int_android.net.TrafficStats.UNSUPPORTED|
+
+*android.net.TrafficStats_Constructors*
+|android.net.TrafficStats()|
+
+*android.net.TrafficStats_Methods*
+|android.net.TrafficStats.clearThreadStatsTag()|Clear any active tag set to acc
+|android.net.TrafficStats.clearThreadStatsUid()|
+|android.net.TrafficStats.closeQuietly(INetworkStatsSession)|
+|android.net.TrafficStats.getMobileRxBytes()|Return number of bytes received ac
+|android.net.TrafficStats.getMobileRxPackets()|Return number of packets receive
+|android.net.TrafficStats.getMobileTcpRxPackets()|
+|android.net.TrafficStats.getMobileTcpTxPackets()|
+|android.net.TrafficStats.getMobileTxBytes()|Return number of bytes transmitted
+|android.net.TrafficStats.getMobileTxPackets()|Return number of packets transmi
+|android.net.TrafficStats.getRxBytes(String)|
+|android.net.TrafficStats.getRxPackets(String)|
+|android.net.TrafficStats.getThreadStatsTag()|Get the active tag used when acco
+|android.net.TrafficStats.getTotalRxBytes()|Return number of bytes received sin
+|android.net.TrafficStats.getTotalRxPackets()|Return number of packets received
+|android.net.TrafficStats.getTotalTxBytes()|Return number of bytes transmitted 
+|android.net.TrafficStats.getTotalTxPackets()|Return number of packets transmit
+|android.net.TrafficStats.getTxBytes(String)|
+|android.net.TrafficStats.getTxPackets(String)|
+|android.net.TrafficStats.getUidRxBytes(int)|Return number of bytes received by
+|android.net.TrafficStats.getUidRxPackets(int)|Return number of packets receive
+|android.net.TrafficStats.getUidTcpRxBytes(int)|
+|android.net.TrafficStats.getUidTcpRxSegments(int)|
+|android.net.TrafficStats.getUidTcpTxBytes(int)|
+|android.net.TrafficStats.getUidTcpTxSegments(int)|
+|android.net.TrafficStats.getUidTxBytes(int)|Return number of bytes transmitted
+|android.net.TrafficStats.getUidTxPackets(int)|Return number of packets transmi
+|android.net.TrafficStats.getUidUdpRxBytes(int)|
+|android.net.TrafficStats.getUidUdpRxPackets(int)|
+|android.net.TrafficStats.getUidUdpTxBytes(int)|
+|android.net.TrafficStats.getUidUdpTxPackets(int)|
+|android.net.TrafficStats.incrementOperationCount(int)|Increment count of netwo
+|android.net.TrafficStats.incrementOperationCount(int,int)|Increment count of n
+|android.net.TrafficStats.setThreadStatsTag(int)|Set active tag to use when acc
+|android.net.TrafficStats.setThreadStatsUid(int)|Set specific UID to use when a
+|android.net.TrafficStats.startDataProfiling(Context)|Start profiling data usag
+|android.net.TrafficStats.stopDataProfiling(Context)|Stop profiling data usage 
+|android.net.TrafficStats.tagSocket(Socket)|Tag the givenSocketwith any statist
+|android.net.TrafficStats.untagSocket(Socket)|Remove any statistics parameters 
+
+*android.net.TrafficStats_Description*
+
+Class that provides network traffic statistics. These statistics include bytes 
+transmitted and received and network packets transmitted and received, over all 
+interfaces, over the mobile interface, and on a per-UID basis. 
+
+These statistics may not be available on all platforms. If the statistics are 
+not supported by this device, (|android.net.TrafficStats|) will be returned. 
+
+
+
+*long_android.net.TrafficStats.GB_IN_BYTES*
+
+
+
+
+*long_android.net.TrafficStats.KB_IN_BYTES*
+
+
+
+
+*long_android.net.TrafficStats.MB_IN_BYTES*
+
+
+
+
+*int_android.net.TrafficStats.TAG_SYSTEM_BACKUP*
+
+Default tag value for (|android.app.backup.BackupManager|) traffic. 
+
+
+*int_android.net.TrafficStats.TAG_SYSTEM_DOWNLOAD*
+
+Default tag value for (|android.app.DownloadManager|) traffic. 
+
+
+*int_android.net.TrafficStats.TAG_SYSTEM_MEDIA*
+
+Default tag value for (|MediaPlayer|) traffic. 
+
+
+*int_android.net.TrafficStats.UID_REMOVED*
+
+Special UID value used when collecting (|android.net.NetworkStatsHistory|) for 
+removed applications. 
+
+
+*int_android.net.TrafficStats.UID_TETHERING*
+
+Special UID value used when collecting (|android.net.NetworkStatsHistory|) for 
+tethering traffic. 
+
+
+*int_android.net.TrafficStats.UNSUPPORTED*
+
+The return value to indicate that the device does not support the statistic. 
+
+
+
+*android.net.TrafficStats()*
+
+public TrafficStats()
+
+
+
+
+*android.net.TrafficStats.clearThreadStatsTag()*
+
+public static void clearThreadStatsTag()
+
+Clear any active tag set to account (|java.net.Socket|) traffic originating 
+from the current thread. 
+
+
+
+*android.net.TrafficStats.clearThreadStatsUid()*
+
+public static void clearThreadStatsUid()
+
+
+
+
+
+*android.net.TrafficStats.closeQuietly(INetworkStatsSession)*
+
+public static void closeQuietly(INetworkStatsSession session)
+
+
+
+
+
+*android.net.TrafficStats.getMobileRxBytes()*
+
+public static long getMobileRxBytes()
+
+Return number of bytes received across mobile networks since device boot. 
+Counts packets across all mobile network interfaces, and always increases 
+monotonically since device boot. Statistics are measured at the network layer, 
+so they include both TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getMobileRxPackets()*
+
+public static long getMobileRxPackets()
+
+Return number of packets received across mobile networks since device boot. 
+Counts packets across all mobile network interfaces, and always increases 
+monotonically since device boot. Statistics are measured at the network layer, 
+so they include both TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getMobileTcpRxPackets()*
+
+public static long getMobileTcpRxPackets()
+
+
+
+
+
+*android.net.TrafficStats.getMobileTcpTxPackets()*
+
+public static long getMobileTcpTxPackets()
+
+
+
+
+
+*android.net.TrafficStats.getMobileTxBytes()*
+
+public static long getMobileTxBytes()
+
+Return number of bytes transmitted across mobile networks since device boot. 
+Counts packets across all mobile network interfaces, and always increases 
+monotonically since device boot. Statistics are measured at the network layer, 
+so they include both TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getMobileTxPackets()*
+
+public static long getMobileTxPackets()
+
+Return number of packets transmitted across mobile networks since device boot. 
+Counts packets across all mobile network interfaces, and always increases 
+monotonically since device boot. Statistics are measured at the network layer, 
+so they include both TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getRxBytes(String)*
+
+public static long getRxBytes(java.lang.String iface)
+
+
+
+
+
+*android.net.TrafficStats.getRxPackets(String)*
+
+public static long getRxPackets(java.lang.String iface)
+
+
+
+
+
+*android.net.TrafficStats.getThreadStatsTag()*
+
+public static int getThreadStatsTag()
+
+Get the active tag used when accounting (|java.net.Socket|) traffic originating 
+from the current thread. Only one active tag per thread is supported. 
+(|android.net.TrafficStats|) . 
+
+
+
+*android.net.TrafficStats.getTotalRxBytes()*
+
+public static long getTotalRxBytes()
+
+Return number of bytes received since device boot. Counts packets across all 
+network interfaces, and always increases monotonically since device boot. 
+Statistics are measured at the network layer, so they include both TCP and UDP 
+usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getTotalRxPackets()*
+
+public static long getTotalRxPackets()
+
+Return number of packets received since device boot. Counts packets across all 
+network interfaces, and always increases monotonically since device boot. 
+Statistics are measured at the network layer, so they include both TCP and UDP 
+usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getTotalTxBytes()*
+
+public static long getTotalTxBytes()
+
+Return number of bytes transmitted since device boot. Counts packets across all 
+network interfaces, and always increases monotonically since device boot. 
+Statistics are measured at the network layer, so they include both TCP and UDP 
+usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getTotalTxPackets()*
+
+public static long getTotalTxPackets()
+
+Return number of packets transmitted since device boot. Counts packets across 
+all network interfaces, and always increases monotonically since device boot. 
+Statistics are measured at the network layer, so they include both TCP and UDP 
+usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getTxBytes(String)*
+
+public static long getTxBytes(java.lang.String iface)
+
+
+
+
+
+*android.net.TrafficStats.getTxPackets(String)*
+
+public static long getTxPackets(java.lang.String iface)
+
+
+
+
+
+*android.net.TrafficStats.getUidRxBytes(int)*
+
+public static long getUidRxBytes(int uid)
+
+Return number of bytes received by the given UID since device boot. Counts 
+packets across all network interfaces, and always increases monotonically since 
+device boot. Statistics are measured at the network layer, so they include both 
+TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getUidRxPackets(int)*
+
+public static long getUidRxPackets(int uid)
+
+Return number of packets received by the given UID since device boot. Counts 
+packets across all network interfaces, and always increases monotonically since 
+device boot. Statistics are measured at the network layer, so they include both 
+TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getUidTcpRxBytes(int)*
+
+public static long getUidTcpRxBytes(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidTcpRxSegments(int)*
+
+public static long getUidTcpRxSegments(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidTcpTxBytes(int)*
+
+public static long getUidTcpTxBytes(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidTcpTxSegments(int)*
+
+public static long getUidTcpTxSegments(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidTxBytes(int)*
+
+public static long getUidTxBytes(int uid)
+
+Return number of bytes transmitted by the given UID since device boot. Counts 
+packets across all network interfaces, and always increases monotonically since 
+device boot. Statistics are measured at the network layer, so they include both 
+TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getUidTxPackets(int)*
+
+public static long getUidTxPackets(int uid)
+
+Return number of packets transmitted by the given UID since device boot. Counts 
+packets across all network interfaces, and always increases monotonically since 
+device boot. Statistics are measured at the network layer, so they include both 
+TCP and UDP usage. 
+
+Before (|android.os.Build.VERSION_CODES|) , this may return 
+(|android.net.TrafficStats|) on devices where statistics aren't available. 
+
+
+
+*android.net.TrafficStats.getUidUdpRxBytes(int)*
+
+public static long getUidUdpRxBytes(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidUdpRxPackets(int)*
+
+public static long getUidUdpRxPackets(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidUdpTxBytes(int)*
+
+public static long getUidUdpTxBytes(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.getUidUdpTxPackets(int)*
+
+public static long getUidUdpTxPackets(int uid)
+
+
+
+    Deprecated: Starting in {@link android.os.Build.VERSION_CODES#JELLY_BEAN_MR2},
+             transport layer statistics are no longer available, and will
+             always return {@link #UNSUPPORTED}.
+
+
+*android.net.TrafficStats.incrementOperationCount(int)*
+
+public static void incrementOperationCount(int operationCount)
+
+Increment count of network operations performed under the accounting tag 
+currently active on the calling thread. This can be used to derive 
+bytes-per-operation. 
+
+
+    operationCount - Number of operations to increment count by. 
+
+*android.net.TrafficStats.incrementOperationCount(int,int)*
+
+public static void incrementOperationCount(
+  int tag,
+  int operationCount)
+
+Increment count of network operations performed under the given accounting tag. 
+This can be used to derive bytes-per-operation. 
+
+
+    tag - Accounting tag used in {@link #setThreadStatsTag(int)}. 
+    operationCount - Number of operations to increment count by. 
+
+*android.net.TrafficStats.setThreadStatsTag(int)*
+
+public static void setThreadStatsTag(int tag)
+
+Set active tag to use when accounting (|java.net.Socket|) traffic originating 
+from the current thread. Only one active tag per thread is supported. 
+
+Changes only take effect during subsequent calls to 
+(|android.net.TrafficStats|) . 
+
+Tags between0xFFFFFF00and0xFFFFFFFFare reserved and used internally by system 
+services like (|android.app.DownloadManager|) when performing traffic on behalf 
+of an application. 
+
+
+
+*android.net.TrafficStats.setThreadStatsUid(int)*
+
+public static void setThreadStatsUid(int uid)
+
+Set specific UID to use when accounting (|java.net.Socket|) traffic originating 
+from the current thread. Designed for use when performing an operation on 
+behalf of another application. 
+
+Changes only take effect during subsequent calls to 
+(|android.net.TrafficStats|) . 
+
+To take effect, caller must hold (|android.Manifest.permission|) permission. 
+
+
+
+*android.net.TrafficStats.startDataProfiling(Context)*
+
+public static void startDataProfiling(android.content.Context context)
+
+Start profiling data usage for current UID. Only one profiling session can be 
+active at a time. 
+
+
+
+*android.net.TrafficStats.stopDataProfiling(Context)*
+
+public static |android.net.NetworkStats| stopDataProfiling(android.content.Context context)
+
+Stop profiling data usage for current UID. 
+
+
+
+    Returns: Detailed {@link NetworkStats} of data that occurred since last {@link 
+             #startDataProfiling(Context)} call. 
+
+*android.net.TrafficStats.tagSocket(Socket)*
+
+public static void tagSocket(java.net.Socket socket)
+  throws |java.net.SocketException|
+         
+Tag the given (|java.net.Socket|) with any statistics parameters active for the 
+current thread. Subsequent calls always replace any existing parameters. When 
+finished, call (|android.net.TrafficStats|) to remove statistics parameters. 
+
+
+
+*android.net.TrafficStats.untagSocket(Socket)*
+
+public static void untagSocket(java.net.Socket socket)
+  throws |java.net.SocketException|
+         
+Remove any statistics parameters from the given (|java.net.Socket|) . 
+
+
+
+

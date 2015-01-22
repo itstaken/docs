@@ -1,0 +1,213 @@
+*android.net.http.EventHandler* *EventHandler* Callbacks in this interface are m
+
+public interface interface EventHandler
+
+
+|android.net.http.EventHandler_Description|
+|android.net.http.EventHandler_Fields|
+|android.net.http.EventHandler_Constructors|
+|android.net.http.EventHandler_Methods|
+
+================================================================================
+
+*android.net.http.EventHandler_Fields*
+|int_android.net.http.EventHandler.ERROR|
+|int_android.net.http.EventHandler.ERROR_AUTH|
+|int_android.net.http.EventHandler.ERROR_BAD_URL|
+|int_android.net.http.EventHandler.ERROR_CONNECT|
+|int_android.net.http.EventHandler.ERROR_FAILED_SSL_HANDSHAKE|
+|int_android.net.http.EventHandler.ERROR_IO|
+|int_android.net.http.EventHandler.ERROR_LOOKUP|
+|int_android.net.http.EventHandler.ERROR_PROXYAUTH|
+|int_android.net.http.EventHandler.ERROR_REDIRECT_LOOP|
+|int_android.net.http.EventHandler.ERROR_TIMEOUT|
+|int_android.net.http.EventHandler.ERROR_UNSUPPORTED_AUTH_SCHEME|
+|int_android.net.http.EventHandler.ERROR_UNSUPPORTED_SCHEME|
+|int_android.net.http.EventHandler.FILE_ERROR|
+|int_android.net.http.EventHandler.FILE_NOT_FOUND_ERROR|
+|int_android.net.http.EventHandler.OK|
+|int_android.net.http.EventHandler.TOO_MANY_REQUESTS_ERROR|
+
+*android.net.http.EventHandler_Methods*
+|android.net.http.EventHandler.certificate(SslCertificate)|SSL certificate call
+|android.net.http.EventHandler.data(byte[],int)|An array containing all or part
+|android.net.http.EventHandler.endData()|Called when the document is completely
+|android.net.http.EventHandler.error(int,String)|There was trouble.
+|android.net.http.EventHandler.handleSslErrorRequest(SslError)|SSL certificate 
+|android.net.http.EventHandler.headers(Headers)|Called after all headers are su
+|android.net.http.EventHandler.status(int,int,int,String)|Called after status l
+
+*android.net.http.EventHandler_Description*
+
+Callbacks in this interface are made as an HTTP request is processed. The 
+normal order of callbacks is status(), headers(), then multiple data() then 
+endData(). handleSslErrorRequest(), if there is an SSL certificate error. 
+error() can occur anywhere in the transaction. 
+
+
+
+*int_android.net.http.EventHandler.ERROR*
+
+Generic error 
+
+
+*int_android.net.http.EventHandler.ERROR_AUTH*
+
+User authentication failed on server 
+
+
+*int_android.net.http.EventHandler.ERROR_BAD_URL*
+
+Bad URL 
+
+
+*int_android.net.http.EventHandler.ERROR_CONNECT*
+
+Could not connect to server 
+
+
+*int_android.net.http.EventHandler.ERROR_FAILED_SSL_HANDSHAKE*
+
+Failed to perform SSL handshake 
+
+
+*int_android.net.http.EventHandler.ERROR_IO*
+
+Failed to write to or read from server 
+
+
+*int_android.net.http.EventHandler.ERROR_LOOKUP*
+
+Server or proxy hostname lookup failed 
+
+
+*int_android.net.http.EventHandler.ERROR_PROXYAUTH*
+
+User authentication failed on proxy 
+
+
+*int_android.net.http.EventHandler.ERROR_REDIRECT_LOOP*
+
+Too many redirects 
+
+
+*int_android.net.http.EventHandler.ERROR_TIMEOUT*
+
+Connection timed out 
+
+
+*int_android.net.http.EventHandler.ERROR_UNSUPPORTED_AUTH_SCHEME*
+
+Unsupported authentication scheme (ie, not basic or digest) 
+
+
+*int_android.net.http.EventHandler.ERROR_UNSUPPORTED_SCHEME*
+
+Unsupported URI scheme (ie, not http, https, etc) 
+
+
+*int_android.net.http.EventHandler.FILE_ERROR*
+
+Generic file error for file:/// loads 
+
+
+*int_android.net.http.EventHandler.FILE_NOT_FOUND_ERROR*
+
+File not found error for file:/// loads 
+
+
+*int_android.net.http.EventHandler.OK*
+
+Success 
+
+
+*int_android.net.http.EventHandler.TOO_MANY_REQUESTS_ERROR*
+
+Too many requests queued 
+
+
+
+*android.net.http.EventHandler.certificate(SslCertificate)*
+
+public void certificate(android.net.http.SslCertificate certificate)
+
+SSL certificate callback called before resource request is made, which will be 
+null for insecure connection. 
+
+
+
+*android.net.http.EventHandler.data(byte[],int)*
+
+public void data(
+  byte[] data,
+  int len)
+
+An array containing all or part of the http body as read from the server. 
+
+
+    data - A byte array containing the content 
+    len - The length of valid content in data 
+
+Note: chunked and compressed encodings are handled within android.net.http. 
+       Decoded data is passed through this interface. 
+
+*android.net.http.EventHandler.endData()*
+
+public void endData()
+
+Called when the document is completely read. No more data() callbacks will be 
+made after this call 
+
+
+
+*android.net.http.EventHandler.error(int,String)*
+
+public void error(
+  int id,
+  java.lang.String description)
+
+There was trouble. 
+
+
+    id - One of the error codes defined below 
+    description - of error 
+
+*android.net.http.EventHandler.handleSslErrorRequest(SslError)*
+
+public boolean handleSslErrorRequest(android.net.http.SslError error)
+
+SSL certificate error callback. Handles SSL error(s) on the way up to the user. 
+The callback has to make sure that restartConnection() is called, otherwise the 
+connection will be suspended indefinitely. 
+
+
+
+    Returns: True if the callback can handle the error, which means it will call 
+             restartConnection() to unblock the thread later, otherwise return 
+             false. 
+
+*android.net.http.EventHandler.headers(Headers)*
+
+public void headers(android.net.http.Headers headers)
+
+Called after all headers are successfully processed. 
+
+
+
+*android.net.http.EventHandler.status(int,int,int,String)*
+
+public void status(
+  int major_version,
+  int minor_version,
+  int code,
+  java.lang.String reason_phrase)
+
+Called after status line has been sucessfully processed. 
+
+
+    major_version - HTTP version advertised by server. major is the part before the "." 
+    minor_version - HTTP version advertised by server. minor is the part after the "." 
+    code - HTTP Status code. See RFC 2616. 
+    reason_phrase - Textual explanation sent by server 
+
+

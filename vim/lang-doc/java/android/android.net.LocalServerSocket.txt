@@ -1,0 +1,95 @@
+*android.net.LocalServerSocket* *LocalServerSocket* non-standard class for creat
+
+public class LocalServerSocket
+  extends    |java.lang.Object|
+
+|android.net.LocalServerSocket_Description|
+|android.net.LocalServerSocket_Fields|
+|android.net.LocalServerSocket_Constructors|
+|android.net.LocalServerSocket_Methods|
+
+================================================================================
+
+*android.net.LocalServerSocket_Constructors*
+|android.net.LocalServerSocket(FileDescriptor)|Create a LocalServerSocket from 
+|android.net.LocalServerSocket(String)|Crewates a new server socket listening a
+
+*android.net.LocalServerSocket_Methods*
+|android.net.LocalServerSocket.accept()|Accepts a new connection to the socket.
+|android.net.LocalServerSocket.close()|Closes server socket.
+|android.net.LocalServerSocket.getFileDescriptor()|Returns file descriptor or n
+|android.net.LocalServerSocket.getLocalSocketAddress()|Obtains the socket's loc
+
+*android.net.LocalServerSocket_Description*
+
+non-standard class for creating inbound UNIX-domain socket on the Android 
+platform, this is created in the Linux non-filesystem namespace. 
+
+On simulator platforms, this may be created in a temporary directory on the 
+filesystem 
+
+
+
+*android.net.LocalServerSocket(FileDescriptor)*
+
+public LocalServerSocket(java.io.FileDescriptor fd)
+  throws |java.io.IOException|
+         
+Create a LocalServerSocket from a file descriptor that's already been created 
+and bound. listen() will be called immediately on it. Used for cases where file 
+descriptors are passed in via environment variables 
+
+    fd - bound file descriptor 
+
+*android.net.LocalServerSocket(String)*
+
+public LocalServerSocket(java.lang.String name)
+  throws |java.io.IOException|
+         
+Crewates a new server socket listening at specified name. On the Android 
+platform, the name is created in the Linux abstract namespace (instead of on 
+the filesystem). 
+
+    name - address for socket 
+
+*android.net.LocalServerSocket.accept()*
+
+public |android.net.LocalSocket| accept()
+  throws |java.io.IOException|
+         
+Accepts a new connection to the socket. Blocks until a new connection arrives. 
+
+
+
+    Returns: a socket representing the new connection. 
+
+*android.net.LocalServerSocket.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Closes server socket. 
+
+
+
+*android.net.LocalServerSocket.getFileDescriptor()*
+
+public |java.io.FileDescriptor| getFileDescriptor()
+
+Returns file descriptor or null if not yet open/already closed 
+
+
+
+    Returns: 
+
+*android.net.LocalServerSocket.getLocalSocketAddress()*
+
+public |android.net.LocalSocketAddress| getLocalSocketAddress()
+
+Obtains the socket's local address 
+
+
+
+    Returns: local address 
+
+

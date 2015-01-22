@@ -1,0 +1,620 @@
+*android.database.CursorWindow* *CursorWindow* A buffer containing multiple curs
+
+public class CursorWindow
+  extends    |android.database.sqlite.SQLiteClosable|
+  implements |android.os.Parcelable|
+
+|android.database.CursorWindow_Description|
+|android.database.CursorWindow_Fields|
+|android.database.CursorWindow_Constructors|
+|android.database.CursorWindow_Methods|
+
+================================================================================
+
+*android.database.CursorWindow_Fields*
+|android.os.Parcelable.Creator<android.database.CursorWindow>_android.database.CursorWindow.CREATOR|
+|int_android.database.CursorWindow.mWindowPtr|
+
+*android.database.CursorWindow_Constructors*
+|android.database.CursorWindow(boolean)|Creates a new empty cursor window.
+|android.database.CursorWindow(String)|Creates a new empty cursor window and gi
+
+*android.database.CursorWindow_Methods*
+|android.database.CursorWindow.allocRow()|Allocates a new row at the end of thi
+|android.database.CursorWindow.clear()|Clears out the existing contents of the 
+|android.database.CursorWindow.copyStringToBuffer(int,int,CharArrayBuffer)|Copi
+|android.database.CursorWindow.describeContents()|
+|android.database.CursorWindow.finalize()|
+|android.database.CursorWindow.freeLastRow()|Frees the last row in this cursor 
+|android.database.CursorWindow.getBlob(int,int)|Gets the value of the field at 
+|android.database.CursorWindow.getDouble(int,int)|Gets the value of the field a
+|android.database.CursorWindow.getFloat(int,int)|Gets the value of the field at
+|android.database.CursorWindow.getInt(int,int)|Gets the value of the field at t
+|android.database.CursorWindow.getLong(int,int)|Gets the value of the field at 
+|android.database.CursorWindow.getName()|Gets the name of this cursor window, n
+|android.database.CursorWindow.getNumRows()|Gets the number of rows in this win
+|android.database.CursorWindow.getShort(int,int)|Gets the value of the field at
+|android.database.CursorWindow.getStartPosition()|Gets the start position of th
+|android.database.CursorWindow.getString(int,int)|Gets the value of the field a
+|android.database.CursorWindow.getType(int,int)|Returns the type of the field a
+|android.database.CursorWindow.isBlob(int,int)|Returns true if the field at the
+|android.database.CursorWindow.isFloat(int,int)|Returns true if the field at th
+|android.database.CursorWindow.isLong(int,int)|Returns true if the field at the
+|android.database.CursorWindow.isNull(int,int)|Returns true if the field at the
+|android.database.CursorWindow.isString(int,int)|Returns true if the field at t
+|android.database.CursorWindow.newFromParcel(Parcel)|
+|android.database.CursorWindow.onAllReferencesReleased()|
+|android.database.CursorWindow.putBlob(byte[],int,int)|Copies a byte array into
+|android.database.CursorWindow.putDouble(double,int,int)|Puts a double-precisio
+|android.database.CursorWindow.putLong(long,int,int)|Puts a long integer into t
+|android.database.CursorWindow.putNull(int,int)|Puts a null value into the fiel
+|android.database.CursorWindow.putString(String,int,int)|Copies a string into t
+|android.database.CursorWindow.setNumColumns(int)|Sets the number of columns in
+|android.database.CursorWindow.setStartPosition(int)|Sets the start position of
+|android.database.CursorWindow.toString()|
+|android.database.CursorWindow.writeToParcel(Parcel,int)|
+
+*android.database.CursorWindow_Description*
+
+A buffer containing multiple cursor rows. 
+
+A (|android.database.CursorWindow|) is read-write when initially created and 
+used locally. When sent to a remote process (by writing it to a 
+(|android.os.Parcel|) ), the remote process receives a read-only view of the 
+cursor window. Typically the cursor window will be allocated by the producer, 
+filled with data, and then sent to the consumer for reading. 
+
+
+
+*android.os.Parcelable.Creator<android.database.CursorWindow>_android.database.CursorWindow.CREATOR*
+
+
+
+
+*int_android.database.CursorWindow.mWindowPtr*
+
+The native CursorWindow object pointer. (FOR INTERNAL USE ONLY) 
+
+
+
+*android.database.CursorWindow(boolean)*
+
+public CursorWindow(boolean localWindow)
+
+Creates a new empty cursor window. 
+
+The cursor initially has no rows or columns. Call 
+(|android.database.CursorWindow|) to set the number of columns before adding 
+any rows to the cursor. 
+
+    localWindow - True if this window will be used in this process only, false if it might be 
+       sent to another processes. This argument is ignored. 
+
+*android.database.CursorWindow(String)*
+
+public CursorWindow(java.lang.String name)
+
+Creates a new empty cursor window and gives it a name. 
+
+The cursor initially has no rows or columns. Call 
+(|android.database.CursorWindow|) to set the number of columns before adding 
+any rows to the cursor. 
+
+    name - The name of the cursor window, or null if none. 
+
+*android.database.CursorWindow.allocRow()*
+
+public boolean allocRow()
+
+Allocates a new row at the end of this cursor window. 
+
+
+
+    Returns: True if successful, false if the cursor window is out of memory. 
+
+*android.database.CursorWindow.clear()*
+
+public void clear()
+
+Clears out the existing contents of the window, making it safe to reuse for new 
+data. 
+
+The start position ( (|android.database.CursorWindow|) ), number of rows ( 
+(|android.database.CursorWindow|) ), and number of columns in the cursor are 
+all reset to zero. 
+
+
+
+*android.database.CursorWindow.copyStringToBuffer(int,int,CharArrayBuffer)*
+
+public void copyStringToBuffer(
+  int row,
+  int column,
+  android.database.CharArrayBuffer buffer)
+
+Copies the text of the field at the specified row and column index into a 
+(|android.database.CharArrayBuffer|) . 
+
+The buffer is populated as follows: 
+
+If the buffer is too small for the value to be copied, then it is automatically 
+resized. If the field is of type (|android.database.Cursor|) , then the buffer 
+is set to an empty string. If the field is of type (|android.database.Cursor|) 
+, then the buffer is set to the contents of the string. If the field is of type 
+(|android.database.Cursor|) , then the buffer is set to a string representation 
+of the integer in decimal, obtained by formatting the value with the printf 
+family of functions using format specifier %lld. If the field is of type 
+(|android.database.Cursor|) , then the buffer is set to a string representation 
+of the floating-point value in decimal, obtained by formatting the value with 
+the printf family of functions using format specifier %g. If the field is of 
+type (|android.database.Cursor|) , then a 
+(|android.database.sqlite.SQLiteException|) is thrown. 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+    buffer - The {@link CharArrayBuffer} to hold the string. It is automatically resized if 
+       the requested string is larger than the buffer's current capacity. 
+
+*android.database.CursorWindow.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.database.CursorWindow.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.database.CursorWindow.freeLastRow()*
+
+public void freeLastRow()
+
+Frees the last row in this cursor window. 
+
+
+
+*android.database.CursorWindow.getBlob(int,int)*
+
+public byte[] getBlob(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a byte 
+array. 
+
+The result is determined as follows: 
+
+If the field is of type (|android.database.Cursor|) , then the result is null. 
+If the field is of type (|android.database.Cursor|) , then the result is the 
+blob value. If the field is of type (|android.database.Cursor|) , then the 
+result is the array of bytes that make up the internal representation of the 
+string value. If the field is of type (|android.database.Cursor|) or 
+(|android.database.Cursor|) , then a 
+(|android.database.sqlite.SQLiteException|) is thrown. 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as a byte array. 
+
+*android.database.CursorWindow.getDouble(int,int)*
+
+public double getDouble(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a double. 
+
+The result is determined as follows: 
+
+If the field is of type (|android.database.Cursor|) , then the result is 0.0. 
+If the field is of type (|android.database.Cursor|) , then the result is the 
+value obtained by parsing the string value with strtod. If the field is of type 
+(|android.database.Cursor|) , then the result is the integer value converted to 
+a double. If the field is of type (|android.database.Cursor|) , then the result 
+is the double value. If the field is of type (|android.database.Cursor|) , then 
+a (|android.database.sqlite.SQLiteException|) is thrown. 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as a double. 
+
+*android.database.CursorWindow.getFloat(int,int)*
+
+public float getFloat(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a float. 
+
+The result is determined by invoking (|android.database.CursorWindow|) and 
+converting the result to float. 
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as an float. 
+
+*android.database.CursorWindow.getInt(int,int)*
+
+public int getInt(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as an int. 
+
+The result is determined by invoking (|android.database.CursorWindow|) and 
+converting the result to int. 
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as an int. 
+
+*android.database.CursorWindow.getLong(int,int)*
+
+public long getLong(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a long. 
+
+The result is determined as follows: 
+
+If the field is of type (|android.database.Cursor|) , then the result is 0L. If 
+the field is of type (|android.database.Cursor|) , then the result is the value 
+obtained by parsing the string value with strtoll. If the field is of type 
+(|android.database.Cursor|) , then the result is the long value. If the field 
+is of type (|android.database.Cursor|) , then the result is the floating-point 
+value converted to a long. If the field is of type (|android.database.Cursor|) 
+, then a (|android.database.sqlite.SQLiteException|) is thrown. 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as a long. 
+
+*android.database.CursorWindow.getName()*
+
+public |java.lang.String| getName()
+
+Gets the name of this cursor window, never null. 
+
+
+
+*android.database.CursorWindow.getNumRows()*
+
+public int getNumRows()
+
+Gets the number of rows in this window. 
+
+
+
+    Returns: The number of rows in this cursor window. 
+
+*android.database.CursorWindow.getShort(int,int)*
+
+public short getShort(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a short. 
+
+The result is determined by invoking (|android.database.CursorWindow|) and 
+converting the result to short. 
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as a short. 
+
+*android.database.CursorWindow.getStartPosition()*
+
+public int getStartPosition()
+
+Gets the start position of this cursor window. 
+
+The start position is the zero-based index of the first row that this window 
+contains relative to the entire result set of the (|android.database.Cursor|) . 
+
+
+
+    Returns: The zero-based start position. 
+
+*android.database.CursorWindow.getString(int,int)*
+
+public |java.lang.String| getString(
+  int row,
+  int column)
+
+Gets the value of the field at the specified row and column index as a string. 
+
+The result is determined as follows: 
+
+If the field is of type (|android.database.Cursor|) , then the result is null. 
+If the field is of type (|android.database.Cursor|) , then the result is the 
+string value. If the field is of type (|android.database.Cursor|) , then the 
+result is a string representation of the integer in decimal, obtained by 
+formatting the value with the printf family of functions using format specifier 
+%lld. If the field is of type (|android.database.Cursor|) , then the result is 
+a string representation of the floating-point value in decimal, obtained by 
+formatting the value with the printf family of functions using format specifier 
+%g. If the field is of type (|android.database.Cursor|) , then a 
+(|android.database.sqlite.SQLiteException|) is thrown. 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The value of the field as a string. 
+
+*android.database.CursorWindow.getType(int,int)*
+
+public int getType(
+  int row,
+  int column)
+
+Returns the type of the field at the specified row and column index. 
+
+The returned field types are: 
+
+(|android.database.Cursor|) (|android.database.Cursor|) 
+(|android.database.Cursor|) (|android.database.Cursor|) 
+(|android.database.Cursor|) 
+
+
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: The field type. 
+
+*android.database.CursorWindow.isBlob(int,int)*
+
+public boolean isBlob(
+  int row,
+  int column)
+
+Returns true if the field at the specified row and column index has type 
+(|android.database.Cursor|) or (|android.database.Cursor|) . 
+
+    Deprecated: Use {@link #getType(int, int)} instead.
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if the field has type {@link Cursor#FIELD_TYPE_BLOB} or {@link 
+             Cursor#FIELD_TYPE_NULL}. 
+
+*android.database.CursorWindow.isFloat(int,int)*
+
+public boolean isFloat(
+  int row,
+  int column)
+
+Returns true if the field at the specified row and column index has type 
+(|android.database.Cursor|) . 
+
+    Deprecated: Use {@link #getType(int, int)} instead.
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if the field has type {@link Cursor#FIELD_TYPE_FLOAT}. 
+
+*android.database.CursorWindow.isLong(int,int)*
+
+public boolean isLong(
+  int row,
+  int column)
+
+Returns true if the field at the specified row and column index has type 
+(|android.database.Cursor|) . 
+
+    Deprecated: Use {@link #getType(int, int)} instead.
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if the field has type {@link Cursor#FIELD_TYPE_INTEGER}. 
+
+*android.database.CursorWindow.isNull(int,int)*
+
+public boolean isNull(
+  int row,
+  int column)
+
+Returns true if the field at the specified row and column index has type 
+(|android.database.Cursor|) . 
+
+    Deprecated: Use {@link #getType(int, int)} instead.
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if the field has type {@link Cursor#FIELD_TYPE_NULL}. 
+
+*android.database.CursorWindow.isString(int,int)*
+
+public boolean isString(
+  int row,
+  int column)
+
+Returns true if the field at the specified row and column index has type 
+(|android.database.Cursor|) or (|android.database.Cursor|) . 
+
+    Deprecated: Use {@link #getType(int, int)} instead.
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if the field has type {@link Cursor#FIELD_TYPE_STRING} or {@link 
+             Cursor#FIELD_TYPE_NULL}. 
+
+*android.database.CursorWindow.newFromParcel(Parcel)*
+
+public static |android.database.CursorWindow| newFromParcel(android.os.Parcel p)
+
+
+
+
+
+*android.database.CursorWindow.onAllReferencesReleased()*
+
+protected void onAllReferencesReleased()
+
+
+
+
+
+*android.database.CursorWindow.putBlob(byte[],int,int)*
+
+public boolean putBlob(
+  byte[] value,
+  int row,
+  int column)
+
+Copies a byte array into the field at the specified row and column index. 
+
+
+    value - The value to store. 
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.putDouble(double,int,int)*
+
+public boolean putDouble(
+  double value,
+  int row,
+  int column)
+
+Puts a double-precision floating point value into the field at the specified 
+row and column index. 
+
+
+    value - The value to store. 
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.putLong(long,int,int)*
+
+public boolean putLong(
+  long value,
+  int row,
+  int column)
+
+Puts a long integer into the field at the specified row and column index. 
+
+
+    value - The value to store. 
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.putNull(int,int)*
+
+public boolean putNull(
+  int row,
+  int column)
+
+Puts a null value into the field at the specified row and column index. 
+
+
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.putString(String,int,int)*
+
+public boolean putString(
+  java.lang.String value,
+  int row,
+  int column)
+
+Copies a string into the field at the specified row and column index. 
+
+
+    value - The value to store. 
+    row - The zero-based row index. 
+    column - The zero-based column index. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.setNumColumns(int)*
+
+public boolean setNumColumns(int columnNum)
+
+Sets the number of columns in this window. 
+
+This method must be called before any rows are added to the window, otherwise 
+it will fail to set the number of columns if it differs from the current number 
+of columns. 
+
+
+    columnNum - The new number of columns. 
+
+    Returns: True if successful. 
+
+*android.database.CursorWindow.setStartPosition(int)*
+
+public void setStartPosition(int pos)
+
+Sets the start position of this cursor window. 
+
+The start position is the zero-based index of the first row that this window 
+contains relative to the entire result set of the (|android.database.Cursor|) . 
+
+
+    pos - The new zero-based start position. 
+
+*android.database.CursorWindow.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.database.CursorWindow.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

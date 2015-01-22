@@ -1,0 +1,50 @@
+*android.provider.ContactsContract.RawContacts.DisplayPhoto* *ContactsContract.RawContacts.DisplayPhoto* 
+
+public static final class ContactsContract.RawContacts.DisplayPhoto
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.RawContacts.DisplayPhoto_Description|
+|android.provider.ContactsContract.RawContacts.DisplayPhoto_Fields|
+|android.provider.ContactsContract.RawContacts.DisplayPhoto_Constructors|
+|android.provider.ContactsContract.RawContacts.DisplayPhoto_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.RawContacts.DisplayPhoto_Fields*
+|java.lang.String_android.provider.ContactsContract.RawContacts.DisplayPhoto.CONTENT_DIRECTORY|
+
+*android.provider.ContactsContract.RawContacts.DisplayPhoto_Description*
+
+A sub-directory of a single raw contact that represents its primary display 
+photo. To access this directory append 
+(|android.provider.ContactsContract.RawContacts.DisplayPhoto|) to the raw 
+contact URI. The resulting URI represents an image file, and should be 
+interacted with using ContentResolver.openAssetFileDescriptor. 
+
+Note that this sub-directory also supports opening the photo as an asset file 
+in write mode. Callers can create or replace the primary photo associated with 
+this raw contact by opening the asset file and writing the full-size photo 
+contents into it. When the file is closed, the image will be parsed, sized down 
+if necessary for the full-size display photo and thumbnail dimensions, and 
+stored. 
+
+Usage example: 
+
+public void writeDisplayPhoto(long rawContactId, byte[] photo) { Uri 
+rawContactPhotoUri = Uri.withAppendedPath( 
+ContentUris.withAppendedId(RawContacts.CONTENT_URI, rawContactId), 
+RawContacts.DisplayPhoto.CONTENT_DIRECTORY); try { AssetFileDescriptor fd = 
+getContentResolver().openAssetFileDescriptor(rawContactPhotoUri, "rw"); 
+OutputStream os = fd.createOutputStream(); os.write(photo); os.close(); 
+fd.close(); } catch (IOException e) { // Handle error cases. } } 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.RawContacts.DisplayPhoto.CONTENT_DIRECTORY*
+
+The directory twig for this sub-table 
+
+
+

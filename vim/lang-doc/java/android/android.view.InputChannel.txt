@@ -1,0 +1,152 @@
+*android.view.InputChannel* *InputChannel* An input channel specifies the file d
+
+public final class InputChannel
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.InputChannel_Description|
+|android.view.InputChannel_Fields|
+|android.view.InputChannel_Constructors|
+|android.view.InputChannel_Methods|
+
+================================================================================
+
+*android.view.InputChannel_Fields*
+|android.os.Parcelable.Creator<android.view.InputChannel>_android.view.InputChannel.CREATOR|
+
+*android.view.InputChannel_Constructors*
+|android.view.InputChannel()|Creates an uninitialized input channel.
+
+*android.view.InputChannel_Methods*
+|android.view.InputChannel.describeContents()|
+|android.view.InputChannel.dispose()|Disposes the input channel.
+|android.view.InputChannel.dup()|Duplicates the input channel.
+|android.view.InputChannel.finalize()|
+|android.view.InputChannel.getName()|Gets the name of the input channel.
+|android.view.InputChannel.openInputChannelPair(String)|Creates a new input cha
+|android.view.InputChannel.readFromParcel(Parcel)|
+|android.view.InputChannel.toString()|
+|android.view.InputChannel.transferTo(InputChannel)|Transfers ownership of the 
+|android.view.InputChannel.writeToParcel(Parcel,int)|
+
+*android.view.InputChannel_Description*
+
+An input channel specifies the file descriptors used to send input events to a 
+window in another process. It is Parcelable so that it can be sent to the 
+process that is to receive events. Only one thread should be reading from an 
+InputChannel at a time. 
+
+
+
+*android.os.Parcelable.Creator<android.view.InputChannel>_android.view.InputChannel.CREATOR*
+
+
+
+
+
+*android.view.InputChannel()*
+
+public InputChannel()
+
+Creates an uninitialized input channel. It can be initialized by reading from a 
+Parcel or by transferring the state of another input channel into this one. 
+
+
+*android.view.InputChannel.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.InputChannel.dispose()*
+
+public void dispose()
+
+Disposes the input channel. Explicitly releases the reference this object is 
+holding on the input channel. When all references are released, the input 
+channel will be closed. 
+
+
+
+*android.view.InputChannel.dup()*
+
+public |android.view.InputChannel| dup()
+
+Duplicates the input channel. 
+
+
+
+*android.view.InputChannel.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.InputChannel.getName()*
+
+public |java.lang.String| getName()
+
+Gets the name of the input channel. 
+
+
+
+    Returns: The input channel name. 
+
+*android.view.InputChannel.openInputChannelPair(String)*
+
+public static |android.view.InputChannel|[] openInputChannelPair(java.lang.String name)
+
+Creates a new input channel pair. One channel should be provided to the input 
+dispatcher and the other to the application's input queue. 
+
+
+    name - The descriptive (non-unique) name of the channel pair. 
+
+    Returns: A pair of input channels. The first channel is designated as the server channel 
+             and should be used to publish input events. The second channel is 
+             designated as the client channel and should be used to consume 
+             input events. 
+
+*android.view.InputChannel.readFromParcel(Parcel)*
+
+public void readFromParcel(android.os.Parcel in)
+
+
+
+
+
+*android.view.InputChannel.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.view.InputChannel.transferTo(InputChannel)*
+
+public void transferTo(android.view.InputChannel outParameter)
+
+Transfers ownership of the internal state of the input channel to another 
+instance and invalidates this instance. This is used to pass an input channel 
+as an out parameter in a binder call. 
+
+
+    other - The other input channel instance. 
+
+*android.view.InputChannel.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

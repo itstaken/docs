@@ -1,0 +1,79 @@
+*android.os.Debug.InstructionCount* *Debug.InstructionCount* API for gathering a
+
+public static class Debug.InstructionCount
+  extends    |java.lang.Object|
+
+|android.os.Debug.InstructionCount_Description|
+|android.os.Debug.InstructionCount_Fields|
+|android.os.Debug.InstructionCount_Constructors|
+|android.os.Debug.InstructionCount_Methods|
+
+================================================================================
+
+*android.os.Debug.InstructionCount_Constructors*
+|android.os.Debug.InstructionCount()|
+
+*android.os.Debug.InstructionCount_Methods*
+|android.os.Debug.InstructionCount.collect()|Collect instruction counts.
+|android.os.Debug.InstructionCount.globalMethodInvocations()|Return the total n
+|android.os.Debug.InstructionCount.globalTotal()|Return the total number of ins
+|android.os.Debug.InstructionCount.resetAndStart()|Reset counters and ensure co
+
+*android.os.Debug.InstructionCount_Description*
+
+API for gathering and querying instruction counts. 
+
+Example usage: 
+
+Debug.InstructionCount icount = new Debug.InstructionCount(); 
+icount.resetAndStart(); [... do lots of stuff ...] if (icount.collect()) { 
+System.out.println("Total instructions executed: " + icount.globalTotal()); 
+System.out.println("Method invocations: " + icount.globalMethodInvocations()); 
+} 
+
+
+
+*android.os.Debug.InstructionCount()*
+
+public Debug.InstructionCount()
+
+
+
+
+*android.os.Debug.InstructionCount.collect()*
+
+public boolean collect()
+
+Collect instruction counts. May or may not stop the counting process. 
+
+
+
+*android.os.Debug.InstructionCount.globalMethodInvocations()*
+
+public int globalMethodInvocations()
+
+Return the total number of method-invocation instructions executed globally. 
+
+
+
+*android.os.Debug.InstructionCount.globalTotal()*
+
+public int globalTotal()
+
+Return the total number of instructions executed globally (i.e. in all 
+threads). 
+
+
+
+*android.os.Debug.InstructionCount.resetAndStart()*
+
+public boolean resetAndStart()
+
+Reset counters and ensure counts are running. Counts may have already been 
+running. 
+
+
+
+    Returns: true if counting was started 
+
+

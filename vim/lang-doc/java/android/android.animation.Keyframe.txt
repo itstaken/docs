@@ -1,0 +1,267 @@
+*android.animation.Keyframe* *Keyframe* This class holds a time/value pair for a
+
+public abstract class Keyframe
+  extends    |java.lang.Object|
+  implements |java.lang.Cloneable|
+
+|android.animation.Keyframe_Description|
+|android.animation.Keyframe_Fields|
+|android.animation.Keyframe_Constructors|
+|android.animation.Keyframe_Methods|
+
+================================================================================
+
+*android.animation.Keyframe_Constructors*
+|android.animation.Keyframe()|
+
+*android.animation.Keyframe_Methods*
+|android.animation.Keyframe.clone()|
+|android.animation.Keyframe.getFraction()|Gets the time for this keyframe, as a
+|android.animation.Keyframe.getInterpolator()|Gets the optional interpolator fo
+|android.animation.Keyframe.getType()|Gets the type of keyframe.
+|android.animation.Keyframe.getValue()|Gets the value for this Keyframe.
+|android.animation.Keyframe.hasValue()|Indicates whether this keyframe has a va
+|android.animation.Keyframe.ofFloat(float)|Constructs a Keyframe object with th
+|android.animation.Keyframe.ofFloat(float,float)|Constructs a Keyframe object w
+|android.animation.Keyframe.ofInt(float)|Constructs a Keyframe object with the 
+|android.animation.Keyframe.ofInt(float,int)|Constructs a Keyframe object with 
+|android.animation.Keyframe.ofObject(float)|Constructs a Keyframe object with t
+|android.animation.Keyframe.ofObject(float,Object)|Constructs a Keyframe object
+|android.animation.Keyframe.setFraction(float)|Sets the time for this keyframe,
+|android.animation.Keyframe.setInterpolator(TimeInterpolator)|Sets the optional
+|android.animation.Keyframe.setValue(Object)|Sets the value for this Keyframe.
+
+*android.animation.Keyframe_Description*
+
+This class holds a time/value pair for an animation. The Keyframe class is used 
+by (|android.animation.ValueAnimator|) to define the values that the animation 
+target will have over the course of the animation. As the time proceeds from 
+one keyframe to the other, the value of the target object will animate between 
+the value at the previous keyframe and the value at the next keyframe. Each 
+keyframe also holds an optional (|android.animation.TimeInterpolator|) object, 
+which defines the time interpolation over the intervalue preceding the 
+keyframe. 
+
+The Keyframe class itself is abstract. The type-specific factory methods will 
+return a subclass of Keyframe specific to the type of value being stored. This 
+is done to improve performance when dealing with the most common cases (e.g., 
+float and int values). Other types will fall into a more general Keyframe class 
+that treats its values as Objects. Unless your animation requires dealing with 
+a custom type or a data structure that needs to be animated directly (and 
+evaluated using an implementation of (|android.animation.TypeEvaluator|) ), you 
+should stick to using float and int as animations using those types have lower 
+runtime overhead than other types. 
+
+
+
+*android.animation.Keyframe()*
+
+public Keyframe()
+
+
+
+
+*android.animation.Keyframe.clone()*
+
+public abstract |android.animation.Keyframe| clone()
+
+
+
+
+
+*android.animation.Keyframe.getFraction()*
+
+public float getFraction()
+
+Gets the time for this keyframe, as a fraction of the overall animation 
+duration. 
+
+
+
+    Returns: The time associated with this keyframe, as a fraction of the overall animation 
+             duration. This should be a value between 0 and 1. 
+
+*android.animation.Keyframe.getInterpolator()*
+
+public |android.animation.TimeInterpolator| getInterpolator()
+
+Gets the optional interpolator for this Keyframe. A value of null indicates 
+that there is no interpolation, which is the same as linear interpolation. 
+
+
+
+    Returns: The optional interpolator for this Keyframe. 
+
+*android.animation.Keyframe.getType()*
+
+public |java.lang.Class| getType()
+
+Gets the type of keyframe. This information is used by ValueAnimator to 
+determine the type of (|android.animation.TypeEvaluator|) to use when 
+calculating values between keyframes. The type is based on the type of Keyframe 
+created. 
+
+
+
+    Returns: The type of the value stored in the Keyframe. 
+
+*android.animation.Keyframe.getValue()*
+
+public abstract |java.lang.Object| getValue()
+
+Gets the value for this Keyframe. 
+
+
+
+    Returns: The value for this Keyframe. 
+
+*android.animation.Keyframe.hasValue()*
+
+public boolean hasValue()
+
+Indicates whether this keyframe has a valid value. This method is called 
+internally when an (|android.animation.ObjectAnimator|) first starts; keyframes 
+without values are assigned values at that time by deriving the value for the 
+property from the target object. 
+
+
+
+    Returns: boolean Whether this object has a value assigned. 
+
+*android.animation.Keyframe.ofFloat(float)*
+
+public static |android.animation.Keyframe| ofFloat(float fraction)
+
+Constructs a Keyframe object with the given time. The value at this time will 
+be derived from the target object when the animation first starts (note that 
+this implies that keyframes with no initial value must be used as part of an 
+(|android.animation.ObjectAnimator|) ). The time defines the time, as a 
+proportion of an overall animation's duration, at which the value will hold 
+true for the animation. The value for the animation between keyframes will be 
+calculated as an interpolation between the values at those keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+
+*android.animation.Keyframe.ofFloat(float,float)*
+
+public static |android.animation.Keyframe| ofFloat(
+  float fraction,
+  float value)
+
+Constructs a Keyframe object with the given time and value. The time defines 
+the time, as a proportion of an overall animation's duration, at which the 
+value will hold true for the animation. The value for the animation between 
+keyframes will be calculated as an interpolation between the values at those 
+keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+    value - The value that the object will animate to as the animation time approaches the 
+       time in this keyframe, and the the value animated from as the time 
+       passes the time in this keyframe. 
+
+*android.animation.Keyframe.ofInt(float)*
+
+public static |android.animation.Keyframe| ofInt(float fraction)
+
+Constructs a Keyframe object with the given time. The value at this time will 
+be derived from the target object when the animation first starts (note that 
+this implies that keyframes with no initial value must be used as part of an 
+(|android.animation.ObjectAnimator|) ). The time defines the time, as a 
+proportion of an overall animation's duration, at which the value will hold 
+true for the animation. The value for the animation between keyframes will be 
+calculated as an interpolation between the values at those keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+
+*android.animation.Keyframe.ofInt(float,int)*
+
+public static |android.animation.Keyframe| ofInt(
+  float fraction,
+  int value)
+
+Constructs a Keyframe object with the given time and value. The time defines 
+the time, as a proportion of an overall animation's duration, at which the 
+value will hold true for the animation. The value for the animation between 
+keyframes will be calculated as an interpolation between the values at those 
+keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+    value - The value that the object will animate to as the animation time approaches the 
+       time in this keyframe, and the the value animated from as the time 
+       passes the time in this keyframe. 
+
+*android.animation.Keyframe.ofObject(float)*
+
+public static |android.animation.Keyframe| ofObject(float fraction)
+
+Constructs a Keyframe object with the given time. The value at this time will 
+be derived from the target object when the animation first starts (note that 
+this implies that keyframes with no initial value must be used as part of an 
+(|android.animation.ObjectAnimator|) ). The time defines the time, as a 
+proportion of an overall animation's duration, at which the value will hold 
+true for the animation. The value for the animation between keyframes will be 
+calculated as an interpolation between the values at those keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+
+*android.animation.Keyframe.ofObject(float,Object)*
+
+public static |android.animation.Keyframe| ofObject(
+  float fraction,
+  java.lang.Object value)
+
+Constructs a Keyframe object with the given time and value. The time defines 
+the time, as a proportion of an overall animation's duration, at which the 
+value will hold true for the animation. The value for the animation between 
+keyframes will be calculated as an interpolation between the values at those 
+keyframes. 
+
+
+    fraction - The time, expressed as a value between 0 and 1, representing the fraction of 
+       time elapsed of the overall animation duration. 
+    value - The value that the object will animate to as the animation time approaches the 
+       time in this keyframe, and the the value animated from as the time 
+       passes the time in this keyframe. 
+
+*android.animation.Keyframe.setFraction(float)*
+
+public void setFraction(float fraction)
+
+Sets the time for this keyframe, as a fraction of the overall animation 
+duration. 
+
+
+    fraction - time associated with this keyframe, as a fraction of the overall animation 
+       duration. This should be a value between 0 and 1. 
+
+*android.animation.Keyframe.setInterpolator(TimeInterpolator)*
+
+public void setInterpolator(android.animation.TimeInterpolator interpolator)
+
+Sets the optional interpolator for this Keyframe. A value of null indicates 
+that there is no interpolation, which is the same as linear interpolation. 
+
+
+
+    Returns: The optional interpolator for this Keyframe. 
+
+*android.animation.Keyframe.setValue(Object)*
+
+public abstract void setValue(java.lang.Object value)
+
+Sets the value for this Keyframe. 
+
+
+    value - value for this Keyframe. 
+
+

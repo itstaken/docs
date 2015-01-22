@@ -1,0 +1,52 @@
+*android.provider.ContactsContract.RawContacts.Entity* *ContactsContract.RawContacts.Entity* 
+
+public static final class ContactsContract.RawContacts.Entity
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.ContactsContract.DataColumns|
+
+|android.provider.ContactsContract.RawContacts.Entity_Description|
+|android.provider.ContactsContract.RawContacts.Entity_Fields|
+|android.provider.ContactsContract.RawContacts.Entity_Constructors|
+|android.provider.ContactsContract.RawContacts.Entity_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.RawContacts.Entity_Fields*
+|java.lang.String_android.provider.ContactsContract.RawContacts.Entity.CONTENT_DIRECTORY|
+|java.lang.String_android.provider.ContactsContract.RawContacts.Entity.DATA_ID|
+
+*android.provider.ContactsContract.RawContacts.Entity_Description*
+
+A sub-directory of a single raw contact that contains all of its 
+(|android.provider.ContactsContract.Data|) rows. To access this directory 
+append (|android.provider.ContactsContract.RawContacts.Entity|) to the raw 
+contact URI. See (|android.provider.ContactsContract.RawContactsEntity|) for a 
+stand-alone table containing the same data. 
+
+Entity has two ID fields: 
+(|android.provider.ContactsContract.RawContacts.Entity|) for the raw contact 
+and (|android.provider.ContactsContract.RawContacts.Entity|) for the data rows. 
+Entity always contains at least one row, even if there are no actual data rows. 
+In this case the (|android.provider.ContactsContract.RawContacts.Entity|) field 
+will be null. 
+
+Using Entity should be preferred to using two separate queries: RawContacts 
+followed by Data. The reason is that Entity reads all data for a raw contact in 
+one transaction, so there is no possibility of the data changing between the 
+two queries. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.RawContacts.Entity.CONTENT_DIRECTORY*
+
+The directory twig for this sub-table 
+
+
+*java.lang.String_android.provider.ContactsContract.RawContacts.Entity.DATA_ID*
+
+The ID of the data row. The value will be null if this raw contact has no data 
+rows. Type: INTEGER 
+
+
+

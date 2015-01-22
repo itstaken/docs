@@ -1,0 +1,276 @@
+*android.util.LruCache* *LruCache* A cache that holds strong references to a lim
+
+public class LruCache<K,V>
+  extends    |java.lang.Object|
+
+|android.util.LruCache_Description|
+|android.util.LruCache_Fields|
+|android.util.LruCache_Constructors|
+|android.util.LruCache_Methods|
+
+================================================================================
+
+*android.util.LruCache_Constructors*
+|android.util.LruCache(int)|
+
+*android.util.LruCache_Methods*
+|android.util.LruCache.create(K)|Called after a cache miss to compute a value f
+|android.util.LruCache.createCount()|Returns the number of times#create(Object)
+|android.util.LruCache.entryRemoved(boolean,K,V,V)|Called for entries that have
+|android.util.LruCache.evictAll()|Clear the cache, calling#entryRemovedon each 
+|android.util.LruCache.evictionCount()|Returns the number of values that have b
+|android.util.LruCache.get(K)|Returns the value forkeyif it exists in the cache
+|android.util.LruCache.hitCount()|Returns the number of times#getreturned a val
+|android.util.LruCache.maxSize()|For caches that do not override#sizeOf, this r
+|android.util.LruCache.missCount()|Returns the number of times#getreturned null
+|android.util.LruCache.put(K,V)|Cachesvalueforkey.
+|android.util.LruCache.putCount()|Returns the number of times#putwas called.
+|android.util.LruCache.remove(K)|Removes the entry forkeyif it exists.
+|android.util.LruCache.resize(int)|Sets the size of the cache.
+|android.util.LruCache.size()|For caches that do not override#sizeOf, this retu
+|android.util.LruCache.sizeOf(K,V)|Returns the size of the entry forkeyandvalue
+|android.util.LruCache.snapshot()|Returns a copy of the current contents of the
+|android.util.LruCache.toString()|
+|android.util.LruCache.trimToSize(int)|Remove the eldest entries until the tota
+
+*android.util.LruCache_Description*
+
+A cache that holds strong references to a limited number of values. Each time a 
+value is accessed, it is moved to the head of a queue. When a value is added to 
+a full cache, the value at the end of that queue is evicted and may become 
+eligible for garbage collection. 
+
+If your cached values hold resources that need to be explicitly released, 
+override (|android.util.LruCache|) . 
+
+If a cache miss should be computed on demand for the corresponding keys, 
+override (|android.util.LruCache|) . This simplifies the calling code, allowing 
+it to assume a value will always be returned, even when there's a cache miss. 
+
+By default, the cache size is measured in the number of entries. Override 
+(|android.util.LruCache|) to size the cache in different units. For example, 
+this cache is limited to 4MiB of bitmaps: 
+
+int cacheSize = 4 * 1024 * 1024; // 4MiB LruCache bitmapCache = new 
+LruCache(cacheSize) { protected int sizeOf(String key, Bitmap value) { return 
+value.getByteCount(); } } 
+
+This class is thread-safe. Perform multiple cache operations atomically by 
+synchronizing on the cache: synchronized (cache) { if (cache.get(key) == null) 
+{ cache.put(key, value); } } 
+
+This class does not allow null to be used as a key or value. A return value of 
+null from (|android.util.LruCache|) , (|android.util.LruCache|) or 
+(|android.util.LruCache|) is unambiguous: the key was not in the cache. 
+
+This class appeared in Android 3.1 (Honeycomb MR1); it's available as part of 
+Android's Support Package for earlier releases. 
+
+
+
+*android.util.LruCache(int)*
+
+public LruCache(int maxSize)
+
+
+
+    maxSize - for caches that do not override {@link #sizeOf}, this is the maximum number of 
+       entries in the cache. For all other caches, this is the maximum sum of 
+       the sizes of the entries in this cache. 
+
+*android.util.LruCache.create(K)*
+
+protected |V| create(K key)
+
+Called after a cache miss to compute a value for the corresponding key. Returns 
+the computed value or null if no value can be computed. The default 
+implementation returns null. 
+
+The method is called without synchronization: other threads may access the 
+cache while this method is executing. 
+
+If a value forkeyexists in the cache when this method returns, the created 
+value will be released with (|android.util.LruCache|) and discarded. This can 
+occur when multiple threads request the same key at the same time (causing 
+multiple values to be created), or when one thread calls 
+(|android.util.LruCache|) while another is creating a value for the same key. 
+
+
+
+*android.util.LruCache.createCount()*
+
+public final synchronized int createCount()
+
+Returns the number of times (|android.util.LruCache|) returned a value. 
+
+
+
+*android.util.LruCache.entryRemoved(boolean,K,V,V)*
+
+protected void entryRemoved(
+  boolean evicted,
+  K key,
+  V oldValue,
+  V newValue)
+
+Called for entries that have been evicted or removed. This method is invoked 
+when a value is evicted to make space, removed by a call to 
+(|android.util.LruCache|) , or replaced by a call to (|android.util.LruCache|) 
+. The default implementation does nothing. 
+
+The method is called without synchronization: other threads may access the 
+cache while this method is executing. 
+
+
+    evicted - true if the entry is being removed to make space, false if the removal was 
+       caused by a {@link #put} or {@link #remove}. 
+    newValue - the new value for {@code key}, if it exists. If non-null, this removal was 
+       caused by a {@link #put}. Otherwise it was caused by an eviction or a 
+       {@link #remove}. 
+
+*android.util.LruCache.evictAll()*
+
+public final void evictAll()
+
+Clear the cache, calling (|android.util.LruCache|) on each removed entry. 
+
+
+
+*android.util.LruCache.evictionCount()*
+
+public final synchronized int evictionCount()
+
+Returns the number of values that have been evicted. 
+
+
+
+*android.util.LruCache.get(K)*
+
+public final |V| get(K key)
+
+Returns the value forkeyif it exists in the cache or can be created by#create. 
+If a value was returned, it is moved to the head of the queue. This returns 
+null if a value is not cached and cannot be created. 
+
+
+
+*android.util.LruCache.hitCount()*
+
+public final synchronized int hitCount()
+
+Returns the number of times (|android.util.LruCache|) returned a value that was 
+already present in the cache. 
+
+
+
+*android.util.LruCache.maxSize()*
+
+public final synchronized int maxSize()
+
+For caches that do not override (|android.util.LruCache|) , this returns the 
+maximum number of entries in the cache. For all other caches, this returns the 
+maximum sum of the sizes of the entries in this cache. 
+
+
+
+*android.util.LruCache.missCount()*
+
+public final synchronized int missCount()
+
+Returns the number of times (|android.util.LruCache|) returned null or required 
+a new value to be created. 
+
+
+
+*android.util.LruCache.put(K,V)*
+
+public final |V| put(
+  K key,
+  V value)
+
+Cachesvalueforkey. The value is moved to the head of the queue. 
+
+
+
+    Returns: the previous value mapped by {@code key}. 
+
+*android.util.LruCache.putCount()*
+
+public final synchronized int putCount()
+
+Returns the number of times (|android.util.LruCache|) was called. 
+
+
+
+*android.util.LruCache.remove(K)*
+
+public final |V| remove(K key)
+
+Removes the entry forkeyif it exists. 
+
+
+
+    Returns: the previous value mapped by {@code key}. 
+
+*android.util.LruCache.resize(int)*
+
+public void resize(int maxSize)
+
+Sets the size of the cache. 
+
+
+    maxSize - The new maximum size. 
+
+*android.util.LruCache.size()*
+
+public final synchronized int size()
+
+For caches that do not override (|android.util.LruCache|) , this returns the 
+number of entries in the cache. For all other caches, this returns the sum of 
+the sizes of the entries in this cache. 
+
+
+
+*android.util.LruCache.sizeOf(K,V)*
+
+protected int sizeOf(
+  K key,
+  V value)
+
+Returns the size of the entry forkeyandvaluein user-defined units. The default 
+implementation returns 1 so that size is the number of entries and max size is 
+the maximum number of entries. 
+
+An entry's size must not change while it is in the cache. 
+
+
+
+*android.util.LruCache.snapshot()*
+
+public final synchronized |java.util.Map|<K,V> snapshot()
+
+Returns a copy of the current contents of the cache, ordered from least 
+recently accessed to most recently accessed. 
+
+
+
+*android.util.LruCache.toString()*
+
+public final synchronized |java.lang.String| toString()
+
+
+
+
+
+*android.util.LruCache.trimToSize(int)*
+
+public void trimToSize(int maxSize)
+
+Remove the eldest entries until the total of remaining entries is at or below 
+the requested size. 
+
+
+    maxSize - the maximum size of the cache before returning. May be -1 to evict even 0-sized 
+       elements. 
+
+

@@ -1,0 +1,330 @@
+*android.animation.Animator* *Animator* This is the superclass for classes which
+
+public abstract class Animator
+  extends    |java.lang.Object|
+  implements |java.lang.Cloneable|
+
+|android.animation.Animator_Description|
+|android.animation.Animator_Fields|
+|android.animation.Animator_Constructors|
+|android.animation.Animator_Methods|
+
+================================================================================
+
+*android.animation.Animator_Constructors*
+|android.animation.Animator()|
+
+*android.animation.Animator_Methods*
+|android.animation.Animator.addListener(Animator.AnimatorListener)|Adds a liste
+|android.animation.Animator.addPauseListener(Animator.AnimatorPauseListener)|Ad
+|android.animation.Animator.cancel()|Cancels the animation.
+|android.animation.Animator.clone()|
+|android.animation.Animator.end()|Ends the animation.
+|android.animation.Animator.getDuration()|Gets the duration of the animation.
+|android.animation.Animator.getInterpolator()|Returns the timing interpolator t
+|android.animation.Animator.getListeners()|Gets the set ofandroid.animation.Ani
+|android.animation.Animator.getStartDelay()|The amount of time, in milliseconds
+|android.animation.Animator.isPaused()|Returns whether this animator is current
+|android.animation.Animator.isRunning()|Returns whether this Animator is curren
+|android.animation.Animator.isStarted()|Returns whether this Animator has been 
+|android.animation.Animator.pause()|Pauses a running animation.
+|android.animation.Animator.removeAllListeners()|Removes all#addListener(androi
+|android.animation.Animator.removeListener(Animator.AnimatorListener)|Removes a
+|android.animation.Animator.removePauseListener(Animator.AnimatorPauseListener)|
+|android.animation.Animator.resume()|Resumes a paused animation, causing the an
+|android.animation.Animator.setDuration(long)|Sets the duration of the animatio
+|android.animation.Animator.setInterpolator(TimeInterpolator)|The time interpol
+|android.animation.Animator.setStartDelay(long)|The amount of time, in millisec
+|android.animation.Animator.setTarget(Object)|Sets the target object whose prop
+|android.animation.Animator.setupEndValues()|This method tells the object to us
+|android.animation.Animator.setupStartValues()|This method tells the object to 
+|android.animation.Animator.start()|Starts this animation.
+
+*android.animation.Animator_Description*
+
+This is the superclass for classes which provide basic support for animations 
+which can be started, ended, and have AnimatorListeners added to them. 
+
+
+
+*android.animation.Animator()*
+
+public Animator()
+
+
+
+
+*android.animation.Animator.addListener(Animator.AnimatorListener)*
+
+public void addListener(android.animation.Animator.AnimatorListener listener)
+
+Adds a listener to the set of listeners that are sent events through the life 
+of an animation, such as start, repeat, and end. 
+
+
+    listener - the listener to be added to the current set of listeners for this animation. 
+
+*android.animation.Animator.addPauseListener(Animator.AnimatorPauseListener)*
+
+public void addPauseListener(android.animation.Animator.AnimatorPauseListener listener)
+
+Adds a pause listener to this animator. 
+
+
+    listener - the listener to be added to the current set of pause listeners for this 
+       animation. 
+
+*android.animation.Animator.cancel()*
+
+public void cancel()
+
+Cancels the animation. Unlike (|android.animation.Animator|) , cancel() causes 
+the animation to stop in its tracks, sending an 
+(|android.animation.Animator.AnimatorListener|) to its listeners, followed by 
+an (|android.animation.Animator.AnimatorListener|) message. 
+
+This method must be called on the thread that is running the animation. 
+
+
+
+*android.animation.Animator.clone()*
+
+public |android.animation.Animator| clone()
+
+
+
+
+
+*android.animation.Animator.end()*
+
+public void end()
+
+Ends the animation. This causes the animation to assign the end value of the 
+property being animated, then calling the 
+(|android.animation.Animator.AnimatorListener|) method on its listeners. 
+
+This method must be called on the thread that is running the animation. 
+
+
+
+*android.animation.Animator.getDuration()*
+
+public abstract long getDuration()
+
+Gets the duration of the animation. 
+
+
+
+    Returns: The length of the animation, in milliseconds. 
+
+*android.animation.Animator.getInterpolator()*
+
+public |android.animation.TimeInterpolator| getInterpolator()
+
+Returns the timing interpolator that this animation uses. 
+
+
+
+    Returns: The timing interpolator for this animation. 
+
+*android.animation.Animator.getListeners()*
+
+public |java.util.ArrayList|<AnimatorListener> getListeners()
+
+Gets the set of (|android.animation.Animator.AnimatorListener|) objects that 
+are currently listening for events on this Animator object. 
+
+
+
+    Returns: ArrayList The set of listeners. 
+
+*android.animation.Animator.getStartDelay()*
+
+public abstract long getStartDelay()
+
+The amount of time, in milliseconds, to delay processing the animation after 
+(|android.animation.Animator|) is called. 
+
+
+
+    Returns: the number of milliseconds to delay running the animation 
+
+*android.animation.Animator.isPaused()*
+
+public boolean isPaused()
+
+Returns whether this animator is currently in a paused state. 
+
+
+
+    Returns: True if the animator is currently paused, false otherwise. 
+
+*android.animation.Animator.isRunning()*
+
+public abstract boolean isRunning()
+
+Returns whether this Animator is currently running (having been started and 
+gone past any initial startDelay period and not yet ended). 
+
+
+
+    Returns: Whether the Animator is running. 
+
+*android.animation.Animator.isStarted()*
+
+public boolean isStarted()
+
+Returns whether this Animator has been started and not yet ended. This state is 
+a superset of the state of (|android.animation.Animator|) , because an Animator 
+with a nonzero startDelay(|android.animation.Animator|) will return true for 
+(|android.animation.Animator|) during the delay phase, whereas 
+(|android.animation.Animator|) will return true only after the delay phase is 
+complete. 
+
+
+
+    Returns: Whether the Animator has been started and not yet ended. 
+
+*android.animation.Animator.pause()*
+
+public void pause()
+
+Pauses a running animation. This method should only be called on the same 
+thread on which the animation was started. If the animation has not yet been 
+started(|android.animation.Animator|) or has since ended, then the call is 
+ignored. Paused animations can be resumed by calling 
+(|android.animation.Animator|) . 
+
+
+
+*android.animation.Animator.removeAllListeners()*
+
+public void removeAllListeners()
+
+Removes all listeners(|android.animation.Animator|) and 
+pauseListeners(|android.animation.Animator|) from this object. 
+
+
+
+*android.animation.Animator.removeListener(Animator.AnimatorListener)*
+
+public void removeListener(android.animation.Animator.AnimatorListener listener)
+
+Removes a listener from the set listening to this animation. 
+
+
+    listener - the listener to be removed from the current set of listeners for this 
+       animation. 
+
+*android.animation.Animator.removePauseListener(Animator.AnimatorPauseListener)*
+
+public void removePauseListener(android.animation.Animator.AnimatorPauseListener listener)
+
+Removes a pause listener from the set listening to this animation. 
+
+
+    listener - the listener to be removed from the current set of pause listeners for this 
+       animation. 
+
+*android.animation.Animator.resume()*
+
+public void resume()
+
+Resumes a paused animation, causing the animator to pick up where it left off 
+when it was paused. This method should only be called on the same thread on 
+which the animation was started. Calls to resume() on an animator that is not 
+currently paused will be ignored. 
+
+
+
+*android.animation.Animator.setDuration(long)*
+
+public abstract |android.animation.Animator| setDuration(long duration)
+
+Sets the duration of the animation. 
+
+
+    duration - The length of the animation, in milliseconds. 
+
+*android.animation.Animator.setInterpolator(TimeInterpolator)*
+
+public abstract void setInterpolator(android.animation.TimeInterpolator value)
+
+The time interpolator used in calculating the elapsed fraction of the 
+animation. The interpolator determines whether the animation runs with linear 
+or non-linear motion, such as acceleration and deceleration. The default value 
+is (|android.view.animation.AccelerateDecelerateInterpolator|) . 
+
+
+    value - the interpolator to be used by this animation 
+
+*android.animation.Animator.setStartDelay(long)*
+
+public abstract void setStartDelay(long startDelay)
+
+The amount of time, in milliseconds, to delay processing the animation after 
+(|android.animation.Animator|) is called. 
+
+
+    startDelay - The amount of the delay, in milliseconds 
+
+*android.animation.Animator.setTarget(Object)*
+
+public void setTarget(java.lang.Object target)
+
+Sets the target object whose property will be animated by this animation. Not 
+all subclasses operate on target objects (for example, 
+(|android.animation.ValueAnimator|) , but this method is on the superclass for 
+the convenience of dealing generically with those subclasses that do handle 
+targets. 
+
+
+    target - The object being animated 
+
+*android.animation.Animator.setupEndValues()*
+
+public void setupEndValues()
+
+This method tells the object to use appropriate information to extract ending 
+values for the animation. For example, a AnimatorSet object will pass this call 
+to its child objects to tell them to set up the values. A ObjectAnimator object 
+will use the information it has about its target object and 
+PropertyValuesHolder objects to get the start values for its properties. A 
+ValueAnimator object will ignore the request since it does not have enough 
+information (such as a target object) to gather these values. 
+
+
+
+*android.animation.Animator.setupStartValues()*
+
+public void setupStartValues()
+
+This method tells the object to use appropriate information to extract starting 
+values for the animation. For example, a AnimatorSet object will pass this call 
+to its child objects to tell them to set up the values. A ObjectAnimator object 
+will use the information it has about its target object and 
+PropertyValuesHolder objects to get the start values for its properties. A 
+ValueAnimator object will ignore the request since it does not have enough 
+information (such as a target object) to gather these values. 
+
+
+
+*android.animation.Animator.start()*
+
+public void start()
+
+Starts this animation. If the animation has a nonzero startDelay, the animation 
+will start running after that delay elapses. A non-delayed animation will have 
+its initial value(s) set immediately, followed by calls to 
+(|android.animation.Animator.AnimatorListener|) for any listeners of this 
+animator. 
+
+The animation started by calling this method will be run on the thread that 
+called this method. This thread should have a Looper on it (a runtime exception 
+will be thrown if this is not the case). Also, if the animation will animate 
+properties of objects in the view hierarchy, then the calling thread should be 
+the UI thread for that view hierarchy. 
+
+
+
+

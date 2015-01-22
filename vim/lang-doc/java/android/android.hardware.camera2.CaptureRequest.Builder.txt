@@ -1,0 +1,126 @@
+*android.hardware.camera2.CaptureRequest.Builder* *CaptureRequest.Builder* A bui
+
+public static final class CaptureRequest.Builder
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CaptureRequest.Builder_Description|
+|android.hardware.camera2.CaptureRequest.Builder_Fields|
+|android.hardware.camera2.CaptureRequest.Builder_Constructors|
+|android.hardware.camera2.CaptureRequest.Builder_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CaptureRequest.Builder_Constructors*
+|android.hardware.camera2.CaptureRequest.Builder(CameraMetadataNative)|Initiali
+
+*android.hardware.camera2.CaptureRequest.Builder_Methods*
+|android.hardware.camera2.CaptureRequest.Builder.addTarget(Surface)|Add a surfa
+|android.hardware.camera2.CaptureRequest.Builder.build()|Build a request using 
+|android.hardware.camera2.CaptureRequest.Builder.get(CameraMetadata.Key<T>)|Get
+|android.hardware.camera2.CaptureRequest.Builder.isEmpty()|
+|android.hardware.camera2.CaptureRequest.Builder.removeTarget(Surface)|Remove a
+|android.hardware.camera2.CaptureRequest.Builder.set(CameraMetadata.Key<T>,T)|S
+|android.hardware.camera2.CaptureRequest.Builder.setTag(Object)|Set a tag for t
+
+*android.hardware.camera2.CaptureRequest.Builder_Description*
+
+A builder for capture requests. 
+
+To obtain a builder instance, use the (|android.hardware.camera2.CameraDevice|) 
+method, which initializes the request fields to one of the templates defined in 
+(|android.hardware.camera2.CameraDevice|) . 
+
+
+
+*android.hardware.camera2.CaptureRequest.Builder(CameraMetadataNative)*
+
+public CaptureRequest.Builder(android.hardware.camera2.impl.CameraMetadataNative template)
+
+Initialize the builder using the template; the request takes ownership of the 
+template. 
+
+
+*android.hardware.camera2.CaptureRequest.Builder.addTarget(Surface)*
+
+public void addTarget(android.view.Surface outputTarget)
+
+Add a surface to the list of targets for this request 
+
+The Surface added must be one of the surfaces included in the most recent call 
+to (|android.hardware.camera2.CameraDevice|) , when the request is given to the 
+camera device. 
+
+Adding a target more than once has no effect. 
+
+
+    outputTarget - Surface to use as an output target for this request 
+
+*android.hardware.camera2.CaptureRequest.Builder.build()*
+
+public |android.hardware.camera2.CaptureRequest| build()
+
+Build a request using the current target Surfaces and settings. 
+
+
+
+    Returns: A new capture request instance, ready for submission to the camera device. 
+
+*android.hardware.camera2.CaptureRequest.Builder.get(CameraMetadata.Key<T>)*
+
+public |T| get(android.hardware.camera2.CameraMetadata.Key<T> key)
+
+Get a capture request field value. The field definitions can be found in 
+(|android.hardware.camera2.CaptureRequest|) . 
+
+
+    key - The metadata field to read. 
+
+    Returns: The value of that key, or {@code null} if the field is not set. 
+
+*android.hardware.camera2.CaptureRequest.Builder.isEmpty()*
+
+public boolean isEmpty()
+
+
+
+
+
+*android.hardware.camera2.CaptureRequest.Builder.removeTarget(Surface)*
+
+public void removeTarget(android.view.Surface outputTarget)
+
+Remove a surface from the list of targets for this request. 
+
+Removing a target that is not currently added has no effect. 
+
+
+    outputTarget - Surface to use as an output target for this request 
+
+*android.hardware.camera2.CaptureRequest.Builder.set(CameraMetadata.Key<T>,T)*
+
+public void set(
+  android.hardware.camera2.CameraMetadata.Key<T> key,
+  T value)
+
+Set a capture request field to a value. The field definitions can be found in 
+(|android.hardware.camera2.CaptureRequest|) . 
+
+
+    key - The metadata field to write. 
+    value - The value to set the field to, which must be of a matching type to the key. 
+
+*android.hardware.camera2.CaptureRequest.Builder.setTag(Object)*
+
+public void setTag(java.lang.Object tag)
+
+Set a tag for this request. 
+
+This tag is not used for anything by the camera device, but can be used by an 
+application to easily identify a CaptureRequest when it is returned by 
+CaptureListener.onCaptureCompleted(|android.hardware.camera2.CameraDevice.CaptureListener|)
+
+
+
+    tag - an arbitrary Object to store with this request 
+
+

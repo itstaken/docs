@@ -1,0 +1,123 @@
+*android.print.pdf.PrintedPdfDocument* *PrintedPdfDocument* This class is a help
+
+public class PrintedPdfDocument
+  extends    |PdfDocument|
+
+|android.print.pdf.PrintedPdfDocument_Description|
+|android.print.pdf.PrintedPdfDocument_Fields|
+|android.print.pdf.PrintedPdfDocument_Constructors|
+|android.print.pdf.PrintedPdfDocument_Methods|
+
+================================================================================
+
+*android.print.pdf.PrintedPdfDocument_Constructors*
+|android.print.pdf.PrintedPdfDocument(Context,PrintAttributes)|Creates a new do
+
+*android.print.pdf.PrintedPdfDocument_Methods*
+|android.print.pdf.PrintedPdfDocument.getPageContentRect()|Gets the content rec
+|android.print.pdf.PrintedPdfDocument.getPageHeight()|Gets the page height.
+|android.print.pdf.PrintedPdfDocument.getPageWidth()|Gets the page width.
+|android.print.pdf.PrintedPdfDocument.startPage(int)|Starts a new page.
+
+*android.print.pdf.PrintedPdfDocument_Description*
+
+This class is a helper for creating a PDF file for given print attributes. It 
+is useful for implementing printing via the native Android graphics APIs. 
+
+This class computes the page width, page height, and content rectangle from the 
+provided print attributes and these precomputed values can be accessed via 
+(|android.print.pdf.PrintedPdfDocument|) , 
+(|android.print.pdf.PrintedPdfDocument|) , and 
+(|android.print.pdf.PrintedPdfDocument|) , respectively. The 
+(|android.print.pdf.PrintedPdfDocument|) methods creates pages whose 
+(|PageInfo|) is initialized with the precomputed values for width, height, and 
+content rectangle. 
+
+A typical use of the APIs looks like this: 
+
+
+
+// open a new document PrintedPdfDocument document = new 
+PrintedPdfDocument(context, printAttributes); 
+
+// start a page Page page = document.startPage(0); 
+
+// draw something on the page View content = getContentView(); 
+content.draw(page.getCanvas()); 
+
+// finish the page document.finishPage(page); . . . // add more pages . . . // 
+write the document content document.writeTo(getOutputStream()); 
+
+//close the document document.close(); 
+
+
+
+*android.print.pdf.PrintedPdfDocument(Context,PrintAttributes)*
+
+public PrintedPdfDocument(
+  android.content.Context context,
+  android.print.PrintAttributes attributes)
+
+Creates a new document. 
+
+Note: You must close the document after you are done by calling 
+(|android.print.pdf.PrintedPdfDocument|) . 
+
+    context - Context instance for accessing resources. 
+    attributes - The print attributes. 
+
+*android.print.pdf.PrintedPdfDocument.getPageContentRect()*
+
+public Rect getPageContentRect()
+
+Gets the content rectangle. This is the area of the page that contains printed 
+data and is relative to the page top left. 
+
+
+
+    Returns: The content rectangle. 
+
+*android.print.pdf.PrintedPdfDocument.getPageHeight()*
+
+public int getPageHeight()
+
+Gets the page height. 
+
+
+
+    Returns: The page height in PostScript points (1/72th of an inch). 
+
+*android.print.pdf.PrintedPdfDocument.getPageWidth()*
+
+public int getPageWidth()
+
+Gets the page width. 
+
+
+
+    Returns: The page width in PostScript points (1/72th of an inch). 
+
+*android.print.pdf.PrintedPdfDocument.startPage(int)*
+
+public Page startPage(int pageNumber)
+
+Starts a new page. The page is created using width, height and content 
+rectangle computed from the print attributes passed in the constructor and the 
+given page number to create an appropriate (|PageInfo|) . 
+
+After the page is created you can draw arbitrary content on the page's canvas 
+which you can get by calling Page.getCanvas()(|Page|) . After you are done 
+drawing the content you should finish the page by calling 
+(|android.print.pdf.PrintedPdfDocument|) . After the page is finished you 
+should no longer access the page or its canvas. 
+
+Note: Do not call this method after (|android.print.pdf.PrintedPdfDocument|) . 
+Also do not call this method if the last page returned by this method is not 
+finished by calling (|android.print.pdf.PrintedPdfDocument|) . 
+
+
+    pageNumber - The page number. Must be a positive value. 
+
+    Returns: A blank page. 
+
+

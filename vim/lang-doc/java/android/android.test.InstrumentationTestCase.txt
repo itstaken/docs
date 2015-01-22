@@ -1,0 +1,190 @@
+*android.test.InstrumentationTestCase* *InstrumentationTestCase* A test case tha
+
+public class InstrumentationTestCase
+  extends    |TestCase|
+
+|android.test.InstrumentationTestCase_Description|
+|android.test.InstrumentationTestCase_Fields|
+|android.test.InstrumentationTestCase_Constructors|
+|android.test.InstrumentationTestCase_Methods|
+
+================================================================================
+
+*android.test.InstrumentationTestCase_Constructors*
+|android.test.InstrumentationTestCase()|
+
+*android.test.InstrumentationTestCase_Methods*
+|android.test.InstrumentationTestCase.getInstrumentation()|Inheritors can acces
+|android.test.InstrumentationTestCase.injectInsrumentation(Instrumentation)|Inj
+|android.test.InstrumentationTestCase.injectInstrumentation(Instrumentation)|In
+|android.test.InstrumentationTestCase.launchActivity(String,Class<T>,Bundle)|Ut
+|android.test.InstrumentationTestCase.launchActivityWithIntent(String,Class<T>,Intent)|
+|android.test.InstrumentationTestCase.runTest()|Runs the current unit test.
+|android.test.InstrumentationTestCase.runTestOnUiThread(Runnable)|Helper for ru
+|android.test.InstrumentationTestCase.sendKeys(int...)|Sends a series of key ev
+|android.test.InstrumentationTestCase.sendKeys(String)|Sends a series of key ev
+|android.test.InstrumentationTestCase.sendRepeatedKeys(int...)|Sends a series o
+|android.test.InstrumentationTestCase.tearDown()|Make sure all resources are cl
+
+*android.test.InstrumentationTestCase_Description*
+
+A test case that has access to (|android.app.Instrumentation|) . 
+
+
+
+*android.test.InstrumentationTestCase()*
+
+public InstrumentationTestCase()
+
+
+
+
+*android.test.InstrumentationTestCase.getInstrumentation()*
+
+public |android.app.Instrumentation| getInstrumentation()
+
+Inheritors can access the instrumentation using this. 
+
+
+
+    Returns: instrumentation 
+
+*android.test.InstrumentationTestCase.injectInsrumentation(Instrumentation)*
+
+public void injectInsrumentation(android.app.Instrumentation instrumentation)
+
+Injects instrumentation into this test case. This method is called by the test 
+runner during test setup. 
+
+    Deprecated: Incorrect spelling,
+ use {@link #injectInstrumentation(android.app.Instrumentation)} instead.
+
+    instrumentation - the instrumentation to use with this instance 
+
+*android.test.InstrumentationTestCase.injectInstrumentation(Instrumentation)*
+
+public void injectInstrumentation(android.app.Instrumentation instrumentation)
+
+Injects instrumentation into this test case. This method is called by the test 
+runner during test setup. 
+
+
+    instrumentation - the instrumentation to use with this instance 
+
+*android.test.InstrumentationTestCase.launchActivity(String,Class<T>,Bundle)*
+
+public final |T| launchActivity(
+  java.lang.String pkg,
+  java.lang.Class<T> activityCls,
+  android.os.Bundle extras)
+
+Utility method for launching an activity. 
+
+The (|android.content.Intent|) used to launch the Activity is: action = 
+(|android.content.Intent|) extras = null, unless a custom bundle is provided 
+here All other fields are null or empty. 
+
+NOTE: The parameter pkg must refer to the package identifier of the package 
+hosting the activity to be launched, which is specified in the 
+AndroidManifest.xml file. This is not necessarily the same as the java package 
+name. 
+
+
+    pkg - The package hosting the activity to be launched. 
+    activityCls - The activity class to launch. 
+    extras - Optional extra stuff to pass to the activity. 
+
+    Returns: The activity, or null if non launched. 
+
+*android.test.InstrumentationTestCase.launchActivityWithIntent(String,Class<T>,Intent)*
+
+public final |T| launchActivityWithIntent(
+  java.lang.String pkg,
+  java.lang.Class<T> activityCls,
+  android.content.Intent intent)
+
+Utility method for launching an activity with a specific Intent. 
+
+NOTE: The parameter pkg must refer to the package identifier of the package 
+hosting the activity to be launched, which is specified in the 
+AndroidManifest.xml file. This is not necessarily the same as the java package 
+name. 
+
+
+    pkg - The package hosting the activity to be launched. 
+    activityCls - The activity class to launch. 
+    intent - The intent to launch with 
+
+    Returns: The activity, or null if non launched. 
+
+*android.test.InstrumentationTestCase.runTest()*
+
+protected void runTest()
+  throws |java.lang.Throwable|
+         
+Runs the current unit test. If the unit test is annotated with 
+(|android.test.UiThreadTest|) , the test is run on the UI thread. 
+
+
+
+*android.test.InstrumentationTestCase.runTestOnUiThread(Runnable)*
+
+public void runTestOnUiThread(java.lang.Runnable r)
+  throws |java.lang.Throwable|
+         
+Helper for running portions of a test on the UI thread. 
+
+Note, in most cases it is simpler to annotate the test method with 
+(|android.test.UiThreadTest|) , which will run the entire test method on the UI 
+thread. Use this method if you need to switch in and out of the UI thread to 
+perform your test. 
+
+
+    r - runnable containing test code in the {@link Runnable#run()} method 
+
+*android.test.InstrumentationTestCase.sendKeys(int...)*
+
+public void sendKeys(int[] keys)
+
+Sends a series of key events through instrumentation and waits for idle. For 
+instance: sendKeys(KEYCODE_DPAD_LEFT, KEYCODE_DPAD_CENTER). 
+
+
+    keys - The series of key codes to send through instrumentation. 
+
+*android.test.InstrumentationTestCase.sendKeys(String)*
+
+public void sendKeys(java.lang.String keysSequence)
+
+Sends a series of key events through instrumentation and waits for idle. The 
+sequence of keys is a string containing the key names as specified in KeyEvent, 
+without the KEYCODE_ prefix. For instance: sendKeys("DPAD_LEFT A B C 
+DPAD_CENTER"). Each key can be repeated by using the N* prefix. For instance, 
+to send two KEYCODE_DPAD_LEFT, use the following: sendKeys("2*DPAD_LEFT"). 
+
+
+    keysSequence - The sequence of keys. 
+
+*android.test.InstrumentationTestCase.sendRepeatedKeys(int...)*
+
+public void sendRepeatedKeys(int[] keys)
+
+Sends a series of key events through instrumentation and waits for idle. Each 
+key code must be preceded by the number of times the key code must be sent. For 
+instance: sendRepeatedKeys(1, KEYCODE_DPAD_CENTER, 2, KEYCODE_DPAD_LEFT). 
+
+
+    keys - The series of key repeats and codes to send through instrumentation. 
+
+*android.test.InstrumentationTestCase.tearDown()*
+
+protected void tearDown()
+  throws |java.lang.Exception|
+         
+Make sure all resources are cleaned up and garbage collected before moving on 
+to the next test. Subclasses that override this method should make sure they 
+call super.tearDown() at the end of the overriding method. 
+
+
+
+

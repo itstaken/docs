@@ -1,0 +1,343 @@
+*android.widget.Scroller* *Scroller* This class encapsulates scrolling.
+
+public class Scroller
+  extends    |java.lang.Object|
+
+|android.widget.Scroller_Description|
+|android.widget.Scroller_Fields|
+|android.widget.Scroller_Constructors|
+|android.widget.Scroller_Methods|
+
+================================================================================
+
+*android.widget.Scroller_Constructors*
+|android.widget.Scroller(Context)|Create a Scroller with the default duration a
+|android.widget.Scroller(Context,Interpolator)|Create a Scroller with the speci
+|android.widget.Scroller(Context,Interpolator,boolean)|Create a Scroller with t
+
+*android.widget.Scroller_Methods*
+|android.widget.Scroller.abortAnimation()|Stops the animation.
+|android.widget.Scroller.computeScrollOffset()|Call this when you want to know 
+|android.widget.Scroller.extendDuration(int)|Extend the scroll animation.
+|android.widget.Scroller.fling(int,int,int,int,int,int,int,int)|Start scrolling
+|android.widget.Scroller.forceFinished(boolean)|Force the finished field to a p
+|android.widget.Scroller.getCurrVelocity()|Returns the current velocity.
+|android.widget.Scroller.getCurrX()|Returns the current X offset in the scroll.
+|android.widget.Scroller.getCurrY()|Returns the current Y offset in the scroll.
+|android.widget.Scroller.getDuration()|Returns how long the scroll event will t
+|android.widget.Scroller.getFinalX()|Returns where the scroll will end.
+|android.widget.Scroller.getFinalY()|Returns where the scroll will end.
+|android.widget.Scroller.getStartX()|Returns the start X offset in the scroll.
+|android.widget.Scroller.getStartY()|Returns the start Y offset in the scroll.
+|android.widget.Scroller.isFinished()|Returns whether the scroller has finished
+|android.widget.Scroller.isScrollingInDirection(float,float)|
+|android.widget.Scroller.setFinalX(int)|Sets the final position (X) for this sc
+|android.widget.Scroller.setFinalY(int)|Sets the final position (Y) for this sc
+|android.widget.Scroller.setFriction(float)|The amount of friction applied to f
+|android.widget.Scroller.startScroll(int,int,int,int)|Start scrolling by provid
+|android.widget.Scroller.startScroll(int,int,int,int,int)|Start scrolling by pr
+|android.widget.Scroller.timePassed()|Returns the time elapsed since the beginn
+
+*android.widget.Scroller_Description*
+
+This class encapsulates scrolling. You can use scrollers ( 
+(|android.widget.Scroller|) or (|android.widget.OverScroller|) ) to collect the 
+data you need to produce a scrolling animationfor example, in response to a 
+fling gesture. Scrollers track scroll offsets for you over time, but they don't 
+automatically apply those positions to your view. It's your responsibility to 
+get and apply new coordinates at a rate that will make the scrolling animation 
+look smooth. 
+
+Here is a simple example: 
+
+private Scroller mScroller = new Scroller(context); ... public void zoomIn() { 
+// Revert any animation currently in progress mScroller.forceFinished(true); // 
+Start scrolling by providing a starting point and // the distance to travel 
+mScroller.startScroll(0, 0, 100, 0); // Invalidate to request a redraw 
+invalidate(); } 
+
+To track the changing positions of the x/y coordinates, use 
+(|android.widget.Scroller|) . The method returns a boolean to indicate whether 
+the scroller is finished. If it isn't, it means that a fling or programmatic 
+pan operation is still in progress. You can use this method to find the current 
+offsets of the x and y coordinates, for example: 
+
+if (mScroller.computeScrollOffset()) { // Get current x and y positions int 
+currX = mScroller.getCurrX(); int currY = mScroller.getCurrY(); ... } 
+
+
+
+*android.widget.Scroller(Context)*
+
+public Scroller(android.content.Context context)
+
+Create a Scroller with the default duration and interpolator. 
+
+
+*android.widget.Scroller(Context,Interpolator)*
+
+public Scroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator)
+
+Create a Scroller with the specified interpolator. If the interpolator is null, 
+the default (viscous) interpolator will be used. "Flywheel" behavior will be in 
+effect for apps targeting Honeycomb or newer. 
+
+
+*android.widget.Scroller(Context,Interpolator,boolean)*
+
+public Scroller(
+  android.content.Context context,
+  android.view.animation.Interpolator interpolator,
+  boolean flywheel)
+
+Create a Scroller with the specified interpolator. If the interpolator is null, 
+the default (viscous) interpolator will be used. Specify whether or not to 
+support progressive "flywheel" behavior in flinging. 
+
+
+*android.widget.Scroller.abortAnimation()*
+
+public void abortAnimation()
+
+Stops the animation. Contrary to (|android.widget.Scroller|) , aborting the 
+animating cause the scroller to move to the final x and y position 
+
+
+
+*android.widget.Scroller.computeScrollOffset()*
+
+public boolean computeScrollOffset()
+
+Call this when you want to know the new location. If it returns true, the 
+animation is not yet finished. 
+
+
+
+*android.widget.Scroller.extendDuration(int)*
+
+public void extendDuration(int extend)
+
+Extend the scroll animation. This allows a running animation to scroll further 
+and longer, when used with (|android.widget.Scroller|) or 
+(|android.widget.Scroller|) . 
+
+
+    extend - Additional time to scroll in milliseconds. 
+
+*android.widget.Scroller.fling(int,int,int,int,int,int,int,int)*
+
+public void fling(
+  int startX,
+  int startY,
+  int velocityX,
+  int velocityY,
+  int minX,
+  int maxX,
+  int minY,
+  int maxY)
+
+Start scrolling based on a fling gesture. The distance travelled will depend on 
+the initial velocity of the fling. 
+
+
+    startX - Starting point of the scroll (X) 
+    startY - Starting point of the scroll (Y) 
+    velocityX - Initial velocity of the fling (X) measured in pixels per second. 
+    velocityY - Initial velocity of the fling (Y) measured in pixels per second 
+    minX - Minimum X value. The scroller will not scroll past this point. 
+    maxX - Maximum X value. The scroller will not scroll past this point. 
+    minY - Minimum Y value. The scroller will not scroll past this point. 
+    maxY - Maximum Y value. The scroller will not scroll past this point. 
+
+*android.widget.Scroller.forceFinished(boolean)*
+
+public final void forceFinished(boolean finished)
+
+Force the finished field to a particular value. 
+
+
+    finished - The new finished value. 
+
+*android.widget.Scroller.getCurrVelocity()*
+
+public float getCurrVelocity()
+
+Returns the current velocity. 
+
+
+
+    Returns: The original velocity less the deceleration. Result may be negative. 
+
+*android.widget.Scroller.getCurrX()*
+
+public final int getCurrX()
+
+Returns the current X offset in the scroll. 
+
+
+
+    Returns: The new X offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.getCurrY()*
+
+public final int getCurrY()
+
+Returns the current Y offset in the scroll. 
+
+
+
+    Returns: The new Y offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.getDuration()*
+
+public final int getDuration()
+
+Returns how long the scroll event will take, in milliseconds. 
+
+
+
+    Returns: The duration of the scroll in milliseconds. 
+
+*android.widget.Scroller.getFinalX()*
+
+public final int getFinalX()
+
+Returns where the scroll will end. Valid only for "fling" scrolls. 
+
+
+
+    Returns: The final X offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.getFinalY()*
+
+public final int getFinalY()
+
+Returns where the scroll will end. Valid only for "fling" scrolls. 
+
+
+
+    Returns: The final Y offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.getStartX()*
+
+public final int getStartX()
+
+Returns the start X offset in the scroll. 
+
+
+
+    Returns: The start X offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.getStartY()*
+
+public final int getStartY()
+
+Returns the start Y offset in the scroll. 
+
+
+
+    Returns: The start Y offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.isFinished()*
+
+public final boolean isFinished()
+
+Returns whether the scroller has finished scrolling. 
+
+
+
+    Returns: True if the scroller has finished scrolling, false otherwise. 
+
+*android.widget.Scroller.isScrollingInDirection(float,float)*
+
+public boolean isScrollingInDirection(
+  float xvel,
+  float yvel)
+
+
+
+
+
+*android.widget.Scroller.setFinalX(int)*
+
+public void setFinalX(int newX)
+
+Sets the final position (X) for this scroller. 
+
+
+    newX - The new X offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.setFinalY(int)*
+
+public void setFinalY(int newY)
+
+Sets the final position (Y) for this scroller. 
+
+
+    newY - The new Y offset as an absolute distance from the origin. 
+
+*android.widget.Scroller.setFriction(float)*
+
+public final void setFriction(float friction)
+
+The amount of friction applied to flings. The default value is 
+(|android.view.ViewConfiguration|) . 
+
+
+    friction - A scalar dimension-less value representing the coefficient of friction. 
+
+*android.widget.Scroller.startScroll(int,int,int,int)*
+
+public void startScroll(
+  int startX,
+  int startY,
+  int dx,
+  int dy)
+
+Start scrolling by providing a starting point and the distance to travel. The 
+scroll will use the default value of 250 milliseconds for the duration. 
+
+
+    startX - Starting horizontal scroll offset in pixels. Positive numbers will scroll the 
+       content to the left. 
+    startY - Starting vertical scroll offset in pixels. Positive numbers will scroll the 
+       content up. 
+    dx - Horizontal distance to travel. Positive numbers will scroll the content to the 
+       left. 
+    dy - Vertical distance to travel. Positive numbers will scroll the content up. 
+
+*android.widget.Scroller.startScroll(int,int,int,int,int)*
+
+public void startScroll(
+  int startX,
+  int startY,
+  int dx,
+  int dy,
+  int duration)
+
+Start scrolling by providing a starting point, the distance to travel, and the 
+duration of the scroll. 
+
+
+    startX - Starting horizontal scroll offset in pixels. Positive numbers will scroll the 
+       content to the left. 
+    startY - Starting vertical scroll offset in pixels. Positive numbers will scroll the 
+       content up. 
+    dx - Horizontal distance to travel. Positive numbers will scroll the content to the 
+       left. 
+    dy - Vertical distance to travel. Positive numbers will scroll the content up. 
+    duration - Duration of the scroll in milliseconds. 
+
+*android.widget.Scroller.timePassed()*
+
+public int timePassed()
+
+Returns the time elapsed since the beginning of the scrolling. 
+
+
+
+    Returns: The elapsed time in milliseconds. 
+
+

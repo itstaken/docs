@@ -1,0 +1,106 @@
+*android.util.CharsetUtils* *CharsetUtils* 
+ A class containing utility methods 
+
+public final class CharsetUtils
+  extends    |java.lang.Object|
+
+|android.util.CharsetUtils_Description|
+|android.util.CharsetUtils_Fields|
+|android.util.CharsetUtils_Constructors|
+|android.util.CharsetUtils_Methods|
+
+================================================================================
+
+*android.util.CharsetUtils_Methods*
+|android.util.CharsetUtils.charsetForVendor(String)|Returns the vendor-specific
+|android.util.CharsetUtils.charsetForVendor(String,String)|Returns the vendor-s
+|android.util.CharsetUtils.nameForDefaultVendor(String)|Returns the name of the
+|android.util.CharsetUtils.nameForVendor(String,String)|Returns the name of the
+
+*android.util.CharsetUtils_Description*
+
+A class containing utility methods related to character sets. This class is 
+primarily useful for code that wishes to be vendor-aware in its interpretation 
+of Japanese charset names (used in DoCoMo, KDDI, and SoftBank). 
+
+Note: Developers will need to add an appropriate mapping for each 
+vendor-specific charset. You may need to modify the C libraries like icu4c in 
+order to let Android support an additional charset. 
+
+
+
+*android.util.CharsetUtils.charsetForVendor(String)*
+
+public static |java.nio.charset.Charset| charsetForVendor(java.lang.String charsetName)
+  throws |java.nio.charset.IllegalCharsetNameException|
+         |java.nio.charset.UnsupportedCharsetException|
+         
+Returns the vendor-specific character set corresponding to the given original 
+character set name and default vendor (that is, the targeted vendor of the 
+device this code is running on). This method merely calls through to 
+(|android.util.CharsetUtils|) , passing the default vendor as the second 
+argument. 
+
+
+    charsetName - the base character set name 
+
+    Returns: the specialized character set, or the one corresponding directly to {@code 
+             charsetName} if there is no specialized variant 
+
+*android.util.CharsetUtils.charsetForVendor(String,String)*
+
+public static |java.nio.charset.Charset| charsetForVendor(
+  java.lang.String charsetName,
+  java.lang.String vendor)
+  throws |java.nio.charset.IllegalCharsetNameException|
+         |java.nio.charset.UnsupportedCharsetException|
+         
+Returns the vendor-specific character set corresponding to the given original 
+character set name and vendor. If there is no vendor-specific character set for 
+the given name/vendor pair, this returns the character set corresponding to the 
+original name. The vendor name is matched case-insensitively. This method 
+merely callsCharset.forName()on a name transformed by a call to 
+(|android.util.CharsetUtils|) . 
+
+
+    charsetName - the base character set name 
+    vendor - the vendor to specialize for 
+
+    Returns: the specialized character set, or the one corresponding directly to {@code 
+             charsetName} if there is no specialized variant 
+
+*android.util.CharsetUtils.nameForDefaultVendor(String)*
+
+public static |java.lang.String| nameForDefaultVendor(java.lang.String charsetName)
+
+Returns the name of the vendor-specific character set corresponding to the 
+given original character set name and the default vendor (that is, the targeted 
+vendor of the device this code is running on). This method merely calls through 
+to (|android.util.CharsetUtils|) , passing the default vendor as the second 
+argument. 
+
+
+    charsetName - the base character set name 
+
+    Returns: the specialized character set name, or {@code charsetName} if there is no 
+             specialized name 
+
+*android.util.CharsetUtils.nameForVendor(String,String)*
+
+public static |java.lang.String| nameForVendor(
+  java.lang.String charsetName,
+  java.lang.String vendor)
+
+Returns the name of the vendor-specific character set corresponding to the 
+given original character set name and vendor. If there is no vendor-specific 
+character set for the given name/vendor pair, this returns the original 
+character set name. 
+
+
+    charsetName - the base character set name 
+    vendor - the vendor to specialize for. All characters should be lower-cased. 
+
+    Returns: the specialized character set name, or {@code charsetName} if there is no 
+             specialized name 
+
+

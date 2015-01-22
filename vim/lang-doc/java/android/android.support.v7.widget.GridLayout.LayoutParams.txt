@@ -1,0 +1,217 @@
+*android.support.v7.widget.GridLayout.LayoutParams* *GridLayout.LayoutParams* La
+
+public static class GridLayout.LayoutParams
+  extends    |MarginLayoutParams|
+
+|android.support.v7.widget.GridLayout.LayoutParams_Description|
+|android.support.v7.widget.GridLayout.LayoutParams_Fields|
+|android.support.v7.widget.GridLayout.LayoutParams_Constructors|
+|android.support.v7.widget.GridLayout.LayoutParams_Methods|
+
+================================================================================
+
+*android.support.v7.widget.GridLayout.LayoutParams_Fields*
+|android.support.v7.widget.GridLayout.Spec_android.support.v7.widget.GridLayout.LayoutParams.columnSpec|
+|android.support.v7.widget.GridLayout.Spec_android.support.v7.widget.GridLayout.LayoutParams.rowSpec|
+
+*android.support.v7.widget.GridLayout.LayoutParams_Constructors*
+|android.support.v7.widget.GridLayout.LayoutParams()|Constructs a new LayoutPar
+|android.support.v7.widget.GridLayout.LayoutParams(Context,AttributeSet)|Values
+|android.support.v7.widget.GridLayout.LayoutParams(GridLayout.Spec,GridLayout.Spec)|
+|android.support.v7.widget.GridLayout.LayoutParams(MarginLayoutParams)|
+|android.support.v7.widget.GridLayout.LayoutParams(ViewGroup.LayoutParams)|
+
+*android.support.v7.widget.GridLayout.LayoutParams_Methods*
+|android.support.v7.widget.GridLayout.LayoutParams.equals(Object)|
+|android.support.v7.widget.GridLayout.LayoutParams.hashCode()|
+|android.support.v7.widget.GridLayout.LayoutParams.setBaseAttributes(TypedArray,int,int)|
+|android.support.v7.widget.GridLayout.LayoutParams.setGravity(int)|Describes ho
+
+*android.support.v7.widget.GridLayout.LayoutParams_Description*
+
+Layout information associated with each of the children of a GridLayout. 
+
+GridLayout supports both row and column spanning and arbitrary forms of 
+alignment within each cell group. The fundamental parameters associated with 
+each cell group are gathered into their vertical and horizontal components and 
+stored in the (|android.support.v7.widget.GridLayout.LayoutParams|) and 
+(|android.support.v7.widget.GridLayout.LayoutParams|) layout parameters. 
+Specs(|android.support.v7.widget.GridLayout.Spec|) are immutable structures and 
+may be shared between the layout parameters of different children. 
+
+The row and column specs contain the leading and trailing indices along each 
+axis and together specify the four grid indices that delimit the cells of this 
+cell group. 
+
+The alignment properties of the row and column specs together specify both 
+aspects of alignment within the cell group. It is also possible to specify a 
+child's alignment within its cell group by using the 
+(|android.support.v7.widget.GridLayout.LayoutParams|) method. 
+
+WRAP_CONTENT and MATCH_PARENT 
+
+Because the default values of the 
+(|android.support.v7.widget.GridLayout.LayoutParams|) and 
+(|android.support.v7.widget.GridLayout.LayoutParams|) properties are both 
+(|android.support.v7.widget.GridLayout.LayoutParams|) , this value never needs 
+to be explicitly declared in the layout parameters of GridLayout's children. In 
+addition, GridLayout does not distinguish the special size value 
+(|android.support.v7.widget.GridLayout.LayoutParams|) from 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . A component's ability 
+to expand to the size of the parent is instead controlled by the principle of 
+flexibility, as discussed in (|android.support.v7.widget.GridLayout|) . 
+
+Summary 
+
+You should not need to use either of the special size 
+values:WRAP_CONTENTorMATCH_PARENTwhen configuring the children of a GridLayout. 
+
+Default values 
+
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 0 when 
+useDefaultMargins(|android.support.v7.widget.GridLayout|) isfalse; otherwise 
+(|android.support.v7.widget.GridLayout.LayoutParams|) , to indicate that a 
+default value should be computed on demand. 
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 0 when 
+useDefaultMargins(|android.support.v7.widget.GridLayout|) isfalse; otherwise 
+(|android.support.v7.widget.GridLayout.LayoutParams|) , to indicate that a 
+default value should be computed on demand. 
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 0 when 
+useDefaultMargins(|android.support.v7.widget.GridLayout|) isfalse; otherwise 
+(|android.support.v7.widget.GridLayout.LayoutParams|) , to indicate that a 
+default value should be computed on demand. 
+(|android.support.v7.widget.GridLayout.LayoutParams|) = 0 when 
+useDefaultMargins(|android.support.v7.widget.GridLayout|) isfalse; otherwise 
+(|android.support.v7.widget.GridLayout.LayoutParams|) , to indicate that a 
+default value should be computed on demand. 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .row = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .rowSpan = 1 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .alignment = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .column = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .columnSpan = 1 
+(|android.support.v7.widget.GridLayout.LayoutParams|) .alignment = 
+(|android.support.v7.widget.GridLayout.LayoutParams|) 
+
+See (|android.support.v7.widget.GridLayout|) for a more complete description of 
+the conventions used by GridLayout in the interpretation of the properties of 
+this class. 
+
+
+
+*android.support.v7.widget.GridLayout.Spec_android.support.v7.widget.GridLayout.LayoutParams.columnSpec*
+
+The spec that defines the horizontal characteristics of the cell group 
+described by these layout parameters. If an assignment is made to this field 
+after a measurement or layout operation has already taken place, a call to 
+(|ViewGroup|) must be made to notify GridLayout of the change. GridLayout is 
+normally able to detect when code fails to observe this rule, issue a warning 
+and take steps to compensate for the omission. This facility is implemented on 
+a best effort basis and should not be relied upon in production code - so it is 
+best to include the above calls to remove the warnings as soon as it is 
+practical. 
+
+
+*android.support.v7.widget.GridLayout.Spec_android.support.v7.widget.GridLayout.LayoutParams.rowSpec*
+
+The spec that defines the vertical characteristics of the cell group described 
+by these layout parameters. If an assignment is made to this field after a 
+measurement or layout operation has already taken place, a call to 
+(|ViewGroup|) must be made to notify GridLayout of the change. GridLayout is 
+normally able to detect when code fails to observe this rule, issue a warning 
+and take steps to compensate for the omission. This facility is implemented on 
+a best effort basis and should not be relied upon in production code - so it is 
+best to include the above calls to remove the warnings as soon as it is 
+practical. 
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams()*
+
+public GridLayout.LayoutParams()
+
+Constructs a new LayoutParams with default values as defined in 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+*android.support.v7.widget.GridLayout.LayoutParams(Context,AttributeSet)*
+
+public GridLayout.LayoutParams(
+  Context context,
+  AttributeSet attrs)
+
+Values not defined in the attribute set take the default values defined in 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+
+*android.support.v7.widget.GridLayout.LayoutParams(GridLayout.Spec,GridLayout.Spec)*
+
+public GridLayout.LayoutParams(
+  android.support.v7.widget.GridLayout.Spec rowSpec,
+  android.support.v7.widget.GridLayout.Spec columnSpec)
+
+Constructs a new LayoutParams instance for this rowSpec and columnSpec. All 
+other fields are initialized with default values as defined in 
+(|android.support.v7.widget.GridLayout.LayoutParams|) . 
+
+    rowSpec - the rowSpec 
+    columnSpec - the columnSpec 
+
+*android.support.v7.widget.GridLayout.LayoutParams(MarginLayoutParams)*
+
+public GridLayout.LayoutParams(MarginLayoutParams params)
+
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams(ViewGroup.LayoutParams)*
+
+public GridLayout.LayoutParams(ViewGroup.LayoutParams params)
+
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams.setBaseAttributes(TypedArray,int,int)*
+
+protected void setBaseAttributes(
+  TypedArray attributes,
+  int widthAttr,
+  int heightAttr)
+
+
+
+
+
+*android.support.v7.widget.GridLayout.LayoutParams.setGravity(int)*
+
+public void setGravity(int gravity)
+
+Describes how the child views are positioned. Default isLEFT | BASELINE. See 
+(|Gravity|) . 
+
+
+    gravity - the new gravity value 
+
+

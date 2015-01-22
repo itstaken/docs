@@ -1,0 +1,247 @@
+*android.view.animation.GridLayoutAnimationController* *GridLayoutAnimationController* 
+
+public class GridLayoutAnimationController
+  extends    |android.view.animation.LayoutAnimationController|
+
+|android.view.animation.GridLayoutAnimationController_Description|
+|android.view.animation.GridLayoutAnimationController_Fields|
+|android.view.animation.GridLayoutAnimationController_Constructors|
+|android.view.animation.GridLayoutAnimationController_Methods|
+
+================================================================================
+
+*android.view.animation.GridLayoutAnimationController_Fields*
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_BOTTOM_TO_TOP|
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_HORIZONTAL_MASK|
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_LEFT_TO_RIGHT|
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_RIGHT_TO_LEFT|
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_TOP_TO_BOTTOM|
+|int_android.view.animation.GridLayoutAnimationController.DIRECTION_VERTICAL_MASK|
+|int_android.view.animation.GridLayoutAnimationController.PRIORITY_COLUMN|
+|int_android.view.animation.GridLayoutAnimationController.PRIORITY_NONE|
+|int_android.view.animation.GridLayoutAnimationController.PRIORITY_ROW|
+
+*android.view.animation.GridLayoutAnimationController_Constructors*
+|android.view.animation.GridLayoutAnimationController(Animation)|Creates a new 
+|android.view.animation.GridLayoutAnimationController(Animation,float,float)|Cr
+|android.view.animation.GridLayoutAnimationController(Context,AttributeSet)|Cre
+
+*android.view.animation.GridLayoutAnimationController_Methods*
+|android.view.animation.GridLayoutAnimationController.getColumnDelay()|Returns 
+|android.view.animation.GridLayoutAnimationController.getDelayForView(View)|
+|android.view.animation.GridLayoutAnimationController.getDirection()|Returns th
+|android.view.animation.GridLayoutAnimationController.getDirectionPriority()|Re
+|android.view.animation.GridLayoutAnimationController.getRowDelay()|Returns the
+|android.view.animation.GridLayoutAnimationController.setColumnDelay(float)|Set
+|android.view.animation.GridLayoutAnimationController.setDirection(int)|Sets th
+|android.view.animation.GridLayoutAnimationController.setDirectionPriority(int)|
+|android.view.animation.GridLayoutAnimationController.setRowDelay(float)|Sets t
+|android.view.animation.GridLayoutAnimationController.willOverlap()|
+
+*android.view.animation.GridLayoutAnimationController_Description*
+
+A layout animation controller is used to animated a grid layout's children. 
+
+While (|android.view.animation.LayoutAnimationController|) relies only on the 
+index of the child in the view group to compute the animation delay, this class 
+uses both the X and Y coordinates of the child within a grid. 
+
+In addition, the animation direction can be controlled. The default direction 
+is DIRECTION_LEFT_TO_RIGHT | DIRECTION_TOP_TO_BOTTOM. You can also set the 
+animation priority to columns or rows. The default priority is none. 
+
+Information used to compute the animation delay of each child are stored in an 
+instance of 
+(|android.view.animation.GridLayoutAnimationController.AnimationParameters|) , 
+itself stored in the (|android.view.ViewGroup.LayoutParams|) of the view. 
+
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_BOTTOM_TO_TOP*
+
+Animates the children starting from the bottom of the grid to the top. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_HORIZONTAL_MASK*
+
+Bitmask used to retrieve the horizontal component of the direction. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_LEFT_TO_RIGHT*
+
+Animates the children starting from the left of the grid to the right. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_RIGHT_TO_LEFT*
+
+Animates the children starting from the right of the grid to the left. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_TOP_TO_BOTTOM*
+
+Animates the children starting from the top of the grid to the bottom. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.DIRECTION_VERTICAL_MASK*
+
+Bitmask used to retrieve the vertical component of the direction. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.PRIORITY_COLUMN*
+
+Columns are animated first. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.PRIORITY_NONE*
+
+Rows and columns are animated at the same time. 
+
+
+*int_android.view.animation.GridLayoutAnimationController.PRIORITY_ROW*
+
+Rows are animated first. 
+
+
+
+*android.view.animation.GridLayoutAnimationController(Animation)*
+
+public GridLayoutAnimationController(android.view.animation.Animation animation)
+
+Creates a new layout animation controller with a delay of 50% for both rows and 
+columns and the specified animation. 
+
+    animation - the animation to use on each child of the view group 
+
+*android.view.animation.GridLayoutAnimationController(Animation,float,float)*
+
+public GridLayoutAnimationController(
+  android.view.animation.Animation animation,
+  float columnDelay,
+  float rowDelay)
+
+Creates a new layout animation controller with the specified delays and the 
+specified animation. 
+
+    animation - the animation to use on each child of the view group 
+    columnDelay - the delay by which each column animation must be offset 
+    rowDelay - the delay by which each row animation must be offset 
+
+*android.view.animation.GridLayoutAnimationController(Context,AttributeSet)*
+
+public GridLayoutAnimationController(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Creates a new grid layout animation controller from external resources. 
+
+    context - the Context the view group is running in, through which it can access the 
+       resources 
+    attrs - the attributes of the XML tag that is inflating the layout animation controller 
+
+*android.view.animation.GridLayoutAnimationController.getColumnDelay()*
+
+public float getColumnDelay()
+
+Returns the delay by which the children's animation are offset from one column 
+to the other. The delay is expressed as a fraction of the animation duration. 
+
+
+
+    Returns: a fraction of the animation duration 
+
+*android.view.animation.GridLayoutAnimationController.getDelayForView(View)*
+
+protected long getDelayForView(android.view.View view)
+
+
+
+
+
+*android.view.animation.GridLayoutAnimationController.getDirection()*
+
+public int getDirection()
+
+Returns the direction of the animation. 
+(|android.view.animation.GridLayoutAnimationController|) and 
+(|android.view.animation.GridLayoutAnimationController|) can be used to 
+retrieve the horizontal and vertical components of the direction. 
+
+
+
+    Returns: the direction of the animation 
+
+*android.view.animation.GridLayoutAnimationController.getDirectionPriority()*
+
+public int getDirectionPriority()
+
+Returns the direction priority for the animation. The priority can be either 
+(|android.view.animation.GridLayoutAnimationController|) , 
+(|android.view.animation.GridLayoutAnimationController|) or 
+(|android.view.animation.GridLayoutAnimationController|) . 
+
+
+
+    Returns: the priority of the animation direction 
+
+*android.view.animation.GridLayoutAnimationController.getRowDelay()*
+
+public float getRowDelay()
+
+Returns the delay by which the children's animation are offset from one row to 
+the other. The delay is expressed as a fraction of the animation duration. 
+
+
+
+    Returns: a fraction of the animation duration 
+
+*android.view.animation.GridLayoutAnimationController.setColumnDelay(float)*
+
+public void setColumnDelay(float columnDelay)
+
+Sets the delay, as a fraction of the animation duration, by which the 
+children's animations are offset from one column to the other. 
+
+
+    columnDelay - a fraction of the animation duration 
+
+*android.view.animation.GridLayoutAnimationController.setDirection(int)*
+
+public void setDirection(int direction)
+
+Sets the direction of the animation. The direction is expressed as an integer 
+containing a horizontal and vertical component. For instance, 
+DIRECTION_BOTTOM_TO_TOP | DIRECTION_RIGHT_TO_LEFT. 
+
+
+    direction - the direction of the animation 
+
+*android.view.animation.GridLayoutAnimationController.setDirectionPriority(int)*
+
+public void setDirectionPriority(int directionPriority)
+
+Specifies the direction priority of the animation. For instance, 
+(|android.view.animation.GridLayoutAnimationController|) will give priority to 
+columns: the animation will first play on the column, then on the rows.Z 
+
+
+    directionPriority - the direction priority of the animation 
+
+*android.view.animation.GridLayoutAnimationController.setRowDelay(float)*
+
+public void setRowDelay(float rowDelay)
+
+Sets the delay, as a fraction of the animation duration, by which the 
+children's animations are offset from one row to the other. 
+
+
+    rowDelay - a fraction of the animation duration 
+
+*android.view.animation.GridLayoutAnimationController.willOverlap()*
+
+public boolean willOverlap()
+
+
+
+
+
+

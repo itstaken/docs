@@ -1,0 +1,187 @@
+*android.provider.ContactsContract.StatusUpdates* *ContactsContract.StatusUpdates* 
+
+public static class ContactsContract.StatusUpdates
+  extends    |java.lang.Object|
+  implements |android.provider.ContactsContract.StatusColumns|
+             |android.provider.ContactsContract.PresenceColumns|
+
+|android.provider.ContactsContract.StatusUpdates_Description|
+|android.provider.ContactsContract.StatusUpdates_Fields|
+|android.provider.ContactsContract.StatusUpdates_Constructors|
+|android.provider.ContactsContract.StatusUpdates_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.StatusUpdates_Fields*
+|java.lang.String_android.provider.ContactsContract.StatusUpdates.CONTENT_ITEM_TYPE|
+|java.lang.String_android.provider.ContactsContract.StatusUpdates.CONTENT_TYPE|
+|android.net.Uri_android.provider.ContactsContract.StatusUpdates.CONTENT_URI|
+|android.net.Uri_android.provider.ContactsContract.StatusUpdates.PROFILE_CONTENT_URI|
+
+*android.provider.ContactsContract.StatusUpdates_Methods*
+|android.provider.ContactsContract.StatusUpdates.getPresenceIconResourceId(int)|
+|android.provider.ContactsContract.StatusUpdates.getPresencePrecedence(int)|Ret
+
+*android.provider.ContactsContract.StatusUpdates_Description*
+
+A status update is linked to a (|android.provider.ContactsContract.Data|) row 
+and captures the user's latest status update via the corresponding source, e.g. 
+"Having lunch" via "Google Talk". 
+
+There are two ways a status update can be inserted: by explicitly linking it to 
+a Data row using (|android.provider.ContactsContract.StatusUpdates|) or 
+indirectly linking it to a data row using a combination of 
+(|android.provider.ContactsContract.StatusUpdates|) (or 
+(|android.provider.ContactsContract.StatusUpdates|) ) and 
+(|android.provider.ContactsContract.StatusUpdates|) . There is no difference 
+between insert and update, you can use either. 
+
+Inserting or updating a status update for the user's profile requires either 
+using the (|android.provider.ContactsContract.StatusUpdates|) to identify the 
+data row to attach the update to, or 
+(|android.provider.ContactsContract.StatusUpdates|) to ensure that the change 
+is scoped to the profile. 
+
+You cannot use (|android.content.ContentResolver|) to change a status, but 
+(|android.content.ContentResolver|) will replace the latests status if it 
+already exists. 
+
+Use (|android.content.ContentResolver|) to insert/update statuses for multiple 
+contacts at once. 
+
+Columns 
+
+StatusUpdates 
+
+long (|android.provider.ContactsContract.StatusUpdates|) read/write Reference 
+to the (|android.provider.ContactsContract.Contacts.Data|) entry that owns this 
+presence. If this field is not specified, the provider will attempt to find a 
+data row that matches the (|android.provider.ContactsContract.StatusUpdates|) 
+(or (|android.provider.ContactsContract.StatusUpdates|) ) and 
+(|android.provider.ContactsContract.StatusUpdates|) columns. 
+
+
+
+long (|android.provider.ContactsContract.StatusUpdates|) read/write See 
+(|android.provider.ContactsContract.CommonDataKinds.Im|) for a list of defined 
+protocol constants. 
+
+String (|android.provider.ContactsContract.StatusUpdates|) read/write Name of 
+the custom protocol. Should be supplied along with the 
+(|android.provider.ContactsContract.StatusUpdates|) value 
+(|android.provider.ContactsContract.CommonDataKinds.Im|) . Should be null or 
+omitted if (|android.provider.ContactsContract.StatusUpdates|) value is not 
+(|android.provider.ContactsContract.CommonDataKinds.Im|) . 
+
+String (|android.provider.ContactsContract.StatusUpdates|) read/write The IM 
+handle the presence item is for. The handle is scoped to 
+(|android.provider.ContactsContract.StatusUpdates|) . 
+
+String (|android.provider.ContactsContract.StatusUpdates|) read/write The IM 
+account for the local user that the presence data came from. 
+
+int (|android.provider.ContactsContract.StatusUpdates|) read/write Contact IM 
+presence status. The allowed values are: 
+
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+
+
+
+Since presence status is inherently volatile, the content provider may choose 
+not to store this field in long-term storage. 
+
+
+
+int (|android.provider.ContactsContract.StatusUpdates|) read/write Contact IM 
+chat compatibility value. The allowed values combinations of the following 
+flags. If None of these flags is set, the device can only do text messaging. 
+
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+(|android.provider.ContactsContract.StatusUpdates|) 
+
+
+
+Since chat compatibility is inherently volatile as the contact's availability 
+moves from one device to another, the content provider may choose not to store 
+this field in long-term storage. 
+
+
+
+String (|android.provider.ContactsContract.StatusUpdates|) read/write Contact's 
+latest status update, e.g. "having toast for breakfast" 
+
+long (|android.provider.ContactsContract.StatusUpdates|) read/write The 
+absolute time in milliseconds when the status was entered by the user. If this 
+value is not provided, the provider will follow this logic: if there was no 
+prior status update, the value will be left as null. If there was a prior 
+status update, the provider will default this field to the current time. 
+
+String (|android.provider.ContactsContract.StatusUpdates|) read/write The 
+package containing resources for this status: label and icon. 
+
+long (|android.provider.ContactsContract.StatusUpdates|) read/write The 
+resource ID of the label describing the source of contact status, e.g. "Google 
+Talk". This resource is scoped by the 
+(|android.provider.ContactsContract.StatusUpdates|) . 
+
+long (|android.provider.ContactsContract.StatusUpdates|) read/write The 
+resource ID of the icon for the source of contact status. This resource is 
+scoped by the (|android.provider.ContactsContract.StatusUpdates|) . 
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.StatusUpdates.CONTENT_ITEM_TYPE*
+
+The MIME type of a (|android.provider.ContactsContract.StatusUpdates|) 
+subdirectory of a single status update detail. 
+
+
+*java.lang.String_android.provider.ContactsContract.StatusUpdates.CONTENT_TYPE*
+
+The MIME type of (|android.provider.ContactsContract.StatusUpdates|) providing 
+a directory of status update details. 
+
+
+*android.net.Uri_android.provider.ContactsContract.StatusUpdates.CONTENT_URI*
+
+The content:// style URI for this table 
+
+
+*android.net.Uri_android.provider.ContactsContract.StatusUpdates.PROFILE_CONTENT_URI*
+
+The content:// style URI for this table, specific to the user's profile. 
+
+
+
+*android.provider.ContactsContract.StatusUpdates.getPresenceIconResourceId(int)*
+
+public static final int getPresenceIconResourceId(int status)
+
+Gets the resource ID for the proper presence icon. 
+
+
+    status - the status to get the icon for 
+
+    Returns: the resource ID for the proper presence icon 
+
+*android.provider.ContactsContract.StatusUpdates.getPresencePrecedence(int)*
+
+public static final int getPresencePrecedence(int status)
+
+Returns the precedence of the status code the higher number being the higher 
+precedence. 
+
+
+    status - The status code. 
+
+    Returns: An integer representing the precedence, 0 being the lowest. 
+
+

@@ -1,0 +1,287 @@
+*android.text.style.SuggestionSpan* *SuggestionSpan* Holds suggestion candidates
+
+public class SuggestionSpan
+  extends    |android.text.style.CharacterStyle|
+  implements |android.text.ParcelableSpan|
+
+|android.text.style.SuggestionSpan_Description|
+|android.text.style.SuggestionSpan_Fields|
+|android.text.style.SuggestionSpan_Constructors|
+|android.text.style.SuggestionSpan_Methods|
+
+================================================================================
+
+*android.text.style.SuggestionSpan_Fields*
+|java.lang.String_android.text.style.SuggestionSpan.ACTION_SUGGESTION_PICKED|
+|android.os.Parcelable.Creator<android.text.style.SuggestionSpan>_android.text.style.SuggestionSpan.CREATOR|
+|int_android.text.style.SuggestionSpan.FLAG_AUTO_CORRECTION|
+|int_android.text.style.SuggestionSpan.FLAG_EASY_CORRECT|
+|int_android.text.style.SuggestionSpan.FLAG_MISSPELLED|
+|java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_AFTER|
+|java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_BEFORE|
+|java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_HASHCODE|
+|int_android.text.style.SuggestionSpan.SUGGESTIONS_MAX_SIZE|
+
+*android.text.style.SuggestionSpan_Constructors*
+|android.text.style.SuggestionSpan(Context,Locale,String[],int,Class<?>)|
+|android.text.style.SuggestionSpan(Context,String[],int)|
+|android.text.style.SuggestionSpan(Locale,String[],int)|
+|android.text.style.SuggestionSpan(Parcel)|
+
+*android.text.style.SuggestionSpan_Methods*
+|android.text.style.SuggestionSpan.describeContents()|
+|android.text.style.SuggestionSpan.equals(Object)|
+|android.text.style.SuggestionSpan.getFlags()|
+|android.text.style.SuggestionSpan.getLocale()|
+|android.text.style.SuggestionSpan.getNotificationTargetClassName()|
+|android.text.style.SuggestionSpan.getSpanTypeId()|
+|android.text.style.SuggestionSpan.getSuggestions()|
+|android.text.style.SuggestionSpan.getUnderlineColor()|
+|android.text.style.SuggestionSpan.hashCode()|
+|android.text.style.SuggestionSpan.notifySelection(Context,String,int)|Notifies
+|android.text.style.SuggestionSpan.setFlags(int)|
+|android.text.style.SuggestionSpan.updateDrawState(TextPaint)|
+|android.text.style.SuggestionSpan.writeToParcel(Parcel,int)|
+
+*android.text.style.SuggestionSpan_Description*
+
+Holds suggestion candidates for the text enclosed in this span. 
+
+When such a span is edited in an EditText, double tapping on the text enclosed 
+in this span will display a popup dialog listing suggestion replacement for 
+that text. The user can then replace the original text by one of the 
+suggestions. 
+
+These spans should typically be created by the input method to provide 
+correction and alternates for the text. 
+
+
+
+*java.lang.String_android.text.style.SuggestionSpan.ACTION_SUGGESTION_PICKED*
+
+
+
+
+*android.os.Parcelable.Creator<android.text.style.SuggestionSpan>_android.text.style.SuggestionSpan.CREATOR*
+
+
+
+
+*int_android.text.style.SuggestionSpan.FLAG_AUTO_CORRECTION*
+
+Sets this flag if the auto correction is about to be applied to a word/text 
+that the user is typing/composing. This type of suggestion is rendered 
+differently to indicate the auto correction is happening. 
+
+
+*int_android.text.style.SuggestionSpan.FLAG_EASY_CORRECT*
+
+Sets this flag if the suggestions should be easily accessible with few 
+interactions. This flag should be set for every suggestions that the user is 
+likely to use. 
+
+
+*int_android.text.style.SuggestionSpan.FLAG_MISSPELLED*
+
+Sets this flag if the suggestions apply to a misspelled word/text. This type of 
+suggestion is rendered differently to highlight the error. 
+
+
+*java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_AFTER*
+
+
+
+
+*java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_BEFORE*
+
+
+
+
+*java.lang.String_android.text.style.SuggestionSpan.SUGGESTION_SPAN_PICKED_HASHCODE*
+
+
+
+
+*int_android.text.style.SuggestionSpan.SUGGESTIONS_MAX_SIZE*
+
+
+
+
+
+*android.text.style.SuggestionSpan(Context,Locale,String[],int,Class<?>)*
+
+public SuggestionSpan(
+  android.content.Context context,
+  java.util.Locale locale,
+  java.lang.String[] suggestions,
+  int flags,
+  java.lang.Class<?> notificationTargetClass)
+
+
+
+    context - Context for the application 
+    locale - locale Locale of the suggestions 
+    suggestions - Suggestions for the string under the span. Only the first up to {@link 
+       SuggestionSpan#SUGGESTIONS_MAX_SIZE} will be considered. Null values not 
+       permitted. 
+    flags - Additional flags indicating how this span is handled in TextView 
+    notificationTargetClass - if not null, this class will get notified when the user selects one of the 
+       suggestions. 
+
+*android.text.style.SuggestionSpan(Context,String[],int)*
+
+public SuggestionSpan(
+  android.content.Context context,
+  java.lang.String[] suggestions,
+  int flags)
+
+
+
+    context - Context for the application 
+    suggestions - Suggestions for the string under the span 
+    flags - Additional flags indicating how this span is handled in TextView 
+
+*android.text.style.SuggestionSpan(Locale,String[],int)*
+
+public SuggestionSpan(
+  java.util.Locale locale,
+  java.lang.String[] suggestions,
+  int flags)
+
+
+
+    locale - Locale of the suggestions 
+    suggestions - Suggestions for the string under the span 
+    flags - Additional flags indicating how this span is handled in TextView 
+
+*android.text.style.SuggestionSpan(Parcel)*
+
+public SuggestionSpan(android.os.Parcel src)
+
+
+
+
+*android.text.style.SuggestionSpan.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.text.style.SuggestionSpan.equals(Object)*
+
+public boolean equals(java.lang.Object o)
+
+
+
+
+
+*android.text.style.SuggestionSpan.getFlags()*
+
+public int getFlags()
+
+
+
+
+
+*android.text.style.SuggestionSpan.getLocale()*
+
+public |java.lang.String| getLocale()
+
+
+
+
+
+    Returns: the locale of the suggestions 
+
+*android.text.style.SuggestionSpan.getNotificationTargetClassName()*
+
+public |java.lang.String| getNotificationTargetClassName()
+
+
+
+
+
+    Returns: The name of the class to notify. The class of the original IME package will 
+             receive a notification when the user selects one of the 
+             suggestions. The notification will include the original string, 
+             the suggested replacement string as well as the hashCode of this 
+             span. The class will get notified by an intent that has those 
+             information. This is an internal API because only the framework 
+             should know the class name. 
+
+*android.text.style.SuggestionSpan.getSpanTypeId()*
+
+public int getSpanTypeId()
+
+
+
+
+
+*android.text.style.SuggestionSpan.getSuggestions()*
+
+public |java.lang.String|[] getSuggestions()
+
+
+
+
+
+    Returns: an array of suggestion texts for this span 
+
+*android.text.style.SuggestionSpan.getUnderlineColor()*
+
+public int getUnderlineColor()
+
+
+
+
+
+    Returns: The color of the underline for that span, or 0 if there is no underline 
+
+*android.text.style.SuggestionSpan.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.text.style.SuggestionSpan.notifySelection(Context,String,int)*
+
+public void notifySelection(
+  android.content.Context context,
+  java.lang.String original,
+  int index)
+
+Notifies a suggestion selection. 
+
+
+
+*android.text.style.SuggestionSpan.setFlags(int)*
+
+public void setFlags(int flags)
+
+
+
+
+
+*android.text.style.SuggestionSpan.updateDrawState(TextPaint)*
+
+public void updateDrawState(android.text.TextPaint tp)
+
+
+
+
+
+*android.text.style.SuggestionSpan.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

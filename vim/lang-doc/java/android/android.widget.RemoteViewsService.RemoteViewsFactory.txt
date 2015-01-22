@@ -1,0 +1,133 @@
+*android.widget.RemoteViewsService.RemoteViewsFactory* *RemoteViewsService.RemoteViewsFactory* 
+
+public static interface interface RemoteViewsService.RemoteViewsFactory
+
+
+|android.widget.RemoteViewsService.RemoteViewsFactory_Description|
+|android.widget.RemoteViewsService.RemoteViewsFactory_Fields|
+|android.widget.RemoteViewsService.RemoteViewsFactory_Constructors|
+|android.widget.RemoteViewsService.RemoteViewsFactory_Methods|
+
+================================================================================
+
+*android.widget.RemoteViewsService.RemoteViewsFactory_Methods*
+|android.widget.RemoteViewsService.RemoteViewsFactory.getCount()|SeeAdapter#get
+|android.widget.RemoteViewsService.RemoteViewsFactory.getItemId(int)|SeeAdapter
+|android.widget.RemoteViewsService.RemoteViewsFactory.getLoadingView()|This all
+|android.widget.RemoteViewsService.RemoteViewsFactory.getViewAt(int)|SeeAdapter
+|android.widget.RemoteViewsService.RemoteViewsFactory.getViewTypeCount()|SeeAda
+|android.widget.RemoteViewsService.RemoteViewsFactory.hasStableIds()|SeeAdapter
+|android.widget.RemoteViewsService.RemoteViewsFactory.onCreate()|Called when yo
+|android.widget.RemoteViewsService.RemoteViewsFactory.onDataSetChanged()|Called
+|android.widget.RemoteViewsService.RemoteViewsFactory.onDestroy()|Called when t
+
+*android.widget.RemoteViewsService.RemoteViewsFactory_Description*
+
+An interface for an adapter between a remote collection view (ListView, 
+GridView, etc) and the underlying data for that view. The implementor is 
+responsible for making a RemoteView for each item in the data set. This 
+interface is a thin wrapper around (|android.widget.Adapter|) . 
+
+
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.getCount()*
+
+public int getCount()
+
+See (|android.widget.Adapter|) 
+
+
+
+    Returns: Count of items. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.getItemId(int)*
+
+public long getItemId(int position)
+
+See (|android.widget.Adapter|) . 
+
+
+    position - The position of the item within the data set whose row id we want. 
+
+    Returns: The id of the item at the specified position. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.getLoadingView()*
+
+public |android.widget.RemoteViews| getLoadingView()
+
+This allows for the use of a custom loading view which appears between the time 
+that (|android.widget.RemoteViewsService.RemoteViewsFactory|) is called and 
+returns. If null is returned, a default loading view will be used. 
+
+
+
+    Returns: The RemoteViews representing the desired loading view. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.getViewAt(int)*
+
+public |android.widget.RemoteViews| getViewAt(int position)
+
+See (|android.widget.Adapter|) . 
+
+Note: expensive tasks can be safely performed synchronously within this method, 
+and a loading view will be displayed in the interim. See 
+(|android.widget.RemoteViewsService.RemoteViewsFactory|) . 
+
+
+    position - The position of the item within the Factory's data set of the item whose view 
+       we want. 
+
+    Returns: A RemoteViews object corresponding to the data at the specified position. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.getViewTypeCount()*
+
+public int getViewTypeCount()
+
+See (|android.widget.Adapter|) . 
+
+
+
+    Returns: The number of types of Views that will be returned by this factory. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.hasStableIds()*
+
+public boolean hasStableIds()
+
+See (|android.widget.Adapter|) . 
+
+
+
+    Returns: True if the same id always refers to the same object. 
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.onCreate()*
+
+public void onCreate()
+
+Called when your factory is first constructed. The same factory may be shared 
+across multiple RemoteViewAdapters depending on the intent passed. 
+
+
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.onDataSetChanged()*
+
+public void onDataSetChanged()
+
+Called when notifyDataSetChanged() is triggered on the remote adapter. This 
+allows a RemoteViewsFactory to respond to data changes by updating any internal 
+references. 
+
+Note: expensive tasks can be safely performed synchronously within this method. 
+In the interim, the old data will be displayed within the widget. 
+
+
+
+*android.widget.RemoteViewsService.RemoteViewsFactory.onDestroy()*
+
+public void onDestroy()
+
+Called when the last RemoteViewsAdapter that is associated with this factory is 
+unbound. 
+
+
+
+

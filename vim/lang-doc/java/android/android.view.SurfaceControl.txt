@@ -1,0 +1,525 @@
+*android.view.SurfaceControl* *SurfaceControl* SurfaceControl
+
+public class SurfaceControl
+  extends    |java.lang.Object|
+
+|android.view.SurfaceControl_Description|
+|android.view.SurfaceControl_Fields|
+|android.view.SurfaceControl_Constructors|
+|android.view.SurfaceControl_Methods|
+
+================================================================================
+
+*android.view.SurfaceControl_Fields*
+|int_android.view.SurfaceControl.BUILT_IN_DISPLAY_ID_HDMI|
+|int_android.view.SurfaceControl.BUILT_IN_DISPLAY_ID_MAIN|
+|int_android.view.SurfaceControl.FX_SURFACE_DIM|
+|int_android.view.SurfaceControl.FX_SURFACE_MASK|
+|int_android.view.SurfaceControl.FX_SURFACE_NORMAL|
+|int_android.view.SurfaceControl.HIDDEN|
+|int_android.view.SurfaceControl.NON_PREMULTIPLIED|
+|int_android.view.SurfaceControl.OPAQUE|
+|int_android.view.SurfaceControl.PROTECTED_APP|
+|int_android.view.SurfaceControl.SECURE|
+|int_android.view.SurfaceControl.SURFACE_HIDDEN|
+
+*android.view.SurfaceControl_Constructors*
+|android.view.SurfaceControl(SurfaceSession,String,int,int,int,int)|Create a su
+
+*android.view.SurfaceControl_Methods*
+|android.view.SurfaceControl.blankDisplay(IBinder)|
+|android.view.SurfaceControl.closeTransaction()|end a transaction
+|android.view.SurfaceControl.createDisplay(String,boolean)|
+|android.view.SurfaceControl.destroy()|Free all server-side state associated wi
+|android.view.SurfaceControl.destroyDisplay(IBinder)|
+|android.view.SurfaceControl.finalize()|
+|android.view.SurfaceControl.getBuiltInDisplay(int)|
+|android.view.SurfaceControl.getDisplayInfo(IBinder,SurfaceControl.PhysicalDisplayInfo)|
+|android.view.SurfaceControl.hide()|
+|android.view.SurfaceControl.openTransaction()|start a transaction
+|android.view.SurfaceControl.release()|Release the local reference to the serve
+|android.view.SurfaceControl.screenshot(IBinder,Surface)|Copy the current scree
+|android.view.SurfaceControl.screenshot(IBinder,Surface,int,int)|Copy the curre
+|android.view.SurfaceControl.screenshot(IBinder,Surface,int,int,int,int)|Copy t
+|android.view.SurfaceControl.screenshot(int,int)|LikeSurfaceControl#screenshot(
+|android.view.SurfaceControl.screenshot(int,int,int,int)|Copy the current scree
+|android.view.SurfaceControl.setAlpha(float)|
+|android.view.SurfaceControl.setAnimationTransaction()|flag the transaction as 
+|android.view.SurfaceControl.setDisplayLayerStack(IBinder,int)|
+|android.view.SurfaceControl.setDisplayProjection(IBinder,int,Rect,Rect)|
+|android.view.SurfaceControl.setDisplaySurface(IBinder,Surface)|
+|android.view.SurfaceControl.setFlags(int,int)|
+|android.view.SurfaceControl.setLayer(int)|
+|android.view.SurfaceControl.setLayerStack(int)|
+|android.view.SurfaceControl.setMatrix(float,float,float,float)|
+|android.view.SurfaceControl.setPosition(float,float)|
+|android.view.SurfaceControl.setSize(int,int)|
+|android.view.SurfaceControl.setTransparentRegionHint(Region)|
+|android.view.SurfaceControl.setWindowCrop(Rect)|
+|android.view.SurfaceControl.show()|
+|android.view.SurfaceControl.toString()|
+|android.view.SurfaceControl.unblankDisplay(IBinder)|
+
+*android.view.SurfaceControl_Description*
+
+SurfaceControl 
+
+
+
+*int_android.view.SurfaceControl.BUILT_IN_DISPLAY_ID_HDMI*
+
+Built-in physical display id: Attached HDMI display. Use only with 
+(|android.view.SurfaceControl|) . 
+
+
+*int_android.view.SurfaceControl.BUILT_IN_DISPLAY_ID_MAIN*
+
+Built-in physical display id: Main display. Use only with 
+(|android.view.SurfaceControl|) . 
+
+
+*int_android.view.SurfaceControl.FX_SURFACE_DIM*
+
+Surface creation flag: Creates a Dim surface. Everything behind this surface is 
+dimmed by the amount specified in (|android.view.SurfaceControl|) . It is an 
+error to lock a Dim surface, since it doesn't have a backing store. 
+
+
+*int_android.view.SurfaceControl.FX_SURFACE_MASK*
+
+Mask used for FX values above. 
+
+
+*int_android.view.SurfaceControl.FX_SURFACE_NORMAL*
+
+Surface creation flag: Creates a normal surface. This is the default. 
+
+
+*int_android.view.SurfaceControl.HIDDEN*
+
+Surface creation flag: Surface is created hidden 
+
+
+*int_android.view.SurfaceControl.NON_PREMULTIPLIED*
+
+Surface creation flag: Creates a surface where color components are interpreted 
+as "non pre-multiplied" by their alpha channel. Of course this flag is 
+meaningless for surfaces without an alpha channel. By default surfaces are 
+pre-multiplied, which means that each color component is already multiplied by 
+its alpha value. In this case the blending equation used is: 
+
+DEST = SRC + DEST * (1-SRC_ALPHA) 
+
+By contrast, non pre-multiplied surfaces use the following equation: 
+
+DEST = SRC * SRC_ALPHA * DEST * (1-SRC_ALPHA) 
+
+pre-multiplied surfaces must always be used if transparent pixels are 
+composited on top of each-other into the surface. A pre-multiplied surface can 
+never lower the value of the alpha component of a given pixel. 
+
+In some rare situations, a non pre-multiplied surface is preferable. 
+
+
+*int_android.view.SurfaceControl.OPAQUE*
+
+Surface creation flag: Indicates that the surface must be considered opaque, 
+even if its pixel format is set to translucent. This can be useful if an 
+application needs full RGBA 8888 support for instance but will still draw every 
+pixel opaque. 
+
+
+*int_android.view.SurfaceControl.PROTECTED_APP*
+
+Surface creation flag: Application requires a hardware-protected path to an 
+external display sink. If a hardware-protected path is not available, then this 
+surface will not be displayed on the external sink. 
+
+
+*int_android.view.SurfaceControl.SECURE*
+
+Surface creation flag: The surface contains secure content, special measures 
+will be taken to disallow the surface's content to be copied from another 
+process. In particular, screenshots and VNC servers will be disabled, but other 
+measures can take place, for instance the surface might not be hardware 
+accelerated. 
+
+
+*int_android.view.SurfaceControl.SURFACE_HIDDEN*
+
+Surface flag: Hide the surface. Equivalent to calling hide(). 
+
+
+
+*android.view.SurfaceControl(SurfaceSession,String,int,int,int,int)*
+
+public SurfaceControl(
+  android.view.SurfaceSession session,
+  java.lang.String name,
+  int w,
+  int h,
+  int format,
+  int flags)
+  throws |android.view.Surface.OutOfResourcesException|
+         
+Create a surface with a name. 
+
+The surface creation flags specify what kind of surface to create and certain 
+options such as whether the surface can be assumed to be opaque and whether it 
+should be initially hidden. Surfaces should always be created with the 
+(|android.view.SurfaceControl|) flag set to ensure that they are not made 
+visible prematurely before all of the surface's properties have been 
+configured. 
+
+Good practice is to first create the surface with the 
+(|android.view.SurfaceControl|) flag specified, open a transaction, set the 
+surface layer, layer stack, alpha, and position, call 
+(|android.view.SurfaceControl|) if appropriate, and close the transaction. 
+
+    session - The surface session, must not be null. 
+    name - The surface name, must not be null. 
+    w - The surface initial width. 
+    h - The surface initial height. 
+    flags - The surface creation flags. Should always include {@link #HIDDEN} in the 
+       creation flags. 
+
+*android.view.SurfaceControl.blankDisplay(IBinder)*
+
+public static void blankDisplay(android.os.IBinder displayToken)
+
+
+
+
+
+*android.view.SurfaceControl.closeTransaction()*
+
+public static void closeTransaction()
+
+end a transaction 
+
+
+
+*android.view.SurfaceControl.createDisplay(String,boolean)*
+
+public static |android.os.IBinder| createDisplay(
+  java.lang.String name,
+  boolean secure)
+
+
+
+
+
+*android.view.SurfaceControl.destroy()*
+
+public void destroy()
+
+Free all server-side state associated with this surface and release this 
+object's reference. This method can only be called from the process that 
+created the service. 
+
+
+
+*android.view.SurfaceControl.destroyDisplay(IBinder)*
+
+public static void destroyDisplay(android.os.IBinder displayToken)
+
+
+
+
+
+*android.view.SurfaceControl.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.SurfaceControl.getBuiltInDisplay(int)*
+
+public static |android.os.IBinder| getBuiltInDisplay(int builtInDisplayId)
+
+
+
+
+
+*android.view.SurfaceControl.getDisplayInfo(IBinder,SurfaceControl.PhysicalDisplayInfo)*
+
+public static boolean getDisplayInfo(
+  android.os.IBinder displayToken,
+  android.view.SurfaceControl.PhysicalDisplayInfo outInfo)
+
+
+
+
+
+*android.view.SurfaceControl.hide()*
+
+public void hide()
+
+
+
+
+
+*android.view.SurfaceControl.openTransaction()*
+
+public static void openTransaction()
+
+start a transaction 
+
+
+
+*android.view.SurfaceControl.release()*
+
+public void release()
+
+Release the local reference to the server-side surface. Always call release() 
+when you're done with a Surface. This will make the surface invalid. 
+
+
+
+*android.view.SurfaceControl.screenshot(IBinder,Surface)*
+
+public static void screenshot(
+  android.os.IBinder display,
+  android.view.Surface consumer)
+
+Copy the current screen contents into the provided (|android.view.Surface|) 
+
+
+    display - The display to take the screenshot of. 
+    consumer - The {@link Surface} to take the screenshot into. 
+
+*android.view.SurfaceControl.screenshot(IBinder,Surface,int,int)*
+
+public static void screenshot(
+  android.os.IBinder display,
+  android.view.Surface consumer,
+  int width,
+  int height)
+
+Copy the current screen contents into the provided (|android.view.Surface|) 
+
+
+    display - The display to take the screenshot of. 
+    consumer - The {@link Surface} to take the screenshot into. 
+    width - The desired width of the returned bitmap; the raw screen will be scaled down to 
+       this size. 
+    height - The desired height of the returned bitmap; the raw screen will be scaled down 
+       to this size. 
+
+*android.view.SurfaceControl.screenshot(IBinder,Surface,int,int,int,int)*
+
+public static void screenshot(
+  android.os.IBinder display,
+  android.view.Surface consumer,
+  int width,
+  int height,
+  int minLayer,
+  int maxLayer)
+
+Copy the current screen contents into the provided (|android.view.Surface|) 
+
+
+    display - The display to take the screenshot of. 
+    consumer - The {@link Surface} to take the screenshot into. 
+    width - The desired width of the returned bitmap; the raw screen will be scaled down to 
+       this size. 
+    height - The desired height of the returned bitmap; the raw screen will be scaled down 
+       to this size. 
+    minLayer - The lowest (bottom-most Z order) surface layer to include in the screenshot. 
+    maxLayer - The highest (top-most Z order) surface layer to include in the screenshot. 
+
+*android.view.SurfaceControl.screenshot(int,int)*
+
+public static Bitmap screenshot(
+  int width,
+  int height)
+
+Like (|android.view.SurfaceControl|) but includes all Surfaces in the 
+screenshot. 
+
+
+    width - The desired width of the returned bitmap; the raw screen will be scaled down to 
+       this size. 
+    height - The desired height of the returned bitmap; the raw screen will be scaled down 
+       to this size. 
+
+    Returns: Returns a Bitmap containing the screen contents, or null if an error occurs. 
+             Make sure to call Bitmap.recycle() as soon as possible, once its 
+             content is not needed anymore. 
+
+*android.view.SurfaceControl.screenshot(int,int,int,int)*
+
+public static Bitmap screenshot(
+  int width,
+  int height,
+  int minLayer,
+  int maxLayer)
+
+Copy the current screen contents into a bitmap and return it. 
+
+CAVEAT: Versions of screenshot that return a (|Bitmap|) can be extremely slow; 
+avoid use unless absolutely necessary; prefer the versions that use a 
+(|android.view.Surface|) instead, such as (|android.view.SurfaceControl|) . 
+
+
+    width - The desired width of the returned bitmap; the raw screen will be scaled down to 
+       this size. 
+    height - The desired height of the returned bitmap; the raw screen will be scaled down 
+       to this size. 
+    minLayer - The lowest (bottom-most Z order) surface layer to include in the screenshot. 
+    maxLayer - The highest (top-most Z order) surface layer to include in the screenshot. 
+
+    Returns: Returns a Bitmap containing the screen contents, or null if an error occurs. 
+             Make sure to call Bitmap.recycle() as soon as possible, once its 
+             content is not needed anymore. 
+
+*android.view.SurfaceControl.setAlpha(float)*
+
+public void setAlpha(float alpha)
+
+
+
+
+
+*android.view.SurfaceControl.setAnimationTransaction()*
+
+public static void setAnimationTransaction()
+
+flag the transaction as an animation 
+
+
+
+*android.view.SurfaceControl.setDisplayLayerStack(IBinder,int)*
+
+public static void setDisplayLayerStack(
+  android.os.IBinder displayToken,
+  int layerStack)
+
+
+
+
+
+*android.view.SurfaceControl.setDisplayProjection(IBinder,int,Rect,Rect)*
+
+public static void setDisplayProjection(
+  android.os.IBinder displayToken,
+  int orientation,
+  Rect layerStackRect,
+  Rect displayRect)
+
+
+
+
+
+*android.view.SurfaceControl.setDisplaySurface(IBinder,Surface)*
+
+public static void setDisplaySurface(
+  android.os.IBinder displayToken,
+  android.view.Surface surface)
+
+
+
+
+
+*android.view.SurfaceControl.setFlags(int,int)*
+
+public void setFlags(
+  int flags,
+  int mask)
+
+
+
+
+
+*android.view.SurfaceControl.setLayer(int)*
+
+public void setLayer(int zorder)
+
+
+
+
+
+*android.view.SurfaceControl.setLayerStack(int)*
+
+public void setLayerStack(int layerStack)
+
+
+
+
+
+*android.view.SurfaceControl.setMatrix(float,float,float,float)*
+
+public void setMatrix(
+  float dsdx,
+  float dtdx,
+  float dsdy,
+  float dtdy)
+
+
+
+
+
+*android.view.SurfaceControl.setPosition(float,float)*
+
+public void setPosition(
+  float x,
+  float y)
+
+
+
+
+
+*android.view.SurfaceControl.setSize(int,int)*
+
+public void setSize(
+  int w,
+  int h)
+
+
+
+
+
+*android.view.SurfaceControl.setTransparentRegionHint(Region)*
+
+public void setTransparentRegionHint(Region region)
+
+
+
+
+
+*android.view.SurfaceControl.setWindowCrop(Rect)*
+
+public void setWindowCrop(Rect crop)
+
+
+
+
+
+*android.view.SurfaceControl.show()*
+
+public void show()
+
+
+
+
+
+*android.view.SurfaceControl.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.view.SurfaceControl.unblankDisplay(IBinder)*
+
+public static void unblankDisplay(android.os.IBinder displayToken)
+
+
+
+
+
+

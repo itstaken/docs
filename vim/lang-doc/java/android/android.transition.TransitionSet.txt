@@ -1,0 +1,285 @@
+*android.transition.TransitionSet* *TransitionSet* A TransitionSet is a parent o
+
+public class TransitionSet
+  extends    |android.transition.Transition|
+
+|android.transition.TransitionSet_Description|
+|android.transition.TransitionSet_Fields|
+|android.transition.TransitionSet_Constructors|
+|android.transition.TransitionSet_Methods|
+
+================================================================================
+
+*android.transition.TransitionSet_Fields*
+|int_android.transition.TransitionSet.ORDERING_SEQUENTIAL|
+|int_android.transition.TransitionSet.ORDERING_TOGETHER|
+
+*android.transition.TransitionSet_Constructors*
+|android.transition.TransitionSet()|Constructs an empty transition set.
+
+*android.transition.TransitionSet_Methods*
+|android.transition.TransitionSet.addListener(Transition.TransitionListener)|
+|android.transition.TransitionSet.addTarget(int)|
+|android.transition.TransitionSet.addTarget(View)|
+|android.transition.TransitionSet.addTransition(Transition)|Adds child transiti
+|android.transition.TransitionSet.cancel()|
+|android.transition.TransitionSet.captureEndValues(TransitionValues)|
+|android.transition.TransitionSet.captureStartValues(TransitionValues)|
+|android.transition.TransitionSet.clone()|
+|android.transition.TransitionSet.createAnimators(ViewGroup,TransitionValuesMaps,TransitionValuesMaps)|
+|android.transition.TransitionSet.getOrdering()|Returns the ordering of this Tr
+|android.transition.TransitionSet.pause()|
+|android.transition.TransitionSet.removeListener(Transition.TransitionListener)|
+|android.transition.TransitionSet.removeTarget(int)|
+|android.transition.TransitionSet.removeTarget(View)|
+|android.transition.TransitionSet.removeTransition(Transition)|Removes the spec
+|android.transition.TransitionSet.resume()|
+|android.transition.TransitionSet.runAnimators()|
+|android.transition.TransitionSet.setDuration(long)|Setting a non-negative dura
+|android.transition.TransitionSet.setInterpolator(TimeInterpolator)|
+|android.transition.TransitionSet.setOrdering(int)|Sets the play order of this 
+|android.transition.TransitionSet.setStartDelay(long)|
+
+*android.transition.TransitionSet_Description*
+
+A TransitionSet is a parent of child transitions (including other 
+TransitionSets). Using TransitionSets enables more complex choreography of 
+transitions, where some sets play (|android.transition.TransitionSet|) and 
+others play (|android.transition.TransitionSet|) . For example, 
+(|android.transition.AutoTransition|) uses a TransitionSet to sequentially play 
+a Fade(Fade.OUT), followed by a (|android.transition.ChangeBounds|) , followed 
+by a Fade(Fade.OUT) transition. 
+
+A TransitionSet can be described in a resource file by using the tag 
+transitionSet, along with the standard attributes of (|android.R.styleable|) 
+and (|android.R.styleable|) . Child transitions of the TransitionSet object can 
+be loaded by adding those child tags inside the enclosing transitionSet tag. 
+For example, the following xml describes a TransitionSet that plays a Fade and 
+then a ChangeBounds transition on the affected view targets: 
+
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android" 
+android:ordering="sequential"> <fade/> <changeBounds/> </transitionSet> 
+
+
+
+*int_android.transition.TransitionSet.ORDERING_SEQUENTIAL*
+
+A flag used to indicate that the child transitions of this set should play in 
+sequence; when one child transition ends, the next child transition begins. 
+Note that a transition does not end until all instances of it (which are 
+playing on all applicable targets of the transition) end. 
+
+
+*int_android.transition.TransitionSet.ORDERING_TOGETHER*
+
+A flag used to indicate that the child transitions of this set should all start 
+at the same time. 
+
+
+
+*android.transition.TransitionSet()*
+
+public TransitionSet()
+
+Constructs an empty transition set. Add child transitions to the set by calling 
+(|android.transition.TransitionSet|) )}. By default, child transitions will 
+play together(|android.transition.TransitionSet|) . 
+
+
+*android.transition.TransitionSet.addListener(Transition.TransitionListener)*
+
+public |android.transition.TransitionSet| addListener(android.transition.Transition.TransitionListener listener)
+
+
+
+
+
+*android.transition.TransitionSet.addTarget(int)*
+
+public |android.transition.TransitionSet| addTarget(int targetId)
+
+
+
+
+
+*android.transition.TransitionSet.addTarget(View)*
+
+public |android.transition.TransitionSet| addTarget(android.view.View target)
+
+
+
+
+
+*android.transition.TransitionSet.addTransition(Transition)*
+
+public |android.transition.TransitionSet| addTransition(android.transition.Transition transition)
+
+Adds child transition to this set. The order in which this child transition is 
+added relative to other child transitions that are added, in addition to the 
+ordering(|android.transition.TransitionSet|) property, determines the order in 
+which the transitions are started. 
+
+If this transitionSet has a duration(|android.transition.TransitionSet|) set on 
+it, the child transition will inherit that duration. Transitions are assumed to 
+have a maximum of one transitionSet parent. 
+
+
+    transition - A non-null child transition to be added to this set. 
+
+    Returns: This transitionSet object. 
+
+*android.transition.TransitionSet.cancel()*
+
+protected void cancel()
+
+
+
+
+
+*android.transition.TransitionSet.captureEndValues(TransitionValues)*
+
+public void captureEndValues(android.transition.TransitionValues transitionValues)
+
+
+
+
+
+*android.transition.TransitionSet.captureStartValues(TransitionValues)*
+
+public void captureStartValues(android.transition.TransitionValues transitionValues)
+
+
+
+
+
+*android.transition.TransitionSet.clone()*
+
+public |android.transition.TransitionSet| clone()
+
+
+
+
+
+*android.transition.TransitionSet.createAnimators(ViewGroup,TransitionValuesMaps,TransitionValuesMaps)*
+
+protected void createAnimators(
+  android.view.ViewGroup sceneRoot,
+  android.transition.TransitionValuesMaps startValues,
+  android.transition.TransitionValuesMaps endValues)
+
+
+
+
+
+*android.transition.TransitionSet.getOrdering()*
+
+public int getOrdering()
+
+Returns the ordering of this TransitionSet. By default, the value is 
+(|android.transition.TransitionSet|) . 
+
+
+
+    Returns: {@link #ORDERING_TOGETHER} if child transitions will play at the same time, 
+             {@link #ORDERING_SEQUENTIAL} if they will play in sequence. 
+
+*android.transition.TransitionSet.pause()*
+
+public void pause()
+
+
+
+
+
+*android.transition.TransitionSet.removeListener(Transition.TransitionListener)*
+
+public |android.transition.TransitionSet| removeListener(android.transition.Transition.TransitionListener listener)
+
+
+
+
+
+*android.transition.TransitionSet.removeTarget(int)*
+
+public |android.transition.TransitionSet| removeTarget(int targetId)
+
+
+
+
+
+*android.transition.TransitionSet.removeTarget(View)*
+
+public |android.transition.TransitionSet| removeTarget(android.view.View target)
+
+
+
+
+
+*android.transition.TransitionSet.removeTransition(Transition)*
+
+public |android.transition.TransitionSet| removeTransition(android.transition.Transition transition)
+
+Removes the specified child transition from this set. 
+
+
+    transition - The transition to be removed. 
+
+    Returns: This transitionSet object. 
+
+*android.transition.TransitionSet.resume()*
+
+public void resume()
+
+
+
+
+
+*android.transition.TransitionSet.runAnimators()*
+
+protected void runAnimators()
+
+
+
+
+
+*android.transition.TransitionSet.setDuration(long)*
+
+public |android.transition.TransitionSet| setDuration(long duration)
+
+Setting a non-negative duration on a TransitionSet causes all of the child 
+transitions (current and future) to inherit this duration. 
+
+
+    duration - The length of the animation, in milliseconds. 
+
+    Returns: This transitionSet object. 
+
+*android.transition.TransitionSet.setInterpolator(TimeInterpolator)*
+
+public |android.transition.TransitionSet| setInterpolator(android.animation.TimeInterpolator interpolator)
+
+
+
+
+
+*android.transition.TransitionSet.setOrdering(int)*
+
+public |android.transition.TransitionSet| setOrdering(int ordering)
+
+Sets the play order of this set's child transitions. 
+
+
+    ordering - {@link #ORDERING_TOGETHER} to play this set's child transitions together, 
+       {@link #ORDERING_SEQUENTIAL} to play the child transitions in sequence. 
+
+    Returns: This transitionSet object. 
+
+*android.transition.TransitionSet.setStartDelay(long)*
+
+public |android.transition.TransitionSet| setStartDelay(long startDelay)
+
+
+
+
+
+

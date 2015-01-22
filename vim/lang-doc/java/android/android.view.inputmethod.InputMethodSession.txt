@@ -1,0 +1,204 @@
+*android.view.inputmethod.InputMethodSession* *InputMethodSession* The InputMeth
+
+public interface interface InputMethodSession
+
+
+|android.view.inputmethod.InputMethodSession_Description|
+|android.view.inputmethod.InputMethodSession_Fields|
+|android.view.inputmethod.InputMethodSession_Constructors|
+|android.view.inputmethod.InputMethodSession_Methods|
+
+================================================================================
+
+*android.view.inputmethod.InputMethodSession_Methods*
+|android.view.inputmethod.InputMethodSession.appPrivateCommand(String,Bundle)|P
+|android.view.inputmethod.InputMethodSession.dispatchGenericMotionEvent(int,MotionEvent,InputMethodSession.EventCallback)|
+|android.view.inputmethod.InputMethodSession.dispatchKeyEvent(int,KeyEvent,InputMethodSession.EventCallback)|
+|android.view.inputmethod.InputMethodSession.dispatchTrackballEvent(int,MotionEvent,InputMethodSession.EventCallback)|
+|android.view.inputmethod.InputMethodSession.displayCompletions(CompletionInfo[])|
+|android.view.inputmethod.InputMethodSession.finishInput()|This method is calle
+|android.view.inputmethod.InputMethodSession.toggleSoftInput(int,int)|Toggle th
+|android.view.inputmethod.InputMethodSession.updateCursor(Rect)|This method is 
+|android.view.inputmethod.InputMethodSession.updateExtractedText(int,ExtractedText)|
+|android.view.inputmethod.InputMethodSession.updateSelection(int,int,int,int,int,int)|
+|android.view.inputmethod.InputMethodSession.viewClicked(boolean)|This method i
+
+*android.view.inputmethod.InputMethodSession_Description*
+
+The InputMethodSession interface provides the per-client functionality of 
+(|android.view.inputmethod.InputMethod|) that is safe to expose to 
+applications. 
+
+Applications will not normally use this interface themselves, instead relying 
+on the standard interaction provided by (|android.widget.TextView|) and 
+(|android.widget.EditText|) . 
+
+
+
+*android.view.inputmethod.InputMethodSession.appPrivateCommand(String,Bundle)*
+
+public void appPrivateCommand(
+  java.lang.String action,
+  android.os.Bundle data)
+
+Process a private command sent from the application to the input method. This 
+can be used to provide domain-specific features that are only known between 
+certain input methods and their clients. 
+
+
+    action - Name of the command to be performed. This must be a scoped name, i.e. prefixed 
+       with a package name you own, so that different developers will not 
+       create conflicting commands. 
+    data - Any data to include with the command. 
+
+*android.view.inputmethod.InputMethodSession.dispatchGenericMotionEvent(int,MotionEvent,InputMethodSession.EventCallback)*
+
+public void dispatchGenericMotionEvent(
+  int seq,
+  android.view.MotionEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+This method is called when there is a generic motion event. 
+
+If the input method wants to handle this event, return true, otherwise return 
+false and the caller (i.e. the application) will handle the event. 
+
+
+    event - The motion event. 
+
+    Returns: Whether the input method wants to handle this event. 
+
+*android.view.inputmethod.InputMethodSession.dispatchKeyEvent(int,KeyEvent,InputMethodSession.EventCallback)*
+
+public void dispatchKeyEvent(
+  int seq,
+  android.view.KeyEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+This method is called when a key is pressed. When done with the event, the 
+implementation must call back on callback with its result. 
+
+If the input method wants to handle this event, return true, otherwise return 
+false and the caller (i.e. the application) will handle the event. 
+
+
+    event - The key event. 
+
+    Returns: Whether the input method wants to handle this event. 
+
+*android.view.inputmethod.InputMethodSession.dispatchTrackballEvent(int,MotionEvent,InputMethodSession.EventCallback)*
+
+public void dispatchTrackballEvent(
+  int seq,
+  android.view.MotionEvent event,
+  android.view.inputmethod.InputMethodSession.EventCallback callback)
+
+This method is called when there is a track ball event. 
+
+If the input method wants to handle this event, return true, otherwise return 
+false and the caller (i.e. the application) will handle the event. 
+
+
+    event - The motion event. 
+
+    Returns: Whether the input method wants to handle this event. 
+
+*android.view.inputmethod.InputMethodSession.displayCompletions(CompletionInfo[])*
+
+public void displayCompletions(android.view.inputmethod.CompletionInfo[] completions)
+
+Called by a text editor that performs auto completion, to tell the input method 
+about the completions it has available. This can be used by the input method to 
+display them to the user to select the text to be inserted. 
+
+
+    completions - Array of text completions that are available, starting with the best. If this 
+       array is null, any existing completions will be removed. 
+
+*android.view.inputmethod.InputMethodSession.finishInput()*
+
+public void finishInput()
+
+This method is called when the application would like to stop receiving text 
+input. 
+
+
+
+*android.view.inputmethod.InputMethodSession.toggleSoftInput(int,int)*
+
+public void toggleSoftInput(
+  int showFlags,
+  int hideFlags)
+
+Toggle the soft input window. Applications can toggle the state of the soft 
+input window. 
+
+
+    showFlags - Provides additional operating flags. May be 0 or have the {@link 
+       InputMethodManager#SHOW_IMPLICIT}, {@link 
+       InputMethodManager#SHOW_FORCED} bit set. 
+    hideFlags - Provides additional operating flags. May be 0 or have the {@link 
+       InputMethodManager#HIDE_IMPLICIT_ONLY}, {@link 
+       InputMethodManager#HIDE_NOT_ALWAYS} bit set. 
+
+*android.view.inputmethod.InputMethodSession.updateCursor(Rect)*
+
+public void updateCursor(Rect newCursor)
+
+This method is called when cursor location of the target input field has 
+changed within its window. This is not normally called, but will only be 
+reported if requested by the input method. 
+
+
+    newCursor - The rectangle of the cursor currently being shown in the input field's window 
+       coordinates. 
+
+*android.view.inputmethod.InputMethodSession.updateExtractedText(int,ExtractedText)*
+
+public void updateExtractedText(
+  int token,
+  android.view.inputmethod.ExtractedText text)
+
+Called by a text editor to report its new extracted text when its contents 
+change. This will only be called if the input method calls 
+InputConnection.getExtractedText()(|android.view.inputmethod.InputConnection|) 
+with the option to report updates. 
+
+
+    token - The input method supplied token for identifying its request. 
+    text - The new extracted text. 
+
+*android.view.inputmethod.InputMethodSession.updateSelection(int,int,int,int,int,int)*
+
+public void updateSelection(
+  int oldSelStart,
+  int oldSelEnd,
+  int newSelStart,
+  int newSelEnd,
+  int candidatesStart,
+  int candidatesEnd)
+
+This method is called when the selection or cursor in the current target input 
+field has changed. 
+
+
+    oldSelStart - The previous text offset of the cursor selection start position. 
+    oldSelEnd - The previous text offset of the cursor selection end position. 
+    newSelStart - The new text offset of the cursor selection start position. 
+    newSelEnd - The new text offset of the cursor selection end position. 
+    candidatesStart - The text offset of the current candidate text start position. 
+    candidatesEnd - The text offset of the current candidate text end position. 
+
+*android.view.inputmethod.InputMethodSession.viewClicked(boolean)*
+
+public void viewClicked(boolean focusChanged)
+
+This method is called when the user tapped a text view. IMEs can't rely on this 
+method being called because this was not part of the original IME protocol, so 
+applications with custom text editing written before this method appeared will 
+not call to inform the IME of this interaction. 
+
+
+    focusChanged - true if the user changed the focused view by this click. 
+
+

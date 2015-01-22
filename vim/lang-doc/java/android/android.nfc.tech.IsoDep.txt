@@ -1,0 +1,194 @@
+*android.nfc.tech.IsoDep* *IsoDep* Provides access to ISO-DEP (ISO 14443-4) prop
+
+public final class IsoDep
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.IsoDep_Description|
+|android.nfc.tech.IsoDep_Fields|
+|android.nfc.tech.IsoDep_Constructors|
+|android.nfc.tech.IsoDep_Methods|
+
+================================================================================
+
+*android.nfc.tech.IsoDep_Fields*
+|java.lang.String_android.nfc.tech.IsoDep.EXTRA_HI_LAYER_RESP|
+|java.lang.String_android.nfc.tech.IsoDep.EXTRA_HIST_BYTES|
+
+*android.nfc.tech.IsoDep_Constructors*
+|android.nfc.tech.IsoDep(Tag)|
+
+*android.nfc.tech.IsoDep_Methods*
+|android.nfc.tech.IsoDep.get(Tag)|Get an instance ofIsoDepfor the given tag.
+|android.nfc.tech.IsoDep.getHiLayerResponse()|Return the higher layer response 
+|android.nfc.tech.IsoDep.getHistoricalBytes()|Return the ISO-DEP historical byt
+|android.nfc.tech.IsoDep.getMaxTransceiveLength()|Return the maximum number of 
+|android.nfc.tech.IsoDep.getTimeout()|Get the current timeout for#transceivein 
+|android.nfc.tech.IsoDep.isExtendedLengthApduSupported()|Standard APDUs have a 
+|android.nfc.tech.IsoDep.setTimeout(int)|Set the timeout of#transceivein millis
+|android.nfc.tech.IsoDep.transceive(byte[])|Send raw ISO-DEP data to the tag an
+
+*android.nfc.tech.IsoDep_Description*
+
+Provides access to ISO-DEP (ISO 14443-4) properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire an (|android.nfc.tech.IsoDep|) object using (|android.nfc.tech.IsoDep|) 
+. The primary ISO-DEP I/O operation is (|android.nfc.tech.IsoDep|) . 
+Applications must implement their own protocol stack on top of 
+(|android.nfc.tech.IsoDep|) . Tags that enumerate the 
+(|android.nfc.tech.IsoDep|) technology in (|android.nfc.Tag|) will also 
+enumerate (|android.nfc.tech.NfcA|) or (|android.nfc.tech.NfcB|) (since IsoDep 
+builds on top of either of these). 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.IsoDep.EXTRA_HI_LAYER_RESP*
+
+
+
+
+*java.lang.String_android.nfc.tech.IsoDep.EXTRA_HIST_BYTES*
+
+
+
+
+
+*android.nfc.tech.IsoDep(Tag)*
+
+public IsoDep(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.IsoDep.get(Tag)*
+
+public static |android.nfc.tech.IsoDep| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.IsoDep|) for the given tag. Does not 
+cause any RF activity and does not block. Returns null if 
+(|android.nfc.tech.IsoDep|) was not enumerated in (|android.nfc.Tag|) . This 
+indicates the tag does not support ISO-DEP. 
+
+
+    tag - an ISO-DEP compatible tag 
+
+    Returns: ISO-DEP object 
+
+*android.nfc.tech.IsoDep.getHiLayerResponse()*
+
+public byte[] getHiLayerResponse()
+
+Return the higher layer response bytes for (|android.nfc.tech.NfcB|) tags. Does 
+not cause any RF activity and does not block. The higher layer response bytes 
+can be used to help identify a tag. They are present only on 
+(|android.nfc.tech.IsoDep|) tags that are based on (|android.nfc.tech.NfcB|) RF 
+technology. If this tag is not (|android.nfc.tech.NfcB|) then null is returned. 
+In ISO 14443-4 terminology, the higher layer bytes are a subset of the ATTRIB 
+response. 
+
+
+
+    Returns: ISO-DEP historical bytes, or null if this is not a {@link NfcB} tag 
+
+*android.nfc.tech.IsoDep.getHistoricalBytes()*
+
+public byte[] getHistoricalBytes()
+
+Return the ISO-DEP historical bytes for (|android.nfc.tech.NfcA|) tags. Does 
+not cause any RF activity and does not block. The historical bytes can be used 
+to help identify a tag. They are present only on (|android.nfc.tech.IsoDep|) 
+tags that are based on (|android.nfc.tech.NfcA|) RF technology. If this tag is 
+not (|android.nfc.tech.NfcA|) then null is returned. In ISO 14443-4 
+terminology, the historical bytes are a subset of the RATS response. 
+
+
+
+    Returns: ISO-DEP historical bytes, or null if this is not a {@link NfcA} tag 
+
+*android.nfc.tech.IsoDep.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.IsoDep|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.IsoDep.getTimeout()*
+
+public int getTimeout()
+
+Get the current timeout for (|android.nfc.tech.IsoDep|) in milliseconds. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: timeout value in milliseconds 
+
+*android.nfc.tech.IsoDep.isExtendedLengthApduSupported()*
+
+public boolean isExtendedLengthApduSupported()
+
+Standard APDUs have a 1-byte length field, allowing a maximum of 255 payload 
+bytes, which results in a maximum APDU length of 261 bytes. 
+
+Extended length APDUs have a 3-byte length field, allowing 65535 payload bytes. 
+
+Some NFC adapters, like the one used in the Nexus S and the Galaxy Nexus do not 
+support extended length APDUs. They are expected to be well-supported in the 
+future though. Use this method to check for extended length APDU support. 
+
+
+
+    Returns: whether the NFC adapter on this device supports extended length APDUs. 
+
+*android.nfc.tech.IsoDep.setTimeout(int)*
+
+public void setTimeout(int timeout)
+
+Set the timeout of (|android.nfc.tech.IsoDep|) in milliseconds. The timeout 
+only applies to ISO-DEP (|android.nfc.tech.IsoDep|) , and is reset to a default 
+value when (|android.nfc.tech.IsoDep|) is called. Setting a longer timeout may 
+be useful when performing transactions that require a long processing time on 
+the tag such as key generation. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    timeout - timeout value in milliseconds 
+
+*android.nfc.tech.IsoDep.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw ISO-DEP data to the tag and receive the response. 
+
+Applications must only send the INF payload, and not the start of frame and end 
+of frame indicators. Applications do not need to fragment the payload, it will 
+be automatically fragmented and defragmented by (|android.nfc.tech.IsoDep|) if 
+it exceeds FSD/FSC limits. 
+
+Use (|android.nfc.tech.IsoDep|) to retrieve the maximum number of bytes that 
+can be sent with (|android.nfc.tech.IsoDep|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.IsoDep|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    data - command bytes to send, must not be null 
+
+    Returns: response bytes received, will not be null 
+
+

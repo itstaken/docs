@@ -1,0 +1,231 @@
+*android.app.Presentation* *Presentation* Base class for presentations.
+
+public class Presentation
+  extends    |android.app.Dialog|
+
+|android.app.Presentation_Description|
+|android.app.Presentation_Fields|
+|android.app.Presentation_Constructors|
+|android.app.Presentation_Methods|
+
+================================================================================
+
+*android.app.Presentation_Constructors*
+|android.app.Presentation(Context,Display)|Creates a new presentation that is a
+|android.app.Presentation(Context,Display,int)|Creates a new presentation that 
+
+*android.app.Presentation_Methods*
+|android.app.Presentation.getDisplay()|Gets theDisplaythat this presentation ap
+|android.app.Presentation.getResources()|Gets theResourcesthat should be used t
+|android.app.Presentation.onDisplayChanged()|Called by the system when the prop
+|android.app.Presentation.onDisplayRemoved()|Called by the system when theDispl
+|android.app.Presentation.onStart()|
+|android.app.Presentation.onStop()|
+|android.app.Presentation.show()|Inherited fromDialog#show.
+
+*android.app.Presentation_Description*
+
+Base class for presentations. 
+
+A presentation is a special kind of dialog whose purpose is to present content 
+on a secondary display. A (|android.app.Presentation|) is associated with the 
+target (|android.view.Display|) at creation time and configures its context and 
+resource configuration according to the display's metrics. 
+
+Notably, the (|android.content.Context|) of a presentation is different from 
+the context of its containing (|android.app.Activity|) . It is important to 
+inflate the layout of a presentation and load other resources using the 
+presentation's own context to ensure that assets of the correct size and 
+density for the target display are loaded. 
+
+A presentation is automatically canceled (see (|android.app.Dialog|) ) when the 
+display to which it is attached is removed. An activity should take care of 
+pausing and resuming whatever content is playing within the presentation 
+whenever the activity itself is paused or resumed. 
+
+Choosing a presentation display 
+
+Before showing a (|android.app.Presentation|) it's important to choose the 
+(|android.view.Display|) on which it will appear. Choosing a presentation 
+display is sometimes difficult because there may be multiple displays attached. 
+Rather than trying to guess which display is best, an application should let 
+the system choose a suitable presentation display. 
+
+There are two main ways to choose a (|android.view.Display|) . 
+
+Using the media router to choose a presentation display 
+
+The easiest way to choose a presentation display is to use the 
+MediaRouter(|android.media.MediaRouter|) API. The media router service keeps 
+track of which audio and video routes are available on the system. The media 
+router sends notifications whenever routes are selected or unselected or when 
+the preferred presentation display of a route changes. So an application can 
+simply watch for these notifications and show or dismiss a presentation on the 
+preferred presentation display automatically. 
+
+The preferred presentation display is the display that the media router 
+recommends that the application should use if it wants to show content on the 
+secondary display. Sometimes there may not be a preferred presentation display 
+in which case the application should show its content locally without using a 
+presentation. 
+
+Here's how to use the media router to create and show a presentation on the 
+preferred presentation display using (|android.media.MediaRouter.RouteInfo|) . 
+
+
+
+MediaRouter mediaRouter = (MediaRouter) 
+context.getSystemService(Context.MEDIA_ROUTER_SERVICE); MediaRouter.RouteInfo 
+route = mediaRouter.getSelectedRoute(); if (route != null) { Display 
+presentationDisplay = route.getPresentationDisplay(); if (presentationDisplay 
+!= null) { Presentation presentation = new MyPresentation(context, 
+presentationDisplay); presentation.show(); } } 
+
+The following sample code from ApiDemos demonstrates how to use the media 
+router to automatically switch between showing content in the main activity and 
+showing the content in a presentation when a presentation display is available. 
+development/samples/ApiDemos/src/com/example/android/apis/app/PresentationWithMediaRouterActivity.java
+activityUsing the display manager to choose a presentation display 
+
+Another way to choose a presentation display is to use the 
+(|android.hardware.display.DisplayManager|) API directly. The display manager 
+service provides functions to enumerate and describe all displays that are 
+attached to the system including displays that may be used for presentations. 
+
+The display manager keeps track of all displays in the system. However, not all 
+displays are appropriate for showing presentations. For example, if an activity 
+attempted to show a presentation on the main display it might obscure its own 
+content (it's like opening a dialog on top of your activity). 
+
+Here's how to identify suitable displays for showing presentations using 
+(|android.hardware.display.DisplayManager|) and the 
+(|android.hardware.display.DisplayManager|) category. 
+
+
+
+DisplayManager displayManager = (DisplayManager) 
+context.getSystemService(Context.DISPLAY_SERVICE); Display[] 
+presentationDisplays = 
+displayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION); if 
+(presentationDisplays.length > 0) { // If there is more than one suitable 
+presentation display, then we could consider // giving the user a choice. For 
+this example, we simply choose the first display // which is the one the system 
+recommends as the preferred presentation display. Display display = 
+presentationDisplays[0]; Presentation presentation = new 
+MyPresentation(context, presentationDisplay); presentation.show(); } 
+
+The following sample code from ApiDemos demonstrates how to use the display 
+manager to enumerate displays and show content on multiple presentation 
+displays simultaneously. 
+development/samples/ApiDemos/src/com/example/android/apis/app/PresentationActivity.java
+activity 
+
+
+
+*android.app.Presentation(Context,Display)*
+
+public Presentation(
+  android.content.Context outerContext,
+  android.view.Display display)
+
+Creates a new presentation that is attached to the specified display using the 
+default theme. 
+
+    outerContext - The context of the application that is showing the presentation. The 
+       presentation will create its own context (see {@link #getContext()}) 
+       based on this context and information about the associated display. 
+    display - The display to which the presentation should be attached. 
+
+*android.app.Presentation(Context,Display,int)*
+
+public Presentation(
+  android.content.Context outerContext,
+  android.view.Display display,
+  int theme)
+
+Creates a new presentation that is attached to the specified display using the 
+optionally specified theme. 
+
+    outerContext - The context of the application that is showing the presentation. The 
+       presentation will create its own context (see {@link #getContext()}) 
+       based on this context and information about the associated display. 
+    display - The display to which the presentation should be attached. 
+    theme - A style resource describing the theme to use for the window. See Style and 
+       Theme Resources for more information about defining and using styles. 
+       This theme is applied on top of the current theme in outerContext. If 0, 
+       the default presentation theme will be used. 
+
+*android.app.Presentation.getDisplay()*
+
+public |android.view.Display| getDisplay()
+
+Gets the (|android.view.Display|) that this presentation appears on. 
+
+
+
+    Returns: 
+
+*android.app.Presentation.getResources()*
+
+public |android.content.res.Resources| getResources()
+
+Gets the (|android.content.res.Resources|) that should be used to inflate the 
+layout of this presentation. This resources object has been configured 
+according to the metrics of the display that the presentation appears on. 
+
+
+
+    Returns: The presentation resources object. 
+
+*android.app.Presentation.onDisplayChanged()*
+
+public void onDisplayChanged()
+
+Called by the system when the properties of the (|android.view.Display|) to 
+which the presentation is attached have changed. 
+
+If the display metrics have changed (for example, if the display has been 
+resized or rotated), then the system automatically calls 
+(|android.app.Presentation|) to dismiss the presentation. 
+
+
+
+*android.app.Presentation.onDisplayRemoved()*
+
+public void onDisplayRemoved()
+
+Called by the system when the (|android.view.Display|) to which the 
+presentation is attached has been removed. 
+
+The system automatically calls (|android.app.Presentation|) to dismiss the 
+presentation after sending this event. 
+
+
+
+*android.app.Presentation.onStart()*
+
+protected void onStart()
+
+
+
+
+
+*android.app.Presentation.onStop()*
+
+protected void onStop()
+
+
+
+
+
+*android.app.Presentation.show()*
+
+public void show()
+
+Inherited from (|android.app.Dialog|) . Will throw 
+(|android.view.WindowManager.InvalidDisplayException|) if the specified 
+secondary (|android.view.Display|) can't be found. 
+
+
+
+

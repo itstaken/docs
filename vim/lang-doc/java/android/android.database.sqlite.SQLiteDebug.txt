@@ -1,0 +1,98 @@
+*android.database.sqlite.SQLiteDebug* *SQLiteDebug* Provides debugging info abou
+
+public final class SQLiteDebug
+  extends    |java.lang.Object|
+
+|android.database.sqlite.SQLiteDebug_Description|
+|android.database.sqlite.SQLiteDebug_Fields|
+|android.database.sqlite.SQLiteDebug_Constructors|
+|android.database.sqlite.SQLiteDebug_Methods|
+
+================================================================================
+
+*android.database.sqlite.SQLiteDebug_Fields*
+|boolean_android.database.sqlite.SQLiteDebug.DEBUG_LOG_SLOW_QUERIES|
+|boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_LOG|
+|boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_STATEMENTS|
+|boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_TIME|
+
+*android.database.sqlite.SQLiteDebug_Methods*
+|android.database.sqlite.SQLiteDebug.dump(Printer,String[])|Dumps detailed info
+|android.database.sqlite.SQLiteDebug.getDatabaseInfo()|return all pager and dat
+|android.database.sqlite.SQLiteDebug.shouldLogSlowQuery(long)|Determines whethe
+
+*android.database.sqlite.SQLiteDebug_Description*
+
+Provides debugging info about all SQLite databases running in the current 
+process. 
+
+
+
+*boolean_android.database.sqlite.SQLiteDebug.DEBUG_LOG_SLOW_QUERIES*
+
+True to enable database performance testing instrumentation. 
+
+
+*boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_LOG*
+
+Controls the printing of informational SQL log messages. 
+
+Enable using "adb shell setprop log.tag.SQLiteLog VERBOSE". 
+
+
+*boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_STATEMENTS*
+
+Controls the printing of SQL statements as they are executed. 
+
+Enable using "adb shell setprop log.tag.SQLiteStatements VERBOSE". 
+
+
+*boolean_android.database.sqlite.SQLiteDebug.DEBUG_SQL_TIME*
+
+Controls the printing of wall-clock time taken to execute SQL statements as 
+they are executed. 
+
+Enable using "adb shell setprop log.tag.SQLiteTime VERBOSE". 
+
+
+
+*android.database.sqlite.SQLiteDebug.dump(Printer,String[])*
+
+public static void dump(
+  android.util.Printer printer,
+  java.lang.String[] args)
+
+Dumps detailed information about all databases used by the process. 
+
+
+    printer - The printer for dumping database state. 
+    args - Command-line arguments supplied to dumpsys dbinfo 
+
+*android.database.sqlite.SQLiteDebug.getDatabaseInfo()*
+
+public static |android.database.sqlite.SQLiteDebug.PagerStats| getDatabaseInfo()
+
+return all pager and database stats for the current process. 
+
+
+
+    Returns: {@link PagerStats} 
+
+*android.database.sqlite.SQLiteDebug.shouldLogSlowQuery(long)*
+
+public static final boolean shouldLogSlowQuery(long elapsedTimeMillis)
+
+Determines whether a query should be logged. 
+
+Reads the "db.log.slow_query_threshold" system property, which can be changed 
+by the user at any time. If the value is zero, then all queries will be 
+considered slow. If the value does not exist or is negative, then no queries 
+will be considered slow. 
+
+This value can be changed dynamically while the system is running. For example, 
+"adb shell setprop db.log.slow_query_threshold 200" will log all queries that 
+take 200ms or longer to run. 
+
+
+
+

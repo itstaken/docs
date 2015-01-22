@@ -1,0 +1,368 @@
+*android.bluetooth.BluetoothHealth* *BluetoothHealth* Public API for Bluetooth H
+
+public final class BluetoothHealth
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothHealth_Description|
+|android.bluetooth.BluetoothHealth_Fields|
+|android.bluetooth.BluetoothHealth_Constructors|
+|android.bluetooth.BluetoothHealth_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothHealth_Fields*
+|int_android.bluetooth.BluetoothHealth.APP_CONFIG_REGISTRATION_FAILURE|
+|int_android.bluetooth.BluetoothHealth.APP_CONFIG_REGISTRATION_SUCCESS|
+|int_android.bluetooth.BluetoothHealth.APP_CONFIG_UNREGISTRATION_FAILURE|
+|int_android.bluetooth.BluetoothHealth.APP_CONFIG_UNREGISTRATION_SUCCESS|
+|int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_ANY|
+|int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_RELIABLE|
+|int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_STREAMING|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_ERROR|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_GENERIC_FAILURE|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_INVALID_ARGS|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_NOT_ALLOWED|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_NOT_FOUND|
+|int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_SUCCESS|
+|int_android.bluetooth.BluetoothHealth.SINK_ROLE|
+|int_android.bluetooth.BluetoothHealth.SOURCE_ROLE|
+|int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_CONNECTED|
+|int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_CONNECTING|
+|int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_DISCONNECTED|
+|int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_DISCONNECTING|
+
+*android.bluetooth.BluetoothHealth_Methods*
+|android.bluetooth.BluetoothHealth.connectChannelToSink(BluetoothDevice,BluetoothHealthAppConfiguration,int)|
+|android.bluetooth.BluetoothHealth.connectChannelToSource(BluetoothDevice,BluetoothHealthAppConfiguration)|
+|android.bluetooth.BluetoothHealth.disconnectChannel(BluetoothDevice,BluetoothHealthAppConfiguration,int)|
+|android.bluetooth.BluetoothHealth.getConnectedDevices()|Get connected devices 
+|android.bluetooth.BluetoothHealth.getConnectionState(BluetoothDevice)|Get the 
+|android.bluetooth.BluetoothHealth.getDevicesMatchingConnectionStates(int[])|Ge
+|android.bluetooth.BluetoothHealth.getMainChannelFd(BluetoothDevice,BluetoothHealthAppConfiguration)|
+|android.bluetooth.BluetoothHealth.registerAppConfiguration(String,int,int,int,BluetoothHealthCallback)|
+|android.bluetooth.BluetoothHealth.registerSinkAppConfiguration(String,int,BluetoothHealthCallback)|
+|android.bluetooth.BluetoothHealth.unregisterAppConfiguration(BluetoothHealthAppConfiguration)|
+
+*android.bluetooth.BluetoothHealth_Description*
+
+Public API for Bluetooth Health Profile. 
+
+BluetoothHealth is a proxy object for controlling the Bluetooth Service via 
+IPC. 
+
+How to connect to a health device which is acting in the source role. Use 
+(|android.bluetooth.BluetoothAdapter|) to get the BluetoothHealth proxy object. 
+Create an (|android.bluetooth.BluetoothHealth|) callback and call 
+(|android.bluetooth.BluetoothHealth|) to register an application configuration 
+Pair with the remote device. This currently needs to be done manually from 
+Bluetooth Settings Connect to a health device using 
+(|android.bluetooth.BluetoothHealth|) . Some devices will connect the channel 
+automatically. The (|android.bluetooth.BluetoothHealth|) callback will inform 
+the application of channel state change. Use the file descriptor provided with 
+a connected channel to read and write data to the health channel. The received 
+data needs to be interpreted using a health manager which implements the IEEE 
+11073-xxxxx specifications. When done, close the health channel by calling 
+(|android.bluetooth.BluetoothHealth|) and unregister the application 
+configuration calling (|android.bluetooth.BluetoothHealth|) 
+
+
+
+*int_android.bluetooth.BluetoothHealth.APP_CONFIG_REGISTRATION_FAILURE*
+
+Health App Configuration registration failure 
+
+
+*int_android.bluetooth.BluetoothHealth.APP_CONFIG_REGISTRATION_SUCCESS*
+
+Health App Configuration registration success 
+
+
+*int_android.bluetooth.BluetoothHealth.APP_CONFIG_UNREGISTRATION_FAILURE*
+
+Health App Configuration un-registration failure 
+
+
+*int_android.bluetooth.BluetoothHealth.APP_CONFIG_UNREGISTRATION_SUCCESS*
+
+Health App Configuration un-registration success 
+
+
+*int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_ANY*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_RELIABLE*
+
+Health Profile - Channel Type used - Reliable 
+
+
+*int_android.bluetooth.BluetoothHealth.CHANNEL_TYPE_STREAMING*
+
+Health Profile - Channel Type used - Streaming 
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_ERROR*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_GENERIC_FAILURE*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_INVALID_ARGS*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_NOT_ALLOWED*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_NOT_FOUND*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.HEALTH_OPERATION_SUCCESS*
+
+
+
+
+*int_android.bluetooth.BluetoothHealth.SINK_ROLE*
+
+Health Profile Sink Role the device talking to the health device. 
+
+
+*int_android.bluetooth.BluetoothHealth.SOURCE_ROLE*
+
+Health Profile Source Role - the health device. 
+
+
+*int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_CONNECTED*
+
+Health Channel Connection State - Connected 
+
+
+*int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_CONNECTING*
+
+Health Channel Connection State - Connecting 
+
+
+*int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_DISCONNECTED*
+
+Health Channel Connection State - Disconnected 
+
+
+*int_android.bluetooth.BluetoothHealth.STATE_CHANNEL_DISCONNECTING*
+
+Health Channel Connection State - Disconnecting 
+
+
+
+*android.bluetooth.BluetoothHealth.connectChannelToSink(BluetoothDevice,BluetoothHealthAppConfiguration,int)*
+
+public boolean connectChannelToSink(
+  android.bluetooth.BluetoothDevice device,
+  android.bluetooth.BluetoothHealthAppConfiguration config,
+  int channelType)
+
+Connect to a health device which has the (|android.bluetooth.BluetoothHealth|) 
+. This is an asynchronous call. If this function returns true, the callback 
+associated with the application configuration will be called. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - The remote Bluetooth device. 
+    config - The application configuration which has been registered using {@link 
+       #registerSinkAppConfiguration(String, int, BluetoothHealthCallback) } 
+
+    Returns: If true, the callback associated with the application config will be called. 
+
+*android.bluetooth.BluetoothHealth.connectChannelToSource(BluetoothDevice,BluetoothHealthAppConfiguration)*
+
+public boolean connectChannelToSource(
+  android.bluetooth.BluetoothDevice device,
+  android.bluetooth.BluetoothHealthAppConfiguration config)
+
+Connect to a health device which has the (|android.bluetooth.BluetoothHealth|) 
+. This is an asynchronous call. If this function returns true, the callback 
+associated with the application configuration will be called. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - The remote Bluetooth device. 
+    config - The application configuration which has been registered using {@link 
+       #registerSinkAppConfiguration(String, int, BluetoothHealthCallback) } 
+
+    Returns: If true, the callback associated with the application config will be called. 
+
+*android.bluetooth.BluetoothHealth.disconnectChannel(BluetoothDevice,BluetoothHealthAppConfiguration,int)*
+
+public boolean disconnectChannel(
+  android.bluetooth.BluetoothDevice device,
+  android.bluetooth.BluetoothHealthAppConfiguration config,
+  int channelId)
+
+Disconnect a connected health channel. This is an asynchronous call. If this 
+function returns true, the callback associated with the application 
+configuration will be called. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - The remote Bluetooth device. 
+    config - The application configuration which has been registered using {@link 
+       #registerSinkAppConfiguration(String, int, BluetoothHealthCallback) } 
+    channelId - The channel id associated with the channel 
+
+    Returns: If true, the callback associated with the application config will be called. 
+
+*android.bluetooth.BluetoothHealth.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+Get connected devices for the health profile. 
+
+Return the set of devices which are in state 
+(|android.bluetooth.BluetoothHealth|) Requires (|android.Manifest.permission|) 
+permission. 
+
+This is not specific to any application configuration but represents the 
+connection state of the local Bluetooth adapter for this profile. This can be 
+used by applications like status bar which would just like to know the state of 
+the local adapter. 
+
+
+
+    Returns: List of devices. The list will be empty on error. 
+
+*android.bluetooth.BluetoothHealth.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+Get the current connection state of the profile. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+This is not specific to any application configuration but represents the 
+connection state of the local Bluetooth adapter with the remote device. This 
+can be used by applications like status bar which would just like to know the 
+state of the local adapter. 
+
+
+    device - Remote bluetooth device. 
+
+    Returns: State of the profile connection. One of {@link #STATE_CONNECTED}, {@link 
+             #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link 
+             #STATE_DISCONNECTING} 
+
+*android.bluetooth.BluetoothHealth.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+Get a list of devices that match any of the given connection states. 
+
+If none of the devices match any of the given states, an empty list will be 
+returned. 
+
+Requires (|android.Manifest.permission|) permission. This is not specific to 
+any application configuration but represents the connection state of the local 
+Bluetooth adapter for this profile. This can be used by applications like 
+status bar which would just like to know the state of the local adapter. 
+
+
+    states - Array of states. States can be one of {@link #STATE_CONNECTED}, {@link 
+       #STATE_CONNECTING}, {@link #STATE_DISCONNECTED}, {@link 
+       #STATE_DISCONNECTING}, 
+
+    Returns: List of devices. The list will be empty on error. 
+
+*android.bluetooth.BluetoothHealth.getMainChannelFd(BluetoothDevice,BluetoothHealthAppConfiguration)*
+
+public |android.os.ParcelFileDescriptor| getMainChannelFd(
+  android.bluetooth.BluetoothDevice device,
+  android.bluetooth.BluetoothHealthAppConfiguration config)
+
+Get the file descriptor of the main channel associated with the remote device 
+and application configuration. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+Its the responsibility of the caller to close the ParcelFileDescriptor when 
+done. 
+
+
+    device - The remote Bluetooth health device 
+    config - The application configuration 
+
+    Returns: null on failure, ParcelFileDescriptor on success. 
+
+*android.bluetooth.BluetoothHealth.registerAppConfiguration(String,int,int,int,BluetoothHealthCallback)*
+
+public boolean registerAppConfiguration(
+  java.lang.String name,
+  int dataType,
+  int role,
+  int channelType,
+  android.bluetooth.BluetoothHealthCallback callback)
+
+Register an application configuration that acts as a Health SINK or in a Health 
+SOURCE role.This is an asynchronous call and so the callback is used to notify 
+success or failure if the function returns true. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    name - The friendly name associated with the application or configuration. 
+    dataType - The dataType of the Source role of Health Profile. 
+    channelType - The channel type. Will be one of {@link #CHANNEL_TYPE_RELIABLE} or {@link 
+       #CHANNEL_TYPE_STREAMING} 
+    callback - - A callback to indicate success or failure. 
+
+    Returns: If true, callback will be called. 
+
+*android.bluetooth.BluetoothHealth.registerSinkAppConfiguration(String,int,BluetoothHealthCallback)*
+
+public boolean registerSinkAppConfiguration(
+  java.lang.String name,
+  int dataType,
+  android.bluetooth.BluetoothHealthCallback callback)
+
+Register an application configuration that acts as a Health SINK. This is the 
+configuration that will be used to communicate with health devices which will 
+act as the (|android.bluetooth.BluetoothHealth|) . This is an asynchronous call 
+and so the callback is used to notify success or failure if the function 
+returns true. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    name - The friendly name associated with the application or configuration. 
+    dataType - The dataType of the Source role of Health Profile to which the sink wants to 
+       connect to. 
+    callback - A callback to indicate success or failure of the registration and all 
+       operations done on this application configuration. 
+
+    Returns: If true, callback will be called. 
+
+*android.bluetooth.BluetoothHealth.unregisterAppConfiguration(BluetoothHealthAppConfiguration)*
+
+public boolean unregisterAppConfiguration(android.bluetooth.BluetoothHealthAppConfiguration config)
+
+Unregister an application configuration that has been registered using 
+(|android.bluetooth.BluetoothHealth|) Requires (|android.Manifest.permission|) 
+permission. 
+
+
+    config - The health app configuration 
+
+    Returns: Success or failure. 
+
+

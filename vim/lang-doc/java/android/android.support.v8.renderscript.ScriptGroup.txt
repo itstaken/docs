@@ -1,0 +1,78 @@
+*android.support.v8.renderscript.ScriptGroup* *ScriptGroup* ScriptGroup creates 
+
+public class ScriptGroup
+  extends    |android.support.v8.renderscript.BaseObj|
+
+|android.support.v8.renderscript.ScriptGroup_Description|
+|android.support.v8.renderscript.ScriptGroup_Fields|
+|android.support.v8.renderscript.ScriptGroup_Constructors|
+|android.support.v8.renderscript.ScriptGroup_Methods|
+
+================================================================================
+
+*android.support.v8.renderscript.ScriptGroup_Methods*
+|android.support.v8.renderscript.ScriptGroup.execute()|Execute the ScriptGroup.
+|android.support.v8.renderscript.ScriptGroup.setInput(Script.KernelID,Allocation)|
+|android.support.v8.renderscript.ScriptGroup.setOutput(Script.KernelID,Allocation)|
+
+*android.support.v8.renderscript.ScriptGroup_Description*
+
+ScriptGroup creates a group of kernels that are executed together with one 
+execution call as if they were a single kernel. The kernels may be connected 
+internally or to an external allocation. The intermediate results for internal 
+connections are not observable after the execution of the script. 
+
+External connections are grouped into inputs and outputs. All outputs are 
+produced by a script kernel and placed into a user-supplied allocation. Inputs 
+provide the input of a kernel. Inputs bound to script globals are set directly 
+upon the script. 
+
+A ScriptGroup must contain at least one kernel. A ScriptGroup must contain only 
+a single directed acyclic graph (DAG) of script kernels and connections. 
+Attempting to create a ScriptGroup with multiple DAGs or attempting to create a 
+cycle within a ScriptGroup will throw an exception. 
+
+Currently, all kernels in a ScriptGroup must be from separate Script objects. 
+Attempting to use multiple kernels from the same Script object will result in 
+an (|android.support.v8.renderscript.RSInvalidStateException|) . 
+
+
+
+*android.support.v8.renderscript.ScriptGroup.execute()*
+
+public void execute()
+
+Execute the ScriptGroup. This will run all the kernels in the ScriptGroup. No 
+internal connection results will be visible after execution of the ScriptGroup. 
+
+
+
+*android.support.v8.renderscript.ScriptGroup.setInput(Script.KernelID,Allocation)*
+
+public void setInput(
+  android.support.v8.renderscript.Script.KernelID s,
+  android.support.v8.renderscript.Allocation a)
+
+Sets an input of the ScriptGroup. This specifies an Allocation to be used for 
+kernels that require an input Allocation provided from outside of the 
+ScriptGroup. 
+
+
+    s - The ID of the kernel where the allocation should be connected. 
+    a - The allocation to connect. 
+
+*android.support.v8.renderscript.ScriptGroup.setOutput(Script.KernelID,Allocation)*
+
+public void setOutput(
+  android.support.v8.renderscript.Script.KernelID s,
+  android.support.v8.renderscript.Allocation a)
+
+Sets an output of the ScriptGroup. This specifies an Allocation to be used for 
+the kernels that require an output Allocation visible after the ScriptGroup is 
+executed. 
+
+
+    s - The ID of the kernel where the allocation should be connected. 
+    a - The allocation to connect. 
+
+

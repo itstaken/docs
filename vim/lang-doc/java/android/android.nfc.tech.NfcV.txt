@@ -1,0 +1,134 @@
+*android.nfc.tech.NfcV* *NfcV* Provides access to NFC-V (ISO 15693) properties a
+
+public final class NfcV
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NfcV_Description|
+|android.nfc.tech.NfcV_Fields|
+|android.nfc.tech.NfcV_Constructors|
+|android.nfc.tech.NfcV_Methods|
+
+================================================================================
+
+*android.nfc.tech.NfcV_Fields*
+|java.lang.String_android.nfc.tech.NfcV.EXTRA_DSFID|
+|java.lang.String_android.nfc.tech.NfcV.EXTRA_RESP_FLAGS|
+
+*android.nfc.tech.NfcV_Constructors*
+|android.nfc.tech.NfcV(Tag)|
+
+*android.nfc.tech.NfcV_Methods*
+|android.nfc.tech.NfcV.get(Tag)|Get an instance ofNfcVfor the given tag.
+|android.nfc.tech.NfcV.getDsfId()|Return the DSF ID bytes from tag discovery.
+|android.nfc.tech.NfcV.getMaxTransceiveLength()|Return the maximum number of by
+|android.nfc.tech.NfcV.getResponseFlags()|Return the Response Flag bytes from t
+|android.nfc.tech.NfcV.transceive(byte[])|Send raw NFC-V commands to the tag an
+
+*android.nfc.tech.NfcV_Description*
+
+Provides access to NFC-V (ISO 15693) properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.NfcV|) object using (|android.nfc.tech.NfcV|) . 
+The primary NFC-V I/O operation is (|android.nfc.tech.NfcV|) . Applications 
+must implement their own protocol stack on top of (|android.nfc.tech.NfcV|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.NfcV.EXTRA_DSFID*
+
+
+
+
+*java.lang.String_android.nfc.tech.NfcV.EXTRA_RESP_FLAGS*
+
+
+
+
+
+*android.nfc.tech.NfcV(Tag)*
+
+public NfcV(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.NfcV.get(Tag)*
+
+public static |android.nfc.tech.NfcV| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NfcV|) for the given tag. Returns null if 
+(|android.nfc.tech.NfcV|) was not enumerated in (|android.nfc.Tag|) . This 
+indicates the tag does not support NFC-V. Does not cause any RF activity and 
+does not block. 
+
+
+    tag - an NFC-V compatible tag 
+
+    Returns: 
+
+*android.nfc.tech.NfcV.getDsfId()*
+
+public byte getDsfId()
+
+Return the DSF ID bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: 
+
+*android.nfc.tech.NfcV.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.NfcV|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.NfcV.getResponseFlags()*
+
+public byte getResponseFlags()
+
+Return the Response Flag bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: Response Flag bytes 
+
+*android.nfc.tech.NfcV.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NFC-V commands to the tag and receive the response. 
+
+Applications must not append the CRC to the payload, it will be automatically 
+calculated. The application does provide FLAGS, CMD and PARAMETER bytes. 
+
+Use (|android.nfc.tech.NfcV|) to retrieve the maximum amount of bytes that can 
+be sent with (|android.nfc.tech.NfcV|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NfcV|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    data - bytes to send 
+
+    Returns: bytes received in response 
+
+

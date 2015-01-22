@@ -1,0 +1,263 @@
+*android.preference.PreferenceFragment* *PreferenceFragment* Shows a hierarchy o
+
+public abstract class PreferenceFragment
+  extends    |android.app.Fragment|
+  implements |android.preference.PreferenceManager.OnPreferenceTreeClickListener|
+
+|android.preference.PreferenceFragment_Description|
+|android.preference.PreferenceFragment_Fields|
+|android.preference.PreferenceFragment_Constructors|
+|android.preference.PreferenceFragment_Methods|
+
+================================================================================
+
+*android.preference.PreferenceFragment_Constructors*
+|android.preference.PreferenceFragment()|
+
+*android.preference.PreferenceFragment_Methods*
+|android.preference.PreferenceFragment.addPreferencesFromIntent(Intent)|Adds pr
+|android.preference.PreferenceFragment.addPreferencesFromResource(int)|Inflates
+|android.preference.PreferenceFragment.findPreference(CharSequence)|Finds aPref
+|android.preference.PreferenceFragment.getListView()|
+|android.preference.PreferenceFragment.getPreferenceManager()|Returns thePrefer
+|android.preference.PreferenceFragment.getPreferenceScreen()|Gets the root of t
+|android.preference.PreferenceFragment.onActivityCreated(Bundle)|
+|android.preference.PreferenceFragment.onActivityResult(int,int,Intent)|
+|android.preference.PreferenceFragment.onCreate(Bundle)|
+|android.preference.PreferenceFragment.onCreateView(LayoutInflater,ViewGroup,Bundle)|
+|android.preference.PreferenceFragment.onDestroy()|
+|android.preference.PreferenceFragment.onDestroyView()|
+|android.preference.PreferenceFragment.onPreferenceTreeClick(PreferenceScreen,Preference)|
+|android.preference.PreferenceFragment.onSaveInstanceState(Bundle)|
+|android.preference.PreferenceFragment.onStart()|
+|android.preference.PreferenceFragment.onStop()|
+|android.preference.PreferenceFragment.setPreferenceScreen(PreferenceScreen)|Se
+
+*android.preference.PreferenceFragment_Description*
+
+Shows a hierarchy of (|android.preference.Preference|) objects as lists. These 
+preferences will automatically save to (|android.content.SharedPreferences|) as 
+the user interacts with them. To retrieve an instance of 
+(|android.content.SharedPreferences|) that the preference hierarchy in this 
+fragment will use, call (|android.preference.PreferenceManager|) with a context 
+in the same package as this fragment. 
+
+Furthermore, the preferences shown will follow the visual style of system 
+preferences. It is easy to create a hierarchy of preferences (that can be shown 
+on multiple screens) via XML. For these reasons, it is recommended to use this 
+fragment (as a superclass) to deal with preferences in applications. 
+
+A (|android.preference.PreferenceScreen|) object should be at the top of the 
+preference hierarchy. Furthermore, subsequent 
+(|android.preference.PreferenceScreen|) in the hierarchy denote a screen 
+break--that is the preferences contained within subsequent 
+(|android.preference.PreferenceScreen|) should be shown on another screen. The 
+preference framework handles showing these other screens from the preference 
+hierarchy. 
+
+The preference hierarchy can be formed in multiple ways: From an XML file 
+specifying the hierarchy From different Activities(|android.app.Activity|) that 
+each specify its own preferences in an XML file via (|android.app.Activity|) 
+meta-data From an object hierarchy rooted with 
+(|android.preference.PreferenceScreen|) To inflate from XML, use the 
+(|android.preference.PreferenceFragment|) . The root element should be a 
+(|android.preference.PreferenceScreen|) . Subsequent elements can point to 
+actual (|android.preference.Preference|) subclasses. As mentioned above, 
+subsequent (|android.preference.PreferenceScreen|) in the hierarchy will result 
+in the screen break. 
+
+To specify an (|android.content.Intent|) to query 
+Activities(|android.app.Activity|) that each have preferences, use 
+(|android.preference.PreferenceFragment|) . Each (|android.app.Activity|) can 
+specify meta-data in the manifest (via the key 
+(|android.preference.PreferenceManager|) ) that points to an XML resource. 
+These XML resources will be inflated into a single preference hierarchy and 
+shown by this fragment. 
+
+To specify an object hierarchy rooted with 
+(|android.preference.PreferenceScreen|) , use 
+(|android.preference.PreferenceFragment|) . 
+
+As a convenience, this fragment implements a click listener for any preference 
+in the current hierarchy, see (|android.preference.PreferenceFragment|) . 
+
+Developer Guides For information about usingPreferenceFragment, read the <a 
+href="guide/topics/ui/settings.html">Settings guide. 
+
+Sample Code 
+
+The following sample code shows a simple preference fragment that is populated 
+from a resource. The resource it loads 
+is:development/samples/ApiDemos/res/xml/preferences.xml preferencesThe fragment 
+implementation itself simply populates the preferences when created. Note that 
+the preferences framework takes care of loading the current values out of the 
+app preferences and writing them when 
+changed:development/samples/ApiDemos/src/com/example/android/apis/preference/FragmentPreferences.java
+fragment 
+
+
+
+*android.preference.PreferenceFragment()*
+
+public PreferenceFragment()
+
+
+
+
+*android.preference.PreferenceFragment.addPreferencesFromIntent(Intent)*
+
+public void addPreferencesFromIntent(android.content.Intent intent)
+
+Adds preferences from activities that match the given 
+(|android.content.Intent|) . 
+
+
+    intent - The {@link Intent} to query activities. 
+
+*android.preference.PreferenceFragment.addPreferencesFromResource(int)*
+
+public void addPreferencesFromResource(int preferencesResId)
+
+Inflates the given XML resource and adds the preference hierarchy to the 
+current preference hierarchy. 
+
+
+    preferencesResId - The XML resource ID to inflate. 
+
+*android.preference.PreferenceFragment.findPreference(CharSequence)*
+
+public |android.preference.Preference| findPreference(java.lang.CharSequence key)
+
+Finds a (|android.preference.Preference|) based on its key. 
+
+
+    key - The key of the preference to retrieve. 
+
+    Returns: The {@link Preference} with the key, or null. 
+
+*android.preference.PreferenceFragment.getListView()*
+
+public |android.widget.ListView| getListView()
+
+
+
+
+
+*android.preference.PreferenceFragment.getPreferenceManager()*
+
+public |android.preference.PreferenceManager| getPreferenceManager()
+
+Returns the (|android.preference.PreferenceManager|) used by this fragment. 
+
+
+
+    Returns: The {@link PreferenceManager}. 
+
+*android.preference.PreferenceFragment.getPreferenceScreen()*
+
+public |android.preference.PreferenceScreen| getPreferenceScreen()
+
+Gets the root of the preference hierarchy that this fragment is showing. 
+
+
+
+    Returns: The {@link PreferenceScreen} that is the root of the preference hierarchy. 
+
+*android.preference.PreferenceFragment.onActivityCreated(Bundle)*
+
+public void onActivityCreated(android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.preference.PreferenceFragment.onActivityResult(int,int,Intent)*
+
+public void onActivityResult(
+  int requestCode,
+  int resultCode,
+  android.content.Intent data)
+
+
+
+
+
+*android.preference.PreferenceFragment.onCreate(Bundle)*
+
+public void onCreate(android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.preference.PreferenceFragment.onCreateView(LayoutInflater,ViewGroup,Bundle)*
+
+public |android.view.View| onCreateView(
+  android.view.LayoutInflater inflater,
+  android.view.ViewGroup container,
+  android.os.Bundle savedInstanceState)
+
+
+
+
+
+*android.preference.PreferenceFragment.onDestroy()*
+
+public void onDestroy()
+
+
+
+
+
+*android.preference.PreferenceFragment.onDestroyView()*
+
+public void onDestroyView()
+
+
+
+
+
+*android.preference.PreferenceFragment.onPreferenceTreeClick(PreferenceScreen,Preference)*
+
+public boolean onPreferenceTreeClick(
+  android.preference.PreferenceScreen preferenceScreen,
+  android.preference.Preference preference)
+
+
+
+
+
+*android.preference.PreferenceFragment.onSaveInstanceState(Bundle)*
+
+public void onSaveInstanceState(android.os.Bundle outState)
+
+
+
+
+
+*android.preference.PreferenceFragment.onStart()*
+
+public void onStart()
+
+
+
+
+
+*android.preference.PreferenceFragment.onStop()*
+
+public void onStop()
+
+
+
+
+
+*android.preference.PreferenceFragment.setPreferenceScreen(PreferenceScreen)*
+
+public void setPreferenceScreen(android.preference.PreferenceScreen preferenceScreen)
+
+Sets the root of the preference hierarchy that this fragment is showing. 
+
+
+    preferenceScreen - The root {@link PreferenceScreen} of the preference hierarchy. 
+
+

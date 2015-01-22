@@ -1,0 +1,462 @@
+*android.os.storage.IMountService* *IMountService* WARNING! Update IMountService
+
+public interface interface IMountService
+
+  implements |android.os.IInterface|
+
+|android.os.storage.IMountService_Description|
+|android.os.storage.IMountService_Fields|
+|android.os.storage.IMountService_Constructors|
+|android.os.storage.IMountService_Methods|
+
+================================================================================
+
+*android.os.storage.IMountService_Fields*
+|int_android.os.storage.IMountService.ENCRYPTION_STATE_ERROR_INCOMPLETE|
+|int_android.os.storage.IMountService.ENCRYPTION_STATE_ERROR_UNKNOWN|
+|int_android.os.storage.IMountService.ENCRYPTION_STATE_NONE|
+|int_android.os.storage.IMountService.ENCRYPTION_STATE_OK|
+
+*android.os.storage.IMountService_Methods*
+|android.os.storage.IMountService.changeEncryptionPassword(String)|Changes the 
+|android.os.storage.IMountService.createSecureContainer(String,int,String,String,int,boolean)|
+|android.os.storage.IMountService.decryptStorage(String)|Decrypts any encrypted
+|android.os.storage.IMountService.destroySecureContainer(String,boolean)|
+|android.os.storage.IMountService.encryptStorage(String)|Encrypts storage.
+|android.os.storage.IMountService.finalizeSecureContainer(String)|
+|android.os.storage.IMountService.finishMediaUpdate()|Call into MountService by
+|android.os.storage.IMountService.fixPermissionsSecureContainer(String,int,String)|
+|android.os.storage.IMountService.formatVolume(String)|Format external storage 
+|android.os.storage.IMountService.getEncryptionState()|Determines the encryptio
+|android.os.storage.IMountService.getMountedObbPath(String)|Gets the path to th
+|android.os.storage.IMountService.getSecureContainerFilesystemPath(String)|Gets
+|android.os.storage.IMountService.getSecureContainerList()|Gets an Array of cur
+|android.os.storage.IMountService.getSecureContainerPath(String)|
+|android.os.storage.IMountService.getStorageUsers(String)|Returns an array of p
+|android.os.storage.IMountService.getVolumeList()|Returns list of all mountable
+|android.os.storage.IMountService.getVolumeState(String)|Gets the state of a vo
+|android.os.storage.IMountService.isExternalStorageEmulated()|Returns whether o
+|android.os.storage.IMountService.isObbMounted(String)|Checks whether the speci
+|android.os.storage.IMountService.isSecureContainerMounted(String)|
+|android.os.storage.IMountService.isUsbMassStorageConnected()|Returns true if a
+|android.os.storage.IMountService.isUsbMassStorageEnabled()|Returns true if a U
+|android.os.storage.IMountService.mkdirs(String,String)|Ensure that all directo
+|android.os.storage.IMountService.mountObb(String,String,String,IObbActionListener,int)|
+|android.os.storage.IMountService.mountSecureContainer(String,String,int)|
+|android.os.storage.IMountService.mountVolume(String)|Mount external storage at
+|android.os.storage.IMountService.registerListener(IMountServiceListener)|Regis
+|android.os.storage.IMountService.renameSecureContainer(String,String)|
+|android.os.storage.IMountService.setUsbMassStorageEnabled(boolean)|Enables / d
+|android.os.storage.IMountService.shutdown(IMountShutdownObserver)|Shuts down t
+|android.os.storage.IMountService.unmountObb(String,boolean,IObbActionListener,int)|
+|android.os.storage.IMountService.unmountSecureContainer(String,boolean)|
+|android.os.storage.IMountService.unmountVolume(String,boolean,boolean)|Safely 
+|android.os.storage.IMountService.unregisterListener(IMountServiceListener)|Unr
+|android.os.storage.IMountService.verifyEncryptionPassword(String)|Verify the e
+
+*android.os.storage.IMountService_Description*
+
+WARNING! Update IMountService.h and IMountService.cpp if you change this file. 
+In particular, the ordering of the methods below must match the _TRANSACTION 
+enum in IMountService.cpp 
+
+
+
+*int_android.os.storage.IMountService.ENCRYPTION_STATE_ERROR_INCOMPLETE*
+
+The volume is in a bad state - partially encrypted. Data is likely 
+irrecoverable. 
+
+
+*int_android.os.storage.IMountService.ENCRYPTION_STATE_ERROR_UNKNOWN*
+
+The volume is in a bad state. 
+
+
+*int_android.os.storage.IMountService.ENCRYPTION_STATE_NONE*
+
+The volume is not encrypted. 
+
+
+*int_android.os.storage.IMountService.ENCRYPTION_STATE_OK*
+
+The volume has been encrypted succesfully. 
+
+
+
+*android.os.storage.IMountService.changeEncryptionPassword(String)*
+
+public int changeEncryptionPassword(java.lang.String password)
+  throws |android.os.RemoteException|
+         
+Changes the encryption password. 
+
+
+
+*android.os.storage.IMountService.createSecureContainer(String,int,String,String,int,boolean)*
+
+public int createSecureContainer(
+  java.lang.String id,
+  int sizeMb,
+  java.lang.String fstype,
+  java.lang.String key,
+  int ownerUid,
+  boolean external)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.decryptStorage(String)*
+
+public int decryptStorage(java.lang.String password)
+  throws |android.os.RemoteException|
+         
+Decrypts any encrypted volumes. 
+
+
+
+*android.os.storage.IMountService.destroySecureContainer(String,boolean)*
+
+public int destroySecureContainer(
+  java.lang.String id,
+  boolean force)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.encryptStorage(String)*
+
+public int encryptStorage(java.lang.String password)
+  throws |android.os.RemoteException|
+         
+Encrypts storage. 
+
+
+
+*android.os.storage.IMountService.finalizeSecureContainer(String)*
+
+public int finalizeSecureContainer(java.lang.String id)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.finishMediaUpdate()*
+
+public void finishMediaUpdate()
+  throws |android.os.RemoteException|
+         
+Call into MountService by PackageManager to notify that its done processing the 
+media status update request. 
+
+
+
+*android.os.storage.IMountService.fixPermissionsSecureContainer(String,int,String)*
+
+public int fixPermissionsSecureContainer(
+  java.lang.String id,
+  int gid,
+  java.lang.String filename)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.formatVolume(String)*
+
+public int formatVolume(java.lang.String mountPoint)
+  throws |android.os.RemoteException|
+         
+Format external storage given a mount point. Returns an int consistent with 
+MountServiceResultCode 
+
+
+
+*android.os.storage.IMountService.getEncryptionState()*
+
+public int getEncryptionState()
+  throws |android.os.RemoteException|
+         
+Determines the encryption state of the volume. 
+
+
+
+    Returns: a numerical value. See {@code ENCRYPTION_STATE_*} for possible values. 
+
+*android.os.storage.IMountService.getMountedObbPath(String)*
+
+public |java.lang.String| getMountedObbPath(java.lang.String rawPath)
+  throws |android.os.RemoteException|
+         
+Gets the path to the mounted Opaque Binary Blob (OBB). 
+
+
+
+*android.os.storage.IMountService.getSecureContainerFilesystemPath(String)*
+
+public |java.lang.String| getSecureContainerFilesystemPath(java.lang.String cid)
+  throws |android.os.RemoteException|
+         
+Gets the path on the filesystem for the ASEC container itself. 
+
+
+    cid - ASEC container ID 
+
+    Returns: path to filesystem or {@code null} if it's not found 
+
+*android.os.storage.IMountService.getSecureContainerList()*
+
+public |java.lang.String|[] getSecureContainerList()
+  throws |android.os.RemoteException|
+         
+Gets an Array of currently known secure container IDs 
+
+
+
+*android.os.storage.IMountService.getSecureContainerPath(String)*
+
+public |java.lang.String| getSecureContainerPath(java.lang.String id)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.getStorageUsers(String)*
+
+public int[] getStorageUsers(java.lang.String path)
+  throws |android.os.RemoteException|
+         
+Returns an array of pids with open files on the specified path. 
+
+
+
+*android.os.storage.IMountService.getVolumeList()*
+
+public |android.os.storage.StorageVolume|[] getVolumeList()
+  throws |android.os.RemoteException|
+         
+Returns list of all mountable volumes. 
+
+
+
+*android.os.storage.IMountService.getVolumeState(String)*
+
+public |java.lang.String| getVolumeState(java.lang.String mountPoint)
+  throws |android.os.RemoteException|
+         
+Gets the state of a volume via its mountpoint. 
+
+
+
+*android.os.storage.IMountService.isExternalStorageEmulated()*
+
+public boolean isExternalStorageEmulated()
+  throws |android.os.RemoteException|
+         
+Returns whether or not the external storage is emulated. 
+
+
+
+*android.os.storage.IMountService.isObbMounted(String)*
+
+public boolean isObbMounted(java.lang.String rawPath)
+  throws |android.os.RemoteException|
+         
+Checks whether the specified Opaque Binary Blob (OBB) is mounted somewhere. 
+
+
+
+*android.os.storage.IMountService.isSecureContainerMounted(String)*
+
+public boolean isSecureContainerMounted(java.lang.String id)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.isUsbMassStorageConnected()*
+
+public boolean isUsbMassStorageConnected()
+  throws |android.os.RemoteException|
+         
+Returns true if a USB mass storage host is connected 
+
+
+
+*android.os.storage.IMountService.isUsbMassStorageEnabled()*
+
+public boolean isUsbMassStorageEnabled()
+  throws |android.os.RemoteException|
+         
+Returns true if a USB mass storage host is enabled (media is shared) 
+
+
+
+*android.os.storage.IMountService.mkdirs(String,String)*
+
+public int mkdirs(
+  java.lang.String callingPkg,
+  java.lang.String path)
+  throws |android.os.RemoteException|
+         
+Ensure that all directories along given path exist, creating parent directories 
+as needed. Validates that given path is absolute and that it contains no 
+relative "." or ".." paths or symlinks. Also ensures that path belongs to a 
+volume managed by vold, and that path is either external storage data or OBB 
+directory belonging to calling app. 
+
+
+
+*android.os.storage.IMountService.mountObb(String,String,String,IObbActionListener,int)*
+
+public void mountObb(
+  java.lang.String rawPath,
+  java.lang.String canonicalPath,
+  java.lang.String key,
+  android.os.storage.IObbActionListener token,
+  int nonce)
+  throws |android.os.RemoteException|
+         
+Mounts an Opaque Binary Blob (OBB) with the specified decryption key and only 
+allows the calling process's UID access to the contents. MountService will call 
+back to the supplied IObbActionListener to inform it of the terminal state of 
+the call. 
+
+
+
+*android.os.storage.IMountService.mountSecureContainer(String,String,int)*
+
+public int mountSecureContainer(
+  java.lang.String id,
+  java.lang.String key,
+  int ownerUid)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.mountVolume(String)*
+
+public int mountVolume(java.lang.String mountPoint)
+  throws |android.os.RemoteException|
+         
+Mount external storage at given mount point. Returns an int consistent with 
+MountServiceResultCode 
+
+
+
+*android.os.storage.IMountService.registerListener(IMountServiceListener)*
+
+public void registerListener(android.os.storage.IMountServiceListener listener)
+  throws |android.os.RemoteException|
+         
+Registers an IMountServiceListener for receiving async notifications. 
+
+
+
+*android.os.storage.IMountService.renameSecureContainer(String,String)*
+
+public int renameSecureContainer(
+  java.lang.String oldId,
+  java.lang.String newId)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.setUsbMassStorageEnabled(boolean)*
+
+public void setUsbMassStorageEnabled(boolean enable)
+  throws |android.os.RemoteException|
+         
+Enables / disables USB mass storage. The caller should check actual status of 
+enabling/disabling USB mass storage via StorageEventListener. 
+
+
+
+*android.os.storage.IMountService.shutdown(IMountShutdownObserver)*
+
+public void shutdown(android.os.storage.IMountShutdownObserver observer)
+  throws |android.os.RemoteException|
+         
+Shuts down the MountService and gracefully unmounts all external media. Invokes 
+call back once the shutdown is complete. 
+
+
+
+*android.os.storage.IMountService.unmountObb(String,boolean,IObbActionListener,int)*
+
+public void unmountObb(
+  java.lang.String rawPath,
+  boolean force,
+  android.os.storage.IObbActionListener token,
+  int nonce)
+  throws |android.os.RemoteException|
+         
+Unmounts an Opaque Binary Blob (OBB). When the force flag is specified, any 
+program using it will be forcibly killed to unmount the image. MountService 
+will call back to the supplied IObbActionListener to inform it of the terminal 
+state of the call. 
+
+
+
+*android.os.storage.IMountService.unmountSecureContainer(String,boolean)*
+
+public int unmountSecureContainer(
+  java.lang.String id,
+  boolean force)
+  throws |android.os.RemoteException|
+         
+
+
+
+
+*android.os.storage.IMountService.unmountVolume(String,boolean,boolean)*
+
+public void unmountVolume(
+  java.lang.String mountPoint,
+  boolean force,
+  boolean removeEncryption)
+  throws |android.os.RemoteException|
+         
+Safely unmount external storage at given mount point. The unmount is an 
+asynchronous operation. Applications should register StorageEventListener for 
+storage related status changes. 
+
+
+    mountPoint - the mount point 
+    force - whether or not to forcefully unmount it (e.g. even if programs are using this 
+       data currently) 
+    removeEncryption - whether or not encryption mapping should be removed from the volume. This value 
+       implies {@code force}. 
+
+*android.os.storage.IMountService.unregisterListener(IMountServiceListener)*
+
+public void unregisterListener(android.os.storage.IMountServiceListener listener)
+  throws |android.os.RemoteException|
+         
+Unregisters an IMountServiceListener 
+
+
+
+*android.os.storage.IMountService.verifyEncryptionPassword(String)*
+
+public int verifyEncryptionPassword(java.lang.String password)
+  throws |android.os.RemoteException|
+         
+Verify the encryption password against the stored volume. This method may only 
+be called by the system process. 
+
+
+
+

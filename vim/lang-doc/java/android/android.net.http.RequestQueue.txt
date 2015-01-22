@@ -1,0 +1,221 @@
+*android.net.http.RequestQueue* *RequestQueue* 
+
+public class RequestQueue
+  extends    |java.lang.Object|
+  implements |android.net.http.RequestFeeder|
+
+|android.net.http.RequestQueue_Description|
+|android.net.http.RequestQueue_Fields|
+|android.net.http.RequestQueue_Constructors|
+|android.net.http.RequestQueue_Methods|
+
+================================================================================
+
+*android.net.http.RequestQueue_Constructors*
+|android.net.http.RequestQueue(Context)|A RequestQueue class instance maintains
+|android.net.http.RequestQueue(Context,int)|A RequestQueue class instance maint
+
+*android.net.http.RequestQueue_Methods*
+|android.net.http.RequestQueue.disablePlatformNotifications()|If platform notif
+|android.net.http.RequestQueue.enablePlatformNotifications()|Enables data state
+|android.net.http.RequestQueue.getProxyHost()|used by webkit
+|android.net.http.RequestQueue.getRequest()|
+|android.net.http.RequestQueue.getRequest(HttpHost)|
+|android.net.http.RequestQueue.haveRequest(HttpHost)|
+|android.net.http.RequestQueue.queueRequest(Request,boolean)|
+|android.net.http.RequestQueue.queueRequest(String,String,Map<String,String>,EventHandler,InputStream,int)|
+|android.net.http.RequestQueue.queueRequest(String,WebAddress,String,Map<String,String>,EventHandler,InputStream,int)|
+|android.net.http.RequestQueue.queueSynchronousRequest(String,WebAddress,String,Map<String,String>,EventHandler,InputStream,int)|
+|android.net.http.RequestQueue.requeueRequest(Request)|Put request back on head
+|android.net.http.RequestQueue.shutdown()|This must be called to cleanly shutdo
+|android.net.http.RequestQueue.startTiming()|
+|android.net.http.RequestQueue.stopTiming()|
+
+*android.net.http.RequestQueue_Description*
+
+
+
+
+
+*android.net.http.RequestQueue(Context)*
+
+public RequestQueue(android.content.Context context)
+
+A RequestQueue class instance maintains a set of queued requests. It orders 
+them, makes the requests against HTTP servers, and makes callbacks to supplied 
+eventHandlers as data is read. It supports request prioritization, connection 
+reuse and pipelining. 
+
+    context - application context 
+
+*android.net.http.RequestQueue(Context,int)*
+
+public RequestQueue(
+  android.content.Context context,
+  int connectionCount)
+
+A RequestQueue class instance maintains a set of queued requests. It orders 
+them, makes the requests against HTTP servers, and makes callbacks to supplied 
+eventHandlers as data is read. It supports request prioritization, connection 
+reuse and pipelining. 
+
+    context - application context 
+    connectionCount - The number of simultaneous connections 
+
+*android.net.http.RequestQueue.disablePlatformNotifications()*
+
+public synchronized void disablePlatformNotifications()
+
+If platform notifications have been enabled, call this method to disable before 
+destroying RequestQueue 
+
+
+
+*android.net.http.RequestQueue.enablePlatformNotifications()*
+
+public synchronized void enablePlatformNotifications()
+
+Enables data state and proxy tracking 
+
+
+
+*android.net.http.RequestQueue.getProxyHost()*
+
+public HttpHost getProxyHost()
+
+used by webkit 
+
+
+
+    Returns: proxy host if set, null otherwise 
+
+*android.net.http.RequestQueue.getRequest()*
+
+public synchronized |android.net.http.Request| getRequest()
+
+
+
+
+
+*android.net.http.RequestQueue.getRequest(HttpHost)*
+
+public synchronized |android.net.http.Request| getRequest(HttpHost host)
+
+
+
+
+
+    Returns: a request for given host if possible 
+
+*android.net.http.RequestQueue.haveRequest(HttpHost)*
+
+public synchronized boolean haveRequest(HttpHost host)
+
+
+
+
+
+    Returns: true if a request for this host is available 
+
+*android.net.http.RequestQueue.queueRequest(Request,boolean)*
+
+protected synchronized void queueRequest(
+  android.net.http.Request request,
+  boolean head)
+
+
+
+
+
+*android.net.http.RequestQueue.queueRequest(String,String,Map<String,String>,EventHandler,InputStream,int)*
+
+public |android.net.http.RequestHandle| queueRequest(
+  java.lang.String url,
+  java.lang.String method,
+  java.util.Map<java.lang.String, java.lang.String> headers,
+  android.net.http.EventHandler eventHandler,
+  java.io.InputStream bodyProvider,
+  int bodyLength)
+
+Queues an HTTP request 
+
+
+    url - The url to load. 
+    method - "GET" or "POST." 
+    headers - A hashmap of http headers. 
+    eventHandler - The event handler for handling returned data. Callbacks will be made on the 
+       supplied instance. 
+    bodyProvider - InputStream providing HTTP body, null if none 
+    bodyLength - length of body, must be 0 if bodyProvider is null 
+
+*android.net.http.RequestQueue.queueRequest(String,WebAddress,String,Map<String,String>,EventHandler,InputStream,int)*
+
+public |android.net.http.RequestHandle| queueRequest(
+  java.lang.String url,
+  android.net.WebAddress uri,
+  java.lang.String method,
+  java.util.Map<java.lang.String, java.lang.String> headers,
+  android.net.http.EventHandler eventHandler,
+  java.io.InputStream bodyProvider,
+  int bodyLength)
+
+Queues an HTTP request 
+
+
+    url - The url to load. 
+    uri - The uri of the url to load. 
+    method - "GET" or "POST." 
+    headers - A hashmap of http headers. 
+    eventHandler - The event handler for handling returned data. Callbacks will be made on the 
+       supplied instance. 
+    bodyProvider - InputStream providing HTTP body, null if none 
+    bodyLength - length of body, must be 0 if bodyProvider is null 
+
+*android.net.http.RequestQueue.queueSynchronousRequest(String,WebAddress,String,Map<String,String>,EventHandler,InputStream,int)*
+
+public |android.net.http.RequestHandle| queueSynchronousRequest(
+  java.lang.String url,
+  android.net.WebAddress uri,
+  java.lang.String method,
+  java.util.Map<java.lang.String, java.lang.String> headers,
+  android.net.http.EventHandler eventHandler,
+  java.io.InputStream bodyProvider,
+  int bodyLength)
+
+
+
+
+
+*android.net.http.RequestQueue.requeueRequest(Request)*
+
+public void requeueRequest(android.net.http.Request request)
+
+Put request back on head of queue 
+
+
+
+*android.net.http.RequestQueue.shutdown()*
+
+public void shutdown()
+
+This must be called to cleanly shutdown RequestQueue 
+
+
+
+*android.net.http.RequestQueue.startTiming()*
+
+public void startTiming()
+
+
+
+
+
+*android.net.http.RequestQueue.stopTiming()*
+
+public void stopTiming()
+
+
+
+
+
+

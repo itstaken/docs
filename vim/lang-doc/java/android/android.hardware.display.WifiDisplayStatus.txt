@@ -1,0 +1,207 @@
+*android.hardware.display.WifiDisplayStatus* *WifiDisplayStatus* Describes the c
+
+public final class WifiDisplayStatus
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.hardware.display.WifiDisplayStatus_Description|
+|android.hardware.display.WifiDisplayStatus_Fields|
+|android.hardware.display.WifiDisplayStatus_Constructors|
+|android.hardware.display.WifiDisplayStatus_Methods|
+
+================================================================================
+
+*android.hardware.display.WifiDisplayStatus_Fields*
+|android.os.Parcelable.Creator<android.hardware.display.WifiDisplayStatus>_android.hardware.display.WifiDisplayStatus.CREATOR|
+|int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_CONNECTED|
+|int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_CONNECTING|
+|int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_NOT_CONNECTED|
+|int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_DISABLED|
+|int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_OFF|
+|int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_ON|
+|int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE|
+|int_android.hardware.display.WifiDisplayStatus.SCAN_STATE_NOT_SCANNING|
+|int_android.hardware.display.WifiDisplayStatus.SCAN_STATE_SCANNING|
+
+*android.hardware.display.WifiDisplayStatus_Constructors*
+|android.hardware.display.WifiDisplayStatus()|
+|android.hardware.display.WifiDisplayStatus(int,int,int,WifiDisplay,WifiDisplay[],WifiDisplaySessionInfo)|
+
+*android.hardware.display.WifiDisplayStatus_Methods*
+|android.hardware.display.WifiDisplayStatus.describeContents()|
+|android.hardware.display.WifiDisplayStatus.getActiveDisplay()|Gets the Wifi di
+|android.hardware.display.WifiDisplayStatus.getActiveDisplayState()|Get the sta
+|android.hardware.display.WifiDisplayStatus.getDisplays()|Gets the list of Wifi
+|android.hardware.display.WifiDisplayStatus.getFeatureState()|Returns the state
+|android.hardware.display.WifiDisplayStatus.getScanState()|Returns the current 
+|android.hardware.display.WifiDisplayStatus.getSessionInfo()|Gets the Wifi disp
+|android.hardware.display.WifiDisplayStatus.toString()|
+|android.hardware.display.WifiDisplayStatus.writeToParcel(Parcel,int)|
+
+*android.hardware.display.WifiDisplayStatus_Description*
+
+Describes the current global state of Wifi display connectivity, including the 
+currently connected display and all available or remembered displays. 
+
+This object is immutable. 
+
+
+
+*android.os.Parcelable.Creator<android.hardware.display.WifiDisplayStatus>_android.hardware.display.WifiDisplayStatus.CREATOR*
+
+
+
+
+*int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_CONNECTED*
+
+Display state: Connected to active display. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_CONNECTING*
+
+Display state: Connecting to active display. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.DISPLAY_STATE_NOT_CONNECTED*
+
+Display state: Not connected. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_DISABLED*
+
+Feature state: Wifi display is disabled, probably because Wifi is disabled. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_OFF*
+
+Feature state: Wifi display is turned off in settings. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_ON*
+
+Feature state: Wifi display is turned on in settings. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE*
+
+Feature state: Wifi display is not available on this device. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.SCAN_STATE_NOT_SCANNING*
+
+Scan state: Not currently scanning. 
+
+
+*int_android.hardware.display.WifiDisplayStatus.SCAN_STATE_SCANNING*
+
+Scan state: Currently scanning. 
+
+
+
+*android.hardware.display.WifiDisplayStatus()*
+
+public WifiDisplayStatus()
+
+
+
+
+*android.hardware.display.WifiDisplayStatus(int,int,int,WifiDisplay,WifiDisplay[],WifiDisplaySessionInfo)*
+
+public WifiDisplayStatus(
+  int featureState,
+  int scanState,
+  int activeDisplayState,
+  android.hardware.display.WifiDisplay activeDisplay,
+  android.hardware.display.WifiDisplay[] displays,
+  android.hardware.display.WifiDisplaySessionInfo sessionInfo)
+
+
+
+
+*android.hardware.display.WifiDisplayStatus.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.hardware.display.WifiDisplayStatus.getActiveDisplay()*
+
+public |android.hardware.display.WifiDisplay| getActiveDisplay()
+
+Gets the Wifi display that is currently active. It may be connecting or 
+connected. 
+
+
+
+*android.hardware.display.WifiDisplayStatus.getActiveDisplayState()*
+
+public int getActiveDisplayState()
+
+Get the state of the currently active display. 
+
+
+
+    Returns: One of: {@link #DISPLAY_STATE_NOT_CONNECTED}, {@link 
+             #DISPLAY_STATE_CONNECTING}, or {@link #DISPLAY_STATE_CONNECTED}. 
+
+*android.hardware.display.WifiDisplayStatus.getDisplays()*
+
+public |android.hardware.display.WifiDisplay|[] getDisplays()
+
+Gets the list of Wifi displays, returns a combined list of all available Wifi 
+displays as reported by the most recent scan, and all remembered Wifi displays 
+(not necessarily available at the time). 
+
+
+
+*android.hardware.display.WifiDisplayStatus.getFeatureState()*
+
+public int getFeatureState()
+
+Returns the state of the Wifi display feature on this device. 
+
+The value of this property reflects whether the device supports the Wifi 
+display, whether it has been enabled by the user and whether the prerequisites 
+for connecting to displays have been met. 
+
+
+
+*android.hardware.display.WifiDisplayStatus.getScanState()*
+
+public int getScanState()
+
+Returns the current state of the Wifi display scan. 
+
+
+
+    Returns: One of: {@link #SCAN_STATE_NOT_SCANNING} or {@link #SCAN_STATE_SCANNING}. 
+
+*android.hardware.display.WifiDisplayStatus.getSessionInfo()*
+
+public |android.hardware.display.WifiDisplaySessionInfo| getSessionInfo()
+
+Gets the Wifi display session info (required for certification only) 
+
+
+
+*android.hardware.display.WifiDisplayStatus.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.hardware.display.WifiDisplayStatus.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

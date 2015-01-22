@@ -1,0 +1,989 @@
+*android.view.accessibility.AccessibilityEvent* *AccessibilityEvent* 
+ This clas
+
+public final class AccessibilityEvent
+  extends    |android.view.accessibility.AccessibilityRecord|
+  implements |android.os.Parcelable|
+
+|android.view.accessibility.AccessibilityEvent_Description|
+|android.view.accessibility.AccessibilityEvent_Fields|
+|android.view.accessibility.AccessibilityEvent_Constructors|
+|android.view.accessibility.AccessibilityEvent_Methods|
+
+================================================================================
+
+*android.view.accessibility.AccessibilityEvent_Fields*
+|int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION|
+|int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE|
+|int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT|
+|int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED|
+|android.os.Parcelable.Creator<android.view.accessibility.AccessibilityEvent>_android.view.accessibility.AccessibilityEvent.CREATOR|
+|int_android.view.accessibility.AccessibilityEvent.INVALID_POSITION|
+|int_android.view.accessibility.AccessibilityEvent.MAX_TEXT_LENGTH|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_ANNOUNCEMENT|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_GESTURE_DETECTION_END|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_GESTURE_DETECTION_START|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_END|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_INTERACTION_END|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_INTERACTION_START|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_HOVER_ENTER|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_HOVER_EXIT|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_LONG_CLICKED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_SCROLLED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_SELECTED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED|
+|int_android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED|
+|int_android.view.accessibility.AccessibilityEvent.TYPES_ALL_MASK|
+
+*android.view.accessibility.AccessibilityEvent_Methods*
+|android.view.accessibility.AccessibilityEvent.appendRecord(AccessibilityRecord)|
+|android.view.accessibility.AccessibilityEvent.clear()|Clears the state of this
+|android.view.accessibility.AccessibilityEvent.describeContents()|
+|android.view.accessibility.AccessibilityEvent.eventTypeToString(int)|Returns t
+|android.view.accessibility.AccessibilityEvent.getAction()|Gets the performed a
+|android.view.accessibility.AccessibilityEvent.getContentChangeTypes()|Gets the
+|android.view.accessibility.AccessibilityEvent.getEventTime()|Gets the time in 
+|android.view.accessibility.AccessibilityEvent.getEventType()|Gets the event ty
+|android.view.accessibility.AccessibilityEvent.getMovementGranularity()|Gets th
+|android.view.accessibility.AccessibilityEvent.getPackageName()|Gets the packag
+|android.view.accessibility.AccessibilityEvent.getRecord(int)|Gets the record a
+|android.view.accessibility.AccessibilityEvent.getRecordCount()|Gets the number
+|android.view.accessibility.AccessibilityEvent.initFromParcel(Parcel)|Creates a
+|android.view.accessibility.AccessibilityEvent.obtain()|Returns a cached instan
+|android.view.accessibility.AccessibilityEvent.obtain(AccessibilityEvent)|Retur
+|android.view.accessibility.AccessibilityEvent.obtain(int)|Returns a cached ins
+|android.view.accessibility.AccessibilityEvent.recycle()|Recycles an instance b
+|android.view.accessibility.AccessibilityEvent.setAction(int)|Sets the performe
+|android.view.accessibility.AccessibilityEvent.setContentChangeTypes(int)|Sets 
+|android.view.accessibility.AccessibilityEvent.setEventTime(long)|Sets the time
+|android.view.accessibility.AccessibilityEvent.setEventType(int)|Sets the event
+|android.view.accessibility.AccessibilityEvent.setMovementGranularity(int)|Sets
+|android.view.accessibility.AccessibilityEvent.setPackageName(CharSequence)|Set
+|android.view.accessibility.AccessibilityEvent.setSealed(boolean)|Sets if this 
+|android.view.accessibility.AccessibilityEvent.toString()|
+|android.view.accessibility.AccessibilityEvent.writeToParcel(Parcel,int)|
+
+*android.view.accessibility.AccessibilityEvent_Description*
+
+This class represents accessibility events that are sent by the system when 
+something notable happens in the user interface. For example, when a 
+(|android.widget.Button|) is clicked, a (|android.view.View|) is focused, etc. 
+
+An accessibility event is fired by an individual view which populates the event 
+with data for its state and requests from its parent to send the event to 
+interested parties. The parent can optionally add an 
+(|android.view.accessibility.AccessibilityRecord|) for itself before 
+dispatching a similar request to its parent. A parent can also choose not to 
+respect the request for sending an event. The accessibility event is sent by 
+the topmost view in the view tree. Therefore, an 
+(|android.accessibilityservice.AccessibilityService|) can explore all records 
+in an accessibility event to obtain more information about the context in which 
+the event was fired. 
+
+The main purpose of an accessibility event is to expose enough information for 
+an (|android.accessibilityservice.AccessibilityService|) to provide meaningful 
+feedback to the user. Sometimes however, an accessibility service may need more 
+contextual information then the one in the event pay-load. In such cases the 
+service can obtain the event source which is an 
+(|android.view.accessibility.AccessibilityNodeInfo|) (snapshot of a View state) 
+which can be used for exploring the window content. Note that the privilege for 
+accessing an event's source, thus the window content, has to be explicitly 
+requested. For more details refer to 
+(|android.accessibilityservice.AccessibilityService|) . If an accessibility 
+service has not requested to retrieve the window content the event will not 
+contain reference to its source. Also for events of type 
+(|android.view.accessibility.AccessibilityEvent|) the source is never 
+available. 
+
+This class represents various semantically different accessibility event types. 
+Each event type has an associated set of related properties. In other words, 
+each event type is characterized via a subset of the properties exposed by this 
+class. For each event type there is a corresponding constant defined in this 
+class. Follows a specification of the event types and their associated 
+properties: 
+
+Developer Guides For more information about creating and processing 
+AccessibilityEvents, read the <a 
+href="guide/topics/ui/accessibility/index.html">Accessibility developer guide. 
+
+VIEW TYPES 
+
+View clicked - represents the event of clicking on a (|android.view.View|) like 
+(|android.widget.Button|) , (|android.widget.CompoundButton|) , etc. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - Whether 
+the source is password. (|android.view.accessibility.AccessibilityEvent|) - 
+Whether the source is checked. 
+(|android.view.accessibility.AccessibilityEvent|) - The content description of 
+the source. (|android.view.accessibility.AccessibilityEvent|) - The offset of 
+the source left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+
+
+View long clicked - represents the event of long clicking on a 
+(|android.view.View|) like (|android.widget.Button|) , 
+(|android.widget.CompoundButton|) , etc Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - Whether 
+the source is password. (|android.view.accessibility.AccessibilityEvent|) - 
+Whether the source is checked. 
+(|android.view.accessibility.AccessibilityEvent|) - The content description of 
+the source. (|android.view.accessibility.AccessibilityEvent|) - The offset of 
+the source left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+
+
+View selected - represents the event of selecting an item usually in the 
+context of an (|android.widget.AdapterView|) . Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - Whether 
+the source is password. (|android.view.accessibility.AccessibilityEvent|) - 
+Whether the source is checked. 
+(|android.view.accessibility.AccessibilityEvent|) - The number of selectable 
+items of the source. (|android.view.accessibility.AccessibilityEvent|) - The 
+currently selected item index. 
+(|android.view.accessibility.AccessibilityEvent|) - The content description of 
+the source. (|android.view.accessibility.AccessibilityEvent|) - The offset of 
+the source left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+
+
+View focused - represents the event of focusing a (|android.view.View|) . Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - Whether 
+the source is password. (|android.view.accessibility.AccessibilityEvent|) - 
+Whether the source is checked. 
+(|android.view.accessibility.AccessibilityEvent|) - The number of focusable 
+items on the screen. (|android.view.accessibility.AccessibilityEvent|) - The 
+currently focused item index. (|android.view.accessibility.AccessibilityEvent|) 
+- The content description of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+
+
+View text changed - represents the event of changing the text of an 
+(|android.widget.EditText|) . Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - Whether the source is 
+enabled. (|android.view.accessibility.AccessibilityEvent|) - Whether the source 
+is password. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is checked. (|android.view.accessibility.AccessibilityEvent|) - The text 
+change start index. (|android.view.accessibility.AccessibilityEvent|) - The 
+number of added characters. (|android.view.accessibility.AccessibilityEvent|) - 
+The number of removed characters. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source 
+before the change. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+
+
+
+View text selection changed - represents the event of changing the text 
+selection of an (|android.widget.EditText|) . Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - Whether the source is 
+password. (|android.view.accessibility.AccessibilityEvent|) - The selection 
+start index. (|android.view.accessibility.AccessibilityEvent|) - The selection 
+end index. (|android.view.accessibility.AccessibilityEvent|) - The length of 
+the source text. (|android.view.accessibility.AccessibilityEvent|) - Whether 
+the source is enabled. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+
+View text traversed at movement granularity - represents the event of 
+traversing the text of a view at a given granularity. For example, moving to 
+the next word. Type: (|android.view.accessibility.AccessibilityEvent|) 
+Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - Sets the granularity at 
+which a view's text was traversed. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - The start of the 
+next/previous text at the specified granularity - inclusive. 
+(|android.view.accessibility.AccessibilityEvent|) - The end of the 
+next/previous text at the specified granularity - exclusive. 
+(|android.view.accessibility.AccessibilityEvent|) - Whether the source is 
+password. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - Sets the granularity at 
+which a view's text was traversed. 
+(|android.view.accessibility.AccessibilityEvent|) - Gets traversal action which 
+specifies the direction. 
+
+
+
+View scrolled - represents the event of scrolling a view. If the source is a 
+descendant of (|android.widget.AdapterView|) the scroll is reported in terms of 
+visible items - the first visible item, the last visible item, and the total 
+items - because the the source is unaware of its pixel size since its adapter 
+is responsible for creating views. In all other cases the scroll is reported as 
+the current scroll on the X and Y axis respectively plus the height of the 
+source in pixels. Type: (|android.view.accessibility.AccessibilityEvent|) 
+Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+Note: This event type is not dispatched to descendants though 
+View.dispatchPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|)
+, hence the event source (|android.view.View|) and the sub-tree rooted at it 
+will not receive calls to 
+View.onPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|) . 
+The preferred way to add text content to such events is by setting the 
+contentDescription(|android.R.styleable|) of the source view. 
+
+TRANSITION TYPES 
+
+Window state changed - represents the event of opening a 
+(|android.widget.PopupWindow|) , (|android.view.Menu|) , (|android.app.Dialog|) 
+, etc. Type: (|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. 
+
+
+
+Window content changed - represents the event of change in the content of a 
+window. This change can be adding/removing view, changing a view size, etc. 
+
+Note: This event is fired only for the window source of the last accessibility 
+event different from (|android.view.accessibility.AccessibilityEvent|) and its 
+purpose is to notify clients that the content of the user interaction window 
+has changed. Type: (|android.view.accessibility.AccessibilityEvent|) 
+Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The type of content 
+changes. (|android.view.accessibility.AccessibilityEvent|) - The source info 
+(for registered clients). (|android.view.accessibility.AccessibilityEvent|) - 
+The class name of the source. (|android.view.accessibility.AccessibilityEvent|) 
+- The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+
+Note: This event type is not dispatched to descendants though 
+View.dispatchPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|)
+, hence the event source (|android.view.View|) and the sub-tree rooted at it 
+will not receive calls to 
+View.onPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|) . 
+The preferred way to add text content to such events is by setting the 
+contentDescription(|android.R.styleable|) of the source view. 
+
+NOTIFICATION TYPES 
+
+Notification state changed - represents the event showing 
+(|android.app.Notification|) . Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The class name of the 
+source. (|android.view.accessibility.AccessibilityEvent|) - The package name of 
+the source. (|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - The posted 
+(|android.app.Notification|) . 
+(|android.view.accessibility.AccessibilityEvent|) - Text for providing more 
+context. 
+
+Note: This event type is not dispatched to descendants though 
+View.dispatchPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|)
+, hence the event source (|android.view.View|) and the sub-tree rooted at it 
+will not receive calls to 
+View.onPopulateAccessibilityEvent(AccessibilityEvent)(|android.view.View|) . 
+The preferred way to add text content to such events is by setting the 
+contentDescription(|android.R.styleable|) of the source view. 
+
+EXPLORATION TYPES 
+
+View hover enter - represents the event of beginning to hover over a 
+(|android.view.View|) . The hover may be generated via exploring the screen by 
+touch or via a pointing device. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+View hover exit - represents the event of stopping to hover over a 
+(|android.view.View|) . The hover may be generated via exploring the screen by 
+touch or via a pointing device. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the source's 
+sub-tree. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. (|android.view.accessibility.AccessibilityEvent|) - The 
+content description of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+left edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The offset of the source 
+top edge in pixels (without descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+first visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The zero based index of the 
+last visible item of the source, inclusive (for descendants of AdapterView). 
+(|android.view.accessibility.AccessibilityEvent|) - The total items of the 
+source (for descendants of AdapterView). 
+
+
+
+Touch interaction start - represents the event of starting a touch interaction, 
+which is the user starts touching the screen. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+Touch interaction end - represents the event of ending a touch interaction, 
+which is the user stops touching the screen. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+Touch exploration gesture start - represents the event of starting a touch 
+exploring gesture. Type: (|android.view.accessibility.AccessibilityEvent|) 
+Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+Touch exploration gesture end - represents the event of ending a touch 
+exploring gesture. Type: (|android.view.accessibility.AccessibilityEvent|) 
+Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+Touch gesture detection start - represents the event of starting a user gesture 
+detection. Type: (|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+Touch gesture detection end - represents the event of ending a user gesture 
+detection. Type: (|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+
+Note: This event is fired only by the system and is not passed to the view tree 
+to be populated. 
+
+MISCELLANEOUS TYPES 
+
+Announcement - represents the event of an application making an announcement. 
+Usually this announcement is related to some sort of a context change for which 
+none of the events representing UI transitions is a good fit. For example, 
+announcing a new page in a book. Type: 
+(|android.view.accessibility.AccessibilityEvent|) Properties: 
+
+(|android.view.accessibility.AccessibilityEvent|) - The type of the event. 
+(|android.view.accessibility.AccessibilityEvent|) - The source info (for 
+registered clients). (|android.view.accessibility.AccessibilityEvent|) - The 
+class name of the source. (|android.view.accessibility.AccessibilityEvent|) - 
+The package name of the source. 
+(|android.view.accessibility.AccessibilityEvent|) - The event time. 
+(|android.view.accessibility.AccessibilityEvent|) - The text of the 
+announcement. (|android.view.accessibility.AccessibilityEvent|) - Whether the 
+source is enabled. 
+
+
+
+Security note 
+
+Since an event contains the text of its source privacy can be compromised by 
+leaking sensitive information such as passwords. To address this issue any 
+event fired in response to manipulation of a PASSWORD field does NOT CONTAIN 
+the text of the password. 
+
+
+
+*int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION*
+
+Change type for (|android.view.accessibility.AccessibilityEvent|) event: The 
+node's content description changed. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_SUBTREE*
+
+Change type for (|android.view.accessibility.AccessibilityEvent|) event: A node 
+in the subtree rooted at the source node was added or removed. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_TEXT*
+
+Change type for (|android.view.accessibility.AccessibilityEvent|) event: The 
+node's text changed. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED*
+
+Change type for (|android.view.accessibility.AccessibilityEvent|) event: The 
+type of change is not defined. 
+
+
+*android.os.Parcelable.Creator<android.view.accessibility.AccessibilityEvent>_android.view.accessibility.AccessibilityEvent.CREATOR*
+
+
+
+
+*int_android.view.accessibility.AccessibilityEvent.INVALID_POSITION*
+
+Invalid selection/focus position. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.MAX_TEXT_LENGTH*
+
+Maximum length of the text fields. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_ANNOUNCEMENT*
+
+Represents the event of an application making an announcement. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_GESTURE_DETECTION_END*
+
+Represents the event of ending gesture detection. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_GESTURE_DETECTION_START*
+
+Represents the event of beginning gesture detection. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED*
+
+Represents the event showing a (|android.app.Notification|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_END*
+
+Represents the event of ending a touch exploration gesture. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_EXPLORATION_GESTURE_START*
+
+Represents the event of starting a touch exploration gesture. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_INTERACTION_END*
+
+Represents the event of the user ending to touch the screen. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_TOUCH_INTERACTION_START*
+
+Represents the event of the user starting to touch the screen. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED*
+
+Represents the event of clearing accessibility focus. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED*
+
+Represents the event of gaining accessibility focus. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED*
+
+Represents the event of clicking on a (|android.view.View|) like 
+(|android.widget.Button|) , (|android.widget.CompoundButton|) , etc. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED*
+
+Represents the event of setting input focus of a (|android.view.View|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_HOVER_ENTER*
+
+Represents the event of a hover enter over a (|android.view.View|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_HOVER_EXIT*
+
+Represents the event of a hover exit over a (|android.view.View|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_LONG_CLICKED*
+
+Represents the event of long clicking on a (|android.view.View|) like 
+(|android.widget.Button|) , (|android.widget.CompoundButton|) , etc. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_SCROLLED*
+
+Represents the event of scrolling a view. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_SELECTED*
+
+Represents the event of selecting an item usually in the context of an 
+(|android.widget.AdapterView|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED*
+
+Represents the event of changing the text of an (|android.widget.EditText|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED*
+
+Represents the event of changing the selection in an 
+(|android.widget.EditText|) . 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_VIEW_TEXT_TRAVERSED_AT_MOVEMENT_GRANULARITY*
+
+Represents the event of traversing the text of a view at a given movement 
+granularity. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED*
+
+Represents the event of changing the content of a window and more specifically 
+the sub-tree rooted at the event's source. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED*
+
+Represents the event of opening a (|android.widget.PopupWindow|) , 
+(|android.view.Menu|) , (|android.app.Dialog|) , etc. 
+
+
+*int_android.view.accessibility.AccessibilityEvent.TYPES_ALL_MASK*
+
+Mask for (|android.view.accessibility.AccessibilityEvent|) all types. 
+
+
+
+*android.view.accessibility.AccessibilityEvent.appendRecord(AccessibilityRecord)*
+
+public void appendRecord(android.view.accessibility.AccessibilityRecord record)
+
+Appends an (|android.view.accessibility.AccessibilityRecord|) to the end of 
+event records. 
+
+
+    record - The record to append. 
+
+*android.view.accessibility.AccessibilityEvent.clear()*
+
+protected void clear()
+
+Clears the state of this instance. 
+
+
+
+*android.view.accessibility.AccessibilityEvent.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.accessibility.AccessibilityEvent.eventTypeToString(int)*
+
+public static |java.lang.String| eventTypeToString(int eventType)
+
+Returns the string representation of an event type. For example, 
+(|android.view.accessibility.AccessibilityEvent|) is represented by the string 
+TYPE_VIEW_CLICKED. 
+
+
+    eventType - The event type 
+
+    Returns: The string representation. 
+
+*android.view.accessibility.AccessibilityEvent.getAction()*
+
+public int getAction()
+
+Gets the performed action that triggered this event. 
+
+
+
+    Returns: 
+
+*android.view.accessibility.AccessibilityEvent.getContentChangeTypes()*
+
+public int getContentChangeTypes()
+
+Gets the bit mask of change types signaled by an 
+(|android.view.accessibility.AccessibilityEvent|) event. A single event may 
+represent multiple change types. 
+
+
+
+    Returns: The bit mask of change types. One or more of: 
+
+{@link AccessibilityEvent#CONTENT_CHANGE_TYPE_CONTENT_DESCRIPTION} {@link 
+             AccessibilityEvent#CONTENT_CHANGE_TYPE_SUBTREE} {@link 
+             AccessibilityEvent#CONTENT_CHANGE_TYPE_TEXT} {@link 
+             AccessibilityEvent#CONTENT_CHANGE_TYPE_UNDEFINED} 
+
+*android.view.accessibility.AccessibilityEvent.getEventTime()*
+
+public long getEventTime()
+
+Gets the time in which this event was sent. 
+
+
+
+    Returns: The event time. 
+
+*android.view.accessibility.AccessibilityEvent.getEventType()*
+
+public int getEventType()
+
+Gets the event type. 
+
+
+
+    Returns: The event type. 
+
+*android.view.accessibility.AccessibilityEvent.getMovementGranularity()*
+
+public int getMovementGranularity()
+
+Gets the movement granularity that was traversed. 
+
+
+
+    Returns: The granularity. 
+
+*android.view.accessibility.AccessibilityEvent.getPackageName()*
+
+public |java.lang.CharSequence| getPackageName()
+
+Gets the package name of the source. 
+
+
+
+    Returns: The package name. 
+
+*android.view.accessibility.AccessibilityEvent.getRecord(int)*
+
+public |android.view.accessibility.AccessibilityRecord| getRecord(int index)
+
+Gets the record at a given index. 
+
+
+    index - The index. 
+
+    Returns: The record at the specified index. 
+
+*android.view.accessibility.AccessibilityEvent.getRecordCount()*
+
+public int getRecordCount()
+
+Gets the number of records contained in the event. 
+
+
+
+    Returns: The number of records. 
+
+*android.view.accessibility.AccessibilityEvent.initFromParcel(Parcel)*
+
+public void initFromParcel(android.os.Parcel parcel)
+
+Creates a new instance from a (|android.os.Parcel|) . 
+
+
+    parcel - A parcel containing the state of a {@link AccessibilityEvent}. 
+
+*android.view.accessibility.AccessibilityEvent.obtain()*
+
+public static |android.view.accessibility.AccessibilityEvent| obtain()
+
+Returns a cached instance if such is available or a new one is instantiated. 
+
+
+
+    Returns: 
+
+*android.view.accessibility.AccessibilityEvent.obtain(AccessibilityEvent)*
+
+public static |android.view.accessibility.AccessibilityEvent| obtain(android.view.accessibility.AccessibilityEvent event)
+
+Returns a cached instance if such is available or a new one is created. The 
+returned instance is initialized from the given event. 
+
+
+    event - The other event. 
+
+    Returns: 
+
+*android.view.accessibility.AccessibilityEvent.obtain(int)*
+
+public static |android.view.accessibility.AccessibilityEvent| obtain(int eventType)
+
+Returns a cached instance if such is available or a new one is instantiated 
+with its type property set. 
+
+
+    eventType - The event type. 
+
+    Returns: 
+
+*android.view.accessibility.AccessibilityEvent.recycle()*
+
+public void recycle()
+
+Recycles an instance back to be reused. 
+
+Note: You must not touch the object after calling this function. 
+
+
+
+*android.view.accessibility.AccessibilityEvent.setAction(int)*
+
+public void setAction(int action)
+
+Sets the performed action that triggered this event. 
+
+Valid actions are defined in 
+(|android.view.accessibility.AccessibilityNodeInfo|) : 
+
+(|android.view.accessibility.AccessibilityNodeInfo|) 
+(|android.view.accessibility.AccessibilityNodeInfo|) 
+(|android.view.accessibility.AccessibilityNodeInfo|) 
+(|android.view.accessibility.AccessibilityNodeInfo|) 
+(|android.view.accessibility.AccessibilityNodeInfo|) etc. 
+
+
+    action - The action. 
+
+*android.view.accessibility.AccessibilityEvent.setContentChangeTypes(int)*
+
+public void setContentChangeTypes(int changeTypes)
+
+Sets the bit mask of node tree changes signaled by an 
+(|android.view.accessibility.AccessibilityEvent|) event. 
+
+
+    changeTypes - The bit mask of change types. 
+
+*android.view.accessibility.AccessibilityEvent.setEventTime(long)*
+
+public void setEventTime(long eventTime)
+
+Sets the time in which this event was sent. 
+
+
+    eventTime - The event time. 
+
+*android.view.accessibility.AccessibilityEvent.setEventType(int)*
+
+public void setEventType(int eventType)
+
+Sets the event type. 
+
+
+    eventType - The event type. 
+
+*android.view.accessibility.AccessibilityEvent.setMovementGranularity(int)*
+
+public void setMovementGranularity(int granularity)
+
+Sets the movement granularity that was traversed. 
+
+
+    granularity - The granularity. 
+
+*android.view.accessibility.AccessibilityEvent.setPackageName(CharSequence)*
+
+public void setPackageName(java.lang.CharSequence packageName)
+
+Sets the package name of the source. 
+
+
+    packageName - The package name. 
+
+*android.view.accessibility.AccessibilityEvent.setSealed(boolean)*
+
+public void setSealed(boolean sealed)
+
+Sets if this instance is sealed. 
+
+
+    sealed - Whether is sealed. 
+
+*android.view.accessibility.AccessibilityEvent.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.view.accessibility.AccessibilityEvent.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel parcel,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,301 @@
+*android.printservice.PrintService* *PrintService* 
+ This is the base class for 
+
+public abstract class PrintService
+  extends    |android.app.Service|
+
+|android.printservice.PrintService_Description|
+|android.printservice.PrintService_Fields|
+|android.printservice.PrintService_Constructors|
+|android.printservice.PrintService_Methods|
+
+================================================================================
+
+*android.printservice.PrintService_Fields*
+|java.lang.String_android.printservice.PrintService.EXTRA_PRINT_JOB_INFO|
+|java.lang.String_android.printservice.PrintService.SERVICE_INTERFACE|
+|java.lang.String_android.printservice.PrintService.SERVICE_META_DATA|
+
+*android.printservice.PrintService_Constructors*
+|android.printservice.PrintService()|
+
+*android.printservice.PrintService_Methods*
+|android.printservice.PrintService.attachBaseContext(Context)|
+|android.printservice.PrintService.generatePrinterId(String)|Generates a global
+|android.printservice.PrintService.getActivePrintJobs()|Gets the active print j
+|android.printservice.PrintService.onBind(Intent)|
+|android.printservice.PrintService.onConnected()|The system has connected to th
+|android.printservice.PrintService.onCreatePrinterDiscoverySession()|Callback a
+|android.printservice.PrintService.onDisconnected()|The system has disconnected
+|android.printservice.PrintService.onPrintJobQueued(PrintJob)|Called when there
+|android.printservice.PrintService.onRequestCancelPrintJob(PrintJob)|Called whe
+
+*android.printservice.PrintService_Description*
+
+This is the base class for implementing print services. A print service knows 
+how to discover and interact one or more printers via one or more protocols. 
+
+Printer discovery 
+
+A print service is responsible for discovering printers, adding discovered 
+printers, removing added printers, and updating added printers. When the system 
+is interested in printers managed by your service it will call 
+(|android.printservice.PrintService|) from which you must return a new 
+(|android.printservice.PrinterDiscoverySession|) instance. The returned session 
+encapsulates the interaction between the system and your service during printer 
+discovery. For description of this interaction refer to the documentation for 
+(|android.printservice.PrinterDiscoverySession|) . 
+
+For every printer discovery session all printers have to be added since system 
+does not retain printers across sessions. Hence, each printer known to this 
+print service should be added only once during a discovery session. Only an 
+already added printer can be removed or updated. Removed printers can be added 
+again. 
+
+Print jobs 
+
+When a new print job targeted to a printer managed by this print service is is 
+queued, i.e. ready for processing by the print service, you will receive a call 
+to (|android.printservice.PrintService|) . The print service may handle the 
+print job immediately or schedule that for an appropriate time in the future. 
+The list of all active print jobs for this service is obtained by calling 
+(|android.printservice.PrintService|) . Active print jobs are ones that are 
+queued or started. 
+
+A print service is responsible for setting a print job's state as appropriate 
+while processing it. Initially, a print job is queued, i.e. 
+PrintJob.isQueued()(|android.printservice.PrintJob|) returns true, which means 
+that the document to be printed is spooled by the system and the print service 
+can begin processing it. You can obtain the printed document by calling 
+PrintJob.getDocument()(|android.printservice.PrintJob|) whose data is accessed 
+via PrintDocument.getData()(|android.printservice.PrintDocument|) . After the 
+print service starts printing the data it should set the print job's state to 
+started by calling (|android.printservice.PrintJob|) after which 
+PrintJob.isStarted()(|android.printservice.PrintJob|) would return true. Upon 
+successful completion, the print job should be marked as completed by calling 
+PrintJob.complete()(|android.printservice.PrintJob|) after which 
+PrintJob.isCompleted()(|android.printservice.PrintJob|) would return true. In 
+case of a failure, the print job should be marked as failed by calling 
+PrintJob.fail( String)(|android.printservice.PrintJob|) after which 
+PrintJob.isFailed()(|android.printservice.PrintJob|) would return true. 
+
+If a print job is queued or started and the user requests to cancel it, the 
+print service will receive a call to (|android.printservice.PrintService|) 
+which requests from the service to do best effort in canceling the job. In case 
+the job is successfully canceled, its state has to be marked as cancelled by 
+calling PrintJob.cancel()(|android.printservice.PrintJob|) after which 
+PrintJob.isCacnelled()(|android.printservice.PrintJob|) would return true. 
+
+Lifecycle 
+
+The lifecycle of a print service is managed exclusively by the system and 
+follows the established service lifecycle. Additionally, starting or stopping a 
+print service is triggered exclusively by an explicit user action through 
+enabling or disabling it in the device settings. After the system binds to a 
+print service, it calls (|android.printservice.PrintService|) . This method can 
+be overriden by clients to perform post binding setup. Also after the system 
+unbinds from a print service, it calls (|android.printservice.PrintService|) . 
+This method can be overriden by clients to perform post unbinding cleanup. Your 
+should not do any work after the system disconnected from your print service 
+since the service can be killed at any time to reclaim memory. The system will 
+not disconnect from a print service if there are active print jobs for the 
+printers managed by it. 
+
+Declaration 
+
+A print service is declared as any other service in an AndroidManifest.xml but 
+it must also specify that it handles the (|android.content.Intent|) with action 
+android.printservice.PrintService(|android.printservice.PrintService|) . 
+Failure to declare this intent will cause the system to ignore the print 
+service. Additionally, a print service must request the 
+android.permission.BIND_PRINT_SERVICE(|android.Manifest.permission|) permission 
+to ensure that only the system can bind to it. Failure to declare this intent 
+will cause the system to ignore the print service. Following is an example 
+declaration: 
+
+
+
+<service android:name=".MyPrintService" 
+android:permission="android.permission.BIND_PRINT_SERVICE"> <intent-filter> 
+<action android:name="android.printservice.PrintService" /> </intent-filter> . 
+. . </service> 
+
+Configuration 
+
+A print service can be configured by specifying an optional settings activity 
+which exposes service specific settings, an optional add printers activity 
+which is used for manual addition of printers, vendor name ,etc. It is a 
+responsibility of the system to launch the settings and add printers activities 
+when appropriate. 
+
+A print service is configured by providing a 
+meta-data(|android.printservice.PrintService|) entry in the manifest when 
+declaring the service. A service declaration with a meta-data tag is presented 
+below: 
+
+<service android:name=".MyPrintService" 
+android:permission="android.permission.BIND_PRINT_SERVICE"> <intent-filter> 
+<action android:name="android.printservice.PrintService" /> </intent-filter> 
+<meta-data android:name="android.printservice" 
+android:resource="@xml/printservice" /> </service> 
+
+
+
+For more details for how to configure your print service via the meta-data 
+refer to (|android.printservice.PrintService|) and < 
+print-service(|android.R.styleable|) >. 
+
+Note: All callbacks in this class are executed on the main application thread. 
+You should also invoke any method of this class on the main application thread. 
+
+
+
+*java.lang.String_android.printservice.PrintService.EXTRA_PRINT_JOB_INFO*
+
+If you declared an optional activity with advanced print options via the 
+advancedPrintOptionsActivity(|R.attr|) attribute, this extra is used to pass in 
+the currently constructed (|android.print.PrintJobInfo|) to your activity 
+allowing you to modify it. After you are done, you must return the modified 
+(|android.print.PrintJobInfo|) via the same extra. 
+
+You cannot modify the passed in (|android.print.PrintJobInfo|) directly, rather 
+you should build another one using the (|PrintJobInfo.Builder|) class. You can 
+specify any standard properties and add advanced, printer specific, ones via 
+PrintJobInfo.Builder#putAdvancedOption(String, String)(|PrintJobInfo.Builder|) 
+and PrintJobInfo.Builder#putAdvancedOption(String, int)(|PrintJobInfo.Builder|) 
+. The advanced options are not interpreted by the system, they will not be 
+visible to applications, and can only be accessed by your print service via 
+PrintJob.getAdvancedStringOption(String)(|android.printservice.PrintJob|) and 
+PrintJob.getAdvancedIntOption(String)(|android.printservice.PrintJob|) . 
+
+If the advanced print options activity offers changes to the standard print 
+options, you can get the current (|android.print.PrinterInfo|) using the 
+"android.intent.extra.print.EXTRA_PRINTER_INFO" extra which will allow you to 
+present the user with UI options supported by the current printer. For example, 
+if the current printer does not support a give media size, you should not offer 
+it in the advanced print options dialog. 
+
+
+*java.lang.String_android.printservice.PrintService.SERVICE_INTERFACE*
+
+The (|android.content.Intent|) action that must be declared as handled by a 
+service in its manifest for the system to recognize it as a print service. 
+
+
+*java.lang.String_android.printservice.PrintService.SERVICE_META_DATA*
+
+Name under which a (|android.printservice.PrintService|) component publishes 
+additional information about itself. This meta-data must reference a XML 
+resource containing a < print-service(|android.R.styleable|) > tag. This is a 
+sample XML file configuring a print service: 
+
+<print-service android:vendor="SomeVendor" 
+android:settingsActivity="foo.bar.MySettingsActivity" 
+andorid:addPrintersActivity="foo.bar.MyAddPrintersActivity." . . . /> 
+
+For detailed configuration options that can be specified via the meta-data 
+refer to android.R.styleable.PrintService(|android.R.styleable|) . 
+
+If you declare a settings or add a printers activity, they have to be exported, 
+by setting the (|android.R.attr|) activity attribute to true . Also in case you 
+want only the system to be able to start any of these activities you can 
+specify that they request the android.permission 
+.START_PRINT_SERVICE_CONFIG_ACTIVITY permission by setting the 
+(|android.R.attr|) activity attribute. 
+
+
+
+*android.printservice.PrintService()*
+
+public PrintService()
+
+
+
+
+*android.printservice.PrintService.attachBaseContext(Context)*
+
+protected final void attachBaseContext(android.content.Context base)
+
+
+
+
+
+*android.printservice.PrintService.generatePrinterId(String)*
+
+public final |android.print.PrinterId| generatePrinterId(java.lang.String localId)
+
+Generates a global printer id given the printer's locally unique one. 
+
+
+    localId - A locally unique id in the context of your print service. 
+
+    Returns: Global printer id. 
+
+*android.printservice.PrintService.getActivePrintJobs()*
+
+public final |java.util.List|<PrintJob> getActivePrintJobs()
+
+Gets the active print jobs for the printers managed by this service. Active 
+print jobs are ones that are not in a final state, i.e. whose state is queued 
+or started. 
+
+
+
+    Returns: The active print jobs. 
+
+*android.printservice.PrintService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.printservice.PrintService.onConnected()*
+
+protected void onConnected()
+
+The system has connected to this service. 
+
+
+
+*android.printservice.PrintService.onCreatePrinterDiscoverySession()*
+
+protected abstract |android.printservice.PrinterDiscoverySession| onCreatePrinterDiscoverySession()
+
+Callback asking you to create a new 
+(|android.printservice.PrinterDiscoverySession|) . 
+
+
+
+*android.printservice.PrintService.onDisconnected()*
+
+protected void onDisconnected()
+
+The system has disconnected from this service. 
+
+
+
+*android.printservice.PrintService.onPrintJobQueued(PrintJob)*
+
+protected abstract void onPrintJobQueued(android.printservice.PrintJob printJob)
+
+Called when there is a queued print job for one of the printers managed by this 
+print service. 
+
+
+    printJob - The new queued print job. 
+
+*android.printservice.PrintService.onRequestCancelPrintJob(PrintJob)*
+
+protected abstract void onRequestCancelPrintJob(android.printservice.PrintJob printJob)
+
+Called when cancellation of a print job is requested. The service should do 
+best effort to fulfill the request. After the cancellation is performed, the 
+print job should be marked as cancelled state by calling 
+(|android.printservice.PrintJob|) . 
+
+
+    printJob - The print job to cancel. 
+
+

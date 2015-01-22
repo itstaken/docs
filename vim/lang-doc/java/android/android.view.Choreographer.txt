@@ -1,0 +1,278 @@
+*android.view.Choreographer* *Choreographer* Coordinates the timing of animation
+
+public final class Choreographer
+  extends    |java.lang.Object|
+
+|android.view.Choreographer_Description|
+|android.view.Choreographer_Fields|
+|android.view.Choreographer_Constructors|
+|android.view.Choreographer_Methods|
+
+================================================================================
+
+*android.view.Choreographer_Fields*
+|int_android.view.Choreographer.CALLBACK_ANIMATION|
+|int_android.view.Choreographer.CALLBACK_INPUT|
+|int_android.view.Choreographer.CALLBACK_TRAVERSAL|
+
+*android.view.Choreographer_Methods*
+|android.view.Choreographer.getFrameDelay()|The amount of time, in milliseconds
+|android.view.Choreographer.getFrameTime()|Gets the time when the current frame
+|android.view.Choreographer.getFrameTimeNanos()|Same as#getFrameTime()but with 
+|android.view.Choreographer.getInstance()|Gets the choreographer for the callin
+|android.view.Choreographer.postCallback(int,Runnable,Object)|Posts a callback 
+|android.view.Choreographer.postCallbackDelayed(int,Runnable,Object,long)|Posts
+|android.view.Choreographer.postFrameCallback(Choreographer.FrameCallback)|Post
+|android.view.Choreographer.postFrameCallbackDelayed(Choreographer.FrameCallback,long)|
+|android.view.Choreographer.removeCallbacks(int,Runnable,Object)|Removes callba
+|android.view.Choreographer.removeFrameCallback(Choreographer.FrameCallback)|Re
+|android.view.Choreographer.setFrameDelay(long)|The amount of time, in millisec
+|android.view.Choreographer.subtractFrameDelay(long)|Subtracts typical frame de
+
+*android.view.Choreographer_Description*
+
+Coordinates the timing of animations, input and drawing. 
+
+The choreographer receives timing pulses (such as vertical synchronization) 
+from the display subsystem then schedules work to occur as part of rendering 
+the next display frame. 
+
+Applications typically interact with the choreographer indirectly using higher 
+level abstractions in the animation framework or the view hierarchy. Here are 
+some examples of things you can do using the higher-level APIs. 
+
+To post an animation to be processed on a regular time basis synchronized with 
+display frame rendering, use (|android.animation.ValueAnimator|) . To post a 
+(|java.lang.Runnable|) to be invoked once at the beginning of the next display 
+frame, use (|android.view.View|) . To post a (|java.lang.Runnable|) to be 
+invoked once at the beginning of the next display frame after a delay, use 
+(|android.view.View|) . To post a call to (|android.view.View|) to occur once 
+at the beginning of the next display frame, use (|android.view.View|) or 
+(|android.view.View|) . To ensure that the contents of a (|android.view.View|) 
+scroll smoothly and are drawn in sync with display frame rendering, do nothing. 
+This already happens automatically. (|android.view.View|) will be called at the 
+appropriate time. 
+
+However, there are a few cases where you might want to use the functions of the 
+choreographer directly in your application. Here are some examples. 
+
+If your application does its rendering in a different thread, possibly using 
+GL, or does not use the animation framework or view hierarchy at all and you 
+want to ensure that it is appropriately synchronized with the display, then use 
+(|android.view.Choreographer|) . ... and that's about it. 
+
+Each (|android.os.Looper|) thread has its own choreographer. Other threads can 
+post callbacks to run on the choreographer but they will run on the 
+(|android.os.Looper|) to which the choreographer belongs. 
+
+
+
+*int_android.view.Choreographer.CALLBACK_ANIMATION*
+
+Callback type: Animation callback. Runs before traversals. 
+
+
+*int_android.view.Choreographer.CALLBACK_INPUT*
+
+Callback type: Input callback. Runs first. 
+
+
+*int_android.view.Choreographer.CALLBACK_TRAVERSAL*
+
+Callback type: Traversal callback. Handles layout and draw. Runs last after all 
+other asynchronous messages have been handled. 
+
+
+
+*android.view.Choreographer.getFrameDelay()*
+
+public static long getFrameDelay()
+
+The amount of time, in milliseconds, between each frame of the animation. 
+
+This is a requested time that the animation will attempt to honor, but the 
+actual delay between frames may be different, depending on system load and 
+capabilities. This is a static function because the same delay will be applied 
+to all animations, since they are all run off of a single timing loop. 
+
+The frame delay may be ignored when the animation system uses an external 
+timing source, such as the display refresh rate (vsync), to govern animations. 
+
+
+
+    Returns: the requested time between frames, in milliseconds 
+
+*android.view.Choreographer.getFrameTime()*
+
+public long getFrameTime()
+
+Gets the time when the current frame started. 
+
+This method provides the time in nanoseconds when the frame started being 
+rendered. The frame time provides a stable time base for synchronizing 
+animations and drawing. It should be used instead of (|android.os.SystemClock|) 
+or (|java.lang.System|) for animations and drawing in the UI. Using the frame 
+time helps to reduce inter-frame jitter because the frame time is fixed at the 
+time the frame was scheduled to start, regardless of when the animations or 
+drawing callback actually runs. All callbacks that run as part of rendering a 
+frame will observe the same frame time so using the frame time also helps to 
+synchronize effects that are performed by different callbacks. 
+
+Please note that the framework already takes care to process animations and 
+drawing using the frame time as a stable time base. Most applications should 
+not need to use the frame time information directly. 
+
+This method should only be called from within a callback. 
+
+
+
+    Returns: The frame start time, in the {@link SystemClock#uptimeMillis()} time base. 
+
+*android.view.Choreographer.getFrameTimeNanos()*
+
+public long getFrameTimeNanos()
+
+Same as (|android.view.Choreographer|) but with nanosecond precision. 
+
+
+
+    Returns: The frame start time, in the {@link System#nanoTime()} time base. 
+
+*android.view.Choreographer.getInstance()*
+
+public static |android.view.Choreographer| getInstance()
+
+Gets the choreographer for the calling thread. Must be called from a thread 
+that already has a (|android.os.Looper|) associated with it. 
+
+
+
+    Returns: The choreographer for this thread. 
+
+*android.view.Choreographer.postCallback(int,Runnable,Object)*
+
+public void postCallback(
+  int callbackType,
+  java.lang.Runnable action,
+  java.lang.Object token)
+
+Posts a callback to run on the next frame. 
+
+The callback runs once then is automatically removed. 
+
+
+    callbackType - The callback type. 
+    action - The callback action to run during the next frame. 
+    token - The callback token, or null if none. 
+
+*android.view.Choreographer.postCallbackDelayed(int,Runnable,Object,long)*
+
+public void postCallbackDelayed(
+  int callbackType,
+  java.lang.Runnable action,
+  java.lang.Object token,
+  long delayMillis)
+
+Posts a callback to run on the next frame after the specified delay. 
+
+The callback runs once then is automatically removed. 
+
+
+    callbackType - The callback type. 
+    action - The callback action to run during the next frame after the specified delay. 
+    token - The callback token, or null if none. 
+    delayMillis - The delay time in milliseconds. 
+
+*android.view.Choreographer.postFrameCallback(Choreographer.FrameCallback)*
+
+public void postFrameCallback(android.view.Choreographer.FrameCallback callback)
+
+Posts a frame callback to run on the next frame. 
+
+The callback runs once then is automatically removed. 
+
+
+    callback - The frame callback to run during the next frame. 
+
+*android.view.Choreographer.postFrameCallbackDelayed(Choreographer.FrameCallback,long)*
+
+public void postFrameCallbackDelayed(
+  android.view.Choreographer.FrameCallback callback,
+  long delayMillis)
+
+Posts a frame callback to run on the next frame after the specified delay. 
+
+The callback runs once then is automatically removed. 
+
+
+    callback - The frame callback to run during the next frame. 
+    delayMillis - The delay time in milliseconds. 
+
+*android.view.Choreographer.removeCallbacks(int,Runnable,Object)*
+
+public void removeCallbacks(
+  int callbackType,
+  java.lang.Runnable action,
+  java.lang.Object token)
+
+Removes callbacks that have the specified action and token. 
+
+
+    callbackType - The callback type. 
+    action - The action property of the callbacks to remove, or null to remove callbacks 
+       with any action. 
+    token - The token property of the callbacks to remove, or null to remove callbacks with 
+       any token. 
+
+*android.view.Choreographer.removeFrameCallback(Choreographer.FrameCallback)*
+
+public void removeFrameCallback(android.view.Choreographer.FrameCallback callback)
+
+Removes a previously posted frame callback. 
+
+
+    callback - The frame callback to remove. 
+
+*android.view.Choreographer.setFrameDelay(long)*
+
+public static void setFrameDelay(long frameDelay)
+
+The amount of time, in milliseconds, between each frame of the animation. 
+
+This is a requested time that the animation will attempt to honor, but the 
+actual delay between frames may be different, depending on system load and 
+capabilities. This is a static function because the same delay will be applied 
+to all animations, since they are all run off of a single timing loop. 
+
+The frame delay may be ignored when the animation system uses an external 
+timing source, such as the display refresh rate (vsync), to govern animations. 
+
+
+    frameDelay - the requested time between frames, in milliseconds 
+
+*android.view.Choreographer.subtractFrameDelay(long)*
+
+public static long subtractFrameDelay(long delayMillis)
+
+Subtracts typical frame delay time from a delay interval in milliseconds. 
+
+This method can be used to compensate for animation delay times that have baked 
+in assumptions about the frame delay. For example, it's quite common for code 
+to assume a 60Hz frame time and bake in a 16ms delay. When we call 
+(|android.view.Choreographer|) we want to know how long to wait before posting 
+the animation callback but let the animation timer take care of the remaining 
+frame delay time. 
+
+This method is somewhat conservative about how much of the frame delay it 
+subtracts. It uses the same value returned by (|android.view.Choreographer|) 
+which by default is 10ms even though many parts of the system assume 16ms. 
+Consequently, we might still wait 6ms before posting an animation callback that 
+we want to run on the next frame, but this is much better than waiting a whole 
+16ms and likely missing the deadline. 
+
+
+    delayMillis - The original delay time including an assumed frame delay. 
+
+    Returns: The adjusted delay time with the assumed frame delay subtracted out. 
+
+

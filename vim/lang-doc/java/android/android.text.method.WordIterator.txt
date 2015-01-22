@@ -1,0 +1,109 @@
+*android.text.method.WordIterator* *WordIterator* Walks through cursor positions
+
+public class WordIterator
+  extends    |java.lang.Object|
+  implements |android.text.Selection.PositionIterator|
+
+|android.text.method.WordIterator_Description|
+|android.text.method.WordIterator_Fields|
+|android.text.method.WordIterator_Constructors|
+|android.text.method.WordIterator_Methods|
+
+================================================================================
+
+*android.text.method.WordIterator_Constructors*
+|android.text.method.WordIterator()|Constructs a WordIterator using the default
+|android.text.method.WordIterator(Locale)|Constructs a new WordIterator for the
+
+*android.text.method.WordIterator_Methods*
+|android.text.method.WordIterator.following(int)|
+|android.text.method.WordIterator.getBeginning(int)|If offset is within a word,
+|android.text.method.WordIterator.getEnd(int)|If offset is within a word, retur
+|android.text.method.WordIterator.preceding(int)|
+|android.text.method.WordIterator.setCharSequence(CharSequence,int,int)|
+
+*android.text.method.WordIterator_Description*
+
+Walks through cursor positions at word boundaries. Internally uses 
+(|java.text.BreakIterator|) , and caches (|java.lang.CharSequence|) for 
+performance reasons. 
+
+Also provides methods to determine word boundaries. 
+
+
+
+*android.text.method.WordIterator()*
+
+public WordIterator()
+
+Constructs a WordIterator using the default locale. 
+
+
+*android.text.method.WordIterator(Locale)*
+
+public WordIterator(java.util.Locale locale)
+
+Constructs a new WordIterator for the specified locale. 
+
+    locale - The locale to be used when analysing the text. 
+
+*android.text.method.WordIterator.following(int)*
+
+public int following(int offset)
+
+
+
+
+
+*android.text.method.WordIterator.getBeginning(int)*
+
+public int getBeginning(int offset)
+
+If offset is within a word, returns the index of the first character of that 
+word, otherwise returns BreakIterator.DONE. 
+
+The offsets that are considered to be part of a word are the indexes of its 
+characters, as well as the index of its last character plus one. If offset is 
+the index of a low surrogate character, BreakIterator.DONE will be returned. 
+
+Valid range for offset is [0..textLength] (note the inclusive upper bound). The 
+returned value is within [0..offset] or BreakIterator.DONE. 
+
+
+
+*android.text.method.WordIterator.getEnd(int)*
+
+public int getEnd(int offset)
+
+If offset is within a word, returns the index of the last character of that 
+word plus one, otherwise returns BreakIterator.DONE. 
+
+The offsets that are considered to be part of a word are the indexes of its 
+characters, as well as the index of its last character plus one. If offset is 
+the index of a low surrogate character, BreakIterator.DONE will be returned. 
+
+Valid range for offset is [0..textLength] (note the inclusive upper bound). The 
+returned value is within [offset..textLength] or BreakIterator.DONE. 
+
+
+
+*android.text.method.WordIterator.preceding(int)*
+
+public int preceding(int offset)
+
+
+
+
+
+*android.text.method.WordIterator.setCharSequence(CharSequence,int,int)*
+
+public void setCharSequence(
+  java.lang.CharSequence charSequence,
+  int start,
+  int end)
+
+
+
+
+
+

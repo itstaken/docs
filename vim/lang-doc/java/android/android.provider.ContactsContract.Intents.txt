@@ -1,0 +1,205 @@
+*android.provider.ContactsContract.Intents* *ContactsContract.Intents* Contains 
+
+public static final class ContactsContract.Intents
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract.Intents_Description|
+|android.provider.ContactsContract.Intents_Fields|
+|android.provider.ContactsContract.Intents_Constructors|
+|android.provider.ContactsContract.Intents_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.Intents_Fields*
+|java.lang.String_android.provider.ContactsContract.Intents.ACTION_GET_MULTIPLE_PHONES|
+|java.lang.String_android.provider.ContactsContract.Intents.ACTION_PROFILE_CHANGED|
+|java.lang.String_android.provider.ContactsContract.Intents.ATTACH_IMAGE|
+|java.lang.String_android.provider.ContactsContract.Intents.CONTACTS_DATABASE_CREATED|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_CREATE_DESCRIPTION|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_EXCLUDE_MIMES|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_FORCE_CREATE|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_MODE|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_PHONE_URIS|
+|java.lang.String_android.provider.ContactsContract.Intents.EXTRA_TARGET_RECT|
+|java.lang.String_android.provider.ContactsContract.Intents.INVITE_CONTACT|
+|int_android.provider.ContactsContract.Intents.MODE_LARGE|
+|int_android.provider.ContactsContract.Intents.MODE_MEDIUM|
+|int_android.provider.ContactsContract.Intents.MODE_SMALL|
+|java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_CLICKED|
+|java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_CREATE_CONTACT_CLICKED|
+|java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_DIAL_NUMBER_CLICKED|
+|java.lang.String_android.provider.ContactsContract.Intents.SHOW_OR_CREATE_CONTACT|
+
+*android.provider.ContactsContract.Intents_Constructors*
+|android.provider.ContactsContract.Intents()|
+
+*android.provider.ContactsContract.Intents_Description*
+
+Contains helper classes used to create or manage 
+Intents(|android.content.Intent|) that involve contacts. 
+
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.ACTION_GET_MULTIPLE_PHONES*
+
+Starts an Activity that lets the user select the multiple phones from a list of 
+phone numbers which come from the contacts or 
+(|android.provider.ContactsContract.Intents|) . 
+
+The phone numbers being passed in through 
+(|android.provider.ContactsContract.Intents|) could belong to the contacts or 
+not, and will be selected by default. 
+
+The user's selection will be returned from (|android.app.Activity|) if the 
+resultCode is (|android.app.Activity|) , the array of picked phone numbers are 
+in the Intent's (|android.provider.ContactsContract.Intents|) ; otherwise, the 
+(|android.app.Activity|) is returned if the user left the Activity without 
+changing the selection. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.ACTION_PROFILE_CHANGED*
+
+A broadcast action which is sent when any change has been made to the profile, 
+such as the profile name or the picture. A receiver must have the 
+android.permission.READ_PROFILE permission. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.ATTACH_IMAGE*
+
+Starts an Activity that lets the user pick a contact to attach an image to. 
+After picking the contact it launches the image cropper in face detection mode. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.CONTACTS_DATABASE_CREATED*
+
+This is the intent that is fired when the contacts database is created. The 
+READ_CONTACT permission is required to receive these broadcasts. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_CREATE_DESCRIPTION*
+
+Used with (|android.provider.ContactsContract.Intents|) to specify an exact 
+description to be shown when prompting user about creating a new contact. 
+
+Type: STRING 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_EXCLUDE_MIMES*
+
+Optional extra used with (|android.provider.ContactsContract.Intents|) to 
+indicate a list of specific MIME-types to exclude and not display. Stored as a 
+(|java.lang.String|) array. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_FORCE_CREATE*
+
+Used with (|android.provider.ContactsContract.Intents|) to force creating a new 
+contact if no matching contact found. Otherwise, default behavior is to prompt 
+user with dialog before creating. 
+
+Type: BOOLEAN 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_MODE*
+
+Optional extra used with (|android.provider.ContactsContract.Intents|) to 
+specify a desired dialog style, usually a variation on size. One of 
+(|android.provider.ContactsContract.Intents|) , 
+(|android.provider.ContactsContract.Intents|) , or 
+(|android.provider.ContactsContract.Intents|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_PHONE_URIS*
+
+Used with (|android.provider.ContactsContract.Intents|) as the input or output 
+value. 
+
+The phone numbers want to be picked by default should be passed in as input 
+value. These phone numbers could belong to the contacts or not. 
+
+The phone numbers which were picked by the user are returned as output value. 
+
+Type: array of URIs, the tel URI is used for the phone numbers which don't 
+belong to any contact, the content URI is used for phone id in contacts. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.EXTRA_TARGET_RECT*
+
+Optional extra used with (|android.provider.ContactsContract.Intents|) to 
+specify a dialog location using screen coordinates. When not specified, the 
+dialog will be centered. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.INVITE_CONTACT*
+
+This is the intent that is fired when the user clicks the "invite to the 
+network" button on a contact. Only sent to an activity which is explicitly 
+registered by a contact provider which supports the "invite to the network" 
+feature. (|android.content.Intent|) contains the lookup URI for the contact. 
+
+
+*int_android.provider.ContactsContract.Intents.MODE_LARGE*
+
+Value for (|android.provider.ContactsContract.Intents|) to show a large-sized 
+dialog. 
+
+
+*int_android.provider.ContactsContract.Intents.MODE_MEDIUM*
+
+Value for (|android.provider.ContactsContract.Intents|) to show a medium-sized 
+dialog. 
+
+
+*int_android.provider.ContactsContract.Intents.MODE_SMALL*
+
+Value for (|android.provider.ContactsContract.Intents|) to show a small-sized 
+dialog. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_CLICKED*
+
+This is the intent that is fired when a search suggestion is clicked on. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_CREATE_CONTACT_CLICKED*
+
+This is the intent that is fired when a search suggestion for creating a 
+contact is clicked on. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.SEARCH_SUGGESTION_DIAL_NUMBER_CLICKED*
+
+This is the intent that is fired when a search suggestion for dialing a number 
+is clicked on. 
+
+
+*java.lang.String_android.provider.ContactsContract.Intents.SHOW_OR_CREATE_CONTACT*
+
+Takes as input a data URI with a mailto: or tel: scheme. If a single contact 
+exists with the given data it will be shown. If no contact exists, a dialog 
+will ask the user if they want to create a new contact with the provided 
+details filled in. If multiple contacts share the data the user will be 
+prompted to pick which contact they want to view. 
+
+For mailto: URIs, the scheme specific portion must be a raw email address, such 
+as one built using (|android.net.Uri|) . 
+
+For tel: URIs, the scheme specific portion is compared to existing numbers 
+using the standard caller ID lookup algorithm. The number must be properly 
+encoded, for example using (|android.net.Uri|) . 
+
+Any extras from the (|android.provider.ContactsContract.Intents.Insert|) class 
+will be passed along to the create activity if there are no contacts to show. 
+
+Passing true for the (|android.provider.ContactsContract.Intents|) extra will 
+skip prompting the user when the contact doesn't exist. 
+
+
+
+*android.provider.ContactsContract.Intents()*
+
+public ContactsContract.Intents()
+
+
+
+

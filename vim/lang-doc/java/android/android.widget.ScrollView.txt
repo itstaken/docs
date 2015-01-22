@@ -1,0 +1,586 @@
+*android.widget.ScrollView* *ScrollView* Layout container for a view hierarchy t
+
+public class ScrollView
+  extends    |android.widget.FrameLayout|
+
+|android.widget.ScrollView_Description|
+|android.widget.ScrollView_Fields|
+|android.widget.ScrollView_Constructors|
+|android.widget.ScrollView_Methods|
+
+================================================================================
+
+*android.widget.ScrollView_Constructors*
+|android.widget.ScrollView(Context)|
+|android.widget.ScrollView(Context,AttributeSet)|
+|android.widget.ScrollView(Context,AttributeSet,int)|
+
+*android.widget.ScrollView_Methods*
+|android.widget.ScrollView.addView(View)|
+|android.widget.ScrollView.addView(View,int)|
+|android.widget.ScrollView.addView(View,int,ViewGroup.LayoutParams)|
+|android.widget.ScrollView.addView(View,ViewGroup.LayoutParams)|
+|android.widget.ScrollView.arrowScroll(int)|Handle scrolling in response to an 
+|android.widget.ScrollView.computeScroll()|
+|android.widget.ScrollView.computeScrollDeltaToGetChildRectOnScreen(Rect)|Compu
+|android.widget.ScrollView.computeVerticalScrollOffset()|
+|android.widget.ScrollView.computeVerticalScrollRange()|The scroll range of a s
+|android.widget.ScrollView.dispatchKeyEvent(KeyEvent)|
+|android.widget.ScrollView.draw(Canvas)|
+|android.widget.ScrollView.executeKeyEvent(KeyEvent)|You can call this function
+|android.widget.ScrollView.fling(int)|Fling the scroll view
+|android.widget.ScrollView.fullScroll(int)|Handles scrolling in response to a "
+|android.widget.ScrollView.getBottomFadingEdgeStrength()|
+|android.widget.ScrollView.getMaxScrollAmount()|
+|android.widget.ScrollView.getTopFadingEdgeStrength()|
+|android.widget.ScrollView.isFillViewport()|Indicates whether this ScrollView's
+|android.widget.ScrollView.isSmoothScrollingEnabled()|
+|android.widget.ScrollView.measureChild(View,int,int)|
+|android.widget.ScrollView.measureChildWithMargins(View,int,int,int,int)|
+|android.widget.ScrollView.onDetachedFromWindow()|
+|android.widget.ScrollView.onGenericMotionEvent(MotionEvent)|
+|android.widget.ScrollView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.ScrollView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.ScrollView.onInterceptTouchEvent(MotionEvent)|
+|android.widget.ScrollView.onLayout(boolean,int,int,int,int)|
+|android.widget.ScrollView.onMeasure(int,int)|
+|android.widget.ScrollView.onOverScrolled(int,int,boolean,boolean)|
+|android.widget.ScrollView.onRequestFocusInDescendants(int,Rect)|When looking f
+|android.widget.ScrollView.onRestoreInstanceState(Parcelable)|
+|android.widget.ScrollView.onSaveInstanceState()|
+|android.widget.ScrollView.onSizeChanged(int,int,int,int)|
+|android.widget.ScrollView.onTouchEvent(MotionEvent)|
+|android.widget.ScrollView.pageScroll(int)|Handles scrolling in response to a "
+|android.widget.ScrollView.performAccessibilityAction(int,Bundle)|
+|android.widget.ScrollView.requestChildFocus(View,View)|
+|android.widget.ScrollView.requestChildRectangleOnScreen(View,Rect,boolean)|
+|android.widget.ScrollView.requestDisallowInterceptTouchEvent(boolean)|
+|android.widget.ScrollView.requestLayout()|
+|android.widget.ScrollView.scrollTo(int,int)|
+|android.widget.ScrollView.setFillViewport(boolean)|Indicates this ScrollView w
+|android.widget.ScrollView.setOverScrollMode(int)|
+|android.widget.ScrollView.setSmoothScrollingEnabled(boolean)|Set whether arrow
+|android.widget.ScrollView.shouldDelayChildPressedState()|
+|android.widget.ScrollView.smoothScrollBy(int,int)|LikeView#scrollBy, but scrol
+|android.widget.ScrollView.smoothScrollTo(int,int)|Like#scrollTo, but scroll sm
+
+*android.widget.ScrollView_Description*
+
+Layout container for a view hierarchy that can be scrolled by the user, 
+allowing it to be larger than the physical display. A ScrollView is a 
+(|android.widget.FrameLayout|) , meaning you should place one child in it 
+containing the entire contents to scroll; this child may itself be a layout 
+manager with a complex hierarchy of objects. A child that is often used is a 
+(|android.widget.LinearLayout|) in a vertical orientation, presenting a 
+vertical array of top-level items that the user can scroll through. You should 
+never use a ScrollView with a (|android.widget.ListView|) , because ListView 
+takes care of its own vertical scrolling. Most importantly, doing this defeats 
+all of the important optimizations in ListView for dealing with large lists, 
+since it effectively forces the ListView to display its entire list of items to 
+fill up the infinite container supplied by ScrollView. The 
+(|android.widget.TextView|) class also takes care of its own scrolling, so does 
+not require a ScrollView, but using the two together is possible to achieve the 
+effect of a text view within a larger container. 
+
+ScrollView only supports vertical scrolling. For horizontal scrolling, use 
+(|android.widget.HorizontalScrollView|) . 
+
+
+
+*android.widget.ScrollView(Context)*
+
+public ScrollView(android.content.Context context)
+
+
+
+
+*android.widget.ScrollView(Context,AttributeSet)*
+
+public ScrollView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.ScrollView(Context,AttributeSet,int)*
+
+public ScrollView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.ScrollView.addView(View)*
+
+public void addView(android.view.View child)
+
+
+
+
+
+*android.widget.ScrollView.addView(View,int)*
+
+public void addView(
+  android.view.View child,
+  int index)
+
+
+
+
+
+*android.widget.ScrollView.addView(View,int,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  int index,
+  android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+*android.widget.ScrollView.addView(View,ViewGroup.LayoutParams)*
+
+public void addView(
+  android.view.View child,
+  android.view.ViewGroup.LayoutParams params)
+
+
+
+
+
+*android.widget.ScrollView.arrowScroll(int)*
+
+public boolean arrowScroll(int direction)
+
+Handle scrolling in response to an up or down arrow click. 
+
+
+    direction - The direction corresponding to the arrow key that was pressed 
+
+    Returns: True if we consumed the event, false otherwise 
+
+*android.widget.ScrollView.computeScroll()*
+
+public void computeScroll()
+
+
+
+
+
+*android.widget.ScrollView.computeScrollDeltaToGetChildRectOnScreen(Rect)*
+
+protected int computeScrollDeltaToGetChildRectOnScreen(Rect rect)
+
+Compute the amount to scroll in the Y direction in order to get a rectangle 
+completely on the screen (or, if taller than the screen, at least the first 
+screen size chunk of it). 
+
+
+    rect - The rect. 
+
+    Returns: The scroll delta. 
+
+*android.widget.ScrollView.computeVerticalScrollOffset()*
+
+protected int computeVerticalScrollOffset()
+
+
+
+
+
+*android.widget.ScrollView.computeVerticalScrollRange()*
+
+protected int computeVerticalScrollRange()
+
+The scroll range of a scroll view is the overall height of all of its children. 
+
+
+
+*android.widget.ScrollView.dispatchKeyEvent(KeyEvent)*
+
+public boolean dispatchKeyEvent(android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.ScrollView.draw(Canvas)*
+
+public void draw(Canvas canvas)
+
+
+
+
+
+*android.widget.ScrollView.executeKeyEvent(KeyEvent)*
+
+public boolean executeKeyEvent(android.view.KeyEvent event)
+
+You can call this function yourself to have the scroll view perform scrolling 
+from a key event, just as if the event had been dispatched to it by the view 
+hierarchy. 
+
+
+    event - The key event to execute. 
+
+    Returns: Return true if the event was handled, else false. 
+
+*android.widget.ScrollView.fling(int)*
+
+public void fling(int velocityY)
+
+Fling the scroll view 
+
+
+    velocityY - The initial velocity in the Y direction. Positive numbers mean that the 
+       finger/cursor is moving down the screen, which means we want to scroll 
+       towards the top. 
+
+*android.widget.ScrollView.fullScroll(int)*
+
+public boolean fullScroll(int direction)
+
+Handles scrolling in response to a "home/end" shortcut press. This method will 
+scroll the view to the top or bottom and give the focus to the 
+topmost/bottommost component in the new visible area. If no component is a good 
+candidate for focus, this scrollview reclaims the focus. 
+
+
+    direction - the scroll direction: {@link android.view.View#FOCUS_UP} to go the top of the 
+       view or {@link android.view.View#FOCUS_DOWN} to go the bottom 
+
+    Returns: true if the key event is consumed by this method, false otherwise 
+
+*android.widget.ScrollView.getBottomFadingEdgeStrength()*
+
+protected float getBottomFadingEdgeStrength()
+
+
+
+
+
+*android.widget.ScrollView.getMaxScrollAmount()*
+
+public int getMaxScrollAmount()
+
+
+
+
+
+    Returns: The maximum amount this scroll view will scroll in response to an arrow event. 
+
+*android.widget.ScrollView.getTopFadingEdgeStrength()*
+
+protected float getTopFadingEdgeStrength()
+
+
+
+
+
+*android.widget.ScrollView.isFillViewport()*
+
+public boolean isFillViewport()
+
+Indicates whether this ScrollView's content is stretched to fill the viewport. 
+
+
+
+    Returns: True if the content fills the viewport, false otherwise. 
+
+*android.widget.ScrollView.isSmoothScrollingEnabled()*
+
+public boolean isSmoothScrollingEnabled()
+
+
+
+
+
+    Returns: Whether arrow scrolling will animate its transition. 
+
+*android.widget.ScrollView.measureChild(View,int,int)*
+
+protected void measureChild(
+  android.view.View child,
+  int parentWidthMeasureSpec,
+  int parentHeightMeasureSpec)
+
+
+
+
+
+*android.widget.ScrollView.measureChildWithMargins(View,int,int,int,int)*
+
+protected void measureChildWithMargins(
+  android.view.View child,
+  int parentWidthMeasureSpec,
+  int widthUsed,
+  int parentHeightMeasureSpec,
+  int heightUsed)
+
+
+
+
+
+*android.widget.ScrollView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.widget.ScrollView.onGenericMotionEvent(MotionEvent)*
+
+public boolean onGenericMotionEvent(android.view.MotionEvent event)
+
+
+
+
+
+*android.widget.ScrollView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.ScrollView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.ScrollView.onInterceptTouchEvent(MotionEvent)*
+
+public boolean onInterceptTouchEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.ScrollView.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int l,
+  int t,
+  int r,
+  int b)
+
+
+
+
+
+*android.widget.ScrollView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.ScrollView.onOverScrolled(int,int,boolean,boolean)*
+
+protected void onOverScrolled(
+  int scrollX,
+  int scrollY,
+  boolean clampedX,
+  boolean clampedY)
+
+
+
+
+
+*android.widget.ScrollView.onRequestFocusInDescendants(int,Rect)*
+
+protected boolean onRequestFocusInDescendants(
+  int direction,
+  Rect previouslyFocusedRect)
+
+When looking for focus in children of a scroll view, need to be a little more 
+careful not to give focus to something that is scrolled off screen. 
+
+This is more expensive than the default (|android.view.ViewGroup|) 
+implementation, otherwise this behavior might have been made the default. 
+
+
+
+*android.widget.ScrollView.onRestoreInstanceState(Parcelable)*
+
+protected void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.widget.ScrollView.onSaveInstanceState()*
+
+protected |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+*android.widget.ScrollView.onSizeChanged(int,int,int,int)*
+
+protected void onSizeChanged(
+  int w,
+  int h,
+  int oldw,
+  int oldh)
+
+
+
+
+
+*android.widget.ScrollView.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.ScrollView.pageScroll(int)*
+
+public boolean pageScroll(int direction)
+
+Handles scrolling in response to a "page up/down" shortcut press. This method 
+will scroll the view by one page up or down and give the focus to the 
+topmost/bottommost component in the new visible area. If no component is a good 
+candidate for focus, this scrollview reclaims the focus. 
+
+
+    direction - the scroll direction: {@link android.view.View#FOCUS_UP} to go one page up or 
+       {@link android.view.View#FOCUS_DOWN} to go one page down 
+
+    Returns: true if the key event is consumed by this method, false otherwise 
+
+*android.widget.ScrollView.performAccessibilityAction(int,Bundle)*
+
+public boolean performAccessibilityAction(
+  int action,
+  android.os.Bundle arguments)
+
+
+
+
+
+*android.widget.ScrollView.requestChildFocus(View,View)*
+
+public void requestChildFocus(
+  android.view.View child,
+  android.view.View focused)
+
+
+
+
+
+*android.widget.ScrollView.requestChildRectangleOnScreen(View,Rect,boolean)*
+
+public boolean requestChildRectangleOnScreen(
+  android.view.View child,
+  Rect rectangle,
+  boolean immediate)
+
+
+
+
+
+*android.widget.ScrollView.requestDisallowInterceptTouchEvent(boolean)*
+
+public void requestDisallowInterceptTouchEvent(boolean disallowIntercept)
+
+
+
+
+
+*android.widget.ScrollView.requestLayout()*
+
+public void requestLayout()
+
+
+
+
+
+*android.widget.ScrollView.scrollTo(int,int)*
+
+public void scrollTo(
+  int x,
+  int y)
+
+This version also clamps the scrolling to the bounds of our child. 
+
+
+
+*android.widget.ScrollView.setFillViewport(boolean)*
+
+public void setFillViewport(boolean fillViewport)
+
+Indicates this ScrollView whether it should stretch its content height to fill 
+the viewport or not. 
+
+
+    fillViewport - True to stretch the content's height to the viewport's boundaries, false 
+       otherwise. 
+
+*android.widget.ScrollView.setOverScrollMode(int)*
+
+public void setOverScrollMode(int mode)
+
+
+
+
+
+*android.widget.ScrollView.setSmoothScrollingEnabled(boolean)*
+
+public void setSmoothScrollingEnabled(boolean smoothScrollingEnabled)
+
+Set whether arrow scrolling will animate its transition. 
+
+
+    smoothScrollingEnabled - whether arrow scrolling will animate its transition 
+
+*android.widget.ScrollView.shouldDelayChildPressedState()*
+
+public boolean shouldDelayChildPressedState()
+
+
+
+
+
+*android.widget.ScrollView.smoothScrollBy(int,int)*
+
+public final void smoothScrollBy(
+  int dx,
+  int dy)
+
+Like (|android.view.View|) , but scroll smoothly instead of immediately. 
+
+
+    dx - the number of pixels to scroll by on the X axis 
+    dy - the number of pixels to scroll by on the Y axis 
+
+*android.widget.ScrollView.smoothScrollTo(int,int)*
+
+public final void smoothScrollTo(
+  int x,
+  int y)
+
+Like (|android.widget.ScrollView|) , but scroll smoothly instead of 
+immediately. 
+
+
+    x - the position where to scroll on the X axis 
+    y - the position where to scroll on the Y axis 
+
+

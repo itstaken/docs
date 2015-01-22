@@ -1,0 +1,401 @@
+*android.app.AlarmManager* *AlarmManager* This class provides access to the syst
+
+public class AlarmManager
+  extends    |java.lang.Object|
+
+|android.app.AlarmManager_Description|
+|android.app.AlarmManager_Fields|
+|android.app.AlarmManager_Constructors|
+|android.app.AlarmManager_Methods|
+
+================================================================================
+
+*android.app.AlarmManager_Fields*
+|int_android.app.AlarmManager.ELAPSED_REALTIME|
+|int_android.app.AlarmManager.ELAPSED_REALTIME_WAKEUP|
+|long_android.app.AlarmManager.INTERVAL_DAY|
+|long_android.app.AlarmManager.INTERVAL_FIFTEEN_MINUTES|
+|long_android.app.AlarmManager.INTERVAL_HALF_DAY|
+|long_android.app.AlarmManager.INTERVAL_HALF_HOUR|
+|long_android.app.AlarmManager.INTERVAL_HOUR|
+|int_android.app.AlarmManager.RTC|
+|int_android.app.AlarmManager.RTC_WAKEUP|
+|long_android.app.AlarmManager.WINDOW_EXACT|
+|long_android.app.AlarmManager.WINDOW_HEURISTIC|
+
+*android.app.AlarmManager_Methods*
+|android.app.AlarmManager.cancel(PendingIntent)|Remove any alarms with a matchi
+|android.app.AlarmManager.set(int,long,long,long,PendingIntent,WorkSource)|
+|android.app.AlarmManager.set(int,long,PendingIntent)|Schedule an alarm.
+|android.app.AlarmManager.setExact(int,long,PendingIntent)|Schedule an alarm to
+|android.app.AlarmManager.setInexactRepeating(int,long,long,PendingIntent)|Sche
+|android.app.AlarmManager.setRepeating(int,long,long,PendingIntent)|Schedule a 
+|android.app.AlarmManager.setTime(long)|Set the system wall clock time.
+|android.app.AlarmManager.setTimeZone(String)|Set the system default time zone.
+|android.app.AlarmManager.setWindow(int,long,long,PendingIntent)|Schedule an al
+
+*android.app.AlarmManager_Description*
+
+This class provides access to the system alarm services. These allow you to 
+schedule your application to be run at some point in the future. When an alarm 
+goes off, the (|android.content.Intent|) that had been registered for it is 
+broadcast by the system, automatically starting the target application if it is 
+not already running. Registered alarms are retained while the device is asleep 
+(and can optionally wake the device up if they go off during that time), but 
+will be cleared if it is turned off and rebooted. 
+
+The Alarm Manager holds a CPU wake lock as long as the alarm receiver's 
+onReceive() method is executing. This guarantees that the phone will not sleep 
+until you have finished handling the broadcast. Once onReceive() returns, the 
+Alarm Manager releases this wake lock. This means that the phone will in some 
+cases sleep as soon as your onReceive() method completes. If your alarm 
+receiver called Context.startService()(|android.content.Context|) , it is 
+possible that the phone will sleep before the requested service is launched. To 
+prevent this, your BroadcastReceiver and Service will need to implement a 
+separate wake lock policy to ensure that the phone continues running until the 
+service becomes available. 
+
+Note: The Alarm Manager is intended for cases where you want to have your 
+application code run at a specific time, even if your application is not 
+currently running. For normal timing operations (ticks, timeouts, etc) it is 
+easier and much more efficient to use (|android.os.Handler|) . 
+
+Note: Beginning with API 19 ( (|android.os.Build.VERSION_CODES|) ) alarm 
+delivery is inexact: the OS will shift alarms in order to minimize wakeups and 
+battery use. There are new APIs to support applications which need strict 
+delivery guarantees; see (|android.app.AlarmManager|) and 
+(|android.app.AlarmManager|) . Applications whosetargetSdkVersionis earlier 
+than API 19 will continue to see the previous behavior in which all alarms are 
+delivered exactly when requested. 
+
+You do not instantiate this class directly; instead, retrieve it through 
+Context.getSystemService(Context.ALARM_SERVICE)(|android.content.Context|) . 
+
+
+
+*int_android.app.AlarmManager.ELAPSED_REALTIME*
+
+Alarm time in SystemClock.elapsedRealtime()(|android.os.SystemClock|) (time 
+since boot, including sleep). This alarm does not wake the device up; if it 
+goes off while the device is asleep, it will not be delivered until the next 
+time the device wakes up. 
+
+
+*int_android.app.AlarmManager.ELAPSED_REALTIME_WAKEUP*
+
+Alarm time in SystemClock.elapsedRealtime()(|android.os.SystemClock|) (time 
+since boot, including sleep), which will wake up the device when it goes off. 
+
+
+*long_android.app.AlarmManager.INTERVAL_DAY*
+
+Available inexact recurrence interval recognized by 
+(|android.app.AlarmManager|) when running on Android prior to API 19. 
+
+
+*long_android.app.AlarmManager.INTERVAL_FIFTEEN_MINUTES*
+
+Available inexact recurrence interval recognized by 
+(|android.app.AlarmManager|) when running on Android prior to API 19. 
+
+
+*long_android.app.AlarmManager.INTERVAL_HALF_DAY*
+
+Available inexact recurrence interval recognized by 
+(|android.app.AlarmManager|) when running on Android prior to API 19. 
+
+
+*long_android.app.AlarmManager.INTERVAL_HALF_HOUR*
+
+Available inexact recurrence interval recognized by 
+(|android.app.AlarmManager|) when running on Android prior to API 19. 
+
+
+*long_android.app.AlarmManager.INTERVAL_HOUR*
+
+Available inexact recurrence interval recognized by 
+(|android.app.AlarmManager|) when running on Android prior to API 19. 
+
+
+*int_android.app.AlarmManager.RTC*
+
+Alarm time in System.currentTimeMillis()(|java.lang.System|) (wall clock time 
+in UTC). This alarm does not wake the device up; if it goes off while the 
+device is asleep, it will not be delivered until the next time the device wakes 
+up. 
+
+
+*int_android.app.AlarmManager.RTC_WAKEUP*
+
+Alarm time in System.currentTimeMillis()(|java.lang.System|) (wall clock time 
+in UTC), which will wake up the device when it goes off. 
+
+
+*long_android.app.AlarmManager.WINDOW_EXACT*
+
+
+
+
+*long_android.app.AlarmManager.WINDOW_HEURISTIC*
+
+
+
+
+
+*android.app.AlarmManager.cancel(PendingIntent)*
+
+public void cancel(android.app.PendingIntent operation)
+
+Remove any alarms with a matching (|android.content.Intent|) . Any alarm, of 
+any type, whose Intent matches this one (as defined by 
+(|android.content.Intent|) ), will be canceled. 
+
+
+    operation - IntentSender which matches a previously added IntentSender. 
+
+*android.app.AlarmManager.set(int,long,long,long,PendingIntent,WorkSource)*
+
+public void set(
+  int type,
+  long triggerAtMillis,
+  long windowMillis,
+  long intervalMillis,
+  android.app.PendingIntent operation,
+  android.os.WorkSource workSource)
+
+
+
+
+
+*android.app.AlarmManager.set(int,long,PendingIntent)*
+
+public void set(
+  int type,
+  long triggerAtMillis,
+  android.app.PendingIntent operation)
+
+Schedule an alarm. Note: for timing operations (ticks, timeouts, etc) it is 
+easier and much more efficient to use (|android.os.Handler|) . If there is 
+already an alarm scheduled for the same IntentSender, that previous alarm will 
+first be canceled. 
+
+If the stated trigger time is in the past, the alarm will be triggered 
+immediately. If there is already an alarm for this Intent scheduled (with the 
+equality of two intents being defined by (|android.content.Intent|) ), then it 
+will be removed and replaced by this one. 
+
+The alarm is an Intent broadcast that goes to a broadcast receiver that you 
+registered with (|android.content.Context|) or through the <receiver> tag in an 
+AndroidManifest.xml file. 
+
+Alarm intents are delivered with a data extra of type int called 
+Intent.EXTRA_ALARM_COUNT(|android.content.Intent|) that indicates how many past 
+alarm events have been accumulated into this intent broadcast. Recurring alarms 
+that have gone undelivered because the phone was asleep may have a count 
+greater than one when delivered. 
+
+
+
+Note: Beginning in API 19, the trigger time passed to this method is treated as 
+inexact: the alarm will not be delivered before this time, but may be deferred 
+and delivered some time later. The OS will use this policy in order to "batch" 
+alarms together across the entire system, minimizing the number of times the 
+device needs to "wake up" and minimizing battery use. In general, alarms 
+scheduled in the near future will not be deferred as long as alarms scheduled 
+far in the future. 
+
+With the new batching policy, delivery ordering guarantees are not as strong as 
+they were previously. If the application sets multiple alarms, it is possible 
+that these alarms' actual delivery ordering may not match the order of their 
+requested delivery times. If your application has strong ordering requirements 
+there are other APIs that you can use to get the necessary behavior; see 
+(|android.app.AlarmManager|) and (|android.app.AlarmManager|) . 
+
+Applications whosetargetSdkVersionis before API 19 will continue to get the 
+previous alarm behavior: all of their scheduled alarms will be treated as 
+exact. 
+
+
+    type - One of {@link #ELAPSED_REALTIME}, {@link #ELAPSED_REALTIME_WAKEUP}, {@link 
+       #RTC}, or {@link #RTC_WAKEUP}. 
+    triggerAtMillis - time in milliseconds that the alarm should go off, using the appropriate clock 
+       (depending on the alarm type). 
+    operation - Action to perform when the alarm goes off; typically comes from {@link 
+       PendingIntent#getBroadcast IntentSender.getBroadcast()}. 
+
+*android.app.AlarmManager.setExact(int,long,PendingIntent)*
+
+public void setExact(
+  int type,
+  long triggerAtMillis,
+  android.app.PendingIntent operation)
+
+Schedule an alarm to be delivered precisely at the stated time. 
+
+This method is like (|android.app.AlarmManager|) , but does not permit the OS 
+to adjust the delivery time. The alarm will be delivered as nearly as possible 
+to the requested trigger time. 
+
+Note: only alarms for which there is a strong demand for exact-time delivery 
+(such as an alarm clock ringing at the requested time) should be scheduled as 
+exact. Applications are strongly discouraged from using exact alarms 
+unnecessarily as they reduce the OS's ability to minimize battery use. 
+
+
+    type - One of {@link #ELAPSED_REALTIME}, {@link #ELAPSED_REALTIME_WAKEUP}, {@link 
+       #RTC}, or {@link #RTC_WAKEUP}. 
+    triggerAtMillis - time in milliseconds that the alarm should go off, using the appropriate clock 
+       (depending on the alarm type). 
+    operation - Action to perform when the alarm goes off; typically comes from {@link 
+       PendingIntent#getBroadcast IntentSender.getBroadcast()}. 
+
+*android.app.AlarmManager.setInexactRepeating(int,long,long,PendingIntent)*
+
+public void setInexactRepeating(
+  int type,
+  long triggerAtMillis,
+  long intervalMillis,
+  android.app.PendingIntent operation)
+
+Schedule a repeating alarm that has inexact trigger time requirements; for 
+example, an alarm that repeats every hour, but not necessarily at the top of 
+every hour. These alarms are more power-efficient than the strict recurrences 
+traditionally supplied by (|android.app.AlarmManager|) , since the system can 
+adjust alarms' delivery times to cause them to fire simultaneously, avoiding 
+waking the device from sleep more than necessary. 
+
+Your alarm's first trigger will not be before the requested time, but it might 
+not occur for almost a full interval after that time. In addition, while the 
+overall period of the repeating alarm will be as requested, the time between 
+any two successive firings of the alarm may vary. If your application demands 
+very low jitter, use one-shot alarms with an appropriate window instead; see 
+(|android.app.AlarmManager|) and (|android.app.AlarmManager|) . 
+
+As of API 19, all repeating alarms are inexact. Because this method has been 
+available since API 3, your application can safely call it and be assured that 
+it will get similar behavior on both current and older versions of Android. 
+
+
+    type - One of {@link #ELAPSED_REALTIME}, {@link #ELAPSED_REALTIME_WAKEUP}, {@link 
+       #RTC}, or {@link #RTC_WAKEUP}. 
+    triggerAtMillis - time in milliseconds that the alarm should first go off, using the appropriate 
+       clock (depending on the alarm type). This is inexact: the alarm will not 
+       fire before this time, but there may be a delay of almost an entire 
+       alarm interval before the first invocation of the alarm. 
+    intervalMillis - interval in milliseconds between subsequent repeats of the alarm. Prior to API 
+       19, if this is one of INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, 
+       INTERVAL_HOUR, INTERVAL_HALF_DAY, or INTERVAL_DAY then the alarm will be 
+       phase-aligned with other alarms to reduce the number of wakeups. 
+       Otherwise, the alarm will be set as though the application had called 
+       {@link #setRepeating}. As of API 19, all repeating alarms will be 
+       inexact and subject to batching with other alarms regardless of their 
+       stated repeat interval. 
+    operation - Action to perform when the alarm goes off; typically comes from {@link 
+       PendingIntent#getBroadcast IntentSender.getBroadcast()}. 
+
+*android.app.AlarmManager.setRepeating(int,long,long,PendingIntent)*
+
+public void setRepeating(
+  int type,
+  long triggerAtMillis,
+  long intervalMillis,
+  android.app.PendingIntent operation)
+
+Schedule a repeating alarm. Note: for timing operations (ticks, timeouts, etc) 
+it is easier and much more efficient to use (|android.os.Handler|) . If there 
+is already an alarm scheduled for the same IntentSender, it will first be 
+canceled. 
+
+Like (|android.app.AlarmManager|) , except you can also supply a period at 
+which the alarm will automatically repeat. This alarm continues repeating until 
+explicitly removed with (|android.app.AlarmManager|) . If the stated trigger 
+time is in the past, the alarm will be triggered immediately, with an alarm 
+count depending on how far in the past the trigger time is relative to the 
+repeat interval. 
+
+If an alarm is delayed (by system sleep, for example, for non _WAKEUP alarm 
+types), a skipped repeat will be delivered as soon as possible. After that, 
+future alarms will be delivered according to the original schedule; they do not 
+drift over time. For example, if you have set a recurring alarm for the top of 
+every hour but the phone was asleep from 7:45 until 8:45, an alarm will be sent 
+as soon as the phone awakens, then the next alarm will be sent at 9:00. 
+
+If your application wants to allow the delivery times to drift in order to 
+guarantee that at least a certain time interval always elapses between alarms, 
+then the approach to take is to use one-time alarms, scheduling the next one 
+yourself when handling each alarm delivery. 
+
+Note: as of API 19, all repeating alarms are inexact. If your application needs 
+precise delivery times then it must use one-time exact alarms, rescheduling 
+each time as described above. Legacy applications whosetargetSdkVersionis 
+earlier than API 19 will continue to have all of their alarms, including 
+repeating alarms, treated as exact. 
+
+
+    type - One of {@link #ELAPSED_REALTIME}, {@link #ELAPSED_REALTIME_WAKEUP}, {@link 
+       #RTC}, or {@link #RTC_WAKEUP}. 
+    triggerAtMillis - time in milliseconds that the alarm should first go off, using the appropriate 
+       clock (depending on the alarm type). 
+    intervalMillis - interval in milliseconds between subsequent repeats of the alarm. 
+    operation - Action to perform when the alarm goes off; typically comes from {@link 
+       PendingIntent#getBroadcast IntentSender.getBroadcast()}. 
+
+*android.app.AlarmManager.setTime(long)*
+
+public void setTime(long millis)
+
+Set the system wall clock time. Requires the permission 
+android.permission.SET_TIME. 
+
+
+    millis - time in milliseconds since the Epoch 
+
+*android.app.AlarmManager.setTimeZone(String)*
+
+public void setTimeZone(java.lang.String timeZone)
+
+Set the system default time zone. Requires the permission 
+android.permission.SET_TIME_ZONE. 
+
+
+    timeZone - in the format understood by {@link java.util.TimeZone} 
+
+*android.app.AlarmManager.setWindow(int,long,long,PendingIntent)*
+
+public void setWindow(
+  int type,
+  long windowStartMillis,
+  long windowLengthMillis,
+  android.app.PendingIntent operation)
+
+Schedule an alarm to be delivered within a given window of time. This method is 
+similar to (|android.app.AlarmManager|) , but allows the application to 
+precisely control the degree to which its delivery might be adjusted by the OS. 
+This method allows an application to take advantage of the battery 
+optimizations that arise from delivery batching even when it has modest 
+timeliness requirements for its alarms. 
+
+This method can also be used to achieve strict ordering guarantees among 
+multiple alarms by ensuring that the windows requested for each alarm do not 
+intersect. 
+
+When precise delivery is not required, applications should use the standard 
+(|android.app.AlarmManager|) method. This will give the OS the most flexibility 
+to minimize wakeups and battery use. For alarms that must be delivered at 
+precisely-specified times with no acceptable variation, applications can use 
+(|android.app.AlarmManager|) . 
+
+
+    type - One of {@link #ELAPSED_REALTIME}, {@link #ELAPSED_REALTIME_WAKEUP}, {@link 
+       #RTC}, or {@link #RTC_WAKEUP}. 
+    windowStartMillis - The earliest time, in milliseconds, that the alarm should be delivered, 
+       expressed in the appropriate clock's units (depending on the alarm 
+       type). 
+    windowLengthMillis - The length of the requested delivery window, in milliseconds. The alarm will be 
+       delivered no later than this many milliseconds after {@code 
+       windowStartMillis}. Note that this parameter is a duration, not the 
+       timestamp of the end of the window. 
+    operation - Action to perform when the alarm goes off; typically comes from {@link 
+       PendingIntent#getBroadcast IntentSender.getBroadcast()}. 
+
+

@@ -1,0 +1,182 @@
+*android.content.AbstractThreadedSyncAdapter* *AbstractThreadedSyncAdapter* An a
+
+public abstract class AbstractThreadedSyncAdapter
+  extends    |java.lang.Object|
+
+|android.content.AbstractThreadedSyncAdapter_Description|
+|android.content.AbstractThreadedSyncAdapter_Fields|
+|android.content.AbstractThreadedSyncAdapter_Constructors|
+|android.content.AbstractThreadedSyncAdapter_Methods|
+
+================================================================================
+
+*android.content.AbstractThreadedSyncAdapter_Fields*
+|int_android.content.AbstractThreadedSyncAdapter.LOG_SYNC_DETAILS|
+
+*android.content.AbstractThreadedSyncAdapter_Constructors*
+|android.content.AbstractThreadedSyncAdapter(Context,boolean)|Creates anAbstrac
+|android.content.AbstractThreadedSyncAdapter(Context,boolean,boolean)|Creates a
+
+*android.content.AbstractThreadedSyncAdapter_Methods*
+|android.content.AbstractThreadedSyncAdapter.getContext()|
+|android.content.AbstractThreadedSyncAdapter.getSyncAdapterBinder()|
+|android.content.AbstractThreadedSyncAdapter.onPerformSync(Account,Bundle,String,ContentProviderClient,SyncResult)|
+|android.content.AbstractThreadedSyncAdapter.onSyncCanceled()|Indicates that a 
+|android.content.AbstractThreadedSyncAdapter.onSyncCanceled(Thread)|Indicates t
+
+*android.content.AbstractThreadedSyncAdapter_Description*
+
+An abstract implementation of a SyncAdapter that spawns a thread to invoke a 
+sync operation. If a sync operation is already in progress when a startSync() 
+request is received then an error will be returned to the new request and the 
+existing request will be allowed to continue. When a startSync() is received 
+and there is no sync operation in progress then a thread will be started to run 
+the operation and (|android.content.AbstractThreadedSyncAdapter|) will be 
+invoked on that thread. If a cancelSync() is received that matches an existing 
+sync operation then the thread that is running that sync operation will be 
+interrupted, which will indicate to the thread that the sync has been canceled. 
+
+In order to be a sync adapter one must extend this class, provide 
+implementations for the abstract methods and write a service that returns the 
+result of (|android.content.AbstractThreadedSyncAdapter|) in the service's 
+(|android.app.Service|) when invoked with an intent with action 
+android.content.SyncAdapter. This service must specify the following intent 
+filter and metadata tags in its AndroidManifest.xml file 
+
+<intent-filter> <action android:name="android.content.SyncAdapter" /> 
+</intent-filter> <meta-data android:name="android.content.SyncAdapter" 
+android:resource="@xml/syncadapter" /> 
+
+The android:resource attribute must point to a resource that looks like: 
+
+<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android" 
+android:contentAuthority="authority" android:accountType="accountType" 
+android:userVisible="true|false" android:supportsUploading="true|false" 
+android:allowParallelSyncs="true|false" android:isAlwaysSyncable="true|false" 
+android:syncAdapterSettingsAction="ACTION_OF_SETTINGS_ACTIVITY" /> 
+
+The android:contentAuthority and android:accountType attributes indicate which 
+content authority and for which account types this sync adapter serves. 
+android:userVisible defaults to true and controls whether or not this sync 
+adapter shows up in the Sync Settings screen. android:supportsUploading 
+defaults to true and if true an upload-only sync will be requested for all 
+syncadapters associated with an authority whenever that authority's content 
+provider does a (|android.content.ContentResolver|) with syncToNetwork set to 
+true. android:allowParallelSyncs defaults to false and if true indicates that 
+the sync adapter can handle syncs for multiple accounts at the same time. 
+Otherwise the SyncManager will wait until the sync adapter is not in use before 
+requesting that it sync an account's data. android:isAlwaysSyncable defaults to 
+false and if true tells the SyncManager to intialize the isSyncable state to 1 
+for that sync adapter for each account that is added. 
+android:syncAdapterSettingsAction defaults to null and if supplied it specifies 
+an Intent action of an activity that can be used to adjust the sync adapter's 
+sync settings. The activity must live in the same package as the sync adapter. 
+
+
+
+*int_android.content.AbstractThreadedSyncAdapter.LOG_SYNC_DETAILS*
+
+Kernel event log tag. Also listed in data/etc/event-log-tags. 
+
+
+
+*android.content.AbstractThreadedSyncAdapter(Context,boolean)*
+
+public AbstractThreadedSyncAdapter(
+  android.content.Context context,
+  boolean autoInitialize)
+
+Creates an (|android.content.AbstractThreadedSyncAdapter|) . 
+
+    context - the {@link android.content.Context} that this is running within. 
+    autoInitialize - if true then sync requests that have {@link 
+       ContentResolver#SYNC_EXTRAS_INITIALIZE} set will be internally handled 
+       by {@link AbstractThreadedSyncAdapter} by calling {@link 
+       ContentResolver#setIsSyncable(android.accounts.Account, String, int)} 
+       with 1 if it is currently set to <0. 
+
+*android.content.AbstractThreadedSyncAdapter(Context,boolean,boolean)*
+
+public AbstractThreadedSyncAdapter(
+  android.content.Context context,
+  boolean autoInitialize,
+  boolean allowParallelSyncs)
+
+Creates an (|android.content.AbstractThreadedSyncAdapter|) . 
+
+    context - the {@link android.content.Context} that this is running within. 
+    autoInitialize - if true then sync requests that have {@link 
+       ContentResolver#SYNC_EXTRAS_INITIALIZE} set will be internally handled 
+       by {@link AbstractThreadedSyncAdapter} by calling {@link 
+       ContentResolver#setIsSyncable(android.accounts.Account, String, int)} 
+       with 1 if it is currently set to <0. 
+    allowParallelSyncs - if true then allow syncs for different accounts to run at the same time, each 
+       in their own thread. This must be consistent with the setting in the 
+       SyncAdapter's configuration file. 
+
+*android.content.AbstractThreadedSyncAdapter.getContext()*
+
+public |android.content.Context| getContext()
+
+
+
+
+
+*android.content.AbstractThreadedSyncAdapter.getSyncAdapterBinder()*
+
+public final |android.os.IBinder| getSyncAdapterBinder()
+
+
+
+
+
+    Returns: a reference to the IBinder of the SyncAdapter service. 
+
+*android.content.AbstractThreadedSyncAdapter.onPerformSync(Account,Bundle,String,ContentProviderClient,SyncResult)*
+
+public abstract void onPerformSync(
+  android.accounts.Account account,
+  android.os.Bundle extras,
+  java.lang.String authority,
+  android.content.ContentProviderClient provider,
+  android.content.SyncResult syncResult)
+
+Perform a sync for this account. SyncAdapter-specific parameters may be 
+specified in extras, which is guaranteed to not be null. Invocations of this 
+method are guaranteed to be serialized. 
+
+
+    account - the account that should be synced 
+    extras - SyncAdapter-specific parameters 
+    authority - the authority of this sync request 
+    provider - a ContentProviderClient that points to the ContentProvider for this authority 
+    syncResult - SyncAdapter-specific parameters 
+
+*android.content.AbstractThreadedSyncAdapter.onSyncCanceled()*
+
+public void onSyncCanceled()
+
+Indicates that a sync operation has been canceled. This will be invoked on a 
+separate thread than the sync thread and so you must consider the 
+multi-threaded implications of the work that you do in this method. 
+
+This will only be invoked when the SyncAdapter indicates that it doesn't 
+support parallel syncs. 
+
+
+
+*android.content.AbstractThreadedSyncAdapter.onSyncCanceled(Thread)*
+
+public void onSyncCanceled(java.lang.Thread thread)
+
+Indicates that a sync operation has been canceled. This will be invoked on a 
+separate thread than the sync thread and so you must consider the 
+multi-threaded implications of the work that you do in this method. 
+
+This will only be invoked when the SyncAdapter indicates that it does support 
+parallel syncs. 
+
+
+    thread - the Thread of the sync that is to be canceled. 
+
+

@@ -1,0 +1,84 @@
+*android.widget.SectionIndexer* *SectionIndexer* Interface that may implemented 
+
+public interface interface SectionIndexer
+
+
+|android.widget.SectionIndexer_Description|
+|android.widget.SectionIndexer_Fields|
+|android.widget.SectionIndexer_Constructors|
+|android.widget.SectionIndexer_Methods|
+
+================================================================================
+
+*android.widget.SectionIndexer_Methods*
+|android.widget.SectionIndexer.getPositionForSection(int)|Given the index of a 
+|android.widget.SectionIndexer.getSectionForPosition(int)|Given a position with
+|android.widget.SectionIndexer.getSections()|Returns an array of objects repres
+
+*android.widget.SectionIndexer_Description*
+
+Interface that may implemented on (|android.widget.Adapter|) s to enable fast 
+scrolling between sections of an (|android.widget.AbsListView|) . 
+
+A section is a group of list items that have something in common. For example, 
+they may begin with the same letter or they may be songs from the same artist. 
+(|android.widget.ExpandableListAdapter|) s that consider groups and sections as 
+synonymous should account for collapsed groups and return an appropriate 
+section/position. 
+
+
+
+*android.widget.SectionIndexer.getPositionForSection(int)*
+
+public int getPositionForSection(int sectionIndex)
+
+Given the index of a section within the array of section objects, returns the 
+starting position of that section within the adapter. 
+
+If the section's starting position is outside of the adapter bounds, the 
+position must be clipped to fall within the size of the adapter. 
+
+
+    sectionIndex - the index of the section within the array of section objects 
+
+    Returns: the starting position of that section within the adapter, constrained to fall 
+             within the adapter bounds 
+
+*android.widget.SectionIndexer.getSectionForPosition(int)*
+
+public int getSectionForPosition(int position)
+
+Given a position within the adapter, returns the index of the corresponding 
+section within the array of section objects. 
+
+If the section index is outside of the section array bounds, the index must be 
+clipped to fall within the size of the section array. 
+
+For example, consider an indexer where the section at array index 0 starts at 
+adapter position 100. Calling this method with position 10, which is before the 
+first section, must return index 0. 
+
+
+    position - the position within the adapter for which to return the corresponding section 
+       index 
+
+    Returns: the index of the corresponding section within the array of section objects, 
+             constrained to fall within the array bounds 
+
+*android.widget.SectionIndexer.getSections()*
+
+public |java.lang.Object|[] getSections()
+
+Returns an array of objects representing sections of the list. The returned 
+array and its contents should be non-null. 
+
+The list view will call toString() on the objects to get the preview text to 
+display while scrolling. For example, an adapter may return an array of Strings 
+representing letters of the alphabet. Or, it may return an array of objects 
+whose toString() methods return their section titles. 
+
+
+
+    Returns: the array of section objects 
+
+

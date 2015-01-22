@@ -1,0 +1,183 @@
+*android.os.DropBoxManager.Entry* *DropBoxManager.Entry* A single entry retrieve
+
+public static class DropBoxManager.Entry
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+             |java.io.Closeable|
+
+|android.os.DropBoxManager.Entry_Description|
+|android.os.DropBoxManager.Entry_Fields|
+|android.os.DropBoxManager.Entry_Constructors|
+|android.os.DropBoxManager.Entry_Methods|
+
+================================================================================
+
+*android.os.DropBoxManager.Entry_Fields*
+|android.os.Parcelable.Creator<android.os.DropBoxManager.Entry>_android.os.DropBoxManager.Entry.CREATOR|
+
+*android.os.DropBoxManager.Entry_Constructors*
+|android.os.DropBoxManager.Entry(String,long)|Create a new empty Entry with no 
+|android.os.DropBoxManager.Entry(String,long,byte[],int)|Create a new Entry wit
+|android.os.DropBoxManager.Entry(String,long,File,int)|Create a new Entry with 
+|android.os.DropBoxManager.Entry(String,long,ParcelFileDescriptor,int)|Create a
+|android.os.DropBoxManager.Entry(String,long,String)|Create a new Entry with pl
+
+*android.os.DropBoxManager.Entry_Methods*
+|android.os.DropBoxManager.Entry.close()|Close the input stream associated with
+|android.os.DropBoxManager.Entry.describeContents()|
+|android.os.DropBoxManager.Entry.getFlags()|
+|android.os.DropBoxManager.Entry.getInputStream()|
+|android.os.DropBoxManager.Entry.getTag()|
+|android.os.DropBoxManager.Entry.getText(int)|
+|android.os.DropBoxManager.Entry.getTimeMillis()|
+|android.os.DropBoxManager.Entry.writeToParcel(Parcel,int)|
+
+*android.os.DropBoxManager.Entry_Description*
+
+A single entry retrieved from the drop box. This may include a reference to a 
+stream, so you must call (|android.os.DropBoxManager.Entry|) when you are done 
+using it. 
+
+
+
+*android.os.Parcelable.Creator<android.os.DropBoxManager.Entry>_android.os.DropBoxManager.Entry.CREATOR*
+
+
+
+
+
+*android.os.DropBoxManager.Entry(String,long)*
+
+public DropBoxManager.Entry(
+  java.lang.String tag,
+  long millis)
+
+Create a new empty Entry with no contents. 
+
+
+*android.os.DropBoxManager.Entry(String,long,byte[],int)*
+
+public DropBoxManager.Entry(
+  java.lang.String tag,
+  long millis,
+  byte[] data,
+  int flags)
+
+Create a new Entry with byte array contents. The data array must not be 
+modified after creating this entry. 
+
+
+*android.os.DropBoxManager.Entry(String,long,File,int)*
+
+public DropBoxManager.Entry(
+  java.lang.String tag,
+  long millis,
+  java.io.File data,
+  int flags)
+  throws |java.io.IOException|
+         
+Create a new Entry with the contents read from a file. The file will be read 
+when the entry's contents are requested. 
+
+
+*android.os.DropBoxManager.Entry(String,long,ParcelFileDescriptor,int)*
+
+public DropBoxManager.Entry(
+  java.lang.String tag,
+  long millis,
+  android.os.ParcelFileDescriptor data,
+  int flags)
+
+Create a new Entry with streaming data contents. Takes ownership of the 
+ParcelFileDescriptor. 
+
+
+*android.os.DropBoxManager.Entry(String,long,String)*
+
+public DropBoxManager.Entry(
+  java.lang.String tag,
+  long millis,
+  java.lang.String text)
+
+Create a new Entry with plain text contents. 
+
+
+*android.os.DropBoxManager.Entry.close()*
+
+public void close()
+
+Close the input stream associated with this entry. 
+
+
+
+*android.os.DropBoxManager.Entry.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.os.DropBoxManager.Entry.getFlags()*
+
+public int getFlags()
+
+
+
+
+
+    Returns: flags describing the content returned by {@link #getInputStream()}. 
+
+*android.os.DropBoxManager.Entry.getInputStream()*
+
+public |java.io.InputStream| getInputStream()
+  throws |java.io.IOException|
+         
+
+
+
+
+    Returns: the uncompressed contents of the entry, or null if the contents were lost 
+
+*android.os.DropBoxManager.Entry.getTag()*
+
+public |java.lang.String| getTag()
+
+
+
+
+
+    Returns: the tag originally attached to the entry. 
+
+*android.os.DropBoxManager.Entry.getText(int)*
+
+public |java.lang.String| getText(int maxBytes)
+
+
+
+
+    maxBytes - of string to return (will truncate at this length). 
+
+    Returns: the uncompressed text contents of the entry, null if the entry is not text. 
+
+*android.os.DropBoxManager.Entry.getTimeMillis()*
+
+public long getTimeMillis()
+
+
+
+
+
+    Returns: time when the entry was originally created. 
+
+*android.os.DropBoxManager.Entry.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

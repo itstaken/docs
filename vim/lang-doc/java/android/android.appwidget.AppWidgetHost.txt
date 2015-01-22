@@ -1,0 +1,215 @@
+*android.appwidget.AppWidgetHost* *AppWidgetHost* AppWidgetHost provides the int
+
+public class AppWidgetHost
+  extends    |java.lang.Object|
+
+|android.appwidget.AppWidgetHost_Description|
+|android.appwidget.AppWidgetHost_Fields|
+|android.appwidget.AppWidgetHost_Constructors|
+|android.appwidget.AppWidgetHost_Methods|
+
+================================================================================
+
+*android.appwidget.AppWidgetHost_Constructors*
+|android.appwidget.AppWidgetHost(Context,int)|
+|android.appwidget.AppWidgetHost(Context,int,RemoteViews.OnClickHandler,Looper)|
+
+*android.appwidget.AppWidgetHost_Methods*
+|android.appwidget.AppWidgetHost.allocateAppWidgetId()|Get a appWidgetId for a 
+|android.appwidget.AppWidgetHost.allocateAppWidgetIdForPackage(int,int,String)|
+|android.appwidget.AppWidgetHost.clearViews()|Clear the list of Views that have
+|android.appwidget.AppWidgetHost.createView(Context,int,AppWidgetProviderInfo)|
+|android.appwidget.AppWidgetHost.deleteAllHosts()|Remove all records about all 
+|android.appwidget.AppWidgetHost.deleteAllHosts(int)|Private method containing 
+|android.appwidget.AppWidgetHost.deleteAppWidgetId(int)|Stop listening to chang
+|android.appwidget.AppWidgetHost.deleteAppWidgetIdForSystem(int,int)|Stop liste
+|android.appwidget.AppWidgetHost.deleteHost()|Remove all records about this hos
+|android.appwidget.AppWidgetHost.getAppWidgetIds()|Gets a list of all the appWi
+|android.appwidget.AppWidgetHost.onCreateView(Context,int,AppWidgetProviderInfo)|
+|android.appwidget.AppWidgetHost.onProviderChanged(int,AppWidgetProviderInfo)|C
+|android.appwidget.AppWidgetHost.onProvidersChanged()|Called when the set of av
+|android.appwidget.AppWidgetHost.startListening()|Start receiving onAppWidgetCh
+|android.appwidget.AppWidgetHost.stopListening()|Stop receiving onAppWidgetChan
+
+*android.appwidget.AppWidgetHost_Description*
+
+AppWidgetHost provides the interaction with the AppWidget service for apps, 
+like the home screen, that want to embed AppWidgets in their UI. 
+
+
+
+*android.appwidget.AppWidgetHost(Context,int)*
+
+public AppWidgetHost(
+  android.content.Context context,
+  int hostId)
+
+
+
+
+*android.appwidget.AppWidgetHost(Context,int,RemoteViews.OnClickHandler,Looper)*
+
+public AppWidgetHost(
+  android.content.Context context,
+  int hostId,
+  android.widget.RemoteViews.OnClickHandler handler,
+  android.os.Looper looper)
+
+
+
+
+*android.appwidget.AppWidgetHost.allocateAppWidgetId()*
+
+public int allocateAppWidgetId()
+
+Get a appWidgetId for a host in the calling process. 
+
+
+
+    Returns: a appWidgetId 
+
+*android.appwidget.AppWidgetHost.allocateAppWidgetIdForPackage(int,int,String)*
+
+public static int allocateAppWidgetIdForPackage(
+  int hostId,
+  int userId,
+  java.lang.String packageName)
+
+Get a appWidgetId for a host in the given package. 
+
+
+
+    Returns: a appWidgetId 
+
+*android.appwidget.AppWidgetHost.clearViews()*
+
+protected void clearViews()
+
+Clear the list of Views that have been created by this AppWidgetHost. 
+
+
+
+*android.appwidget.AppWidgetHost.createView(Context,int,AppWidgetProviderInfo)*
+
+public final |android.appwidget.AppWidgetHostView| createView(
+  android.content.Context context,
+  int appWidgetId,
+  android.appwidget.AppWidgetProviderInfo appWidget)
+
+Create the AppWidgetHostView for the given widget. The AppWidgetHost retains a 
+pointer to the newly-created View. 
+
+
+
+*android.appwidget.AppWidgetHost.deleteAllHosts()*
+
+public static void deleteAllHosts()
+
+Remove all records about all hosts for your package. 
+
+Call this when initializing your database, as it might be because of a data 
+wipe. Call this to have the AppWidget manager release all resources associated 
+with your host. Any future calls about this host will cause the records to be 
+re-allocated. 
+
+
+
+*android.appwidget.AppWidgetHost.deleteAllHosts(int)*
+
+public static void deleteAllHosts(int userId)
+
+Private method containing a userId 
+
+
+
+*android.appwidget.AppWidgetHost.deleteAppWidgetId(int)*
+
+public void deleteAppWidgetId(int appWidgetId)
+
+Stop listening to changes for this AppWidget. 
+
+
+
+*android.appwidget.AppWidgetHost.deleteAppWidgetIdForSystem(int,int)*
+
+public static void deleteAppWidgetIdForSystem(
+  int appWidgetId,
+  int userId)
+
+Stop listening to changes for this AppWidget. 
+
+
+
+*android.appwidget.AppWidgetHost.deleteHost()*
+
+public void deleteHost()
+
+Remove all records about this host from the AppWidget manager. 
+
+Call this when initializing your database, as it might be because of a data 
+wipe. Call this to have the AppWidget manager release all resources associated 
+with your host. Any future calls about this host will cause the records to be 
+re-allocated. 
+
+
+
+*android.appwidget.AppWidgetHost.getAppWidgetIds()*
+
+public int[] getAppWidgetIds()
+
+Gets a list of all the appWidgetIds that are bound to the current host 
+
+
+
+*android.appwidget.AppWidgetHost.onCreateView(Context,int,AppWidgetProviderInfo)*
+
+protected |android.appwidget.AppWidgetHostView| onCreateView(
+  android.content.Context context,
+  int appWidgetId,
+  android.appwidget.AppWidgetProviderInfo appWidget)
+
+Called to create the AppWidgetHostView. Override to return a custom subclass if 
+you need it. 
+
+
+
+*android.appwidget.AppWidgetHost.onProviderChanged(int,AppWidgetProviderInfo)*
+
+protected void onProviderChanged(
+  int appWidgetId,
+  android.appwidget.AppWidgetProviderInfo appWidget)
+
+Called when the AppWidget provider for a AppWidget has been upgraded to a new 
+apk. 
+
+
+
+*android.appwidget.AppWidgetHost.onProvidersChanged()*
+
+protected void onProvidersChanged()
+
+Called when the set of available widgets changes (ie. widget containing 
+packages are added, updated or removed, or widget components are enabled or 
+disabled.) 
+
+
+
+*android.appwidget.AppWidgetHost.startListening()*
+
+public void startListening()
+
+Start receiving onAppWidgetChanged calls for your AppWidgets. Call this when 
+your activity becomes visible, i.e. from onStart() in your Activity. 
+
+
+
+*android.appwidget.AppWidgetHost.stopListening()*
+
+public void stopListening()
+
+Stop receiving onAppWidgetChanged calls for your AppWidgets. Call this when 
+your activity is no longer visible, i.e. from onStop() in your Activity. 
+
+
+
+

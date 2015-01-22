@@ -1,0 +1,155 @@
+*android.util.AtomicFile* *AtomicFile* Helper class for performing atomic operat
+
+public class AtomicFile
+  extends    |java.lang.Object|
+
+|android.util.AtomicFile_Description|
+|android.util.AtomicFile_Fields|
+|android.util.AtomicFile_Constructors|
+|android.util.AtomicFile_Methods|
+
+================================================================================
+
+*android.util.AtomicFile_Constructors*
+|android.util.AtomicFile(File)|Create a new AtomicFile for a file located at th
+
+*android.util.AtomicFile_Methods*
+|android.util.AtomicFile.delete()|Delete the atomic file.
+|android.util.AtomicFile.failWrite(FileOutputStream)|Call when you have failed 
+|android.util.AtomicFile.finishWrite(FileOutputStream)|Call when you have succe
+|android.util.AtomicFile.getBaseFile()|Return the path to the base file.
+|android.util.AtomicFile.openAppend()|
+|android.util.AtomicFile.openRead()|Open the atomic file for reading.
+|android.util.AtomicFile.readFully()|A convenience for#openRead()that also read
+|android.util.AtomicFile.startWrite()|Start a new write operation on the file.
+|android.util.AtomicFile.truncate()|
+
+*android.util.AtomicFile_Description*
+
+Helper class for performing atomic operations on a file by creating a backup 
+file until a write has successfully completed. If you need this on older 
+versions of the platform you can use (|android.support.v4.util.AtomicFile|) in 
+the v4 support library. 
+
+Atomic file guarantees file integrity by ensuring that a file has been 
+completely written and sync'd to disk before removing its backup. As long as 
+the backup file exists, the original file is considered to be invalid (left 
+over from a previous attempt to write the file). 
+
+Atomic file does not confer any file locking semantics. Do not use this class 
+when the file may be accessed or modified concurrently by multiple threads or 
+processes. The caller is responsible for ensuring appropriate mutual exclusion 
+invariants whenever it accesses the file. 
+
+
+
+*android.util.AtomicFile(File)*
+
+public AtomicFile(java.io.File baseName)
+
+Create a new AtomicFile for a file located at the given File path. The 
+secondary backup file will be the same file path with ".bak" appended. 
+
+
+*android.util.AtomicFile.delete()*
+
+public void delete()
+
+Delete the atomic file. This deletes both the base and backup files. 
+
+
+
+*android.util.AtomicFile.failWrite(FileOutputStream)*
+
+public void failWrite(java.io.FileOutputStream str)
+
+Call when you have failed for some reason at writing to the stream returned by 
+(|android.util.AtomicFile|) . This will close the current write stream, and 
+roll back to the previous state of the file. 
+
+
+
+*android.util.AtomicFile.finishWrite(FileOutputStream)*
+
+public void finishWrite(java.io.FileOutputStream str)
+
+Call when you have successfully finished writing to the stream returned by 
+(|android.util.AtomicFile|) . This will close, sync, and commit the new data. 
+The next attempt to read the atomic file will return the new file stream. 
+
+
+
+*android.util.AtomicFile.getBaseFile()*
+
+public |java.io.File| getBaseFile()
+
+Return the path to the base file. You should not generally use this, as the 
+data at that path may not be valid. 
+
+
+
+*android.util.AtomicFile.openAppend()*
+
+public |java.io.FileOutputStream| openAppend()
+  throws |java.io.IOException|
+         
+
+
+    Deprecated: This is not safe.
+
+
+*android.util.AtomicFile.openRead()*
+
+public |java.io.FileInputStream| openRead()
+  throws |java.io.FileNotFoundException|
+         
+Open the atomic file for reading. If there previously was an incomplete write, 
+this will roll back to the last good data before opening for read. You should 
+call close() on the FileInputStream when you are done reading from it. 
+
+Note that if another thread is currently performing a write, this will 
+incorrectly consider it to be in the state of a bad write and roll back, 
+causing the new data currently being written to be dropped. You must do your 
+own threading protection for access to AtomicFile. 
+
+
+
+*android.util.AtomicFile.readFully()*
+
+public byte[] readFully()
+  throws |java.io.IOException|
+         
+A convenience for (|android.util.AtomicFile|) that also reads all of the file 
+contents into a byte array which is returned. 
+
+
+
+*android.util.AtomicFile.startWrite()*
+
+public |java.io.FileOutputStream| startWrite()
+  throws |java.io.IOException|
+         
+Start a new write operation on the file. This returns a FileOutputStream to 
+which you can write the new file data. The existing file is replaced with the 
+new data. You must not directly close the given FileOutputStream; instead call 
+either (|android.util.AtomicFile|) or (|android.util.AtomicFile|) . 
+
+Note that if another thread is currently performing a write, this will simply 
+replace whatever that thread is writing with the new file being written by this 
+thread, and when the other thread finishes the write the new write operation 
+will no longer be safe (or will be lost). You must do your own threading 
+protection for access to AtomicFile. 
+
+
+
+*android.util.AtomicFile.truncate()*
+
+public void truncate()
+  throws |java.io.IOException|
+         
+
+
+    Deprecated: This is not safe.
+
+
+

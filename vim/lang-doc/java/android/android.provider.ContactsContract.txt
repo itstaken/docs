@@ -1,0 +1,190 @@
+*android.provider.ContactsContract* *ContactsContract* 
+ The contract between th
+
+public final class ContactsContract
+  extends    |java.lang.Object|
+
+|android.provider.ContactsContract_Description|
+|android.provider.ContactsContract_Fields|
+|android.provider.ContactsContract_Constructors|
+|android.provider.ContactsContract_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract_Fields*
+|java.lang.String_android.provider.ContactsContract.AUTHORITY|
+|android.net.Uri_android.provider.ContactsContract.AUTHORITY_URI|
+|java.lang.String_android.provider.ContactsContract.CALLER_IS_SYNCADAPTER|
+|java.lang.String_android.provider.ContactsContract.DEFERRED_SNIPPETING|
+|java.lang.String_android.provider.ContactsContract.DEFERRED_SNIPPETING_QUERY|
+|java.lang.String_android.provider.ContactsContract.DIRECTORY_PARAM_KEY|
+|java.lang.String_android.provider.ContactsContract.LIMIT_PARAM_KEY|
+|java.lang.String_android.provider.ContactsContract.PRIMARY_ACCOUNT_NAME|
+|java.lang.String_android.provider.ContactsContract.PRIMARY_ACCOUNT_TYPE|
+|java.lang.String_android.provider.ContactsContract.REMOVE_DUPLICATE_ENTRIES|
+|java.lang.String_android.provider.ContactsContract.STREQUENT_PHONE_ONLY|
+
+*android.provider.ContactsContract_Constructors*
+|android.provider.ContactsContract()|
+
+*android.provider.ContactsContract_Methods*
+|android.provider.ContactsContract.isProfileId(long)|This method can be used to
+
+*android.provider.ContactsContract_Description*
+
+The contract between the contacts provider and applications. Contains 
+definitions for the supported URIs and columns. These APIs supersede 
+(|android.provider.Contacts|) . 
+
+Overview 
+
+ContactsContract defines an extensible database of contact-related information. 
+Contact information is stored in a three-tier data model: 
+
+
+
+A row in the (|android.provider.ContactsContract.Contacts.Data|) table can 
+store any kind of personal data, such as a phone number or email addresses. The 
+set of data kinds that can be stored in this table is open-ended. There is a 
+predefined set of common kinds, but any application can add its own data kinds. 
+
+A row in the (|android.provider.ContactsContract.RawContacts|) table represents 
+a set of data describing a person and associated with a single account (for 
+example, one of the user's Gmail accounts). 
+
+A row in the (|android.provider.Contacts|) table represents an aggregate of one 
+or more RawContacts presumably describing the same person. When data in or 
+associated with the RawContacts table is changed, the affected aggregate 
+contacts are updated as necessary. 
+
+
+
+Other tables include: 
+
+(|android.provider.ContactsContract.Groups|) , which contains information about 
+raw contact groups such as Gmail contact groups. The current API does not 
+support the notion of groups spanning multiple accounts. 
+
+(|android.provider.ContactsContract.StatusUpdates|) , which contains social 
+status updates including IM availability. 
+
+(|android.provider.ContactsContract.AggregationExceptions|) , which is used for 
+manual aggregation and disaggregation of raw contacts 
+
+(|android.provider.Settings|) , which contains visibility and sync settings for 
+accounts and groups. 
+
+(|android.provider.ContactsContract.SyncState|) , which contains free-form data 
+maintained on behalf of sync adapters 
+
+(|android.provider.ContactsContract.PhoneLookup|) , which is used for quick 
+caller-ID lookup 
+
+
+
+*java.lang.String_android.provider.ContactsContract.AUTHORITY*
+
+The authority for the contacts provider 
+
+
+*android.net.Uri_android.provider.ContactsContract.AUTHORITY_URI*
+
+A content:// style uri to the authority for the contacts provider 
+
+
+*java.lang.String_android.provider.ContactsContract.CALLER_IS_SYNCADAPTER*
+
+An optional URI parameter for insert, update, or delete queries that allows the 
+caller to specify that it is a sync adapter. The default value is false. If 
+true (|android.provider.ContactsContract.RawContacts|) is not automatically set 
+and the "syncToNetwork" parameter is set to false when calling 
+(|android.content.ContentResolver|) . This prevents an unnecessary extra 
+synchronization, see the discussion of the delete operation in 
+(|android.provider.ContactsContract.RawContacts|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.DEFERRED_SNIPPETING*
+
+A key to a boolean in the "extras" bundle of the cursor. The boolean indicates 
+that the provider did not create a snippet and that the client asking for the 
+snippet should do it (true means the snippeting was deferred to the client). 
+
+
+*java.lang.String_android.provider.ContactsContract.DEFERRED_SNIPPETING_QUERY*
+
+Key to retrieve the original query on the client side. 
+
+
+*java.lang.String_android.provider.ContactsContract.DIRECTORY_PARAM_KEY*
+
+Query parameter that should be used by the client to access a specific 
+(|android.provider.ContactsContract.Directory|) . The parameter value should be 
+the _ID of the corresponding directory, 
+e.g.content://com.android.contacts/data/emails/filter/acme?directory=3 
+
+
+*java.lang.String_android.provider.ContactsContract.LIMIT_PARAM_KEY*
+
+A query parameter that limits the number of results returned. The parameter 
+value should be an integer. 
+
+
+*java.lang.String_android.provider.ContactsContract.PRIMARY_ACCOUNT_NAME*
+
+A query parameter specifing a primary account. This parameter should be used 
+with (|android.provider.ContactsContract|) . The contacts provider handling a 
+query may rely on this information to optimize its query results. 
+
+For example, in an email composition screen, its implementation can specify an 
+account when obtaining possible recipients, letting the provider know which 
+account is selected during the composition. The provider may use the "primary 
+account" information to optimize the search result. 
+
+
+*java.lang.String_android.provider.ContactsContract.PRIMARY_ACCOUNT_TYPE*
+
+A query parameter specifing a primary account. This parameter should be used 
+with (|android.provider.ContactsContract|) . See the doc in 
+(|android.provider.ContactsContract|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.REMOVE_DUPLICATE_ENTRIES*
+
+A boolean parameter for 
+(|android.provider.ContactsContract.CommonDataKinds.Phone|) , 
+(|android.provider.ContactsContract.CommonDataKinds.Email|) , and 
+(|android.provider.ContactsContract.CommonDataKinds.StructuredPostal|) . This 
+enables a content provider to remove duplicate entries in results. 
+
+
+*java.lang.String_android.provider.ContactsContract.STREQUENT_PHONE_ONLY*
+
+A boolean parameter for (|android.provider.Contacts|) and 
+(|android.provider.Contacts|) , which requires the ContactsProvider to return 
+only phone-related results. For example, frequently contacted person list 
+should include persons contacted via phone (not email, sms, etc.) 
+
+
+
+*android.provider.ContactsContract()*
+
+public ContactsContract()
+
+
+
+
+*android.provider.ContactsContract.isProfileId(long)*
+
+public static boolean isProfileId(long id)
+
+This method can be used to identify whether the given ID is associated with 
+profile data. It does not necessarily indicate that the ID is tied to valid 
+data, merely that accessing data using this ID will result in profile access 
+checks and will only return data from the profile. 
+
+
+    id - The ID to check. 
+
+    Returns: Whether the ID is associated with profile data. 
+
+

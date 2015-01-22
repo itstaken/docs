@@ -1,0 +1,151 @@
+*android.provider.CalendarContract.CalendarAlerts* *CalendarContract.CalendarAlerts* 
+
+public static final class CalendarContract.CalendarAlerts
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+             |android.provider.CalendarContract.CalendarAlertsColumns|
+             |android.provider.CalendarContract.EventsColumns|
+             |android.provider.CalendarContract.CalendarColumns|
+
+|android.provider.CalendarContract.CalendarAlerts_Description|
+|android.provider.CalendarContract.CalendarAlerts_Fields|
+|android.provider.CalendarContract.CalendarAlerts_Constructors|
+|android.provider.CalendarContract.CalendarAlerts_Methods|
+
+================================================================================
+
+*android.provider.CalendarContract.CalendarAlerts_Fields*
+|android.net.Uri_android.provider.CalendarContract.CalendarAlerts.CONTENT_URI|
+|android.net.Uri_android.provider.CalendarContract.CalendarAlerts.CONTENT_URI_BY_INSTANCE|
+|java.lang.String_android.provider.CalendarContract.CalendarAlerts.TABLE_NAME|
+
+*android.provider.CalendarContract.CalendarAlerts_Methods*
+|android.provider.CalendarContract.CalendarAlerts.alarmExists(ContentResolver,long,long,long)|
+|android.provider.CalendarContract.CalendarAlerts.findNextAlarmTime(ContentResolver,long)|
+|android.provider.CalendarContract.CalendarAlerts.insert(ContentResolver,long,long,long,long,int)|
+|android.provider.CalendarContract.CalendarAlerts.rescheduleMissedAlarms(ContentResolver,Context,AlarmManager)|
+|android.provider.CalendarContract.CalendarAlerts.scheduleAlarm(Context,AlarmManager,long)|
+
+*android.provider.CalendarContract.CalendarAlerts_Description*
+
+Fields and helpers for accessing calendar alerts information. These fields are 
+for tracking which alerts have been fired. Scheduled alarms will generate an 
+intent using (|android.provider.CalendarContract.CalendarAlerts|) . Apps that 
+receive this action may update the 
+(|android.provider.CalendarContract.CalendarAlerts|) for the reminder when they 
+have finished handling it. Apps that have their notifications disabled should 
+not modify the table to ensure that they do not conflict with another app that 
+is generating a notification. In general, apps should not need to write to this 
+table directly except to update the state of a reminder. 
+
+
+
+*android.net.Uri_android.provider.CalendarContract.CalendarAlerts.CONTENT_URI*
+
+The Uri for querying calendar alert information 
+
+
+*android.net.Uri_android.provider.CalendarContract.CalendarAlerts.CONTENT_URI_BY_INSTANCE*
+
+This URI is for grouping the query results by event_id and begin time. This 
+will return one result per instance of an event. So events with multiple alarms 
+will appear just once, but multiple instances of a repeating event will show up 
+multiple times. 
+
+
+*java.lang.String_android.provider.CalendarContract.CalendarAlerts.TABLE_NAME*
+
+
+
+
+
+*android.provider.CalendarContract.CalendarAlerts.alarmExists(ContentResolver,long,long,long)*
+
+public static final boolean alarmExists(
+  android.content.ContentResolver cr,
+  long eventId,
+  long begin,
+  long alarmTime)
+
+Searches for an entry in the CalendarAlerts table that matches the given event 
+id, begin time and alarm time. If one is found then this alarm already exists 
+and this method returns true. TODO Move to provider 
+
+
+    cr - the ContentResolver 
+    eventId - the event id to match 
+    begin - the start time of the event in UTC millis 
+    alarmTime - the alarm time of the event in UTC millis 
+
+    Returns: true if there is already an alarm for the given event with the same start time 
+             and alarm time. 
+
+*android.provider.CalendarContract.CalendarAlerts.findNextAlarmTime(ContentResolver,long)*
+
+public static final long findNextAlarmTime(
+  android.content.ContentResolver cr,
+  long millis)
+
+Finds the next alarm after (or equal to) the given time and returns the time of 
+that alarm or -1 if no such alarm exists. This is a blocking call and should 
+not be done on the UI thread. TODO move to provider 
+
+
+    cr - the ContentResolver 
+    millis - the time in UTC milliseconds 
+
+    Returns: the next alarm time greater than or equal to "millis", or -1 if no such alarm 
+             exists. 
+
+*android.provider.CalendarContract.CalendarAlerts.insert(ContentResolver,long,long,long,long,int)*
+
+public static final |android.net.Uri| insert(
+  android.content.ContentResolver cr,
+  long eventId,
+  long begin,
+  long end,
+  long alarmTime,
+  int minutes)
+
+Helper for inserting an alarm time associated with an event TODO move to 
+Provider 
+
+
+
+*android.provider.CalendarContract.CalendarAlerts.rescheduleMissedAlarms(ContentResolver,Context,AlarmManager)*
+
+public static final void rescheduleMissedAlarms(
+  android.content.ContentResolver cr,
+  android.content.Context context,
+  android.app.AlarmManager manager)
+
+Searches the CalendarAlerts table for alarms that should have fired but have 
+not and then reschedules them. This method can be called at boot time to 
+restore alarms that may have been lost due to a phone reboot. TODO move to 
+provider 
+
+
+    cr - the ContentResolver 
+    context - the Context 
+    manager - the AlarmManager 
+
+*android.provider.CalendarContract.CalendarAlerts.scheduleAlarm(Context,AlarmManager,long)*
+
+public static void scheduleAlarm(
+  android.content.Context context,
+  android.app.AlarmManager manager,
+  long alarmTime)
+
+Schedules an alarm intent with the system AlarmManager that will notify 
+listeners when a reminder should be fired. The provider will keep scheduled 
+reminders up to date but apps may use this to implement snooze functionality 
+without modifying the reminders table. Scheduled alarms will generate an intent 
+using (|android.provider.CalendarContract.CalendarAlerts|) . TODO Move to 
+provider 
+
+
+    context - A context for referencing system resources 
+    manager - The AlarmManager to use or null 
+    alarmTime - The time to fire the intent in UTC millis since epoch 
+
+

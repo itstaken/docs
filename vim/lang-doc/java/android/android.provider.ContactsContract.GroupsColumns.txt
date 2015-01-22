@@ -1,0 +1,185 @@
+*android.provider.ContactsContract.GroupsColumns* *ContactsContract.GroupsColumns* 
+
+protected static interface interface ContactsContract.GroupsColumns
+
+
+|android.provider.ContactsContract.GroupsColumns_Description|
+|android.provider.ContactsContract.GroupsColumns_Fields|
+|android.provider.ContactsContract.GroupsColumns_Constructors|
+|android.provider.ContactsContract.GroupsColumns_Methods|
+
+================================================================================
+
+*android.provider.ContactsContract.GroupsColumns_Fields*
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.ACCOUNT_TYPE_AND_DATA_SET|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.AUTO_ADD|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.DATA_SET|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.DELETED|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.FAVORITES|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.GROUP_IS_READ_ONLY|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.GROUP_VISIBLE|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.NOTES|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.PARAM_RETURN_GROUP_COUNT_PER_ACCOUNT|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.RES_PACKAGE|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.SHOULD_SYNC|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_COUNT|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_GROUP_COUNT_PER_ACCOUNT|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_WITH_PHONES|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.SYSTEM_ID|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.TITLE|
+|java.lang.String_android.provider.ContactsContract.GroupsColumns.TITLE_RES|
+
+*android.provider.ContactsContract.GroupsColumns_Description*
+
+
+
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.ACCOUNT_TYPE_AND_DATA_SET*
+
+A concatenation of the account type and data set (delimited by a forward slash) 
+- if the data set is empty, this will be the same as the account type. For 
+applications that need to be aware of the data set, this can be used instead of 
+account type to distinguish sets of data. This is never intended to be used for 
+specifying accounts. 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.AUTO_ADD*
+
+Any newly created contacts will automatically be added to groups that have this 
+flag set to true. 
+
+Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.DATA_SET*
+
+The data set within the account that this group belongs to. This allows 
+multiple sync adapters for the same account type to distinguish between each 
+others' group data. 
+
+This is empty by default, and is completely optional. It only needs to be 
+populated if multiple sync adapters are entering distinct group data for the 
+same account type and account name. Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.DELETED*
+
+The "deleted" flag: "0" by default, "1" if the row has been marked for 
+deletion. When (|android.content.ContentResolver|) is called on a group, it is 
+marked for deletion. The sync adaptor deletes the group on the server and then 
+calls ContactResolver.delete once more, this time setting the the 
+(|android.provider.ContactsContract|) query parameter to finalize the data 
+removal. Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.FAVORITES*
+
+When a contacts is marked as a favorites it will be automatically added to the 
+groups that have this flag set, and when it is removed from favorites it will 
+be removed from these groups. 
+
+Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.GROUP_IS_READ_ONLY*
+
+The "read-only" flag: "0" by default, "1" if the row cannot be modified or 
+deleted except by a sync adapter. See (|android.provider.ContactsContract|) . 
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.GROUP_VISIBLE*
+
+Flag indicating if the contacts belonging to this group should be visible in 
+any user interface. 
+
+Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.NOTES*
+
+Notes about the group. 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.PARAM_RETURN_GROUP_COUNT_PER_ACCOUNT*
+
+A boolean query parameter that can be used with 
+(|android.provider.ContactsContract.Groups|) . It will additionally return 
+(|android.provider.ContactsContract.GroupsColumns|) . 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.RES_PACKAGE*
+
+The package name to use when creating (|android.content.res.Resources|) objects 
+for this group. This value is only designed for use when building user 
+interfaces, and should not be used to infer the owner. 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.SHOULD_SYNC*
+
+Whether this group should be synced if the SYNC_EVERYTHING settings is false 
+for this group's account. 
+
+Type: INTEGER (boolean) 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_COUNT*
+
+The total number of (|android.provider.Contacts|) that have 
+(|android.provider.ContactsContract.CommonDataKinds.GroupMembership|) in this 
+group. Read-only value that is only present when querying 
+(|android.provider.ContactsContract.Groups|) . 
+
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_GROUP_COUNT_PER_ACCOUNT*
+
+The total number of groups of the account that a group belongs to. This column 
+is available only when the parameter 
+(|android.provider.ContactsContract.GroupsColumns|) is specified in 
+(|android.provider.ContactsContract.Groups|) . 
+
+For example, when the account "A" has two groups "group1" and "group2", and the 
+account "B" has a group "group3", the rows for "group1" and "group2" return "2" 
+and the row for "group3" returns "1" for this column. 
+
+Note: This counts only non-favorites, non-auto-add, and not deleted groups. 
+
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.SUMMARY_WITH_PHONES*
+
+The total number of (|android.provider.Contacts|) that have both 
+(|android.provider.ContactsContract.CommonDataKinds.GroupMembership|) in this 
+group, and also have phone numbers. Read-only value that is only present when 
+querying (|android.provider.ContactsContract.Groups|) . 
+
+Type: INTEGER 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.SYSTEM_ID*
+
+The ID of this group if it is a System Group, i.e. a group that has a special 
+meaning to the sync adapter, null otherwise. Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.TITLE*
+
+The display title of this group. 
+
+Type: TEXT 
+
+
+*java.lang.String_android.provider.ContactsContract.GroupsColumns.TITLE_RES*
+
+The display title of this group to load as a resource from 
+(|android.provider.ContactsContract.GroupsColumns|) , which may be localized. 
+Type: TEXT 
+
+
+

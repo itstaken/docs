@@ -1,0 +1,55 @@
+*android.view.ViewDebug.HierarchyHandler* *ViewDebug.HierarchyHandler* Allows a 
+
+public static interface interface ViewDebug.HierarchyHandler
+
+
+|android.view.ViewDebug.HierarchyHandler_Description|
+|android.view.ViewDebug.HierarchyHandler_Fields|
+|android.view.ViewDebug.HierarchyHandler_Constructors|
+|android.view.ViewDebug.HierarchyHandler_Methods|
+
+================================================================================
+
+*android.view.ViewDebug.HierarchyHandler_Methods*
+|android.view.ViewDebug.HierarchyHandler.dumpViewHierarchyWithProperties(BufferedWriter,int)|
+|android.view.ViewDebug.HierarchyHandler.findHierarchyView(String,int)|Returns 
+
+*android.view.ViewDebug.HierarchyHandler_Description*
+
+Allows a View to inject custom children into HierarchyViewer. For example, 
+WebView uses this to add its internal layer tree as a child to itself 
+
+
+
+*android.view.ViewDebug.HierarchyHandler.dumpViewHierarchyWithProperties(BufferedWriter,int)*
+
+public void dumpViewHierarchyWithProperties(
+  java.io.BufferedWriter out,
+  int level)
+
+Dumps custom children to hierarchy viewer. See 
+ViewDebug.dumpViewWithProperties(Context, View, BufferedWriter, int) for the 
+format 
+
+An empty implementation should simply do nothing 
+
+
+    out - The output writer 
+    level - The indentation level 
+
+*android.view.ViewDebug.HierarchyHandler.findHierarchyView(String,int)*
+
+public |android.view.View| findHierarchyView(
+  java.lang.String className,
+  int hashCode)
+
+Returns a View to enable grabbing screenshots from custom children returned in 
+dumpViewHierarchyWithProperties. 
+
+
+    className - The className of the view to find 
+    hashCode - The hashCode of the view to find 
+
+    Returns: the View to capture from, or null if not found 
+
+

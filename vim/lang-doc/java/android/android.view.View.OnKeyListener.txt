@@ -1,0 +1,46 @@
+*android.view.View.OnKeyListener* *View.OnKeyListener* Interface definition for 
+
+public static interface interface View.OnKeyListener
+
+
+|android.view.View.OnKeyListener_Description|
+|android.view.View.OnKeyListener_Fields|
+|android.view.View.OnKeyListener_Constructors|
+|android.view.View.OnKeyListener_Methods|
+
+================================================================================
+
+*android.view.View.OnKeyListener_Methods*
+|android.view.View.OnKeyListener.onKey(View,int,KeyEvent)|Called when a hardwar
+
+*android.view.View.OnKeyListener_Description*
+
+Interface definition for a callback to be invoked when a hardware key event is 
+dispatched to this view. The callback will be invoked before the key event is 
+given to the view. This is only useful for hardware keyboards; a software input 
+method has no obligation to trigger this listener. 
+
+
+
+*android.view.View.OnKeyListener.onKey(View,int,KeyEvent)*
+
+public boolean onKey(
+  android.view.View v,
+  int keyCode,
+  android.view.KeyEvent event)
+
+Called when a hardware key is dispatched to a view. This allows listeners to 
+get a chance to respond before the target view. Key presses in software 
+keyboards will generally NOT trigger this method, although some may elect to do 
+so in some situations. Do not assume a software input method has to be 
+key-based; even if it is, it may use key presses in a different way than you 
+expect, so there is no way to reliably catch soft input key presses. 
+
+
+    v - The view the key has been dispatched to. 
+    keyCode - The code for the physical key that was pressed 
+    event - The KeyEvent object containing full information about the event. 
+
+    Returns: True if the listener has consumed the event, false otherwise. 
+
+

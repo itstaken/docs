@@ -1,0 +1,188 @@
+*android.app.UiModeManager* *UiModeManager* This class provides access to the sy
+
+public class UiModeManager
+  extends    |java.lang.Object|
+
+|android.app.UiModeManager_Description|
+|android.app.UiModeManager_Fields|
+|android.app.UiModeManager_Constructors|
+|android.app.UiModeManager_Methods|
+
+================================================================================
+
+*android.app.UiModeManager_Fields*
+|java.lang.String_android.app.UiModeManager.ACTION_ENTER_CAR_MODE|
+|java.lang.String_android.app.UiModeManager.ACTION_ENTER_DESK_MODE|
+|java.lang.String_android.app.UiModeManager.ACTION_EXIT_CAR_MODE|
+|java.lang.String_android.app.UiModeManager.ACTION_EXIT_DESK_MODE|
+|int_android.app.UiModeManager.DISABLE_CAR_MODE_GO_HOME|
+|int_android.app.UiModeManager.ENABLE_CAR_MODE_GO_CAR_HOME|
+|int_android.app.UiModeManager.MODE_NIGHT_AUTO|
+|int_android.app.UiModeManager.MODE_NIGHT_NO|
+|int_android.app.UiModeManager.MODE_NIGHT_YES|
+
+*android.app.UiModeManager_Methods*
+|android.app.UiModeManager.disableCarMode(int)|Turn off special mode if current
+|android.app.UiModeManager.enableCarMode(int)|Force device into car mode, like 
+|android.app.UiModeManager.getCurrentModeType()|Return the current running mode
+|android.app.UiModeManager.getNightMode()|Returns the currently configured nigh
+|android.app.UiModeManager.setNightMode(int)|Sets the night mode.
+
+*android.app.UiModeManager_Description*
+
+This class provides access to the system uimode services. These services allow 
+applications to control UI modes of the device. It provides functionality to 
+disable the car mode and it gives access to the night mode settings. 
+
+These facilities are built on top of the underlying (|android.content.Intent|) 
+broadcasts that are sent when the user physical places the device into and out 
+of a dock. When that happens, the UiModeManager switches the system 
+(|android.content.res.Configuration|) to the appropriate UI mode, sends 
+broadcasts about the mode switch, and starts the corresponding mode activity if 
+appropriate. See the broadcasts (|android.app.UiModeManager|) and 
+(|android.app.UiModeManager|) for more information. 
+
+In addition, the user may manually switch the system to car mode without 
+physically being in a dock. While in car mode -- whether by manual action from 
+the user or being physically placed in a dock -- a notification is displayed 
+allowing the user to exit dock mode. Thus the dock mode represented here may be 
+different than the current state of the underlying dock event broadcast. 
+
+You do not instantiate this class directly; instead, retrieve it through 
+Context.getSystemService(Context.UI_MODE_SERVICE)(|android.content.Context|) . 
+
+
+
+*java.lang.String_android.app.UiModeManager.ACTION_ENTER_CAR_MODE*
+
+Broadcast sent when the device's UI has switched to car mode, either by being 
+placed in a car dock or explicit action of the user. After sending the 
+broadcast, the system will start the intent (|android.content.Intent|) with 
+category (|android.content.Intent|) to display the car UI, which typically what 
+an application would implement to provide their own interface. However, 
+applications can also monitor this Intent in order to be informed of mode 
+changes or prevent the normal car UI from being displayed by setting the result 
+of the broadcast to (|android.app.Activity|) . 
+
+
+*java.lang.String_android.app.UiModeManager.ACTION_ENTER_DESK_MODE*
+
+Broadcast sent when the device's UI has switched to desk mode, by being placed 
+in a desk dock. After sending the broadcast, the system will start the intent 
+(|android.content.Intent|) with category (|android.content.Intent|) to display 
+the desk UI, which typically what an application would implement to provide 
+their own interface. However, applications can also monitor this Intent in 
+order to be informed of mode changes or prevent the normal desk UI from being 
+displayed by setting the result of the broadcast to (|android.app.Activity|) . 
+
+
+*java.lang.String_android.app.UiModeManager.ACTION_EXIT_CAR_MODE*
+
+Broadcast sent when the device's UI has switch away from car mode back to 
+normal mode. Typically used by a car mode app, to dismiss itself when the user 
+exits car mode. 
+
+
+*java.lang.String_android.app.UiModeManager.ACTION_EXIT_DESK_MODE*
+
+Broadcast sent when the device's UI has switched away from desk mode back to 
+normal mode. Typically used by a desk mode app, to dismiss itself when the user 
+exits desk mode. 
+
+
+*int_android.app.UiModeManager.DISABLE_CAR_MODE_GO_HOME*
+
+Flag for use with (|android.app.UiModeManager|) : go to the normal home 
+activity as part of the disable. Disabling this way ensures a clean transition 
+between the current activity (in car mode) and the original home activity 
+(which was typically last running without being in car mode). 
+
+
+*int_android.app.UiModeManager.ENABLE_CAR_MODE_GO_CAR_HOME*
+
+Flag for use with (|android.app.UiModeManager|) : go to the car home activity 
+as part of the enable. Enabling this way ensures a clean transition between the 
+current activity (in non-car-mode) and the car home activity that will serve as 
+home while in car mode. This will switch to the car home activity even if we 
+are already in car mode. 
+
+
+*int_android.app.UiModeManager.MODE_NIGHT_AUTO*
+
+Constant for (|android.app.UiModeManager|) and (|android.app.UiModeManager|) : 
+automatically switch night mode on and off based on the time. 
+
+
+*int_android.app.UiModeManager.MODE_NIGHT_NO*
+
+Constant for (|android.app.UiModeManager|) and (|android.app.UiModeManager|) : 
+never run in night mode. 
+
+
+*int_android.app.UiModeManager.MODE_NIGHT_YES*
+
+Constant for (|android.app.UiModeManager|) and (|android.app.UiModeManager|) : 
+always run in night mode. 
+
+
+
+*android.app.UiModeManager.disableCarMode(int)*
+
+public void disableCarMode(int flags)
+
+Turn off special mode if currently in car mode. 
+
+
+    flags - May be 0 or {@link #DISABLE_CAR_MODE_GO_HOME}. 
+
+*android.app.UiModeManager.enableCarMode(int)*
+
+public void enableCarMode(int flags)
+
+Force device into car mode, like it had been placed in the car dock. This will 
+cause the device to switch to the car home UI as part of the mode switch. 
+
+
+    flags - Must be 0. 
+
+*android.app.UiModeManager.getCurrentModeType()*
+
+public int getCurrentModeType()
+
+Return the current running mode type. May be one of 
+Configuration.UI_MODE_TYPE_NORMAL(|android.content.res.Configuration|) , 
+Configuration.UI_MODE_TYPE_DESK(|android.content.res.Configuration|) , or 
+Configuration.UI_MODE_TYPE_CAR(|android.content.res.Configuration|) , or 
+Configuration.UI_MODE_TYPE_APPLIANCE(|android.content.res.Configuration|) . 
+
+
+
+*android.app.UiModeManager.getNightMode()*
+
+public int getNightMode()
+
+Returns the currently configured night mode. 
+
+
+
+    Returns: {@link #MODE_NIGHT_NO}, {@link #MODE_NIGHT_YES}, or {@link #MODE_NIGHT_AUTO}. 
+             When an error occurred -1 is returned. 
+
+*android.app.UiModeManager.setNightMode(int)*
+
+public void setNightMode(int mode)
+
+Sets the night mode. Changes to the night mode are only effective when the car 
+or desk mode is enabled on a device. 
+
+The mode can be one of: 
+
+(|android.app.UiModeManager|) - sets the device into notnight mode. 
+(|android.app.UiModeManager|) - sets the device into night mode. 
+
+(|android.app.UiModeManager|) - automatic night/notnight switching depending on 
+the location and certain other sensors. 
+
+
+
+

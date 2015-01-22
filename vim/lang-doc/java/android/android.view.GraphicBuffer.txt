@@ -1,0 +1,290 @@
+*android.view.GraphicBuffer* *GraphicBuffer* Simple wrapper for the native Graph
+
+public class GraphicBuffer
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.view.GraphicBuffer_Description|
+|android.view.GraphicBuffer_Fields|
+|android.view.GraphicBuffer_Constructors|
+|android.view.GraphicBuffer_Methods|
+
+================================================================================
+
+*android.view.GraphicBuffer_Fields*
+|android.os.Parcelable.Creator<android.view.GraphicBuffer>_android.view.GraphicBuffer.CREATOR|
+|int_android.view.GraphicBuffer.USAGE_HW_2D|
+|int_android.view.GraphicBuffer.USAGE_HW_COMPOSER|
+|int_android.view.GraphicBuffer.USAGE_HW_MASK|
+|int_android.view.GraphicBuffer.USAGE_HW_RENDER|
+|int_android.view.GraphicBuffer.USAGE_HW_TEXTURE|
+|int_android.view.GraphicBuffer.USAGE_HW_VIDEO_ENCODER|
+|int_android.view.GraphicBuffer.USAGE_PROTECTED|
+|int_android.view.GraphicBuffer.USAGE_SOFTWARE_MASK|
+|int_android.view.GraphicBuffer.USAGE_SW_READ_MASK|
+|int_android.view.GraphicBuffer.USAGE_SW_READ_NEVER|
+|int_android.view.GraphicBuffer.USAGE_SW_READ_OFTEN|
+|int_android.view.GraphicBuffer.USAGE_SW_READ_RARELY|
+|int_android.view.GraphicBuffer.USAGE_SW_WRITE_MASK|
+|int_android.view.GraphicBuffer.USAGE_SW_WRITE_NEVER|
+|int_android.view.GraphicBuffer.USAGE_SW_WRITE_OFTEN|
+|int_android.view.GraphicBuffer.USAGE_SW_WRITE_RARELY|
+
+*android.view.GraphicBuffer_Methods*
+|android.view.GraphicBuffer.create(int,int,int,int)|Creates new GraphicBuffer i
+|android.view.GraphicBuffer.describeContents()|
+|android.view.GraphicBuffer.destroy()|Destroyes this buffer immediately.
+|android.view.GraphicBuffer.finalize()|
+|android.view.GraphicBuffer.getFormat()|Returns the pixel format of this buffer
+|android.view.GraphicBuffer.getHeight()|Returns the height of this buffer in pi
+|android.view.GraphicBuffer.getUsage()|Returns the usage hint set on this buffe
+|android.view.GraphicBuffer.getWidth()|Returns the width of this buffer in pixe
+|android.view.GraphicBuffer.isDestroyed()|Indicates whether this buffer has bee
+|android.view.GraphicBuffer.lockCanvas()|Start editing the pixels in the buffer
+|android.view.GraphicBuffer.lockCanvas(Rect)|Just like#lockCanvas()but allows s
+|android.view.GraphicBuffer.unlockCanvasAndPost(Canvas)|Finish editing pixels i
+|android.view.GraphicBuffer.writeToParcel(Parcel,int)|Flatten this object in to
+
+*android.view.GraphicBuffer_Description*
+
+Simple wrapper for the native GraphicBuffer class. 
+
+
+
+*android.os.Parcelable.Creator<android.view.GraphicBuffer>_android.view.GraphicBuffer.CREATOR*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_2D*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_COMPOSER*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_MASK*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_RENDER*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_TEXTURE*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_HW_VIDEO_ENCODER*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_PROTECTED*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SOFTWARE_MASK*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_READ_MASK*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_READ_NEVER*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_READ_OFTEN*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_READ_RARELY*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_WRITE_MASK*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_WRITE_NEVER*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_WRITE_OFTEN*
+
+
+
+
+*int_android.view.GraphicBuffer.USAGE_SW_WRITE_RARELY*
+
+
+
+
+
+*android.view.GraphicBuffer.create(int,int,int,int)*
+
+public static |android.view.GraphicBuffer| create(
+  int width,
+  int height,
+  int format,
+  int usage)
+
+Creates new GraphicBuffer instance. This method will return null if the buffer 
+cannot be created. 
+
+
+    width - The width in pixels of the buffer 
+    height - The height in pixels of the buffer 
+    format - The format of each pixel as specified in {@link PixelFormat} 
+    usage - Hint indicating how the buffer will be used 
+
+    Returns: A GraphicBuffer instance or null 
+
+*android.view.GraphicBuffer.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.view.GraphicBuffer.destroy()*
+
+public void destroy()
+
+Destroyes this buffer immediately. Calling this method frees up any underlying 
+native resources. After calling this method, this buffer must not be used in 
+any way ( (|android.view.GraphicBuffer|) must not be called, etc.) 
+
+
+
+*android.view.GraphicBuffer.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.GraphicBuffer.getFormat()*
+
+public int getFormat()
+
+Returns the pixel format of this buffer. The pixel format must be one of the 
+formats defined in (|PixelFormat|) . 
+
+
+
+*android.view.GraphicBuffer.getHeight()*
+
+public int getHeight()
+
+Returns the height of this buffer in pixels. 
+
+
+
+*android.view.GraphicBuffer.getUsage()*
+
+public int getUsage()
+
+Returns the usage hint set on this buffer. 
+
+
+
+*android.view.GraphicBuffer.getWidth()*
+
+public int getWidth()
+
+Returns the width of this buffer in pixels. 
+
+
+
+*android.view.GraphicBuffer.isDestroyed()*
+
+public boolean isDestroyed()
+
+Indicates whether this buffer has been destroyed. A destroyed buffer cannot be 
+used in any way: locking a Canvas will return null, the buffer cannot be 
+written to a parcel, etc. 
+
+
+
+    Returns: True if this GraphicBuffer is in a destroyed state, false otherwise. 
+
+*android.view.GraphicBuffer.lockCanvas()*
+
+public Canvas lockCanvas()
+
+Start editing the pixels in the buffer. A null is returned if the buffer cannot 
+be locked for editing. 
+
+The content of the buffer is preserved between unlockCanvas() and lockCanvas(). 
+
+If this method is called after (|android.view.GraphicBuffer|) , the return 
+value will always be null. 
+
+
+
+    Returns: A Canvas used to draw into the buffer, or null. 
+
+*android.view.GraphicBuffer.lockCanvas(Rect)*
+
+public Canvas lockCanvas(Rect dirty)
+
+Just like (|android.view.GraphicBuffer|) but allows specification of a dirty 
+rectangle. 
+
+If this method is called after (|android.view.GraphicBuffer|) , the return 
+value will always be null. 
+
+
+    dirty - Area of the buffer that may be modified. 
+
+    Returns: A Canvas used to draw into the surface, or null. 
+
+*android.view.GraphicBuffer.unlockCanvasAndPost(Canvas)*
+
+public void unlockCanvasAndPost(Canvas canvas)
+
+Finish editing pixels in the buffer. 
+
+This method doesn't do anything if (|android.view.GraphicBuffer|) was 
+previously called. 
+
+
+    canvas - The Canvas previously returned by lockCanvas() 
+
+*android.view.GraphicBuffer.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+Flatten this object in to a Parcel. 
+
+Calling this method will throw an IllegalStateException if 
+(|android.view.GraphicBuffer|) has been previously called. 
+
+
+    dest - The Parcel in which the object should be written. 
+    flags - Additional flags about how the object should be written. May be 0 or {@link 
+       #PARCELABLE_WRITE_RETURN_VALUE}. 
+
+

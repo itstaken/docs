@@ -1,0 +1,44 @@
+*android.hardware.Camera.PreviewCallback* *Camera.PreviewCallback* Callback inte
+
+public static interface interface Camera.PreviewCallback
+
+
+|android.hardware.Camera.PreviewCallback_Description|
+|android.hardware.Camera.PreviewCallback_Fields|
+|android.hardware.Camera.PreviewCallback_Constructors|
+|android.hardware.Camera.PreviewCallback_Methods|
+
+================================================================================
+
+*android.hardware.Camera.PreviewCallback_Methods*
+|android.hardware.Camera.PreviewCallback.onPreviewFrame(byte[],Camera)|Called a
+
+*android.hardware.Camera.PreviewCallback_Description*
+
+Callback interface used to deliver copies of preview frames as they are 
+displayed. 
+
+
+
+*android.hardware.Camera.PreviewCallback.onPreviewFrame(byte[],Camera)*
+
+public void onPreviewFrame(
+  byte[] data,
+  android.hardware.Camera camera)
+
+Called as preview frames are displayed. This callback is invoked on the event 
+thread (|android.hardware.Camera.PreviewCallback|) was called from. 
+
+If using the (|android.graphics.ImageFormat|) format, refer to the equations in 
+(|android.hardware.Camera.Parameters|) for the arrangement of the pixel data in 
+the preview callback buffers. 
+
+
+    data - the contents of the preview frame in the format defined by {@link 
+       android.graphics.ImageFormat}, which can be queried with {@link 
+       android.hardware.Camera.Parameters#getPreviewFormat()}. If {@link 
+       android.hardware.Camera.Parameters#setPreviewFormat(int)} is never 
+       called, the default will be the YCbCr_420_SP (NV21) format. 
+    camera - the Camera service object. 
+
+

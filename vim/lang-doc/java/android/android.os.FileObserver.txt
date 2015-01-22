@@ -1,0 +1,196 @@
+*android.os.FileObserver* *FileObserver* Monitors files (using inotify)
+ to fire
+
+public abstract class FileObserver
+  extends    |java.lang.Object|
+
+|android.os.FileObserver_Description|
+|android.os.FileObserver_Fields|
+|android.os.FileObserver_Constructors|
+|android.os.FileObserver_Methods|
+
+================================================================================
+
+*android.os.FileObserver_Fields*
+|int_android.os.FileObserver.ACCESS|
+|int_android.os.FileObserver.ALL_EVENTS|
+|int_android.os.FileObserver.ATTRIB|
+|int_android.os.FileObserver.CLOSE_NOWRITE|
+|int_android.os.FileObserver.CLOSE_WRITE|
+|int_android.os.FileObserver.CREATE|
+|int_android.os.FileObserver.DELETE|
+|int_android.os.FileObserver.DELETE_SELF|
+|int_android.os.FileObserver.MODIFY|
+|int_android.os.FileObserver.MOVE_SELF|
+|int_android.os.FileObserver.MOVED_FROM|
+|int_android.os.FileObserver.MOVED_TO|
+|int_android.os.FileObserver.OPEN|
+
+*android.os.FileObserver_Constructors*
+|android.os.FileObserver(String)|Equivalent to FileObserver(path, FileObserver.
+|android.os.FileObserver(String,int)|Create a new file observer for a certain f
+
+*android.os.FileObserver_Methods*
+|android.os.FileObserver.finalize()|
+|android.os.FileObserver.onEvent(int,String)|The event handler, which must be i
+|android.os.FileObserver.startWatching()|Start watching for events.
+|android.os.FileObserver.stopWatching()|Stop watching for events.
+
+*android.os.FileObserver_Description*
+
+Monitors files (using inotify) to fire an event after files are accessed or 
+changed by by any process on the device (including this one). FileObserver is 
+an abstract class; subclasses must implement the event handler 
+(|android.os.FileObserver|) . 
+
+Each FileObserver instance monitors a single file or directory. If a directory 
+is monitored, events will be triggered for all files and subdirectories inside 
+the monitored directory. 
+
+An event mask is used to specify which changes or actions to report. Event type 
+constants are used to describe the possible changes in the event mask as well 
+as what actually happened in event callbacks. 
+
+Warning: If a FileObserver is garbage collected, it will stop sending events. 
+To ensure you keep receiving events, you must keep a reference to the 
+FileObserver instance from some other live object. 
+
+
+
+*int_android.os.FileObserver.ACCESS*
+
+Event type: Data was read from a file 
+
+
+*int_android.os.FileObserver.ALL_EVENTS*
+
+Event mask: All valid event types, combined 
+
+
+*int_android.os.FileObserver.ATTRIB*
+
+Event type: Metadata (permissions, owner, timestamp) was changed explicitly 
+
+
+*int_android.os.FileObserver.CLOSE_NOWRITE*
+
+Event type: Someone had a file or directory open read-only, and closed it 
+
+
+*int_android.os.FileObserver.CLOSE_WRITE*
+
+Event type: Someone had a file or directory open for writing, and closed it 
+
+
+*int_android.os.FileObserver.CREATE*
+
+Event type: A new file or subdirectory was created under the monitored 
+directory 
+
+
+*int_android.os.FileObserver.DELETE*
+
+Event type: A file was deleted from the monitored directory 
+
+
+*int_android.os.FileObserver.DELETE_SELF*
+
+Event type: The monitored file or directory was deleted; monitoring effectively 
+stops 
+
+
+*int_android.os.FileObserver.MODIFY*
+
+Event type: Data was written to a file 
+
+
+*int_android.os.FileObserver.MOVE_SELF*
+
+Event type: The monitored file or directory was moved; monitoring continues 
+
+
+*int_android.os.FileObserver.MOVED_FROM*
+
+Event type: A file or subdirectory was moved from the monitored directory 
+
+
+*int_android.os.FileObserver.MOVED_TO*
+
+Event type: A file or subdirectory was moved to the monitored directory 
+
+
+*int_android.os.FileObserver.OPEN*
+
+Event type: A file or directory was opened 
+
+
+
+*android.os.FileObserver(String)*
+
+public FileObserver(java.lang.String path)
+
+Equivalent to FileObserver(path, FileObserver.ALL_EVENTS). 
+
+
+*android.os.FileObserver(String,int)*
+
+public FileObserver(
+  java.lang.String path,
+  int mask)
+
+Create a new file observer for a certain file or directory. Monitoring does not 
+start on creation! You must call (|android.os.FileObserver|) before you will 
+receive events. 
+
+    path - The file or directory to monitor 
+    mask - The event or events (added together) to watch for 
+
+*android.os.FileObserver.finalize()*
+
+protected void finalize()
+
+
+
+
+
+*android.os.FileObserver.onEvent(int,String)*
+
+public abstract void onEvent(
+  int event,
+  java.lang.String path)
+
+The event handler, which must be implemented by subclasses. 
+
+This method is invoked on a special FileObserver thread. It runs independently 
+of any threads, so take care to use appropriate synchronization! Consider using 
+(|android.os.Handler|) to shift event handling work to the main thread to avoid 
+concurrency problems. 
+
+Event handlers must not throw exceptions. 
+
+
+    event - The type of event which happened 
+    path - The path, relative to the main monitored file or directory, of the file or 
+       directory which triggered the event 
+
+*android.os.FileObserver.startWatching()*
+
+public void startWatching()
+
+Start watching for events. The monitored file or directory must exist at this 
+time, or else no events will be reported (even if it appears later). If 
+monitoring is already started, this call has no effect. 
+
+
+
+*android.os.FileObserver.stopWatching()*
+
+public void stopWatching()
+
+Stop watching for events. Some events may be in process, so events may continue 
+to be reported even after this method completes. If monitoring is already 
+stopped, this call has no effect. 
+
+
+
+

@@ -1,0 +1,121 @@
+*android.inputmethodservice.AbstractInputMethodService* *AbstractInputMethodService* 
+
+public abstract class AbstractInputMethodService
+  extends    |android.app.Service|
+  implements |android.view.KeyEvent.Callback|
+
+|android.inputmethodservice.AbstractInputMethodService_Description|
+|android.inputmethodservice.AbstractInputMethodService_Fields|
+|android.inputmethodservice.AbstractInputMethodService_Constructors|
+|android.inputmethodservice.AbstractInputMethodService_Methods|
+
+================================================================================
+
+*android.inputmethodservice.AbstractInputMethodService_Constructors*
+|android.inputmethodservice.AbstractInputMethodService()|
+
+*android.inputmethodservice.AbstractInputMethodService_Methods*
+|android.inputmethodservice.AbstractInputMethodService.dump(FileDescriptor,PrintWriter,String[])|
+|android.inputmethodservice.AbstractInputMethodService.getKeyDispatcherState()|
+|android.inputmethodservice.AbstractInputMethodService.onBind(Intent)|
+|android.inputmethodservice.AbstractInputMethodService.onCreateInputMethodInterface()|
+|android.inputmethodservice.AbstractInputMethodService.onCreateInputMethodSessionInterface()|
+|android.inputmethodservice.AbstractInputMethodService.onGenericMotionEvent(MotionEvent)|
+|android.inputmethodservice.AbstractInputMethodService.onTrackballEvent(MotionEvent)|
+
+*android.inputmethodservice.AbstractInputMethodService_Description*
+
+AbstractInputMethodService provides a abstract base class for input methods. 
+Normal input method implementations will not derive from this directly, instead 
+building on top of (|android.inputmethodservice.InputMethodService|) or another 
+more complete base class. Be sure to read 
+(|android.view.inputmethod.InputMethod|) for more information on the basics of 
+writing input methods. 
+
+This class combines a Service (representing the input method component to the 
+system with the InputMethod interface that input methods must implement. This 
+base class takes care of reporting your InputMethod from the service when 
+clients bind to it, but provides no standard implementation of the InputMethod 
+interface itself. Derived classes must implement that interface. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService()*
+
+public AbstractInputMethodService()
+
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.dump(FileDescriptor,PrintWriter,String[])*
+
+protected void dump(
+  java.io.FileDescriptor fd,
+  java.io.PrintWriter fout,
+  java.lang.String[] args)
+
+Implement this to handle Binder.dump()(|android.os.Binder|) calls on your input 
+method. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.getKeyDispatcherState()*
+
+public |android.view.KeyEvent.DispatcherState| getKeyDispatcherState()
+
+Return the global KeyEvent.DispatcherState(|KeyEvent.DispatcherState|) for used 
+for processing events from the target application. Normally you will not need 
+to use this directly, but just use the standard high-level event callbacks like 
+(|android.inputmethodservice.AbstractInputMethodService|) . 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.onBind(Intent)*
+
+public final |android.os.IBinder| onBind(android.content.Intent intent)
+
+
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.onCreateInputMethodInterface()*
+
+public abstract |android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodImpl| onCreateInputMethodInterface()
+
+Called by the framework during initialization, when the InputMethod interface 
+for this service needs to be created. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.onCreateInputMethodSessionInterface()*
+
+public abstract |android.inputmethodservice.AbstractInputMethodService.AbstractInputMethodSessionImpl| onCreateInputMethodSessionInterface()
+
+Called by the framework when a new InputMethodSession interface is needed for a 
+new client of the input method. 
+
+
+
+*android.inputmethodservice.AbstractInputMethodService.onGenericMotionEvent(MotionEvent)*
+
+public boolean onGenericMotionEvent(android.view.MotionEvent event)
+
+Implement this to handle generic motion events on your input method. 
+
+
+    event - The motion event being received. 
+
+    Returns: True if the event was handled in this function, false otherwise. 
+
+*android.inputmethodservice.AbstractInputMethodService.onTrackballEvent(MotionEvent)*
+
+public boolean onTrackballEvent(android.view.MotionEvent event)
+
+Implement this to handle trackball events on your input method. 
+
+
+    event - The motion event being received. 
+
+    Returns: True if the event was handled in this function, false otherwise. 
+
+

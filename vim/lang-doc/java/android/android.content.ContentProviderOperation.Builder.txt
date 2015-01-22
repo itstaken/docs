@@ -1,0 +1,162 @@
+*android.content.ContentProviderOperation.Builder* *ContentProviderOperation.Builder* 
+
+public static class ContentProviderOperation.Builder
+  extends    |java.lang.Object|
+
+|android.content.ContentProviderOperation.Builder_Description|
+|android.content.ContentProviderOperation.Builder_Fields|
+|android.content.ContentProviderOperation.Builder_Constructors|
+|android.content.ContentProviderOperation.Builder_Methods|
+
+================================================================================
+
+*android.content.ContentProviderOperation.Builder_Methods*
+|android.content.ContentProviderOperation.Builder.build()|Create a ContentProvi
+|android.content.ContentProviderOperation.Builder.withExpectedCount(int)|If set
+|android.content.ContentProviderOperation.Builder.withSelection(String,String[])|
+|android.content.ContentProviderOperation.Builder.withSelectionBackReference(int,int)|
+|android.content.ContentProviderOperation.Builder.withValue(String,Object)|A va
+|android.content.ContentProviderOperation.Builder.withValueBackReference(String,int)|
+|android.content.ContentProviderOperation.Builder.withValueBackReferences(ContentValues)|
+|android.content.ContentProviderOperation.Builder.withValues(ContentValues)|The
+|android.content.ContentProviderOperation.Builder.withYieldAllowed(boolean)|
+
+*android.content.ContentProviderOperation.Builder_Description*
+
+Used to add parameters to a (|android.content.ContentProviderOperation|) . The 
+(|android.content.ContentProviderOperation.Builder|) is first created by 
+calling (|android.content.ContentProviderOperation|) , 
+(|android.content.ContentProviderOperation|) , 
+(|android.content.ContentProviderOperation|) or 
+(|android.content.ContentProviderOperation|) . The withXXX methods can then be 
+used to add parameters to the builder. See the specific methods to find for 
+which (|android.content.ContentProviderOperation.Builder|) type each is 
+allowed. Call (|android.content.ContentProviderOperation.Builder|) to create 
+the (|android.content.ContentProviderOperation|) once all the parameters have 
+been supplied. 
+
+
+
+*android.content.ContentProviderOperation.Builder.build()*
+
+public |android.content.ContentProviderOperation| build()
+
+Create a ContentProviderOperation from this 
+(|android.content.ContentProviderOperation.Builder|) . 
+
+
+
+*android.content.ContentProviderOperation.Builder.withExpectedCount(int)*
+
+public |android.content.ContentProviderOperation.Builder| withExpectedCount(int count)
+
+If set then if the number of rows affected by this operation do not match this 
+count (|android.content.OperationApplicationException|) will be throw. This can 
+only be used with builders of type update, delete, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withSelection(String,String[])*
+
+public |android.content.ContentProviderOperation.Builder| withSelection(
+  java.lang.String selection,
+  java.lang.String[] selectionArgs)
+
+The selection and arguments to use. An occurrence of '?' in the selection will 
+be replaced with the corresponding occurence of the selection argument. Any of 
+the selection arguments may be overwritten by a selection argument back 
+reference as specified by (|android.content.ContentProviderOperation.Builder|) 
+. This can only be used with builders of type update, delete, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withSelectionBackReference(int,int)*
+
+public |android.content.ContentProviderOperation.Builder| withSelectionBackReference(
+  int selectionArgIndex,
+  int previousResult)
+
+Add a back references as a selection arg. Any value at that index of the 
+selection arg that was specified by 
+(|android.content.ContentProviderOperation.Builder|) will be overwritten. This 
+can only be used with builders of type update, delete, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withValue(String,Object)*
+
+public |android.content.ContentProviderOperation.Builder| withValue(
+  java.lang.String key,
+  java.lang.Object value)
+
+A value to insert or update. This value may be overwritten by the corresponding 
+value specified by (|android.content.ContentProviderOperation.Builder|) . This 
+can only be used with builders of type insert, update, or assert. 
+
+
+    key - the name of this value 
+    value - the value itself. the type must be acceptable for insertion by {@link 
+       ContentValues#put} 
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withValueBackReference(String,int)*
+
+public |android.content.ContentProviderOperation.Builder| withValueBackReference(
+  java.lang.String key,
+  int previousResult)
+
+Add a ContentValues back reference. A column value from the back references 
+takes precedence over a value specified in 
+(|android.content.ContentProviderOperation.Builder|) . This can only be used 
+with builders of type insert, update, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withValueBackReferences(ContentValues)*
+
+public |android.content.ContentProviderOperation.Builder| withValueBackReferences(android.content.ContentValues backReferences)
+
+Add a (|android.content.ContentValues|) of back references. The key is the name 
+of the column and the value is an integer that is the index of the previous 
+result whose value should be used for the column. The value is added as a 
+(|java.lang.String|) . A column value from the back references takes precedence 
+over a value specified in (|android.content.ContentProviderOperation.Builder|) 
+. This can only be used with builders of type insert, update, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withValues(ContentValues)*
+
+public |android.content.ContentProviderOperation.Builder| withValues(android.content.ContentValues values)
+
+The ContentValues to use. This may be null. These values may be overwritten by 
+the corresponding value specified by 
+(|android.content.ContentProviderOperation.Builder|) or by future calls to 
+(|android.content.ContentProviderOperation.Builder|) or 
+(|android.content.ContentProviderOperation.Builder|) . This can only be used 
+with builders of type insert, update, or assert. 
+
+
+
+    Returns: this builder, to allow for chaining. 
+
+*android.content.ContentProviderOperation.Builder.withYieldAllowed(boolean)*
+
+public |android.content.ContentProviderOperation.Builder| withYieldAllowed(boolean yieldAllowed)
+
+
+
+
+
+

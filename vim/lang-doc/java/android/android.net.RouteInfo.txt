@@ -1,0 +1,239 @@
+*android.net.RouteInfo* *RouteInfo* A simple container for route information.
+
+public class RouteInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.net.RouteInfo_Description|
+|android.net.RouteInfo_Fields|
+|android.net.RouteInfo_Constructors|
+|android.net.RouteInfo_Methods|
+
+================================================================================
+
+*android.net.RouteInfo_Fields*
+|android.os.Parcelable.Creator<android.net.RouteInfo>_android.net.RouteInfo.CREATOR|
+
+*android.net.RouteInfo_Constructors*
+|android.net.RouteInfo(InetAddress)|
+|android.net.RouteInfo(LinkAddress)|
+|android.net.RouteInfo(LinkAddress,InetAddress)|
+|android.net.RouteInfo(LinkAddress,InetAddress,String)|Constructs a RouteInfo o
+
+*android.net.RouteInfo_Methods*
+|android.net.RouteInfo.describeContents()|
+|android.net.RouteInfo.equals(Object)|
+|android.net.RouteInfo.getDestination()|
+|android.net.RouteInfo.getGateway()|
+|android.net.RouteInfo.getInterface()|
+|android.net.RouteInfo.hasGateway()|
+|android.net.RouteInfo.hashCode()|
+|android.net.RouteInfo.isDefaultRoute()|
+|android.net.RouteInfo.isHostRoute()|
+|android.net.RouteInfo.makeHostRoute(InetAddress,InetAddress,String)|
+|android.net.RouteInfo.makeHostRoute(InetAddress,String)|
+|android.net.RouteInfo.matches(InetAddress)|
+|android.net.RouteInfo.selectBestRoute(Collection<RouteInfo>,InetAddress)|Find 
+|android.net.RouteInfo.toString()|
+|android.net.RouteInfo.writeToParcel(Parcel,int)|
+
+*android.net.RouteInfo_Description*
+
+A simple container for route information. 
+
+In order to be used, a route must have a destination prefix and: 
+
+- A gateway address (next-hop, for gatewayed routes), or - An interface (for 
+directly-connected routes), or - Both a gateway and an interface. 
+
+This class does not enforce these constraints because there is code that uses 
+RouteInfo objects to store directly-connected routes without interfaces. Such 
+objects cannot be used directly, but can be put into a LinkProperties object 
+which then specifies the interface. 
+
+
+
+*android.os.Parcelable.Creator<android.net.RouteInfo>_android.net.RouteInfo.CREATOR*
+
+
+
+
+
+*android.net.RouteInfo(InetAddress)*
+
+public RouteInfo(java.net.InetAddress gateway)
+
+
+
+
+*android.net.RouteInfo(LinkAddress)*
+
+public RouteInfo(android.net.LinkAddress host)
+
+
+
+
+*android.net.RouteInfo(LinkAddress,InetAddress)*
+
+public RouteInfo(
+  android.net.LinkAddress destination,
+  java.net.InetAddress gateway)
+
+
+
+
+*android.net.RouteInfo(LinkAddress,InetAddress,String)*
+
+public RouteInfo(
+  android.net.LinkAddress destination,
+  java.net.InetAddress gateway,
+  java.lang.String iface)
+
+Constructs a RouteInfo object. 
+
+If destination is null, then gateway must be specified and the constructed 
+route is either the IPv4 default route 0.0.0.0 if @gateway is an instance of 
+(|java.net.Inet4Address|) , or the IPv6 default route ::/0 if gateway is an 
+instance of (|java.net.Inet6Address|) . 
+
+destination and gateway may not both be null. 
+
+    destination - the destination prefix 
+    gateway - the IP address to route packets through 
+    iface - the interface name to send packets on 
+
+*android.net.RouteInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.net.RouteInfo.equals(Object)*
+
+public boolean equals(java.lang.Object obj)
+
+
+
+
+
+*android.net.RouteInfo.getDestination()*
+
+public |android.net.LinkAddress| getDestination()
+
+
+
+
+
+*android.net.RouteInfo.getGateway()*
+
+public |java.net.InetAddress| getGateway()
+
+
+
+
+
+*android.net.RouteInfo.getInterface()*
+
+public |java.lang.String| getInterface()
+
+
+
+
+
+*android.net.RouteInfo.hasGateway()*
+
+public boolean hasGateway()
+
+
+
+
+
+*android.net.RouteInfo.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.net.RouteInfo.isDefaultRoute()*
+
+public boolean isDefaultRoute()
+
+
+
+
+
+*android.net.RouteInfo.isHostRoute()*
+
+public boolean isHostRoute()
+
+
+
+
+
+*android.net.RouteInfo.makeHostRoute(InetAddress,InetAddress,String)*
+
+public static |android.net.RouteInfo| makeHostRoute(
+  java.net.InetAddress host,
+  java.net.InetAddress gateway,
+  java.lang.String iface)
+
+
+
+
+
+*android.net.RouteInfo.makeHostRoute(InetAddress,String)*
+
+public static |android.net.RouteInfo| makeHostRoute(
+  java.net.InetAddress host,
+  java.lang.String iface)
+
+
+
+
+
+*android.net.RouteInfo.matches(InetAddress)*
+
+protected boolean matches(java.net.InetAddress destination)
+
+
+
+
+
+*android.net.RouteInfo.selectBestRoute(Collection<RouteInfo>,InetAddress)*
+
+public static |android.net.RouteInfo| selectBestRoute(
+  java.util.Collection<android.net.RouteInfo> routes,
+  java.net.InetAddress dest)
+
+Find the route from a Collection of routes that best matches a given address. 
+May return null if no routes are applicable. 
+
+
+    routes - a Collection of RouteInfos to chose from 
+    dest - the InetAddress your trying to get to 
+
+    Returns: the RouteInfo from the Collection that best fits the given address 
+
+*android.net.RouteInfo.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.net.RouteInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

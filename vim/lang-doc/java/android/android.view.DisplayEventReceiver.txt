@@ -1,0 +1,99 @@
+*android.view.DisplayEventReceiver* *DisplayEventReceiver* Provides a low-level 
+
+public abstract class DisplayEventReceiver
+  extends    |java.lang.Object|
+
+|android.view.DisplayEventReceiver_Description|
+|android.view.DisplayEventReceiver_Fields|
+|android.view.DisplayEventReceiver_Constructors|
+|android.view.DisplayEventReceiver_Methods|
+
+================================================================================
+
+*android.view.DisplayEventReceiver_Constructors*
+|android.view.DisplayEventReceiver(Looper)|Creates a display event receiver.
+
+*android.view.DisplayEventReceiver_Methods*
+|android.view.DisplayEventReceiver.dispose()|Disposes the receiver.
+|android.view.DisplayEventReceiver.finalize()|
+|android.view.DisplayEventReceiver.onHotplug(long,int,boolean)|Called when a di
+|android.view.DisplayEventReceiver.onVsync(long,int,int)|Called when a vertical
+|android.view.DisplayEventReceiver.scheduleVsync()|Schedules a single vertical 
+
+*android.view.DisplayEventReceiver_Description*
+
+Provides a low-level mechanism for an application to receive display events 
+such as vertical sync. 
+
+The display event receive is NOT thread safe. Moreover, its methods must only 
+be called on the Looper thread to which it is attached. 
+
+
+
+*android.view.DisplayEventReceiver(Looper)*
+
+public DisplayEventReceiver(android.os.Looper looper)
+
+Creates a display event receiver. 
+
+    looper - The looper to use when invoking callbacks. 
+
+*android.view.DisplayEventReceiver.dispose()*
+
+public void dispose()
+
+Disposes the receiver. 
+
+
+
+*android.view.DisplayEventReceiver.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.DisplayEventReceiver.onHotplug(long,int,boolean)*
+
+public void onHotplug(
+  long timestampNanos,
+  int builtInDisplayId,
+  boolean connected)
+
+Called when a display hotplug event is received. 
+
+
+    timestampNanos - The timestamp of the event, in the {@link System#nanoTime()} timebase. 
+    builtInDisplayId - The surface flinger built-in display id such as {@link 
+       SurfaceControl#BUILT_IN_DISPLAY_ID_HDMI}. 
+    connected - True if the display is connected, false if it disconnected. 
+
+*android.view.DisplayEventReceiver.onVsync(long,int,int)*
+
+public void onVsync(
+  long timestampNanos,
+  int builtInDisplayId,
+  int frame)
+
+Called when a vertical sync pulse is received. The recipient should render a 
+frame and then call (|android.view.DisplayEventReceiver|) to schedule the next 
+vertical sync pulse. 
+
+
+    timestampNanos - The timestamp of the pulse, in the {@link System#nanoTime()} timebase. 
+    builtInDisplayId - The surface flinger built-in display id such as {@link 
+       SurfaceControl#BUILT_IN_DISPLAY_ID_MAIN}. 
+    frame - The frame number. Increases by one for each vertical sync interval. 
+
+*android.view.DisplayEventReceiver.scheduleVsync()*
+
+public void scheduleVsync()
+
+Schedules a single vertical sync pulse to be delivered when the next display 
+frame begins. 
+
+
+
+

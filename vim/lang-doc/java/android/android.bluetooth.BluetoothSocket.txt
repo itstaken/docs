@@ -1,0 +1,163 @@
+*android.bluetooth.BluetoothSocket* *BluetoothSocket* A connected or connecting 
+
+public final class BluetoothSocket
+  extends    |java.lang.Object|
+  implements |java.io.Closeable|
+
+|android.bluetooth.BluetoothSocket_Description|
+|android.bluetooth.BluetoothSocket_Fields|
+|android.bluetooth.BluetoothSocket_Constructors|
+|android.bluetooth.BluetoothSocket_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothSocket_Fields*
+|int_android.bluetooth.BluetoothSocket.MAX_RFCOMM_CHANNEL|
+
+*android.bluetooth.BluetoothSocket_Methods*
+|android.bluetooth.BluetoothSocket.close()|
+|android.bluetooth.BluetoothSocket.connect()|Attempt to connect to a remote dev
+|android.bluetooth.BluetoothSocket.finalize()|
+|android.bluetooth.BluetoothSocket.getInputStream()|Get the input stream associ
+|android.bluetooth.BluetoothSocket.getOutputStream()|Get the output stream asso
+|android.bluetooth.BluetoothSocket.getRemoteDevice()|Get the remote device this
+|android.bluetooth.BluetoothSocket.isConnected()|Get the connection status of t
+
+*android.bluetooth.BluetoothSocket_Description*
+
+A connected or connecting Bluetooth socket. 
+
+The interface for Bluetooth Sockets is similar to that of TCP sockets: 
+(|java.net.Socket|) and (|java.net.ServerSocket|) . On the server side, use a 
+(|android.bluetooth.BluetoothServerSocket|) to create a listening server 
+socket. When a connection is accepted by the 
+(|android.bluetooth.BluetoothServerSocket|) , it will return a new 
+(|android.bluetooth.BluetoothSocket|) to manage the connection. On the client 
+side, use a single (|android.bluetooth.BluetoothSocket|) to both initiate an 
+outgoing connection and to manage the connection. 
+
+The most common type of Bluetooth socket is RFCOMM, which is the type supported 
+by the Android APIs. RFCOMM is a connection-oriented, streaming transport over 
+Bluetooth. It is also known as the Serial Port Profile (SPP). 
+
+To create a (|android.bluetooth.BluetoothSocket|) for connecting to a known 
+device, use 
+BluetoothDevice.createRfcommSocketToServiceRecord()(|android.bluetooth.BluetoothDevice|)
+. Then call (|android.bluetooth.BluetoothSocket|) to attempt a connection to 
+the remote device. This call will block until a connection is established or 
+the connection fails. 
+
+To create a (|android.bluetooth.BluetoothSocket|) as a server (or "host"), see 
+the (|android.bluetooth.BluetoothServerSocket|) documentation. 
+
+Once the socket is connected, whether initiated as a client or accepted as a 
+server, open the IO streams by calling (|android.bluetooth.BluetoothSocket|) 
+and (|android.bluetooth.BluetoothSocket|) in order to retrieve 
+(|java.io.InputStream|) and (|java.io.OutputStream|) objects, respectively, 
+which are automatically connected to the socket. 
+
+(|android.bluetooth.BluetoothSocket|) is thread safe. In particular, 
+(|android.bluetooth.BluetoothSocket|) will always immediately abort ongoing 
+operations and close the socket. 
+
+Note: Requires the (|android.Manifest.permission|) permission. 
+
+Developer Guides For more information about using Bluetooth, read the <a 
+href="guide/topics/wireless/bluetooth.html">Bluetooth developer guide. 
+(|android.bluetooth.BluetoothServerSocket|) (|java.io.InputStream|) 
+(|java.io.OutputStream|) 
+
+
+
+*int_android.bluetooth.BluetoothSocket.MAX_RFCOMM_CHANNEL*
+
+
+
+
+
+*android.bluetooth.BluetoothSocket.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.bluetooth.BluetoothSocket.connect()*
+
+public void connect()
+  throws |java.io.IOException|
+         
+Attempt to connect to a remote device. This method will block until a 
+connection is made or the connection fails. If this method returns without an 
+exception then this socket is now connected. Creating new connections to remote 
+Bluetooth devices should not be attempted while device discovery is in 
+progress. Device discovery is a heavyweight procedure on the Bluetooth adapter 
+and will significantly slow a device connection. Use 
+(|android.bluetooth.BluetoothAdapter|) to cancel an ongoing discovery. 
+Discovery is not managed by the Activity, but is run as a system service, so an 
+application should always call (|android.bluetooth.BluetoothAdapter|) even if 
+it did not directly request a discovery, just to be sure. 
+(|android.bluetooth.BluetoothSocket|) can be used to abort this call from 
+another thread. 
+
+
+
+*android.bluetooth.BluetoothSocket.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.bluetooth.BluetoothSocket.getInputStream()*
+
+public |java.io.InputStream| getInputStream()
+  throws |java.io.IOException|
+         
+Get the input stream associated with this socket. The input stream will be 
+returned even if the socket is not yet connected, but operations on that stream 
+will throw IOException until the associated socket is connected. 
+
+
+
+    Returns: 
+
+*android.bluetooth.BluetoothSocket.getOutputStream()*
+
+public |java.io.OutputStream| getOutputStream()
+  throws |java.io.IOException|
+         
+Get the output stream associated with this socket. The output stream will be 
+returned even if the socket is not yet connected, but operations on that stream 
+will throw IOException until the associated socket is connected. 
+
+
+
+    Returns: 
+
+*android.bluetooth.BluetoothSocket.getRemoteDevice()*
+
+public |android.bluetooth.BluetoothDevice| getRemoteDevice()
+
+Get the remote device this socket is connecting, or connected, to. 
+
+
+
+    Returns: remote device 
+
+*android.bluetooth.BluetoothSocket.isConnected()*
+
+public boolean isConnected()
+
+Get the connection status of this socket, ie, whether there is an active 
+connection with remote device. 
+
+
+
+    Returns: true if connected false if not connected 
+
+

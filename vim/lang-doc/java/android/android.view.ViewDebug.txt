@@ -1,0 +1,260 @@
+*android.view.ViewDebug* *ViewDebug* Various debugging/tracing tools related toV
+
+public class ViewDebug
+  extends    |java.lang.Object|
+
+|android.view.ViewDebug_Description|
+|android.view.ViewDebug_Fields|
+|android.view.ViewDebug_Constructors|
+|android.view.ViewDebug_Methods|
+
+================================================================================
+
+*android.view.ViewDebug_Fields*
+|boolean_android.view.ViewDebug.DEBUG_DRAG|
+|boolean_android.view.ViewDebug.TRACE_HIERARCHY|
+|boolean_android.view.ViewDebug.TRACE_RECYCLER|
+
+*android.view.ViewDebug_Constructors*
+|android.view.ViewDebug()|
+
+*android.view.ViewDebug_Methods*
+|android.view.ViewDebug.capture(View,OutputStream,View)|
+|android.view.ViewDebug.captureLayers(View,DataOutputStream)|
+|android.view.ViewDebug.dump(View,boolean,boolean,OutputStream)|Dumps the view 
+|android.view.ViewDebug.dumpCapturedView(String,Object)|Dump view info for id b
+|android.view.ViewDebug.findView(View,String)|
+|android.view.ViewDebug.getViewInstanceCount()|Returns the number of instanciat
+|android.view.ViewDebug.getViewRootImplCount()|Returns the number of instanciat
+|android.view.ViewDebug.invokeViewMethod(View,Method,Object[])|Invoke a particu
+|android.view.ViewDebug.outputDisplayList(View,View)|
+|android.view.ViewDebug.profileViewAndChildren(View,BufferedWriter)|
+|android.view.ViewDebug.setLayoutParameter(View,String,int)|
+|android.view.ViewDebug.startHierarchyTracing(String,View)|
+|android.view.ViewDebug.startRecyclerTracing(String,View)|
+|android.view.ViewDebug.stopHierarchyTracing()|
+|android.view.ViewDebug.stopRecyclerTracing()|
+|android.view.ViewDebug.trace(View,ViewDebug.HierarchyTraceType)|
+|android.view.ViewDebug.trace(View,ViewDebug.RecyclerTraceType,int...)|
+
+*android.view.ViewDebug_Description*
+
+Various debugging/tracing tools related to (|android.view.View|) and the view 
+hierarchy. 
+
+
+
+*boolean_android.view.ViewDebug.DEBUG_DRAG*
+
+Enables detailed logging of drag/drop operations. 
+
+
+*boolean_android.view.ViewDebug.TRACE_HIERARCHY*
+
+
+
+
+*boolean_android.view.ViewDebug.TRACE_RECYCLER*
+
+
+
+
+
+*android.view.ViewDebug()*
+
+public ViewDebug()
+
+
+
+
+*android.view.ViewDebug.capture(View,OutputStream,View)*
+
+public static void capture(
+  android.view.View root,
+  java.io.OutputStream clientStream,
+  android.view.View captureView)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.view.ViewDebug.captureLayers(View,DataOutputStream)*
+
+public static void captureLayers(
+  android.view.View root,
+  java.io.DataOutputStream clientStream)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.view.ViewDebug.dump(View,boolean,boolean,OutputStream)*
+
+public static void dump(
+  android.view.View root,
+  boolean skipChildren,
+  boolean includeProperties,
+  java.io.OutputStream clientStream)
+  throws |java.io.IOException|
+         
+Dumps the view hierarchy starting from the given view. 
+
+
+
+*android.view.ViewDebug.dumpCapturedView(String,Object)*
+
+public static void dumpCapturedView(
+  java.lang.String tag,
+  java.lang.Object view)
+
+Dump view info for id based instrument test generation (and possibly further 
+data analysis). The results are dumped to the log. 
+
+
+    tag - for log 
+    view - for dump 
+
+*android.view.ViewDebug.findView(View,String)*
+
+public static |android.view.View| findView(
+  android.view.View root,
+  java.lang.String parameter)
+
+
+
+
+
+*android.view.ViewDebug.getViewInstanceCount()*
+
+public static long getViewInstanceCount()
+
+Returns the number of instanciated Views. 
+
+
+
+    Returns: The number of Views instanciated in the current process. 
+
+*android.view.ViewDebug.getViewRootImplCount()*
+
+public static long getViewRootImplCount()
+
+Returns the number of instanciated ViewAncestors. 
+
+
+
+    Returns: The number of ViewAncestors instanciated in the current process. 
+
+*android.view.ViewDebug.invokeViewMethod(View,Method,Object[])*
+
+public static |java.lang.Object| invokeViewMethod(
+  android.view.View view,
+  java.lang.reflect.Method method,
+  java.lang.Object[] args)
+
+Invoke a particular method on given view. The given method is always invoked on 
+the UI thread. The caller thread will stall until the method invocation is 
+complete. Returns an object equal to the result of the method invocation, null 
+if the method is declared to return void 
+
+
+
+*android.view.ViewDebug.outputDisplayList(View,View)*
+
+public static void outputDisplayList(
+  android.view.View root,
+  android.view.View target)
+
+
+
+
+
+*android.view.ViewDebug.profileViewAndChildren(View,BufferedWriter)*
+
+public static void profileViewAndChildren(
+  android.view.View view,
+  java.io.BufferedWriter out)
+  throws |java.io.IOException|
+         
+
+
+
+
+*android.view.ViewDebug.setLayoutParameter(View,String,int)*
+
+public static void setLayoutParameter(
+  android.view.View view,
+  java.lang.String param,
+  int value)
+  throws |java.lang.IllegalAccessException|
+         |java.lang.NoSuchFieldException|
+         
+
+
+
+
+*android.view.ViewDebug.startHierarchyTracing(String,View)*
+
+public static void startHierarchyTracing(
+  java.lang.String prefix,
+  android.view.View view)
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+*android.view.ViewDebug.startRecyclerTracing(String,View)*
+
+public static void startRecyclerTracing(
+  java.lang.String prefix,
+  android.view.View view)
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+*android.view.ViewDebug.stopHierarchyTracing()*
+
+public static void stopHierarchyTracing()
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+*android.view.ViewDebug.stopRecyclerTracing()*
+
+public static void stopRecyclerTracing()
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+*android.view.ViewDebug.trace(View,ViewDebug.HierarchyTraceType)*
+
+public static void trace(
+  android.view.View view,
+  android.view.ViewDebug.HierarchyTraceType type)
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+*android.view.ViewDebug.trace(View,ViewDebug.RecyclerTraceType,int...)*
+
+public static void trace(
+  android.view.View view,
+  android.view.ViewDebug.RecyclerTraceType type,
+  int[] parameters)
+
+
+
+    Deprecated: This method is now unused and invoking it is a no-op
+
+
+

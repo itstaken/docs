@@ -1,0 +1,76 @@
+*android.accounts.AccountAuthenticatorActivity* *AccountAuthenticatorActivity* B
+
+public class AccountAuthenticatorActivity
+  extends    |android.app.Activity|
+
+|android.accounts.AccountAuthenticatorActivity_Description|
+|android.accounts.AccountAuthenticatorActivity_Fields|
+|android.accounts.AccountAuthenticatorActivity_Constructors|
+|android.accounts.AccountAuthenticatorActivity_Methods|
+
+================================================================================
+
+*android.accounts.AccountAuthenticatorActivity_Constructors*
+|android.accounts.AccountAuthenticatorActivity()|
+
+*android.accounts.AccountAuthenticatorActivity_Methods*
+|android.accounts.AccountAuthenticatorActivity.finish()|Sends the result or a C
+|android.accounts.AccountAuthenticatorActivity.onCreate(Bundle)|Retreives the A
+|android.accounts.AccountAuthenticatorActivity.setAccountAuthenticatorResult(Bundle)|
+
+*android.accounts.AccountAuthenticatorActivity_Description*
+
+Base class for implementing an Activity that is used to help implement an 
+AbstractAccountAuthenticator. If the AbstractAccountAuthenticator needs to use 
+an activity to handle the request then it can have the activity extend 
+AccountAuthenticatorActivity. The AbstractAccountAuthenticator passes in the 
+response to the intent using the following: 
+
+intent.putExtra( (|android.accounts.AccountManager|) , response); 
+
+The activity then sets the result that is to be handed to the response via 
+(|android.accounts.AccountAuthenticatorActivity|) . This result will be sent as 
+the result of the request when the activity finishes. If this is never set or 
+if it is set to null then error (|android.accounts.AccountManager|) will be 
+called on the response. 
+
+
+
+*android.accounts.AccountAuthenticatorActivity()*
+
+public AccountAuthenticatorActivity()
+
+
+
+
+*android.accounts.AccountAuthenticatorActivity.finish()*
+
+public void finish()
+
+Sends the result or a Constants.ERROR_CODE_CANCELED error if a result isn't 
+present. 
+
+
+
+*android.accounts.AccountAuthenticatorActivity.onCreate(Bundle)*
+
+protected void onCreate(android.os.Bundle icicle)
+
+Retreives the AccountAuthenticatorResponse from either the intent of the 
+icicle, if the icicle is non-zero. 
+
+
+    icicle - the save instance data of this Activity, may be null 
+
+*android.accounts.AccountAuthenticatorActivity.setAccountAuthenticatorResult(Bundle)*
+
+public final void setAccountAuthenticatorResult(android.os.Bundle result)
+
+Set the result that is to be sent as the result of the request that caused this 
+Activity to be launched. If result is null or this method is never called then 
+the request will be canceled. 
+
+
+    result - this is returned as the result of the AbstractAccountAuthenticator request 
+
+

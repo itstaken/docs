@@ -1,0 +1,428 @@
+*android.widget.VideoView* *VideoView* Displays a video file.
+
+public class VideoView
+  extends    |android.view.SurfaceView|
+  implements |android.widget.MediaController.MediaPlayerControl|
+
+|android.widget.VideoView_Description|
+|android.widget.VideoView_Fields|
+|android.widget.VideoView_Constructors|
+|android.widget.VideoView_Methods|
+
+================================================================================
+
+*android.widget.VideoView_Constructors*
+|android.widget.VideoView(Context)|
+|android.widget.VideoView(Context,AttributeSet)|
+|android.widget.VideoView(Context,AttributeSet,int)|
+
+*android.widget.VideoView_Methods*
+|android.widget.VideoView.addSubtitleSource(InputStream,MediaFormat)|Adds an ex
+|android.widget.VideoView.canPause()|
+|android.widget.VideoView.canSeekBackward()|
+|android.widget.VideoView.canSeekForward()|
+|android.widget.VideoView.draw(Canvas)|
+|android.widget.VideoView.getAudioSessionId()|
+|android.widget.VideoView.getBufferPercentage()|
+|android.widget.VideoView.getCurrentPosition()|
+|android.widget.VideoView.getDuration()|
+|android.widget.VideoView.getSubtitleLooper()|
+|android.widget.VideoView.isPlaying()|
+|android.widget.VideoView.onAttachedToWindow()|
+|android.widget.VideoView.onDetachedFromWindow()|
+|android.widget.VideoView.onInitializeAccessibilityEvent(AccessibilityEvent)|
+|android.widget.VideoView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)|
+|android.widget.VideoView.onKeyDown(int,KeyEvent)|
+|android.widget.VideoView.onLayout(boolean,int,int,int,int)|
+|android.widget.VideoView.onMeasure(int,int)|
+|android.widget.VideoView.onTouchEvent(MotionEvent)|
+|android.widget.VideoView.onTrackballEvent(MotionEvent)|
+|android.widget.VideoView.pause()|
+|android.widget.VideoView.resolveAdjustedSize(int,int)|
+|android.widget.VideoView.resume()|
+|android.widget.VideoView.seekTo(int)|
+|android.widget.VideoView.setMediaController(MediaController)|
+|android.widget.VideoView.setOnCompletionListener(OnCompletionListener)|Registe
+|android.widget.VideoView.setOnErrorListener(OnErrorListener)|Register a callba
+|android.widget.VideoView.setOnInfoListener(OnInfoListener)|Register a callback
+|android.widget.VideoView.setOnPreparedListener(MediaPlayer.OnPreparedListener)|
+|android.widget.VideoView.setSubtitleWidget(RenderingWidget)|
+|android.widget.VideoView.setVideoPath(String)|
+|android.widget.VideoView.setVideoURI(Uri)|
+|android.widget.VideoView.setVideoURI(Uri,Map<String,String>)|
+|android.widget.VideoView.start()|
+|android.widget.VideoView.stopPlayback()|
+|android.widget.VideoView.suspend()|
+
+*android.widget.VideoView_Description*
+
+Displays a video file. The VideoView class can load images from various sources 
+(such as resources or content providers), takes care of computing its 
+measurement from the video so that it can be used in any layout manager, and 
+provides various display options such as scaling and tinting. 
+
+Note: VideoView does not retain its full state when going into the background. 
+In particular, it does not restore the current play state, play position, 
+selected tracks, or any subtitle tracks added via 
+addSubtitleSource()(|android.widget.VideoView|) . Applications should save and 
+restore these on their own in (|android.app.Activity|) and 
+(|android.app.Activity|) . Also note that the audio session id (from 
+(|android.widget.VideoView|) ) may change from its previously returned value 
+when the VideoView is restored. 
+
+
+
+*android.widget.VideoView(Context)*
+
+public VideoView(android.content.Context context)
+
+
+
+
+*android.widget.VideoView(Context,AttributeSet)*
+
+public VideoView(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+
+
+
+*android.widget.VideoView(Context,AttributeSet,int)*
+
+public VideoView(
+  android.content.Context context,
+  android.util.AttributeSet attrs,
+  int defStyle)
+
+
+
+
+*android.widget.VideoView.addSubtitleSource(InputStream,MediaFormat)*
+
+public void addSubtitleSource(
+  java.io.InputStream is,
+  MediaFormat format)
+
+Adds an external subtitle source file (from the provided input stream.) 
+
+Note that a single external subtitle source may contain multiple or no 
+supported tracks in it. If the source contained at least one track in it, one 
+will receive an (|MediaPlayer|) info message. Otherwise, if reading the source 
+takes excessive time, one will receive a (|MediaPlayer|) message. If the source 
+contained no supported track (including an empty source file or null input 
+stream), one will receive a (|MediaPlayer|) message. One can find the total 
+number of available tracks using (|MediaPlayer|) to see what additional tracks 
+become available after this method call. 
+
+
+    is - input stream containing the subtitle data. It will be closed by the media 
+       framework. 
+    format - the format of the subtitle track(s). Must contain at least the mime type 
+       ({@link MediaFormat#KEY_MIME}) and the language ({@link 
+       MediaFormat#KEY_LANGUAGE}) of the file. If the file itself contains the 
+       language information, specify "und" for the language. 
+
+*android.widget.VideoView.canPause()*
+
+public boolean canPause()
+
+
+
+
+
+*android.widget.VideoView.canSeekBackward()*
+
+public boolean canSeekBackward()
+
+
+
+
+
+*android.widget.VideoView.canSeekForward()*
+
+public boolean canSeekForward()
+
+
+
+
+
+*android.widget.VideoView.draw(Canvas)*
+
+public void draw(Canvas canvas)
+
+
+
+
+
+*android.widget.VideoView.getAudioSessionId()*
+
+public int getAudioSessionId()
+
+
+
+
+
+*android.widget.VideoView.getBufferPercentage()*
+
+public int getBufferPercentage()
+
+
+
+
+
+*android.widget.VideoView.getCurrentPosition()*
+
+public int getCurrentPosition()
+
+
+
+
+
+*android.widget.VideoView.getDuration()*
+
+public int getDuration()
+
+
+
+
+
+*android.widget.VideoView.getSubtitleLooper()*
+
+public |android.os.Looper| getSubtitleLooper()
+
+
+
+
+
+*android.widget.VideoView.isPlaying()*
+
+public boolean isPlaying()
+
+
+
+
+
+*android.widget.VideoView.onAttachedToWindow()*
+
+protected void onAttachedToWindow()
+
+
+
+
+
+*android.widget.VideoView.onDetachedFromWindow()*
+
+protected void onDetachedFromWindow()
+
+
+
+
+
+*android.widget.VideoView.onInitializeAccessibilityEvent(AccessibilityEvent)*
+
+public void onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent event)
+
+
+
+
+
+*android.widget.VideoView.onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo)*
+
+public void onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo info)
+
+
+
+
+
+*android.widget.VideoView.onKeyDown(int,KeyEvent)*
+
+public boolean onKeyDown(
+  int keyCode,
+  android.view.KeyEvent event)
+
+
+
+
+
+*android.widget.VideoView.onLayout(boolean,int,int,int,int)*
+
+protected void onLayout(
+  boolean changed,
+  int left,
+  int top,
+  int right,
+  int bottom)
+
+
+
+
+
+*android.widget.VideoView.onMeasure(int,int)*
+
+protected void onMeasure(
+  int widthMeasureSpec,
+  int heightMeasureSpec)
+
+
+
+
+
+*android.widget.VideoView.onTouchEvent(MotionEvent)*
+
+public boolean onTouchEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.VideoView.onTrackballEvent(MotionEvent)*
+
+public boolean onTrackballEvent(android.view.MotionEvent ev)
+
+
+
+
+
+*android.widget.VideoView.pause()*
+
+public void pause()
+
+
+
+
+
+*android.widget.VideoView.resolveAdjustedSize(int,int)*
+
+public int resolveAdjustedSize(
+  int desiredSize,
+  int measureSpec)
+
+
+
+
+
+*android.widget.VideoView.resume()*
+
+public void resume()
+
+
+
+
+
+*android.widget.VideoView.seekTo(int)*
+
+public void seekTo(int msec)
+
+
+
+
+
+*android.widget.VideoView.setMediaController(MediaController)*
+
+public void setMediaController(android.widget.MediaController controller)
+
+
+
+
+
+*android.widget.VideoView.setOnCompletionListener(OnCompletionListener)*
+
+public void setOnCompletionListener(OnCompletionListener l)
+
+Register a callback to be invoked when the end of a media file has been reached 
+during playback. 
+
+
+    l - The callback that will be run 
+
+*android.widget.VideoView.setOnErrorListener(OnErrorListener)*
+
+public void setOnErrorListener(OnErrorListener l)
+
+Register a callback to be invoked when an error occurs during playback or 
+setup. If no listener is specified, or if the listener returned false, 
+VideoView will inform the user of any errors. 
+
+
+    l - The callback that will be run 
+
+*android.widget.VideoView.setOnInfoListener(OnInfoListener)*
+
+public void setOnInfoListener(OnInfoListener l)
+
+Register a callback to be invoked when an informational event occurs during 
+playback or setup. 
+
+
+    l - The callback that will be run 
+
+*android.widget.VideoView.setOnPreparedListener(MediaPlayer.OnPreparedListener)*
+
+public void setOnPreparedListener(MediaPlayer.OnPreparedListener l)
+
+Register a callback to be invoked when the media file is loaded and ready to 
+go. 
+
+
+    l - The callback that will be run 
+
+*android.widget.VideoView.setSubtitleWidget(RenderingWidget)*
+
+public void setSubtitleWidget(RenderingWidget subtitleWidget)
+
+
+
+
+
+*android.widget.VideoView.setVideoPath(String)*
+
+public void setVideoPath(java.lang.String path)
+
+
+
+
+
+*android.widget.VideoView.setVideoURI(Uri)*
+
+public void setVideoURI(android.net.Uri uri)
+
+
+
+
+
+*android.widget.VideoView.setVideoURI(Uri,Map<String,String>)*
+
+public void setVideoURI(
+  android.net.Uri uri,
+  java.util.Map<java.lang.String, java.lang.String> headers)
+
+
+
+
+
+*android.widget.VideoView.start()*
+
+public void start()
+
+
+
+
+
+*android.widget.VideoView.stopPlayback()*
+
+public void stopPlayback()
+
+
+
+
+
+*android.widget.VideoView.suspend()*
+
+public void suspend()
+
+
+
+
+
+

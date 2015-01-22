@@ -1,0 +1,684 @@
+*android.text.format.Time* *Time* An alternative to thejava.util.Calendarandjava
+
+public class Time
+  extends    |java.lang.Object|
+
+|android.text.format.Time_Description|
+|android.text.format.Time_Fields|
+|android.text.format.Time_Constructors|
+|android.text.format.Time_Methods|
+
+================================================================================
+
+*android.text.format.Time_Fields*
+|boolean_android.text.format.Time.allDay|
+|int_android.text.format.Time.EPOCH_JULIAN_DAY|
+|int_android.text.format.Time.FRIDAY|
+|long_android.text.format.Time.gmtoff|
+|int_android.text.format.Time.hour|
+|int_android.text.format.Time.HOUR|
+|int_android.text.format.Time.isDst|
+|int_android.text.format.Time.minute|
+|int_android.text.format.Time.MINUTE|
+|int_android.text.format.Time.MONDAY|
+|int_android.text.format.Time.MONDAY_BEFORE_JULIAN_EPOCH|
+|int_android.text.format.Time.month|
+|int_android.text.format.Time.MONTH|
+|int_android.text.format.Time.MONTH_DAY|
+|int_android.text.format.Time.monthDay|
+|int_android.text.format.Time.SATURDAY|
+|int_android.text.format.Time.second|
+|int_android.text.format.Time.SECOND|
+|int_android.text.format.Time.SUNDAY|
+|int_android.text.format.Time.THURSDAY|
+|java.lang.String_android.text.format.Time.timezone|
+|java.lang.String_android.text.format.Time.TIMEZONE_UTC|
+|int_android.text.format.Time.TUESDAY|
+|int_android.text.format.Time.WEDNESDAY|
+|int_android.text.format.Time.WEEK_DAY|
+|int_android.text.format.Time.WEEK_NUM|
+|int_android.text.format.Time.weekDay|
+|int_android.text.format.Time.year|
+|int_android.text.format.Time.YEAR|
+|int_android.text.format.Time.YEAR_DAY|
+|int_android.text.format.Time.yearDay|
+
+*android.text.format.Time_Constructors*
+|android.text.format.Time()|Construct a Time object in the default timezone.
+|android.text.format.Time(String)|Construct a Time object in the timezone named
+|android.text.format.Time(Time)|A copy constructor.
+
+*android.text.format.Time_Methods*
+|android.text.format.Time.after(Time)|Returns true if the time represented by t
+|android.text.format.Time.before(Time)|Returns true if the time represented by 
+|android.text.format.Time.clear(String)|Clears all values, setting the timezone
+|android.text.format.Time.compare(Time,Time)|Compare twoTimeobjects and return 
+|android.text.format.Time.format(String)|Print the current value given the form
+|android.text.format.Time.format2445()|Format according to RFC 2445 DATETIME ty
+|android.text.format.Time.format3339(boolean)|Return a string in the RFC 3339 f
+|android.text.format.Time.getActualMaximum(int)|Return the maximum possible val
+|android.text.format.Time.getCurrentTimezone()|Returns the timezone string that
+|android.text.format.Time.getJulianDay(long,long)|Computes the Julian day numbe
+|android.text.format.Time.getJulianMondayFromWeeksSinceEpoch(int)|Takes a numbe
+|android.text.format.Time.getWeekNumber()|Computes the week number according to
+|android.text.format.Time.getWeeksSinceEpochFromJulianDay(int,int)|Returns the 
+|android.text.format.Time.isEpoch(Time)|Returns true if the day of the given ti
+|android.text.format.Time.normalize(boolean)|Ensures the values in each field a
+|android.text.format.Time.parse(String)|Parses a date-time string in either the
+|android.text.format.Time.parse3339(String)|Parse a time in RFC 3339 format.
+|android.text.format.Time.set(int,int,int)|Sets the date from the given fields.
+|android.text.format.Time.set(int,int,int,int,int,int)|Sets the fields.
+|android.text.format.Time.set(long)|Sets the fields in this Time object given t
+|android.text.format.Time.set(Time)|Copy the value of that to this Time object.
+|android.text.format.Time.setJulianDay(int)|Sets the time from the given Julian
+|android.text.format.Time.setToNow()|Sets the time of the given Time object to 
+|android.text.format.Time.switchTimezone(String)|Convert this time object so th
+|android.text.format.Time.toMillis(boolean)|Converts this time to milliseconds.
+|android.text.format.Time.toString()|Return the current time in YYYYMMDDTHHMMSS
+
+*android.text.format.Time_Description*
+
+An alternative to the (|java.util.Calendar|) and 
+(|java.util.GregorianCalendar|) classes. An instance of the Time class 
+represents a moment in time, specified with second precision. It is modelled 
+after struct tm, and in fact, uses struct tm to implement most of the 
+functionality. 
+
+
+
+*boolean_android.text.format.Time.allDay*
+
+True if this is an allDay event. The hour, minute, second fields are all zero, 
+and the date is displayed the same in all time zones. 
+
+
+*int_android.text.format.Time.EPOCH_JULIAN_DAY*
+
+The Julian day of the epoch, that is, January 1, 1970 on the Gregorian 
+calendar. 
+
+
+*int_android.text.format.Time.FRIDAY*
+
+
+
+
+*long_android.text.format.Time.gmtoff*
+
+Offset from UTC (in seconds). 
+
+
+*int_android.text.format.Time.hour*
+
+Hour of day [0-23] 
+
+
+*int_android.text.format.Time.HOUR*
+
+
+
+
+*int_android.text.format.Time.isDst*
+
+This time is in daylight savings time. One of: 
+
+positive - in dst 0 - not in dst negative - unknown 
+
+
+*int_android.text.format.Time.minute*
+
+Minute [0-59] 
+
+
+*int_android.text.format.Time.MINUTE*
+
+
+
+
+*int_android.text.format.Time.MONDAY*
+
+
+
+
+*int_android.text.format.Time.MONDAY_BEFORE_JULIAN_EPOCH*
+
+The Julian day of the Monday in the week of the epoch, December 29, 1969 on the 
+Gregorian calendar. 
+
+
+*int_android.text.format.Time.month*
+
+Month [0-11] 
+
+
+*int_android.text.format.Time.MONTH*
+
+
+
+
+*int_android.text.format.Time.MONTH_DAY*
+
+
+
+
+*int_android.text.format.Time.monthDay*
+
+Day of month [1-31] 
+
+
+*int_android.text.format.Time.SATURDAY*
+
+
+
+
+*int_android.text.format.Time.second*
+
+Seconds [0-61] (2 leap seconds allowed) 
+
+
+*int_android.text.format.Time.SECOND*
+
+
+
+
+*int_android.text.format.Time.SUNDAY*
+
+
+
+
+*int_android.text.format.Time.THURSDAY*
+
+
+
+
+*java.lang.String_android.text.format.Time.timezone*
+
+The timezone for this Time. Should not be null. 
+
+
+*java.lang.String_android.text.format.Time.TIMEZONE_UTC*
+
+
+
+
+*int_android.text.format.Time.TUESDAY*
+
+
+
+
+*int_android.text.format.Time.WEDNESDAY*
+
+
+
+
+*int_android.text.format.Time.WEEK_DAY*
+
+
+
+
+*int_android.text.format.Time.WEEK_NUM*
+
+
+
+
+*int_android.text.format.Time.weekDay*
+
+Day of week [0-6] 
+
+
+*int_android.text.format.Time.year*
+
+Year. For example, 1970. 
+
+
+*int_android.text.format.Time.YEAR*
+
+
+
+
+*int_android.text.format.Time.YEAR_DAY*
+
+
+
+
+*int_android.text.format.Time.yearDay*
+
+Day of year [0-365] 
+
+
+
+*android.text.format.Time()*
+
+public Time()
+
+Construct a Time object in the default timezone. The time is initialized to Jan 
+1, 1970. 
+
+
+*android.text.format.Time(String)*
+
+public Time(java.lang.String timezone)
+
+Construct a Time object in the timezone named by the string argument 
+"timezone". The time is initialized to Jan 1, 1970. 
+
+    timezone - string containing the timezone to use. 
+
+*android.text.format.Time(Time)*
+
+public Time(android.text.format.Time other)
+
+A copy constructor. Construct a Time object by copying the given Time object. 
+No normalization occurs. 
+
+    other - 
+
+*android.text.format.Time.after(Time)*
+
+public boolean after(android.text.format.Time that)
+
+Returns true if the time represented by this Time object occurs after the given 
+time. 
+
+
+    that - a given Time object to compare against 
+
+    Returns: true if this time is greater than the given time 
+
+*android.text.format.Time.before(Time)*
+
+public boolean before(android.text.format.Time that)
+
+Returns true if the time represented by this Time object occurs before the 
+given time. 
+
+
+    that - a given Time object to compare against 
+
+    Returns: true if this time is less than the given time 
+
+*android.text.format.Time.clear(String)*
+
+public void clear(java.lang.String timezone)
+
+Clears all values, setting the timezone to the given timezone. Sets isDst to a 
+negative value to mean "unknown". 
+
+
+    timezone - the timezone to use. 
+
+*android.text.format.Time.compare(Time,Time)*
+
+public static int compare(
+  android.text.format.Time a,
+  android.text.format.Time b)
+
+Compare twoTimeobjects and return a negative number ifais less thanb, a 
+positive number ifais greater thanb, or 0 if they are equal. 
+
+
+    a - first {@code Time} instance to compare 
+    b - second {@code Time} instance to compare 
+
+    Returns: a negative result if {@code a} is earlier, a positive result if {@code a} is 
+             earlier, or 0 if they are equal. 
+
+*android.text.format.Time.format(String)*
+
+public |java.lang.String| format(java.lang.String format)
+
+Print the current value given the format string provided. See man strftime for 
+what means what. The final string must be less than 256 characters. 
+
+
+    format - a string containing the desired format. 
+
+    Returns: a String containing the current time expressed in the current locale. 
+
+*android.text.format.Time.format2445()*
+
+public native |java.lang.String| format2445()
+
+Format according to RFC 2445 DATETIME type. 
+
+The same as format("%Y%m%dT%H%M%S"). 
+
+
+
+*android.text.format.Time.format3339(boolean)*
+
+public |java.lang.String| format3339(boolean allDay)
+
+Return a string in the RFC 3339 format. 
+
+If allDay is true, expresses the time as Y-M-D 
+
+Otherwise, if the timezone is UTC, expresses the time as Y-M-D-T-H-M-S UTC 
+
+Otherwise the time is expressed the time as Y-M-D-T-H-M-S +- GMT 
+
+
+    allDay - 
+
+    Returns: string in the RFC 3339 format. 
+
+*android.text.format.Time.getActualMaximum(int)*
+
+public int getActualMaximum(int field)
+
+Return the maximum possible value for the given field given the value of the 
+other fields. Requires that it be normalized for MONTH_DAY and YEAR_DAY. 
+
+
+    field - one of the constants for HOUR, MINUTE, SECOND, etc. 
+
+    Returns: the maximum value for the field. 
+
+*android.text.format.Time.getCurrentTimezone()*
+
+public static |java.lang.String| getCurrentTimezone()
+
+Returns the timezone string that is currently set for the device. 
+
+
+
+*android.text.format.Time.getJulianDay(long,long)*
+
+public static int getJulianDay(
+  long millis,
+  long gmtoff)
+
+Computes the Julian day number, given the UTC milliseconds and the offset (in 
+seconds) from UTC. The Julian day for a given date will be the same for every 
+timezone. For example, the Julian day for July 1, 2008 is 2454649. This is the 
+same value no matter what timezone is being used. The Julian day is useful for 
+testing if two events occur on the same day and for determining the relative 
+time of an event from the present ("yesterday", "3 days ago", etc.). 
+
+Use (|android.text.format.Time|) to get the milliseconds. 
+
+
+    millis - the time in UTC milliseconds 
+    gmtoff - the offset from UTC in seconds 
+
+    Returns: the Julian day 
+
+*android.text.format.Time.getJulianMondayFromWeeksSinceEpoch(int)*
+
+public static int getJulianMondayFromWeeksSinceEpoch(int week)
+
+Takes a number of weeks since the epoch and calculates the Julian day of the 
+Monday for that week. This assumes that the week containing the 
+(|android.text.format.Time|) is considered week 0. It returns the Julian day 
+for the Monday week weeks after the Monday of the week containing the epoch. 
+
+
+    week - Number of weeks since the epoch 
+
+    Returns: The julian day for the Monday of the given week since the epoch 
+
+*android.text.format.Time.getWeekNumber()*
+
+public int getWeekNumber()
+
+Computes the week number according to ISO 8601. The current Time object must 
+already be normalized because this method uses the yearDay and weekDay fields. 
+
+In IS0 8601, weeks start on Monday. The first week of the year (week 1) is 
+defined by ISO 8601 as the first week with four or more of its days in the 
+starting year. Or equivalently, the week containing January 4. Or equivalently, 
+the week with the year's first Thursday in it. 
+
+The week number can be calculated by counting Thursdays. Week N contains the 
+Nth Thursday of the year. 
+
+
+
+    Returns: the ISO week number. 
+
+*android.text.format.Time.getWeeksSinceEpochFromJulianDay(int,int)*
+
+public static int getWeeksSinceEpochFromJulianDay(
+  int julianDay,
+  int firstDayOfWeek)
+
+Returns the week since (|android.text.format.Time|) (Jan 1, 1970) adjusted for 
+first day of week. This takes a julian day and the week start day and 
+calculates which week since (|android.text.format.Time|) that day occurs in, 
+starting at 0. *Do not* use this to compute the ISO week number for the year. 
+
+
+    julianDay - The julian day to calculate the week number for 
+    firstDayOfWeek - Which week day is the first day of the week, see {@link #SUNDAY} 
+
+    Returns: Weeks since the epoch 
+
+*android.text.format.Time.isEpoch(Time)*
+
+public static boolean isEpoch(android.text.format.Time time)
+
+Returns true if the day of the given time is the epoch on the Julian Calendar 
+(January 1, 1970 on the Gregorian calendar). 
+
+
+    time - the time to test 
+
+    Returns: true if epoch. 
+
+*android.text.format.Time.normalize(boolean)*
+
+public native long normalize(boolean ignoreDst)
+
+Ensures the values in each field are in range. For example if the current value 
+of this calendar is March 32, normalize() will convert it to April 1. It also 
+fills in weekDay, yearDay, isDst and gmtoff. 
+
+If "ignoreDst" is true, then this method sets the "isDst" field to -1 (the 
+"unknown" value) before normalizing. It then computes the correct value for 
+"isDst". 
+
+See (|android.text.format.Time|) for more information about when to use true or 
+false for "ignoreDst". 
+
+
+
+    Returns: the UTC milliseconds since the epoch 
+
+*android.text.format.Time.parse(String)*
+
+public boolean parse(java.lang.String s)
+
+Parses a date-time string in either the RFC 2445 format or an abbreviated 
+format that does not include the "time" field. For example, all of the 
+following strings are valid: 
+
+"20081013T160000Z" "20081013T160000" "20081013" 
+
+Returns whether or not the time is in UTC (ends with Z). If the string ends 
+with "Z" then the timezone is set to UTC. If the date-time string included only 
+a date and no time field, then the allDay field of this Time class is set to 
+true and the hour, minute, and second fields are set to zero; otherwise (a time 
+field was included in the date-time string) allDay is set to false. The fields 
+weekDay, yearDay, and gmtoff are always set to zero, and the field isDst is set 
+to -1 (unknown). To set those fields, call (|android.text.format.Time|) after 
+parsing. 
+
+To parse a date-time string and convert it to UTC milliseconds, do something 
+like this: 
+
+
+
+Time time = new Time(); String date = "20081013T160000Z"; time.parse(date); 
+long millis = time.normalize(false); 
+
+
+    s - the string to parse 
+
+    Returns: true if the resulting time value is in UTC time 
+
+*android.text.format.Time.parse3339(String)*
+
+public boolean parse3339(java.lang.String s)
+
+Parse a time in RFC 3339 format. This method also parses simple dates (that is, 
+strings that contain no time or time offset). For example, all of the following 
+strings are valid: 
+
+"2008-10-13T16:00:00.000Z" "2008-10-13T16:00:00.000+07:00" 
+"2008-10-13T16:00:00.000-07:00" "2008-10-13" 
+
+If the string contains a time and time offset, then the time offset will be 
+used to convert the time value to UTC. 
+
+If the given string contains just a date (with no time field), then the 
+(|android.text.format.Time|) field is set to true and the 
+(|android.text.format.Time|) , (|android.text.format.Time|) , and 
+(|android.text.format.Time|) fields are set to zero. 
+
+Returns true if the resulting time value is in UTC time. 
+
+
+    s - the string to parse 
+
+    Returns: true if the resulting time value is in UTC time 
+
+*android.text.format.Time.set(int,int,int)*
+
+public void set(
+  int monthDay,
+  int month,
+  int year)
+
+Sets the date from the given fields. Also sets allDay to true. Sets weekDay, 
+yearDay and gmtoff to 0, and isDst to -1. Call (|android.text.format.Time|) if 
+you need those. 
+
+
+    monthDay - the day of the month (in the range [1,31]) 
+    month - the zero-based month number (in the range [0,11]) 
+    year - the year 
+
+*android.text.format.Time.set(int,int,int,int,int,int)*
+
+public void set(
+  int second,
+  int minute,
+  int hour,
+  int monthDay,
+  int month,
+  int year)
+
+Sets the fields. Sets weekDay, yearDay and gmtoff to 0, and isDst to -1. Call 
+(|android.text.format.Time|) if you need those. 
+
+
+
+*android.text.format.Time.set(long)*
+
+public native void set(long millis)
+
+Sets the fields in this Time object given the UTC milliseconds. After this 
+method returns, all the fields are normalized. This also sets the "isDst" field 
+to the correct value. 
+
+
+    millis - the time in UTC milliseconds since the epoch. 
+
+*android.text.format.Time.set(Time)*
+
+public void set(android.text.format.Time that)
+
+Copy the value of that to this Time object. No normalization happens. 
+
+
+
+*android.text.format.Time.setJulianDay(int)*
+
+public long setJulianDay(int julianDay)
+
+Sets the time from the given Julian day number, which must be based on the same 
+timezone that is set in this Time object. The "gmtoff" field need not be 
+initialized because the given Julian day may have a different GMT offset than 
+whatever is currently stored in this Time object anyway. After this method 
+returns all the fields will be normalized and the time will be set to 12am at 
+the beginning of the given Julian day. 
+
+The only exception to this is if 12am does not exist for that day because of 
+daylight saving time. For example, Cairo, Eqypt moves time ahead one hour at 
+12am on April 25, 2008 and there are a few other places that also change 
+daylight saving time at 12am. In those cases, the time will be set to 1am. 
+
+
+    julianDay - the Julian day in the timezone for this Time object 
+
+    Returns: the UTC milliseconds for the beginning of the Julian day 
+
+*android.text.format.Time.setToNow()*
+
+public native void setToNow()
+
+Sets the time of the given Time object to the current time. 
+
+
+
+*android.text.format.Time.switchTimezone(String)*
+
+public native void switchTimezone(java.lang.String timezone)
+
+Convert this time object so the time represented remains the same, but is 
+instead located in a different timezone. This method automatically calls 
+normalize() in some cases 
+
+
+
+*android.text.format.Time.toMillis(boolean)*
+
+public native long toMillis(boolean ignoreDst)
+
+Converts this time to milliseconds. Suitable for interacting with the standard 
+java libraries. The time is in UTC milliseconds since the epoch. This does an 
+implicit normalization to compute the milliseconds but does not change any of 
+the fields in this Time object. If you want to normalize the fields in this 
+Time object and also get the milliseconds then use (|android.text.format.Time|) 
+. 
+
+If "ignoreDst" is false, then this method uses the current setting of the 
+"isDst" field and will adjust the returned time if the "isDst" field is wrong 
+for the given time. See the sample code below for an example of this. 
+
+If "ignoreDst" is true, then this method ignores the current setting of the 
+"isDst" field in this Time object and will instead figure out the correct value 
+of "isDst" (as best it can) from the fields in this Time object. The only case 
+where this method cannot figure out the correct value of the "isDst" field is 
+when the time is inherently ambiguous because it falls in the hour that is 
+repeated when switching from Daylight-Saving Time to Standard Time. 
+
+Here is an example where toMillis(true) adjusts the time, assuming that DST 
+changes at 2am on Sunday, Nov 4, 2007. 
+
+
+
+Time time = new Time(); time.set(4, 10, 2007); // set the date to Nov 4, 2007, 
+12am time.normalize(); // this sets isDst = 1 time.monthDay += 1; // changes 
+the date to Nov 5, 2007, 12am millis = time.toMillis(false); // millis is Nov 
+4, 2007, 11pm millis = time.toMillis(true); // millis is Nov 5, 2007, 12am 
+
+To avoid this problem, use toMillis(true) after adding or subtracting days or 
+explicitly setting the "monthDay" field. On the other hand, if you are adding 
+or subtracting hours or minutes, then you should use toMillis(false). 
+
+You should also use toMillis(false) if you want to read back the same 
+milliseconds that you set with (|android.text.format.Time|) or 
+(|android.text.format.Time|) or after parsing a date string. 
+
+
+
+*android.text.format.Time.toString()*
+
+public native |java.lang.String| toString()
+
+Return the current time in YYYYMMDDTHHMMSS format 
+
+
+
+

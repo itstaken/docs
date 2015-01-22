@@ -1,0 +1,138 @@
+*android.speech.RecognizerResultsIntent* *RecognizerResultsIntent* Constants for
+
+public class RecognizerResultsIntent
+  extends    |java.lang.Object|
+
+|android.speech.RecognizerResultsIntent_Description|
+|android.speech.RecognizerResultsIntent_Fields|
+|android.speech.RecognizerResultsIntent_Constructors|
+|android.speech.RecognizerResultsIntent_Methods|
+
+================================================================================
+
+*android.speech.RecognizerResultsIntent_Fields*
+|java.lang.String_android.speech.RecognizerResultsIntent.ACTION_VOICE_SEARCH_RESULTS|
+|java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTML|
+|java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS|
+|java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS|
+|java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_STRINGS|
+|java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_URLS|
+|java.lang.String_android.speech.RecognizerResultsIntent.URI_SCHEME_INLINE|
+
+*android.speech.RecognizerResultsIntent_Description*
+
+Constants for intents related to showing speech recognition results. 
+
+These constants should not be needed for normal utilization of speech 
+recognition. They would only be called if you wanted to trigger a view of voice 
+search results in your application, or implemented if you wanted to offer a 
+different view for voice search results with your application. 
+
+The standard behavior here for someone receiving an 
+(|android.speech.RecognizerResultsIntent|) is to first retrieve the list of 
+(|android.speech.RecognizerResultsIntent|) , and use any provided HTML for that 
+result in (|android.speech.RecognizerResultsIntent|) , if available, to display 
+the search results. If that is not available, then the corresponding url for 
+that result in (|android.speech.RecognizerResultsIntent|) should be used. And 
+if even that is not available, then a search url should be constructed from the 
+actual recognition result string. 
+
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.ACTION_VOICE_SEARCH_RESULTS*
+
+Intent that can be sent by implementations of voice search to display the 
+results of a search in, for example, a web browser. 
+
+This intent should always be accompanied by at least 
+(|android.speech.RecognizerResultsIntent|) , and optionally but recommended, 
+(|android.speech.RecognizerResultsIntent|) , and sometimes 
+(|android.speech.RecognizerResultsIntent|) and 
+(|android.speech.RecognizerResultsIntent|) . 
+
+These are parallel arrays, where a recognition result string at index N of 
+(|android.speech.RecognizerResultsIntent|) should be accompanied by a url to 
+use for searching based on that string at index N of 
+(|android.speech.RecognizerResultsIntent|) , and, possibly, the full html to 
+display for that result at index N of 
+(|android.speech.RecognizerResultsIntent|) . If full html is provided, a base 
+url (or list of base urls) should be provided with 
+(|android.speech.RecognizerResultsIntent|) . 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTML*
+
+The key to an extra (|java.util.ArrayList|) of (|java.lang.String|) s that 
+contains the html content to use, if available, for the recognition alternates 
+provided in (|android.speech.RecognizerResultsIntent|) . This list should 
+always be the same size as the one provided in 
+(|android.speech.RecognizerResultsIntent|) - if a result cannot provide html, 
+that entry in this list should be null, and the implementor of 
+(|android.speech.RecognizerResultsIntent|) should back off to the corresponding 
+url provided in (|android.speech.RecognizerResultsIntent|) , if available, or 
+else should execute a search of its own choosing, based on the recognition 
+result string. 
+
+Currently this html content should be expected in the form of a uri with scheme 
+(|android.speech.RecognizerResultsIntent|) for the Browser. In the future this 
+may change to a "content://" uri or some other identifier. Anyone who reads 
+this extra should confirm that a result is in fact an "inline:" uri and back 
+off to the urls or strings gracefully if it is not, thus maintaining future 
+backwards compatibility if this changes. 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTML_BASE_URLS*
+
+The key to an extra (|java.util.ArrayList|) of (|java.lang.String|) s that 
+contains the base url to assume when interpreting html provided in 
+(|android.speech.RecognizerResultsIntent|) . 
+
+A list of size 1 may be provided to apply the same base url to all html 
+results. A list of the same size as (|android.speech.RecognizerResultsIntent|) 
+may be provided to apply different base urls to each different html result in 
+the (|android.speech.RecognizerResultsIntent|) list. 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS*
+
+The key to an extra (|java.util.ArrayList|) of (|android.os.Bundle|) s that 
+contains key/value pairs. All the values and the keys are (|java.lang.String|) 
+s. Each key/value pair represents an extra HTTP header. The keys can't be the 
+standard HTTP headers as they are set by the WebView. 
+
+A list of size 1 may be provided to apply the same HTTP headers to all web 
+results. A list of the same size as (|android.speech.RecognizerResultsIntent|) 
+may be provided to apply different HTTP headers to each different web result in 
+the list. These headers will only be used in the case that the url for a 
+particular web result (from (|android.speech.RecognizerResultsIntent|) ) is 
+loaded. 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_STRINGS*
+
+The key to an extra (|java.util.ArrayList|) of (|java.lang.String|) s that 
+contains the list of recognition alternates from voice search, in order from 
+highest to lowest confidence. 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.EXTRA_VOICE_SEARCH_RESULT_URLS*
+
+The key to an extra (|java.util.ArrayList|) of (|java.lang.String|) s that 
+contains the search urls to use, if available, for the recognition alternates 
+provided in (|android.speech.RecognizerResultsIntent|) . This list should 
+always be the same size as the one provided in 
+(|android.speech.RecognizerResultsIntent|) - if a result cannot provide a 
+search url, that entry in this ArrayList should be null, and the implementor of 
+(|android.speech.RecognizerResultsIntent|) should execute a search of its own 
+choosing, based on the recognition result string. 
+
+
+*java.lang.String_android.speech.RecognizerResultsIntent.URI_SCHEME_INLINE*
+
+The scheme used currently for html content in 
+(|android.speech.RecognizerResultsIntent|) . Note that this should only be used 
+in tandem with this particular extra; it should NOT be used for generic URIs 
+such as those found in the data field of an Intent. 
+
+
+

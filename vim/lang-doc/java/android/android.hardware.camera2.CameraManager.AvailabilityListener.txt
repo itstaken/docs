@@ -1,0 +1,63 @@
+*android.hardware.camera2.CameraManager.AvailabilityListener* *CameraManager.AvailabilityListener* 
+
+public abstract static class CameraManager.AvailabilityListener
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.CameraManager.AvailabilityListener_Description|
+|android.hardware.camera2.CameraManager.AvailabilityListener_Fields|
+|android.hardware.camera2.CameraManager.AvailabilityListener_Constructors|
+|android.hardware.camera2.CameraManager.AvailabilityListener_Methods|
+
+================================================================================
+
+*android.hardware.camera2.CameraManager.AvailabilityListener_Constructors*
+|android.hardware.camera2.CameraManager.AvailabilityListener()|
+
+*android.hardware.camera2.CameraManager.AvailabilityListener_Methods*
+|android.hardware.camera2.CameraManager.AvailabilityListener.onCameraAvailable(String)|
+|android.hardware.camera2.CameraManager.AvailabilityListener.onCameraUnavailable(String)|
+
+*android.hardware.camera2.CameraManager.AvailabilityListener_Description*
+
+Interface for listening to camera devices becoming available or unavailable. 
+
+Cameras become available when they are no longer in use, or when a new 
+removable camera is connected. They become unavailable when some application or 
+service starts using a camera, or when a removable camera is disconnected. 
+
+
+
+*android.hardware.camera2.CameraManager.AvailabilityListener()*
+
+public CameraManager.AvailabilityListener()
+
+
+
+
+*android.hardware.camera2.CameraManager.AvailabilityListener.onCameraAvailable(String)*
+
+public void onCameraAvailable(java.lang.String cameraId)
+
+A new camera has become available to use. 
+
+The default implementation of this method does nothing. 
+
+
+    cameraId - The unique identifier of the new camera. 
+
+*android.hardware.camera2.CameraManager.AvailabilityListener.onCameraUnavailable(String)*
+
+public void onCameraUnavailable(java.lang.String cameraId)
+
+A previously-available camera has become unavailable for use. 
+
+If an application had an active CameraDevice instance for the now-disconnected 
+camera, that application will receive a disconnection 
+error(|android.hardware.camera2.CameraDevice.StateListener|) . 
+
+The default implementation of this method does nothing. 
+
+
+    cameraId - The unique identifier of the disconnected camera. 
+
+

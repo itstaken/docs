@@ -1,0 +1,252 @@
+*android.os.Looper* *Looper* Class used to run a message loop for a thread.
+
+public final class Looper
+  extends    |java.lang.Object|
+
+|android.os.Looper_Description|
+|android.os.Looper_Fields|
+|android.os.Looper_Constructors|
+|android.os.Looper_Methods|
+
+================================================================================
+
+*android.os.Looper_Methods*
+|android.os.Looper.dump(Printer,String)|
+|android.os.Looper.getMainLooper()|Returns the application's main looper, which
+|android.os.Looper.getQueue()|
+|android.os.Looper.getThread()|Return the Thread associated with this Looper.
+|android.os.Looper.isCurrentThread()|Returns true if the current thread is this
+|android.os.Looper.isIdling()|Return whether this looper's thread is currently 
+|android.os.Looper.loop()|Run the message queue in this thread.
+|android.os.Looper.myLooper()|Return the Looper object associated with the curr
+|android.os.Looper.myQueue()|Return theMessageQueueobject associated with the c
+|android.os.Looper.postSyncBarrier()|Posts a synchronization barrier to the Loo
+|android.os.Looper.prepare()|Initialize the current thread as a looper.
+|android.os.Looper.prepareMainLooper()|Initialize the current thread as a loope
+|android.os.Looper.quit()|Quits the looper.
+|android.os.Looper.quitSafely()|Quits the looper safely.
+|android.os.Looper.removeSyncBarrier(int)|Removes a synchronization barrier.
+|android.os.Looper.setMessageLogging(Printer)|Control logging of messages as th
+|android.os.Looper.toString()|
+
+*android.os.Looper_Description*
+
+Class used to run a message loop for a thread. Threads by default do not have a 
+message loop associated with them; to create one, call (|android.os.Looper|) in 
+the thread that is to run the loop, and then (|android.os.Looper|) to have it 
+process messages until the loop is stopped. 
+
+Most interaction with a message loop is through the (|android.os.Handler|) 
+class. 
+
+This is a typical example of the implementation of a Looper thread, using the 
+separation of (|android.os.Looper|) and (|android.os.Looper|) to create an 
+initial Handler to communicate with the Looper. 
+
+
+
+class LooperThread extends Thread { public Handler mHandler; 
+
+public void run() { Looper.prepare(); 
+
+mHandler = new Handler() { public void handleMessage(Message msg) { // process 
+incoming messages here } }; 
+
+Looper.loop(); } } 
+
+
+
+*android.os.Looper.dump(Printer,String)*
+
+public void dump(
+  android.util.Printer pw,
+  java.lang.String prefix)
+
+
+
+
+
+*android.os.Looper.getMainLooper()*
+
+public static |android.os.Looper| getMainLooper()
+
+Returns the application's main looper, which lives in the main thread of the 
+application. 
+
+
+
+*android.os.Looper.getQueue()*
+
+public |android.os.MessageQueue| getQueue()
+
+
+
+
+
+*android.os.Looper.getThread()*
+
+public |java.lang.Thread| getThread()
+
+Return the Thread associated with this Looper. 
+
+
+
+*android.os.Looper.isCurrentThread()*
+
+public boolean isCurrentThread()
+
+Returns true if the current thread is this looper's thread. 
+
+
+
+*android.os.Looper.isIdling()*
+
+public boolean isIdling()
+
+Return whether this looper's thread is currently idle, waiting for new work to 
+do. This is intrinsically racy, since its state can change before you get the 
+result back. 
+
+
+
+*android.os.Looper.loop()*
+
+public static void loop()
+
+Run the message queue in this thread. Be sure to call (|android.os.Looper|) to 
+end the loop. 
+
+
+
+*android.os.Looper.myLooper()*
+
+public static |android.os.Looper| myLooper()
+
+Return the Looper object associated with the current thread. Returns null if 
+the calling thread is not associated with a Looper. 
+
+
+
+*android.os.Looper.myQueue()*
+
+public static |android.os.MessageQueue| myQueue()
+
+Return the (|android.os.MessageQueue|) object associated with the current 
+thread. This must be called from a thread running a Looper, or a 
+NullPointerException will be thrown. 
+
+
+
+*android.os.Looper.postSyncBarrier()*
+
+public int postSyncBarrier()
+
+Posts a synchronization barrier to the Looper's message queue. 
+
+Message processing occurs as usual until the message queue encounters the 
+synchronization barrier that has been posted. When the barrier is encountered, 
+later synchronous messages in the queue are stalled (prevented from being 
+executed) until the barrier is released by calling (|android.os.Looper|) and 
+specifying the token that identifies the synchronization barrier. 
+
+This method is used to immediately postpone execution of all subsequently 
+posted synchronous messages until a condition is met that releases the barrier. 
+Asynchronous messages (see (|android.os.Message|) are exempt from the barrier 
+and continue to be processed as usual. 
+
+This call must be always matched by a call to (|android.os.Looper|) with the 
+same token to ensure that the message queue resumes normal operation. Otherwise 
+the application will probably hang! 
+
+
+
+    Returns: A token that uniquely identifies the barrier. This token must be passed to 
+             {@link #removeSyncBarrier} to release the barrier. 
+
+*android.os.Looper.prepare()*
+
+public static void prepare()
+
+Initialize the current thread as a looper. This gives you a chance to create 
+handlers that then reference this looper, before actually starting the loop. Be 
+sure to call (|android.os.Looper|) after calling this method, and end it by 
+calling (|android.os.Looper|) . 
+
+
+
+*android.os.Looper.prepareMainLooper()*
+
+public static void prepareMainLooper()
+
+Initialize the current thread as a looper, marking it as an application's main 
+looper. The main looper for your application is created by the Android 
+environment, so you should never need to call this function yourself. See also: 
+(|android.os.Looper|) 
+
+
+
+*android.os.Looper.quit()*
+
+public void quit()
+
+Quits the looper. 
+
+Causes the (|android.os.Looper|) method to terminate without processing any 
+more messages in the message queue. 
+
+Any attempt to post messages to the queue after the looper is asked to quit 
+will fail. For example, the (|android.os.Handler|) method will return false. 
+
+Using this method may be unsafe because some messages may not be delivered 
+before the looper terminates. Consider using (|android.os.Looper|) instead to 
+ensure that all pending work is completed in an orderly manner. 
+
+
+
+*android.os.Looper.quitSafely()*
+
+public void quitSafely()
+
+Quits the looper safely. 
+
+Causes the (|android.os.Looper|) method to terminate as soon as all remaining 
+messages in the message queue that are already due to be delivered have been 
+handled. However pending delayed messages with due times in the future will not 
+be delivered before the loop terminates. 
+
+Any attempt to post messages to the queue after the looper is asked to quit 
+will fail. For example, the (|android.os.Handler|) method will return false. 
+
+
+
+*android.os.Looper.removeSyncBarrier(int)*
+
+public void removeSyncBarrier(int token)
+
+Removes a synchronization barrier. 
+
+
+    token - The synchronization barrier token that was returned by {@link 
+       #postSyncBarrier}. 
+
+*android.os.Looper.setMessageLogging(Printer)*
+
+public void setMessageLogging(android.util.Printer printer)
+
+Control logging of messages as they are processed by this Looper. If enabled, a 
+log message will be written to printer at the beginning and ending of each 
+message dispatch, identifying the target Handler and message contents. 
+
+
+    printer - A Printer object that will receive log messages, or null to disable message 
+       logging. 
+
+*android.os.Looper.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+

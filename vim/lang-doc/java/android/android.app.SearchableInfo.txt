@@ -1,0 +1,430 @@
+*android.app.SearchableInfo* *SearchableInfo* Searchability meta-data for an act
+
+public final class SearchableInfo
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+
+|android.app.SearchableInfo_Description|
+|android.app.SearchableInfo_Fields|
+|android.app.SearchableInfo_Constructors|
+|android.app.SearchableInfo_Methods|
+
+================================================================================
+
+*android.app.SearchableInfo_Fields*
+|android.os.Parcelable.Creator<android.app.SearchableInfo>_android.app.SearchableInfo.CREATOR|
+
+*android.app.SearchableInfo_Methods*
+|android.app.SearchableInfo.autoUrlDetect()|Checks whether this searchable acti
+|android.app.SearchableInfo.describeContents()|
+|android.app.SearchableInfo.findActionKey(int)|If any action keys were defined 
+|android.app.SearchableInfo.getActivityContext(Context)|Get the context for the
+|android.app.SearchableInfo.getActivityMetaData(Context,ActivityInfo,int)|Gets 
+|android.app.SearchableInfo.getHintId()|Gets the resource id of the hint text.
+|android.app.SearchableInfo.getIconId()|Gets the icon id specified by the Searc
+|android.app.SearchableInfo.getImeOptions()|Gets the input method options speci
+|android.app.SearchableInfo.getInputType()|Gets the input type as specified in 
+|android.app.SearchableInfo.getLabelId()|Gets the "label" (user-visible name) o
+|android.app.SearchableInfo.getProviderContext(Context,Context)|Get the context
+|android.app.SearchableInfo.getSearchActivity()|Gets the component name of the 
+|android.app.SearchableInfo.getSearchButtonText()|Gets the resource id of repla
+|android.app.SearchableInfo.getSettingsDescriptionId()|Gets the resource id of 
+|android.app.SearchableInfo.getSuggestAuthority()|Gets the search suggestion co
+|android.app.SearchableInfo.getSuggestIntentAction()|Gets the optional intent a
+|android.app.SearchableInfo.getSuggestIntentData()|Gets the optional intent dat
+|android.app.SearchableInfo.getSuggestPackage()|Gets the name of the package wh
+|android.app.SearchableInfo.getSuggestPath()|Gets the content provider path for
+|android.app.SearchableInfo.getSuggestSelection()|Gets the selection for obtain
+|android.app.SearchableInfo.getSuggestThreshold()|Gets the suggestion threshold
+|android.app.SearchableInfo.getVoiceLanguageId()|Gets the resource id of the sp
+|android.app.SearchableInfo.getVoiceLanguageModeId()|Gets the resource id of th
+|android.app.SearchableInfo.getVoiceMaxResults()|The maximum number of voice re
+|android.app.SearchableInfo.getVoicePromptTextId()|Gets the resource id of the 
+|android.app.SearchableInfo.getVoiceSearchEnabled()|Checks if the searchable ac
+|android.app.SearchableInfo.getVoiceSearchLaunchRecognizer()|Checks if voice se
+|android.app.SearchableInfo.getVoiceSearchLaunchWebSearch()|Checks if voice sea
+|android.app.SearchableInfo.queryAfterZeroResults()|Checks whether this searcha
+|android.app.SearchableInfo.shouldIncludeInGlobalSearch()|Checks whether the se
+|android.app.SearchableInfo.shouldRewriteQueryFromData()|Checks whether the tex
+|android.app.SearchableInfo.shouldRewriteQueryFromText()|Checks whether the tex
+|android.app.SearchableInfo.useBadgeIcon()|Checks whether the badge should be a
+|android.app.SearchableInfo.useBadgeLabel()|Checks whether the badge should be 
+|android.app.SearchableInfo.writeToParcel(Parcel,int)|
+
+*android.app.SearchableInfo_Description*
+
+Searchability meta-data for an activity. Only applications that search other 
+applications should need to use this class. See <a 
+href="guide/topics/search/searchable-config.html">Searchable Configuration for 
+more information about declaring searchability meta-data for your application. 
+
+
+
+*android.os.Parcelable.Creator<android.app.SearchableInfo>_android.app.SearchableInfo.CREATOR*
+
+Support for parcelable and aidl operations. 
+
+
+
+*android.app.SearchableInfo.autoUrlDetect()*
+
+public boolean autoUrlDetect()
+
+Checks whether this searchable activity has auto URL detection turned on. 
+
+
+
+*android.app.SearchableInfo.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.app.SearchableInfo.findActionKey(int)*
+
+public |android.app.SearchableInfo.ActionKeyInfo| findActionKey(int keyCode)
+
+If any action keys were defined for this searchable activity, look up and 
+return. 
+
+
+    keyCode - The key that was pressed 
+
+    Returns: Returns the action key info, or {@code null} if none defined. 
+
+*android.app.SearchableInfo.getActivityContext(Context)*
+
+public |android.content.Context| getActivityContext(android.content.Context context)
+
+Get the context for the searchable activity. 
+
+
+    context - You need to supply a context to start with 
+
+    Returns: Returns a context related to the searchable activity 
+
+*android.app.SearchableInfo.getActivityMetaData(Context,ActivityInfo,int)*
+
+public static |android.app.SearchableInfo| getActivityMetaData(
+  android.content.Context context,
+  android.content.pm.ActivityInfo activityInfo,
+  int userId)
+
+Gets search information for the given activity. 
+
+
+    context - Context to use for reading activity resources. 
+    activityInfo - Activity to get search information from. 
+
+    Returns: Search information about the given activity, or {@code null} if the activity 
+             has no or invalid searchability meta-data. 
+
+*android.app.SearchableInfo.getHintId()*
+
+public int getHintId()
+
+Gets the resource id of the hint text. This must be read using the searchable 
+Activity's resources. 
+
+
+
+    Returns: A resource id, or {@code 0} if no hint was specified. 
+
+*android.app.SearchableInfo.getIconId()*
+
+public int getIconId()
+
+Gets the icon id specified by the Searchable_icon meta-data entry. This must be 
+read using the searchable Activity's resources. 
+
+
+
+    Returns: A resource id, or {@code 0} if no icon was specified. 
+
+*android.app.SearchableInfo.getImeOptions()*
+
+public int getImeOptions()
+
+Gets the input method options specified in the searchable attributes. This will 
+default to (|android.view.inputmethod.EditorInfo|) if not specified (which is 
+appropriate for a search box). 
+
+
+
+    Returns: the input type 
+
+*android.app.SearchableInfo.getInputType()*
+
+public int getInputType()
+
+Gets the input type as specified in the searchable attributes. This will 
+default to (|android.text.InputType|) if not specified (which is appropriate 
+for free text input). 
+
+
+
+    Returns: the input type 
+
+*android.app.SearchableInfo.getLabelId()*
+
+public int getLabelId()
+
+Gets the "label" (user-visible name) of this searchable context. This must be 
+read using the searchable Activity's resources. 
+
+
+
+    Returns: A resource id, or {@code 0} if no label was specified. 
+
+*android.app.SearchableInfo.getProviderContext(Context,Context)*
+
+public |android.content.Context| getProviderContext(
+  android.content.Context context,
+  android.content.Context activityContext)
+
+Get the context for the suggestions provider. 
+
+
+    context - You need to supply a context to start with 
+    activityContext - If we can determine that the provider and the activity are the same, we'll just 
+       return this one. 
+
+    Returns: Returns a context related to the suggestion provider 
+
+*android.app.SearchableInfo.getSearchActivity()*
+
+public |android.content.ComponentName| getSearchActivity()
+
+Gets the component name of the searchable activity. 
+
+
+
+    Returns: A component name, never {@code null}. 
+
+*android.app.SearchableInfo.getSearchButtonText()*
+
+public int getSearchButtonText()
+
+Gets the resource id of replacement text for the "Search" button. 
+
+
+
+    Returns: A resource id, or {@code 0} if no replacement text was specified. 
+
+*android.app.SearchableInfo.getSettingsDescriptionId()*
+
+public int getSettingsDescriptionId()
+
+Gets the resource id of the description string to use for this source in system 
+search settings, or0if none has been specified. 
+
+
+
+*android.app.SearchableInfo.getSuggestAuthority()*
+
+public |java.lang.String| getSuggestAuthority()
+
+Gets the search suggestion content provider authority. 
+
+
+
+    Returns: The search suggestions authority, or {@code null} if not set. 
+
+*android.app.SearchableInfo.getSuggestIntentAction()*
+
+public |java.lang.String| getSuggestIntentAction()
+
+Gets the optional intent action for use with these suggestions. This is useful 
+if all intents will have the same action (e.g. (|android.content.Intent|) ) 
+
+This can be overriden in any given suggestion using the column 
+(|android.app.SearchManager|) . 
+
+
+
+    Returns: The default intent action, or {@code null} if not set. 
+
+*android.app.SearchableInfo.getSuggestIntentData()*
+
+public |java.lang.String| getSuggestIntentData()
+
+Gets the optional intent data for use with these suggestions. This is useful if 
+all intents will have similar data URIs, but you'll likely need to provide a 
+specific ID as well via the column (|android.app.SearchManager|) , which will 
+be appended to the intent data URI. 
+
+This can be overriden in any given suggestion using the column 
+(|android.app.SearchManager|) . 
+
+
+
+    Returns: The default intent data, or {@code null} if not set. 
+
+*android.app.SearchableInfo.getSuggestPackage()*
+
+public |java.lang.String| getSuggestPackage()
+
+Gets the name of the package where the suggestion provider lives, ornull. 
+
+
+
+*android.app.SearchableInfo.getSuggestPath()*
+
+public |java.lang.String| getSuggestPath()
+
+Gets the content provider path for obtaining search suggestions. 
+
+
+
+    Returns: The suggestion path, or {@code null} if not set. 
+
+*android.app.SearchableInfo.getSuggestSelection()*
+
+public |java.lang.String| getSuggestSelection()
+
+Gets the selection for obtaining search suggestions. 
+
+
+
+*android.app.SearchableInfo.getSuggestThreshold()*
+
+public int getSuggestThreshold()
+
+Gets the suggestion threshold. 
+
+
+
+    Returns: The suggestion threshold, or {@code 0} if not set. 
+
+*android.app.SearchableInfo.getVoiceLanguageId()*
+
+public int getVoiceLanguageId()
+
+Gets the resource id of the spoken language to recognize in voice search. 
+
+
+
+    Returns: A resource id, or {@code 0} if no language was specified. 
+
+*android.app.SearchableInfo.getVoiceLanguageModeId()*
+
+public int getVoiceLanguageModeId()
+
+Gets the resource id of the voice search language model string. 
+
+
+
+    Returns: A resource id, or {@code 0} if no language model was specified. 
+
+*android.app.SearchableInfo.getVoiceMaxResults()*
+
+public int getVoiceMaxResults()
+
+The maximum number of voice recognition results to return. 
+
+
+
+    Returns: the max results count, if specified in the searchable activity's metadata, or 
+             {@code 0} if not specified. 
+
+*android.app.SearchableInfo.getVoicePromptTextId()*
+
+public int getVoicePromptTextId()
+
+Gets the resource id of the voice prompt text string. 
+
+
+
+    Returns: A resource id, or {@code 0} if no voice prompt text was specified. 
+
+*android.app.SearchableInfo.getVoiceSearchEnabled()*
+
+public boolean getVoiceSearchEnabled()
+
+Checks if the searchable activity wants the voice search button to be shown. 
+
+
+
+*android.app.SearchableInfo.getVoiceSearchLaunchRecognizer()*
+
+public boolean getVoiceSearchLaunchRecognizer()
+
+Checks if voice search should start in-app search. 
+
+
+
+*android.app.SearchableInfo.getVoiceSearchLaunchWebSearch()*
+
+public boolean getVoiceSearchLaunchWebSearch()
+
+Checks if voice search should start web search. 
+
+
+
+*android.app.SearchableInfo.queryAfterZeroResults()*
+
+public boolean queryAfterZeroResults()
+
+Checks whether this searchable activity should be queried for suggestions if a 
+prefix of the query has returned no results. 
+
+
+
+*android.app.SearchableInfo.shouldIncludeInGlobalSearch()*
+
+public boolean shouldIncludeInGlobalSearch()
+
+Checks whether the searchable should be included in global search. 
+
+
+
+    Returns: The value of the {@link android.R.styleable#Searchable_includeInGlobalSearch} 
+             attribute, or {@code false} if the attribute is not set. 
+
+*android.app.SearchableInfo.shouldRewriteQueryFromData()*
+
+public boolean shouldRewriteQueryFromData()
+
+Checks whether the text in the query field should come from the suggestion 
+intent data. 
+
+
+
+*android.app.SearchableInfo.shouldRewriteQueryFromText()*
+
+public boolean shouldRewriteQueryFromText()
+
+Checks whether the text in the query field should come from the suggestion 
+title. 
+
+
+
+*android.app.SearchableInfo.useBadgeIcon()*
+
+public boolean useBadgeIcon()
+
+Checks whether the badge should be an icon. 
+
+
+
+*android.app.SearchableInfo.useBadgeLabel()*
+
+public boolean useBadgeLabel()
+
+Checks whether the badge should be a text label. 
+
+
+
+*android.app.SearchableInfo.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel dest,
+  int flags)
+
+
+
+
+
+

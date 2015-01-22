@@ -1,0 +1,185 @@
+*android.preference.PreferenceScreen* *PreferenceScreen* Represents a top-levelP
+
+public final class PreferenceScreen
+  extends    |android.preference.PreferenceGroup|
+  implements |android.widget.AdapterView.OnItemClickListener|
+             |android.content.DialogInterface.OnDismissListener|
+
+|android.preference.PreferenceScreen_Description|
+|android.preference.PreferenceScreen_Fields|
+|android.preference.PreferenceScreen_Constructors|
+|android.preference.PreferenceScreen_Methods|
+
+================================================================================
+
+*android.preference.PreferenceScreen_Constructors*
+|android.preference.PreferenceScreen(Context,AttributeSet)|Do NOT use this cons
+
+*android.preference.PreferenceScreen_Methods*
+|android.preference.PreferenceScreen.bind(ListView)|Binds aListViewto the prefe
+|android.preference.PreferenceScreen.getDialog()|Used to get a handle to the di
+|android.preference.PreferenceScreen.getRootAdapter()|Returns an adapter that c
+|android.preference.PreferenceScreen.isOnSameScreenAsChildren()|
+|android.preference.PreferenceScreen.onClick()|
+|android.preference.PreferenceScreen.onCreateRootAdapter()|Creates the root ada
+|android.preference.PreferenceScreen.onDismiss(DialogInterface)|
+|android.preference.PreferenceScreen.onItemClick(AdapterView,View,int,long)|
+|android.preference.PreferenceScreen.onRestoreInstanceState(Parcelable)|
+|android.preference.PreferenceScreen.onSaveInstanceState()|
+
+*android.preference.PreferenceScreen_Description*
+
+Represents a top-level (|android.preference.Preference|) that is the root of a 
+Preference hierarchy. A (|android.preference.PreferenceActivity|) points to an 
+instance of this class to show the preferences. To instantiate this class, use 
+(|android.preference.PreferenceManager|) . 
+
+This class can appear in two places: When a 
+(|android.preference.PreferenceActivity|) points to this, it is used as the 
+root and is not shown (only the contained preferences are shown). When it 
+appears inside another preference hierarchy, it is shown and serves as the 
+gateway to another screen of preferences (either by showing another screen of 
+preferences as a (|android.app.Dialog|) or via a (|android.content.Context|) 
+from the (|android.preference.Preference|) ). The children of this 
+(|android.preference.PreferenceScreen|) are NOT shown in the screen that this 
+(|android.preference.PreferenceScreen|) is shown in. Instead, a separate screen 
+will be shown when this preference is clicked. 
+
+Here's an example XML layout of a PreferenceScreen: 
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" 
+android:key="first_preferencescreen"> <CheckBoxPreference android:key="wifi 
+enabled" android:title="WiFi" /> <PreferenceScreen 
+android:key="second_preferencescreen" android:title="WiFi settings"> 
+<CheckBoxPreference android:key="prefer wifi" android:title="Prefer WiFi" /> 
+... other preferences here ... </PreferenceScreen> </PreferenceScreen> 
+
+In this example, the "first_preferencescreen" will be used as the root of the 
+hierarchy and given to a (|android.preference.PreferenceActivity|) . The first 
+screen will show preferences "WiFi" (which can be used to quickly 
+enable/disable WiFi) and "WiFi settings". The "WiFi settings" is the 
+"second_preferencescreen" and when clicked will show another screen of 
+preferences such as "Prefer WiFi" (and the other preferences that are children 
+of the "second_preferencescreen" tag). 
+
+Developer Guides For information about building a settings UI with Preferences, 
+read the <a href="guide/topics/ui/settings.html">Settings guide. 
+
+
+
+*android.preference.PreferenceScreen(Context,AttributeSet)*
+
+public PreferenceScreen(
+  android.content.Context context,
+  android.util.AttributeSet attrs)
+
+Do NOT use this constructor, use (|android.preference.PreferenceManager|) . 
+
+
+*android.preference.PreferenceScreen.bind(ListView)*
+
+public void bind(android.widget.ListView listView)
+
+Binds a (|android.widget.ListView|) to the preferences contained in this 
+(|android.preference.PreferenceScreen|) via 
+(|android.preference.PreferenceScreen|) . It also handles passing list item 
+clicks to the corresponding (|android.preference.Preference|) contained by this 
+(|android.preference.PreferenceScreen|) . 
+
+
+    listView - The list view to attach to. 
+
+*android.preference.PreferenceScreen.getDialog()*
+
+public |android.app.Dialog| getDialog()
+
+Used to get a handle to the dialog. This is useful for cases where we want to 
+manipulate the dialog as we would with any other activity or view. 
+
+
+
+*android.preference.PreferenceScreen.getRootAdapter()*
+
+public |android.widget.ListAdapter| getRootAdapter()
+
+Returns an adapter that can be attached to a 
+(|android.preference.PreferenceActivity|) or 
+(|android.preference.PreferenceFragment|) to show the preferences contained in 
+this (|android.preference.PreferenceScreen|) . 
+
+This (|android.preference.PreferenceScreen|) will NOT appear in the returned 
+adapter, instead it appears in the hierarchy above this 
+(|android.preference.PreferenceScreen|) . 
+
+This adapter's (|android.widget.Adapter|) should always return a subclass of 
+(|android.preference.Preference|) . 
+
+
+
+    Returns: An adapter that provides the {@link Preference} contained in this {@link 
+             PreferenceScreen}. 
+
+*android.preference.PreferenceScreen.isOnSameScreenAsChildren()*
+
+protected boolean isOnSameScreenAsChildren()
+
+
+
+
+
+*android.preference.PreferenceScreen.onClick()*
+
+protected void onClick()
+
+
+
+
+
+*android.preference.PreferenceScreen.onCreateRootAdapter()*
+
+protected |android.widget.ListAdapter| onCreateRootAdapter()
+
+Creates the root adapter. 
+
+
+
+    Returns: An adapter that contains the preferences contained in this {@link 
+             PreferenceScreen}. 
+
+*android.preference.PreferenceScreen.onDismiss(DialogInterface)*
+
+public void onDismiss(android.content.DialogInterface dialog)
+
+
+
+
+
+*android.preference.PreferenceScreen.onItemClick(AdapterView,View,int,long)*
+
+public void onItemClick(
+  android.widget.AdapterView parent,
+  android.view.View view,
+  int position,
+  long id)
+
+
+
+
+
+*android.preference.PreferenceScreen.onRestoreInstanceState(Parcelable)*
+
+protected void onRestoreInstanceState(android.os.Parcelable state)
+
+
+
+
+
+*android.preference.PreferenceScreen.onSaveInstanceState()*
+
+protected |android.os.Parcelable| onSaveInstanceState()
+
+
+
+
+
+

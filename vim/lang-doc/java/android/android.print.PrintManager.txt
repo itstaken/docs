@@ -1,0 +1,246 @@
+*android.print.PrintManager* *PrintManager* System level service for accessing t
+
+public final class PrintManager
+  extends    |java.lang.Object|
+
+|android.print.PrintManager_Description|
+|android.print.PrintManager_Fields|
+|android.print.PrintManager_Constructors|
+|android.print.PrintManager_Methods|
+
+================================================================================
+
+*android.print.PrintManager_Fields*
+|java.lang.String_android.print.PrintManager.ACTION_PRINT_DIALOG|
+|int_android.print.PrintManager.APP_ID_ANY|
+|java.lang.String_android.print.PrintManager.EXTRA_PRINT_DIALOG_INTENT|
+|java.lang.String_android.print.PrintManager.EXTRA_PRINT_DOCUMENT_ADAPTER|
+|java.lang.String_android.print.PrintManager.EXTRA_PRINT_JOB|
+
+*android.print.PrintManager_Constructors*
+|android.print.PrintManager(Context,IPrintManager,int,int)|Creates a new instan
+
+*android.print.PrintManager_Methods*
+|android.print.PrintManager.addPrintJobStateChangeListener(PrintManager.PrintJobStateChangeListener)|
+|android.print.PrintManager.createPrinterDiscoverySession()|
+|android.print.PrintManager.getEnabledPrintServices()|Gets the list of enabled 
+|android.print.PrintManager.getGlobalPrintManagerForUser(int)|Creates an instan
+|android.print.PrintManager.getInstalledPrintServices()|Gets the list of instal
+|android.print.PrintManager.getPrintJob(PrintJobId)|Gets a print job given its 
+|android.print.PrintManager.getPrintJobs()|Gets the print jobs for this applica
+|android.print.PrintManager.print(String,PrintDocumentAdapter,PrintAttributes)|
+|android.print.PrintManager.removePrintJobStateChangeListener(PrintManager.PrintJobStateChangeListener)|
+
+*android.print.PrintManager_Description*
+
+System level service for accessing the printing capabilities of the platform. 
+
+To obtain a handle to the print manager do the following: 
+
+
+
+PrintManager printManager = (PrintManager) 
+context.getSystemService(Context.PRINT_SERVICE); 
+
+Print mechanics 
+
+The key idea behind printing on the platform is that the content to be printed 
+should be laid out for the currently selected print options resulting in an 
+optimized output and higher user satisfaction. To achieve this goal the 
+platform declares a contract that the printing application has to follow which 
+is defined by the (|android.print.PrintDocumentAdapter|) class. At a higher 
+level the contract is that when the user selects some options from the print UI 
+that may affect the way content is laid out, for example page size, the 
+application receives a callback allowing it to layout the content to better fit 
+these new constraints. After a layout pass the system may ask the application 
+to render one or more pages one or more times. For example, an application may 
+produce a single column list for smaller page sizes and a multi-column table 
+for larger page sizes. 
+
+Print jobs 
+
+Print jobs are started by calling the (|android.print.PrintManager|) from an 
+activity which results in bringing up the system print UI. Once the print UI is 
+up, when the user changes a selected print option that affects the way content 
+is laid out the system starts to interact with the application following the 
+mechanics described the section above. 
+
+Print jobs can be in created(|android.print.PrintJobInfo|) , 
+queued(|android.print.PrintJobInfo|) , started(|android.print.PrintJobInfo|) , 
+blocked(|android.print.PrintJobInfo|) , completed(|android.print.PrintJobInfo|) 
+, failed(|android.print.PrintJobInfo|) , and 
+canceled(|android.print.PrintJobInfo|) state. Print jobs are stored in 
+dedicated system spooler until they are handled which is they are cancelled or 
+completed. Active print jobs, ones that are not cancelled or completed, are 
+considered failed if the device reboots as the new boot may be after a very 
+long time. The user may choose to restart such print jobs. Once a print job is 
+queued all relevant content is stored in the system spooler and its lifecycle 
+becomes detached from this of the application that created it. 
+
+An applications can query the print spooler for current print jobs it created 
+but not print jobs created by other applications. 
+
+
+
+*java.lang.String_android.print.PrintManager.ACTION_PRINT_DIALOG*
+
+The action for launching the print dialog activity. 
+
+
+*int_android.print.PrintManager.APP_ID_ANY*
+
+
+
+
+*java.lang.String_android.print.PrintManager.EXTRA_PRINT_DIALOG_INTENT*
+
+Extra with the intent for starting the print dialog. 
+
+Type: (|android.content.IntentSender|) 
+
+
+*java.lang.String_android.print.PrintManager.EXTRA_PRINT_DOCUMENT_ADAPTER*
+
+Extra with the print document adapter to be printed. 
+
+Type: (|android.print.IPrintDocumentAdapter|) 
+
+
+*java.lang.String_android.print.PrintManager.EXTRA_PRINT_JOB*
+
+Extra with a print job. 
+
+Type: (|android.print.PrintJobInfo|) 
+
+
+
+*android.print.PrintManager(Context,IPrintManager,int,int)*
+
+public PrintManager(
+  android.content.Context context,
+  IPrintManager service,
+  int userId,
+  int appId)
+
+Creates a new instance. 
+
+    context - The current context in which to operate. 
+    service - The backing system service. 
+
+*android.print.PrintManager.addPrintJobStateChangeListener(PrintManager.PrintJobStateChangeListener)*
+
+public void addPrintJobStateChangeListener(android.print.PrintManager.PrintJobStateChangeListener listener)
+
+Adds a listener for observing the state of print jobs. 
+
+
+    listener - The listener to add. 
+
+*android.print.PrintManager.createPrinterDiscoverySession()*
+
+public |android.print.PrinterDiscoverySession| createPrinterDiscoverySession()
+
+
+
+
+
+*android.print.PrintManager.getEnabledPrintServices()*
+
+public |java.util.List|<PrintServiceInfo> getEnabledPrintServices()
+
+Gets the list of enabled print services. 
+
+
+
+    Returns: The enabled service list or an empty list. 
+
+*android.print.PrintManager.getGlobalPrintManagerForUser(int)*
+
+public |android.print.PrintManager| getGlobalPrintManagerForUser(int userId)
+
+Creates an instance that can access all print jobs. 
+
+
+    userId - The user id for which to get all print jobs. 
+
+    Returns: An instance if the caller has the permission to access all print jobs, null 
+             otherwise. 
+
+*android.print.PrintManager.getInstalledPrintServices()*
+
+public |java.util.List|<PrintServiceInfo> getInstalledPrintServices()
+
+Gets the list of installed print services. 
+
+
+
+    Returns: The installed service list or an empty list. 
+
+*android.print.PrintManager.getPrintJob(PrintJobId)*
+
+public |android.print.PrintJob| getPrintJob(android.print.PrintJobId printJobId)
+
+Gets a print job given its id. 
+
+
+
+    Returns: The print job list. 
+
+*android.print.PrintManager.getPrintJobs()*
+
+public |java.util.List|<PrintJob> getPrintJobs()
+
+Gets the print jobs for this application. 
+
+
+
+    Returns: The print job list. 
+
+*android.print.PrintManager.print(String,PrintDocumentAdapter,PrintAttributes)*
+
+public |android.print.PrintJob| print(
+  java.lang.String printJobName,
+  android.print.PrintDocumentAdapter documentAdapter,
+  android.print.PrintAttributes attributes)
+
+Creates a print job for printing a (|android.print.PrintDocumentAdapter|) with 
+default print attributes. 
+
+Calling this method brings the print UI allowing the user to customize the 
+print job and returns a (|android.print.PrintJob|) object without waiting for 
+the user to customize or confirm the print job. The returned print job instance 
+is in a created(|android.print.PrintJobInfo|) state. 
+
+This method can be called only from an (|android.app.Activity|) . The rationale 
+is that printing from a service will create an inconsistent user experience as 
+the print UI would appear without any context. 
+
+Also the passed in (|android.print.PrintDocumentAdapter|) will be considered 
+invalid if your activity is finished. The rationale is that once the activity 
+that initiated printing is finished, the provided adapter may be in an 
+inconsistent state as it may depend on the UI presented by the activity. 
+
+The default print attributes are a hint to the system how the data is to be 
+printed. For example, a photo editor may look at the photo aspect ratio to 
+determine the default orientation and provide a hint whether the printing 
+should be in portrait or landscape. The system will do a best effort to 
+selected the hinted options in the print dialog, given the current printer 
+supports them. 
+
+
+    printJobName - A name for the new print job which is shown to the user. 
+    documentAdapter - An adapter that emits the document to print. 
+    attributes - The default print job attributes or null. 
+
+    Returns: The created print job on success or null on failure. 
+
+*android.print.PrintManager.removePrintJobStateChangeListener(PrintManager.PrintJobStateChangeListener)*
+
+public void removePrintJobStateChangeListener(android.print.PrintManager.PrintJobStateChangeListener listener)
+
+Removes a listener for observing the state of print jobs. 
+
+
+    listener - The listener to remove. 
+
+

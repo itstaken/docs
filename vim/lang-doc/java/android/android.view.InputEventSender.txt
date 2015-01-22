@@ -1,0 +1,84 @@
+*android.view.InputEventSender* *InputEventSender* Provides a low-level mechanis
+
+public abstract class InputEventSender
+  extends    |java.lang.Object|
+
+|android.view.InputEventSender_Description|
+|android.view.InputEventSender_Fields|
+|android.view.InputEventSender_Constructors|
+|android.view.InputEventSender_Methods|
+
+================================================================================
+
+*android.view.InputEventSender_Constructors*
+|android.view.InputEventSender(InputChannel,Looper)|Creates an input event send
+
+*android.view.InputEventSender_Methods*
+|android.view.InputEventSender.dispose()|Disposes the receiver.
+|android.view.InputEventSender.finalize()|
+|android.view.InputEventSender.onInputEventFinished(int,boolean)|Called when an
+|android.view.InputEventSender.sendInputEvent(int,InputEvent)|Sends an input ev
+
+*android.view.InputEventSender_Description*
+
+Provides a low-level mechanism for an application to send input events. 
+
+
+
+*android.view.InputEventSender(InputChannel,Looper)*
+
+public InputEventSender(
+  android.view.InputChannel inputChannel,
+  android.os.Looper looper)
+
+Creates an input event sender bound to the specified input channel. 
+
+    inputChannel - The input channel. 
+    looper - The looper to use when invoking callbacks. 
+
+*android.view.InputEventSender.dispose()*
+
+public void dispose()
+
+Disposes the receiver. 
+
+
+
+*android.view.InputEventSender.finalize()*
+
+protected void finalize()
+  throws |java.lang.Throwable|
+         
+
+
+
+
+*android.view.InputEventSender.onInputEventFinished(int,boolean)*
+
+public void onInputEventFinished(
+  int seq,
+  boolean handled)
+
+Called when an input event is finished. 
+
+
+    seq - The input event sequence number. 
+    handled - True if the input event was handled. 
+
+*android.view.InputEventSender.sendInputEvent(int,InputEvent)*
+
+public final boolean sendInputEvent(
+  int seq,
+  android.view.InputEvent event)
+
+Sends an input event. Must be called on the same Looper thread to which the 
+sender is attached. 
+
+
+    seq - The input event sequence number. 
+    event - The input event to send. 
+
+    Returns: True if the entire event was sent successfully. May return false if the input 
+             channel buffer filled before all samples were dispatched. 
+
+

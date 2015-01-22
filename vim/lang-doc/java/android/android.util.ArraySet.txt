@@ -1,0 +1,269 @@
+*android.util.ArraySet* *ArraySet* ArraySet is a generic set data structure that
+
+public final class ArraySet<E>
+  extends    |java.lang.Object|
+  implements |java.util.Collection|
+             |java.util.Set|
+
+|android.util.ArraySet_Description|
+|android.util.ArraySet_Fields|
+|android.util.ArraySet_Constructors|
+|android.util.ArraySet_Methods|
+
+================================================================================
+
+*android.util.ArraySet_Constructors*
+|android.util.ArraySet()|Create a new empty ArraySet.
+|android.util.ArraySet(ArraySet)|Create a new ArraySet with the mappings from t
+|android.util.ArraySet(int)|Create a new ArraySet with a given initial capacity
+
+*android.util.ArraySet_Methods*
+|android.util.ArraySet.add(E)|Adds the specified object to this set.
+|android.util.ArraySet.addAll(Collection<?extendsE>)|
+|android.util.ArraySet.clear()|Make the array map empty.
+|android.util.ArraySet.contains(Object)|Check whether a value exists in the set
+|android.util.ArraySet.containsAll(Collection<?>)|
+|android.util.ArraySet.ensureCapacity(int)|Ensure the array map can hold at lea
+|android.util.ArraySet.equals(Object)|
+|android.util.ArraySet.hashCode()|
+|android.util.ArraySet.isEmpty()|Return true if the array map contains no items
+|android.util.ArraySet.iterator()|
+|android.util.ArraySet.putAll(ArraySet<?extendsE>)|Perform a#add(Object)of all 
+|android.util.ArraySet.remove(Object)|Removes the specified object from this se
+|android.util.ArraySet.removeAll(Collection<?>)|
+|android.util.ArraySet.removeAt(int)|Remove the key/value mapping at the given 
+|android.util.ArraySet.retainAll(Collection<?>)|
+|android.util.ArraySet.size()|Return the number of items in this array map.
+|android.util.ArraySet.toArray()|
+|android.util.ArraySet.toArray(T[])|
+|android.util.ArraySet.toString()|
+|android.util.ArraySet.valueAt(int)|Return the value at the given index in the 
+
+*android.util.ArraySet_Description*
+
+ArraySet is a generic set data structure that is designed to be more memory 
+efficient than a traditional (|java.util.HashSet|) . The design is very similar 
+to (|android.util.ArrayMap|) , with all of the caveats described there. This 
+implementation is separate from ArrayMap, however, so the Object array contains 
+only one item for each entry in the set (instead of a pair for a mapping). 
+
+Note that this implementation is not intended to be appropriate for data 
+structures that may contain large numbers of items. It is generally slower than 
+a traditional HashSet, since lookups require a binary search and adds and 
+removes require inserting and deleting entries in the array. For containers 
+holding up to hundreds of items, the performance difference is not significant, 
+less than 50%. 
+
+Because this container is intended to better balance memory use, unlike most 
+other standard Java containers it will shrink its array as items are removed 
+from it. Currently you have no control over this shrinking -- if you set a 
+capacity and then remove an item, it may reduce the capacity to better match 
+the current size. In the future an explicit call to set the capacity should 
+turn off this aggressive shrinking behavior. 
+
+
+
+*android.util.ArraySet()*
+
+public ArraySet()
+
+Create a new empty ArraySet. The default capacity of an array map is 0, and 
+will grow once items are added to it. 
+
+
+*android.util.ArraySet(ArraySet)*
+
+public ArraySet(android.util.ArraySet set)
+
+Create a new ArraySet with the mappings from the given ArraySet. 
+
+
+*android.util.ArraySet(int)*
+
+public ArraySet(int capacity)
+
+Create a new ArraySet with a given initial capacity. 
+
+
+*android.util.ArraySet.add(E)*
+
+public boolean add(E value)
+
+Adds the specified object to this set. The set is not modified if it already 
+contains the object. 
+
+
+    value - the object to add. 
+
+    Returns: {@code true} if this set is modified, {@code false} otherwise. 
+
+*android.util.ArraySet.addAll(Collection<?extendsE>)*
+
+public boolean addAll(java.util.Collection<? extends E> collection)
+
+
+
+
+
+*android.util.ArraySet.clear()*
+
+public void clear()
+
+Make the array map empty. All storage is released. 
+
+
+
+*android.util.ArraySet.contains(Object)*
+
+public boolean contains(java.lang.Object key)
+
+Check whether a value exists in the set. 
+
+
+    key - The value to search for. 
+
+    Returns: Returns true if the value exists, else false. 
+
+*android.util.ArraySet.containsAll(Collection<?>)*
+
+public boolean containsAll(java.util.Collection<?> collection)
+
+
+
+
+
+*android.util.ArraySet.ensureCapacity(int)*
+
+public void ensureCapacity(int minimumCapacity)
+
+Ensure the array map can hold at least minimumCapacity items. 
+
+
+
+*android.util.ArraySet.equals(Object)*
+
+public boolean equals(java.lang.Object object)
+
+This implementation returns false if the object is not a set, or if the sets 
+have different sizes. Otherwise, for each value in this set, it checks to make 
+sure the value also exists in the other set. If any value doesn't exist, the 
+method returns false; otherwise, it returns true. 
+
+
+
+*android.util.ArraySet.hashCode()*
+
+public int hashCode()
+
+
+
+
+
+*android.util.ArraySet.isEmpty()*
+
+public boolean isEmpty()
+
+Return true if the array map contains no items. 
+
+
+
+*android.util.ArraySet.iterator()*
+
+public |java.util.Iterator|<E> iterator()
+
+
+
+
+
+*android.util.ArraySet.putAll(ArraySet<?extendsE>)*
+
+public void putAll(android.util.ArraySet<? extends E> array)
+
+Perform a (|android.util.ArraySet|) of all values in array 
+
+
+    array - The array whose contents are to be retrieved. 
+
+*android.util.ArraySet.remove(Object)*
+
+public boolean remove(java.lang.Object object)
+
+Removes the specified object from this set. 
+
+
+    object - the object to remove. 
+
+    Returns: {@code true} if this set was modified, {@code false} otherwise. 
+
+*android.util.ArraySet.removeAll(Collection<?>)*
+
+public boolean removeAll(java.util.Collection<?> collection)
+
+
+
+
+
+*android.util.ArraySet.removeAt(int)*
+
+public |E| removeAt(int index)
+
+Remove the key/value mapping at the given index. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+
+    Returns: Returns the value that was stored at this index. 
+
+*android.util.ArraySet.retainAll(Collection<?>)*
+
+public boolean retainAll(java.util.Collection<?> collection)
+
+
+
+
+
+*android.util.ArraySet.size()*
+
+public int size()
+
+Return the number of items in this array map. 
+
+
+
+*android.util.ArraySet.toArray()*
+
+public |java.lang.Object|[] toArray()
+
+
+
+
+
+*android.util.ArraySet.toArray(T[])*
+
+public |T|[] toArray(T[] array)
+
+
+
+
+
+*android.util.ArraySet.toString()*
+
+public |java.lang.String| toString()
+
+This implementation composes a string by iterating over its values. If this set 
+contains itself as a value, the string "(this Set)" will appear in its place. 
+
+
+
+*android.util.ArraySet.valueAt(int)*
+
+public |E| valueAt(int index)
+
+Return the value at the given index in the array. 
+
+
+    index - The desired index, must be between 0 and {@link #size()}-1. 
+
+    Returns: Returns the value stored at the given index. 
+
+

@@ -1,0 +1,60 @@
+*android.view.accessibility.AccessibilityEventSource* *AccessibilityEventSource* 
+
+public interface interface AccessibilityEventSource
+
+
+|android.view.accessibility.AccessibilityEventSource_Description|
+|android.view.accessibility.AccessibilityEventSource_Fields|
+|android.view.accessibility.AccessibilityEventSource_Constructors|
+|android.view.accessibility.AccessibilityEventSource_Methods|
+
+================================================================================
+
+*android.view.accessibility.AccessibilityEventSource_Methods*
+|android.view.accessibility.AccessibilityEventSource.sendAccessibilityEvent(int)|
+|android.view.accessibility.AccessibilityEventSource.sendAccessibilityEventUnchecked(AccessibilityEvent)|
+
+*android.view.accessibility.AccessibilityEventSource_Description*
+
+This interface is implemented by classes source of 
+(|android.view.accessibility.AccessibilityEvent|) s. 
+
+Developer Guides For more information about making applications accessible, 
+read the <a href="guide/topics/ui/accessibility/index.html">Accessibility 
+developer guide. 
+
+
+
+*android.view.accessibility.AccessibilityEventSource.sendAccessibilityEvent(int)*
+
+public void sendAccessibilityEvent(int eventType)
+
+Handles the request for sending an 
+(|android.view.accessibility.AccessibilityEvent|) given the event type. The 
+method must first check if accessibility is on via calling 
+AccessibilityManager.isEnabled()(|android.view.accessibility.AccessibilityManager|)
+, obtain an (|android.view.accessibility.AccessibilityEvent|) from the event 
+pool through calling 
+AccessibilityEvent.obtain(int)(|android.view.accessibility.AccessibilityEvent|) 
+, populate the event, and send it for dispatch via calling 
+AccessibilityManager.sendAccessibilityEvent(AccessibilityEvent)(|android.view.accessibility.AccessibilityManager|)
+. 
+
+
+    eventType - The event type. 
+
+*android.view.accessibility.AccessibilityEventSource.sendAccessibilityEventUnchecked(AccessibilityEvent)*
+
+public void sendAccessibilityEventUnchecked(android.view.accessibility.AccessibilityEvent event)
+
+Handles the request for sending an 
+(|android.view.accessibility.AccessibilityEvent|) . The method does not 
+guarantee to check if accessibility is on before sending the event for 
+dispatch. It is responsibility of the caller to do the check via calling 
+AccessibilityManager.isEnabled()(|android.view.accessibility.AccessibilityManager|)
+. 
+
+
+    event - The event. 
+
+

@@ -1,0 +1,275 @@
+*android.bluetooth.BluetoothA2dp* *BluetoothA2dp* This class provides the public
+
+public final class BluetoothA2dp
+  extends    |java.lang.Object|
+  implements |android.bluetooth.BluetoothProfile|
+
+|android.bluetooth.BluetoothA2dp_Description|
+|android.bluetooth.BluetoothA2dp_Fields|
+|android.bluetooth.BluetoothA2dp_Constructors|
+|android.bluetooth.BluetoothA2dp_Methods|
+
+================================================================================
+
+*android.bluetooth.BluetoothA2dp_Fields*
+|java.lang.String_android.bluetooth.BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED|
+|java.lang.String_android.bluetooth.BluetoothA2dp.ACTION_PLAYING_STATE_CHANGED|
+|int_android.bluetooth.BluetoothA2dp.STATE_NOT_PLAYING|
+|int_android.bluetooth.BluetoothA2dp.STATE_PLAYING|
+
+*android.bluetooth.BluetoothA2dp_Methods*
+|android.bluetooth.BluetoothA2dp.adjustAvrcpAbsoluteVolume(int)|Tells remote de
+|android.bluetooth.BluetoothA2dp.connect(BluetoothDevice)|Initiate connection t
+|android.bluetooth.BluetoothA2dp.disconnect(BluetoothDevice)|Initiate disconnec
+|android.bluetooth.BluetoothA2dp.finalize()|
+|android.bluetooth.BluetoothA2dp.getConnectedDevices()|
+|android.bluetooth.BluetoothA2dp.getConnectionState(BluetoothDevice)|
+|android.bluetooth.BluetoothA2dp.getDevicesMatchingConnectionStates(int[])|
+|android.bluetooth.BluetoothA2dp.getPriority(BluetoothDevice)|Get the priority 
+|android.bluetooth.BluetoothA2dp.isA2dpPlaying(BluetoothDevice)|Check if A2DP p
+|android.bluetooth.BluetoothA2dp.isAvrcpAbsoluteVolumeSupported()|Checks if Avr
+|android.bluetooth.BluetoothA2dp.setAvrcpAbsoluteVolume(int)|Tells remote devic
+|android.bluetooth.BluetoothA2dp.setPriority(BluetoothDevice,int)|Set priority 
+|android.bluetooth.BluetoothA2dp.shouldSendVolumeKeys(BluetoothDevice)|This fun
+|android.bluetooth.BluetoothA2dp.stateToString(int)|Helper for converting a sta
+
+*android.bluetooth.BluetoothA2dp_Description*
+
+This class provides the public APIs to control the Bluetooth A2DP profile. 
+
+BluetoothA2dp is a proxy object for controlling the Bluetooth A2DP Service via 
+IPC. Use (|android.bluetooth.BluetoothAdapter|) to get the BluetoothA2dp proxy 
+object. 
+
+Android only supports one connected Bluetooth A2dp device at a time. Each 
+method is protected with its appropriate permission. 
+
+
+
+*java.lang.String_android.bluetooth.BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED*
+
+Intent used to broadcast the change in connection state of the A2DP profile. 
+
+This intent will have 3 extras: 
+
+(|android.bluetooth.BluetoothA2dp|) - The current state of the profile. 
+(|android.bluetooth.BluetoothA2dp|) - The previous state of the profile. 
+(|android.bluetooth.BluetoothDevice|) - The remote device. 
+
+(|android.bluetooth.BluetoothA2dp|) or (|android.bluetooth.BluetoothA2dp|) can 
+be any of (|android.bluetooth.BluetoothA2dp|) , 
+(|android.bluetooth.BluetoothA2dp|) , (|android.bluetooth.BluetoothA2dp|) , 
+(|android.bluetooth.BluetoothA2dp|) . 
+
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*java.lang.String_android.bluetooth.BluetoothA2dp.ACTION_PLAYING_STATE_CHANGED*
+
+Intent used to broadcast the change in the Playing state of the A2DP profile. 
+
+This intent will have 3 extras: 
+
+(|android.bluetooth.BluetoothA2dp|) - The current state of the profile. 
+(|android.bluetooth.BluetoothA2dp|) - The previous state of the profile. 
+(|android.bluetooth.BluetoothDevice|) - The remote device. 
+
+(|android.bluetooth.BluetoothA2dp|) or (|android.bluetooth.BluetoothA2dp|) can 
+be any of (|android.bluetooth.BluetoothA2dp|) , 
+(|android.bluetooth.BluetoothA2dp|) , 
+
+Requires (|android.Manifest.permission|) permission to receive. 
+
+
+*int_android.bluetooth.BluetoothA2dp.STATE_NOT_PLAYING*
+
+A2DP sink device is NOT streaming music. This state can be one of 
+(|android.bluetooth.BluetoothA2dp|) or (|android.bluetooth.BluetoothA2dp|) of 
+(|android.bluetooth.BluetoothA2dp|) intent. 
+
+
+*int_android.bluetooth.BluetoothA2dp.STATE_PLAYING*
+
+A2DP sink device is streaming music. This state can be one of 
+(|android.bluetooth.BluetoothA2dp|) or (|android.bluetooth.BluetoothA2dp|) of 
+(|android.bluetooth.BluetoothA2dp|) intent. 
+
+
+
+*android.bluetooth.BluetoothA2dp.adjustAvrcpAbsoluteVolume(int)*
+
+public void adjustAvrcpAbsoluteVolume(int direction)
+
+Tells remote device to adjust volume. Only if absolute volume is supported. 
+
+
+    direction - 1 to increase volume, or -1 to decrease volume 
+
+*android.bluetooth.BluetoothA2dp.connect(BluetoothDevice)*
+
+public boolean connect(android.bluetooth.BluetoothDevice device)
+
+Initiate connection to a profile of the remote bluetooth device. 
+
+Currently, the system supports only 1 connection to the A2DP profile. The API 
+will automatically disconnect connected devices before connecting. 
+
+This API returns false in scenarios like the profile on the device is already 
+connected or Bluetooth is not turned on. When this API returns true, it is 
+guaranteed that connection state intent for the profile will be broadcasted 
+with the state. Users can get the connection state of the profile from this 
+intent. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothA2dp.disconnect(BluetoothDevice)*
+
+public boolean disconnect(android.bluetooth.BluetoothDevice device)
+
+Initiate disconnection from a profile 
+
+This API will return false in scenarios like the profile on the Bluetooth 
+device is not in connected state etc. When this API returns, true, it is 
+guaranteed that the connection state change intent will be broadcasted with the 
+state. Users can get the disconnection state of the profile from this intent. 
+
+If the disconnection is initiated by a remote device, the state will transition 
+from (|android.bluetooth.BluetoothA2dp|) to (|android.bluetooth.BluetoothA2dp|) 
+. If the disconnect is initiated by the host (local) device the state will 
+transition from (|android.bluetooth.BluetoothA2dp|) to state 
+(|android.bluetooth.BluetoothA2dp|) to state 
+(|android.bluetooth.BluetoothA2dp|) . The transition to 
+(|android.bluetooth.BluetoothA2dp|) can be used to distinguish between the two 
+scenarios. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Remote Bluetooth Device 
+
+    Returns: false on immediate error, true otherwise 
+
+*android.bluetooth.BluetoothA2dp.finalize()*
+
+public void finalize()
+
+
+
+
+
+*android.bluetooth.BluetoothA2dp.getConnectedDevices()*
+
+public |java.util.List|<BluetoothDevice> getConnectedDevices()
+
+
+
+
+
+*android.bluetooth.BluetoothA2dp.getConnectionState(BluetoothDevice)*
+
+public int getConnectionState(android.bluetooth.BluetoothDevice device)
+
+
+
+
+
+*android.bluetooth.BluetoothA2dp.getDevicesMatchingConnectionStates(int[])*
+
+public |java.util.List|<BluetoothDevice> getDevicesMatchingConnectionStates(int[] states)
+
+
+
+
+
+*android.bluetooth.BluetoothA2dp.getPriority(BluetoothDevice)*
+
+public int getPriority(android.bluetooth.BluetoothDevice device)
+
+Get the priority of the profile. 
+
+The priority can be any of: (|android.bluetooth.BluetoothA2dp|) , 
+(|android.bluetooth.BluetoothA2dp|) , (|android.bluetooth.BluetoothA2dp|) , 
+(|android.bluetooth.BluetoothA2dp|) Requires (|android.Manifest.permission|) 
+permission. 
+
+
+    device - Bluetooth device 
+
+    Returns: priority of the device 
+
+*android.bluetooth.BluetoothA2dp.isA2dpPlaying(BluetoothDevice)*
+
+public boolean isA2dpPlaying(android.bluetooth.BluetoothDevice device)
+
+Check if A2DP profile is streaming music. 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - BluetoothDevice device 
+
+*android.bluetooth.BluetoothA2dp.isAvrcpAbsoluteVolumeSupported()*
+
+public boolean isAvrcpAbsoluteVolumeSupported()
+
+Checks if Avrcp device supports the absolute volume feature. 
+
+
+
+    Returns: true if device supports absolute volume 
+
+*android.bluetooth.BluetoothA2dp.setAvrcpAbsoluteVolume(int)*
+
+public void setAvrcpAbsoluteVolume(int volume)
+
+Tells remote device to set an absolute volume. Only if absolute volume is 
+supported 
+
+
+    volume - Absolute volume to be set on AVRCP side 
+
+*android.bluetooth.BluetoothA2dp.setPriority(BluetoothDevice,int)*
+
+public boolean setPriority(
+  android.bluetooth.BluetoothDevice device,
+  int priority)
+
+Set priority of the profile 
+
+The device should already be paired. Priority can be one of 
+(|android.bluetooth.BluetoothA2dp|) orgetBluetoothManager 
+(|android.bluetooth.BluetoothA2dp|) , 
+
+Requires (|android.Manifest.permission|) permission. 
+
+
+    device - Paired bluetooth device 
+    priority - 
+
+    Returns: true if priority is set, false on error 
+
+*android.bluetooth.BluetoothA2dp.shouldSendVolumeKeys(BluetoothDevice)*
+
+public boolean shouldSendVolumeKeys(android.bluetooth.BluetoothDevice device)
+
+This function checks if the remote device is an AVCRP target and thus whether 
+we should send volume keys changes or not. 
+
+
+
+*android.bluetooth.BluetoothA2dp.stateToString(int)*
+
+public static |java.lang.String| stateToString(int state)
+
+Helper for converting a state to a string. 
+
+For debug use only - strings are not internationalized. 
+
+
+
+

@@ -1,0 +1,165 @@
+*android.nfc.tech.NfcF* *NfcF* Provides access to NFC-F (JIS 6319-4) properties 
+
+public final class NfcF
+  extends    |android.nfc.tech.BasicTagTechnology|
+
+|android.nfc.tech.NfcF_Description|
+|android.nfc.tech.NfcF_Fields|
+|android.nfc.tech.NfcF_Constructors|
+|android.nfc.tech.NfcF_Methods|
+
+================================================================================
+
+*android.nfc.tech.NfcF_Fields*
+|java.lang.String_android.nfc.tech.NfcF.EXTRA_PMM|
+|java.lang.String_android.nfc.tech.NfcF.EXTRA_SC|
+
+*android.nfc.tech.NfcF_Constructors*
+|android.nfc.tech.NfcF(Tag)|
+
+*android.nfc.tech.NfcF_Methods*
+|android.nfc.tech.NfcF.get(Tag)|Get an instance ofNfcFfor the given tag.
+|android.nfc.tech.NfcF.getManufacturer()|Return the Manufacturer bytes from tag
+|android.nfc.tech.NfcF.getMaxTransceiveLength()|Return the maximum number of by
+|android.nfc.tech.NfcF.getSystemCode()|Return the System Code bytes from tag di
+|android.nfc.tech.NfcF.getTimeout()|Get the current#transceivetimeout in millis
+|android.nfc.tech.NfcF.setTimeout(int)|Set the#transceivetimeout in millisecond
+|android.nfc.tech.NfcF.transceive(byte[])|Send raw NFC-F commands to the tag an
+
+*android.nfc.tech.NfcF_Description*
+
+Provides access to NFC-F (JIS 6319-4) properties and I/O operations on a 
+(|android.nfc.Tag|) . 
+
+Acquire a (|android.nfc.tech.NfcF|) object using (|android.nfc.tech.NfcF|) . 
+The primary NFC-F I/O operation is (|android.nfc.tech.NfcF|) . Applications 
+must implement their own protocol stack on top of (|android.nfc.tech.NfcF|) . 
+
+Note: Methods that perform I/O operations require the 
+(|android.Manifest.permission|) permission. 
+
+
+
+*java.lang.String_android.nfc.tech.NfcF.EXTRA_PMM*
+
+
+
+
+*java.lang.String_android.nfc.tech.NfcF.EXTRA_SC*
+
+
+
+
+
+*android.nfc.tech.NfcF(Tag)*
+
+public NfcF(android.nfc.Tag tag)
+  throws |android.os.RemoteException|
+         
+
+
+
+*android.nfc.tech.NfcF.get(Tag)*
+
+public static |android.nfc.tech.NfcF| get(android.nfc.Tag tag)
+
+Get an instance of (|android.nfc.tech.NfcF|) for the given tag. Returns null if 
+(|android.nfc.tech.NfcF|) was not enumerated in (|android.nfc.Tag|) . This 
+indicates the tag does not support NFC-F. Does not cause any RF activity and 
+does not block. 
+
+
+    tag - an NFC-F compatible tag 
+
+    Returns: 
+
+*android.nfc.tech.NfcF.getManufacturer()*
+
+public byte[] getManufacturer()
+
+Return the Manufacturer bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: Manufacturer bytes 
+
+*android.nfc.tech.NfcF.getMaxTransceiveLength()*
+
+public int getMaxTransceiveLength()
+
+Return the maximum number of bytes that can be sent with 
+(|android.nfc.tech.NfcF|) . 
+
+
+
+    Returns: the maximum number of bytes that can be sent with {@link #transceive}. 
+
+*android.nfc.tech.NfcF.getSystemCode()*
+
+public byte[] getSystemCode()
+
+Return the System Code bytes from tag discovery. 
+
+Does not cause any RF activity and does not block. 
+
+
+
+    Returns: System Code bytes 
+
+*android.nfc.tech.NfcF.getTimeout()*
+
+public int getTimeout()
+
+Get the current (|android.nfc.tech.NfcF|) timeout in milliseconds. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+
+    Returns: timeout value in milliseconds 
+
+*android.nfc.tech.NfcF.setTimeout(int)*
+
+public void setTimeout(int timeout)
+
+Set the (|android.nfc.tech.NfcF|) timeout in milliseconds. 
+
+The timeout only applies to (|android.nfc.tech.NfcF|) on this object, and is 
+reset to a default value when (|android.nfc.tech.NfcF|) is called. 
+
+Setting a longer timeout may be useful when performing transactions that 
+require a long processing time on the tag such as key generation. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    timeout - timeout value in milliseconds 
+
+*android.nfc.tech.NfcF.transceive(byte[])*
+
+public byte[] transceive(byte[] data)
+  throws |java.io.IOException|
+         
+Send raw NFC-F commands to the tag and receive the response. 
+
+Applications must not append the SoD (length) or EoD (CRC) to the payload, it 
+will be automatically calculated. 
+
+Use (|android.nfc.tech.NfcF|) to retrieve the maximum amount of bytes that can 
+be sent with (|android.nfc.tech.NfcF|) . 
+
+This is an I/O operation and will block until complete. It must not be called 
+from the main application thread. A blocked call will be canceled with 
+(|java.io.IOException|) if (|android.nfc.tech.NfcF|) is called from another 
+thread. 
+
+Requires the (|android.Manifest.permission|) permission. 
+
+
+    data - bytes to send 
+
+    Returns: bytes received in response 
+
+

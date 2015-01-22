@@ -1,0 +1,869 @@
+*android.hardware.Camera* *Camera* The Camera class is used to set image capture
+
+public class Camera
+  extends    |java.lang.Object|
+
+|android.hardware.Camera_Description|
+|android.hardware.Camera_Fields|
+|android.hardware.Camera_Constructors|
+|android.hardware.Camera_Methods|
+
+================================================================================
+
+*android.hardware.Camera_Fields*
+|java.lang.String_android.hardware.Camera.ACTION_NEW_PICTURE|
+|java.lang.String_android.hardware.Camera.ACTION_NEW_VIDEO|
+|int_android.hardware.Camera.CAMERA_ERROR_SERVER_DIED|
+|int_android.hardware.Camera.CAMERA_ERROR_UNKNOWN|
+
+*android.hardware.Camera_Methods*
+|android.hardware.Camera.addCallbackBuffer(byte[])|Adds a pre-allocated buffer 
+|android.hardware.Camera.addRawImageCallbackBuffer(byte[])|Adds a pre-allocated
+|android.hardware.Camera.autoFocus(Camera.AutoFocusCallback)|Starts camera auto
+|android.hardware.Camera.cancelAutoFocus()|Cancels any auto-focus function in p
+|android.hardware.Camera.createPreviewAllocation(RenderScript,int)|Create aandr
+|android.hardware.Camera.enableShutterSound(boolean)|Enable or disable the defa
+|android.hardware.Camera.finalize()|
+|android.hardware.Camera.getCameraInfo(int,Camera.CameraInfo)|Returns the infor
+|android.hardware.Camera.getEmptyParameters()|Returns an emptyParametersfor tes
+|android.hardware.Camera.getNumberOfCameras()|Returns the number of physical ca
+|android.hardware.Camera.getParameters()|Returns the current settings for this 
+|android.hardware.Camera.lock()|Re-locks the camera to prevent other processes 
+|android.hardware.Camera.open()|Creates a new Camera object to access the first
+|android.hardware.Camera.open(int)|Creates a new Camera object to access a part
+|android.hardware.Camera.previewEnabled()|Return current preview state.
+|android.hardware.Camera.reconnect()|Reconnects to the camera service after ano
+|android.hardware.Camera.release()|Disconnects and releases the Camera object r
+|android.hardware.Camera.setAutoFocusMoveCallback(Camera.AutoFocusMoveCallback)|
+|android.hardware.Camera.setDisplayOrientation(int)|Set the clockwise rotation 
+|android.hardware.Camera.setErrorCallback(Camera.ErrorCallback)|Registers a cal
+|android.hardware.Camera.setFaceDetectionListener(Camera.FaceDetectionListener)|
+|android.hardware.Camera.setOneShotPreviewCallback(Camera.PreviewCallback)|Inst
+|android.hardware.Camera.setParameters(Camera.Parameters)|Changes the settings 
+|android.hardware.Camera.setPreviewCallback(Camera.PreviewCallback)|Installs a 
+|android.hardware.Camera.setPreviewCallbackAllocation(Allocation)|Set anandroid
+|android.hardware.Camera.setPreviewCallbackWithBuffer(Camera.PreviewCallback)|I
+|android.hardware.Camera.setPreviewDisplay(SurfaceHolder)|Sets theSurfaceto be 
+|android.hardware.Camera.setPreviewTexture(SurfaceTexture)|Sets theSurfaceTextu
+|android.hardware.Camera.setZoomChangeListener(Camera.OnZoomChangeListener)|Reg
+|android.hardware.Camera.startFaceDetection()|Starts the face detection.
+|android.hardware.Camera.startPreview()|Starts capturing and drawing preview fr
+|android.hardware.Camera.startSmoothZoom(int)|Zooms to the requested value smoo
+|android.hardware.Camera.stopFaceDetection()|Stops the face detection.
+|android.hardware.Camera.stopPreview()|Stops capturing and drawing preview fram
+|android.hardware.Camera.stopSmoothZoom()|Stops the smooth zoom.
+|android.hardware.Camera.takePicture(Camera.ShutterCallback,Camera.PictureCallback,Camera.PictureCallback)|
+|android.hardware.Camera.takePicture(Camera.ShutterCallback,Camera.PictureCallback,Camera.PictureCallback,Camera.PictureCallback)|
+|android.hardware.Camera.unlock()|Unlocks the camera to allow another process t
+
+*android.hardware.Camera_Description*
+
+The Camera class is used to set image capture settings, start/stop preview, 
+snap pictures, and retrieve frames for encoding for video. This class is a 
+client for the Camera service, which manages the actual camera hardware. 
+
+To access the device camera, you must declare the 
+(|android.Manifest.permission|) permission in your Android Manifest. Also be 
+sure to include the <a 
+href="guide/topics/manifest/uses-feature-element.html"><uses-feature> manifest 
+element to declare camera features used by your application. For example, if 
+you use the camera and auto-focus feature, your Manifest should include the 
+following: 
+
+<uses-permission android:name="android.permission.CAMERA" /> <uses-feature 
+android:name="android.hardware.camera" /> <uses-feature 
+android:name="android.hardware.camera.autofocus" /> 
+
+To take pictures with this class, use the following steps: 
+
+Obtain an instance of Camera from (|android.hardware.Camera|) . 
+
+Get existing (default) settings with (|android.hardware.Camera|) . 
+
+If necessary, modify the returned (|android.hardware.Camera.Parameters|) object 
+and call (|android.hardware.Camera|) . 
+
+If desired, call (|android.hardware.Camera|) . 
+
+Important: Pass a fully initialized (|android.view.SurfaceHolder|) to 
+(|android.hardware.Camera|) . Without a surface, the camera will be unable to 
+start the preview. 
+
+Important: Call (|android.hardware.Camera|) to start updating the preview 
+surface. Preview must be started before you can take a picture. 
+
+When you want, call (|android.hardware.Camera|) to capture a photo. Wait for 
+the callbacks to provide the actual image data. 
+
+After taking a picture, preview display will have stopped. To take more photos, 
+call (|android.hardware.Camera|) again first. 
+
+Call (|android.hardware.Camera|) to stop updating the preview surface. 
+
+Important: Call (|android.hardware.Camera|) to release the camera for use by 
+other applications. Applications should release the camera immediately in 
+(|android.app.Activity|) (and re- (|android.hardware.Camera|) it in 
+(|android.app.Activity|) ). 
+
+To quickly switch to video recording mode, use these steps: 
+
+Obtain and initialize a Camera and start preview as described above. 
+
+Call (|android.hardware.Camera|) to allow the media process to access the 
+camera. 
+
+Pass the camera to (|android.media.MediaRecorder|) . See 
+(|android.media.MediaRecorder|) information about video recording. 
+
+When finished recording, call (|android.hardware.Camera|) to re-acquire and 
+re-lock the camera. 
+
+If desired, restart preview and take more photos or videos. 
+
+Call (|android.hardware.Camera|) and (|android.hardware.Camera|) as described 
+above. 
+
+This class is not thread-safe, and is meant for use from one event thread. Most 
+long-running operations (preview, focus, photo capture, etc) happen 
+asynchronously and invoke callbacks as necessary. Callbacks will be invoked on 
+the event thread (|android.hardware.Camera|) was called from. This class's 
+methods must never be called from multiple threads at once. 
+
+Caution: Different Android-powered devices may have different hardware 
+specifications, such as megapixel ratings and auto-focus capabilities. In order 
+for your application to be compatible with more devices, you should not make 
+assumptions about the device camera specifications. 
+
+Developer Guides For more information about using cameras, read the <a 
+href="guide/topics/media/camera.html">Camera developer guide. 
+
+
+
+*java.lang.String_android.hardware.Camera.ACTION_NEW_PICTURE*
+
+Broadcast Action: A new picture is taken by the camera, and the entry of the 
+picture has been added to the media store. (|android.content.Intent|) is URI of 
+the picture. 
+
+
+*java.lang.String_android.hardware.Camera.ACTION_NEW_VIDEO*
+
+Broadcast Action: A new video is recorded by the camera, and the entry of the 
+video has been added to the media store. (|android.content.Intent|) is URI of 
+the video. 
+
+
+*int_android.hardware.Camera.CAMERA_ERROR_SERVER_DIED*
+
+Media server died. In this case, the application must release the Camera object 
+and instantiate a new one. 
+
+
+*int_android.hardware.Camera.CAMERA_ERROR_UNKNOWN*
+
+Unspecified camera error. 
+
+
+
+*android.hardware.Camera.addCallbackBuffer(byte[])*
+
+public final void addCallbackBuffer(byte[] callbackBuffer)
+
+Adds a pre-allocated buffer to the preview callback buffer queue. Applications 
+can add one or more buffers to the queue. When a preview frame arrives and 
+there is still at least one available buffer, the buffer will be used and 
+removed from the queue. Then preview callback is invoked with the buffer. If a 
+frame arrives and there is no buffer left, the frame is discarded. Applications 
+should add buffers back when they finish processing the data in them. 
+
+For formats besides YV12, the size of the buffer is determined by multiplying 
+the preview image width, height, and bytes per pixel. The width and height can 
+be read from (|android.hardware.Camera.Parameters|) . Bytes per pixel can be 
+computed from (|android.graphics.ImageFormat|) / 8, using the image format from 
+(|android.hardware.Camera.Parameters|) . 
+
+If using the (|android.graphics.ImageFormat|) format, the size can be 
+calculated using the equations listed in (|android.hardware.Camera.Parameters|) 
+. 
+
+This method is only necessary when (|android.hardware.Camera|) is used. When 
+(|android.hardware.Camera|) or (|android.hardware.Camera|) are used, buffers 
+are automatically allocated. When a supplied buffer is too small to hold the 
+preview frame data, preview callback will return null and the buffer will be 
+removed from the buffer queue. 
+
+
+    callbackBuffer - the buffer to add to the queue. The size of the buffer must match the values 
+       described above. 
+
+*android.hardware.Camera.addRawImageCallbackBuffer(byte[])*
+
+public final void addRawImageCallbackBuffer(byte[] callbackBuffer)
+
+Adds a pre-allocated buffer to the raw image callback buffer queue. 
+Applications can add one or more buffers to the queue. When a raw image frame 
+arrives and there is still at least one available buffer, the buffer will be 
+used to hold the raw image data and removed from the queue. Then raw image 
+callback is invoked with the buffer. If a raw image frame arrives but there is 
+no buffer left, the frame is discarded. Applications should add buffers back 
+when they finish processing the data in them by calling this method again in 
+order to avoid running out of raw image callback buffers. 
+
+The size of the buffer is determined by multiplying the raw image width, 
+height, and bytes per pixel. The width and height can be read from 
+(|android.hardware.Camera.Parameters|) . Bytes per pixel can be computed from 
+(|android.graphics.ImageFormat|) / 8, using the image format from 
+(|android.hardware.Camera.Parameters|) . 
+
+This method is only necessary when the PictureCallbck for raw image is used 
+while calling (|android.hardware.Camera|) . 
+
+Please note that by calling this method, the mode for application-managed 
+callback buffers is triggered. If this method has never been called, null will 
+be returned by the raw image callback since there is no image callback buffer 
+available. Furthermore, When a supplied buffer is too small to hold the raw 
+image data, raw image callback will return null and the buffer will be removed 
+from the buffer queue. 
+
+
+    callbackBuffer - the buffer to add to the raw image callback buffer queue. The size should be 
+       width * height * (bits per pixel) / 8. An null callbackBuffer will be 
+       ignored and won't be added to the queue. 
+
+*android.hardware.Camera.autoFocus(Camera.AutoFocusCallback)*
+
+public final void autoFocus(android.hardware.Camera.AutoFocusCallback cb)
+
+Starts camera auto-focus and registers a callback function to run when the 
+camera is focused. This method is only valid when preview is active (between 
+(|android.hardware.Camera|) and before (|android.hardware.Camera|) ). 
+
+Callers should check (|android.hardware.Camera.Parameters|) to determine if 
+this method should be called. If the camera does not support auto-focus, it is 
+a no-op and (|android.hardware.Camera.AutoFocusCallback|) callback will be 
+called immediately. 
+
+If your application should not be installed on devices without auto-focus, you 
+must declare that your application uses auto-focus with the <a 
+href="guide/topics/manifest/uses-feature-element.html"><uses-feature> manifest 
+element. 
+
+If the current flash mode is not (|android.hardware.Camera.Parameters|) , flash 
+may be fired during auto-focus, depending on the driver and camera hardware. 
+
+Auto-exposure lock (|android.hardware.Camera.Parameters|) and auto-white 
+balance locks (|android.hardware.Camera.Parameters|) do not change during and 
+after autofocus. But auto-focus routine may stop auto-exposure and auto-white 
+balance transiently during focusing. 
+
+Stopping preview with (|android.hardware.Camera|) , or triggering still image 
+capture with (|android.hardware.Camera|) , will not change the the focus 
+position. Applications must call cancelAutoFocus to reset the focus. 
+
+If autofocus is successful, consider using (|android.media.MediaActionSound|) 
+to properly play back an autofocus success sound to the user. 
+
+
+    cb - the callback to run 
+
+*android.hardware.Camera.cancelAutoFocus()*
+
+public final void cancelAutoFocus()
+
+Cancels any auto-focus function in progress. Whether or not auto-focus is 
+currently in progress, this function will return the focus position to the 
+default. If the camera does not support auto-focus, this is a no-op. 
+
+
+
+*android.hardware.Camera.createPreviewAllocation(RenderScript,int)*
+
+public final Allocation createPreviewAllocation(
+  RenderScript rs,
+  int usage)
+  throws |RSIllegalArgumentException|
+         
+Create a RenderScript(|android.renderscript|) 
+Allocation(|android.renderscript.Allocation|) to use as a destination of 
+preview callback frames. Use 
+setPreviewCallbackAllocation(|android.hardware.Camera|) to use the created 
+Allocation as a destination for camera preview frames. 
+
+The Allocation will be created with a YUV type, and its contents must be 
+accessed within Renderscript with thersGetElementAtYuv_*accessor methods. Its 
+size will be based on the current preview 
+size(|android.hardware.Camera.Parameters|) configured for this camera. 
+
+
+    rs - the RenderScript context for this Allocation. 
+    usage - additional usage flags to set for the Allocation. The usage flag {@link 
+       android.renderscript.Allocation#USAGE_IO_INPUT} will always be set on 
+       the created Allocation, but additional flags may be provided here. 
+
+    Returns: a new YUV-type Allocation with dimensions equal to the current preview size. 
+
+*android.hardware.Camera.enableShutterSound(boolean)*
+
+public final boolean enableShutterSound(boolean enabled)
+
+Enable or disable the default shutter sound when taking a picture. 
+
+By default, the camera plays the system-defined camera shutter sound when 
+(|android.hardware.Camera|) is called. Using this method, the shutter sound can 
+be disabled. It is strongly recommended that an alternative shutter sound is 
+played in the (|android.hardware.Camera.ShutterCallback|) when the system 
+shutter sound is disabled. 
+
+Note that devices may not always allow disabling the camera shutter sound. If 
+the shutter sound state cannot be set to the desired value, this method will 
+return false. (|android.hardware.Camera.CameraInfo|) can be used to determine 
+whether the device will allow the shutter sound to be disabled. 
+
+
+    enabled - whether the camera should play the system shutter sound when {@link 
+       #takePicture takePicture} is called. 
+
+    Returns: {@code true} if the shutter sound state was successfully changed. {@code false} 
+             if the shutter sound state could not be changed. {@code true} is 
+             also returned if shutter sound playback is already set to the 
+             requested state. 
+
+*android.hardware.Camera.finalize()*
+
+protected void finalize()
+
+
+
+
+
+*android.hardware.Camera.getCameraInfo(int,Camera.CameraInfo)*
+
+public static void getCameraInfo(
+  int cameraId,
+  android.hardware.Camera.CameraInfo cameraInfo)
+
+Returns the information about a particular camera. If 
+(|android.hardware.Camera|) returns N, the valid id is 0 to N-1. 
+
+
+
+*android.hardware.Camera.getEmptyParameters()*
+
+public static |android.hardware.Camera.Parameters| getEmptyParameters()
+
+Returns an empty (|android.hardware.Camera.Parameters|) for testing purpose. 
+
+
+
+    Returns: a Parameter object. 
+
+*android.hardware.Camera.getNumberOfCameras()*
+
+public static native int getNumberOfCameras()
+
+Returns the number of physical cameras available on this device. 
+
+
+
+*android.hardware.Camera.getParameters()*
+
+public |android.hardware.Camera.Parameters| getParameters()
+
+Returns the current settings for this Camera service. If modifications are made 
+to the returned Parameters, they must be passed to (|android.hardware.Camera|) 
+to take effect. 
+
+
+
+*android.hardware.Camera.lock()*
+
+public final native void lock()
+
+Re-locks the camera to prevent other processes from accessing it. Camera 
+objects are locked by default unless (|android.hardware.Camera|) is called. 
+Normally (|android.hardware.Camera|) is used instead. 
+
+Since API level 14, camera is automatically locked for applications in 
+(|android.media.MediaRecorder|) . Applications can use the camera (ex: zoom) 
+after recording starts. There is no need to call this after recording starts or 
+stops. 
+
+If you are not recording video, you probably do not need this method. 
+
+
+
+*android.hardware.Camera.open()*
+
+public static |android.hardware.Camera| open()
+
+Creates a new Camera object to access the first back-facing camera on the 
+device. If the device does not have a back-facing camera, this returns null. 
+
+
+
+*android.hardware.Camera.open(int)*
+
+public static |android.hardware.Camera| open(int cameraId)
+
+Creates a new Camera object to access a particular hardware camera. If the same 
+camera is opened by other applications, this will throw a RuntimeException. 
+
+You must call (|android.hardware.Camera|) when you are done using the camera, 
+otherwise it will remain locked and be unavailable to other applications. 
+
+Your application should only have one Camera object active at a time for a 
+particular hardware camera. 
+
+Callbacks from other methods are delivered to the event loop of the thread 
+which called open(). If this thread has no event loop, then callbacks are 
+delivered to the main application event loop. If there is no main application 
+event loop, callbacks are not delivered. 
+
+Caution: On some devices, this method may take a long time to complete. It is 
+best to call this method from a worker thread (possibly using 
+(|android.os.AsyncTask|) ) to avoid blocking the main application UI thread. 
+
+
+    cameraId - the hardware camera to access, between 0 and {@link #getNumberOfCameras()}-1. 
+
+    Returns: a new Camera object, connected, locked and ready for use. 
+
+*android.hardware.Camera.previewEnabled()*
+
+public final native boolean previewEnabled()
+
+Return current preview state. 
+
+FIXME: Unhide before release 
+
+
+
+*android.hardware.Camera.reconnect()*
+
+public final native void reconnect()
+  throws |java.io.IOException|
+         
+Reconnects to the camera service after another process used it. After 
+(|android.hardware.Camera|) is called, another process may use the camera; when 
+the process is done, you must reconnect to the camera, which will re-acquire 
+the lock and allow you to continue using the camera. 
+
+Since API level 14, camera is automatically locked for applications in 
+(|android.media.MediaRecorder|) . Applications can use the camera (ex: zoom) 
+after recording starts. There is no need to call this after recording starts or 
+stops. 
+
+If you are not recording video, you probably do not need this method. 
+
+
+
+*android.hardware.Camera.release()*
+
+public final void release()
+
+Disconnects and releases the Camera object resources. 
+
+You must call this as soon as you're done with the Camera object. 
+
+
+
+*android.hardware.Camera.setAutoFocusMoveCallback(Camera.AutoFocusMoveCallback)*
+
+public void setAutoFocusMoveCallback(android.hardware.Camera.AutoFocusMoveCallback cb)
+
+Sets camera auto-focus move callback. 
+
+
+    cb - the callback to run 
+
+*android.hardware.Camera.setDisplayOrientation(int)*
+
+public final native void setDisplayOrientation(int degrees)
+
+Set the clockwise rotation of preview display in degrees. This affects the 
+preview frames and the picture displayed after snapshot. This method is useful 
+for portrait mode applications. Note that preview display of front-facing 
+cameras is flipped horizontally before the rotation, that is, the image is 
+reflected along the central vertical axis of the camera sensor. So the users 
+can see themselves as looking into a mirror. 
+
+This does not affect the order of byte array passed in 
+(|android.hardware.Camera.PreviewCallback|) , JPEG pictures, or recorded 
+videos. This method is not allowed to be called during preview. 
+
+If you want to make the camera image show in the same orientation as the 
+display, you can use the following code. 
+
+public static void setCameraDisplayOrientation(Activity activity, int cameraId, 
+android.hardware.Camera camera) { android.hardware.Camera.CameraInfo info = new 
+android.hardware.Camera.CameraInfo(); 
+android.hardware.Camera.getCameraInfo(cameraId, info); int rotation = 
+activity.getWindowManager().getDefaultDisplay() .getRotation(); int degrees = 
+0; switch (rotation) { case Surface.ROTATION_0: degrees = 0; break; case 
+Surface.ROTATION_90: degrees = 90; break; case Surface.ROTATION_180: degrees = 
+180; break; case Surface.ROTATION_270: degrees = 270; break; } 
+
+int result; if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) { result 
+= (info.orientation + degrees) % 360; result = (360 - result) % 360; // 
+compensate the mirror } else { // back-facing result = (info.orientation - 
+degrees + 360) % 360; } camera.setDisplayOrientation(result); } 
+
+Starting from API level 14, this method can be called when preview is active. 
+
+
+    degrees - the angle that the picture will be rotated clockwise. Valid values are 0, 90, 
+       180, and 270. The starting position is 0 (landscape). 
+
+*android.hardware.Camera.setErrorCallback(Camera.ErrorCallback)*
+
+public final void setErrorCallback(android.hardware.Camera.ErrorCallback cb)
+
+Registers a callback to be invoked when an error occurs. 
+
+
+    cb - The callback to run 
+
+*android.hardware.Camera.setFaceDetectionListener(Camera.FaceDetectionListener)*
+
+public final void setFaceDetectionListener(android.hardware.Camera.FaceDetectionListener listener)
+
+Registers a listener to be notified about the faces detected in the preview 
+frame. 
+
+
+    listener - the listener to notify 
+
+*android.hardware.Camera.setOneShotPreviewCallback(Camera.PreviewCallback)*
+
+public final void setOneShotPreviewCallback(android.hardware.Camera.PreviewCallback cb)
+
+Installs a callback to be invoked for the next preview frame in addition to 
+displaying it on the screen. After one invocation, the callback is cleared. 
+This method can be called any time, even when preview is live. Any other 
+preview callbacks are overridden. 
+
+If you are using the preview data to create video or still images, strongly 
+consider using (|android.media.MediaActionSound|) to properly indicate image 
+capture or recording start/stop to the user. 
+
+
+    cb - a callback object that receives a copy of the next preview frame, or null to 
+       stop receiving callbacks. 
+
+*android.hardware.Camera.setParameters(Camera.Parameters)*
+
+public void setParameters(android.hardware.Camera.Parameters params)
+
+Changes the settings for this Camera service. 
+
+
+    params - the Parameters to use for this Camera service 
+
+*android.hardware.Camera.setPreviewCallback(Camera.PreviewCallback)*
+
+public final void setPreviewCallback(android.hardware.Camera.PreviewCallback cb)
+
+Installs a callback to be invoked for every preview frame in addition to 
+displaying them on the screen. The callback will be repeatedly called for as 
+long as preview is active. This method can be called at any time, even while 
+preview is live. Any other preview callbacks are overridden. 
+
+If you are using the preview data to create video or still images, strongly 
+consider using (|android.media.MediaActionSound|) to properly indicate image 
+capture or recording start/stop to the user. 
+
+
+    cb - a callback object that receives a copy of each preview frame, or null to stop 
+       receiving callbacks. 
+
+*android.hardware.Camera.setPreviewCallbackAllocation(Allocation)*
+
+public final void setPreviewCallbackAllocation(Allocation previewAllocation)
+  throws |java.io.IOException|
+         
+Set an Allocation(|android.renderscript.Allocation|) as the target of preview 
+callback data. Use this method for efficient processing of camera preview data 
+with RenderScript. The Allocation must be created with the 
+createPreviewAllocation (|android.hardware.Camera|) method. 
+
+Setting a preview allocation will disable any active preview callbacks set by 
+setPreviewCallback(|android.hardware.Camera|) or 
+setPreviewCallbackWithBuffer(|android.hardware.Camera|) , and vice versa. Using 
+a preview allocation still requires an active standard preview target to be 
+set, either with setPreviewTexture(|android.hardware.Camera|) or 
+setPreviewDisplay(|android.hardware.Camera|) . 
+
+To be notified when new frames are available to the Allocation, use 
+Allocation.setIoInputNotificationHandler(|android.renderscript.Allocation|) . 
+To update the frame currently accessible from the Allocation to the latest 
+preview frame, call Allocation.ioReceive(|android.renderscript.Allocation|) . 
+
+To disable preview into the Allocation, call this method with anullparameter. 
+
+Once a preview allocation is set, the preview size set by 
+setPreviewSize(|android.hardware.Camera.Parameters|) cannot be changed. If you 
+wish to change the preview size, first remove the preview allocation by 
+callingsetPreviewCallbackAllocation(null), then change the preview size, create 
+a new preview Allocation with 
+createPreviewAllocation(|android.hardware.Camera|) , and set it as the new 
+preview callback allocation target. 
+
+If you are using the preview data to create video or still images, strongly 
+consider using (|android.media.MediaActionSound|) to properly indicate image 
+capture or recording start/stop to the user. 
+
+
+    previewAllocation - the allocation to use as destination for preview 
+
+*android.hardware.Camera.setPreviewCallbackWithBuffer(Camera.PreviewCallback)*
+
+public final void setPreviewCallbackWithBuffer(android.hardware.Camera.PreviewCallback cb)
+
+Installs a callback to be invoked for every preview frame, using buffers 
+supplied with (|android.hardware.Camera|) , in addition to displaying them on 
+the screen. The callback will be repeatedly called for as long as preview is 
+active and buffers are available. Any other preview callbacks are overridden. 
+
+The purpose of this method is to improve preview efficiency and frame rate by 
+allowing preview frame memory reuse. You must call (|android.hardware.Camera|) 
+at some point -- before or after calling this method -- or no callbacks will 
+received. 
+
+The buffer queue will be cleared if this method is called with a null callback, 
+(|android.hardware.Camera|) is called, or (|android.hardware.Camera|) is 
+called. 
+
+If you are using the preview data to create video or still images, strongly 
+consider using (|android.media.MediaActionSound|) to properly indicate image 
+capture or recording start/stop to the user. 
+
+
+    cb - a callback object that receives a copy of the preview frame, or null to stop 
+       receiving callbacks and clear the buffer queue. 
+
+*android.hardware.Camera.setPreviewDisplay(SurfaceHolder)*
+
+public final void setPreviewDisplay(android.view.SurfaceHolder holder)
+  throws |java.io.IOException|
+         
+Sets the (|android.view.Surface|) to be used for live preview. Either a surface 
+or surface texture is necessary for preview, and preview is necessary to take 
+pictures. The same surface can be re-set without harm. Setting a preview 
+surface will un-set any preview surface texture that was set via 
+(|android.hardware.Camera|) . 
+
+The (|android.view.SurfaceHolder|) must already contain a surface when this 
+method is called. If you are using (|android.view.SurfaceView|) , you will need 
+to register a (|SurfaceHolder.Callback|) with (|android.view.SurfaceHolder|) 
+and wait for (|SurfaceHolder.Callback|) before calling setPreviewDisplay() or 
+starting preview. 
+
+This method must be called before (|android.hardware.Camera|) . The one 
+exception is that if the preview surface is not set (or set to null) before 
+startPreview() is called, then this method may be called once with a non-null 
+parameter to set the preview surface. (This allows camera setup and surface 
+creation to happen in parallel, saving time.) The preview surface may not 
+otherwise change while preview is running. 
+
+
+    holder - containing the Surface on which to place the preview, or null to remove the 
+       preview surface 
+
+*android.hardware.Camera.setPreviewTexture(SurfaceTexture)*
+
+public final native void setPreviewTexture(SurfaceTexture surfaceTexture)
+  throws |java.io.IOException|
+         
+Sets the (|SurfaceTexture|) to be used for live preview. Either a surface or 
+surface texture is necessary for preview, and preview is necessary to take 
+pictures. The same surface texture can be re-set without harm. Setting a 
+preview surface texture will un-set any preview surface that was set via 
+(|android.hardware.Camera|) . 
+
+This method must be called before (|android.hardware.Camera|) . The one 
+exception is that if the preview surface texture is not set (or set to null) 
+before startPreview() is called, then this method may be called once with a 
+non-null parameter to set the preview surface. (This allows camera setup and 
+surface creation to happen in parallel, saving time.) The preview surface 
+texture may not otherwise change while preview is running. 
+
+The timestamps provided by (|SurfaceTexture|) for a SurfaceTexture set as the 
+preview texture have an unspecified zero point, and cannot be directly compared 
+between different cameras or different instances of the same camera, or across 
+multiple runs of the same program. 
+
+If you are using the preview data to create video or still images, strongly 
+consider using (|android.media.MediaActionSound|) to properly indicate image 
+capture or recording start/stop to the user. 
+
+
+    surfaceTexture - the {@link SurfaceTexture} to which the preview images are to be sent or null 
+       to remove the current preview surface texture 
+
+*android.hardware.Camera.setZoomChangeListener(Camera.OnZoomChangeListener)*
+
+public final void setZoomChangeListener(android.hardware.Camera.OnZoomChangeListener listener)
+
+Registers a listener to be notified when the zoom value is updated by the 
+camera driver during smooth zoom. 
+
+
+    listener - the listener to notify 
+
+*android.hardware.Camera.startFaceDetection()*
+
+public final void startFaceDetection()
+
+Starts the face detection. This should be called after preview is started. The 
+camera will notify (|android.hardware.Camera.FaceDetectionListener|) of the 
+detected faces in the preview frame. The detected faces may be the same as the 
+previous ones. Applications should call (|android.hardware.Camera|) to stop the 
+face detection. This method is supported if 
+(|android.hardware.Camera.Parameters|) returns a number larger than 0. If the 
+face detection has started, apps should not call this again. 
+
+When the face detection is running, (|android.hardware.Camera.Parameters|) , 
+(|android.hardware.Camera.Parameters|) , and 
+(|android.hardware.Camera.Parameters|) have no effect. The camera uses the 
+detected faces to do auto-white balance, auto exposure, and autofocus. 
+
+If the apps call (|android.hardware.Camera|) , the camera will stop sending 
+face callbacks. The last face callback indicates the areas used to do 
+autofocus. After focus completes, face detection will resume sending face 
+callbacks. If the apps call (|android.hardware.Camera|) , the face callbacks 
+will also resume. 
+
+After calling (|android.hardware.Camera|) or (|android.hardware.Camera|) , and 
+then resuming preview with (|android.hardware.Camera|) , the apps should call 
+this method again to resume face detection. 
+
+
+
+*android.hardware.Camera.startPreview()*
+
+public final native void startPreview()
+
+Starts capturing and drawing preview frames to the screen. Preview will not 
+actually start until a surface is supplied with (|android.hardware.Camera|) or 
+(|android.hardware.Camera|) . 
+
+If (|android.hardware.Camera|) , (|android.hardware.Camera|) , or 
+(|android.hardware.Camera|) were called, 
+(|android.hardware.Camera.PreviewCallback|) will be called when preview data 
+becomes available. 
+
+
+
+*android.hardware.Camera.startSmoothZoom(int)*
+
+public final native void startSmoothZoom(int value)
+
+Zooms to the requested value smoothly. The driver will notify 
+(|android.hardware.Camera.OnZoomChangeListener|) of the zoom value and whether 
+zoom is stopped at the time. For example, suppose the current zoom is 0 and 
+startSmoothZoom is called with value 3. The 
+(|android.hardware.Camera.OnZoomChangeListener|) method will be called three 
+times with zoom values 1, 2, and 3. Applications can call 
+(|android.hardware.Camera|) to stop the zoom earlier. Applications should not 
+call startSmoothZoom again or change the zoom value before zoom stops. If the 
+supplied zoom value equals to the current zoom value, no zoom callback will be 
+generated. This method is supported if (|android.hardware.Camera.Parameters|) 
+returns true. 
+
+
+    value - zoom value. The valid range is 0 to {@link 
+       android.hardware.Camera.Parameters#getMaxZoom}. 
+
+*android.hardware.Camera.stopFaceDetection()*
+
+public final void stopFaceDetection()
+
+Stops the face detection. 
+
+
+
+*android.hardware.Camera.stopPreview()*
+
+public final void stopPreview()
+
+Stops capturing and drawing preview frames to the surface, and resets the 
+camera for a future call to (|android.hardware.Camera|) . 
+
+
+
+*android.hardware.Camera.stopSmoothZoom()*
+
+public final native void stopSmoothZoom()
+
+Stops the smooth zoom. Applications should wait for the 
+(|android.hardware.Camera.OnZoomChangeListener|) to know when the zoom is 
+actually stopped. This method is supported if 
+(|android.hardware.Camera.Parameters|) is true. 
+
+
+
+*android.hardware.Camera.takePicture(Camera.ShutterCallback,Camera.PictureCallback,Camera.PictureCallback)*
+
+public final void takePicture(
+  android.hardware.Camera.ShutterCallback shutter,
+  android.hardware.Camera.PictureCallback raw,
+  android.hardware.Camera.PictureCallback jpeg)
+
+Equivalent to takePicture(shutter, raw, null, jpeg). 
+
+
+
+*android.hardware.Camera.takePicture(Camera.ShutterCallback,Camera.PictureCallback,Camera.PictureCallback,Camera.PictureCallback)*
+
+public final void takePicture(
+  android.hardware.Camera.ShutterCallback shutter,
+  android.hardware.Camera.PictureCallback raw,
+  android.hardware.Camera.PictureCallback postview,
+  android.hardware.Camera.PictureCallback jpeg)
+
+Triggers an asynchronous image capture. The camera service will initiate a 
+series of callbacks to the application as the image capture progresses. The 
+shutter callback occurs after the image is captured. This can be used to 
+trigger a sound to let the user know that image has been captured. The raw 
+callback occurs when the raw image data is available (NOTE: the data will be 
+null if there is no raw image callback buffer available or the raw image 
+callback buffer is not large enough to hold the raw image). The postview 
+callback occurs when a scaled, fully processed postview image is available 
+(NOTE: not all hardware supports this). The jpeg callback occurs when the 
+compressed image is available. If the application does not need a particular 
+callback, a null can be passed instead of a callback method. 
+
+This method is only valid when preview is active (after 
+(|android.hardware.Camera|) ). Preview will be stopped after the image is 
+taken; callers must call (|android.hardware.Camera|) again if they want to 
+re-start preview or take more pictures. This should not be called between 
+(|android.media.MediaRecorder|) and (|android.media.MediaRecorder|) . 
+
+After calling this method, you must not call (|android.hardware.Camera|) or 
+take another picture until the JPEG callback has returned. 
+
+
+    shutter - the callback for image capture moment, or null 
+    raw - the callback for raw (uncompressed) image data, or null 
+    postview - callback with postview image data, may be null 
+    jpeg - the callback for JPEG image data, or null 
+
+*android.hardware.Camera.unlock()*
+
+public final native void unlock()
+
+Unlocks the camera to allow another process to access it. Normally, the camera 
+is locked to the process with an active Camera object until 
+(|android.hardware.Camera|) is called. To allow rapid handoff between 
+processes, you can call this method to release the camera temporarily for 
+another process to use; once the other process is done you can call 
+(|android.hardware.Camera|) to reclaim the camera. 
+
+This must be done before calling (|android.media.MediaRecorder|) . This cannot 
+be called after recording starts. 
+
+If you are not recording video, you probably do not need this method. 
+
+
+
+

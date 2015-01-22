@@ -1,0 +1,216 @@
+*android.content.res.AssetFileDescriptor* *AssetFileDescriptor* File descriptor 
+
+public class AssetFileDescriptor
+  extends    |java.lang.Object|
+  implements |android.os.Parcelable|
+             |java.io.Closeable|
+
+|android.content.res.AssetFileDescriptor_Description|
+|android.content.res.AssetFileDescriptor_Fields|
+|android.content.res.AssetFileDescriptor_Constructors|
+|android.content.res.AssetFileDescriptor_Methods|
+
+================================================================================
+
+*android.content.res.AssetFileDescriptor_Fields*
+|android.os.Parcelable.Creator<android.content.res.AssetFileDescriptor>_android.content.res.AssetFileDescriptor.CREATOR|
+|long_android.content.res.AssetFileDescriptor.UNKNOWN_LENGTH|
+
+*android.content.res.AssetFileDescriptor_Constructors*
+|android.content.res.AssetFileDescriptor(ParcelFileDescriptor,long,long)|Create
+|android.content.res.AssetFileDescriptor(ParcelFileDescriptor,long,long,Bundle)|
+
+*android.content.res.AssetFileDescriptor_Methods*
+|android.content.res.AssetFileDescriptor.close()|Convenience for calling getPar
+|android.content.res.AssetFileDescriptor.createInputStream()|Create and return 
+|android.content.res.AssetFileDescriptor.createOutputStream()|Create and return
+|android.content.res.AssetFileDescriptor.describeContents()|
+|android.content.res.AssetFileDescriptor.getDeclaredLength()|Return the actual 
+|android.content.res.AssetFileDescriptor.getExtras()|Returns any additional det
+|android.content.res.AssetFileDescriptor.getFileDescriptor()|Returns the FileDe
+|android.content.res.AssetFileDescriptor.getLength()|Returns the total number o
+|android.content.res.AssetFileDescriptor.getParcelFileDescriptor()|The AssetFil
+|android.content.res.AssetFileDescriptor.getStartOffset()|Returns the byte offs
+|android.content.res.AssetFileDescriptor.toString()|
+|android.content.res.AssetFileDescriptor.writeToParcel(Parcel,int)|
+
+*android.content.res.AssetFileDescriptor_Description*
+
+File descriptor of an entry in the AssetManager. This provides your own opened 
+FileDescriptor that can be used to read the data, as well as the offset and 
+length of that entry's data in the file. 
+
+
+
+*android.os.Parcelable.Creator<android.content.res.AssetFileDescriptor>_android.content.res.AssetFileDescriptor.CREATOR*
+
+
+
+
+*long_android.content.res.AssetFileDescriptor.UNKNOWN_LENGTH*
+
+Length used with (|android.content.res.AssetFileDescriptor|) and 
+(|android.content.res.AssetFileDescriptor|) when a length has not been 
+declared. This means the data extends to the end of the file. 
+
+
+
+*android.content.res.AssetFileDescriptor(ParcelFileDescriptor,long,long)*
+
+public AssetFileDescriptor(
+  android.os.ParcelFileDescriptor fd,
+  long startOffset,
+  long length)
+
+Create a new AssetFileDescriptor from the given values. 
+
+    fd - The underlying file descriptor. 
+    startOffset - The location within the file that the asset starts. This must be 0 if length is 
+       UNKNOWN_LENGTH. 
+    length - The number of bytes of the asset, or {@link #UNKNOWN_LENGTH} if it extends to 
+       the end of the file. 
+
+*android.content.res.AssetFileDescriptor(ParcelFileDescriptor,long,long,Bundle)*
+
+public AssetFileDescriptor(
+  android.os.ParcelFileDescriptor fd,
+  long startOffset,
+  long length,
+  android.os.Bundle extras)
+
+Create a new AssetFileDescriptor from the given values. 
+
+    fd - The underlying file descriptor. 
+    startOffset - The location within the file that the asset starts. This must be 0 if length is 
+       UNKNOWN_LENGTH. 
+    length - The number of bytes of the asset, or {@link #UNKNOWN_LENGTH} if it extends to 
+       the end of the file. 
+    extras - additional details that can be used to interpret the underlying file 
+       descriptor. May be null. 
+
+*android.content.res.AssetFileDescriptor.close()*
+
+public void close()
+  throws |java.io.IOException|
+         
+Convenience for calling getParcelFileDescriptor().close(). 
+
+
+
+*android.content.res.AssetFileDescriptor.createInputStream()*
+
+public |java.io.FileInputStream| createInputStream()
+  throws |java.io.IOException|
+         
+Create and return a new auto-close input stream for this asset. This will 
+either return a full asset 
+(|android.content.res.AssetFileDescriptor.AutoCloseInputStream|) , or an 
+underlying 
+ParcelFileDescriptor.AutoCloseInputStream(|ParcelFileDescriptor.AutoCloseInputStream|)
+depending on whether the the object represents a complete file or sub-section 
+of a file. You should only call this once for a particular asset. 
+
+
+
+*android.content.res.AssetFileDescriptor.createOutputStream()*
+
+public |java.io.FileOutputStream| createOutputStream()
+  throws |java.io.IOException|
+         
+Create and return a new auto-close output stream for this asset. This will 
+either return a full asset 
+(|android.content.res.AssetFileDescriptor.AutoCloseOutputStream|) , or an 
+underlying 
+ParcelFileDescriptor.AutoCloseOutputStream(|ParcelFileDescriptor.AutoCloseOutputStream|)
+depending on whether the the object represents a complete file or sub-section 
+of a file. You should only call this once for a particular asset. 
+
+
+
+*android.content.res.AssetFileDescriptor.describeContents()*
+
+public int describeContents()
+
+
+
+
+
+*android.content.res.AssetFileDescriptor.getDeclaredLength()*
+
+public long getDeclaredLength()
+
+Return the actual number of bytes that were declared when the 
+AssetFileDescriptor was constructed. Will be 
+(|android.content.res.AssetFileDescriptor|) if the length was not declared, 
+meaning data should be read to the end of the file. 
+
+
+
+*android.content.res.AssetFileDescriptor.getExtras()*
+
+public |android.os.Bundle| getExtras()
+
+Returns any additional details that can be used to interpret the underlying 
+file descriptor. May be null. 
+
+
+
+*android.content.res.AssetFileDescriptor.getFileDescriptor()*
+
+public |java.io.FileDescriptor| getFileDescriptor()
+
+Returns the FileDescriptor that can be used to read the data in the file. 
+
+
+
+*android.content.res.AssetFileDescriptor.getLength()*
+
+public long getLength()
+
+Returns the total number of bytes of this asset entry's data. May be 
+(|android.content.res.AssetFileDescriptor|) if the asset extends to the end of 
+the file. If the AssetFileDescriptor was constructed with 
+(|android.content.res.AssetFileDescriptor|) , this will use 
+ParcelFileDescriptor.getStatSize()(|android.os.ParcelFileDescriptor|) to find 
+the total size of the file, returning that number if found or 
+(|android.content.res.AssetFileDescriptor|) if it could not be determined. 
+
+
+
+*android.content.res.AssetFileDescriptor.getParcelFileDescriptor()*
+
+public |android.os.ParcelFileDescriptor| getParcelFileDescriptor()
+
+The AssetFileDescriptor contains its own ParcelFileDescriptor, which in 
+addition to the normal FileDescriptor object also allows you to close the 
+descriptor when you are done with it. 
+
+
+
+*android.content.res.AssetFileDescriptor.getStartOffset()*
+
+public long getStartOffset()
+
+Returns the byte offset where this asset entry's data starts. 
+
+
+
+*android.content.res.AssetFileDescriptor.toString()*
+
+public |java.lang.String| toString()
+
+
+
+
+
+*android.content.res.AssetFileDescriptor.writeToParcel(Parcel,int)*
+
+public void writeToParcel(
+  android.os.Parcel out,
+  int flags)
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+*android.widget.AbsListView.OnScrollListener* *AbsListView.OnScrollListener* Int
+
+public static interface interface AbsListView.OnScrollListener
+
+
+|android.widget.AbsListView.OnScrollListener_Description|
+|android.widget.AbsListView.OnScrollListener_Fields|
+|android.widget.AbsListView.OnScrollListener_Constructors|
+|android.widget.AbsListView.OnScrollListener_Methods|
+
+================================================================================
+
+*android.widget.AbsListView.OnScrollListener_Fields*
+|int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_FLING|
+|int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE|
+|int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL|
+
+*android.widget.AbsListView.OnScrollListener_Methods*
+|android.widget.AbsListView.OnScrollListener.onScroll(AbsListView,int,int,int)|
+|android.widget.AbsListView.OnScrollListener.onScrollStateChanged(AbsListView,int)|
+
+*android.widget.AbsListView.OnScrollListener_Description*
+
+Interface definition for a callback to be invoked when the list or grid has 
+been scrolled. 
+
+
+
+*int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_FLING*
+
+The user had previously been scrolling using touch and had performed a fling. 
+The animation is now coasting to a stop 
+
+
+*int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE*
+
+The view is not scrolling. Note navigating the list using the trackball counts 
+as being in the idle state since these transitions are not animated. 
+
+
+*int_android.widget.AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL*
+
+The user is scrolling using touch, and their finger is still on the screen 
+
+
+
+*android.widget.AbsListView.OnScrollListener.onScroll(AbsListView,int,int,int)*
+
+public void onScroll(
+  android.widget.AbsListView view,
+  int firstVisibleItem,
+  int visibleItemCount,
+  int totalItemCount)
+
+Callback method to be invoked when the list or grid has been scrolled. This 
+will be called after the scroll has completed 
+
+
+    view - The view whose scroll state is being reported 
+    firstVisibleItem - the index of the first visible cell (ignore if visibleItemCount == 0) 
+    visibleItemCount - the number of visible cells 
+    totalItemCount - the number of items in the list adaptor 
+
+*android.widget.AbsListView.OnScrollListener.onScrollStateChanged(AbsListView,int)*
+
+public void onScrollStateChanged(
+  android.widget.AbsListView view,
+  int scrollState)
+
+Callback method to be invoked while the list view or grid view is being 
+scrolled. If the view is being scrolled, this method will be called before the 
+next frame of the scroll is rendered. In particular, it will be called before 
+any calls to (|android.widget.Adapter|) . 
+
+
+    view - The view whose scroll state is being reported 
+    scrollState - The current scroll state. One of {@link #SCROLL_STATE_IDLE}, {@link 
+       #SCROLL_STATE_TOUCH_SCROLL} or {@link #SCROLL_STATE_IDLE}. 
+
+

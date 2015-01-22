@@ -1,0 +1,394 @@
+*android.webkit.WebViewClient* *WebViewClient* 
+
+public class WebViewClient
+  extends    |java.lang.Object|
+
+|android.webkit.WebViewClient_Description|
+|android.webkit.WebViewClient_Fields|
+|android.webkit.WebViewClient_Constructors|
+|android.webkit.WebViewClient_Methods|
+
+================================================================================
+
+*android.webkit.WebViewClient_Fields*
+|int_android.webkit.WebViewClient.ERROR_AUTHENTICATION|
+|int_android.webkit.WebViewClient.ERROR_BAD_URL|
+|int_android.webkit.WebViewClient.ERROR_CONNECT|
+|int_android.webkit.WebViewClient.ERROR_FAILED_SSL_HANDSHAKE|
+|int_android.webkit.WebViewClient.ERROR_FILE|
+|int_android.webkit.WebViewClient.ERROR_FILE_NOT_FOUND|
+|int_android.webkit.WebViewClient.ERROR_HOST_LOOKUP|
+|int_android.webkit.WebViewClient.ERROR_IO|
+|int_android.webkit.WebViewClient.ERROR_PROXY_AUTHENTICATION|
+|int_android.webkit.WebViewClient.ERROR_REDIRECT_LOOP|
+|int_android.webkit.WebViewClient.ERROR_TIMEOUT|
+|int_android.webkit.WebViewClient.ERROR_TOO_MANY_REQUESTS|
+|int_android.webkit.WebViewClient.ERROR_UNKNOWN|
+|int_android.webkit.WebViewClient.ERROR_UNSUPPORTED_AUTH_SCHEME|
+|int_android.webkit.WebViewClient.ERROR_UNSUPPORTED_SCHEME|
+
+*android.webkit.WebViewClient_Constructors*
+|android.webkit.WebViewClient()|
+
+*android.webkit.WebViewClient_Methods*
+|android.webkit.WebViewClient.doUpdateVisitedHistory(WebView,String,boolean)|No
+|android.webkit.WebViewClient.onFormResubmission(WebView,Message,Message)|As th
+|android.webkit.WebViewClient.onLoadResource(WebView,String)|Notify the host ap
+|android.webkit.WebViewClient.onPageFinished(WebView,String)|Notify the host ap
+|android.webkit.WebViewClient.onPageStarted(WebView,String,Bitmap)|Notify the h
+|android.webkit.WebViewClient.onReceivedError(WebView,int,String,String)|Report
+|android.webkit.WebViewClient.onReceivedHttpAuthRequest(WebView,HttpAuthHandler,String,String)|
+|android.webkit.WebViewClient.onReceivedLoginRequest(WebView,String,String,String)|
+|android.webkit.WebViewClient.onReceivedSslError(WebView,SslErrorHandler,SslError)|
+|android.webkit.WebViewClient.onScaleChanged(WebView,float,float)|Notify the ho
+|android.webkit.WebViewClient.onTooManyRedirects(WebView,Message,Message)|Notif
+|android.webkit.WebViewClient.onUnhandledKeyEvent(WebView,KeyEvent)|Notify the 
+|android.webkit.WebViewClient.shouldInterceptRequest(WebView,String)|Notify the
+|android.webkit.WebViewClient.shouldOverrideKeyEvent(WebView,KeyEvent)|Give the
+|android.webkit.WebViewClient.shouldOverrideUrlLoading(WebView,String)|Give the
+
+*android.webkit.WebViewClient_Description*
+
+
+
+
+
+*int_android.webkit.WebViewClient.ERROR_AUTHENTICATION*
+
+User authentication failed on server 
+
+
+*int_android.webkit.WebViewClient.ERROR_BAD_URL*
+
+Malformed URL 
+
+
+*int_android.webkit.WebViewClient.ERROR_CONNECT*
+
+Failed to connect to the server 
+
+
+*int_android.webkit.WebViewClient.ERROR_FAILED_SSL_HANDSHAKE*
+
+Failed to perform SSL handshake 
+
+
+*int_android.webkit.WebViewClient.ERROR_FILE*
+
+Generic file error 
+
+
+*int_android.webkit.WebViewClient.ERROR_FILE_NOT_FOUND*
+
+File not found 
+
+
+*int_android.webkit.WebViewClient.ERROR_HOST_LOOKUP*
+
+Server or proxy hostname lookup failed 
+
+
+*int_android.webkit.WebViewClient.ERROR_IO*
+
+Failed to read or write to the server 
+
+
+*int_android.webkit.WebViewClient.ERROR_PROXY_AUTHENTICATION*
+
+User authentication failed on proxy 
+
+
+*int_android.webkit.WebViewClient.ERROR_REDIRECT_LOOP*
+
+Too many redirects 
+
+
+*int_android.webkit.WebViewClient.ERROR_TIMEOUT*
+
+Connection timed out 
+
+
+*int_android.webkit.WebViewClient.ERROR_TOO_MANY_REQUESTS*
+
+Too many requests during this load 
+
+
+*int_android.webkit.WebViewClient.ERROR_UNKNOWN*
+
+Generic error 
+
+
+*int_android.webkit.WebViewClient.ERROR_UNSUPPORTED_AUTH_SCHEME*
+
+Unsupported authentication scheme (not basic or digest) 
+
+
+*int_android.webkit.WebViewClient.ERROR_UNSUPPORTED_SCHEME*
+
+Unsupported URI scheme 
+
+
+
+*android.webkit.WebViewClient()*
+
+public WebViewClient()
+
+
+
+
+*android.webkit.WebViewClient.doUpdateVisitedHistory(WebView,String,boolean)*
+
+public void doUpdateVisitedHistory(
+  android.webkit.WebView view,
+  java.lang.String url,
+  boolean isReload)
+
+Notify the host application to update its visited links database. 
+
+
+    view - The WebView that is initiating the callback. 
+    url - The url being visited. 
+    isReload - True if this url is being reloaded. 
+
+*android.webkit.WebViewClient.onFormResubmission(WebView,Message,Message)*
+
+public void onFormResubmission(
+  android.webkit.WebView view,
+  android.os.Message dontResend,
+  android.os.Message resend)
+
+As the host application if the browser should resend data as the requested page 
+was a result of a POST. The default is to not resend the data. 
+
+
+    view - The WebView that is initiating the callback. 
+    dontResend - The message to send if the browser should not resend 
+    resend - The message to send if the browser should resend data 
+
+*android.webkit.WebViewClient.onLoadResource(WebView,String)*
+
+public void onLoadResource(
+  android.webkit.WebView view,
+  java.lang.String url)
+
+Notify the host application that the WebView will load the resource specified 
+by the given url. 
+
+
+    view - The WebView that is initiating the callback. 
+    url - The url of the resource the WebView will load. 
+
+*android.webkit.WebViewClient.onPageFinished(WebView,String)*
+
+public void onPageFinished(
+  android.webkit.WebView view,
+  java.lang.String url)
+
+Notify the host application that a page has finished loading. This method is 
+called only for main frame. When onPageFinished() is called, the rendering 
+picture may not be updated yet. To get the notification for the new Picture, 
+use (|android.webkit.WebView.PictureListener|) . 
+
+
+    view - The WebView that is initiating the callback. 
+    url - The url of the page. 
+
+*android.webkit.WebViewClient.onPageStarted(WebView,String,Bitmap)*
+
+public void onPageStarted(
+  android.webkit.WebView view,
+  java.lang.String url,
+  Bitmap favicon)
+
+Notify the host application that a page has started loading. This method is 
+called once for each main frame load so a page with iframes or framesets will 
+call onPageStarted one time for the main frame. This also means that 
+onPageStarted will not be called when the contents of an embedded frame 
+changes, i.e. clicking a link whose target is an iframe. 
+
+
+    view - The WebView that is initiating the callback. 
+    url - The url to be loaded. 
+    favicon - The favicon for this page if it already exists in the database. 
+
+*android.webkit.WebViewClient.onReceivedError(WebView,int,String,String)*
+
+public void onReceivedError(
+  android.webkit.WebView view,
+  int errorCode,
+  java.lang.String description,
+  java.lang.String failingUrl)
+
+Report an error to the host application. These errors are unrecoverable (i.e. 
+the main resource is unavailable). The errorCode parameter corresponds to one 
+of the ERROR_* constants. 
+
+
+    view - The WebView that is initiating the callback. 
+    errorCode - The error code corresponding to an ERROR_* value. 
+    description - A String describing the error. 
+    failingUrl - The url that failed to load. 
+
+*android.webkit.WebViewClient.onReceivedHttpAuthRequest(WebView,HttpAuthHandler,String,String)*
+
+public void onReceivedHttpAuthRequest(
+  android.webkit.WebView view,
+  android.webkit.HttpAuthHandler handler,
+  java.lang.String host,
+  java.lang.String realm)
+
+Notifies the host application that the WebView received an HTTP authentication 
+request. The host application can use the supplied 
+(|android.webkit.HttpAuthHandler|) to set the WebView's response to the 
+request. The default behavior is to cancel the request. 
+
+
+    view - the WebView that is initiating the callback 
+    handler - the HttpAuthHandler used to set the WebView's response 
+    host - the host requiring authentication 
+    realm - the realm for which authentication is required 
+
+*android.webkit.WebViewClient.onReceivedLoginRequest(WebView,String,String,String)*
+
+public void onReceivedLoginRequest(
+  android.webkit.WebView view,
+  java.lang.String realm,
+  java.lang.String account,
+  java.lang.String args)
+
+Notify the host application that a request to automatically log in the user has 
+been processed. 
+
+
+    view - The WebView requesting the login. 
+    realm - The account realm used to look up accounts. 
+    account - An optional account. If not null, the account should be checked against 
+       accounts on the device. If it is a valid account, it should be used to 
+       log in the user. 
+    args - Authenticator specific arguments used to log in the user. 
+
+*android.webkit.WebViewClient.onReceivedSslError(WebView,SslErrorHandler,SslError)*
+
+public void onReceivedSslError(
+  android.webkit.WebView view,
+  android.webkit.SslErrorHandler handler,
+  android.net.http.SslError error)
+
+Notify the host application that an SSL error occurred while loading a 
+resource. The host application must call either handler.cancel() or 
+handler.proceed(). Note that the decision may be retained for use in response 
+to future SSL errors. The default behavior is to cancel the load. 
+
+
+    view - The WebView that is initiating the callback. 
+    handler - An SslErrorHandler object that will handle the user's response. 
+    error - The SSL error object. 
+
+*android.webkit.WebViewClient.onScaleChanged(WebView,float,float)*
+
+public void onScaleChanged(
+  android.webkit.WebView view,
+  float oldScale,
+  float newScale)
+
+Notify the host application that the scale applied to the WebView has changed. 
+
+
+    view - he WebView that is initiating the callback. 
+    oldScale - The old scale factor 
+    newScale - The new scale factor 
+
+*android.webkit.WebViewClient.onTooManyRedirects(WebView,Message,Message)*
+
+public void onTooManyRedirects(
+  android.webkit.WebView view,
+  android.os.Message cancelMsg,
+  android.os.Message continueMsg)
+
+Notify the host application that there have been an excessive number of HTTP 
+redirects. As the host application if it would like to continue trying to load 
+the resource. The default behavior is to send the cancel message. 
+
+    Deprecated: This method is no longer called. When the WebView encounters
+             a redirect loop, it will cancel the load.
+
+    view - The WebView that is initiating the callback. 
+    cancelMsg - The message to send if the host wants to cancel 
+    continueMsg - The message to send if the host wants to continue 
+
+*android.webkit.WebViewClient.onUnhandledKeyEvent(WebView,KeyEvent)*
+
+public void onUnhandledKeyEvent(
+  android.webkit.WebView view,
+  android.view.KeyEvent event)
+
+Notify the host application that a key was not handled by the WebView. Except 
+system keys, WebView always consumes the keys in the normal flow or if 
+shouldOverrideKeyEvent returns true. This is called asynchronously from where 
+the key is dispatched. It gives the host application a chance to handle the 
+unhandled key events. 
+
+
+    view - The WebView that is initiating the callback. 
+    event - The key event. 
+
+*android.webkit.WebViewClient.shouldInterceptRequest(WebView,String)*
+
+public |android.webkit.WebResourceResponse| shouldInterceptRequest(
+  android.webkit.WebView view,
+  java.lang.String url)
+
+Notify the host application of a resource request and allow the application to 
+return the data. If the return value is null, the WebView will continue to load 
+the resource as usual. Otherwise, the return response and data will be used. 
+NOTE: This method is called on a thread other than the UI thread so clients 
+should exercise caution when accessing private data or the view system. 
+
+
+    view - The {@link android.webkit.WebView} that is requesting the resource. 
+    url - The raw url of the resource. 
+
+    Returns: A {@link android.webkit.WebResourceResponse} containing the response 
+             information or null if the WebView should load the resource 
+             itself. 
+
+*android.webkit.WebViewClient.shouldOverrideKeyEvent(WebView,KeyEvent)*
+
+public boolean shouldOverrideKeyEvent(
+  android.webkit.WebView view,
+  android.view.KeyEvent event)
+
+Give the host application a chance to handle the key event synchronously. e.g. 
+menu shortcut key events need to be filtered this way. If return true, WebView 
+will not handle the key event. If return false, WebView will always handle the 
+key event, so none of the super in the view chain will see the key event. The 
+default behavior returns false. 
+
+
+    view - The WebView that is initiating the callback. 
+    event - The key event. 
+
+    Returns: True if the host application wants to handle the key event itself, otherwise 
+             return false 
+
+*android.webkit.WebViewClient.shouldOverrideUrlLoading(WebView,String)*
+
+public boolean shouldOverrideUrlLoading(
+  android.webkit.WebView view,
+  java.lang.String url)
+
+Give the host application a chance to take over the control when a new url is 
+about to be loaded in the current WebView. If WebViewClient is not provided, by 
+default WebView will ask Activity Manager to choose the proper handler for the 
+url. If WebViewClient is provided, return true means the host application 
+handles the url, while return false means the current WebView handles the url. 
+This method is not called for requests using the POST "method". 
+
+
+    view - The WebView that is initiating the callback. 
+    url - The url to be loaded. 
+
+    Returns: True if the host application wants to leave the current WebView and handle the 
+             url itself, otherwise return false. 
+
+

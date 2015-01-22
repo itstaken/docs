@@ -1,0 +1,752 @@
+*android.provider.Downloads.Impl* *Downloads.Impl* Implementation details
+
+ Expo
+
+public static final class Downloads.Impl
+  extends    |java.lang.Object|
+  implements |android.provider.BaseColumns|
+
+|android.provider.Downloads.Impl_Description|
+|android.provider.Downloads.Impl_Fields|
+|android.provider.Downloads.Impl_Constructors|
+|android.provider.Downloads.Impl_Methods|
+
+================================================================================
+
+*android.provider.Downloads.Impl_Fields*
+|java.lang.String_android.provider.Downloads.Impl._DATA|
+|java.lang.String_android.provider.Downloads.Impl.ACTION_DOWNLOAD_COMPLETED|
+|java.lang.String_android.provider.Downloads.Impl.ACTION_NOTIFICATION_CLICKED|
+|android.net.Uri_android.provider.Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_METERED|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_ROAMING|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_WRITE|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOWED_NETWORK_TYPES|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_APP_DATA|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_CONTROL|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_COOKIE_DATA|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_CURRENT_BYTES|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_DELETED|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_DESCRIPTION|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_DESTINATION|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_ERROR_MSG|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_FAILED_CONNECTIONS|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_FILE_NAME_HINT|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_IS_PUBLIC_API|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_LAST_MODIFICATION|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_LAST_UPDATESRC|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_MEDIA_SCANNED|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_MEDIAPROVIDER_URI|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_MIME_TYPE|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_NO_INTEGRITY|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_CLASS|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_EXTRAS|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_PACKAGE|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_OTHER_UID|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_REFERER|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_STATUS|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_TITLE|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_TOTAL_BYTES|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_URI|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_USER_AGENT|
+|java.lang.String_android.provider.Downloads.Impl.COLUMN_VISIBILITY|
+|android.net.Uri_android.provider.Downloads.Impl.CONTENT_URI|
+|int_android.provider.Downloads.Impl.CONTROL_PAUSED|
+|int_android.provider.Downloads.Impl.CONTROL_RUN|
+|int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION|
+|int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION_NOROAMING|
+|int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION_PURGEABLE|
+|int_android.provider.Downloads.Impl.DESTINATION_EXTERNAL|
+|int_android.provider.Downloads.Impl.DESTINATION_FILE_URI|
+|int_android.provider.Downloads.Impl.DESTINATION_NON_DOWNLOADMANAGER_DOWNLOAD|
+|int_android.provider.Downloads.Impl.DESTINATION_SYSTEMCACHE_PARTITION|
+|int_android.provider.Downloads.Impl.LAST_UPDATESRC_DONT_NOTIFY_DOWNLOADSVC|
+|int_android.provider.Downloads.Impl.LAST_UPDATESRC_NOT_RELEVANT|
+|int_android.provider.Downloads.Impl.MIN_ARTIFICIAL_ERROR_STATUS|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS_ADVANCED|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS_ALL|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_CACHE|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_CACHE_NON_PURGEABLE|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_NO_NOTIFICATION|
+|java.lang.String_android.provider.Downloads.Impl.PERMISSION_SEND_INTENTS|
+|android.net.Uri_android.provider.Downloads.Impl.PUBLICLY_ACCESSIBLE_DOWNLOADS_URI|
+|java.lang.String_android.provider.Downloads.Impl.PUBLICLY_ACCESSIBLE_DOWNLOADS_URI_SEGMENT|
+|int_android.provider.Downloads.Impl.STATUS_BAD_REQUEST|
+|int_android.provider.Downloads.Impl.STATUS_BLOCKED|
+|int_android.provider.Downloads.Impl.STATUS_CANCELED|
+|int_android.provider.Downloads.Impl.STATUS_CANNOT_RESUME|
+|int_android.provider.Downloads.Impl.STATUS_DEVICE_NOT_FOUND_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_FILE_ALREADY_EXISTS_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_FILE_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_HTTP_DATA_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_HTTP_EXCEPTION|
+|int_android.provider.Downloads.Impl.STATUS_INSUFFICIENT_SPACE_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_LENGTH_REQUIRED|
+|int_android.provider.Downloads.Impl.STATUS_NOT_ACCEPTABLE|
+|int_android.provider.Downloads.Impl.STATUS_PAUSED_BY_APP|
+|int_android.provider.Downloads.Impl.STATUS_PENDING|
+|int_android.provider.Downloads.Impl.STATUS_PRECONDITION_FAILED|
+|int_android.provider.Downloads.Impl.STATUS_QUEUED_FOR_WIFI|
+|int_android.provider.Downloads.Impl.STATUS_RUNNING|
+|int_android.provider.Downloads.Impl.STATUS_SUCCESS|
+|int_android.provider.Downloads.Impl.STATUS_TOO_MANY_REDIRECTS|
+|int_android.provider.Downloads.Impl.STATUS_UNHANDLED_HTTP_CODE|
+|int_android.provider.Downloads.Impl.STATUS_UNHANDLED_REDIRECT|
+|int_android.provider.Downloads.Impl.STATUS_UNKNOWN_ERROR|
+|int_android.provider.Downloads.Impl.STATUS_WAITING_FOR_NETWORK|
+|int_android.provider.Downloads.Impl.STATUS_WAITING_TO_RETRY|
+|int_android.provider.Downloads.Impl.VISIBILITY_HIDDEN|
+|int_android.provider.Downloads.Impl.VISIBILITY_VISIBLE|
+|int_android.provider.Downloads.Impl.VISIBILITY_VISIBLE_NOTIFY_COMPLETED|
+
+*android.provider.Downloads.Impl_Methods*
+|android.provider.Downloads.Impl.isNotificationToBeDisplayed(int)|this method d
+|android.provider.Downloads.Impl.isStatusClientError(int)|Returns whether the s
+|android.provider.Downloads.Impl.isStatusCompleted(int)|Returns whether the dow
+|android.provider.Downloads.Impl.isStatusError(int)|Returns whether the status 
+|android.provider.Downloads.Impl.isStatusInformational(int)|Returns whether the
+|android.provider.Downloads.Impl.isStatusServerError(int)|Returns whether the s
+|android.provider.Downloads.Impl.isStatusSuccess(int)|Returns whether the statu
+|android.provider.Downloads.Impl.statusToString(int)|
+
+*android.provider.Downloads.Impl_Description*
+
+Implementation details 
+
+Exposes constants used to interact with the download manager's content 
+provider. The constants URI ... STATUS are the names of columns in the 
+downloads table. 
+
+
+
+*java.lang.String_android.provider.Downloads.Impl._DATA*
+
+The name of the column containing the filename where the downloaded data was 
+actually stored. Type: TEXT Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.ACTION_DOWNLOAD_COMPLETED*
+
+Broadcast Action: this is sent by the download manager to the app that had 
+initiated a download when that download completes. The download's content: uri 
+is specified in the intent's data. 
+
+
+*java.lang.String_android.provider.Downloads.Impl.ACTION_NOTIFICATION_CLICKED*
+
+Broadcast Action: this is sent by the download manager to the app that had 
+initiated a download when the user selects the notification associated with 
+that download. The download's content: uri is specified in the intent's data if 
+the click is associated with a single download, or Downloads.CONTENT_URI if the 
+notification is associated with multiple downloads. Note: this is not currently 
+sent for downloads that have completed successfully. 
+
+
+*android.net.Uri_android.provider.Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI*
+
+The content URI for accessing all downloads across all UIDs (requires the 
+ACCESS_ALL_DOWNLOADS permission). 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_METERED*
+
+The name of the column indicating whether metered connections can be used. This 
+is only used for public API downloads. Type: BOOLEAN Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_ROAMING*
+
+The name of the column indicating whether roaming connections can be used. This 
+is only used for public API downloads. Type: BOOLEAN Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOW_WRITE*
+
+
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_ALLOWED_NETWORK_TYPES*
+
+The name of the column holding a bitmask of allowed network types. This is only 
+used for public API downloads. Type: INTEGER Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_APP_DATA*
+
+The name of the column containing application-specific data. Type: TEXT Owner 
+can Init/Read/Write 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT*
+
+If true, the user has confirmed that this download can proceed over the mobile 
+network even though it exceeds the recommended maximum size. Type: BOOLEAN 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_CONTROL*
+
+The name of the column containing the current control state of the download. 
+Applications can write to this to control (pause/resume) the download. the 
+CONTROL_* constants for a list of legal values. Type: INTEGER Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_COOKIE_DATA*
+
+The name of the column contain the values of the cookie to be used for the 
+download. This is used directly as the value for the Cookie: HTTP header that 
+gets sent with the request. Type: TEXT Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_CURRENT_BYTES*
+
+The name of the column containing the size of the part of the file that has 
+been downloaded so far. Type: INTEGER Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_DELETED*
+
+Set to true if this download is deleted. It is completely removed from the 
+database when MediaProvider database also deletes the metadata asociated with 
+this downloaded file. Type: BOOLEAN Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_DESCRIPTION*
+
+The name of the column where the initiating application can provide the 
+description of this download. The description will be displayed to the user in 
+the list of downloads. Type: TEXT Owner can Init/Read/Write 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_DESTINATION*
+
+The name of the column containing the flag that controls the destination of the 
+download. See the DESTINATION_* constants for a list of legal values. Type: 
+INTEGER Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_ERROR_MSG*
+
+The column with errorMsg for a failed downloaded. Used only for debugging 
+purposes. Type: TEXT 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_FAILED_CONNECTIONS*
+
+The column that is used to count retries 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_FILE_NAME_HINT*
+
+The name of the column containing the filename that the initiating application 
+recommends. When possible, the download manager will attempt to use this 
+filename, or a variation, as the actual name for the file. Type: TEXT Owner can 
+Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_IS_PUBLIC_API*
+
+The name of the column indicating whether the download was requesting through 
+the public API. This controls some differences in behavior. Type: BOOLEAN Owner 
+can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI*
+
+Whether or not this download should be displayed in the system's Downloads UI. 
+Defaults to true. Type: INTEGER Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_LAST_MODIFICATION*
+
+The name of the column containing the date at which some interesting status 
+changed in the download. Stored as a System.currentTimeMillis() value. Type: 
+BIGINT Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_LAST_UPDATESRC*
+
+This column stores the source of the last update to this row. This column is 
+only for internal use. Valid values are indicated by LAST_UPDATESRC_* 
+constants. Type: INT 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_MEDIA_SCANNED*
+
+The column that is used to remember whether the media scanner was invoked. It 
+can take the values: null or 0(not scanned), 1(scanned), 2 (not scannable). 
+Type: TEXT 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_MEDIAPROVIDER_URI*
+
+The URI to the corresponding entry in MediaProvider for this downloaded entry. 
+It is used to delete the entries from MediaProvider database when it is deleted 
+from the downloaded list. Type: TEXT Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_MIME_TYPE*
+
+The name of the column containing the MIME type of the downloaded data. Type: 
+TEXT Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_NO_INTEGRITY*
+
+The name of the column containing the flags that indicates whether the 
+initiating application is capable of verifying the integrity of the downloaded 
+file. When this flag is set, the download manager performs downloads and 
+reports success even in some situations where it can't guarantee that the 
+download has completed (e.g. when doing a byte-range request without an ETag, 
+or when it can't determine whether a download fully completed). Type: BOOLEAN 
+Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_CLASS*
+
+The name of the column containing the component name of the class that will 
+receive notifications associated with the download. The package/class 
+combination is passed to Intent.setClassName(String,String). Type: TEXT Owner 
+can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_EXTRAS*
+
+If extras are specified when requesting a download they will be provided in the 
+intent that is sent to the specified class and package when a download has 
+finished. Type: TEXT Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_NOTIFICATION_PACKAGE*
+
+The name of the column containing the package name of the application that 
+initiating the download. The download manager will send notifications to a 
+component in this package when the download completes. Type: TEXT Owner can 
+Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_OTHER_UID*
+
+The name of the column where the initiating application can provide the UID of 
+another application that is allowed to access this download. If multiple 
+applications share the same UID, all those applications will be allowed to 
+access this download. This column can be updated after the download is 
+initiated. This requires the permission 
+android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED. Type: INTEGER Owner can 
+Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_REFERER*
+
+The name of the column containing the referer (sic) that the initiating 
+application wants the download manager to use for this download. Type: TEXT 
+Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_STATUS*
+
+The name of the column containing the current status of the download. 
+Applications can read this to follow the progress of each download. See the 
+STATUS_* constants for a list of legal values. Type: INTEGER Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_TITLE*
+
+The name of the column where the initiating application can provided the title 
+of this download. The title will be displayed ito the user in the list of 
+downloads. Type: TEXT Owner can Init/Read/Write 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_TOTAL_BYTES*
+
+The name of the column containing the total size of the file being downloaded. 
+Type: INTEGER Owner can Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_URI*
+
+The name of the column containing the URI of the data being downloaded. Type: 
+TEXT Owner can Init/Read 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_USER_AGENT*
+
+The name of the column containing the user agent that the initiating 
+application wants the download manager to use for this download. Type: TEXT 
+Owner can Init 
+
+
+*java.lang.String_android.provider.Downloads.Impl.COLUMN_VISIBILITY*
+
+The name of the column containing the flags that controls whether the download 
+is displayed by the UI. See the VISIBILITY_* constants for a list of legal 
+values. Type: INTEGER Owner can Init/Read/Write 
+
+
+*android.net.Uri_android.provider.Downloads.Impl.CONTENT_URI*
+
+The content:// URI to access downloads owned by the caller's UID. 
+
+
+*int_android.provider.Downloads.Impl.CONTROL_PAUSED*
+
+This download must pause at the first opportunity. 
+
+
+*int_android.provider.Downloads.Impl.CONTROL_RUN*
+
+This download is allowed to run. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION*
+
+This download will be saved to the download manager's private partition. This 
+is the behavior used by applications that want to download private files that 
+are used and deleted soon after they get downloaded. All file types are 
+allowed, and only the initiating application can access the file (indirectly 
+through a content provider). This requires the 
+android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED permission. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION_NOROAMING*
+
+This download will be saved to the download manager's private partition, as 
+with DESTINATION_CACHE_PARTITION, but the download will not proceed if the user 
+is on a roaming data connection. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_CACHE_PARTITION_PURGEABLE*
+
+This download will be saved to the download manager's private partition and 
+will be purged as necessary to make space. This is for private files (similar 
+to CACHE_PARTITION) that aren't deleted immediately after they are used, and 
+are kept around by the download manager as long as space is available. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_EXTERNAL*
+
+This download will be saved to the external storage. This is the default 
+behavior, and should be used for any file that the user can freely access, 
+copy, delete. Even with that destination, unencrypted DRM files are saved in 
+secure internal storage. Downloads to the external destination only write files 
+for which there is a registered handler. The resulting files are accessible by 
+filename to all applications. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_FILE_URI*
+
+This download will be saved to the location given by the file URI in 
+(|android.provider.Downloads.Impl|) . 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_NON_DOWNLOADMANAGER_DOWNLOAD*
+
+This download was completed by the caller (i.e., NOT downloadmanager) and 
+caller wants to have this download displayed in Downloads App. 
+
+
+*int_android.provider.Downloads.Impl.DESTINATION_SYSTEMCACHE_PARTITION*
+
+This download will be saved to the system cache ("/cache") partition. This 
+option is only used by system apps and so it requires 
+android.permission.ACCESS_CACHE_FILESYSTEM permission. 
+
+
+*int_android.provider.Downloads.Impl.LAST_UPDATESRC_DONT_NOTIFY_DOWNLOADSVC*
+
+One of the values taken by (|android.provider.Downloads.Impl|) . This value is 
+used when the update is NOT to be relayed to the DownloadService (and thus 
+spare DownloadService from scanning the database when this change occurs) 
+
+
+*int_android.provider.Downloads.Impl.LAST_UPDATESRC_NOT_RELEVANT*
+
+default value for (|android.provider.Downloads.Impl|) . This value is used when 
+this column's value is not relevant. 
+
+
+*int_android.provider.Downloads.Impl.MIN_ARTIFICIAL_ERROR_STATUS*
+
+The lowest-valued error status that is not an actual HTTP status code. 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS*
+
+The permission to access the download manager 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS_ADVANCED*
+
+The permission to access the download manager's advanced functions 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_ACCESS_ALL*
+
+The permission to access the all the downloads in the manager. 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_CACHE*
+
+The permission to directly access the download manager's cache directory 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_CACHE_NON_PURGEABLE*
+
+The permission to download files to the cache partition that won't be 
+automatically purged when space is needed. 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_NO_NOTIFICATION*
+
+The permission to download files without any system notification being shown. 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PERMISSION_SEND_INTENTS*
+
+The permission to send broadcasts on download completion 
+
+
+*android.net.Uri_android.provider.Downloads.Impl.PUBLICLY_ACCESSIBLE_DOWNLOADS_URI*
+
+The content URI for accessing publicly accessible downloads (i.e., it requires 
+no permissions to access this downloaded file) 
+
+
+*java.lang.String_android.provider.Downloads.Impl.PUBLICLY_ACCESSIBLE_DOWNLOADS_URI_SEGMENT*
+
+URI segment to access a publicly accessible downloaded file 
+
+
+*int_android.provider.Downloads.Impl.STATUS_BAD_REQUEST*
+
+This request couldn't be parsed. This is also used when processing requests 
+with unknown/unsupported URI schemes. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_BLOCKED*
+
+This download has failed because requesting application has been blocked by 
+(|android.net.NetworkPolicyManager|) . 
+
+
+*int_android.provider.Downloads.Impl.STATUS_CANCELED*
+
+This download was canceled 
+
+
+*int_android.provider.Downloads.Impl.STATUS_CANNOT_RESUME*
+
+Some possibly transient error occurred, but we can't resume the download. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_DEVICE_NOT_FOUND_ERROR*
+
+This download couldn't be completed because no external storage device was 
+found. Typically, this is because the SD card is not mounted. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_FILE_ALREADY_EXISTS_ERROR*
+
+The requested destination file already exists. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_FILE_ERROR*
+
+This download couldn't be completed because of a storage issue. Typically, 
+that's because the filesystem is missing or full. Use the more specific 
+(|android.provider.Downloads.Impl|) and (|android.provider.Downloads.Impl|) 
+when appropriate. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_HTTP_DATA_ERROR*
+
+This download couldn't be completed because of an error receiving or processing 
+data at the HTTP level. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_HTTP_EXCEPTION*
+
+This download couldn't be completed because of an HttpException while setting 
+up the request. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_INSUFFICIENT_SPACE_ERROR*
+
+This download couldn't be completed due to insufficient storage space. 
+Typically, this is because the SD card is full. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_LENGTH_REQUIRED*
+
+This download cannot be performed because the length cannot be determined 
+accurately. This is the code for the HTTP error "Length Required", which is 
+typically used when making requests that require a content length but don't 
+have one, and it is also used in the client when a response is received whose 
+length cannot be determined accurately (therefore making it impossible to know 
+when a download completes). 
+
+
+*int_android.provider.Downloads.Impl.STATUS_NOT_ACCEPTABLE*
+
+This download can't be performed because the content type cannot be handled. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_PAUSED_BY_APP*
+
+This download has been paused by the owning app. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_PENDING*
+
+This download hasn't stated yet 
+
+
+*int_android.provider.Downloads.Impl.STATUS_PRECONDITION_FAILED*
+
+This download was interrupted and cannot be resumed. This is the code for the 
+HTTP error "Precondition Failed", and it is also used in situations where the 
+client doesn't have an ETag at all. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_QUEUED_FOR_WIFI*
+
+This download exceeded a size limit for mobile networks and is waiting for a 
+Wi-Fi connection to proceed. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_RUNNING*
+
+This download has started 
+
+
+*int_android.provider.Downloads.Impl.STATUS_SUCCESS*
+
+This download has successfully completed. Warning: there might be other status 
+values that indicate success in the future. Use isSucccess() to capture the 
+entire category. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_TOO_MANY_REDIRECTS*
+
+This download couldn't be completed because there were too many redirects. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_UNHANDLED_HTTP_CODE*
+
+This download couldn't be completed because of an unspecified unhandled HTTP 
+code. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_UNHANDLED_REDIRECT*
+
+This download couldn't be completed because of an HTTP redirect response that 
+the download manager couldn't handle. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_UNKNOWN_ERROR*
+
+This download has completed with an error. Warning: there will be other status 
+values that indicate errors in the future. Use isStatusError() to capture the 
+entire category. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_WAITING_FOR_NETWORK*
+
+This download is waiting for network connectivity to proceed. 
+
+
+*int_android.provider.Downloads.Impl.STATUS_WAITING_TO_RETRY*
+
+This download encountered some network error and is waiting before retrying the 
+request. 
+
+
+*int_android.provider.Downloads.Impl.VISIBILITY_HIDDEN*
+
+This download doesn't show in the UI or in the notifications. 
+
+
+*int_android.provider.Downloads.Impl.VISIBILITY_VISIBLE*
+
+This download is visible but only shows in the notifications while it's in 
+progress. 
+
+
+*int_android.provider.Downloads.Impl.VISIBILITY_VISIBLE_NOTIFY_COMPLETED*
+
+This download is visible and shows in the notifications while in progress and 
+after completion. 
+
+
+
+*android.provider.Downloads.Impl.isNotificationToBeDisplayed(int)*
+
+public static boolean isNotificationToBeDisplayed(int visibility)
+
+this method determines if a notification should be displayed for a given 
+(|android.provider.Downloads.Impl|) value 
+
+
+    visibility - the value of {@link #COLUMN_VISIBILITY}. 
+
+    Returns: true if the notification should be displayed. false otherwise. 
+
+*android.provider.Downloads.Impl.isStatusClientError(int)*
+
+public static boolean isStatusClientError(int status)
+
+Returns whether the status is a client error (i.e. 4xx). 
+
+
+
+*android.provider.Downloads.Impl.isStatusCompleted(int)*
+
+public static boolean isStatusCompleted(int status)
+
+Returns whether the download has completed (either with success or error). 
+
+
+
+*android.provider.Downloads.Impl.isStatusError(int)*
+
+public static boolean isStatusError(int status)
+
+Returns whether the status is an error (i.e. 4xx or 5xx). 
+
+
+
+*android.provider.Downloads.Impl.isStatusInformational(int)*
+
+public static boolean isStatusInformational(int status)
+
+Returns whether the status is informational (i.e. 1xx). 
+
+
+
+*android.provider.Downloads.Impl.isStatusServerError(int)*
+
+public static boolean isStatusServerError(int status)
+
+Returns whether the status is a server error (i.e. 5xx). 
+
+
+
+*android.provider.Downloads.Impl.isStatusSuccess(int)*
+
+public static boolean isStatusSuccess(int status)
+
+Returns whether the status is a success (i.e. 2xx). 
+
+
+
+*android.provider.Downloads.Impl.statusToString(int)*
+
+public static |java.lang.String| statusToString(int status)
+
+
+
+
+
+

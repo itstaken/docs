@@ -1,0 +1,86 @@
+*android.database.ContentObservable* *ContentObservable* A specialization ofObse
+
+public class ContentObservable
+  extends    |android.database.Observable|
+
+|android.database.ContentObservable_Description|
+|android.database.ContentObservable_Fields|
+|android.database.ContentObservable_Constructors|
+|android.database.ContentObservable_Methods|
+
+================================================================================
+
+*android.database.ContentObservable_Constructors*
+|android.database.ContentObservable()|
+
+*android.database.ContentObservable_Methods*
+|android.database.ContentObservable.dispatchChange(boolean)|InvokesContentObser
+|android.database.ContentObservable.dispatchChange(boolean,Uri)|InvokesContentO
+|android.database.ContentObservable.notifyChange(boolean)|InvokesContentObserve
+|android.database.ContentObservable.registerObserver(ContentObserver)|
+
+*android.database.ContentObservable_Description*
+
+A specialization of (|android.database.Observable|) for 
+(|android.database.ContentObserver|) that provides methods for sending 
+notifications to a list of (|android.database.ContentObserver|) objects. 
+
+
+
+*android.database.ContentObservable()*
+
+public ContentObservable()
+
+
+
+
+*android.database.ContentObservable.dispatchChange(boolean)*
+
+public void dispatchChange(boolean selfChange)
+
+Invokes (|android.database.ContentObserver|) on each observer. 
+
+If selfChange is true, only delivers the notification to the observer if it has 
+indicated that it wants to receive self-change notifications by implementing 
+(|android.database.ContentObserver|) to return true. 
+
+    Deprecated: Use {@link #dispatchChange(boolean, Uri)} instead.
+
+    selfChange - True if this is a self-change notification. 
+
+*android.database.ContentObservable.dispatchChange(boolean,Uri)*
+
+public void dispatchChange(
+  boolean selfChange,
+  android.net.Uri uri)
+
+Invokes (|android.database.ContentObserver|) on each observer. Includes the 
+changed content Uri when available. 
+
+If selfChange is true, only delivers the notification to the observer if it has 
+indicated that it wants to receive self-change notifications by implementing 
+(|android.database.ContentObserver|) to return true. 
+
+
+    selfChange - True if this is a self-change notification. 
+    uri - The Uri of the changed content, or null if unknown. 
+
+*android.database.ContentObservable.notifyChange(boolean)*
+
+public void notifyChange(boolean selfChange)
+
+Invokes (|android.database.ContentObserver|) on each observer. 
+
+    Deprecated: Use {@link #dispatchChange} instead.
+
+    selfChange - True if this is a self-change notification. 
+
+*android.database.ContentObservable.registerObserver(ContentObserver)*
+
+public void registerObserver(android.database.ContentObserver observer)
+
+
+
+
+
+

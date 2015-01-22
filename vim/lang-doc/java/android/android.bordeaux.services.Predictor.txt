@@ -1,0 +1,143 @@
+*android.bordeaux.services.Predictor* *Predictor* This is interface to implement
+
+public class Predictor
+  extends    |IPredictor.Stub|
+  implements |android.bordeaux.services.IBordeauxLearner|
+
+|android.bordeaux.services.Predictor_Description|
+|android.bordeaux.services.Predictor_Fields|
+|android.bordeaux.services.Predictor_Constructors|
+|android.bordeaux.services.Predictor_Methods|
+
+================================================================================
+
+*android.bordeaux.services.Predictor_Fields*
+|java.lang.String_android.bordeaux.services.Predictor.FEATURE_SEPARATOR|
+|java.lang.String_android.bordeaux.services.Predictor.PREVIOUS_SAMPLE|
+|java.lang.String_android.bordeaux.services.Predictor.SET_FEATURE|
+|java.lang.String_android.bordeaux.services.Predictor.SET_PAIRED_FEATURES|
+|java.lang.String_android.bordeaux.services.Predictor.USE_HISTORY|
+
+*android.bordeaux.services.Predictor_Constructors*
+|android.bordeaux.services.Predictor()|
+
+*android.bordeaux.services.Predictor_Methods*
+|android.bordeaux.services.Predictor.getBinder()|
+|android.bordeaux.services.Predictor.getModel()|
+|android.bordeaux.services.Predictor.getTopCandidates(int)|return probabilty of
+|android.bordeaux.services.Predictor.pushNewSample(String)|Input is a sampleNam
+|android.bordeaux.services.Predictor.resetPredictor()|Reset the Predictor
+|android.bordeaux.services.Predictor.setModel(byte[])|
+|android.bordeaux.services.Predictor.setModelChangeCallback(IBordeauxLearner.ModelChangeCallback)|
+|android.bordeaux.services.Predictor.setPredictorParameter(String,String)|Set p
+
+*android.bordeaux.services.Predictor_Description*
+
+This is interface to implement Prediction based on histogram that uses 
+predictor_histogram from learnerning section 
+
+
+
+*java.lang.String_android.bordeaux.services.Predictor.FEATURE_SEPARATOR*
+
+
+
+
+*java.lang.String_android.bordeaux.services.Predictor.PREVIOUS_SAMPLE*
+
+
+
+
+*java.lang.String_android.bordeaux.services.Predictor.SET_FEATURE*
+
+
+
+
+*java.lang.String_android.bordeaux.services.Predictor.SET_PAIRED_FEATURES*
+
+
+
+
+*java.lang.String_android.bordeaux.services.Predictor.USE_HISTORY*
+
+
+
+
+
+*android.bordeaux.services.Predictor()*
+
+public Predictor()
+
+
+
+
+*android.bordeaux.services.Predictor.getBinder()*
+
+public IBinder getBinder()
+
+
+
+
+
+*android.bordeaux.services.Predictor.getModel()*
+
+public byte[] getModel()
+
+
+
+
+
+*android.bordeaux.services.Predictor.getTopCandidates(int)*
+
+public |java.util.List|<StringFloat> getTopCandidates(int topK)
+
+return probabilty of an exmple using the histogram 
+
+
+
+*android.bordeaux.services.Predictor.pushNewSample(String)*
+
+public void pushNewSample(java.lang.String sampleName)
+
+Input is a sampleName e.g.action name. This input is then augmented with 
+requested build-in features such as time and location to create sampleFeatures. 
+The sampleFeatures is then pushed to the histogram 
+
+
+
+*android.bordeaux.services.Predictor.resetPredictor()*
+
+public void resetPredictor()
+
+Reset the Predictor 
+
+
+
+*android.bordeaux.services.Predictor.setModel(byte[])*
+
+public boolean setModel(byte[] modelData)
+
+
+
+
+
+*android.bordeaux.services.Predictor.setModelChangeCallback(IBordeauxLearner.ModelChangeCallback)*
+
+public void setModelChangeCallback(android.bordeaux.services.IBordeauxLearner.ModelChangeCallback callback)
+
+
+
+
+
+*android.bordeaux.services.Predictor.setPredictorParameter(String,String)*
+
+public boolean setPredictorParameter(
+  java.lang.String key,
+  java.lang.String value)
+
+Set parameters for 1) using History in probability estimations e.g. consider 
+the last event and 2) featureAssembly e.g. time and location. 
+
+
+
+

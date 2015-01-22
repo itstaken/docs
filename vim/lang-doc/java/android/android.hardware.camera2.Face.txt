@@ -1,0 +1,210 @@
+*android.hardware.camera2.Face* *Face* Describes a face detected in an image.
+
+public final class Face
+  extends    |java.lang.Object|
+
+|android.hardware.camera2.Face_Description|
+|android.hardware.camera2.Face_Fields|
+|android.hardware.camera2.Face_Constructors|
+|android.hardware.camera2.Face_Methods|
+
+================================================================================
+
+*android.hardware.camera2.Face_Fields*
+|int_android.hardware.camera2.Face.ID_UNSUPPORTED|
+|int_android.hardware.camera2.Face.SCORE_MAX|
+|int_android.hardware.camera2.Face.SCORE_MIN|
+
+*android.hardware.camera2.Face_Constructors*
+|android.hardware.camera2.Face(Rect,int)|Create a new face without the optional
+|android.hardware.camera2.Face(Rect,int,int,Point,Point,Point)|Create a new fac
+
+*android.hardware.camera2.Face_Methods*
+|android.hardware.camera2.Face.getBounds()|Bounds of the face.
+|android.hardware.camera2.Face.getId()|An unique id per face while the face is 
+|android.hardware.camera2.Face.getLeftEyePosition()|The coordinates of the cent
+|android.hardware.camera2.Face.getMouthPosition()|The coordinates of the center
+|android.hardware.camera2.Face.getRightEyePosition()|The coordinates of the cen
+|android.hardware.camera2.Face.getScore()|The confidence level for the detectio
+|android.hardware.camera2.Face.toString()|Represent the Face as a string for de
+
+*android.hardware.camera2.Face_Description*
+
+Describes a face detected in an image. 
+
+
+
+*int_android.hardware.camera2.Face.ID_UNSUPPORTED*
+
+The ID is-1when the optional set of fields is unsupported. 
+
+
+*int_android.hardware.camera2.Face.SCORE_MAX*
+
+The maximum possible value for the confidence level. 
+
+
+*int_android.hardware.camera2.Face.SCORE_MIN*
+
+The minimum possible value for the confidence level. 
+
+
+
+*android.hardware.camera2.Face(Rect,int)*
+
+public Face(
+  Rect bounds,
+  int score)
+
+Create a new face without the optional fields. 
+
+The id, leftEyePosition, rightEyePosition, and mouthPosition are considered 
+optional. If the id is#ID_UNSUPPORTEDthen the leftEyePosition, 
+rightEyePosition, and mouthPositions are guaranteed to benull. Otherwise, each 
+of leftEyePosition, rightEyePosition, and mouthPosition may be independently 
+null or not-null. When devices report the value of key 
+(|android.hardware.camera2.CaptureResult|) as 
+(|android.hardware.camera2.CameraMetadata|) in 
+(|android.hardware.camera2.CaptureResult|) , the face id of each face is 
+expected to be#ID_UNSUPPORTED, the leftEyePosition, rightEyePosition, and 
+mouthPositions are expected to benullfor each face. 
+
+    bounds - Bounds of the face. 
+    score - Confidence level between {@value #SCORE_MIN}-{@value #SCORE_MAX}. 
+
+*android.hardware.camera2.Face(Rect,int,int,Point,Point,Point)*
+
+public Face(
+  Rect bounds,
+  int score,
+  int id,
+  Point leftEyePosition,
+  Point rightEyePosition,
+  Point mouthPosition)
+
+Create a new face with all fields set. 
+
+The id, leftEyePosition, rightEyePosition, and mouthPosition are considered 
+optional. They are only required when the 
+(|android.hardware.camera2.CaptureResult|) reports that the value of key 
+(|android.hardware.camera2.CaptureResult|) is 
+(|android.hardware.camera2.CameraMetadata|) . If the id is#ID_UNSUPPORTEDthen 
+the leftEyePosition, rightEyePosition, and mouthPositions are guaranteed to 
+benull. Otherwise, each of leftEyePosition, rightEyePosition, and mouthPosition 
+may be independently null or not-null. 
+
+    bounds - Bounds of the face. 
+    score - Confidence level between {@value #SCORE_MIN}-{@value #SCORE_MAX}. 
+    id - A unique ID per face visible to the tracker. 
+    leftEyePosition - The position of the left eye. 
+    rightEyePosition - The position of the right eye. 
+    mouthPosition - The position of the mouth. 
+
+*android.hardware.camera2.Face.getBounds()*
+
+public Rect getBounds()
+
+Bounds of the face. 
+
+A rectangle relative to the sensor's 
+(|android.hardware.camera2.CameraCharacteristics|) , with (0,0) representing 
+the top-left corner of the active array rectangle. 
+
+There is no constraints on the the Rectangle value other than it is not-null. 
+
+
+
+*android.hardware.camera2.Face.getId()*
+
+public int getId()
+
+An unique id per face while the face is visible to the tracker. 
+
+If the face leaves the field-of-view and comes back, it will get a new id. 
+
+This is an optional field, may not be supported on all devices. If the id 
+is#ID_UNSUPPORTEDthen the leftEyePosition, rightEyePosition, and mouthPositions 
+are guaranteed to benull. Otherwise, each of leftEyePosition, rightEyePosition, 
+and mouthPosition may be independently null or not-null. When devices report 
+the value of key (|android.hardware.camera2.CaptureResult|) as 
+(|android.hardware.camera2.CameraMetadata|) in 
+(|android.hardware.camera2.CaptureResult|) , the face id of each face is 
+expected to be#ID_UNSUPPORTED. 
+
+This value will either be#ID_UNSUPPORTEDor otherwise greater than0. 
+
+
+
+*android.hardware.camera2.Face.getLeftEyePosition()*
+
+public Point getLeftEyePosition()
+
+The coordinates of the center of the left eye. 
+
+The coordinates are in the same space as the ones for 
+(|android.hardware.camera2.Face|) . This is an optional field, may not be 
+supported on all devices. If not supported, the value will always be set to 
+null. This value will always be null only if (|android.hardware.camera2.Face|) 
+returns#ID_UNSUPPORTED. 
+
+
+
+    Returns: The left eye position, or {@code null} if unknown. 
+
+*android.hardware.camera2.Face.getMouthPosition()*
+
+public Point getMouthPosition()
+
+The coordinates of the center of the mouth. 
+
+The coordinates are in the same space as the ones for 
+(|android.hardware.camera2.Face|) . This is an optional field, may not be 
+supported on all devices. If not supported, the value will always be set to 
+null. This value will always be null only if (|android.hardware.camera2.Face|) 
+returns#ID_UNSUPPORTED. 
+
+
+
+    Returns: The mouth position, or {@code null} if unknown. 
+
+*android.hardware.camera2.Face.getRightEyePosition()*
+
+public Point getRightEyePosition()
+
+The coordinates of the center of the right eye. 
+
+The coordinates are in the same space as the ones for 
+(|android.hardware.camera2.Face|) .This is an optional field, may not be 
+supported on all devices. If not supported, the value will always be set to 
+null. This value will always be null only if (|android.hardware.camera2.Face|) 
+returns#ID_UNSUPPORTED. 
+
+
+
+    Returns: The right eye position, or {@code null} if unknown. 
+
+*android.hardware.camera2.Face.getScore()*
+
+public int getScore()
+
+The confidence level for the detection of the face. 
+
+The range is#SCORE_MINto#SCORE_MAX.#SCORE_MAXis the highest confidence. 
+
+Depending on the device, even very low-confidence faces may be listed, so 
+applications should filter out faces with low confidence, depending on the use 
+case. For a typical point-and-shoot camera application that wishes to display 
+rectangles around detected faces, filtering out faces with confidence less than 
+half of#SCORE_MAXis recommended. 
+
+
+
+*android.hardware.camera2.Face.toString()*
+
+public |java.lang.String| toString()
+
+Represent the Face as a string for debugging purposes. 
+
+
+
+

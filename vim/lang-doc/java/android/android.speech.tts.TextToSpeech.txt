@@ -1,0 +1,613 @@
+*android.speech.tts.TextToSpeech* *TextToSpeech* Synthesizes speech from text fo
+
+public class TextToSpeech
+  extends    |java.lang.Object|
+
+|android.speech.tts.TextToSpeech_Description|
+|android.speech.tts.TextToSpeech_Fields|
+|android.speech.tts.TextToSpeech_Constructors|
+|android.speech.tts.TextToSpeech_Methods|
+
+================================================================================
+
+*android.speech.tts.TextToSpeech_Fields*
+|java.lang.String_android.speech.tts.TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED|
+|int_android.speech.tts.TextToSpeech.ERROR|
+|int_android.speech.tts.TextToSpeech.LANG_AVAILABLE|
+|int_android.speech.tts.TextToSpeech.LANG_COUNTRY_AVAILABLE|
+|int_android.speech.tts.TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE|
+|int_android.speech.tts.TextToSpeech.LANG_MISSING_DATA|
+|int_android.speech.tts.TextToSpeech.LANG_NOT_SUPPORTED|
+|int_android.speech.tts.TextToSpeech.QUEUE_ADD|
+|int_android.speech.tts.TextToSpeech.QUEUE_FLUSH|
+|int_android.speech.tts.TextToSpeech.SUCCESS|
+
+*android.speech.tts.TextToSpeech_Constructors*
+|android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener)|The const
+|android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener,String)|Th
+|android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener,String,String,boolean)|
+
+*android.speech.tts.TextToSpeech_Methods*
+|android.speech.tts.TextToSpeech.addEarcon(String,String)|Adds a mapping betwee
+|android.speech.tts.TextToSpeech.addEarcon(String,String,int)|Adds a mapping be
+|android.speech.tts.TextToSpeech.addSpeech(String,String)|Adds a mapping betwee
+|android.speech.tts.TextToSpeech.addSpeech(String,String,int)|Adds a mapping be
+|android.speech.tts.TextToSpeech.areDefaultsEnforced()|Checks whether the user'
+|android.speech.tts.TextToSpeech.getCurrentEngine()|
+|android.speech.tts.TextToSpeech.getDefaultEngine()|Gets the package name of th
+|android.speech.tts.TextToSpeech.getDefaultLanguage()|Returns a Locale instance
+|android.speech.tts.TextToSpeech.getEngines()|Gets a list of all installed TTS 
+|android.speech.tts.TextToSpeech.getFeatures(Locale)|Queries the engine for the
+|android.speech.tts.TextToSpeech.getLanguage()|Returns a Locale instance descri
+|android.speech.tts.TextToSpeech.getMaxSpeechInputLength()|Limit of length of i
+|android.speech.tts.TextToSpeech.isLanguageAvailable(Locale)|Checks if the spec
+|android.speech.tts.TextToSpeech.isSpeaking()|Checks whether the TTS engine is 
+|android.speech.tts.TextToSpeech.playEarcon(String,int,HashMap<String,String>)|
+|android.speech.tts.TextToSpeech.playSilence(long,int,HashMap<String,String>)|P
+|android.speech.tts.TextToSpeech.setEngineByPackageName(String)|Sets the TTS en
+|android.speech.tts.TextToSpeech.setLanguage(Locale)|Sets the text-to-speech la
+|android.speech.tts.TextToSpeech.setOnUtteranceCompletedListener(TextToSpeech.OnUtteranceCompletedListener)|
+|android.speech.tts.TextToSpeech.setOnUtteranceProgressListener(UtteranceProgressListener)|
+|android.speech.tts.TextToSpeech.setPitch(float)|Sets the speech pitch for the 
+|android.speech.tts.TextToSpeech.setSpeechRate(float)|Sets the speech rate.
+|android.speech.tts.TextToSpeech.shutdown()|Releases the resources used by the 
+|android.speech.tts.TextToSpeech.speak(String,int,HashMap<String,String>)|Speak
+|android.speech.tts.TextToSpeech.stop()|Interrupts the current utterance (wheth
+|android.speech.tts.TextToSpeech.synthesizeToFile(String,HashMap<String,String>,String)|
+
+*android.speech.tts.TextToSpeech_Description*
+
+Synthesizes speech from text for immediate playback or to create a sound file. 
+A TextToSpeech instance can only be used to synthesize text once it has 
+completed its initialization. Implement the 
+(|android.speech.tts.TextToSpeech.OnInitListener|) to be notified of the 
+completion of the initialization. When you are done using the TextToSpeech 
+instance, call the (|android.speech.tts.TextToSpeech|) method to release the 
+native resources used by the TextToSpeech engine. 
+
+
+
+*java.lang.String_android.speech.tts.TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED*
+
+Broadcast Action: The TextToSpeech synthesizer has completed processing of all 
+the text in the speech queue. 
+
+Note that this notifies callers when the engine has finished has processing 
+text data. Audio playback might not have completed (or even started) at this 
+point. If you wish to be notified when this happens, see 
+(|android.speech.tts.TextToSpeech.OnUtteranceCompletedListener|) . 
+
+
+*int_android.speech.tts.TextToSpeech.ERROR*
+
+Denotes a generic operation failure. 
+
+
+*int_android.speech.tts.TextToSpeech.LANG_AVAILABLE*
+
+Denotes the language is available for the language by the locale, but not the 
+country and variant. 
+
+
+*int_android.speech.tts.TextToSpeech.LANG_COUNTRY_AVAILABLE*
+
+Denotes the language is available for the language and country specified by the 
+locale, but not the variant. 
+
+
+*int_android.speech.tts.TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE*
+
+Denotes the language is available exactly as specified by the locale. 
+
+
+*int_android.speech.tts.TextToSpeech.LANG_MISSING_DATA*
+
+Denotes the language data is missing. 
+
+
+*int_android.speech.tts.TextToSpeech.LANG_NOT_SUPPORTED*
+
+Denotes the language is not supported. 
+
+
+*int_android.speech.tts.TextToSpeech.QUEUE_ADD*
+
+Queue mode where the new entry is added at the end of the playback queue. 
+
+
+*int_android.speech.tts.TextToSpeech.QUEUE_FLUSH*
+
+Queue mode where all entries in the playback queue (media to be played and text 
+to be synthesized) are dropped and replaced by the new entry. Queues are 
+flushed with respect to a given calling app. Entries in the queue from other 
+callees are not discarded. 
+
+
+*int_android.speech.tts.TextToSpeech.SUCCESS*
+
+Denotes a successful operation. 
+
+
+
+*android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener)*
+
+public TextToSpeech(
+  android.content.Context context,
+  android.speech.tts.TextToSpeech.OnInitListener listener)
+
+The constructor for the TextToSpeech class, using the default TTS engine. This 
+will also initialize the associated TextToSpeech engine if it isn't already 
+running. 
+
+    context - The context this instance is running in. 
+    listener - The {@link TextToSpeech.OnInitListener} that will be called when the 
+       TextToSpeech engine has initialized. In a case of a failure the listener 
+       may be called immediately, before TextToSpeech instance is fully 
+       constructed. 
+
+*android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener,String)*
+
+public TextToSpeech(
+  android.content.Context context,
+  android.speech.tts.TextToSpeech.OnInitListener listener,
+  java.lang.String engine)
+
+The constructor for the TextToSpeech class, using the given TTS engine. This 
+will also initialize the associated TextToSpeech engine if it isn't already 
+running. 
+
+    context - The context this instance is running in. 
+    listener - The {@link TextToSpeech.OnInitListener} that will be called when the 
+       TextToSpeech engine has initialized. In a case of a failure the listener 
+       may be called immediately, before TextToSpeech instance is fully 
+       constructed. 
+    engine - Package name of the TTS engine to use. 
+
+*android.speech.tts.TextToSpeech(Context,TextToSpeech.OnInitListener,String,String,boolean)*
+
+public TextToSpeech(
+  android.content.Context context,
+  android.speech.tts.TextToSpeech.OnInitListener listener,
+  java.lang.String engine,
+  java.lang.String packageName,
+  boolean useFallback)
+
+Used by the framework to instantiate TextToSpeech objects with a supplied 
+package name, instead of using (|android.content.Context|) 
+
+
+*android.speech.tts.TextToSpeech.addEarcon(String,String)*
+
+public int addEarcon(
+  java.lang.String earcon,
+  java.lang.String filename)
+
+Adds a mapping between a string of text and a sound file. Use this to add 
+custom earcons. 
+
+
+    earcon - The name of the earcon. Example: "[tick]" 
+    filename - The full path to the sound file (for example: "/sdcard/mysounds/tick.wav") 
+
+    Returns: Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.addEarcon(String,String,int)*
+
+public int addEarcon(
+  java.lang.String earcon,
+  java.lang.String packagename,
+  int resourceId)
+
+Adds a mapping between a string of text and a sound resource in a package. Use 
+this to add custom earcons. 
+
+
+    earcon - The name of the earcon. Example: "[tick]" 
+    packagename - the package name of the application that contains the resource. This can for 
+       instance be the package name of your own application. Example: 
+       "com.google.marvin.compass" The package name can be found in the 
+       AndroidManifest.xml of the application containing the resource. 
+
+<manifest xmlns:android=... package=com.google.marvin.compass> 
+    resourceId - Example: R.raw.tick_snd 
+
+    Returns: Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.addSpeech(String,String)*
+
+public int addSpeech(
+  java.lang.String text,
+  java.lang.String filename)
+
+Adds a mapping between a string of text and a sound file. Using this, it is 
+possible to add custom pronounciations for a string of text. After a call to 
+this method, subsequent calls to (|android.speech.tts.TextToSpeech|) will play 
+the specified sound resource if it is available, or synthesize the text it is 
+missing. 
+
+
+    text - The string of text. Example: "south_south_east" 
+    filename - The full path to the sound file (for example: "/sdcard/mysounds/hello.wav") 
+
+    Returns: Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.addSpeech(String,String,int)*
+
+public int addSpeech(
+  java.lang.String text,
+  java.lang.String packagename,
+  int resourceId)
+
+Adds a mapping between a string of text and a sound resource in a package. 
+After a call to this method, subsequent calls to 
+(|android.speech.tts.TextToSpeech|) will play the specified sound resource if 
+it is available, or synthesize the text it is missing. 
+
+
+    text - The string of text. Example: "south_south_east" 
+    packagename - Pass the packagename of the application that contains the resource. If the 
+       resource is in your own application (this is the most common case), then 
+       put the packagename of your application here. Example: 
+       "com.google.marvin.compass" The packagename can be found in the 
+       AndroidManifest.xml of your application. 
+
+<manifest xmlns:android=... package=com.google.marvin.compass> 
+    resourceId - Example: R.raw.south_south_east 
+
+    Returns: Code indicating success or failure. See {@link #ERROR} and {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.areDefaultsEnforced()*
+
+public boolean areDefaultsEnforced()
+
+Checks whether the user's settings should override settings requested by the 
+calling application. As of the Ice cream sandwich release, user settings never 
+forcibly override the app's settings. 
+
+
+
+*android.speech.tts.TextToSpeech.getCurrentEngine()*
+
+public |java.lang.String| getCurrentEngine()
+
+
+
+
+
+    Returns: the engine currently in use by this TextToSpeech instance. 
+
+*android.speech.tts.TextToSpeech.getDefaultEngine()*
+
+public |java.lang.String| getDefaultEngine()
+
+Gets the package name of the default speech synthesis engine. 
+
+
+
+    Returns: Package name of the TTS engine that the user has chosen as their default. 
+
+*android.speech.tts.TextToSpeech.getDefaultLanguage()*
+
+public |java.util.Locale| getDefaultLanguage()
+
+Returns a Locale instance describing the language currently being used as the 
+default Text-to-speech language. 
+
+
+
+    Returns: language, country (if any) and variant (if any) used by the client stored in a 
+             Locale instance, or {@code null} on error. 
+
+*android.speech.tts.TextToSpeech.getEngines()*
+
+public |java.util.List|<EngineInfo> getEngines()
+
+Gets a list of all installed TTS engines. 
+
+
+
+    Returns: A list of engine info objects. The list can be empty, but never {@code null}. 
+
+*android.speech.tts.TextToSpeech.getFeatures(Locale)*
+
+public |java.util.Set|<String> getFeatures(java.util.Locale locale)
+
+Queries the engine for the set of features it supports for a given locale. 
+Features can either be framework defined, e.g. 
+(|android.speech.tts.TextToSpeech.Engine|) or engine specific. Engine specific 
+keys must be prefixed by the name of the engine they are intended for. These 
+keys can be used as parameters to (|android.speech.tts.TextToSpeech|) and 
+(|android.speech.tts.TextToSpeech|) . 
+
+Features are boolean flags, and their values in the synthesis parameters must 
+be behave as per (|java.lang.Boolean|) . 
+
+
+    locale - The locale to query features for. 
+
+*android.speech.tts.TextToSpeech.getLanguage()*
+
+public |java.util.Locale| getLanguage()
+
+Returns a Locale instance describing the language currently being used for 
+synthesis requests sent to the TextToSpeech engine. 
+
+In Android 4.2 and before (API <= 17) this function returns the language that 
+is currently being used by the TTS engine. That is the last language set by 
+this or any other client by a (|android.speech.tts.TextToSpeech|) call to the 
+same engine. 
+
+In Android versions after 4.2 this function returns the language that is 
+currently being used for the synthesis requests sent from this client. That is 
+the last language set by a (|android.speech.tts.TextToSpeech|) call on this 
+instance. 
+
+
+
+    Returns: language, country (if any) and variant (if any) used by the client stored in a 
+             Locale instance, or {@code null} on error. 
+
+*android.speech.tts.TextToSpeech.getMaxSpeechInputLength()*
+
+public static int getMaxSpeechInputLength()
+
+Limit of length of input string passed to speak and synthesizeToFile. 
+
+
+
+*android.speech.tts.TextToSpeech.isLanguageAvailable(Locale)*
+
+public int isLanguageAvailable(java.util.Locale loc)
+
+Checks if the specified language as represented by the Locale is available and 
+supported. 
+
+
+    loc - The Locale describing the language to be used. 
+
+    Returns: Code indicating the support status for the locale. See {@link #LANG_AVAILABLE}, 
+             {@link #LANG_COUNTRY_AVAILABLE}, {@link 
+             #LANG_COUNTRY_VAR_AVAILABLE}, {@link #LANG_MISSING_DATA} and 
+             {@link #LANG_NOT_SUPPORTED}. 
+
+*android.speech.tts.TextToSpeech.isSpeaking()*
+
+public boolean isSpeaking()
+
+Checks whether the TTS engine is busy speaking. Note that a speech item is 
+considered complete once it's audio data has been sent to the audio mixer, or 
+written to a file. There might be a finite lag between this point, and when the 
+audio hardware completes playback. 
+
+
+
+    Returns: {@code true} if the TTS engine is speaking. 
+
+*android.speech.tts.TextToSpeech.playEarcon(String,int,HashMap<String,String>)*
+
+public int playEarcon(
+  java.lang.String earcon,
+  int queueMode,
+  java.util.HashMap<java.lang.String, java.lang.String> params)
+
+Plays the earcon using the specified queueing mode and parameters. The earcon 
+must already have been added with (|android.speech.tts.TextToSpeech|) or 
+(|android.speech.tts.TextToSpeech|) . This method is asynchronous, i.e. the 
+method just adds the request to the queue of TTS requests and then returns. The 
+synthesis might not have finished (or even started!) at the time when this 
+method returns. In order to reliably detect errors during synthesis, we 
+recommend setting an utterance progress listener (see 
+(|android.speech.tts.TextToSpeech|) ) and using the 
+(|android.speech.tts.TextToSpeech.Engine|) parameter. 
+
+
+    earcon - The earcon that should be played 
+    queueMode - {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}. 
+    params - Parameters for the request. Can be null. Supported parameter names: {@link 
+       Engine#KEY_PARAM_STREAM}, {@link Engine#KEY_PARAM_UTTERANCE_ID}. Engine 
+       specific parameters may be passed in but the parameter keys must be 
+       prefixed by the name of the engine they are intended for. For example 
+       the keys "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to 
+       the engine named "com.svox.pico" if it is being used. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS} of queuing the playEarcon operation. 
+
+*android.speech.tts.TextToSpeech.playSilence(long,int,HashMap<String,String>)*
+
+public int playSilence(
+  long durationInMs,
+  int queueMode,
+  java.util.HashMap<java.lang.String, java.lang.String> params)
+
+Plays silence for the specified amount of time using the specified queue mode. 
+This method is asynchronous, i.e. the method just adds the request to the queue 
+of TTS requests and then returns. The synthesis might not have finished (or 
+even started!) at the time when this method returns. In order to reliably 
+detect errors during synthesis, we recommend setting an utterance progress 
+listener (see (|android.speech.tts.TextToSpeech|) ) and using the 
+(|android.speech.tts.TextToSpeech.Engine|) parameter. 
+
+
+    durationInMs - The duration of the silence. 
+    queueMode - {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}. 
+    params - Parameters for the request. Can be null. Supported parameter names: {@link 
+       Engine#KEY_PARAM_UTTERANCE_ID}. Engine specific parameters may be passed 
+       in but the parameter keys must be prefixed by the name of the engine 
+       they are intended for. For example the keys "com.svox.pico_foo" and 
+       "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" 
+       if it is being used. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS} of queuing the playSilence operation. 
+
+*android.speech.tts.TextToSpeech.setEngineByPackageName(String)*
+
+public int setEngineByPackageName(java.lang.String enginePackageName)
+
+Sets the TTS engine to use. 
+
+    Deprecated: This doesn't inform callers when the TTS engine has been
+        initialized. {@link #TextToSpeech(Context, OnInitListener, String)}
+        can be used with the appropriate engine name. Also, there is no
+        guarantee that the engine specified will be loaded. If it isn't
+        installed or disabled, the user / system wide defaults will apply.
+
+    enginePackageName - The package name for the synthesis engine (e.g. "com.svox.pico") 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.setLanguage(Locale)*
+
+public int setLanguage(java.util.Locale loc)
+
+Sets the text-to-speech language. The TTS engine will try to use the closest 
+match to the specified language as represented by the Locale, but there is no 
+guarantee that the exact same Locale will be used. Use 
+(|android.speech.tts.TextToSpeech|) to check the level of support before 
+choosing the language to use for the next utterances. 
+
+
+    loc - The locale describing the language to be used. 
+
+    Returns: Code indicating the support status for the locale. See {@link #LANG_AVAILABLE}, 
+             {@link #LANG_COUNTRY_AVAILABLE}, {@link 
+             #LANG_COUNTRY_VAR_AVAILABLE}, {@link #LANG_MISSING_DATA} and 
+             {@link #LANG_NOT_SUPPORTED}. 
+
+*android.speech.tts.TextToSpeech.setOnUtteranceCompletedListener(TextToSpeech.OnUtteranceCompletedListener)*
+
+public int setOnUtteranceCompletedListener(android.speech.tts.TextToSpeech.OnUtteranceCompletedListener listener)
+
+Sets the listener that will be notified when synthesis of an utterance 
+completes. 
+
+    Deprecated: Use {@link #setOnUtteranceProgressListener(UtteranceProgressListener)}
+        instead.
+
+    listener - The listener to use. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.setOnUtteranceProgressListener(UtteranceProgressListener)*
+
+public int setOnUtteranceProgressListener(android.speech.tts.UtteranceProgressListener listener)
+
+Sets the listener that will be notified of various events related to the 
+synthesis of a given utterance. 
+
+See (|android.speech.tts.UtteranceProgressListener|) and 
+(|android.speech.tts.TextToSpeech.Engine|) . 
+
+
+    listener - the listener to use. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS} 
+
+*android.speech.tts.TextToSpeech.setPitch(float)*
+
+public int setPitch(float pitch)
+
+Sets the speech pitch for the TextToSpeech engine. 
+
+This has no effect on any pre-recorded speech. 
+
+
+    pitch - Speech pitch. {@code 1.0} is the normal pitch, lower values lower the tone of 
+       the synthesized voice, greater values increase it. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.setSpeechRate(float)*
+
+public int setSpeechRate(float speechRate)
+
+Sets the speech rate. 
+
+This has no effect on any pre-recorded speech. 
+
+
+    speechRate - Speech rate. {@code 1.0} is the normal speech rate, lower values slow down the 
+       speech ({@code 0.5} is half the normal speech rate), greater values 
+       accelerate it ({@code 2.0} is twice the normal speech rate). 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.shutdown()*
+
+public void shutdown()
+
+Releases the resources used by the TextToSpeech engine. It is good practice for 
+instance to call this method in the onDestroy() method of an Activity so the 
+TextToSpeech engine can be cleanly stopped. 
+
+
+
+*android.speech.tts.TextToSpeech.speak(String,int,HashMap<String,String>)*
+
+public int speak(
+  java.lang.String text,
+  int queueMode,
+  java.util.HashMap<java.lang.String, java.lang.String> params)
+
+Speaks the string using the specified queuing strategy and speech parameters. 
+This method is asynchronous, i.e. the method just adds the request to the queue 
+of TTS requests and then returns. The synthesis might not have finished (or 
+even started!) at the time when this method returns. In order to reliably 
+detect errors during synthesis, we recommend setting an utterance progress 
+listener (see (|android.speech.tts.TextToSpeech|) ) and using the 
+(|android.speech.tts.TextToSpeech.Engine|) parameter. 
+
+
+    text - The string of text to be spoken. No longer than {@link 
+       #getMaxSpeechInputLength()} characters. 
+    queueMode - The queuing strategy to use, {@link #QUEUE_ADD} or {@link #QUEUE_FLUSH}. 
+    params - Parameters for the request. Can be null. Supported parameter names: {@link 
+       Engine#KEY_PARAM_STREAM}, {@link Engine#KEY_PARAM_UTTERANCE_ID}, {@link 
+       Engine#KEY_PARAM_VOLUME}, {@link Engine#KEY_PARAM_PAN}. Engine specific 
+       parameters may be passed in but the parameter keys must be prefixed by 
+       the name of the engine they are intended for. For example the keys 
+       "com.svox.pico_foo" and "com.svox.pico:bar" will be passed to the engine 
+       named "com.svox.pico" if it is being used. 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS} of queuing the speak operation. 
+
+*android.speech.tts.TextToSpeech.stop()*
+
+public int stop()
+
+Interrupts the current utterance (whether played or rendered to file) and 
+discards other utterances in the queue. 
+
+
+
+    Returns: {@link #ERROR} or {@link #SUCCESS}. 
+
+*android.speech.tts.TextToSpeech.synthesizeToFile(String,HashMap<String,String>,String)*
+
+public int synthesizeToFile(
+  java.lang.String text,
+  java.util.HashMap<java.lang.String, java.lang.String> params,
+  java.lang.String filename)
+
+Synthesizes the given text to a file using the specified parameters. This 
+method is asynchronous, i.e. the method just adds the request to the queue of 
+TTS requests and then returns. The synthesis might not have finished (or even 
+started!) at the time when this method returns. In order to reliably detect 
+errors during synthesis, we recommend setting an utterance progress listener 
+(see (|android.speech.tts.TextToSpeech|) ) and using the 
+(|android.speech.tts.TextToSpeech.Engine|) parameter. 
+
+
+    text - The text that should be synthesized. No longer than {@link 
+       #getMaxSpeechInputLength()} characters. 
+    params - Parameters for the request. Can be null. Supported parameter names: {@link 
+       Engine#KEY_PARAM_UTTERANCE_ID}. Engine specific parameters may be passed 
+       in but the parameter keys must be prefixed by the name of the engine 
+       they are intended for. For example the keys "com.svox.pico_foo" and 
+       "com.svox.pico:bar" will be passed to the engine named "com.svox.pico" 
+       if it is being used. 
+    filename - Absolute file filename to write the generated audio data to.It should be 
+       something like "/sdcard/myappsounds/mysound.wav". 
+
+    Returns: {@link #ERROR} or {@link #SUCCESS} of queuing the synthesizeToFile operation. 
+
+

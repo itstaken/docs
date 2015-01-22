@@ -1,0 +1,273 @@
+*android.support.v7.internal.view.menu.BaseMenuPresenter* *BaseMenuPresenter* Ba
+
+public abstract class BaseMenuPresenter
+  extends    |java.lang.Object|
+  implements |android.support.v7.internal.view.menu.MenuPresenter|
+
+|android.support.v7.internal.view.menu.BaseMenuPresenter_Description|
+|android.support.v7.internal.view.menu.BaseMenuPresenter_Fields|
+|android.support.v7.internal.view.menu.BaseMenuPresenter_Constructors|
+|android.support.v7.internal.view.menu.BaseMenuPresenter_Methods|
+
+================================================================================
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter_Fields*
+|Context_android.support.v7.internal.view.menu.BaseMenuPresenter.mContext|
+|LayoutInflater_android.support.v7.internal.view.menu.BaseMenuPresenter.mInflater|
+|android.support.v7.internal.view.menu.MenuBuilder_android.support.v7.internal.view.menu.BaseMenuPresenter.mMenu|
+|android.support.v7.internal.view.menu.MenuView_android.support.v7.internal.view.menu.BaseMenuPresenter.mMenuView|
+|Context_android.support.v7.internal.view.menu.BaseMenuPresenter.mSystemContext|
+|LayoutInflater_android.support.v7.internal.view.menu.BaseMenuPresenter.mSystemInflater|
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter_Constructors*
+|android.support.v7.internal.view.menu.BaseMenuPresenter(Context,int,int)|Const
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter_Methods*
+|android.support.v7.internal.view.menu.BaseMenuPresenter.addItemView(View,int)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.bindItemView(MenuItemImpl,MenuView.ItemView)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.collapseItemActionView(MenuBuilder,MenuItemImpl)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.createItemView(ViewGroup)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.expandItemActionView(MenuBuilder,MenuItemImpl)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.filterLeftoverView(ViewGroup,int)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.flagActionItems()|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.getId()|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.getItemView(MenuItemImpl,View,ViewGroup)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.getMenuView(ViewGroup)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.initForMenu(Context,MenuBuilder)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.onCloseMenu(MenuBuilder,boolean)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.onSubMenuSelected(SubMenuBuilder)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.setCallback(MenuPresenter.Callback)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.setId(int)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.shouldIncludeItem(int,MenuItemImpl)|
+|android.support.v7.internal.view.menu.BaseMenuPresenter.updateMenuView(boolean)|
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter_Description*
+
+Base class for MenuPresenters that have a consistent container view and item 
+views. Behaves similarly to an AdapterView in that existing item views will be 
+reused if possible when items change. 
+
+
+
+*Context_android.support.v7.internal.view.menu.BaseMenuPresenter.mContext*
+
+
+
+
+*LayoutInflater_android.support.v7.internal.view.menu.BaseMenuPresenter.mInflater*
+
+
+
+
+*android.support.v7.internal.view.menu.MenuBuilder_android.support.v7.internal.view.menu.BaseMenuPresenter.mMenu*
+
+
+
+
+*android.support.v7.internal.view.menu.MenuView_android.support.v7.internal.view.menu.BaseMenuPresenter.mMenuView*
+
+
+
+
+*Context_android.support.v7.internal.view.menu.BaseMenuPresenter.mSystemContext*
+
+
+
+
+*LayoutInflater_android.support.v7.internal.view.menu.BaseMenuPresenter.mSystemInflater*
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter(Context,int,int)*
+
+public BaseMenuPresenter(
+  Context context,
+  int menuLayoutRes,
+  int itemLayoutRes)
+
+Construct a new BaseMenuPresenter. 
+
+    context - Context for generating system-supplied views 
+    menuLayoutRes - Layout resource ID for the menu container view 
+    itemLayoutRes - Layout resource ID for a single item view 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.addItemView(View,int)*
+
+protected void addItemView(
+  View itemView,
+  int childIndex)
+
+Add an item view at the given index. 
+
+
+    itemView - View to add 
+    childIndex - Index within the parent to insert at 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.bindItemView(MenuItemImpl,MenuView.ItemView)*
+
+public abstract void bindItemView(
+  android.support.v7.internal.view.menu.MenuItemImpl item,
+  android.support.v7.internal.view.menu.MenuView.ItemView itemView)
+
+Bind item data to an existing item view. 
+
+
+    item - Item to bind 
+    itemView - View to populate with item data 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.collapseItemActionView(MenuBuilder,MenuItemImpl)*
+
+public boolean collapseItemActionView(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  android.support.v7.internal.view.menu.MenuItemImpl item)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.createItemView(ViewGroup)*
+
+public |android.support.v7.internal.view.menu.MenuView.ItemView| createItemView(ViewGroup parent)
+
+Create a new item view that can be re-bound to other item data later. 
+
+
+
+    Returns: The new item view 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.expandItemActionView(MenuBuilder,MenuItemImpl)*
+
+public boolean expandItemActionView(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  android.support.v7.internal.view.menu.MenuItemImpl item)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.filterLeftoverView(ViewGroup,int)*
+
+protected boolean filterLeftoverView(
+  ViewGroup parent,
+  int childIndex)
+
+Filter the child view at index and remove it if appropriate. 
+
+
+    parent - Parent to filter from 
+    childIndex - Index to filter 
+
+    Returns: true if the child view at index was removed 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.flagActionItems()*
+
+public boolean flagActionItems()
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.getId()*
+
+public int getId()
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.getItemView(MenuItemImpl,View,ViewGroup)*
+
+public View getItemView(
+  android.support.v7.internal.view.menu.MenuItemImpl item,
+  View convertView,
+  ViewGroup parent)
+
+Prepare an item view for use. See AdapterView for the basic idea at work here. 
+This may require creating a new item view, but well-behaved implementations 
+will re-use the view passed as convertView if present. The returned view will 
+be populated with data from the item parameter. 
+
+
+    item - Item to present 
+    convertView - Existing view to reuse 
+    parent - Intended parent view - use for inflation. 
+
+    Returns: View that presents the requested menu item 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.getMenuView(ViewGroup)*
+
+public |android.support.v7.internal.view.menu.MenuView| getMenuView(ViewGroup root)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.initForMenu(Context,MenuBuilder)*
+
+public void initForMenu(
+  Context context,
+  android.support.v7.internal.view.menu.MenuBuilder menu)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.onCloseMenu(MenuBuilder,boolean)*
+
+public void onCloseMenu(
+  android.support.v7.internal.view.menu.MenuBuilder menu,
+  boolean allMenusAreClosing)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.onSubMenuSelected(SubMenuBuilder)*
+
+public boolean onSubMenuSelected(android.support.v7.internal.view.menu.SubMenuBuilder menu)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.setCallback(MenuPresenter.Callback)*
+
+public void setCallback(android.support.v7.internal.view.menu.MenuPresenter.Callback cb)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.setId(int)*
+
+public void setId(int id)
+
+
+
+
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.shouldIncludeItem(int,MenuItemImpl)*
+
+public boolean shouldIncludeItem(
+  int childIndex,
+  android.support.v7.internal.view.menu.MenuItemImpl item)
+
+Filter item by child index and item data. 
+
+
+    childIndex - Indended presentation index of this item 
+    item - Item to present 
+
+    Returns: true if this item should be included in this menu presentation; false otherwise 
+
+*android.support.v7.internal.view.menu.BaseMenuPresenter.updateMenuView(boolean)*
+
+public void updateMenuView(boolean cleared)
+
+Reuses item views when it can 
+
+
+
+

@@ -1,0 +1,108 @@
+*android.support.v8.renderscript.ScriptGroup.Builder* *ScriptGroup.Builder* Help
+
+public static final class ScriptGroup.Builder
+  extends    |java.lang.Object|
+
+|android.support.v8.renderscript.ScriptGroup.Builder_Description|
+|android.support.v8.renderscript.ScriptGroup.Builder_Fields|
+|android.support.v8.renderscript.ScriptGroup.Builder_Constructors|
+|android.support.v8.renderscript.ScriptGroup.Builder_Methods|
+
+================================================================================
+
+*android.support.v8.renderscript.ScriptGroup.Builder_Constructors*
+|android.support.v8.renderscript.ScriptGroup.Builder(RenderScript)|Create a Bui
+
+*android.support.v8.renderscript.ScriptGroup.Builder_Methods*
+|android.support.v8.renderscript.ScriptGroup.Builder.addConnection(Type,Script.KernelID,Script.FieldID)|
+|android.support.v8.renderscript.ScriptGroup.Builder.addConnection(Type,Script.KernelID,Script.KernelID)|
+|android.support.v8.renderscript.ScriptGroup.Builder.addKernel(Script.KernelID)|
+|android.support.v8.renderscript.ScriptGroup.Builder.create()|Creates the Scrip
+
+*android.support.v8.renderscript.ScriptGroup.Builder_Description*
+
+Helper class to build a ScriptGroup. A ScriptGroup is created in two steps. 
+
+First, all kernels to be used by the ScriptGroup should be added. 
+
+Second, add connections between kernels. There are two types of connections: 
+kernel to kernel and kernel to field. Kernel to kernel allows a kernel's output 
+to be passed to another kernel as input. Kernel to field allows the output of 
+one kernel to be bound as a script global. Kernel to kernel is higher 
+performance and should be used where possible. 
+
+A ScriptGroup must contain a single directed acyclic graph (DAG); it cannot 
+contain cycles. Currently, all kernels used in a ScriptGroup must come from 
+different Script objects. Additionally, all kernels in a ScriptGroup must have 
+at least one input, output, or internal connection. 
+
+Once all connections are made, a call to 
+(|android.support.v8.renderscript.ScriptGroup.Builder|) will return the 
+ScriptGroup object. 
+
+
+
+*android.support.v8.renderscript.ScriptGroup.Builder(RenderScript)*
+
+public ScriptGroup.Builder(android.support.v8.renderscript.RenderScript rs)
+
+Create a Builder for generating a ScriptGroup. 
+
+    rs - The RenderScript context. 
+
+*android.support.v8.renderscript.ScriptGroup.Builder.addConnection(Type,Script.KernelID,Script.FieldID)*
+
+public |android.support.v8.renderscript.ScriptGroup.Builder| addConnection(
+  android.support.v8.renderscript.Type t,
+  android.support.v8.renderscript.Script.KernelID from,
+  android.support.v8.renderscript.Script.FieldID to)
+
+Adds a connection to the group. 
+
+
+    t - The type of the connection. This is used to determine the kernel launch sizes 
+       on the source side of this connection. 
+    from - The source for the connection. 
+    to - The destination of the connection. 
+
+    Returns: Builder Returns this 
+
+*android.support.v8.renderscript.ScriptGroup.Builder.addConnection(Type,Script.KernelID,Script.KernelID)*
+
+public |android.support.v8.renderscript.ScriptGroup.Builder| addConnection(
+  android.support.v8.renderscript.Type t,
+  android.support.v8.renderscript.Script.KernelID from,
+  android.support.v8.renderscript.Script.KernelID to)
+
+Adds a connection to the group. 
+
+
+    t - The type of the connection. This is used to determine the kernel launch sizes 
+       for both sides of this connection. 
+    from - The source for the connection. 
+    to - The destination of the connection. 
+
+    Returns: Builder Returns this 
+
+*android.support.v8.renderscript.ScriptGroup.Builder.addKernel(Script.KernelID)*
+
+public |android.support.v8.renderscript.ScriptGroup.Builder| addKernel(android.support.v8.renderscript.Script.KernelID k)
+
+Adds a Kernel to the group. 
+
+
+    k - The kernel to add. 
+
+    Returns: Builder Returns this. 
+
+*android.support.v8.renderscript.ScriptGroup.Builder.create()*
+
+public |android.support.v8.renderscript.ScriptGroup| create()
+
+Creates the Script group. 
+
+
+
+    Returns: ScriptGroup The new ScriptGroup 
+
+
