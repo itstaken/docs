@@ -1,0 +1,226 @@
+*javax.script.AbstractScriptEngine* *AbstractScriptEngine* Provides a standard i
+
+public abstract class AbstractScriptEngine
+  extends    |java.lang.Object|
+  implements |javax.script.ScriptEngine|
+
+|javax.script.AbstractScriptEngine_Description|
+|javax.script.AbstractScriptEngine_Fields|
+|javax.script.AbstractScriptEngine_Constructors|
+|javax.script.AbstractScriptEngine_Methods|
+
+================================================================================
+
+*javax.script.AbstractScriptEngine_Fields*
+|javax.script.ScriptContext_javax.script.AbstractScriptEngine.context|
+
+*javax.script.AbstractScriptEngine_Constructors*
+|javax.script.AbstractScriptEngine()|Creates a new instance of AbstractScriptEn
+|javax.script.AbstractScriptEngine(Bindings)|Creates a new instance using the s
+
+*javax.script.AbstractScriptEngine_Methods*
+|javax.script.AbstractScriptEngine.eval(Reader)|eval(Reader) calls the abstract
+|javax.script.AbstractScriptEngine.eval(Reader,Bindings)|eval(Reader, Bindings)
+|javax.script.AbstractScriptEngine.eval(String)|Same as eval(Reader) except tha
+|javax.script.AbstractScriptEngine.eval(String,Bindings)|Same as eval(Reader, B
+|javax.script.AbstractScriptEngine.get(String)|Gets the value for the specified
+|javax.script.AbstractScriptEngine.getBindings(int)|Returns the Bindings with t
+|javax.script.AbstractScriptEngine.getContext()|Returns the value of the protec
+|javax.script.AbstractScriptEngine.getScriptContext(Bindings)|Returns a SimpleS
+|javax.script.AbstractScriptEngine.put(String,Object)|Sets the specified value 
+|javax.script.AbstractScriptEngine.setBindings(Bindings,int)|Sets the Bindings 
+|javax.script.AbstractScriptEngine.setContext(ScriptContext)|Sets the value of 
+
+*javax.script.AbstractScriptEngine_Description*
+
+Provides a standard implementation for several of the variants of the eval 
+method. 
+
+eval(Reader)eval(String) eval(String, Bindings)eval(Reader, Bindings) are 
+implemented using the abstract methods 
+
+eval(Reader,ScriptContext) or eval(String, ScriptContext) 
+
+with a SimpleScriptContext. 
+
+A SimpleScriptContext is used as the default ScriptContext of the 
+AbstractScriptEngine.. 
+
+
+
+*javax.script.ScriptContext_javax.script.AbstractScriptEngine.context*
+
+The default ScriptContext of this AbstractScriptEngine. 
+
+
+
+*javax.script.AbstractScriptEngine()*
+
+public AbstractScriptEngine()
+
+Creates a new instance of AbstractScriptEngine using a SimpleScriptContext as 
+its default ScriptContext. 
+
+
+*javax.script.AbstractScriptEngine(Bindings)*
+
+public AbstractScriptEngine(javax.script.Bindings n)
+
+Creates a new instance using the specified Bindings as the ENGINE_SCOPE 
+Bindings in the protected context field. 
+
+    n - The specified Bindings. 
+
+*javax.script.AbstractScriptEngine.eval(Reader)*
+
+public |java.lang.Object| eval(java.io.Reader reader)
+  throws |javax.script.ScriptException|
+         
+eval(Reader) calls the abstract eval(Reader, ScriptContext) passing the value 
+of the context field. 
+
+
+    reader - A Reader containing the source of the script. 
+
+    Returns: The return value from eval(Reader, ScriptContext) 
+
+*javax.script.AbstractScriptEngine.eval(Reader,Bindings)*
+
+public |java.lang.Object| eval(
+  java.io.Reader reader,
+  javax.script.Bindings bindings)
+  throws |javax.script.ScriptException|
+         
+eval(Reader, Bindings) calls the abstract eval(Reader, ScriptContext) method, 
+passing it a ScriptContext whose Reader, Writers and Bindings for scopes other 
+that ENGINE_SCOPE are identical to those members of the protected context 
+field. The specified Bindings is used instead of the ENGINE_SCOPE 
+
+Bindings of the context field. 
+
+
+    reader - A Reader containing the source of the script. 
+    bindings - A Bindings to use for the ENGINE_SCOPE while the script executes. 
+
+    Returns: The return value from eval(Reader, ScriptContext) 
+
+*javax.script.AbstractScriptEngine.eval(String)*
+
+public |java.lang.Object| eval(java.lang.String script)
+  throws |javax.script.ScriptException|
+         
+Same as eval(Reader) except that the abstract eval(String, ScriptContext) is 
+used. 
+
+
+    script - A String containing the source of the script. 
+
+    Returns: The return value from eval(String, ScriptContext) 
+
+*javax.script.AbstractScriptEngine.eval(String,Bindings)*
+
+public |java.lang.Object| eval(
+  java.lang.String script,
+  javax.script.Bindings bindings)
+  throws |javax.script.ScriptException|
+         
+Same as eval(Reader, Bindings) except that the abstract eval(String, 
+ScriptContext) is used. 
+
+
+    script - A String containing the source of the script. 
+    bindings - A Bindings to use as the ENGINE_SCOPE while the script executes. 
+
+    Returns: The return value from eval(String, ScriptContext) 
+
+*javax.script.AbstractScriptEngine.get(String)*
+
+public |java.lang.Object| get(java.lang.String key)
+
+Gets the value for the specified key in the ENGINE_SCOPE of the protected 
+context field. 
+
+
+
+    Returns: The value for the specified key. 
+
+*javax.script.AbstractScriptEngine.getBindings(int)*
+
+public |javax.script.Bindings| getBindings(int scope)
+
+Returns the Bindings with the specified scope value in the protected context 
+field. 
+
+
+    scope - The specified scope 
+
+    Returns: The corresponding Bindings. 
+
+*javax.script.AbstractScriptEngine.getContext()*
+
+public |javax.script.ScriptContext| getContext()
+
+Returns the value of the protected context field. 
+
+
+
+    Returns: The value of the protected context field. 
+
+*javax.script.AbstractScriptEngine.getScriptContext(Bindings)*
+
+protected |javax.script.ScriptContext| getScriptContext(javax.script.Bindings nn)
+
+Returns a SimpleScriptContext. The SimpleScriptContext: 
+
+Uses the specified Bindings for its ENGINE_SCOPE 
+
+Uses the Bindings returned by the abstract getGlobalScope method as its 
+GLOBAL_SCOPE 
+
+Uses the Reader and Writer in the default ScriptContext of this ScriptEngine 
+
+
+
+A SimpleScriptContext returned by this method is used to implement eval methods 
+using the abstract eval(Reader,Bindings) and eval(String,Bindings) versions. 
+
+
+    nn - Bindings to use for the ENGINE_SCOPE 
+
+    Returns: The SimpleScriptContext 
+
+*javax.script.AbstractScriptEngine.put(String,Object)*
+
+public void put(
+  java.lang.String key,
+  java.lang.Object value)
+
+Sets the specified value with the specified key in the ENGINE_SCOPE Bindings of 
+the protected context field. 
+
+
+    key - The specified key. 
+    value - The specified value. 
+
+*javax.script.AbstractScriptEngine.setBindings(Bindings,int)*
+
+public void setBindings(
+  javax.script.Bindings bindings,
+  int scope)
+
+Sets the Bindings with the corresponding scope value in the context field. 
+
+
+    bindings - The specified Bindings. 
+    scope - The specified scope. 
+
+*javax.script.AbstractScriptEngine.setContext(ScriptContext)*
+
+public void setContext(javax.script.ScriptContext ctxt)
+
+Sets the value of the protected context field to the specified ScriptContext. 
+
+
+    ctxt - The specified ScriptContext. 
+
+
